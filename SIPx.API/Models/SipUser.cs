@@ -9,5 +9,9 @@ namespace SIPx.API.Models
     public class SipUser: IdentityUser
     {
         public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int LanguageID { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

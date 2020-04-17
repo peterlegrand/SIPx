@@ -39,6 +39,12 @@ namespace SIPx.API.Services
             {
                 Email = model.Email,
                 UserName = model.Email,
+                FirstName = "Peter",
+                LastName = "le Grand",
+                LanguageID = 41,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+
             };
 
             var result = await _userManager.CreateAsync(identityUser, model.Password);
@@ -102,7 +108,8 @@ namespace SIPx.API.Services
             {
                 Message = tokenAsString,
                 IsSuccess = true,
-                ExpireDate = token.ValidTo
+                ExpireDate = token.ValidTo,
+                UserId = user.Id
             };
         }
 

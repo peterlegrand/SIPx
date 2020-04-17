@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SIPx.DataAccess\SIPx.DataAccess.csproj" />
     <ProjectReference Include="..\SIPx.Shared\SIPx.Shared.csproj" />
   </ItemGroup>
 

@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SIPx.API.Models;
 using SIPx.API.Services;
+using SIPx.DataAccess;
 
 namespace SIPx.API
 {
@@ -66,6 +67,8 @@ namespace SIPx.API
 
             services.AddScoped<IUserService, UserService>();
             services.AddControllers();
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<IClassificationProvider, ClassificationProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
