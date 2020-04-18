@@ -20,6 +20,16 @@ namespace SIPx.DataAccess
             _config = config;
         }
 
+        public List<T> LoadData2<T>(string sql, List<SqlParameter> parameters)
+        {
+
+            string connectionString = _config.GetConnectionString("DefaultConnection");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = connection.Query<T>(sql, parameters);
+                return data.ToList();
+            }
+        }
         public async Task<List<T>> LoadData<T, U>(string sql, U parameters)
         {
             string connectionString = _config.GetConnectionString("DefaultConnection");

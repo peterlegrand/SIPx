@@ -24,5 +24,6 @@ namespace SIPx.DataAccess
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public bool DefaultLanguage { get; set; }
+ 
     }
 }

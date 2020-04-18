@@ -27,7 +27,7 @@ namespace SIPx.API.Controllers
         [HttpGet]
         public async Task<List<AdminClassificationDetails>> Get()
         {
-           //var UserId = Request.Headers["UserId"];
+           //var UserId = Request.Headers["UserId"]; 
             var CurrentUser = await _userManager.GetUserAsync(User);
             return await _classificationProvider.GetClassifications(CurrentUser.LanguageID);
 
@@ -49,5 +49,4 @@ namespace SIPx.API.Controllers
             return Classification;
         }
     }
-
 }

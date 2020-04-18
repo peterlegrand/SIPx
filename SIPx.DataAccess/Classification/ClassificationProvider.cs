@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,10 +16,18 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public Task<List<AdminClassificationDetails>> GetClassifications(int LanguageId)
+        public async Task<List<AdminClassificationDetails>> GetClassifications(int LanguageId)
         {
             string usp = "usp_AdminClassficationList @LanguageID";
-            return _sqlDataAccess.LoadData<AdminClassificationDetails, dynamic>(usp, new { LanguageID = LanguageId });
+            var x = await _sqlDataAccess.LoadData<AdminClassificationDetails, dynamic>(usp, new { LanguageID = LanguageId });
+            return x;
+        }
+        public  List<AdminClassificationDetails> GetClassifications2(int LanguageId)
+        {
+            var parameters = new List<SqlParameter> { new SqlParameter { ParameterName = "@LanguageID", SqlValue = LanguageId } };
+            string usp = "usp_AdminClassficationList @LanguageID";
+            var x = _sqlDataAccess.LoadData2<AdminClassificationDetails>(usp, parameters );
+            return x;
         }
 
         public Task<AdminClassificationDetails> GetClassificationById(int Id, int LanguageId)
