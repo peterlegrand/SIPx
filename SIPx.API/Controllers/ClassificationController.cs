@@ -13,7 +13,7 @@ namespace SIPx.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ClassificationController : ControllerBase
     {
         private readonly IClassificationProvider _classificationProvider;

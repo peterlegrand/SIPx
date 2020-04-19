@@ -1,0 +1,21 @@
+﻿@page "/Classifications"
+@inherits ClassificationsBase
+<h3>Classifications</h3>
+
+@if (Classifications == null)
+{ <div class="spinner"></div>}
+else
+{<table class="table table-bordered table-hover">
+<thead>
+    <tr><th>Name</th></tr>
+</thead>
+    <tbody>
+        @foreach (var classification in Classifications)
+        {
+            <tr>
+                <td>@classification.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
