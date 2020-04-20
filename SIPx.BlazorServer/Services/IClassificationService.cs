@@ -8,6 +8,6 @@ namespace SIPx.BlazorServer.Services
 {
     public interface IClassificationService
     {
-        Task<IEnumerable<AdminClassificationDetails>> getclassifications();
+     //   Task<IEnumerable<AdminClassificationDetails>> getclassifications();
     }
 }

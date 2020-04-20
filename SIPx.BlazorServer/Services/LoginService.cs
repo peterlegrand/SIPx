@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using SIPx.Shared;
 using SIPx.Shared.User;
 using System;
 using System.Collections.Generic;
@@ -13,25 +14,28 @@ using System.Threading.Tasks;
 
 namespace SIPx.BlazorServer.Services
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpsService _httpsService;
 
-        public LoginService(HttpClient httpClient)
+        public LoginService(IHttpsService httpsService)
         {
-            _httpClient = httpClient;
-
+            _httpsService = httpsService;
         }
-    public async Task<LoginReturn> Login(Login login)
+
+        public async Task<UserManagerResponse> Login(LoginViewModel model) 
         {
-            var jsonData = JsonConvert.SerializeObject(login);
-            var content = new StringContent(jsonData, Encoding.UTF8, "Application/json");
-            var response = await _httpClient.PostAsync("https://localhost:44393/api/Auth/Login", content);
-            var responseBody = await response.Content.ReadAsStringAsync();
-            var responseObject = JsonConvert.DeserializeObject<()
 
-            await HttpClientJsonExtensions.PostJsonAsync<Login>(_httpClient, "api/Login",login); 
+            //var model = new LoginViewModel
+            //{
+            //    Email = "eplegrand@gmail.com",
+            //    Password = "Pipo!9165",
+            //};
+
+            var responseObject = JsonConvert.DeserializeObject<UserManagerResponse>(await _httpsService.httpPostService<LoginViewModel>(model, "api/auth/login"));
+
+            return responseObject;
         }
-    
+
     }
 }

@@ -1,4 +1,28 @@
-﻿@page "/Login"
+﻿@page "/"
 @inherits LoginBase
 <h3>Login</h3>
+<div>
+    @*<EditForm Model="LoginModel" >
+    <label>User name:</label>
+    <InputText @bind-Value="LoginModel.Email">eplegrand@gmail.com</InputText>
+    <label>Password:</label>
+    <InputText @bind-Value="LoginModel.Password"></InputText>
+    <button type="button" @onclick="@(() => SubmitLogin())">Login</button>
+</EditForm>*@
+    <EditForm Model="LoginModel" OnSubmit="SubmitLogin">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <label>User name:</label>
+        <InputText @bind-Value="LoginModel.Email"></InputText>
+        <label>Password:</label>
+        <InputText @bind-Value="LoginModel.Password"></InputText>
+        <button type="submit">Submit</button>
+    </EditForm>
+    </div>
 
+@if (y.Message == "")
+{ <div>wait</div>}
+else if (y.Message == "load")
+{ <div>loading</div>}
+else
+{ <div>@y.Message</div>}

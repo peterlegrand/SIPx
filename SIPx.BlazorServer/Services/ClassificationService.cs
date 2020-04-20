@@ -14,13 +14,18 @@ namespace SIPx.BlazorServer.Services
     {
         private readonly HttpClient _httpClient;
 
-        public ClassificationService(HttpClient httpClient)
+        //public ClassificationService(HttpClient httpClient)
+        //{
+        //    _httpClient = httpClient;
+        //}
+
+        public Task<IEnumerable<AdminClassificationDetails>> getclassifications()
         {
-            _httpClient = httpClient;
+            throw new NotImplementedException();
         }
-        public async Task<IEnumerable<AdminClassificationDetails>> getclassifications()
-        {
-            return await  HttpClientJsonExtensions.GetJsonAsync<List<AdminClassificationDetails>>(_httpClient, "api/");
-        }
+        //  public async Task<IEnumerable<AdminClassificationDetails>> getclassifications()
+        //  {
+        ////      return await  HttpClientJsonExtensions.GetJsonAsync<List<AdminClassificationDetails>>(_httpClient, "api/");
+        //  }
     }
 }
