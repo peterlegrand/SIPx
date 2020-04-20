@@ -1,4 +1,5 @@
 ﻿@page "/"
+@layout AuthLayout
 @inherits LoginBase
 <h3>Login</h3>
 <div>
@@ -10,14 +11,17 @@
     <button type="button" @onclick="@(() => SubmitLogin())">Login</button>
 </EditForm>*@
     <EditForm Model="LoginModel" OnSubmit="SubmitLogin">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <label>User name:</label>
-        <InputText @bind-Value="LoginModel.Email"></InputText>
-        <label>Password:</label>
-        <InputText @bind-Value="LoginModel.Password"></InputText>
-        <button type="submit">Submit</button>
-    </EditForm>
+        <RadzenCard>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <label>User name:</label>
+            <RadzenTextBox  @bind-Value="LoginModel.Email"></RadzenTextBox>
+            <label>Password:</label>
+            <RadzenTextBox @bind-Value="LoginModel.Password"></RadzenTextBox>
+            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Login"
+                          ButtonStyle="Radzen.ButtonStyle.Primary" class="btn-block mr-2"/>
+        </RadzenCard>
+</EditForm>
     </div>
 
 @if (y.Message == "")

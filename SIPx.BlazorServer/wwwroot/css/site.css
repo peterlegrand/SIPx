@@ -195,3 +195,12 @@ app {
 @keyframes spin {0% {transform: rotate(0deg)}
                  100% {transform: rotate(360deg)}
 }
+
+.middle-box {
+    margin: auto;
+    margin-top: 150px;
+    width: 450px;
+    padding:30px;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 20px;
+}

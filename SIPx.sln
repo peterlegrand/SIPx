@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIPx.DataAccess", "SIPx.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIPx.Tests", "SIPx.Tests\SIPx.Tests.csproj", "{25A267BC-BA96-4B00-BC94-74B84383A703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIPx.BlazorServer", "SIPx.BlazorServer\SIPx.BlazorServer.csproj", "{288A3710-7C7E-4635-AD2F-511F60834449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIPx.BlazorServer", "SIPx.BlazorServer\SIPx.BlazorServer.csproj", "{288A3710-7C7E-4635-AD2F-511F60834449}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
