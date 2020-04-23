@@ -8,7 +8,7 @@ namespace SIPx.DataAccess
         Task<AdminClassificationDetails> GetClassificationById(int Id, int LanguageId);
         Task<List<AdminClassificationDetails>> GetClassifications(int LanguageId);
         List<AdminClassificationDetails> GetClassifications2(int LanguageId);
-        bool PostClassification(AdminClassificationCreate Classification);
-        bool PutClassification(AdminClassificationUpdate Classification);
+        bool PostClassification(ClassificationCreate Classification);
+        bool PutClassification(ClassificationUpdate Classification);
     }
 }

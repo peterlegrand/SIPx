@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.DataAccess
 {
-    public class AdminClassificationDetails : IAdminClassificationDetails
+    public class ClassificationViewGet : IClassificationViewGet
     {
         [Key]
         public int ClassificationId { get; set; }

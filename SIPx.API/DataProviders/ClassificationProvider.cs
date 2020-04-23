@@ -36,16 +36,16 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<AdminClassificationDetails, dynamic>(usp, new { ClassificationId = Id, LanguageID = LanguageId });
 
         }
-        public bool PostClassification(AdminClassificationCreate Classification)
+        public bool PostClassification(ClassificationCreate Classification)
         {
             string usp = "usp_classificationCreate @LanguageID, @StatusID, @DefaultPageId, @HasDropDown, @DropDownSequence, @CreatorId, @Name, @Description, @MenuName, @MouseOver";
-            _sqlDataAccess.SaveData<AdminClassificationCreate>(usp, Classification);
+            _sqlDataAccess.SaveData<ClassificationCreate>(usp, Classification);
             return true;
         }
-        public bool PutClassification(AdminClassificationUpdate Classification)
+        public bool PutClassification(ClassificationUpdate Classification)
         {
             string usp = "usp_AdminClassificationUpdate @StatusID , @DefaultPageID , @HasDropDown , @DropDownSequence , @ModifierID , @ClassificationID , @Name , @Description , @MenuName , @MouseOver , @LanguageID";
-            _sqlDataAccess.SaveData<AdminClassificationUpdate>(usp, Classification);
+            _sqlDataAccess.SaveData<ClassificationUpdate>(usp, Classification);
             return true;
         }
     }

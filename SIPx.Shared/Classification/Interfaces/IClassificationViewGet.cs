@@ -2,7 +2,7 @@
 
 namespace SIPx.DataAccess
 {
-    public interface IAdminClassificationDetails
+    public interface IClassificationViewGet
     {
         int ClassificationId { get; set; }
         string ClassificationPageName { get; set; }

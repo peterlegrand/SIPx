@@ -41,7 +41,7 @@ namespace SIPx.API.Controllers
 
         }
         [HttpPut]
-        public AdminClassificationUpdate Put(AdminClassificationUpdate Classification)
+        public ClassificationUpdate Put(ClassificationUpdate Classification)
         {
 //            var CurrentUser = await _userManager.GetUserAsync(User);
 
