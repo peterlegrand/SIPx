@@ -26,7 +26,7 @@ namespace SIPx.Tests.DataAccess
                 var parameters = new List<SqlParameter> { new SqlParameter { ParameterName = "@LanguageID", SqlValue = 39 } };
                 mock.Mock<ISqlDataAccess>()
          
-                    .Setup(x => x.LoadData2<AdminClassificationDetails>("usp_AdminClassficationList @LanguageID", parameters))
+                    .Setup(x => x.LoadData2<ClassificationViewGet>("usp_AdminClassficationList @LanguageID", parameters))
                     .Returns(GetSampleClassifications(39));
 
                 var y = mock.Create<ClassificationProvider>();
@@ -38,11 +38,11 @@ namespace SIPx.Tests.DataAccess
 
 
         }
-        private List<AdminClassificationDetails> GetSampleClassifications(int LanguageId)
+        private List<ClassificationViewGet> GetSampleClassifications(int LanguageId)
         {
-            List<AdminClassificationDetails> output = new List<AdminClassificationDetails>
+            List<ClassificationViewGet> output = new List<ClassificationViewGet>
                 {
-                new AdminClassificationDetails
+                new ClassificationViewGet
                 {
                     Name = "Climate"
                     ,

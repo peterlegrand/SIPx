@@ -25,7 +25,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
         [HttpGet]
-        public async Task<List<AdminClassificationDetails>> Get()
+        public async Task<List<ClassificationViewGet>> Get()
         {
            //var UserId = Request.Headers["UserId"]; 
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -33,7 +33,7 @@ namespace SIPx.API.Controllers
 
         }
         [HttpGet("{Id:int}")]
-        public async Task<AdminClassificationDetails> Get(int Id)
+        public async Task<ClassificationViewGet> Get(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
@@ -41,7 +41,7 @@ namespace SIPx.API.Controllers
 
         }
         [HttpPut]
-        public ClassificationUpdate Put(ClassificationUpdate Classification)
+        public ClassificationUpdatePut Put(ClassificationUpdatePut Classification)
         {
 //            var CurrentUser = await _userManager.GetUserAsync(User);
 

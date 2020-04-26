@@ -16,36 +16,36 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<AdminClassificationDetails>> GetClassifications(int LanguageId)
+        public async Task<List<ClassificationViewGet>> GetClassifications(int LanguageId)
         {
             string usp = "usp_AdminClassficationList @LanguageID";
-            var x = await _sqlDataAccess.LoadData<AdminClassificationDetails, dynamic>(usp, new { LanguageID = LanguageId });
+            var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageID = LanguageId });
             return x;
         }
-        public  List<AdminClassificationDetails> GetClassifications2(int LanguageId)
+        public  List<ClassificationViewGet> GetClassifications2(int LanguageId)
         {
             var parameters = new List<SqlParameter> { new SqlParameter { ParameterName = "@LanguageID", SqlValue = LanguageId } };
             string usp = "usp_AdminClassficationList @LanguageID";
-            var x = _sqlDataAccess.LoadData2<AdminClassificationDetails>(usp, parameters );
+            var x = _sqlDataAccess.LoadData2<ClassificationViewGet>(usp, parameters );
             return x;
         }
 
-        public Task<AdminClassificationDetails> GetClassificationById(int Id, int LanguageId)
+        public Task<ClassificationViewGet> GetClassificationById(int Id, int LanguageId)
         {
             string usp = "usp_AdminClassficationDetails @classificationId,  @LanguageID";
-            return _sqlDataAccess.LoadSingleRecord<AdminClassificationDetails, dynamic>(usp, new { ClassificationId = Id, LanguageID = LanguageId });
+            return _sqlDataAccess.LoadSingleRecord<ClassificationViewGet, dynamic>(usp, new { ClassificationId = Id, LanguageID = LanguageId });
 
         }
-        public bool PostClassification(ClassificationCreate Classification)
+        public bool PostClassification(ClassificationCreatePost Classification)
         {
             string usp = "usp_classificationCreate @LanguageID, @StatusID, @DefaultPageId, @HasDropDown, @DropDownSequence, @CreatorId, @Name, @Description, @MenuName, @MouseOver";
-            _sqlDataAccess.SaveData<ClassificationCreate>(usp, Classification);
+            _sqlDataAccess.SaveData<ClassificationCreatePost>(usp, Classification);
             return true;
         }
-        public bool PutClassification(ClassificationUpdate Classification)
+        public bool PutClassification(ClassificationUpdatePut Classification)
         {
             string usp = "usp_AdminClassificationUpdate @StatusID , @DefaultPageID , @HasDropDown , @DropDownSequence , @ModifierID , @ClassificationID , @Name , @Description , @MenuName , @MouseOver , @LanguageID";
-            _sqlDataAccess.SaveData<ClassificationUpdate>(usp, Classification);
+            _sqlDataAccess.SaveData<ClassificationUpdatePut>(usp, Classification);
             return true;
         }
     }

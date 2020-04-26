@@ -10,7 +10,7 @@ namespace SIPx.BlazorServer.Pages
 {
     public class ClassificationsBase : ComponentBase
     {
-        public IEnumerable<AdminClassificationDetails> Classifications { get; set; }
+        public IEnumerable<ClassificationViewGet> Classifications { get; set; }
         [Inject]
         public IClassificationService classificationService { get; set; }
     }
