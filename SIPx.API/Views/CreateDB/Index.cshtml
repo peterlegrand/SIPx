@@ -1,0 +1,13 @@
+﻿@model int;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div>Username: eplegrand@gmail.com</div>
+<div>Password: Pipo!9165</div>
+<form asp-controller="Classification" asp-action="Create" class="mt-3" method="post">
+    <button type="submit">Create DB</button>
+    @Model = 1;
+</form>
+

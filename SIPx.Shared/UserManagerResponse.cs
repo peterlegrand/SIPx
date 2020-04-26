@@ -11,5 +11,6 @@ namespace SIPx.Shared
         public IEnumerable<string> Errors { get; set; }
         public DateTime? ExpireDate { get; set; }
         public string UserId { get; set; }
+        public Dictionary<string, string> UserInfo { get; set; }
     }
 }

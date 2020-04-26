@@ -60,5 +60,23 @@ namespace SIPx.DataAccess
             }
         }
 
+        public async Task PopulateDataMaster(string sql)
+        {
+            string connectionString = _config.GetConnectionString("Initial");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = await connection.ExecuteAsync(sql);
+            }
+        }
+
+        public async Task PopulateDataSIP(string sql)
+        {
+            string connectionString = _config.GetConnectionString("DefaultConnection");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = await connection.ExecuteAsync(sql);
+            }
+        }
+
     }
 }

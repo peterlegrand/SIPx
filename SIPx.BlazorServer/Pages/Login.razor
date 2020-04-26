@@ -24,9 +24,9 @@
 </EditForm>
     </div>
 
-@if (y.Message == "")
+@if (loginResult.Message == "")
 { <div>wait</div>}
-else if (y.Message == "load")
+else if (loginResult.Message == "load")
 { <div>loading</div>}
 else
-{ <div>@y.Message</div>}
+{ <div>@loginResult.Message</div>}
