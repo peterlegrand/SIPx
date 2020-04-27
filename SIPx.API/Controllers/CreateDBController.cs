@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using SIPx.API.Models;
 using SIPx.DataAccess;
 using System.ServiceProcess;
+using System.Security.Claims;
+
 namespace SIPx.API.Controllers
 {
     public class CreateDBController : Controller
@@ -16,12 +18,14 @@ namespace SIPx.API.Controllers
         private readonly UserManager<SipUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ISqlDataAccess _sqlDataAccess;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public CreateDBController(UserManager<SipUser> userManager, IConfiguration configuration, ISqlDataAccess sqlDataAccess)
+        public CreateDBController(UserManager<SipUser> userManager, IConfiguration configuration, ISqlDataAccess sqlDataAccess, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _configuration = configuration;
             _sqlDataAccess = sqlDataAccess;
+            _roleManager = roleManager;
         }
         [HttpGet]
         public IActionResult Index()
@@ -77,10 +81,17 @@ namespace SIPx.API.Controllers
                 LanguageID = 41,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
-
             };
             var result = await _userManager.CreateAsync(identityUser, "Pipo!9165");
+            
+            var Role = new IdentityRole();
+            Role.Name = "Admin";
+            await _roleManager.CreateAsync(Role);
+            await _roleManager.AddClaimAsync(Role, new Claim("ApplicationRight", "ClassificationRead"));
+            
+            await _userManager.AddToRoleAsync(identityUser, "Admin");
 
+            
             using (StreamReader sr = new StreamReader("SQLScripts\\04MasterData.sql", System.Text.Encoding.UTF8))
             {
                 string line = await sr.ReadToEndAsync();
