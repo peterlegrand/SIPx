@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="2.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Radzen.Blazor" Version="2.5.10" />
-    <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.45" />
+    <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.48" />
   </ItemGroup>
 
   <ItemGroup>

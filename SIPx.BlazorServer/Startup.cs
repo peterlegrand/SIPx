@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace SIPx.BlazorServer
             services.AddServerSideBlazor();
             services.AddHttpClient<IHttpsService, HttpsService>(client => { client.BaseAddress = new Uri("https://localhost:44393/"); });
             services.AddSingleton<ILoginService, LoginService>();
+            services.AddBlazoredLocalStorage();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

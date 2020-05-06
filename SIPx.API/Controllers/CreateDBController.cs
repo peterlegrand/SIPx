@@ -74,8 +74,8 @@ namespace SIPx.API.Controllers
 
             var identityUser = new SipUser
             {
-                Email = "eplegrand2@gmail.com",
-                UserName = "eplegrand2@gmail.com",
+                Email = "eplegrand@gmail.com",
+                UserName = "eplegrand@gmail.com",
                 FirstName = "Peter",
                 LastName = "le Grand",
                 LanguageID = 41,
