@@ -87,8 +87,16 @@ namespace SIPx.API.Controllers
             var Role = new IdentityRole();
             Role.Name = "Admin";
             await _roleManager.CreateAsync(Role);
-            await _roleManager.AddClaimAsync(Role, new Claim("ApplicationRight", "ClassificationRead"));
-            
+            using (StreamReader sr = new StreamReader($"SQLScripts\\ApplicationRights.txt", System.Text.Encoding.UTF8))
+            {
+                while (!sr.EndOfStream)
+                { 
+                string line = await sr.ReadLineAsync();
+                await _roleManager.AddClaimAsync(Role, new Claim("ApplicationRight", line));
+            }
+            }
+
+
             await _userManager.AddToRoleAsync(identityUser, "Admin");
 
             

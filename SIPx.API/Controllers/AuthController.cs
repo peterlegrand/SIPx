@@ -50,6 +50,7 @@ namespace SIPx.API.Controllers
         [HttpPost("Login")]
         public async Task<UserManagerResponse> LoginAsync([FromBody]LoginViewModel model)
         {
+           
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (ModelState.IsValid)
             {

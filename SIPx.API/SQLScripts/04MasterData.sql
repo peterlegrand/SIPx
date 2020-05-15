@@ -1184,3 +1184,40 @@ INSERT INTO LeftMenuLanguages ( LeftMenuLanguageID, LeftMenuID, LanguageID, Name
 , (32, 16, 39, 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers')
 SET IDENTITY_INSERT LeftMenuLanguages OFF;
 
+
+SET IDENTITY_INSERT ClaimGroups ON;
+INSERT INTO ClaimGroups (
+	ClaimGroupID, Sequence) VALUES 
+(1, 1)
+SET IDENTITY_INSERT ClaimGroups OFF;
+
+
+SET IDENTITY_INSERT ClaimGroupLanguages ON;
+INSERT INTO ClaimGroupLanguages ( ClaimGroupLanguageID, ClaimGroupID, LanguageID, Name, Description, MenuName, MouseOver) VALUES 
+  (1, 1, 41, 'Classification Master', 'Classification Master', 'Classification Master', 'Classification Master')
+,  (2, 1, 39, 'Classificering onderhoud', 'Classificering onderhoud', 'Classificering onderhoud', 'Classificering onderhoud')
+SET IDENTITY_INSERT ClaimGroupLanguages OFF;
+
+
+SET IDENTITY_INSERT Claims ON;
+INSERT INTO Claims (
+	ClaimID, ClaimGroupID, ClaimType, ClaimValue) VALUES 
+(1, 1, 'ApplicationRights','ClassificationRead')
+, (2, 1, 'ApplicationRights','ClassificationDelete')
+, (3, 1, 'ApplicationRights','ClassificationUpdate')
+, (4, 1, 'ApplicationRights','ClassificationCreate')
+SET IDENTITY_INSERT Claims OFF;
+
+
+SET IDENTITY_INSERT ClaimLanguages ON;
+INSERT INTO ClaimLanguages ( ClaimLanguageID, ClaimID, LanguageID, Name, Description, MenuName, MouseOver) VALUES 
+  (1, 1, 41, 'Read classification', 'Read classification', 'Read classification', 'Read classification')
+, (2, 2, 41, 'Delete classification', 'Delete classification', 'Delete classification', 'Delete classification')
+, (3, 3, 41, 'Update classification', 'Update classification', 'Update classification', 'Update classification')
+, (4, 4, 41, 'Create classification', 'Create classification', 'Create classification', 'Create classification')
+, (5, 1, 39, 'Classificering lezen', 'Classificering lezen', 'Classificering lezen', 'Classificering lezen')
+, (6, 2, 39, 'Classificering verwijderen', 'Classificering verwijderen', 'Classificering verwijderen', 'Classificering verwijderen')
+, (7, 3, 39, 'Classificering veranderen', 'Classificering veranderen', 'Classificering veranderen', 'Classificering veranderen')
+, (8, 4, 39, 'Classificering toevoegen', 'Classificering toevoegen', 'Classificering toevoegen', 'Classificering toevoegen')
+SET IDENTITY_INSERT ClaimLanguages OFF;
+

@@ -18,7 +18,7 @@ namespace SIPx.DataAccess
 
         public async Task<List<ClassificationViewGet>> GetClassifications(int LanguageId)
         {
-            string usp = "usp_AdminClassficationList @LanguageID";
+            string usp = "usp_ClassificationViewGet @LanguageID";
             var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageID = LanguageId });
             return x;
         }
