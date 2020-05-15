@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIPx.Tests", "SIPx.Tests\SI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIPx.BlazorServer", "SIPx.BlazorServer\SIPx.BlazorServer.csproj", "{288A3710-7C7E-4635-AD2F-511F60834449}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIPx.MVC", "SIPx.MVC\SIPx.MVC.csproj", "{6D36ABBA-B5CA-4E54-9290-19F05DF50EEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{288A3710-7C7E-4635-AD2F-511F60834449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{288A3710-7C7E-4635-AD2F-511F60834449}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{288A3710-7C7E-4635-AD2F-511F60834449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D36ABBA-B5CA-4E54-9290-19F05DF50EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D36ABBA-B5CA-4E54-9290-19F05DF50EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D36ABBA-B5CA-4E54-9290-19F05DF50EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D36ABBA-B5CA-4E54-9290-19F05DF50EEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

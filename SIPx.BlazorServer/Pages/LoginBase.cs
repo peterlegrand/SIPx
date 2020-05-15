@@ -12,8 +12,10 @@ namespace SIPx.BlazorServer.Pages
     public class LoginBase : ComponentBase
     {
         [Inject]
-        public ILoginService loginService { get; set; }
         public ILocalStorageService storageService { get; set; }
+        [Inject]
+        public ILoginService loginService { get; set; }
+        [Inject]
         public AuthenticationStateProvider authenticationStateProvider { get; set; }
         public UserManagerResponse loginResult { get; set; } = new UserManagerResponse { Message = "" };
         public LoginViewModel LoginModel { get; set; } = new LoginViewModel();
@@ -44,7 +46,7 @@ namespace SIPx.BlazorServer.Pages
                     LastName = loginResult.UserInfo["LastName"].Trim(),
                     Id = loginResult.UserInfo[System.Security.Claims.ClaimTypes.NameIdentifier],
                 };
-                await storageService.SetItemAsync("User", "o"); //userInfo);
+                await storageService.SetItemAsync("User", userInfo);
                 await authenticationStateProvider.GetAuthenticationStateAsync();
 
                 isBusy = false;
