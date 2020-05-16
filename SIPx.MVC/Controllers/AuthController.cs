@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SIPx.Shared;
@@ -36,6 +37,7 @@ namespace SIPx.MVC.Controllers
 
             if (responseObject.IsSuccess)
             {
+                HttpContext.Session.SetString("Token", responseObject.Message);
                 return View();
             }
             else
@@ -45,6 +47,8 @@ namespace SIPx.MVC.Controllers
         }
 
         public IActionResult Index()
-        { return View(); }
+        {
+            ViewBag.SessionV = HttpContext.Session.GetString("Token"); 
+                return View(); }
     }
 }

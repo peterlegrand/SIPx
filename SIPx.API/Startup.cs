@@ -15,9 +15,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SIPx.API.Models;
 using SIPx.API.Services;
 using SIPx.DataAccess;
+using Swashbuckle.AspNetCore.Swagger;
+using SwaggerOptions = SIPx.API.Options.SwaggerOptions;
 
 namespace SIPx.API
 {
@@ -70,7 +73,11 @@ namespace SIPx.API
             services.AddControllers();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IClassificationProvider, ClassificationProvider>();
-        }
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new OpenApiInfo { Title = "SIP API", Version = "v1" });
+            });                
+            }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -79,7 +86,13 @@ namespace SIPx.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            var swaggerOptions = new SwaggerOptions();
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+            app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
+            app.UseSwaggerUI(option =>
+            {
+                option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();
