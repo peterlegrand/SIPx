@@ -4,6 +4,14 @@
 }
 
 <h1>Index</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" toolbar="@(new List<string>() {"Add","Edit","Delete"})">
+    <e-grid-pagesettings pageSize="2"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="ClassificationId" headerText="Classification ID" textAlign="Right"></e-grid-column>
+        <e-grid-column field="Name" headerText="Name" textAlign="Right">@Model</e-grid-column>
+        <e-grid-column field="HasDropDown" headerText="hasDropDown" textAlign="Right"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
 @foreach (var x in Model)
 
 {@x.Name}
