@@ -1,4 +1,4 @@
-﻿namespace SIPx.DataAccess
+﻿namespace SIPx.Shared
 {
     public interface IClassificationUpdatePut
     {

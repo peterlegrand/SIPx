@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SIPx.CallAPI\SIPx.CallAPI.csproj" />
     <ProjectReference Include="..\SIPx.Shared\SIPx.Shared.csproj" />
   </ItemGroup>
 

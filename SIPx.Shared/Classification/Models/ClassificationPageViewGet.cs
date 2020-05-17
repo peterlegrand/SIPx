@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace SIPx.DataAccess
+namespace SIPx.Shared
 {
     public class ClassificationPageViewGet : IClassificationPageViewGet
     {

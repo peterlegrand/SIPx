@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
 using SIPx.DataAccess;
+using SIPx.Shared;
 
 namespace SIPx.API.Controllers
 {
