@@ -4,14 +4,20 @@
 }
 
 <h1>Index</h1>
-<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" toolbar="@(new List<string>() {"Add","Edit","Delete"})">
-    <e-grid-pagesettings pageSize="2"></e-grid-pagesettings>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true"  >
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ClassificationId" headerText="Classification ID" textAlign="Right"></e-grid-column>
-        <e-grid-column field="Name" headerText="Name" textAlign="Right">@Model</e-grid-column>
-        <e-grid-column field="HasDropDown" headerText="hasDropDown" textAlign="Right"></e-grid-column>
+        <e-grid-column field="ClassificationId" headerText="Classification ID" textAlign="Right" width="10%" type="number"></e-grid-column>
+        <e-grid-column field="Name" headerText="Name" textAlign="Right" width="40%" type="string"></e-grid-column>
+        <e-grid-column field="HasDropDown" headerText="has Dropdown" textAlign="Right" width="10%" type="boolean" ></e-grid-column>
+        <e-grid-column headerText="Edit" template="#template" textAlign="Center" width="40%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 @foreach (var x in Model)
 
 {@x.Name}
+<script id="template" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+    </div>
+</script>
