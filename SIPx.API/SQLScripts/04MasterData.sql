@@ -1221,3 +1221,107 @@ INSERT INTO ClaimLanguages ( ClaimLanguageID, ClaimID, LanguageID, Name, Descrip
 , (8, 4, 39, 'Classificering toevoegen', 'Classificering toevoegen', 'Classificering toevoegen', 'Classificering toevoegen')
 SET IDENTITY_INSERT ClaimLanguages OFF;
 
+
+
+SET IDENTITY_INSERT ProcessTemplateFieldTypes ON
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (1);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (2);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (3);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (4);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (5);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (6);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (7);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (8);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (9);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (10);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (11);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (12);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (13);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (14);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (15);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (16);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (17);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (18);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (19);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (20);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (21);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (22);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (23);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (24);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (25);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (26);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (27);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (28);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (29);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (30);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (31);
+INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID) VALUES (32);
+SET IDENTITY_INSERT ProcessTemplateFieldTypes OFF
+
+
+SET IDENTITY_INSERT ProcessTemplateFieldTypeLanguages ON
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (1, 1, 41, 'Primary subject', 'Primary subject', 'Primary subject', 'Primary subject');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (2, 2, 41, 'Text', 'Text', 'Text', 'Text');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (3, 3, 41, 'Number', 'Number', 'Number', 'Number');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (4, 4, 41, 'Date', 'Date', 'Date', 'Date');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (5, 5, 41, 'Date time', 'Date time', 'Date time', 'Date time');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (6, 6, 41, 'From date', 'From date', 'From date', 'From date');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (7, 7, 41, 'To date', 'To date', 'To date', 'To date');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (8, 8, 41, 'From date time', 'From date time', 'From date time', 'From date time');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (9, 9, 41, 'To date time', 'To date time', 'To date time', 'To date time');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (10, 10, 41, 'Action button', 'Action button', 'Action button', 'Action button');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (11, 11, 41, 'Cancel button', 'Cancel button', 'Cancel button', 'Cancel button');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (12, 12, 41, 'Primary user', 'Primary user', 'Primary user', 'Primary user');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (13, 13, 41, 'Secondary user', 'Secondary user', 'Secondary user', 'Secondary user');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (14, 14, 41, 'Primary organization', 'Primary organization', 'Primary organization', 'Primary organization');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (15, 15, 41, 'Secondary organization', 'Secondary organization', 'Secondary organization', 'Secondary organization');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (16, 16, 41, 'Primary project', 'Primary project', 'Primary project', 'Primary project');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (17, 17, 41, 'Secondary project', 'Secondary project', 'Secondary project', 'Secondary project');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (18, 18, 41, 'Primary language', 'Primary language', 'Primary language', 'Primary language');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (19, 19, 41, 'Secondary language', 'Secondary language', 'Secondary language', 'Secondary language');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (20, 20, 41, 'Primary classification', 'Primary classification', 'Primary classification', 'Primary classification');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (21, 21, 41, 'Secondary classification', 'Secondary classification', 'Secondary classification', 'Secondary classification');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (22, 22, 41, 'Primary classification value', 'Primary classification value', 'Primary classification value', 'Primary classification value');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (23, 23, 41, 'Secondary classification value', 'Secondary classification value', 'Secondary classification value', 'Secondary classification value');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (24, 24, 41, 'Primary content', 'Primary content', 'Primary content', 'Primary content');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (25, 25, 41, 'Secondary content', 'Secondary content', 'Secondary content', 'Secondary content');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (26, 26, 41, 'Primary country', 'Primary country', 'Primary country', 'Primary country');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (27, 27, 41, 'Secondary country', 'Secondary country', 'Secondary country', 'Secondary country');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (28, 28, 41, 'Primary security level', 'Primary security level', 'Primary security level', 'Primary security level');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (29, 29, 41, 'Secondary security level', 'Secondary security level', 'Secondary security level', 'Secondary security level');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (30, 30, 41, 'Primary role', 'Primary role', 'Primary role', 'Primary role');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (31, 31, 41, 'Secondary role', 'Secondary role', 'Secondary role', 'Secondary role');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (32, 32, 41, 'HTML text', 'HTML text', 'HTML text', 'HTML text');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (33, 1, 39, 'Hoofd onderwerp', 'Hoofd onderwerp', 'Hoofd onderwerp', 'Hoofd onderwerp');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (34, 2, 39, 'Tekst', 'Tekst', 'Tekst', 'Tekst');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (35, 3, 39, 'Nummer', 'Nummer', 'Nummer', 'Nummer');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (36, 4, 39, 'Datum', 'Datum', 'Datum', 'Datum');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (37, 5, 39, 'Datum tijd', 'Datum tijd', 'Datum tijd', 'Datum tijd');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (38, 6, 39, 'Van datum', 'Van datum', 'Van datum', 'Van datum');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (39, 7, 39, 'Tot datum', 'Tot datum', 'Tot datum', 'Tot datum');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (40, 8, 39, 'Van datum tijd', 'Van datum tijd', 'Van datum tijd', 'Van datum tijd');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (41, 9, 39, 'Tot datum tijd', 'Tot datum tijd', 'Tot datum tijd', 'Tot datum tijd');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (42, 10, 39, 'Aktie knop', 'Aktie knop', 'Aktie knop', 'Aktie knop');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (43, 11, 39, 'Annuleren knop', 'Annuleren knop', 'Annuleren knop', 'Annuleren knop');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (44, 12, 39, 'Hoofd gebruiker', 'Hoofd gebruiker', 'Hoofd gebruiker', 'Hoofd gebruiker');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (45, 13, 39, 'Tweede gebruiker', 'Tweede gebruiker', 'Tweede gebruiker', 'Tweede gebruiker');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (46, 14, 39, 'Hoofd organizatie', 'Hoofd organizatie', 'Hoofd organizatie', 'Hoofd organizatie');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (47, 15, 39, 'Tweede organizatie', 'Tweede organizatie', 'Tweede organizatie', 'Tweede organizatie');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (48, 16, 39, 'Hoofd project', 'Hoofd project', 'Hoofd project', 'Hoofd project');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (49, 17, 39, 'Tweede project', 'Tweede project', 'Tweede project', 'Tweede project');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (50, 18, 39, 'Hoofd taal', 'Hoofd taal', 'Hoofd taal', 'Hoofd taal');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (51, 19, 39, 'Tweede taal', 'Tweede taal', 'Tweede taal', 'Tweede taal');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (52, 20, 39, 'Hoofd classificering', 'Hoofd classificering', 'Hoofd classificering', 'Hoofd classificering');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (53, 21, 39, 'Tweede classificering', 'Tweede classificering', 'Tweede classificering', 'Tweede classificering');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (54, 22, 39, 'Hoofd classificering waarde', 'Hoofd classificering waarde', 'Hoofd classificering waarde', 'Hoofd classificering waarde');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (55, 23, 39, 'Tweede classificering waarde', 'Tweede classificering waarde', 'Tweede classificering waarde', 'Tweede classificering waarde');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (56, 24, 39, 'Hoofd inhoud', 'Hoofd inhoud', 'Hoofd inhoud', 'Hoofd inhoud');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (57, 25, 39, 'Tweede inhoud', 'Tweede inhoud', 'Tweede inhoud', 'Tweede inhoud');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (58, 26, 39, 'Hoofd land', 'Hoofd land', 'Hoofd land', 'Hoofd land');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (59, 27, 39, 'Tweede land', 'Tweede land', 'Tweede land', 'Tweede land');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (60, 28, 39, 'Hoofd veiligheids niveau', 'Hoofd veiligheids niveau', 'Hoofd veiligheids niveau', 'Hoofd veiligheids niveau');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (61, 29, 39, 'Tweede veiligheids niveau', 'Tweede veiligheids niveau', 'Tweede veiligheids niveau', 'Tweede veiligheids niveau');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (62, 30, 39, 'Hoofd rol', 'Hoofd rol', 'Hoofd rol', 'Hoofd rol');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (63, 31, 39, 'Tweede rol', 'Tweede rol', 'Tweede rol', 'Tweede rol');
+INSERT INTO ProcessTemplateFieldTypeLanguages (ProcessTemplateFieldTypeLanguageID, ProcessTemplateFieldTypeID, LanguageID, Name, Description, MouseOver, MenuName) VALUES (64, 32, 39, 'HTML tekst', 'HTML tekst', 'HTML tekst', 'HTML tekst');
+SET IDENTITY_INSERT ProcessTemplateFieldTypeLanguages OFF

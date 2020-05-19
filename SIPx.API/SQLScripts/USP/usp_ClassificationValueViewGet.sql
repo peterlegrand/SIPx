@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[ClassificationValueViewGet] (@LanguageId Int, @ClassificationID Int )
+CREATE PROCEDURE [dbo].[usp_ClassificationValueViewGet] (@LanguageId Int, @ClassificationID Int )
 	AS 
 	--https://www.sqlservertutorial.net/sql-server-basics/sql-server-recursive-cte/
 		WITH StructureClassificationValues (
@@ -86,6 +86,3 @@ CREATE PROCEDURE [dbo].[ClassificationValueViewGet] (@LanguageId Int, @Classific
 		JOIN AspNetUsers Modifier
 			ON Modifier.Id = ClassificationValues.ModifierID
 		ORDER BY Path
-
-
-
