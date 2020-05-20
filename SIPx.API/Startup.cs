@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SIPx.API.DataProviders;
 using SIPx.API.Models;
 using SIPx.API.Services;
 using SIPx.DataAccess;
@@ -73,6 +74,7 @@ namespace SIPx.API
             services.AddControllers();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IClassificationProvider, ClassificationProvider>();
+            services.AddTransient<SIPx.API.DataProviders.IUITermLanguageCustomizationProvider, UITermLanguageCustomizationProvider>();
             services.AddSwaggerGen(x =>
             {
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "SIP API", Version = "v1" });

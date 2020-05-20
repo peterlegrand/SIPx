@@ -18,6 +18,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<List<ClassificationViewGet>>($"{_baseUrl}api/Classification",token);
+            var x = await client.GetAsync<List<UITermLanguageCustomization>>($"{_baseUrl}api/UITerm");
+            ViewBag.UITerms = x;
             return View(response);
             //return View();
         }

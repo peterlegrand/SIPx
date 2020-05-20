@@ -72,3 +72,4 @@ JOIN AspNetUsers Modifier
 	ON Modifier.Id = Content.ModifierID
 WHERE ContentStatusLanguages.LanguageID = @LanguageID
 	AND SecurityLevelLanguages.LanguageID = @LanguageID
+	END;

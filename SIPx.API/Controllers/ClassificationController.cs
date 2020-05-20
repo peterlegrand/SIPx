@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SIPx.API.DataProviders;
 using SIPx.API.Models;
 using SIPx.DataAccess;
 using SIPx.Shared;
