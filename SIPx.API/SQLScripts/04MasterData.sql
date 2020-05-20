@@ -2292,3 +2292,11 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(639,319, 39,'Inhouds type groep','Inhouds type groep','Inhouds type groep');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(640,320, 39,'Proces sjabloon','Proces sjabloon','Proces sjabloon');
 SET IDENTITY_INSERT UITermLanguages OFF;
+
+SET IDENTITY_INSERT MVCUIScreens ON;
+INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES(1, 'Classification','Index')
+SET IDENTITY_INSERT MVCUIScreens OFF;
+
+SET IDENTITY_INSERT MVCUITermScreens ON;
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(1, 3,1)
+SET IDENTITY_INSERT MVCUITermScreens OFF;

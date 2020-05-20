@@ -29,11 +29,12 @@ namespace SIPx.API.Controllers
         {
 
             //            var CurrentUser = await _userManager.GetUserAsync(User);
-            string Controller = "a";
-            string Action = "b";
+            string Controller = "Classification";
+            string Action = "Index";
             string LanguageID = "41";
 
-            return Ok(await _uITermProvider.GetUITermLanguageCustomization(Controller, Action, 41));
+            var a = await _uITermProvider.GetUITermLanguageCustomization(Controller, Action, 41);
+            return Ok(a);
 
 
         }
