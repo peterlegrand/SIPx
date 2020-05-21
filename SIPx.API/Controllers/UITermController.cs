@@ -25,7 +25,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet] //("{Controller}/{Action}/{LanguageID}")]
-        public async Task<IActionResult> Get() //string Controller = "a", string Action = "b", string LanguageID = "1")
+        public  IActionResult Get() //string Controller = "a", string Action = "b", string LanguageID = "1")
         {
 
             //            var CurrentUser = await _userManager.GetUserAsync(User);
@@ -33,7 +33,7 @@ namespace SIPx.API.Controllers
             string Action = "Index";
             string LanguageID = "41";
 
-            var a = await _uITermProvider.GetUITermLanguageCustomization(Controller, Action, 41);
+            var a = _uITermProvider.GetUITermLanguageCustomization(Controller, Action, 41);
             return Ok(a);
 
 

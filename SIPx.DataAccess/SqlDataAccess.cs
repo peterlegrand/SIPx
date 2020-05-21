@@ -20,7 +20,7 @@ namespace SIPx.DataAccess
             _config = config;
         }
 
-        public List<T> LoadData2<T>(string sql, List<SqlParameter> parameters)
+        public List<T> LoadData2<T>(string sql, DynamicParameters parameters)
         {
 
             string connectionString = _config.GetConnectionString("DefaultConnection");

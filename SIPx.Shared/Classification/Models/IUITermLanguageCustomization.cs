@@ -2,7 +2,7 @@
 {
     public interface IUITermLanguageCustomization
     {
-        string Customization { get; set; }
+        string TermString { get; set; }
         string InternalName { get; set; }
     }
 }

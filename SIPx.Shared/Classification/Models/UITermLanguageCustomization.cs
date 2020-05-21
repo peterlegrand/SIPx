@@ -9,6 +9,6 @@ namespace SIPx.Shared
     {
         [Key]
         public string InternalName { get; set; }
-        public string Customization { get; set; }
+        public string TermString { get; set; }
     }
 }

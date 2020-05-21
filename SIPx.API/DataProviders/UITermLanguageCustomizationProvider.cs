@@ -1,10 +1,11 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using SIPx.DataAccess;
 using SIPx.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace SIPx.API.DataProviders
 {
@@ -17,14 +18,16 @@ namespace SIPx.API.DataProviders
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<UITermLanguageCustomization>> GetUITermLanguageCustomization(string Controller, string Action, int LanguageId)
+        public List<UITermLanguageCustomization> GetUITermLanguageCustomization(string Controller, string Action, int LanguageId)
         {
             string usp = "usp_MVCUITermLanguageCustomizationsGet @Controller, @Action, @LanguageID";
-            SqlParameter[] parameters =  {new SqlParameter ("@Controller" , Controller),
-                new SqlParameter ("@Action" , Action),
-                new SqlParameter ("@LanguageID" , LanguageId),
-            };
-            var x = await _sqlDataAccess.LoadData<UITermLanguageCustomization, SqlParameter[]>(usp, parameters);
+            // List<SqlParameter> parameters = new List<SqlParameter> {new SqlParameter ("@Controller" , Controller),
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@Controller", Controller);
+            parameters.Add("@Action", Action);
+            parameters.Add("@LanguageID", LanguageId);
+            
+            var x = _sqlDataAccess.LoadData2<UITermLanguageCustomization>(usp, parameters);
             return x;
         }
 

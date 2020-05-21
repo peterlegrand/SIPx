@@ -6,6 +6,6 @@ namespace SIPx.API.DataProviders
 {
     public interface IUITermLanguageCustomizationProvider
     {
-        Task<List<UITermLanguageCustomization>> GetUITermLanguageCustomization(string Controller, string Action, int LanguageId);
+        List<UITermLanguageCustomization> GetUITermLanguageCustomization(string Controller, string Action, int LanguageId);
     }
 }

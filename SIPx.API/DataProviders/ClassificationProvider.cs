@@ -1,4 +1,5 @@
 ﻿
+using Dapper;
 using SIPx.Shared;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,8 @@ namespace SIPx.DataAccess
         }
         public  List<ClassificationViewGet> GetClassifications2(int LanguageId)
         {
-            var parameters = new List<SqlParameter> { new SqlParameter { ParameterName = "@LanguageID", SqlValue = LanguageId } };
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@LanguageID", LanguageId);
             string usp = "usp_AdminClassficationList @LanguageID";
             var x = _sqlDataAccess.LoadData2<ClassificationViewGet>(usp, parameters );
             return x;
