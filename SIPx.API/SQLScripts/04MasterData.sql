@@ -2298,5 +2298,17 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES(1, 
 SET IDENTITY_INSERT MVCUIScreens OFF;
 
 SET IDENTITY_INSERT MVCUITermScreens ON;
-INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(1, 3,1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(1, 2, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(2, 3, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(3, 21, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(4, 22, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(5, 24, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(6, 29, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(7, 34, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(8, 36, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(9, 37, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(10, 46, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(11, 59, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(12, 60, 1)
+INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenID,[UITermID],[MVCUIScreenID])VALUES(13, 65, 1)
 SET IDENTITY_INSERT MVCUITermScreens OFF;

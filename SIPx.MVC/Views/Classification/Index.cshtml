@@ -1,26 +1,61 @@
 ﻿@model List<ClassificationViewGet>
 @{
-    ViewData["Title"] = "Index";
     var Term = (List<UITermLanguageCustomization>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
 
 }
 
-<h1>Index</h1>
-<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true"  >
+<h1>@Term.Find(x => x.InternalName.Equals("Classifications")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ClassificationId" headerText="Classification ID" textAlign="Right" width="10%" type="number"></e-grid-column>
+        <e-grid-column field="ClassificationId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="10%" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="40%" type="string"></e-grid-column>
-        <e-grid-column field="HasDropDown" headerText="has Dropdown" textAlign="Right" width="10%" type="boolean" ></e-grid-column>
-        <e-grid-column headerText="Edit" template="#template" textAlign="Center" width="40%" type="string"></e-grid-column>
+        <e-grid-column field="HasDropDown" headerText="@Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString" textAlign="Right" width="10%" type="boolean"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" width="40%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Values")).TermString" template="#Values" textAlign="Center" width="40%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Pages")).TermString" template="#Pages" textAlign="Center" width="40%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="40%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" width="40%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="40%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 @foreach (var x in Model)
 
 {@x.Name}
-<script id="template" type="text/x-template">
+<script id="Levels" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
-        
+
+    </div>
+</script>
+<script id="Values" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+
+    </div>
+</script>
+<script id="Pages" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+
+    </div>
+</script>
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+
+    </div>
+</script>
+<script id="Languages" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+
     </div>
 </script>
