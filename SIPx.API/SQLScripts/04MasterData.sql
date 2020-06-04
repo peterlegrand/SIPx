@@ -340,16 +340,16 @@ INSERT INTO Regions (RegionID) VALUES (5);
 SET IDENTITY_INSERT Regions OFF;
 
 SET IDENTITY_INSERT RegionLanguages ON;
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (1, 1, 41, 'Europe', 'Europe', 'Europe', 'Europe');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (2, 2, 41, 'Americas', 'Americas', 'Americas', 'Americas');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (3, 3, 41, 'Oceania', 'Oceania', 'Oceania', 'Oceania');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (4, 4, 41, 'Asia', 'Asia', 'Asia', 'Asia');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (5, 5, 41, 'Africa', 'Africa', 'Africa', 'Africa');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (6, 1, 39, 'Europa', 'Europa', 'Europa', 'Europa');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (7, 2, 39, 'Zuid en Noord Amerika', 'Zuid en Noord Amerika', 'Zuid en Noord Amerika', 'Zuid en Noord Amerika');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (8, 3, 39, 'Oceania', 'Oceania', 'Oceania', 'Oceania');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (9, 4, 39, 'Azie', 'Azie', 'Azie', 'Azie');
-INSERT INTO RegionLanguages (RegionLanguageID, RegionID, Name, Description, MenuName, MouseOver) VALUES (10, 5, 39, 'Afrika', 'Afrika', 'Afrika', 'Afrika');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (1, 1, 41, 'Europe', 'Europe', 'Europe', 'Europe');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (2, 2, 41, 'Americas', 'Americas', 'Americas', 'Americas');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (3, 3, 41, 'Oceania', 'Oceania', 'Oceania', 'Oceania');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (4, 4, 41, 'Asia', 'Asia', 'Asia', 'Asia');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (5, 5, 41, 'Africa', 'Africa', 'Africa', 'Africa');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (6, 1, 39, 'Europa', 'Europa', 'Europa', 'Europa');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (7, 2, 39, 'Zuid en Noord Amerika', 'Zuid en Noord Amerika', 'Zuid en Noord Amerika', 'Zuid en Noord Amerika');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (8, 3, 39, 'Oceania', 'Oceania', 'Oceania', 'Oceania');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (9, 4, 39, 'Azie', 'Azie', 'Azie', 'Azie');
+INSERT INTO RegionLanguages (RegionLanguageID, RegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (10, 5, 39, 'Afrika', 'Afrika', 'Afrika', 'Afrika');
 SET IDENTITY_INSERT RegionLanguages OFF;
 
 SET IDENTITY_INSERT SubRegions ON;
@@ -439,7 +439,7 @@ INSERT INTO IntermediateRegionLanguages (IntermediateRegionLanguageID,Intermedia
 INSERT INTO IntermediateRegionLanguages (IntermediateRegionLanguageID,IntermediateRegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (14, 6, 39, 'Zuid Amerika', 'Zuid Amerika', 'Zuid Amerika', 'Zuid Amerika');
 INSERT INTO IntermediateRegionLanguages (IntermediateRegionLanguageID,IntermediateRegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (15, 7, 39, 'Caribbean', 'Caribbean', 'Caribbean', 'Caribbean');
 INSERT INTO IntermediateRegionLanguages (IntermediateRegionLanguageID,IntermediateRegionID, LanguageID, Name, Description, MenuName, MouseOver) VALUES (16, 8, 39, 'Oost Afrika', 'Oost Afrika', 'Oost Afrika', 'Oost Afrika');
-SET IDENTITY_INSERT IntermediateRegionLanguages ON;
+SET IDENTITY_INSERT IntermediateRegionLanguages OFF;
 
 
 
