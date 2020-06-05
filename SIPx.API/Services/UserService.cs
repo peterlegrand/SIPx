@@ -39,9 +39,9 @@ namespace SIPx.API.Services
             {
                 Email = model.Email,
                 UserName = model.Email,
-                FirstName = "Peter",
-                LastName = "le Grand",
-                LanguageID = 41,
+             //   FirstName = "Peter",
+             //   LastName = "le Grand",
+             //   LanguageID = 41,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
 

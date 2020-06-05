@@ -38,7 +38,8 @@ namespace SIPx.API.Controllers
 
             if ( await _claimCheck.CheckClaim(CurrentUser, "ClassificationRead"))
             {
-                return Ok(await _classificationProvider.GetClassifications(CurrentUser.LanguageID));
+                //TOFIX PETER
+                return Ok(await _classificationProvider.GetClassifications(1));// CurrentUser.LanguageID));
             }
             return BadRequest(new
             {
@@ -52,7 +53,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            return await _classificationProvider.GetClassificationById(Id, CurrentUser.LanguageID);
+            return await _classificationProvider.GetClassificationById(Id, 1);// CurrentUser.LanguageID));
 
         }
         [HttpPut]

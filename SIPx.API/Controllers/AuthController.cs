@@ -61,8 +61,8 @@ namespace SIPx.API.Controllers
                     var claims = new[]
             {
                 new Claim("Email", model.Email),
-                new Claim("FirstName", user.FirstName),
-                new Claim("LastName", user.LastName),
+               // new Claim("FirstName", user.FirstName),
+                //new Claim("LastName", user.LastName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));

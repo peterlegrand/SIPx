@@ -61,24 +61,24 @@ namespace SIPx.API.Controllers
                 await _sqlDataAccess.PopulateDataMaster(line);
             }
 
-            DirectoryInfo d = new DirectoryInfo("SQLScripts\\USP");
-            FileInfo[] Files = d.GetFiles();
-            foreach (FileInfo file in Files)
-            {
-                using (StreamReader sr = new StreamReader($"SQLScripts\\USP\\{file.Name}", System.Text.Encoding.UTF8))
-                {
-                    string line = await sr.ReadToEndAsync();
-                    await _sqlDataAccess.PopulateDataSIP(line);
-                }
-            }
+            //DirectoryInfo d = new DirectoryInfo("SQLScripts\\USP");
+            //FileInfo[] Files = d.GetFiles();
+            //foreach (FileInfo file in Files)
+            //{
+            //    using (StreamReader sr = new StreamReader($"SQLScripts\\USP\\{file.Name}", System.Text.Encoding.UTF8))
+            //    {
+            //        string line = await sr.ReadToEndAsync();
+            //        await _sqlDataAccess.PopulateDataSIP(line);
+            //    }
+            //}
 
             var identityUser = new SipUser
             {
                 Email = "eplegrand@gmail.com",
                 UserName = "eplegrand@gmail.com",
-                FirstName = "Peter",
-                LastName = "le Grand",
-                LanguageID = 41,
+            //    FirstName = "Peter",
+            //    LastName = "le Grand",
+            //    LanguageID = 41,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -99,23 +99,21 @@ namespace SIPx.API.Controllers
 
             await _userManager.AddToRoleAsync(identityUser, "Admin");
 
-            
-            using (StreamReader sr = new StreamReader("SQLScripts\\04MasterData.sql", System.Text.Encoding.UTF8))
-            {
-                string line = await sr.ReadToEndAsync();
-                await _sqlDataAccess.PopulateDataSIP(line);
-            }
-            using (StreamReader sr = new StreamReader("SQLScripts\\Demo\\Demo.sql", System.Text.Encoding.UTF8))
-            {
-                string line = await sr.ReadToEndAsync();
-                await _sqlDataAccess.PopulateDataSIP(line);
-            }
-            using (StreamReader sr = new StreamReader("SQLScripts\\Demo\\DemoNL.sql", System.Text.Encoding.UTF8))
-            {
-                string line = await sr.ReadToEndAsync();
-                await _sqlDataAccess.PopulateDataSIP(line);
-            }
-
+//{            using (StreamReader sr = new StreamReader("SQLScripts\\04MasterData.sql", System.Text.Encoding.UTF8))
+//            {
+//                string line = await sr.ReadToEndAsync();
+//                await _sqlDataAccess.PopulateDataSIP(line);
+//            }
+//            using (StreamReader sr = new StreamReader("SQLScripts\\Demo\\Demo.sql", System.Text.Encoding.UTF8))
+//            {
+//                string line = await sr.ReadToEndAsync();
+//                await _sqlDataAccess.PopulateDataSIP(line);
+//            }
+//            using (StreamReader sr = new StreamReader("SQLScripts\\Demo\\DemoNL.sql", System.Text.Encoding.UTF8))
+//            {
+//                string line = await sr.ReadToEndAsync();
+//                await _sqlDataAccess.PopulateDataSIP(line);
+//            }
 
             return View();
         }
