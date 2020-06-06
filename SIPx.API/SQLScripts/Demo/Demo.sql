@@ -305,4 +305,9 @@ INSERT INTO OrganizationAddresses (OrganizationAddressID,OrganizationID,AddressT
 VALUES (1, 1, 1, 'Rama 4','Lumpini','110','a',geography::STGeomFromText('POINT(51.477805 -0.0025417)' , 4326),'Bangkok','12000','',221,'Bangkok','',@User, @User, getdate(),getdate());
 SET IDENTITY_INSERT OrganizationAddresses OFF;
 
+SET IDENTITY_INSERT UserPreferences ON;
+INSERT INTO UserPreferences (UserPreferenceID,PreferenceTypeID,UserID,IntPreference, ModifierID, ModifiedDate) 
+VALUES (1, 1, @user, 41, @User, getdate());
+SET IDENTITY_INSERT OrganizationAddresses OFF;
+
 use master
