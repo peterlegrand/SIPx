@@ -1,6 +1,8 @@
 use sip
 DECLARE @User as nvarchar(450);
 Select @User = Id from AspNetUsers
+DECLARE @Role as nvarchar(450);
+Select @Role = Id from AspNetRoles
 
 SET IDENTITY_INSERT Classifications ON;
 INSERT INTO Classifications (ClassificationID, StatusID, HasDropDown, DropDownSequence, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
@@ -15,6 +17,25 @@ INSERT INTO ClassificationLanguages(ClassificationLanguageID, ClassificationID, 
 , (2, 2, 41, 'Soil', 'Soil', 'Soil', 'Soil', @User, @User, GETDATE(), GETDATE())
 , (3, 3, 41, 'Crop', 'Crop', 'Crop', 'Crop', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ClassificationLanguages OFF;
+
+SET IDENTITY_INSERT ClassificationOwners ON;
+INSERT INTO ClassificationOwners (ClassificationOwnerID,ClassificationID,UserID,CreatorID,CreatedDate) VALUES 
+  (1, 1, @User, @User, getdate());
+INSERT INTO ClassificationOwners (ClassificationOwnerID,ClassificationID,UserID,CreatorID,CreatedDate) VALUES 
+  (2, 2, @User, @User, getdate());
+INSERT INTO ClassificationOwners (ClassificationOwnerID,ClassificationID,UserID,CreatorID,CreatedDate) VALUES 
+  (3, 3, @User, @User, getdate());
+SET IDENTITY_INSERT ClassificationOwners OFF;
+
+SET IDENTITY_INSERT ClassificationRoles ON;
+INSERT INTO ClassificationRoles (ClassificationRoleID,ClassificationID,RoleID,CreatorID,CreatedDate) VALUES 
+  (1, 1, @Role, @User, getdate());
+INSERT INTO ClassificationRoles (ClassificationRoleID,ClassificationID,RoleID,CreatorID,CreatedDate) VALUES 
+  (2, 2, @Role, @User, getdate());
+INSERT INTO ClassificationRoles (ClassificationRoleID,ClassificationID,RoleID,CreatorID,CreatedDate) VALUES 
+  (3, 3, @Role, @User, getdate());
+SET IDENTITY_INSERT ClassificationRoles OFF;
+
 
 SET IDENTITY_INSERT ClassificationLevels ON;
 INSERT INTO ClassificationLevels (ClassificationLevelID, ClassificationID, Sequence, DateLevelID, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
@@ -144,6 +165,33 @@ INSERT INTO ClassificationValueLanguages(ClassificationValueLanguageID, Classifi
 , (51, 51, 41, 'ET', 'Tundra', 'ET', 'ET', 'ET', 'ET', 'Tundra', 'ET', 'Tundra', 'ET', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ClassificationValueLanguages OFF;
 
+SET IDENTITY_INSERT ClassificationValueRoles ON;
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (1, 1, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (2, 2, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (3, 3, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (4, 4, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (5, 5, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (6, 6, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (7, 7, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (8, 8, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (9, 9, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (10, 10, @Role, @User, getdate());
+SET IDENTITY_INSERT ClassificationValueRoles OFF;
+
+SET IDENTITY_INSERT ClassificationValueOwners ON;
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (1, 1, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (2, 2, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (3, 3, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (4, 4, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (5, 5, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (6, 6, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (7, 7, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (8, 8, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (9, 9, @User, @User, getdate());
+INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (10, 10, @User, @User, getdate());
+SET IDENTITY_INSERT ClassificationValueOwners OFF;
+
+
 SET IDENTITY_INSERT ClassificationPages ON;
 INSERT INTO ClassificationPages (ClassificationPageID, ClassificationID, StatusID, ShowtitleName, ShowTitleDescription, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
   (1, 1, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
@@ -221,15 +269,15 @@ INSERT INTO ContentTypeClassifications ( ContentTypeClassificationID, ContentTyp
 SET IDENTITY_INSERT ContentTypeClassifications OFF;
 
 SET IDENTITY_INSERT OrganizationTypes ON;
-INSERT INTO OrganizationTypes (OrganizationTypeID, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
-  (1, @User, @User, GETDATE(), GETDATE())
-, (2, @User, @User, GETDATE(), GETDATE())
+INSERT INTO OrganizationTypes (OrganizationTypeID) VALUES 
+  (1)
+, (2)
 SET IDENTITY_INSERT OrganizationTypes OFF;
 
 SET IDENTITY_INSERT OrganizationTypeLanguages ON;
-INSERT INTO OrganizationTypeLanguages(OrganizationTypeLanguageID, OrganizationTypeID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
-(1, 1, 41, 'Legal entity', 'Legal entity', 'Legal entity', 'Legal entity', @User, @User, GETDATE(), GETDATE())
-, (2, 2, 41, 'Internal entity', 'Internal entity', 'Internal entity', 'Internal entity', @User, @User, GETDATE(), GETDATE())
+INSERT INTO OrganizationTypeLanguages(OrganizationTypeLanguageID, OrganizationTypeID, LanguageID, Name, Description, MenuName, MouseOver) VALUES 
+(1, 1, 41, 'Legal entity', 'Legal entity', 'Legal entity', 'Legal entity')
+, (2, 2, 41, 'Internal entity', 'Internal entity', 'Internal entity', 'Internal entity')
 SET IDENTITY_INSERT OrganizationTypeLanguages OFF;
 
 
@@ -245,4 +293,14 @@ INSERT INTO OrganizationLanguages(OrganizationLanguageID, OrganizationID, Langua
 (1, 1, 41, 'Chulalongkorn University', 'Chulalongkorn University', 'Chulalongkorn University', 'Chulalongkorn University', @User, @User, GETDATE(), GETDATE())
 , (2, 2, 41, 'Medical faculty', 'Medical faculty', 'Medical faculty', 'Medical faculty', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT OrganizationLanguages OFF;
+
+
+
+DECLARE @User as nvarchar(450);
+Select @User = Id from AspNetUsers
+SET IDENTITY_INSERT OrganizationAddresses ON;
+INSERT INTO OrganizationAddresses (OrganizationAddressID,OrganizationID,AddressTypeID,Address1,Address2,HouseNumber,HouseNumberExt,Location, City, PostalCode,PostalCodeExt, CountryID, ProvinceState,County,CreatorID,ModifierID,CreatedDate,ModifiedDate) 
+VALUES (1, 1, 1, 'Rama 4','Lumpini','110','a',geography::STGeomFromText('POINT(51.477805 -0.0025417)' , 4326),'Bangkok','12000','',221,'Bangkok','',@User, @User, getdate(),getdate());
+SET IDENTITY_INSERT OrganizationAddresses OFF;
+
 use master
