@@ -2395,3 +2395,46 @@ INSERT INTO AddressTypeLanguages (AddressTypeLanguageID, AddressTypeID, Language
 SET IDENTITY_INSERT AddressTypeLanguages OFF
 
 
+
+SET IDENTITY_INSERT PreferenceTypes ON;
+INSERT INTO PreferenceTypes (PreferenceTypeID) VALUES 
+  (1)
+SET IDENTITY_INSERT PreferenceTypes OFF;
+
+SET IDENTITY_INSERT PreferenceTypeLanguages ON;
+INSERT INTO PreferenceTypeLanguages(PreferenceTypeLanguageID, PreferenceTypeID, LanguageID, Name, Description, MenuName, MouseOver) VALUES 
+(1, 1, 41, 'Language', 'Language', 'Language', 'Language'),
+(2, 1, 39, 'Taal', 'Taal', 'Taal', 'Taal')
+SET IDENTITY_INSERT PreferenceTypeLanguages OFF;
+
+
+
+SET IDENTITY_INSERT TelecomTypes ON;
+INSERT INTO TelecomTypes (TelecomTypeID) VALUES 
+  (1),
+  (2)
+SET IDENTITY_INSERT TelecomTypes OFF;
+
+SET IDENTITY_INSERT TelecomTypeLanguages ON;
+INSERT INTO TelecomTypeLanguages(TelecomTypeLanguageID, TelecomTypeID, LanguageID, Name, Description, MenuName, MouseOver) VALUES 
+(1, 1, 41, 'Phone', 'Phone', 'Phone', 'Phone'),
+(2, 1, 41, 'Skype', 'Skype', 'Skype', 'Skype'),
+(3, 1, 39, 'Telefoon', 'Telefoon', 'Telefoon', 'Telefoon'),
+(4, 1, 39, 'Skype', 'Skype', 'Skype', 'Skype')
+SET IDENTITY_INSERT TelecomTypeLanguages OFF;
+
+SET IDENTITY_INSERT ProcessTemplateStageFieldStatuses ON;
+INSERT INTO ProcessTemplateStageFieldStatuses (ProcessTemplateStageFieldStatusID) VALUES (1), (2),(3),(4);
+SET IDENTITY_INSERT ProcessTemplateStageFieldStatuses OFF;
+
+SET IDENTITY_INSERT ProcessTemplateStageFieldStatusLanguages ON;
+INSERT INTO ProcessTemplateStageFieldStatusLanguages (ProcessTemplateStageFieldStatusLanguageID, ProcessTemplateStageFieldStatusID, LanguageId, Name, Description, MouseOver, MenuName)
+VALUES (1,1,41,'Hide','Hide','Hide','Hide')
+, (2,2,41,'Disabled','Disabled','Disabled','Disabled')
+, (3,3,41,'Editable','Editable','Editable','Editable')
+, (4,4,41,'Mandatory','Mandatory','Mandatory','Mandatory')
+, (5,1,39,'Verborgen','Verborgen','Verborgen','Verborgen')
+, (6,2,39,'Inactief','Inactief','Inactief','Inactief')
+, (7,3,39,'Actief','Actief','Actief','Actief')
+, (8,4,39,'Verplicht','Verplicht','Verplicht','Verplicht')
+SET IDENTITY_INSERT ProcessTemplateStageFieldStatusLanguages OFF;

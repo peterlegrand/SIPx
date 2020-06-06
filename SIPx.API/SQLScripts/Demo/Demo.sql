@@ -18,22 +18,26 @@ INSERT INTO ClassificationLanguages(ClassificationLanguageID, ClassificationID, 
 , (3, 3, 41, 'Crop', 'Crop', 'Crop', 'Crop', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ClassificationLanguages OFF;
 
-SET IDENTITY_INSERT ClassificationOwners ON;
-INSERT INTO ClassificationOwners (ClassificationOwnerID,ClassificationID,UserID,CreatorID,CreatedDate) VALUES 
-  (1, 1, @User, @User, getdate());
-INSERT INTO ClassificationOwners (ClassificationOwnerID,ClassificationID,UserID,CreatorID,CreatedDate) VALUES 
-  (2, 2, @User, @User, getdate());
-INSERT INTO ClassificationOwners (ClassificationOwnerID,ClassificationID,UserID,CreatorID,CreatedDate) VALUES 
-  (3, 3, @User, @User, getdate());
-SET IDENTITY_INSERT ClassificationOwners OFF;
+SET IDENTITY_INSERT ClassificationRelationTypes ON;
+INSERT INTO ClassificationRelationTypes (ClassificationRelationTypeID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES (1, @User, @User, GETDATE(), GETDATE());
+SET IDENTITY_INSERT ClassificationRelationTypes OFF;
+
+SET IDENTITY_INSERT ClassificationRelationTypeLanguages ON;
+INSERT INTO ClassificationRelationTypeLanguages(ClassificationRelationTypeLanguageID, ClassificationRelationTypeID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+(1, 1, 41, 'Owner', 'Owner', 'Owner', 'Owner', @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT ClassificationRelationTypeLanguages OFF;
+
+
+SET IDENTITY_INSERT ClassificationUsers ON;
+INSERT INTO ClassificationUsers (ClassificationUserID,ClassificationID,UserID, ClassificationRelationTypeID ,CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES (1, 1, @User, 1, @User, @User, GETDATE(), GETDATE());
+INSERT INTO ClassificationUsers (ClassificationUserID,ClassificationID,UserID, ClassificationRelationTypeID ,CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES (2, 2, @User, 1, @User, @User, GETDATE(), GETDATE());
+INSERT INTO ClassificationUsers (ClassificationUserID,ClassificationID,UserID, ClassificationRelationTypeID ,CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES (3, 3, @User, 1, @User, @User, GETDATE(), GETDATE());
+SET IDENTITY_INSERT ClassificationUsers OFF;
 
 SET IDENTITY_INSERT ClassificationRoles ON;
-INSERT INTO ClassificationRoles (ClassificationRoleID,ClassificationID,RoleID,CreatorID,CreatedDate) VALUES 
-  (1, 1, @Role, @User, getdate());
-INSERT INTO ClassificationRoles (ClassificationRoleID,ClassificationID,RoleID,CreatorID,CreatedDate) VALUES 
-  (2, 2, @Role, @User, getdate());
-INSERT INTO ClassificationRoles (ClassificationRoleID,ClassificationID,RoleID,CreatorID,CreatedDate) VALUES 
-  (3, 3, @Role, @User, getdate());
+INSERT INTO ClassificationRoles (ClassificationRoleID, ClassificationID, RoleID, ClassificationRelationTypeID ,CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES (1, 1, @Role, 1, @User, @User, GETDATE(), GETDATE());
+INSERT INTO ClassificationRoles (ClassificationRoleID, ClassificationID, RoleID, ClassificationRelationTypeID ,CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES (2, 2, @Role, 1, @User, @User, GETDATE(), GETDATE());
+INSERT INTO ClassificationRoles (ClassificationRoleID, ClassificationID, RoleID, ClassificationRelationTypeID ,CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES (3, 3, @Role, 1, @User, @User, GETDATE(), GETDATE());
 SET IDENTITY_INSERT ClassificationRoles OFF;
 
 
@@ -166,30 +170,30 @@ INSERT INTO ClassificationValueLanguages(ClassificationValueLanguageID, Classifi
 SET IDENTITY_INSERT ClassificationValueLanguages OFF;
 
 SET IDENTITY_INSERT ClassificationValueRoles ON;
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (1, 1, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (2, 2, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (3, 3, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (4, 4, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (5, 5, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (6, 6, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (7, 7, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (8, 8, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (9, 9, @Role, @User, getdate());
-INSERT INTO ClassificationValueRoles (ClassificationValueRoleID,ClassificationValueID,RoleID,CreatorID,CreatedDate) VALUES (10, 10, @Role, @User, getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (1, 1, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (2, 2, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (3, 3, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (4, 4, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (5, 5, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (6, 6, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (7, 7, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (8, 8, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (9, 9, @Role, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueRoles (ClassificationValueRoleID, ClassificationValueID, RoleID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (10, 10, @Role,1, @User, @User, getdate(), getdate());
 SET IDENTITY_INSERT ClassificationValueRoles OFF;
 
-SET IDENTITY_INSERT ClassificationValueOwners ON;
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (1, 1, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (2, 2, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (3, 3, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (4, 4, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (5, 5, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (6, 6, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (7, 7, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (8, 8, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (9, 9, @User, @User, getdate());
-INSERT INTO ClassificationValueOwners (ClassificationValueOwnerID,ClassificationValueID,OwnerID,CreatorID,CreatedDate) VALUES (10, 10, @User, @User, getdate());
-SET IDENTITY_INSERT ClassificationValueOwners OFF;
+SET IDENTITY_INSERT ClassificationValueUsers ON;
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (1, 1, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (2, 2, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (3, 3, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (4, 4, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (5, 5, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (6, 6, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (7, 7, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (8, 8, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (9, 9, @User, 1, @User, @User, getdate(), getdate());
+INSERT INTO ClassificationValueUsers (ClassificationValueUserID,ClassificationValueID, UserID, ClassificationRelationTypeID, CreatorID, ModifierID,CreatedDate, ModifiedDate) VALUES (10, 10, @User, 1, @User, @User, getdate(), getdate());
+SET IDENTITY_INSERT ClassificationValueUsers OFF;
 
 
 SET IDENTITY_INSERT ClassificationPages ON;
@@ -296,8 +300,6 @@ SET IDENTITY_INSERT OrganizationLanguages OFF;
 
 
 
-DECLARE @User as nvarchar(450);
-Select @User = Id from AspNetUsers
 SET IDENTITY_INSERT OrganizationAddresses ON;
 INSERT INTO OrganizationAddresses (OrganizationAddressID,OrganizationID,AddressTypeID,Address1,Address2,HouseNumber,HouseNumberExt,Location, City, PostalCode,PostalCodeExt, CountryID, ProvinceState,County,CreatorID,ModifierID,CreatedDate,ModifiedDate) 
 VALUES (1, 1, 1, 'Rama 4','Lumpini','110','a',geography::STGeomFromText('POINT(51.477805 -0.0025417)' , 4326),'Bangkok','12000','',221,'Bangkok','',@User, @User, getdate(),getdate());
