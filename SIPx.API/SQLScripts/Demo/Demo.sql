@@ -308,6 +308,6 @@ SET IDENTITY_INSERT OrganizationAddresses OFF;
 SET IDENTITY_INSERT UserPreferences ON;
 INSERT INTO UserPreferences (UserPreferenceID,PreferenceTypeID,UserID,IntPreference, ModifierID, ModifiedDate) 
 VALUES (1, 1, @user, 41, @User, getdate());
-SET IDENTITY_INSERT OrganizationAddresses OFF;
+SET IDENTITY_INSERT UserPreferences OFF;
 
 use master
