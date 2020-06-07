@@ -1,7 +1,7 @@
 ﻿USE sip
 
 SET IDENTITY_INSERT SecurityLevels ON;
-INSERT INTO SecurityLevels (SecurityLevelID, NameTermID, DescriptionTermID, MenuNameID, MouseOverID) VALUES 
+INSERT INTO SecurityLevels (SecurityLevelID, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID) VALUES 
   (1,688,688,688,688)
 , (2,689,689,689,689)
 , (3,690,690,690,690)
