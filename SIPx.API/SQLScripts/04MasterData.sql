@@ -875,6 +875,9 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(873, 'Yiddish');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(874, 'Yoruba');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(875, 'Zhuang, Chuang');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(876, 'Zulu');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(877, 'Male');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(878, 'Female');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(879, 'Trans');
 SET IDENTITY_INSERT UITerms OFF;
 
 SET IDENTITY_INSERT SecurityLevels ON;

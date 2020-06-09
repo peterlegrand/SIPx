@@ -61,16 +61,16 @@ namespace SIPx.API.Controllers
                 await _sqlDataAccess.PopulateDataMaster(line);
             }
 
-            //DirectoryInfo d = new DirectoryInfo("SQLScripts\\USP");
-            //FileInfo[] Files = d.GetFiles();
-            //foreach (FileInfo file in Files)
-            //{
-            //    using (StreamReader sr = new StreamReader($"SQLScripts\\USP\\{file.Name}", System.Text.Encoding.UTF8))
-            //    {
-            //        string line = await sr.ReadToEndAsync();
-            //        await _sqlDataAccess.PopulateDataSIP(line);
-            //    }
-            //}
+            DirectoryInfo d = new DirectoryInfo("SQLScripts\\USP");
+            FileInfo[] Files = d.GetFiles();
+            foreach (FileInfo file in Files)
+            {
+                using (StreamReader sr = new StreamReader($"SQLScripts\\USP\\{file.Name}", System.Text.Encoding.UTF8))
+                {
+                    string line = await sr.ReadToEndAsync();
+                    await _sqlDataAccess.PopulateDataSIP(line);
+                }
+            }
             using (StreamReader sr = new StreamReader("SQLScripts\\04MasterData.sql", System.Text.Encoding.UTF8))
             {
                 string line = await sr.ReadToEndAsync();
@@ -90,9 +90,16 @@ namespace SIPx.API.Controllers
                 ModifiedDate = DateTime.Now
             };
             var result = await _userManager.CreateAsync(identityUser, "Pipo!9165");
-            
-            var Role = new IdentityRole();
+
+            using (StreamReader sr = new StreamReader("SQLScripts\\05MasterData.sql", System.Text.Encoding.UTF8))
+            {
+                string line = await sr.ReadToEndAsync();
+                await _sqlDataAccess.PopulateDataSIP(line);
+            }
+
+            var Role = new SipRole();
             Role.Name = "Admin";
+            Role.RoleGroupID = 1;
             await _roleManager.CreateAsync(Role);
             using (StreamReader sr = new StreamReader($"SQLScripts\\ApplicationRights.txt", System.Text.Encoding.UTF8))
             {
@@ -114,7 +121,7 @@ namespace SIPx.API.Controllers
 
             await _userManager.AddToRoleAsync(identityUser, "Admin");
 
-            using (StreamReader sr = new StreamReader("SQLScripts\\05MasterData.sql", System.Text.Encoding.UTF8))
+            using (StreamReader sr = new StreamReader("SQLScripts\\06MasterData.sql", System.Text.Encoding.UTF8))
             {
                 string line = await sr.ReadToEndAsync();
                 await _sqlDataAccess.PopulateDataSIP(line);
