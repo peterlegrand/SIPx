@@ -633,3 +633,20 @@ INSERT INTO ProcessTemplateStageFieldStatuses (ProcessTemplateStageFieldStatusID
 (1,679,679,679,679), (2,680,680,680,680),(3,681,681,681,681),(4,682,682,682,682);
 SET IDENTITY_INSERT ProcessTemplateStageFieldStatuses OFF;
 
+SET IDENTITY_INSERT RoleGroupLanguages ON;
+INSERT INTO RoleGroupLanguages (RoleGroupLanguageID, RoleGroupID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) 
+VALUES(1,1,41,'Admin','Admin','Admin','Admin',@User,@User,getdate(),getdate());
+SET IDENTITY_INSERT RoleGroupLanguages OFF;
+
+SET IDENTITY_INSERT Genders ON;
+INSERT INTO Genders (GenderId, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID, Active, ModifierID, ModifiedDate) VALUES 
+(1,877,877,877,877,1,@User,getdate())
+, (2,878,878,878,878,1,@User,getdate())
+, (3,879,879,879,879,0,@User,getdate())
+SET IDENTITY_INSERT Genders OFF;
+
+SET IDENTITY_INSERT PageSectionDataTypes ON;
+INSERT INTO PageSectionDataTypes (PageSectionDataTypeID, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID) VALUES 
+(1,227,227,227,227)
+, (2,234,234,234,234)
+SET IDENTITY_INSERT PageSectionDataTypes OFF;

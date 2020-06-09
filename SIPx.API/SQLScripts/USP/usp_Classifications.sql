@@ -30,4 +30,4 @@ LEFT JOIN (SELECT ClassificationPageID, Name FROM ClassificationPageLanguages WH
 LEFT JOIN (SELECT ClassificationPageID, Name FROM ClassificationPageLanguages  JOIN Settings ON ClassificationPageLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationPageLanguage
 	ON DefaultClassificationPageLanguage.ClassificationPageID = Classifications.DefaultPageID
 WHERE UIName.LanguageID = @LanguageID
-	AND Classification.ClassificationID = @ClassificationID
+	AND Classifications.ClassificationID = @ClassificationID
