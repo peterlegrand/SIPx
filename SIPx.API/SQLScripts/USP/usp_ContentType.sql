@@ -1,0 +1,42 @@
+CREATE PROCEDURE [dbo].[usp_ContentType] (@UserID nvarchar(450), @ContentTypeID int) 
+AS 
+DECLARE @LanguageID int;
+SELECT @LanguageID = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeID = 1 ;
+SELECT ContentTypes.ContentTypeID
+	, ISNULL(SecutiryLevelNameCustom.Customization, SecurityLevelLanguages.Name) SecurityLevelName
+
+	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
+	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this classification')) Description
+	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.Name,'No menu name for this classification')) MenuName
+	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this classification')) MouseOver
+	, ISNULL(UINameCustom.Customization ,UIName.Name) StatusName
+	, CASE WHEN Classifications.DefaultPageID IS NULL THEN ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for the default page')) ELSE 'There is no default page' END MouseOver
+	, Classifications.HasDropDown 
+	, Classifications.DropDownSequence
+FROM ContentTypes 
+JOIN ContentTypeGroupLanguages 
+	ON ContentTypes.ContentTypeGroupID = ContentTypeGroupLanguages.ContentTypeGroupID
+JOIN SecurityLevels
+	ON ContentTypes.SecurityLevelID = SecurityLevels.SecurityLevelID
+	JOIN UITermLanguages SecurityLevelLanguages
+	ON SecurityLevelLanguages.UITermID = SecurityLevels.NameTermID
+LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations WHERE LanguageID = @LanguageID) SecutiryLevelNameCustom
+	ON SecutiryLevelNameCustom.UITermID = SecurityLevels.NameTermID
+
+LEFT JOIN (SELECT ClassificationID, Name, Description, MenuName, MouseOver FROM ContentTypeGroupLanguages WHERE LanguageID = @LanguageID) UserLanguage
+	ON UserLanguage.ClassificationID= Classifications.ClassificationID
+LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
+	ON DefaultLanguage.ClassificationID = Classifications.ClassificationID
+LEFT JOIN (SELECT ClassificationPageID, Name FROM ClassificationPageLanguages WHERE LanguageID = @LanguageID) UserClassificationPageLanguage
+	ON UserClassificationPageLanguage.ClassificationPageID = Classifications.DefaultPageID
+LEFT JOIN (SELECT ClassificationPageID, Name FROM ClassificationPageLanguages  JOIN Settings ON ClassificationPageLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationPageLanguage
+	ON DefaultClassificationPageLanguage.ClassificationPageID = Classifications.DefaultPageID
+WHERE UIName.LanguageID = @LanguageID
+	AND Classifications.ClassificationID = @ClassificationID
+
+
+	SELECT * FROM ContentTypes
+	SELECT * FROM SecurityLevels

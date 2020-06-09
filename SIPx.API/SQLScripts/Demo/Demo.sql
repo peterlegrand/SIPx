@@ -309,3 +309,69 @@ SET IDENTITY_INSERT UserPreferences ON;
 INSERT INTO UserPreferences (UserPreferenceID,PreferenceTypeID,UserID,IntPreference, ModifierID, ModifiedDate) 
 VALUES (1, 1, @user, 41, @User, getdate());
 SET IDENTITY_INSERT UserPreferences OFF;
+
+SET IDENTITY_INSERT OrganizationTelecoms ON;
+INSERT INTO OrganizationTelecoms(OrganizationTelecomID, OrganizationID, TelecomTypeID, TelecomValue, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+(1, 1, 2, 'MegaDodo', @User, @User, GETDATE(), GETDATE()), (2, 1, 1, '11234', @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT OrganizationTelecoms OFF;
+
+INSERT INTO OrganizationTelecomPhones(OrganizationTelecomID, CountryCode, AreaCode, ExtensionCode, AskForName) VALUES 
+(2, '+66', '2', '42', 'Ford')
+
+SET IDENTITY_INSERT Pages ON;
+INSERT INTO Pages (PageID, StatusID, ShowtitleName, ShowTitleDescription, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
+, (2, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
+, (3, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT Pages OFF;
+
+SET IDENTITY_INSERT PageLanguages ON;
+INSERT INTO PageLanguages(PageLanguageID, PageID, LanguageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+(1, 1, 41, 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', @User, @User, GETDATE(), GETDATE())
+, (2, 2, 41, 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', @User, @User, GETDATE(), GETDATE())
+, (3, 3, 41, 'Project stories', 'Project stories', 'Project stories', 'Project stories', 'Project stories', 'Project stories', @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT PageLanguages OFF;
+
+SET IDENTITY_INSERT PageSections ON;
+INSERT INTO PageSections (PageSectionID, PageID, Sequence, PageSectionTypeID, PageSectionDataTypeID, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitleName, ShowContentTypeTitleDescription, OneTwoColumns, SortByID, MaxContent, HasPaging, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (2, 1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (3, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (4, 2, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (5, 3, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (6, 3, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT PageSections OFF;
+
+SET IDENTITY_INSERT PageSectionLanguages ON;
+INSERT INTO PageSectionLanguages(PageSectionLanguageID,  PageID, PageSectionID, LanguageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+(1, 1, 1, 41, 'New stories', 'New stories', 'New stories', 'New stories', 'New stories', 'New stories', @User, @User, GETDATE(), GETDATE())
+, (2, 1, 2, 41, 'Most visited', 'Most visited', 'Most visited', 'Most visited', 'Most visited', 'Most visited', @User, @User, GETDATE(), GETDATE())
+, (3, 2, 3, 41, 'Approved research', 'Approved research', 'Approved research', 'Approved research', 'Approved research', 'Approved research', @User, @User, GETDATE(), GETDATE())
+, (4, 2, 4, 41, 'Pending research', 'Pending research', 'Pending research', 'Pending research', 'Pending research', 'Pending research', @User, @User, GETDATE(), GETDATE())
+, (5, 3, 5, 41, 'Newest completed projects', 'Newest completed projects', 'Newest completed projects', 'Newest completed projects', 'Newest completed projects', 'Newest completed projects', @User, @User, GETDATE(), GETDATE())
+, (6, 3, 6, 41, 'Projects in Process', 'Projects in Process', 'Projects in Process', 'Projects in Process', 'Projects in Process', 'Projects in Process', @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT PageSectionLanguages OFF;
+
+SET IDENTITY_INSERT Persons ON;
+INSERT INTO Persons( PersonID, Salutation, FirstName, MiddleName, LastName, PersonalTitle, Suffix, NickName
+, FirstNameLocal, MiddleNameLocal, LastNameLocal, GenderID, BirthDate, DefaultOrganizationID
+, CreatorID, ModifierID, CreatedDate, ModifiedDate)
+VALUES(1,'Mr', 'Dirk','', 'Gently','','','Dirk', 'Dirk','', 'Gently',1,'1942-01-01',1, @User, @User, GETDATE(), GETDATE()),
+(2,'Mr', 'Ford','', 'Prefect','','','Ford', 'Ford','', 'Prefect',1,'2050-01-01',1, @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT Persons OFF;
+
+SET IDENTITY_INSERT PersonAddresses ON;
+INSERT INTO PersonAddresses( PersonAddressID, PersonID, AddressTypeID, AttnName, Address1, Address2, HouseNumber, HouseNumberExt
+	, Location, City, PostalCode, PostalCodeExt, CountryID, County 
+	, CreatorID, ModifierID, CreatedDate, ModifiedDate)
+VALUES(1,1,1,'Dirk','Downingstreet', '','0','',geography::STGeomFromText('POINT(51.477805 -0.0025417)' , 4326), 'London','1', '',1,'', @User, @User, GETDATE(), GETDATE());
+SET IDENTITY_INSERT PersonAddresses OFF;
+
+SET IDENTITY_INSERT PersonTelecoms ON;
+INSERT INTO PersonTelecoms(PersonTelecomID, PersonID, TelecomTypeID, TelecomValue, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+(1, 1, 2, 'Frogstar', @User, @User, GETDATE(), GETDATE()), (2, 1, 1, '121212', @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT PersonTelecoms OFF;
+
+INSERT INTO PersonTelecomPhones(PersonTelecomID, CountryCode, AreaCode, ExtensionCode, AskForName) VALUES 
+(2, '+2', '2', '42', 'Ford')
+
