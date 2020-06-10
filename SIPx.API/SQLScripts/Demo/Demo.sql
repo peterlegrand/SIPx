@@ -375,3 +375,365 @@ SET IDENTITY_INSERT PersonTelecoms OFF;
 INSERT INTO PersonTelecomPhones(PersonTelecomID, CountryCode, AreaCode, ExtensionCode, AskForName) VALUES 
 (2, '+2', '2', '42', 'Ford')
 
+SET IDENTITY_INSERT ProcessTemplateGroups ON;
+INSERT INTO ProcessTemplateGroups (ProcessTemplateGroupID, Sequence, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1, @User, @User, GETDATE(), GETDATE())
+,(2,2, @User, @User, GETDATE(), GETDATE());
+SET IDENTITY_INSERT ProcessTemplateGroups OFF;
+
+SET IDENTITY_INSERT ProcessTemplateGroupLanguages ON;
+INSERT INTO ProcessTemplateGroupLanguages (ProcessTemplateGroupLanguageID, ProcessTemplateGroupID,LanguageID, Name, Description, MenuName, MouseOver, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1, 41, 'Assignments', 'Assignments', 'Assignments', 'Assignments', @User, @User, GETDATE(), GETDATE())
+,(2,2, 41, 'Knowledge', 'Knowledge', 'Knowledge', 'Knowledge', @User, @User, GETDATE(), GETDATE());
+SET IDENTITY_INSERT ProcessTemplateGroupLanguages OFF;
+
+SET IDENTITY_INSERT ProcessTemplates ON;
+INSERT INTO ProcessTemplates (ProcessTemplateID, ProcessTemplateGroupID, ShowInPersonalCalendar, ShowInEventCalendar
+, ProcessMultiMax, Sequence, IsPersonal, ShowInNew, ShowInSearch, ShowInReports, HideEverywhere
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,0,0
+,10,1,0,1,1,1,0
+, @User, @User, GETDATE(), GETDATE())
+,(2,1,0,0
+,15,2,0,1,1,1,0
+, @User, @User, GETDATE(), GETDATE())
+,(3,2,0,0
+,15,1,0,1,1,1,0
+, @User, @User, GETDATE(), GETDATE());
+SET IDENTITY_INSERT ProcessTemplates OFF;
+
+SET IDENTITY_INSERT ProcessTemplateLanguages ON;
+INSERT INTO ProcessTemplateLanguages (ProcessTemplateLanguageID, ProcessTemplateID, LanguageID , Name, Description, MenuName, MouseOver
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,41, 'Game assignment', 'Game assignment', 'Game assignment', 'Game assignment', @User, @User, GETDATE(), GETDATE())
+,(2,2,41, 'Research assignment', 'Research assignment', 'Research assignment', 'Research assignment', @User, @User, GETDATE(), GETDATE())
+,(3,3,41, 'Proof reading', 'Proof reading', 'Proof reading', 'Proof reading', @User, @User, GETDATE(), GETDATE());
+SET IDENTITY_INSERT ProcessTemplateLanguages OFF;
+
+
+
+
+SET IDENTITY_INSERT ProcessTemplateFields ON;
+INSERT INTO ProcessTemplateFields (ProcessTemplateFieldID, ProcessTemplateID, ProcessTemplateFieldTypeID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,1, @User, @User, GETDATE(), GETDATE())
+, (2,1,10, @User, @User, GETDATE(), GETDATE())
+, (3,1,32, @User, @User, GETDATE(), GETDATE())
+, (4,1,16, @User, @User, GETDATE(), GETDATE())
+, (5,1,32, @User, @User, GETDATE(), GETDATE())
+, (6,1,10, @User, @User, GETDATE(), GETDATE())
+, (7,1,3, @User, @User, GETDATE(), GETDATE())
+, (8,1,10, @User, @User, GETDATE(), GETDATE())
+, (9,1,10, @User, @User, GETDATE(), GETDATE())
+, (10,1,4, @User, @User, GETDATE(), GETDATE())
+, (11,1,4, @User, @User, GETDATE(), GETDATE())
+, (12,1,4, @User, @User, GETDATE(), GETDATE())
+, (13,2,1, @User, @User, GETDATE(), GETDATE())
+, (14,2,10, @User, @User, GETDATE(), GETDATE())
+, (15,2,32, @User, @User, GETDATE(), GETDATE())
+, (16,2,32, @User, @User, GETDATE(), GETDATE())
+, (17,2,10, @User, @User, GETDATE(), GETDATE())
+, (18,2,3, @User, @User, GETDATE(), GETDATE())
+, (19,2,10, @User, @User, GETDATE(), GETDATE())
+, (20,2,10, @User, @User, GETDATE(), GETDATE())
+, (21,2,4, @User, @User, GETDATE(), GETDATE())
+, (22,2,4, @User, @User, GETDATE(), GETDATE())
+, (23,2,4, @User, @User, GETDATE(), GETDATE())
+, (24,3,1, @User, @User, GETDATE(), GETDATE())
+, (25,3,32, @User, @User, GETDATE(), GETDATE())
+, (26,3,24, @User, @User, GETDATE(), GETDATE())
+, (27,3,22, @User, @User, GETDATE(), GETDATE())
+, (28,3,10, @User, @User, GETDATE(), GETDATE())
+, (29,3,32, @User, @User, GETDATE(), GETDATE())
+, (30,3,10, @User, @User, GETDATE(), GETDATE())
+, (31,3,10, @User, @User, GETDATE(), GETDATE())
+, (32,1,12, @User, @User, GETDATE(), GETDATE())
+, (33,2,12, @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateFields OFF;
+
+SET IDENTITY_INSERT ProcessTemplateFieldLanguages ON;
+INSERT INTO ProcessTemplateFieldLanguages (ProcessTemplateFieldLanguageID, ProcessTemplateID, ProcessTemplateFieldID, LanguageID , Name, Description, MenuName, MouseOver
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,1,41, 'Subject', 'Game assignment', 'Game assignment', 'Game assignment', @User, @User, GETDATE(), GETDATE())
+,(2,1,2,41, 'Assign', 'Research assignment', 'Research assignment', 'Research assignment', @User, @User, GETDATE(), GETDATE())
+,(3,1,3,41, 'Assignment', 'Assignment', 'Assignment', 'Assignment', @User, @User, GETDATE(), GETDATE())
+,(4,1,4,41, 'Game', 'Game', 'Game', 'Game', @User, @User, GETDATE(), GETDATE())
+,(5,1,5,41, 'Student text', 'Student text', 'Student text', 'Student text', @User, @User, GETDATE(), GETDATE())
+,(6,1,6,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(7,1,7,41, 'Result', 'Result', 'Result', 'Result', @User, @User, GETDATE(), GETDATE())
+,(8,1,8,41, 'Passed', 'Passed', 'Passed', 'Passed', @User, @User, GETDATE(), GETDATE())
+,(9,1,9,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
+,(10,1,10,41, 'Date assigned', 'Date assigned', 'Date assigned', 'Date assigned', @User, @User, GETDATE(), GETDATE())
+,(11,1,11,41, 'Date sumitted', 'Date sumitted', 'Date sumitted', 'Date sumitted', @User, @User, GETDATE(), GETDATE())
+,(12,1,12,41, 'Date passed', 'Date passed', 'Date passed', 'Date passed', @User, @User, GETDATE(), GETDATE())
+,(13,2,13,41, 'Subject', 'Game assignment', 'Game assignment', 'Game assignment', @User, @User, GETDATE(), GETDATE())
+,(14,2,14,41, 'Assign', 'Research assignment', 'Research assignment', 'Research assignment', @User, @User, GETDATE(), GETDATE())
+,(15,2,15,41, 'Assignment', 'Assignment', 'Assignment', 'Assignment', @User, @User, GETDATE(), GETDATE())
+,(16,2,16,41, 'Student text', 'Student text', 'Student text', 'Student text', @User, @User, GETDATE(), GETDATE())
+,(17,2,17,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(18,2,18,41, 'Result', 'Result', 'Result', 'Result', @User, @User, GETDATE(), GETDATE())
+,(19,2,19,41, 'Passed', 'Passed', 'Passed', 'Passed', @User, @User, GETDATE(), GETDATE())
+,(20,2,20,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
+,(21,2,21,41, 'Date assigned', 'Date assigned', 'Date assigned', 'Date assigned', @User, @User, GETDATE(), GETDATE())
+,(22,2,22,41, 'Date sumitted', 'Date sumitted', 'Date sumitted', 'Date sumitted', @User, @User, GETDATE(), GETDATE())
+,(23,2,23,41, 'Date passed', 'Date passed', 'Date passed', 'Date passed', @User, @User, GETDATE(), GETDATE())
+,(24,3,24,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+,(25,3,25,41, 'Student comment', 'Student comment', 'Student comment', 'Student comment', @User, @User, GETDATE(), GETDATE())
+,(26,3,26,41, 'Content', 'Content', 'Content', 'Content', @User, @User, GETDATE(), GETDATE())
+,(27,3,27,41, 'Area', 'Area', 'Area', 'Area', @User, @User, GETDATE(), GETDATE())
+,(28,3,28,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(29,3,29,41, 'Approver comment', 'Approver comment', 'Approver comment', 'Approver comment', @User, @User, GETDATE(), GETDATE())
+,(30,3,30,41, 'Approve', 'Approve', 'Approve', 'Approve', @User, @User, GETDATE(), GETDATE())
+,(31,3,31,41, 'Reject', 'Reject', 'Reject', 'Reject', @User, @User, GETDATE(), GETDATE())
+,(32,1,32,41, 'Player', 'Player', 'Player', 'Player', @User, @User, GETDATE(), GETDATE())
+,(33,2,33,41, 'Student', 'Student', 'Student', 'Student', @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateFieldLanguages OFF;
+
+SET IDENTITY_INSERT ProcessTemplateStageTypes ON;
+INSERT INTO ProcessTemplateStageTypes (ProcessTemplateStageTypeID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1, @User, @User, GETDATE(), GETDATE())
+, (2, @User, @User, GETDATE(), GETDATE())
+, (3, @User, @User, GETDATE(), GETDATE())
+, (4, @User, @User, GETDATE(), GETDATE())
+, (5, @User, @User, GETDATE(), GETDATE())
+, (6, @User, @User, GETDATE(), GETDATE())
+, (7, @User, @User, GETDATE(), GETDATE())
+, (8, @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateStageTypes OFF;
+
+SET IDENTITY_INSERT ProcessTemplateStageTypeLanguages ON;
+INSERT INTO ProcessTemplateStageTypeLanguages (ProcessTemplateStageTypeLanguageID, ProcessTemplateStageTypeID, LanguageID , Name, Description, MenuName, MouseOver
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,41, 'Initiated', 'Initiated', 'Initiated', 'Initiated', @User, @User, GETDATE(), GETDATE())
+,(2,2,41, 'Draft', 'Draft', 'Draft', 'Draft', @User, @User, GETDATE(), GETDATE())
+,(3,3,41, 'Submitted', 'Submitted', 'Submitted', 'Submitted', @User, @User, GETDATE(), GETDATE())
+,(4,4,41, 'Assigned', 'Assigned', 'Assigned', 'Assigned', @User, @User, GETDATE(), GETDATE())
+,(5,5,41, 'Approved', 'Approved', 'Approved', 'Approved', @User, @User, GETDATE(), GETDATE())
+,(6,6,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
+,(7,7,41, 'Completed', 'Completed', 'Completed', 'Completed', @User, @User, GETDATE(), GETDATE())
+,(8,8,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateStageTypeLanguages OFF;
+
+
+SET IDENTITY_INSERT ProcessTemplateStages ON;
+INSERT INTO ProcessTemplateStages (ProcessTemplateStageID, ProcessTemplateID, ProcessTemplateStageTypeID, IsEndStageID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,4,0, @User, @User, GETDATE(), GETDATE())
+, (2,1,3,0, @User, @User, GETDATE(), GETDATE())
+, (3,1,5,1, @User, @User, GETDATE(), GETDATE())
+, (4,1,6,1, @User, @User, GETDATE(), GETDATE())
+, (5,2,4,0, @User, @User, GETDATE(), GETDATE())
+, (6,2,3,0, @User, @User, GETDATE(), GETDATE())
+, (7,2,5,1, @User, @User, GETDATE(), GETDATE())
+, (8,2,6,1, @User, @User, GETDATE(), GETDATE())
+, (9,3,3,0, @User, @User, GETDATE(), GETDATE())
+, (10,3,5,1, @User, @User, GETDATE(), GETDATE())
+, (11,3,6,1, @User, @User, GETDATE(), GETDATE())
+, (12,1,7,0, @User, @User, GETDATE(), GETDATE())
+, (13,2,7,0, @User, @User, GETDATE(), GETDATE())
+, (14,3,7,0, @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateStages OFF;
+
+
+SET IDENTITY_INSERT ProcessTemplateStageLanguages ON;
+INSERT INTO ProcessTemplateStageLanguages (ProcessTemplateStageLanguageID,ProcessTemplateID, ProcessTemplateStageID, LanguageID , Name, Description, MenuName, MouseOver
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,1,41, 'Assigned', 'Assigned', 'Assigned', 'Assigned', @User, @User, GETDATE(), GETDATE())
+, (2,1,2,41, 'Submitted', 'Submitted', 'Submitted', 'Submitted', @User, @User, GETDATE(), GETDATE())
+, (3,1,3,41, 'Approved / completed', 'Approved / completed', 'Approved / completed', 'Approved / completed', @User, @User, GETDATE(), GETDATE())
+, (4,1,4,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
+, (5,2,5,41, 'Assigned', 'Assigned', 'Assigned', 'Assigned', @User, @User, GETDATE(), GETDATE())
+, (6,2,6,41, 'Submitted', 'Submitted', 'Submitted', 'Submitted', @User, @User, GETDATE(), GETDATE())
+, (7,2,7,41, 'Approved / completed', 'Approved / completed', 'Approved / completed', 'Approved / completed', @User, @User, GETDATE(), GETDATE())
+, (8,2,8,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
+, (9,3,9,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+, (10,3,10,41, 'Approved', 'Approved', 'Approved', 'Approved', @User, @User, GETDATE(), GETDATE())
+, (11,3,11,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
+, (12,1,12,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+, (13,2,13,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+, (14,3,14,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateStageLanguages OFF;
+
+
+
+SET IDENTITY_INSERT ProcessTemplateStageFields ON;
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (1,1,12,1,4, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (14,1,1,1,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (27,1,2,1,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (40,1,3,1,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (53,1,4,1,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (2,1,12,2,3, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (15,1,1,2,1, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (28,1,2,2,1, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (41,1,3,2,1, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (54,1,4,2,1, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (3,1,12,32,4, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (16,1,1,32,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (29,1,2,32,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (42,1,3,32,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (55,1,4,32,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (4,1,12,3,4, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (17,1,1,3,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (30,1,2,3,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (43,1,3,3,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (56,1,4,3,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (5,1,12,4,4, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (18,1,1,4,2, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (31,1,2,4,2, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (44,1,3,4,2, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (57,1,4,4,2, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (6,1,12,5,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (19,1,1,5,4, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (32,1,2,5,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (45,1,3,5,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (58,1,4,5,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (7,1,12,6,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (20,1,1,6,3, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (33,1,2,6,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (46,1,3,6,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (59,1,4,6,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (8,1,12,7,1, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (21,1,1,7,1, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (34,1,2,7,4, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (47,1,3,7,2, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (60,1,4,7,2, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (9,1,12,8,1, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (22,1,1,8,1, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (35,1,2,8,3, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (48,1,3,8,2, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (61,1,4,8,2, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (10,1,12,9,1, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (23,1,1,9,1, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (36,1,2,9,3, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (49,1,3,9,2, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (62,1,4,9,2, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (11,1,12,10,4, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (24,1,1,10,2, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (37,1,2,10,2, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (50,1,3,10,2, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (63,1,4,10,2, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (12,1,12,11,1, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (25,1,1,11,4, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (38,1,2,11,2, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (51,1,3,11,2, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (64,1,4,11,2, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (13,1,12,12,1, 13, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (26,1,1,12,1, 13, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (39,1,2,12,4, 13, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (52,1,3,12,2, 13, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (65,1,4,12,1, 13, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (66,2,13,13,4, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (78,2,5,13,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (90,2,6,13,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (102,2,7,13,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (114,2,8,13,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (67,2,13,14,3, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (79,2,5,14,1, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (91,2,6,14,1, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (103,2,7,14,1, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (115,2,8,14,1, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (68,2,13,33,4, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (80,2,5,33,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (92,2,6,33,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (104,2,7,33,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (116,2,8,33,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (69,2,13,15,4, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (81,2,5,15,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (93,2,6,15,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (105,2,7,15,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (117,2,8,15,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (70,2,13,16,1, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (82,2,5,16,4, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (94,2,6,16,1, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (106,2,7,16,1, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (118,2,8,16,1, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (71,2,13,17,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (83,2,5,17,3, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (95,2,6,17,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (107,2,7,17,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (119,2,8,17,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (72,2,13,18,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (84,2,5,18,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (96,2,6,18,4, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (108,2,7,18,2, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (120,2,8,18,2, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (73,2,13,19,1, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (85,2,5,19,1, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (97,2,6,19,3, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (109,2,7,19,2, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (121,2,8,19,2, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (74,2,13,20,1, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (86,2,5,20,1, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (98,2,6,20,3, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (110,2,7,20,2, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (122,2,8,20,2, 9, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (75,2,13,21,4, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (87,2,5,21,2, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (99,2,6,21,2, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (111,2,7,21,2, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (123,2,8,21,2, 10, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (76,2,13,22,1, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (88,2,5,22,4, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (100,2,6,22,2, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (112,2,7,22,2, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (124,2,8,22,2, 11, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (77,2,13,23,1, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (89,2,5,23,1, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (101,2,6,23,4, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (113,2,7,23,2, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (125,2,8,23,1, 12, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (126,3,14,24,4, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (134,3,9,24,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (142,3,10,24,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (150,3,11,24,2, 1, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (127,3,14,25,3, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (135,3,9,25,2, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (143,3,10,25,2, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (151,3,11,25,2, 2, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (128,3,14,26,4, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (136,3,9,26,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (144,3,10,26,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (152,3,11,26,2, 3, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (129,3,14,27,4, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (137,3,9,27,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (145,3,10,27,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (153,3,11,27,2, 4, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (130,3,14,28,3, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (138,3,9,28,1, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (146,3,10,28,1, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (154,3,11,28,1, 5, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (131,3,14,29,1, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (139,3,9,29,3, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (147,3,10,29,2, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (155,3,11,29,2, 6, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (132,3,14,30,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (140,3,9,30,3, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (148,3,10,30,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (156,3,11,30,1, 7, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (133,3,14,31,1, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (141,3,9,31,3, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (149,3,10,31,1, 8, @user,getdate());
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldID,ProcessTemplateID,ProcessTemplateStageID,ProcessTemplateFieldID,ProcessTemplateStageFieldStatusID,Sequence,ModifierID, ModifiedDate) VALUES (157,3,11,31,1, 8, @user,getdate());
+
+SET IDENTITY_INSERT ProcessTemplateStageFields OFF;
+
+
+SET IDENTITY_INSERT ProcessTemplateFlows ON;
+INSERT INTO ProcessTemplateFlows (ProcessTemplateFlowID, ProcessTemplateID, ProcessTemplateFromStageID, ProcessTemplateToStageID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,12,1, @User, @User, GETDATE(), GETDATE())
+, (2,1,1,2, @User, @User, GETDATE(), GETDATE())
+, (3,1,2,3, @User, @User, GETDATE(), GETDATE())
+, (4,1,2,4, @User, @User, GETDATE(), GETDATE())
+, (5,2,13,5, @User, @User, GETDATE(), GETDATE())
+, (6,2,5,6, @User, @User, GETDATE(), GETDATE())
+, (7,2,6,7, @User, @User, GETDATE(), GETDATE())
+, (8,2,6,8, @User, @User, GETDATE(), GETDATE())
+, (9,3,14,9, @User, @User, GETDATE(), GETDATE())
+, (10,3,9,10, @User, @User, GETDATE(), GETDATE())
+, (11,3,9,11, @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateFlows OFF;

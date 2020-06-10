@@ -589,7 +589,7 @@ INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID, NameTermID, D
 ,(13, 656, 656, 656, 656),(14, 657, 657, 657, 657),(15, 658, 658, 658, 658),(16, 659, 659, 659, 659),(17, 660, 660, 660, 660),(18, 661, 661, 661, 661)
 ,(19, 662, 662, 662, 662),(20, 663, 663, 663, 663),(21, 664, 664, 664, 664),(22, 665, 665, 665, 665),(23, 666, 666, 666, 666),(24, 667, 667, 667, 667)
 ,(25, 668, 668, 668, 668),(26, 669, 669, 669, 669),(27, 670, 670, 670, 670),(28, 671, 671, 671, 671),(29, 672, 672, 672, 672),(30, 673, 673, 673, 673)
-,(31, 674, 674, 674, 674),(32, 675, 675, 675, 675);
+,(31, 674, 674, 674, 674),(32, 675, 675, 675, 675),(33, 918, 918, 918, 918),(34, 919, 919, 919, 919);
 SET IDENTITY_INSERT ProcessTemplateFieldTypes OFF
 
 SET IDENTITY_INSERT MVCUIScreens ON;
@@ -650,3 +650,28 @@ INSERT INTO PageSectionDataTypes (PageSectionDataTypeID, NameTermID, Description
 (1,227,227,227,227)
 , (2,234,234,234,234)
 SET IDENTITY_INSERT PageSectionDataTypes OFF;
+
+SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes ON;
+INSERT INTO ProcessTemplateFlowConditionTypes (ProcessTemplateFlowConditionTypeID, NameTermID,DescriptionTermID,MenuNameTermID,MouseOverTermID) VALUES
+(1, 880, 881, 880,880)
+, (2, 882, 883, 882,882)
+, (3, 884, 885, 884,884)
+, (4, 886, 887, 886,886)
+, (5, 888, 889, 888,888)
+, (6, 890, 891, 890,890)
+, (7, 892, 893, 892,892)
+, (8, 894, 895, 894,894)
+, (9, 896, 897, 896,896)
+, (10, 898, 899, 898,898)
+, (11, 900, 901, 900,900)
+, (12, 902, 903, 902,904)
+, (13, 904, 905, 904,904)
+, (14, 906, 907, 906,906)
+, (15, 908, 909, 908,908)
+, (16, 910, 909, 910,910)
+, (17, 911, 909, 911,911)
+, (18, 912, 909, 912,912)
+, (19, 913, 914, 913,913)
+, (20, 915, 916, 915,915)
+, (21, 917, 918, 917,917)
+SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes OFF;
