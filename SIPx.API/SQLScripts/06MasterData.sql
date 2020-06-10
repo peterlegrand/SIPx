@@ -589,7 +589,7 @@ INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeID, NameTermID, D
 ,(13, 656, 656, 656, 656),(14, 657, 657, 657, 657),(15, 658, 658, 658, 658),(16, 659, 659, 659, 659),(17, 660, 660, 660, 660),(18, 661, 661, 661, 661)
 ,(19, 662, 662, 662, 662),(20, 663, 663, 663, 663),(21, 664, 664, 664, 664),(22, 665, 665, 665, 665),(23, 666, 666, 666, 666),(24, 667, 667, 667, 667)
 ,(25, 668, 668, 668, 668),(26, 669, 669, 669, 669),(27, 670, 670, 670, 670),(28, 671, 671, 671, 671),(29, 672, 672, 672, 672),(30, 673, 673, 673, 673)
-,(31, 674, 674, 674, 674),(32, 675, 675, 675, 675),(33, 918, 918, 918, 918),(34, 919, 919, 919, 919);
+,(31, 674, 674, 674, 674),(32, 675, 675, 675, 675),(33, 918, 918, 918, 918),(34, 919, 919, 919, 919),(35, 920, 920, 920, 920);
 SET IDENTITY_INSERT ProcessTemplateFieldTypes OFF
 
 SET IDENTITY_INSERT MVCUIScreens ON;
@@ -675,3 +675,15 @@ INSERT INTO ProcessTemplateFlowConditionTypes (ProcessTemplateFlowConditionTypeI
 , (20, 915, 916, 915,915)
 , (21, 917, 918, 917,917)
 SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes OFF;
+
+SET IDENTITY_INSERT ProcessTemplateFlowConditionComparisonOperators ON;
+INSERT INTO ProcessTemplateFlowConditionComparisonOperators (
+	ProcessTemplateFlowConditionComparisonOperatorID, Symbol, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID) VALUES 
+(1, '', 921, 921, 921, 921)
+, (2, '=', 922, 922, 922, 922)
+, (3, '>', 923, 923, 923, 923)
+, (4, '<', 924, 924, 924, 924)
+, (5, '>=', 925, 925, 925, 925)
+, (6, '<=', 926, 926, 926, 926)
+, (7, '<>', 927, 927, 927, 927);
+SET IDENTITY_INSERT ProcessTemplateFlowConditionComparisonOperators OFF;

@@ -448,6 +448,7 @@ INSERT INTO ProcessTemplateFields (ProcessTemplateFieldID, ProcessTemplateID, Pr
 , (31,3,10, @User, @User, GETDATE(), GETDATE())
 , (32,1,12, @User, @User, GETDATE(), GETDATE())
 , (33,2,12, @User, @User, GETDATE(), GETDATE())
+, (34,1,28, @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFields OFF;
 
@@ -487,6 +488,7 @@ INSERT INTO ProcessTemplateFieldLanguages (ProcessTemplateFieldLanguageID, Proce
 ,(31,3,31,41, 'Reject', 'Reject', 'Reject', 'Reject', @User, @User, GETDATE(), GETDATE())
 ,(32,1,32,41, 'Player', 'Player', 'Player', 'Player', @User, @User, GETDATE(), GETDATE())
 ,(33,2,33,41, 'Student', 'Student', 'Student', 'Student', @User, @User, GETDATE(), GETDATE())
+,(34,1,34,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level', @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFieldLanguages OFF;
 
@@ -737,3 +739,17 @@ INSERT INTO ProcessTemplateFlows (ProcessTemplateFlowID, ProcessTemplateID, Proc
 , (11,3,9,11, @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFlows OFF;
+
+SET IDENTITY_INSERT ProcessTemplateFlowConditions ON;
+INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionID, ProcessTemplateID, ProcessTemplateFlowID
+, ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFlowConditionInt, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1, 1, 1, 3, 5, 3, @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateFlowConditions OFF;
+
+SET IDENTITY_INSERT ProcessTemplateFlowConditionLanguages ON;
+INSERT INTO ProcessTemplateFlowConditionLanguages (ProcessTemplateFlowConditionLanguageID,ProcessTemplateID, ProcessTemplateFlowID, ProcessTemplateFlowConditionID, LanguageID , Name, Description, MenuName, MouseOver
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,1,1,41, 'Minimum security level 3', 'Minimum security level 3', 'Minimum security level 3', 'Minimum security level 3', @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProcessTemplateFlowConditionLanguages OFF;

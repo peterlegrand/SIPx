@@ -919,6 +919,13 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(917, 'Relation to user field
 INSERT INTO UITerms (UITermId, InternalName) VALUES(918, 'The user has a specific relation to the user field');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(919, 'Organization role');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(920, 'Project role');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(921, 'None');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(922, 'Equal');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(923, 'Larger');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(924, 'Smaller');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(925, 'Larger or equal');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(926, 'Smaller or equal');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(927, 'Not equal');
 SET IDENTITY_INSERT UITerms OFF;
 
 SET IDENTITY_INSERT SecurityLevels ON;

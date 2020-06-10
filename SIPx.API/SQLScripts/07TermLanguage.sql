@@ -924,6 +924,14 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1835,918,41,'The user has a specific relation to the user field', 'The user has a specific relation to the user field', 'The user has a specific relation to the user field');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1837,919,41,'Organization role', 'Organization role', 'Organization role');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1839,920,41,'Project role', 'Project role', 'Project role');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1841,921,41,'None', 'None', 'None');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1843,922,41,'Equal', 'Equal', 'Equal');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1845,923,41,'Larger', 'Larger', 'Larger');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1847,924,41,'Smaller', 'Smaller', 'Smaller');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1849,925,41,'Larger or equal', 'Larger or equal', 'Larger or equal');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1851,926,41,'Smaller or equal', 'Smaller or equal', 'Smaller or equal');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1853,927,41,'Not equal', 'Not equal', 'Not equal');
+
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2,1,39,'Classificatie', 'Classificatie', 'Classificatie');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(4,2,39,'Id', 'Id', 'Id');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(6,3,39,'Naam', 'Naam', 'Naam');
@@ -1844,5 +1852,11 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1836,918,39,'The user has a specific relation to the user field', 'The user has a specific relation to the user field', 'The user has a specific relation to the user field');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1838,919,39,'Organization role', 'Organization role', 'Organization role');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1840,920,39,'Project role', 'Project role', 'Project role');
-
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1842,921,39,'Geen', 'Geen', 'Geen');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1844,922,39,'Gelijk', 'Gelijk', 'Gelijk');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1846,923,39,'Grooter', 'Grooter', 'Grooter');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1848,924,39,'Kleiner', 'Kleiner', 'Kleiner');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1850,925,39,'Grooter of gelijk', 'Grooter of gelijk', 'Grooter of gelijk');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1852,926,39,'Kleiner of gelijk', 'Kleiner of gelijk', 'Kleiner of gelijk');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1854,927,39,'Niet gelijk', 'Niet gelijk', 'Niet gelijk');
 SET IDENTITY_INSERT UITermLanguages OFF;
