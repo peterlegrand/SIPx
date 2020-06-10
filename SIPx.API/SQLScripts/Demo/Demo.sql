@@ -740,6 +740,42 @@ INSERT INTO ProcessTemplateFlows (ProcessTemplateFlowID, ProcessTemplateID, Proc
 ;
 SET IDENTITY_INSERT ProcessTemplateFlows OFF;
 
+SET IDENTITY_INSERT ProcessTemplateFlowLanguages ON;
+INSERT INTO ProcessTemplateFlowLanguages  (
+ProcessTemplateFlowLanguageID,ProcessTemplateID, ProcessTemplateFlowID, LanguageID , Name, Description, MenuName, MouseOver
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,1,41, 'Assinging assignment', 'Assinging assignment', 'Assinging assignment', 'Assinging assignment', @User, @User, GETDATE(), GETDATE())
+,(2,1,2,41, 'Submitting assignment', 'Submitting assignment', 'Submitting assignment', 'Submitting assignment', @User, @User, GETDATE(), GETDATE())
+,(3,1,3,41, 'Approving assignment', 'Approving assignment', 'Approving assignment', 'Approving assignment', @User, @User, GETDATE(), GETDATE())
+,(4,1,4,41, 'Rejecting assignment', 'Rejecting assignment', 'Rejecting assignment', 'Rejecting assignment', @User, @User, GETDATE(), GETDATE())
+,(5,2,5,41, 'Assinging assignment', 'Assinging assignment', 'Assinging assignment', 'Assinging assignment', @User, @User, GETDATE(), GETDATE())
+,(6,2,6,41, 'Submitting assignment', 'Submitting assignment', 'Submitting assignment', 'Submitting assignment', @User, @User, GETDATE(), GETDATE())
+,(7,2,7,41, 'Approving assignment', 'Approving assignment', 'Approving assignment', 'Approving assignment', @User, @User, GETDATE(), GETDATE())
+,(8,2,8,41, 'Rejecting assignment', 'Rejecting assignment', 'Rejecting assignment', 'Rejecting assignment', @User, @User, GETDATE(), GETDATE())
+,(9,3,9,41, 'Submitting assignment', 'Submitting assignment', 'Submitting assignment', 'Submitting assignment', @User, @User, GETDATE(), GETDATE())
+,(10,3,10,41, 'Approving assignment', 'Approving assignment', 'Approving assignment', 'Approving assignment', @User, @User, GETDATE(), GETDATE())
+,(11,3,11,41, 'Rejecting assignment', 'Rejecting assignment', 'Rejecting assignment', 'Rejecting assignment', @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT  ProcessTemplateFlowLanguages  OFF;
+
+SET IDENTITY_INSERT Projects ON;
+INSERT INTO Projects (ProjectID, StatusID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1, 1, @User, @User, GETDATE(), GETDATE())
+;
+INSERT INTO Projects (ProjectID,ParentProjectID, StatusID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(2,1, 1, @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT Projects OFF;
+
+SET IDENTITY_INSERT ProjectLanguages ON;
+INSERT INTO ProjectLanguages (ProjectLanguageID, ProjectID, LanguageID , Name, Description, MenuName, MouseOver
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,41, 'Zero Waste', 'Zero Waste', 'Zero Waste', 'Zero Waste', @User, @User, GETDATE(), GETDATE())
+,(2,2,41, 'Clean the beach 2020', 'Clean the beach 2020', 'Clean the beach 2020', 'Clean the beach 2020', @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT ProjectLanguages OFF;
+
+
 SET IDENTITY_INSERT ProcessTemplateFlowConditions ON;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionID, ProcessTemplateID, ProcessTemplateFlowID
 , ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFlowConditionInt, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
@@ -753,3 +789,16 @@ INSERT INTO ProcessTemplateFlowConditionLanguages (ProcessTemplateFlowConditionL
 (1,1,1,1,41, 'Minimum security level 3', 'Minimum security level 3', 'Minimum security level 3', 'Minimum security level 3', @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFlowConditionLanguages OFF;
+
+SET IDENTITY_INSERT PersonRelationTypes ON;
+INSERT INTO PersonRelationTypes (PersonRelationTypeID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+( 1, @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT PersonRelationTypes OFF;
+
+SET IDENTITY_INSERT PersonRelationTypeLanguages ON;
+INSERT INTO PersonRelationTypeLanguages (PersonRelationTypeLanguageID, PersonRelationTypeID, LanguageID , Name, Description, MenuName, MouseOver, FromIsAnXOfTo, ToIsAnXOfFrom
+, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1,1,41, 'Manager', 'Manager', 'MAnager', 'Manager', 'Manager', 'Staff', @User, @User, GETDATE(), GETDATE())
+;
+SET IDENTITY_INSERT PersonRelationTypeLanguages OFF;

@@ -91,6 +91,19 @@ namespace SIPx.API.Controllers
             };
             var result = await _userManager.CreateAsync(identityUser, "Pipo!9165");
 
+            var identityUser2 = new SipUser
+            {
+                Email = "FordPrefect@gmail.com",
+                UserName = "FordPrefect@gmail.com",
+                //    FirstName = "Peter",
+                //    LastName = "le Grand",
+                //    LanguageID = 41,
+                SecurityLevelID = 5,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+            result = await _userManager.CreateAsync(identityUser2, "Pipo!9165");
+
             using (StreamReader sr = new StreamReader("SQLScripts\\05MasterData.sql", System.Text.Encoding.UTF8))
             {
                 string line = await sr.ReadToEndAsync();
