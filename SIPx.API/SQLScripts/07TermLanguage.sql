@@ -4,6 +4,7 @@ Select @User = Id from AspNetUsers
 
 
 SET IDENTITY_INSERT UITermLanguages ON;
+
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1,1,41,'Classification', 'Classification', 'Classification');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(3,2,41,'Id', 'Id', 'Id');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(5,3,41,'Name', 'Name', 'Name');
@@ -931,6 +932,13 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1849,925,41,'Larger or equal', 'Larger or equal', 'Larger or equal');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1851,926,41,'Smaller or equal', 'Smaller or equal', 'Smaller or equal');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1853,927,41,'Not equal', 'Not equal', 'Not equal');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1855,928,41,'Classification relation', 'Classification relation', 'Classification relation');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1857,929,41,'Classification relation type', 'Classification relation type', 'Classification relation type');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1859,930,41,'User must be in the relation with classification / value', 'User must be in the relation with classification / value', 'User must be in the relation with classification / value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1861,931,41,'User must be in a specific relation with classification / value', 'User must be in a specific relation with classification / value', 'User must be in a specific relation with classification / value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1863,932,41,'Don''t update', 'Don''t update', 'Don''t update');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1865,933,41,'Always update', 'Always update', 'Always update');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1867,934,41,'Update when NULL', 'Update when NULL', 'Update when NULL');
 
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2,1,39,'Classificatie', 'Classificatie', 'Classificatie');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(4,2,39,'Id', 'Id', 'Id');
@@ -1859,4 +1867,12 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1850,925,39,'Grooter of gelijk', 'Grooter of gelijk', 'Grooter of gelijk');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1852,926,39,'Kleiner of gelijk', 'Kleiner of gelijk', 'Kleiner of gelijk');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1854,927,39,'Niet gelijk', 'Niet gelijk', 'Niet gelijk');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1856,928,39,'Classification relation', 'Classification relation', 'Classification relation');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1858,929,39,'Classification relation type', 'Classification relation type', 'Classification relation type');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1860,930,39,'User must be in the relation with classification / value', 'User must be in the relation with classification / value', 'User must be in the relation with classification / value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1862,931,39,'User must be in a specific relation with classification / value', 'User must be in a specific relation with classification / value', 'User must be in a specific relation with classification / value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1864,932,39,'Don''t update', 'Don''t update', 'Don''t update');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1866,933,39,'Always update', 'Always update', 'Always update');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1868,934,39,'Update when NULL', 'Update when NULL', 'Update when NULL');
+
 SET IDENTITY_INSERT UITermLanguages OFF;

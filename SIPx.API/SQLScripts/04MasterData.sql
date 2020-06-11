@@ -1,4 +1,5 @@
 ﻿SET IDENTITY_INSERT UITerms ON;
+
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1, 'Classification');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2, 'Id');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(3, 'Name');
@@ -926,6 +927,14 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(924, 'Smaller');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(925, 'Larger or equal');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(926, 'Smaller or equal');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(927, 'Not equal');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(928, 'Classification relation');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(929, 'Classification relation type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(930, 'User must be in the relation with classification / value');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(931, 'User must be in a specific relation with classification / value');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(932, 'Don''t update');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(933, 'Always update');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(934, 'Update when NULL');
+
 SET IDENTITY_INSERT UITerms OFF;
 
 SET IDENTITY_INSERT SecurityLevels ON;

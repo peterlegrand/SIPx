@@ -674,6 +674,8 @@ INSERT INTO ProcessTemplateFlowConditionTypes (ProcessTemplateFlowConditionTypeI
 , (19, 913, 914, 913,913)
 , (20, 915, 916, 915,915)
 , (21, 917, 918, 917,917)
+, (22, 928, 930, 928,928)
+, (23, 929, 931, 929,929)
 SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes OFF;
 
 SET IDENTITY_INSERT ProcessTemplateFlowConditionComparisonOperators ON;
@@ -687,3 +689,12 @@ INSERT INTO ProcessTemplateFlowConditionComparisonOperators (
 , (6, '<=', 926, 926, 926, 926)
 , (7, '<>', 927, 927, 927, 927);
 SET IDENTITY_INSERT ProcessTemplateFlowConditionComparisonOperators OFF;
+
+
+SET IDENTITY_INSERT ValueUpdateTypes ON;
+INSERT INTO ValueUpdateTypes (
+	ValueUpdateTypeID, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID) VALUES 
+(1, 932, 932, 932, 932)
+, (2, 933, 933, 933, 933)
+, (3, 934, 934, 934, 934)
+SET IDENTITY_INSERT ValueUpdateTypes OFF;
