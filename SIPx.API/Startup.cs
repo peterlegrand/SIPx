@@ -43,7 +43,7 @@ namespace SIPx.API
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddIdentity<SipUser, IdentityRole>(options =>
+            services.AddIdentity<SipUser, SipRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;

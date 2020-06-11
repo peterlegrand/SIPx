@@ -576,10 +576,10 @@ SET IDENTITY_INSERT ClaimGroups OFF;
 SET IDENTITY_INSERT Claims ON;
 INSERT INTO Claims (
 	ClaimID, ClaimGroupID, ClaimType, ClaimValue, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID) VALUES 
-(1, 1, 'ApplicationRights','ClassificationRead', 642, 642, 642, 642)
-, (2, 1, 'ApplicationRights','ClassificationDelete', 66, 66, 66, 666)
-, (3, 1, 'ApplicationRights','ClassificationUpdate', 643, 643, 643, 643)
-, (4, 1, 'ApplicationRights','ClassificationCreate', 644, 644, 644, 644)
+(1, 1, 'ApplicationRight','ClassificationRead', 642, 642, 642, 642)
+, (2, 1, 'ApplicationRight','ClassificationDelete', 66, 66, 66, 666)
+, (3, 1, 'ApplicationRight','ClassificationUpdate', 643, 643, 643, 643)
+, (4, 1, 'ApplicationRight','ClassificationCreate', 644, 644, 644, 644)
 SET IDENTITY_INSERT Claims OFF;
 
 SET IDENTITY_INSERT ProcessTemplateFieldTypes ON

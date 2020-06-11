@@ -27,4 +27,5 @@ JOIN UITermLanguages UIStatusName
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIStatusNameCustom
 	ON UIStatusNameCustom.UITermID = Statuses.NameTermID
 WHERE ClassificationPages.ClassificationID = @ClassificationID
-
+	AND UIStatusName.LanguageID = @LanguageID
+ORDER BY ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for this role'))

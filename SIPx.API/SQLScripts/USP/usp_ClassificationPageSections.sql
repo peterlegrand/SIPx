@@ -38,4 +38,6 @@ JOIN UITermLanguages UIPageSectionDataTypeName
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIPageSectionDataTypeNameCustom
 	ON UIPageSectionDataTypeNameCustom.UITermID = PageSectionDataTypes.NameTermID
 WHERE ClassificationPageSections.ClassificationPageID = @ClassificationPageID
+	AND UIPageSectionTypeName.LanguageID = @LanguageID
+	AND UIPageSectionDataTypeName.LanguageID = @LanguageID
 ORDER BY ClassificationPageSections.Sequence

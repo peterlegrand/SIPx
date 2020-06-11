@@ -27,4 +27,8 @@ LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHE
 	ON UIMenuNameCustom.UITermID = ContentStatuses.MenuNameTermID
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
 	ON UIMouseOverCustom.UITermID = ContentStatuses.MouseOverTermID
-	ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)
+WHERE UIName.LanguageID = @LanguageID
+	AND UIDescription.LanguageID = @LanguageID
+	AND UIMenuName.LanguageID = @LanguageID
+	AND UIMouseOver.LanguageID = @LanguageID
+ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)

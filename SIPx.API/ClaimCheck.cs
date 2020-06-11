@@ -10,9 +10,9 @@ namespace SIPx.API
     public class ClaimCheck : IClaimCheck
     {
         private readonly UserManager<SipUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<SipRole> _roleManager;
 
-        public ClaimCheck(UserManager<SipUser> userManager, RoleManager<IdentityRole> roleManager)
+        public ClaimCheck(UserManager<SipUser> userManager, RoleManager<SipRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;

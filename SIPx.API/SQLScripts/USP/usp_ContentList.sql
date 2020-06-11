@@ -7,6 +7,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeID = 1 ;
 SELECT Content.ContentID
+, Content.Title
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this content type')) ContentTypeName
 	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) StatusName
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
@@ -52,4 +53,8 @@ JOIN ProcessFields
 JOIN ProcessTemplateFields 
 	ON ProcessFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID 
 WHERE ProcessTemplateFields.ProcessTemplateFieldTypeID = 1
+	AND UISecurityLevelName.LanguageID = @LanguageID
+	AND UIStatusName.LanguageID = @LanguageID
+	AND UILanguageName.LanguageID = @LanguageID
+ORDER BY Content.Title
 END;

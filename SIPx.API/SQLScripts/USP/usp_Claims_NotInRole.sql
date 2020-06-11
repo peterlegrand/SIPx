@@ -52,5 +52,12 @@ LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHE
 LEFT JOIN (SELECT ClaimType, ClaimValue, id FROM aspnetroleclaims WHERE RoleID = @RoleID) aspnetroleclaims 
 	ON aspnetroleclaims.ClaimType = Claims.ClaimType AND aspnetroleclaims.ClaimValue = Claims.ClaimValue
 WHERE AspNetRoleClaims.Id IS NULL
-
-
+	AND UIName.LanguageID = @LanguageID
+	AND UIDescription.LanguageID = @LanguageID
+	AND UIMenuName.LanguageID = @LanguageID
+	AND UIMouseOver.LanguageID = @LanguageID
+	AND UIGroupName.LanguageID = @LanguageID
+	AND UIGroupDescription.LanguageID = @LanguageID
+	AND UIGroupMenuName.LanguageID = @LanguageID
+	AND UIGroupMouseOver.LanguageID = @LanguageID
+ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)

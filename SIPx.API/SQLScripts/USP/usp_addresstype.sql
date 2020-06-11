@@ -31,5 +31,6 @@ WHERE UIName.LanguageID = @LanguageID
 	AND UIDescription.LanguageID = @LanguageID
 	AND UIMenuName.LanguageID = @LanguageID
 	AND UIMouseOver.LanguageID = @LanguageID
+ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)
 
 

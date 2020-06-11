@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_Classifications] (@UserID nvarchar(450), @ClassificationID int) 
+CREATE PROCEDURE [dbo].[usp_Classifications] (@UserID nvarchar(450)) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -30,4 +30,6 @@ LEFT JOIN (SELECT ClassificationPageID, Name FROM ClassificationPageLanguages WH
 LEFT JOIN (SELECT ClassificationPageID, Name FROM ClassificationPageLanguages  JOIN Settings ON ClassificationPageLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationPageLanguage
 	ON DefaultClassificationPageLanguage.ClassificationPageID = Classifications.DefaultPageID
 WHERE UIName.LanguageID = @LanguageID
-	AND Classifications.ClassificationID = @ClassificationID
+ORDER BY  ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) 
+
+

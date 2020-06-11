@@ -1,4 +1,3 @@
-
 CREATE PROCEDURE [dbo].[usp_Classification] (@UserID nvarchar(450), @ClassificationID int, @Top int =1000) 
 AS 
 BEGIN
@@ -55,8 +54,9 @@ JOIN DateLevels
 JOIN UITermLanguages UIDateLevelName
 	ON UIDateLevelName.UITermID = DateLevels.NameTermID
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDateLevelNameCustom
-	ON UIDateLevelNameCustom.UITermID = DateLevels.NameTermID
+	ON UIDateLevelNameCustom.UITermID = DateLevels.NameTermID	
 WHERE ClassificationLevels.ClassificationID = @ClassificationID
+	AND UIDateLevelName.LanguageID = @LanguageID
 ORDER BY ClassificationLevels.Sequence;
 
 SELECT ClassificationPages.ClassificationPageID
@@ -80,7 +80,9 @@ JOIN UITermLanguages UIStatusName
 	ON UIStatusName.UITermID = Statuses.NameTermID
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIStatusNameCustom
 	ON UIStatusNameCustom.UITermID = Statuses.NameTermID
-WHERE ClassificationPages.ClassificationID = @ClassificationID;
+WHERE ClassificationPages.ClassificationID = @ClassificationID
+	AND UIStatusName.LanguageID = @LanguageID;
+	
 
 SELECT ClassificationRoles.RoleID
 	, ISNULL(UserRoleLanguage.Name,ISNULL(DefaultRoleLanguage.Name,'No name for this role')) RoleName

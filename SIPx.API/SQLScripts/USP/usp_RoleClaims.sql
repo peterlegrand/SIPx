@@ -19,7 +19,7 @@ SELECT Claims.ClaimID
 FROM AspNetRoleClaims
 JOIN Claims
 	ON AspNetRoleClaims.ClaimType = Claims.ClaimType
-		AND AspNetRoleClaims.ClaimValue = Claims.ClaimValue
+		AND AspNetRoleClaims.ClaimValue = CAST(Claims.ClaimId AS int)
 JOIN ClaimGroups
 	ON Claims.ClaimGroupID = ClaimGroups.ClaimGroupID
 JOIN UITermLanguages UIName
@@ -54,3 +54,12 @@ LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHE
 	ON UIGroupMenuNameCustom.UITermID = ClaimGroups.MenuNameTermID
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupMouseOverCustom
 	ON UIGroupMouseOverCustom.UITermID = ClaimGroups.MouseOverTermID
+WHERE UIName.LanguageID = @LanguageID
+	AND UIDescription.LanguageID = @LanguageID
+	AND UIMenuName.LanguageID = @LanguageID
+	AND UIMouseOver.LanguageID = @LanguageID
+	AND UIGroupName.LanguageID = @LanguageID
+	AND UIGroupDescription.LanguageID = @LanguageID
+	AND UIGroupMenuName.LanguageID = @LanguageID
+	AND UIGroupMouseOver.LanguageID = @LanguageID
+ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)

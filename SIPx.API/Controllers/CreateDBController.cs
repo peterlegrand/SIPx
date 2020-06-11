@@ -18,9 +18,9 @@ namespace SIPx.API.Controllers
         private readonly UserManager<SipUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ISqlDataAccess _sqlDataAccess;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<SipRole> _roleManager;
 
-        public CreateDBController(UserManager<SipUser> userManager, IConfiguration configuration, ISqlDataAccess sqlDataAccess, RoleManager<IdentityRole> roleManager)
+        public CreateDBController(UserManager<SipUser> userManager, IConfiguration configuration, ISqlDataAccess sqlDataAccess, RoleManager<SipRole> roleManager)
         {
             _userManager = userManager;
             _configuration = configuration;

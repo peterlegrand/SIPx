@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_Claim (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_Claim] (@UserID nvarchar(450)) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -49,3 +49,14 @@ LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHE
 	ON UIGroupMenuNameCustom.UITermID = ClaimGroups.MenuNameTermID
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupMouseOverCustom
 	ON UIGroupMouseOverCustom.UITermID = ClaimGroups.MouseOverTermID
+WHERE UIName.LanguageID = @LanguageID
+	AND UIDescription.LanguageID = @LanguageID
+	AND UIMenuName.LanguageID = @LanguageID
+	AND UIMouseOver.LanguageID = @LanguageID
+	AND UIGroupName.LanguageID = @LanguageID
+	AND UIGroupDescription.LanguageID = @LanguageID
+	AND UIGroupMenuName.LanguageID = @LanguageID
+	AND UIGroupMouseOver.LanguageID = @LanguageID
+ORDER BY 
+	ISNULL(UINameCustom.Customization,UIName.Name)
+

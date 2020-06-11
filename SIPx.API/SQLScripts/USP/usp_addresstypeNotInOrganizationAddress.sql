@@ -32,3 +32,5 @@ WHERE AddressTypes.AddressTypeID NOT IN (SELECT OrganizationAddresses.AddressTyp
 	AND UIDescription.LanguageID = @LanguageID
 	AND UIMenuName.LanguageID = @LanguageID
 	AND UIMouseOver.LanguageID = @LanguageID
+ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)
+

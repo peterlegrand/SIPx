@@ -28,4 +28,6 @@ JOIN UITermLanguages UIDateLevelName
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDateLevelNameCustom
 	ON UIDateLevelNameCustom.UITermID = DateLevels.NameTermID
 WHERE ClassificationLevels.ClassificationID = @ClassificationID
+	AND UIDateLevelName.LanguageID = @LanguageID
 ORDER BY ClassificationLevels.Sequence
+
