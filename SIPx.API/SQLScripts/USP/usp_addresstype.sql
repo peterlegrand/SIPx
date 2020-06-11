@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_addresstype (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_addresstype] (@UserID nvarchar(450)) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -27,3 +27,9 @@ LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHE
 	ON UIMenuNameCustom.UITermID = AddressTypes.MenuNameTermID
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
 	ON UIMouseOverCustom.UITermID = AddressTypes.MouseOverTermID
+WHERE UIName.LanguageID = @LanguageID
+	AND UIDescription.LanguageID = @LanguageID
+	AND UIMenuName.LanguageID = @LanguageID
+	AND UIMouseOver.LanguageID = @LanguageID
+
+

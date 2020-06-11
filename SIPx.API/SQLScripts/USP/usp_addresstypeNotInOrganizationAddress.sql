@@ -28,5 +28,7 @@ LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHE
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
 	ON UIMouseOverCustom.UITermID = AddressTypes.MouseOverTermID
 WHERE AddressTypes.AddressTypeID NOT IN (SELECT OrganizationAddresses.AddressTypeID FROM OrganizationAddresses WHERE OrganizationAddressID = @OrganizationAddressID) 
-
-
+	AND UIName.LanguageID = @LanguageID
+	AND UIDescription.LanguageID = @LanguageID
+	AND UIMenuName.LanguageID = @LanguageID
+	AND UIMouseOver.LanguageID = @LanguageID
