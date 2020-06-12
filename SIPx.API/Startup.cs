@@ -73,6 +73,7 @@ namespace SIPx.API
                 services.AddScoped<IUserService, UserService>();
             services.AddControllers();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<IContentProvider, ContentProvider>();
             services.AddTransient<IClassificationProvider, ClassificationProvider>();
             services.AddTransient<SIPx.API.DataProviders.IUITermLanguageCustomizationProvider, UITermLanguageCustomizationProvider>();
             services.AddSwaggerGen(x =>

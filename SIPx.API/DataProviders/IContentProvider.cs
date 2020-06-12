@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public interface IClassificationProvider
+    public interface IContentProvider
     {
         Task<ClassificationViewGet> GetClassificationById(int Id, int LanguageId);
-        Task<List<ClassificationViewGet>> GetClassifications(string UserID);
+        Task<List<Content>> GetContents(string UserID);
+        Task<List<ContentType>> GetContentTypes(string UserID);
         List<ClassificationViewGet> GetClassifications2(int LanguageId);
         bool PostClassification(ClassificationCreatePost Classification);
         bool PutClassification(ClassificationUpdatePut Classification);

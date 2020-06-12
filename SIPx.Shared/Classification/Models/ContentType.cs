@@ -5,17 +5,18 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationViewGet : IClassificationViewGet
+    public class ContentType : IContentType
     {
         [Key]
-        public int ClassificationId { get; set; }
+        public int ContentTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string StatusName { get; set; }
-        public bool HasDropDown { get; set; }
-        public int DropDownSequence { get; set; }
- 
+        public string GroupName { get; set; }
+        public string SecurityLevelName { get; set; }
+        public string ProcessName { get; set; }
+        public string ProcessGroupName { get; set; }
+
     }
 }

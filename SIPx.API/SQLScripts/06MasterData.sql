@@ -576,10 +576,18 @@ SET IDENTITY_INSERT ClaimGroups OFF;
 SET IDENTITY_INSERT Claims ON;
 INSERT INTO Claims (
 	ClaimID, ClaimGroupID, ClaimType, ClaimValue, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID) VALUES 
-(1, 1, 'ApplicationRight','ClassificationRead', 642, 642, 642, 642)
-, (2, 1, 'ApplicationRight','ClassificationDelete', 66, 66, 66, 666)
-, (3, 1, 'ApplicationRight','ClassificationUpdate', 643, 643, 643, 643)
-, (4, 1, 'ApplicationRight','ClassificationCreate', 644, 644, 644, 644)
+(1, 1, 'ApplicationRight','1', 642, 642, 642, 642)
+, (2, 1, 'ApplicationRight','2', 66, 66, 66, 666)
+, (3, 1, 'ApplicationRight','3', 643, 643, 643, 643)
+, (4, 1, 'ApplicationRight','4', 644, 644, 644, 644)
+, (5, 1, 'ApplicationRight','5', 935, 935, 935, 935)
+, (6, 1, 'ApplicationRight','6', 937, 937, 937, 937)
+, (7, 1, 'ApplicationRight','7', 936, 936, 936, 936)
+, (8, 1, 'ApplicationRight','8', 174, 174, 174, 174)
+, (9, 1, 'ApplicationRight','9', 938, 938, 938, 938)
+, (10, 1, 'ApplicationRight','10', 941, 941, 941, 941)
+, (11, 1, 'ApplicationRight','11', 940, 940, 940, 940)
+, (12, 1, 'ApplicationRight','12', 939, 939, 939, 939)
 SET IDENTITY_INSERT Claims OFF;
 
 SET IDENTITY_INSERT ProcessTemplateFieldTypes ON

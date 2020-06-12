@@ -5,6 +5,6 @@ namespace SIPx.API
 {
     public interface IClaimCheck
     {
-        Task<bool> CheckClaim(SipUser User, string ClaimValue);
+        Task<bool> CheckClaim(SipUser User, string ClaimType, string ClaimValue);
     }
 }

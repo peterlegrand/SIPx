@@ -17,7 +17,7 @@ namespace SIPx.API
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        public async Task<bool> CheckClaim(SipUser User, string ClaimValue)
+        public async Task<bool> CheckClaim(SipUser User, string ClaimType, string ClaimValue)
         {
             var Roles = await _userManager.GetRolesAsync(User);
             foreach (var Role in Roles)
@@ -25,7 +25,7 @@ namespace SIPx.API
                 var Claims = await _roleManager.GetClaimsAsync(await _roleManager.FindByNameAsync(Role));
                 foreach (var Claim in Claims)
                 {
-                    if (Claim.Value == ClaimValue)
+                    if (Claim.Value == ClaimValue & Claim.Type == ClaimType)
                     {
 
                         return true;

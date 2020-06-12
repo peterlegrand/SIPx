@@ -934,19 +934,26 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(931, 'User must be in a spec
 INSERT INTO UITerms (UITermId, InternalName) VALUES(932, 'Don''t update');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(933, 'Always update');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(934, 'Update when NULL');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(935, 'Read content');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(936, 'Update content');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(937, 'Delete content');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(938, 'Read processes');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(939, 'Update processes');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(940, 'Create processes');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(941, 'Delete processes');
 
 SET IDENTITY_INSERT UITerms OFF;
 
 SET IDENTITY_INSERT SecurityLevels ON;
 INSERT INTO SecurityLevels (SecurityLevelID, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID) VALUES 
-  (1,688,688,688,688)
-, (2,689,689,689,689)
-, (3,690,690,690,690)
-, (4,691,691,691,691)
-, (5,692,692,692,692)
-, (6,693,693,693,693)
-, (7,694,694,694,694)
-, (8,695,695,695,695)
-, (9,696,696,696,696)
-, (10,697,697,697,697)
+  (1,683,683,683,683)
+, (2,684,684,684,684)
+, (3,685,685,685,685)
+, (4,686,686,686,686)
+, (5,687,687,687,687)
+, (6,688,688,688,688)
+, (7,689,689,689,689)
+, (8,690,690,690,690)
+, (9,691,691,691,691)
+, (10,692,692,692,692)
 SET IDENTITY_INSERT SecurityLevels OFF;

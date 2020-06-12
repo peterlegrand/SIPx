@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class ClassificationProvider : IClassificationProvider
+    public class ContentProvider : IContentProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
-        public ClassificationProvider(ISqlDataAccess sqlDataAccess)
+        public ContentProvider(ISqlDataAccess sqlDataAccess)
         {
             _sqlDataAccess = sqlDataAccess;
         }
@@ -24,13 +24,19 @@ namespace SIPx.DataAccess
         //    var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageID = LanguageId });
         //    return x;
         //}
-        public async Task<List<ClassificationViewGet>> GetClassifications(string UserID)
+        public async Task<List<Content>> GetContents(string UserID)
         {
-            string usp = "usp_Classifications @UserID";
-            var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { UserID = UserID });
+            string usp = "usp_Contents @UserID";
+            var x = await _sqlDataAccess.LoadData<Content, dynamic>(usp, new { UserID = UserID });
             return x;
         }
-        public  List<ClassificationViewGet> GetClassifications2(int LanguageId)
+        public async Task<List<ContentType>> GetContentTypes(string UserID)
+        {
+            string usp = "usp_ContentTypes @UserID";
+            var x = await _sqlDataAccess.LoadData<ContentType, dynamic>(usp, new { UserID = UserID });
+            return x;
+        }
+        public List<ClassificationViewGet> GetClassifications2(int LanguageId)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@LanguageID", LanguageId);

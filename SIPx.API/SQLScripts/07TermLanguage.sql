@@ -939,6 +939,13 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1863,932,41,'Don''t update', 'Don''t update', 'Don''t update');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1865,933,41,'Always update', 'Always update', 'Always update');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1867,934,41,'Update when NULL', 'Update when NULL', 'Update when NULL');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1869,935,41,'Read content', 'Read content', 'Read content');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1871,936,41,'Update content', 'Update content', 'Update content');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1873,937,41,'Delete content', 'Delete content', 'Delete content');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1875,938,41,'Read processes', 'Read processes', 'Read processes');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1877,939,41,'Update processes', 'Update processes', 'Update processes');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1879,940,41,'Create processes', 'Create processes', 'Create processes');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1881,941,41,'Delete processes', 'Delete processes', 'Delete processes');
 
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2,1,39,'Classificatie', 'Classificatie', 'Classificatie');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(4,2,39,'Id', 'Id', 'Id');
@@ -1874,5 +1881,12 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1864,932,39,'Don''t update', 'Don''t update', 'Don''t update');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1866,933,39,'Always update', 'Always update', 'Always update');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1868,934,39,'Update when NULL', 'Update when NULL', 'Update when NULL');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1870,935,39,'Read content', 'Read content', 'Read content');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1872,936,39,'Update content', 'Update content', 'Update content');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1874,937,39,'Delete content', 'Delete content', 'Delete content');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1876,938,39,'Read processes', 'Read processes', 'Read processes');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1878,939,39,'Update processes', 'Update processes', 'Update processes');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1880,940,39,'Create processes', 'Create processes', 'Create processes');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1882,941,39,'Delete processes', 'Delete processes', 'Delete processes');
 
 SET IDENTITY_INSERT UITermLanguages OFF;

@@ -36,10 +36,10 @@ namespace SIPx.API.Controllers
     
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            if ( await _claimCheck.CheckClaim(CurrentUser, "ClassificationRead"))
+            if ( await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 //TOFIX PETER
-                return Ok(await _classificationProvider.GetClassifications(1));// CurrentUser.LanguageID));
+                return Ok(await _classificationProvider.GetClassifications(CurrentUser.Id));// CurrentUser.LanguageID));
             }
             return BadRequest(new
             {
