@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace SIPx.Shared
+{
+    public class ClassificationList 
+    {
+        [Key]
+        public int ClassificationID { get; set; }
+        public string Name { get; set; }
+
+        public List<ClassificationValueList> ClassificationValueList { get; set; }
+    }
+}

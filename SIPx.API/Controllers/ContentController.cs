@@ -60,14 +60,44 @@ namespace SIPx.API.Controllers
                 return Ok(await _contentProvider.GetContentTypes(CurrentUser.Id));// CurrentUser.LanguageID));
             }
             return BadRequest(new
-            { 
+            {
                 IsSuccess = false,
                 Message = "No rights",
             });
 
         }
-        
-        
+
+        [HttpGet("Create/{ContentTypeId}")]
+        public async Task<IActionResult> Create(int ContentTypeId)
+        {
+
+            var CurrentUser = await _userManager.GetUserAsync(User);
+
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
+            {
+                //TOFIX PETER
+                var Set = new ContentCreateListSet();
+                Set.ContentTypeId = ContentTypeId;
+                Set.LanguageList = await _contentProvider.GetLanguageList(CurrentUser.Id);
+                Set.ClassificationList = await _contentProvider.GetClassificationList(CurrentUser.Id, ContentTypeId);
+                Set.OrganizationList = await _contentProvider.GetOrganizationList(CurrentUser.Id);
+                
+                foreach (var Classification in Set.ClassificationList)
+                {
+                    Classification.ClassificationValueList = await _contentProvider.GetContentCreateListSet2(CurrentUser.Id, Classification.ClassificationID);
+                }
+
+                return Ok(Set);// CurrentUser.LanguageID));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+
         //        [HttpGet("{Id:int}")]
         //        public async Task<ClassificationViewGet> Get(int Id)
         //        {

@@ -30,7 +30,7 @@ AS
 -- Statement using the CTE
 SELECT TOP (@Top) ClassificationValueHierarchy.ClassificationValueID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
-	, Path
+	--, Path
 FROM   ClassificationValueHierarchy
 LEFT JOIN (SELECT ClassificationValueID, Name FROM ClassificationValueLanguages WHERE LanguageID = @LanguageID) UserLanguage
 	ON UserLanguage.ClassificationValueID= ClassificationValueHierarchy.ClassificationValueID

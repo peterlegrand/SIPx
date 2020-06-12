@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ContentCreate1b] (@UserID nvarchar(450), @ContentTypeID int) 
+CREATE PROCEDURE [dbo].[usp_ContentCreateClassifications] (@UserID nvarchar(450), @ContentTypeID int) 
 AS 
 DECLARE @LanguageID int;
 
@@ -11,6 +11,7 @@ SELECT @LanguageID = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeID = 1 ;
+
 SELECT
 	ContentTypeClassifications.ClassificationID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
@@ -22,3 +23,4 @@ LEFT JOIN (SELECT ClassificationID, Name FROM ClassificationLanguages JOIN Setti
 WHERE ContentTypeClassifications.ContentTypeID = @ContentTypeID
 	AND ContentTypeClassifications.ContentTypeClassificationStatusID <> 1
 ORDER BY ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification'))
+
