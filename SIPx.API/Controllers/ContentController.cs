@@ -60,7 +60,7 @@ namespace SIPx.API.Controllers
                 return Ok(await _contentProvider.GetContentTypes(CurrentUser.Id));// CurrentUser.LanguageID));
             }
             return BadRequest(new
-            {
+            { 
                 IsSuccess = false,
                 Message = "No rights",
             });
