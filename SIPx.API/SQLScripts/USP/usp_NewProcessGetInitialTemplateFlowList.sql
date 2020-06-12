@@ -1,0 +1,5 @@
+CREATE PROCEDURE usp_NewProcessGetInitialTemplateFlowList 
+AS
+SELECT DISTINCT ProcessTemplateFlows.ProcessTemplateFlowID 
+FROM ProcessTemplateFlows 
+WHERE ProcessTemplateFlows.ProcessTemplateFromStageID NOT IN (SELECT DISTINCT ProcessTemplateFlows.ProcessTemplateToStageID FROM ProcessTemplateFlows)
