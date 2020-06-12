@@ -59,8 +59,8 @@ namespace SIPx.API
             {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
                     ValidAudience = Configuration["AuthSettings:Audience"],
                     ValidIssuer = Configuration["AuthSettings:Issuer"],
                     RequireExpirationTime = true,
@@ -79,11 +79,40 @@ namespace SIPx.API
             services.AddSwaggerGen(x =>
             {
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "SIP API", Version = "v1" });
-            });                
+            var security = new Dictionary<string, IEnumerable<string>>
+            { {"Bearer", new string[0]}};
+                x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+                x.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                },
+                                Scheme = "bearer",
+            Name = "Bearer",
+            In = ParameterLocation.Header,
+                            },
+                            new string[] {}
+
+                    }
+                });
+            });
             }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
