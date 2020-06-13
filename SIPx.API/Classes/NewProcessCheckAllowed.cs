@@ -1,42 +1,24 @@
-﻿using System;
+﻿using SIPx.API.Models;
+using SIPx.DataAccess;
+using SIPx.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
-using SIPx.API.Classes;
-using SIPx.API.Models;
-using SIPx.DataAccess;
-using SIPx.Shared;
 
-namespace SIPx.API.Controllers
+namespace SIPx.API.Classes
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProcessController : ControllerBase
+    public  class NewProcessCheckAllowed
     {
-        private IClaimCheck _claimCheck;
         private readonly IProcessProvider _processProvider;
-        private readonly Microsoft.AspNetCore.Identity.UserManager<SipUser> _userManager;
 
-        public ProcessController(IClaimCheck claimCheck, IProcessProvider ProcessProvider, Microsoft.AspNetCore.Identity.UserManager<SipUser> userManager)
+        public NewProcessCheckAllowed(IProcessProvider ProcessProvider)
         {
-            _claimCheck = claimCheck;
             _processProvider = ProcessProvider;
-            _userManager = userManager;
         }
-
-        [HttpGet("NewProcess")]
-
-        public async Task<IActionResult> Get()
+        public async Task<bool> CheckProcessTemplateID(SipUser CurrentUser, int TemplateToCheckID)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
-            {
-
-                string SQLWhere = " WHERE 1=1 ";
+            string SQLWhere = " WHERE 1=1 ";
             string SQLJOIN = " DECLARE @LanguageID int;" +
                 "SELECT @LanguageID = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeID = 1 ;" +
                 "SELECT ProcessTemplates.ProcessTemplateID ,ProcessTemplates.ProcessTemplateGroupID   " +
@@ -51,10 +33,10 @@ namespace SIPx.API.Controllers
             foreach (var TemplateID in TemplateIDs)
             {
                 List<ProcessTemplateFlowCondition> TemplateFlowConditions = await _processProvider.NewProcessGetFlowConditionList(TemplateID);
-       
-                if (TemplateFlowConditions.Count()>0)
+
+                if (TemplateFlowConditions.Count() > 0)
                 { SQLWhere = SQLWhere + " AND "; }
-                foreach(var Condition in TemplateFlowConditions)
+                foreach (var Condition in TemplateFlowConditions)
                 {
                     //Condition types
                     //SELECT ProcessTemplateFlowConditionTypes.ProcessTemplateFlowConditionTypeID, Name FROM ProcessTemplateFlowConditionTypes JOIN UITermLanguages ON ProcessTemplateFlowConditionTypes.NameTermID = UITermLanguages.UITermID WHERE LanguageID =41 ORDER BY ProcessTemplateFlowConditionTypes.ProcessTemplateFlowConditionTypeID
@@ -69,11 +51,11 @@ namespace SIPx.API.Controllers
 
                             //SELECT 'case ' + cast(ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorID as char(2))+ ': //', Name FROM ProcessTemplateFlowConditionComparisonOperators JOIN UITermLanguages ON ProcessTemplateFlowConditionComparisonOperators.NameTermID = UITermLanguages.UITermID WHERE LanguageID =41 ORDER BY ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorID
                             SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeID = 28 AND Table" + Condition.ProcessTemplateFlowId + "a.IntValue ";
-                                switch (Condition.ComparisonOperatorID)
+                            switch (Condition.ComparisonOperatorID)
                             {
                                 case 2:
                                     SQLWhere = SQLWhere + " = ";
-                                break;
+                                    break;
                                 case 3:
                                     SQLWhere = SQLWhere + " > ";
                                     break;
@@ -98,8 +80,8 @@ namespace SIPx.API.Controllers
                                     " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldID = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldID " +
                                     " AND ProcessTemplateFlows.ProcessTemplateFromStageID = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageID ";
                             break;
-                            case 4: //User role
-                            SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeID = 30 AND Table" + Condition.ProcessTemplateFlowId + "a.StringValue IN (SELECT RoleID FROM AspNetUserRoles WHERE UserID = '"+CurrentUser.Id+"') ";
+                        case 4: //User role
+                            SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeID = 30 AND Table" + Condition.ProcessTemplateFlowId + "a.StringValue IN (SELECT RoleID FROM AspNetUserRoles WHERE UserID = '" + CurrentUser.Id + "') ";
 
                             SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
                                     " ON Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateID = ProcessTemplateFlows.ProcessTemplateID " +
@@ -108,8 +90,8 @@ namespace SIPx.API.Controllers
                                     " AND ProcessTemplateFlows.ProcessTemplateFromStageID = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageID ";
 
                             break;
-                            //  Manager user field there is no user yet stored in the process
-                            case 6: //   Organization user
+                        //  Manager user field there is no user yet stored in the process
+                        case 6: //   Organization user
                             SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeID = 14 AND Table" + Condition.ProcessTemplateFlowId + "a.IntValue IN ((SELECT CAST(AspNetRoleClaims.ClaimValue as int) FROM AspNetUserRoles JOIN AspNetRoleClaims ON AspNetUserRoles.RoleId = AspNetRoleClaims.RoleId WHERE UserID = '" + CurrentUser.Id + "' AND AspNetRoleClaims.ClaimValue = 'OrganizationRight') ";
 
                             SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
@@ -118,7 +100,7 @@ namespace SIPx.API.Controllers
                                     " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldID = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldID " +
                                     " AND ProcessTemplateFlows.ProcessTemplateFromStageID = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageID ";
                             break;
-                            case 7: //	Organization role user
+                        case 7: //	Organization role user
                             SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + "Field.ProcessTemplateFieldTypeID = 14 " +
 
                                 " Table" + Condition.ProcessTemplateFlowId + "FieldRole.ProcessTemplateFieldTypeID = 30 " +
@@ -144,9 +126,9 @@ namespace SIPx.API.Controllers
                                     " AND CAST(Table" + Condition.ProcessTemplateFlowId + "RoleClaim.ClaimValue AS int) = Table" + Condition.ProcessTemplateFlowId + "StageField.IntValue "
                                     ;
                             break;
-                             //	Organization parent user no parent
-                             //	Organization parent role user
-                            case 10: //	Project user
+                        //	Organization parent user no parent
+                        //	Organization parent role user
+                        case 10: //	Project user
                             SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeID = 16 AND Table" + Condition.ProcessTemplateFlowId + "a.IntValue IN ((SELECT CAST(AspNetRoleClaims.ClaimValue as int) FROM AspNetUserRoles JOIN AspNetRoleClaims ON AspNetUserRoles.RoleId = AspNetRoleClaims.RoleId WHERE UserID = '" + CurrentUser.Id + "' AND AspNetRoleClaims.ClaimValue = 'ProjectRight') ";
 
                             SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
@@ -155,7 +137,7 @@ namespace SIPx.API.Controllers
                                     " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldID = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldID " +
                                     " AND ProcessTemplateFlows.ProcessTemplateFromStageID = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageID ";
                             break;
-                            case 11: //	Project role user
+                        case 11: //	Project role user
                             SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + "Field.ProcessTemplateFieldTypeID = 16 " +
 
                                 " Table" + Condition.ProcessTemplateFlowId + "FieldRole.ProcessTemplateFieldTypeID = 30 " +
@@ -181,9 +163,9 @@ namespace SIPx.API.Controllers
                                     " AND CAST(Table" + Condition.ProcessTemplateFlowId + "RoleClaim.ClaimValue AS int) = Table" + Condition.ProcessTemplateFlowId + "StageField.IntValue "
                                     ;
                             break;
-                            //	Project parent user
-                            //	Project parent role user
-                            case 14: //	Default organization user
+                        //	Project parent user
+                        //	Project parent role user
+                        case 14: //	Default organization user
                             SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeID = 14 AND Table" + Condition.ProcessTemplateFlowId + "a.IntValue IN ((SELECT persons.DefaultOrganizationID FROM persons WHERE persons.UserID'" + CurrentUser.Id + "' ) ";
 
                             SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
@@ -192,59 +174,31 @@ namespace SIPx.API.Controllers
                                     " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldID = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldID " +
                                     " AND ProcessTemplateFlows.ProcessTemplateFromStageID = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageID ";
                             break;
-                            case 15: //	Open bracket
+                        case 15: //	Open bracket
                             SQLWhere = SQLWhere + " ( ";
                             break;
-                            case 16: //	and
+                        case 16: //	and
                             SQLWhere = SQLWhere + " AND ";
                             break;
-                            case 17: //	or
+                        case 17: //	or
                             SQLWhere = SQLWhere + " OR ";
                             break;
-                            case 18: //	Close bracket
+                        case 18: //	Close bracket
                             SQLWhere = SQLWhere + " ) ";
                             break;
-                            //	User
-                            //	Relation to creator
-                            //	Relation to user field
-                            case 22: //	Classification relation both value and classification itself
+                        //	User
+                        //	Relation to creator
+                        //	Relation to user field
+                        case 22: //	Classification relation both value and classification itself
                             break;
-                            case 23: //	Classification relation type
+                        case 23: //	Classification relation type
                             break;
                     }
                 }
             }
-            List<NewProcessTemplateList> NewTemplateList = await _processProvider.NewProcessGetTemplateList(SQLJOIN+ SQLWhere);
+            List<NewProcessTemplateList> NewTemplateList = await _processProvider.NewProcessGetTemplateList(SQLJOIN + SQLWhere);
+            return NewTemplateList.Exists(x => x.ProcessTemplateID == TemplateToCheckID);
             
-                return Ok(NewTemplateList);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
         }
-
-        [HttpGet("NewProcessGet{ProcessTemplateId}")]
-        public async Task<IActionResult> ContentType(int ProcessTemplateId )
-        {
-
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var testifallowed = new NewProcessCheckAllowed(_processProvider);
-
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
-            {
-                if(await testifallowed.CheckProcessTemplateID(CurrentUser,ProcessTemplateId))
-                //TOFIX PETER
-                return Ok(await _processProvider.NewProcessGet(CurrentUser.Id, ProcessTemplateId));// CurrentUser.LanguageID));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
-        }
-        
     }
 }
