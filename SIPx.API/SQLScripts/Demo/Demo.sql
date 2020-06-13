@@ -652,9 +652,9 @@ SET IDENTITY_INSERT ProjectLanguages OFF;
 SET IDENTITY_INSERT ProcessTemplateFlowConditions ON;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionID, ProcessTemplateID, ProcessTemplateFlowID
 , ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFlowConditionInt, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
-(1, 1, 1, 3, 5, 3, @User, @User, GETDATE(), GETDATE())
-,(2, 2, 5, 3, 5, 6, @User, @User, GETDATE(), GETDATE())
-,(3, 3, 9, 3, 5, 5, @User, @User, GETDATE(), GETDATE())
+(1, 1, 1, 3, 6, 3, @User, @User, GETDATE(), GETDATE())
+,(2, 2, 5, 3, 6, 6, @User, @User, GETDATE(), GETDATE())
+,(3, 3, 9, 3, 6, 5, @User, @User, GETDATE(), GETDATE())
 ;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionID, ProcessTemplateID, ProcessTemplateFlowID
 , ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFieldID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 

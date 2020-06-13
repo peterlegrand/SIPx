@@ -26,18 +26,23 @@ namespace SIPx.DataAccess
         //}
         public async Task<List<int>> NewProcessGetInitialTemplateList()
         {
-            string usp = "usp_usp_NewProcessGetInitialTemplateFlowList";
+            string usp = "usp_NewProcessGetInitialTemplateFlowList";
             var x = await _sqlDataAccess.LoadData<int>(usp);
             return x;
         }
 
         public async Task<List<ProcessTemplateFlowCondition>> NewProcessGetFlowConditionList(int FlowID)
         {
-            string usp = "usp_usp_NewProcessGetInitialTemplateFlowList @FlowID";
+            string usp = "usp_NewProcessGetFlowConditionList @FlowID";
             var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowCondition, dynamic>(usp, new { FlowID = FlowID });
             return x;
         }
 
+        public async Task<List<NewProcessTemplateList>> NewProcessGetTemplateList(string SQLString)
+        {
+            var x = await _sqlDataAccess.LoadData<NewProcessTemplateList>(SQLString);
+            return x;
+        }
         //public async Task<List<ProcessType>> GetProcessTypes(string UserID)
         //{
         //    string usp = "usp_ProcessTypes @UserID";

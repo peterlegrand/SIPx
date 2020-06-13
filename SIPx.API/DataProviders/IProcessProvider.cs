@@ -9,5 +9,6 @@ namespace SIPx.DataAccess
 //        Task<List<ProcessType>> GetProcessTypes(string UserID);
         Task<List<int>> NewProcessGetInitialTemplateList();
         Task<List<ProcessTemplateFlowCondition>> NewProcessGetFlowConditionList(int FlowID);
+        Task<List<NewProcessTemplateList>> NewProcessGetTemplateList(string SQLString);
     }
 }

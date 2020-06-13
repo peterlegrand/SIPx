@@ -33,14 +33,24 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
+            string SQLWhere = " WHERE 1=1 ";
+            string SQLJOIN = " DECLARE @LanguageID int;" +
+                "SELECT @LanguageID = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeID = 1 ;" +
+                "SELECT ProcessTemplates.ProcessTemplateID ,ProcessTemplates.ProcessTemplateGroupID   " +
+                ", ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name " +
+                "FROM processtemplates JOIN ProcessTemplateFlows ON ProcessTemplates.ProcessTemplateID = ProcessTemplateFlows.ProcessTemplateID " +
+                " LEFT JOIN (SELECT ProcessTemplateID, Name FROM ProcessTemplateLanguages WHERE LanguageID = @LanguageID) UserLanguage " +
+                "  ON UserLanguage.ProcessTemplateID= ProcessTemplates.ProcessTemplateID " +
+                " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage " +
+                " ON DefaultLanguage.ProcessTemplateID = ProcessTemplates.ProcessTemplateID ";
+
             List<int> TemplateIDs = await _processProvider.NewProcessGetInitialTemplateList();
             foreach (var TemplateID in TemplateIDs)
             {
                 List<ProcessTemplateFlowCondition> TemplateFlowConditions = await _processProvider.NewProcessGetFlowConditionList(TemplateID);
-                string SQLWhere = " WHERE 1=1 ";
-                string SQLJOIN = "";
+       
                 if (TemplateFlowConditions.Count()>0)
-                { SQLWhere = SQLWhere +" AND "}
+                { SQLWhere = SQLWhere + " AND "; }
                 foreach(var Condition in TemplateFlowConditions)
                 {
                     //Condition types
@@ -201,7 +211,9 @@ namespace SIPx.API.Controllers
                     }
                 }
             }
-            return Ok();
+            List<NewProcessTemplateList> NewTemplateList = await _processProvider.NewProcessGetTemplateList(SQLJOIN+ SQLWhere);
+            
+                return Ok(NewTemplateList);
         }
     }
 }
