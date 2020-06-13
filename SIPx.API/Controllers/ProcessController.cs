@@ -32,8 +32,10 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Get()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+            {
 
-            string SQLWhere = " WHERE 1=1 ";
+                string SQLWhere = " WHERE 1=1 ";
             string SQLJOIN = " DECLARE @LanguageID int;" +
                 "SELECT @LanguageID = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeID = 1 ;" +
                 "SELECT ProcessTemplates.ProcessTemplateID ,ProcessTemplates.ProcessTemplateGroupID   " +
@@ -214,6 +216,30 @@ namespace SIPx.API.Controllers
             List<NewProcessTemplateList> NewTemplateList = await _processProvider.NewProcessGetTemplateList(SQLJOIN+ SQLWhere);
             
                 return Ok(NewTemplateList);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("NewProcessGet{ProcessTemplateId}")]
+        public async Task<IActionResult> ContentType(int ProcessTemplateId )
+        {
+
+            var CurrentUser = await _userManager.GetUserAsync(User);
+
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+            {
+                //TOFIX PETER
+                return Ok(await _processProvider.NewProcessGet(CurrentUser.Id, ProcessTemplateId));// CurrentUser.LanguageID));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
         }
     }
 }

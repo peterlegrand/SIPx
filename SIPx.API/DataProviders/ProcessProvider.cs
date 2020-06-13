@@ -4,6 +4,7 @@ using SIPx.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,6 +36,13 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_NewProcessGetFlowConditionList @FlowID";
             var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowCondition, dynamic>(usp, new { FlowID = FlowID });
+            return x;
+        }
+        public async Task<List<NewProcessTemplateGet>> NewProcessGet(string User, int ProcessTemplateID)
+        {
+
+            string usp = "usp_NewProcessGet @UserID, @ProcessTemplateID";
+            var x = await _sqlDataAccess.LoadData<NewProcessTemplateGet, dynamic>(usp, new { UserID = User, ProcessTemplateID = ProcessTemplateID });
             return x;
         }
 
