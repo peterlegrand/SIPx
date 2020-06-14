@@ -16,7 +16,7 @@ namespace SIPx.API.Classes
         {
             _processProvider = ProcessProvider;
         }
-        public async Task<bool> CheckProcessTemplateID(SipUser CurrentUser, int TemplateToCheckID)
+        public async Task<List<NewProcessTemplateList>> CheckProcessTemplateID(SipUser CurrentUser, int TemplateToCheckID)
         {
             string SQLWhere = " WHERE 1=1 ";
             string SQLJOIN = " DECLARE @LanguageID int;" +
@@ -197,7 +197,7 @@ namespace SIPx.API.Classes
                 }
             }
             List<NewProcessTemplateList> NewTemplateList = await _processProvider.NewProcessGetTemplateList(SQLJOIN + SQLWhere);
-            return NewTemplateList.Exists(x => x.ProcessTemplateID == TemplateToCheckID);
+            return NewTemplateList;
             
         }
     }

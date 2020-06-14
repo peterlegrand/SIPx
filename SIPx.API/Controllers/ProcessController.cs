@@ -214,6 +214,7 @@ namespace SIPx.API.Controllers
                     }
                 }
             }
+
             List<NewProcessTemplateList> NewTemplateList = await _processProvider.NewProcessGetTemplateList(SQLJOIN+ SQLWhere);
             
                 return Ok(NewTemplateList);
@@ -226,7 +227,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("NewProcessGet{ProcessTemplateId}")]
-        public async Task<IActionResult> ContentType(int ProcessTemplateId )
+        public async Task<IActionResult> NewProcessGet(int ProcessTemplateId )
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -234,7 +235,9 @@ namespace SIPx.API.Controllers
 
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
             {
-                if(await testifallowed.CheckProcessTemplateID(CurrentUser,ProcessTemplateId))
+                List<NewProcessTemplateList> x = await testifallowed.CheckProcessTemplateID(CurrentUser, ProcessTemplateId);
+
+                if (x.Exists(x => x.ProcessTemplateID == ProcessTemplateId) )
                 //TOFIX PETER
                 return Ok(await _processProvider.NewProcessGet(CurrentUser.Id, ProcessTemplateId));// CurrentUser.LanguageID));
             }
@@ -244,6 +247,24 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewProcess( NewProcess newProcess)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var testifallowed = new NewProcessCheckAllowed(_processProvider);
+            List<NewProcessTemplateList> x = await testifallowed.CheckProcessTemplateID(CurrentUser, newProcess.ProcessTemplateID);
+            if (x.Exists(x => x.ProcessTemplateID == newProcess.ProcessTemplateID))
+            {
+                newProcess.
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+//            return Ok();
         }
         
     }
