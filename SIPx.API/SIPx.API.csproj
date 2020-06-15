@@ -27,5 +27,9 @@
     <ProjectReference Include="..\SIPx.Shared\SIPx.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 
 </Project>
