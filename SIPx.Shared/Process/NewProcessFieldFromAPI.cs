@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class NewProcessField : INewProcessField
+    public class NewProcessFieldFromAPI : INewProcessFieldFromAPI
     {
         [Key]
         public int Sequence { get; set; }

@@ -1,5 +1,6 @@
 ﻿
 using Dapper;
+using SIPx.API.Models;
 using SIPx.Shared;
 using System;
 using System.Collections.Generic;
@@ -38,11 +39,11 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowCondition, dynamic>(usp, new { FlowID = FlowID });
             return x;
         }
-        public async Task<List<NewProcessTemplateGet>> NewProcessGet(string User, int ProcessTemplateID)
+        public async Task<List<NewProcessFromDB>> NewProcessGet(SipUser User, int ProcessTemplateID)
         {
 
             string usp = "usp_NewProcessGet @UserID, @ProcessTemplateID";
-            var x = await _sqlDataAccess.LoadData<NewProcessTemplateGet, dynamic>(usp, new { UserID = User, ProcessTemplateID = ProcessTemplateID });
+            var x = await _sqlDataAccess.LoadData<NewProcessFromDB, dynamic>(usp, new { UserID = User, ProcessTemplateID = ProcessTemplateID });
             return x;
         }
 

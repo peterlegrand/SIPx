@@ -2,7 +2,7 @@
 
 namespace SIPx.Shared
 {
-    public interface INewProcessField
+    public interface INewProcessFieldFromAPI
     {
         DateTime? DateTimeValue { get; set; }
         int? IntValue { get; set; }
