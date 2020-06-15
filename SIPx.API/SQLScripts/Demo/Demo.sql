@@ -537,7 +537,7 @@ SET IDENTITY_INSERT ProcessTemplateStageTypeLanguages OFF;
 
 
 SET IDENTITY_INSERT ProcessTemplateStages ON;
-INSERT INTO ProcessTemplateStages (ProcessTemplateStageID, ProcessTemplateID, ProcessTemplateStageTypeID, IsEndStageID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+INSERT INTO ProcessTemplateStages (ProcessTemplateStageID, ProcessTemplateID, ProcessTemplateStageTypeID, IsEndStage, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
 (1,1,4,0, @User, @User, GETDATE(), GETDATE())
 , (2,1,3,0, @User, @User, GETDATE(), GETDATE())
 , (3,1,5,1, @User, @User, GETDATE(), GETDATE())
@@ -651,30 +651,28 @@ SET IDENTITY_INSERT ProjectLanguages OFF;
 
 SET IDENTITY_INSERT ProcessTemplateFlowConditions ON;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionID, ProcessTemplateID, ProcessTemplateFlowID
-, ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFlowConditionInt, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
-(1, 1, 1, 3, 6, 3, @User, @User, GETDATE(), GETDATE())
-,(2, 2, 5, 3, 6, 6, @User, @User, GETDATE(), GETDATE())
-,(3, 3, 9, 3, 6, 5, @User, @User, GETDATE(), GETDATE())
+, ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFlowConditionInt, Sequence, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1, 1, 1, 3, 6, 3, 1, @User, @User, GETDATE(), GETDATE())
+,(2, 2, 5, 3, 6, 6, 2, @User, @User, GETDATE(), GETDATE())
+,(3, 3, 9, 3, 6, 5 , 3, @User, @User, GETDATE(), GETDATE())
 ;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionID, ProcessTemplateID, ProcessTemplateFlowID
-, ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFieldID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
-(4, 1, 2, 19, 2, 32, @User, @User, GETDATE(), GETDATE())
-,(5, 2, 6, 19, 2, 32, @User, @User, GETDATE(), GETDATE())
+, ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFieldID, Sequence, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(4, 1, 2, 19, 2, 32,4, @User, @User, GETDATE(), GETDATE())
+,(5, 2, 6, 19, 2, 32,5, @User, @User, GETDATE(), GETDATE())
 ;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionID, ProcessTemplateID, ProcessTemplateFlowID
 , ProcessTemplateFlowConditionTypeID , ComparisonOperatorID
-,ProcessTemplateFieldID,ProcessTemplateFieldIDRole
+,ProcessTemplateFieldID,ProcessTemplateFieldIDRole, Sequence
 , CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
-(6, 1, 3
-, 19, 2
-, 32,35, @User, @User, GETDATE(), GETDATE())
-,(7, 1, 4, 19, 2, 32,35, @User, @User, GETDATE(), GETDATE())
-,(8, 2, 7, 19, 2, 32,35, @User, @User, GETDATE(), GETDATE())
-,(9, 2, 8, 19, 2, 32,35, @User, @User, GETDATE(), GETDATE())
+(6, 1, 3, 19, 2, 32,35,6, @User, @User, GETDATE(), GETDATE())
+,(7, 1, 4, 19, 2, 32,35,7, @User, @User, GETDATE(), GETDATE())
+,(8, 2, 7, 19, 2, 32,35,8, @User, @User, GETDATE(), GETDATE())
+,(9, 2, 8, 19, 2, 32,35,9, @User, @User, GETDATE(), GETDATE())
 ;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionID, ProcessTemplateID, ProcessTemplateFlowID
-, ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFieldID, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
-(10, 3, 10, 22, 2, 27, @User, @User, GETDATE(), GETDATE())
+, ProcessTemplateFlowConditionTypeID , ComparisonOperatorID, ProcessTemplateFieldID, Sequence, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(10, 3, 10, 22, 2, 27,10, @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFlowConditions OFF;
 

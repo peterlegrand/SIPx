@@ -10,7 +10,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProcessTemplateID { get; set; }
-        public int ProcessTemplateFieldID { get; set; }
+        public int ProcessTemplateStageID { get; set; }
         public List<NewProcessField> ProcessFields { get; set; }
     }
 }

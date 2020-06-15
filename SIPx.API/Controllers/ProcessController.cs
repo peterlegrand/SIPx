@@ -249,23 +249,23 @@ namespace SIPx.API.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateNewProcess( NewProcess newProcess)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var testifallowed = new NewProcessCheckAllowed(_processProvider);
-            List<NewProcessTemplateList> x = await testifallowed.CheckProcessTemplateID(CurrentUser, newProcess.ProcessTemplateID);
-            if (x.Exists(x => x.ProcessTemplateID == newProcess.ProcessTemplateID))
-            {
-                newProcess.
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-//            return Ok();
-        }
+//        [HttpPost]
+//        public async Task<IActionResult> CreateNewProcess( NewProcess newProcess)
+//        {
+//            var CurrentUser = await _userManager.GetUserAsync(User);
+//            var testifallowed = new NewProcessCheckAllowed(_processProvider);
+//            List<NewProcessTemplateList> x = await testifallowed.CheckProcessTemplateID(CurrentUser, newProcess.ProcessTemplateID);
+//            if (x.Exists(x => x.ProcessTemplateID == newProcess.ProcessTemplateID))
+//            {
+//                newProcess.
+//            }
+//            return BadRequest(new
+//            {
+//                IsSuccess = false,
+//                Message = "No rights",
+//            });
+////            return Ok();
+//        }
         
     }
 }

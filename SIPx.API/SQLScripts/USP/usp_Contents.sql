@@ -71,6 +71,5 @@ WHERE ProcessTemplateFields.ProcessTemplateFieldTypeID = 1
 	AND SecurityLevels.SecurityLevelID <= @SecurityLevelID
 ORDER BY Contents.Title
 END;
-GO
 
 
