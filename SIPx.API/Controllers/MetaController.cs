@@ -101,5 +101,50 @@ namespace SIPx.API.Controllers
             List<MetaListValueUpdateType> MasterList = await _metaProvider.ValueUpdateTypes();
             return View(MasterList);
         }
+        public async Task<IActionResult> UITerms()
+        {
+            List<MetaListUITerm> MasterList = await _metaProvider.UITerms();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> UITermCustomizations()
+        {
+            List<MetaListUITermCustomization> MasterList = await _metaProvider.UITermCustomizations();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> PageSectionDataTypes()
+        {
+            List<MetaListPageSectionDataType> MasterList = await _metaProvider.PageSectionDataTypes();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> PageSectionTypes()
+        {
+            List<MetaListPageSectionType> MasterList = await _metaProvider.PageSectionTypes();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> PreferenceTypes()
+        {
+            List<MetaListPreferenceType> MasterList = await _metaProvider.PreferenceTypes();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> ProcessTemplateFieldTypes()
+        {
+            List<MetaListProcessTemplateFieldType> MasterList = await _metaProvider.ProcessTemplateFieldTypes();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> ProcessTemplateStageFieldStatuses()
+        {
+            List<MetaListProcessTemplateStageFieldStatus> MasterList = await _metaProvider.ProcessTemplateStageFieldStatuses();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> ProcessTemplateFlowConditionComparisonOperators()
+        {
+            List<MetaListProcessTemplateFlowConditionComparisonOperator> MasterList = await _metaProvider.ProcessTemplateFlowConditionComparisonOperators();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> ProcessTemplateFlowConditionTypes()
+        {
+            List<MetaListProcessTemplateFlowConditionType> MasterList = await _metaProvider.ProcessTemplateFlowConditionTypes();
+            return View(MasterList);
+        }
     }
 }

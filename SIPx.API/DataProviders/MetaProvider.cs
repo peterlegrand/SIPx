@@ -118,6 +118,60 @@ namespace SIPx.DataAccess
             var MetaList = await _sqlDataAccess.LoadData<MetaListValueUpdateType>(usp);
             return MetaList;
         }
+        public async Task<List<MetaListUITerm>> UITerms()
+        {
+            string usp = "usp_metalistUITerm";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListUITerm>(usp);
+            return MetaList;
+        }
+        public async Task<List<MetaListUITermCustomization>> UITermCustomizations()
+        {
+            string usp = "usp_metalistUITermCustomization";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListUITermCustomization>(usp);
+            return MetaList;
+        }
+        public async Task<List<MetaListPageSectionDataType>> PageSectionDataTypes()
+        {
+            string usp = "usp_metalistPageSectionDataType";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListPageSectionDataType>(usp);
+            return MetaList;
+        }
+        public async Task<List<MetaListPageSectionType>> PageSectionTypes()
+        {
+            string usp = "usp_metalistPageSectionType";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListPageSectionType>(usp);
+            return MetaList;
+        }
+        public async Task<List<MetaListPreferenceType>> PreferenceTypes()
+        {
+            string usp = "usp_metalistPreferenceType";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListPreferenceType>(usp);
+            return MetaList;
+        }
+        public async Task<List<MetaListProcessTemplateFieldType>> ProcessTemplateFieldTypes()
+        {
+            string usp = "usp_metalistProcessTemplateFieldType";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListProcessTemplateFieldType>(usp);
+            return MetaList;
+        }
+        public async Task<List<MetaListProcessTemplateStageFieldStatus>> ProcessTemplateStageFieldStatuses()
+        {
+            string usp = "usp_metalistProcessTemplateStageFieldStatus";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListProcessTemplateStageFieldStatus>(usp);
+            return MetaList;
+        }
+        public async Task<List<MetaListProcessTemplateFlowConditionComparisonOperator>> ProcessTemplateFlowConditionComparisonOperators()
+        {
+            string usp = "usp_metalistProcessTemplateFlowConditionComparisonOperator";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListProcessTemplateFlowConditionComparisonOperator>(usp);
+            return MetaList;
+        }
+        public async Task<List<MetaListProcessTemplateFlowConditionType>> ProcessTemplateFlowConditionTypes()
+        {
+            string usp = "usp_metalistProcessTemplateFlowConditionType";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListProcessTemplateFlowConditionType>(usp);
+            return MetaList;
+        }
 
     }
 }

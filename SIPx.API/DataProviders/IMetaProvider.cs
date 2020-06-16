@@ -14,6 +14,13 @@ namespace SIPx.DataAccess
         Task<List<MetaListDateLevel>> DateLevels();
         Task<List<MetaListGender>> Genders();
         Task<List<MetaListLanguage>> Languages();
+        Task<List<MetaListPageSectionDataType>> PageSectionDataTypes();
+        Task<List<MetaListPageSectionType>> PageSectionTypes();
+        Task<List<MetaListPreferenceType>> PreferenceTypes();
+        Task<List<MetaListProcessTemplateFieldType>> ProcessTemplateFieldTypes();
+        Task<List<MetaListProcessTemplateFlowConditionComparisonOperator>> ProcessTemplateFlowConditionComparisonOperators();
+        Task<List<MetaListProcessTemplateFlowConditionType>> ProcessTemplateFlowConditionTypes();
+        Task<List<MetaListProcessTemplateStageFieldStatus>> ProcessTemplateStageFieldStatuses();
         Task<List<MetaListRegion>> Regions();
         Task<List<MetaListSecurityLevel>> SecurityLevels();
         Task<List<MetaListSettings>> Settings();
@@ -21,6 +28,8 @@ namespace SIPx.DataAccess
         Task<List<MetaListStatus>> Statuses();
         Task<List<MetaListSubRegion>> SubRegions();
         Task<List<MetaListTelecomType>> TelecomTypes();
+        Task<List<MetaListUITermCustomization>> UITermCustomizations();
+        Task<List<MetaListUITerm>> UITerms();
         Task<List<MetaListValueUpdateType>> ValueUpdateTypes();
     }
 }

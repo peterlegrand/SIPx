@@ -131,5 +131,61 @@ namespace SIPx.API.ViewModels
         public int ValueUpdateTypeID { get; set; }
         public string Name { get; set; }
     }
+    public class MetaListUITerm
+    {
+        [Key]
+        public int UITermID { get; set; }
+        public string InternalName { get; set; }
+        public string Name { get; set; }
+    }
+    public class MetaListUITermCustomization
+    {
+        [Key]
+        public int UITermID { get; set; }
+        public string InternalName { get; set; }
+        public string Customization { get; set; }
+    }
+    public class MetaListPageSectionDataType
+    {
+        [Key]
+        public int PageSectionDataTypeID { get; set; }
+        public string Name { get; set; }
+    }
+    public class MetaListPageSectionType
+    {
+        [Key]
+        public int PageSectionTypeID { get; set; }
+        public string Name { get; set; }
+    }
+    public class MetaListPreferenceType
+    {
+        [Key]
+        public int PreferenceTypeID { get; set; }
+        public string Name { get; set; }
+    }
+    public class MetaListProcessTemplateFieldType
+    {
+        [Key]
+        public int ProcessTemplateFieldTypeID { get; set; }
+        public string Name { get; set; }
+    }
+    public class MetaListProcessTemplateFlowConditionComparisonOperator
+    {
+        [Key]
+        public int ProcessTemplateFlowConditionComparisonOperatorID { get; set; }
+        public string Name { get; set; }
+    }
+    public class MetaListProcessTemplateFlowConditionType
+    {
+        [Key]
+        public int ProcessTemplateFlowConditionTypeID { get; set; }
+        public string Name { get; set; }
+    }
+    public class MetaListProcessTemplateStageFieldStatus
+    {
+        [Key]
+        public int ProcessTemplateStageFieldStatuseID { get; set; }
+        public string Name { get; set; }
+    }
 
 }
