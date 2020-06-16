@@ -1,0 +1,31 @@
+﻿
+@model List<SIPx.API.ViewModels.MetaListCountry>
+@{
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead>
+            <tr><th>Country ID</th><th>Name</th><th>Foreign name</th><th>ISO31662</th><th>ISO31662</th><th>ISO31663</th><th>ISO3166Num</th><th>Region ID</th><th>Region name</th><th>Subregion ID</th><th>Subregion name</th><th>Intermediate region ID</th><th>Intermediate region name</th></tr>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+    <tr>
+        <td><div>@x.CountryID</div></td>
+        <td><div>@x.CountryName</div></td>
+        <td><div>@x.ForeingName</div></td>
+        <td><div>@x.ISO31662</div></td>
+        <td><div>@x.ISO31663</div></td>
+        <td><div>@x.ISO3166Num</div></td>
+        <td><div>@x.RegionID</div></td>
+        <td><div>@x.RegionName</div></td>
+        <td><div>@x.SubRegionID</div></td>
+        <td><div>@x.SubRegionName</div></td>
+        <td><div>@x.IntermediateRegionID</div></td>
+        <td><div>@x.IntermediateRegionName</div></td>
+    </tr>
+
+        }
+    </table>
+</div>

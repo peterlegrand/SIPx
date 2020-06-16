@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
+using Microsoft.Data.SqlClient;
 using SIPx.API.Classes;
 using SIPx.API.Models;
 using SIPx.DataAccess;
 using SIPx.Shared;
+using SIPx.Shared.Process;
 
 namespace SIPx.API.Controllers
 {
@@ -256,6 +260,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             var testifallowed = new NewProcessCheckAllowed(_processProvider);
+            DataTable ProcessFields = NewProcessField.CreateTable();
 
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "186"))  //11
             {
@@ -451,7 +456,7 @@ namespace SIPx.API.Controllers
                                                 return BadRequest(new
                                                 {
                                                     IsSuccess = false,
-                                                    Message = "Required value is missing",
+                                                    Message = "Required value is missing 1",
                                                 });
 
                                             }
@@ -480,7 +485,7 @@ namespace SIPx.API.Controllers
                                                 return BadRequest(new
                                                 {
                                                     IsSuccess = false,
-                                                    Message = "Required value is missing",
+                                                    Message = "Required value is missing 2",
                                                 });
 
                                             }
@@ -498,7 +503,7 @@ namespace SIPx.API.Controllers
                                                 return BadRequest(new
                                                 {
                                                     IsSuccess = false,
-                                                    Message = "Required value is missing",
+                                                    Message = "Required value is missing 3",
                                                 });
 
                                             }
@@ -513,7 +518,20 @@ namespace SIPx.API.Controllers
                             }
                         }
 
+                        foreach (var ProcessFieldFromAPI in ProcessesFromAPI.ProcessFields)
+                        {
+                            ProcessFields.Rows.Add(ProcessFieldFromAPI.ProcessTemplateID, ProcessFieldFromAPI.ProcessTemplateFieldID, ProcessFieldFromAPI.StringValue, ProcessFieldFromAPI.IntValue, ProcessFieldFromAPI.DateTimeValue);
+                        }
 
+                        //   SqlParameter Parameters = cmd.Parameters.AddWithValue("@FieldsTable", ProcessFields);
+                    //    System.Data.SqlClient.SqlParameter[] Parameters =  {
+                    //    new System.Data.SqlClient.SqlParameter("@User", CurrentUser.Id)
+                    //    , new System.Data.SqlClient.SqlParameter("@ProcessTemplateID", ProcessesFromAPI.ProcessTemplateID)
+                    //    , new System.Data.SqlClient.SqlParameter("@ProcessTemplateStageID", ProcessesFromAPI.ProcessTemplateStageID)
+                    //    , new System.Data.SqlClient.SqlParameter("@FieldsTable", ProcessFields)
+                    //};
+                        await _processProvider.NewProcessInsert("usp_CreateProcess @User, @ProcessTemplateID, @ProcessTemplateStageID, @FieldsTable", CurrentUser.Id,  ProcessesFromAPI.ProcessTemplateID, ProcessesFromAPI.ProcessTemplateStageID, ProcessFields );
+                        return Ok();
                     }
 
                 }
@@ -521,7 +539,7 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = "No rights 1",
             });
             //            return Ok();
         }

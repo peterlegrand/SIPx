@@ -1,0 +1,23 @@
+﻿
+@model List<SIPx.API.ViewModels.MetaListSubRegion>
+@{
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead>
+            <tr><th>Subregion ID</th><th>Subregion ame</th><th>Region ID</th><th>Region ame</th></tr>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+    <tr>
+        <td><div>@x.SubRegionID</div></td>
+        <td><div>@x.SubRegionName</div></td>
+        <td><div>@x.RegionID</div></td>
+        <td><div>@x.SubRegionID</div></td>
+    </tr>
+
+        }
+    </table>
+</div>

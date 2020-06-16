@@ -1,0 +1,25 @@
+﻿
+@model List<SIPx.API.ViewModels.MetaListLanguage>
+@{
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead>
+            <tr><th>Content status ID</th><th>Name</th></tr>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+    <tr>
+        <td><div>@x.LanguageID</div></td>
+        <td><div>@x.Name</div></td>
+        <td><div>@x.ForeingName</div></td>
+        <td><div>@x.ISO6391</div></td>
+        <td><div>@x.ISO6392</div></td>
+        <td><div>@x.StatusName</div></td>
+    </tr>
+
+        }
+    </table>
+</div>

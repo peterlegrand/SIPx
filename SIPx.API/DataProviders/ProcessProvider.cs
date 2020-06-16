@@ -1,9 +1,11 @@
 ﻿
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
 using SIPx.Shared;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -42,8 +44,8 @@ namespace SIPx.DataAccess
         public async Task<List<NewProcessFromDB>> NewProcessGet(SipUser User, int ProcessTemplateID)
         {
 
-            string usp = "usp_NewProcessGet @UserID, @ProcessTemplateID";
-            var x = await _sqlDataAccess.LoadData<NewProcessFromDB, dynamic>(usp, new { UserID = User, ProcessTemplateID = ProcessTemplateID });
+            string usp = "usp_NewProcessGet @ProcessTemplateID";
+            var x = await _sqlDataAccess.LoadData<NewProcessFromDB, dynamic>(usp, new { ProcessTemplateID = ProcessTemplateID });
             return x;
         }
 
@@ -52,6 +54,15 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<NewProcessTemplateList>(SQLString);
             return x;
         }
+
+        public async Task<bool> NewProcessInsert(string SQLString, string UserID, int TemplateID, int StageID, DataTable Fields)
+        {
+            await _sqlDataAccess.SaveData2<dynamic>(SQLString, new  { User = UserID, ProcessTemplateID = TemplateID, ProcessTemplateStageID = StageID, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
+            return true;
+        }
+
+        
+ 
         //public async Task<List<ProcessType>> GetProcessTypes(string UserID)
         //{
         //    string usp = "usp_ProcessTypes @UserID";

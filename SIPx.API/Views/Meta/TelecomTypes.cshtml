@@ -1,0 +1,21 @@
+﻿
+@model List<SIPx.API.ViewModels.MetaListTelecomType>
+@{
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead>
+            <tr><th>Telecom type ID</th><th>Name</th>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+            <tr>
+                <td><div>@x.TelecomTypeID</div></td>
+                <td><div>@x.Name</div></td>
+            </tr>
+
+        }
+    </table>
+</div>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SIPx.BlazorServer.Services;
-using SIPx.DataAccess;
+using SIPx.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;

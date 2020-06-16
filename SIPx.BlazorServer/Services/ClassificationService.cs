@@ -1,5 +1,4 @@
-﻿using SIPx.DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -7,6 +6,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
 using SIPx.BlazorServer.Pages;
+using SIPx.Shared;
 
 namespace SIPx.BlazorServer.Services
 {

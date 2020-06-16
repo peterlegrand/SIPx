@@ -1,0 +1,21 @@
+﻿
+@model List<SIPx.API.ViewModels.MetaListClaimGroup>
+@{
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead>
+            <tr><th>Claim group ID</th><th>Name</th></tr>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+            <tr>
+                <td><div>@x.ClaimGroupID</div></td>
+                <td><div>@x.Name</div></td>
+            </tr>
+
+        }
+    </table>
+</div>

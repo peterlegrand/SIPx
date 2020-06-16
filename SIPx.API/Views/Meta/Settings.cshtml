@@ -1,0 +1,24 @@
+﻿
+@model List<SIPx.API.ViewModels.MetaListSettings>
+@{
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead>
+            <tr><th>Setting ID</th><th>Name</th></tr>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+    <tr>
+        <td><div>@x.SettingID</div></td>
+        <td><div>@x.Name</div></td>
+        <td><div>@x.IntValue</div></td>
+        <td><div>@x.StringValue</div></td>
+        <td><div>@x.DateTimeValue</div></td>
+    </tr>
+
+        }
+    </table>
+</div>
