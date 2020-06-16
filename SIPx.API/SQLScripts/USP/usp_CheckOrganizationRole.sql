@@ -4,6 +4,3 @@ SELECT CASE COUNT(*) WHEN 0 THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END HasOrgan
 FROM AspNetRoleClaims
 WHERE AspNetRoleClaims.RoleId = @RoleID
 	AND AspNetRoleClaims.ClaimType = 'OrganizationRight'
-GO
-
-

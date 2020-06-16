@@ -7,7 +7,7 @@ SELECT
 	, ISO31663
 	, ISO3166Num
 	, CountryLanguage.Name CountryName
-	, ISNULL(SubRegion.SuRegionID,0) SuRegionID
+	, ISNULL(SubRegion.SubRegionID,0) SubRegionID
 	, ISNULL(SubRegion.SubregionName, '') SubRegionName
 	, ISNULL(SubRegion.RegionID, 0)RegionID
 	, ISNULL(SubRegion.RegionName,'')RegionName 
@@ -17,7 +17,7 @@ FROM Countries
 JOIN UITermLanguages CountryLanguage 
 	ON Countries.NameTermID = CountryLanguage.UITermID 
 LEFT JOIN (
-	SELECT SubRegionName.Name as SubregionName , SuRegionID, Regions.RegionID, RegionName.Name RegionName
+	SELECT SubRegionName.Name as SubregionName , SubRegionID, Regions.RegionID, RegionName.Name RegionName
 	FROM SubRegions 
 	JOIN UITermLanguages SubRegionName
 		ON Subregions.NameTermID = SubRegionName.UITermID 
@@ -26,7 +26,7 @@ LEFT JOIN (
 	JOIN UITermLanguages RegionName
 		ON Regions.NameTermID = RegionName.UITermID  WHERE RegionName.LanguageID =41 AND SubRegionName.LanguageID =41 
 	) SubRegion
-ON SubRegion.SuRegionID = Countries.SuRegionID
+ON SubRegion.SubRegionID = Countries.SubRegionID
 LEFT JOIN (SELECT IntermediateRegionName.Name, IntermediateRegions.IntermediateRegionID 
 	FROM IntermediateRegions
 	JOIN UITermLanguages IntermediateRegionName

@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_MetaListSubRegion]
 AS
 SELECT 
-	 SubRegions.SuRegionID
+	 SubRegions.SuBRegionID
 	, ISNULL(SubRegionName.Name, '') SubRegionName
 	, SubRegions.RegionID
 	, ISNULL(RegionName.Name,'')RegionName 
