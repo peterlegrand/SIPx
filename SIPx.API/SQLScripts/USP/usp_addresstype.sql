@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_addresstype] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_addresstype] (@UserID nvarchar(450), @AddressTypeID int) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -31,6 +31,7 @@ WHERE UIName.LanguageID = @LanguageID
 	AND UIDescription.LanguageID = @LanguageID
 	AND UIMenuName.LanguageID = @LanguageID
 	AND UIMouseOver.LanguageID = @LanguageID
-ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)
+	AND AddressTypes.AddressTypeID = @AddressTypeID
+
 
 

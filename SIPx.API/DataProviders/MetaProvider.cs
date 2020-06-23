@@ -1,5 +1,6 @@
 ﻿
 using Dapper;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using SIPx.API.Models;
 using SIPx.API.ViewModels;
 using SIPx.Shared;
@@ -170,6 +171,24 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_metalistProcessTemplateFlowConditionType";
             var MetaList = await _sqlDataAccess.LoadData<MetaListProcessTemplateFlowConditionType>(usp);
+            return MetaList;
+        }
+        public async Task<string> GetDefaultUser()
+        {
+            string usp = "usp_GetDefaultUser";
+            var MetaList = await _sqlDataAccess.LoadData<string>(usp);
+            return MetaList.First();
+        }
+        public async Task<List<MetaListClassification>> Classifications(string UserID)
+        {
+            string usp = "usp_Classifications  @UserID";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListClassification, dynamic>(usp, new { UserID = UserID });
+            return MetaList;
+        }
+        public async Task<List<MetaListClassificationLevel>> ClassificationLevels(string UserID, int ClassificationID)
+        {
+            string usp = "usp_ClassificationLevels  @UserID, @ClassificationID";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListClassificationLevel, dynamic>(usp, new { UserID = UserID, ClassificationID  = ClassificationID  });
             return MetaList;
         }
 

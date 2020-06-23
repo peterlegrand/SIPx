@@ -1,0 +1,3 @@
+CREATE PROCEDURE [dbo].[usp_ClassificationRelationTypeLanguageDelete] (@ClassificationRelationTypeLanguageID int) 
+AS 
+DELETE FROM ClassificationRelationTypeLanguages WHERE ClassificationRelationTypeLanguageID= @ClassificationRelationTypeLanguageID

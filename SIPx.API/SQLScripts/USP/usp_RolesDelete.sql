@@ -1,0 +1,6 @@
+CREATE PROCEDURE [dbo].[usp_RolesDelete] (@RoleID nvarchar(450)) 
+AS 
+BEGIN TRANSACTION
+DELETE FROM RoleLanguages WHERE RoleID = @RoleID ;
+DELETE FROM AspNetRoles WHERE Id = @RoleID;
+COMMIT TRANSACTION

@@ -15,6 +15,10 @@ SELECT ClassificationPages.ClassificationPageID
 	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) StatusName
 	, ClassificationPages.ShowTitleName
 	, ClassificationPages.ShowTitleDescription
+	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, ClassificationPages.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, ClassificationPages.ModifiedDate
 FROM ClassificationPages 
 LEFT JOIN (SELECT ClassificationPageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages WHERE LanguageID = @LanguageID) UserClassificationPageLanguage
 	ON UserClassificationPageLanguage.ClassificationPageID = ClassificationPages.ClassificationPageID
@@ -26,6 +30,10 @@ JOIN UITermLanguages UIStatusName
 	ON UIStatusName.UITermID = Statuses.NameTermID
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIStatusNameCustom
 	ON UIStatusNameCustom.UITermID = Statuses.NameTermID
-WHERE ClassificationPages.ClassificationID = @ClassificationID
-	AND UIStatusName.LanguageID = @LanguageID
-ORDER BY ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for this role'))
+JOIN Persons Creator
+	ON Creator.UserID = ClassificationPages.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserID = ClassificationPages.ModifierID
+WHERE UIStatusName.LanguageID = @LanguageID
+	AND ClassificationPages.ClassificationID = @ClassificationID
+ORDER BY ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for this role')) 

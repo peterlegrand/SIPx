@@ -48,5 +48,5 @@ LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages WHERE Language
 	ON OrganizationUserLanguage.OrganizationID = Persons.DefaultOrganizationID
 LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) OrganizationDefaultLanguage
 	ON OrganizationDefaultLanguage.OrganizationID = Persons.DefaultOrganizationID
-
-
+WHERE SecurityLevelLanguages.LanguageID = @LanguageID
+	AND GenderLanguages.LanguageID = @LanguageID

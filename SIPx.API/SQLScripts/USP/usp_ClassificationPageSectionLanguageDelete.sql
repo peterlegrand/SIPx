@@ -1,0 +1,3 @@
+CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionLanguageDelete] (@ClassificationPageSectionLanguageID int) 
+AS 
+DELETE FROM ClassificationPageSectionLanguages WHERE ClassificationPageSectionLanguageID= @ClassificationPageSectionLanguageID

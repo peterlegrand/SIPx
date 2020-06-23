@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_addresstypeNotInOrganizationAddress] (@UserID nvarchar(450), @OrganizationAddressID int) 
+CREATE PROCEDURE [dbo].[usp_addresstypesNotInOrganizationAddress] (@UserID nvarchar(450), @OrganizationAddressID int) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -33,4 +33,5 @@ WHERE AddressTypes.AddressTypeID NOT IN (SELECT OrganizationAddresses.AddressTyp
 	AND UIMenuName.LanguageID = @LanguageID
 	AND UIMouseOver.LanguageID = @LanguageID
 ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)
+
 

@@ -187,5 +187,82 @@ namespace SIPx.API.ViewModels
         public int ProcessTemplateStageFieldStatuseID { get; set; }
         public string Name { get; set; }
     }
+    public class MetaListClassification
+    {
+        [Key]
+        public int ClassificationID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string MenuName { get; set; }
+        public string MouseOver { get; set; }
+        public string StatusName { get; set; }
+        public string DefaultPage { get; set; }
+        public bool HasDropDown { get; set; }
+        public int DropDownSequence { get; set; }
+    }
+
+    public class MetaListClassificationLevel
+    {
+        [Key]
+        public int ClassificationLevelID { get; set; }
+        public int ClassificationID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string MenuName { get; set; }
+        public string MouseOver { get; set; }
+        public string DateLevelName { get; set; }
+        public int Sequence { get; set; }
+        public bool Alphabetically { get; set; }
+        public bool OnTheFly { get; set; }
+        public bool InDropDown { get; set; }
+        public bool InMenu { get; set; }
+    }
+
+    public class MetaListClassificationPage
+    {
+        [Key]
+        public int ClassificationPageID { get; set; }
+        public int ClassificationID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string MenuName { get; set; }
+        public string MouseOver { get; set; }
+        public string TitleName { get; set; }
+        public string TitleDescription { get; set; }
+        public string StatusName { get; set; }
+        public bool ShowTitleName { get; set; }
+        public bool ShowTitleDescription { get; set; }
+    }
+    public class MetaListClassificationPageSection
+    {
+        [Key]
+        public int ClassificationPageSectionID { get; set; }
+        public int ClassificationPageID { get; set; }
+        public int ClassificationID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string MenuName { get; set; }
+        public string MouseOver { get; set; }
+        public string TitleName { get; set; }
+        public string TitleDescription { get; set; }
+        public string PageSectionTypeName { get; set; }
+        public string PageSectionDataTypeName { get; set; }
+        public int Sequence { get; set; }
+        public bool ShowSectionTitleName { get; set; }
+        public bool ShowSectionTitleDescription { get; set; }
+        public bool ShowContentTypeTitleName { get; set; }
+        public bool ShowContentTypeTitleDescription { get; set; }
+        public bool OneTwoColumns { get; set; }
+    }
+    public class MetaListClassificationUsers
+    {
+        [Key]
+        public int UserID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string RelationTypeName { get; set; }
+        public string OrganizatonName { get; set; }
+    }
+
 
 }

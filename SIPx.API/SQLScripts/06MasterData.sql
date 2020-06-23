@@ -821,9 +821,9 @@ INSERT INTO PreferenceTypes (PreferenceTypeID, NameTermID, DescriptionTermID, Me
 SET IDENTITY_INSERT PreferenceTypes OFF;
 
 SET IDENTITY_INSERT TelecomTypes ON;
-INSERT INTO TelecomTypes (TelecomTypeID, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID, Active, ModifierID,ModifiedDate) VALUES 
-  (1,677,677,677,677,1, @user, getdate()),
-  (2,678,678,678,678,1, @user, getdate())
+INSERT INTO TelecomTypes (TelecomTypeID, PhoneProperties, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID, Active, ModifierID,ModifiedDate) VALUES 
+  (1,1, 677,677,677,677,1, @user, getdate()),
+  (2,0,678,678,678,678,1, @user, getdate())
 SET IDENTITY_INSERT TelecomTypes OFF;
 
 SET IDENTITY_INSERT ProcessTemplateStageFieldStatuses ON;

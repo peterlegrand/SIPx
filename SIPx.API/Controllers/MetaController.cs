@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SIPx.API.Models;
 using SIPx.API.ViewModels;
 using SIPx.DataAccess;
 
@@ -12,10 +14,12 @@ namespace SIPx.API.Controllers
     public class MetaController : Controller
     {
         private readonly IMetaProvider _metaProvider;
+        private readonly UserManager<SipUser> _userManager;
 
-        public MetaController(IMetaProvider metaProvider)
+        public MetaController(IMetaProvider metaProvider, UserManager<SipUser> userManager)
         {
             _metaProvider = metaProvider;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -144,6 +148,19 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> ProcessTemplateFlowConditionTypes()
         {
             List<MetaListProcessTemplateFlowConditionType> MasterList = await _metaProvider.ProcessTemplateFlowConditionTypes();
+            return View(MasterList);
+        }
+        public async Task<IActionResult> Classifications()
+        {
+            string DefaultUser = await _metaProvider.GetDefaultUser();
+            List<MetaListClassification> MasterList = await _metaProvider.Classifications(DefaultUser);
+            return View(MasterList);
+        }
+
+        public async Task<IActionResult> ClassificationLevels(int Id)
+        {
+            string DefaultUser = await _metaProvider.GetDefaultUser();
+            List<MetaListClassificationLevel> MasterList = await _metaProvider.ClassificationLevels(DefaultUser, Id);
             return View(MasterList);
         }
     }

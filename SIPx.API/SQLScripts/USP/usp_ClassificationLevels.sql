@@ -16,6 +16,10 @@ SELECT ClassificationLevels.ClassificationLevelID
 	, ClassificationLevels.OnTheFly
 	, ClassificationLevels.InDropDown
 	, ClassificationLevels.InMenu
+	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, ClassificationLevels.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, ClassificationLevels.ModifiedDate
 FROM ClassificationLevels 
 LEFT JOIN (SELECT ClassificationLevelID, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages WHERE LanguageID = @LanguageID) UserClassificationLevelLanguage
 	ON UserClassificationLevelLanguage.ClassificationLevelID = ClassificationLevels.ClassificationLevelID
@@ -27,7 +31,10 @@ JOIN UITermLanguages UIDateLevelName
 	ON UIDateLevelName.UITermID = DateLevels.NameTermID
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDateLevelNameCustom
 	ON UIDateLevelNameCustom.UITermID = DateLevels.NameTermID
+JOIN Persons Creator
+	ON Creator.UserID = ClassificationLevels.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserID = ClassificationLevels.ModifierID
 WHERE ClassificationLevels.ClassificationID = @ClassificationID
 	AND UIDateLevelName.LanguageID = @LanguageID
 ORDER BY ClassificationLevels.Sequence
-

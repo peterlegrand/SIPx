@@ -1,0 +1,23 @@
+﻿
+@model List<SIPx.API.ViewModels.MetaListClassificationLevel>
+@{
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead>
+            <tr><th>Classification ID</th><th>Name</th><th>Menu name</th><th>Mouse over</th><th>Status name</th><th>Default page</th><th>Has dropdown</th><th>Dropdown sequence</th></tr>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+            <tr>
+                <td><div>@x.ClassificationID</div></td>
+                <td><div>@x.Name</div></td>
+                <td><div>@x.MenuName</div></td>
+                <td><div>@x.MouseOver</div></td>
+            </tr>
+
+        }
+    </table>
+</div>
