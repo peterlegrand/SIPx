@@ -275,15 +275,15 @@ INSERT INTO ContentTypeClassifications ( ContentTypeClassificationID, ContentTyp
 SET IDENTITY_INSERT ContentTypeClassifications OFF;
 
 SET IDENTITY_INSERT OrganizationTypes ON;
-INSERT INTO OrganizationTypes (OrganizationTypeID, Internal, LegalEntity) VALUES 
-  (1,1,1)
-, (2,1,0)
+INSERT INTO OrganizationTypes (OrganizationTypeID, Internal, LegalEntity, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+  (1,1,1, @User, @User, GETDATE(), GETDATE())
+, (2,1,0, @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT OrganizationTypes OFF;
 
 SET IDENTITY_INSERT OrganizationTypeLanguages ON;
-INSERT INTO OrganizationTypeLanguages(OrganizationTypeLanguageID, OrganizationTypeID, LanguageID, Name, Description, MenuName, MouseOver) VALUES 
-(1, 1, 41, 'Legal entity', 'Legal entity', 'Legal entity', 'Legal entity')
-, (2, 2, 41, 'Internal entity', 'Internal entity', 'Internal entity', 'Internal entity')
+INSERT INTO OrganizationTypeLanguages(OrganizationTypeLanguageID, OrganizationTypeID, LanguageID, Name, Description, MenuName, MouseOver, CreatorId, ModifierID, ModifiedDate, CreatedDate) VALUES 
+(1, 1, 41, 'Legal entity', 'Legal entity', 'Legal entity', 'Legal entity', @User, @User, GETDATE(), GETDATE())
+, (2, 2, 41, 'Internal entity', 'Internal entity', 'Internal entity', 'Internal entity', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT OrganizationTypeLanguages OFF;
 
 

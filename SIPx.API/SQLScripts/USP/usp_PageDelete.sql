@@ -1,0 +1,9 @@
+CREATE PROCEDURE [dbo].[usp_PageDelete] (
+	@PageID int) 
+AS 
+BEGIN TRANSACTION
+DELETE FROM PageLanguages WHERE PageID = @PageID
+DELETE FROM Pages WHERE PageID = @PageID
+COMMIT TRANSACTION
+
+
