@@ -15,6 +15,7 @@ SELECT
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this organization')) MouseOver
 	, ISNULL(UserTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this organization type')) OrganizationTypeName
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
+	, CASE WHEN Organizations.ParentOrganizationID = NULL THEN 'No parent Organization' ELSE ISNULL(UserParentOrganizationLanguage.Name,ISNULL(DefaultParentOrganizationLanguage.Name,'No name for this parent Organization')) END ParentOrganizationName
 	, OrganizationTypes.Internal
 	, OrganizationTypes.LegalEntity
 	, Creator.FirstName + ' ' + Creator.LastName Creator
@@ -22,6 +23,10 @@ SELECT
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, Organizations.ModifiedDate
 FROM   Organizations
+LEFT JOIN (SELECT OrganizationID, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageID = @LanguageID) UserParentOrganizationLanguage
+	ON UserParentOrganizationLanguage.OrganizationID= Organizations.ParentOrganizationID
+LEFT JOIN (SELECT OrganizationID, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultParentOrganizationLanguage
+	ON DefaultParentOrganizationLanguage.OrganizationID = Organizations.ParentOrganizationID
 JOIN Statuses
 	ON Statuses.StatusID = Organizations.StatusID
 JOIN OrganizationTypes

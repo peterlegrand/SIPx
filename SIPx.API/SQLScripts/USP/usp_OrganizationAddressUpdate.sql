@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[usp_OrganizationAddressUpdate] (
 AS 
 
 UPDATE OrganizationAddresses SET
-	, AddressTypeID  = @AddressTypeID 
+	 AddressTypeID  = @AddressTypeID 
 	, AttnName = @AttnName 
 	, Address1 = @Address1 
 	, Address2 = @Address2

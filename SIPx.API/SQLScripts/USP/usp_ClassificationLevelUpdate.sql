@@ -1,4 +1,4 @@
-	CREATE PROCEDURE [dbo].[usp_ClassificationLevelUpdate] (
+CREATE PROCEDURE [dbo].[usp_ClassificationLevelUpdate] (
 	@ClassificationLevelLanguageID int
 	, @ClassificationLevelID int
 	, @Sequence int
@@ -15,15 +15,16 @@
 	, @User nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM ClassificationLevels WHERE ClassificationLevelID = @ClassificationLevelID;
+DECLARE @ClassificationID int;
+SELECT @OldSequence = Sequence, @ClassificationID = ClassificationID FROM ClassificationLevels WHERE ClassificationLevelID = @ClassificationLevelID;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE ClassificationLevels SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence
+UPDATE ClassificationLevels SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @ClassificationID = ClassificationID 
 END
 ELSE
 BEGIN
-UPDATE ClassificationLevels SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence
+UPDATE ClassificationLevels SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND @ClassificationID = ClassificationID 
 END
 
 UPDATE ClassificationLevels SET 
@@ -48,3 +49,4 @@ UPDATE  ClassificationLevelLanguages SET
 WHERE ClassificationLevelLanguageID= @ClassificationLevelLanguageID
 
 COMMIT TRANSACTION
+
