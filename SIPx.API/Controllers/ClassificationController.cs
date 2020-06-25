@@ -232,6 +232,20 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Values/{Id:int}")]
+        public async Task<IActionResult> GetValues(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationValues(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
         /// <summary>
         /// INDIVIDUAL RECORDS
         /// </summary>

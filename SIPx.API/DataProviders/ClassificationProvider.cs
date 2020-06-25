@@ -209,6 +209,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueUser, dynamic>(usp, new { UserID = UserID, ClassificationValueUserID = ClassificationValueUserID });
 
         }
+        public Task<List<ClassificationValue>> GetClassificationValues(string UserID, int ClassificationID)
+        {
+            string usp = "usp_ClassificationValues @UserID, @ClassificationID";
+            return _sqlDataAccess.LoadData<ClassificationValue, dynamic>(usp, new { UserID = UserID, ClassificationID = ClassificationID });
+
+        }
         public bool PostClassification(ClassificationCreatePost Classification)
         {
             string usp = "usp_classificationCreate @LanguageID, @StatusID, @DefaultPageId, @HasDropDown, @DropDownSequence, @CreatorId, @Name, @Description, @MenuName, @MouseOver";
