@@ -1,7 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_UITermLanguages] (@languageID int) 
 AS 
 SELECT
-	UITerms.UITermID
+	UITermLanguages.UITermLanguageID
+	, UITerms.UITermID
 	, Name 
 	, Description 
 	, MouseOver 

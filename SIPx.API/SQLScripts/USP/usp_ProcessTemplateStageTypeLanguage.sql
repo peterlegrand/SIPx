@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageTypeLanguages] (@UserID nvarchar(450), @ProcessTemplateStageTypeID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageTypeLanguage] (@UserID nvarchar(450), @ProcessTemplateStageTypeLanguageID int) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -30,6 +30,5 @@ JOIN Persons Creator
 	ON Creator.UserID = ProcessTemplateStageTypeLanguages.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserID = ProcessTemplateStageTypeLanguages.ModifierID
-WHERE ProcessTemplateStageTypes.ProcessTemplateStageTypeID = @ProcessTemplateStageTypeID
+WHERE ProcessTemplateStageTypeLanguages.ProcessTemplateStageTypeLanguageID = @ProcessTemplateStageTypeLanguageID
 	AND UILanguageName.LanguageID = @LanguageID
-ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)

@@ -2,6 +2,7 @@ CREATE PROCEDURE [dbo].[usp_UITermLanguageCustomization] (@UITermID int, @langua
 AS 
 SELECT
 	UITerms.UITermID
+	, UITermLanguages.LanguageID
 	, Customization
 	, Name 
 	, Description 

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProjectLanguages] (@UserID nvarchar(450), @ProjectID int) 
+CREATE PROCEDURE [dbo].[usp_ProjectLanguage] (@UserID nvarchar(450), @ProjectLanguageID int) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -30,6 +30,5 @@ JOIN Persons Creator
 	ON Creator.UserID = ProjectLanguages.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserID = ProjectLanguages.ModifierID
-WHERE Projects.ProjectID = @ProjectID
+WHERE ProjectLanguages.ProjectLanguageID = @ProjectLanguageID
 	AND UILanguageName.LanguageID = @LanguageID
-ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)
