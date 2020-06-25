@@ -5,6 +5,3 @@ BEGIN TRANSACTION
 DELETE FROM ClassificationRelationTypeLanguages WHERE ClassificationRelationTypeID = @ClassificationRelationTypeID
 DELETE FROM ClassificationRelationTypes WHERE ClassificationRelationTypeID = @ClassificationRelationTypeID
 COMMIT TRANSACTION
-GO
-
-

@@ -38,6 +38,5 @@ JOIN Persons Creator
 	ON Creator.UserID = Projects.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserID = Projects.ModifierID
-WHERE StatusName.LanguageID = @LanguageID
-ORDER BY Path;
+WHERE StatusName.LanguageID = @LanguageID;
 END;

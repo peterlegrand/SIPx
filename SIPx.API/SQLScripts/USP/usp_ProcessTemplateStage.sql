@@ -23,7 +23,7 @@ LEFT JOIN (SELECT ProcessTemplateStageID, Name, Description, MenuName, MouseOver
 	ON DefaultProcessTemplateStageLanguage.ProcessTemplateStageID = ProcessTemplateStages.ProcessTemplateStageID
 LEFT JOIN (SELECT ProcessTemplateStageTypeID, Name FROM ProcessTemplateStageTypeLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateStageTypeLanguage
 	ON UserProcessTemplateStageTypeLanguage.ProcessTemplateStageTypeID = ProcessTemplateStages.ProcessTemplateStageTypeID
-LEFT JOIN (SELECT ProcessTemplateStageTypeID FROM ProcessTemplateStageTypeLanguages JOIN Settings ON ProcessTemplateStageTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateStageTypeLanguage
+LEFT JOIN (SELECT ProcessTemplateStageTypeID, Name FROM ProcessTemplateStageTypeLanguages JOIN Settings ON ProcessTemplateStageTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateStageTypeLanguage
 	ON DefaultProcessTemplateStageTypeLanguage.ProcessTemplateStageTypeID = ProcessTemplateStages.ProcessTemplateStageTypeID
 JOIN Persons Creator
 	ON Creator.UserID = ProcessTemplateStages.CreatorID

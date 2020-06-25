@@ -35,6 +35,5 @@ UPDATE  ProcessTemplateStageFields SET
 	, ModifierID = @User
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateStageFieldID= @ProcessTemplateStageFieldID
-GO
 
 

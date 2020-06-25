@@ -21,6 +21,5 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserID = PersonRelationTypeLanguages.ModifierID
 WHERE PersonRelationTypeLanguages.PersonRelationTypeLanguageID = @PersonRelationTypeLanguageID
-GO
 
 

@@ -54,6 +54,5 @@ UPDATE  ProcessTemplateFlowConditionLanguages SET
 WHERE ProcessTemplateFlowConditionLanguageID= @ProcessTemplateFlowConditionLanguageID
 
 COMMIT TRANSACTION
-GO
 
 

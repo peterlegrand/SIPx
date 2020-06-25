@@ -62,7 +62,7 @@ WHERE UIName.LanguageID = @LanguageID
 	AND UIGroupDescription.LanguageID = @LanguageID
 	AND UIGroupMenuName.LanguageID = @LanguageID
 	AND UIGroupMouseOver.LanguageID = @LanguageID
-	AND RoleID NOT IN (SELECT RoleID FROM AspNetRoleClaims WHERE ClaimType ='OrganizationRight' OR  ClaimType ='ProjectRight' 
+	AND RoleID NOT IN (SELECT RoleID FROM AspNetRoleClaims WHERE ClaimType ='OrganizationRight' OR  ClaimType ='ProjectRight' )
 ORDER BY claimgroups.Sequence
 	, ISNULL(UINameCustom.Customization,UIName.Name)
 

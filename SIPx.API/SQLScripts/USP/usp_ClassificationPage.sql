@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationPage] (@UserID nvarchar(450), @ClassificationPagerID int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationPage] (@UserID nvarchar(450), @ClassificationPageID int) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference

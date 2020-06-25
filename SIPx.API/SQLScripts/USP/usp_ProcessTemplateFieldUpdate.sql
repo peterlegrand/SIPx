@@ -25,6 +25,5 @@ UPDATE  ProcessTemplateFieldLanguages SET
 WHERE ProcessTemplateFieldLanguageID= @ProcessTemplateFieldLanguageID
 
 COMMIT TRANSACTION
-GO
 
 

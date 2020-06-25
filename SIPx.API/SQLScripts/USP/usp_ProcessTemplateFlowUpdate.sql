@@ -27,6 +27,5 @@ UPDATE  ProcessTemplateFlowLanguages SET
 WHERE ProcessTemplateFlowLanguageID= @ProcessTemplateFlowLanguageID
 
 COMMIT TRANSACTION
-GO
 
 

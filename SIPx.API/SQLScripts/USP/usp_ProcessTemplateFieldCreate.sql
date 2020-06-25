@@ -52,6 +52,5 @@ VALUES (
 	, getdate())
 
 	COMMIT TRANSACTION
-GO
 
 

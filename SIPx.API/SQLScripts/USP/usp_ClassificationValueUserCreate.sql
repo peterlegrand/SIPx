@@ -24,6 +24,5 @@ VALUES (
 	, @UserID
 	, getdate())
 
-GO
 
 
