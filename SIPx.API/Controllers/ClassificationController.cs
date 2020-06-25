@@ -232,7 +232,11 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-
+        /// <summary>
+        /// INDIVIDUAL RECORDS
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpGet("{Id:int}")]
         public async Task<Classification> Get(int Id)
         {
@@ -241,6 +245,196 @@ namespace SIPx.API.Controllers
             var x = await _classificationProvider.GetClassification( CurrentUser.Id, Id);// CurrentUser.LanguageID));
             return x;
         }
+
+        [HttpGet("Language/{Id:int}")]
+        public async Task<IActionResult> GetLanguage(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationLanguage(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("Level/{Id:int}")]
+        public async Task<IActionResult> GetLevel(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationLevel(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("LevelLanguage/{Id:int}")]
+        public async Task<IActionResult> GetLevelLanguage(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationLevelLanguage(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("Page/{Id:int}")]
+        public async Task<IActionResult> GetPage(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationPage(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("PageLanguage/{Id:int}")]
+        public async Task<IActionResult> GetPageLanguage(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationPageLanguage(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("PageSection/{Id:int}")]
+        public async Task<IActionResult> GetPageSection(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationPageSection(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("PageSectionLanguage/{Id:int}")]
+        public async Task<IActionResult> GetPageSectionLanguage(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationPageSectionLanguage(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("RelationType/{Id:int}")]
+        public async Task<IActionResult> GetRelationType(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationRelationType(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("RelationTypeLanguage/{Id:int}")]
+        public async Task<IActionResult> GetRelationTypeLanguage(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationRelationTypeLanguage(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Role/{Id:int}")]
+        public async Task<IActionResult> GetRole(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationRole(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("User/{Id:int}")]
+        public async Task<IActionResult> GetUser(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationUser(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("ValueRole/{Id:int}")]
+        public async Task<IActionResult> GetValueRole(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationValueRole(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("ValueUser/{Id:int}")]
+        public async Task<IActionResult> GetValueUser(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _classificationProvider.GetClassificationValueUser(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+
         [HttpPut]
         public ClassificationUpdatePut Put(ClassificationUpdatePut Classification)
         {
