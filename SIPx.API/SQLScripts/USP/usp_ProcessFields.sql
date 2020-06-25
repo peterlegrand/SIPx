@@ -6,8 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeID = 1 ;
 SELECT 
-	Processes.ProcessID
-	, ProcessFields.ProcessFieldID
+	ProcessFields.ProcessFieldID
 	, ProcessFields.IntValue
 	, ProcessFields.StringValue
 	, ProcessFields.DateTimeValue
