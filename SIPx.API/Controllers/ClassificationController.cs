@@ -347,7 +347,7 @@ namespace SIPx.API.Controllers
         [HttpGet("RelationType/{Id:int}")]
         public async Task<IActionResult> GetRelationType(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
+            var CurrentUser = await _userManager.GetUserAsync(User); 
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 return Ok(await _classificationProvider.GetClassificationRelationType(CurrentUser.Id, Id));
