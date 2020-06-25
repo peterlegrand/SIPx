@@ -353,7 +353,7 @@ namespace SIPx.API.Controllers
                 return Ok(await _classificationProvider.GetClassificationRelationType(CurrentUser.Id, Id));
             }
             return BadRequest(new
-            {
+            { 
                 IsSuccess = false,
                 Message = "No rights",
             });
