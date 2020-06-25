@@ -16,7 +16,7 @@ SELECT ContentTypes.ContentTypeID
 	, ISNULL(UserGroupLanguage.MenuName,ISNULL(DefaultGroupLanguage.MenuName,'No menu name for this content type group')) GroupMenuName
 	, ISNULL(UserGroupLanguage.MouseOver,ISNULL(DefaultGroupLanguage.MouseOver,'No mouse over for this content type group')) GroupMouseOver
 	, ISNULL(UISecurityLevelNameCustom.Customization ,UISecurityLevelName.Name) SecurityLevelName
-	, CASE WHEN ContentTypes.ProcessTemplateID IS NULL THEN ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguageLanguage.Name,'No name for the process template')) ELSE 'There is process template' END ProcessTemplate
+	, CASE WHEN ContentTypes.ProcessTemplateID IS NULL THEN ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguageLanguage.Name,'No name for the process template')) ELSE 'There is process template' END ProcessTemplateName
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, ContentTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier

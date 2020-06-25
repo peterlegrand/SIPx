@@ -10,6 +10,10 @@ SELECT ClassificationValueUsers.UserID
 	, Persons.LastName
 	, ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typeUser')) RelationTypeName
 	, ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,'No name for this organization')) OrganizationName
+	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, ClassificationValueUsers.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, ClassificationValueUsers.ModifiedDate
 FROM ClassificationValueUsers 
 JOIN Persons
 	ON Persons.Userid = ClassificationValueUsers.UserID
@@ -21,6 +25,10 @@ LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages WHERE Language
 	ON OrganizationUserLanguage.OrganizationID = Persons.DefaultOrganizationID
 LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) OrganizationDefaultLanguage
 	ON OrganizationDefaultLanguage.OrganizationID = Persons.DefaultOrganizationID
+JOIN Persons Creator
+	ON Creator.UserID = ClassificationValueUsers.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserID = ClassificationValueUsers.ModifierID
 WHERE ClassificationValueUsers.ClassificationValueID = @ClassificationValueID
 ORDER BY Persons.FirstName, Persons.LastName 	, ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,'No name for this organization')) 
 

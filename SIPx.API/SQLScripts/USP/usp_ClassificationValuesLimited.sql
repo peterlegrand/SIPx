@@ -22,7 +22,11 @@ WITH ClassificationValueHierarchy (
 	, DateFrom
 	, DateTo
 	, Location
-	, Path)
+	, Path	
+	, CreatorID
+	, CreatedDate
+	, ModifierID
+	, ModifiedDate)
 AS
 (
 	SELECT 
@@ -37,10 +41,14 @@ AS
 		, ClassificationValueLanguages.HeaderName
 		, ClassificationValueLanguages.HeaderDescription
 		, ClassificationValueLanguages.TopicName
-	, ClassificationValues.DateFrom
-	, ClassificationValues.DateTo
-	, ClassificationValues.Location
+		, ClassificationValues.DateFrom
+		, ClassificationValues.DateTo
+		, ClassificationValues.Location
 		, CAST(ClassificationValueLanguages.Name AS VARCHAR(255)) AS Path
+		, ClassificationValues.CreatorID
+		, ClassificationValues.CreatedDate
+		, ClassificationValues.ModifierID
+		, ClassificationValues.ModifiedDate
 	FROM ClassificationValues 
 	JOIN ClassificationValueLanguages 
 		ON ClassificationValueLanguages.ClassificationValueID = ClassificationValues.ClassificationValueID
@@ -61,11 +69,14 @@ AS
 		, ClassificationValueLanguages.HeaderName
 		, ClassificationValueLanguages.HeaderDescription
 		, ClassificationValueLanguages.TopicName
-	, ClassificationValueNextLevel.DateFrom
-	, ClassificationValueNextLevel.DateTo
-	, ClassificationValueNextLevel.Location
+		, ClassificationValueNextLevel.DateFrom
+		, ClassificationValueNextLevel.DateTo
+		, ClassificationValueNextLevel.Location
 		, CAST(ClassificationValueBaseLevel.Path + '.' + CAST(ClassificationValueLanguages.Name AS VARCHAR(255)) AS VARCHAR(255))
-
+		, ClassificationValueLanguages.CreatorID
+		, ClassificationValueLanguages.CreatedDate
+		, ClassificationValueLanguages.ModifierID
+		, ClassificationValueLanguages.ModifiedDate
 	FROM ClassificationValues ClassificationValueNextLevel
 	JOIN ClassificationValueLanguages 
 		ON ClassificationValueLanguages.ClassificationValueID = ClassificationValueNextLevel.ClassificationValueID
@@ -90,11 +101,19 @@ SELECT TOP (@Top) ClassificationValueHierarchy.ClassificationValueID
 	, Dateto
 	, Location
 	, Path
+	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, ClassificationValueHierarchy.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, ClassificationValueHierarchy.ModifiedDate
 FROM   ClassificationValueHierarchy
 --LEFT JOIN (SELECT ClassificationValueID, Name FROM ClassificationValueLanguages WHERE LanguageID = @LanguageID) UserLanguage
 --	ON UserLanguage.ClassificationValueID= ClassificationValueHierarchy.ClassificationValueID
 --LEFT JOIN (SELECT ClassificationValueID, Name FROM ClassificationValueLanguages JOIN Settings ON ClassificationValueLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
 --	ON DefaultLanguage.ClassificationValueID = ClassificationValueHierarchy.ClassificationValueID
+JOIN Persons Creator
+	ON Creator.UserID = ClassificationValueHierarchy.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserID = ClassificationValueHierarchy.ModifierID
 ORDER BY Path;
 END;
 

@@ -7,7 +7,7 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeID = 1 ;
 
 SELECT 
-	aspnetUsers.Id
+	aspnetUsers.Id UserID
 	,aspnetUsers.UserName
 	, aspnetUsers.Email
 	, aspnetUsers.PhoneNumber UserPhoneNumber
@@ -28,7 +28,7 @@ SELECT
 	, Persons.FirstNameLocal
 	, Persons.MiddleNameLocal
 	, Persons.LastNameLocal
-	, GenderLanguages.Name
+	, GenderLanguages.Name GenderName
 	, Persons.BirthDate
 	, ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,'No name for this organization')) OrganizationName
 FROM AspNetUsers 

@@ -13,7 +13,7 @@ SELECT PersonRelations.PersonRelationID
 	, ValidFrom
 	, ValidTill
 	, PersonRelations.PersonRelationTypeID
-	, ISNULL(UserRelationTypeLanguage.Name,ISNULL(DefaultRelationTypeLanguage.Name,'No name for this relation type')) RelationTypeName
+	, ISNULL(UserRelationTypeLanguage.Name,ISNULL(DefaultRelationTypeLanguage.Name,'No name for this relation type')) PersonRelationTypeName
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, PersonRelations.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier

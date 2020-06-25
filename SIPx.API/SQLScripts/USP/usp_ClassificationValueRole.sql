@@ -8,6 +8,10 @@ WHERE USerId = @UserID
 SELECT ClassificationValueRoles.RoleID
 	, ISNULL(UserRoleLanguage.Name,ISNULL(DefaultRoleLanguage.Name,'No name for this role')) RoleName
 	, ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typerole')) RelationTypeName
+	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, ClassificationValueRoles.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, ClassificationValueRoles.ModifiedDate
 FROM ClassificationValueRoles 
 LEFT JOIN (SELECT RoleID, Name, Description, MenuName, MouseOver FROM RoleLanguages WHERE LanguageID = @LanguageID) UserRoleLanguage
 	ON UserRoleLanguage.RoleID = ClassificationValueRoles.RoleID
@@ -17,6 +21,10 @@ LEFT JOIN (SELECT ClassificationRelationTypeID, Name FROM ClassificationRelation
 	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationValueRoles.ClassificationRelationTypeID
 LEFT JOIN (SELECT ClassificationRelationTypeID, Name FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationRelationTypeLanguage
 	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationValueRoles.ClassificationRelationTypeID
+JOIN Persons Creator
+	ON Creator.UserID = ClassificationValueRoles.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserID = ClassificationValueRoles.ModifierID
 WHERE ClassificationValueRoles.ClassificationValueroleID = @ClassificationValueRoleID
 
 

@@ -6,8 +6,8 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeID = 1 ;
 SELECT ContentTypeClassifications.ContentTypeClassificationID
-	, ISNULL(UserClassificationLanguage.Name,ISNULL(DefaultClassificationLanguage.Name,'No name for this classification')) Classification
-	, ISNULL(UINameCustom.Customization,UIName.Name) Name
+	, ISNULL(UserClassificationLanguage.Name,ISNULL(DefaultClassificationLanguage.Name,'No name for this classification')) ClassificationName
+	, ISNULL(UINameCustom.Customization,UIName.Name) StatusName
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ContentTypeClassifications.ModifiedDate
 FROM ContentTypeClassifications

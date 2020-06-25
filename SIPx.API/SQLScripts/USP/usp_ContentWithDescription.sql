@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_Content] (@UserID nvarchar(450), @ContentID int, @Top int =1000) 
+CREATE PROCEDURE [dbo].[usp_ContentWithDescription] (@UserID nvarchar(450), @ContentID int, @Top int =1000) 
 AS 
 BEGIN
 DECLARE @LanguageID int;
@@ -12,6 +12,7 @@ FROM AspNetUsers
 WHERE Id = @UserID;
 SELECT Contents.ContentID
 , Contents.Title
+, Contents.Description
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this content type')) ContentTypeName
 	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) StatusName
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName

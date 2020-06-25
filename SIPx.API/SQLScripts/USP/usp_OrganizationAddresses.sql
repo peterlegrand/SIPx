@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationAddresses] (@UserID nvarchar(450), @OrganizationID int) 
+CREATE PROCEDURE [dbo].[usp_OrganizationAddress] (@UserID nvarchar(450), @OrganizationAddressID int) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -19,7 +19,10 @@ SELECT OrganizationAddresses.OrganizationAddressID
 	, ISNULL(UICountryCustom.Customization,UICountryName.Name) CountryName
 	, OrganizationAddresses.ProvinceState
 	, OrganizationAddresses.County
-
+	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, OrganizationAddresses.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, OrganizationAddresses.ModifiedDate
 FROM OrganizationAddresses
 JOIN AddressTypes
 	ON OrganizationAddresses.AddressTypeID = AddressTypes.AddressTypeID
@@ -33,7 +36,11 @@ LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHE
 	ON UICountryCustom.UITermID = Countries.NameTermID
 JOIN UITermLanguages UICountryName
 	ON UICountryName.UITermID = Countries.NameTermID
+JOIN Persons Creator
+	ON Creator.UserID = OrganizationAddresses.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserID = OrganizationAddresses.ModifierID
 WHERE UICountryName.LanguageID = @LanguageID
 	AND UIAddressTypeName.LanguageID = @LanguageID
-		AND OrganizationAddresses.OrganizationID = @OrganizationID
+		AND OrganizationAddresses.OrganizationAddressID = @OrganizationAddressID
 ORDER BY ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) 

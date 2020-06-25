@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_RolesClaims] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_RolesClaims] (@UserID nvarchar(450),@RoleID nvarchar(450)) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -7,43 +7,19 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeID = 1 ;
 
 SELECT 
-	aspnetroles.id
-	, rolegroups.RoleGroupID
-	, Claims.ClaimID 
+	Claims.ClaimID 
 	, ClaimGroups.ClaimGroupID
-	, ISNULL(UIClaimNameCustom.Customization,UIClaimName.Name) ClaimName
-	, ISNULL(UIClaimDescriptionCustom.Customization,UIClaimDescription.Name) ClaimDescription
+	, ISNULL(UIClaimNameCustom.Customization,UIClaimName.Name) Name
+	, ISNULL(UIClaimDescriptionCustom.Customization,UIClaimDescription.Name) Description
 	, ISNULL(UIClaimMenuNameCustom.Customization,UIClaimMenuName.Name) MenuName
 	, ISNULL(UIClaimMouseOverCustom.Customization,UIClaimMouseOver.Name) MouseOver
-	, ISNULL(UIClaimGroupNameCustom.Customization,UIClaimGroupName.Name) ClaimGroupName
-	, ISNULL(UIClaimGroupDescriptionCustom.Customization,UIClaimGroupDescription.Name) ClaimGroupDescription
-	, ISNULL(UIClaimGroupMenuNameCustom.Customization,UIClaimGroupMenuName.Name) ClaimGroupMenuName
-	, ISNULL(UIClaimGroupMouseOverCustom.Customization,UIClaimGroupMouseOver.Name) ClaimGroupMouseOver
-	, ISNULL(RoleUserLanguage.Name,RoleDefaultLanguage.Name) RoleName
-	, ISNULL(RoleUserLanguage.Description,RoleDefaultLanguage.Description) RoleDescription
-	, ISNULL(RoleUserLanguage.MenuName,RoleDefaultLanguage.MenuName) RoleMenuName
-	, ISNULL(RoleUserLanguage.MouseOver,RoleDefaultLanguage.MouseOver) RoleMouseOver
-	, ISNULL(RoleGroupUserLanguage.Name,RoleGroupDefaultLanguage.Name) RoleGroupName
-	, ISNULL(RoleGroupUserLanguage.Description,RoleGroupDefaultLanguage.Description) RoleGroupDescription
-	, ISNULL(RoleGroupUserLanguage.MenuName,RoleGroupDefaultLanguage.MenuName) RoleGroupMenuName
-	, ISNULL(RoleGroupUserLanguage.MouseOver,RoleGroupDefaultLanguage.MouseOver) RoleGroupMouseOver
+	, ISNULL(UIClaimGroupNameCustom.Customization,UIClaimGroupName.Name) GroupName
+	, ISNULL(UIClaimGroupDescriptionCustom.Customization,UIClaimGroupDescription.Name) GroupDescription
+	, ISNULL(UIClaimGroupMenuNameCustom.Customization,UIClaimGroupMenuName.Name) GroupMenuName
+	, ISNULL(UIClaimGroupMouseOverCustom.Customization,UIClaimGroupMouseOver.Name) GroupMouseOver
 FROM AspNetRoleClaims
 JOIN AspNetRoles
 	ON AspNetRoleClaims.RoleId = AspNetRoles.Id
-JOIN RoleLanguages RoleUserLanguage
-	ON RoleUserLanguage.RoleID = AspNetRoles.Id
-JOIN RoleLanguages RoleDefaultLanguage
-	ON RoleDefaultLanguage.RoleID = AspNetRoles.Id
-JOIN Settings RoleSettings
-	ON RoleDefaultLanguage.LanguageID = RoleSettings.IntValue
-JOIN RoleGroups	
-	ON RoleGroups.RoleGroupID = aspnetroles.RoleGroupID
-JOIN RoleGroupLanguages RoleGroupUserLanguage
-	ON RoleGroupUserLanguage.RoleGroupID = Rolegroups.RoleGroupID
-JOIN RoleGroupLanguages RoleGroupDefaultLanguage
-	ON RoleGroupDefaultLanguage.RoleGroupID = Rolegroups.RoleGroupID
-JOIN Settings RoleGroupSettings
-	ON RoleGroupDefaultLanguage.LanguageID = RoleGroupSettings.IntValue
 JOIN Claims 
 	ON AspNetRoleClaims.ClaimType = Claims.ClaimType 
 		AND AspNetRoleClaims.ClaimValue = Claims.ClaimValue
@@ -89,12 +65,7 @@ WHERE UIClaimName.LanguageID = @LanguageID
 	AND UIClaimGroupDescription.LanguageID = @LanguageID
 	AND UIClaimGroupMenuName.LanguageID = @LanguageID
 	AND UIClaimGroupMouseOver.LanguageID = @LanguageID
-	AND RoleUserLanguage.LanguageID = @LanguageID
-	AND RoleGroupUserLanguage.LanguageID = @LanguageID
-	AND RoleGroupSettings.SettingID = 1
-	AND RoleSettings.SettingID = 1
+	AND AspNetRoles.Id = @RoleID
 ORDER BY 
-	Rolegroups.Sequence
-	, ISNULL(RoleUserLanguage.Name,RoleDefaultLanguage.Name)
-	, ISNULL(UIClaimGroupNameCustom.Customization,UIClaimGroupName.Name)
+	ISNULL(UIClaimGroupNameCustom.Customization,UIClaimGroupName.Name)
 	, ISNULL(UIClaimNameCustom.Customization,UIClaimName.Name)

@@ -11,7 +11,11 @@ WITH ClassificationValueHierarchy (ClassificationValueID
 	, DateFrom
 	, DateTo
 	, Location
-	, Path)
+	, Path
+	, CreatorID
+	, CreatedDate
+	, ModifierID
+	, ModifiedDate)
 AS
 (
 	SELECT 
@@ -20,6 +24,10 @@ AS
 		, DateTo
 		, Location
 		, CAST(ClassificationValues.ClassificationValueID AS VARCHAR(255)) AS Path
+		, CreatorID
+		, CreatedDate
+		, ModifierID
+		, ModifiedDate
 	FROM ClassificationValues 
 	WHERE ClassificationValues.ParentValueID IS NULL
 		AND ClassificationValues.ClassificationID = @ClassificationID
@@ -31,7 +39,10 @@ AS
 		, ClassificationValueNextLevel.DateTo
 		, ClassificationValueNextLevel.Location
 		, CAST(ClassificationValueBaseLevel.Path + '.' + CAST(ClassificationValueNextLevel.ClassificationValueID AS VARCHAR(255)) AS VARCHAR(255))
-
+		, ClassificationValueNextLevel.CreatorID
+		, ClassificationValueNextLevel.CreatedDate
+		, ClassificationValueNextLevel.ModifierID
+		, ClassificationValueNextLevel.ModifiedDate
 	FROM ClassificationValues ClassificationValueNextLevel
 	JOIN ClassificationValueHierarchy ClassificationValueBaseLevel
 		ON ClassificationValueBaseLevel.ClassificationValueID = ClassificationValueNextLevel.ParentValueID
@@ -53,10 +64,18 @@ SELECT TOP (@Top)
 	, ISNULL(UserLanguage.HeaderDescription,ISNULL(DefaultLanguage.HeaderDescription,'No header description for this value')) HeaderDescription
 	, ISNULL(UserLanguage.TopicName,ISNULL(DefaultLanguage.TopicName,'No topic name for this value')) TopicName
 	, Path
+	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, ClassificationValueHierarchy.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, ClassificationValueHierarchy.ModifiedDate
 FROM   ClassificationValueHierarchy
 LEFT JOIN (SELECT ClassificationValueID, Name, Description, MenuName, MouseOver, DropDownName, PageName, PageDescription, HeaderName, HeaderDescription, TopicName  FROM ClassificationValueLanguages WHERE LanguageID = @LanguageID) UserLanguage
 	ON UserLanguage.ClassificationValueID= ClassificationValueHierarchy.ClassificationValueID
 LEFT JOIN (SELECT ClassificationValueID, Name, Description, MenuName, MouseOver, DropDownName, PageName, PageDescription, HeaderName, HeaderDescription, TopicName  FROM ClassificationValueLanguages JOIN Settings ON ClassificationValueLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
 	ON DefaultLanguage.ClassificationValueID = ClassificationValueHierarchy.ClassificationValueID
+JOIN Persons Creator
+	ON Creator.UserID = ClassificationValueHierarchy.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserID = ClassificationValueHierarchy.ModifierID
 ORDER BY Path;
 END;

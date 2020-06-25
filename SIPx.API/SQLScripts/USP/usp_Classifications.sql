@@ -11,7 +11,8 @@ SELECT Classifications.ClassificationID
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this classification')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this classification')) MouseOver
 	, ISNULL(UINameCustom.Customization ,UIName.Name) StatusName
-	, CASE WHEN Classifications.DefaultPageID IS NULL THEN ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for the default page')) ELSE 'There is no default page' END DefaultPage
+	, CASE WHEN Classifications.DefaultPageID IS NULL THEN ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for the default page')) ELSE 'There is no default page' END DefaultPageName
+	, Classifications.DefaultPageID
 	, Classifications.HasDropDown 
 	, Classifications.DropDownSequence
 	, Creator.FirstName + ' ' + Creator.LastName Creator
