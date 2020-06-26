@@ -182,5 +182,17 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ValueUpdateType, dynamic>(usp, new { UserID = UserID, ValueUpdateTypeID = ValueUpdateTypeID });
 
         }
+        public async Task<List<AddressType>> GetAddressTypes(string UserID)
+        {
+            string usp = "usp_AddressTypes @UserID";
+            var x = await _sqlDataAccess.LoadData<AddressType, dynamic>(usp, new { UserID = UserID });
+            return x;
+        }
+        public Task<AddressType> GetAddressType(string UserID, int AddressTypeID)
+        {
+            string usp = "usp_AddressType @UserID, @AddressTypeID";
+            return _sqlDataAccess.LoadSingleRecord<AddressType, dynamic>(usp, new { UserID = UserID, AddressTypeID = AddressTypeID });
+
+        }
     }
 }

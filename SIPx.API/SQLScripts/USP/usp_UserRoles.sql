@@ -5,7 +5,7 @@ SELECT @LanguageID = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT AspNetRoles.Id RoleID
+SELECT AspNetRoles.Id RoleId 
 	, AspNetRoles.Name InternalName 
 	, ISNULL(UserRoleLanguage.Name,DefaultRoleLanguage.Name) Name
 	, ISNULL(UserRoleLanguage.Description,DefaultRoleLanguage.Description) Description

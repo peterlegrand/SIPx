@@ -18,26 +18,26 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class MasterController : ControllerBase
+    public class PeopleController : ControllerBase
     {
-        private  IClaimCheck _claimCheck;
-        private readonly IMasterProvider _masterProvider;
+        private IClaimCheck _claimCheck;
+        private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public MasterController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PeopleController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _claimCheck = claimCheck;
-            _masterProvider = masterProvider;
+            _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
 
-        [HttpGet("Countries")]
-        public async Task<IActionResult> GetCountries()
+        [HttpGet("RoleClaims")]
+        public async Task<IActionResult> GetRoleClaims(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetCountries(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetRoleClaims(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -45,13 +45,27 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Country/{Id:int}")]
-        public async Task<IActionResult> GetCountry(int Id)
+        //[HttpGet("RoleClaim/{Id:int}")]
+        //public async Task<IActionResult> GetRoleClaim(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _peopleProvider.GetRoleClaim(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
+        [HttpGet("Roles")]
+        public async Task<IActionResult> GetRoles()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetCountry(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.GetRoles(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -59,13 +73,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("DateLevels")]
-        public async Task<IActionResult> GetDateLevels(int Id)
+        [HttpGet("GetRole/{Id}")]
+        public async Task<IActionResult> GetRole(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetDateLevels(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetRole(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -73,13 +87,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("DateLevel/{Id:int}")]
-        public async Task<IActionResult> GetDateLevel(int Id)
+        [HttpGet("UserRoles/{Id}")]
+        public async Task<IActionResult> GetUserRoles(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetDateLevel(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.GetUserRoles(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -87,13 +101,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Genders")]
-        public async Task<IActionResult> GetGenders()
+        [HttpGet("Users")]
+        public async Task<IActionResult> GetUsers()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetGenders(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetUsers(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -101,13 +115,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("GendersActive")]
-        public async Task<IActionResult> GetGendersActive()
+        [HttpGet("User/{Id}")]
+        public async Task<IActionResult> GetUser(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetGendersActive(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetUser(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -115,14 +129,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-
-        [HttpGet("GetGender/{Id:int}")]
-        public async Task<IActionResult> GetGender(int Id)
+        [HttpGet("ClaimGroups")]
+        public async Task<IActionResult> GetClaimGroups()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetGender(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.GetClaimGroups(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -130,41 +143,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("IntermediateRegions")]
-        public async Task<IActionResult> GetIntermediateRegions()
+        [HttpGet("ClaimGroup/{Id:int}")]
+        public async Task<IActionResult> GetClaimGroup(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetIntermediateRegions(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Languages")]
-        public async Task<IActionResult> GetLanguages()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.GetLanguages(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("LanguagesActive")]
-        public async Task<IActionResult> GetLanguagesActive()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.GetLanguagesActive(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetClaimGroup(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -173,13 +158,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("Settings")]
-        public async Task<IActionResult> GetSettings()
+        [HttpGet("Claims")]
+        public async Task<IActionResult> GetClaims()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSettings(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetClaims(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -188,13 +173,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("Setting/{Id:int}")]
-        public async Task<IActionResult> GetSetting(int Id)
+        [HttpGet("Claim/{Id:int}")]
+        public async Task<IActionResult> GetClaim(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSetting(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.GetClaim(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -203,13 +188,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("SortBys")]
-        public async Task<IActionResult> GetSortBys()
+        [HttpGet("PersonAddresses/{Id:int}")]
+        public async Task<IActionResult> GetPersonAddresses(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSortBys(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetPersonAddresses(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -218,13 +203,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("SortBys/{Id:int}")]
-        public async Task<IActionResult> GetSortBy(int Id)
+        [HttpGet("PersonAddress/{Id:int}")]
+        public async Task<IActionResult> GetPersonAddress(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSortBy(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.GetPersonAddress(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -232,13 +217,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Statuses")]
-        public async Task<IActionResult> GetStatuses()
+        [HttpGet("PersonRelations/{Id:int}")]
+        public async Task<IActionResult> GetPersonRelations(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetStatuses(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetPersonRelations(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -248,13 +233,13 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("Status/{Id:int}")]
-        public async Task<IActionResult> GetStatus(int Id)
+        [HttpGet("PersonRelation/{Id:int}")]
+        public async Task<IActionResult> GetPersonRelation(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetStatus(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.GetPersonRelation(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -262,27 +247,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("SubRegions")]
-        public async Task<IActionResult> GetSubRegions()
+        [HttpGet("PersonRelationTypeLanguages/{Id:int}")]
+        public async Task<IActionResult> GetPersonRelationTypeLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSubRegions(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("TelecomTypes")]
-        public async Task<IActionResult> GetTelecomTypes()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.GetTelecomTypes(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetPersonRelationTypeLanguages(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -292,13 +263,13 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("TelecomType/{Id:int}")]
-        public async Task<IActionResult> GetTelecomType(int Id)
+        [HttpGet("PersonRelationTypeLanguage/{Id:int}")]
+        public async Task<IActionResult> GetPersonRelationTypeLanguage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetTelecomType(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.GetPersonRelationTypeLanguage(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -306,27 +277,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("UITermLanguageCustomizations")]
-        public async Task<IActionResult> GetUITermLanguageCustomizations()
+        [HttpGet("PersonRelationTypes")]
+        public async Task<IActionResult> GetPersonRelationTypes()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetUITermLanguageCustomizations(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("UITermLanguages")]
-        public async Task<IActionResult> GetUITermLanguages()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.GetUITermLanguages(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetPersonRelationTypes(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -335,27 +292,14 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("UITermLanguage/{Id:int}")]
-        public async Task<IActionResult> GetUITermLanguage(int Id)
+
+        [HttpGet("PersonRelationType/{Id:int}")]
+        public async Task<IActionResult> GetPersonRelationType(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetUITermLanguage(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("UITerms")]
-        public async Task<IActionResult> GetUITerms()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.GetUITerms(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetPersonRelationType(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -364,27 +308,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("UITerm/{Id:int}")]
-        public async Task<IActionResult> GetUITerm(int Id)
+        [HttpGet("Persons")]
+        public async Task<IActionResult> GetPersons()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetUITerm(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("ValueUpdateTypes")]
-        public async Task<IActionResult> GetValueUpdateTypes()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.GetValueUpdateTypes(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetPersons(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -393,27 +323,14 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("ValueUpdateType/{Id:int}")]
-        public async Task<IActionResult> GetValueUpdateType(int Id)
+
+        [HttpGet("Person/{Id:int}")]
+        public async Task<IActionResult> GetPerson(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetValueUpdateType(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("AddressTypes")]
-        public async Task<IActionResult> GetAddressTypes()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.GetAddressTypes(CurrentUser.Id));
+                return Ok(await _peopleProvider.GetPerson(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -422,13 +339,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("AddressType/{Id:int}")]
-        public async Task<IActionResult> GetAddressType(int Id)
+        [HttpGet("PersonTelecoms/{Id:int}")]
+        public async Task<IActionResult> GetPersonTelecoms(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetAddressType(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.GetPersonTelecoms(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -436,5 +353,202 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+
+        [HttpGet("PersonTelecom/{Id:int}")]
+        public async Task<IActionResult> GetPersonTelecom(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetPersonTelecom(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("PreferenceTypes")]
+        public async Task<IActionResult> GetPreferenceTypes()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetPreferenceTypes(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpGet("PreferenceType/{Id:int}")]
+        public async Task<IActionResult> GetPreferenceType(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetPreferenceType(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("RoleGroupLanguages/{Id:int}")]
+        public async Task<IActionResult> GetRoleGroupLanguages(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetRoleGroupLanguages(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpGet("RoleGroupLanguage/{Id:int}")]
+        public async Task<IActionResult> GetRoleGroupLanguage(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetRoleGroupLanguage(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("RoleGroups")]
+        public async Task<IActionResult> GetRoleGroups()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetRoleGroups(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpGet("RoleGroup/{Id:int}")]
+        public async Task<IActionResult> GetRoleGroup(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetRoleGroup(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("RoleLanguages/{Id}")]
+        public async Task<IActionResult> GetRoleLanguages(string Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetRoleLanguages(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpGet("RoleLanguage/{Id:int}")]
+        public async Task<IActionResult> GetRoleLanguage(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetRoleLanguage(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("SecurityLevels")]
+        public async Task<IActionResult> GetSecurityLevels()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetSecurityLevels(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpGet("SecurityLevel/{Id:int}")]
+        public async Task<IActionResult> GetSecurityLevel(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetSecurityLevel(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("UserPreferences/{Id}")]
+        public async Task<IActionResult> GetUserPreferences(string Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetUserPreferences(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpGet("UserPreference/{Id:int}")]
+        public async Task<IActionResult> GetUserPreference(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.GetUserPreference(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

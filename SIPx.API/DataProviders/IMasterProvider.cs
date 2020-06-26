@@ -6,6 +6,8 @@ namespace SIPx.DataAccess
 {
     public interface IMasterProvider
     {
+        Task<AddressType> GetAddressType(string UserID, int AddressTypeID);
+        Task<List<AddressType>> GetAddressTypes(string UserID);
         Task<List<Country>> GetCountries(string UserID);
         Task<Country> GetCountry(string UserID, int CountryID);
         Task<DateLevel> GetDateLevel(string UserID, int DateLevelID);

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PersonRelations] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_PersonRelations] (@UserID nvarchar(450), @PersonID int) 
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -13,7 +13,7 @@ SELECT PersonRelations.PersonRelationID
 	, ValidFrom
 	, ValidTill
 	, PersonRelations.PersonRelationTypeID
-	, ISNULL(UserRelationTypeLanguage.Name,ISNULL(DefaultRelationTypeLanguage.Name,'No name for this relation type')) PersonRelationTypeName
+	, ISNULL(UserRelationTypeLanguage.Name,ISNULL(DefaultRelationTypeLanguage.Name,'No name for this relation type')) RelationTypeName
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, PersonRelations.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
@@ -31,3 +31,6 @@ JOIN Persons Creator
 	ON Creator.UserID = PersonRelations.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserID = PersonRelations.ModifierID
+WHERE PersonRelations.FromPersonID = @PersonID
+	OR PersonRelations.ToPersonID = @PersonID
+
