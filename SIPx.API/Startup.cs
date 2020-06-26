@@ -75,6 +75,7 @@ namespace SIPx.API
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IPeopleProvider, PeopleProvider>();
             services.AddTransient<IProcessProvider, ProcessProvider>();
+            services.AddTransient<IProcessTemplateProvider, ProcessTemplateProvider>();
             services.AddTransient<IOrganizationProvider, OrganizationProvider>();
             services.AddTransient<IMetaProvider, MetaProvider>();
             services.AddTransient<IContentProvider, ContentProvider>();
