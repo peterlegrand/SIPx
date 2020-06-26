@@ -20,7 +20,7 @@ SELECT ClassificationValues.ClassificationValueID
 	, ISNULL(UserParentLanguage.Name,ISNULL(DefaultParentLanguage.Name,'No parent name for this value')) ParentName
 	, ClassificationValues.DateFrom
 	, ClassificationValues.DateTo
-	, ClassificationValues.Location
+--	, Location
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, ClassificationValues.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
@@ -39,4 +39,3 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserID = ClassificationValues.ModifierID
 WHERE ClassificationValues.ClassificationValueID = @ClassificationValueID
-

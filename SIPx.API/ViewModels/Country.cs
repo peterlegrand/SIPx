@@ -10,7 +10,7 @@ namespace SIPx.API.ViewModels
     {
         [Key]
         public int CountryID { get; set; }
-        public int ForeignName { get; set; }
+        public string ForeignName { get; set; }
         public string ISO31662 { get; set; }
         public string ISO31663 { get; set; }
         public int ISO3166Num { get; set; }

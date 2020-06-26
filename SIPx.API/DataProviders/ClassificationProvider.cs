@@ -19,34 +19,12 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-
-        //public async Task<List<ClassificationViewGet>> GetClassifications(int LanguageId)
-        //{
-        //    string usp = "usp_ClassificationViewGet @LanguageID";
-        //    var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageID = LanguageId });
-        //    return x;
-        //}
         public async Task<List<Classification>> GetClassifications(string UserID)
         {
             string usp = "usp_Classifications @UserID";
             var x = await _sqlDataAccess.LoadData<Classification, dynamic>(usp, new { UserID = UserID });
             return x;
         }
-        //public  List<ClassificationViewGet> GetClassifications2(int LanguageId)
-        //{
-        //    DynamicParameters parameters = new DynamicParameters();
-        //    parameters.Add("@LanguageID", LanguageId);
-        //    string usp = "usp_AdminClassificationList @LanguageID";
-        //    var x = _sqlDataAccess.LoadData2<ClassificationViewGet>(usp, parameters );
-        //    return x;
-        //}
-
-        //public Task<ClassificationViewGet> GetClassificationById(int Id, int LanguageId)
-        //{
-        //    string usp = "usp_AdminClassificationDetails @classificationId,  @LanguageID";
-        //    return _sqlDataAccess.LoadSingleRecord<ClassificationViewGet, dynamic>(usp, new { ClassificationId = Id, LanguageID = LanguageId });
-
-        //}
         public Task<Classification> GetClassification(string UserID, int ClassificationID)
         {
             string usp = "usp_Classification @UserID, @classificationID";
@@ -85,7 +63,7 @@ namespace SIPx.DataAccess
         }
         public Task<ClassificationLevelLanguage> GetClassificationLevelLanguage(string UserID, int ClassificationLevelLanguageID)
         {
-            string usp = "usp_ClassificationLevelLanguages @UserID, @ClassificationLevelLanguageID";
+            string usp = "usp_ClassificationLevelLanguage @UserID, @ClassificationLevelLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationLevelLanguage, dynamic>(usp, new { UserID = UserID, ClassificationLevelLanguageID = ClassificationLevelLanguageID });
 
         }

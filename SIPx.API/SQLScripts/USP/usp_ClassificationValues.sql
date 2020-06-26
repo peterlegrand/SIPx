@@ -10,7 +10,7 @@ WHERE USerId = @UserID
 WITH ClassificationValueHierarchy (ClassificationValueID
 	, DateFrom
 	, DateTo
-	, Location
+--	, Location
 	, Path
 	, CreatorID
 	, CreatedDate
@@ -22,7 +22,7 @@ AS
 		ClassificationValues.ClassificationValueID
 		, DateFrom
 		, DateTo
-		, Location
+--		, Location
 		, CAST(ClassificationValues.ClassificationValueID AS VARCHAR(255)) AS Path
 		, CreatorID
 		, CreatedDate
@@ -37,7 +37,7 @@ AS
 		ClassificationValueNextLevel.ClassificationValueID
 		, ClassificationValueNextLevel.DateFrom
 		, ClassificationValueNextLevel.DateTo
-		, ClassificationValueNextLevel.Location
+--		, ClassificationValueNextLevel.Location
 		, CAST(ClassificationValueBaseLevel.Path + '.' + CAST(ClassificationValueNextLevel.ClassificationValueID AS VARCHAR(255)) AS VARCHAR(255))
 		, ClassificationValueNextLevel.CreatorID
 		, ClassificationValueNextLevel.CreatedDate
@@ -53,7 +53,7 @@ SELECT TOP (@Top)
 	ClassificationValueHierarchy.ClassificationValueID
 	, DateFrom
 	, DateTo
-	, Location
+--	, ISNULL(Location, '') Location
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this value')) Name
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this value')) Description
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this value')) MenuName

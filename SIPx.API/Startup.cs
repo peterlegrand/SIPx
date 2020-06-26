@@ -76,6 +76,8 @@ namespace SIPx.API
             services.AddTransient<IProcessProvider, ProcessProvider>();
             services.AddTransient<IMetaProvider, MetaProvider>();
             services.AddTransient<IContentProvider, ContentProvider>();
+            services.AddTransient<IContentMasterProvider, ContentMasterProvider>();
+            services.AddTransient<IMasterProvider, MasterProvider>();
             services.AddTransient<ICheckProvider, CheckProvider>();
             services.AddTransient<IClassificationProvider, ClassificationProvider>();
             services.AddTransient<SIPx.API.DataProviders.IUITermLanguageCustomizationProvider, UITermLanguageCustomizationProvider>();
