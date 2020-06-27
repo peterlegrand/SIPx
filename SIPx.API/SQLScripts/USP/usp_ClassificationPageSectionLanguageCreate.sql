@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionLanguageCreate] (
 	, @MouseOver nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 INSERT INTO ClassificationPageSectionLanguages (
 	ClassificationPageSectionID
@@ -31,8 +31,8 @@ VALUES (
 	, @MouseOver
 	, @TitleName
 	, @TitleDescription
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 

@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[usp_PersonRelationUpdate] (
 	, @ValidFrom int
 	, @ValidTill int
 	, @PersonRelationTypeID int
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 UPDATE  PersonRelations SET 
 	FromPersonID= @FromPersonID
@@ -13,7 +13,7 @@ UPDATE  PersonRelations SET
 	, ValidFrom = @ValidFrom
 	, ValidTill = @ValidTill
 	, PersonRelationTypeID = @PersonRelationTypeID
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE PersonRelationID= @PersonRelationID
 

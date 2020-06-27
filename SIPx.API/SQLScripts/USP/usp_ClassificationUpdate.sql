@@ -9,7 +9,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationUpdate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
 SELECT @OldSequence = DropDownSequence FROM Classifications WHERE ClassificationID = @ClassificationID;
@@ -28,7 +28,7 @@ UPDATE Classifications SET
 	, DefaultPageID = @DefaultPageID
 	, HasDropDown = @HasDropDown
 	, DropDownSequence = @DropDownSequence
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = GETDATE()
 WHERE ClassificationID = @ClassificationID
 
@@ -37,7 +37,7 @@ UPDATE  ClassificationLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationLanguageID= @ClassificationLanguageID
 

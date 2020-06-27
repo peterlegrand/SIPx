@@ -4,13 +4,13 @@ CREATE PROCEDURE [dbo].[usp_ClassificationLevelLanguageUpdate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 UPDATE  ClassificationLevelLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationLevelLanguageID= @ClassificationLevelLanguageID

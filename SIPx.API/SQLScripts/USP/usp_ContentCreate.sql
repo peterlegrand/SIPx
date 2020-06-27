@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ContentCreate (
-	@User nvarchar(450)
+	@UserID nvarchar(450)
 	, @ParentContentID int
 	, @ContentTypeID int
 	, @ContentStatusID int
@@ -39,13 +39,13 @@ VALUES (
 	, @OrganizationID
 	, @ProjectID
 	, @ProcessID
-	, @User
-	, @User
+	, @UserID
+	, @UserID
 	, getdate()
 	, getdate())
 
 DECLARE @NewContentID int	= scope_identity();
 
 INSERT INTO ContentClassificationValues(ContentID, ClassificationValueID, ClassificationID, CreatorID, ModifierID, CreatedDate, ModifiedDate)
-SELECT @NewContentID, ClassificationValueID, ClassificationID, @User,@User, getdate(), getdate() FROM @ClassificationValueTable
+SELECT @NewContentID, ClassificationValueID, ClassificationID, @UserID,@UserID, getdate(), getdate() FROM @ClassificationValueTable
 COMMIT TRANSACTION

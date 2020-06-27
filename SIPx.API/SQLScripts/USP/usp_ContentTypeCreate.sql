@@ -6,13 +6,13 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeCreate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)
+	, @UserID nvarchar(450)
 	, @ContentTypeClassificationTable AS udt_ContentTypeClassificationNew READONLY)
 AS 
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
 FROM UserPreferences
-WHERE USerId = @User
+WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeID = 1 ;
 BEGIN TRANSACTION
 
@@ -28,9 +28,9 @@ VALUES (
 	@ContentTypeGroupID
 	, @ProcessTemplateID
 	, @SecurityLevelID
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 
@@ -54,13 +54,13 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 INSERT INTO ContentTypeClassifications ( ContentTypeID, ClassificationID, ContentTypeClassificationStatusID, ModifierID, ModifiedDate)
-SELECT @NewContentTypeId, ClassificationID, ContentTypeClassificationStatusID, @User, getdate() FROM @ContentTypeClassificationTable
+SELECT @NewContentTypeId, ClassificationID, ContentTypeClassificationStatusID, @UserID, getdate() FROM @ContentTypeClassificationTable
 
 
 	COMMIT TRANSACTION

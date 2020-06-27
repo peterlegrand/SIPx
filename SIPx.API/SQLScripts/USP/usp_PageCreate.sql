@@ -8,7 +8,7 @@ CREATE PROCEDURE [dbo].[usp_PageCreate] (
 	, @MouseOver nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
@@ -22,9 +22,9 @@ INSERT INTO Pages (
 VALUES (
 	@ShowTitleName
 	, @ShowTitleDescription
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 
@@ -52,9 +52,9 @@ VALUES (
 	, @MouseOver
 	, @TitleName
 	, @TitleDescription
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 	COMMIT TRANSACTION

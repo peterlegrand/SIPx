@@ -11,7 +11,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueLanguageCreate] (
 	, @HeaderName nvarchar(50)
 	, @HeaderDescription nvarchar(max)
 	, @TopicName nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 INSERT INTO ClassificationValueLanguages (
 	ClassificationValueID
@@ -41,9 +41,9 @@ VALUES (
 	, @HeaderName
 	, @HeaderName
 	, @TopicName
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 

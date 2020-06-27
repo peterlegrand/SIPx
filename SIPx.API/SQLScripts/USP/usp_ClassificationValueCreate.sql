@@ -15,7 +15,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueCreate] (
 	, @HeaderName nvarchar(50)
 	, @HeaderDescription nvarchar(max)
 	, @TopicName nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
@@ -35,9 +35,9 @@ VALUES (
 	, @DateFrom
 	, @DateTo
 	, @Location
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 
@@ -75,9 +75,9 @@ VALUES (
 	, @HeaderName
 	, @HeaderDescription
 	, @TopicName
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 	COMMIT TRANSACTION

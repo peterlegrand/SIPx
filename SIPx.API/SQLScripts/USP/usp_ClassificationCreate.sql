@@ -8,7 +8,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationCreate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
@@ -26,9 +26,9 @@ VALUES (
 	, @DefaultPageID
 	, @HasDropDown
 	, @DropDownSequence
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 
@@ -52,9 +52,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 	COMMIT TRANSACTION

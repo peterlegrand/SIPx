@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Organization\" />
     <Folder Include="Interfaces\PRocessTemplate\" />
     <Folder Include="Interfaces\Process\" />
     <Folder Include="Interfaces\People\" />

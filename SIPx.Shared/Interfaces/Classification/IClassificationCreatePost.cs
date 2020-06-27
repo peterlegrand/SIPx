@@ -2,7 +2,7 @@
 {
     public interface IClassificationCreatePost
     {
-        string CreatorId { get; set; }
+        string UserId { get; set; }
         int DefaultPageId { get; set; }
         string Description { get; set; }
         int DropDownSequence { get; set; }

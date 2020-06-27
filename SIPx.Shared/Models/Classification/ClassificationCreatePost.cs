@@ -13,7 +13,7 @@ namespace SIPx.Shared
         public int DefaultPageId { get; set; }
         public bool HasDropDown { get; set; }
         public int DropDownSequence { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

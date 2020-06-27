@@ -5,9 +5,9 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeGroupLanguageCreate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 INSERT INTO ContentTypeGroupLanguages (ContentTypeGroupID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, CreatedDate, ModifierID, ModifiedDate)
-VALUES (@ContentTypeGroupID, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @User, getdate(), @User, getdate())
+VALUES (@ContentTypeGroupID, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @UserID, getdate(), @UserID, getdate())
 
 

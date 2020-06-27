@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[usp_PersonRelationCreate] (
 	, @ValidFrom DateTime
 	, @ValidTo DateTime
 	, @PersonRelationTypeID int
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 
 INSERT INTO PersonRelations (
@@ -23,7 +23,7 @@ VALUES (
 	, @ValidFrom
 	, @ValidTo
 	, @PersonRelationTypeID
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())

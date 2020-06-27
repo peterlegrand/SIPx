@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageFieldUpdate] (
 	, @IntValue int
 	, @LocationValue geography
 	, @DateTimeValue DateTime
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 DECLARE @StageID int;
 DECLARE @OldSequence int;
@@ -32,7 +32,7 @@ UPDATE  ProcessTemplateStageFields SET
 	, IntValue = @IntValue
 	, LocationValue = @LocationValue
 	, DateTimeValue = @DateTimeValue
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateStageFieldID= @ProcessTemplateStageFieldID
 

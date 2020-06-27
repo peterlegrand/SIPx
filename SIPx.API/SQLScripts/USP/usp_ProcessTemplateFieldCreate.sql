@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldCreate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
@@ -20,9 +20,9 @@ INSERT INTO ProcessTemplateFields (
 VALUES (
 	@ProcessTemplateID
 	, @ProcessTemplateFieldTypeID
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 
@@ -46,9 +46,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 	COMMIT TRANSACTION

@@ -13,7 +13,7 @@ CREATE PROCEDURE [dbo].[usp_PersonAddressCreate] (
 	, @CountryID int
 	, @ProvinceState nvarchar(50)
 	, @County nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 
 INSERT INTO PersonAddresses (
@@ -50,9 +50,9 @@ VALUES (
 	, @CountryID
 	, @ProvinceState 
 	, @County 
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 

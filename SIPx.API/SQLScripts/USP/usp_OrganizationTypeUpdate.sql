@@ -7,13 +7,13 @@ CREATE PROCEDURE [dbo].[usp_OrganizationTypeUpdate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 
 UPDATE OrganizationTypes SET 
 	Internal= @Internal
 	, LegalEntity = @LegalEntity
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = GETDATE()
 WHERE OrganizationTypeID = @OrganizationTypeID
 
@@ -22,7 +22,7 @@ UPDATE  OrganizationTypeLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE OrganizationTypeLanguageID= @OrganizationTypeLanguageID
 

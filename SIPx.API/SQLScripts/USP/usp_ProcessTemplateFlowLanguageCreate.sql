@@ -5,8 +5,8 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowLanguageCreate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 INSERT INTO ProcessTemplateFlowLanguages (ProcessTemplateFlowID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, CreatedDate, ModifierID, ModifiedDate)
-VALUES (@ProcessTemplateFlowID, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @User, getdate(), @User, getdate())
+VALUES (@ProcessTemplateFlowID, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @UserID, getdate(), @UserID, getdate())
 

@@ -13,7 +13,7 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionUpdate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 DECLARE @OldSequence int;
@@ -40,7 +40,7 @@ UPDATE ProcessTemplateFlowConditions SET
 	, ProcessTemplateFlowConditionString = @ProcessTemplateFlowConditionString 
 	, ProcessTemplateFlowConditionInt = @ProcessTemplateFlowConditionInt 
 	, ProcessTemplateFlowConditionDate = @ProcessTemplateFlowConditionDate 
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = GETDATE()
 WHERE ProcessTemplateFlowConditionID = @ProcessTemplateFlowConditionID
 
@@ -49,7 +49,7 @@ UPDATE  ProcessTemplateFlowConditionLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateFlowConditionLanguageID= @ProcessTemplateFlowConditionLanguageID
 

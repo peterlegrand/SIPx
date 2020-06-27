@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationRoleCreate] (
 	@RoleID nvarchar(450)
 	, @ClassificationID int 
 	, @ClassificationRelationTypeID int
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 INSERT INTO ClassificationRoles (
 	RoleID
@@ -16,9 +16,9 @@ VALUES (
 	@RoleID
 	, @ClassificationID
 	, @ClassificationRelationTypeID
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 

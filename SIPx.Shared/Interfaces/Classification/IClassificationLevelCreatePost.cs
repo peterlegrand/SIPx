@@ -5,7 +5,7 @@
         bool Alhpabetically { get; set; }
         bool CanLink { get; set; }
         int ClassificationId { get; set; }
-        string CreatorId { get; set; }
+        string UserId { get; set; }
         int DateLevelId { get; set; }
         string Description { get; set; }
         bool InDropDown { get; set; }

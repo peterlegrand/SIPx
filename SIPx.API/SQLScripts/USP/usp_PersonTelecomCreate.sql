@@ -6,13 +6,13 @@ CREATE PROCEDURE [dbo].[usp_PersonTelecomCreate] (
 	, @AreaCode nvarchar(10)
 	, @ExtensionCode nvarchar(10)
 	, @AskFor nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 
 BEGIN TRANSACTION
 
 INSERT INTO PersonTelecoms (PersonID, TelecomTypeID, TelecomValue, CreatorID, CreatedDate, ModifierID, ModifiedDate) VALUES (
-	@PersonID, @TelecomTypeID, @TelecomValue, @User, getdate(), @User, getdate())
+	@PersonID, @TelecomTypeID, @TelecomValue, @UserID, getdate(), @UserID, getdate())
 
 DECLARE @NewPersonTelecomID int	= scope_identity();
 

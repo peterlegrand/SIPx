@@ -2,7 +2,7 @@
 {
     public interface IObjectLanguageCreatePost
     {
-        string CreatorId { get; set; }
+        string UserId { get; set; }
         string Description { get; set; }
         int LanguageId { get; set; }
         string MenuName { get; set; }

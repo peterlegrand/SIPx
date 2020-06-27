@@ -10,14 +10,14 @@
 	, @MouseOver nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 UPDATE ClassificationPages SET 
 	StatusID = @StatusID
 	, ShowtitleName = @ShowtitleName
 	, ShowtitleDescription = @ShowtitleDescription
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = GETDATE()
 WHERE ClassificationPageID = @ClassificationPageID
 
@@ -28,7 +28,7 @@ UPDATE  ClassificationPageLanguages SET
 	, MouseOver = @MouseOver
 	, TitleName = @TitleName
 	, TitleDescription = @TitleDescription
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationPageLanguageID= @ClassificationPageLanguageID
 

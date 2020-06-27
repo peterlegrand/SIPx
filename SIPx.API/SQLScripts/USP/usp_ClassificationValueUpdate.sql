@@ -15,7 +15,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueUpdate] (
 	, @HeaderName nvarchar(50)
 	, @HeaderDescription nvarchar(max)
 	, @TopicName nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 UPDATE ClassificationValues SET 
@@ -23,7 +23,7 @@ UPDATE ClassificationValues SET
 	, DateFrom = @DateFrom
 	, DateTo = @DateTo
 	, Location = @Location
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = GETDATE()
 WHERE ClassificationValueID = @ClassificationValueID
 
@@ -38,7 +38,7 @@ UPDATE  ClassificationValueLanguages SET
 	, HeaderName = @HeaderName 
 	, HeaderDescription = @HeaderDescription
 	, TopicName = @TopicName 
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationValueLanguageID= @ClassificationValueLanguageID
 

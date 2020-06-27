@@ -13,7 +13,7 @@ CREATE PROCEDURE [dbo].[usp_PersonAddressUpdate] (
 	, @CountryID int
 	, @ProvinceState nvarchar(50)
 	, @County nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 
 UPDATE PersonAddresses SET
@@ -30,7 +30,7 @@ UPDATE PersonAddresses SET
 	, CountryID = @CountryID
 	, ProvinceState = @ProvinceState 
 	, County = @County 
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 	WHERE PersonAddressID = @PersonAddressID 
 	

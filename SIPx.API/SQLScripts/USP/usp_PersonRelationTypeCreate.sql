@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[usp_PersonRelationTypeCreate] (
 	, @MouseOver nvarchar(50)
 	, @FromIsAnXOfTo nvarchar(50)
 	, @ToIsAnXOfFrom nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
@@ -16,9 +16,9 @@ INSERT INTO PersonRelationTypes (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@User
+	@UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 
@@ -46,9 +46,9 @@ VALUES (
 	, @MouseOver
 	, @FromIsAnXOfTo
 	, @ToIsAnXOfFrom
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 	COMMIT TRANSACTION

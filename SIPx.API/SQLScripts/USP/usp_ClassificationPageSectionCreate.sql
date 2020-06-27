@@ -20,7 +20,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionCreate] (
 	, @MouseOver nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
@@ -63,9 +63,9 @@ VALUES (
 	, @SortByID
 	, @MaxContent
 	, @HasPaging
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 
@@ -97,9 +97,9 @@ VALUES (
 	, @MouseOver
 	, @TitleName
 	, @TitleDescription
-	, @User
+	, @UserID
 	, getdate()
-	, @User
+	, @UserID
 	, getdate())
 
 	COMMIT TRANSACTION

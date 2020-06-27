@@ -19,7 +19,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionUpdate] (
 	, @MouseOver nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
 SELECT @OldSequence = Sequence FROM ClassificationPageSections WHERE ClassificationPageSectionID = @ClassificationPageSectionID;
@@ -46,7 +46,7 @@ UPDATE ClassificationPageSections SET
 	, SortByID = @SortByID
 	, MaxContent = @MaxContent
 	, HasPaging = @HasPaging 
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = GETDATE()
 WHERE ClassificationPageSectionID = @ClassificationPageSectionID
 
@@ -57,7 +57,7 @@ UPDATE  ClassificationPageSectionLanguages SET
 	, MouseOver = @MouseOver
 	, TitleName = @TitleName
 	, TitleDescription = @TitleDescription
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationPageSectionLanguageID= @ClassificationPageSectionLanguageID
 

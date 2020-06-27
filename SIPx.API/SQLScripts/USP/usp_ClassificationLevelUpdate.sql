@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationLevelUpdate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserID nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
 DECLARE @ClassificationID int;
@@ -35,7 +35,7 @@ UPDATE ClassificationLevels SET
 	, CanLink = @CanLink
 	, InDropDown = @InDropDown
 	, InMenu = @InMenu
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = GETDATE()
 WHERE ClassificationLevelID = @ClassificationLevelID
 
@@ -44,7 +44,7 @@ UPDATE  ClassificationLevelLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @User
+	, ModifierID = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationLevelLanguageID= @ClassificationLevelLanguageID
 
