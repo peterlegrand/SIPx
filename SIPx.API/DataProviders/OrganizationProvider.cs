@@ -23,7 +23,7 @@ namespace SIPx.DataAccess
         public async Task<List<OrganizationAddress>> GetOrganizationAddresses(string UserID, int OrganizationID)
         {
             string usp = "usp_OrganizationAddresses @UserID, @OrganizationID";
-            var x = await _sqlDataAccess.LoadData<Country, dynamic>(usp, new { UserID = UserID, OrganizationID = OrganizationID });
+            var x = await _sqlDataAccess.LoadData<OrganizationAddress, dynamic>(usp, new { UserID = UserID, OrganizationID = OrganizationID });
             return x;
         }
         public Task<OrganizationAddress> GetOrganizationAddress(string UserID, int OrganizationAddressID)
