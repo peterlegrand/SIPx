@@ -195,7 +195,7 @@ namespace SIPx.DataAccess
         }
         public bool PostClassification(ClassificationCreatePost Classification)
         {
-            string usp = "usp_classificationCreate @LanguageID, @StatusID, @DefaultPageId, @HasDropDown, @DropDownSequence, @CreatorId, @Name, @Description, @MenuName, @MouseOver";
+            string usp = "usp_classificationCreate @StatusID, @DefaultPageId, @HasDropDown, @DropDownSequence, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @UserID";
             _sqlDataAccess.SaveData<ClassificationCreatePost>(usp, Classification);
             return true;
         }

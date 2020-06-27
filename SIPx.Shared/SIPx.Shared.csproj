@@ -9,11 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\PRocessTemplate\" />
     <Folder Include="Interfaces\Process\" />
-    <Folder Include="Interfaces\People\" />
-    <Folder Include="Models\ProcessTemplate\" />
-    <Folder Include="Models\People\" />
     <Folder Include="Models\Process\" />
   </ItemGroup>
 

@@ -458,5 +458,15 @@ namespace SIPx.API.Controllers
              _classificationProvider.PutClassification(Classification);
             return Classification;
         }
+
+        [HttpPost]
+        public ClassificationCreatePost Post(ClassificationCreatePost Classification)
+        {
+
+            //            var CurrentUser = await _userManager.GetUserAsync(User);
+
+            _classificationProvider.PostClassification(Classification);
+            return Classification;
+        }
     }
 }
