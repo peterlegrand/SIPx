@@ -1130,6 +1130,7 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1127, 'Create multi process'
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1128, 'Read multi process');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1129, 'Update multi process');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1130, 'Delete multi process');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1131, 'Read classification language');
 SET IDENTITY_INSERT UITerms OFF;
 
 SET IDENTITY_INSERT SecurityLevels ON;

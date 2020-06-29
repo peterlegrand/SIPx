@@ -777,6 +777,7 @@ INSERT INTO Claims (	ClaimID, ClaimGroupID, ClaimType, ClaimValue, NameTermID, D
 ,(190, 10, 'ApplicationRight', '190',643, 643, 643, 643)
 ,(191, 10, 'ApplicationRight', '191',644, 644, 644, 644)
 ,(192, 10, 'ApplicationRight', '192',174, 174, 174, 174)
+,(193, 10, 'ApplicationRight', '193',1131, 1131, 1131, 1131)
 ;
 SET IDENTITY_INSERT Claims OFF;
 

@@ -44,7 +44,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> GetLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188")) //PETER TODO add classification language read to claims and change this id
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193")) 
             {
                 return Ok(await _classificationProvider.GetClassificationLanguages(CurrentUser.Id, Id));
             }
@@ -274,7 +274,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> GetLanguage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188")) //PETER TODO create new id and add it here. See earlier place
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))  
             {
                 return Ok(await _classificationProvider.GetClassificationLanguage(CurrentUser.Id, Id));
             }
