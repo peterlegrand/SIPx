@@ -9,6 +9,7 @@ namespace SIPx.DataAccess
         Task<bool> CheckClassificationValue(int ClassificationValueID);
         Task<bool> CheckContent(int ContentID);
         Task<bool> CheckCountry(int CountryID);
+        Task<int> CheckIfRecordExists(string TableName, string IDField, int ID);
         Task<bool> CheckLanguage(int LanguageID);
         Task<bool> CheckOrganization(int OrganizationID);
         Task<bool> CheckOrganizationRole(string RoleID);

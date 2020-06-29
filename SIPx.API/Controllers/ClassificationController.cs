@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SIPx.API.DataProviders;
 using SIPx.API.Models;
-using SIPx.API.ViewModels;
 using SIPx.DataAccess;
 using SIPx.Shared;
 
@@ -20,12 +12,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationController : ControllerBase
     {
+        private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationController(IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationController(ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;
             _userManager = userManager;
@@ -257,7 +251,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
             {
-                var x = await _classificationProvider.GetClassification(CurrentUser.Id, Id);// CurrentUser.LanguageID));
+                if(await _checkProvider.CheckIfRecordExists("Classifications", "ClassificationID", Id) == 0)
+                    {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _classificationProvider.GetClassification(CurrentUser.Id, Id);
                 return Ok(x);
             }
             return BadRequest(new
