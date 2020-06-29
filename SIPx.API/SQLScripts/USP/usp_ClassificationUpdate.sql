@@ -1,6 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationUpdate] (
 	@ClassificationLanguageID int
-	, @ClassificationID int
 	, @StatusID int
 	, @DefaultPageID int
 	, @HasDropDown bit
@@ -12,7 +11,8 @@ CREATE PROCEDURE [dbo].[usp_ClassificationUpdate] (
 	, @UserID nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
-SELECT @OldSequence = DropDownSequence FROM Classifications WHERE ClassificationID = @ClassificationID;
+DECLARE @ClassificationID int;
+SELECT @OldSequence = DropDownSequence, @ClassificationID = Classifications.ClassificationID FROM ClassificationLanguages JOIN Classifications ON ClassificationLanguages.ClassificationID = Classifications.ClassificationID  WHERE ClassificationLanguageID= @ClassificationLanguageID;
 BEGIN TRANSACTION
 IF @OldSequence > @DropDownSequence
 BEGIN

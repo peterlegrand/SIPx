@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.14.4" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SIPx.API\SIPx.API.csproj" />
+    <ProjectReference Include="..\SIPx.DataAccess\SIPx.DataAccess.csproj" />
+    <ProjectReference Include="..\SIPx.MVC\SIPx.MVC.csproj" />
+    <ProjectReference Include="..\SIPx.Shared\SIPx.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

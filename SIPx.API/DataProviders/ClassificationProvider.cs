@@ -195,15 +195,27 @@ namespace SIPx.DataAccess
         }
         public bool PostClassification(ClassificationCreatePost Classification)
         {
-            string usp = "usp_classificationCreate @StatusID, @DefaultPageId, @HasDropDown, @DropDownSequence, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @UserID";
+            string usp = "usp_classificationCreate @StatusID, @HasDropDown, @DropDownSequence, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @UserID";
             _sqlDataAccess.SaveData<ClassificationCreatePost>(usp, Classification);
             return true;
         }
+        public async Task<string> PostClassificationCheck(ClassificationCreatePost Classification)
+        {
+            string usp = "usp_ClassificationCreateCheck @StatusID  , @HasDropDown , @DropDownSequence , @LanguageID , @Name , @Description , @MenuName , @MouseOver , @UserID ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Classification);
+            return CheckString;
+        }
         public bool PutClassification(ClassificationUpdatePut Classification)
         {
-            string usp = "usp_AdminClassificationUpdate @StatusID , @DefaultPageID , @HasDropDown , @DropDownSequence , @ModifierID , @ClassificationID , @Name , @Description , @MenuName , @MouseOver , @LanguageID";
+            string usp = "usp_ClassificationUpdate @classificationLanguageID, @StatusID , @DefaultPageID , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @ModifierID ";
             _sqlDataAccess.SaveData<ClassificationUpdatePut>(usp, Classification);
             return true;
+        } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.
+        public async Task<string> PutClassificationCheck(ClassificationUpdatePut Classification)
+        {
+            string usp = "usp_ClassificationUpdateCheck @classificationLanguageID, @StatusID , @DefaultPageID , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @ModifierID ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Classification);
+            return CheckString;
         }
     }
 }

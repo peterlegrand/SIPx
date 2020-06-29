@@ -1,6 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationCreate] (
 	@StatusID bit
-	, @DefaultPageID int = 0
 	, @HasDropDown bit
 	, @DropDownSequence int
 	, @LanguageID int
@@ -14,7 +13,6 @@ BEGIN TRANSACTION
 
 INSERT INTO Classifications (
 	StatusID
-	, DefaultPageID
 	, HasDropDown
 	, DropDownSequence
 	, CreatorID
@@ -23,7 +21,6 @@ INSERT INTO Classifications (
 	, ModifiedDate)
 VALUES (
 	@StatusID
-	, @DefaultPageID
 	, @HasDropDown
 	, @DropDownSequence
 	, @UserID

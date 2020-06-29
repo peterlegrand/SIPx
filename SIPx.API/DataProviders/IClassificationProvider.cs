@@ -33,10 +33,12 @@ namespace SIPx.DataAccess
         Task<List<ClassificationUser>> GetClassificationUsers(string UserID, int ClassificationID);
         Task<ClassificationValueRole> GetClassificationValueRole(string UserID, int ClassificationValueRoleID);
         Task<List<ClassificationValueRole>> GetClassificationValueRoles(string UserID, int ClassificationID);
-        Task<List<ClassificationValue>> GetClassificationValues(string UserID, int ClassificationValueUserID);
+        Task<List<ClassificationValue>> GetClassificationValues(string UserID, int ClassificationID);
         Task<ClassificationValueUser> GetClassificationValueUser(string UserID, int ClassificationValueUserID);
         Task<List<ClassificationValueUser>> GetClassificationValueUsers(string UserID, int ClassificationID);
         bool PostClassification(ClassificationCreatePost Classification);
+        Task<string> PostClassificationCheck(ClassificationCreatePost Classification);
         bool PutClassification(ClassificationUpdatePut Classification);
+        Task<string> PutClassificationCheck(ClassificationUpdatePut Classification);
     }
 }
