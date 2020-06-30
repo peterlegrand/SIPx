@@ -205,8 +205,8 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(202, 'User organization type
 INSERT INTO UITerms (UITermId, InternalName) VALUES(203, 'User organization type languages');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(204, 'Add user organization type language');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(205, 'Back to user organization types');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(206, 'CreatedDate');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(207, 'ModifiedDate');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(206, 'Created date');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(207, 'Modified date');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(208, 'Delete content type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(209, 'Delete organization');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(210, 'Delete organization type');

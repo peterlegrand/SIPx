@@ -210,8 +210,8 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(405,203,41,'User organization type languages', 'User organization type languages', 'User organization type languages');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(407,204,41,'Add user organization type language', 'Add user organization type language', 'Add user organization type language');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(409,205,41,'Back to user organization types', 'Back to user organization types', 'Back to user organization types');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(411,206,41,'CreatedDate', 'CreatedDate', 'CreatedDate');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(413,207,41,'ModifiedDate', 'ModifiedDate', 'ModifiedDate');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(411,206,41,'Created date', 'Created date', 'Created date');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(413,207,41,'Modified date', 'Modified date', 'Modified date');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(415,208,41,'Delete content type', 'Delete content type', 'Delete content type');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(417,209,41,'Delete organization', 'Delete organization', 'Delete organization');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermId, LanguageId, Name, Description, MouseOver) VALUES(419,210,41,'Delete organization type', 'Delete organization type', 'Delete organization type');
