@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFields] (@UserID nvarchar(450), @ProcessTemplateID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFields] (@UserId nvarchar(450), @ProcessTemplateId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateFields.ProcessTemplateFieldID
 	, ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserProcessTemplateFieldLanguage.Description,ISNULL(DefaultProcessTemplateFieldLanguage.Description,'No description for this role')) Description
@@ -16,21 +16,21 @@ SELECT ProcessTemplateFields.ProcessTemplateFieldID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ProcessTemplateFields.ModifiedDate
 FROM ProcessTemplateFields 
-LEFT JOIN (SELECT ProcessTemplateFieldID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateFieldLanguage
-	ON UserProcessTemplateFieldLanguage.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateFieldLanguage
-	ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage
+	ON UserProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage
+	ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
 JOIN ProcessTemplateFieldTypes 
-	ON ProcessTemplateFieldTypes.ProcessTemplateFieldTypeID = ProcessTemplateFields.ProcessTemplateFieldTypeID
+	ON ProcessTemplateFieldTypes.ProcessTemplateFieldTypeId = ProcessTemplateFields.ProcessTemplateFieldTypeID
 JOIN UITermLanguages UITypeName
-	ON UITypeName.UITermID = ProcessTemplateFieldTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UITypeNameCustom
-	ON UITypeNameCustom.UITermID =ProcessTemplateFieldTypes.NameTermID
+	ON UITypeName.UITermId = ProcessTemplateFieldTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UITypeNameCustom
+	ON UITypeNameCustom.UITermId =ProcessTemplateFieldTypes.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ProcessTemplateFields.CreatorID
+	ON Creator.UserId = ProcessTemplateFields.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ProcessTemplateFields.ModifierID
-WHERE ProcessTemplateFields.ProcessTemplateID = @ProcessTemplateID
-	AND UITypeName.LanguageID = @LanguageID
+	ON Modifier.UserId = ProcessTemplateFields.ModifierID
+WHERE ProcessTemplateFields.ProcessTemplateId = @ProcessTemplateID
+	AND UITypeName.LanguageId = @LanguageID
 ORDER BY ISNULL(UITypeNameCustom.Customization,UITypeName.Name), ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this role'))
 

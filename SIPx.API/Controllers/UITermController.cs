@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.DataProviders;
 using SIPx.API.Models;
-using SIPx.Shared;
 
 namespace SIPx.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class UITermController : ControllerBase
     {
         private readonly UserManager<SipUser> _userManager;
@@ -24,16 +20,15 @@ namespace SIPx.API.Controllers
             _uITermProvider = UITermProvider;
         }
 
-        [HttpGet] //("{Controller}/{Action}/{LanguageID}")]
-        public  IActionResult Get() //string Controller = "a", string Action = "b", string LanguageID = "1")
+        [HttpGet("MVC/{controllerName}/{actionName}")] //("{Controller}/{Action}/{LanguageID}")]
+        public async Task<IActionResult> MVC(string controllerName, string actionName) //string Controller = "a", string Action = "b", string LanguageId = "1")
         {
 
-            //            var CurrentUser = await _userManager.GetUserAsync(User);
-            string Controller = "Classification";
-            string Action = "Index";
-            string LanguageID = "41";
-
-            var a = _uITermProvider.GetUITermLanguageCustomization(Controller, Action, 41);
+                        var CurrentUser = await _userManager.GetUserAsync(User);
+            //Namecontroller = "Classification";
+            //action = "Index";
+            
+            var a = _uITermProvider.GetUITermLanguageCustomization(controllerName, actionName, CurrentUser.Id);
             return Ok(a);
 
 

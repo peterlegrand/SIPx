@@ -1,13 +1,13 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeGroupDelete] (
-	@ContentTypeGroupID int) 
+	@ContentTypeGroupId int) 
 AS 
 BEGIN TRANSACTION
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM ContentTypeGroups WHERE ContentTypeGroupID = @ContentTypeGroupID;
+SELECT @OldSequence = Sequence FROM ContentTypeGroups WHERE ContentTypeGroupId = @ContentTypeGroupID;
 UPDATE ContentTypeGroups SET Sequence = Sequence - 1 WHERE Sequence > @OldSequence 
 
-DELETE FROM ContentTypeGroupLanguages WHERE ContentTypeGroupID = @ContentTypeGroupID
-DELETE FROM ContentTypeGroups WHERE ContentTypeGroupID = @ContentTypeGroupID
+DELETE FROM ContentTypeGroupLanguages WHERE ContentTypeGroupId = @ContentTypeGroupID
+DELETE FROM ContentTypeGroups WHERE ContentTypeGroupId = @ContentTypeGroupID
 COMMIT TRANSACTION
 
 

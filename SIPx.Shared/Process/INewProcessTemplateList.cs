@@ -3,7 +3,7 @@
     public interface INewProcessTemplateList
     {
         string Name { get; set; }
-        int ProcessTemplateGroupID { get; set; }
-        int ProcessTemplateID { get; set; }
+        int ProcessTemplateGroupId { get; set; }
+        int ProcessTemplateId { get; set; }
     }
 }

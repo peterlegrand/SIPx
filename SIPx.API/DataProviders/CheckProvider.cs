@@ -28,88 +28,88 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<bool> CheckClassification(int ClassificationID)
+        public async Task<bool> CheckClassification(int ClassificationId)
         {
             string usp = "usp_CheckClassification @ClassificationID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { ClassificationID = ClassificationID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { ClassificationId = ClassificationId });
             return x.First();
         }
-        public async Task<bool> CheckClassificationValue(int ClassificationValueID)
+        public async Task<bool> CheckClassificationValue(int ClassificationValueId)
         {
             string usp = "usp_CheckClassificationValue @ClassificationValueID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { ClassificationValueID = ClassificationValueID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { ClassificationValueId = ClassificationValueId });
             return x.First();
         }
-        public async Task<bool> CheckContent(int ContentID)
+        public async Task<bool> CheckContent(int ContentId)
         {
             string usp = "usp_CheckContent @ContentID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { ContentID = ContentID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { ContentId = ContentId });
             return x.First();
         }
-        public async Task<bool> CheckCountry(int CountryID)
+        public async Task<bool> CheckCountry(int CountryId)
         {
             string usp = "usp_CheckCountry @CountryID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { CountryID = CountryID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { CountryId = CountryId });
             return x.First();
         }
-        public async Task<bool> CheckLanguage(int LanguageID)
+        public async Task<bool> CheckLanguage(int LanguageId)
         {
             string usp = "usp_CheckLanguage @LanguageID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { LanguageID = LanguageID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { LanguageId = LanguageId });
             return x.First();
         }
-        public async Task<bool> CheckOrganization(int OrganizationID)
+        public async Task<bool> CheckOrganization(int OrganizationId)
         {
             string usp = "usp_CheckOrganization @OrganizationID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { OrganizationID = OrganizationID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { OrganizationId = OrganizationId });
             return x.First();
         }
-        public async Task<bool> CheckOrganizationRole(string RoleID)
+        public async Task<bool> CheckOrganizationRole(string RoleId)
         {
             string usp = "usp_CheckOrganizationRole RoleID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { RoleID = RoleID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { RoleId = RoleId });
             return x.First();
         }
-        public async Task<bool> CheckProject(int ProjectID)
+        public async Task<bool> CheckProject(int ProjectId)
         {
             string usp = "usp_CheckProject @ProjectID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { ProjectID = ProjectID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { ProjectId = ProjectId });
             return x.First();
         }
-        public async Task<bool> CheckProjectRole(string RoleID)
+        public async Task<bool> CheckProjectRole(string RoleId)
         {
             string usp = "usp_CheckProjectRole RoleID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { RoleID = RoleID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { RoleId = RoleId });
             return x.First();
         }
-        public async Task<bool> CheckRole(string RoleID)
+        public async Task<bool> CheckRole(string RoleId)
         {
             string usp = "usp_CheckRole @RoleID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { RoleID = RoleID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { RoleId = RoleId });
             return x.First();
         }
-        public async Task<bool> CheckSecurityLevel(int SecurityLevelID)
+        public async Task<bool> CheckSecurityLevel(int SecurityLevelId)
         {
             string usp = "usp_CheckSecurityLevel @SecurityLevelID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { SecurityLevelID = SecurityLevelID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { SecurityLevelId = SecurityLevelId });
             return x.First();
         }
-        public async Task<bool> CheckUser(string UserID)
+        public async Task<bool> CheckUser(string UserId)
         {
             string usp = "usp_CheckUser @UserID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { UserId = UserId });
             return x.First();
         }
-        public async Task<bool> CheckUserRelation(int PersonRelationID)
+        public async Task<bool> CheckUserRelation(int PersonRelationId)
         {
             string usp = "usp_CheckUserRelation @PersonRelationID";
-            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { PersonRelationID = PersonRelationID });
+            var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { PersonRelationId = PersonRelationId });
             return x.First();
         }
-        public async Task<int> CheckIfRecordExists(string TableName, string IDField, int ID)
+        public async Task<int> CheckIfRecordExists(string TableName, string IDField, int Id)
         {
             string usp = "usp_CheckIfRecordExists @TableName, @IDField, @ID";
-            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { TableName = TableName, IDField = IDField, ID = ID });
+            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { TableName = TableName, IDField = IDField, Id = Id });
             return x.First();
         }
     }

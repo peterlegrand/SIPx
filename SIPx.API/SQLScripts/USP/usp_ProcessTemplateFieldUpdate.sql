@@ -1,26 +1,26 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldUpdate] (
-	@ProcessTemplateFieldLanguageID int
-	, @ProcessTemplateFieldID int
-	, @ProcessTemplateFieldTypeID int
+	@ProcessTemplateFieldLanguageId int
+	, @ProcessTemplateFieldId int
+	, @ProcessTemplateFieldTypeId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 UPDATE ProcessTemplateFields SET 
-	ProcessTemplateFieldTypeID = @ProcessTemplateFieldTypeID
-	, ModifierID = @UserID
+	ProcessTemplateFieldTypeId = @ProcessTemplateFieldTypeID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ProcessTemplateFieldID = @ProcessTemplateFieldID
+WHERE ProcessTemplateFieldId = @ProcessTemplateFieldID
 
 UPDATE  ProcessTemplateFieldLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateFieldLanguageID= @ProcessTemplateFieldLanguageID
 

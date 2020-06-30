@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_Role] (@UserID nvarchar(450), @RoleID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_Role] (@UserId nvarchar(450), @RoleId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT AspNetRoles.Id RoleID
 	, AspNetRoles.Name InternalName 
 	, ISNULL(UserRoleLanguage.Name,DefaultRoleLanguage.Name) Name
@@ -18,15 +18,15 @@ SELECT AspNetRoles.Id RoleID
 	, ISNULL(UserRoleGroupLanguage.MenuName,DefaultRoleGroupLanguage.MenuName) GroupMenuName
 	, ISNULL(UserRoleGroupLanguage.MouseOver,DefaultRoleGroupLanguage.MouseOver) GroupMouseOver
 FROM AspNetRoles
-LEFT JOIN (SELECT RoleID, Name, Description, MenuName, MouseOver FROM RoleLanguages WHERE LanguageID = @LanguageID) UserRoleLanguage
-	ON UserRoleLanguage.RoleID = AspNetRoles.Id
-LEFT JOIN (SELECT RoleID, Name, Description, MenuName, MouseOver FROM RoleLanguages JOIN Settings ON RoleLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultRoleLanguage
-	ON DefaultRoleLanguage.RoleID = AspNetRoles.Id
+LEFT JOIN (SELECT RoleId, Name, Description, MenuName, MouseOver FROM RoleLanguages WHERE LanguageId = @LanguageID) UserRoleLanguage
+	ON UserRoleLanguage.RoleId = AspNetRoles.Id
+LEFT JOIN (SELECT RoleId, Name, Description, MenuName, MouseOver FROM RoleLanguages JOIN Settings ON RoleLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultRoleLanguage
+	ON DefaultRoleLanguage.RoleId = AspNetRoles.Id
 JOIN RoleGroups
-	ON AspNetRoles.RoleGroupID = RoleGroups.RoleGroupID
-LEFT JOIN (SELECT RoleGroupID, Name, Description, MenuName, MouseOver FROM RoleGroupLanguages WHERE LanguageID = @LanguageID) UserRoleGroupLanguage
-	ON UserRoleGroupLanguage.RoleGroupID = AspNetRoles.RoleGroupID
-LEFT JOIN (SELECT RoleGroupID, Name, Description, MenuName, MouseOver FROM RoleGroupLanguages JOIN Settings ON RoleGroupLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultRoleGroupLanguage
+	ON AspNetRoles.RoleGroupId = RoleGroups.RoleGroupID
+LEFT JOIN (SELECT RoleGroupId, Name, Description, MenuName, MouseOver FROM RoleGroupLanguages WHERE LanguageId = @LanguageID) UserRoleGroupLanguage
+	ON UserRoleGroupLanguage.RoleGroupId = AspNetRoles.RoleGroupID
+LEFT JOIN (SELECT RoleGroupId, Name, Description, MenuName, MouseOver FROM RoleGroupLanguages JOIN Settings ON RoleGroupLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultRoleGroupLanguage
 	ON DefaultRoleGroupLanguage.RoleGroupID= AspNetRoles.RoleGroupID
 WHERE AspNetRoles.Id = @RoleID
 

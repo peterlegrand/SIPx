@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ClassificationValue
     {
         [Key]
-        public int ClassificationValueID { get; set; }
+        public int ClassificationValueId { get; set; }
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
         //public string Location { get; set; }

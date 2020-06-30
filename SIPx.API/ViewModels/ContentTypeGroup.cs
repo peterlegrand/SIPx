@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ContentTypeGroup
     {
         [Key]
-        public int ContentTypeGroupID { get; set; }
+        public int ContentTypeGroupId { get; set; }
         public int Sequence { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

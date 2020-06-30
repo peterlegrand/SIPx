@@ -25,7 +25,7 @@ namespace SIPx.DataAccess
         //public async Task<List<ClassificationViewGet>> GetClassifications(int LanguageId)
         //{
         //    string usp = "usp_ClassificationViewGet @LanguageID";
-        //    var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageID = LanguageId });
+        //    var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageId = LanguageId });
         //    return x;
         //}
         public async Task<List<int>> NewProcessGetInitialTemplateList()
@@ -35,17 +35,17 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<List<ProcessTemplateFlowCondition>> NewProcessGetFlowConditionList(int FlowID)
+        public async Task<List<ProcessTemplateFlowCondition>> NewProcessGetFlowConditionList(int FlowId)
         {
             string usp = "usp_NewProcessGetFlowConditionList @FlowID";
-            var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowCondition, dynamic>(usp, new { FlowID = FlowID });
+            var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowCondition, dynamic>(usp, new { FlowId = FlowId });
             return x;
         }
-        public async Task<List<NewProcessFromDB>> NewProcessGet(SipUser User, int ProcessTemplateID)
+        public async Task<List<NewProcessFromDB>> NewProcessGet(SipUser User, int ProcessTemplateId)
         {
 
             string usp = "usp_NewProcessGet @ProcessTemplateID";
-            var x = await _sqlDataAccess.LoadData<NewProcessFromDB, dynamic>(usp, new { ProcessTemplateID = ProcessTemplateID });
+            var x = await _sqlDataAccess.LoadData<NewProcessFromDB, dynamic>(usp, new { ProcessTemplateId = ProcessTemplateId });
             return x;
         }
 
@@ -55,18 +55,18 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<bool> NewProcessInsert(string SQLString, string UserID, int TemplateID, int StageID, DataTable Fields)
+        public async Task<bool> NewProcessInsert(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields)
         {
-            await _sqlDataAccess.SaveData2<dynamic>(SQLString, new  { User = UserID, ProcessTemplateID = TemplateID, ProcessTemplateStageID = StageID, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
+            await _sqlDataAccess.SaveData2<dynamic>(SQLString, new  { User = UserId, ProcessTemplateId = TemplateId, ProcessTemplateStageId = StageId, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
             return true;
         }
 
         
  
-        //public async Task<List<ProcessType>> GetProcessTypes(string UserID)
+        //public async Task<List<ProcessType>> GetProcessTypes(string UserId)
         //{
         //    string usp = "usp_ProcessTypes @UserID";
-        //    var x = await _sqlDataAccess.LoadData<ProcessType, dynamic>(usp, new { UserID = UserID });
+        //    var x = await _sqlDataAccess.LoadData<ProcessType, dynamic>(usp, new { UserId = UserId });
         //    return x;
         //}
 

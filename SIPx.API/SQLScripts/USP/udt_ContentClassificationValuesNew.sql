@@ -1,4 +1,4 @@
 CREATE TYPE udt_ContentClassificationValuesNew AS TABLE (
-ClassificationValueID int not null
-, ClassificationID int not null
+ClassificationValueId int not null
+, ClassificationId int not null
 )

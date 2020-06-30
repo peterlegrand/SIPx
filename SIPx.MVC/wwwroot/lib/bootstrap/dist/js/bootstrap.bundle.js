@@ -80,7 +80,7 @@
    */
 
   var TRANSITION_END = 'transitionend';
-  var MAX_UID = 1000000;
+  var MAX_UId = 1000000;
   var MILLISECONDS_MULTIPLIER = 1000; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
 
   function toType(obj) {
@@ -715,7 +715,7 @@
       }
 
       if (this._isSliding) {
-        $(this._element).one(Event$2.SLID, function () {
+        $(this._element).one(Event$2.SLId, function () {
           return _this.to(index);
         });
         return;
@@ -991,7 +991,7 @@
 
       this._setActiveIndicatorElement(nextElement);
 
-      var slidEvent = $.Event(Event$2.SLID, {
+      var slidEvent = $.Event(Event$2.SLId, {
         relatedTarget: nextElement,
         direction: eventDirectionName,
         from: activeElementIndex,

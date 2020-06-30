@@ -1,16 +1,16 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionUpdate] (
-	@ClassificationPageSectionLanguageID int
-	, @ClassificationPageSectionID int
+	@ClassificationPageSectionLanguageId int
+	, @ClassificationPageSectionId int
 	, @Sequence int
-	, @PageSectionTypeID int
-	, @PageSectionDataTypeID int
+	, @PageSectionTypeId int
+	, @PageSectionDataTypeId int
 	, @ShowSectionTitleName bit
 	, @ShowSectionTitleDescription bit
 	, @ShowContentTypeTitleName bit
 	, @ShowContentTypeTitleDescription bit
 	, @OneTwoColumns int
-	, @ContentTypeID int
-	, @SortByID int
+	, @ContentTypeId int
+	, @SortById int
 	, @MaxContent int
 	, @HasPaging bit
 	, @Name nvarchar(50)
@@ -19,10 +19,10 @@ CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionUpdate] (
 	, @MouseOver nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM ClassificationPageSections WHERE ClassificationPageSectionID = @ClassificationPageSectionID;
+SELECT @OldSequence = Sequence FROM ClassificationPageSections WHERE ClassificationPageSectionId = @ClassificationPageSectionID;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
@@ -35,20 +35,20 @@ END
 
 UPDATE ClassificationPageSections SET 
 	Sequence = @Sequence
-	, PageSectionTypeID = @PageSectionTypeID
-	, PageSectionDataTypeID = @PageSectionDataTypeID
+	, PageSectionTypeId = @PageSectionTypeID
+	, PageSectionDataTypeId = @PageSectionDataTypeID
 	, ShowSectionTitleName = @ShowSectionTitleName
 	, ShowSectionTitleDescription = @ShowSectionTitleDescription
 	, ShowContentTypeTitleName = @ShowContentTypeTitleName
 	, ShowContentTypeTitleDescription = @ShowContentTypeTitleDescription
 	, OneTwoColumns = @OneTwoColumns 
-	, ContentTypeID = @ContentTypeID 
-	, SortByID = @SortByID
+	, ContentTypeId = @ContentTypeId 
+	, SortById = @SortByID
 	, MaxContent = @MaxContent
 	, HasPaging = @HasPaging 
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ClassificationPageSectionID = @ClassificationPageSectionID
+WHERE ClassificationPageSectionId = @ClassificationPageSectionID
 
 UPDATE  ClassificationPageSectionLanguages SET 
 	Name = @Name
@@ -57,7 +57,7 @@ UPDATE  ClassificationPageSectionLanguages SET
 	, MouseOver = @MouseOver
 	, TitleName = @TitleName
 	, TitleDescription = @TitleDescription
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationPageSectionLanguageID= @ClassificationPageSectionLanguageID
 

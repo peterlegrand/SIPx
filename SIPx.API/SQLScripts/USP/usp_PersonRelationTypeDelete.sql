@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[usp_PersonRelationTypeDelete] (
-	@PersonRelationTypeID int) 
+	@PersonRelationTypeId int) 
 AS 
 BEGIN TRANSACTION
-DELETE FROM PersonRelationTypeLanguages WHERE @PersonRelationTypeID = PersonRelationTypeID
-DELETE FROM PersonRelationTypes WHERE @PersonRelationTypeID = PersonRelationTypeID
+DELETE FROM PersonRelationTypeLanguages WHERE @PersonRelationTypeId = PersonRelationTypeID
+DELETE FROM PersonRelationTypes WHERE @PersonRelationTypeId = PersonRelationTypeID
 COMMIT TRANSACTION
 
 

@@ -462,7 +462,7 @@ jQuery.extend( {
 		return concat.apply( [], ret );
 	},
 
-	// A global GUID counter for objects
+	// A global GUId counter for objects
 	guid: 1,
 
 	// jQuery.support is not used in Core but other projects attach their
@@ -627,7 +627,7 @@ var i,
 
 	rnative = /^[^{]+\{\s*\[native \w/,
 
-	// Easily-parseable/retrievable ID or TAG or CLASS selectors
+	// Easily-parseable/retrievable Id or TAG or CLASS selectors
 	rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,
 
 	rsibling = /[+~]/,
@@ -742,7 +742,7 @@ function Sizzle( selector, context, results, seed ) {
 			// (excepting DocumentFragment context, where the methods don't exist)
 			if ( nodeType !== 11 && (match = rquickExpr.exec( selector )) ) {
 
-				// ID selector
+				// Id selector
 				if ( (m = match[1]) ) {
 
 					// Document context
@@ -804,7 +804,7 @@ function Sizzle( selector, context, results, seed ) {
 				// Exclude object elements
 				} else if ( context.nodeName.toLowerCase() !== "object" ) {
 
-					// Capture the context ID, setting it first if necessary
+					// Capture the context Id, setting it first if necessary
 					if ( (nid = context.getAttribute( "id" )) ) {
 						nid = nid.replace( rcssescape, fcssescape );
 					} else {
@@ -1127,7 +1127,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		return !document.getElementsByName || !document.getElementsByName( expando ).length;
 	});
 
-	// ID filter and find
+	// Id filter and find
 	if ( support.getById ) {
 		Expr.filter["ID"] = function( id ) {
 			var attrId = id.replace( runescape, funescape );
@@ -1802,8 +1802,8 @@ Expr = Sizzle.selectors = {
 
 							// Support: IE <9 only
 							// Defend against cloned attroperties (jQuery gh-1709)
-							uniqueCache = outerCache[ node.uniqueID ] ||
-								(outerCache[ node.uniqueID ] = {});
+							uniqueCache = outerCache[ node.uniqueId ] ||
+								(outerCache[ node.uniqueId ] = {});
 
 							cache = uniqueCache[ type ] || [];
 							nodeIndex = cache[ 0 ] === dirruns && cache[ 1 ];
@@ -1831,8 +1831,8 @@ Expr = Sizzle.selectors = {
 
 								// Support: IE <9 only
 								// Defend against cloned attroperties (jQuery gh-1709)
-								uniqueCache = outerCache[ node.uniqueID ] ||
-									(outerCache[ node.uniqueID ] = {});
+								uniqueCache = outerCache[ node.uniqueId ] ||
+									(outerCache[ node.uniqueId ] = {});
 
 								cache = uniqueCache[ type ] || [];
 								nodeIndex = cache[ 0 ] === dirruns && cache[ 1 ];
@@ -1857,8 +1857,8 @@ Expr = Sizzle.selectors = {
 
 											// Support: IE <9 only
 											// Defend against cloned attroperties (jQuery gh-1709)
-											uniqueCache = outerCache[ node.uniqueID ] ||
-												(outerCache[ node.uniqueID ] = {});
+											uniqueCache = outerCache[ node.uniqueId ] ||
+												(outerCache[ node.uniqueId ] = {});
 
 											uniqueCache[ type ] = [ dirruns, diff ];
 										}
@@ -2244,7 +2244,7 @@ function addCombinator( matcher, combinator, base ) {
 
 						// Support: IE <9 only
 						// Defend against cloned attroperties (jQuery gh-1709)
-						uniqueCache = outerCache[ elem.uniqueID ] || (outerCache[ elem.uniqueID ] = {});
+						uniqueCache = outerCache[ elem.uniqueId ] || (outerCache[ elem.uniqueId ] = {});
 
 						if ( skip && skip === elem.nodeName.toLowerCase() ) {
 							elem = elem[ dir ] || elem;
@@ -4973,7 +4973,7 @@ jQuery.event = {
 			jQuery.find.matchesSelector( documentElement, selector );
 		}
 
-		// Make sure that the handler has a unique ID, used to find/remove it later
+		// Make sure that the handler has a unique Id, used to find/remove it later
 		if ( !handler.guid ) {
 			handler.guid = jQuery.guid++;
 		}

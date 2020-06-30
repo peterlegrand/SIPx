@@ -9,8 +9,8 @@ namespace SIPx.API.ViewModels
     public class Organization
     {
         [Key]
-        public int OrganizationID { get; set; }
-        public int OrganizationTypeID { get; set; }
+        public int OrganizationId { get; set; }
+        public int OrganizationTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

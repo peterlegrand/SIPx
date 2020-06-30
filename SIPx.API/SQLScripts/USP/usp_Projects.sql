@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_Projects] (@UserID nvarchar(450), @Top int =1000) 
+CREATE PROCEDURE [dbo].[usp_Projects] (@UserId nvarchar(450), @Top int =1000) 
 AS 
 BEGIN
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 WITH ProjectHierarchy (ProjectID
 	, StatusID
@@ -19,19 +19,19 @@ AS
 	SELECT 
 		Projects.ProjectID
 		, StatusID
-		, CAST(Projects.ProjectID AS VARCHAR(255)) AS Path
+		, CAST(Projects.ProjectId AS VARCHAR(255)) AS Path
 		, CreatedDate
 		, CreatorID
 		, ModifierID
 		, ModifiedDate
 	FROM Projects 
-	WHERE Projects.ParentProjectID IS NULL
+	WHERE Projects.ParentProjectId IS NULL
 
    UNION ALL
 	SELECT 
 		ProjectNextLevel.ProjectID
 		, ProjectNextLevel.StatusID
-		, CAST(ProjectBaseLevel.Path + '.' + CAST(ProjectNextLevel.ProjectID AS VARCHAR(255)) AS VARCHAR(255))
+		, CAST(ProjectBaseLevel.Path + '.' + CAST(ProjectNextLevel.ProjectId AS VARCHAR(255)) AS VARCHAR(255))
 	, ProjectNextLevel.CreatedDate
 	, ProjectNextLevel.CreatorID
 	, ProjectNextLevel.ModifierID
@@ -39,7 +39,7 @@ AS
 
 	FROM Projects ProjectNextLevel
 	JOIN ProjectHierarchy ProjectBaseLevel
-		ON ProjectBaseLevel.ProjectID = ProjectNextLevel.ParentProjectID
+		ON ProjectBaseLevel.ProjectId = ProjectNextLevel.ParentProjectID
 	)
 -- Statement using the CTE
 SELECT TOP (@Top) 
@@ -56,19 +56,19 @@ SELECT TOP (@Top)
 	, ProjectHierarchy.ModifiedDate
 FROM   ProjectHierarchy
 JOIN Statuses
-	ON Statuses.StatusID = ProjectHierarchy.StatusID
-LEFT JOIN (SELECT ProjectID, Name, Description, MenuName, MouseOver FROM ProjectLanguages WHERE LanguageID = @LanguageID) UserLanguage
+	ON Statuses.StatusId = ProjectHierarchy.StatusID
+LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.ProjectID= ProjectHierarchy.ProjectID
-LEFT JOIN (SELECT ProjectID, Name, Description, MenuName, MouseOver FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
-	ON DefaultLanguage.ProjectID = ProjectHierarchy.ProjectID
+LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ProjectId = ProjectHierarchy.ProjectID
 JOIN UITermLanguages StatusName
-	ON Statuses.NameTermID = StatusName.UITermID  
-LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageID = @LanguageID)  UserStatusName
-	ON Statuses.NameTermID = UserStatusName.UITermID  
+	ON Statuses.NameTermId = StatusName.UITermId  
+LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserStatusName
+	ON Statuses.NameTermId = UserStatusName.UITermId  
 JOIN Persons Creator
-	ON Creator.UserID = ProjectHierarchy.CreatorID
+	ON Creator.UserId = ProjectHierarchy.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ProjectHierarchy.ModifierID
-WHERE StatusName.LanguageID = @LanguageID
+	ON Modifier.UserId = ProjectHierarchy.ModifierID
+WHERE StatusName.LanguageId = @LanguageID
 ORDER BY Path;
 END;

@@ -1,34 +1,34 @@
-CREATE PROCEDURE [dbo].[usp_PageSectionType] (@UserID nvarchar(450), @PageSectionTypeID int) 
+CREATE PROCEDURE [dbo].[usp_PageSectionType] (@UserId nvarchar(450), @PageSectionTypeId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT PageSectionTypes.PageSectionTypeID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT PageSectionTypes.PageSectionTypeId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
 	, ISNULL(UIMenuNameCustom.Customization,UIMenuName.Name) MenuName
 	, ISNULL(UIMouseOverCustom.Customization,UIMouseOver.Name) MouseOver
 FROM PageSectionTypes
 JOIN UITermLanguages UIName
-	ON UIName.UITermID = PageSectionTypes.NameTermID
+	ON UIName.UITermId = PageSectionTypes.NameTermID
 JOIN UITermLanguages UIDescription
-	ON UIDescription.UITermID = PageSectionTypes.NameTermID
+	ON UIDescription.UITermId = PageSectionTypes.NameTermID
 JOIN UITermLanguages UIMenuName
-	ON UIMEnuName.UITermID = PageSectionTypes.NameTermID
+	ON UIMEnuName.UITermId = PageSectionTypes.NameTermID
 JOIN UITermLanguages UIMouseOver
-	ON UIMouseOver.UITermID = PageSectionTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
-	ON UINameCustom.UITermID = PageSectionTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDescriptionCustom
-	ON UIDescriptionCustom.UITermID = PageSectionTypes.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMenuNameCustom
-	ON UIMenuNameCustom.UITermID = PageSectionTypes.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
-	ON UIMouseOverCustom.UITermID = PageSectionTypes.MouseOverTermID
-WHERE UIName.LanguageID = @LanguageID
-	AND UIDescription.LanguageID = @LanguageID
-	AND UIMenuName.LanguageID = @LanguageID
-	AND UIMouseOver.LanguageID = @LanguageID
-	AND PageSectionTypes.PageSectionTypeID  = @PageSectionTypeID
+	ON UIMouseOver.UITermId = PageSectionTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = PageSectionTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDescriptionCustom
+	ON UIDescriptionCustom.UITermId = PageSectionTypes.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMenuNameCustom
+	ON UIMenuNameCustom.UITermId = PageSectionTypes.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMouseOverCustom
+	ON UIMouseOverCustom.UITermId = PageSectionTypes.MouseOverTermID
+WHERE UIName.LanguageId = @LanguageID
+	AND UIDescription.LanguageId = @LanguageID
+	AND UIMenuName.LanguageId = @LanguageID
+	AND UIMouseOver.LanguageId = @LanguageID
+	AND PageSectionTypes.PageSectionTypeId  = @PageSectionTypeID

@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_OrganizationAddressCreate] (
-	@OrganizationID int
-	, @AddressTypeID int
+	@OrganizationId int
+	, @AddressTypeId int
 	, @AttnName nvarchar(50)
 	, @Address1 nvarchar(100)
 	, @Address2 nvarchar(100)
@@ -10,15 +10,15 @@ CREATE PROCEDURE [dbo].[usp_OrganizationAddressCreate] (
 	, @City nvarchar(50)
 	, @PostalCode nvarchar(50)
 	, @PostalCodeExt nvarchar(50)
-	, @CountryID int
+	, @CountryId int
 	, @ProvinceState nvarchar(50)
 	, @County nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 INSERT INTO OrganizationAddresses (
-	OrganizationID 
-	, AddressTypeID 
+	OrganizationId 
+	, AddressTypeId 
 	, AttnName 
 	, Address1 
 	, Address2 
@@ -36,8 +36,8 @@ INSERT INTO OrganizationAddresses (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@OrganizationID 
-	, @AddressTypeID 
+	@OrganizationId 
+	, @AddressTypeId 
 	, @AttnName 
 	, @Address1 
 	, @Address2 

@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_RoleClaims] (@UserID nvarchar(450), @RoleID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_RoleClaims] (@UserId nvarchar(450), @RoleId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT Claims.ClaimID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT Claims.ClaimId 
 	, Claims.ClaimType 
 	, Claims.ClaimValue
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
@@ -21,48 +21,48 @@ JOIN Claims
 	ON AspNetRoleClaims.ClaimType = Claims.ClaimType
 		AND AspNetRoleClaims.ClaimValue = CAST(Claims.ClaimId AS int)
 JOIN ClaimGroups
-	ON Claims.ClaimGroupID = ClaimGroups.ClaimGroupID
+	ON Claims.ClaimGroupId = ClaimGroups.ClaimGroupID
 JOIN UITermLanguages UIName
-	ON UIName.UITermID = Claims.NameTermID
+	ON UIName.UITermId = Claims.NameTermID
 JOIN UITermLanguages UIDescription
-	ON UIDescription.UITermID = Claims.NameTermID
+	ON UIDescription.UITermId = Claims.NameTermID
 JOIN UITermLanguages UIMenuName
-	ON UIMEnuName.UITermID = Claims.NameTermID
+	ON UIMEnuName.UITermId = Claims.NameTermID
 JOIN UITermLanguages UIMouseOver
-	ON UIMouseOver.UITermID = Claims.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
-	ON UINameCustom.UITermID = Claims.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDescriptionCustom
-	ON UIDescriptionCustom.UITermID = Claims.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMenuNameCustom
-	ON UIMenuNameCustom.UITermID = Claims.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
-	ON UIMouseOverCustom.UITermID = Claims.MouseOverTermID
+	ON UIMouseOver.UITermId = Claims.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = Claims.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDescriptionCustom
+	ON UIDescriptionCustom.UITermId = Claims.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMenuNameCustom
+	ON UIMenuNameCustom.UITermId = Claims.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMouseOverCustom
+	ON UIMouseOverCustom.UITermId = Claims.MouseOverTermID
 JOIN UITermLanguages UIGroupName
-	ON UIGroupName.UITermID = ClaimGroups.NameTermID
+	ON UIGroupName.UITermId = ClaimGroups.NameTermID
 JOIN UITermLanguages UIGroupDescription
-	ON UIGroupDescription.UITermID = ClaimGroups.NameTermID
+	ON UIGroupDescription.UITermId = ClaimGroups.NameTermID
 JOIN UITermLanguages UIGroupMenuName
-	ON UIGroupMEnuName.UITermID = ClaimGroups.NameTermID
+	ON UIGroupMEnuName.UITermId = ClaimGroups.NameTermID
 JOIN UITermLanguages UIGroupMouseOver
-	ON UIGroupMouseOver.UITermID = ClaimGroups.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupNameCustom
-	ON UIGroupNameCustom.UITermID = ClaimGroups.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupDescriptionCustom
-	ON UIGroupDescriptionCustom.UITermID = ClaimGroups.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupMenuNameCustom
-	ON UIGroupMenuNameCustom.UITermID = ClaimGroups.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupMouseOverCustom
-	ON UIGroupMouseOverCustom.UITermID = ClaimGroups.MouseOverTermID
-WHERE UIName.LanguageID = @LanguageID
-	AND UIDescription.LanguageID = @LanguageID
-	AND UIMenuName.LanguageID = @LanguageID
-	AND UIMouseOver.LanguageID = @LanguageID
-	AND UIGroupName.LanguageID = @LanguageID
-	AND UIGroupDescription.LanguageID = @LanguageID
-	AND UIGroupMenuName.LanguageID = @LanguageID
-	AND UIGroupMouseOver.LanguageID = @LanguageID
-	AND RoleID NOT IN (SELECT RoleID FROM AspNetRoleClaims WHERE ClaimType ='OrganizationRight' OR  ClaimType ='ProjectRight' )
+	ON UIGroupMouseOver.UITermId = ClaimGroups.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupNameCustom
+	ON UIGroupNameCustom.UITermId = ClaimGroups.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupDescriptionCustom
+	ON UIGroupDescriptionCustom.UITermId = ClaimGroups.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupMenuNameCustom
+	ON UIGroupMenuNameCustom.UITermId = ClaimGroups.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupMouseOverCustom
+	ON UIGroupMouseOverCustom.UITermId = ClaimGroups.MouseOverTermID
+WHERE UIName.LanguageId = @LanguageID
+	AND UIDescription.LanguageId = @LanguageID
+	AND UIMenuName.LanguageId = @LanguageID
+	AND UIMouseOver.LanguageId = @LanguageID
+	AND UIGroupName.LanguageId = @LanguageID
+	AND UIGroupDescription.LanguageId = @LanguageID
+	AND UIGroupMenuName.LanguageId = @LanguageID
+	AND UIGroupMouseOver.LanguageId = @LanguageID
+	AND RoleId NOT IN (SELECT RoleId FROM AspNetRoleClaims WHERE ClaimType ='OrganizationRight' OR  ClaimType ='ProjectRight' )
 ORDER BY claimgroups.Sequence
 	, ISNULL(UINameCustom.Customization,UIName.Name)
 

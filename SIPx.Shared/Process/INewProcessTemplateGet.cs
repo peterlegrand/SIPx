@@ -10,12 +10,12 @@ namespace SIPx.Shared
         string MenuName { get; set; }
         string MouseOver { get; set; }
         string Name { get; set; }
-        int ProcessTemplateFieldID { get; set; }
-        int ProcessTemplateFieldTypeID { get; set; }
-        int ProcessTemplateID { get; set; }
-        int ProcessTemplateStageFieldStatusID { get; set; }
+        int ProcessTemplateFieldId { get; set; }
+        int ProcessTemplateFieldTypeId { get; set; }
+        int ProcessTemplateId { get; set; }
+        int ProcessTemplateStageFieldStatusId { get; set; }
         int Sequence { get; set; }
         string StringValue { get; set; }
-        int ValueUpdateTypeID { get; set; }
+        int ValueUpdateTypeId { get; set; }
     }
 }

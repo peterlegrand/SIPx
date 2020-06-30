@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_MetaListValueUpdateType]
 AS
-SELECT ValueUpdateTypes.ValueUpdateTypeID, Name FROM ValueUpdateTypes JOIN UITermLanguages ON ValueUpdateTypes.NameTermID = UITermLanguages.UITermID WHERE LanguageID =41 ORDER BY ValueUpdateTypes.ValueUpdateTypeID
+SELECT ValueUpdateTypes.ValueUpdateTypeId, Name FROM ValueUpdateTypes JOIN UITermLanguages ON ValueUpdateTypes.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY ValueUpdateTypes.ValueUpdateTypeID
 
 
 

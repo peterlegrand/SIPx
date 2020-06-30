@@ -1,36 +1,36 @@
-CREATE PROCEDURE [dbo].[usp_DateLevels] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_DateLevels] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT DateLevels.DateLevelID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT DateLevels.DateLevelId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
 	, ISNULL(UIMenuNameCustom.Customization,UIMenuName.Name) MenuName
 	, ISNULL(UIMouseOverCustom.Customization,UIMouseOver.Name) MouseOver
 FROM DateLevels 
 JOIN UITermLanguages UIName
-	ON UIName.UITermID = DateLevels.NameTermID
+	ON UIName.UITermId = DateLevels.NameTermID
 JOIN UITermLanguages UIDescription
-	ON UIDescription.UITermID = DateLevels.NameTermID
+	ON UIDescription.UITermId = DateLevels.NameTermID
 JOIN UITermLanguages UIMenuName
-	ON UIMEnuName.UITermID = DateLevels.NameTermID
+	ON UIMEnuName.UITermId = DateLevels.NameTermID
 JOIN UITermLanguages UIMouseOver
-	ON UIMouseOver.UITermID = DateLevels.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
-	ON UINameCustom.UITermID = DateLevels.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDescriptionCustom
-	ON UIDescriptionCustom.UITermID = DateLevels.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMenuNameCustom
-	ON UIMenuNameCustom.UITermID = DateLevels.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
-	ON UIMouseOverCustom.UITermID = DateLevels.MouseOverTermID
-WHERE UIName.LanguageID = @LanguageID
-	AND UIDescription.LanguageID = @LanguageID
-	AND UIMenuName.LanguageID = @LanguageID
-	AND UIMouseOver.LanguageID = @LanguageID
+	ON UIMouseOver.UITermId = DateLevels.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = DateLevels.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDescriptionCustom
+	ON UIDescriptionCustom.UITermId = DateLevels.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMenuNameCustom
+	ON UIMenuNameCustom.UITermId = DateLevels.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMouseOverCustom
+	ON UIMouseOverCustom.UITermId = DateLevels.MouseOverTermID
+WHERE UIName.LanguageId = @LanguageID
+	AND UIDescription.LanguageId = @LanguageID
+	AND UIMenuName.LanguageId = @LanguageID
+	AND UIMouseOver.LanguageId = @LanguageID
 ORDER BY ISNULL(UINameCustom.Customization,UIName.Name)
 
 

@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationLevelUpdate] (
-	@ClassificationLevelLanguageID int
-	, @ClassificationLevelID int
+	@ClassificationLevelLanguageId int
+	, @ClassificationLevelId int
 	, @Sequence int
-	, @DateLevelID int
+	, @DateLevelId int
 	, @OnTheFly bit
 	, @Alphabetically bit
 	, @CanLink bit
@@ -12,39 +12,39 @@ CREATE PROCEDURE [dbo].[usp_ClassificationLevelUpdate] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
-DECLARE @ClassificationID int;
-SELECT @OldSequence = Sequence, @ClassificationID = ClassificationID FROM ClassificationLevels WHERE ClassificationLevelID = @ClassificationLevelID;
+DECLARE @ClassificationId int;
+SELECT @OldSequence = Sequence, @ClassificationId = ClassificationId FROM ClassificationLevels WHERE ClassificationLevelId = @ClassificationLevelID;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE ClassificationLevels SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @ClassificationID = ClassificationID 
+UPDATE ClassificationLevels SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @ClassificationId = ClassificationId 
 END
 ELSE
 BEGIN
-UPDATE ClassificationLevels SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND @ClassificationID = ClassificationID 
+UPDATE ClassificationLevels SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND @ClassificationId = ClassificationId 
 END
 
 UPDATE ClassificationLevels SET 
 	Sequence = @Sequence
-	, DateLevelID = @DateLevelID
+	, DateLevelId = @DateLevelID
 	, OnTheFly = @OnTheFly
 	, Alphabetically = @Alphabetically
 	, CanLink = @CanLink
 	, InDropDown = @InDropDown
 	, InMenu = @InMenu
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ClassificationLevelID = @ClassificationLevelID
+WHERE ClassificationLevelId = @ClassificationLevelID
 
 UPDATE  ClassificationLevelLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationLevelLanguageID= @ClassificationLevelLanguageID
 

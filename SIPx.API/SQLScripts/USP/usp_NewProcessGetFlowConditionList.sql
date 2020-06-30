@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_NewProcessGetFlowConditionList (@FlowID int) 
+CREATE PROCEDURE usp_NewProcessGetFlowConditionList (@FlowId int) 
 AS
 SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowId
 	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionId
@@ -10,6 +10,6 @@ SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowId
 	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionInt
 	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionDate
 FROM ProcessTemplateFlowConditions 
-WHERE ProcessTemplateFlowConditions.ProcessTemplateFlowID = @FlowID
+WHERE ProcessTemplateFlowConditions.ProcessTemplateFlowId = @FlowID
 ORDER BY Sequence
 

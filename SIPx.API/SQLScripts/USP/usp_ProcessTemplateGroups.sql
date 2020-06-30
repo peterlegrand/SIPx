@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroups] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroups] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateGroups.ProcessTemplateGroupID
 	, ISNULL(UserProcessTemplateGroupLanguage.Name,ISNULL(DefaultProcessTemplateGroupLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserProcessTemplateGroupLanguage.Description,ISNULL(DefaultProcessTemplateGroupLanguage.Description,'No description for this role')) Description
@@ -16,12 +16,12 @@ SELECT ProcessTemplateGroups.ProcessTemplateGroupID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ProcessTemplateGroups.ModifiedDate
 FROM ProcessTemplateGroups 
-LEFT JOIN (SELECT ProcessTemplateGroupID, Name, Description, MenuName, MouseOver FROM ProcessTemplateGroupLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateGroupLanguage
-	ON UserProcessTemplateGroupLanguage.ProcessTemplateGroupID = ProcessTemplateGroups.ProcessTemplateGroupID
-LEFT JOIN (SELECT ProcessTemplateGroupID, Name, Description, MenuName, MouseOver FROM ProcessTemplateGroupLanguages JOIN Settings ON ProcessTemplateGroupLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateGroupLanguage
-	ON DefaultProcessTemplateGroupLanguage.ProcessTemplateGroupID = ProcessTemplateGroups.ProcessTemplateGroupID
+LEFT JOIN (SELECT ProcessTemplateGroupId, Name, Description, MenuName, MouseOver FROM ProcessTemplateGroupLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateGroupLanguage
+	ON UserProcessTemplateGroupLanguage.ProcessTemplateGroupId = ProcessTemplateGroups.ProcessTemplateGroupID
+LEFT JOIN (SELECT ProcessTemplateGroupId, Name, Description, MenuName, MouseOver FROM ProcessTemplateGroupLanguages JOIN Settings ON ProcessTemplateGroupLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateGroupLanguage
+	ON DefaultProcessTemplateGroupLanguage.ProcessTemplateGroupId = ProcessTemplateGroups.ProcessTemplateGroupID
 JOIN Persons Creator
-	ON Creator.UserID = ProcessTemplateGroups.CreatorID
+	ON Creator.UserId = ProcessTemplateGroups.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ProcessTemplateGroups.ModifierID
+	ON Modifier.UserId = ProcessTemplateGroups.ModifierID
 ORDER BY ProcessTemplateGroups.Sequence

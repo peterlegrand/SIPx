@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_UITerms] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_UITerms] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT UITerms.UITermID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT UITerms.UITermId 
 	, UITerms.InternalName
 	, UITermLanguages.Name UITermLanguageName
 	, UITermLanguages.Description UITermLanguageDescription
@@ -14,8 +14,8 @@ SELECT UITerms.UITermID
 	
 FROM UITerms
 JOIN UITermLanguages
-	ON UITermLanguages.UITermID = UITerms.UITermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations WHERE LanguageID = @LanguageID) Customization
-	ON Customization.UITermID = UITerms.UITermID
-WHERE UITermLanguages.LanguageID = @LanguageID
+	ON UITermLanguages.UITermId = UITerms.UITermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations WHERE LanguageId = @LanguageID) Customization
+	ON Customization.UITermId = UITerms.UITermID
+WHERE UITermLanguages.LanguageId = @LanguageID
 ORDER BY UITermLanguages.Name 

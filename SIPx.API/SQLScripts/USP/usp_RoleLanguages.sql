@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_RoleLanguages] (@UserID nvarchar(450), @RoleID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_RoleLanguages] (@UserId nvarchar(450), @RoleId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT RoleLanguages.RoleLanguageID
 	, RoleLanguages.LanguageID
@@ -19,17 +19,17 @@ SELECT RoleLanguages.RoleLanguageID
 	, RoleLanguages.ModifiedDate
 FROM AspNetRoles
 JOIN RoleLanguages
-	ON AspNetRoles.ID = RoleLanguages.RoleID
+	ON AspNetRoles.Id = RoleLanguages.RoleID
 JOIN Languages 
-	ON Languages.LanguageID = RoleLanguages.LanguageID
+	ON Languages.LanguageId = RoleLanguages.LanguageID
 JOIN UITermLanguages UILanguageName
-	ON UILanguageName.UITermID = Languages.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UILanguageNameCustom
-	ON UILanguageNameCustom.UITermID = Languages.NameTermID
+	ON UILanguageName.UITermId = Languages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UILanguageNameCustom
+	ON UILanguageNameCustom.UITermId = Languages.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = RoleLanguages.CreatorID
+	ON Creator.UserId = RoleLanguages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = RoleLanguages.ModifierID
-WHERE AspNetRoles.ID = @RoleID
-	AND UILanguageName.LanguageID = @LanguageID
+	ON Modifier.UserId = RoleLanguages.ModifierID
+WHERE AspNetRoles.Id = @RoleID
+	AND UILanguageName.LanguageId = @LanguageID
 ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)

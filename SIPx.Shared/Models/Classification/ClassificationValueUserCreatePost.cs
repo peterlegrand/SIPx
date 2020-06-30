@@ -8,10 +8,10 @@ namespace SIPx.Shared
     public class ClassificationValueUserCreatePost : IClassificationValueUserCreatePost
     {
         [Key]
-        public string @UserOfClassificationID { get; set; }
-        public int ClassificationValueID { get; set; }
-        public int ClassificationID { get; set; }
-        public int ClassificationRelationTypeID { get; set; }
+        public string @UserOfClassificationId { get; set; }
+        public int ClassificationValueId { get; set; }
+        public int ClassificationId { get; set; }
+        public int ClassificationRelationTypeId { get; set; }
         public string UserId { get; set; }
     }
 }

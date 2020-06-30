@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationLevelLanguages] (@UserID nvarchar(450), @ClassificationLevelID int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationLevelLanguages] (@UserId nvarchar(450), @ClassificationLevelId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT ClassificationLevelLanguages.ClassificationLevelLanguageID
 	, ClassificationLevelLanguages.LanguageID
@@ -19,19 +19,19 @@ SELECT ClassificationLevelLanguages.ClassificationLevelLanguageID
 	, ClassificationLevelLanguages.ModifiedDate
 FROM ClassificationLevels
 JOIN ClassificationLevelLanguages
-	ON ClassificationLevels.ClassificationLevelID = ClassificationLevelLanguages.ClassificationLevelID
+	ON ClassificationLevels.ClassificationLevelId = ClassificationLevelLanguages.ClassificationLevelID
 JOIN Languages 
-	ON Languages.LanguageID = ClassificationLevelLanguages.LanguageID
+	ON Languages.LanguageId = ClassificationLevelLanguages.LanguageID
 JOIN UITermLanguages UILanguageName
-	ON UILanguageName.UITermID = Languages.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UILanguageNameCustom
-	ON UILanguageNameCustom.UITermID = Languages.NameTermID
+	ON UILanguageName.UITermId = Languages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UILanguageNameCustom
+	ON UILanguageNameCustom.UITermId = Languages.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationLevelLanguages.CreatorID
+	ON Creator.UserId = ClassificationLevelLanguages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationLevelLanguages.ModifierID
-WHERE ClassificationLevels.ClassificationLevelID = @ClassificationLevelID
-	AND UILanguageName.LanguageID = @LanguageID
+	ON Modifier.UserId = ClassificationLevelLanguages.ModifierID
+WHERE ClassificationLevels.ClassificationLevelId = @ClassificationLevelID
+	AND UILanguageName.LanguageId = @LanguageID
 ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)
 
 

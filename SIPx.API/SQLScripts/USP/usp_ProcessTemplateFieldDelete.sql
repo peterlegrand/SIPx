@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldDelete] (
-	@ProcessTemplateFieldID int) 
+	@ProcessTemplateFieldId int) 
 AS 
 BEGIN TRANSACTION
-DELETE FROM ProcessTemplateFieldLanguages WHERE ProcessTemplateFieldID = @ProcessTemplateFieldID
-DELETE FROM ProcessTemplateFields WHERE ProcessTemplateFieldID = @ProcessTemplateFieldID
+DELETE FROM ProcessTemplateFieldLanguages WHERE ProcessTemplateFieldId = @ProcessTemplateFieldID
+DELETE FROM ProcessTemplateFields WHERE ProcessTemplateFieldId = @ProcessTemplateFieldID
 COMMIT TRANSACTION
 
 

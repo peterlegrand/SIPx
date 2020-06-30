@@ -9,12 +9,12 @@ SELECT
 	 , LangLanguage.Name
 FROM Languages 
 JOIN STatuses	
-	ON Statuses.StatusID = Languages.StatusID
+	ON Statuses.StatusId = Languages.StatusID
 JOIN UITermLanguages StatusLanguage
-		ON Statuses.NameTermID = StatusLanguage.UITermID  
+		ON Statuses.NameTermId = StatusLanguage.UITermId  
 JOIN UITermLanguages LangLanguage
-		ON Languages.NameTermID = LangLanguage.UITermID  
-WHERE StatusLanguage.LanguageID =41  and LangLanguage.LanguageID = 41
+		ON Languages.NameTermId = LangLanguage.UITermId  
+WHERE StatusLanguage.LanguageId =41  and LangLanguage.LanguageId = 41
 ORDER BY LangLanguage.Name
 
 

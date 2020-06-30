@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ClassificationValueUser
     {
         [Key]
-        public String UserID { get; set; }
+        public String UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string RelationTypeName { get; set; }

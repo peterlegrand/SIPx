@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_PersonRelationTypeLanguages] (@UserID nvarchar(450), @PersonRelationTypeID int) 
+CREATE PROCEDURE [dbo].[usp_PersonRelationTypeLanguages] (@UserId nvarchar(450), @PersonRelationTypeId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT PersonRelationTypeLanguages.PersonRelationTypeLanguageID
 	, PersonRelationTypeLanguages.LanguageID
@@ -21,18 +21,18 @@ SELECT PersonRelationTypeLanguages.PersonRelationTypeLanguageID
 	, PersonRelationTypeLanguages.ModifiedDate
 FROM PersonRelationTypes
 JOIN PersonRelationTypeLanguages
-	ON PersonRelationTypes.PersonRelationTypeID = PersonRelationTypeLanguages.PersonRelationTypeID
+	ON PersonRelationTypes.PersonRelationTypeId = PersonRelationTypeLanguages.PersonRelationTypeID
 JOIN Languages 
-	ON Languages.LanguageID = PersonRelationTypeLanguages.LanguageID
+	ON Languages.LanguageId = PersonRelationTypeLanguages.LanguageID
 JOIN UITermLanguages UILanguageName
-	ON UILanguageName.UITermID = Languages.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UILanguageNameCustom
-	ON UILanguageNameCustom.UITermID = Languages.NameTermID
+	ON UILanguageName.UITermId = Languages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UILanguageNameCustom
+	ON UILanguageNameCustom.UITermId = Languages.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = PersonRelationTypeLanguages.CreatorID
+	ON Creator.UserId = PersonRelationTypeLanguages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = PersonRelationTypeLanguages.ModifierID
-WHERE PersonRelationTypes.PersonRelationTypeID = @PersonRelationTypeID
-	AND UILanguageName.LanguageID = @LanguageID
+	ON Modifier.UserId = PersonRelationTypeLanguages.ModifierID
+WHERE PersonRelationTypes.PersonRelationTypeId = @PersonRelationTypeID
+	AND UILanguageName.LanguageId = @LanguageID
 ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)
 

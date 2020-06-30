@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageDelete] (
-	@ProcessTemplateStageID int) 
+	@ProcessTemplateStageId int) 
 AS 
 BEGIN TRANSACTION
-DELETE FROM ProcessTemplateStageLanguages WHERE ProcessTemplateStageID = @ProcessTemplateStageID
-DELETE FROM ProcessTemplateStages WHERE ProcessTemplateStageID = @ProcessTemplateStageID
+DELETE FROM ProcessTemplateStageLanguages WHERE ProcessTemplateStageId = @ProcessTemplateStageID
+DELETE FROM ProcessTemplateStages WHERE ProcessTemplateStageId = @ProcessTemplateStageID
 COMMIT TRANSACTION

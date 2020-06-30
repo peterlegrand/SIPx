@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ProcessField
     {
         [Key]
-        public int ProcessFieldID { get; set; }
+        public int ProcessFieldId { get; set; }
         public int? IntValue { get; set; }
         public string StringValue { get; set; }
         public DateTime? DateTimeValue { get; set; }

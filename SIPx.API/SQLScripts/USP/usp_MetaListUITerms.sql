@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[usp_MetaListUITerms]
 AS
-SELECT UITerms.UITermID, InternalName, Name 
+SELECT UITerms.UITermId, InternalName, Name 
 FROM UITerms 
 JOIN UITermLanguages
-	ON UITerms.UITermID = UITermLanguages.UITermID
-WHERE LanguageID =41 
+	ON UITerms.UITermId = UITermLanguages.UITermID
+WHERE LanguageId =41 
 ORDER BY InternalName
 

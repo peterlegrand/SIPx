@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageLanguageDelete] (@ProcessTemplateStageLanguageID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageLanguageDelete] (@ProcessTemplateStageLanguageId int) 
 AS 
 DELETE FROM ProcessTemplateStageLanguages WHERE ProcessTemplateStageLanguageID= @ProcessTemplateStageLanguageID
 

@@ -2,10 +2,10 @@
 {
     public interface IClassificationValueUserCreatePost
     {
-        int ClassificationID { get; set; }
-        int ClassificationRelationTypeID { get; set; }
-        int ClassificationValueID { get; set; }
+        int ClassificationId { get; set; }
+        int ClassificationRelationTypeId { get; set; }
+        int ClassificationValueId { get; set; }
         string UserId { get; set; }
-        string UserOfClassificationID { get; set; }
+        string UserOfClassificationId { get; set; }
     }
 }

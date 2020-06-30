@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_OrganizationAddressDelete] (
-	@OrganizationAddressID  int
+	@OrganizationAddressId  int
 ) 
 AS 
 
 DELETE FROM  OrganizationAddresses 
-	WHERE OrganizationAddressID = @OrganizationAddressID 
+	WHERE OrganizationAddressId = @OrganizationAddressId 
 	

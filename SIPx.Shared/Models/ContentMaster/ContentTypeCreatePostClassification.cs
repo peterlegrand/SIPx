@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class ContentTypeCreatePostClassification : IContentTypeCreatePostClassification
     {
         [Key]
-        public int ClassificationID { get; set; }
-        public int ContentTypeClassificationStatusID { get; set; }
+        public int ClassificationId { get; set; }
+        public int ContentTypeClassificationStatusId { get; set; }
     }
 }

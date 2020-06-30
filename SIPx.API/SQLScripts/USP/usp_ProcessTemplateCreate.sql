@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateCreate] (
-	 @ProcessTemplateGroupID int
+	 @ProcessTemplateGroupId int
 	, @ShowInPersonalCalendar bit
 	, @ShowInEventCalendar bit
 	, @ProcessMultiMax int
@@ -9,17 +9,17 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateCreate] (
 	, @ShowInSearch bit
 	, @ShowInReports bit
 	, @HideEverywhere bit
-	, @LanguageID int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
 UPDATE ProcessTemplates SET Sequence = Sequence + 1 
-WHERE ProcessTemplateGroupID = @ProcessTemplateGroupID
+WHERE ProcessTemplateGroupId = @ProcessTemplateGroupID
 	AND Sequence >= @Sequence
 
 INSERT INTO ProcessTemplates (

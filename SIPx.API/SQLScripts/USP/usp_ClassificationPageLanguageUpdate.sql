@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationPageLanguageUpdate] (
-	@ClassificationPageLanguageID int
+	@ClassificationPageLanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 UPDATE  ClassificationPageLanguages SET 
 	Name = @Name
@@ -15,6 +15,6 @@ UPDATE  ClassificationPageLanguages SET
 	, MouseOver = @MouseOver
 	, TitleName = @TitleName
 	, TitleDescription = @TitleDescription
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationPageLanguageID= @ClassificationPageLanguageID

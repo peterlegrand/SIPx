@@ -8,9 +8,9 @@ namespace SIPx.Shared
     public class ContentTypeCreatePost : IContentTypeCreatePost
     {
         [Key]
-        public int ContentTypeGroupID { get; set; }
-        public int ProcessTemplateID { get; set; }
-        public int SecurityLevelID { get; set; }
+        public int ContentTypeGroupId { get; set; }
+        public int ProcessTemplateId { get; set; }
+        public int SecurityLevelId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

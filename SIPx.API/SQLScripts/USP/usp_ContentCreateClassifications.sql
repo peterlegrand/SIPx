@@ -1,26 +1,26 @@
-CREATE PROCEDURE [dbo].[usp_ContentCreateClassifications] (@UserID nvarchar(450), @ContentTypeID int) 
+CREATE PROCEDURE [dbo].[usp_ContentCreateClassifications] (@UserId nvarchar(450), @ContentTypeId int) 
 AS 
-DECLARE @LanguageID int;
+DECLARE @LanguageId int;
 
-DECLARE @SecurityLevelID int;
-SELECT @SecurityLevelID = SecurityLevelID
+DECLARE @SecurityLevelId int;
+SELECT @SecurityLevelId = SecurityLevelID
 FROM AspNetUsers
 WHERE Id = @UserID;
 
-SELECT @LanguageID = IntPreference
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT
 	ContentTypeClassifications.ClassificationID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
 FROM ContentTypeClassifications
-LEFT JOIN (SELECT ClassificationID, Name FROM ClassificationLanguages WHERE LanguageID = @LanguageID) UserLanguage
+LEFT JOIN (SELECT ClassificationId, Name FROM ClassificationLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.ClassificationID= ContentTypeClassifications.ClassificationID
-LEFT JOIN (SELECT ClassificationID, Name FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
-	ON DefaultLanguage.ClassificationID = ContentTypeClassifications.ClassificationID
-WHERE ContentTypeClassifications.ContentTypeID = @ContentTypeID
-	AND ContentTypeClassifications.ContentTypeClassificationStatusID <> 1
+LEFT JOIN (SELECT ClassificationId, Name FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ClassificationId = ContentTypeClassifications.ClassificationID
+WHERE ContentTypeClassifications.ContentTypeId = @ContentTypeID
+	AND ContentTypeClassifications.ContentTypeClassificationStatusId <> 1
 ORDER BY ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification'))
 

@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class Setting
     {
         [Key]
-        public int SettingID { get; set; }
+        public int SettingId { get; set; }
         public int? IntValue { get; set; }
         public string StringValue { get; set; }
         public DateTime? DateTimeValue { get; set; }

@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[usp_OrganizationTelecomDelete] (
-	@OrganizationTelecomID int) 
+	@OrganizationTelecomId int) 
 AS 
 
 BEGIN TRANSACTION
 
-DELETE FROM  OrganizationTelecoms  WHERE OrganizationTelecomID = @OrganizationTelecomID
-DELETE FROM OrganizationTelecomPhones WHERE OrganizationTelecomID = @OrganizationTelecomID
+DELETE FROM  OrganizationTelecoms  WHERE OrganizationTelecomId = @OrganizationTelecomID
+DELETE FROM OrganizationTelecomPhones WHERE OrganizationTelecomId = @OrganizationTelecomID
 COMMIT TRANSACTION
 
 

@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ClassificationLevel
     {
         [Key]
-        public int ClassificationLevelID { get; set; }
+        public int ClassificationLevelId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

@@ -6,10 +6,10 @@ namespace SIPx.Shared
     {
         DateTime Birthdate { get; set; }
         DateTime DeceasedDate { get; set; }
-        int DefaultOrganizationID { get; set; }
+        int DefaultOrganizationId { get; set; }
         string FirstName { get; set; }
         string FirstNameLocal { get; set; }
-        int GenderID { get; set; }
+        int GenderId { get; set; }
         string LastName { get; set; }
         string LastNameLocal { get; set; }
         string MiddleName { get; set; }

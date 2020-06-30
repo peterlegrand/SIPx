@@ -21,49 +21,49 @@ namespace SIPx.DataAccess
         //public async Task<List<ClassificationViewGet>> GetClassifications(int LanguageId)
         //{
         //    string usp = "usp_ClassificationViewGet @LanguageID";
-        //    var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageID = LanguageId });
+        //    var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageId = LanguageId });
         //    return x;
         //}
-        public async Task<List<Content>> GetContents(string UserID)
+        public async Task<List<Content>> GetContents(string UserId)
         {
             string usp = "usp_Contents @UserID";
-            var x = await _sqlDataAccess.LoadData<Content, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<Content, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<ContentType>> GetContentTypes(string UserID)
+        public async Task<List<ContentType>> GetContentTypes(string UserId)
         {
             string usp = "usp_ContentTypes @UserID";
-            var x = await _sqlDataAccess.LoadData<ContentType, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<ContentType, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<LanguageList>> GetLanguageList(string UserID)
+        public async Task<List<LanguageList>> GetLanguageList(string UserId)
         {
             string usp = "usp_ContentCreateLanguages @UserID";
-            var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<ClassificationList>> GetClassificationList(string UserID, int ContentTypeID)
+        public async Task<List<ClassificationList>> GetClassificationList(string UserId, int ContentTypeId)
         {
-            string usp = "usp_ContentCreateClassifications @UserID, @ContentTypeID";
-            var x = await _sqlDataAccess.LoadData<ClassificationList, dynamic>(usp, new { UserID = UserID, ContentTypeID = ContentTypeID });
+            string usp = "usp_ContentCreateClassifications @UserId, @ContentTypeID";
+            var x = await _sqlDataAccess.LoadData<ClassificationList, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
             return x;
         }
-        public async Task<List<OrganizationList>> GetOrganizationList(string UserID)
+        public async Task<List<OrganizationList>> GetOrganizationList(string UserId)
         {
             string usp = "usp_ContentCreateOrganizations @UserID";
-            var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserID = UserID});
+            var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<ContentCreateListSet> GetContentCreateListSet(string UserID, int ContentTypeID)
+        public async Task<ContentCreateListSet> GetContentCreateListSet(string UserId, int ContentTypeId)
         {
-            string usp = "usp_ContentCreate1a @UserID, @ContentTypeID";
-            var x = await _sqlDataAccess.LoadData<ContentCreateListSet, dynamic>(usp, new { UserID = UserID, ContentTypeID = ContentTypeID });
+            string usp = "usp_ContentCreate1a @UserId, @ContentTypeID";
+            var x = await _sqlDataAccess.LoadData<ContentCreateListSet, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
             return x[0];
         }
-        public async Task<List<ClassificationValueList>> GetContentCreateListSet2(string UserID, int ClassificationID)
+        public async Task<List<ClassificationValueList>> GetContentCreateListSet2(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationValues @UserID, @ClassificationID";
-            var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserID = UserID, ClassificationID = ClassificationID });
+            string usp = "usp_ClassificationValues @UserId, @ClassificationID";
+            var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId, ClassificationId = ClassificationId });
             return x;
         }
         public List<ClassificationViewGet> GetClassifications2(int LanguageId)
@@ -78,18 +78,18 @@ namespace SIPx.DataAccess
         public Task<ClassificationViewGet> GetClassificationById(int Id, int LanguageId)
         {
             string usp = "usp_AdminClassficationDetails @classificationId,  @LanguageID";
-            return _sqlDataAccess.LoadSingleRecord<ClassificationViewGet, dynamic>(usp, new { ClassificationId = Id, LanguageID = LanguageId });
+            return _sqlDataAccess.LoadSingleRecord<ClassificationViewGet, dynamic>(usp, new { ClassificationId = Id, LanguageId = LanguageId });
 
         }
         public bool PostClassification(ClassificationCreatePost Classification)
         {
-            string usp = "usp_classificationCreate @LanguageID, @StatusID, @DefaultPageId, @HasDropDown, @DropDownSequence, @CreatorId, @Name, @Description, @MenuName, @MouseOver";
+            string usp = "usp_classificationCreate @LanguageId, @StatusId, @DefaultPageId, @HasDropDown, @DropDownSequence, @CreatorId, @Name, @Description, @MenuName, @MouseOver";
             _sqlDataAccess.SaveData<ClassificationCreatePost>(usp, Classification);
             return true;
         }
         public bool PutClassification(ClassificationUpdatePut Classification)
         {
-            string usp = "usp_AdminClassificationUpdate @StatusID , @DefaultPageID , @HasDropDown , @DropDownSequence , @ModifierID , @ClassificationID , @Name , @Description , @MenuName , @MouseOver , @LanguageID";
+            string usp = "usp_AdminClassificationUpdate @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @ModifierId , @ClassificationId , @Name , @Description , @MenuName , @MouseOver , @LanguageID";
             _sqlDataAccess.SaveData<ClassificationUpdatePut>(usp, Classification);
             return true;
         }

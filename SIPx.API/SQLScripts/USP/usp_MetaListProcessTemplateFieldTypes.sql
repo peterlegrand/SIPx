@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_MetaListProcessTemplateFieldTypes]
 AS
-SELECT ProcessTemplateFieldTypes.ProcessTemplateFieldTypeID, Name
+SELECT ProcessTemplateFieldTypes.ProcessTemplateFieldTypeId, Name
 FROM ProcessTemplateFieldTypes 
 JOIN UITermLanguages
-	ON ProcessTemplateFieldTypes.NameTermID = UITermLanguages.UITermID
-WHERE LanguageID =41 
+	ON ProcessTemplateFieldTypes.NameTermId = UITermLanguages.UITermID
+WHERE LanguageId =41 
 ORDER BY Name

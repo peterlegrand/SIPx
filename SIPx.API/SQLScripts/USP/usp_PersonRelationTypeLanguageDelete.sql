@@ -1,3 +1,3 @@
-CREATE PROCEDURE [dbo].[usp_PersonRelationTypeLanguageDelete] (@PersonRelationTypeLanguageID int) 
+CREATE PROCEDURE [dbo].[usp_PersonRelationTypeLanguageDelete] (@PersonRelationTypeLanguageId int) 
 AS 
 DELETE FROM PersonRelationTypeLanguages WHERE PersonRelationTypeLanguageID= @PersonRelationTypeLanguageID

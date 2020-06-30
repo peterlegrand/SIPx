@@ -9,63 +9,63 @@ namespace SIPx.API.ViewModels
     public class MetaListAddressType
     {
         [Key]
-        public int AddressTypeID { get; set; }
+        public int AddressTypeId { get; set; }
         public string Name { get; set; }
     }
 
     public class MetaListClaim
     {
         [Key]
-        public int ClaimID { get; set; }
+        public int ClaimId { get; set; }
         public string ClaimName { get; set; }
-        public int ClaimGroupID { get; set; }
+        public int ClaimGroupId { get; set; }
         public string ClaimGroupName { get; set; }
     }
     public class MetaListClaimGroup
     {
         [Key]
-        public int ClaimGroupID { get; set; }
+        public int ClaimGroupId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListContentStatus
     {
         [Key]
-        public int ContentStatusID { get; set; }
+        public int ContentStatusId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListCountry
     {
         [Key]
-        public int CountryID { get; set; }
+        public int CountryId { get; set; }
         public string ForeingName { get; set; }
         public string ISO31662 { get; set; }
         public string ISO31663 { get; set; }
         public int ISO3166Num { get; set; }
         public string CountryName { get; set; }
-        public int SubRegionID { get; set; }
+        public int SubRegionId { get; set; }
         public string SubRegionName { get; set; }
-        public int RegionID { get; set; }
+        public int RegionId { get; set; }
         public string RegionName { get; set; }
-        public int IntermediateRegionID { get; set; }
+        public int IntermediateRegionId { get; set; }
         public string IntermediateRegionName { get; set; }
     }
 
     public class MetaListDateLevel
     {
         [Key]
-        public int DateLevelID { get; set; }
+        public int DateLevelId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListGender
     {
         [Key]
-        public int GenderID { get; set; }
+        public int GenderId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListLanguage
     {
         [Key]
-        public int LanguageID { get; set; }
+        public int LanguageId { get; set; }
         public string ForeingName { get; set; }
         public string ISO6391 { get; set; }
         public string ISO6392 { get; set; }
@@ -75,19 +75,19 @@ namespace SIPx.API.ViewModels
     public class MetaListRegion
     {
         [Key]
-        public int RegionID { get; set; }
+        public int RegionId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListSecurityLevel
     {
         [Key]
-        public int SecurityLevelID { get; set; }
+        public int SecurityLevelId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListSettings
     {
         [Key]
-        public int SettingID { get; set; }
+        public int SettingId { get; set; }
         public string Name { get; set; }
         public int IntValue { get; set; }
         public string StringValue { get; set; }
@@ -98,99 +98,99 @@ namespace SIPx.API.ViewModels
     public class MetaListSortBy
     {
         [Key]
-        public int SortByID { get; set; }
+        public int SortById { get; set; }
         public string Name { get; set; }
     }
 
     public class MetaListStatus
     {
         [Key]
-        public int StatusID { get; set; }
+        public int StatusId { get; set; }
         public string Name { get; set; }
     }
 
     public class MetaListSubRegion
     {
         [Key]
-        public int SubRegionID { get; set; }
+        public int SubRegionId { get; set; }
         public string SubRegionName { get; set; }
-        public int RegionID { get; set; }
+        public int RegionId { get; set; }
         public string RegionName { get; set; }
     }
 
     public class MetaListTelecomType
     {
         [Key]
-        public int TelecomTypeID { get; set; }
+        public int TelecomTypeId { get; set; }
         public string Name { get; set; }
     }
 
     public class MetaListValueUpdateType
     {
         [Key]
-        public int ValueUpdateTypeID { get; set; }
+        public int ValueUpdateTypeId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListUITerm
     {
         [Key]
-        public int UITermID { get; set; }
+        public int UITermId { get; set; }
         public string InternalName { get; set; }
         public string Name { get; set; }
     }
     public class MetaListUITermCustomization
     {
         [Key]
-        public int UITermID { get; set; }
+        public int UITermId { get; set; }
         public string InternalName { get; set; }
         public string Customization { get; set; }
     }
     public class MetaListPageSectionDataType
     {
         [Key]
-        public int PageSectionDataTypeID { get; set; }
+        public int PageSectionDataTypeId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListPageSectionType
     {
         [Key]
-        public int PageSectionTypeID { get; set; }
+        public int PageSectionTypeId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListPreferenceType
     {
         [Key]
-        public int PreferenceTypeID { get; set; }
+        public int PreferenceTypeId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListProcessTemplateFieldType
     {
         [Key]
-        public int ProcessTemplateFieldTypeID { get; set; }
+        public int ProcessTemplateFieldTypeId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListProcessTemplateFlowConditionComparisonOperator
     {
         [Key]
-        public int ProcessTemplateFlowConditionComparisonOperatorID { get; set; }
+        public int ProcessTemplateFlowConditionComparisonOperatorId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListProcessTemplateFlowConditionType
     {
         [Key]
-        public int ProcessTemplateFlowConditionTypeID { get; set; }
+        public int ProcessTemplateFlowConditionTypeId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListProcessTemplateStageFieldStatus
     {
         [Key]
-        public int ProcessTemplateStageFieldStatuseID { get; set; }
+        public int ProcessTemplateStageFieldStatuseId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListClassification
     {
         [Key]
-        public int ClassificationID { get; set; }
+        public int ClassificationId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -204,8 +204,8 @@ namespace SIPx.API.ViewModels
     public class MetaListClassificationLevel
     {
         [Key]
-        public int ClassificationLevelID { get; set; }
-        public int ClassificationID { get; set; }
+        public int ClassificationLevelId { get; set; }
+        public int ClassificationId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -221,8 +221,8 @@ namespace SIPx.API.ViewModels
     public class MetaListClassificationPage
     {
         [Key]
-        public int ClassificationPageID { get; set; }
-        public int ClassificationID { get; set; }
+        public int ClassificationPageId { get; set; }
+        public int ClassificationId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -236,9 +236,9 @@ namespace SIPx.API.ViewModels
     public class MetaListClassificationPageSection
     {
         [Key]
-        public int ClassificationPageSectionID { get; set; }
-        public int ClassificationPageID { get; set; }
-        public int ClassificationID { get; set; }
+        public int ClassificationPageSectionId { get; set; }
+        public int ClassificationPageId { get; set; }
+        public int ClassificationId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -257,7 +257,7 @@ namespace SIPx.API.ViewModels
     public class MetaListClassificationUsers
     {
         [Key]
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string RelationTypeName { get; set; }

@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ProcessTemplateStageType
     {
         [Key]
-        public int ProcessTemplateStageTypeID { get; set; }
+        public int ProcessTemplateStageTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

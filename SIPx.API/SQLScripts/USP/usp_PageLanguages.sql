@@ -1,12 +1,12 @@
-CREATE PROCEDURE [dbo].[usp_PageLanguages] (@UserID nvarchar(450), @PageID int) 
+CREATE PROCEDURE [dbo].[usp_PageLanguages] (@UserId nvarchar(450), @PageId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
-SELECT Pages.PageID 
+SELECT Pages.PageId 
 	, PageLanguages.PageLanguageID
 	, PageLanguages.LanguageID
 	, PageLanguages.Name
@@ -22,18 +22,18 @@ SELECT Pages.PageID
 	, PageLanguages.ModifiedDate
 FROM Pages
 JOIN PageLanguages
-	ON Pages.PageID = PageLanguages.PageID
+	ON Pages.PageId = PageLanguages.PageID
 JOIN Languages 
-	ON Languages.LanguageID = PageLanguages.LanguageID
+	ON Languages.LanguageId = PageLanguages.LanguageID
 JOIN UITermLanguages UILanguageName
-	ON UILanguageName.UITermID = Languages.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UILanguageNameCustom
-	ON UILanguageNameCustom.UITermID = Languages.NameTermID
+	ON UILanguageName.UITermId = Languages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UILanguageNameCustom
+	ON UILanguageNameCustom.UITermId = Languages.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = PageLanguages.CreatorID
+	ON Creator.UserId = PageLanguages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = PageLanguages.ModifierID
-WHERE Pages.PageID = @PageID
-	AND UILanguageName.LanguageID = @LanguageID
+	ON Modifier.UserId = PageLanguages.ModifierID
+WHERE Pages.PageId = @PageID
+	AND UILanguageName.LanguageId = @LanguageID
 ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)
 

@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationLevels] (@UserID nvarchar(450), @ClassificationID int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationLevels] (@UserId nvarchar(450), @ClassificationId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationLevels.ClassificationLevelID
 	, ISNULL(UserClassificationLevelLanguage.Name,ISNULL(DefaultClassificationLevelLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserClassificationLevelLanguage.Description,ISNULL(DefaultClassificationLevelLanguage.Description,'No description for this role')) Description
@@ -21,20 +21,20 @@ SELECT ClassificationLevels.ClassificationLevelID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationLevels.ModifiedDate
 FROM ClassificationLevels 
-LEFT JOIN (SELECT ClassificationLevelID, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages WHERE LanguageID = @LanguageID) UserClassificationLevelLanguage
-	ON UserClassificationLevelLanguage.ClassificationLevelID = ClassificationLevels.ClassificationLevelID
-LEFT JOIN (SELECT ClassificationLevelID, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages JOIN Settings ON ClassificationLevelLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationLevelLanguage
-	ON DefaultClassificationLevelLanguage.ClassificationLevelID = ClassificationLevels.ClassificationLevelID
+LEFT JOIN (SELECT ClassificationLevelId, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages WHERE LanguageId = @LanguageID) UserClassificationLevelLanguage
+	ON UserClassificationLevelLanguage.ClassificationLevelId = ClassificationLevels.ClassificationLevelID
+LEFT JOIN (SELECT ClassificationLevelId, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages JOIN Settings ON ClassificationLevelLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationLevelLanguage
+	ON DefaultClassificationLevelLanguage.ClassificationLevelId = ClassificationLevels.ClassificationLevelID
 JOIN DateLevels 
-	ON DateLevels.DateLevelID = ClassificationLevels.DateLevelID
+	ON DateLevels.DateLevelId = ClassificationLevels.DateLevelID
 JOIN UITermLanguages UIDateLevelName
-	ON UIDateLevelName.UITermID = DateLevels.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDateLevelNameCustom
-	ON UIDateLevelNameCustom.UITermID = DateLevels.NameTermID
+	ON UIDateLevelName.UITermId = DateLevels.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDateLevelNameCustom
+	ON UIDateLevelNameCustom.UITermId = DateLevels.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationLevels.CreatorID
+	ON Creator.UserId = ClassificationLevels.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationLevels.ModifierID
-WHERE ClassificationLevels.ClassificationID = @ClassificationID
-	AND UIDateLevelName.LanguageID = @LanguageID
+	ON Modifier.UserId = ClassificationLevels.ModifierID
+WHERE ClassificationLevels.ClassificationId = @ClassificationID
+	AND UIDateLevelName.LanguageId = @LanguageID
 ORDER BY ClassificationLevels.Sequence

@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_PersonUpdate] (
-	@PersonID int
+	@PersonId int
 	, @Salutation nvarchar(50)
 	, @FirstName nvarchar(50)
 	, @MiddleName nvarchar(50)
@@ -10,11 +10,11 @@ CREATE PROCEDURE [dbo].[usp_PersonUpdate] (
 	, @FirstNameLocal nvarchar(50)
 	, @MiddleNameLocal nvarchar(50)
 	, @LastNameLocal nvarchar(50)
-	, @GenderID int
+	, @GenderId int
 	, @Birthdate DateTime
 	, @DeceasedDate DateTime
-	, @DefaultOrganizationID int
-	, @UserID nvarchar(450)
+	, @DefaultOrganizationId int
+	, @UserId nvarchar(450)
 	, @ModifierCreator nvarchar(450)) 
 AS 
 UPDATE Persons SET
@@ -28,10 +28,10 @@ UPDATE Persons SET
 	, FirstNameLocal = @FirstNameLocal 
 	, MiddleNameLocal = @MiddleNameLocal 
 	, LastNameLocal = @LastNameLocal 
-	, GenderID = @GenderID 
+	, GenderId = @GenderId 
 	, Birthdate = @Birthdate 
 	, DeceasedDate = @DeceasedDate 
-	, DefaultOrganizationID = @DefaultOrganizationID 
-	, UserID = @UserID 
-	, ModifierID = @ModifierCreator
+	, DefaultOrganizationId = @DefaultOrganizationId 
+	, UserId = @UserId 
+	, ModifierId = @ModifierCreator
 	, ModifiedDate = Getdate()

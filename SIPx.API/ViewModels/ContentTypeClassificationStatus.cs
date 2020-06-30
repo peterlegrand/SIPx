@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ContentTypeClassificationStatus
     {
         [Key]
-        public int ContentTypeClassificationStatusID { get; set; }
+        public int ContentTypeClassificationStatusId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

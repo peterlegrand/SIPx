@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ClaimGroup
     {
         [Key]
-        public int ClaimGroupID { get; set; }
+        public int ClaimGroupId { get; set; }
         public int Sequence { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

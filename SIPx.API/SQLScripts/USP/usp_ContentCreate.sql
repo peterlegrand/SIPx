@@ -1,15 +1,15 @@
 CREATE PROCEDURE usp_ContentCreate (
-	@UserID nvarchar(450)
-	, @ParentContentID int
-	, @ContentTypeID int
-	, @ContentStatusID int
-	, @LanguageID int
+	@UserId nvarchar(450)
+	, @ParentContentId int
+	, @ContentTypeId int
+	, @ContentStatusId int
+	, @LanguageId int
 	, @Title nvarchar(50)
 	, @Description nvarchar(max)
-	, @SecurityLevelID int
-	, @OrganizationID int
-	, @ProjectID int
-	, @ProcessID int
+	, @SecurityLevelId int
+	, @OrganizationId int
+	, @ProjectId int
+	, @ProcessId int
 	, @ClassificationValueTable AS udt_ContentClassificationValuesNew READONLY)
 AS 
 BEGIN TRANSACTION
@@ -44,8 +44,8 @@ VALUES (
 	, getdate()
 	, getdate())
 
-DECLARE @NewContentID int	= scope_identity();
+DECLARE @NewContentId int	= scope_identity();
 
-INSERT INTO ContentClassificationValues(ContentID, ClassificationValueID, ClassificationID, CreatorID, ModifierID, CreatedDate, ModifiedDate)
-SELECT @NewContentID, ClassificationValueID, ClassificationID, @UserID,@UserID, getdate(), getdate() FROM @ClassificationValueTable
+INSERT INTO ContentClassificationValues(ContentId, ClassificationValueId, ClassificationId, CreatorId, ModifierId, CreatedDate, ModifiedDate)
+SELECT @NewContentId, ClassificationValueId, ClassificationId, @UserId,@UserId, getdate(), getdate() FROM @ClassificationValueTable
 COMMIT TRANSACTION

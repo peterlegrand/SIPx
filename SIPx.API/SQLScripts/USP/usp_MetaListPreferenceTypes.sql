@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_MetaListPreferenceTypes]
 AS
-SELECT PreferenceTypes.PreferenceTypeID, Name
+SELECT PreferenceTypes.PreferenceTypeId, Name
 FROM PreferenceTypes 
 JOIN UITermLanguages
-	ON PreferenceTypes.NameTermID = UITermLanguages.UITermID
-WHERE LanguageID =41 
+	ON PreferenceTypes.NameTermId = UITermLanguages.UITermID
+WHERE LanguageId =41 
 ORDER BY Name

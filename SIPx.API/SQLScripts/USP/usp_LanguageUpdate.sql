@@ -1,6 +1,6 @@
-CREATE PROCEDURE [dbo].[usp_LanguageUpdate] (@LanguageID int, @StatusID int) 
+CREATE PROCEDURE [dbo].[usp_LanguageUpdate] (@LanguageId int, @StatusId int) 
 AS 
-UPDATE Languages SET StatusID = @StatusID WHERE LanguageID = @LanguageID
+UPDATE Languages SET StatusId = @StatusId WHERE LanguageId = @LanguageID
 
 
 

@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[usp_PageLanguageCreate] (
-	@PageID int
-	, @LanguageID int
+	@PageId int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
-INSERT INTO PageLanguages (PageID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, CreatedDate, ModifierID, ModifiedDate)
-VALUES (@PageID, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @UserID, getdate(), @UserID, getdate())
+INSERT INTO PageLanguages (PageId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, CreatedDate, ModifierId, ModifiedDate)
+VALUES (@PageId, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserId, getdate(), @UserId, getdate())
 

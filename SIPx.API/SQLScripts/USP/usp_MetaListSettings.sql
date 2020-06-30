@@ -7,4 +7,4 @@ SELECT
 	, Settings.StringValue
 	, Settings.DateTimeValue
 	,Settings.GuidValue
-FROM Settings JOIN UITermLanguages ON Settings.NameTermID = UITermLanguages.UITermID WHERE LanguageID =41 ORDER BY Settings.SettingID
+FROM Settings JOIN UITermLanguages ON Settings.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY Settings.SettingID

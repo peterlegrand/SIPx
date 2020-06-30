@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class Gender
     {
         [Key]
-        public int DateLevelID { get; set; }
+        public int DateLevelId { get; set; }
         public int Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_UserPreferences] (@UserID nvarchar(450), @SelectedUserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_UserPreferences] (@UserId nvarchar(450), @SelectedUserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT UserPreferences.UserPreferenceID
 	, UserPreferences.PreferenceTypeID
 	, UserPreferences.StringPreference
@@ -15,12 +15,12 @@ SELECT UserPreferences.UserPreferenceID
 	, ISNULL(UITypeNameCustom.Customization,UITypeName.Name) TypeName
 FROM UserPreferences 
 JOIN PreferenceTypes
-	ON UserPreferences.PreferenceTypeID = PreferenceTypes.PreferenceTypeID
+	ON UserPreferences.PreferenceTypeId = PreferenceTypes.PreferenceTypeID
 JOIN UITermLanguages UITypeName
-	ON UITypeName.UITermID = PreferenceTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UITypeNameCustom
-	ON UITypeNameCustom.UITermID = PreferenceTypes.NameTermID
-WHERE UITypeName.LanguageID = @LanguageID
+	ON UITypeName.UITermId = PreferenceTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UITypeNameCustom
+	ON UITypeNameCustom.UITermId = PreferenceTypes.NameTermID
+WHERE UITypeName.LanguageId = @LanguageID
 AND UserPreferences.UserID= @SelectedUserID
 
 

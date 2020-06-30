@@ -6,10 +6,10 @@ namespace SIPx.Shared
     {
         DateTime DateValue { get; set; }
         int IntValue { get; set; }
-        int ProcessTemplateFieldID { get; set; }
-        int ProcessTemplateFieldTypeID { get; set; }
-        int ProcessTemplateStageFieldStatusID { get; set; }
+        int ProcessTemplateFieldId { get; set; }
+        int ProcessTemplateFieldTypeId { get; set; }
+        int ProcessTemplateStageFieldStatusId { get; set; }
         string StringValue { get; set; }
-        int ValueUpdateTypeID { get; set; }
+        int ValueUpdateTypeId { get; set; }
     }
 }

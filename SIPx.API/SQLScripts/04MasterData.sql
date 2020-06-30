@@ -22,7 +22,7 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(19, 'Create new value');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(20, 'Date level');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(21, 'Delete');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(22, 'Description');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(23, 'Drop down name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(23, 'Dropdown name');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(24, 'Edit');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(25, 'Edit classification');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(26, 'Edit classification level');
@@ -31,7 +31,7 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(28, 'Edit value');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(29, 'Has dropdown');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(30, 'Header description');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(31, 'Header name');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(32, 'In drop down');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(32, 'In dropdown');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(33, 'Language');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(34, 'Languages');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(35, 'Logout');
@@ -218,7 +218,7 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(215, 'One two columns');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(216, 'Page section languages');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(217, 'Page languages');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(218, 'Application title');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(219, 'Drop down sequence');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(219, 'Dropdown sequence');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(220, 'Default page');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(221, 'Preference');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(222, 'User project type');
@@ -1134,7 +1134,7 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1131, 'Read classification l
 SET IDENTITY_INSERT UITerms OFF;
 
 SET IDENTITY_INSERT SecurityLevels ON;
-INSERT INTO SecurityLevels (SecurityLevelID, NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID) VALUES 
+INSERT INTO SecurityLevels (SecurityLevelId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
   (1,683,683,683,683)
 , (2,684,684,684,684)
 , (3,685,685,685,685)

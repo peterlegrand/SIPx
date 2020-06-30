@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_User] (@UserID nvarchar(450),@SelectedUserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_User] (@UserId nvarchar(450),@SelectedUserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT 
 	aspnetUsers.Id UserID
@@ -35,19 +35,19 @@ FROM AspNetUsers
 JOIN persons
 	ON AspNetUsers.Id = Persons.UserID
 JOIN SecurityLevels
-	ON SecurityLevels.SecurityLevelID = AspNetUsers.SecurityLevelID
+	ON SecurityLevels.SecurityLevelId = AspNetUsers.SecurityLevelID
 JOIN UITermLanguages SecurityLevelLanguages
-	ON SecurityLevelLanguages.UITermID = SecurityLevels.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations WHERE LanguageID = @LanguageID) SecutiryLevelNameCustom
-	ON SecutiryLevelNameCustom.UITermID = SecurityLevels.NameTermID
+	ON SecurityLevelLanguages.UITermId = SecurityLevels.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations WHERE LanguageId = @LanguageID) SecutiryLevelNameCustom
+	ON SecutiryLevelNameCustom.UITermId = SecurityLevels.NameTermID
 JOIN Genders
-	ON Genders.GenderID = Persons.GenderID
+	ON Genders.GenderId = Persons.GenderID
 JOIN UITermLanguages GenderLanguages
-	ON GenderLanguages.UITermID = Genders.NameTermID
-LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages WHERE LanguageID = @LanguageID) OrganizationUserLanguage
-	ON OrganizationUserLanguage.OrganizationID = Persons.DefaultOrganizationID
-LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) OrganizationDefaultLanguage
-	ON OrganizationDefaultLanguage.OrganizationID = Persons.DefaultOrganizationID
-WHERE SecurityLevelLanguages.LanguageID = @LanguageID
-	AND GenderLanguages.LanguageID = @LanguageID
+	ON GenderLanguages.UITermId = Genders.NameTermID
+LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages WHERE LanguageId = @LanguageID) OrganizationUserLanguage
+	ON OrganizationUserLanguage.OrganizationId = Persons.DefaultOrganizationID
+LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) OrganizationDefaultLanguage
+	ON OrganizationDefaultLanguage.OrganizationId = Persons.DefaultOrganizationID
+WHERE SecurityLevelLanguages.LanguageId = @LanguageID
+	AND GenderLanguages.LanguageId = @LanguageID
 	AND aspnetusers.Id= @SelectedUserID

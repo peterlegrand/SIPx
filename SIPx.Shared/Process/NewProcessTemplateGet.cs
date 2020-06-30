@@ -7,17 +7,17 @@ namespace SIPx.Shared
 {
     public class NewProcessTemplateGet : INewProcessTemplateGet
     {
-        public int ProcessTemplateStageFieldStatusID { get; set; }
-        public int ProcessTemplateFieldTypeID { get; set; }
+        public int ProcessTemplateStageFieldStatusId { get; set; }
+        public int ProcessTemplateFieldTypeId { get; set; }
         [Key]
-        public int ProcessTemplateFieldID { get; set; }
-        public int ProcessTemplateID { get; set; }
+        public int ProcessTemplateFieldId { get; set; }
+        public int ProcessTemplateId { get; set; }
         public int Sequence { get; set; }
         public int? IntValue { get; set; }
         public DateTime? DateTimeValue { get; set; }
         public string StringValue { get; set; }
         //        public DbGeography? ProcessTemplateFlowConditionInt { get; set; }
-        public int ValueUpdateTypeID { get; set; }
+        public int ValueUpdateTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

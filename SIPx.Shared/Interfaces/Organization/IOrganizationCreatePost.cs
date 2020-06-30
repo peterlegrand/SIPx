@@ -6,9 +6,9 @@
         string MenuName { get; set; }
         string MouseOver { get; set; }
         string Name { get; set; }
-        int OrganizationTypeID { get; set; }
-        int? ParentOrganizationID { get; set; }
-        int StatusID { get; set; }
+        int OrganizationTypeId { get; set; }
+        int? ParentOrganizationId { get; set; }
+        int StatusId { get; set; }
         string UserId { get; set; }
     }
 }

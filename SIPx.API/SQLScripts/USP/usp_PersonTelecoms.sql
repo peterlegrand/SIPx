@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_PersonTelecoms] (@UserID nvarchar(450), @PersonID int) 
+CREATE PROCEDURE [dbo].[usp_PersonTelecoms] (@UserId nvarchar(450), @PersonId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT PersonTelecoms.PersonTelecomID
 	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) AddressTypeName
 	, PersonTelecoms.TelecomValue
@@ -18,17 +18,17 @@ SELECT PersonTelecoms.PersonTelecomID
 	, PersonTelecoms.ModifiedDate
 FROM PersonTelecoms
 JOIN TelecomTypes
-	ON PersonTelecoms.TelecomTypeID = TelecomTypes.TelecomTypeID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UITelecomTypeNameCustom
-	ON UITelecomTypeNameCustom.UITermID = TelecomTypes.NameTermID
+	ON PersonTelecoms.TelecomTypeId = TelecomTypes.TelecomTypeID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UITelecomTypeNameCustom
+	ON UITelecomTypeNameCustom.UITermId = TelecomTypes.NameTermID
 JOIN UITermLanguages UITelecomTypeName
-	ON UITelecomTypeName.UITermID = TelecomTypes.NameTermID
+	ON UITelecomTypeName.UITermId = TelecomTypes.NameTermID
 LEFT JOIN PersonTelecomPhones 
 	ON PersonTelecomPhones.PersonTelecomID= PersonTelecoms.PersonTelecomID
 JOIN Persons Creator
-	ON Creator.UserID = PersonTelecoms.CreatorID
+	ON Creator.UserId = PersonTelecoms.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = PersonTelecoms.ModifierID
-WHERE UITelecomTypeName.LanguageID = @LanguageID
-	AND PersonTelecoms.PersonID = @PersonID
+	ON Modifier.UserId = PersonTelecoms.ModifierID
+WHERE UITelecomTypeName.LanguageId = @LanguageID
+	AND PersonTelecoms.PersonId = @PersonID
 ORDER BY ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) 

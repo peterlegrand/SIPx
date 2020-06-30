@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class PreferenceType
     {
         [Key]
-        public int PreferenceTypeID { get; set; }
+        public int PreferenceTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

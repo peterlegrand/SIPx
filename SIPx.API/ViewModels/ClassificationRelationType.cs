@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ClassificationRelationType
     {
         [Key]
-        public int ClassificationRelationTypeID { get; set; }
+        public int ClassificationRelationTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationPage] (@UserID nvarchar(450), @ClassificationPageID int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationPage] (@UserId nvarchar(450), @ClassificationPageId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationPages.ClassificationPageID
 	, ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserClassificationPageLanguage.Description,ISNULL(DefaultClassificationPageLanguage.Description,'No description for this role')) Description
@@ -20,19 +20,19 @@ SELECT ClassificationPages.ClassificationPageID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationPages.ModifiedDate
 FROM ClassificationPages 
-LEFT JOIN (SELECT ClassificationPageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages WHERE LanguageID = @LanguageID) UserClassificationPageLanguage
-	ON UserClassificationPageLanguage.ClassificationPageID = ClassificationPages.ClassificationPageID
-LEFT JOIN (SELECT ClassificationPageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages JOIN Settings ON ClassificationPageLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationPageLanguage
-	ON DefaultClassificationPageLanguage.ClassificationPageID = ClassificationPages.ClassificationPageID
+LEFT JOIN (SELECT ClassificationPageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages WHERE LanguageId = @LanguageID) UserClassificationPageLanguage
+	ON UserClassificationPageLanguage.ClassificationPageId = ClassificationPages.ClassificationPageID
+LEFT JOIN (SELECT ClassificationPageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages JOIN Settings ON ClassificationPageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationPageLanguage
+	ON DefaultClassificationPageLanguage.ClassificationPageId = ClassificationPages.ClassificationPageID
 JOIN Statuses 
-	ON Statuses.StatusID = ClassificationPages.StatusID
+	ON Statuses.StatusId = ClassificationPages.StatusID
 JOIN UITermLanguages UIStatusName
-	ON UIStatusName.UITermID = Statuses.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIStatusNameCustom
-	ON UIStatusNameCustom.UITermID = Statuses.NameTermID
+	ON UIStatusName.UITermId = Statuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIStatusNameCustom
+	ON UIStatusNameCustom.UITermId = Statuses.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationPages.CreatorID
+	ON Creator.UserId = ClassificationPages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationPages.ModifierID
-WHERE UIStatusName.LanguageID = @LanguageID
-	AND ClassificationPages.ClassificationPageID = @ClassificationPageID
+	ON Modifier.UserId = ClassificationPages.ModifierID
+WHERE UIStatusName.LanguageId = @LanguageID
+	AND ClassificationPages.ClassificationPageId = @ClassificationPageID

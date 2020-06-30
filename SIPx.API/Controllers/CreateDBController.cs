@@ -84,8 +84,8 @@ namespace SIPx.API.Controllers
                 UserName = "eplegrand@gmail.com",
             //    FirstName = "Peter",
             //    LastName = "le Grand",
-            //    LanguageID = 41,
-            SecurityLevelID=10,
+            //    LanguageId = 41,
+            SecurityLevelId = 10,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -97,8 +97,8 @@ namespace SIPx.API.Controllers
                 UserName = "FordPrefect@gmail.com",
                 //    FirstName = "Peter",
                 //    LastName = "le Grand",
-                //    LanguageID = 41,
-                SecurityLevelID = 5,
+                //    LanguageId = 41,
+                SecurityLevelId = 5,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -112,7 +112,7 @@ namespace SIPx.API.Controllers
 
             var Role = new SipRole();
             Role.Name = "Admin";
-            Role.RoleGroupID = 1;
+            Role.RoleGroupId = 1;
             await _roleManager.CreateAsync(Role);
             using (StreamReader sr = new StreamReader($"SQLScripts\\ApplicationRights.txt", System.Text.Encoding.UTF8))
             {

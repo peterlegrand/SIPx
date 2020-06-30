@@ -1,16 +1,16 @@
 CREATE PROCEDURE [dbo].[usp_SettingsUpdate] (
-	@SettingID int
+	@SettingId int
 	, @IntValue int
 	, @StringValue nvarchar(max)
 	, @DateTimeValue DateTime
 	, @GuidValue UniqueIdentifier
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 UPDATE Settings SET 
 	IntValue = @IntValue 
 	, StringValue  = @StringValue 
 	, DateTimeValue = @DateTimeValue 
 	, GuidValue = @GuidValue 
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE SettingID = @SettingID
+WHERE SettingId = @SettingID

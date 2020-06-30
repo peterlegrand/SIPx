@@ -1,30 +1,30 @@
 CREATE PROCEDURE [dbo].[usp_PageSectionCreate] (
-	@PageID int
+	@PageId int
 	, @Sequence int
-	, @PageSectionTypeID int
-	, @PageSectionDataTypeID int
+	, @PageSectionTypeId int
+	, @PageSectionDataTypeId int
 	, @ShowSectionTitleName bit
 	, @ShowSectionTitleDescription bit
 	, @ShowContentTypeTitleName bit
 	, @ShowContentTypeTitleDescription bit
 	, @OneTwoColumns int
-	, @ContentTypeID int
-	, @SortByID int
+	, @ContentTypeId int
+	, @SortById int
 	, @MaxContent int
 	, @HasPaging bit
-	, @LanguageID int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
 UPDATE PageSections SET Sequence = Sequence + 1 
-WHERE PageID = @PageID 
+WHERE PageId = @PageId 
 	AND Sequence >= @Sequence
 
 INSERT INTO PageSections (

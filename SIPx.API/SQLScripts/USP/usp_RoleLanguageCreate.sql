@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[usp_RoleLanguageCreate] (
-	@RoleID nvarchar(450)
-	, @LanguageID int
+	@RoleId nvarchar(450)
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
-INSERT INTO RoleLanguages (RoleID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, CreatedDate, ModifierID, ModifiedDate)
-VALUES (@RoleID, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @UserID, getdate(), @UserID, getdate())
+INSERT INTO RoleLanguages (RoleId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, CreatedDate, ModifierId, ModifiedDate)
+VALUES (@RoleId, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserId, getdate(), @UserId, getdate())
 

@@ -1,34 +1,34 @@
-CREATE PROCEDURE [dbo].[usp_PreferenceTypes] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_PreferenceTypes] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT PreferenceTypes.PreferenceTypeID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT PreferenceTypes.PreferenceTypeId 
 	, ISNULL(UIGroupNameCustom.Customization,UIGroupName.Name) GroupName
 	, ISNULL(UIGroupDescriptionCustom.Customization,UIGroupDescription.Name) GroupDescription
 	, ISNULL(UIGroupMenuNameCustom.Customization,UIGroupMenuName.Name) GroupMenuName
 	, ISNULL(UIGroupMouseOverCustom.Customization,UIGroupMouseOver.Name) GroupMouseOver
 FROM PreferenceTypes
 JOIN UITermLanguages UIGroupName
-	ON UIGroupName.UITermID = PreferenceTypes.NameTermID
+	ON UIGroupName.UITermId = PreferenceTypes.NameTermID
 JOIN UITermLanguages UIGroupDescription
-	ON UIGroupDescription.UITermID = PreferenceTypes.NameTermID
+	ON UIGroupDescription.UITermId = PreferenceTypes.NameTermID
 JOIN UITermLanguages UIGroupMenuName
-	ON UIGroupMEnuName.UITermID = PreferenceTypes.NameTermID
+	ON UIGroupMEnuName.UITermId = PreferenceTypes.NameTermID
 JOIN UITermLanguages UIGroupMouseOver
-	ON UIGroupMouseOver.UITermID = PreferenceTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupNameCustom
-	ON UIGroupNameCustom.UITermID = PreferenceTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupDescriptionCustom
-	ON UIGroupDescriptionCustom.UITermID = PreferenceTypes.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupMenuNameCustom
-	ON UIGroupMenuNameCustom.UITermID = PreferenceTypes.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupMouseOverCustom
-	ON UIGroupMouseOverCustom.UITermID = PreferenceTypes.MouseOverTermID
-WHERE UIGroupName.LanguageID = @LanguageID
-	AND UIGroupDescription.LanguageID = @LanguageID
-	AND UIGroupMenuName.LanguageID = @LanguageID
-	AND UIGroupMouseOver.LanguageID = @LanguageID
+	ON UIGroupMouseOver.UITermId = PreferenceTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupNameCustom
+	ON UIGroupNameCustom.UITermId = PreferenceTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupDescriptionCustom
+	ON UIGroupDescriptionCustom.UITermId = PreferenceTypes.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupMenuNameCustom
+	ON UIGroupMenuNameCustom.UITermId = PreferenceTypes.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupMouseOverCustom
+	ON UIGroupMouseOverCustom.UITermId = PreferenceTypes.MouseOverTermID
+WHERE UIGroupName.LanguageId = @LanguageID
+	AND UIGroupDescription.LanguageId = @LanguageID
+	AND UIGroupMenuName.LanguageId = @LanguageID
+	AND UIGroupMouseOver.LanguageId = @LanguageID
 ORDER BY ISNULL(UIGroupNameCustom.Customization,UIGroupName.Name) 

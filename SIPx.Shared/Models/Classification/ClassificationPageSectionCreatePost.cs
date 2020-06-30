@@ -11,8 +11,8 @@ namespace SIPx.Shared
         public int ClassificationPageId { get; set; }
         public int ClassificationId { get; set; }
         public int Sequence { get; set; }
-        public int PageSectionTypeID { get; set; }
-        public int PageSectionDataTypeID { get; set; }
+        public int PageSectionTypeId { get; set; }
+        public int PageSectionDataTypeId { get; set; }
         public bool ShowSectionTitleName { get; set; }
         public bool ShowSectionTitleDescription { get; set; }
         public bool ShowContentTypeTitleName { get; set; }

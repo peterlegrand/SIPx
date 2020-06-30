@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionLanguageDelete] (@ProcessTemplateFlowConditionLanguageID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionLanguageDelete] (@ProcessTemplateFlowConditionLanguageId int) 
 AS 
 DELETE FROM ProcessTemplateFlowConditionLanguages WHERE ProcessTemplateFlowConditionLanguageID= @ProcessTemplateFlowConditionLanguageID
 

@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationValueLanguageCreate] (
-	@ClassificationValueID int
-	, @LanguageID int
+	@ClassificationValueId int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -11,7 +11,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueLanguageCreate] (
 	, @HeaderName nvarchar(50)
 	, @HeaderDescription nvarchar(max)
 	, @TopicName nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 INSERT INTO ClassificationValueLanguages (
 	ClassificationValueID

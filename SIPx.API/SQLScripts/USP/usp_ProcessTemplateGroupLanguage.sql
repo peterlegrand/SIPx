@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroupLanguage] (@UserID nvarchar(450), @ProcessTemplateGroupLanguageID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroupLanguage] (@UserId nvarchar(450), @ProcessTemplateGroupLanguageId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT ProcessTemplateGroupLanguages.ProcessTemplateGroupLanguageID
 	, ProcessTemplateGroupLanguages.LanguageID
@@ -19,16 +19,16 @@ SELECT ProcessTemplateGroupLanguages.ProcessTemplateGroupLanguageID
 	, ProcessTemplateGroupLanguages.ModifiedDate
 FROM ProcessTemplateGroups
 JOIN ProcessTemplateGroupLanguages
-	ON ProcessTemplateGroups.ProcessTemplateGroupID = ProcessTemplateGroupLanguages.ProcessTemplateGroupID
+	ON ProcessTemplateGroups.ProcessTemplateGroupId = ProcessTemplateGroupLanguages.ProcessTemplateGroupID
 JOIN Languages 
-	ON Languages.LanguageID = ProcessTemplateGroupLanguages.LanguageID
+	ON Languages.LanguageId = ProcessTemplateGroupLanguages.LanguageID
 JOIN UITermLanguages UILanguageName
-	ON UILanguageName.UITermID = Languages.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UILanguageNameCustom
-	ON UILanguageNameCustom.UITermID = Languages.NameTermID
+	ON UILanguageName.UITermId = Languages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UILanguageNameCustom
+	ON UILanguageNameCustom.UITermId = Languages.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ProcessTemplateGroupLanguages.CreatorID
+	ON Creator.UserId = ProcessTemplateGroupLanguages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ProcessTemplateGroupLanguages.ModifierID
-WHERE ProcessTemplateGroupLanguages.ProcessTemplateGroupLanguageID = @ProcessTemplateGroupLanguageID
-	AND UILanguageName.LanguageID = @LanguageID
+	ON Modifier.UserId = ProcessTemplateGroupLanguages.ModifierID
+WHERE ProcessTemplateGroupLanguages.ProcessTemplateGroupLanguageId = @ProcessTemplateGroupLanguageID
+	AND UILanguageName.LanguageId = @LanguageID

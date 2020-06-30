@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class RoleGroup
     {
         [Key]
-        public int RoleGroupID { get; set; }
+        public int RoleGroupId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

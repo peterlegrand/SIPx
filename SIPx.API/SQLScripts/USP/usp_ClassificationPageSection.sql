@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationPageSection] (@UserID nvarchar(450), @ClassificationPageSectionID int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationPageSection] (@UserId nvarchar(450), @ClassificationPageSectionId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationPageSections.ClassificationPageSectionID
 	, ISNULL(UserClassificationPageSectionLanguage.Name,ISNULL(DefaultClassificationPageSectionLanguage.Name,'No name for this section')) Name
 	, ISNULL(UserClassificationPageSectionLanguage.Description,ISNULL(DefaultClassificationPageSectionLanguage.Description,'No description for this section')) Description
@@ -31,39 +31,39 @@ SELECT ClassificationPageSections.ClassificationPageSectionID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationPageSections.ModifiedDate
 FROM ClassificationPageSections 
-LEFT JOIN (SELECT ClassificationPageSectionID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageSectionLanguages WHERE LanguageID = @LanguageID) UserClassificationPageSectionLanguage
-	ON UserClassificationPageSectionLanguage.ClassificationPageSectionID = ClassificationPageSections.ClassificationPageSectionID
-LEFT JOIN (SELECT ClassificationPageSectionID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageSectionLanguages JOIN Settings ON ClassificationPageSectionLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationPageSectionLanguage
-	ON DefaultClassificationPageSectionLanguage.ClassificationPageSectionID = ClassificationPageSections.ClassificationPageSectionID
+LEFT JOIN (SELECT ClassificationPageSectionId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageSectionLanguages WHERE LanguageId = @LanguageID) UserClassificationPageSectionLanguage
+	ON UserClassificationPageSectionLanguage.ClassificationPageSectionId = ClassificationPageSections.ClassificationPageSectionID
+LEFT JOIN (SELECT ClassificationPageSectionId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageSectionLanguages JOIN Settings ON ClassificationPageSectionLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationPageSectionLanguage
+	ON DefaultClassificationPageSectionLanguage.ClassificationPageSectionId = ClassificationPageSections.ClassificationPageSectionID
 JOIN PageSectionTypes
-	ON PageSectionTypes.PageSectionTypeID = ClassificationPageSections.PageSectionTypeID
+	ON PageSectionTypes.PageSectionTypeId = ClassificationPageSections.PageSectionTypeID
 JOIN UITermLanguages UIPageSectionTypeName
-	ON UIPageSectionTypeName.UITermID = PageSectionTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIPageSectionTypeNameCustom
-	ON UIPageSectionTypeNameCustom.UITermID = PageSectionTypes.NameTermID
+	ON UIPageSectionTypeName.UITermId = PageSectionTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIPageSectionTypeNameCustom
+	ON UIPageSectionTypeNameCustom.UITermId = PageSectionTypes.NameTermID
 JOIN PageSectionDataTypes
-	ON PageSectionDataTypes.PageSectionDataTypeID = ClassificationPageSections.PageSectionDataTypeID
+	ON PageSectionDataTypes.PageSectionDataTypeId = ClassificationPageSections.PageSectionDataTypeID
 JOIN UITermLanguages UIPageSectionDataTypeName
-	ON UIPageSectionDataTypeName.UITermID = PageSectionDataTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIPageSectionDataTypeNameCustom
-	ON UIPageSectionDataTypeNameCustom.UITermID = PageSectionDataTypes.NameTermID
-LEFT JOIN (SELECT ContentTypeID, Name FROM ContentTypeLanguages WHERE LanguageID = @LanguageID) UserContentTypeLanguage
-	ON UserContentTypeLanguage.ContentTypeID = ClassificationPageSections.ContentTypeID
-LEFT JOIN (SELECT ContentTypeID, Name FROM ContentTypeLanguages JOIN Settings ON ContentTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultContentTypeLanguage
-	ON DefaultContentTypeLanguage.ContentTypeID = ClassificationPageSections.ContentTypeID
+	ON UIPageSectionDataTypeName.UITermId = PageSectionDataTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIPageSectionDataTypeNameCustom
+	ON UIPageSectionDataTypeNameCustom.UITermId = PageSectionDataTypes.NameTermID
+LEFT JOIN (SELECT ContentTypeId, Name FROM ContentTypeLanguages WHERE LanguageId = @LanguageID) UserContentTypeLanguage
+	ON UserContentTypeLanguage.ContentTypeId = ClassificationPageSections.ContentTypeID
+LEFT JOIN (SELECT ContentTypeId, Name FROM ContentTypeLanguages JOIN Settings ON ContentTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultContentTypeLanguage
+	ON DefaultContentTypeLanguage.ContentTypeId = ClassificationPageSections.ContentTypeID
 JOIN SortBys
-	ON SortBys.SortByID = ClassificationPageSections.SortByID
+	ON SortBys.SortById = ClassificationPageSections.SortByID
 JOIN UITermLanguages UISortByName
-	ON UISortByName.UITermID = SortBys.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UISortByNameCustom
-	ON UISortByNameCustom.UITermID = SortBys.NameTermID
+	ON UISortByName.UITermId = SortBys.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UISortByNameCustom
+	ON UISortByNameCustom.UITermId = SortBys.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationPageSections.CreatorID
+	ON Creator.UserId = ClassificationPageSections.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationPageSections.ModifierID
-WHERE ClassificationPageSections.ClassificationPageSectionID = @ClassificationPageSectionID
-	AND UIPageSectionTypeName.LanguageID = @LanguageID
-	AND UIPageSectionDataTypeName.LanguageID = @LanguageID
-	AND UISortByName.LanguageID = @LanguageID
+	ON Modifier.UserId = ClassificationPageSections.ModifierID
+WHERE ClassificationPageSections.ClassificationPageSectionId = @ClassificationPageSectionID
+	AND UIPageSectionTypeName.LanguageId = @LanguageID
+	AND UIPageSectionDataTypeName.LanguageId = @LanguageID
+	AND UISortByName.LanguageId = @LanguageID
 
 

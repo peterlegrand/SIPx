@@ -8,14 +8,14 @@ namespace SIPx.Shared
     public class ProcessTemplateStageCreatePost : IProcessTemplateStageCreatePost
     {
         [Key]
-        public int ProcessTemplateID { get; set; }
-        public int ProcessTemplateTypeID { get; set; }
+        public int ProcessTemplateId { get; set; }
+        public int ProcessTemplateTypeId { get; set; }
         public bool IsEndStage { get; set; }
-        public int LanguageID { get; set; }
+        public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string UserID { get; set; }
+        public string UserId { get; set; }
     }
 }

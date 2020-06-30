@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeGroupCreate] (
 	@Sequence int 
-	, @LanguageID int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 

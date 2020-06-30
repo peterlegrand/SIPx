@@ -1,31 +1,31 @@
 CREATE PROCEDURE [dbo].[usp_ProjectUpdate] (
-	@ProjectID int
-	, @ProjectLanguageID int
-	, @ParentProjectID int
-	, @StatusID int 
+	@ProjectId int
+	, @ProjectLanguageId int
+	, @ParentProjectId int
+	, @StatusId int 
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 BEGIN TRANSACTION
 UPDATE Projects SET
-	ParentProjectID = @ParentProjectID
-	, StatusID = @StatusID
-	, ModifierID = @UserID
+	ParentProjectId = @ParentProjectID
+	, StatusId = @StatusID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE 
-	ProjectID = @ProjectID
+	ProjectId = @ProjectID
 
 UPDATE ProjectLanguages SET
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
-WHERE ProjectLanguageID = @ProjectLanguageID
+WHERE ProjectLanguageId = @ProjectLanguageID
 
 COMMIT TRANSACTION

@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[usp_PersonRelationCreate] (
-	@FromPersonID int
-	, @ToPersonID int
+	@FromPersonId int
+	, @ToPersonId int
 	, @ValidFrom DateTime
 	, @ValidTo DateTime
-	, @PersonRelationTypeID int
-	, @UserID nvarchar(450)) 
+	, @PersonRelationTypeId int
+	, @UserId nvarchar(450)) 
 AS 
 
 INSERT INTO PersonRelations (

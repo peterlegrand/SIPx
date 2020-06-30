@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class UITermLanguageCustomization : IUITermLanguageCustomization
+    public class UITermLanguageCustomization
     {
         [Key]
+        public int UITermId { get; set; }
+        [Key]
+        public int LanguageId { get; set; }
+        public string Customization { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string MouseOver { get; set; }
         public string InternalName { get; set; }
-        public string TermString { get; set; }
     }
 }

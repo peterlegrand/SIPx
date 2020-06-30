@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_OrganizationLanguageDelete] (
-	@OrganizationLanguageID int) 
+	@OrganizationLanguageId int) 
 AS 
-DELETE FROM OrganizationLanguages WHERE OrganizationLanguageID = @OrganizationLanguageID
+DELETE FROM OrganizationLanguages WHERE OrganizationLanguageId = @OrganizationLanguageID
 
 

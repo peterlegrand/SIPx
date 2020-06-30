@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_PersonRelations] (@UserID nvarchar(450), @PersonID int) 
+CREATE PROCEDURE [dbo].[usp_PersonRelations] (@UserId nvarchar(450), @PersonId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT PersonRelations.PersonRelationID
 	, PersonRelations.FromPersonID
 	, FromPersons.FirstName + ' ' + FromPersons.LastName FromPersonName
@@ -20,17 +20,17 @@ SELECT PersonRelations.PersonRelationID
 	, PersonRelations.ModifiedDate
 FROM PersonRelations
 JOIN Persons FromPersons
-	ON PersonRelations.FromPersonID = FromPersons.PersonID
+	ON PersonRelations.FromPersonId = FromPersons.PersonID
 JOIN Persons ToPersons
-	ON PersonRelations.ToPersonID = ToPersons.PersonID
-LEFT JOIN (SELECT PersonRelationTypeID, Name FROM PersonRelationTypeLanguages WHERE LanguageID = @LanguageID) UserRelationTypeLanguage
-	ON PersonRelations.PersonRelationTypeID = PersonRelations.PersonRelationTypeID
-LEFT JOIN (SELECT PersonRelationTypeId, Name FROM PersonRelationTypeLanguages JOIN Settings ON PersonRelationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultRelationTypeLanguage
+	ON PersonRelations.ToPersonId = ToPersons.PersonID
+LEFT JOIN (SELECT PersonRelationTypeId, Name FROM PersonRelationTypeLanguages WHERE LanguageId = @LanguageID) UserRelationTypeLanguage
+	ON PersonRelations.PersonRelationTypeId = PersonRelations.PersonRelationTypeID
+LEFT JOIN (SELECT PersonRelationTypeId, Name FROM PersonRelationTypeLanguages JOIN Settings ON PersonRelationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultRelationTypeLanguage
 	ON DefaultRelationTypeLanguage.PersonRelationTypeId = PersonRelations.PersonRelationTypeId
 JOIN Persons Creator
-	ON Creator.UserID = PersonRelations.CreatorID
+	ON Creator.UserId = PersonRelations.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = PersonRelations.ModifierID
-WHERE PersonRelations.FromPersonID = @PersonID
-	OR PersonRelations.ToPersonID = @PersonID
+	ON Modifier.UserId = PersonRelations.ModifierID
+WHERE PersonRelations.FromPersonId = @PersonID
+	OR PersonRelations.ToPersonId = @PersonID
 

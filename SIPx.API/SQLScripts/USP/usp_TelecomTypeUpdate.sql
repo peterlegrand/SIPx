@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[usp_TelecomTypeUpdate] (
-	@TelecomTypeID int
+	@TelecomTypeId int
 	, @Active bit
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 UPDATE TelecomTypes SET 
 	Active = @Active 
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE TelecomTypeID = @TelecomTypeID
+WHERE TelecomTypeId = @TelecomTypeID

@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class Person
     {
         [Key]
-        public int PersonID { get; set; }
+        public int PersonId { get; set; }
         public string Salutation { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

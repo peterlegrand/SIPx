@@ -3,20 +3,20 @@ DECLARE @User as nvarchar(450);
 Select @User = Id from AspNetUsers
 
 SET IDENTITY_INSERT ClassificationLanguages ON;
-INSERT INTO ClassificationLanguages(ClassificationLanguageID, ClassificationID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO ClassificationLanguages(ClassificationLanguageId, ClassificationId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (4, 1, 39, 'Klimaat', 'Klimaat', 'Klimaat', 'Klimaat', @User, @User, GETDATE(), GETDATE())
 , (5, 2, 39, 'Grond', 'Grond', 'Grond', 'Grond', @User, @User, GETDATE(), GETDATE())
 , (6, 3, 39, 'Gewas', 'Gewas', 'Gewas', 'Gewas', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ClassificationLanguages OFF;
 
 SET IDENTITY_INSERT ClassificationRelationTypeLanguages ON;
-INSERT INTO ClassificationRelationTypeLanguages(ClassificationRelationTypeLanguageID, ClassificationRelationTypeID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO ClassificationRelationTypeLanguages(ClassificationRelationTypeLanguageId, ClassificationRelationTypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (2, 1, 39, 'Eigenaar', 'Eigenaar', 'Eigenaar', 'Eigenaar', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ClassificationRelationTypeLanguages OFF;
 
 
 SET IDENTITY_INSERT ClassificationLevelLanguages ON;
-INSERT INTO ClassificationLevelLanguages(ClassificationLevelLanguageID, ClassificationID, ClassificationLevelID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO ClassificationLevelLanguages(ClassificationLevelLanguageId, ClassificationId, ClassificationLevelId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (5, 1, 1, 39, 'Köppen hoofd groep', 'Köppen hoofd groep', 'Köppen hoofd groep', 'Köppen hoofd groep', @User, @User, GETDATE(), GETDATE())
 , (6, 1, 2, 39, 'Köppen subgroep', 'Köppen subgroep', 'Köppen subgroep', 'Köppen subgroep', @User, @User, GETDATE(), GETDATE())
 , (7, 2, 3, 39, 'Hoofd grond soort', 'Hoofd grond soort', 'Hoofd grond soort', 'Hoofd grond soort', @User, @User, GETDATE(), GETDATE())
@@ -25,7 +25,7 @@ SET IDENTITY_INSERT ClassificationLevelLanguages OFF;
 
 
 SET IDENTITY_INSERT ClassificationValueLanguages ON;
-INSERT INTO ClassificationValueLanguages(ClassificationValueLanguageID, ClassificationID, ClassificationValueID, LanguageID, Name, Description, MenuName, MouseOver, DropDownName, PageName, PageDescription, HeaderName, HeaderDescription, TopicName, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO ClassificationValueLanguages(ClassificationValueLanguageId, ClassificationId, ClassificationValueId, LanguageId, Name, Description, MenuName, MouseOver, DropDownName, PageName, PageDescription, HeaderName, HeaderDescription, TopicName, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (52, 1, 1, 39, 'Groep A', 'Tropisch Klimaat', 'Groep A', 'Groep A', 'Groep A', 'Groep A', 'Tropisch Klimaat', 'Groep A', 'Tropisch Klimaat', 'Groep A', @User, @User, GETDATE(), GETDATE())
 , (53, 1, 2, 39, 'Groep B', 'Droog Klimaat', 'Groep B', 'Groep B', 'Groep B', 'Groep B', 'Droog Klimaat', 'Groep B', 'Droog Klimaat', 'Groep B', @User, @User, GETDATE(), GETDATE())
 , (54, 1, 3, 39, 'Groep C', 'Gematigd Klimaat', 'Groep C', 'Groep C', 'Groep C', 'Groep C', 'Gematigd Klimaat', 'Groep C', 'Gematigd Klimaat', 'Groep C', @User, @User, GETDATE(), GETDATE())
@@ -80,14 +80,14 @@ INSERT INTO ClassificationValueLanguages(ClassificationValueLanguageID, Classifi
 SET IDENTITY_INSERT ClassificationValueLanguages OFF;
 
 SET IDENTITY_INSERT ClassificationPageLanguages ON;
-INSERT INTO ClassificationPageLanguages(ClassificationPageLanguageID, ClassificationID, ClassificationPageID, LanguageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO ClassificationPageLanguages(ClassificationPageLanguageId, ClassificationId, ClassificationPageId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (4, 1, 1, 39, 'Klimaat pagina', 'Standard klimaat pagina', 'Standard klimaat pagina', 'Standard klimaat pagina',  'Standard klimaat pagina', 'Standard klimaat pagina', @User, @User, GETDATE(), GETDATE())
 , (5, 2, 2, 39, 'Grond pagina', 'Standard grond pagina', 'Standard grond pagina', 'Standard grond pagina', 'Standard grond pagina', 'Standard grond pagina', @User, @User, GETDATE(), GETDATE())
 , (6, 3, 3, 39, 'Gewas pagina', 'Standard gewas pagina', 'Standard gewas pagina', 'Standard gewas pagina', 'Standard gewas pagina', 'Standard gewas pagina', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ClassificationPageLanguages OFF;
 
 SET IDENTITY_INSERT ClassificationPageLanguages ON;
-INSERT INTO ClassificationPageLanguages(ClassificationPageLanguageID, ClassificationID, ClassificationPageID, ClassificationPageID, LanguageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO ClassificationPageLanguages(ClassificationPageLanguageId, ClassificationId, ClassificationPageId, ClassificationPageId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (7, 1, 1, 1, 39, 'Newest climate', 'Newest climate', 'Newest climate', 'Newest climate', 'Newest climate title name', 'Newest climate title description', @User, @User, GETDATE(), GETDATE())
 , (8, 1, 1, 2, 39, 'Most visited climate', 'Most visited climate', 'Most visited climate', 'Most visited climate', 'Most visited climate title name', 'Most visited climate title description', @User, @User, GETDATE(), GETDATE())
 , (9, 2, 2, 1, 39, 'Newest Soil', 'Newest Soil', 'Newest Soil', 'Newest Soil', 'Newest Soil title name', 'Newest Soil title description', @User, @User, GETDATE(), GETDATE())
@@ -97,26 +97,26 @@ INSERT INTO ClassificationPageLanguages(ClassificationPageLanguageID, Classifica
 SET IDENTITY_INSERT ClassificationPageLanguages OFF;
 
 SET IDENTITY_INSERT ContentTypeGroupLanguages ON;
-INSERT INTO ContentTypeGroupLanguages(ContentTypeGroupLanguageID, ContentTypeGroupID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO ContentTypeGroupLanguages(ContentTypeGroupLanguageId, ContentTypeGroupId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (3, 1, 39, 'Kennis', 'Kennis', 'Kennis', 'Kennis', @User, @User, GETDATE(), GETDATE())
 , (4, 2, 39, 'Opdracht', 'Opdracht', 'Opdracht', 'Opdracht', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypeGroupLanguages OFF;
 
 SET IDENTITY_INSERT ContentTypeLanguages ON;
-INSERT INTO ContentTypeLanguages(ContentTypeLanguageID, ContentTypeID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO ContentTypeLanguages(ContentTypeLanguageId, ContentTypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (4, 1, 39, 'Klimaat kennis', 'Klimaat kennis', 'Klimaat kennis', 'Klimaat kennis', @User, @User, GETDATE(), GETDATE())
 , (5, 2, 39, 'Grond kennis', 'Grond kennis', 'Grond kennis', 'Grond kennis', @User, @User, GETDATE(), GETDATE())
 , (6, 3, 39, 'Algemene opdracht', 'Algemene opdracht', 'Algemene opdracht', 'Algemene opdracht', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypeLanguages OFF;
 
 SET IDENTITY_INSERT OrganizationTypeLanguages ON;
-INSERT INTO OrganizationTypeLanguages(OrganizationTypeLanguageID, OrganizationTypeID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO OrganizationTypeLanguages(OrganizationTypeLanguageId, OrganizationTypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (3, 1, 41, 'Rechtspersoon', 'Rechtspersoon', 'Rechtspersoon', 'Rechtspersoon', @User, @User, GETDATE(), GETDATE())
 , (4, 2, 41, 'Interne entiteit', 'Interne entiteit', 'Interne entiteit', 'Interne entiteit', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT OrganizationTypeLanguages OFF;
 
 SET IDENTITY_INSERT OrganizationLanguages ON;
-INSERT INTO OrganizationLanguages(OrganizationLanguageID, OrganizationID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES 
+INSERT INTO OrganizationLanguages(OrganizationLanguageId, OrganizationId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
 (3, 1, 41, 'Chulalongkorn University', 'Chulalongkorn University', 'Chulalongkorn University', 'Chulalongkorn University', @User, @User, GETDATE(), GETDATE())
 , (4, 2, 41, 'Medische faculteit', 'Medische faculteit', 'Medische faculteit', 'Medische faculteit', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT OrganizationLanguages OFF;

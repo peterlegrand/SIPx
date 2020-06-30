@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class PersonAddress
     {
         [Key]
-        public int PersonAddressID { get; set; }
+        public int PersonAddressId { get; set; }
         public string AddressTypeName { get; set; }
         public string AttnName { get; set; }
         public string Address1 { get; set; }
@@ -25,9 +25,9 @@ namespace SIPx.API.ViewModels
         public string County { get; set; }
         public int StatusName { get; set; }
         public string SubRegionName { get; set; }
-        public int RegionID { get; set; }
+        public int RegionId { get; set; }
         public string RegionName { get; set; }
-        public int IntermediateRegionID { get; set; }
+        public int IntermediateRegionId { get; set; }
         public string IntermediateRegionName { get; set; }
 
     }

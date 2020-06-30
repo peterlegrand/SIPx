@@ -5,6 +5,6 @@ SELECT
 	, ISNULL(RegionName.Name,'') Name 
 	FROM Regions 
 	JOIN UITermLanguages RegionName
-		ON Regions.NameTermID = RegionName.UITermID  WHERE RegionName.LanguageID =41  
+		ON Regions.NameTermId = RegionName.UITermId  WHERE RegionName.LanguageId =41  
 ORDER BY RegionName.Name
 

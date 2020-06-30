@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationPageLanguages] (@UserID nvarchar(450), @ClassificationPageID int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationPageLanguages] (@UserId nvarchar(450), @ClassificationPageId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT ClassificationPageLanguages.ClassificationPageLanguageID
 	, ClassificationPageLanguages.LanguageID
@@ -21,19 +21,19 @@ SELECT ClassificationPageLanguages.ClassificationPageLanguageID
 	, ClassificationPageLanguages.ModifiedDate
 FROM ClassificationPages
 JOIN ClassificationPageLanguages
-	ON ClassificationPages.ClassificationPageID = ClassificationPageLanguages.ClassificationPageID
+	ON ClassificationPages.ClassificationPageId = ClassificationPageLanguages.ClassificationPageID
 JOIN Languages 
-	ON Languages.LanguageID = ClassificationPageLanguages.LanguageID
+	ON Languages.LanguageId = ClassificationPageLanguages.LanguageID
 JOIN UITermLanguages UILanguageName
-	ON UILanguageName.UITermID = Languages.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UILanguageNameCustom
-	ON UILanguageNameCustom.UITermID = Languages.NameTermID
+	ON UILanguageName.UITermId = Languages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UILanguageNameCustom
+	ON UILanguageNameCustom.UITermId = Languages.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationPageLanguages.CreatorID
+	ON Creator.UserId = ClassificationPageLanguages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationPageLanguages.ModifierID
-WHERE ClassificationPages.ClassificationPageID = @ClassificationPageID
-	AND UILanguageName.LanguageID = @LanguageID
+	ON Modifier.UserId = ClassificationPageLanguages.ModifierID
+WHERE ClassificationPages.ClassificationPageId = @ClassificationPageID
+	AND UILanguageName.LanguageId = @LanguageID
 ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)
 
 

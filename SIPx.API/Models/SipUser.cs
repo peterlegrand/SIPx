@@ -11,6 +11,6 @@ namespace SIPx.API.Models
        
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public int SecurityLevelID { get; set; } 
+        public int SecurityLevelId { get; set; } 
     }
 }

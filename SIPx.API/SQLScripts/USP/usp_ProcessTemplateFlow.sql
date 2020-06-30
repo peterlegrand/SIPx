@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlow] (@UserID nvarchar(450), @ProcessTemplateFlowID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlow] (@UserId nvarchar(450), @ProcessTemplateFlowId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateFlows.ProcessTemplateFlowID
 	, ISNULL(UserProcessTemplateFlowLanguage.Name,ISNULL(DefaultProcessTemplateFlowLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserProcessTemplateFlowLanguage.Description,ISNULL(DefaultProcessTemplateFlowLanguage.Description,'No description for this role')) Description
@@ -17,12 +17,12 @@ SELECT ProcessTemplateFlows.ProcessTemplateFlowID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ProcessTemplateFlows.ModifiedDate
 FROM ProcessTemplateFlows 
-LEFT JOIN (SELECT ProcessTemplateFlowID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateFlowLanguage
-	ON UserProcessTemplateFlowLanguage.ProcessTemplateFlowID = ProcessTemplateFlows.ProcessTemplateFlowID
-LEFT JOIN (SELECT ProcessTemplateFlowID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowLanguages JOIN Settings ON ProcessTemplateFlowLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateFlowLanguage
-	ON DefaultProcessTemplateFlowLanguage.ProcessTemplateFlowID = ProcessTemplateFlows.ProcessTemplateFlowID
+LEFT JOIN (SELECT ProcessTemplateFlowId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFlowLanguage
+	ON UserProcessTemplateFlowLanguage.ProcessTemplateFlowId = ProcessTemplateFlows.ProcessTemplateFlowID
+LEFT JOIN (SELECT ProcessTemplateFlowId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowLanguages JOIN Settings ON ProcessTemplateFlowLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFlowLanguage
+	ON DefaultProcessTemplateFlowLanguage.ProcessTemplateFlowId = ProcessTemplateFlows.ProcessTemplateFlowID
 JOIN Persons Creator
-	ON Creator.UserID = ProcessTemplateFlows.CreatorID
+	ON Creator.UserId = ProcessTemplateFlows.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ProcessTemplateFlows.ModifierID
-WHERE ProcessTemplateFlows.ProcessTemplateFlowID = @ProcessTemplateFlowID
+	ON Modifier.UserId = ProcessTemplateFlows.ModifierID
+WHERE ProcessTemplateFlows.ProcessTemplateFlowId = @ProcessTemplateFlowID

@@ -4,8 +4,8 @@ namespace SIPx.Shared
 {
     public interface INewProcessFromAPI
     {
-        int ProcessTemplateStageID { get; set; }
-        int ProcessTemplateID { get; set; }
+        int ProcessTemplateStageId { get; set; }
+        int ProcessTemplateId { get; set; }
         List<NewProcessFieldFromAPI> ProcessFields { get; set; }
     }
 }

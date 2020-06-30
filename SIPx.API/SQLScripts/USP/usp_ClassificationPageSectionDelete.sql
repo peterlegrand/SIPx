@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionDelete] (
-	@ClassificationPageSectionID int) 
+	@ClassificationPageSectionId int) 
 AS 
 BEGIN TRANSACTION
-DELETE FROM ClassificationPageSectionLanguages WHERE ClassificationPageSectionID = @ClassificationPageSectionID
-DELETE FROM ClassificationPageSections WHERE ClassificationPageSectionID = @ClassificationPageSectionID
+DELETE FROM ClassificationPageSectionLanguages WHERE ClassificationPageSectionId = @ClassificationPageSectionID
+DELETE FROM ClassificationPageSections WHERE ClassificationPageSectionId = @ClassificationPageSectionID
 COMMIT TRANSACTION

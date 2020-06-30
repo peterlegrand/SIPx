@@ -9,11 +9,11 @@ CREATE PROCEDURE [dbo].[usp_PersonCreate] (
 	, @FirstNameLocal nvarchar(50)
 	, @MiddleNameLocal nvarchar(50)
 	, @LastNameLocal nvarchar(50)
-	, @GenderID int
+	, @GenderId int
 	, @Birthdate DateTime
 	, @DeceasedDate DateTime
-	, @DefaultOrganizationID int
-	, @UserID nvarchar(450)
+	, @DefaultOrganizationId int
+	, @UserId nvarchar(450)
 	, @ModifierCreator nvarchar(450)) 
 AS 
 INSERT INTO Persons (
@@ -27,11 +27,11 @@ INSERT INTO Persons (
 	, FirstNameLocal 
 	, MiddleNameLocal 
 	, LastNameLocal 
-	, GenderID 
+	, GenderId 
 	, Birthdate 
 	, DeceasedDate 
-	, DefaultOrganizationID 
-	, UserID 
+	, DefaultOrganizationId 
+	, UserId 
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -48,11 +48,11 @@ VALUES (
 	, @FirstNameLocal 
 	, @MiddleNameLocal 
 	, @LastNameLocal 
-	, @GenderID 
+	, @GenderId 
 	, @Birthdate 
 	, @DeceasedDate 
-	, @DefaultOrganizationID 
-	, @UserID 
+	, @DefaultOrganizationId 
+	, @UserId 
 	, @ModifierCreator 
 	, getdate()
 	, @ModifierCreator 

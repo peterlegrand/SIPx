@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationTelecoms] (@UserID nvarchar(450), @OrganizationID int) 
+CREATE PROCEDURE [dbo].[usp_OrganizationTelecoms] (@UserId nvarchar(450), @OrganizationId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT OrganizationTelecoms.OrganizationTelecomID
 	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) AddressTypeName
 	, OrganizationTelecoms.TelecomValue
@@ -18,17 +18,17 @@ SELECT OrganizationTelecoms.OrganizationTelecomID
 	, OrganizationTelecoms.ModifiedDate
 FROM OrganizationTelecoms
 JOIN TelecomTypes
-	ON OrganizationTelecoms.TelecomTypeID = TelecomTypes.TelecomTypeID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UITelecomTypeNameCustom
-	ON UITelecomTypeNameCustom.UITermID = TelecomTypes.NameTermID
+	ON OrganizationTelecoms.TelecomTypeId = TelecomTypes.TelecomTypeID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UITelecomTypeNameCustom
+	ON UITelecomTypeNameCustom.UITermId = TelecomTypes.NameTermID
 JOIN UITermLanguages UITelecomTypeName
-	ON UITelecomTypeName.UITermID = TelecomTypes.NameTermID
+	ON UITelecomTypeName.UITermId = TelecomTypes.NameTermID
 LEFT JOIN OrganizationTelecomPhones 
 	ON OrganizationTelecomPhones.OrganizationTelecomID= OrganizationTelecoms.OrganizationTelecomID
 JOIN Persons Creator
-	ON Creator.UserID = OrganizationTelecoms.CreatorID
+	ON Creator.UserId = OrganizationTelecoms.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = OrganizationTelecoms.ModifierID
-WHERE UITelecomTypeName.LanguageID = @LanguageID
-	AND OrganizationTelecoms.OrganizationID = @OrganizationID
+	ON Modifier.UserId = OrganizationTelecoms.ModifierID
+WHERE UITelecomTypeName.LanguageId = @LanguageID
+	AND OrganizationTelecoms.OrganizationId = @OrganizationID
 ORDER BY ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) 

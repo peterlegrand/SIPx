@@ -18,10 +18,10 @@ namespace SIPx.Shared
         public string FirstNameLocal { get; set; }
         public string MiddleNameLocal { get; set; }
         public string LastNameLocal { get; set; }
-        public int GenderID { get; set; }
+        public int GenderId { get; set; }
         public DateTime Birthdate { get; set; }
         public DateTime DeceasedDate { get; set; }
-        public int DefaultOrganizationID { get; set; }
+        public int DefaultOrganizationId { get; set; }
         public string UserId { get; set; }
         public string ModifierCreator { get; set; }
 

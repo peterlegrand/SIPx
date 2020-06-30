@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationValueUserDelete] (
-	@ClassificationValueUserID int) 
+	@ClassificationValueUserId int) 
 AS 
-DELETE FROM ClassificationValueUsers WHERE @ClassificationValueUserID = ClassificationValueUserID
+DELETE FROM ClassificationValueUsers WHERE @ClassificationValueUserId = ClassificationValueUserID
 

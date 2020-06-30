@@ -14,8 +14,8 @@
         string MouseOver { get; set; }
         string Name { get; set; }
         int OenTwoColumns { get; set; }
-        int PageSectionDataTypeID { get; set; }
-        int PageSectionTypeID { get; set; }
+        int PageSectionDataTypeId { get; set; }
+        int PageSectionTypeId { get; set; }
         int Sequence { get; set; }
         bool ShowContentTypeTitleDescription { get; set; }
         bool ShowContentTypeTitleName { get; set; }

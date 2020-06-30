@@ -1,10 +1,10 @@
-CREATE PROCEDURE usp_ProcessFields (@UserID nvarchar(450), @ProcessID int)
+CREATE PROCEDURE usp_ProcessFields (@UserId nvarchar(450), @ProcessId int)
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT 
 	ProcessFields.ProcessFieldID
 	, ProcessFields.IntValue
@@ -18,26 +18,26 @@ SELECT
 	, ProcessFields.ModifiedDate
 FROM Processes
 JOIN ProcessTemplateStageFields
-	ON Processes.ProcessTemplateStageID = ProcessTemplateStageFields.ProcessTemplateStageID
+	ON Processes.ProcessTemplateStageId = ProcessTemplateStageFields.ProcessTemplateStageID
 JOIN ProcessFields
-	ON Processes.ProcessID = ProcessFields.ProcessID
+	ON Processes.ProcessId = ProcessFields.ProcessID
 JOIN ProcessTemplateFields
-	ON ProcessFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
-		AND ProcessTemplateStageFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateFieldLanguage
-	ON UserProcessTemplateFieldLanguage.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateFieldLanguage
-	ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
+	ON ProcessFields.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
+		AND ProcessTemplateStageFields.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage
+	ON UserProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage
+	ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
 JOIN ProcessTemplateStageFieldStatuses 
-	ON ProcessTemplateStageFieldStatuses.ProcessTemplateStageFieldStatusID = ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
+	ON ProcessTemplateStageFieldStatuses.ProcessTemplateStageFieldStatusId = ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
 JOIN UITermLanguages UIStatusName
-	ON UIStatusName.UITermID = ProcessTemplateStageFieldStatuses.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIStatusNameCustom
-	ON UIStatusNameCustom.UITermID = ProcessTemplateStageFieldStatuses.NameTermID
+	ON UIStatusName.UITermId = ProcessTemplateStageFieldStatuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIStatusNameCustom
+	ON UIStatusNameCustom.UITermId = ProcessTemplateStageFieldStatuses.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ProcessFields.CreatorID
+	ON Creator.UserId = ProcessFields.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ProcessFields.ModifierID
-WHERE Processes.ProcessID = @ProcessID
-	AND UIStatusName.LanguageID = @LanguageID
+	ON Modifier.UserId = ProcessFields.ModifierID
+WHERE Processes.ProcessId = @ProcessID
+	AND UIStatusName.LanguageId = @LanguageID
 ORDER BY ProcessTemplateStageFields.Sequence

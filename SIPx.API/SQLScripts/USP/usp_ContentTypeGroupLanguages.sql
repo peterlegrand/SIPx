@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ContentTypeGroupLanguages] (@UserID nvarchar(450), @ContentTypeGroupID int) 
+CREATE PROCEDURE [dbo].[usp_ContentTypeGroupLanguages] (@UserId nvarchar(450), @ContentTypeGroupId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT ContentTypeGroupLanguages.ContentTypeGroupLanguageID
 	, ContentTypeGroupLanguages.LanguageID
@@ -19,17 +19,17 @@ SELECT ContentTypeGroupLanguages.ContentTypeGroupLanguageID
 	, ContentTypeGroupLanguages.ModifiedDate
 FROM ContentTypeGroups
 JOIN ContentTypeGroupLanguages
-	ON ContentTypeGroups.ContentTypeGroupID = ContentTypeGroupLanguages.ContentTypeGroupID
+	ON ContentTypeGroups.ContentTypeGroupId = ContentTypeGroupLanguages.ContentTypeGroupID
 JOIN Languages 
-	ON Languages.LanguageID = ContentTypeGroupLanguages.LanguageID
+	ON Languages.LanguageId = ContentTypeGroupLanguages.LanguageID
 JOIN UITermLanguages UILanguageName
-	ON UILanguageName.UITermID = Languages.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UILanguageNameCustom
-	ON UILanguageNameCustom.UITermID = Languages.NameTermID
+	ON UILanguageName.UITermId = Languages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UILanguageNameCustom
+	ON UILanguageNameCustom.UITermId = Languages.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ContentTypeGroupLanguages.CreatorID
+	ON Creator.UserId = ContentTypeGroupLanguages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ContentTypeGroupLanguages.ModifierID
-WHERE ContentTypeGroups.ContentTypeGroupID = @ContentTypeGroupID
-	AND UILanguageName.LanguageID = @LanguageID
+	ON Modifier.UserId = ContentTypeGroupLanguages.ModifierID
+WHERE ContentTypeGroups.ContentTypeGroupId = @ContentTypeGroupID
+	AND UILanguageName.LanguageId = @LanguageID
 ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)

@@ -9,6 +9,6 @@ namespace SIPx.API.Models
     public class SipRole: IdentityRole
     {
        
-        public int RoleGroupID { get; set; }
+        public int RoleGroupId { get; set; }
     }
 }

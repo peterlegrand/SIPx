@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_MetaListPageSectionDataTypes]
 AS
-SELECT PageSectionDataTypes.PageSectionDataTypeID, Name
+SELECT PageSectionDataTypes.PageSectionDataTypeId, Name
 FROM PageSectionDataTypes 
 JOIN UITermLanguages
-	ON PageSectionDataTypes.NameTermID = UITermLanguages.UITermID
-WHERE LanguageID =41 
+	ON PageSectionDataTypes.NameTermId = UITermLanguages.UITermID
+WHERE LanguageId =41 
 ORDER BY Name

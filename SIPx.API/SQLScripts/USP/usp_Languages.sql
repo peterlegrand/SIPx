@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_Languages] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_Languages] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT 
 	Languages.LanguageID
 	, ForeignName
@@ -16,19 +16,19 @@ SELECT
 	, Languages.ModifiedDate
 FROM Languages 
 JOIN Statuses	
-	ON Languages.StatusID = Statuses.StatusID
+	ON Languages.StatusId = Statuses.StatusID
 JOIN UITermLanguages LanguageName
-	ON Languages.NameTermID = LanguageName.UITermID  
-LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageID = @LanguageID)  UserLanguageName
-	ON Languages.NameTermID = UserLanguageName.UITermID  
+	ON Languages.NameTermId = LanguageName.UITermId  
+LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserLanguageName
+	ON Languages.NameTermId = UserLanguageName.UITermId  
 JOIN UITermLanguages StatusName
-	ON Statuses.NameTermID = StatusName.UITermID  
-LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageID = @LanguageID)  UserStatusName
-	ON Statuses.NameTermID = UserStatusName.UITermID  
+	ON Statuses.NameTermId = StatusName.UITermId  
+LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserStatusName
+	ON Statuses.NameTermId = UserStatusName.UITermId  
 JOIN Persons Modifier
-	ON Modifier.UserID = Languages.ModifierID
-WHERE LanguageName.LanguageID =@LanguageID 
-	AND StatusName.LanguageID = @LanguageID
+	ON Modifier.UserId = Languages.ModifierID
+WHERE LanguageName.LanguageId =@LanguageId 
+	AND StatusName.LanguageId = @LanguageID
 ORDER BY  	ISNULL( UserLanguageName.Customization, LanguageName.Name) 
 	
 

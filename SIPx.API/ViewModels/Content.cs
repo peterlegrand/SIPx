@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class Content
     {
         [Key]
-        public int ContentID { get; set; }
+        public int ContentId { get; set; }
         public string Title { get; set; }
         public string ContentypeName { get; set; }
         public string StatusName { get; set; }

@@ -9,8 +9,8 @@ namespace SIPx.API.ViewModels
     public class RoleLanguage
     {
         [Key]
-        public int RoleLanguageID { get; set; }
-        public int LanguageID { get; set; }
+        public int RoleLanguageId { get; set; }
+        public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

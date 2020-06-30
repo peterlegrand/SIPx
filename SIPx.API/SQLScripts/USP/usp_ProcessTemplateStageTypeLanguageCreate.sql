@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageTypeLanguageCreate] (
-	@ProcessTemplateStageTypeID int
-	, @LanguageID int
+	@ProcessTemplateStageTypeId int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
-INSERT INTO ProcessTemplateStageTypeLanguages (ProcessTemplateStageTypeID, LanguageID, Name, Description, MenuName, MouseOver, CreatorID, CreatedDate, ModifierID, ModifiedDate)
-VALUES (@ProcessTemplateStageTypeID, @LanguageID, @Name, @Description, @MenuName, @MouseOver, @UserID, getdate(), @UserID, getdate())
+INSERT INTO ProcessTemplateStageTypeLanguages (ProcessTemplateStageTypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, CreatedDate, ModifierId, ModifiedDate)
+VALUES (@ProcessTemplateStageTypeId, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserId, getdate(), @UserId, getdate())
 

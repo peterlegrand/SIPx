@@ -1,18 +1,18 @@
 CREATE PROCEDURE usp_MetaListClaim
 AS
-SELECT Claims.ClaimID 
+SELECT Claims.ClaimId 
 	, UITermLanguages.Name ClaimName
 	, ClaimGroups.ClaimGroupID
 	, GroupLanguage.Name ClaimGroupName
 FROM Claims 
 JOIN UITermLanguages 
-	ON Claims.NameTermID = UITermLanguages.UITermID 
+	ON Claims.NameTermId = UITermLanguages.UITermId 
 JOIN ClaimGroups
-	ON Claims.ClaimGroupID = ClaimGroups.ClaimGroupID
+	ON Claims.ClaimGroupId = ClaimGroups.ClaimGroupID
 JOIN UITermLanguages GroupLanguage
-	ON ClaimGroups.NameTermID = GroupLanguage.UITermID 
-WHERE GroupLanguage.LanguageID =41
-	AND UITermLanguages.LanguageID = 41
+	ON ClaimGroups.NameTermId = GroupLanguage.UITermId 
+WHERE GroupLanguage.LanguageId =41
+	AND UITermLanguages.LanguageId = 41
 ORDER BY GroupLanguage.Name 
 	, UITermLanguages.Name 
 	

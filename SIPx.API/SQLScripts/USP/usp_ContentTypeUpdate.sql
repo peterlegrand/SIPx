@@ -1,41 +1,41 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeUpdate] (
-	@ContentTypeLanguageID int
-	, @ContentTypeID int
-	, @ContentTypeGroupID int
-	, @ProcessTemplateID int
-	, @SecurityLevelID int
+	@ContentTypeLanguageId int
+	, @ContentTypeId int
+	, @ContentTypeGroupId int
+	, @ProcessTemplateId int
+	, @SecurityLevelId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)
+	, @UserId nvarchar(450)
 	, @ContentTypeClassificationTable AS udt_ContentTypeClassificationUpdate READONLY)
 
 AS 
 BEGIN TRANSACTION
 UPDATE ContentTypes SET 
 	ContentTypeGroupID= @ContentTypeGroupID
-	, ProcessTemplateID = @ProcessTemplateID
-	, SecurityLevelID = @SecurityLevelID
-	, ModifierID = @UserID
+	, ProcessTemplateId = @ProcessTemplateID
+	, SecurityLevelId = @SecurityLevelID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ContentTypeID = @ContentTypeID
+WHERE ContentTypeId = @ContentTypeID
 
 UPDATE  ContentTypeLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ContentTypeLanguageID= @ContentTypeLanguageID
 
 UPDATE ContentTypeClassifications SET 
-ContentTypeClassifications.ContentTypeClassificationStatusID = UpdateData.ContentTypeClassificationStatusID
+ContentTypeClassifications.ContentTypeClassificationStatusId = UpdateData.ContentTypeClassificationStatusID
 FROM ContentTypeClassifications
 INNER JOIN
 @ContentTypeClassificationTable UpdateData
-ON UpdateData.ContentTypeClassificationID = ContentTypeClassifications.ContentTypeClassificationID
+ON UpdateData.ContentTypeClassificationId = ContentTypeClassifications.ContentTypeClassificationID
 
 COMMIT TRANSACTION
 

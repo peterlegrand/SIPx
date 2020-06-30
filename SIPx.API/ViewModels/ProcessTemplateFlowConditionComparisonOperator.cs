@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ProcessTemplateFlowConditionComparisonOperator
     {
         [Key]
-        public int ProcessTemplateFlowConditionComparisonOperatorID { get; set; }
+        public int ProcessTemplateFlowConditionComparisonOperatorId { get; set; }
         public string Symbol { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

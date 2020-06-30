@@ -1,15 +1,15 @@
 CREATE PROCEDURE [dbo].[usp_RoleGroupUpdate] (
-	@RoleGroupID int 
-	, @RoleGroupLanguageID int 
+	@RoleGroupId int 
+	, @RoleGroupLanguageId int 
 	, @Sequence int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM RoleGroups WHERE RoleGroupID = @RoleGroupID;
+SELECT @OldSequence = Sequence FROM RoleGroups WHERE RoleGroupId = @RoleGroupID;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
@@ -22,16 +22,16 @@ END
 
 UPDATE RoleGroups SET 
 	Sequence = @Sequence
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE RoleGroupID = @RoleGroupID
+WHERE RoleGroupId = @RoleGroupID
 
 UPDATE  RoleGroupLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE RoleGroupLanguageID= @RoleGroupLanguageID
 COMMIT TRANSACTION

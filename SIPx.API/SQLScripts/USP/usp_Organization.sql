@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_Organization] (@UserID nvarchar(450), @OrganizationID int) 
+CREATE PROCEDURE [dbo].[usp_Organization] (@UserId nvarchar(450), @OrganizationId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT 
 	Organizations.OrganizationID
@@ -15,7 +15,7 @@ SELECT
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this organization')) MouseOver
 	, ISNULL(UserTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this organization type')) OrganizationTypeName
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
-	, CASE WHEN Organizations.ParentOrganizationID = NULL THEN 'No parent Organization' ELSE ISNULL(UserParentOrganizationLanguage.Name,ISNULL(DefaultParentOrganizationLanguage.Name,'No name for this parent Organization')) END ParentOrganizationName
+	, CASE WHEN Organizations.ParentOrganizationId = NULL THEN 'No parent Organization' ELSE ISNULL(UserParentOrganizationLanguage.Name,ISNULL(DefaultParentOrganizationLanguage.Name,'No name for this parent Organization')) END ParentOrganizationName
 	, OrganizationTypes.Internal
 	, OrganizationTypes.LegalEntity
 	, Creator.FirstName + ' ' + Creator.LastName Creator
@@ -23,29 +23,29 @@ SELECT
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, Organizations.ModifiedDate
 FROM   Organizations
-LEFT JOIN (SELECT OrganizationID, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageID = @LanguageID) UserParentOrganizationLanguage
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserParentOrganizationLanguage
 	ON UserParentOrganizationLanguage.OrganizationID= Organizations.ParentOrganizationID
-LEFT JOIN (SELECT OrganizationID, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultParentOrganizationLanguage
-	ON DefaultParentOrganizationLanguage.OrganizationID = Organizations.ParentOrganizationID
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultParentOrganizationLanguage
+	ON DefaultParentOrganizationLanguage.OrganizationId = Organizations.ParentOrganizationID
 JOIN Statuses
-	ON Statuses.StatusID = Organizations.StatusID
+	ON Statuses.StatusId = Organizations.StatusID
 JOIN OrganizationTypes
-	ON Organizations.OrganizationTypeID = OrganizationTypes.OrganizationTypeID
-LEFT JOIN (SELECT OrganizationID, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageID = @LanguageID) UserLanguage
+	ON Organizations.OrganizationTypeId = OrganizationTypes.OrganizationTypeID
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.OrganizationID= Organizations.OrganizationID
-LEFT JOIN (SELECT OrganizationID, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
-	ON DefaultLanguage.OrganizationID = Organizations.OrganizationID
-LEFT JOIN (SELECT OrganizationTypeID, Name FROM OrganizationTypeLanguages WHERE LanguageID = @LanguageID) UserTypeLanguage
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.OrganizationId = Organizations.OrganizationID
+LEFT JOIN (SELECT OrganizationTypeId, Name FROM OrganizationTypeLanguages WHERE LanguageId = @LanguageID) UserTypeLanguage
 	ON UserTypeLanguage.OrganizationTypeID= Organizations.OrganizationTypeID
-LEFT JOIN (SELECT OrganizationTypeID, Name FROM OrganizationTypeLanguages JOIN Settings ON OrganizationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultTypeLanguage
+LEFT JOIN (SELECT OrganizationTypeId, Name FROM OrganizationTypeLanguages JOIN Settings ON OrganizationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultTypeLanguage
 	ON DefaultTypeLanguage.OrganizationTypeID= Organizations.OrganizationTypeID
 JOIN UITermLanguages StatusName
-	ON Statuses.NameTermID = StatusName.UITermID  
-LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageID = @LanguageID)  UserStatusName
-	ON Statuses.NameTermID = UserStatusName.UITermID  
+	ON Statuses.NameTermId = StatusName.UITermId  
+LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserStatusName
+	ON Statuses.NameTermId = UserStatusName.UITermId  
 JOIN Persons Creator
-	ON Creator.UserID = Organizations.CreatorID
+	ON Creator.UserId = Organizations.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = Organizations.ModifierID
-WHERE StatusName.LanguageID = @LanguageID
-	AND Organizations.OrganizationID = @OrganizationID
+	ON Modifier.UserId = Organizations.ModifierID
+WHERE StatusName.LanguageId = @LanguageID
+	AND Organizations.OrganizationId = @OrganizationID

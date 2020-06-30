@@ -12,13 +12,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationController : ControllerBase
     {
+        private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationController(ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;
@@ -44,8 +46,17 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> GetLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193")) 
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationLanguages", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationLanguages(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -60,6 +71,16 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
+
                 return Ok(await _classificationProvider.GetClassificationLevels(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -74,6 +95,16 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationLevelLanguages", "ClassificationLevelID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
+
                 return Ok(await _classificationProvider.GetClassificationLevelLanguages(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -88,6 +119,16 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "10"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationPages", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
+
                 return Ok(await _classificationProvider.GetClassificationPages(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -102,6 +143,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "24"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationPageLanguages", "ClassificationPageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationPageLanguages(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -116,6 +166,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "13"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationPageSections", "ClassificationPageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationPageSections(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -130,6 +189,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "27"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassficationPageSectionLanguages", "ClassficationPageSectionID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationPageSectionLanguages(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -139,11 +207,20 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("RelationTypes")]
-        public async Task<IActionResult> GetRelationTypes(int Id)
+        public async Task<IActionResult> GetRelationTypes() //int Id) PETER CHECK it had this Id but I think no need
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "30"))
             {
+                //if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypes", "ClassificationRelationTypeID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
+
                 return Ok(await _classificationProvider.GetClassificationRelationTypes(CurrentUser.Id));
             }
             return BadRequest(new
@@ -158,6 +235,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "34"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypeLanguages", "ClassificationRelationTypeID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationRelationTypeLanguages(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -173,6 +259,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "38"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationRoles", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationRoles(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -188,6 +283,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "42"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationUsers", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationUsers(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -203,6 +307,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "46"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValueRoles", "ClassificationValueID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationValueRoles(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -218,6 +331,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))  //PETER TODO looks like there is also a value 54
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationValueUsers(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -232,6 +354,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "6"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValues", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationValues(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -273,6 +404,15 @@ namespace SIPx.API.Controllers
         [HttpGet("Language/{Id:int}")]
         public async Task<IActionResult> GetLanguage(int Id)
         {
+            if (await _checkProvider.CheckIfRecordExists("ClassificationLanguages", "ClassificationLanguageID", Id) == 0)
+            {
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = "No record with this ID",
+                });
+            }
+
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))  
             {
@@ -290,6 +430,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationLevelID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
                 return Ok(await _classificationProvider.GetClassificationLevel(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -304,6 +452,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationLevelLanguages", "ClassificationLevelLanguageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationLevelLanguage(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -318,6 +475,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "10"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationPages", "ClassificationPageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationPage(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -332,6 +498,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "24"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationPageLanguages", "ClassificationPageLanguageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationPageLanguage(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -346,6 +521,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "13"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationPageSections", "ClassificationPageSectionID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationPageSection(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -360,6 +544,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "27"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationPageSectionLanguages", "ClassificationPageSectionLanguageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationPageSectionLanguage(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -374,6 +567,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User); 
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "30"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypes", "ClassificationRelationTypeID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationRelationType(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -388,6 +590,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "34"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypeLanguages", "ClassificationRelationTypeLanguageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationRelationTypeLanguage(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -403,6 +614,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "38"))
             {
+                if (await _checkProvider.CheckIfRecordExists("Classificationroles", "ClassificationRoleID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationRole(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -418,6 +638,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "42"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationUsers", "ClassificationUserID", Id) == 0)  
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationUser(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -433,6 +662,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "46"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValueRoles", "ClassificationValueRoleID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationValueRole(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -448,6 +686,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))
             {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueUserID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
                 return Ok(await _classificationProvider.GetClassificationValueUser(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -457,7 +704,35 @@ namespace SIPx.API.Controllers
             });
         }
 
+        [HttpGet("Edit/{Id:int}")]
+        public async Task<IActionResult> EditGet(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("Classifications", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _classificationProvider.GetClassificationEdit(CurrentUser.Id, Id);
+                var y = await _classificationProvider.GetClassificationPageList(CurrentUser.Id, Id);
+                var z = await _masterProvider.GetStatusList(CurrentUser.Id);
 
+                x.DefaultPages = y;
+                x.Statuses = z;
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
 
         [HttpPut]
         public async Task<IActionResult> Put(ClassificationUpdatePut Classification)
@@ -490,7 +765,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Post(ClassificationCreatePost Classification)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _classificationProvider.PostClassificationCheck(Classification);
                 if (CheckString.Length == 0)

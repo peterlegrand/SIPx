@@ -1,28 +1,28 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowUpdate] (
-	@ProcessTemplateFlowLanguageID int
-	, @ProcessTemplateFlowID int
-	, @ProcessTemplateFromStageID int
-	, @ProcessTemplateToStageID int
+	@ProcessTemplateFlowLanguageId int
+	, @ProcessTemplateFlowId int
+	, @ProcessTemplateFromStageId int
+	, @ProcessTemplateToStageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 UPDATE ProcessTemplateFlows SET 
-	ProcessTemplateFromStageID = @ProcessTemplateFromStageID
-	, ProcessTemplateToStageID = @ProcessTemplateToStageID
-	, ModifierID = @UserID
+	ProcessTemplateFromStageId = @ProcessTemplateFromStageID
+	, ProcessTemplateToStageId = @ProcessTemplateToStageID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ProcessTemplateFlowID = @ProcessTemplateFlowID
+WHERE ProcessTemplateFlowId = @ProcessTemplateFlowID
 
 UPDATE  ProcessTemplateFlowLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateFlowLanguageID= @ProcessTemplateFlowLanguageID
 

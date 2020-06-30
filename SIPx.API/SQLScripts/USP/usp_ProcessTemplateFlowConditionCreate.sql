@@ -1,28 +1,28 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionCreate] (
-	@ProcessTemplateFlowID int
+	@ProcessTemplateFlowId int
 	, @Sequence int
-	, @ProcessTemplateFlowConditionTypeID int
-	, @ProcessTemplateFieldID int
+	, @ProcessTemplateFlowConditionTypeId int
+	, @ProcessTemplateFieldId int
 	, @ProcessTemplateFieldIDRole int
-	, @ComparisonOperatorID int
+	, @ComparisonOperatorId int
 	, @ProcessTemplateFlowConditionString nvarchar(max)
 	, @ProcessTemplateFlowConditionInt int
 	, @ProcessTemplateFlowConditionDate DateTime
-	, @LanguageID int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
-DECLARE @ProcessTemplateID int;
+DECLARE @ProcessTemplateId int;
 
-SELECT @ProcessTemplateID  = ProcessTemplateID FROM ProcessTemplateFlows WHERE ProcessTemplateFlowID = @ProcessTemplateFlowID;
+SELECT @ProcessTemplateId  = ProcessTemplateId FROM ProcessTemplateFlows WHERE ProcessTemplateFlowId = @ProcessTemplateFlowID;
 BEGIN TRANSACTION
 
 UPDATE ProcessTemplateFlowConditions SET Sequence = Sequence + 1 
-WHERE ProcessTemplateFlowID = @ProcessTemplateFlowID 
+WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId 
 	AND Sequence >= @Sequence
 
 INSERT INTO ProcessTemplateFlowConditions (
@@ -32,7 +32,7 @@ INSERT INTO ProcessTemplateFlowConditions (
 	, ProcessTemplateFlowConditionTypeID
 	, ProcessTemplateFieldID
 	, ProcessTemplateFieldIDRole 
-	, ComparisonOperatorID 
+	, ComparisonOperatorId 
 	, ProcessTemplateFlowConditionString 
 	, ProcessTemplateFlowConditionInt 
 	, ProcessTemplateFlowConditionDate 
@@ -47,7 +47,7 @@ VALUES (
 	, @ProcessTemplateFlowConditionTypeID
 	, @ProcessTemplateFieldID
 	, @ProcessTemplateFieldIDRole 
-	, @ComparisonOperatorID 
+	, @ComparisonOperatorId 
 	, @ProcessTemplateFlowConditionString 
 	, @ProcessTemplateFlowConditionInt 
 	, @ProcessTemplateFlowConditionDate 

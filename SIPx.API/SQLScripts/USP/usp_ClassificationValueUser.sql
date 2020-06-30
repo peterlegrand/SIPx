@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationValueUser] (@UserID nvarchar(450), @ClassificationValueUserID int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationValueUser] (@UserId nvarchar(450), @ClassificationValueUserId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationValueUsers.UserID
 	, Persons.FirstName
 	, Persons.LastName
@@ -17,18 +17,18 @@ SELECT ClassificationValueUsers.UserID
 FROM ClassificationValueUsers 
 JOIN Persons
 	ON Persons.Userid = ClassificationValueUsers.UserID
-LEFT JOIN (SELECT ClassificationRelationTypeID, Name FROM ClassificationRelationTypeLanguages WHERE LanguageID = @LanguageID) UserClassificationRelationTypeLanguage
-	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationValueUsers.ClassificationRelationTypeID
-LEFT JOIN (SELECT ClassificationRelationTypeID, Name FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationRelationTypeLanguage
-	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationValueUsers.ClassificationRelationTypeID
-LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages WHERE LanguageID = @LanguageID) OrganizationUserLanguage
-	ON OrganizationUserLanguage.OrganizationID = Persons.DefaultOrganizationID
-LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) OrganizationDefaultLanguage
-	ON OrganizationDefaultLanguage.OrganizationID = Persons.DefaultOrganizationID
+LEFT JOIN (SELECT ClassificationRelationTypeId, Name FROM ClassificationRelationTypeLanguages WHERE LanguageId = @LanguageID) UserClassificationRelationTypeLanguage
+	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationValueUsers.ClassificationRelationTypeID
+LEFT JOIN (SELECT ClassificationRelationTypeId, Name FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationRelationTypeLanguage
+	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationValueUsers.ClassificationRelationTypeID
+LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages WHERE LanguageId = @LanguageID) OrganizationUserLanguage
+	ON OrganizationUserLanguage.OrganizationId = Persons.DefaultOrganizationID
+LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) OrganizationDefaultLanguage
+	ON OrganizationDefaultLanguage.OrganizationId = Persons.DefaultOrganizationID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationValueUsers.CreatorID
+	ON Creator.UserId = ClassificationValueUsers.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationValueUsers.ModifierID
-WHERE ClassificationValueUsers.ClassificationValueUserID = @ClassificationValueUserID
+	ON Modifier.UserId = ClassificationValueUsers.ModifierID
+WHERE ClassificationValueUsers.ClassificationValueUserId = @ClassificationValueUserID
 
 

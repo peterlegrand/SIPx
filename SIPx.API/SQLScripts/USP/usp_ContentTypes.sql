@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ContentTypes] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_ContentTypes] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ContentTypes.ContentTypeID
 	, ContentTypeGroups.Sequence
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this content type')) Name
@@ -16,7 +16,7 @@ SELECT ContentTypes.ContentTypeID
 	, ISNULL(UserGroupLanguage.MenuName,ISNULL(DefaultGroupLanguage.MenuName,'No menu name for this content type group')) GroupMenuName
 	, ISNULL(UserGroupLanguage.MouseOver,ISNULL(DefaultGroupLanguage.MouseOver,'No mouse over for this content type group')) GroupMouseOver
 	, ISNULL(UISecurityLevelNameCustom.Customization ,UISecurityLevelName.Name) SecurityLevelName
-	, CASE WHEN ContentTypes.ProcessTemplateID IS NULL THEN ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguageLanguage.Name,'No name for the process template')) ELSE 'There is process template' END ProcessTemplateName
+	, CASE WHEN ContentTypes.ProcessTemplateId IS NULL THEN ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguageLanguage.Name,'No name for the process template')) ELSE 'There is process template' END ProcessTemplateName
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, ContentTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
@@ -27,24 +27,24 @@ JOIN ContentTypeGroups
 JOIN SecurityLevels
 	ON SecurityLevels.SecurityLevelID= Contenttypes.SecurityLevelID
 JOIN UITermLanguages UISecurityLevelName
-	ON UISecurityLevelName.UITermID = SecurityLevels.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UISecurityLevelNameCustom
-	ON UISecurityLevelNameCustom.UITermID = SecurityLevels.NameTermID
-LEFT JOIN (SELECT ContentTypeID, Name, Description, MenuName, MouseOver FROM ContentTypeLanguages WHERE LanguageID = @LanguageID) UserLanguage
+	ON UISecurityLevelName.UITermId = SecurityLevels.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UISecurityLevelNameCustom
+	ON UISecurityLevelNameCustom.UITermId = SecurityLevels.NameTermID
+LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver FROM ContentTypeLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.ContentTypeID= ContentTypes.ContentTypeID
-LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver FROM ContentTypeLanguages JOIN Settings ON ContentTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
-	ON DefaultLanguage.ContentTypeID = ContentTypes.ContentTypeID
-LEFT JOIN (SELECT ContentTypeGroupID, Name, Description, MenuName, MouseOver FROM ContentTypeGroupLanguages WHERE LanguageID = @LanguageID) UserGroupLanguage
-	ON UserGroupLanguage.ContentTypeGroupID  = ContentTypes.ContentTypeGroupID
-LEFT JOIN (SELECT ContentTypeGroupId, Name, Description, MenuName, MouseOver FROM ContentTypeGroupLanguages JOIN Settings ON ContentTypeGroupLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultGroupLanguage
-	ON DefaultGroupLanguage.ContentTypeGroupID = ContentTypes.ContentTypeGroupID
-LEFT JOIN (SELECT ProcessTemplateID, Name FROM ProcessTemplateLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateLanguage
-	ON UserProcessTemplateLanguage.ProcessTemplateID = ContentTypes.ProcessTemplateID
-LEFT JOIN (SELECT ProcessTemplateID, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateLanguageLanguage
-	ON DefaultProcessTemplateLanguageLanguage.ProcessTemplateID = ContentTypes.ProcessTemplateID
+LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver FROM ContentTypeLanguages JOIN Settings ON ContentTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ContentTypeId = ContentTypes.ContentTypeID
+LEFT JOIN (SELECT ContentTypeGroupId, Name, Description, MenuName, MouseOver FROM ContentTypeGroupLanguages WHERE LanguageId = @LanguageID) UserGroupLanguage
+	ON UserGroupLanguage.ContentTypeGroupId  = ContentTypes.ContentTypeGroupID
+LEFT JOIN (SELECT ContentTypeGroupId, Name, Description, MenuName, MouseOver FROM ContentTypeGroupLanguages JOIN Settings ON ContentTypeGroupLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultGroupLanguage
+	ON DefaultGroupLanguage.ContentTypeGroupId = ContentTypes.ContentTypeGroupID
+LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateLanguage
+	ON UserProcessTemplateLanguage.ProcessTemplateId = ContentTypes.ProcessTemplateID
+LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateLanguageLanguage
+	ON DefaultProcessTemplateLanguageLanguage.ProcessTemplateId = ContentTypes.ProcessTemplateID
 JOIN Persons Creator
-	ON Creator.UserID = ContentTypes.CreatorID
+	ON Creator.UserId = ContentTypes.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ContentTypes.ModifierID
-WHERE UISecurityLevelName.LanguageID = @LanguageID
+	ON Modifier.UserId = ContentTypes.ModifierID
+WHERE UISecurityLevelName.LanguageId = @LanguageID
 ORDER BY ContentTypeGroups.Sequence, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this ContentType')) 

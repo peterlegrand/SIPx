@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[usp_ProjectDelete] (
-	@ProjectID int)
+	@ProjectId int)
 AS 
 
 BEGIN TRANSACTION
-DELETE FROM ProjectLanguages WHERE ProjectID = @ProjectID
-DELETE FROM Projects WHERE ProjectID = @ProjectID
+DELETE FROM ProjectLanguages WHERE ProjectId = @ProjectID
+DELETE FROM Projects WHERE ProjectId = @ProjectID
 
 COMMIT TRANSACTION

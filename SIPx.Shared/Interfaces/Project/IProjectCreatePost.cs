@@ -8,6 +8,6 @@
         string Name { get; set; }
         int ProjectParentId { get; set; }
         int StatusId { get; set; }
-        string UserID { get; set; }
+        string UserId { get; set; }
     }
 }

@@ -9,8 +9,8 @@ namespace SIPx.API.ViewModels
     public class SubRegion
     {
         [Key]
-        public int SubRegionID { get; set; }
-        public int RegionID { get; set; }
+        public int SubRegionId { get; set; }
+        public int RegionId { get; set; }
         public string SubRegionName { get; set; }
         public string RegionName { get; set; }
     }

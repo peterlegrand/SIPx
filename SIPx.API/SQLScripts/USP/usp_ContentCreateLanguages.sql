@@ -1,22 +1,22 @@
-CREATE PROCEDURE [dbo].[usp_ContentCreateLanguages] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_ContentCreateLanguages] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
+DECLARE @LanguageId int;
 
-DECLARE @SecurityLevelID int;
-SELECT @SecurityLevelID = SecurityLevelID
+DECLARE @SecurityLevelId int;
+SELECT @SecurityLevelId = SecurityLevelID
 FROM AspNetUsers
 WHERE Id = @UserID;
 
-SELECT @LanguageID = IntPreference
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT Languages.LanguageID
 	, ISNULL(Customization,Name ) Name 
 FROM Languages 
-JOIN UITermLanguages ON Languages.NameTermID = UITermLanguages.UITermID
-LEFT JOIN (SELECT UITermLanguageCustomizations.UITermID, UITermLanguageCustomizations.Customization FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageID = @LanguageID) Customization
-	ON Customization.UITermID = Languages.NameTermID
-WHERE Languages.StatusID = 1 AND UITermLanguages.LanguageID = @LanguageID
+JOIN UITermLanguages ON Languages.NameTermId = UITermLanguages.UITermID
+LEFT JOIN (SELECT UITermLanguageCustomizations.UITermId, UITermLanguageCustomizations.Customization FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID) Customization
+	ON Customization.UITermId = Languages.NameTermID
+WHERE Languages.StatusId = 1 AND UITermLanguages.LanguageId = @LanguageID
 ORDER BY Name

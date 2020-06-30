@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_MetaListProcessTemplateFlowConditionTypes]
 AS
-SELECT ProcessTemplateFlowConditionTypes.ProcessTemplateFlowConditionTypeID, Name
+SELECT ProcessTemplateFlowConditionTypes.ProcessTemplateFlowConditionTypeId, Name
 FROM ProcessTemplateFlowConditionTypes 
 JOIN UITermLanguages
-	ON ProcessTemplateFlowConditionTypes.NameTermID = UITermLanguages.UITermID
-WHERE LanguageID =41 
+	ON ProcessTemplateFlowConditionTypes.NameTermId = UITermLanguages.UITermID
+WHERE LanguageId =41 
 ORDER BY Name

@@ -7,9 +7,9 @@ namespace SIPx.Shared
 {
     public class NewProcessTemplateList : INewProcessTemplateList
     {
-        public int ProcessTemplateID { get; set; }
+        public int ProcessTemplateId { get; set; }
         [Key]
-        public int ProcessTemplateGroupID { get; set; }
+        public int ProcessTemplateGroupId { get; set; }
         public string Name { get; set; }
     }
 }

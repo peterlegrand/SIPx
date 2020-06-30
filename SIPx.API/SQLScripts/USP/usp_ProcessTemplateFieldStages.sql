@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldStages] (@UserID nvarchar(450), @ProcessTemplateFieldID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldStages] (@UserId nvarchar(450), @ProcessTemplateFieldId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldID
 	, ProcessTemplateStageFields.ProcessTemplateStageID
 	, ProcessTemplateStageFields.ProcessTemplateID
@@ -20,27 +20,27 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ProcessTemplateStageFields.ModifiedDate
 FROM ProcessTemplateStageFields 
-LEFT JOIN (SELECT ProcessTemplateStageID, Name FROM ProcessTemplateStageLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateStageLanguage
-	ON UserProcessTemplateStageLanguage.ProcessTemplateStageID = ProcessTemplateStageFields.ProcessTemplateStageID
-LEFT JOIN (SELECT ProcessTemplateStageID, Name FROM ProcessTemplateStageLanguages JOIN Settings ON ProcessTemplateStageLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateStageLanguage
-	ON DefaultProcessTemplateStageLanguage.ProcessTemplateStageID = ProcessTemplateStageFields.ProcessTemplateStageID
+LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageLanguage
+	ON UserProcessTemplateStageLanguage.ProcessTemplateStageId = ProcessTemplateStageFields.ProcessTemplateStageID
+LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages JOIN Settings ON ProcessTemplateStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateStageLanguage
+	ON DefaultProcessTemplateStageLanguage.ProcessTemplateStageId = ProcessTemplateStageFields.ProcessTemplateStageID
 JOIN ProcessTemplateStageFieldStatuses 
-	ON ProcessTemplateStageFieldStatuses.ProcessTemplateStageFieldStatusID = ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
+	ON ProcessTemplateStageFieldStatuses.ProcessTemplateStageFieldStatusId = ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
 JOIN UITermLanguages UIStatusName
-	ON UIStatusName.UITermID = ProcessTemplateStageFieldStatuses.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIStatusNameCustom
-	ON UIStatusNameCustom.UITermID = ProcessTemplateStageFieldStatuses.NameTermID
+	ON UIStatusName.UITermId = ProcessTemplateStageFieldStatuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIStatusNameCustom
+	ON UIStatusNameCustom.UITermId = ProcessTemplateStageFieldStatuses.NameTermID
 JOIN ValueUpdateTypes
-	ON ValueUpdateTypes.ValueUpdateTypeID = ProcessTemplateStageFields.ValueUpdateTypeID
+	ON ValueUpdateTypes.ValueUpdateTypeId = ProcessTemplateStageFields.ValueUpdateTypeID
 JOIN UITermLanguages UIUpdateTypeName
-	ON UIUpdateTypeName.UITermID = ValueUpdateTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIUpdateTypeNameCustom
-	ON UIUpdateTypeNameCustom.UITermID = ValueUpdateTypes.NameTermID
+	ON UIUpdateTypeName.UITermId = ValueUpdateTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIUpdateTypeNameCustom
+	ON UIUpdateTypeNameCustom.UITermId = ValueUpdateTypes.NameTermID
 JOIN Persons Modifier
-	ON Modifier.UserID = ProcessTemplateStageFields.ModifierID
-WHERE ProcessTemplateStageFields.ProcessTemplateFieldID = @ProcessTemplateFieldID
-	AND UIStatusName.LanguageID = @LanguageID
-	AND UIUpdateTypeName.LanguageID = @LanguageID
+	ON Modifier.UserId = ProcessTemplateStageFields.ModifierID
+WHERE ProcessTemplateStageFields.ProcessTemplateFieldId = @ProcessTemplateFieldID
+	AND UIStatusName.LanguageId = @LanguageID
+	AND UIUpdateTypeName.LanguageId = @LanguageID
 ORDER BY 	 ISNULL(UserProcessTemplateStageLanguage.Name,ISNULL(DefaultProcessTemplateStageLanguage.Name,'No name for this stage')) 
 
 

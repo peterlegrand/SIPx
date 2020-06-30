@@ -4,7 +4,7 @@
     {
         string Description { get; set; }
         bool Internal { get; set; }
-        int LanguageID { get; set; }
+        int LanguageId { get; set; }
         bool LegalEntity { get; set; }
         string MenuName { get; set; }
         string MouseOver { get; set; }

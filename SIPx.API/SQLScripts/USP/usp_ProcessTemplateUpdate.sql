@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateUpdate] (
-	 @ProcessTemplateID int
-	 , @ProcessTemplateLanguageID int
-	 , @ProcessTemplateGroupID int
+	 @ProcessTemplateId int
+	 , @ProcessTemplateLanguageId int
+	 , @ProcessTemplateGroupId int
 	, @ShowInPersonalCalendar bit
 	, @ShowInEventCalendar bit
 	, @ProcessMultiMax int
@@ -11,26 +11,26 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateUpdate] (
 	, @ShowInSearch bit
 	, @ShowInReports bit
 	, @HideEverywhere bit
-	, @LanguageID int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
 DECLARE @OldSequence int;
-DECLARE @OldProcessTemplateGroupID int;
-SELECT @OldSequence = Sequence, @OldProcessTemplateGroupID = ProcessTemplateGroupID FROM ProcessTemplates WHERE ProcessTemplateID = @ProcessTemplateID;
+DECLARE @OldProcessTemplateGroupId int;
+SELECT @OldSequence = Sequence, @OldProcessTemplateGroupId = ProcessTemplateGroupId FROM ProcessTemplates WHERE ProcessTemplateId = @ProcessTemplateID;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE ProcessTemplates SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @OldProcessTemplateGroupID = ProcessTemplateGroupID
+UPDATE ProcessTemplates SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @OldProcessTemplateGroupId = ProcessTemplateGroupID
 END
 ELSE
 BEGIN
-UPDATE ProcessTemplates SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND @OldProcessTemplateGroupID = ProcessTemplateGroupID
+UPDATE ProcessTemplates SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND @OldProcessTemplateGroupId = ProcessTemplateGroupID
 END
 
 INSERT INTO ProcessTemplates (

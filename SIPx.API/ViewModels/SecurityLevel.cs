@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class SecurityLevel
     {
         [Key]
-        public int SecurityLevelID { get; set; }
+        public int SecurityLevelId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

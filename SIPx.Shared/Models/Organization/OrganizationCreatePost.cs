@@ -8,9 +8,9 @@ namespace SIPx.Shared
     public class OrganizationCreatePost : IOrganizationCreatePost
     {
         [Key]
-        public int OrganizationTypeID { get; set; }
-        public int? ParentOrganizationID { get; set; }
-        public int StatusID { get; set; }
+        public int OrganizationTypeId { get; set; }
+        public int? ParentOrganizationId { get; set; }
+        public int StatusId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

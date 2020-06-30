@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeGroupLanguageUpdate] (
-	@ContentTypeGroupLanguageID int 
+	@ContentTypeGroupLanguageId int 
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 UPDATE  ContentTypeGroupLanguages SET 
@@ -12,7 +12,7 @@ UPDATE  ContentTypeGroupLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ContentTypeGroupLanguageID= @ContentTypeGroupLanguageID
 

@@ -1,13 +1,13 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationUserUpdate] (
 	@UserIDOfClassificationUser nvarchar(450)
-	, @ClassificationUserID int 
-	, @ClassificationRelationTypeID int
-	, @UserID nvarchar(450)) 
+	, @ClassificationUserId int 
+	, @ClassificationRelationTypeId int
+	, @UserId nvarchar(450)) 
 AS 
 UPDATE ClassificationUsers SET 
-	UserID = @UserIDOfClassificationUser
-	, ClassificationRelationTypeID = @ClassificationRelationTypeID
-	, ModifierID = @UserID
+	UserId = @UserIDOfClassificationUser
+	, ClassificationRelationTypeId = @ClassificationRelationTypeID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ClassificationUserID = @ClassificationUserID
+WHERE ClassificationUserId = @ClassificationUserID
 

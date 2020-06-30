@@ -2,6 +2,6 @@
 Select @User = Id from AspNetUsers
 
 SET IDENTITY_INSERT RoleGroups ON;
-INSERT INTO RoleGroups (RoleGroupID, Sequence, CreatorID, ModifierID, CreatedDate, ModifiedDate) VALUES(1,1,@User,@User,getdate(),getdate());
+INSERT INTO RoleGroups (RoleGroupId, Sequence, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES(1,1,@User,@User,getdate(),getdate());
 SET IDENTITY_INSERT RoleGroups OFF;
 

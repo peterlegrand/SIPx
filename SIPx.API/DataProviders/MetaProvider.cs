@@ -179,16 +179,16 @@ namespace SIPx.DataAccess
             var MetaList = await _sqlDataAccess.LoadData<string>(usp);
             return MetaList.First();
         }
-        public async Task<List<MetaListClassification>> Classifications(string UserID)
+        public async Task<List<MetaListClassification>> Classifications(string UserId)
         {
             string usp = "usp_Classifications  @UserID";
-            var MetaList = await _sqlDataAccess.LoadData<MetaListClassification, dynamic>(usp, new { UserID = UserID });
+            var MetaList = await _sqlDataAccess.LoadData<MetaListClassification, dynamic>(usp, new { UserId = UserId });
             return MetaList;
         }
-        public async Task<List<MetaListClassificationLevel>> ClassificationLevels(string UserID, int ClassificationID)
+        public async Task<List<MetaListClassificationLevel>> ClassificationLevels(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationLevels  @UserID, @ClassificationID";
-            var MetaList = await _sqlDataAccess.LoadData<MetaListClassificationLevel, dynamic>(usp, new { UserID = UserID, ClassificationID  = ClassificationID  });
+            string usp = "usp_ClassificationLevels  @UserId, @ClassificationID";
+            var MetaList = await _sqlDataAccess.LoadData<MetaListClassificationLevel, dynamic>(usp, new { UserId = UserId, ClassificationId  = ClassificationId  });
             return MetaList;
         }
 

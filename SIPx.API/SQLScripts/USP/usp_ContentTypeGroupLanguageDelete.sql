@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeGroupLanguageDelete] (
-	@ContentTypeGroupLanguageID int) 
+	@ContentTypeGroupLanguageId int) 
 AS 
-DELETE FROM ContentTypeGroupLanguages WHERE ContentTypeGroupLanguageID = @ContentTypeGroupLanguageID
+DELETE FROM ContentTypeGroupLanguages WHERE ContentTypeGroupLanguageId = @ContentTypeGroupLanguageID
 
 

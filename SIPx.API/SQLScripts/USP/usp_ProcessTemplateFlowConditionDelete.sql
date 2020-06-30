@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionDelete] (
-	@ProcessTemplateFlowConditionID int) 
+	@ProcessTemplateFlowConditionId int) 
 AS 
 BEGIN TRANSACTION
-DELETE FROM ProcessTemplateFlowConditionLanguages WHERE ProcessTemplateFlowConditionID = @ProcessTemplateFlowConditionID
-DELETE FROM ProcessTemplateFlowConditions WHERE ProcessTemplateFlowConditionID = @ProcessTemplateFlowConditionID
+DELETE FROM ProcessTemplateFlowConditionLanguages WHERE ProcessTemplateFlowConditionId = @ProcessTemplateFlowConditionID
+DELETE FROM ProcessTemplateFlowConditions WHERE ProcessTemplateFlowConditionId = @ProcessTemplateFlowConditionID
 COMMIT TRANSACTION
 

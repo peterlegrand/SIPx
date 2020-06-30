@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionComparisonOperator] (@UserID nvarchar(450), @ProcessTemplateFlowConditionComparisonOperatorID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionComparisonOperator] (@UserId nvarchar(450), @ProcessTemplateFlowConditionComparisonOperatorId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorId 
 	, ProcessTemplateFlowConditionComparisonOperators.Symbol
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
@@ -13,24 +13,24 @@ SELECT ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowCondit
 	, ISNULL(UIMouseOverCustom.Customization,UIMouseOver.Name) MouseOver
 FROM ProcessTemplateFlowConditionComparisonOperators
 JOIN UITermLanguages UIName
-	ON UIName.UITermID = ProcessTemplateFlowConditionComparisonOperators.NameTermID
+	ON UIName.UITermId = ProcessTemplateFlowConditionComparisonOperators.NameTermID
 JOIN UITermLanguages UIDescription
-	ON UIDescription.UITermID = ProcessTemplateFlowConditionComparisonOperators.NameTermID
+	ON UIDescription.UITermId = ProcessTemplateFlowConditionComparisonOperators.NameTermID
 JOIN UITermLanguages UIMenuName
-	ON UIMEnuName.UITermID = ProcessTemplateFlowConditionComparisonOperators.NameTermID
+	ON UIMEnuName.UITermId = ProcessTemplateFlowConditionComparisonOperators.NameTermID
 JOIN UITermLanguages UIMouseOver
-	ON UIMouseOver.UITermID = ProcessTemplateFlowConditionComparisonOperators.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
-	ON UINameCustom.UITermID = ProcessTemplateFlowConditionComparisonOperators.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDescriptionCustom
-	ON UIDescriptionCustom.UITermID = ProcessTemplateFlowConditionComparisonOperators.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMenuNameCustom
-	ON UIMenuNameCustom.UITermID = ProcessTemplateFlowConditionComparisonOperators.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
-	ON UIMouseOverCustom.UITermID = ProcessTemplateFlowConditionComparisonOperators.MouseOverTermID
-WHERE UIName.LanguageID = @LanguageID
-	AND UIDescription.LanguageID = @LanguageID
-	AND UIMenuName.LanguageID = @LanguageID
-	AND UIMouseOver.LanguageID = @LanguageID
-	AND ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorID = @ProcessTemplateFlowConditionComparisonOperatorID
+	ON UIMouseOver.UITermId = ProcessTemplateFlowConditionComparisonOperators.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = ProcessTemplateFlowConditionComparisonOperators.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDescriptionCustom
+	ON UIDescriptionCustom.UITermId = ProcessTemplateFlowConditionComparisonOperators.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMenuNameCustom
+	ON UIMenuNameCustom.UITermId = ProcessTemplateFlowConditionComparisonOperators.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMouseOverCustom
+	ON UIMouseOverCustom.UITermId = ProcessTemplateFlowConditionComparisonOperators.MouseOverTermID
+WHERE UIName.LanguageId = @LanguageID
+	AND UIDescription.LanguageId = @LanguageID
+	AND UIMenuName.LanguageId = @LanguageID
+	AND UIMouseOver.LanguageId = @LanguageID
+	AND ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorId = @ProcessTemplateFlowConditionComparisonOperatorID
 

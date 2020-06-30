@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_UITermLanguages] (@languageID int) 
+CREATE PROCEDURE [dbo].[usp_UITermLanguages] (@languageId int) 
 AS 
 SELECT
 	UITermLanguages.UITermLanguageID
@@ -9,5 +9,5 @@ SELECT
 	, InternalName
 FROM UITermLanguages
 JOIN UITerms
-	ON UITermLanguages.UITermID = UITerms.UITermID
-WHERE LanguageID = @LanguageID
+	ON UITermLanguages.UITermId = UITerms.UITermID
+WHERE LanguageId = @LanguageID

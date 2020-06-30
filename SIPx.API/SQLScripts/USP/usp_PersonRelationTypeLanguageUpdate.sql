@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[usp_PersonRelationTypeLanguageUpdate] (
-	@PersonRelationTypeLanguageID int
+	@PersonRelationTypeLanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @FromIsAnXOfTo nvarchar(50)
 	, @ToIsAnXOfFrom nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 UPDATE  PersonRelationTypeLanguages SET 
 	Name = @Name
@@ -15,7 +15,7 @@ UPDATE  PersonRelationTypeLanguages SET
 	, MouseOver = @MouseOver
 	, FromIsAnXOfTo = @FromIsAnXOfTo
 	, ToIsAnXOfFrom = @ToIsAnXOfFrom
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE PersonRelationTypeLanguageID= @PersonRelationTypeLanguageID
 

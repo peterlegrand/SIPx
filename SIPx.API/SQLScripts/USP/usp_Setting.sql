@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_Setting] (@UserID nvarchar(450), @SettingID int) 
+CREATE PROCEDURE [dbo].[usp_Setting] (@UserId nvarchar(450), @SettingId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT Settings.SettingID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT Settings.SettingId 
 	, Settings.IntValue
 	, Settings.StringValue
 	, Settings.DateTimeValue
@@ -16,23 +16,23 @@ SELECT Settings.SettingID
 	, ISNULL(UISettingsMouseOverCustom.Customization,UISettingsMouseOver.Name) SettingsMouseOver
 FROM Settings
 JOIN UITermLanguages UISettingsName
-	ON UISettingsName.UITermID = Settings.NameTermID
+	ON UISettingsName.UITermId = Settings.NameTermID
 JOIN UITermLanguages UISettingsDescription
-	ON UISettingsDescription.UITermID = Settings.NameTermID
+	ON UISettingsDescription.UITermId = Settings.NameTermID
 JOIN UITermLanguages UISettingsMenuName
-	ON UISettingsMEnuName.UITermID = Settings.NameTermID
+	ON UISettingsMEnuName.UITermId = Settings.NameTermID
 JOIN UITermLanguages UISettingsMouseOver
-	ON UISettingsMouseOver.UITermID = Settings.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UISettingsNameCustom
-	ON UISettingsNameCustom.UITermID = Settings.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UISettingsDescriptionCustom
-	ON UISettingsDescriptionCustom.UITermID = Settings.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UISettingsMenuNameCustom
-	ON UISettingsMenuNameCustom.UITermID = Settings.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UISettingsMouseOverCustom
-	ON UISettingsMouseOverCustom.UITermID = Settings.MouseOverTermID
-WHERE UISettingsName.LanguageID = @LanguageID
-	AND UISettingsDescription.LanguageID = @LanguageID
-	AND UISettingsMenuName.LanguageID = @LanguageID
-	AND UISettingsMouseOver.LanguageID = @LanguageID
-	AND SettingID = @SettingID
+	ON UISettingsMouseOver.UITermId = Settings.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UISettingsNameCustom
+	ON UISettingsNameCustom.UITermId = Settings.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UISettingsDescriptionCustom
+	ON UISettingsDescriptionCustom.UITermId = Settings.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UISettingsMenuNameCustom
+	ON UISettingsMenuNameCustom.UITermId = Settings.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UISettingsMouseOverCustom
+	ON UISettingsMouseOverCustom.UITermId = Settings.MouseOverTermID
+WHERE UISettingsName.LanguageId = @LanguageID
+	AND UISettingsDescription.LanguageId = @LanguageID
+	AND UISettingsMenuName.LanguageId = @LanguageID
+	AND UISettingsMouseOver.LanguageId = @LanguageID
+	AND SettingId = @SettingID

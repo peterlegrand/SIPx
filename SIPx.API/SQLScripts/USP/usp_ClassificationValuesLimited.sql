@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationValuesLimited] (@UserID nvarchar(450), @ClassificationID int, @Top int =1000) 
+CREATE PROCEDURE [dbo].[usp_ClassificationValuesLimited] (@UserId nvarchar(450), @ClassificationId int, @Top int =1000) 
 AS 
 BEGIN
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 WITH ClassificationValueHierarchy (
 	ClassificationValueID
@@ -51,10 +51,10 @@ AS
 		, ClassificationValues.ModifiedDate
 	FROM ClassificationValues 
 	JOIN ClassificationValueLanguages 
-		ON ClassificationValueLanguages.ClassificationValueID = ClassificationValues.ClassificationValueID
-	WHERE ClassificationValues.ParentValueID IS NULL
-		AND ClassificationValues.ClassificationID = @ClassificationID
-		AND ClassificationValueLanguages.LanguageID = @LanguageID
+		ON ClassificationValueLanguages.ClassificationValueId = ClassificationValues.ClassificationValueID
+	WHERE ClassificationValues.ParentValueId IS NULL
+		AND ClassificationValues.ClassificationId = @ClassificationID
+		AND ClassificationValueLanguages.LanguageId = @LanguageID
 
    UNION ALL
 	SELECT 
@@ -79,11 +79,11 @@ AS
 		, ClassificationValueLanguages.ModifiedDate
 	FROM ClassificationValues ClassificationValueNextLevel
 	JOIN ClassificationValueLanguages 
-		ON ClassificationValueLanguages.ClassificationValueID = ClassificationValueNextLevel.ClassificationValueID
+		ON ClassificationValueLanguages.ClassificationValueId = ClassificationValueNextLevel.ClassificationValueID
 	JOIN ClassificationValueHierarchy ClassificationValueBaseLevel
-		ON ClassificationValueBaseLevel.ClassificationValueID = ClassificationValueNextLevel.ParentValueID
-	WHERE ClassificationValueNextLevel.ClassificationID = @ClassificationID
-		AND ClassificationValueLanguages.LanguageID = @LanguageID
+		ON ClassificationValueBaseLevel.ClassificationValueId = ClassificationValueNextLevel.ParentValueID
+	WHERE ClassificationValueNextLevel.ClassificationId = @ClassificationID
+		AND ClassificationValueLanguages.LanguageId = @LanguageID
 )
 -- Statement using the CTE
 SELECT TOP (@Top) ClassificationValueHierarchy.ClassificationValueID
@@ -106,14 +106,14 @@ SELECT TOP (@Top) ClassificationValueHierarchy.ClassificationValueID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationValueHierarchy.ModifiedDate
 FROM   ClassificationValueHierarchy
---LEFT JOIN (SELECT ClassificationValueID, Name FROM ClassificationValueLanguages WHERE LanguageID = @LanguageID) UserLanguage
+--LEFT JOIN (SELECT ClassificationValueId, Name FROM ClassificationValueLanguages WHERE LanguageId = @LanguageID) UserLanguage
 --	ON UserLanguage.ClassificationValueID= ClassificationValueHierarchy.ClassificationValueID
---LEFT JOIN (SELECT ClassificationValueID, Name FROM ClassificationValueLanguages JOIN Settings ON ClassificationValueLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
---	ON DefaultLanguage.ClassificationValueID = ClassificationValueHierarchy.ClassificationValueID
+--LEFT JOIN (SELECT ClassificationValueId, Name FROM ClassificationValueLanguages JOIN Settings ON ClassificationValueLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+--	ON DefaultLanguage.ClassificationValueId = ClassificationValueHierarchy.ClassificationValueID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationValueHierarchy.CreatorID
+	ON Creator.UserId = ClassificationValueHierarchy.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationValueHierarchy.ModifierID
+	ON Modifier.UserId = ClassificationValueHierarchy.ModifierID
 ORDER BY Path;
 END;
 

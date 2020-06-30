@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_OrganizationTypeDelete] (
-	@OrganizationTypeID int) 
+	@OrganizationTypeId int) 
 AS 
 BEGIN TRANSACTION
-DELETE FROM OrganizationTypeLanguages WHERE @OrganizationTypeID = OrganizationTypeID
-DELETE FROM OrganizationTypes WHERE @OrganizationTypeID = OrganizationTypeID
+DELETE FROM OrganizationTypeLanguages WHERE @OrganizationTypeId = OrganizationTypeID
+DELETE FROM OrganizationTypes WHERE @OrganizationTypeId = OrganizationTypeID
 COMMIT TRANSACTION

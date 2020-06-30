@@ -6,8 +6,8 @@
         string AskFor { get; set; }
         string CountryCode { get; set; }
         string ExtensionCode { get; set; }
-        int OrganizationID { get; set; }
-        int TelecomTypeID { get; set; }
+        int OrganizationId { get; set; }
+        int TelecomTypeId { get; set; }
         string TelecomValue { get; set; }
         string UserId { get; set; }
     }

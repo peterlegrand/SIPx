@@ -3,7 +3,7 @@
     public interface IUITermLanguageCustomizationCreatePost
     {
         string Customization { get; set; }
-        int LanguageID { get; set; }
-        int UITermID { get; set; }
+        int LanguageId { get; set; }
+        int UITermId { get; set; }
     }
 }

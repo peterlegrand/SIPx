@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationLanguageValueUpdate] (
-	@ClassificationValueLanguageID int
+	@ClassificationValueLanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -10,7 +10,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationLanguageValueUpdate] (
 	, @HeaderName nvarchar(50)
 	, @HeaderDescription nvarchar(max)
 	, @TopicName nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 UPDATE  ClassificationValueLanguages SET 
 	Name = @Name
@@ -23,6 +23,6 @@ UPDATE  ClassificationValueLanguages SET
 	, HeaderName = @HeaderName
 	, HeaderDescription = @HeaderDescription
 	, TopicName = @TopicName
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationValueLanguageID= @ClassificationValueLanguageID

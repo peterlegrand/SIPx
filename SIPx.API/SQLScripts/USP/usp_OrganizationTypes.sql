@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationTypes] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_OrganizationTypes] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT OrganizationTypes.OrganizationTypeID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this organization type')) Name
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this organization type')) Description
@@ -17,12 +17,12 @@ SELECT OrganizationTypes.OrganizationTypeID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, OrganizationTypes.ModifiedDate
 FROM OrganizationTypes 
-LEFT JOIN (SELECT OrganizationTypeID, Name, Description, MenuName, MouseOver FROM OrganizationTypeLanguages WHERE LanguageID = @LanguageID) UserLanguage
+LEFT JOIN (SELECT OrganizationTypeId, Name, Description, MenuName, MouseOver FROM OrganizationTypeLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.OrganizationTypeID= OrganizationTypes.OrganizationTypeID
-LEFT JOIN (SELECT OrganizationTypeId, Name, Description, MenuName, MouseOver FROM OrganizationTypeLanguages JOIN Settings ON OrganizationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
-	ON DefaultLanguage.OrganizationTypeID = OrganizationTypes.OrganizationTypeID
+LEFT JOIN (SELECT OrganizationTypeId, Name, Description, MenuName, MouseOver FROM OrganizationTypeLanguages JOIN Settings ON OrganizationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.OrganizationTypeId = OrganizationTypes.OrganizationTypeID
 JOIN Persons Creator
-	ON Creator.UserID = OrganizationTypes.CreatorID
+	ON Creator.UserId = OrganizationTypes.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = OrganizationTypes.ModifierID
+	ON Modifier.UserId = OrganizationTypes.ModifierID
 ORDER BY  ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this organization type'))

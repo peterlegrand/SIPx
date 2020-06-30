@@ -8,8 +8,8 @@ namespace SIPx.Shared
     public class PersonTelecomCreatePost : IPersonTelecomCreatePost
     {
         [Key]
-        public int PersonID { get; set; }
-        public int TelecomTypeID { get; set; }
+        public int PersonId { get; set; }
+        public int TelecomTypeId { get; set; }
         public string TelecomValue { get; set; }
         public string CountryCode { get; set; }
         public string AreaCode { get; set; }

@@ -1,6 +1,7 @@
 ﻿
 using Dapper;
 using SIPx.API.ViewModels;
+using SIPx.Shared;
 //using SIPx.Shared;
 using System;
 using System.Collections.Generic;
@@ -20,179 +21,187 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<Country>> GetCountries(string UserID)
+        public async Task<List<Country>> GetCountries(string UserId)
         {
             string usp = "usp_Countries @UserID";
-            var x = await _sqlDataAccess.LoadData<Country, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<Country, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Country> GetCountry(string UserID, int CountryID)
+        public Task<Country> GetCountry(string UserId, int CountryId)
         {
-            string usp = "usp_Country @UserID, @CountryID";
-            return _sqlDataAccess.LoadSingleRecord<Country, dynamic>(usp, new { UserID = UserID, CountryID = CountryID });
+            string usp = "usp_Country @UserId, @CountryID";
+            return _sqlDataAccess.LoadSingleRecord<Country, dynamic>(usp, new { UserId = UserId, CountryId = CountryId });
 
         }
-        public async Task<List<DateLevel>> GetDateLevels(string UserID)
+        public async Task<List<DateLevel>> GetDateLevels(string UserId)
         {
             string usp = "usp_DateLevels @UserID";
-            var x = await _sqlDataAccess.LoadData<DateLevel, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<DateLevel, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<DateLevel> GetDateLevel(string UserID, int DateLevelID)
+        public Task<DateLevel> GetDateLevel(string UserId, int DateLevelId)
         {
-            string usp = "usp_DateLevel @UserID, @DateLevelID";
-            return _sqlDataAccess.LoadSingleRecord<DateLevel, dynamic>(usp, new { UserID = UserID, DateLevelID = DateLevelID });
+            string usp = "usp_DateLevel @UserId, @DateLevelID";
+            return _sqlDataAccess.LoadSingleRecord<DateLevel, dynamic>(usp, new { UserId = UserId, DateLevelId = DateLevelId });
 
         }
-        public async Task<List<Gender>> GetGenders(string UserID)
+        public async Task<List<Gender>> GetGenders(string UserId)
         {
             string usp = "usp_Genders @UserID";
-            var x = await _sqlDataAccess.LoadData<Gender, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<Gender, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Gender> GetGender(string UserID, int GenderID)
+        public Task<Gender> GetGender(string UserId, int GenderId)
         {
-            string usp = "usp_Gender @UserID, @GenderID";
-            return _sqlDataAccess.LoadSingleRecord<Gender, dynamic>(usp, new { UserID = UserID, GenderID = GenderID });
+            string usp = "usp_Gender @UserId, @GenderID";
+            return _sqlDataAccess.LoadSingleRecord<Gender, dynamic>(usp, new { UserId = UserId, GenderId = GenderId });
 
         }
-        public Task<List<Gender>> GetGendersActive(string UserID)
+        public Task<List<Gender>> GetGendersActive(string UserId)
         {
             string usp = "usp_GendersActive @UserID";
-            return _sqlDataAccess.LoadData<Gender, dynamic>(usp, new { UserID = UserID });
+            return _sqlDataAccess.LoadData<Gender, dynamic>(usp, new { UserId = UserId });
 
         }
-        public async Task<List<IntermediateRegion>> GetIntermediateRegions(string UserID)
+        public async Task<List<IntermediateRegion>> GetIntermediateRegions(string UserId)
         {
             string usp = "usp_IntermediateRegions @UserID";
-            var x = await _sqlDataAccess.LoadData<IntermediateRegion, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<IntermediateRegion, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<Language>> GetLanguages(string UserID)
+        public async Task<List<Language>> GetLanguages(string UserId)
         {
             string usp = "usp_Languages @UserID";
-            var x = await _sqlDataAccess.LoadData<Language, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<Language, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<Language>> GetLanguagesActive(string UserID)
+        public async Task<List<Language>> GetLanguagesActive(string UserId)
         {
             string usp = "usp_LanguagesActive @UserID";
-            var x = await _sqlDataAccess.LoadData<Language, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<Language, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<Setting>> GetSettings(string UserID)
+        public async Task<List<Setting>> GetSettings(string UserId)
         {
             string usp = "usp_Settings @UserID";
-            var x = await _sqlDataAccess.LoadData<Setting, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<Setting, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Setting> GetSetting(string UserID, int SettingID)
+        public Task<Setting> GetSetting(string UserId, int SettingId)
         {
-            string usp = "usp_Setting @UserID, @SettingID";
-            return _sqlDataAccess.LoadSingleRecord<Setting, dynamic>(usp, new { UserID = UserID, SettingID = SettingID });
+            string usp = "usp_Setting @UserId, @SettingID";
+            return _sqlDataAccess.LoadSingleRecord<Setting, dynamic>(usp, new { UserId = UserId, SettingId = SettingId });
 
         }
-        public async Task<List<SortBy>> GetSortBys(string UserID)
+        public async Task<List<SortBy>> GetSortBys(string UserId)
         {
             string usp = "usp_SortBys @UserID";
-            var x = await _sqlDataAccess.LoadData<SortBy, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<SortBy, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<SortBy> GetSortBy(string UserID, int SortByID)
+        public Task<SortBy> GetSortBy(string UserId, int SortById)
         {
-            string usp = "usp_SortBy @UserID, @SortByID";
-            return _sqlDataAccess.LoadSingleRecord<SortBy, dynamic>(usp, new { UserID = UserID, SortByID = SortByID });
+            string usp = "usp_SortBy @UserId, @SortByID";
+            return _sqlDataAccess.LoadSingleRecord<SortBy, dynamic>(usp, new { UserId = UserId, SortById = SortById });
 
         }
-        public Task<List<Status>> GetStatuses(string UserID)
+        public Task<List<StatusList>> GetStatusList(string UserId)
+        {
+            string usp = "usp_StatusList @UserID";
+            return _sqlDataAccess.LoadData<StatusList, dynamic>(usp, new { UserId = UserId });
+
+        }
+        public Task<List<Status>> GetStatuses(string UserId)
         {
             string usp = "usp_Statuses @UserID";
-            return _sqlDataAccess.LoadData<Status, dynamic>(usp, new { UserID = UserID });
+            return _sqlDataAccess.LoadData<Status, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<Status> GetStatus(string UserID, int StatusID)
+        public Task<Status> GetStatus(string UserId, int StatusId)
         {
-            string usp = "usp_Status @UserID, @StatusID";
-            return _sqlDataAccess.LoadSingleRecord<Status, dynamic>(usp, new { UserID = UserID, StatusID = StatusID });
+            string usp = "usp_Status @UserId, @StatusID";
+            return _sqlDataAccess.LoadSingleRecord<Status, dynamic>(usp, new { UserId = UserId, StatusId = StatusId });
 
         }
-        public Task<List<SubRegion>> GetSubRegions(string UserID)
+        public Task<List<SubRegion>> GetSubRegions(string UserId)
         {
             string usp = "usp_SubRegions @UserID";
-            return _sqlDataAccess.LoadData<SubRegion, dynamic>(usp, new { UserID = UserID });
+            return _sqlDataAccess.LoadData<SubRegion, dynamic>(usp, new { UserId = UserId });
 
         }
-        public async Task<List<TelecomType>> GetTelecomTypes(string UserID)
+        public async Task<List<TelecomType>> GetTelecomTypes(string UserId)
         {
             string usp = "usp_TelecomTypes @UserID";
-            var x = await _sqlDataAccess.LoadData<TelecomType, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<TelecomType, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<TelecomType> GetTelecomType(string UserID, int TelecomTypeID)
+        public Task<TelecomType> GetTelecomType(string UserId, int TelecomTypeId)
         {
-            string usp = "usp_TelecomType @UserID, @TelecomTypeID";
-            return _sqlDataAccess.LoadSingleRecord<TelecomType, dynamic>(usp, new { UserID = UserID, TelecomTypeID = TelecomTypeID });
+            string usp = "usp_TelecomType @UserId, @TelecomTypeID";
+            return _sqlDataAccess.LoadSingleRecord<TelecomType, dynamic>(usp, new { UserId = UserId, TelecomTypeId = TelecomTypeId });
 
         }
-        public async Task<List<UITermLanguageCustomization>> GetUITermLanguageCustomizations(string UserID)
+        public async Task<List<UITermLanguageCustomization>> GetUITermLanguageCustomizations(string UserId)
         {
             string usp = "usp_UITermLanguageCustomizations @UserID";
-            var x = await _sqlDataAccess.LoadData<UITermLanguageCustomization, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<UITermLanguageCustomization, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<UITermLanguageCustomization> GetUITermLanguageCustomization(string UserID, int UITermLanguageCustomizationID)
+        public Task<UITermLanguageCustomization> GetUITermLanguageCustomization(string UserId, int UITermLanguageCustomizationId)
         {
-            string usp = "usp_UITermLanguageCustomization @UserID, @UITermLanguageCustomizationID";
-            return _sqlDataAccess.LoadSingleRecord<UITermLanguageCustomization, dynamic>(usp, new { UserID = UserID, UITermLanguageCustomizationID = UITermLanguageCustomizationID });
+            string usp = "usp_UITermLanguageCustomization @UserId, @UITermLanguageCustomizationID";
+            return _sqlDataAccess.LoadSingleRecord<UITermLanguageCustomization, dynamic>(usp, new { UserId = UserId, UITermLanguageCustomizationId = UITermLanguageCustomizationId });
 
         }
-        public async Task<List<UITermLanguage>> GetUITermLanguages(string UserID)
+        public async Task<List<UITermLanguage>> GetUITermLanguages(string UserId)
         {
             string usp = "usp_UITermLanguages @UserID";
-            var x = await _sqlDataAccess.LoadData<UITermLanguage, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<UITermLanguage, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<UITermLanguage> GetUITermLanguage(string UserID, int UITermLanguageID)
+        public Task<UITermLanguage> GetUITermLanguage(string UserId, int UITermLanguageId)
         {
-            string usp = "usp_UITermLanguage @UserID, @UITermLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<UITermLanguage, dynamic>(usp, new { UserID = UserID, UITermLanguageID = UITermLanguageID });
+            string usp = "usp_UITermLanguage @UserId, @UITermLanguageID";
+            return _sqlDataAccess.LoadSingleRecord<UITermLanguage, dynamic>(usp, new { UserId = UserId, UITermLanguageId = UITermLanguageId });
 
         }
-        public async Task<List<UITerm>> GetUITerms(string UserID)
+        public async Task<List<UITerm>> GetUITerms(string UserId)
         {
             string usp = "usp_UITerms @UserID";
-            var x = await _sqlDataAccess.LoadData<UITerm, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<UITerm, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<UITerm> GetUITerm(string UserID, int UITermID)
+        public Task<UITerm> GetUITerm(string UserId, int UITermId)
         {
-            string usp = "usp_UITerm @UserID, @UITermID";
-            return _sqlDataAccess.LoadSingleRecord<UITerm, dynamic>(usp, new { UserID = UserID, UITermID = UITermID });
+            string usp = "usp_UITerm @UserId, @UITermID";
+            return _sqlDataAccess.LoadSingleRecord<UITerm, dynamic>(usp, new { UserId = UserId, UITermId = UITermId });
 
         }
-        public async Task<List<ValueUpdateType>> GetValueUpdateTypes(string UserID)
+        public async Task<List<ValueUpdateType>> GetValueUpdateTypes(string UserId)
         {
             string usp = "usp_ValueUpdateTypes @UserID";
-            var x = await _sqlDataAccess.LoadData<ValueUpdateType, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<ValueUpdateType, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<ValueUpdateType> GetValueUpdateType(string UserID, int ValueUpdateTypeID)
+        public Task<ValueUpdateType> GetValueUpdateType(string UserId, int ValueUpdateTypeId)
         {
-            string usp = "usp_ValueUpdateType @UserID, @ValueUpdateTypeID";
-            return _sqlDataAccess.LoadSingleRecord<ValueUpdateType, dynamic>(usp, new { UserID = UserID, ValueUpdateTypeID = ValueUpdateTypeID });
+            string usp = "usp_ValueUpdateType @UserId, @ValueUpdateTypeID";
+            return _sqlDataAccess.LoadSingleRecord<ValueUpdateType, dynamic>(usp, new { UserId = UserId, ValueUpdateTypeId = ValueUpdateTypeId });
 
         }
-        public async Task<List<AddressType>> GetAddressTypes(string UserID)
+        public async Task<List<AddressType>> GetAddressTypes(string UserId)
         {
             string usp = "usp_AddressTypes @UserID";
-            var x = await _sqlDataAccess.LoadData<AddressType, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<AddressType, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<AddressType> GetAddressType(string UserID, int AddressTypeID)
+        public Task<AddressType> GetAddressType(string UserId, int AddressTypeId)
         {
-            string usp = "usp_AddressType @UserID, @AddressTypeID";
-            return _sqlDataAccess.LoadSingleRecord<AddressType, dynamic>(usp, new { UserID = UserID, AddressTypeID = AddressTypeID });
+            string usp = "usp_AddressType @UserId, @AddressTypeID";
+            return _sqlDataAccess.LoadSingleRecord<AddressType, dynamic>(usp, new { UserId = UserId, AddressTypeId = AddressTypeId });
 
         }
+
+
     }
 }

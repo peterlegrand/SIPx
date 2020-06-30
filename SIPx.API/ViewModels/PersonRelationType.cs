@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class PersonRelationType
     {
         [Key]
-        public int PageSectionID { get; set; }
+        public int PageSectionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

@@ -1,15 +1,15 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeGroupUpdate] (
-	@ContentTypeGroupID int 
-	, @ContentTypeGroupLanguageID int 
+	@ContentTypeGroupId int 
+	, @ContentTypeGroupLanguageId int 
 	, @Sequence int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM ContentTypeGroups WHERE ContentTypeGroupID = @ContentTypeGroupID;
+SELECT @OldSequence = Sequence FROM ContentTypeGroups WHERE ContentTypeGroupId = @ContentTypeGroupID;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
@@ -22,16 +22,16 @@ END
 
 UPDATE ContentTypeGroups SET 
 	Sequence = @Sequence
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ContentTypeGroupID = @ContentTypeGroupID
+WHERE ContentTypeGroupId = @ContentTypeGroupID
 
 UPDATE  ContentTypeGroupLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ContentTypeGroupLanguageID= @ContentTypeGroupLanguageID
 COMMIT TRANSACTION

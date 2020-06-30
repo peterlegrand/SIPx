@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationValueDelete] (
-	@ClassificationValueID int) 
+	@ClassificationValueId int) 
 AS 
 BEGIN TRANSACTION
-DELETE FROM ClassificationValueLanguages WHERE ClassificationValueID = @ClassificationValueID
-DELETE FROM ClassificationValues WHERE ClassificationValueID = @ClassificationValueID
+DELETE FROM ClassificationValueLanguages WHERE ClassificationValueId = @ClassificationValueID
+DELETE FROM ClassificationValues WHERE ClassificationValueId = @ClassificationValueID
 COMMIT TRANSACTION
 
 

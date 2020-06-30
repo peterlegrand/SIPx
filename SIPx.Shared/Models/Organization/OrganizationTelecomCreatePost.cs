@@ -8,8 +8,8 @@ namespace SIPx.Shared
     public class OrganizationTelecomCreatePost : IOrganizationTelecomCreatePost
     {
         [Key]
-        public int OrganizationID { get; set; }
-        public int TelecomTypeID { get; set; }
+        public int OrganizationId { get; set; }
+        public int TelecomTypeId { get; set; }
         public string TelecomValue { get; set; }
         public string CountryCode { get; set; }
         public string AreaCode { get; set; }

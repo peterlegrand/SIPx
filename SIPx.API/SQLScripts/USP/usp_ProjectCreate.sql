@@ -1,17 +1,17 @@
 CREATE PROCEDURE [dbo].[usp_ProjectCreate] (
-	@ParentProjectID int
-	, @StatusID int 
+	@ParentProjectId int
+	, @StatusId int 
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 BEGIN TRANSACTION
 INSERT INTO Projects (
 	ParentProjectID

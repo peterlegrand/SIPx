@@ -9,8 +9,8 @@ namespace SIPx.API.ViewModels
     public class UITermLanguage
     {
         [Key]
-        public int UITermLanguageID { get; set; }
-        public int UITermID { get; set; }
+        public int UITermLanguageId { get; set; }
+        public int UITermId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MouseOver { get; set; }

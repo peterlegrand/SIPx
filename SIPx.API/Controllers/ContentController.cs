@@ -32,7 +32,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
             {
                 //TOFIX PETER
-                return Ok(await _contentProvider.GetContents(CurrentUser.Id));// CurrentUser.LanguageID));
+                return Ok(await _contentProvider.GetContents(CurrentUser.Id));// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {
@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
             {
                 //TOFIX PETER
-                return Ok(await _contentProvider.GetContentTypes(CurrentUser.Id));// CurrentUser.LanguageID));
+                return Ok(await _contentProvider.GetContentTypes(CurrentUser.Id));// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {
@@ -77,10 +77,10 @@ namespace SIPx.API.Controllers
                 
                 foreach (var Classification in Set.ClassificationList)
                 {
-                    Classification.ClassificationValueList = await _contentProvider.GetContentCreateListSet2(CurrentUser.Id, Classification.ClassificationID);
+                    Classification.ClassificationValueList = await _contentProvider.GetContentCreateListSet2(CurrentUser.Id, Classification.ClassificationId);
                 }
 
-                return Ok(Set);// CurrentUser.LanguageID));
+                return Ok(Set);// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {
@@ -96,7 +96,7 @@ namespace SIPx.API.Controllers
         //        {
         //            var CurrentUser = await _userManager.GetUserAsync(User);
 
-        //            return await _classificationProvider.GetClassificationById(Id, 1);// CurrentUser.LanguageID));
+        //            return await _classificationProvider.GetClassificationById(Id, 1);// CurrentUser.LanguageId));
 
         //        }
         //        [HttpPut]

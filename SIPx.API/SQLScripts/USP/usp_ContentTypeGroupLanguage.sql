@@ -1,6 +1,6 @@
-CREATE PROCEDURE [dbo].[usp_ContentTypeGroupLanguage] (@ContentTypeGroupLanguageID int) 
+CREATE PROCEDURE [dbo].[usp_ContentTypeGroupLanguage] (@ContentTypeGroupLanguageId int) 
 AS 
-SELECT ContentTypeGroups.ContentTypeGroupID 
+SELECT ContentTypeGroups.ContentTypeGroupId 
 	, ContentTypeGroupLanguages.ContentTypeGroupLanguageID
 	, ContentTypeGroupLanguages.LanguageID
 	, ContentTypeGroupLanguages.Name
@@ -13,10 +13,10 @@ SELECT ContentTypeGroups.ContentTypeGroupID
 	, ContentTypeGroupLanguages.ModifiedDate
 FROM ContentTypeGroups
 JOIN ContentTypeGroupLanguages
-	ON ContentTypeGroups.ContentTypeGroupID = ContentTypeGroupLanguages.ContentTypeGroupID
+	ON ContentTypeGroups.ContentTypeGroupId = ContentTypeGroupLanguages.ContentTypeGroupID
 JOIN Persons Creator
-	ON Creator.UserID = ContentTypeGroupLanguages.CreatorID
+	ON Creator.UserId = ContentTypeGroupLanguages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ContentTypeGroupLanguages.ModifierID
-WHERE ContentTypeGroupLanguages.ContentTypeGroupLanguageID = @ContentTypeGroupLanguageID
+	ON Modifier.UserId = ContentTypeGroupLanguages.ModifierID
+WHERE ContentTypeGroupLanguages.ContentTypeGroupLanguageId = @ContentTypeGroupLanguageID
 

@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationValueCreate] (
-	@ClassificationID int
-	, @ParentID int = NULL
+	@ClassificationId int
+	, @ParentId int = NULL
 	, @DateFrom datetime = NULL
 	, @DateTo datetime = NULL
 	, @Location geography = NULL
-	, @LanguageID int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -15,7 +15,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueCreate] (
 	, @HeaderName nvarchar(50)
 	, @HeaderDescription nvarchar(max)
 	, @TopicName nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 
@@ -63,7 +63,7 @@ INSERT INTO ClassificationValueLanguages (
 	, ModifiedDate)
 VALUES (
 	@NewClassificationValueId 
-	, @ClassificationID 
+	, @ClassificationId 
 	, @LanguageID
 	, @Name
 	, @Description

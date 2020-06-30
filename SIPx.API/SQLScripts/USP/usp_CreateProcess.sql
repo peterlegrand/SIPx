@@ -1,11 +1,11 @@
-CREATE PROCEDURE usp_CreateProcess (@UserID nvarchar(450), @ProcessTemplateID int, @ProcessTemplateStageID int, @FieldsTable AS udt_ProcessFieldsNew READONLY)
+CREATE PROCEDURE usp_CreateProcess (@UserId nvarchar(450), @ProcessTemplateId int, @ProcessTemplateStageId int, @FieldsTable AS udt_ProcessFieldsNew READONLY)
 AS 
 BEGIN TRANSACTION
-INSERT INTO processes (ProcessTemplateID, ProcessTemplateStageID, CreatorID, ModifierID, CreatedDate, ModifiedDate) 
-VALUES (@ProcessTemplateID, @ProcessTemplateStageID, @UserID, @UserID, getdate(), getdate())
+INSERT INTO processes (ProcessTemplateId, ProcessTemplateStageId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES (@ProcessTemplateId, @ProcessTemplateStageId, @UserId, @UserId, getdate(), getdate())
 
-DECLARE @NewPRocessID int	= scope_identity();
+DECLARE @NewPRocessId int	= scope_identity();
 
-INSERT INTO ProcessFields (ProcessID, ProcessTemplateID, ProcessTemplateFieldID, StringValue, IntValue, DateTimeValue, CreatorID, ModifierID, CreatedDate, ModifiedDate)
-SELECT @NewPRocessID, ProcessTemplateID, ProcessTemplateFieldID, StringValue, IntValue, DateTimeValue, @UserID,@UserID, getdate(), getdate() FROM @FieldsTable
+INSERT INTO ProcessFields (ProcessId, ProcessTemplateId, ProcessTemplateFieldId, StringValue, IntValue, DateTimeValue, CreatorId, ModifierId, CreatedDate, ModifiedDate)
+SELECT @NewPRocessId, ProcessTemplateId, ProcessTemplateFieldId, StringValue, IntValue, DateTimeValue, @UserId,@UserId, getdate(), getdate() FROM @FieldsTable
 COMMIT TRANSACTION

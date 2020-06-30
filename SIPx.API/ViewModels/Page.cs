@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class Page
     {
         [Key]
-        public int PageID { get; set; }
+        public int PageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

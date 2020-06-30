@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class OrganizationTelecom
     {
         [Key]
-        public int OrganizationTelecomID { get; set; }
+        public int OrganizationTelecomId { get; set; }
         public string AddressTypeName { get; set; }
         public string TelecomValue { get; set; }
         public string AreaCode { get; set; }

@@ -9,8 +9,8 @@ namespace SIPx.API.ViewModels
     public class ProcessTemplateFieldLanguage
     {
         [Key]
-        public int ProcessTemplateFieldLanguageID { get; set; }
-        public int LanguageID { get; set; }
+        public int ProcessTemplateFieldLanguageId { get; set; }
+        public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

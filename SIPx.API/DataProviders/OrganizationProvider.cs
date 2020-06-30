@@ -20,76 +20,76 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<OrganizationAddress>> GetOrganizationAddresses(string UserID, int OrganizationID)
+        public async Task<List<OrganizationAddress>> GetOrganizationAddresses(string UserId, int OrganizationId)
         {
-            string usp = "usp_OrganizationAddresses @UserID, @OrganizationID";
-            var x = await _sqlDataAccess.LoadData<OrganizationAddress, dynamic>(usp, new { UserID = UserID, OrganizationID = OrganizationID });
+            string usp = "usp_OrganizationAddresses @UserId, @OrganizationID";
+            var x = await _sqlDataAccess.LoadData<OrganizationAddress, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
-        public Task<OrganizationAddress> GetOrganizationAddress(string UserID, int OrganizationAddressID)
+        public Task<OrganizationAddress> GetOrganizationAddress(string UserId, int OrganizationAddressId)
         {
-            string usp = "usp_OrganizationAddress @UserID, @OrganizationAddressID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationAddress, dynamic>(usp, new { UserID = UserID, OrganizationAddressID = OrganizationAddressID });
+            string usp = "usp_OrganizationAddress @UserId, @OrganizationAddressID";
+            return _sqlDataAccess.LoadSingleRecord<OrganizationAddress, dynamic>(usp, new { UserId = UserId, OrganizationAddressId = OrganizationAddressId });
 
         }
-        public async Task<List<OrganizationLanguage>> GetOrganizationLanguages(string UserID, int OrganizationID)
+        public async Task<List<OrganizationLanguage>> GetOrganizationLanguages(string UserId, int OrganizationId)
         {
-            string usp = "usp_DateLevels @UserID, @OrganizationID";
-            var x = await _sqlDataAccess.LoadData<OrganizationLanguage, dynamic>(usp, new { UserID = UserID, OrganizationID = OrganizationID });
+            string usp = "usp_DateLevels @UserId, @OrganizationID";
+            var x = await _sqlDataAccess.LoadData<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
-        public Task<OrganizationLanguage> GetOrganizationLanguage(string UserID, int OrganizationLanguageID)
+        public Task<OrganizationLanguage> GetOrganizationLanguage(string UserId, int OrganizationLanguageId)
         {
-            string usp = "usp_DateLevel @UserID, @DOrganizationLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationLanguage, dynamic>(usp, new { UserID = UserID, OrganizationLanguageID = OrganizationLanguageID });
+            string usp = "usp_DateLevel @UserId, @DOrganizationLanguageID";
+            return _sqlDataAccess.LoadSingleRecord<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationLanguageId = OrganizationLanguageId });
 
         }
-        public async Task<List<Organization>> GetOrganizations(string UserID)
+        public async Task<List<Organization>> GetOrganizations(string UserId)
         {
             string usp = "usp_Organizations @UserID";
-            var x = await _sqlDataAccess.LoadData<Organization, dynamic>(usp, new { UserID = UserID });
+            var x = await _sqlDataAccess.LoadData<Organization, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Organization> GetOrganization(string UserID, int OrganizationID)
+        public Task<Organization> GetOrganization(string UserId, int OrganizationId)
         {
-            string usp = "usp_Organization @UserID, @OrganizationID";
-            return _sqlDataAccess.LoadSingleRecord<Organization, dynamic>(usp, new { UserID = UserID, OrganizationID = OrganizationID });
+            string usp = "usp_Organization @UserId, @OrganizationID";
+            return _sqlDataAccess.LoadSingleRecord<Organization, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
 
         }
-        public Task<List<OrganizationTelecom>> GetOrganizationTelecoms(string UserID, int OrganizationID)
+        public Task<List<OrganizationTelecom>> GetOrganizationTelecoms(string UserId, int OrganizationId)
         {
-            string usp = "usp_OrganizationTelecoms @UserID, @OrganizationID";
-            return _sqlDataAccess.LoadData<OrganizationTelecom, dynamic>(usp, new { UserID = UserID, OrganizationID = OrganizationID });
+            string usp = "usp_OrganizationTelecoms @UserId, @OrganizationID";
+            return _sqlDataAccess.LoadData<OrganizationTelecom, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
 
         }
-        public Task<OrganizationTelecom> GetOrganizationTelecom(string UserID, int OrganizationTelecomID)
+        public Task<OrganizationTelecom> GetOrganizationTelecom(string UserId, int OrganizationTelecomId)
         {
-            string usp = "usp_OrganizationTelecom @UserID, @OrganizationTelecomID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationTelecom, dynamic>(usp, new { UserID = UserID, OrganizationTelecomID = OrganizationTelecomID });
+            string usp = "usp_OrganizationTelecom @UserId, @OrganizationTelecomID";
+            return _sqlDataAccess.LoadSingleRecord<OrganizationTelecom, dynamic>(usp, new { UserId = UserId, OrganizationTelecomId = OrganizationTelecomId });
 
         }
-        public Task<List<OrganizationTypeLanguage>> GetOrganizationTypeLanguages(string UserID, int OrganizationTypeID)
+        public Task<List<OrganizationTypeLanguage>> GetOrganizationTypeLanguages(string UserId, int OrganizationTypeId)
         {
-            string usp = "usp_OrganizationTypeLanguages @UserID, @OrganizationTypeID";
-            return _sqlDataAccess.LoadData<OrganizationTypeLanguage, dynamic>(usp, new { UserID = UserID, OrganizationTypeID = OrganizationTypeID });
+            string usp = "usp_OrganizationTypeLanguages @UserId, @OrganizationTypeID";
+            return _sqlDataAccess.LoadData<OrganizationTypeLanguage, dynamic>(usp, new { UserId = UserId, OrganizationTypeId = OrganizationTypeId });
 
         }
-        public Task<OrganizationTypeLanguage> GetOrganizationTypeLanguage(string UserID, int OrganizationTypeLanguageID)
+        public Task<OrganizationTypeLanguage> GetOrganizationTypeLanguage(string UserId, int OrganizationTypeLanguageId)
         {
-            string usp = "usp_OrganizationTypeLanguage @UserID, @OrganizationTypeLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationTypeLanguage, dynamic>(usp, new { UserID = UserID, OrganizationTypeLanguageID = OrganizationTypeLanguageID });
+            string usp = "usp_OrganizationTypeLanguage @UserId, @OrganizationTypeLanguageID";
+            return _sqlDataAccess.LoadSingleRecord<OrganizationTypeLanguage, dynamic>(usp, new { UserId = UserId, OrganizationTypeLanguageId = OrganizationTypeLanguageId });
 
         }
-        public Task<List<OrganizationType>> GetOrganizationTypes(string UserID)
+        public Task<List<OrganizationType>> GetOrganizationTypes(string UserId)
         {
             string usp = "usp_OrganizationTypes @UserID";
-            return _sqlDataAccess.LoadData<OrganizationType, dynamic>(usp, new { UserID = UserID });
+            return _sqlDataAccess.LoadData<OrganizationType, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<OrganizationType> GetOrganizationType(string UserID, int OrganizationTypeID)
+        public Task<OrganizationType> GetOrganizationType(string UserId, int OrganizationTypeId)
         {
-            string usp = "usp_OrganizationType @UserID, @OrganizationTypeID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationType, dynamic>(usp, new { UserID = UserID, OrganizationTypeID = OrganizationTypeID });
+            string usp = "usp_OrganizationType @UserId, @OrganizationTypeID";
+            return _sqlDataAccess.LoadSingleRecord<OrganizationType, dynamic>(usp, new { UserId = UserId, OrganizationTypeId = OrganizationTypeId });
 
         }
     }

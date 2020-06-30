@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ClassificationPageSection
     {
         [Key]
-        public int ClassificationPageSectionID { get; set; }
+        public int ClassificationPageSectionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -25,9 +25,9 @@ namespace SIPx.API.ViewModels
         public bool ShowContentTypeTitleDescription { get; set; }
         public int OneTwoColumns { get; set; }
         public string ContentTypeName { get; set; }
-        public int? ContentTypeID { get; set; }
+        public int? ContentTypeId { get; set; }
         public string SortByName { get; set; }
-        public int SortByID { get; set; }
+        public int SortById { get; set; }
         public int MaxContent { get; set; }
         public int HasPaging { get; set; }
         public string Creator { get; set; }

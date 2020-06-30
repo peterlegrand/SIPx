@@ -9,8 +9,8 @@ namespace SIPx.API.ViewModels
     public class UserPreference
     {
         [Key]
-        public int UserPreferenceID { get; set; }
-        public int PreferenceTypeID { get; set; }
+        public int UserPreferenceId { get; set; }
+        public int PreferenceTypeId { get; set; }
         public string StringPreference { get; set; }
         public int IntPreference { get; set; }
         public DateTime DateTimePreference { get; set; }

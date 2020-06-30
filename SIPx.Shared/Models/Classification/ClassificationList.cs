@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class ClassificationList 
     {
         [Key]
-        public int ClassificationID { get; set; }
+        public int ClassificationId { get; set; }
         public string Name { get; set; }
 
         public List<ClassificationValueList> ClassificationValueList { get; set; }

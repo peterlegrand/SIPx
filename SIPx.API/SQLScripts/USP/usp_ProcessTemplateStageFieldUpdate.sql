@@ -1,38 +1,38 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageFieldUpdate] (
-	@ProcessTemplateStageFieldID int
-	, @ProcessTemplateStageFieldStatusID int
-	, @ValueUpdateTypeID int
+	@ProcessTemplateStageFieldId int
+	, @ProcessTemplateStageFieldStatusId int
+	, @ValueUpdateTypeId int
 	, @Sequence int
 	, @StringValue nvarchar(max)
 	, @IntValue int
 	, @LocationValue geography
 	, @DateTimeValue DateTime
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
-DECLARE @StageID int;
+DECLARE @StageId int;
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence , @StageID = ProcessTemplateStageID FROM ProcessTemplateStageFields WHERE ProcessTemplateStageFieldID = @ProcessTemplateStageFieldID
+SELECT @OldSequence = Sequence , @StageId = ProcessTemplateStageId FROM ProcessTemplateStageFields WHERE ProcessTemplateStageFieldId = @ProcessTemplateStageFieldID
 
 BEGIN TRANSACTION
 
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE ProcessTemplateStageFields SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @StageID = ProcessTemplateStageID
+UPDATE ProcessTemplateStageFields SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @StageId = ProcessTemplateStageID
 END
 ELSE
 BEGIN
-UPDATE ProcessTemplateStageFields SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND @StageID = ProcessTemplateStageID
+UPDATE ProcessTemplateStageFields SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND @StageId = ProcessTemplateStageID
 END
 
 UPDATE  ProcessTemplateStageFields SET 
-	ProcessTemplateStageFieldStatusID = @ProcessTemplateStageFieldStatusID
-	, ValueUpdateTypeID = @ValueUpdateTypeID
+	ProcessTemplateStageFieldStatusId = @ProcessTemplateStageFieldStatusID
+	, ValueUpdateTypeId = @ValueUpdateTypeID
 	, Sequence = @Sequence
 	, StringValue = @StringValue
 	, IntValue = @IntValue
 	, LocationValue = @LocationValue
 	, DateTimeValue = @DateTimeValue
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateStageFieldID= @ProcessTemplateStageFieldID
 

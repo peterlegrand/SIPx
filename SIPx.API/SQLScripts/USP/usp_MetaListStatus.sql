@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_MetaListStatus]
 AS
-SELECT Statuses.StatusID, Name FROM Statuses JOIN UITermLanguages ON Statuses.NameTermID = UITermLanguages.UITermID WHERE LanguageID =41 ORDER BY Statuses.StatusID
+SELECT Statuses.StatusId, Name FROM Statuses JOIN UITermLanguages ON Statuses.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY Statuses.StatusID
 
 
 

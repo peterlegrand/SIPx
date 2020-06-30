@@ -1,18 +1,18 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationUpdate] (
-	@ClassificationLanguageID int
-	, @StatusID int
-	, @DefaultPageID int
+	@ClassificationLanguageId int
+	, @StatusId int
+	, @DefaultPageId int
 	, @HasDropDown bit
 	, @DropDownSequence int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
-DECLARE @ClassificationID int;
-SELECT @OldSequence = DropDownSequence, @ClassificationID = Classifications.ClassificationID FROM ClassificationLanguages JOIN Classifications ON ClassificationLanguages.ClassificationID = Classifications.ClassificationID  WHERE ClassificationLanguageID= @ClassificationLanguageID;
+DECLARE @ClassificationId int;
+SELECT @OldSequence = DropDownSequence, @ClassificationId = Classifications.ClassificationId FROM ClassificationLanguages JOIN Classifications ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId  WHERE ClassificationLanguageID= @ClassificationLanguageID;
 BEGIN TRANSACTION
 IF @OldSequence > @DropDownSequence
 BEGIN
@@ -24,20 +24,20 @@ UPDATE Classifications SET DropDownSequence = DropDownSequence - 1 WHERE DropDow
 END
 
 UPDATE Classifications SET 
-	StatusID = @StatusID
-	, DefaultPageID = @DefaultPageID
+	StatusId = @StatusID
+	, DefaultPageId = @DefaultPageID
 	, HasDropDown = @HasDropDown
 	, DropDownSequence = @DropDownSequence
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ClassificationID = @ClassificationID
+WHERE ClassificationId = @ClassificationID
 
 UPDATE  ClassificationLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationLanguageID= @ClassificationLanguageID
 

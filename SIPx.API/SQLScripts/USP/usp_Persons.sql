@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_Persons] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_Persons] (@UserId nvarchar(450)) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT Persons.PersonID
 	, Persons.Salutation
 	, Persons.FirstName
@@ -26,20 +26,20 @@ SELECT Persons.PersonID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, Persons.ModifiedDate
 FROM Persons 
-LEFT JOIN AspNetUsers ON Persons.UserID = AspNetUsers.ID
+LEFT JOIN AspNetUsers ON Persons.UserId = AspNetUsers.ID
 JOIN Genders 
-	ON Genders.GenderID = Persons.GenderID
+	ON Genders.GenderId = Persons.GenderID
 JOIN UITermLanguages UIGenderName
-	ON UIGenderName.UITermID = Genders.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGenderNameCustom
-	ON UIGenderNameCustom.UITermID = Genders.NameTermID
-LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages WHERE LanguageID = @LanguageID) UserOrganizationLanguages
+	ON UIGenderName.UITermId = Genders.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGenderNameCustom
+	ON UIGenderNameCustom.UITermId = Genders.NameTermID
+LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserOrganizationLanguages
 	ON UserOrganizationLanguages.OrganizationID= Persons.DefaultOrganizationID
-LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultOrganizationLanguages
-	ON DefaultOrganizationLanguages.OrganizationID = Persons.DefaultOrganizationID
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultOrganizationLanguages
+	ON DefaultOrganizationLanguages.OrganizationId = Persons.DefaultOrganizationID
 JOIN Persons Creator
-	ON Creator.UserID = Persons.CreatorID
+	ON Creator.UserId = Persons.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = Persons.ModifierID
-	AND UIGenderName.LanguageID = @LanguageID
+	ON Modifier.UserId = Persons.ModifierID
+	AND UIGenderName.LanguageId = @LanguageID
 ORDER BY Persons.FirstName, Persons.LastName

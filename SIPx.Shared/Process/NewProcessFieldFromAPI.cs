@@ -10,8 +10,8 @@ namespace SIPx.Shared
     {
         [Key]
         public int Sequence { get; set; }
-        public int ProcessTemplateID { get; set; }
-        public int ProcessTemplateFieldID { get; set; }
+        public int ProcessTemplateId { get; set; }
+        public int ProcessTemplateFieldId { get; set; }
         public string StringValue { get; set; }
         public int? IntValue { get; set; }
         public DateTime? DateTimeValue { get; set; }

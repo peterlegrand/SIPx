@@ -1,20 +1,20 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationCreateCheck] (
-	@StatusID bit
+	@StatusId bit
 	, @HasDropDown bit
 	, @DropDownSequence int
-	, @LanguageID int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN 
 DECLARE @Error varchar(500) = '';
 
-IF @StatusID NOT IN (1,2) 
+IF @StatusId NOT IN (1,2) 
 BEGIN
-	SET @Error = @Error + ' - StatusID is not correct'
+	SET @Error = @Error + ' - StatusId is not correct'
 END
 
 
@@ -32,15 +32,15 @@ END
 IF  (SELECT COUNT(*) 
 	FROM Classifications 
 	JOIN ClassificationLanguages 
-		ON ClassificationLanguages.ClassificationID = Classifications.ClassificationID 
-	WHERE LanguageID = @LanguageID
+		ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId 
+	WHERE LanguageId = @LanguageID
 		AND ClassificationLanguages.Name = @Name) >0
 BEGIN
 	SET @Error = @Error + ' - This classification name for this language already exists'
 END
 IF  (SELECT COUNT(*) 
 	FROM Languages 
-	WHERE LanguageID = @LanguageID AND languages.StatusID = 1
+	WHERE LanguageId = @LanguageId AND languages.StatusId = 1
 ) >0
 BEGIN
 	SET @Error = @Error + ' - The language is not active'

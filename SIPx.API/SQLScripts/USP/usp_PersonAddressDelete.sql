@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_PersonAddressDelete] (
-	@PersonAddressID  int
+	@PersonAddressId  int
 ) 
 AS 
 
 DELETE FROM  PersonAddresses 
-	WHERE PersonAddressID = @PersonAddressID 
+	WHERE PersonAddressId = @PersonAddressId 
 	

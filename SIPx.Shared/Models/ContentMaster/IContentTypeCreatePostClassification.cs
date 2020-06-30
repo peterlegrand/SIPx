@@ -2,7 +2,7 @@
 {
     public interface IContentTypeCreatePostClassification
     {
-        int ClassificationID { get; set; }
-        int ContentTypeClassificationStatusID { get; set; }
+        int ClassificationId { get; set; }
+        int ContentTypeClassificationStatusId { get; set; }
     }
 }

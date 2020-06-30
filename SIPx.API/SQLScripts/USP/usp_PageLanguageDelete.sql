@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PageLanguageDelete] (@PageLanguageID int) 
+CREATE PROCEDURE [dbo].[usp_PageLanguageDelete] (@PageLanguageId int) 
 AS 
 DELETE FROM PageLanguages WHERE PageLanguageID= @PageLanguageID
 

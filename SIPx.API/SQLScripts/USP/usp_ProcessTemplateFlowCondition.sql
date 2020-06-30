@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowCondition] (@UserID nvarchar(450), @ProcessTemplateFlowConditionID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowCondition] (@UserId nvarchar(450), @ProcessTemplateFlowConditionId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
 	, ISNULL(UserProcessTemplateFlowConditionLanguage.Name,ISNULL(DefaultProcessTemplateFlowConditionLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserProcessTemplateFlowConditionLanguage.Description,ISNULL(DefaultProcessTemplateFlowConditionLanguage.Description,'No description for this role')) Description
@@ -23,33 +23,33 @@ SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ProcessTemplateFlowConditions.ModifiedDate
 FROM ProcessTemplateFlowConditions 
-LEFT JOIN (SELECT ProcessTemplateFlowConditionID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowConditionLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateFlowConditionLanguage
-	ON UserProcessTemplateFlowConditionLanguage.ProcessTemplateFlowConditionID = ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
-LEFT JOIN (SELECT ProcessTemplateFlowConditionID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowConditionLanguages JOIN Settings ON ProcessTemplateFlowConditionLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateFlowConditionLanguage
-	ON DefaultProcessTemplateFlowConditionLanguage.ProcessTemplateFlowConditionID = ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
+LEFT JOIN (SELECT ProcessTemplateFlowConditionId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowConditionLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFlowConditionLanguage
+	ON UserProcessTemplateFlowConditionLanguage.ProcessTemplateFlowConditionId = ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
+LEFT JOIN (SELECT ProcessTemplateFlowConditionId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowConditionLanguages JOIN Settings ON ProcessTemplateFlowConditionLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFlowConditionLanguage
+	ON DefaultProcessTemplateFlowConditionLanguage.ProcessTemplateFlowConditionId = ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
 JOIN ProcessTemplateFlowConditionTypes
-	ON ProcessTemplateFlowConditionTypes.ProcessTemplateFlowConditionTypeID = ProcessTemplateFlowConditions.ProcessTemplateFlowConditionTypeID
+	ON ProcessTemplateFlowConditionTypes.ProcessTemplateFlowConditionTypeId = ProcessTemplateFlowConditions.ProcessTemplateFlowConditionTypeID
 JOIN UITermLanguages UITypeName
-	ON UITypeName.UITermID = ProcessTemplateFlowConditionTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UITypeNameCustom
-	ON UITypeNameCustom.UITermID = ProcessTemplateFlowConditionTypes.NameTermID
-LEFT JOIN (SELECT ProcessTemplateFieldID, Name FROM ProcessTemplateFieldLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateFieldLanguage
-	ON UserProcessTemplateFieldLanguage.ProcessTemplatefieldID = ProcessTemplateFlowConditions.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateFieldLanguage
-	ON DefaultProcessTemplateFieldLanguage.ProcessTemplatefieldID = ProcessTemplateFlowConditions.ProcessTemplateFieldID
+	ON UITypeName.UITermId = ProcessTemplateFlowConditionTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UITypeNameCustom
+	ON UITypeNameCustom.UITermId = ProcessTemplateFlowConditionTypes.NameTermID
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage
+	ON UserProcessTemplateFieldLanguage.ProcessTemplatefieldId = ProcessTemplateFlowConditions.ProcessTemplateFieldID
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage
+	ON DefaultProcessTemplateFieldLanguage.ProcessTemplatefieldId = ProcessTemplateFlowConditions.ProcessTemplateFieldID
 
-LEFT JOIN (SELECT ProcessTemplateFieldID, Name FROM ProcessTemplateFieldLanguages WHERE LanguageID = @LanguageID) UserProcessTemplateFieldRoleLanguage
-	ON UserProcessTemplateFieldRoleLanguage.ProcessTemplatefieldID = ProcessTemplateFlowConditions.ProcessTemplateFieldIDRole
-LEFT JOIN (SELECT ProcessTemplateFieldID, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultProcessTemplateFieldRoleLanguage
-	ON DefaultProcessTemplateFieldRoleLanguage.ProcessTemplatefieldID = ProcessTemplateFlowConditions.ProcessTemplateFieldIDRole
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldRoleLanguage
+	ON UserProcessTemplateFieldRoleLanguage.ProcessTemplatefieldId = ProcessTemplateFlowConditions.ProcessTemplateFieldIDRole
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldRoleLanguage
+	ON DefaultProcessTemplateFieldRoleLanguage.ProcessTemplatefieldId = ProcessTemplateFlowConditions.ProcessTemplateFieldIDRole
 
 LEFT JOIN ProcessTemplateFlowConditionComparisonOperators 
-	ON ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorID = ProcessTemplateFlowConditions.ComparisonOperatorID
+	ON ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorId = ProcessTemplateFlowConditions.ComparisonOperatorID
 JOIN Persons Creator
-	ON Creator.UserID = ProcessTemplateFlowConditions.CreatorID
+	ON Creator.UserId = ProcessTemplateFlowConditions.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ProcessTemplateFlowConditions.ModifierID
-WHERE ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID = @ProcessTemplateFlowConditionID
-	AND UITypeName.LanguageID = @LanguageID
+	ON Modifier.UserId = ProcessTemplateFlowConditions.ModifierID
+WHERE ProcessTemplateFlowConditions.ProcessTemplateFlowConditionId = @ProcessTemplateFlowConditionID
+	AND UITypeName.LanguageId = @LanguageID
 
 

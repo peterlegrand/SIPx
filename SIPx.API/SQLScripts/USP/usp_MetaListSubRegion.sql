@@ -7,9 +7,9 @@ SELECT
 	, ISNULL(RegionName.Name,'')RegionName 
 	FROM SubRegions 
 	JOIN UITermLanguages SubRegionName
-		ON Subregions.NameTermID = SubRegionName.UITermID 
+		ON Subregions.NameTermId = SubRegionName.UITermId 
 	JOIN Regions 
-		ON Regions.RegionID = SubRegions.RegionID
+		ON Regions.RegionId = SubRegions.RegionID
 	JOIN UITermLanguages RegionName
-		ON Regions.NameTermID = RegionName.UITermID  WHERE RegionName.LanguageID =41 AND SubRegionName.LanguageID =41 
+		ON Regions.NameTermId = RegionName.UITermId  WHERE RegionName.LanguageId =41 AND SubRegionName.LanguageId =41 
 ORDER BY RegionName, SubregionName

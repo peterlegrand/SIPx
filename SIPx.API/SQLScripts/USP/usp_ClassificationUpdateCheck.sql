@@ -1,35 +1,35 @@
 CREATE PROCEDURE usp_ClassificationUpdateCheck (
-	@ClassificationLanguageID int
-	, @StatusID int
-	, @DefaultPageID int
+	@ClassificationLanguageId int
+	, @StatusId int
+	, @DefaultPageId int
 	, @HasDropDown bit
 	, @DropDownSequence int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450))
+	, @UserId nvarchar(450))
 AS
 BEGIN
 
 DECLARE @Error varchar(500) = '';
 
-IF @StatusID NOT IN (1,2) 
+IF @StatusId NOT IN (1,2) 
 BEGIN
-	SET @Error = @Error + ' - StatusID is not correct'
+	SET @Error = @Error + ' - StatusId is not correct'
 END
 
 IF  (SELECT COUNT(*) 
 	FROM ClassificationLanguages 
-	WHERE ClassificationLanguages.ClassificationLanguageID = @ClassificationLanguageID) =0
+	WHERE ClassificationLanguages.ClassificationLanguageId = @ClassificationLanguageID) =0
 BEGIN
-	SET @Error = @Error + ' - The classificaation language ID does not exist'
+	SET @Error = @Error + ' - The classificaation language Id does not exist'
 END
 
 IF  (SELECT COUNT(*) 
-	FROM ClassificationPages JOIN ClassificationLanguages ON ClassificationPages.ClassificationID  = ClassificationLanguages.ClassificationID
-	WHERE ClassificationPages.ClassificationPageID = @DefaultPageID 
-		AND ClassificationLanguages.ClassificationLanguageID= @ClassificationLanguageID) = 0  AND @DefaultPageID IS NOT NULL 
+	FROM ClassificationPages JOIN ClassificationLanguages ON ClassificationPages.ClassificationId  = ClassificationLanguages.ClassificationID
+	WHERE ClassificationPages.ClassificationPageId = @DefaultPageId 
+		AND ClassificationLanguages.ClassificationLanguageID= @ClassificationLanguageID) = 0  AND @DefaultPageId IS NOT NULL 
 BEGIN
 	SET @Error = @Error + ' - The default page is not correct'
 END
@@ -48,12 +48,12 @@ END
 IF  (SELECT COUNT(*) 
 	FROM Classifications 
 	JOIN ClassificationLanguages 
-		ON ClassificationLanguages.ClassificationID = Classifications.ClassificationID 
-	WHERE LanguageID IN (
-		SELECT LanguageID 
+		ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId 
+	WHERE LanguageId IN (
+		SELECT LanguageId 
 		FROM ClassificationLanguages 
-			WHERE ClassificationLanguages.ClassificationLanguageID = @ClassificationLanguageID)
-		AND ClassificationLanguageID <> @ClassificationLanguageID
+			WHERE ClassificationLanguages.ClassificationLanguageId = @ClassificationLanguageID)
+		AND ClassificationLanguageId <> @ClassificationLanguageID
 		AND ClassificationLanguages.Name = @Name) >0
 BEGIN
 	SET @Error = @Error + ' - This classification name for this language already exists'

@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class LanguageList 
     {
         [Key]
-        public int LanguageID { get; set; }
+        public int LanguageId { get; set; }
         public string Name { get; set; }
 
     }

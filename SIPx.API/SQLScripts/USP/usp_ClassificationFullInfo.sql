@@ -1,18 +1,18 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationFullInfo] (@UserID nvarchar(450), @ClassificationID int, @Top int =1000) 
+CREATE PROCEDURE [dbo].[usp_ClassificationFullInfo] (@UserId nvarchar(450), @ClassificationId int, @Top int =1000) 
 AS 
 BEGIN
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT Classifications.ClassificationID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this classification')) Description
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.Name,'No menu name for this classification')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this classification')) MouseOver
 	, ISNULL(UINameCustom.Customization ,UIName.Name) StatusName
-	, CASE WHEN Classifications.DefaultPageID IS NOT NULL THEN ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for the default page')) ELSE 'There is no default page' END MouseOver
+	, CASE WHEN Classifications.DefaultPageId IS NOT NULL THEN ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for the default page')) ELSE 'There is no default page' END MouseOver
 	, Classifications.HasDropDown 
 	, Classifications.DropDownSequence
 	, Creator.FirstName + ' ' + Creator.LastName Creator
@@ -21,25 +21,25 @@ SELECT Classifications.ClassificationID
 	, Classifications.ModifiedDate
 FROM Classifications 
 JOIN Statuses 
-	ON Statuses.StatusID = Classifications.StatusID
+	ON Statuses.StatusId = Classifications.StatusID
 JOIN UITermLanguages UIName
-	ON UIName.UITermID = Statuses.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
-	ON UINameCustom.UITermID = Statuses.NameTermID
-LEFT JOIN (SELECT ClassificationID, Name, Description, MenuName, MouseOver FROM ClassificationLanguages WHERE LanguageID = @LanguageID) UserLanguage
+	ON UIName.UITermId = Statuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = Statuses.NameTermID
+LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver FROM ClassificationLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.ClassificationID= Classifications.ClassificationID
-LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
-	ON DefaultLanguage.ClassificationID = Classifications.ClassificationID
-LEFT JOIN (SELECT ClassificationPageID, Name FROM ClassificationPageLanguages WHERE LanguageID = @LanguageID) UserClassificationPageLanguage
-	ON UserClassificationPageLanguage.ClassificationPageID = Classifications.DefaultPageID
-LEFT JOIN (SELECT ClassificationPageID, Name FROM ClassificationPageLanguages  JOIN Settings ON ClassificationPageLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationPageLanguage
-	ON DefaultClassificationPageLanguage.ClassificationPageID = Classifications.DefaultPageID
+LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ClassificationId = Classifications.ClassificationID
+LEFT JOIN (SELECT ClassificationPageId, Name FROM ClassificationPageLanguages WHERE LanguageId = @LanguageID) UserClassificationPageLanguage
+	ON UserClassificationPageLanguage.ClassificationPageId = Classifications.DefaultPageID
+LEFT JOIN (SELECT ClassificationPageId, Name FROM ClassificationPageLanguages  JOIN Settings ON ClassificationPageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationPageLanguage
+	ON DefaultClassificationPageLanguage.ClassificationPageId = Classifications.DefaultPageID
 JOIN Persons Creator
-	ON Creator.UserID = Classifications.CreatorID
+	ON Creator.UserId = Classifications.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = Classifications.ModifierID
-WHERE UIName.LanguageID = @LanguageID
-	AND Classifications.ClassificationID = @ClassificationID;
+	ON Modifier.UserId = Classifications.ModifierID
+WHERE UIName.LanguageId = @LanguageID
+	AND Classifications.ClassificationId = @ClassificationID;
 
 SELECT ClassificationLevels.ClassificationLevelID
 	, ISNULL(UserClassificationLevelLanguage.Name,ISNULL(DefaultClassificationLevelLanguage.Name,'No name for this role')) Name
@@ -57,22 +57,22 @@ SELECT ClassificationLevels.ClassificationLevelID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationLevels.ModifiedDate
 FROM ClassificationLevels 
-LEFT JOIN (SELECT ClassificationLevelID, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages WHERE LanguageID = @LanguageID) UserClassificationLevelLanguage
-	ON UserClassificationLevelLanguage.ClassificationLevelID = ClassificationLevels.ClassificationLevelID
-LEFT JOIN (SELECT ClassificationLevelID, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages JOIN Settings ON ClassificationLevelLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationLevelLanguage
-	ON DefaultClassificationLevelLanguage.ClassificationLevelID = ClassificationLevels.ClassificationLevelID
+LEFT JOIN (SELECT ClassificationLevelId, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages WHERE LanguageId = @LanguageID) UserClassificationLevelLanguage
+	ON UserClassificationLevelLanguage.ClassificationLevelId = ClassificationLevels.ClassificationLevelID
+LEFT JOIN (SELECT ClassificationLevelId, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages JOIN Settings ON ClassificationLevelLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationLevelLanguage
+	ON DefaultClassificationLevelLanguage.ClassificationLevelId = ClassificationLevels.ClassificationLevelID
 JOIN DateLevels 
-	ON DateLevels.DateLevelID = ClassificationLevels.DateLevelID
+	ON DateLevels.DateLevelId = ClassificationLevels.DateLevelID
 JOIN UITermLanguages UIDateLevelName
-	ON UIDateLevelName.UITermID = DateLevels.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDateLevelNameCustom
-	ON UIDateLevelNameCustom.UITermID = DateLevels.NameTermID	
+	ON UIDateLevelName.UITermId = DateLevels.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDateLevelNameCustom
+	ON UIDateLevelNameCustom.UITermId = DateLevels.NameTermID	
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationLevels.CreatorID
+	ON Creator.UserId = ClassificationLevels.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationLevels.ModifierID
-WHERE ClassificationLevels.ClassificationID = @ClassificationID
-	AND UIDateLevelName.LanguageID = @LanguageID
+	ON Modifier.UserId = ClassificationLevels.ModifierID
+WHERE ClassificationLevels.ClassificationId = @ClassificationID
+	AND UIDateLevelName.LanguageId = @LanguageID
 ORDER BY ClassificationLevels.Sequence;
 
 SELECT ClassificationPages.ClassificationPageID
@@ -90,22 +90,22 @@ SELECT ClassificationPages.ClassificationPageID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationPages.ModifiedDate
 FROM ClassificationPages 
-LEFT JOIN (SELECT ClassificationPageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages WHERE LanguageID = @LanguageID) UserClassificationPageLanguage
-	ON UserClassificationPageLanguage.ClassificationPageID = ClassificationPages.ClassificationPageID
-LEFT JOIN (SELECT ClassificationPageID, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages JOIN Settings ON ClassificationPageLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationPageLanguage
-	ON DefaultClassificationPageLanguage.ClassificationPageID = ClassificationPages.ClassificationPageID
+LEFT JOIN (SELECT ClassificationPageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages WHERE LanguageId = @LanguageID) UserClassificationPageLanguage
+	ON UserClassificationPageLanguage.ClassificationPageId = ClassificationPages.ClassificationPageID
+LEFT JOIN (SELECT ClassificationPageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageLanguages JOIN Settings ON ClassificationPageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationPageLanguage
+	ON DefaultClassificationPageLanguage.ClassificationPageId = ClassificationPages.ClassificationPageID
 JOIN Statuses 
-	ON Statuses.StatusID = ClassificationPages.StatusID
+	ON Statuses.StatusId = ClassificationPages.StatusID
 JOIN UITermLanguages UIStatusName
-	ON UIStatusName.UITermID = Statuses.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIStatusNameCustom
-	ON UIStatusNameCustom.UITermID = Statuses.NameTermID
+	ON UIStatusName.UITermId = Statuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIStatusNameCustom
+	ON UIStatusNameCustom.UITermId = Statuses.NameTermID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationPages.CreatorID
+	ON Creator.UserId = ClassificationPages.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationPages.ModifierID
-WHERE ClassificationPages.ClassificationID = @ClassificationID
-	AND UIStatusName.LanguageID = @LanguageID;
+	ON Modifier.UserId = ClassificationPages.ModifierID
+WHERE ClassificationPages.ClassificationId = @ClassificationID
+	AND UIStatusName.LanguageId = @LanguageID;
 	
 
 SELECT ClassificationRoles.RoleID
@@ -116,19 +116,19 @@ SELECT ClassificationRoles.RoleID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationRoles.ModifiedDate
 FROM ClassificationRoles 
-LEFT JOIN (SELECT RoleID, Name, Description, MenuName, MouseOver FROM RoleLanguages WHERE LanguageID = @LanguageID) UserRoleLanguage
-	ON UserRoleLanguage.RoleID = ClassificationRoles.RoleID
-LEFT JOIN (SELECT RoleID, Name, Description, MenuName, MouseOver FROM RoleLanguages JOIN Settings ON RoleLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultRoleLanguage
-	ON DefaultRoleLanguage.RoleID = ClassificationRoles.RoleID
-LEFT JOIN (SELECT ClassificationRelationTypeID, Name FROM ClassificationRelationTypeLanguages WHERE LanguageID = @LanguageID) UserClassificationRelationTypeLanguage
-	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationRoles.ClassificationRelationTypeID
-LEFT JOIN (SELECT ClassificationRelationTypeID, Name FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationRelationTypeLanguage
-	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationRoles.ClassificationRelationTypeID
+LEFT JOIN (SELECT RoleId, Name, Description, MenuName, MouseOver FROM RoleLanguages WHERE LanguageId = @LanguageID) UserRoleLanguage
+	ON UserRoleLanguage.RoleId = ClassificationRoles.RoleID
+LEFT JOIN (SELECT RoleId, Name, Description, MenuName, MouseOver FROM RoleLanguages JOIN Settings ON RoleLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultRoleLanguage
+	ON DefaultRoleLanguage.RoleId = ClassificationRoles.RoleID
+LEFT JOIN (SELECT ClassificationRelationTypeId, Name FROM ClassificationRelationTypeLanguages WHERE LanguageId = @LanguageID) UserClassificationRelationTypeLanguage
+	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationRoles.ClassificationRelationTypeID
+LEFT JOIN (SELECT ClassificationRelationTypeId, Name FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationRelationTypeLanguage
+	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationRoles.ClassificationRelationTypeID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationRoles.CreatorID
+	ON Creator.UserId = ClassificationRoles.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationRoles.ModifierID
-WHERE ClassificationRoles.ClassificationID = @ClassificationID
+	ON Modifier.UserId = ClassificationRoles.ModifierID
+WHERE ClassificationRoles.ClassificationId = @ClassificationID
 ORDER BY ISNULL(UserRoleLanguage.Name,ISNULL(DefaultRoleLanguage.Name,'No name for this role'));
 
 
@@ -144,53 +144,53 @@ SELECT ClassificationUsers.UserID
 FROM ClassificationUsers 
 JOIN Persons
 	ON Persons.Userid = ClassificationUsers.UserID
-LEFT JOIN (SELECT ClassificationRelationTypeID, Name FROM ClassificationRelationTypeLanguages WHERE LanguageID = @LanguageID) UserClassificationRelationTypeLanguage
-	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationUsers.ClassificationRelationTypeID
-LEFT JOIN (SELECT ClassificationRelationTypeID, Name FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationRelationTypeLanguage
-	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationUsers.ClassificationRelationTypeID
-LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages WHERE LanguageID = @LanguageID) OrganizationUserLanguage
-	ON OrganizationUserLanguage.OrganizationID = Persons.DefaultOrganizationID
-LEFT JOIN (SELECT OrganizationID, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) OrganizationDefaultLanguage
-	ON OrganizationDefaultLanguage.OrganizationID = Persons.DefaultOrganizationID
+LEFT JOIN (SELECT ClassificationRelationTypeId, Name FROM ClassificationRelationTypeLanguages WHERE LanguageId = @LanguageID) UserClassificationRelationTypeLanguage
+	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationUsers.ClassificationRelationTypeID
+LEFT JOIN (SELECT ClassificationRelationTypeId, Name FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationRelationTypeLanguage
+	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationUsers.ClassificationRelationTypeID
+LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages WHERE LanguageId = @LanguageID) OrganizationUserLanguage
+	ON OrganizationUserLanguage.OrganizationId = Persons.DefaultOrganizationID
+LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) OrganizationDefaultLanguage
+	ON OrganizationDefaultLanguage.OrganizationId = Persons.DefaultOrganizationID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationUsers.CreatorID
+	ON Creator.UserId = ClassificationUsers.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationUsers.ModifierID
-WHERE ClassificationUsers.ClassificationID = @ClassificationID
+	ON Modifier.UserId = ClassificationUsers.ModifierID
+WHERE ClassificationUsers.ClassificationId = @ClassificationID
 ORDER BY Persons.FirstName, Persons.LastName	, ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,'No name for this organization')) ;
 
 
 
 
 
-WITH ClassificationValueHierarchy (ClassificationValueID, Path)
+WITH ClassificationValueHierarchy (ClassificationValueId, Path)
 AS
 (
 	SELECT 
 		ClassificationValues.ClassificationValueID
-		, CAST(ClassificationValues.ClassificationValueID AS VARCHAR(255)) AS Path
+		, CAST(ClassificationValues.ClassificationValueId AS VARCHAR(255)) AS Path
 	FROM ClassificationValues 
-	WHERE ClassificationValues.ParentValueID IS NULL
-		AND ClassificationValues.ClassificationID = @ClassificationID
+	WHERE ClassificationValues.ParentValueId IS NULL
+		AND ClassificationValues.ClassificationId = @ClassificationID
 
    UNION ALL
 	SELECT 
 		ClassificationValueNextLevel.ClassificationValueID
-		, CAST(ClassificationValueBaseLevel.Path + '.' + CAST(ClassificationValueNextLevel.ClassificationValueID AS VARCHAR(255)) AS VARCHAR(255))
+		, CAST(ClassificationValueBaseLevel.Path + '.' + CAST(ClassificationValueNextLevel.ClassificationValueId AS VARCHAR(255)) AS VARCHAR(255))
 
 	FROM ClassificationValues ClassificationValueNextLevel
 	JOIN ClassificationValueHierarchy ClassificationValueBaseLevel
-		ON ClassificationValueBaseLevel.ClassificationValueID = ClassificationValueNextLevel.ParentValueID
-	WHERE ClassificationValueNextLevel.ClassificationID = @ClassificationID
+		ON ClassificationValueBaseLevel.ClassificationValueId = ClassificationValueNextLevel.ParentValueID
+	WHERE ClassificationValueNextLevel.ClassificationId = @ClassificationID
 )
 -- Statement using the CTE
 SELECT  TOP (@Top)  ClassificationValueHierarchy.ClassificationValueID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
 	, Path
 FROM   ClassificationValueHierarchy
-LEFT JOIN (SELECT ClassificationValueID, Name FROM ClassificationValueLanguages WHERE LanguageID = @LanguageID) UserLanguage
+LEFT JOIN (SELECT ClassificationValueId, Name FROM ClassificationValueLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.ClassificationValueID= ClassificationValueHierarchy.ClassificationValueID
-LEFT JOIN (SELECT ClassificationValueID, Name FROM ClassificationValueLanguages JOIN Settings ON ClassificationValueLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
-	ON DefaultLanguage.ClassificationValueID = ClassificationValueHierarchy.ClassificationValueID
+LEFT JOIN (SELECT ClassificationValueId, Name FROM ClassificationValueLanguages JOIN Settings ON ClassificationValueLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ClassificationValueId = ClassificationValueHierarchy.ClassificationValueID
 ORDER BY Path;
 END;

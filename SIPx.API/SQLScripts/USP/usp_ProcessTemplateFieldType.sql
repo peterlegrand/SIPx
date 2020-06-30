@@ -1,34 +1,34 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldType] (@UserID nvarchar(450), @ProcessTemplateFieldTypeID int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldType] (@UserId nvarchar(450), @ProcessTemplateFieldTypeId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT ProcessTemplateFieldTypes.ProcessTemplateFieldTypeID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT ProcessTemplateFieldTypes.ProcessTemplateFieldTypeId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
 	, ISNULL(UIMenuNameCustom.Customization,UIMenuName.Name) MenuName
 	, ISNULL(UIMouseOverCustom.Customization,UIMouseOver.Name) MouseOver
 FROM ProcessTemplateFieldTypes
 JOIN UITermLanguages UIName
-	ON UIName.UITermID = ProcessTemplateFieldTypes.NameTermID
+	ON UIName.UITermId = ProcessTemplateFieldTypes.NameTermID
 JOIN UITermLanguages UIDescription
-	ON UIDescription.UITermID = ProcessTemplateFieldTypes.NameTermID
+	ON UIDescription.UITermId = ProcessTemplateFieldTypes.NameTermID
 JOIN UITermLanguages UIMenuName
-	ON UIMEnuName.UITermID = ProcessTemplateFieldTypes.NameTermID
+	ON UIMEnuName.UITermId = ProcessTemplateFieldTypes.NameTermID
 JOIN UITermLanguages UIMouseOver
-	ON UIMouseOver.UITermID = ProcessTemplateFieldTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
-	ON UINameCustom.UITermID = ProcessTemplateFieldTypes.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDescriptionCustom
-	ON UIDescriptionCustom.UITermID = ProcessTemplateFieldTypes.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMenuNameCustom
-	ON UIMenuNameCustom.UITermID = ProcessTemplateFieldTypes.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
-	ON UIMouseOverCustom.UITermID = ProcessTemplateFieldTypes.MouseOverTermID
-WHERE UIName.LanguageID = @LanguageID
-	AND UIDescription.LanguageID = @LanguageID
-	AND UIMenuName.LanguageID = @LanguageID
-	AND UIMouseOver.LanguageID = @LanguageID
+	ON UIMouseOver.UITermId = ProcessTemplateFieldTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = ProcessTemplateFieldTypes.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDescriptionCustom
+	ON UIDescriptionCustom.UITermId = ProcessTemplateFieldTypes.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMenuNameCustom
+	ON UIMenuNameCustom.UITermId = ProcessTemplateFieldTypes.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMouseOverCustom
+	ON UIMouseOverCustom.UITermId = ProcessTemplateFieldTypes.MouseOverTermID
+WHERE UIName.LanguageId = @LanguageID
+	AND UIDescription.LanguageId = @LanguageID
+	AND UIMenuName.LanguageId = @LanguageID
+	AND UIMouseOver.LanguageId = @LanguageID
 	AND ProcessTemplateFieldTypes.ProcessTemplateFieldTypeId = @ProcessTemplateFieldTypeID

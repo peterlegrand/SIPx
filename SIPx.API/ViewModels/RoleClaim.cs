@@ -9,8 +9,8 @@ namespace SIPx.API.ViewModels
     public class RoleClaim
     {
         [Key]
-        public int ClaimID { get; set; }
-        public int ClaimGroupID { get; set; }
+        public int ClaimId { get; set; }
+        public int ClaimGroupId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

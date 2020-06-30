@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationRelationType] (@UserID nvarchar(450), @ClassificationRelationTypeID int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationRelationType] (@UserId nvarchar(450), @ClassificationRelationTypeId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationRelationTypes.ClassificationRelationTypeID
 	, ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserClassificationRelationTypeLanguage.Description,ISNULL(DefaultClassificationRelationTypeLanguage.Description,'No description for this role')) Description
@@ -15,14 +15,14 @@ SELECT ClassificationRelationTypes.ClassificationRelationTypeID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationRelationTypes.ModifiedDate
 FROM ClassificationRelationTypes 
-LEFT JOIN (SELECT ClassificationRelationTypeID, Name, Description, MenuName, MouseOver FROM ClassificationRelationTypeLanguages WHERE LanguageID = @LanguageID) UserClassificationRelationTypeLanguage
-	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationRelationTypes.ClassificationRelationTypeID
-LEFT JOIN (SELECT ClassificationRelationTypeID, Name, Description, MenuName, MouseOver FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultClassificationRelationTypeLanguage
-	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeID = ClassificationRelationTypes.ClassificationRelationTypeID
+LEFT JOIN (SELECT ClassificationRelationTypeId, Name, Description, MenuName, MouseOver FROM ClassificationRelationTypeLanguages WHERE LanguageId = @LanguageID) UserClassificationRelationTypeLanguage
+	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationRelationTypes.ClassificationRelationTypeID
+LEFT JOIN (SELECT ClassificationRelationTypeId, Name, Description, MenuName, MouseOver FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationRelationTypeLanguage
+	ON DefaultClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationRelationTypes.ClassificationRelationTypeID
 JOIN Persons Creator
-	ON Creator.UserID = ClassificationRelationTypes.CreatorID
+	ON Creator.UserId = ClassificationRelationTypes.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = ClassificationRelationTypes.ModifierID
-WHERE ClassificationRelationTypes.ClassificationRelationTypeID = @ClassificationRelationTypeID
+	ON Modifier.UserId = ClassificationRelationTypes.ModifierID
+WHERE ClassificationRelationTypes.ClassificationRelationTypeId = @ClassificationRelationTypeID
 
 

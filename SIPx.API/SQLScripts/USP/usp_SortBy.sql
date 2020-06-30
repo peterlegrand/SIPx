@@ -1,36 +1,36 @@
-CREATE PROCEDURE [dbo].[usp_SortBy] (@UserID nvarchar(450), @SortByID int) 
+CREATE PROCEDURE [dbo].[usp_SortBy] (@UserId nvarchar(450), @SortById int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT SortBys.SortByID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT SortBys.SortById 
 	, ISNULL(UIGroupNameCustom.Customization,UIGroupName.Name) GroupName
 	, ISNULL(UIGroupDescriptionCustom.Customization,UIGroupDescription.Name) GroupDescription
 	, ISNULL(UIGroupMenuNameCustom.Customization,UIGroupMenuName.Name) GroupMenuName
 	, ISNULL(UIGroupMouseOverCustom.Customization,UIGroupMouseOver.Name) GroupMouseOver
 FROM SortBys
 JOIN UITermLanguages UIGroupName
-	ON UIGroupName.UITermID = SortBys.NameTermID
+	ON UIGroupName.UITermId = SortBys.NameTermID
 JOIN UITermLanguages UIGroupDescription
-	ON UIGroupDescription.UITermID = SortBys.NameTermID
+	ON UIGroupDescription.UITermId = SortBys.NameTermID
 JOIN UITermLanguages UIGroupMenuName
-	ON UIGroupMEnuName.UITermID = SortBys.NameTermID
+	ON UIGroupMEnuName.UITermId = SortBys.NameTermID
 JOIN UITermLanguages UIGroupMouseOver
-	ON UIGroupMouseOver.UITermID = SortBys.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupNameCustom
-	ON UIGroupNameCustom.UITermID = SortBys.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupDescriptionCustom
-	ON UIGroupDescriptionCustom.UITermID = SortBys.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupMenuNameCustom
-	ON UIGroupMenuNameCustom.UITermID = SortBys.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIGroupMouseOverCustom
-	ON UIGroupMouseOverCustom.UITermID = SortBys.MouseOverTermID
-WHERE UIGroupName.LanguageID = @LanguageID
-	AND UIGroupDescription.LanguageID = @LanguageID
-	AND UIGroupMenuName.LanguageID = @LanguageID
-	AND UIGroupMouseOver.LanguageID = @LanguageID
-	AND SortBys.SortByID = @SortByID
+	ON UIGroupMouseOver.UITermId = SortBys.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupNameCustom
+	ON UIGroupNameCustom.UITermId = SortBys.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupDescriptionCustom
+	ON UIGroupDescriptionCustom.UITermId = SortBys.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupMenuNameCustom
+	ON UIGroupMenuNameCustom.UITermId = SortBys.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIGroupMouseOverCustom
+	ON UIGroupMouseOverCustom.UITermId = SortBys.MouseOverTermID
+WHERE UIGroupName.LanguageId = @LanguageID
+	AND UIGroupDescription.LanguageId = @LanguageID
+	AND UIGroupMenuName.LanguageId = @LanguageID
+	AND UIGroupMouseOver.LanguageId = @LanguageID
+	AND SortBys.SortById = @SortByID
 
 

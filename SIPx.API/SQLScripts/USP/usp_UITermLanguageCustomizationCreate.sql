@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_UITermLanguageCustomizationCreate] (
-	@UITermID int, 
-	@LanguageID int, 
+	@UITermId int, 
+	@LanguageId int, 
 	@Customization nvarchar(max)) 
 AS 
 INSERT INTO UITermLanguageCustomizations (

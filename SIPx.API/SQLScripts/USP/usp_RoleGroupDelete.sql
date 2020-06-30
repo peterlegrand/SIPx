@@ -1,13 +1,13 @@
 CREATE PROCEDURE [dbo].[usp_RoleGroupDelete] (
-	@RoleGroupID int) 
+	@RoleGroupId int) 
 AS 
 BEGIN TRANSACTION
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM RoleGroups WHERE RoleGroupID = @RoleGroupID;
+SELECT @OldSequence = Sequence FROM RoleGroups WHERE RoleGroupId = @RoleGroupID;
 UPDATE RoleGroups SET Sequence = Sequence - 1 WHERE Sequence > @OldSequence 
 
-DELETE FROM RoleGroupLanguages WHERE RoleGroupID = @RoleGroupID
-DELETE FROM RoleGroups WHERE RoleGroupID = @RoleGroupID
+DELETE FROM RoleGroupLanguages WHERE RoleGroupId = @RoleGroupID
+DELETE FROM RoleGroups WHERE RoleGroupId = @RoleGroupID
 COMMIT TRANSACTION
 
 

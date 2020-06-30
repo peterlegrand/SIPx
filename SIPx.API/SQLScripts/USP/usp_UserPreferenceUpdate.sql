@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_UserPreferenceUpdate] (
-	@UserPreferenceID Int
+	@UserPreferenceId Int
 	, @StringPreference nvarchar(max)
 	, @IntPreference int
 	, @DateTimePreference Datetime
@@ -12,6 +12,6 @@ UPDATE UserPreferences SET
 	, DateTimePreference = @DateTimePreference
 	, GuidPreference = @GuidPreference
 	, LocationPreference = @LocationPreference
-WHERE UserPreferences.UserPreferenceID = @UserPreferenceID
+WHERE UserPreferences.UserPreferenceId = @UserPreferenceID
 
 

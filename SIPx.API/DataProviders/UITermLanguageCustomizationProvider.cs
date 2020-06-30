@@ -18,16 +18,16 @@ namespace SIPx.API.DataProviders
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public List<UITermLanguageCustomization> GetUITermLanguageCustomization(string Controller, string Action, int LanguageId)
+        public List<UITermLanguageCustomizationList> GetUITermLanguageCustomization(string Controller, string Action, string UserId)
         {
-            string usp = "usp_MVCUITermLanguageCustomizationsGet @Controller, @Action, @LanguageID";
+            string usp = "usp_MVCUITermLanguageCustomizationsGet @Controller, @Action, @UserId";
             // List<SqlParameter> parameters = new List<SqlParameter> {new SqlParameter ("@Controller" , Controller),
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@Controller", Controller);
             parameters.Add("@Action", Action);
-            parameters.Add("@LanguageID", LanguageId);
-            
-            var x = _sqlDataAccess.LoadData2<UITermLanguageCustomization>(usp, parameters);
+            parameters.Add("@UserId", UserId);
+
+            var x = _sqlDataAccess.LoadData2<UITermLanguageCustomizationList>(usp, parameters);
             return x;
         }
 

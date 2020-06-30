@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_Organizations] (@UserID nvarchar(450), @Top int =1000) 
+CREATE PROCEDURE [dbo].[usp_Organizations] (@UserId nvarchar(450), @Top int =1000) 
 AS 
 BEGIN
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 WITH OrganizationHierarchy (OrganizationID
 	, StatusID
@@ -21,20 +21,20 @@ AS
 		Organizations.OrganizationID
 		, StatusID
 		, OrganizationTypeID
-		, CAST(Organizations.OrganizationID AS VARCHAR(255)) AS Path
+		, CAST(Organizations.OrganizationId AS VARCHAR(255)) AS Path
 		, CreatedDate
 		, CreatorID
 		, ModifierID
 		, ModifiedDate
 	FROM Organizations 
-	WHERE Organizations.ParentOrganizationID IS NULL
+	WHERE Organizations.ParentOrganizationId IS NULL
 
    UNION ALL
 	SELECT 
 		OrganizationNextLevel.OrganizationID
 		, OrganizationNextLevel.StatusID
 		, OrganizationNextLevel.OrganizationTypeID
-		, CAST(OrganizationBaseLevel.Path + '.' + CAST(OrganizationNextLevel.OrganizationID AS VARCHAR(255)) AS VARCHAR(255))
+		, CAST(OrganizationBaseLevel.Path + '.' + CAST(OrganizationNextLevel.OrganizationId AS VARCHAR(255)) AS VARCHAR(255))
 	, OrganizationNextLevel.CreatedDate
 	, OrganizationNextLevel.CreatorID
 	, OrganizationNextLevel.ModifierID
@@ -42,7 +42,7 @@ AS
 
 	FROM Organizations OrganizationNextLevel
 	JOIN OrganizationHierarchy OrganizationBaseLevel
-		ON OrganizationBaseLevel.OrganizationID = OrganizationNextLevel.ParentOrganizationID
+		ON OrganizationBaseLevel.OrganizationId = OrganizationNextLevel.ParentOrganizationID
 	)
 -- Statement using the CTE
 SELECT TOP (@Top) 
@@ -63,25 +63,25 @@ SELECT TOP (@Top)
 	, OrganizationHierarchy.ModifiedDate
 FROM   OrganizationHierarchy
 JOIN Statuses
-	ON Statuses.StatusID = OrganizationHierarchy.StatusID
+	ON Statuses.StatusId = OrganizationHierarchy.StatusID
 JOIN OrganizationTypes
-	ON OrganizationHierarchy.OrganizationTypeID = OrganizationTypes.OrganizationTypeID
-LEFT JOIN (SELECT OrganizationID, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageID = @LanguageID) UserLanguage
+	ON OrganizationHierarchy.OrganizationTypeId = OrganizationTypes.OrganizationTypeID
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.OrganizationID= OrganizationHierarchy.OrganizationID
-LEFT JOIN (SELECT OrganizationID, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultLanguage
-	ON DefaultLanguage.OrganizationID = OrganizationHierarchy.OrganizationID
-LEFT JOIN (SELECT OrganizationTypeID, Name FROM OrganizationTypeLanguages WHERE LanguageID = @LanguageID) UserTypeLanguage
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.OrganizationId = OrganizationHierarchy.OrganizationID
+LEFT JOIN (SELECT OrganizationTypeId, Name FROM OrganizationTypeLanguages WHERE LanguageId = @LanguageID) UserTypeLanguage
 	ON UserTypeLanguage.OrganizationTypeID= OrganizationHierarchy.OrganizationTypeID
-LEFT JOIN (SELECT OrganizationTypeID, Name FROM OrganizationTypeLanguages JOIN Settings ON OrganizationTypeLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultTypeLanguage
+LEFT JOIN (SELECT OrganizationTypeId, Name FROM OrganizationTypeLanguages JOIN Settings ON OrganizationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultTypeLanguage
 	ON DefaultTypeLanguage.OrganizationTypeID= OrganizationHierarchy.OrganizationTypeID
 JOIN UITermLanguages StatusName
-	ON Statuses.NameTermID = StatusName.UITermID  
-LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageID = @LanguageID)  UserStatusName
-	ON Statuses.NameTermID = UserStatusName.UITermID  
+	ON Statuses.NameTermId = StatusName.UITermId  
+LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserStatusName
+	ON Statuses.NameTermId = UserStatusName.UITermId  
 JOIN Persons Creator
-	ON Creator.UserID = OrganizationHierarchy.CreatorID
+	ON Creator.UserId = OrganizationHierarchy.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = OrganizationHierarchy.ModifierID
-WHERE StatusName.LanguageID = @LanguageID
+	ON Modifier.UserId = OrganizationHierarchy.ModifierID
+WHERE StatusName.LanguageId = @LanguageID
 ORDER BY Path;
 END;

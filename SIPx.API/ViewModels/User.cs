@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class User
     {
         [Key]
-        public string UserID { get; set; }
+        public string UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string UserPhoneNumber { get; set; }
@@ -19,7 +19,7 @@ namespace SIPx.API.ViewModels
         public bool LockOutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string SecurityLevelName { get; set; }
-        public int PersonID { get; set; }
+        public int PersonId { get; set; }
         public string Salutation { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

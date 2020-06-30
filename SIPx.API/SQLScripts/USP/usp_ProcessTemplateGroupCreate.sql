@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroupCreate] (
-	@Sequence int	, @LanguageID int
+	@Sequence int	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 

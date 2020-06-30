@@ -1,15 +1,15 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroupUpdate] (
-	@ProcessTemplateGroupLanguageID int
-	, @ProcessTemplateGroupID int
+	@ProcessTemplateGroupLanguageId int
+	, @ProcessTemplateGroupId int
 	, @Sequence int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM ProcessTemplateGroups WHERE ProcessTemplateGroupID = @ProcessTemplateGroupID;
+SELECT @OldSequence = Sequence FROM ProcessTemplateGroups WHERE ProcessTemplateGroupId = @ProcessTemplateGroupID;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
@@ -22,16 +22,16 @@ END
 
 UPDATE ProcessTemplateGroups SET 
 	 Sequence = @Sequence
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ProcessTemplateGroupID = @ProcessTemplateGroupID
+WHERE ProcessTemplateGroupId = @ProcessTemplateGroupID
 
 UPDATE  ProcessTemplateGroupLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateGroupLanguageID= @ProcessTemplateGroupLanguageID
 

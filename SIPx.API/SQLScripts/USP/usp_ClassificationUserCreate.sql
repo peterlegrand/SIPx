@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationUserCreate] (
-	@UserOfClassificationID nvarchar(450)
-	, @ClassificationID int 
-	, @ClassificationRelationTypeID int
-	, @UserID nvarchar(450)) 
+	@UserOfClassificationId nvarchar(450)
+	, @ClassificationId int 
+	, @ClassificationRelationTypeId int
+	, @UserId nvarchar(450)) 
 AS 
 INSERT INTO ClassificationUsers (
 	UserID

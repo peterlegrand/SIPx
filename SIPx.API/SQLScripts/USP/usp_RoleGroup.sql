@@ -1,10 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_RoleGroup] (@UserID nvarchar(450), @RoleGroupID int) 
+CREATE PROCEDURE [dbo].[usp_RoleGroup] (@UserId nvarchar(450), @RoleGroupId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT RoleGroups.RoleGroupID
 	, RoleGroups.Sequence
 	, ISNULL(UserGroupLanguage.Name,ISNULL(DefaultGroupLanguage.Name,'No name for this content type group')) Name
@@ -16,13 +16,13 @@ SELECT RoleGroups.RoleGroupID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, RoleGroups.ModifiedDate
 FROM RoleGroups
-LEFT JOIN (SELECT RoleGroupID, Name, Description, MenuName, MouseOver FROM RoleGroupLanguages WHERE LanguageID = @LanguageID) UserGroupLanguage
-	ON UserGroupLanguage.RoleGroupID  = RoleGroups.RoleGroupID
-LEFT JOIN (SELECT RoleGroupId, Name, Description, MenuName, MouseOver FROM RoleGroupLanguages JOIN Settings ON RoleGroupLanguages.LanguageID = Settings.IntValue WHERE Settings.SettingID = 1) DefaultGroupLanguage
-	ON DefaultGroupLanguage.RoleGroupID = RoleGroups.RoleGroupID
+LEFT JOIN (SELECT RoleGroupId, Name, Description, MenuName, MouseOver FROM RoleGroupLanguages WHERE LanguageId = @LanguageID) UserGroupLanguage
+	ON UserGroupLanguage.RoleGroupId  = RoleGroups.RoleGroupID
+LEFT JOIN (SELECT RoleGroupId, Name, Description, MenuName, MouseOver FROM RoleGroupLanguages JOIN Settings ON RoleGroupLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultGroupLanguage
+	ON DefaultGroupLanguage.RoleGroupId = RoleGroups.RoleGroupID
 JOIN Persons Creator
-	ON Creator.UserID = RoleGroups.CreatorID
+	ON Creator.UserId = RoleGroups.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserID = RoleGroups.ModifierID
-WHERE RoleGroups.RoleGroupID = @RoleGroupID
+	ON Modifier.UserId = RoleGroups.ModifierID
+WHERE RoleGroups.RoleGroupId = @RoleGroupID
 

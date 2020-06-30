@@ -1,34 +1,34 @@
-CREATE PROCEDURE [dbo].[usp_ContentTypeClassificationStatus] (@UserID nvarchar(450), @ContentTypeClassificationStatusID int) 
+CREATE PROCEDURE [dbo].[usp_ContentTypeClassificationStatus] (@UserId nvarchar(450), @ContentTypeClassificationStatusId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT ContentTypeClassificationStatuses.ContentTypeClassificationStatusID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT ContentTypeClassificationStatuses.ContentTypeClassificationStatusId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
 	, ISNULL(UIMenuNameCustom.Customization,UIMenuName.Name) MenuName
 	, ISNULL(UIMouseOverCustom.Customization,UIMouseOver.Name) MouseOver
 FROM ContentTypeClassificationStatuses 
 JOIN UITermLanguages UIName
-	ON UIName.UITermID = ContentTypeClassificationStatuses.NameTermID
+	ON UIName.UITermId = ContentTypeClassificationStatuses.NameTermID
 JOIN UITermLanguages UIDescription
-	ON UIDescription.UITermID = ContentTypeClassificationStatuses.NameTermID
+	ON UIDescription.UITermId = ContentTypeClassificationStatuses.NameTermID
 JOIN UITermLanguages UIMenuName
-	ON UIMEnuName.UITermID = ContentTypeClassificationStatuses.NameTermID
+	ON UIMEnuName.UITermId = ContentTypeClassificationStatuses.NameTermID
 JOIN UITermLanguages UIMouseOver
-	ON UIMouseOver.UITermID = ContentTypeClassificationStatuses.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
-	ON UINameCustom.UITermID = ContentTypeClassificationStatuses.NameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIDescriptionCustom
-	ON UIDescriptionCustom.UITermID = ContentTypeClassificationStatuses.DescriptionTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMenuNameCustom
-	ON UIMenuNameCustom.UITermID = ContentTypeClassificationStatuses.MenuNameTermID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIMouseOverCustom
-	ON UIMouseOverCustom.UITermID = ContentTypeClassificationStatuses.MouseOverTermID
-WHERE UIName.LanguageID = @LanguageID
-	AND UIDescription.LanguageID = @LanguageID
-	AND UIMenuName.LanguageID = @LanguageID
-	AND UIMouseOver.LanguageID = @LanguageID
-	AND ContentTypeClassificationStatuses.ContentTypeClassificationStatusID = @ContentTypeClassificationStatusID
+	ON UIMouseOver.UITermId = ContentTypeClassificationStatuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = ContentTypeClassificationStatuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDescriptionCustom
+	ON UIDescriptionCustom.UITermId = ContentTypeClassificationStatuses.DescriptionTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMenuNameCustom
+	ON UIMenuNameCustom.UITermId = ContentTypeClassificationStatuses.MenuNameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMouseOverCustom
+	ON UIMouseOverCustom.UITermId = ContentTypeClassificationStatuses.MouseOverTermID
+WHERE UIName.LanguageId = @LanguageID
+	AND UIDescription.LanguageId = @LanguageID
+	AND UIMenuName.LanguageId = @LanguageID
+	AND UIMouseOver.LanguageId = @LanguageID
+	AND ContentTypeClassificationStatuses.ContentTypeClassificationStatusId = @ContentTypeClassificationStatusID

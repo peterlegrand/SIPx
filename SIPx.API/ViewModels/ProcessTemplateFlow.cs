@@ -9,13 +9,13 @@ namespace SIPx.API.ViewModels
     public class ProcessTemplateFlow
     {
         [Key]
-        public int ProcessTemplateFlowID { get; set; }
+        public int ProcessTemplateFlowId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public int ProcessTemplateFromStageID { get; set; }
-        public int ProcessTemplatetoStageID { get; set; }
+        public int ProcessTemplateFromStageId { get; set; }
+        public int ProcessTemplatetoStageId { get; set; }
         public string Creator { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Modifier { get; set; }

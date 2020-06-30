@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class ClassificationValueRole
     {
         [Key]
-        public String RoleID { get; set; }
+        public String RoleId { get; set; }
         public string RoleName { get; set; }
         public string RelationTypeName { get; set; }
         public string Creator { get; set; }

@@ -10,7 +10,7 @@
         string Description { get; set; }
         bool InDropDown { get; set; }
         bool InMenu { get; set; }
-        int LanguageID { get; set; }
+        int LanguageId { get; set; }
         string MenuName { get; set; }
         string MouseOver { get; set; }
         string Name { get; set; }

@@ -1,13 +1,13 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageCreate] (
-	@ProcessTemplateID int
-	, @ProcessTemplateTypeID int
+	@ProcessTemplateId int
+	, @ProcessTemplateTypeId int
 	, @IsEndStage bit
-	, @LanguageID int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 

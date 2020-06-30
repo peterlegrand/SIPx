@@ -8,11 +8,11 @@ namespace SIPx.Shared
     public class PersonRelationCreatePost : IPersonRelationCreatePost
     {
         [Key]
-        public int FromPersonID { get; set; }
-        public int ToPersonID { get; set; }
+        public int FromPersonId { get; set; }
+        public int ToPersonId { get; set; }
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTill { get; set; }
-        public int PersonRelationTypeID { get; set; }
+        public int PersonRelationTypeId { get; set; }
         public string UserId { get; set; }
 
     }

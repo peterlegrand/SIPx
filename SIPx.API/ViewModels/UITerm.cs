@@ -9,7 +9,7 @@ namespace SIPx.API.ViewModels
     public class UITerm
     {
         [Key]
-        public int UITermID { get; set; }
+        public int UITermId { get; set; }
         public string InternalName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

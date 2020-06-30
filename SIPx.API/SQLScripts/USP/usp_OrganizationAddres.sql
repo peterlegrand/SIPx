@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationAddres] (@UserID nvarchar(450), @OrganizationAddressID int) 
+CREATE PROCEDURE [dbo].[usp_OrganizationAddres] (@UserId nvarchar(450), @OrganizationAddressId int) 
 AS 
-DECLARE @LanguageID int;
-SELECT @LanguageID = IntPreference
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
-	AND UserPreferences.PreferenceTypeID = 1 ;
-SELECT OrganizationAddresses.OrganizationAddressID 
+	AND UserPreferences.PreferenceTypeId = 1 ;
+SELECT OrganizationAddresses.OrganizationAddressId 
 	, ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) AddressTypeName
 	, OrganizationAddresses.AttnName
 	, OrganizationAddresses.Address1
@@ -22,17 +22,17 @@ SELECT OrganizationAddresses.OrganizationAddressID
 
 FROM OrganizationAddresses
 JOIN AddressTypes
-	ON OrganizationAddresses.AddressTypeID = AddressTypes.AddressTypeID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UIAddressTypeNameCustom
-	ON UIAddressTypeNameCustom.UITermID = AddressTypes.NameTermID
+	ON OrganizationAddresses.AddressTypeId = AddressTypes.AddressTypeID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIAddressTypeNameCustom
+	ON UIAddressTypeNameCustom.UITermId = AddressTypes.NameTermID
 JOIN UITermLanguages UIAddressTypeName
-	ON UIAddressTypeName.UITermID = AddressTypes.NameTermID
+	ON UIAddressTypeName.UITermId = AddressTypes.NameTermID
 JOIN Countries	
-	ON OrganizationAddresses.CountryID = Countries.CountryID
-LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UICountryCustom
-	ON UICountryCustom.UITermID = Countries.NameTermID
+	ON OrganizationAddresses.CountryId = Countries.CountryID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UICountryCustom
+	ON UICountryCustom.UITermId = Countries.NameTermID
 JOIN UITermLanguages UICountryName
-	ON UICountryName.UITermID = Countries.NameTermID
-WHERE UICountryName.LanguageID = @LanguageID
-	AND UIAddressTypeName.LanguageID = @LanguageID
+	ON UICountryName.UITermId = Countries.NameTermID
+WHERE UICountryName.LanguageId = @LanguageID
+	AND UIAddressTypeName.LanguageId = @LanguageID
 		AND OrganizationAddresses.OrganizationAddressID= @OrganizationAddressID

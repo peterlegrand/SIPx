@@ -1,3 +1,3 @@
-CREATE PROCEDURE [dbo].[usp_UITermLanguageCustomizationDelete] (@UITermLanguageID int) 
+CREATE PROCEDURE [dbo].[usp_UITermLanguageCustomizationDelete] (@UITermLanguageId int) 
 AS 
-DELETE FROM UITermLanguageCustomizations WHERE UITermLanguageID = @UITermLanguageID
+DELETE FROM UITermLanguageCustomizations WHERE UITermLanguageId = @UITermLanguageID

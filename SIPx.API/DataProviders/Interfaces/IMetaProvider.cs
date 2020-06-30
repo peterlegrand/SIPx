@@ -32,7 +32,7 @@ namespace SIPx.DataAccess
         Task<List<MetaListUITerm>> UITerms();
         Task<List<MetaListValueUpdateType>> ValueUpdateTypes();
         Task<string> GetDefaultUser();
-        Task<List<MetaListClassification>> Classifications(string UserID);
-        Task<List<MetaListClassificationLevel>> ClassificationLevels(string UserID, int ClassificationID);
+        Task<List<MetaListClassification>> Classifications(string UserId);
+        Task<List<MetaListClassificationLevel>> ClassificationLevels(string UserId, int ClassificationId);
     }
 }

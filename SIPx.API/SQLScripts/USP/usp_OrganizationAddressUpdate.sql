@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_OrganizationAddressUpdate] (
-	@OrganizationAddressID  int
-	, @AddressTypeID int
+	@OrganizationAddressId  int
+	, @AddressTypeId int
 	, @AttnName nvarchar(50)
 	, @Address1 nvarchar(100)
 	, @Address2 nvarchar(100)
@@ -10,14 +10,14 @@ CREATE PROCEDURE [dbo].[usp_OrganizationAddressUpdate] (
 	, @City nvarchar(50)
 	, @PostalCode nvarchar(50)
 	, @PostalCodeExt nvarchar(50)
-	, @CountryID int
+	, @CountryId int
 	, @ProvinceState nvarchar(50)
 	, @County nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 UPDATE OrganizationAddresses SET
-	 AddressTypeID  = @AddressTypeID 
+	 AddressTypeId  = @AddressTypeId 
 	, AttnName = @AttnName 
 	, Address1 = @Address1 
 	, Address2 = @Address2
@@ -27,10 +27,10 @@ UPDATE OrganizationAddresses SET
 	, City = @City 
 	, PostalCode = @PostalCode 
 	, PostalCodeExt = @PostalCodeExt 
-	, CountryID = @CountryID
+	, CountryId = @CountryID
 	, ProvinceState = @ProvinceState 
 	, County = @County 
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
-	WHERE OrganizationAddressID = @OrganizationAddressID 
+	WHERE OrganizationAddressId = @OrganizationAddressId 
 	

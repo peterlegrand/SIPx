@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationValueUpdate] (
-	@ClassificationValueLanguageID int
-	, @ClassificationValueID int
-	, @ParentValueID int
+	@ClassificationValueLanguageId int
+	, @ClassificationValueId int
+	, @ParentValueId int
 	, @DateFrom Datetime
 	, @DateTo Datetime
 	, @Location Geography
@@ -15,17 +15,17 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueUpdate] (
 	, @HeaderName nvarchar(50)
 	, @HeaderDescription nvarchar(max)
 	, @TopicName nvarchar(50)
-	, @UserID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
 UPDATE ClassificationValues SET 
-	ParentValueID = @ParentValueID
+	ParentValueId = @ParentValueID
 	, DateFrom = @DateFrom
 	, DateTo = @DateTo
 	, Location = @Location
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
-WHERE ClassificationValueID = @ClassificationValueID
+WHERE ClassificationValueId = @ClassificationValueID
 
 UPDATE  ClassificationValueLanguages SET 
 	Name = @Name
@@ -38,7 +38,7 @@ UPDATE  ClassificationValueLanguages SET
 	, HeaderName = @HeaderName 
 	, HeaderDescription = @HeaderDescription
 	, TopicName = @TopicName 
-	, ModifierID = @UserID
+	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ClassificationValueLanguageID= @ClassificationValueLanguageID
 

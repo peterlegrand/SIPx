@@ -1,6 +1,6 @@
 ﻿@model List<ClassificationViewGet>
 @{
-    var Term = (List<UITermLanguageCustomization>)ViewBag.UITerms;
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
 
 }
@@ -25,19 +25,19 @@
 {@x.Name}
 <script id="Levels" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+        <a class="nav-link text-dark font-weight-bold" href="/Classification/Edit/${ClassificationId}">${Name}</a>
 
     </div>
 </script>
 <script id="Values" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+        <a class="nav-link text-dark font-weight-bold" href="~/Classification/Index/${ClassificationId}">${Name}</a>
 
     </div>
 </script>
 <script id="Pages" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Classification/Index/${ClassificationId}">${Name}</a>
+        <a class="nav-link text-dark font-weight-bold" href="~/Classification/Index/${ClassificationId}">${Name}</a>
 
     </div>
 </script>

@@ -8,6 +8,6 @@ namespace SIPx.Shared
     {
         public string Controller { get; set; }
         public string Action { get; set; }
-        public int LanguageID { get; set; }
+        public int LanguageId { get; set; }
     }
 }

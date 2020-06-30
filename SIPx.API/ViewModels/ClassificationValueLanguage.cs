@@ -9,8 +9,8 @@ namespace SIPx.API.ViewModels
     public class ClassificationValueLanguage
     {
         [Key]
-        public int ClassificationValueLanguageID { get; set; }
-        public int LanguageID { get; set; }
+        public int ClassificationValueLanguageId { get; set; }
+        public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
