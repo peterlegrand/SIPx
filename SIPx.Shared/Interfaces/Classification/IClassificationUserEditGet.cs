@@ -13,7 +13,7 @@ namespace SIPx.Shared
         string Creator { get; set; }
         DateTime ModifiedDate { get; set; }
         string Modifier { get; set; }
-        List<RoleList> Statuses { get; set; }
+        List<UserList> Users { get; set; }
         string UserId { get; set; }
     }
 }

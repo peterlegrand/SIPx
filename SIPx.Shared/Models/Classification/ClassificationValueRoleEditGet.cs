@@ -17,7 +17,7 @@ namespace SIPx.Shared
         public string Modifier { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<RoleList> Statuses { get; set; }
+        public List<RoleList> Roles { get; set; }
         public List<ClassificationRelationTypeList> ClassificationRelationTypes { get; set; }
 
     }

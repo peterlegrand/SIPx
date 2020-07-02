@@ -14,6 +14,6 @@ namespace SIPx.Shared
         DateTime ModifiedDate { get; set; }
         string Modifier { get; set; }
         string RoleId { get; set; }
-        List<RoleList> Statuses { get; set; }
+        List<RoleList> Roles { get; set; }
     }
 }

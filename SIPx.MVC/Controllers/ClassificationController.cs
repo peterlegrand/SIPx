@@ -32,14 +32,5 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
-        [HttpGet]
-        public async Task<IActionResult> LevelEdit(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ClassificationLevelEditGet>($"{_baseUrl}api/Classification/LevelEdit/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Classification/LevelEdit", token);
-            ViewBag.UITerms = x;
-            return View(response);
-        }
     }
 }

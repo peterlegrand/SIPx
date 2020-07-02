@@ -38,5 +38,8 @@ namespace SIPx.Shared
         public List<int> Sequences { get; set; }
         public List<PageSectionTypeList> PageSectionTypes { get; set; }
         public List<PageSectionDataTypeList> PageSectionDataTypes { get; set; }
+        public List<int> OneTwoColumnsSource { get; set; }
+        public List<ContentTypeList> ContentTypes { get; set; }
+        public List<SortByList> SortBys { get; set; }
     }
 }
