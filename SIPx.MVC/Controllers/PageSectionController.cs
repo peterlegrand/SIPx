@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PageSectionEditGet>>($"{_baseUrl}api/PageSection",token);
+            var response = await client.GetProtectedAsync<List<PageSectionUpdateGet>>($"{_baseUrl}api/PageSection",token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/PageSection/Index", token);
             ViewBag.UITerms = x;
             return View(response);
@@ -28,7 +28,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<PageSectionEditGet>($"{_baseUrl}api/PageSection/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<PageSectionUpdateGet>($"{_baseUrl}api/PageSection/Edit/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/PageSection/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

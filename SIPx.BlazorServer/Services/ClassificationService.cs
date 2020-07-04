@@ -19,7 +19,7 @@ namespace SIPx.BlazorServer.Services
         //    _httpClient = httpClient;
         //}
 
-        public Task<IEnumerable<ClassificationViewGet>> getclassifications()
+        public Task<IEnumerable<ClassificationIndexGet>> getclassifications()
         {
             throw new NotImplementedException();
         }

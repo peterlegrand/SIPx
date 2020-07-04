@@ -18,10 +18,10 @@ namespace SIPx.Shared
         DateTime ModifiedDate { get; set; }
         string Modifier { get; set; }
         string MouseOver { get; set; }
-        string ParentValueName { get; set; }
         string Name { get; set; }
         string PageDescription { get; set; }
         string PageName { get; set; }
+        string ParentValueName { get; set; }
         string TopicName { get; set; }
     }
 }

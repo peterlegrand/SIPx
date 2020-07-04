@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ClassificationRoleEditGet>>($"{_baseUrl}api/ClassificationRelationRole/Index" + id,token);
+            var response = await client.GetProtectedAsync<List<ClassificationRoleUpdateGet>>($"{_baseUrl}api/ClassificationRelationRole/Index" + id,token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationRelationRole/Index", token);
             ViewBag.UITerms = x;
             return View(response);
@@ -27,7 +27,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ClassificationRoleEditGet>($"{_baseUrl}api/ClassificationRole/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<ClassificationRoleUpdateGet>($"{_baseUrl}api/ClassificationRole/Edit/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationRelationRole/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

@@ -5,7 +5,6 @@
         int ClassificationId { get; set; }
         int ClassificationPageId { get; set; }
         int ContentTypeId { get; set; }
-        string UserId { get; set; }
         string Description { get; set; }
         bool HasPaging { get; set; }
         int LanguageId { get; set; }
@@ -24,5 +23,6 @@
         int SortById { get; set; }
         string TitleDescription { get; set; }
         string TitleName { get; set; }
+        string UserId { get; set; }
     }
 }

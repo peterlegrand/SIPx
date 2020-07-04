@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ProcessTemplateFlowConditionEditGet>>($"{_baseUrl}api/ProcessTemplateFlowCondition",token);
+            var response = await client.GetProtectedAsync<List<ProcessTemplateFlowConditionUpdateGet>>($"{_baseUrl}api/ProcessTemplateFlowCondition",token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ProcessTemplateFlowCondition/Index", token);
             ViewBag.UITerms = x;
             return View(response);
@@ -28,7 +28,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ProcessTemplateFlowConditionEditGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<ProcessTemplateFlowConditionUpdateGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Edit/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ProcessTemplateFlowCondition/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

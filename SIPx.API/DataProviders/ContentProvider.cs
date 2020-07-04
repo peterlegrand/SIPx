@@ -66,19 +66,19 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId, ClassificationId = ClassificationId });
             return x;
         }
-        public List<ClassificationViewGet> GetClassifications2(int LanguageId)
+        public List<ClassificationIndexGet> GetClassifications2(int LanguageId)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@LanguageID", LanguageId);
             string usp = "usp_AdminClassficationList @LanguageID";
-            var x = _sqlDataAccess.LoadData2<ClassificationViewGet>(usp, parameters );
+            var x = _sqlDataAccess.LoadData2<ClassificationIndexGet>(usp, parameters );
             return x;
         }
 
-        public Task<ClassificationViewGet> GetClassificationById(int Id, int LanguageId)
+        public Task<ClassificationIndexGet> GetClassificationById(int Id, int LanguageId)
         {
             string usp = "usp_AdminClassficationDetails @classificationId,  @LanguageID";
-            return _sqlDataAccess.LoadSingleRecord<ClassificationViewGet, dynamic>(usp, new { ClassificationId = Id, LanguageId = LanguageId });
+            return _sqlDataAccess.LoadSingleRecord<ClassificationIndexGet, dynamic>(usp, new { ClassificationId = Id, LanguageId = LanguageId });
 
         }
         public bool PostClassification(ClassificationCreatePost Classification)

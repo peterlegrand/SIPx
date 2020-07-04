@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ProcessTemplateStageFieldEditGet>>($"{_baseUrl}api/ProcessTemplateStageField",token);
+            var response = await client.GetProtectedAsync<List<ProcessTemplateStageFieldUpdateGet>>($"{_baseUrl}api/ProcessTemplateStageField",token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ProcessTemplateStageField/Index", token);
             ViewBag.UITerms = x;
             return View(response);
@@ -28,7 +28,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ProcessTemplateStageFieldEditGet>($"{_baseUrl}api/ProcessTemplateStageField/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<ProcessTemplateStageFieldUpdateGet>($"{_baseUrl}api/ProcessTemplateStageField/Edit/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ProcessTemplateStageField/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

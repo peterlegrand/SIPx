@@ -3,7 +3,6 @@
     public interface IClassificationPageCreatePost
     {
         int ClassificationId { get; set; }
-        string UserId { get; set; }
         string Description { get; set; }
         int LanguageId { get; set; }
         string MenuName { get; set; }
@@ -13,5 +12,6 @@
         bool ShowTitleName { get; set; }
         string TitleDescription { get; set; }
         string TitleName { get; set; }
+        string UserId { get; set; }
     }
 }
