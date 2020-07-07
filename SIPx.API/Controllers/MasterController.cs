@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.DataProviders;
 using SIPx.API.Models;
-using SIPx.API.ViewModels;
 using SIPx.DataAccess;
 using SIPx.Shared;
 
@@ -20,7 +19,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class MasterController : ControllerBase
     {
-        private  IClaimCheck _claimCheck;
+        private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 

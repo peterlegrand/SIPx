@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationLanguageUpdateGet 
+    public class ClassificationLevelLanguageIndex 
     {
         [Key]
-        public int ClassificationLanguageId { get; set; }
+        public int ClassificationLevelId { get; set; }
+        public int ClassificationLevelLanguageId { get; set; }
         public int ClassificationId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }

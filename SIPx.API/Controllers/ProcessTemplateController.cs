@@ -9,10 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.DataProviders;
 using SIPx.API.Models;
-using SIPx.API.ViewModels;
-using SIPx.DataAccess;
 using SIPx.Shared;
-
+using SIPx.DataAccess;
 namespace SIPx.API.Controllers
 {
     [Route("api/[controller]")]
@@ -20,7 +18,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateController : ControllerBase
     {
-        private  IClaimCheck _claimCheck;
+        private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 

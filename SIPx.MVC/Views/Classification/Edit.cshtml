@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationEditGet
+@model ClassificationUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification")).TermString;

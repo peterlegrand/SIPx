@@ -10,7 +10,5 @@ namespace SIPx.Shared
         [Key]
         public int ClassificationId { get; set; }
         public string Name { get; set; }
-
-        //  public List<ClassificationValueList> ClassificationValueList { get; set; }
     }
 }

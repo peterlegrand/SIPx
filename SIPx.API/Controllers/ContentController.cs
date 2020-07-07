@@ -23,7 +23,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
         [HttpGet]
-
         public async Task<IActionResult> Get()
         {
 
@@ -77,7 +76,9 @@ namespace SIPx.API.Controllers
                 
                 foreach (var Classification in Set.ClassificationList)
                 {
-                    Classification.ClassificationValueList = await _contentProvider.GetContentCreateListSet2(CurrentUser.Id, Classification.ClassificationId);
+                    //PETER TODO the following line is not working as the classificationlist class is probably the wrong class that only has 2 fields.  It should have also a value field
+
+//                    Classification.ClassificationValueList = await _contentProvider.GetContentCreateListSet2(CurrentUser.Id, Classification.ClassificationId);
                 }
 
                 return Ok(Set);// CurrentUser.LanguageId));

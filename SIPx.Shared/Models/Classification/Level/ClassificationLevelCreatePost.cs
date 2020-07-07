@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationLevelCreatePost : IClassificationLevelCreatePost
+    public class ClassificationLevelCreatePost 
     {
         [Key]
         public int ClassificationId { get; set; }

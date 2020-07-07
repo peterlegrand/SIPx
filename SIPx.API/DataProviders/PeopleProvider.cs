@@ -1,6 +1,6 @@
 ﻿
 using Dapper;
-using SIPx.API.ViewModels;
+using SIPx.Shared;
 //using SIPx.Shared;
 using System;
 using System.Collections.Generic;

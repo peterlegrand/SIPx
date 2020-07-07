@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SIPx.Shared.User
+namespace SIPx.Shared
 {
     public class LoginReturn
     {

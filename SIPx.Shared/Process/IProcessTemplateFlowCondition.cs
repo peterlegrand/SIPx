@@ -2,7 +2,7 @@
 
 namespace SIPx.Shared
 {
-    public interface IProcessTemplateFlowCondition
+    public interface IProcessTemplateFlowConditionOld
     {
         int? ComparisonOperatorId { get; set; }
         int? ProcessTemplateFieldId { get; set; }

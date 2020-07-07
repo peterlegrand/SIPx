@@ -35,10 +35,10 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<List<ProcessTemplateFlowCondition>> NewProcessGetFlowConditionList(int FlowId)
+        public async Task<List<ProcessTemplateFlowConditionOld>> NewProcessGetFlowConditionList(int FlowId)
         {
             string usp = "usp_NewProcessGetFlowConditionList @FlowID";
-            var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowCondition, dynamic>(usp, new { FlowId = FlowId });
+            var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowConditionOld, dynamic>(usp, new { FlowId = FlowId });
             return x;
         }
         public async Task<List<NewProcessFromDB>> NewProcessGet(SipUser User, int ProcessTemplateId)

@@ -2,7 +2,6 @@
 using Dapper;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using SIPx.API.Models;
-using SIPx.API.ViewModels;
 using SIPx.Shared;
 using System;
 using System.Collections.Generic;

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SIPx.Shared;
-using SIPx.Shared.User;
 
 namespace SIPx.MVC.Controllers
 {

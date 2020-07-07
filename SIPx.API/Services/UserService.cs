@@ -89,8 +89,8 @@ namespace SIPx.API.Services
 
             var claims = new[]
             {
-                new Claim("Email", model.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new System.Security.Claims.Claim("Email", model.Email),
+                new System.Security.Claims.Claim(ClaimTypes.NameIdentifier, user.Id),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));

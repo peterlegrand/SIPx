@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SIPx.API.Models;
-using SIPx.API.ViewModels;
+using SIPx.Shared;
 using SIPx.DataAccess;
 
 namespace SIPx.API.Controllers

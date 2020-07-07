@@ -5,7 +5,8 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationRelationTypeLanguageUpdateGet 
+    public class ClassificationRelationTypeLanguageUpdateGet
+    {
         [Key]
         public int ClassificationRelationTypeId { get; set; }
         public int ClassificationRelationTypeLanguageId { get; set; }

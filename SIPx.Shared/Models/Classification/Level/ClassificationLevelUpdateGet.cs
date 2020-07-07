@@ -27,7 +27,7 @@ namespace SIPx.Shared
         public DateTime ModifiedDate { get; set; }
 
         public List<DateLevelList> DateLevels { get; set; }
-        public List<int> Sequences { get; set; }
+        public List<SequenceList> Sequences { get; set; }
 
     }
 }

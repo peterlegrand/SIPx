@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationPageSectionCreatePost : IClassificationPageSectionCreatePost
+    public class ClassificationPageSectionCreatePost 
     {
         [Key]
         public int ClassificationPageId { get; set; }
@@ -29,6 +29,6 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
     }
 }

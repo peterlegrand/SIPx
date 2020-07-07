@@ -9,6 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ClassificationId { get; set; }
+        public int StatusId { get; set; }
         public bool ShowTitleName { get; set; }
         public bool ShowTitleDescription { get; set; }
         public int LanguageId { get; set; }

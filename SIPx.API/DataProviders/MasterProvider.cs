@@ -1,8 +1,6 @@
 ﻿
 using Dapper;
-using SIPx.API.ViewModels;
 using SIPx.Shared;
-//using SIPx.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -21,6 +19,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+        public async Task<LanguageList> GetUserLanguage(string UserId)
+        {
+            string usp = "usp_GetUserLanguage @UserID";
+            var x = await _sqlDataAccess.LoadSingleRecord<LanguageList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public async Task<List<Country>> GetCountries(string UserId)
         {
             string usp = "usp_Countries @UserID";

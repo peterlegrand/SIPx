@@ -13,7 +13,6 @@ using SIPx.API.Classes;
 using SIPx.API.Models;
 using SIPx.DataAccess;
 using SIPx.Shared;
-using SIPx.Shared.Process;
 
 namespace SIPx.API.Controllers
 {
@@ -21,7 +20,7 @@ namespace SIPx.API.Controllers
     [ApiController]
     public class ProcessController : ControllerBase
     {
-        private IClaimCheck _claimCheck;
+        private readonly IClaimCheck _claimCheck;
         private readonly IProcessProvider _processProvider;
         private readonly Microsoft.AspNetCore.Identity.UserManager<SipUser> _userManager;
         private readonly ICheckProvider _checkProvider;
@@ -35,7 +34,6 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("NewProcess")]
-
         public async Task<IActionResult> Get()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -56,10 +54,10 @@ namespace SIPx.API.Controllers
                 List<int> TemplateIDs = await _processProvider.NewProcessGetInitialTemplateList();
                 foreach (var TemplateId in TemplateIDs)
                 {
-                    List<ProcessTemplateFlowCondition> TemplateFlowConditions = await _processProvider.NewProcessGetFlowConditionList(TemplateId);
+                    List<ProcessTemplateFlowConditionOld> TemplateFlowConditions = await _processProvider.NewProcessGetFlowConditionList(TemplateId);
 
                     if (TemplateFlowConditions.Count() > 0)
-                    { SQLWhere = SQLWhere + " AND "; }
+                    { SQLWhere += " AND "; }
                     foreach (var Condition in TemplateFlowConditions)
                     {
                         //Condition types
@@ -78,26 +76,26 @@ namespace SIPx.API.Controllers
                                 switch (Condition.ComparisonOperatorId)
                                 {
                                     case 2:
-                                        SQLWhere = SQLWhere + " = ";
+                                        SQLWhere += " = ";
                                         break;
                                     case 3:
-                                        SQLWhere = SQLWhere + " > ";
+                                        SQLWhere += " > ";
                                         break;
                                     case 4:
-                                        SQLWhere = SQLWhere + " >= ";
+                                        SQLWhere += " >= ";
                                         break;
                                     case 5:
-                                        SQLWhere = SQLWhere + " >= ";
+                                        SQLWhere += " >= ";
                                         break;
                                     case 6:
-                                        SQLWhere = SQLWhere + " <= ";
+                                        SQLWhere += " <= ";
                                         break;
                                     case 7:
-                                        SQLWhere = SQLWhere + " <> ";
+                                        SQLWhere += " <> ";
                                         break;
 
                                 }
-                                SQLWhere = SQLWhere + CurrentUser.SecurityLevelId.ToString();
+                                SQLWhere += CurrentUser.SecurityLevelId.ToString();
                                 SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
                                         " ON Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
                                     " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "a " +
@@ -199,16 +197,16 @@ namespace SIPx.API.Controllers
                                         " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageId ";
                                 break;
                             case 15: //	Open bracket
-                                SQLWhere = SQLWhere + " ( ";
+                                SQLWhere += " ( ";
                                 break;
                             case 16: //	and
-                                SQLWhere = SQLWhere + " AND ";
+                                SQLWhere += " AND ";
                                 break;
                             case 17: //	or
-                                SQLWhere = SQLWhere + " OR ";
+                                SQLWhere += " OR ";
                                 break;
                             case 18: //	Close bracket
-                                SQLWhere = SQLWhere + " ) ";
+                                SQLWhere += " ) ";
                                 break;
                             //	User
                             //	Relation to creator

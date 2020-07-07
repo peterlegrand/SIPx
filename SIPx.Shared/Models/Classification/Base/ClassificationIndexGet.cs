@@ -19,7 +19,7 @@ namespace SIPx.Shared
         public string Creator { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Modifier { get; set; }
-        public string ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
 
     }
 }

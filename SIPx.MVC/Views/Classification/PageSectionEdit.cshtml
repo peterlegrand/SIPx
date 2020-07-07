@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationPageSectionEditGet
+@model ClassificationPageSectionUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification page section")).TermString;

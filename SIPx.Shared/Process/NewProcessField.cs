@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace SIPx.Shared.Process
+namespace SIPx.Shared
 {
     public class NewProcessField
     {

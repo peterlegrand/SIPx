@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationRelationTypeEditGet
+@model ClassificationRelationTypeUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification relation type")).TermString;

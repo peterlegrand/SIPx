@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ProcessTemplateFlowCondition : IProcessTemplateFlowCondition
+    public class ProcessTemplateFlowConditionOld : IProcessTemplateFlowConditionOld
     {
         public int ProcessTemplateFlowId { get; set; }
         [Key]

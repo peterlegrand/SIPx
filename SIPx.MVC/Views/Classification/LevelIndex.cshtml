@@ -1,4 +1,4 @@
-﻿@model List<ClassificationLevelViewGet>
+﻿@model List<ClassificationLevelIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification levels")).TermString;
@@ -9,7 +9,7 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="@Model.ClassificationLevelId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
+        <e-grid-column field="ClassificationLevelId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
         <e-grid-column field="HasDropDown" headerText="@Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString" textAlign="Right" width="5%" type="boolean"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" width="5%" type="string"></e-grid-column>

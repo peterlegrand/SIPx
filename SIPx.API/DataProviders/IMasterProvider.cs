@@ -1,5 +1,4 @@
-﻿using SIPx.API.ViewModels;
-using SIPx.Shared;
+﻿using SIPx.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -35,6 +34,7 @@ namespace SIPx.DataAccess
         Task<List<UITermLanguageCustomization>> GetUITermLanguageCustomizations(string UserId);
         Task<List<UITermLanguage>> GetUITermLanguages(string UserId);
         Task<List<UITerm>> GetUITerms(string UserId);
+        Task<LanguageList> GetUserLanguage(string UserId);
         Task<ValueUpdateType> GetValueUpdateType(string UserId, int ValueUpdateTypeId);
         Task<List<ValueUpdateType>> GetValueUpdateTypes(string UserId);
     }

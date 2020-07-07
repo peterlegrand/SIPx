@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SIPx.Shared
 {
-    public class ClassificationLevelIndexGet : IClassificationLevelIndexGet
+    public class ClassificationLevelIndexGet 
     {
         [Key]
         public int ClassificationLevelId { get; set; }
@@ -11,6 +11,7 @@ namespace SIPx.Shared
         public int ClassificationId { get; set; }
         public int Sequence { get; set; }
         public int DateLevelId { get; set; }
+        public string DateLevelName { get; set; }
         public bool OnTheFly { get; set; }
         public bool Alphabetically { get; set; }
         public bool CanLink { get; set; }

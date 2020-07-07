@@ -20,9 +20,9 @@ namespace SIPx.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private  IUserService _userService;
-        private  UserManager<SipUser> _userManager;
-        private  IConfiguration _configuration;
+        private readonly IUserService _userService;
+        private readonly UserManager<SipUser> _userManager;
+        private readonly IConfiguration _configuration;
 
         public AuthController(IUserService userService, UserManager<SipUser> userManager, IConfiguration configuration )
         {
@@ -60,10 +60,10 @@ namespace SIPx.API.Controllers
                 {
                     var claims = new[]
             {
-                new Claim("Email", model.Email),
+                new System.Security.Claims.Claim("Email", model.Email),
                // new Claim("FirstName", user.FirstName),
                 //new Claim("LastName", user.LastName),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new System.Security.Claims.Claim(ClaimTypes.NameIdentifier, user.Id)
             };
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
                   

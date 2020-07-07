@@ -1,4 +1,4 @@
-﻿using SIPx.API.ViewModels;
+﻿using SIPx.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
