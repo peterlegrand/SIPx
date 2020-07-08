@@ -9,7 +9,9 @@ namespace SIPx.Shared
     {
         [Key]
         public int ClassificationPageId { get; set; }
+        public string ClassificationPageName { get; set; }
         public int ClassificationId { get; set; }
+        public string ClassificationName { get; set; }
         public int Sequence { get; set; }
         public int PageSectionTypeId { get; set; }
         public int PageSectionDataTypeId { get; set; }
@@ -23,6 +25,7 @@ namespace SIPx.Shared
         public int MaxContent { get; set; }
         public bool HasPaging { get; set; }
         public int LanguageId { get; set; }
+        public string LanguageName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

@@ -12,6 +12,7 @@ namespace SIPx.Shared
         public string Title { get; set; }
         public string ContentTypeName { get; set; }
         public string StatusName { get; set; }
+        public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string SecurityLevelName { get; set; }
         public string OrganizationName { get; set; }

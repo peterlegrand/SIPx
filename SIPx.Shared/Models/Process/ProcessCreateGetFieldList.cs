@@ -6,18 +6,16 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class ProcessField
+    public class ProcessCreateGetFieldList
     {
         [Key]
-        public int ProcessFieldId { get; set; }
+        public int ProcessTemplateFieldId { get; set; }
+        public int ProcessTemplateId { get; set; }
         public int? IntValue { get; set; }
         public string StringValue { get; set; }
         public DateTime? DateTimeValue { get; set; }
         public string LocationValue { get; set; }
+        public string FieldStatusId { get; set; }
         public string FieldStatusName { get; set; }
-        public string Creator { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string Modifier { get; set; }
-        public DateTime ModifiedDate { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace SIPx.Shared
         public int ClassificationLevelId { get; set; }
         public int ClassificationLevelLanguageId { get; set; }
         public int ClassificationId { get; set; }
+        public string ClassificationName { get; set; }
+        public int LanguageId { get; set; }
+        public string LanguageName { get; set; }
         public int Sequence { get; set; }
         public int DateLevelId { get; set; }
         public string DateLevelName { get; set; }
@@ -21,9 +24,11 @@ namespace SIPx.Shared
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string Creator { get; set; }
+        public string CreatorName { get; set; }
+        public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string Modifier { get; set; }
+        public string ModifierName { get; set; }
+        public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
     }
 }

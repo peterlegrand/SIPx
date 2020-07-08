@@ -5,19 +5,19 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class UITermLanguageCustomizationUpdateGet 
+    public class ProcessTemplateFieldCreateGet
     {
         [Key]
-        public int UITermLanguageCustomizationId { get; set; }
-        public int UITermId { get; set; }
+        public int ProcessTemplateId { get; set; }
+        public string ProcessTemplateName { get; set; }
+        public int ProcessTemplateFieldTypeId { get; set; }
         public int LanguageId { get; set; }
-        public string Customization { get; set; }
+        public string LanguageName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string Modifier { get; set; }
-        public DateTime ModifiedDate { get; set; }
-
+        public string CreatorId { get; set; }
+        public List<ProcessTemplateFieldList> ProcessTemplateFields { get; set; }
     }
 }
