@@ -11,6 +11,8 @@ namespace SIPx.Shared
         public int RoleGroupId { get; set; }
         public int RoleGroupLanguageId { get; set; }
         public int Sequence { get; set; }
+        public int LanguageId { get; set; }
+        public string LanguageName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

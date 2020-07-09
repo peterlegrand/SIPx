@@ -5,20 +5,19 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PersonRelationTypeIndexGet
+    public class ProcessTemplateFieldIndexGet
     {
         [Key]
-        public int PersonRelationTypeId { get; set; }
-        public int PersonRelationTypeLanguageId { get; set; }
+        public int ProcessTemplateFieldId { get; set; }
+        public int ProcessTemplateFieldLanguageId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
-
+        public int ProcessTemplateFieldTypeId { get; set; }
+        public string ProcessTemplateFieldTypeName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string FromIsAnXOfTo { get; set; }
-        public string ToIsAnXOfFrom { get; set; }
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }

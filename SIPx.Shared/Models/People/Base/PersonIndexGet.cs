@@ -25,6 +25,8 @@ namespace SIPx.Shared
         public DateTime DeceasedDate { get; set; }
         public int DefaultOrganizationId { get; set; }
         public string DefaultOrganizationName { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }

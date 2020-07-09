@@ -5,13 +5,15 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationPageSectionLanguageIndex
+    public class ClassificationPageSectionLanguageIndexGet
     {
         [Key]
         public int ClassificationPageSectionLanguageId { get; set; }
         public int ClassificationPageSectionId { get; set; }
         public int ClassificationPageId { get; set; }
+        public int ClassificationPageName { get; set; }
         public int ClassificationId { get; set; }
+        public string ClassificationName { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string Name { get; set; }
@@ -20,6 +22,12 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
+
+        public string CreatorName { get; set; }
         public string CreatorId { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string ModifierName { get; set; }
+        public string ModifierId { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

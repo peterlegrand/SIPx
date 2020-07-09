@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class ClassificationLevelLanguageCreate 
+    public class ContentTypeLanguageCreateGet
     {
         [Key]
-        public int ClassificationLevelId { get; set; }
-        public int ClassificationId { get; set; }
-        public string ClassificationName { get; set; }
+        public int ContentTypeId { get; set; }
         public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

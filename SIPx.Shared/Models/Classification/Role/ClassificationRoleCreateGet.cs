@@ -5,15 +5,15 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationUserCreateGet
+    public class ClassificationRoleCreateGet
     {
         [Key]
-        public string UserId { get; set; }
+        public string RoleId { get; set; }
         public int ClassificationId { get; set; }
         public string ClassificationName { get; set; }
         public int ClassificationRelationTypeId { get; set; }
         public string CreatorId { get; set; }
-        public List<UserList> Users { get; set; }
+        public List<RoleList> Roles { get; set; }
         public List<ClassificationRelationTypeList> ClassificationRelationTypes { get; set; }
     }
 }

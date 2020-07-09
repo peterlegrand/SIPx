@@ -10,6 +10,9 @@ namespace SIPx.Shared
         [Key]
         public int PersonRelationId { get; set; }
         public int FromPersonFirstId { get; set; }
+        public int LanguageId { get; set; }
+        public string LanguageName { get; set; }
+
         public string FromPersonFirstName { get; set; }
         public string FromPersonLastName { get; set; }
         public string FromOrganizationName { get; set; }
@@ -21,6 +24,8 @@ namespace SIPx.Shared
         public DateTime? ValidTill { get; set; }
         public string PersonRelationTypeId { get; set; }
         public string PersonRelationTypeName { get; set; }
+        public string FromIsAXOfTo { get; set; }
+        public string ToIsAXOfFrom { get; set; }
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }

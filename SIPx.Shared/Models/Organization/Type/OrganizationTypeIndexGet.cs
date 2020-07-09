@@ -10,6 +10,8 @@ namespace SIPx.Shared
         [Key]
         public int OrganizationTypeId { get; set; }
         public int OrganizationTypeLanguageId { get; set; }
+        public int LanguageId { get; set; }
+        public string LanguageName { get; set; }
         public bool Internal { get; set; }
         public bool LegalEntity { get; set; }
         public string Name { get; set; }

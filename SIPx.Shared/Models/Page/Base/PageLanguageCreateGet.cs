@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class ClassificationPageLanguageIndex 
+    public class PageLanguageCreateGet
     {
         [Key]
-        public int ClassificationPageLanguageId { get; set; }
-        public int ClassificationPageId { get; set; }
-        public int ClassificationId { get; set; }
-        public string Language { get; set; }
+        public int PageId { get; set; }
+        public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

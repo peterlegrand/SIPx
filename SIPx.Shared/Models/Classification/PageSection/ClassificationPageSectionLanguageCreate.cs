@@ -10,9 +10,10 @@ namespace SIPx.Shared
         [Key]
         public int ClassificationPageSectionId { get; set; }
         public int ClassificationPageId { get; set; }
+        public string ClassificationPageName { get; set; }
         public int ClassificationId { get; set; }
+        public string ClassificationName { get; set; }
         public int LanguageId { get; set; }
-        public string LanguageName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -20,5 +21,6 @@ namespace SIPx.Shared
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
         public string CreatorId { get; set; }
+        public List<LanguageList> Languages { get; set; }
     }
 }

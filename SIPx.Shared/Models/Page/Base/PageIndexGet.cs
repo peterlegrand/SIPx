@@ -11,8 +11,6 @@ namespace SIPx.Shared
         [Key]
         public int PageId { get; set; }
         public int PageLanguageId { get; set; }
-        public int Id { get; set; }
-        public string Name { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string Name { get; set; }

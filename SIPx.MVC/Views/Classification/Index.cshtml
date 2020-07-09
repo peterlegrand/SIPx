@@ -15,8 +15,10 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" width="5%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Values")).TermString" template="#Values" textAlign="Center" width="5%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Pages")).TermString" template="#Pages" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Pages")).TermString" template="#Roles" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Pages")).TermString" template="#Users" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Value roles")).TermString" template="#Roles" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Value users")).TermString" template="#Users" textAlign="Center" width="5%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" width="5%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
@@ -27,7 +29,7 @@
 {@x.Name}
 <script id="Levels" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Classification/LevelIndex/${ClassificationId}"><span style="color:red">L</span>evel</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Index/${ClassificationId}"><span style="color:red">L</span>evel</a>
 
     </div>
 </script>

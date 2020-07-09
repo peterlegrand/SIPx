@@ -792,15 +792,50 @@ INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeId, NameTermId, D
 SET IDENTITY_INSERT ProcessTemplateFieldTypes OFF
 
 SET IDENTITY_INSERT MVCUIScreens ON;
-INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES(1, 'Classification','Index'),(1, 'Classification','Edit')
+INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES (1, 'Classification', 'Index')		, (2, 'Classification', 'Create')		, (3, 'Classification', 'Edit')		, (4, 'Classification', 'Delete')		, (5, 'Classification', 'LanguageIndex')		, (6, 'Classification', 'LanguageCreate')		, (7, 'Classification', 'LanguageEdit')		, (8, 'Classification', 'LanguageDelete')
+, (9, 'ClassificationLevel', 'Index')		, (10, 'ClassificationLevel', 'Create')		, (11, 'ClassificationLevel', 'Edit')		, (12, 'ClassificationLevel', 'Delete')		, (13, 'ClassificationLevel', 'LanguageIndex')		, (14, 'ClassificationLevel', 'LanguageCreate')		, (15, 'ClassificationLevel', 'LanguageEdit')		, (16, 'ClassificationLevel', 'LanguageDelete')
+, (17, 'ClassificationPage', 'Index')		, (18, 'ClassificationPage', 'Create')		, (19, 'ClassificationPage', 'Edit')		, (20, 'ClassificationPage', 'Delete')		, (21, 'ClassificationPage', 'LanguageIndex')		, (22, 'ClassificationPage', 'LanguageCreate')		, (23, 'ClassificationPage', 'LanguageEdit')		, (24, 'ClassificationPage', 'LanguageDelete')
+, (25, 'ClassificationPageSection', 'Index')		, (26, 'ClassificationPageSection', 'Create')		, (27, 'ClassificationPageSection', 'Edit')		, (28, 'ClassificationPageSection', 'Delete')		, (29, 'ClassificationPageSection', 'LanguageIndex')		, (30, 'ClassificationPageSection', 'LanguageCreate')		, (31, 'ClassificationPageSection', 'LanguageEdit')		, (32, 'ClassificationPageSection', 'LanguageDelete')
+, (33, 'ClassificationRelationType', 'Index')		, (34, 'ClassificationRelationType', 'Create')		, (35, 'ClassificationRelationType', 'Edit')		, (36, 'ClassificationRelationType', 'Delete')		, (37, 'ClassificationRelationType', 'LanguageIndex')		, (38, 'ClassificationRelationType', 'LanguageCreate')		, (39, 'ClassificationRelationType', 'LanguageEdit')		, (40, 'ClassificationRelationType', 'LanguageDelete')
+, (41, 'ClassificationRole', 'Index')		, (42, 'ClassificationRole', 'Create')		, (43, 'ClassificationRole', 'Edit')		, (44, 'ClassificationRole', 'Delete')		, (45, 'ClassificationRole', 'LanguageIndex')		, (46, 'ClassificationRole', 'LanguageCreate')		, (47, 'ClassificationRole', 'LanguageEdit')		, (48, 'ClassificationRole', 'LanguageDelete')
+, (49, 'ClassificationUser', 'Index')		, (50, 'ClassificationUser', 'Create')		, (51, 'ClassificationUser', 'Edit')		, (52, 'ClassificationUser', 'Delete')		, (53, 'ClassificationUser', 'LanguageIndex')		, (54, 'ClassificationUser', 'LanguageCreate')		, (55, 'ClassificationUser', 'LanguageEdit')		, (56, 'ClassificationUser', 'LanguageDelete')
+, (57, 'ClassificationValue', 'Index')		, (58, 'ClassificationValue', 'Create')		, (59, 'ClassificationValue', 'Edit')		, (60, 'ClassificationValue', 'Delete')		, (61, 'ClassificationValue', 'LanguageIndex')		, (62, 'ClassificationValue', 'LanguageCreate')		, (63, 'ClassificationValue', 'LanguageEdit')		, (64, 'ClassificationValue', 'LanguageDelete')
+, (65, 'ClassificationValueRole', 'Index')		, (66, 'ClassificationValueRole', 'Create')		, (67, 'ClassificationValueRole', 'Edit')		, (68, 'ClassificationValueRole', 'Delete')		, (69, 'ClassificationValueRole', 'LanguageIndex')		, (70, 'ClassificationValueRole', 'LanguageCreate')		, (71, 'ClassificationValueRole', 'LanguageEdit')		, (72, 'ClassificationValueRole', 'LanguageDelete')
+, (73, 'ClassificationValueUser', 'Index')		, (74, 'ClassificationValueUser', 'Create')		, (75, 'ClassificationValueUser', 'Edit')		, (76, 'ClassificationValueUser', 'Delete')		, (77, 'ClassificationValueUser', 'LanguageIndex')		, (78, 'ClassificationValueUser', 'LanguageCreate')		, (79, 'ClassificationValueUser', 'LanguageEdit')		, (80, 'ClassificationValueUser', 'LanguageDelete')
+
 SET IDENTITY_INSERT MVCUIScreens OFF;
 
 SET IDENTITY_INSERT MVCUITermScreens ON;
 INSERT INTO [dbo].[MVCUITermScreens](MVCUITermScreenId,[UITermID],[MVCUIScreenID])VALUES
-(1, 2, 1),(2, 3, 1),(3, 21, 1),(4, 22, 1),(5, 24, 1),(6, 29, 1),(7, 34, 1)
-,(8, 36, 1),(9, 37, 1),(10, 46, 1),(11, 59, 1),(12, 60, 1),(13, 65, 1),(14,1,2)
-,(15,2,2),(16,3,2),(17,13,2),(18,22,2),(19,29,2),(20,36,2),(21,37,2),(22,52,2)
-, (23,56,2), (24,220,2), (25,219,2), (26,67,2), (27,206,2), (28,207,2), (29,68,2);
+ (1, 59, 1)
+, (2, 2, 1)
+, (3, 3, 1)
+, (4, 29, 1)
+, (5, 60, 1)
+, (6, 65, 1)
+, (7, 46, 1)
+, (8, 51, 1)
+, (9, 64, 1)
+, (10, 1132, 1)
+, (11, 1133, 1)
+, (12, 24, 1)
+, (13, 34, 1)
+, (14, 21, 1)
+
+
+
+, (18, 15, 5)
+, (19, 2, 5)
+, (20, 3, 5)
+, (21, 1135, 5)
+, (22, 39, 5)
+, (23, 8, 5)
+, (24, 12, 5)
+, (25, 1136, 5)
+, (26, 255, 5)
+, (27, 24, 5)
+, (28, 34, 5)
+, (29, 21, 5)
 SET IDENTITY_INSERT MVCUITermScreens OFF;
 
 SET IDENTITY_INSERT AddressTypes ON

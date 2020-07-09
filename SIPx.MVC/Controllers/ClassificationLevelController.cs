@@ -12,8 +12,9 @@ namespace SIPx.MVC.Controllers
     public class ClassificationLevelController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-//PETER TODO put base url somewhere central
-        ServiceClient client = new ServiceClient();
+
+        //PETER TODO put base url somewhere central
+        readonly ServiceClient client = new ServiceClient();
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
