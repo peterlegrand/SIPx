@@ -1,11 +1,11 @@
-﻿@model List<ClassificationLanguageIndexGet>
+﻿@model List<ClassificationPageSectionLanguageIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification languages")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification page section languages")).TermString;
 
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification languages")).TermString</h1>
+<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification page section languages")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -17,8 +17,8 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
-<a href="~/Classification/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
+<a href="/ClassificationPageSection/Index">@Term.Find(x => x.InternalName.Equals("Back to classification page sections")).TermString</a>
+<a href="/ClassificationPageSection/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>

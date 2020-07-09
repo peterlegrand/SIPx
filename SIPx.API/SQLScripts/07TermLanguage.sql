@@ -2316,5 +2316,10 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2306,1153,39,'Add new classification page section', 'Add new classification page section', 'Add new classification page section');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2308,1154,39,'Add role to classification relation', 'Add role to classification relation', 'Add role to classification relation');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2310,1155,39,'Add user to classification relation', 'Add user to classification relation', 'Add user to classification relation');
-
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2311,1156,41,'Classification page languages', 'Classification page languages', 'Classification page languages');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2313,1157,41,'Classification page section languages', 'Classification page section languages', 'Classification page section languages');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2315,1158,41,'Back to classification page sections', 'Back to classification page sections', 'Back to classification page sections');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2312,1156,39,'Classification page languages', 'Classification page languages', 'Classification page languages');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2314,1157,39,'Classification page section languages', 'Classification page section languages', 'Classification page section languages');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2316,1158,39,'Back to classification page sections', 'Back to classification page sections', 'Back to classification page sections');
 SET IDENTITY_INSERT UITermLanguages OFF;

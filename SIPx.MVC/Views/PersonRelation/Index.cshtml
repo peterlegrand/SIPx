@@ -1,0 +1,31 @@
+﻿@model List<PersonRelationIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person relations")).TermString;
+
+}
+
+<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person relations")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="PersonTelecomId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
+        <e-grid-column field="TelecomTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Telecom type")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
+        <e-grid-column field="TelecomValue" headerText="@Term.Find(x => x.InternalName.Equals("Telecom value")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a href="~/PersonTelecom/Create">@Term.Find(x => x.InternalName.Equals("Add new person")).TermString</a>
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/PersonTelecom/Edit/${PersonTelecomId}"><span style="color:red">E</span>dit</a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="PersonTelecom/Delete/${PersonTelecomId}"><span style="color:red">D</span>elete</a>
+
+    </div>
+</script>

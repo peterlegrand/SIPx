@@ -51,7 +51,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("IndexLanguages/{Id:int}")]
+        [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> GetLevelLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

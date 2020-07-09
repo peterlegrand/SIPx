@@ -71,7 +71,12 @@ namespace SIPx.API.Controllers
                     await _sqlDataAccess.PopulateDataSIP(line);
                 }
             }
-            using (StreamReader sr = new StreamReader("SQLScripts\\04MasterData.sql", System.Text.Encoding.UTF8))
+            using (StreamReader sr = new StreamReader("SQLScripts\\04aUITerms.sql", System.Text.Encoding.UTF8))
+            {
+                string line = await sr.ReadToEndAsync();
+                await _sqlDataAccess.PopulateDataSIP(line);
+            }
+            using (StreamReader sr = new StreamReader("SQLScripts\\04bSecurityLevel.sql", System.Text.Encoding.UTF8))
             {
                 string line = await sr.ReadToEndAsync();
                 await _sqlDataAccess.PopulateDataSIP(line);
@@ -134,7 +139,17 @@ namespace SIPx.API.Controllers
 
             await _userManager.AddToRoleAsync(identityUser, "Admin");
 
-            using (StreamReader sr = new StreamReader("SQLScripts\\06MasterData.sql", System.Text.Encoding.UTF8))
+            using (StreamReader sr = new StreamReader("SQLScripts\\06aMasterData.sql", System.Text.Encoding.UTF8))
+            {
+                string line = await sr.ReadToEndAsync();
+                await _sqlDataAccess.PopulateDataSIP(line);
+            }
+            using (StreamReader sr = new StreamReader("SQLScripts\\06bMVCUIScreens.sql", System.Text.Encoding.UTF8))
+            {
+                string line = await sr.ReadToEndAsync();
+                await _sqlDataAccess.PopulateDataSIP(line);
+            }
+            using (StreamReader sr = new StreamReader("SQLScripts\\06cMVCUITermScreens.sql", System.Text.Encoding.UTF8))
             {
                 string line = await sr.ReadToEndAsync();
                 await _sqlDataAccess.PopulateDataSIP(line);

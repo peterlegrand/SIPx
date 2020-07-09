@@ -1155,18 +1155,7 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1152, 'Add new classificatio
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1153, 'Add new classification page section');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1154, 'Add role to classification relation');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1155, 'Add user to classification relation');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1156, 'Classification page languages');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1157, 'Classification page section languages');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1158, 'Back to classification page sections');
 SET IDENTITY_INSERT UITerms OFF;
-
-SET IDENTITY_INSERT SecurityLevels ON;
-INSERT INTO SecurityLevels (SecurityLevelId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-  (1,683,683,683,683)
-, (2,684,684,684,684)
-, (3,685,685,685,685)
-, (4,686,686,686,686)
-, (5,687,687,687,687)
-, (6,688,688,688,688)
-, (7,689,689,689,689)
-, (8,690,690,690,690)
-, (9,691,691,691,691)
-, (10,692,692,692,692)
-SET IDENTITY_INSERT SecurityLevels OFF;

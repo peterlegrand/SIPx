@@ -1,11 +1,11 @@
-﻿@model List<ClassificationLanguageIndexGet>
+﻿@model List<ClassificationLevelLanguageIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification languages")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification level languages")).TermString;
 
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification languages")).TermString</h1>
+<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification level languages")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -17,18 +17,18 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
-<a href="~/Classification/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
+<a href="/ClassificationLevel/Index">@Term.Find(x => x.InternalName.Equals("Back to classification levels")).TermString</a>
+<a href="/ClassificationLevel/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Classification/Edit/${ClassificationId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="ClassificationLevel/Edit/${ClassificationId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Classification/Delete/${ClassificationId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="ClassificationLevel/Delete/${ClassificationId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

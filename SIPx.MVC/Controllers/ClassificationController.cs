@@ -63,7 +63,7 @@ namespace SIPx.MVC.Controllers
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Classification/LanguageIndex", token);
             ViewBag.UITerms = UITerms;
             return View(response);
-            //return View();
+        
         }
     }
 }

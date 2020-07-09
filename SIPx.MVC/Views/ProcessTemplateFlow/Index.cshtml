@@ -1,0 +1,44 @@
+﻿@model List<ProcessTemplateFlowIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template flows")).TermString;
+
+}
+
+<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template flows")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="ProcessTemplateFlowId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
+        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Telecom type")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Conditions")).TermString" template="#Condition" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Language" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a href="~/ProcessTemplate/Create">@Term.Find(x => x.InternalName.Equals("Add new process template flow")).TermString</a>
+<script id="Condition" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlowCondition/Index/${ProcessTemplateFlowId}"><span style="color:red">C</span>onditions</a>
+
+    </div>
+</script>
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlow/Edit/${ProcessTemplateFlowId}"><span style="color:red">E</span>dit</a>
+
+    </div>
+</script>
+<script id="Language" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlow/LanguageIndex/${ProcessTemplateFlowId}"><span style="color:red">E</span>dit</a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="ProcessTemplateFlow/Delete/${ProcessTemplateFlowId}"><span style="color:red">D</span>elete</a>
+
+    </div>
+</script>

@@ -1,15 +1,15 @@
-﻿@model List<ClassificationPageIndexGet>
+﻿@model List<PageIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification pages")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals(" pages")).TermString;
 
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification pages")).TermString</h1>
+<h1><img src="~/images/icons/s.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals(" pages")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ClassificationPageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
+        <e-grid-column field="PageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Sections")).TermString" template="#Sections" textAlign="Center" width="5%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
@@ -17,31 +17,29 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
-<a href="~/ClassificationPage/Create">@Term.Find(x => x.InternalName.Equals("Add new classification page")).TermString</a>
+<a href="~/Page/Create">@Term.Find(x => x.InternalName.Equals("Add new page")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationPageSection/Edit/${ClassificationPageId}"><span style="color:red">E</span>dit</a>
-
+        <a class="nav-link text-dark font-weight-bold" href="/Page/Edit/${PageId}"><span style="color:red">E</span>dit</a>
     </div>
 </script>
 
 <script id="Sections" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationPage/Edit/${ClassificationPageId}"><span style="color:red">S</span>ections</a>
+        <a class="nav-link text-dark font-weight-bold" href="/PageSection/Index/${PageId}"><span style="color:red">S</span>ections</a>
 
     </div>
 </script>
 <script id="Languages" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationPage/LanguageIndex/${ClassificationPageId}"><span style="color:red">L</span>anguage</a>
+        <a class="nav-link text-dark font-weight-bold" href="/Page/LanguageIndex/${PageId}"><span style="color:red">L</span>anguage</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationPage/Delete/${ClassificationPageId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/Page/Delete/${PageId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>
