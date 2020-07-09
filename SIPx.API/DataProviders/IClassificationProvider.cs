@@ -30,9 +30,9 @@ namespace SIPx.DataAccess
         Task<List<ClassificationRelationTypeLanguageUpdateGet>> GetClassificationRelationTypeLanguages(string UserId, int ClassificationRelationTypeId);
         Task<List<ClassificationRelationTypeIndexGet>> GetClassificationRelationTypes(string UserId);
         Task<ClassificationRoleUpdateGet> GetClassificationRole(string UserId, int ClassificationRoleId);
-        Task<List<ClassificationRoleUpdateGet>> GetClassificationRoles(string UserId, int ClassificationId);
+        Task<List<ClassificationRoleIndexGet>> GetClassificationRoles(string UserId, int ClassificationId);
         Task<ClassificationUserUpdateGet> GetClassificationUser(string UserId, int ClassificationUserId);
-        Task<List<ClassificationUserUpdateGet>> GetClassificationUsers(string UserId, int ClassificationId);
+        Task<List<ClassificationUserIndexGet>> GetClassificationUsers(string UserId, int ClassificationId);
         Task<ClassificationValueRoleUpdateGet> GetClassificationValueRole(string UserId, int ClassificationValueRoleId);
         Task<List<ClassificationValueRoleUpdateGet>> GetClassificationValueRoles(string UserId, int ClassificationId);
         Task<List<ClassificationValueUpdateGet>> GetClassificationValues(string UserId, int ClassificationId);

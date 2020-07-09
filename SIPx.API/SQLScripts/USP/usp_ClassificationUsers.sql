@@ -8,7 +8,7 @@ WHERE USerId = @UserID
 SELECT ClassificationUsers.UserID
 	, Persons.FirstName
 	, Persons.LastName
-	, ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typeUser')) RelationTypeName
+	, ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typeUser')) ClassificationRelationTypeName
 	, ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,'No name for this organization')) OrganizationName
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, ClassificationUsers.CreatedDate

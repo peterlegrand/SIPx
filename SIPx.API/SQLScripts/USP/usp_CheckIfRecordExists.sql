@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_CheckIfRecordExists (@TableName varchar(20), @IDField varchar(20), @Id int)
+CREATE PROCEDURE usp_CheckIfRecordExists (@TableName varchar(50), @IDField varchar(20), @Id int)
 AS
 BEGIN
 DECLARE @statement NVARCHAR(200);

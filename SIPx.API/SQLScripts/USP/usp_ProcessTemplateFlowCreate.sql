@@ -55,9 +55,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @User
+	, @UserId
 	, getdate()
-	, @User
+	, @UserId
 	, getdate())
 
 	COMMIT TRANSACTION

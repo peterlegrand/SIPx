@@ -30,5 +30,5 @@ JOIN Persons Creator
 	ON Creator.UserId = ClassificationLanguages.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = ClassificationLanguages.ModifierID
-WHERE Classifications.ClassificationLanguageId = @ClassificationLanguageID
+WHERE ClassificationLanguages.ClassificationLanguageId = @ClassificationLanguageID
 	AND UILanguageName.LanguageId = @LanguageID

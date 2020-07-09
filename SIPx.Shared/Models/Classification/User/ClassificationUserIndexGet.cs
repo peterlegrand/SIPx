@@ -5,13 +5,14 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationUserIndextGet 
+    public class ClassificationUserIndexGet 
     {
         [Key]
         public int ClassificationUserId { get; set; }
         public string UserId { get; set; }
-        public string UserFirstName { get; set; }
-        public string UserLastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string OrganizationName { get; set; }
         public int ClassificationId { get; set; }
         public int ClassificationRelationTypeId { get; set; }
         public string ClassificationRelationTypeName { get; set; }

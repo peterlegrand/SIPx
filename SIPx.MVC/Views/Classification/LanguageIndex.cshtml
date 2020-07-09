@@ -1,28 +1,25 @@
-﻿@model List<ClassificationIndexGet>
+﻿@model List<ClassificationLanguageIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification languages")).TermString;
 
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classifications")).TermString</h1>
+<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification languages")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ClassificationId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
+        <e-grid-column field="ClassificationLanguageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
-        <e-grid-column field="HasDropDown" headerText="@Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString" textAlign="Right" width="5%" type="boolean"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Values")).TermString" template="#Values" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Pages")).TermString" template="#Pages" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column field="MenuName" headerText="@Term.Find(x => x.InternalName.Equals("Menu name")).TermString" textAlign="Right" width="5%" type="boolean"></e-grid-column>
+        <e-grid-column field="MouseOver" headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" width="5%" type="boolean"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" width="5%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Create">@Term.Find(x => x.InternalName.Equals("Add new classification")).TermString</a>
+<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
+<a href="~/Classification/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
+
 <script id="Levels" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Index/${ClassificationId}"><span style="color:red">L</span>evel</a>

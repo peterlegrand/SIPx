@@ -22,8 +22,6 @@ SELECT PageLanguages.PageLanguageID
 FROM Pages
 JOIN PageLanguages
 	ON Pages.PageId = PageLanguages.PageID
-JOIN PageLanguages
-	ON Pages.PageId = PageLanguages.PageID
 JOIN Languages 
 	ON Languages.LanguageId = PageLanguages.LanguageID
 JOIN UITermLanguages UILanguageName
