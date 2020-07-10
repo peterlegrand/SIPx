@@ -8,8 +8,8 @@ namespace SIPx.Shared
     public class PageUpdateGet 
     {
         [Key]
-        public int OrganizationTypeId { get; set; }
-        public int OrganizationTypeLanguageId { get; set; }
+        public int PageId { get; set; }
+        public int PageLanguageId { get; set; }
         public int StatusId { get; set; }
         public bool ShowTitleName { get; set; }
         public bool ShowTitleDescription { get; set; }

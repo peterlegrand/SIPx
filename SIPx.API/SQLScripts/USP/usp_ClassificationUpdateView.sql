@@ -1,5 +1,10 @@
-CREATE PROCEDURE usp_ClassificationUpdateView (@ClassificationId int, @LanguageId int)
+CREATE PROCEDURE usp_ClassificationUpdateView (@UserId nvarchar(450),@ClassificationId int)
 AS
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT Classifications.ClassificationID
 	, Classifications.StatusId 
 	, Classifications.DefaultPageID

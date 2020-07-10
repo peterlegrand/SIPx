@@ -16,14 +16,12 @@ namespace SIPx.API.Controllers
     public class CreateDBController : Controller
     {
         private readonly UserManager<SipUser> _userManager;
-        private readonly IConfiguration _configuration;
         private readonly ISqlDataAccess _sqlDataAccess;
         private readonly RoleManager<SipRole> _roleManager;
 
-        public CreateDBController(UserManager<SipUser> userManager, IConfiguration configuration, ISqlDataAccess sqlDataAccess, RoleManager<SipRole> roleManager)
+        public CreateDBController(UserManager<SipUser> userManager, ISqlDataAccess sqlDataAccess, RoleManager<SipRole> roleManager)
         {
             _userManager = userManager;
-            _configuration = configuration;
             _sqlDataAccess = sqlDataAccess;
             _roleManager = roleManager;
         }
@@ -65,11 +63,9 @@ namespace SIPx.API.Controllers
             FileInfo[] Files = d.GetFiles();
             foreach (FileInfo file in Files)
             {
-                using (StreamReader sr = new StreamReader($"SQLScripts\\USP\\{file.Name}", System.Text.Encoding.UTF8))
-                {
-                    string line = await sr.ReadToEndAsync();
-                    await _sqlDataAccess.PopulateDataSIP(line);
-                }
+                using StreamReader sr = new StreamReader($"SQLScripts\\USP\\{file.Name}", System.Text.Encoding.UTF8);
+                string line = await sr.ReadToEndAsync();
+                await _sqlDataAccess.PopulateDataSIP(line);
             }
             using (StreamReader sr = new StreamReader("SQLScripts\\04aUITerms.sql", System.Text.Encoding.UTF8))
             {
@@ -94,7 +90,7 @@ namespace SIPx.API.Controllers
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
-            var result = await _userManager.CreateAsync(identityUser, "Pipo!9165");
+            await _userManager.CreateAsync(identityUser, "Pipo!9165");
 
             var identityUser2 = new SipUser
             {
@@ -107,7 +103,7 @@ namespace SIPx.API.Controllers
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
-            result = await _userManager.CreateAsync(identityUser2, "Pipo!9165");
+            await _userManager.CreateAsync(identityUser2, "Pipo!9165");
 
             using (StreamReader sr = new StreamReader("SQLScripts\\05MasterData.sql", System.Text.Encoding.UTF8))
             {
@@ -115,9 +111,11 @@ namespace SIPx.API.Controllers
                 await _sqlDataAccess.PopulateDataSIP(line);
             }
 
-            var Role = new SipRole();
-            Role.Name = "Admin";
-            Role.RoleGroupId = 1;
+            SipRole Role = new SipRole
+            {
+                Name = "Admin",
+                RoleGroupId = 1
+            };
             await _roleManager.CreateAsync(Role);
             using (StreamReader sr = new StreamReader($"SQLScripts\\ApplicationRights.txt", System.Text.Encoding.UTF8))
             {

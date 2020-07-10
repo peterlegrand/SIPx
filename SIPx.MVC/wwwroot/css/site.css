@@ -74,3 +74,7 @@ body {
     margin: 10px;
     max-width:none;
 }
+.e-grid .e-rowcell {
+    padding: 1px 1px 1px 1px;
+    margin: 1px 1px 1px 1px;
+}

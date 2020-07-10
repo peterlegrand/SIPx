@@ -21,7 +21,7 @@ INSERT INTO ClassificationLanguages(ClassificationLanguageId, ClassificationId, 
 SET IDENTITY_INSERT ClassificationLanguages OFF;
 
 SET IDENTITY_INSERT ClassificationRelationTypes ON;
-INSERT INTO ClassificationRelationTypes (ClassificationRelationTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES (1, @User, @User, GETDATE(), GETDATE());
+INSERT INTO ClassificationRelationTypes (ClassificationRelationTypeId, SeePersonal, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES (1,0, @User, @User, GETDATE(), GETDATE());
 SET IDENTITY_INSERT ClassificationRelationTypes OFF;
 
 SET IDENTITY_INSERT ClassificationRelationTypeLanguages ON;
@@ -396,16 +396,16 @@ INSERT INTO ProcessTemplateGroupLanguages (ProcessTemplateGroupLanguageId, Proce
 SET IDENTITY_INSERT ProcessTemplateGroupLanguages OFF;
 
 SET IDENTITY_INSERT ProcessTemplates ON;
-INSERT INTO ProcessTemplates (ProcessTemplateId, ProcessTemplateGroupId, ShowInPersonalCalendar, ShowInEventCalendar
+INSERT INTO ProcessTemplates (ProcessTemplateId, ProcessTemplateGroupId, ShowInPersonalCalendar, ShowInOrgnizationCalendar, ShowInProjectCalendar, ShowInEventCalendar
 , ProcessMultiMax, Sequence, IsPersonal, ShowInNew, ShowInSearch, ShowInReports, HideEverywhere
 , CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-(1,1,0,0
+(1,1,0,0,0,0
 ,10,1,0,1,1,1,0
 , @User, @User, GETDATE(), GETDATE())
-,(2,1,0,0
+,(2,1,0,0,0,0
 ,15,2,0,1,1,1,0
 , @User, @User, GETDATE(), GETDATE())
-,(3,2,0,0
+,(3,2,0,0,0,0
 ,15,1,0,1,1,1,0
 , @User, @User, GETDATE(), GETDATE());
 SET IDENTITY_INSERT ProcessTemplates OFF;

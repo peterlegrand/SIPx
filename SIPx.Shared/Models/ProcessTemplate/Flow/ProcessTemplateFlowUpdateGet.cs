@@ -11,8 +11,8 @@ namespace SIPx.Shared
         public int ProcessTemplateFlowId { get; set; }
         public int ProcessTemplateFlowLanguageId { get; set; }
         public int ProcessTemplateId { get; set; }
-        public int ProcessTemplateFromFieldId { get; set; }
-        public int ProcessTemplateToFieldId { get; set; }
+        public int ProcessTemplateFromStageId { get; set; }
+        public int ProcessTemplateToStageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -22,7 +22,7 @@ namespace SIPx.Shared
         public string Modifier { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<ProcessTemplateFieldList> ProcessTemplateFields { get; set; }
+        public List<ProcessTemplateStageList> ProcessTemplateStages { get; set; }
 
     }
 }

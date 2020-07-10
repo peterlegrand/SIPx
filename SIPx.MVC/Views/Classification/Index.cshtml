@@ -6,67 +6,84 @@
 }
 
 <h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classifications")).TermString</h1>
-<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ClassificationId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
-        <e-grid-column field="HasDropDown" headerText="@Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString" textAlign="Right" width="5%" type="boolean"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Values")).TermString" template="#Values" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Pages")).TermString" template="#Pages" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" width="50%" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString" template="#HasDropDown" textAlign="Right" width="5%" type="boolean"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Values")).TermString" template="#Values" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Pages")).TermString" template="#Pages" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/Classification/Create">@Term.Find(x => x.InternalName.Equals("Add new classification")).TermString</a>
-<script id="Levels" type="text/x-template">
+<script id="Id" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Index/${ClassificationId}"><div title="Level"></div><span style="color:red">L</span>evel</div></a>
+        ${ClassificationId}
+    </div>
+</script>
+<script id="Name" type="text/x-template">
+    <div >
+        ${Name}
+    </div>
+</script>
+<script id="HasDropDown" type="text/x-template">
+    <div >
+        ${HasDropDown}
+    </div>
+</script>
+<script id="Levels" type="text/x-template">
+    <div >
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Index/${ClassificationId}">
+            <div title="Level"></div><span style="color:red">L</span>evel
+        </a>
 
     </div>
 </script>
 <script id="Values" type="text/x-template">
-    <div>
+    <div >
         <a class="nav-link text-dark font-weight-bold" href="/Classification/ValueIndex/${ClassificationId}"><span style="color:red">V</span>alue</a>
 
     </div>
 </script>
 <script id="Pages" type="text/x-template">
-    <div>
+    <div >
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationPage/Index/${ClassificationId}"><span style="color:red">P</span>age</a>
 
     </div>
 </script>
 <script id="Roles" type="text/x-template">
-    <div>
+    <div >
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationRelationRole/Index/${ClassificationId}"><span style="color:red">R</span>ole</a>
 
     </div>
 </script>
 <script id="Users" type="text/x-template">
-    <div>
+    <div >
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationRelationUser/Index/${ClassificationId}"><span style="color:red">U</span>ser</a>
 
     </div>
 </script>
 <script id="Edit" type="text/x-template">
-    <div>
+    <div >
         <a class="nav-link text-dark font-weight-bold" href="/Classification/Edit/${ClassificationId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Languages" type="text/x-template">
-    <div>
+    <div >
         <a class="nav-link text-dark font-weight-bold" href="/Classification/LanguageIndex/${ClassificationId}"><span style="color:red">L</span>anguage</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
-    <div>
+    <div >
         <a class="nav-link text-dark font-weight-bold" href="Classification/Delete/${ClassificationId}"><span style="color:red">D</span>elete</a>
 
     </div>

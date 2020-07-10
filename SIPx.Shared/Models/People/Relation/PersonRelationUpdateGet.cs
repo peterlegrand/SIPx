@@ -12,6 +12,7 @@ namespace SIPx.Shared
         public string FromPersonFirstName { get; set; }
         public string FromPersonLastName { get; set; }
         public string FromOrganizationName { get; set; }
+        public int FromPersonId { get; set; }
         public int ToPersonId { get; set; }
         public DateTime ValidFrom { get; set; }
         public DateTime? ValidTill { get; set; }

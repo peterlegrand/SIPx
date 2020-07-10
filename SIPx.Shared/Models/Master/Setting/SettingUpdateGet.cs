@@ -17,6 +17,7 @@ namespace SIPx.Shared
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
+        public int TypeId { get; set; }
         public string Modifier { get; set; }
         public DateTime ModifiedDate { get; set; }
 

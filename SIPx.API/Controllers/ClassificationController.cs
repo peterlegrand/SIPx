@@ -14,7 +14,7 @@ namespace SIPx.API.Controllers
     {
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
-        private  IClaimCheck _claimCheck;
+        private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 

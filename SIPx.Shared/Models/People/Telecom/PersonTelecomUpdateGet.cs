@@ -11,6 +11,8 @@ namespace SIPx.Shared
         public int PersonTelecomId { get; set; }
         public int PersonId { get; set; }
         public int TelecomTypeId { get; set; }
+        public bool PhoneProperties { get; set; }
+        public string TelecomTypeName { get; set; }
         public string TelecomValue { get; set; }
         public string CountryCode { get; set; }
         public string AreaCode { get; set; }

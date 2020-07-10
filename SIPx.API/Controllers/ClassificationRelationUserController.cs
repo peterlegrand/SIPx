@@ -12,15 +12,13 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationRelationUserController : ControllerBase
     {
-        private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
-        private  IClaimCheck _claimCheck;
+        private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationRelationUserController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationRelationUserController(ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
-            _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;

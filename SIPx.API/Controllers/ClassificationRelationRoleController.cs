@@ -10,17 +10,15 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class ClassificationRelationRoleController : ControllerBase
+    public class ClassificationRoleController : ControllerBase
     {
-        private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
-        private  IClaimCheck _claimCheck;
+        private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationRelationRoleController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationRoleController( ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
-            _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;

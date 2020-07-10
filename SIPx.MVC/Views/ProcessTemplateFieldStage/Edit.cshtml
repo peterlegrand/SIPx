@@ -1,0 +1,256 @@
+﻿@using Syncfusion.EJ2
+@using Newtonsoft.Json
+@model ProcessTemplateStageFieldUpdateGet
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template field stage")).TermString;
+
+}
+
+<h1>
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template field stage")).TermString
+</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        </div>
+        <div class="col-9">@Model.ProcessTemplateFieldId</div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        </div>
+        <div class="col-9">@Model.ProcessTemplateId</div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        </div><div class="col-9">@Model.ProcessTemplateStageId</div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        </div><div class="col-9">@Model.ProcessTemplateStageFieldId</div>
+    </div>
+    <form method="post">
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Field")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ProcessTemplateFieldName
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Stage")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ProcessTemplateStageName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="ProcessTemplateStageFieldStatusName" dataSource="@Model.ProcessTemplateStageFieldStatuses" ejs-for="@Model.ProcessTemplateStageFieldStatusId" value="@Model.ProcessTemplateStageFieldStatusId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
+                    @*<e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>*@
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="FilterDefaultPage" popupHeight="220px">
+                    @*<e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>*@
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Value update type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="ValueUpdateTypeId" dataSource="@Model.ValueUpdateTypes" ejs-for="@Model.ValueUpdateTypeId" value="@Model.ValueUpdateTypeId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
+                    @*<e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>*@
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("String value")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="StringValue" ejs-for="StringValue" cssClass="e-outline" placeholder="String value" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Int value")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="IntValue" ejs-for="StringValue" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Date time value")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-datepicker id="DateTimeValue" ejs-for="DateTimeValue" cssClass="e-outline" placeholder="Date time value" floatLabelType="Auto"></ejs-datepicker>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ModifierName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/css/css.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+<style>
+    .e-code-mirror::before {
+        content: '\e345';
+    }
+
+    .e-html-preview::before {
+        content: '\e350';
+    }
+
+    .CodeMirror-linenumber,
+    .CodeMirror-gutters {
+        display: none;
+    }
+
+    .sb-header {
+        z-index: 100;
+    }
+
+    .sb-content.e-view.hide-header {
+        top: 0 !important;
+    }
+
+    .sb-header.e-view.hide-header {
+        display: none;
+    }
+
+    .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #F4F5F7;
+    }
+
+    .highcontrast .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #303030;
+    }
+</style>
+<script type="text/javascript">
+    var rteObj, myCodeMirror, textArea;
+    function created() {
+        rteObj = this;
+        textArea = rteObj.contentModule.getEditPanel();
+    }
+    function mirrorConversion(e) {
+        var id = rteObj.getID() + 'mirror-view';
+        var mirrorView = rteObj.element.querySelector('#' + id);
+        var charCount = rteObj.element.querySelector('.e-rte-character-count');
+        if (e.targetItem === 'Preview') {
+            textArea.style.display = 'block';
+            mirrorView.style.display = 'none';
+            textArea.innerHTML = myCodeMirror.getValue();
+            charCount.style.display = 'block';
+        }
+        else {
+            if (!mirrorView) {
+                mirrorView = ej.base.createElement('div', { className: 'e-content' });
+                mirrorView.id = id;
+                textArea.parentNode.appendChild(mirrorView);
+            }
+            else {
+                mirrorView.innerHTML = '';
+            }
+            textArea.style.display = 'none';
+            mirrorView.style.display = 'block';
+            renderCodeMirror(mirrorView, defaultRTE.value);
+            charCount.style.display = 'none';
+        }
+    }
+    function renderCodeMirror(mirrorView, content) {
+        myCodeMirror = CodeMirror(mirrorView, {
+            value: content,
+            lineNumbers: true,
+            mode: 'text/html',
+            lineWrapping: true,
+        });
+    }
+    function handleFullScreen(e) {
+        var sbCntEle = document.querySelector('.sb-content.e-view');
+        var sbHdrEle = document.querySelector('.sb-header.e-view');
+        if (e.targetItem === 'Maximize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.addClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+        else if (e.targetItem === 'Minimize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.removeClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+    }
+    function actionCompleteHandler(e) {
+        if (e.targetItem && (e.targetItem === 'SourceCode' || e.targetItem === 'Preview')) {
+            this.sourceCodeModule.getPanel().style.display = 'none';
+            mirrorConversion(e);
+        }
+        else {
+            setTimeout(function () { rteObj.toolbarModule.refreshToolbarOverflow(); }, 400);
+        }
+    }
+</script>
+@*
+        PETER TODO
+        <script type="text/javascript">
+        function FilterDefaultPage(e) {
+                    var query = new ej.data.Query();
+                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+                }
+    </script>
+    <script type="text/javascript">
+        function FilterStatus(e) {
+                    var query = new ej.data.Query();
+                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+                }
+    </script>*@

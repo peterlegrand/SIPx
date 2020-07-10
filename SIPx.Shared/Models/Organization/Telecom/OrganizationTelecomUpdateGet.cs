@@ -11,11 +11,13 @@ namespace SIPx.Shared
         public int OrganizationTelecomId { get; set; }
         public int OrganizationId { get; set; }
         public int TelecomTypeId { get; set; }
+        public string TelecomTypeName { get; set; }
         public string TelecomValue { get; set; }
         public string CountryCode { get; set; }
         public string AreaCode { get; set; }
         public string ExtensionCode { get; set; }
         public string AskForName { get; set; }
+        public bool PhoneProperties { get; set; }
         public string Creator { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Modifier { get; set; }
