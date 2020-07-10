@@ -19,6 +19,7 @@ namespace SIPx.DataAccess
         Task<List<ContentTypeGroup>> GetContentTypeGroups(string UserId);
         Task<ContentTypeLanguage> GetContentTypeLanguage(string UserId, int ContentTypeLanguageId);
         Task<List<ContentTypeLanguage>> GetContentTypeLanguages(string UserId, int ContentTypeId);
+        Task<List<ContentTypeList>> GetContentTypeList(string UserId);
         Task<List<ContentType>> GetContentTypes(string UserId);
     }
 }

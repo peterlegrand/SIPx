@@ -98,6 +98,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ContentType, dynamic>(usp, new { UserId = UserId });
 
         }
+        public Task<List<ContentTypeList>> GetContentTypeList(string UserId)
+        {
+            string usp = "usp_ContentTypeList @UserID";
+            return _sqlDataAccess.LoadData<ContentTypeList, dynamic>(usp, new { UserId = UserId });
+
+        }
         public Task<ContentType> GetContentType(string UserId, int ContentTypeId)
         {
             string usp = "usp_ContentType @UserId, @ContentTypeID";

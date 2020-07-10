@@ -13,14 +13,16 @@ namespace SIPx.API.Controllers
     public class ClassificationPageSectionController : ControllerBase
     {
         private readonly IMasterProvider _masterProvider;
+        private readonly IContentMasterProvider _contentMasterProvider;
         private readonly ICheckProvider _checkProvider;
-        private  IClaimCheck _claimCheck;
+        private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationPageSectionController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationPageSectionController(IMasterProvider masterProvider, IContentMasterProvider contentMasterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _masterProvider = masterProvider;
+            _contentMasterProvider = contentMasterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;
@@ -89,8 +91,11 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
+                var cps = new ClassificationPageSectionUpdateGet();
+                cps = await _classificationProvider.GetClassificationPage(CurrentUser.Id, Id);
+                cps.ContentTypes = await _contentMasterProvider.GetContentTypeList(CurrentUser.Id);
 
-                return Ok(await _classificationProvider.GetClassificationPage(CurrentUser.Id, Id));
+                return Ok();
             }
             return BadRequest(new
             {

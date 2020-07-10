@@ -93,14 +93,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("On the fly")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="ShowTitleDescription" label="Show title description" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
             </div>
