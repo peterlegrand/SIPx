@@ -17,7 +17,7 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Create">@Term.Find(x => x.InternalName.Equals("Add new organization address")).TermString</a>
+<a href="~/Classification/Create">@Term.Find(x => x.InternalName.Equals("Add new organization")).TermString</a>
 <script id="Address" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationAddress/Index/${OrganizationId}"><span style="color:red">A</span>ddress</a>

@@ -35,31 +35,28 @@
         </nav>
     </header>
     <div class="container">
-        <a class="nav-link text-dark font-weight-bold" asp-controller="Auth" asp-action="Login">Login</a>
-        <a class="nav-link text-dark font-weight-bold" asp-controller="Classification" asp-action="Index">Classifications</a>
-        <a href="https://localhost:44393/CreateDB/">Create DB</a></div>
-    <div>
-        <a href="https://localhost:44393/Meta/">Meta</a>
-    </div>
-    <div>
-        <a href="https://localhost:44393/Swagger/">Swagger</a>
-    </div>
+        <div class="row">
+            <div class="col-2">
+                <a class="nav-link text-dark font-weight-bold" asp-controller="Auth" asp-action="Login">Login</a>
+                <a class="nav-link text-dark font-weight-bold" asp-controller="Classification" asp-action="Index">Admin</a>
 
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - SIPx.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+            <div class="col-10">
+                @RenderBody()
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-    <!-- Syncfusion Essential JS 2 ScriptManager -->
-    <ejs-scripts></ejs-scripts>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2020 - SIPx.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+        <!-- Syncfusion Essential JS 2 ScriptManager -->
+        <ejs-scripts></ejs-scripts>
 </body>
 </html>

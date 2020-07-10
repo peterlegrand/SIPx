@@ -37,7 +37,7 @@ namespace SIPx.MVC.Controllers
             if (responseObject.IsSuccess)
             {
                 HttpContext.Session.SetString("Token", responseObject.Message);
-                return View();
+                return RedirectToAction("Index", "Classification");
             }
             else
             {

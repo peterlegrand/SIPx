@@ -9,7 +9,7 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="OrgnizationId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
+        <e-grid-column field="PersonId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Addresses")).TermString" template="#Telecom" textAlign="Center" width="5%" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Telecom")).TermString" template="#Telecom" textAlign="Center" width="5%" type="string"></e-grid-column>
@@ -18,7 +18,7 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Create">@Term.Find(x => x.InternalName.Equals("Add new person")).TermString</a>
+<a href="~/Person/Create">@Term.Find(x => x.InternalName.Equals("Add new person")).TermString</a>
 <script id="Addresses" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/PersonAddress/Index/${PersonId}"><span style="color:red">A</span>ddresses</a>
