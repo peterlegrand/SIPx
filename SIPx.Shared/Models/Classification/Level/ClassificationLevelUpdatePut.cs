@@ -19,7 +19,7 @@ namespace SIPx.Shared
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string Modifier { get; set; }
+        public string ModifierId { get; set; }
 
 
     }

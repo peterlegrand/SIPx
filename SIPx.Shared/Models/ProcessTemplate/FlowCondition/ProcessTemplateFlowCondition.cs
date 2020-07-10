@@ -22,9 +22,11 @@ namespace SIPx.Shared
         public string ProcessTemplateFlowConditionString { get; set; }
         public int ProcessTemplateFlowConditionInt { get; set; }
         public DateTime ProcessTemplateFlowConditionDate { get; set; }
-        public string Creator { get; set; }
+        public string CreatorName { get; set; }
+        public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string Modifier { get; set; }
+        public string ModifierName { get; set; }
+        public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
     }
 }

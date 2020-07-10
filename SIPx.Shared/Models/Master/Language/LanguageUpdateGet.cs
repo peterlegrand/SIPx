@@ -14,7 +14,8 @@ namespace SIPx.Shared
         public string ISO6391 { get; set; }
         public string ISO6392 { get; set; }
         public int StatusId { get; set; }
-        public string Modifier { get; set; }
+        public string ModifierName { get; set; }
+        public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
 
         public List<StatusList> Statuses { get; set; }

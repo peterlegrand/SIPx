@@ -18,6 +18,6 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
-        public string Modifier { get; set; }
+        public string ModifierId { get; set; }
     }
 }

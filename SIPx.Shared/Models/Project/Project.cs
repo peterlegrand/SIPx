@@ -16,9 +16,12 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string StatusName { get; set; }
         public string Path { get; set; }
-        public string Creator { get; set; }
+        public string CreatorName { get; set; }
+        public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string Modifier { get; set; }
+        public string ModifierName { get; set; }
+        public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
     }
 }
+

@@ -14,7 +14,8 @@ namespace SIPx.Shared
         public string ContentTypeName { get; set; }
         public string ClassificationName { get; set; }
         public string ContentTypeClassificationStatusId { get; set; }
-        public string Modifier { get; set; }
+        public int ModifierId { get; set; }
+        public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
 
         public List<ContentTypeClassificationStatusList> ContentTypeClassificationStatuses { get; set; }
