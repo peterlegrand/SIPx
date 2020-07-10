@@ -18,8 +18,8 @@ namespace SIPx.DataAccess
         Task<List<IntermediateRegion>> GetIntermediateRegions(string UserId);
         Task<List<Language>> GetLanguages(string UserId);
         Task<List<Language>> GetLanguagesActive(string UserId);
-        Task<Setting> GetSetting(string UserId, int SettingId);
-        Task<List<Setting>> GetSettings(string UserId);
+        Task<SettingUpdateGet> GetSetting(string UserId, int SettingId);
+        Task<List<SettingUpdateGet>> GetSettings(string UserId);
         Task<SortBy> GetSortBy(string UserId, int SortById);
         Task<List<SortBy>> GetSortBys(string UserId);
         Task<Status> GetStatus(string UserId, int StatusId);

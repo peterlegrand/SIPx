@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
-                <div class="col-9">@Model.Name</div>
+                <div class="col-9">@Model.SettingsName</div>
             </div>
             @switch (Model.TypeId)
                         {

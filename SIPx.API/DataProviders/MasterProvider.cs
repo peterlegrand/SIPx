@@ -85,16 +85,16 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<Language, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<Setting>> GetSettings(string UserId)
+        public async Task<List<SettingUpdateGet>> GetSettings(string UserId)
         {
             string usp = "usp_Settings @UserID";
-            var x = await _sqlDataAccess.LoadData<Setting, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<SettingUpdateGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Setting> GetSetting(string UserId, int SettingId)
+        public Task<SettingUpdateGet> GetSetting(string UserId, int SettingId)
         {
             string usp = "usp_Setting @UserId, @SettingID";
-            return _sqlDataAccess.LoadSingleRecord<Setting, dynamic>(usp, new { UserId = UserId, SettingId = SettingId });
+            return _sqlDataAccess.LoadSingleRecord<SettingUpdateGet, dynamic>(usp, new { UserId = UserId, SettingId = SettingId });
 
         }
         public async Task<List<SortBy>> GetSortBys(string UserId)

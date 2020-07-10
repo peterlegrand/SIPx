@@ -70,7 +70,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Sow in organization calendar")).TermString
+                @Term.Find(x => x.InternalName.Equals("Show in organization calendar")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox id="ShowInOrganizationCalendar" label="ShowInOrganizationCalendar" ejs-for="ShowInOrganizationCalendar" checked="@Model.ShowInOrganizationCalendar"></ejs-checkbox>
@@ -86,7 +86,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Sow in event calendar")).TermString
+                @Term.Find(x => x.InternalName.Equals("Show in event calendar")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox id="ShowInEventCalendar" label="ShowInEventCalendar" ejs-for="ShowInEventCalendar" checked="@Model.ShowInEventCalendar"></ejs-checkbox>

@@ -172,7 +172,7 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("Settings")]
+        [HttpGet("Setting")]
         public async Task<IActionResult> GetSettings()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
