@@ -10,8 +10,9 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class ClassificationPageSectionController : ControllerBase
+    public class ClassificationPageSectionController  : ControllerBase
     {
+        private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IContentMasterProvider _contentMasterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -19,8 +20,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationPageSectionController(IMasterProvider masterProvider, IContentMasterProvider contentMasterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationPageSectionController(IPageProvider pageProvider, IMasterProvider masterProvider, IContentMasterProvider contentMasterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _pageProvider = pageProvider;
             _masterProvider = masterProvider;
             _contentMasterProvider = contentMasterProvider;
             _checkProvider = checkProvider;
@@ -30,7 +32,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> GetPages(int Id)
+        public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "10"))
@@ -45,7 +47,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationProvider.GetClassificationPages(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.GetClassificationPageSections(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -68,7 +70,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationPageLanguages(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.GetClassificationPageSectionLanguages(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -92,8 +94,14 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var cps = new ClassificationPageSectionUpdateGet();
-                cps = await _classificationProvider.GetClassificationPage(CurrentUser.Id, Id);
+                cps = await _classificationProvider.GetClassificationPageSection(CurrentUser.Id, Id);
                 cps.ContentTypes = await _contentMasterProvider.GetContentTypeList(CurrentUser.Id);
+                cps.PageSectionTypes = await _pageProvider.GetPageSectionTypeList(CurrentUser.Id);
+                cps.PageSectionDataTypes = await _pageProvider.GetPageSectionDataTypeList(CurrentUser.Id);
+                cps.SortBys = await _masterProvider.GetSortByList(CurrentUser.Id);
+                cps.Sequences = await _classificationProvider.GetClassificationPageSectionSequenceListBySectionId(CurrentUser.Id, Id);
+                cps.OneTwoColumnSource.Add(1);
+                cps.OneTwoColumnSource.Add(2);
 
                 return Ok();
             }
@@ -118,7 +126,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationPageLanguage(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.GetClassificationPageSectionLanguage(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

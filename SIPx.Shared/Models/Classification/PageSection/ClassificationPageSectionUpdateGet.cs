@@ -37,11 +37,11 @@ namespace SIPx.Shared
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<SequenceList> Sequences { get; set; }
+        public List<ClassificationPageSectionSequenceList> Sequences { get; set; }
         public List<PageSectionTypeList> PageSectionTypes { get; set; }
         public List<PageSectionDataTypeList> PageSectionDataTypes { get; set; }
-        public List<int> OneTwoColumnsSource { get; set; }
         public List<ContentTypeList> ContentTypes { get; set; }
         public List<SortByList> SortBys { get; set; }
+        public List<int> OneTwoColumnSource { get; set; }
     }
 }

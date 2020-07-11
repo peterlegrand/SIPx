@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class PageProvider 
+    public class PageProvider : IPageProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
@@ -20,7 +20,7 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        
+
         public async Task<List<PageLanguage>> GetPageLanguages(string UserId, int PageId)
         {
             string usp = "usp_DateLevels @UserId, @PageID";
@@ -45,6 +45,18 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<Page, dynamic>(usp, new { UserId = UserId, PageId = PageId });
 
         }
-       
+        public Task<List<PageSectionDataTypeList>> GetPageSectionDataTypeList(string UserId)
+        {
+            string usp = "usp_PageSectionDataTypeList @UserId";
+            return _sqlDataAccess.LoadData<PageSectionDataTypeList, dynamic>(usp, new { UserId = UserId});
+
+        }
+        public Task<List<PageSectionTypeList>> GetPageSectionTypeList(string UserId)
+        {
+            string usp = "usp_PageSectionTypeList @UserId, @PageID";
+            return _sqlDataAccess.LoadData<PageSectionTypeList, dynamic>(usp, new { UserId = UserId });
+
+        }
+
     }
 }

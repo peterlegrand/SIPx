@@ -22,6 +22,7 @@ namespace SIPx.DataAccess
         Task<List<SettingUpdateGet>> GetSettings(string UserId);
         Task<SortBy> GetSortBy(string UserId, int SortById);
         Task<List<SortBy>> GetSortBys(string UserId);
+        Task<List<SortByList>> GetSortByList(string UserId);
         Task<Status> GetStatus(string UserId, int StatusId);
         Task<List<Status>> GetStatuses(string UserId);
         Task<List<StatusList>> GetStatusList(string UserId);

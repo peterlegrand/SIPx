@@ -170,7 +170,7 @@
                     @Term.Find(x => x.InternalName.Equals("One two columns")).TermString
                 </div>
                 <div class="col-9">
-                    <ejs-dropdownlist id="Statuses" dataSource="@Model.OneTwoColumnsSource" ejs-for="@Model.OneTwoColumns" value="@Model.OneTwoColumns" index="2" filtering="FilterDefaultPage" popupHeight="220px">
+                    <ejs-dropdownlist id="Statuses" dataSource="@Model.OneTwoColumnSource" ejs-for="@Model.OneTwoColumns" value="@Model.OneTwoColumns" index="2" filtering="FilterDefaultPage" popupHeight="220px">
                         <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
 
@@ -214,7 +214,7 @@
                 @Term.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
-                @Model.Creator
+                @Model.CreatorName
             </div>
         </div>
         <div class="row">
@@ -230,7 +230,7 @@
                 @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
-                @Model.Modifier
+                @Model.ModifierName
             </div>
         </div>
         <div class="row">

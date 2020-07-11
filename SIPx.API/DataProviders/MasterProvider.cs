@@ -103,6 +103,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<SortBy, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<SortByList>> GetSortByList(string UserId)
+        {
+            string usp = "usp_SortByList @UserID";
+            var x = await _sqlDataAccess.LoadData<SortByList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public Task<SortBy> GetSortBy(string UserId, int SortById)
         {
             string usp = "usp_SortBy @UserId, @SortByID";

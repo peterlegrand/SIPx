@@ -114,10 +114,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationPageLanguageId });
 
         }
-        public Task<List<ClassificationPageSectionUpdateGet>> GetClassificationPageSections(string UserId, int ClassificationPageId)
+        public Task<List<ClassificationPageSectionIndexGet>> GetClassificationPageSections(string UserId, int ClassificationPageId)
         {
             string usp = "usp_ClassificationPageSections @UserId, @ClassificationPageID";
-            return _sqlDataAccess.LoadData<ClassificationPageSectionUpdateGet, dynamic>(usp, new { UserId, ClassificationPageId });
+            return _sqlDataAccess.LoadData<ClassificationPageSectionIndexGet, dynamic>(usp, new { UserId, ClassificationPageId });
 
         }
         public Task<ClassificationPageSectionUpdateGet> GetClassificationPageSection(string UserId, int ClassificationPageSectionId)
@@ -239,6 +239,12 @@ namespace SIPx.DataAccess
             string usp = "usp_ClassificationUpdateCheck @classificationLanguageId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @ModifierId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Classification);
             return CheckString;
+        }
+        public Task<List<ClassificationPageSectionSequenceList>> GetClassificationPageSectionSequenceListBySectionId(string UserId, int ClassificationPageSectionId)
+        {
+            string usp = "usp_ClassificationPageSectionSequenceList @UserId, @ClassificationPageSectionID";
+            return _sqlDataAccess.LoadData<ClassificationPageSectionSequenceList, dynamic>(usp, new { UserId, ClassificationPageSectionId });
+
         }
     }
 }
