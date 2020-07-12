@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ClassificationUpdateView (@UserId nvarchar(450),@ClassificationId int)
+CREATE PROCEDURE usp_ClassificationUpdateGet (@UserId nvarchar(450),@ClassificationId int)
 AS
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -15,9 +15,11 @@ SELECT Classifications.ClassificationID
 	, ClassificationLanguages.Description
 	, ClassificationLanguages.MenuName
 	, ClassificationLanguages.MouseOver
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Classifications.CreatorID
 	, Classifications.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Classifications.ModifierID
 	, Classifications.ModifiedDate
 FROM Classifications 
 JOIN ClassificationLanguages 

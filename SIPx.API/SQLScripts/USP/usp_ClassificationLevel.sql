@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationLevel] (@UserId nvarchar(450), @ClassificationLevelId int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationLevelUpdateGet] (@UserId nvarchar(450), @ClassificationLevelId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationLevels.ClassificationLevelID
+	, ClassificationLevels.ClassificationID
 	, ISNULL(UserClassificationLevelLanguage.ClassificationLevelLanguageId,ISNULL(DefaultClassificationLevelLanguage.ClassificationLevelLanguageId,0)) ClassificationLevelLanguageId
 	, ISNULL(UserClassificationLevelLanguage.Name,ISNULL(DefaultClassificationLevelLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserClassificationLevelLanguage.Description,ISNULL(DefaultClassificationLevelLanguage.Description,'No description for this role')) Description
@@ -17,10 +18,12 @@ SELECT ClassificationLevels.ClassificationLevelID
 	, ClassificationLevels.OnTheFly
 	, ClassificationLevels.InDropDown
 	, ClassificationLevels.InMenu
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ClassificationLevels.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, ClassificationLevels.CreatorID
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, ClassificationLevels.ModifiedDate
+	, ClassificationLevels.ModifierID
 FROM ClassificationLevels 
 LEFT JOIN (SELECT ClassificationLevelId, Name, Description, MenuName, MouseOver, ClassificationLevelLanguageId FROM ClassificationLevelLanguages WHERE LanguageId = @LanguageID) UserClassificationLevelLanguage
 	ON UserClassificationLevelLanguage.ClassificationLevelId = ClassificationLevels.ClassificationLevelID

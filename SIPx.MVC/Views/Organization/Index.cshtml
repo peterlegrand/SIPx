@@ -5,7 +5,7 @@
 
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organizations")).TermString</h1>
+<h1><img src="~/images/icons/Organizations.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organizations")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -17,34 +17,34 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Create">@Term.Find(x => x.InternalName.Equals("Add new organization")).TermString</a>
+<a href="~/Organization/Create">@Term.Find(x => x.InternalName.Equals("Add new organization")).TermString</a>
 <script id="Address" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationAddress/Index/${OrganizationId}"><span style="color:red">A</span>ddress</a>
+        <a class="nav-link text-dark font-weight-bold" href="/OrganizationAddress/Index/${OrganizationId}"><span style="color:red">A</span>ddress</a>
 
     </div>
 </script>
 <script id="Telecom" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationTelecom/Index/${OrganizationId}"><span style="color:red">T</span>elecom</a>
+        <a class="nav-link text-dark font-weight-bold" href="/OrganizationTelecom/Index/${OrganizationId}"><span style="color:red">T</span>elecom</a>
 
     </div>
 </script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Classification/Edit/${OrganizationId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/Organization/Edit/${OrganizationId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Language" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Classification/LanguageIndex/${OrganizationId}"><span style="color:red">L</span>anguage</a>
+        <a class="nav-link text-dark font-weight-bold" href="/Organization/LanguageIndex/${OrganizationId}"><span style="color:red">L</span>anguage</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Classification/Delete/${OrganizationId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="Organization/Delete/${OrganizationId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

@@ -86,7 +86,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Organizations")]
+        [HttpGet]
         public async Task<IActionResult> GetOrganizations()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -100,7 +100,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Organization/{Id:int}")]
+        [HttpGet("/{Id:int}")]
         public async Task<IActionResult> GetOrganization(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

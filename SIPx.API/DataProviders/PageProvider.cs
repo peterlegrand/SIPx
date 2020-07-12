@@ -53,7 +53,7 @@ namespace SIPx.DataAccess
         }
         public Task<List<PageSectionTypeList>> GetPageSectionTypeList(string UserId)
         {
-            string usp = "usp_PageSectionTypeList @UserId, @PageID";
+            string usp = "usp_PageSectionTypeList @UserId";
             return _sqlDataAccess.LoadData<PageSectionTypeList, dynamic>(usp, new { UserId = UserId });
 
         }

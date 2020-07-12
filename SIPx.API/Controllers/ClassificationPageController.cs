@@ -43,7 +43,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationProvider.GetClassificationPages(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationPageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -66,7 +66,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationPageLanguages(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationPageLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -74,7 +74,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Edit/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetPage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -89,7 +89,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationPage(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationPageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -112,7 +112,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationPageLanguage(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationPageLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

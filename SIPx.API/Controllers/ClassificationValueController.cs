@@ -42,7 +42,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationValues(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationValueIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

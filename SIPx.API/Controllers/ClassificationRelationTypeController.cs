@@ -27,7 +27,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("TypeIndex")]
+        [HttpGet("Index")]
         public async Task<IActionResult> GetRelationTypes() //int Id) PETER CHECK it had this Id but I think no need
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -42,7 +42,7 @@ namespace SIPx.API.Controllers
                 //    });
                 //}
 
-                return Ok(await _classificationProvider.GetClassificationRelationTypes(CurrentUser.Id));
+                return Ok(await _classificationProvider.ClassificationRelationTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("TypeLanguageIndex/{Id:int}")]
+        [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> GetRelationTypeLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -65,7 +65,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationRelationTypeLanguages(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationRelationTypeLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -74,7 +74,7 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("TypeEdit/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetRelationType(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User); 
@@ -89,7 +89,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationRelationType(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationRelationTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             { 
@@ -97,7 +97,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("TypeLanguageEdit/{Id:int}")]
+        [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> GetRelationTypeLanguage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -112,7 +112,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationRelationTypeLanguage(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationRelationTypeLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

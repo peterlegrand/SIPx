@@ -27,7 +27,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet]
+        [HttpGet("Index")]
         public async Task<IActionResult> Get()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -63,7 +63,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> Post(ClassificationCreatePost Classification)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -90,7 +90,7 @@ namespace SIPx.API.Controllers
 
         }
 
-        [HttpGet("Languages/{Id:int}")]
+        [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> GetLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -105,7 +105,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationLanguages(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -113,32 +113,32 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("{Id:int}")]
-        public async Task<IActionResult> Get(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
-            {
-                if(await _checkProvider.CheckIfRecordExists("Classifications", "ClassificationID", Id) == 0)
-                    {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-                var x = await _classificationProvider.GetClassification(CurrentUser.Id, Id);
-                return Ok(x);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+        //[HttpGet("{Id:int}")]
+        //public async Task<IActionResult> Get(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
+        //    {
+        //        if(await _checkProvider.CheckIfRecordExists("Classifications", "ClassificationID", Id) == 0)
+        //            {
+        //            return BadRequest(new
+        //            {
+        //                IsSuccess = false,
+        //                Message = "No record with this ID",
+        //            });
+        //        }
+        //        var x = await _classificationProvider.GetClassification(CurrentUser.Id, Id);
+        //        return Ok(x);
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
             
-        }
+        //}
 
-        [HttpGet("Language/{Id:int}")]
+        [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> GetLanguage(int Id)
         {
             if (await _checkProvider.CheckIfRecordExists("ClassificationLanguages", "ClassificationLanguageID", Id) == 0)
@@ -153,7 +153,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))  
             {
-                return Ok(await _classificationProvider.GetClassificationLanguage(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -161,7 +161,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Edit/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> EditGet(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -175,8 +175,8 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _classificationProvider.GetClassificationEdit(CurrentUser.Id, Id);
-                var y = await _classificationProvider.GetClassificationPageList(CurrentUser.Id, Id);
+                var x = await _classificationProvider.ClassificationUpdateGet(CurrentUser.Id, Id);
+                var y = await _classificationProvider.ClassificationPageListGet(CurrentUser.Id, Id);
                 var z = await _masterProvider.GetStatusList(CurrentUser.Id);
 
                 x.DefaultPages = y;
@@ -191,13 +191,13 @@ namespace SIPx.API.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Put(ClassificationUpdatePut Classification)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                var CheckString = await _classificationProvider.PutClassificationCheck(Classification);
+                var CheckString = await _classificationProvider.ClassificationCheckPut(Classification);
                 if (CheckString.Length==0)
                 { 
                  _classificationProvider.PutClassification(Classification);

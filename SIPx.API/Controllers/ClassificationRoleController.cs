@@ -41,7 +41,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationRoles(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationRoleIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -64,7 +64,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationRole(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationRoleUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

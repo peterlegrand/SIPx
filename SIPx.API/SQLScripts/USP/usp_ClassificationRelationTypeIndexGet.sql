@@ -35,6 +35,7 @@ JOIN Persons Creator
 	ON Creator.UserId = ClassificationRelationTypes.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = ClassificationRelationTypes.ModifierID
+WHERE UILanguageName.LanguageId = @LanguageID
 ORDER BY ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this role'))
 
 

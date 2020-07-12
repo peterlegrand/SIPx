@@ -7,15 +7,19 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT ClassificationLanguages.ClassificationLanguageID
+	, ClassificationLanguages.ClassificationID
 	, ClassificationLanguages.LanguageID
+	, UILanguageName.Name LanguageName
 	, ClassificationLanguages.Name
 	, ClassificationLanguages.Description
 	, ClassificationLanguages.MenuName
 	, ClassificationLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, ClassificationLanguages.CreatorID
 	, ClassificationLanguages.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, ClassificationLanguages.ModifierID
 	, ClassificationLanguages.ModifiedDate
 FROM Classifications
 JOIN ClassificationLanguages

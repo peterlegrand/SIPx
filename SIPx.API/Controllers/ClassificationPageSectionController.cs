@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -46,7 +47,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                var x = await _classificationProvider.GetClassificationPageSections(CurrentUser.Id, Id);
+                var x = await _classificationProvider.ClassificationPageSectionIndexGet(CurrentUser.Id, Id);
                 return Ok(x);
             }
             return BadRequest(new
@@ -70,7 +71,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationPageSectionLanguages(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationPageSectionLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -94,14 +95,17 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var cps = new ClassificationPageSectionUpdateGet();
-                cps = await _classificationProvider.GetClassificationPageSection(CurrentUser.Id, Id);
+                cps = await _classificationProvider.ClassificationPageSectionUpdateGet(CurrentUser.Id, Id);
                 cps.ContentTypes = await _contentMasterProvider.GetContentTypeList(CurrentUser.Id);
                 cps.PageSectionTypes = await _pageProvider.GetPageSectionTypeList(CurrentUser.Id);
                 cps.PageSectionDataTypes = await _pageProvider.GetPageSectionDataTypeList(CurrentUser.Id);
                 cps.SortBys = await _masterProvider.GetSortByList(CurrentUser.Id);
-                cps.Sequences = await _classificationProvider.GetClassificationPageSectionSequenceListBySectionId(CurrentUser.Id, Id);
-                cps.OneTwoColumnSource.Add(1);
-                cps.OneTwoColumnSource.Add(2);
+                cps.Sequences = await _classificationProvider.ClassificationPageSectionSequenceListBySectionIdGet(CurrentUser.Id, Id);
+                var intlist = new List<int>();
+                intlist.Add(1);
+                intlist.Add(2);
+
+                cps.OneTwoColumnSource = intlist;
 
                 return Ok(cps);
             }
@@ -126,7 +130,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationPageSectionLanguage(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationPageSectionLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

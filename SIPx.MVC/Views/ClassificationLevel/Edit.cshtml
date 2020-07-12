@@ -68,24 +68,27 @@
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequence" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="FilterDefaultPage" popupHeight="220px">
-                    @*<e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>*@
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
         </div>
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Date level")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="DateLevelId" dataSource="@Model.DateLevelId" ejs-for="@Model.DateLevelId" value="@Model.DateLevelId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="DateLevelId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="DateLevelId" dataSource="@Model.DateLevels" ejs-for="@Model.DateLevelId" value="@Model.DateLevelId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="DateLevelListId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -130,12 +133,11 @@
                 <ejs-checkbox id="InMenu" label="InMenu" ejs-for="InMenu" checked="@Model.InMenu"></ejs-checkbox>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
             </div>
-            <div class="col-9">
+            <div class="col-6">
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>

@@ -11,7 +11,7 @@ namespace SIPx.Shared
         public int ClassificationPageSectionLanguageId { get; set; }
         public int ClassificationPageSectionId { get; set; }
         public int ClassificationPageId { get; set; }
-        public int ClassificationPageName { get; set; }
+        public string ClassificationPageName { get; set; }
         public int ClassificationId { get; set; }
         public string ClassificationName { get; set; }
         public int LanguageId { get; set; }

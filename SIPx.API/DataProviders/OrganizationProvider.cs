@@ -44,16 +44,16 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationLanguageId = OrganizationLanguageId });
 
         }
-        public async Task<List<Organization>> GetOrganizations(string UserId)
+        public async Task<List<OrganizationIndexGet>> GetOrganizations(string UserId)
         {
             string usp = "usp_Organizations @UserID";
-            var x = await _sqlDataAccess.LoadData<Organization, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<OrganizationIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Organization> GetOrganization(string UserId, int OrganizationId)
+        public Task<OrganizationUpdateGet> GetOrganization(string UserId, int OrganizationId)
         {
             string usp = "usp_Organization @UserId, @OrganizationID";
-            return _sqlDataAccess.LoadSingleRecord<Organization, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            return _sqlDataAccess.LoadSingleRecord<OrganizationUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
 
         }
         public Task<List<OrganizationTelecom>> GetOrganizationTelecoms(string UserId, int OrganizationId)

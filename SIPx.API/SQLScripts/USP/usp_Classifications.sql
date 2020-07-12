@@ -7,7 +7,7 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT Classifications.ClassificationID
 	, ISNULL(UserLanguage.ClassificationLanguageID,ISNULL(DefaultLanguage.ClassificationLanguageID,0)) ClassificationLanguageID
-	, @LanguageId
+	, @LanguageId LanguageId
 	, LanguageTerm.Name LanguageName
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this classification')) Description

@@ -57,9 +57,9 @@ SELECT TOP (@Top)
 	, Path
 	, OrganizationTypes.Internal
 	, OrganizationTypes.LegalEntity
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, OrganizationHierarchy.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, OrganizationHierarchy.ModifiedDate
 FROM   OrganizationHierarchy
 JOIN Statuses

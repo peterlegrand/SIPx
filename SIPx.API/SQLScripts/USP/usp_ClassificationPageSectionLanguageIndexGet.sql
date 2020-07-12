@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionLanguageUpdateGet] (@UserId nvarchar(450), @ClassificationPageSectionLanguageId int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionLanguageIndexGet] (@UserId nvarchar(450), @ClassificationPageSectionId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -6,12 +6,12 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
-SELECT ClassificationPageSections.ClassificationPageSectionId 
-	, ClassificationPageSections.ClassificationPageID
-	, ClassificationPageSections.ClassificationID
+SELECT ClassificationPageSectionLanguages.ClassificationPageSectionLanguageID
+	, ClassificationPageSectionLanguages.ClassificationPageSectionID
+	, ClassificationPages.ClassificationID
+	, ClassificationPages.ClassificationPageID
 	, ISNULL(UserClassificationLanguage.Name,ISNULL(DefaultClassificationLanguage.Name,'No name for this classification')) ClassificationName
 	, ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for this classification page')) ClassificationPageName
-	, ClassificationPageSectionLanguages.ClassificationPageSectionLanguageID
 	, ClassificationPageSectionLanguages.LanguageID
 	, ClassificationPageSectionLanguages.Name
 	, ClassificationPageSectionLanguages.Description
@@ -21,8 +21,8 @@ SELECT ClassificationPageSections.ClassificationPageSectionId
 	, ClassificationPageSectionLanguages.TitleDescription
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationPageSectionLanguages.CreatorId
 	, ClassificationPageSectionLanguages.CreatedDate
+	, ClassificationPageSectionLanguages.CreatorId
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, ClassificationPageSectionLanguages.ModifierId
 	, ClassificationPageSectionLanguages.ModifiedDate
@@ -51,8 +51,8 @@ JOIN Persons Creator
 	ON Creator.UserId = ClassificationPageSectionLanguages.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = ClassificationPageSectionLanguages.ModifierID
-WHERE ClassificationPageSectionLanguages.ClassificationPageSectionLanguageId = @ClassificationPageSectionLanguageID
+WHERE ClassificationPageSections.ClassificationPageSectionId = @ClassificationPageSectionID
 	AND UILanguageName.LanguageId = @LanguageID
-
+ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)
 
 

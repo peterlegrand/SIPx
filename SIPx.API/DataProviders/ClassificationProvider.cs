@@ -36,55 +36,55 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ClassificationCreateGetSequence, dynamic>(usp, new { UserId });
             return x;
         }
-        public Task<ClassificationUpdateGet> GetClassification(string UserId, int ClassificationId)
+        public Task<ClassificationUpdateGet> ClassificationGet(string UserId, int ClassificationId)
         {
             string usp = "usp_Classification @UserId, @classificationID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
-        public Task<ClassificationUpdateGet> GetClassificationEdit(string UserId, int ClassificationId)
+        public Task<ClassificationUpdateGet> ClassificationUpdateGet(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationUpdateView @UserId, @classificationID";
+            string usp = "usp_ClassificationUpdateGet @UserId, @classificationID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
-        public async Task<List<ClassificationLanguageIndexGet>> GetClassificationLanguages(string UserId, int ClassificationId)
+        public async Task<List<ClassificationLanguageIndexGet>> ClassificationLanguageIndexGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationLanguages @UserId, @ClassificationID";
             var x = await _sqlDataAccess.LoadData<ClassificationLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationId });
             return x;
         }
-        public Task<ClassificationLanguageIndexGet> GetClassificationLanguage(string UserId, int ClassificationLanguageId)
+        public Task<ClassificationLanguageIndexGet> ClassificationLanguageUpdateGet(string UserId, int ClassificationLanguageId)
         {
             string usp = "usp_ClassificationLanguage @UserId, @ClassificationLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<ClassificationLanguageIndexGet, dynamic>(usp, (UserId, ClassificationLanguageId));
+            return _sqlDataAccess.LoadSingleRecord<ClassificationLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationLanguageId });
 
         }
-        public async Task<List<ClassificationLevelIndexGet>> GetClassificationLevels(string UserId, int ClassificationId)
+        public async Task<List<ClassificationLevelIndexGet>> ClassificationLevelIndexGet(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationLevels @UserId, @ClassificationID";
+            string usp = "usp_ClassificationLevelIndex @UserId, @ClassificationID";
             var x = await _sqlDataAccess.LoadData<ClassificationLevelIndexGet, dynamic>(usp, new { UserId, ClassificationId });
             return x;
         }
-        public Task<ClassificationLevelUpdateGet> GetClassificationLevel(string UserId, int ClassificationLevelId)
+        public Task<ClassificationLevelUpdateGet> ClassificationLevelUpdateGet(string UserId, int ClassificationLevelId)
         {
-            string usp = "usp_ClassificationLevel @UserId, @ClassificationLevelID";
+            string usp = "usp_ClassificationLevelUpdateGet @UserId, @ClassificationLevelID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationLevelUpdateGet, dynamic>(usp, new { UserId, ClassificationLevelId });
 
         }
-        public async Task<List<ClassificationLevelLanguageIndexGet>> GetClassificationLevelLanguages(string UserId, int ClassificationLevelId)
+        public async Task<List<ClassificationLevelLanguageIndexGet>> ClassificationLevelLanguageIndexGet(string UserId, int ClassificationLevelId)
         {
-            string usp = "usp_ClassificationLevelLanguages @UserId, @ClassificationLevelID";
+            string usp = "usp_ClassificationLevelLanguageIndex @UserId, @ClassificationLevelID";
             var x = await _sqlDataAccess.LoadData<ClassificationLevelLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationLevelId });
             return x;
         }
-        public Task<ClassificationLevelLanguageIndexGet> GetClassificationLevelLanguage(string UserId, int ClassificationLevelLanguageId)
+        public Task<ClassificationLevelLanguageIndexGet> ClassificationLevelLanguageUpdateGet(string UserId, int ClassificationLevelLanguageId)
         {
-            string usp = "usp_ClassificationLevelLanguage @UserId, @ClassificationLevelLanguageID";
+            string usp = "usp_ClassificationLevelLanguageUpdateGet @UserId, @ClassificationLevelLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationLevelLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationLevelLanguageId });
 
         }
-        public Task<List<ClassificationPageList>> GetClassificationPageList(string UserId, int ClassificationId)
+        public Task<List<ClassificationPageList>> ClassificationPageListGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationPageList @UserId, @ClassificationID";
             return _sqlDataAccess.LoadData<ClassificationPageList, dynamic>(usp, new { UserId, ClassificationId });
@@ -92,129 +92,136 @@ namespace SIPx.DataAccess
         }
 
 
-        public async Task<List<ClassificationPageIndexGet>> GetClassificationPages(string UserId, int ClassificationId)
+        public async Task<List<ClassificationPageIndexGet>> ClassificationPageIndexGet(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationPages @UserId, @ClassificationID";
+            string usp = "usp_ClassificationPageIndexGet @UserId, @ClassificationID";
             var x = await _sqlDataAccess.LoadData<ClassificationPageIndexGet, dynamic>(usp, new { UserId, ClassificationId });
             return x;
         }
-        public async Task<List<ClassificationPageSectionIndexGet>> GetClassificationPageSections(string UserId, int ClassificationPageId)
-        {
-            string usp = "usp_ClassificationPageSections @UserId, @ClassificationPageID";
-            var x = await _sqlDataAccess.LoadData<ClassificationPageSectionIndexGet, dynamic>(usp, new { UserId, ClassificationPageId });
-            return x;
+        //public async Task<List<ClassificationPageSectionIndexGet>> ClassificationPageSectionIndexGet(string UserId, int ClassificationPageId)
+        //{
+        //    string usp = "usp_ClassificationPageSections @UserId, @ClassificationPageID";
+        //    var x = await _sqlDataAccess.LoadData<ClassificationPageSectionIndexGet, dynamic>(usp, new { UserId, ClassificationPageId });
+        //    return x;
 
-        }
-        public Task<ClassificationPageUpdateGet> GetClassificationPage(string UserId, int ClassificationPageId)
+        //}
+        public Task<ClassificationPageUpdateGet> ClassificationPageUpdateGet(string UserId, int ClassificationPageId)
         {
-            string usp = "usp_ClassificationPage @UserId, @ClassificationPageID";
+            string usp = "usp_ClassificationPageUpdateGet @UserId, @ClassificationPageID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageUpdateGet, dynamic>(usp, new { UserId, ClassificationPageId });
 
         }
-        public Task<List<ClassificationPageLanguageIndexGet>> GetClassificationPageLanguages(string UserId, int ClassificationPageId)
+        public Task<List<ClassificationPageLanguageIndexGet>> ClassificationPageLanguageIndexGet(string UserId, int ClassificationPageId)
         {
-            string usp = "usp_ClassificationPageLanguages @UserId, @ClassificationPageID";
+            string usp = "usp_ClassificationPageLanguageIndexGet @UserId, @ClassificationPageID";
             return _sqlDataAccess.LoadData<ClassificationPageLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationPageId });
 
         }
-        public Task<ClassificationPageLanguageIndexGet> GetClassificationPageLanguage(string UserId, int ClassificationPageLanguageId)
+        public Task<ClassificationPageLanguageIndexGet> GetClassificationPageLanguageUpdateGet(string UserId, int ClassificationPageLanguageId)
         {
             string usp = "usp_ClassificationPageLanguage @UserId, @ClassificationPageLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationPageLanguageId });
 
         }
-
-        public Task<ClassificationPageSectionUpdateGet> GetClassificationPageSection(string UserId, int ClassificationPageSectionId)
+        public async Task<List<ClassificationPageSectionIndexGet>> ClassificationPageSectionIndexGet(string UserId, int ClassificationPageId)
         {
-            string usp = "usp_ClassificationPageSection @UserId, @ClassificationPageSectionID";
+            string usp = "usp_ClassificationPageSectionIndexGet @UserId, @ClassificationPageID";
+            var x = await _sqlDataAccess.LoadData<ClassificationPageSectionIndexGet, dynamic>(usp, new { UserId, ClassificationPageId });
+            return x;
+
+        }
+
+        public Task<ClassificationPageSectionUpdateGet> ClassificationPageSectionUpdateGet(string UserId, int ClassificationPageSectionId)
+        {
+            string usp = "usp_ClassificationPageSectionUpdateGet @UserId, @ClassificationPageSectionID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageSectionUpdateGet, dynamic>(usp, new { UserId, ClassificationPageSectionId });
 
         }
-        public Task<List<ClassificationPageSectionLanguageIndexGet>> GetClassificationPageSectionLanguages(string UserId, int ClassificationPageSectionId)
+        public Task<List<ClassificationPageSectionLanguageIndexGet>> ClassificationPageSectionLanguageIndexGet(string UserId, int ClassificationPageSectionId)
         {
-            string usp = "usp_ClassificationPageSectionLanguages @UserId, @ClassificationPageSectionID";
+            string usp = "usp_ClassificationPageSectionLanguageIndexGet @UserId, @ClassificationPageSectionID";
             return _sqlDataAccess.LoadData<ClassificationPageSectionLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationPageSectionId });
 
         }
-        public Task<ClassificationPageSectionLanguageIndexGet> GetClassificationPageSectionLanguage(string UserId, int ClassificationPageSectionLanguageId)
+        public Task<ClassificationPageSectionLanguageIndexGet> ClassificationPageSectionLanguageUpdateGet(string UserId, int ClassificationPageSectionLanguageId)
         {
-            string usp = "usp_ClassificationPageSectionLanguage @UserId, @ClassificationPageLanguageSectionID";
+            string usp = "usp_ClassificationPageSectionLanguageUpdateGet @UserId, @ClassificationPageSectionLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageSectionLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationPageSectionLanguageId });
 
         }
-        public Task<List<ClassificationRelationTypeIndexGet>> GetClassificationRelationTypes(string UserId)
+        public Task<List<ClassificationRelationTypeIndexGet>> ClassificationRelationTypeIndexGet(string UserId)
         {
-            string usp = "usp_ClassificationRelationTypes @UserID";
+            string usp = "usp_ClassificationRelationTypeIndexGet @UserID";
             return _sqlDataAccess.LoadData<ClassificationRelationTypeIndexGet, dynamic>(usp, new { UserId });
 
         }
-        public Task<ClassificationRelationTypeUpdateGet> GetClassificationRelationType(string UserId, int ClassificationRelationTypeId)
+        public Task<ClassificationRelationTypeUpdateGet> ClassificationRelationTypeUpdateGet(string UserId, int ClassificationRelationTypeId)
         {
-            string usp = "usp_ClassificationRelationType @UserId, @ClassificationRelationTypeID";
+            string usp = "usp_ClassificationRelationTypeUpdateGet @UserId, @ClassificationRelationTypeID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationRelationTypeUpdateGet, dynamic>(usp, new { UserId, ClassificationRelationTypeId });
 
         }
-        public Task<List<ClassificationRelationTypeLanguageUpdateGet>> GetClassificationRelationTypeLanguages(string UserId, int ClassificationRelationTypeId)
+        public Task<List<ClassificationRelationTypeLanguageUpdateGet>> ClassificationRelationTypeLanguageIndexGet(string UserId, int ClassificationRelationTypeId)
         {
-            string usp = "usp_ClassificationRelationTypeLanguages @UserId, @ClassificationRelationTypeID";
+            string usp = "usp_ClassificationRelationTypeLanguageIndexGet @UserId, @ClassificationRelationTypeID";
             return _sqlDataAccess.LoadData<ClassificationRelationTypeLanguageUpdateGet, dynamic>(usp, new { UserId, ClassificationRelationTypeId });
 
         }
-        public Task<ClassificationRelationTypeLanguageUpdateGet> GetClassificationRelationTypeLanguage(string UserId, int ClassificationRelationTypeLanguageId)
+        public Task<ClassificationRelationTypeLanguageUpdateGet> ClassificationRelationTypeLanguageUpdateGet(string UserId, int ClassificationRelationTypeLanguageId)
         {
-            string usp = "usp_ClassificationRelationTypeLanguage @UserId, @ClassificationPageLanguageSectionID";
+            string usp = "usp_ClassificationRelationTypeLanguageUpdateGet @UserId, @ClassificationRelationTypeLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationRelationTypeLanguageUpdateGet, dynamic>(usp, new { UserId, ClassificationRelationTypeLanguageId });
 
         }
-        public Task<List<ClassificationRoleIndexGet>> GetClassificationRoles(string UserId, int ClassificationId)
+        public Task<List<ClassificationRoleIndexGet>> ClassificationRoleIndexGet(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationRoles @UserId, @ClassificationID";
+            string usp = "usp_ClassificationRoleIndexGet @UserId, @ClassificationID";
             return _sqlDataAccess.LoadData<ClassificationRoleIndexGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
-        public Task<ClassificationRoleUpdateGet> GetClassificationRole(string UserId, int ClassificationRoleId)
+        public Task<ClassificationRoleUpdateGet> ClassificationRoleUpdateGet(string UserId, int ClassificationRoleId)
         {
-            string usp = "usp_ClassificationRole @UserId, @ClassificationRoleID";
+            string usp = "usp_ClassificationRoleUpdateGet @UserId, @ClassificationRoleID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationRoleUpdateGet, dynamic>(usp, new { UserId, ClassificationRoleId });
 
         }
-        public Task<List<ClassificationUserIndexGet>> GetClassificationUsers(string UserId, int ClassificationId)
+        public Task<List<ClassificationUserIndexGet>> ClassificationUserIndexGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationUsers @UserId, @ClassificationID";
             return _sqlDataAccess.LoadData<ClassificationUserIndexGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
-        public Task<ClassificationUserUpdateGet> GetClassificationUser(string UserId, int ClassificationUserId)
+        public Task<ClassificationUserUpdateGet> ClassificationUserUpdateGet(string UserId, int ClassificationUserId)
         {
             string usp = "usp_ClassificationUser @UserId, @ClassificationUserID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationUserUpdateGet, dynamic>(usp, new { UserId, ClassificationUserId });
 
         }
-        public Task<List<ClassificationValueRoleUpdateGet>> GetClassificationValueRoles(string UserId, int ClassificationId)
+        public Task<List<ClassificationValueRoleUpdateGet>> ClassificationValueRoleIndexGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationValueRoles @UserId, @ClassificationID";
             return _sqlDataAccess.LoadData<ClassificationValueRoleUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
-        public Task<ClassificationValueRoleUpdateGet> GetClassificationValueRole(string UserId, int ClassificationValueRoleId)
+        public Task<ClassificationValueRoleUpdateGet> ClassificationValueRoleUpdateGet(string UserId, int ClassificationValueRoleId)
         {
             string usp = "usp_ClassificationValueRole @UserId, @ClassificationValueRoleID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueRoleUpdateGet, dynamic>(usp, new { UserId, ClassificationValueRoleId });
 
         }
-        public Task<List<ClassificationValueUserUpdateGet>> GetClassificationValueUsers(string UserId, int ClassificationId)
+        public Task<List<ClassificationValueUserUpdateGet>> ClassificationValueUserIndexGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationValueUsers @UserId, @ClassificationID";
             return _sqlDataAccess.LoadData<ClassificationValueUserUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
-        public Task<ClassificationValueUserUpdateGet> GetClassificationValueUser(string UserId, int ClassificationValueUserId)
+        public Task<ClassificationValueUserUpdateGet> ClassificationValueUserUpdateGet(string UserId, int ClassificationValueUserId)
         {
             string usp = "usp_ClassificationValueUser @UserId, @ClassificationValueUserID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueUserUpdateGet, dynamic>(usp, new { UserId, ClassificationValueUserId });
 
         }
-        public Task<List<ClassificationValueUpdateGet>> GetClassificationValues(string UserId, int ClassificationId)
+        public Task<List<ClassificationValueUpdateGet>> ClassificationValueIndexGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationValues @UserId, @ClassificationID";
             return _sqlDataAccess.LoadData<ClassificationValueUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
@@ -238,13 +245,13 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationUpdatePut>(usp, Classification);
             return true;
         } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.
-        public async Task<string> PutClassificationCheck(ClassificationUpdatePut Classification)
+        public async Task<string> ClassificationCheckPut(ClassificationUpdatePut Classification)
         {
             string usp = "usp_ClassificationUpdateCheck @classificationLanguageId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @ModifierId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Classification);
             return CheckString;
         }
-        public Task<List<ClassificationPageSectionSequenceList>> GetClassificationPageSectionSequenceListBySectionId(string UserId, int ClassificationPageSectionId)
+        public Task<List<ClassificationPageSectionSequenceList>> ClassificationPageSectionSequenceListBySectionIdGet(string UserId, int ClassificationPageSectionId)
         {
             string usp = "usp_ClassificationPageSectionSequenceList @UserId, @ClassificationPageSectionID";
             return _sqlDataAccess.LoadData<ClassificationPageSectionSequenceList, dynamic>(usp, new { UserId, ClassificationPageSectionId });

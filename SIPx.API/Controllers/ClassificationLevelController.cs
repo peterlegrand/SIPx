@@ -43,7 +43,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationProvider.GetClassificationLevels(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationLevelIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -67,7 +67,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationProvider.GetClassificationLevelLanguages(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationLevelLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -89,7 +89,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                return Ok(await _classificationProvider.GetClassificationLevel(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationLevelUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -112,7 +112,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.GetClassificationLevelLanguage(CurrentUser.Id, Id));
+                return Ok(await _classificationProvider.ClassificationLevelLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
