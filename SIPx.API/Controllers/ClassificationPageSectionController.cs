@@ -46,8 +46,8 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-
-                return Ok(await _classificationProvider.GetClassificationPageSections(CurrentUser.Id, Id));
+                var x = await _classificationProvider.GetClassificationPageSections(CurrentUser.Id, Id);
+                return Ok(x);
             }
             return BadRequest(new
             {
@@ -103,7 +103,7 @@ namespace SIPx.API.Controllers
                 cps.OneTwoColumnSource.Add(1);
                 cps.OneTwoColumnSource.Add(2);
 
-                return Ok();
+                return Ok(cps);
             }
             return BadRequest(new
             {

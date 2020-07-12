@@ -7,6 +7,8 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationPageSections.ClassificationPageSectionID
 	, ISNULL(UserClassificationPageSectionLanguage.Name,ISNULL(DefaultClassificationPageSectionLanguage.Name,'No name for this section')) Name
+	, ClassificationPageSections.ClassificationID
+	, ISNULL(UserClassificationPageSectionLanguage.ClassificationPageSectionLanguageID,ISNULL(DefaultClassificationPageSectionLanguage.ClassificationPageSectionLanguageID,0)) ClassificationPageSectionLanguageID
 	, ISNULL(UserClassificationPageSectionLanguage.Description,ISNULL(DefaultClassificationPageSectionLanguage.Description,'No description for this section')) Description
 	, ISNULL(UserClassificationPageSectionLanguage.MenuName,ISNULL(DefaultClassificationPageSectionLanguage.MenuName,'No menu name for this section')) MenuName
 	, ISNULL(UserClassificationPageSectionLanguage.MouseOver,ISNULL(DefaultClassificationPageSectionLanguage.MouseOver,'No mouse over for this section')) MouseOver
@@ -21,7 +23,7 @@ SELECT ClassificationPageSections.ClassificationPageSectionID
 	, ClassificationPageSections.ShowContentTypeTitleDescription
 	, ClassificationPageSections.OneTwoColumns
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this content type')) ContentTypeName
-	, ClassificationPageSections.ContentTypeID
+	, ISNULL(ClassificationPageSections.ContentTypeID,0) ContentTypeID
 	, ISNULL(UISortByNameCustom.Customization,UISortByName.Name) SortByName
 	, ClassificationPageSections.SortByID
 	, ClassificationPageSections.MaxContent
@@ -31,9 +33,10 @@ SELECT ClassificationPageSections.ClassificationPageSectionID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ClassificationPageSections.ModifiedDate
 FROM ClassificationPageSections 
-LEFT JOIN (SELECT ClassificationPageSectionId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageSectionLanguages WHERE LanguageId = @LanguageID) UserClassificationPageSectionLanguage
+
+LEFT JOIN (SELECT ClassificationPageSectionId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, ClassificationPageSectionLanguageID FROM ClassificationPageSectionLanguages WHERE LanguageId = @LanguageID) UserClassificationPageSectionLanguage
 	ON UserClassificationPageSectionLanguage.ClassificationPageSectionId = ClassificationPageSections.ClassificationPageSectionID
-LEFT JOIN (SELECT ClassificationPageSectionId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM ClassificationPageSectionLanguages JOIN Settings ON ClassificationPageSectionLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationPageSectionLanguage
+LEFT JOIN (SELECT ClassificationPageSectionId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, ClassificationPageSectionLanguageID FROM ClassificationPageSectionLanguages JOIN Settings ON ClassificationPageSectionLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationPageSectionLanguage
 	ON DefaultClassificationPageSectionLanguage.ClassificationPageSectionId = ClassificationPageSections.ClassificationPageSectionID
 JOIN PageSectionTypes
 	ON PageSectionTypes.PageSectionTypeId = ClassificationPageSections.PageSectionTypeID

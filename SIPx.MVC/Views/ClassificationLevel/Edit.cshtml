@@ -133,7 +133,9 @@
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+            </div>
+            <div class="col-9">
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
@@ -276,9 +278,7 @@
         }
     }
 </script>
-@*
-    PETER TODO 
-    <script type="text/javascript">
+@*<script type="text/javascript">
     function FilterDefaultPage(e) {
                 var query = new ej.data.Query();
                 query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
