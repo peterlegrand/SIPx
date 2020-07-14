@@ -20,10 +20,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<RoleClaim>> RoleClaimIndexGet(string UserId, string RoleId)
+        public async Task<List<RoleClaimIndexGet>> RoleClaimIndexGet(string UserId, string RoleId)
         {
             string usp = "usp_RoleClaimIndexGet @UserId, @RoleID";
-            var x = await _sqlDataAccess.LoadData<RoleClaim, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
+            var x = await _sqlDataAccess.LoadData<RoleClaimIndexGet, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
             return x;
         }
         //public async Task<RoleClaim> GetRoleClaim(string UserId, int RoleId)
@@ -32,58 +32,58 @@ namespace SIPx.DataAccess
         //    var x = await _sqlDataAccess.LoadSingleRecord<RoleClaim, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
         //    return x;
         //}
-        public async Task<List<Role>> RoleIndexGet(string UserId)
+        public async Task<List<RoleIndexGet>> RoleIndexGet(string UserId)
         {
             string usp = "usp_RoleIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<Role, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<RoleIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Role> RoleUpdateGet(string UserId, string RoleId)
+        public Task<RoleUpdateGet> RoleUpdateGet(string UserId, string RoleId)
         {
             string usp = "usp_roleUpdateGet @UserId, @RoleID";
-            return _sqlDataAccess.LoadSingleRecord<Role, dynamic>(usp, new { UserId = UserId, roleId = RoleId });
+            return _sqlDataAccess.LoadSingleRecord<RoleUpdateGet, dynamic>(usp, new { UserId = UserId, roleId = RoleId });
 
         }
-        public async Task<List<UserRole>> UserRoleIndexGet(string UserId, string UserRoleUserId)
+        public async Task<List<UserRoleIndexGet>> UserRoleIndexGet(string UserId, string UserRoleUserId)
         {
             string usp = "usp_UserRoleIndexGet @UserId, @UserRoleUserID";
-            var x = await _sqlDataAccess.LoadData<UserRole, dynamic>(usp, new { UserId = UserId, UserRoleUserId = UserRoleUserId });
+            var x = await _sqlDataAccess.LoadData<UserRoleIndexGet, dynamic>(usp, new { UserId = UserId, UserRoleUserId = UserRoleUserId });
             return x;
         }
-        public async Task<List<User>> UserIndexGet(string UserId)
+        public async Task<List<UserIndexGet>> UserIndexGet(string UserId)
         {
             string usp = "usp_UserIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<User, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<UserIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<User> UserUpdateGet(string UserId, string SelectedUserId)
+        public Task<UserUpdateGet> UserUpdateGet(string UserId, string SelectedUserId)
         {
             string usp = "usp_UserUpdateGet @UserId, @SelectedUserID";
-            return _sqlDataAccess.LoadSingleRecord<User, dynamic>(usp, new { UserId = UserId, SelectedUserId = SelectedUserId });
+            return _sqlDataAccess.LoadSingleRecord<UserUpdateGet, dynamic>(usp, new { UserId = UserId, SelectedUserId = SelectedUserId });
 
         }
-        public async Task<List<ClaimGroup>> ClaimGroupIndexGet(string UserId)
+        public async Task<List<ClaimGroupIndexGet>> ClaimGroupIndexGet(string UserId)
         {
             string usp = "usp_ClaimGroupIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<ClaimGroup, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<ClaimGroupIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<ClaimGroup> ClaimGroupUpdateGet(string UserId, int ClaimGroupId)
+        public Task<ClaimGroupUpdateGet> ClaimGroupUpdateGet(string UserId, int ClaimGroupId)
         {
             string usp = "usp_ClaimGroupUpdateGet @UserId, @ClaimGroupID";
-            return _sqlDataAccess.LoadSingleRecord<ClaimGroup, dynamic>(usp, new { UserId = UserId, ClaimGroupId = ClaimGroupId });
+            return _sqlDataAccess.LoadSingleRecord<ClaimGroupUpdateGet, dynamic>(usp, new { UserId = UserId, ClaimGroupId = ClaimGroupId });
 
         }
-        public async Task<List<Claim>> ClaimIndexGet(string UserId)
+        public async Task<List<ClaimIndexGet>> ClaimIndexGet(string UserId)
         {
             string usp = "usp_ClaimIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<Claim, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<ClaimIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Claim> ClaimUpdateGet(string UserId, int ClaimId)
+        public Task<ClaimUpdateGet> ClaimUpdateGet(string UserId, int ClaimId)
         {
             string usp = "usp_ClaimUpdateGet @UserId, @ClaimID";
-            return _sqlDataAccess.LoadSingleRecord<Claim, dynamic>(usp, new { UserId = UserId, ClaimId = ClaimId });
+            return _sqlDataAccess.LoadSingleRecord<ClaimUpdateGet, dynamic>(usp, new { UserId = UserId, ClaimId = ClaimId });
 
         }
         public Task<List<PersonAddress>> PersonAddressIndexGet(string UserId, int PersonId)
@@ -218,16 +218,16 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<SecurityLevel, dynamic>(usp, new { UserId = UserId, SecurityLevelId = SecurityLevelId });
 
         }
-        public Task<List<UserPreference>> UserPreferenceIndexGet(string UserId, string SelectedUserId)
+        public Task<List<UserPreferenceIndexGet>> UserPreferenceIndexGet(string UserId, string SelectedUserId)
         {
             string usp = "usp_UserPreferenceIndexGet @UserId, @SelectedUserID";
-            return _sqlDataAccess.LoadData<UserPreference, dynamic>(usp, new { UserId = UserId, SelectedUserId = SelectedUserId });
+            return _sqlDataAccess.LoadData<UserPreferenceIndexGet, dynamic>(usp, new { UserId = UserId, SelectedUserId = SelectedUserId });
 
         }
-        public Task<UserPreference> UserPreferenceUpdateGet(string UserId, int UserPreferenceId)
+        public Task<UserPreferenceUpdateGet> UserPreferenceUpdateGet(string UserId, int UserPreferenceId)
         {
             string usp = "usp_UserPreferenceUpdateGet @UserId, @UserPreferenceID";
-            return _sqlDataAccess.LoadSingleRecord<UserPreference, dynamic>(usp, new { UserId = UserId, UserPreferenceId = UserPreferenceId });
+            return _sqlDataAccess.LoadSingleRecord<UserPreferenceUpdateGet, dynamic>(usp, new { UserId = UserId, UserPreferenceId = UserPreferenceId });
 
         }
         public Task<List<RoleList>> RoleList(string UserId)

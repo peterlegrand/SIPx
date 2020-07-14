@@ -17,13 +17,13 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class UITermController : ControllerBase
+    public class GenderController : ControllerBase
     {
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UITermController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public GenderController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;
@@ -31,56 +31,27 @@ namespace SIPx.API.Controllers
         }
 
      
-        [HttpGet("LanguageCustomizationIndex")]
-        public async Task<IActionResult> GetUITermLanguageCustomizations()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.UITermLanguageCustomizationIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("LanguageIndex")]
-        public async Task<IActionResult> GetUITermLanguages()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.UITermLanguageIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetUITermLanguage(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.UITermLanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
         [HttpGet("Index")]
-        public async Task<IActionResult> GetUITerms()
+        public async Task<IActionResult> GetGenders()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.UITermIndexGet(CurrentUser.Id));
+                return Ok(await _masterProvider.GenderIndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("Active")]
+        public async Task<IActionResult> GetGendersActive()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _masterProvider.GendersActive(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -90,18 +61,18 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetUITerm(int Id)
+        public async Task<IActionResult> GetGender(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.UITermUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.GenderUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
                 IsSuccess = false,
                 Message = "No rights",
             });
-        }
+               }
     }
 }
