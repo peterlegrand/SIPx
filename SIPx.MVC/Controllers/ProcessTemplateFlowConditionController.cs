@@ -14,10 +14,10 @@ namespace SIPx.MVC.Controllers
         private readonly string _baseUrl = "https://localhost:44393/";
 
         ServiceClient client = new ServiceClient();
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ProcessTemplateFlowConditionUpdateGet>>($"{_baseUrl}api/ProcessTemplateFlowCondition",token);
+            var response = await client.GetProtectedAsync<List<ProcessTemplateFlowConditionIndexGet>>($"{_baseUrl}api/ProcessTemplateFlowCondition/Index/" + id, token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ProcessTemplateFlowCondition/Index", token);
             ViewBag.UITerms = x;
             return View(response);
@@ -28,7 +28,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ProcessTemplateFlowConditionUpdateGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<ProcessTemplateFlowConditionUpdateGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Update/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ProcessTemplateFlowCondition/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

@@ -6,10 +6,10 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT Statuses.StatusId 
-	, ISNULL(UIGroupNameCustom.Customization,UIGroupName.Name) GroupName
-	, ISNULL(UIGroupDescriptionCustom.Customization,UIGroupDescription.Name) GroupDescription
-	, ISNULL(UIGroupMenuNameCustom.Customization,UIGroupMenuName.Name) GroupMenuName
-	, ISNULL(UIGroupMouseOverCustom.Customization,UIGroupMouseOver.Name) GroupMouseOver
+	, ISNULL(UIGroupNameCustom.Customization,UIGroupName.Name) Name
+	, ISNULL(UIGroupDescriptionCustom.Customization,UIGroupDescription.Name) Description
+	, ISNULL(UIGroupMenuNameCustom.Customization,UIGroupMenuName.Name) MenuName
+	, ISNULL(UIGroupMouseOverCustom.Customization,UIGroupMouseOver.Name) MouseOver
 FROM Statuses
 JOIN UITermLanguages UIGroupName
 	ON UIGroupName.UITermId = Statuses.NameTermID

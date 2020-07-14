@@ -30,41 +30,13 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("OrganizationAddresses/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationAddresses(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationProvider.GetOrganizationAddresses(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("OrganizationAddress/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationAddress(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationProvider.GetOrganizationAddress(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
         [HttpGet("OrganizationLanguages/{Id:int}")]
         public async Task<IActionResult> GetOrganizationLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.GetOrganizationLanguages(CurrentUser.Id,Id));
+                return Ok(await _organizationProvider.OrganizationLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -78,7 +50,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.GetOrganizationLanguage(CurrentUser.Id, Id));
+                return Ok(await _organizationProvider.OrganizationLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -86,13 +58,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet]
+        [HttpGet("Index")]
         public async Task<IActionResult> GetOrganizations()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.GetOrganizations(CurrentUser.Id));
+                return Ok(await _organizationProvider.OrganizationIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -100,13 +72,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetOrganization(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.GetOrganization(CurrentUser.Id, Id));
+                return Ok(await _organizationProvider.OrganizationUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -114,89 +86,6 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("OrganizationTelecoms/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationTelecoms(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationProvider.GetOrganizationTelecoms(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("OrganizationTelecom/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationTelecom(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationProvider.GetOrganizationTelecom(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("OrganizationTypeLanguages/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationTypeLanguages(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationProvider.GetOrganizationTypeLanguages(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("OrganizationTypeLanguage/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationTypeLanguage(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationProvider.GetOrganizationTypeLanguage(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("OrganizationTypes")]
-        public async Task<IActionResult> GetOrganizationTypes()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationProvider.GetOrganizationTypes(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("OrganizationType/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationType(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationProvider.GetOrganizationType(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+
     }
 }

@@ -17,8 +17,8 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string GroupName { get; set; }
         public string SecurityLevelName { get; set; }
-        public string ProcessName { get; set; }
-        public string ProcessGroupName { get; set; }
+        public string ProcessTemplateName { get; set; }
+        public int ProcessTemplateId { get; set; }
 
     }
 }

@@ -9,11 +9,11 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="OrgnizationTelecomId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
-        <e-grid-column field="TelecomTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Telecom type")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
-        <e-grid-column field="TelecomValue" headerText="@Term.Find(x => x.InternalName.Equals("Telecom value")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column field="OrgnizationTelecomId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="TelecomTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Telecom type")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="TelecomValue" headerText="@Term.Find(x => x.InternalName.Equals("Telecom value")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/OrganizationTelecom/Create/${OrganizationId}">@Term.Find(x => x.InternalName.Equals("Add new organization telecom")).TermString</a>

@@ -21,37 +21,37 @@ namespace SIPx.DataAccess
         }
 
 
-        public async Task<List<PageLanguage>> GetPageLanguages(string UserId, int PageId)
+        public async Task<List<PageLanguage>> PageLanguageIndexGet(string UserId, int PageId)
         {
-            string usp = "usp_DateLevels @UserId, @PageID";
+            string usp = "usp_DateLevelIndexGet @UserId, @PageID";
             var x = await _sqlDataAccess.LoadData<PageLanguage, dynamic>(usp, new { UserId = UserId, PageId = PageId });
             return x;
         }
-        public Task<PageLanguage> GetPageLanguage(string UserId, int PageLanguageId)
+        public Task<PageLanguage> PageLanguageUpdateGet(string UserId, int PageLanguageId)
         {
-            string usp = "usp_DateLevel @UserId, @DPageLanguageID";
+            string usp = "usp_DateLevelUpdateGet @UserId, @DPageLanguageID";
             return _sqlDataAccess.LoadSingleRecord<PageLanguage, dynamic>(usp, new { UserId = UserId, PageLanguageId = PageLanguageId });
 
         }
-        public async Task<List<Page>> GetPages(string UserId)
+        public async Task<List<Page>> PageIndexGet(string UserId)
         {
-            string usp = "usp_Pages @UserID";
+            string usp = "usp_PageIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<Page, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Page> GetPage(string UserId, int PageId)
+        public Task<Page> PageUpdateGet(string UserId, int PageId)
         {
-            string usp = "usp_Page @UserId, @PageID";
+            string usp = "usp_PageUpdateGet @UserId, @PageID";
             return _sqlDataAccess.LoadSingleRecord<Page, dynamic>(usp, new { UserId = UserId, PageId = PageId });
 
         }
-        public Task<List<PageSectionDataTypeList>> GetPageSectionDataTypeList(string UserId)
+        public Task<List<PageSectionDataTypeList>> PageSectionDataTypeList(string UserId)
         {
             string usp = "usp_PageSectionDataTypeList @UserId";
-            return _sqlDataAccess.LoadData<PageSectionDataTypeList, dynamic>(usp, new { UserId = UserId});
+            return _sqlDataAccess.LoadData<PageSectionDataTypeList, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<List<PageSectionTypeList>> GetPageSectionTypeList(string UserId)
+        public Task<List<PageSectionTypeList>> PageSectionTypeList(string UserId)
         {
             string usp = "usp_PageSectionTypeList @UserId";
             return _sqlDataAccess.LoadData<PageSectionTypeList, dynamic>(usp, new { UserId = UserId });

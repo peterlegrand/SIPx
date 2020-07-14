@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetCountries(CurrentUser.Id));
+                return Ok(await _masterProvider.CountryIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetCountry(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.CountryUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -59,12 +59,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("DateLevels")]
-        public async Task<IActionResult> GetDateLevels(int Id)
+        public async Task<IActionResult> GetDateLevels()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetDateLevels(CurrentUser.Id));
+                return Ok(await _masterProvider.DateLevelIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -78,7 +78,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetDateLevel(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.DateLevelUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -86,13 +86,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Genders")]
+        [HttpGet("Gender/Index")]
         public async Task<IActionResult> GetGenders()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetGenders(CurrentUser.Id));
+                return Ok(await _masterProvider.GenderIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -106,7 +106,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetGendersActive(CurrentUser.Id));
+                return Ok(await _masterProvider.GendersActive(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -115,13 +115,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("GetGender/{Id:int}")]
+        [HttpGet("GenderUpdate/{Id:int}")]
         public async Task<IActionResult> GetGender(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetGender(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.GenderUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -135,7 +135,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetIntermediateRegions(CurrentUser.Id));
+                return Ok(await _masterProvider.IntermediateRegionIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -149,7 +149,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetLanguages(CurrentUser.Id));
+                return Ok(await _masterProvider.LanguageIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -163,7 +163,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetLanguagesActive(CurrentUser.Id));
+                return Ok(await _masterProvider.LanguagesActiveGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -178,7 +178,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSettings(CurrentUser.Id));
+                return Ok(await _masterProvider.SettingIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -188,12 +188,12 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Setting/{Id:int}")]
-        public async Task<IActionResult> GetSetting(int Id)
+        public async Task<IActionResult> SettingUpdateGet(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSetting(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.SettingUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -202,13 +202,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("SortBys")]
-        public async Task<IActionResult> GetSortBys()
+        [HttpGet("SortByIndex")]
+        public async Task<IActionResult> SortByIndexGet()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSortBys(CurrentUser.Id));
+                return Ok(await _masterProvider.SortByIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -217,13 +217,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("SortBys/{Id:int}")]
+        [HttpGet("SortByUpdate/{Id:int}")]
         public async Task<IActionResult> GetSortBy(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSortBy(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.SortByUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -232,12 +232,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Statuses")]
-        public async Task<IActionResult> GetStatuses()
+        public async Task<IActionResult> StatusIndexGet()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetStatuses(CurrentUser.Id));
+                return Ok(await _masterProvider.StatusIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -253,7 +253,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetStatus(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.StatusUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -267,7 +267,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetSubRegions(CurrentUser.Id));
+                return Ok(await _masterProvider.SubRegionIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -281,7 +281,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetTelecomTypes(CurrentUser.Id));
+                return Ok(await _masterProvider.TelecomTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -297,7 +297,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetTelecomType(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.TelecomTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -311,7 +311,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetUITermLanguageCustomizations(CurrentUser.Id));
+                return Ok(await _masterProvider.UITermLanguageCustomizationIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -325,7 +325,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetUITermLanguages(CurrentUser.Id));
+                return Ok(await _masterProvider.UITermLanguageIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -340,7 +340,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetUITermLanguage(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.UITermLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -354,7 +354,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetUITerms(CurrentUser.Id));
+                return Ok(await _masterProvider.UITermIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -369,7 +369,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetUITerm(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.UITermUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -383,7 +383,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetValueUpdateTypes(CurrentUser.Id));
+                return Ok(await _masterProvider.ValueUpdateTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -398,7 +398,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetValueUpdateType(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.ValueUpdateTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -412,7 +412,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetAddressTypes(CurrentUser.Id));
+                return Ok(await _masterProvider.AddressTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -427,7 +427,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GetAddressType(CurrentUser.Id, Id));
+                return Ok(await _masterProvider.AddressTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

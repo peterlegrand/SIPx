@@ -57,12 +57,12 @@ namespace SIPx.DataAccess
 
         public async Task<bool> NewProcessInsert(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields)
         {
-            await _sqlDataAccess.SaveData2<dynamic>(SQLString, new  { User = UserId, ProcessTemplateId = TemplateId, ProcessTemplateStageId = StageId, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
+            await _sqlDataAccess.SaveData2<dynamic>(SQLString, new { User = UserId, ProcessTemplateId = TemplateId, ProcessTemplateStageId = StageId, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
             return true;
         }
 
-        
- 
+
+
         //public async Task<List<ProcessType>> GetProcessTypes(string UserId)
         //{
         //    string usp = "usp_ProcessTypes @UserID";

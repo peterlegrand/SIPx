@@ -1,5 +1,10 @@
-CREATE PROCEDURE [dbo].[usp_UITermLanguageCustomizations] (@languageId int) 
+CREATE PROCEDURE [dbo].[usp_UITermLanguageCustomizations] (@UserId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT
 	UITerms.UITermID
 	, UITermLanguages.LanguageID

@@ -9,9 +9,9 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="SettingId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
-        <e-grid-column field="SettingsName" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column field="SettingId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="SettingsName" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <script id="Edit" type="text/x-template">

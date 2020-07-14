@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentStatuses(CurrentUser.Id));
+                return Ok(await _contentMasterProvider.ContentStatusIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentStatus(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentStatusUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -59,12 +59,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("ContentTypeClassifications/{Id:int}")]
-        public async Task<IActionResult> GetContentTypeClassifications(int Id)
+        public async Task<IActionResult> ContentTypeClassificationsIndexGet(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeClassifications(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeClassificationIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -73,12 +73,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("GetContentTypeClassification/{Id:int}")]
-        public async Task<IActionResult> GetContentTypeClassification(int Id)
+        public async Task<IActionResult> ContentTypeClassificationUpdateGet(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeClassification(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeClassificationUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -92,7 +92,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeClassificationStatuses(CurrentUser.Id));
+                return Ok(await _contentMasterProvider.ContentTypeClassificationStatusIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -106,7 +106,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeClassificationStatus(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeClassificationStatusUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -115,12 +115,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("ContentTypeGroupLanguages/{Id:int}")]
-        public async Task<IActionResult> GetContentTypeGroupLanguages(int Id)
+        public async Task<IActionResult> ContentTypeGroupLanguageIndexGet(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeGroupLanguages(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeGroupLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -129,12 +129,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("ContentTypeGroupLanguage/{Id:int}")]
-        public async Task<IActionResult> GetContentTypeGroupLanguage(int Id)
+        public async Task<IActionResult> ContentTypeGroupLanguageUpdateGet(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeGroupLanguage(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeGroupLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -143,13 +143,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("ContentTypeGroups")]
-        public async Task<IActionResult> GetContentTypeGroups()
+        [HttpGet("ContentTypeGroupIndex")]
+        public async Task<IActionResult> ContentTypeGroupIndexGet()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeGroups(CurrentUser.Id));
+                return Ok(await _contentMasterProvider.ContentTypeGroupIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -158,13 +158,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("ContentTypeGroup/{Id:int}")]
-        public async Task<IActionResult> GetContentTypeGroup(int Id)
+        [HttpGet("ContentTypeGroupUpdate/{Id:int}")]
+        public async Task<IActionResult> ContentTypeGroupUpdateGet(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeGroup(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeGroupUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -179,7 +179,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeLanguages(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -194,7 +194,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypeLanguage(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -208,7 +208,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentTypes(CurrentUser.Id));
+                return Ok(await _contentMasterProvider.ContentTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -224,7 +224,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.GetContentType(CurrentUser.Id, Id));
+                return Ok(await _contentMasterProvider.ContentTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

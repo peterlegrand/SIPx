@@ -14,10 +14,10 @@ namespace SIPx.MVC.Controllers
         private readonly string _baseUrl = "https://localhost:44393/";
 
         ServiceClient client = new ServiceClient();
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PersonAddressUpdateGet>>($"{_baseUrl}api/PersonAddress",token);
+            var response = await client.GetProtectedAsync<List<PersonAddressUpdateGet>>($"{_baseUrl}api/PersonAddress/Index"+id,token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/PersonAddress/Index", token);
             ViewBag.UITerms = x;
             return View(response);
@@ -28,7 +28,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<PersonAddressUpdateGet>($"{_baseUrl}api/PersonAddress/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<PersonAddressUpdateGet>($"{_baseUrl}api/PersonAddress/Update/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/PersonAddress/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

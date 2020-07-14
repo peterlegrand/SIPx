@@ -27,7 +27,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ContentTypeClassificationUpdateGet>($"{_baseUrl}api/ContentTypeClassification/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<ContentTypeClassificationUpdateGet>($"{_baseUrl}api/ContentTypeClassification/Update/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ContentTypeClassification/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

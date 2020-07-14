@@ -10,7 +10,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int IntermediateRegionId { get; set; }
-        public int IntermediateRegionName { get; set; }
+        public string IntermediateRegionName { get; set; }
 
     }
 }

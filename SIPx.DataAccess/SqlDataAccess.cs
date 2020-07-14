@@ -39,6 +39,15 @@ namespace SIPx.DataAccess
                 return data.ToList();
             }
         }
+        public async Task<List<T>> LoadData<T, U>(string sql)
+        {
+            string connectionString = _config.GetConnectionString("DefaultConnection");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = await connection.QueryAsync<T>(sql);
+                return data.ToList();
+            }
+        }
         public async Task<List<T>> LoadData<T>(string sql)
         {
             string connectionString = _config.GetConnectionString("DefaultConnection");

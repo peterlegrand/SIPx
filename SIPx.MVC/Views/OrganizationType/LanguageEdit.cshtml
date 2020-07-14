@@ -1,31 +1,26 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationPageUpdateGet
+@model OrganizationTypeLanguageIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification Page")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization type language")).TermString;
 
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification Page")).TermString
+    <img src="~/images/icons/Organizations.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organization type language")).TermString
 </h1>
 <div class="container">
     <div class="row">
         <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("Id")).TermString
         </div>
-        <div class="col-9">@Model.ClassificationPageId</div>
-    </div><div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.ClassificationId</div>
-
+        <div class="col-9">@Model.OrganizationTypeId</div>
     </div>
     <div class="row">
         <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.ClassificationPageLanguageId</div>
+        </div><div class="col-9">@Model.OrganizationTypeLanguageId</div>
 
     </div>
 
@@ -69,51 +64,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Title name")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-textbox id="TitleName" ejs-for="TitleName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Title description")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Statuses")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="Statuses" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="ShowTitleName" label="ShowTitleName" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show title description")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="ShowTitleDescription" label="ShowTitleDescription" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
         <div class="row">
@@ -258,16 +211,16 @@
 @*
     PETER TODO 
     <script type="text/javascript">
-    function FilterDefaultPage(e) {
+    function FilterDefault(e) {
                 var query = new ej.data.Query();
                 query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Defaults)), query);
             }
 </script>
 <script type="text/javascript">
     function FilterStatus(e) {
                 var query = new ej.data.Query();
                 query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Defaults)), query);
             }
 </script>*@

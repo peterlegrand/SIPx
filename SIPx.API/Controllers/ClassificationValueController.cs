@@ -27,7 +27,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Values/{Id:int}")]
+        [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> GetValues(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

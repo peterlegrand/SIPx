@@ -28,7 +28,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ProjectUpdateGet>($"{_baseUrl}api/Project/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<ProjectUpdateGet>($"{_baseUrl}api/Project/Update/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Project/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

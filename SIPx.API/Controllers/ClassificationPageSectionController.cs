@@ -80,7 +80,7 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("Edit/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetPage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -96,10 +96,10 @@ namespace SIPx.API.Controllers
                 }
                 var cps = new ClassificationPageSectionUpdateGet();
                 cps = await _classificationProvider.ClassificationPageSectionUpdateGet(CurrentUser.Id, Id);
-                cps.ContentTypes = await _contentMasterProvider.GetContentTypeList(CurrentUser.Id);
-                cps.PageSectionTypes = await _pageProvider.GetPageSectionTypeList(CurrentUser.Id);
-                cps.PageSectionDataTypes = await _pageProvider.GetPageSectionDataTypeList(CurrentUser.Id);
-                cps.SortBys = await _masterProvider.GetSortByList(CurrentUser.Id);
+                cps.ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
+                cps.PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
+                cps.PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
+                cps.SortBys = await _masterProvider.SortByList(CurrentUser.Id);
                 cps.Sequences = await _classificationProvider.ClassificationPageSectionSequenceListBySectionIdGet(CurrentUser.Id, Id);
                 var intlist = new List<int>();
                 intlist.Add(1);
@@ -115,7 +115,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("LanguageEdit/{Id:int}")]
+        [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> GetPageLanguage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

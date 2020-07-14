@@ -10,11 +10,11 @@ namespace SIPx.Shared
     {
         [Key]
         public int LanguageId { get; set; }
-        public int ForeignName { get; set; }
+        public string ForeignName { get; set; }
         public string ISO6391 { get; set; }
         public string ISO6392 { get; set; }
         public string LanguageName { get; set; }
-        public int StatusName { get; set; }
+        public string StatusName { get; set; }
         public string SubRegionName { get; set; }
         public int RegionId { get; set; }
         public string RegionName { get; set; }

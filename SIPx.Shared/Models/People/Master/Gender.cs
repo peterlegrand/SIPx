@@ -9,8 +9,8 @@ namespace SIPx.Shared
     public class Gender
     {
         [Key]
-        public int DateLevelId { get; set; }
-        public int Name { get; set; }
+        public int GenderId { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }

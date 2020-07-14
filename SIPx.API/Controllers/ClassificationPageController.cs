@@ -97,7 +97,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("LanguageEdit/{Id:int}")]
+        [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> GetPageLanguage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

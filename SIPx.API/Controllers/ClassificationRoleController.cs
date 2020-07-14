@@ -12,13 +12,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationRoleController : ControllerBase
     {
+        private readonly IPeopleProvider _peopleProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationRoleController( ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationRoleController( IPeopleProvider peopleProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _peopleProvider = peopleProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;
@@ -49,7 +51,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Edit/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetRole(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -63,8 +65,12 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-
-                return Ok(await _classificationProvider.ClassificationRoleUpdateGet(CurrentUser.Id, Id));
+                var ClassificationRole = await _classificationProvider.ClassificationRoleUpdateGet(CurrentUser.Id, Id);
+                var RelationTypeList = await _classificationProvider.ClassificationRelationTypeListGet(CurrentUser.Id);
+                var RoleList = await _peopleProvider.RoleList(CurrentUser.Id);
+                ClassificationRole.ClassificationRelationTypes = RelationTypeList;
+                ClassificationRole.Roles = RoleList;
+                return Ok(ClassificationRole);
             }
             return BadRequest(new
             {

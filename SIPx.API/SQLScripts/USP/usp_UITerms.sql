@@ -7,9 +7,9 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT UITerms.UITermId 
 	, UITerms.InternalName
-	, UITermLanguages.Name UITermLanguageName
-	, UITermLanguages.Description UITermLanguageDescription
-	, UITermLanguages.MouseOver UITermLanguageMouseOver
+	, UITermLanguages.Name Name
+	, UITermLanguages.Description Description
+	, UITermLanguages.MouseOver MouseOver
 	, ISNULL(Customization.Customization, 'No customization') Customization
 	
 FROM UITerms

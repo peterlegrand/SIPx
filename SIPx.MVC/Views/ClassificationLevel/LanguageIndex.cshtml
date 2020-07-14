@@ -9,12 +9,12 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ClassificationLanguageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
-        <e-grid-column field="MenuName" headerText="@Term.Find(x => x.InternalName.Equals("Menu name")).TermString" textAlign="Right" width="5%" type="boolean"></e-grid-column>
-        <e-grid-column field="MouseOver" headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" width="5%" type="boolean"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column field="ClassificationLanguageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="MenuName" headerText="@Term.Find(x => x.InternalName.Equals("Menu name")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+        <e-grid-column field="MouseOver" headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="/ClassificationLevel/Index">@Term.Find(x => x.InternalName.Equals("Back to classification levels")).TermString</a>
@@ -22,13 +22,13 @@
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="ClassificationLevel/Edit/${ClassificationId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/LanguageEdit/${ClassificationId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="ClassificationLevel/Delete/${ClassificationId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/LanguageDelete/${ClassificationId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

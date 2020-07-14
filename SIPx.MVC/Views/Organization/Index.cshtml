@@ -5,16 +5,17 @@
 
 }
 
-<h1><img src="~/images/icons/Organizations.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organizations")).TermString</h1>
+<h1>@*<img src="~/images/icons/Organizations.png" width="50" height="50" />*@
+    <span style="color:red;font-size:14px">O</span>@Term.Find(x => x.InternalName.Equals("Organizations")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Addresses")).TermString" template="#Address" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Telecom")).TermString" template="#Telecom" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Language" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Addresses")).TermString" template="#Address" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Telecom")).TermString" template="#Telecom" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Language" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/Organization/Create">@Term.Find(x => x.InternalName.Equals("Add new organization")).TermString</a>

@@ -6,20 +6,20 @@ namespace SIPx.DataAccess
 {
     public interface IContentMasterProvider
     {
-        Task<ContentStatus> GetContentStatus(string UserId, int ContentStatusId);
-        Task<List<ContentStatus>> GetContentStatuses(string UserId);
-        Task<ContentType> GetContentType(string UserId, int ContentTypeId);
-        Task<ContentTypeClassification> GetContentTypeClassification(string UserId, int ContentTypeClassificationId);
-        Task<List<ContentTypeClassification>> GetContentTypeClassifications(string UserId, int ContentTypeId);
-        Task<ContentTypeClassificationStatus> GetContentTypeClassificationStatus(string UserId, int ContentTypeClassificationStatusId);
-        Task<List<ContentTypeClassificationStatus>> GetContentTypeClassificationStatuses(string UserId);
-        Task<ContentTypeGroup> GetContentTypeGroup(string UserId, int ContentTypeGroupId);
-        Task<ContentTypeGroupLanguage> GetContentTypeGroupLanguage(string UserId, int ContentTypeGroupLanguageId);
-        Task<List<ContentTypeGroupLanguage>> GetContentTypeGroupLanguages(string UserId, int ContentTypeGroupId);
-        Task<List<ContentTypeGroup>> GetContentTypeGroups(string UserId);
-        Task<ContentTypeLanguage> GetContentTypeLanguage(string UserId, int ContentTypeLanguageId);
-        Task<List<ContentTypeLanguage>> GetContentTypeLanguages(string UserId, int ContentTypeId);
-        Task<List<ContentTypeList>> GetContentTypeList(string UserId);
-        Task<List<ContentType>> GetContentTypes(string UserId);
+        Task<List<ContentStatus>> ContentStatusIndexGet(string UserId);
+        Task<ContentStatus> ContentStatusUpdateGet(string UserId, int ContentStatusId);
+        Task<List<ContentTypeClassification>> ContentTypeClassificationIndexGet(string UserId, int ContentTypeId);
+        Task<List<ContentTypeClassificationStatus>> ContentTypeClassificationStatusIndexGet(string UserId);
+        Task<ContentTypeClassificationStatus> ContentTypeClassificationStatusUpdateGet(string UserId, int ContentTypeClassificationStatusId);
+        Task<ContentTypeClassification> ContentTypeClassificationUpdateGet(string UserId, int ContentTypeClassificationId);
+        Task<List<ContentTypeGroup>> ContentTypeGroupIndexGet(string UserId);
+        Task<List<ContentTypeGroupLanguage>> ContentTypeGroupLanguageIndexGet(string UserId, int ContentTypeGroupId);
+        Task<ContentTypeGroupLanguage> ContentTypeGroupLanguageUpdateGet(string UserId, int ContentTypeGroupLanguageId);
+        Task<ContentTypeGroup> ContentTypeGroupUpdateGet(string UserId, int ContentTypeGroupId);
+        Task<List<ContentType>> ContentTypeIndexGet(string UserId);
+        Task<List<ContentTypeLanguage>> ContentTypeLanguageIndexGet(string UserId, int ContentTypeId);
+        Task<ContentTypeLanguage> ContentTypeLanguageUpdateGet(string UserId, int ContentTypeLanguageId);
+        Task<List<ContentTypeList>> ContentTypeList(string UserId);
+        Task<ContentType> ContentTypeUpdateGet(string UserId, int ContentTypeId);
     }
 }

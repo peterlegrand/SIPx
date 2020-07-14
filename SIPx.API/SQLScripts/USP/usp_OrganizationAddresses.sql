@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationAddress] (@UserId nvarchar(450), @OrganizationAddressId int) 
+CREATE PROCEDURE [dbo].[usp_OrganizationAddresses] (@UserId nvarchar(450), @OrganizationId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -42,5 +42,5 @@ JOIN Persons Modifier
 	ON Modifier.UserId = OrganizationAddresses.ModifierID
 WHERE UICountryName.LanguageId = @LanguageID
 	AND UIAddressTypeName.LanguageId = @LanguageID
-		AND OrganizationAddresses.OrganizationAddressId = @OrganizationAddressID
+		AND OrganizationAddresses.OrganizationId = @OrganizationID
 ORDER BY ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) 

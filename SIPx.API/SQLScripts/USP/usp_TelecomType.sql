@@ -6,10 +6,10 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT TelecomTypes.TelecomTypeId 
-	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) TelecomTypeName
-	, ISNULL(UITelecomTypeDescriptionCustom.Customization,UITelecomTypeDescription.Name) TelecomTypeDescription
-	, ISNULL(UITelecomTypeMenuNameCustom.Customization,UITelecomTypeMenuName.Name) TelecomTypeMenuName
-	, ISNULL(UITelecomTypeMouseOverCustom.Customization,UITelecomTypeMouseOver.Name) TelecomTypeMouseOver
+	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) Name
+	, ISNULL(UITelecomTypeDescriptionCustom.Customization,UITelecomTypeDescription.Name) Description
+	, ISNULL(UITelecomTypeMenuNameCustom.Customization,UITelecomTypeMenuName.Name) MenuName
+	, ISNULL(UITelecomTypeMouseOverCustom.Customization,UITelecomTypeMouseOver.Name) MouseOver
 	, PhoneProperties
 	, Active
 FROM TelecomTypes

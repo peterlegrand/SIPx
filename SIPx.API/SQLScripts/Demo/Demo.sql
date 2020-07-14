@@ -704,7 +704,7 @@ SET IDENTITY_INSERT PersonRelationTypeLanguages ON;
 INSERT INTO PersonRelationTypeLanguages (PersonRelationTypeLanguageId, PersonRelationTypeId, LanguageId , Name, Description, MenuName, MouseOver, FromIsAnXOfTo, ToIsAnXOfFrom
 , CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
 (1,1,41, 'Manager', 'Manager', 'Manager', 'Manager', 'Manager', 'Staff', @User, @User, GETDATE(), GETDATE())
-,(2,1,41, 'Teacher', 'Teacher', 'Teacher', 'Teacher', 'Teacher', 'Staff', @User, @User, GETDATE(), GETDATE())
+,(2,2,41, 'Teacher', 'Teacher', 'Teacher', 'Teacher', 'Teacher', 'Staff', @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT PersonRelationTypeLanguages OFF;
 

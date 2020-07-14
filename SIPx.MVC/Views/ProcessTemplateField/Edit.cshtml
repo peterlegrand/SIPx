@@ -71,8 +71,8 @@
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateFieldTypeId" dataSource="@Model.ProcessTemplateFieldTypes" ejs-for="@Model.ProcessTemplateFieldTypeId" value="@Model.ProcessTemplateFieldTypeId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
-                    @*<e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>*@
+                <ejs-dropdownlist id="ProcessTemplateFieldTypeId" dataSource="@Model.ProcessTemplateFieldTypes" ejs-for="@Model.ProcessTemplateFieldTypeId" value="@Model.ProcessTemplateFieldTypeId" index="2" filtering="ProcessTemplateFieldTypes" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFieldTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -81,6 +81,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
         <div class="row">
@@ -222,19 +223,11 @@
         }
     }
 </script>
-@*
-        PETER TODO
+
         <script type="text/javascript">
-        function FilterDefaultPage(e) {
+        function ProcessTemplateFieldTypes(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFieldTypes)), query);
                 }
     </script>
-    <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>*@

@@ -12,9 +12,11 @@ SELECT OrganizationTelecoms.OrganizationTelecomID
 	, ISNULL(OrganizationTelecomPhones.CountryCode,'') CountryCode
 	, ISNULL(OrganizationTelecomPhones.ExtensionCode,'') ExtensionCode
 	, ISNULL(OrganizationTelecomPhones.AskForName,'') AskForName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, OrganizationTelecoms.CreatorID
 	, OrganizationTelecoms.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, OrganizationTelecoms.ModifierID
 	, OrganizationTelecoms.ModifiedDate
 FROM OrganizationTelecoms
 JOIN TelecomTypes

@@ -12,9 +12,11 @@ SELECT OrganizationTypes.OrganizationTypeID
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this organization type')) MouseOver
 	, OrganizationTypes.Internal
 	, OrganizationTypes.LegalEntity
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, OrganizationTypes.CreatorID
 	, OrganizationTypes.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, OrganizationTypes.ModifierID
 	, OrganizationTypes.ModifiedDate
 FROM OrganizationTypes 
 LEFT JOIN (SELECT OrganizationTypeId, Name, Description, MenuName, MouseOver FROM OrganizationTypeLanguages WHERE LanguageId = @LanguageID) UserLanguage

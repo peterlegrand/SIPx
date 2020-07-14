@@ -6,17 +6,17 @@ namespace SIPx.DataAccess
 {
     public interface IOrganizationProvider
     {
-        Task<OrganizationUpdateGet> GetOrganization(string UserId, int OrganizationId);
-        Task<OrganizationAddress> GetOrganizationAddress(string UserId, int OrganizationAddressId);
-        Task<List<OrganizationAddress>> GetOrganizationAddresses(string UserId, int OrganizationId);
-        Task<OrganizationLanguage> GetOrganizationLanguage(string UserId, int OrganizationLanguageId);
-        Task<List<OrganizationLanguage>> GetOrganizationLanguages(string UserId, int OrganizationId);
-        Task<List<OrganizationIndexGet>> GetOrganizations(string UserId);
-        Task<OrganizationTelecom> GetOrganizationTelecom(string UserId, int OrganizationTelecomId);
-        Task<List<OrganizationTelecom>> GetOrganizationTelecoms(string UserId, int OrganizationId);
-        Task<OrganizationType> GetOrganizationType(string UserId, int OrganizationTypeId);
-        Task<OrganizationTypeLanguage> GetOrganizationTypeLanguage(string UserId, int OrganizationTypeLanguageId);
-        Task<List<OrganizationTypeLanguage>> GetOrganizationTypeLanguages(string UserId, int OrganizationTypeId);
-        Task<List<OrganizationType>> GetOrganizationTypes(string UserId);
+        Task<List<OrganizationAddress>> OrganizationAddressIndexGet(string UserId, int OrganizationId);
+        Task<OrganizationAddress> OrganizationAddressUpdateGet(string UserId, int OrganizationAddressId);
+        Task<List<OrganizationIndexGet>> OrganizationIndexGet(string UserId);
+        Task<List<OrganizationLanguage>> OrganizationLanguageIndexGet(string UserId, int OrganizationId);
+        Task<OrganizationLanguage> OrganizationLanguageUpdateGet(string UserId, int OrganizationLanguageId);
+        Task<List<OrganizationTelecom>> OrganizationTelecomIndexGet(string UserId, int OrganizationId);
+        Task<OrganizationTelecom> OrganizationTelecomUpdateGet(string UserId, int OrganizationTelecomId);
+        Task<List<OrganizationType>> OrganizationTypeIndexGet(string UserId);
+        Task<List<OrganizationTypeLanguage>> OrganizationTypeLanguageIndexGet(string UserId, int OrganizationTypeId);
+        Task<OrganizationTypeLanguage> OrganizationTypeLanguageUpdateGet(string UserId, int OrganizationTypeLanguageId);
+        Task<OrganizationType> OrganizationTypeUpdateGet(string UserId, int OrganizationTypeId);
+        Task<OrganizationUpdateGet> OrganizationUpdateGet(string UserId, int OrganizationId);
     }
 }

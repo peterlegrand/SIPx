@@ -35,7 +35,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFieldLanguages(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFieldLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -49,7 +49,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFieldLanguage(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFieldLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -63,7 +63,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFields(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFieldIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -77,7 +77,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateField(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFieldUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -91,7 +91,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFlowConditionLanguages(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFlowConditionLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -105,7 +105,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFlowConditionLanguage(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFlowConditionLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -119,7 +119,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFlowConditions(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFlowConditionIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -133,7 +133,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFlowCondition(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFlowConditionUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -147,7 +147,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFlowLanguages(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFlowLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -161,7 +161,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFlowLanguage(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFlowLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -175,7 +175,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFlows(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFlowIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -189,7 +189,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateGroupLanguages(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateGroupLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -203,7 +203,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateGroupLanguage(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateGroupLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -217,7 +217,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateLanguages(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -231,7 +231,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateLanguage(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -245,7 +245,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateStageFields(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateStageFieldIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -259,7 +259,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateStageField(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateStageFieldUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -273,7 +273,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFieldStages(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFieldStageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -287,7 +287,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateStageFieldStatuses(CurrentUser.Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateStageFieldStatusIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -301,7 +301,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateStageLanguages(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateStageLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -315,7 +315,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateStageLanguage(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateStageLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -329,7 +329,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateStages(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateStageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -343,7 +343,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateStage(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateStageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -357,7 +357,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.GetProcessTemplateFieldTypes(CurrentUser.Id));
+                return Ok(await _processTemplateProvider.ProcessTemplateFieldTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {

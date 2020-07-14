@@ -9,17 +9,17 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ClassificationLevelId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" width="5%" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" width="50%" type="string"></e-grid-column>
-        <e-grid-column field="DateLevelName" headerText="@Term.Find(x => x.InternalName.Equals("Date level name")).TermString" textAlign="Right" width="5%" type="string"></e-grid-column>
-        <e-grid-column field="OnTheFly" headerText="@Term.Find(x => x.InternalName.Equals("On the fly")).TermString" textAlign="Right" width="5%" type="string"></e-grid-column>
-        <e-grid-column field="Alphabetically" headerText="@Term.Find(x => x.InternalName.Equals("Alphabetically")).TermString" textAlign="Right" width="5%" type="string"></e-grid-column>
-        <e-grid-column field="CanLink" headerText="@Term.Find(x => x.InternalName.Equals("Can link")).TermString" textAlign="Right" width="5%" type="string"></e-grid-column>
-        <e-grid-column field="InDropDown" headerText="@Term.Find(x => x.InternalName.Equals("In dropdown")).TermString" textAlign="Right" width="5%" type="string"></e-grid-column>
-        <e-grid-column field="InMenu" headerText="@Term.Find(x => x.InternalName.Equals("In menu")).TermString" textAlign="Right" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" width="5%" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
+        <e-grid-column field="ClassificationLevelId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="DateLevelName" headerText="@Term.Find(x => x.InternalName.Equals("Date level name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="OnTheFly" headerText="@Term.Find(x => x.InternalName.Equals("On the fly")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="Alphabetically" headerText="@Term.Find(x => x.InternalName.Equals("Alphabetically")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="CanLink" headerText="@Term.Find(x => x.InternalName.Equals("Can link")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="InDropDown" headerText="@Term.Find(x => x.InternalName.Equals("In dropdown")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="InMenu" headerText="@Term.Find(x => x.InternalName.Equals("In menu")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>

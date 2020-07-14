@@ -1,0 +1,34 @@
+﻿@model List<ClassificationRelationTypeLanguageIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification RelationType languages")).TermString;
+
+}
+
+<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification RelationType languages")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+    <e-grid-pagesettings RelationTypeSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="ClassificationLanguageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="MenuName" headerText="@Term.Find(x => x.InternalName.Equals("Menu name")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+        <e-grid-column field="MouseOver" headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a href="/ClassificationRelationType/Index">@Term.Find(x => x.InternalName.Equals("Back to classification RelationTypes")).TermString</a>
+<a href="/ClassificationRelationType/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
+
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationRelationType/Edit/${ClassificationId}"><span style="color:red">E</span>dit</a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="ClassificationRelationType/Delete/${ClassificationId}"><span style="color:red">D</span>elete</a>
+
+    </div>
+</script>

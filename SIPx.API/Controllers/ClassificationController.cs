@@ -49,8 +49,8 @@ namespace SIPx.API.Controllers
             {
                 var ClassificationCreateGet = new ClassificationCreateGet();
                 var ClassificationCreateGetSequences = await _classificationProvider.ClassificationCreateGetSequence(CurrentUser.Id);
-                var Statuses = await _masterProvider.GetStatusList(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.GetUserLanguage(CurrentUser.Id);
+                var Statuses = await _masterProvider.StatusList(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationCreateGet.LanguageId = UserLanguage.LanguageId;
                 ClassificationCreateGet.LanguageName = UserLanguage.Name;
                 ClassificationCreateGet.Statuses = Statuses;
@@ -177,7 +177,7 @@ namespace SIPx.API.Controllers
                 }
                 var x = await _classificationProvider.ClassificationUpdateGet(CurrentUser.Id, Id);
                 var y = await _classificationProvider.ClassificationPageListGet(CurrentUser.Id, Id);
-                var z = await _masterProvider.GetStatusList(CurrentUser.Id);
+                var z = await _masterProvider.StatusList(CurrentUser.Id);
 
                 x.DefaultPages = y;
                 x.Statuses = z;

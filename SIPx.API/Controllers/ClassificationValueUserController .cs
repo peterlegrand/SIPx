@@ -12,14 +12,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationValueUserController : ControllerBase
     {
+        private readonly IPeopleProvider _peopleProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueUserController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueUserController( IPeopleProvider peopleProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _peopleProvider = peopleProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -66,8 +68,14 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-
-                return Ok(await _classificationProvider.ClassificationValueUserUpdateGet(CurrentUser.Id, Id));
+                //PETER I UPDATED THIS IN THE Wrong controller
+                var ClassificationUser = await _classificationProvider.ClassificationUserUpdateGet(CurrentUser.Id, Id);
+                var RelationTypeList = await _classificationProvider.ClassificationRelationTypeListGet(CurrentUser.Id);
+                var UserList = await _peopleProvider.UserList();
+                ClassificationUser.ClassificationRelationTypes = RelationTypeList;
+                ClassificationUser.Users = UserList;
+                return Ok(ClassificationUser);
+//                return Ok(await _classificationProvider.ClassificationValueUserUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

@@ -12,13 +12,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationUserController : ControllerBase
     {
+        private readonly IPeopleProvider _peopleProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationUserController(ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationUserController(IPeopleProvider peopleProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _peopleProvider = peopleProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;
@@ -50,7 +52,7 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("Edit/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetUser(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -64,8 +66,12 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-
-                return Ok(await _classificationProvider.ClassificationUserUpdateGet(CurrentUser.Id, Id));
+                var ClassificationUser = await _classificationProvider.ClassificationUserUpdateGet(CurrentUser.Id, Id);
+                var RelationTypeList = await _classificationProvider.ClassificationRelationTypeListGet(CurrentUser.Id);
+                var UserList = await _peopleProvider.UserList();
+                ClassificationUser.ClassificationRelationTypes = RelationTypeList;
+                ClassificationUser.Users = UserList;
+                return Ok(ClassificationUser);
             }
             return BadRequest(new
             {

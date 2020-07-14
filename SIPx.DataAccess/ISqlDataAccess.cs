@@ -11,6 +11,7 @@ namespace SIPx.DataAccess
         Task<List<T>> LoadData<T, U>(string sql, U parameters);
         Task<List<T>> LoadData<T>(string sql);
         Task<T> LoadSingleRecord<T, U>(string sql, U parameters);
+        //Task SaveData<T>(string sql);
         Task SaveData<T>(string sql, T parameters);
         Task SaveData2<T>(string sql, T parameters);
         Task PopulateDataSIP(string sql);

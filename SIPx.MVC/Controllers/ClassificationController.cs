@@ -18,7 +18,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ClassificationIndexGet>>($"{_baseUrl}api/Classification", token);
+            var response = await client.GetProtectedAsync<List<ClassificationIndexGet>>($"{_baseUrl}api/Classification/Index", token);
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Classification/Index", token);
             ViewBag.UITerms = UITerms;
             return View(response);
@@ -51,7 +51,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ClassificationUpdateGet>($"{_baseUrl}api/Classification/Edit/" + id, token);
+            var response = await client.GetProtectedAsync<ClassificationUpdateGet>($"{_baseUrl}api/Classification/Update/" + id, token);
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Classification/Edit", token);
             ViewBag.UITerms = UITerms;
             return View(response);
@@ -59,11 +59,20 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ClassificationLanguageIndexGet>>($"{_baseUrl}api/Classification/Languages/" + id, token);
+            var response = await client.GetProtectedAsync<List<ClassificationLanguageIndexGet>>($"{_baseUrl}api/Classification/LanguageIndex/" + id, token);
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Classification/LanguageIndex", token);
             ViewBag.UITerms = UITerms;
             return View(response);
-        
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> LanguageEdit(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<ClassificationLanguageIndexGet>($"{_baseUrl}api/Classification/LanguageUpdate/" + id, token);
+            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Classification/LanguageEdit", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
         }
     }
 }

@@ -3,6 +3,7 @@ Select @User = Id from AspNetUsers
 
 SET IDENTITY_INSERT MVCUIScreens ON;
 INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES 
+
  (1, 'Classification', 'Index')
 , (2, 'Classification', 'Create')
 , (3, 'Classification', 'Edit')
@@ -251,4 +252,15 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (246, 'Setting', 'LanguageCreate')
 , (247, 'Setting', 'LanguageEdit')
 , (248, 'Setting', 'LanguageDelete')
+, (249, 'PersonRelationType', 'LanguageIndex')
+, (250, 'PersonRelationType', 'LanguageEdit')
+, (251, 'ContentType', 'LanguageEdit')
+, (252, 'ContentType', 'LanguageIndex')
+, (253, 'ContentTypeGroup', 'LanguageEdit')
+, (254, 'ContentTypeGroup', 'LanguageIndex')
+, (255, 'Role', 'LanguageEdit')
+, (256, 'Role', 'LanguageIndex')
+, (257, 'ProcessTemplateStageType', 'LanguageEdit')
+, (258, 'ProcessTemplateStageType', 'LanguageIndex')
+
 SET IDENTITY_INSERT MVCUIScreens OFF;

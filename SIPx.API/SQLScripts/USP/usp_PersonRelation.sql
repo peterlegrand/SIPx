@@ -31,4 +31,4 @@ JOIN Persons Creator
 	ON Creator.UserId = PersonRelations.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = PersonRelations.ModifierID
-WHERE PersonRelations.PersonRelationId = @PersonRelationID
+WHERE PersonRelations.PersonRelationId = @PersonRelationId
