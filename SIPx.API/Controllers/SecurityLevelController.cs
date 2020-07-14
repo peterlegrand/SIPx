@@ -17,25 +17,25 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class PeopleController : ControllerBase
+    public class SecurityLevelController : ControllerBase
     {
         private readonly IClaimCheck _claimCheck;
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PeopleController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public SecurityLevelController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _claimCheck = claimCheck;
             _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
         [HttpGet("Index")]
-        public async Task<IActionResult> GetPersons()
+        public async Task<IActionResult> GetSecurityLevels()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonIndexGet(CurrentUser.Id));
+                return Ok(await _peopleProvider.SecurityLevelIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -46,12 +46,12 @@ namespace SIPx.API.Controllers
 
 
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetPerson(int Id)
+        public async Task<IActionResult> GetSecurityLevel(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.SecurityLevelUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

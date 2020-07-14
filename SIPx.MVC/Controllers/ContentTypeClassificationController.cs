@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ContentTypeClassificationUpdateGet>>($"{_baseUrl}api/ContentTypeClassification",token);
+            var response = await client.GetProtectedAsync<List<ContentTypeClassificationUpdateGet>>($"{_baseUrl}api/ContentTypeClassification/Index",token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ContentTypeClassification/Index", token);
             ViewBag.UITerms = x;
             return View(response);

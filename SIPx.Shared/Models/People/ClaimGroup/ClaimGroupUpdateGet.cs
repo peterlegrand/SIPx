@@ -6,18 +6,14 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class RoleClaim
+    public class ClaimGroupUpdateGet
     {
         [Key]
-        public int ClaimId { get; set; }
         public int ClaimGroupId { get; set; }
+        public int Sequence { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string GroupName { get; set; }
-        public string GroupDescription { get; set; }
-        public string GroupMenuName { get; set; }
-        public string GroupMouseOver { get; set; }
     }
 }

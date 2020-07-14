@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class Claim
+    public class ClaimUpdateGet
     {
         [Key]
         public int ClaimId { get; set; }

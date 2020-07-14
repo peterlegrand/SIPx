@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class ClaimGroup
+    public class PreferenceTypeUpdateGet
     {
         [Key]
-        public int ClaimGroupId { get; set; }
-        public int Sequence { get; set; }
+        public int PreferenceTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class User
+    public class UserUpdateGet
     {
         [Key]
         public string UserId { get; set; }

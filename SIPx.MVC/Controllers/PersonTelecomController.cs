@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PersonTelecomUpdateGet>>($"{_baseUrl}api/PersonTelecom/Index" + id,token);
+            var response = await client.GetProtectedAsync<List<PersonTelecomUpdateGet>>($"{_baseUrl}api/PersonTelecom/Index/" + id,token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/PersonTelecom/Index", token);
             ViewBag.UITerms = x;
             return View(response);

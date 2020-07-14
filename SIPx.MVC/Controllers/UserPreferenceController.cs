@@ -9,27 +9,26 @@ using SIPx.Shared;
 
 namespace SIPx.MVC.Controllers
 {
-    public class PageController : Controller
+    public class UserPreferenceController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
 
         ServiceClient client = new ServiceClient();
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PageUpdateGet>>($"{_baseUrl}api/Page/Index",token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Page/Index", token);
+            var response = await client.GetProtectedAsync<List<UserPreferenceUpdateGet>>($"{_baseUrl}api/UserPreference/Index/" + id,token);
+           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/UserPreference/Index", token);
             ViewBag.UITerms = x;
             return View(response);
-            //return View();
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<PageUpdateGet>($"{_baseUrl}api/Page/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Page/Edit", token);
+            var response = await client.GetProtectedAsync<UserPreferenceUpdateGet>($"{_baseUrl}api/UserPreference/Update/" + id, token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/UserPreference/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }

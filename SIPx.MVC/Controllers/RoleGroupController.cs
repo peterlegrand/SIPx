@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<RoleGroupUpdateGet>>($"{_baseUrl}api/RoleGroup",token);
+            var response = await client.GetProtectedAsync<List<RoleGroupUpdateGet>>($"{_baseUrl}api/RoleGroup/Index",token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/RoleGroup/Index", token);
             ViewBag.UITerms = x;
             return View(response);
