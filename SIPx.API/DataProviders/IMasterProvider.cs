@@ -9,6 +9,7 @@ namespace SIPx.DataAccess
         Task<List<AddressType>> AddressTypeIndexGet(string UserId);
         Task<AddressType> AddressTypeUpdateGet(string UserId, int AddressTypeId);
         Task<List<Country>> CountryIndexGet(string UserId);
+        Task<List<CountryList>> CountryList(string UserId);
         Task<Country> CountryUpdateGet(string UserId, int CountryId);
         Task<List<DateLevel>> DateLevelIndexGet(string UserId);
         Task<DateLevel> DateLevelUpdateGet(string UserId, int DateLevelId);

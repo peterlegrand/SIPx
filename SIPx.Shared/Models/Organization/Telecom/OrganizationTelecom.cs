@@ -10,7 +10,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int OrganizationTelecomId { get; set; }
-        public string AddressTypeName { get; set; }
+        public string TelecomTypeName { get; set; }
         public string TelecomValue { get; set; }
         public string AreaCode { get; set; }
         public string CountryCode { get; set; }

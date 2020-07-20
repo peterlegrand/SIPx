@@ -30,7 +30,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("OrganizationLanguages/{Id:int}")]
+        [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> GetOrganizationLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -44,7 +44,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("OrganizationLanguage/{Id:int}")]
+        [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> GetOrganizationLanguage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

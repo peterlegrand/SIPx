@@ -19,6 +19,7 @@ namespace SIPx.Shared
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string PostalCodeExt { get; set; }
+        public int CountryId { get; set; }
         public string CountryName { get; set; }
         public string ProcinceState { get; set; }
         public string County { get; set; }
@@ -28,6 +29,12 @@ namespace SIPx.Shared
         public string RegionName { get; set; }
         public int IntermediateRegionId { get; set; }
         public string IntermediateRegionName { get; set; }
+        public string CreatorName { get; set; }
+        public string CreatorId { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string ModifierName { get; set; }
+        public string ModifierId { get; set; }
+        public DateTime ModifiedDate { get; set; }
 
     }
 }

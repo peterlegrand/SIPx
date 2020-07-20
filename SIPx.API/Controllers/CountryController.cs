@@ -44,6 +44,20 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("List")]
+        public async Task<IActionResult> GetCountryList()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _masterProvider.CountryList(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetCountry(int Id)
         {

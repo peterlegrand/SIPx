@@ -19,19 +19,19 @@
 <a href="~/OrganizationType/Create">@Term.Find(x => x.InternalName.Equals("Add new organization type")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/OrganizationType/Edit/${OrganizationId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/OrganizationType/Edit/${OrganizationTypeId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Languages" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/OrganizationType/LanguageIndex/${OrganizationId}"><span style="color:red">L</span>anguage</a>
+        <a class="nav-link text-dark font-weight-bold" href="/OrganizationType/LanguageIndex/${OrganizationTypeId}"><span style="color:red">L</span>anguage</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="OrganizationType/Delete/${OrganizationId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/OrganizationType/Delete/${OrganizationTypeId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

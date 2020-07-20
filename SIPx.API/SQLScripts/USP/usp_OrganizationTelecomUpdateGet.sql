@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationTelecomIndexGet] (@UserId nvarchar(450), @OrganizationId int) 
+CREATE PROCEDURE [dbo].[usp_OrganizationTelecomUpdateGet] (@UserId nvarchar(450), @OrganizationTelecomId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -6,7 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT OrganizationTelecoms.OrganizationTelecomID
-	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) AddressTypeName
+	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) TelecomTypeName
 	, OrganizationTelecoms.TelecomValue
 	, ISNULL(OrganizationTelecomPhones.AreaCode,'') AreaCode
 	, ISNULL(OrganizationTelecomPhones.CountryCode,'') CountryCode
@@ -32,5 +32,4 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserId = OrganizationTelecoms.ModifierID
 WHERE UITelecomTypeName.LanguageId = @LanguageID
-	AND OrganizationTelecoms.OrganizationId = @OrganizationID
-ORDER BY ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) 
+	AND OrganizationTelecoms.OrganizationTelecomId = @OrganizationTelecomID

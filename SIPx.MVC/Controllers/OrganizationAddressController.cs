@@ -29,6 +29,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<OrganizationAddressUpdateGet>($"{_baseUrl}api/OrganizationAddress/Update/" + id, token);
+            var CountryList = await client.GetProtectedAsync<List<CountryList>>($"{_baseUrl}api/Country/List", token);
+            response.Countries = CountryList;
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationAddress/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

@@ -84,8 +84,8 @@
                 @Term.Find(x => x.InternalName.Equals("Country")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Country" dataSource="@Model.Countries" ejs-for="@Model.CountryId" value="@Model.CountryId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="DateLevelId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="Country" dataSource="@Model.Countries" ejs-for="CountryId" value="@Model.CountryId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="CountryId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>

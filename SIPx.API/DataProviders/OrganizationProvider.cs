@@ -34,13 +34,13 @@ namespace SIPx.DataAccess
         }
         public async Task<List<OrganizationLanguage>> OrganizationLanguageIndexGet(string UserId, int OrganizationId)
         {
-            string usp = "OrganizationLanguagIndexGet @UserId, @OrganizationId";
+            string usp = "usp_OrganizationLanguageIndexGet @UserId, @OrganizationId";
             var x = await _sqlDataAccess.LoadData<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
         public Task<OrganizationLanguage> OrganizationLanguageUpdateGet(string UserId, int OrganizationLanguageId)
         {
-            string usp = "OrganizationLanguageUpdateGet @UserId, @OrganizationLanguageID";
+            string usp = "usp_OrganizationLanguageUpdateGet @UserId, @OrganizationLanguageID";
             return _sqlDataAccess.LoadSingleRecord<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationLanguageId = OrganizationLanguageId });
 
         }

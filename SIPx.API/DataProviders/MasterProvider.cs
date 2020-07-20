@@ -31,6 +31,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<Country, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<CountryList>> CountryList(string UserId)
+        {
+            string usp = "usp_CountryList @UserID";
+            var x = await _sqlDataAccess.LoadData<CountryList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public Task<Country> CountryUpdateGet(string UserId, int CountryId)
         {
             string usp = "usp_CountryUpdateGet @UserId, @CountryID";
