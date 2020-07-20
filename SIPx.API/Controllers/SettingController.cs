@@ -17,13 +17,13 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class SetttingController : ControllerBase
+    public class SettingController : ControllerBase
     {
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public SetttingController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public SettingController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;

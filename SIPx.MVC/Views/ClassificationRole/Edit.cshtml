@@ -26,7 +26,8 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Role")).TermString
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @*//PETER TODO Change the "Name" into "Role"*@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Role" dataSource="@Model.Roles" ejs-for="@Model.RoleId" value="@Model.RoleId" index="2" filtering="Roles" popupHeight="220px">
@@ -37,7 +38,8 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification relation type")).TermString
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @* PETER TODO Classification relation type instead of name *@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ClassificationRelationTypes" dataSource="@Model.ClassificationRelationTypes" ejs-for="@Model.ClassificationRelationTypeId" value="@Model.ClassificationRelationTypeId" index="2" filtering="ClassificationRelationTypes" popupHeight="220px">

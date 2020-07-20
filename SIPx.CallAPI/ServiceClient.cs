@@ -28,10 +28,12 @@ namespace SIPx.CallAPI
         {
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, url);
 
-            List<KeyValuePair<string, string>> keyValues = new List<KeyValuePair<string, string>>();
-            keyValues.Add(new KeyValuePair<string, string>("username", userName));
-            keyValues.Add(new KeyValuePair<string, string>("password", password));
-            keyValues.Add(new KeyValuePair<string, string>("grant_type", "password"));
+            List<KeyValuePair<string, string>> keyValues = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("username", userName),
+                new KeyValuePair<string, string>("password", password),
+                new KeyValuePair<string, string>("grant_type", "password")
+            };
 
             HttpContent content = new FormUrlEncodedContent(keyValues);
             message.Content = content;

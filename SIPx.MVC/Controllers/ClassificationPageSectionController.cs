@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<List<ClassificationPageSectionIndexGet>>($"{_baseUrl}api/ClassificationPageSection/Index/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationPageSection/Index", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -27,7 +27,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<ClassificationPageSectionUpdateGet>($"{_baseUrl}api/ClassificationPageSection/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationPageSection/Edit", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
@@ -35,7 +35,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<List<ClassificationPageSectionLanguageIndexGet>>($"{_baseUrl}api/ClassificationPageSection/LanguageIndex/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationPageSection/LanguageIndex", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/LanguageIndex", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -45,7 +45,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<ClassificationPageSectionLanguageIndexGet>($"{_baseUrl}api/ClassificationPageSection/LanguageEdit/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationPageSection/LanguageEdit", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/LanguageEdit", token);
             ViewBag.UITerms = x;
             return View(response);
         }

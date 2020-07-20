@@ -16,7 +16,7 @@ namespace SIPx.DataAccess
         Task<ClassificationLevelLanguageIndexGet> ClassificationLevelLanguageUpdateGet(string UserId, int ClassificationLevelLanguageId);
         Task<ClassificationLevelUpdateGet> ClassificationLevelUpdateGet(string UserId, int ClassificationLevelId);
         Task<List<ClassificationPageIndexGet>> ClassificationPageIndexGet(string UserId, int ClassificationId);
-        Task<List<ClassificationRelationTypeLanguageIndexGet>> ClassificationPageLanguageIndexGet(string UserId, int ClassificationPageId);
+        Task<List<ClassificationPageLanguageIndexGet>> ClassificationPageLanguageIndexGet(string UserId, int ClassificationPageId);
         Task<List<ClassificationPageList>> ClassificationPageListGet(string UserId, int ClassificationId);
         Task<List<ClassificationPageSectionIndexGet>> ClassificationPageSectionIndexGet(string UserId, int ClassificationPageId);
         Task<List<ClassificationPageSectionLanguageIndexGet>> ClassificationPageSectionLanguageIndexGet(string UserId, int ClassificationPageSectionId);
@@ -25,7 +25,7 @@ namespace SIPx.DataAccess
         Task<ClassificationPageSectionUpdateGet> ClassificationPageSectionUpdateGet(string UserId, int ClassificationPageSectionId);
         Task<ClassificationPageUpdateGet> ClassificationPageUpdateGet(string UserId, int ClassificationPageId);
         Task<List<ClassificationRelationTypeIndexGet>> ClassificationRelationTypeIndexGet(string UserId);
-        Task<List<ClassificationPageLanguageUpdateGet>> ClassificationRelationTypeLanguageIndexGet(string UserId, int ClassificationRelationTypeId);
+        Task<List<ClassificationRelationTypeLanguageUpdateGet>> ClassificationRelationTypeLanguageIndexGet(string UserId, int ClassificationRelationTypeId);
         Task<ClassificationPageLanguageUpdateGet> ClassificationRelationTypeLanguageUpdateGet(string UserId, int ClassificationRelationTypeLanguageId);
         Task<List<ClassificationRelationTypeList>> ClassificationRelationTypeListGet(string UserId);
         Task<ClassificationRelationTypeUpdateGet> ClassificationRelationTypeUpdateGet(string UserId, int ClassificationRelationTypeId);
@@ -35,11 +35,14 @@ namespace SIPx.DataAccess
         Task<List<ClassificationUserIndexGet>> ClassificationUserIndexGet(string UserId, int ClassificationId);
         Task<ClassificationUserUpdateGet> ClassificationUserUpdateGet(string UserId, int ClassificationUserId);
         Task<List<ClassificationValueUpdateGet>> ClassificationValueIndexGet(string UserId, int ClassificationId);
+        Task<List<ClassificationValueLanguageIndexGet>> ClassificationValueLanguageIndexGet(string UserId, int ClassificationValueId);
+        Task<ClassificationValueLanguageIndexGet> ClassificationValueLanguageUpdateGet(string UserId, int ClassificationValueLanguageId);
         Task<List<ClassificationValueRoleUpdateGet>> ClassificationValueRoleIndexGet(string UserId, int ClassificationId);
         Task<ClassificationValueRoleUpdateGet> ClassificationValueRoleUpdateGet(string UserId, int ClassificationValueRoleId);
+        Task<ClassificationValueUpdateGet> ClassificationValueUpdateGet(string UserId, int ClassificationValueId);
         Task<List<ClassificationValueUserUpdateGet>> ClassificationValueUserIndexGet(string UserId, int ClassificationId);
         Task<ClassificationValueUserUpdateGet> ClassificationValueUserUpdateGet(string UserId, int ClassificationValueUserId);
-        Task<ClassificationRelationTypeLanguageIndexGet> GetClassificationPageLanguageUpdateGet(string UserId, int ClassificationPageLanguageId);
+        Task<ClassificationPageLanguageIndexGet> GetClassificationPageLanguageUpdateGet(string UserId, int ClassificationPageLanguageId);
         bool PostClassification(ClassificationCreatePost Classification);
         Task<string> PostClassificationCheck(ClassificationCreatePost Classification);
         bool PutClassification(ClassificationUpdatePut Classification);

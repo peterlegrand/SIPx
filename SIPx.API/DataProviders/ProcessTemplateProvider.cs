@@ -254,5 +254,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageTypeLanguage, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageTypeLanguageId = ProcessTemplateStageTypeLanguageId });
 
         }
+        public Task<ProcessTemplateStageFieldStatusUpdateGet> ProcessTemplateStageFieldStatusUpdateGet(string UserId, int ProcessTemplateStageFieldDStatusId)
+        {
+            string usp = "usp_ProcessTemplateStageTypeLanguageUpdateGet @UserId, @ProcessTemplateStageFieldDStatusId";
+            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageFieldStatusUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldDStatusId = ProcessTemplateStageFieldDStatusId });
+        }
+
     }
 }

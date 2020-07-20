@@ -1,5 +1,4 @@
 ﻿SET IDENTITY_INSERT UITerms ON;
-
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1, 'Classification');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2, 'Id');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(3, 'Name');
@@ -1304,5 +1303,17 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1301, 'Process template stag
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1302, 'Process template stage type languages');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1303, 'Back to process template stage types');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1304, 'Role group languages');
-
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1305, 'Classification values');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1306, 'Parent');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1307, 'Add new classification value');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1308, 'Classification value');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1309, 'Parent value');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1310, 'Classification name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1311, 'Parent name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1312, 'Classification value language');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1313, 'Classification language');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1314, 'Classification role');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1315, 'Classification page section language');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1316, 'Back to classification');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1317, 'Classification user');
 SET IDENTITY_INSERT UITerms OFF;

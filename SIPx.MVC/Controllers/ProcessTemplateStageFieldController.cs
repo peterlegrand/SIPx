@@ -18,7 +18,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<List<ProcessTemplateStageFieldIndexGet>>($"{_baseUrl}api/ProcessTemplateStageField/Index/" + id, token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ProcessTemplateStageField/Index", token);
+           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateStageField/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -29,7 +29,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<ProcessTemplateStageFieldUpdateGet>($"{_baseUrl}api/ProcessTemplateStageField/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ProcessTemplateStageField/Edit", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateStageField/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }

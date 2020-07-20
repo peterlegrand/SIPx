@@ -12,13 +12,12 @@ namespace SIPx.MVC.Controllers
     public class PersonController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-
-        ServiceClient client = new ServiceClient();
+        readonly ServiceClient client = new ServiceClient();
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<List<PersonRelationIndexGet>>($"{_baseUrl}api/Person/Index",token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Person/Index", token);
+           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Person/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -29,7 +28,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<PersonRelationUpdateGet>($"{_baseUrl}api/Person/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Person/Edit", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Person/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }

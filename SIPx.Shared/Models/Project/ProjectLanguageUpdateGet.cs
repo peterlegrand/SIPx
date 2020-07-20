@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class ProjectLanguage
+    public class ProjectLanguageUpdateGet
     {
         [Key]
         public int ProjectLanguageId { get; set; }

@@ -6,7 +6,7 @@
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification page section language")).TermString;
 
 }
-
+@* PETER TODO Classification page section language *@
 <h1>
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification page section language")).TermString
 </h1>
@@ -237,18 +237,18 @@
     }
 </script>
 @*
-    PETER TODO 
+        PETER TODO
+        <script type="text/javascript">
+        function FilterDefaultPage(e) {
+                    var query = new ej.data.Query();
+                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+                }
+    </script>
     <script type="text/javascript">
-    function FilterDefaultPage(e) {
-                var query = new ej.data.Query();
-                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-            }
-</script>
-<script type="text/javascript">
-    function FilterStatus(e) {
-                var query = new ej.data.Query();
-                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-            }
-</script>*@
+        function FilterStatus(e) {
+                    var query = new ej.data.Query();
+                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+                }
+    </script>*@

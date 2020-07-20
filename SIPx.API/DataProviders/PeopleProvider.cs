@@ -182,40 +182,40 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<RoleGroupLanguage, dynamic>(usp, new { UserId = UserId, RoleGroupLanguageId = RoleGroupLanguageId });
 
         }
-        public Task<List<RoleGroup>> RoleGroupIndexGet(string UserId)
+        public Task<List<RoleGroupIndexGet>> RoleGroupIndexGet(string UserId)
         {
             string usp = "usp_RoleGroupIndexGet @UserID";
-            return _sqlDataAccess.LoadData<RoleGroup, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<RoleGroupIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<RoleGroup> RoleGroupUpdateGet(string UserId, int RoleGroupId)
+        public Task<RoleGroupUpdateGet> RoleGroupUpdateGet(string UserId, int RoleGroupId)
         {
             string usp = "usp_RoleGroupUpdateGet @UserId, @RoleGroupID";
-            return _sqlDataAccess.LoadSingleRecord<RoleGroup, dynamic>(usp, new { UserId = UserId, RoleGroupId = RoleGroupId });
+            return _sqlDataAccess.LoadSingleRecord<RoleGroupUpdateGet, dynamic>(usp, new { UserId = UserId, RoleGroupId = RoleGroupId });
 
         }
-        public Task<List<RoleLanguage>> RoleLanguageIndexGet(string UserId, string RoleId)
+        public Task<List<RoleLanguageIndexGet>> RoleLanguageIndexGet(string UserId, string RoleId)
         {
             string usp = "usp_RoleLanguageIndexGet @UserId, @RoleID";
-            return _sqlDataAccess.LoadData<RoleLanguage, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
+            return _sqlDataAccess.LoadData<RoleLanguageIndexGet, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
 
         }
-        public Task<RoleLanguage> RoleLanguageUpdateGet(string UserId, int RoleLanguageId)
+        public Task<RoleLanguageUpdateGet> RoleLanguageUpdateGet(string UserId, int RoleLanguageId)
         {
             string usp = "usp_RoleLanguageUpdateGet @UserId, @RoleLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<RoleLanguage, dynamic>(usp, new { UserId = UserId, RoleLanguageId = RoleLanguageId });
+            return _sqlDataAccess.LoadSingleRecord<RoleLanguageUpdateGet, dynamic>(usp, new { UserId = UserId, RoleLanguageId = RoleLanguageId });
 
         }
-        public Task<List<SecurityLevel>> SecurityLevelIndexGet(string UserId)
+        public Task<List<SecurityLevelIndexGet>> SecurityLevelIndexGet(string UserId)
         {
             string usp = "usp_SecurityLevelIndexGet @UserID";
-            return _sqlDataAccess.LoadData<SecurityLevel, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<SecurityLevelIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<SecurityLevel> SecurityLevelUpdateGet(string UserId, int SecurityLevelId)
+        public Task<SecurityLevelUpdateGet> SecurityLevelUpdateGet(string UserId, int SecurityLevelId)
         {
             string usp = "usp_SecurityLevelUpdateGet @UserId, @SecurityLevelID";
-            return _sqlDataAccess.LoadSingleRecord<SecurityLevel, dynamic>(usp, new { UserId = UserId, SecurityLevelId = SecurityLevelId });
+            return _sqlDataAccess.LoadSingleRecord<SecurityLevelUpdateGet, dynamic>(usp, new { UserId = UserId, SecurityLevelId = SecurityLevelId });
 
         }
         public Task<List<UserPreferenceIndexGet>> UserPreferenceIndexGet(string UserId, string SelectedUserId)

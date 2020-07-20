@@ -152,6 +152,11 @@ namespace SIPx.API.Controllers
                 string line = await sr.ReadToEndAsync();
                 await _sqlDataAccess.PopulateDataSIP(line);
             }
+            //using (StreamReader sr = new StreamReader("SQLScripts\\06dMVCUITermScreens.sql", System.Text.Encoding.UTF8))
+            //{
+            //    string line = await sr.ReadToEndAsync();
+            //    await _sqlDataAccess.PopulateDataSIP(line);
+            //}
             using (StreamReader sr = new StreamReader("SQLScripts\\07TermLanguage.sql", System.Text.Encoding.UTF8))
             {
                 string line = await sr.ReadToEndAsync();

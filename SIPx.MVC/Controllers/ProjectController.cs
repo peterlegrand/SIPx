@@ -12,13 +12,12 @@ namespace SIPx.MVC.Controllers
     public class ProjectController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-
-        ServiceClient client = new ServiceClient();
+        readonly ServiceClient client = new ServiceClient();
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ProjectUpdateGet>>($"{_baseUrl}api/Project/Index",token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Project/Index", token);
+            var response = await client.GetProtectedAsync<List<ProjectIndexGet>>($"{_baseUrl}api/Project/Index",token);
+           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Project/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -29,7 +28,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<ProjectUpdateGet>($"{_baseUrl}api/Project/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/Project/Edit", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Project/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }

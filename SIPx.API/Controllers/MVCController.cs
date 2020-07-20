@@ -20,7 +20,7 @@ namespace SIPx.API.Controllers
             _uITermProvider = UITermProvider;
         }
 
-        [HttpGet("MVC/{controllerName}/{actionName}")] //("{Controller}/{Action}/{LanguageID}")]
+        [HttpGet("{controllerName}/{actionName}")] //("{Controller}/{Action}/{LanguageID}")]
         public async Task<IActionResult> MVC(string controllerName, string actionName) //string Controller = "a", string Action = "b", string LanguageId = "1")
         {
 

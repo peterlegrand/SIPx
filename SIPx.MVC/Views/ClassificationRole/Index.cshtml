@@ -20,13 +20,13 @@
 <a href="~/ClassificationRole/Create">@Term.Find(x => x.InternalName.Equals("Add role to classification relation")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="ClassificationLevel/Edit/${ClassificationLevelId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationRole/Edit/${ClassificationRoleId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="ClassificationLevel/Delete/${ClassificationLevelId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationRole/Delete/${ClassificationRoleId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

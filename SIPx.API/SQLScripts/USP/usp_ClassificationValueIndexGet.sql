@@ -63,6 +63,7 @@ SELECT TOP (@Top)
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this value')) Name
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this value')) Description
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this value')) MenuName
+	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this value')) MouseOver
 	, ISNULL(UserLanguage.DropDownName,ISNULL(DefaultLanguage.DropDownName,'No drop downName for this value')) DropDownName
 	, ISNULL(UserLanguage.PageName,ISNULL(DefaultLanguage.PageName,'No page name for this value')) PageName
 	, ISNULL(UserLanguage.PageDescription,ISNULL(DefaultLanguage.PageDescription,'No page description for this value')) PageDescription

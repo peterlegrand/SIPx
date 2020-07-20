@@ -6,7 +6,6 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateProvider
     {
-        Task<ProcessTemplateFlowConditionLanguage> ProcessTemplateFlowConditionLanguageUpdateGet(string UserId, int ProcessTemplateFlowConditionLanguageId);
         Task<List<ProcessTemplateField>> ProcessTemplateFieldIndexGet(string UserId, int ProcessTemplateId);
         Task<List<ProcessTemplateFieldLanguage>> ProcessTemplateFieldLanguageIndexGet(string UserId, int ProcessTemplateFieldId);
         Task<ProcessTemplateFieldLanguage> ProcessTemplateFieldLanguageUpdateGet(string UserId, int ProcessTemplateFieldLanguageId);
@@ -18,6 +17,7 @@ namespace SIPx.DataAccess
         Task<ProcessTemplateFlowConditionComparisonOperator> ProcessTemplateFlowConditionComparisonOperatorUpdateGet(string UserId, int ProcessTemplateFlowConditionComparisonOperatorId);
         Task<List<ProcessTemplateFlowCondition>> ProcessTemplateFlowConditionIndexGet(string UserId, int ProcessTemplateFlowId);
         Task<List<ProcessTemplateFlowConditionLanguage>> ProcessTemplateFlowConditionLanguageIndexGet(string UserId, int ProcessTemplateFlowConditionId);
+        Task<ProcessTemplateFlowConditionLanguage> ProcessTemplateFlowConditionLanguageUpdateGet(string UserId, int ProcessTemplateFlowConditionLanguageId);
         Task<List<ProcessTemplateFlowConditionType>> ProcessTemplateFlowConditionTypeIndexGet(string UserId);
         Task<ProcessTemplateFlowConditionType> ProcessTemplateFlowConditionTypeUpdateGet(string UserId, int ProcessTemplateFlowConditionTypeId);
         Task<ProcessTemplateFlowCondition> ProcessTemplateFlowConditionUpdateGet(string UserId, int ProcessTemplateFlowConditionId);
@@ -44,5 +44,6 @@ namespace SIPx.DataAccess
         Task<ProcessTemplateStageType> ProcessTemplateStageTypeUpdateGet(string UserId, int ProcessTemplateStageTypeId);
         Task<ProcessTemplateStage> ProcessTemplateStageUpdateGet(string UserId, int ProcessTemplateStageId);
         Task<ProcessTemplate> ProcessTemplateUpdateGet(string UserId, int ProcessTemplateId);
+        Task<ProcessTemplateStageFieldStatusUpdateGet> ProcessTemplateStageFieldStatusUpdateGet(string UserId, int ProcessTemplateStageFieldStatusId);
     }
 }

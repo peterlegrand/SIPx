@@ -94,7 +94,7 @@ namespace SIPx.DataAccess
         }
         public Task<SettingUpdateGet> SettingUpdateGet(string UserId, int SettingId)
         {
-            string usp = "usp_SettingUpdateSet @UserId, @SettingID";
+            string usp = "usp_SettingUpdateGet @UserId, @SettingID";
             return _sqlDataAccess.LoadSingleRecord<SettingUpdateGet, dynamic>(usp, new { UserId = UserId, SettingId = SettingId });
 
         }

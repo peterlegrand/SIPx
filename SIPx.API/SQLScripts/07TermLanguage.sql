@@ -4,8 +4,6 @@ Select @User = Id from AspNetUsers
 
 
 SET IDENTITY_INSERT UITermLanguages ON;
-
-
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(1,1,41,'Classification', 'Classification', 'Classification');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(3,2,41,'Id', 'Id', 'Id');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(5,3,41,'Name', 'Name', 'Name');
@@ -1310,7 +1308,18 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2603,1302,41,'Process template stage type languages', 'Process template stage type languages', 'Process template stage type languages');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2605,1303,41,'Back to process template stage types', 'Back to process template stage types', 'Back to process template stage types');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2607,1304,41,'Role group languages', 'Role group languages', 'Role group languages');
-
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2609,1305,41,'Classification values', 'Classification values', 'Classification values');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2611,1306,41,'Parent', 'Parent', 'Parent');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2613,1307,41,'Add new classification value', 'Add new classification value', 'Add new classification value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2615,1308,41,'Classification value', 'Classification value', 'Classification value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2617,1309,41,'Parent value', 'Parent value', 'Parent value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2619,1310,41,'Classification name', 'Classification name', 'Classification name');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2621,1311,41,'Parent name', 'Parent name', 'Parent name');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2623,1312,41,'Classification value language', 'Classification value language', 'Classification value language');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2625,1313,41,'Classification language', 'Classification language', 'Classification language');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2627,1314,41,'Classification role', 'Classification role', 'Classification role');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2629,1315,41,'Classification page section language', 'Classification page section language', 'Classification page section language');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2631,1316,41,'Back to classification', 'Back to classification', 'Back to classification');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2,1,39,'Classificatie', 'Classificatie', 'Classificatie');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(4,2,39,'Id', 'Id', 'Id');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(6,3,39,'Naam', 'Naam', 'Naam');
@@ -2615,4 +2624,18 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2604,1302,39,'Process template stage type languages', 'Process template stage type languages', 'Process template stage type languages');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2606,1303,39,'Back to process template stage types', 'Back to process template stage types', 'Back to process template stage types');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2608,1304,39,'Role group languages', 'Role group languages', 'Role group languages');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2610,1305,39,'Classification values', 'Classification values', 'Classification values');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2612,1306,39,'Parent', 'Parent', 'Parent');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2614,1307,39,'Add new classification value', 'Add new classification value', 'Add new classification value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2616,1308,39,'Classification value', 'Classification value', 'Classification value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2618,1309,39,'Parent value', 'Parent value', 'Parent value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2620,1310,39,'Classification name', 'Classification name', 'Classification name');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2622,1311,39,'Parent name', 'Parent name', 'Parent name');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2624,1312,39,'Classification value language', 'Classification value language', 'Classification value language');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2626,1313,39,'Classification language', 'Classification language', 'Classification language');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2628,1314,39,'Classification role', 'Classification role', 'Classification role');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2630,1315,39,'Classification page section language', 'Classification page section language', 'Classification page section language');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2632,1316,39,'Back to classification', 'Back to classification', 'Back to classification');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2633,1317,41,'Classification user', 'Classification user', 'Classification user');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2634,1317,39,'Classification user', 'Classification user', 'Classification user');
 SET IDENTITY_INSERT UITermLanguages OFF;

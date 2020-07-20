@@ -19,7 +19,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<List<ClassificationLevelIndexGet>>($"{_baseUrl}api/ClassificationLevel/Index/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationLevel/Index", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -30,7 +30,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<ClassificationLevelUpdateGet>($"{_baseUrl}api/ClassificationLevel/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationLevel/Edit", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<List<ClassificationLevelLanguageIndexGet>>($"{_baseUrl}api/ClassificationLevel/LanguageIndex/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationLevel/LanguageIndex", token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/LanguageIndex", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -48,8 +48,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageEdit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ClassificationLevelUpdateGet>($"{_baseUrl}api/ClassificationLevel/LanguageEdit/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/UITerm/MVC/ClassificationLevel/LanguageEdit", token);
+            var response = await client.GetProtectedAsync<ClassificationLevelLanguageIndexGet>($"{_baseUrl}api/ClassificationLevel/LanguageUpdate/" + id, token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/LanguageEdit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
