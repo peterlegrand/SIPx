@@ -26,8 +26,8 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string PageSectionTypeName { get; set; }
-        public int PageSectionDataTypeName { get; set; }
-        public string ContentTypeId { get; set; }
+        public string PageSectionDataTypeName { get; set; }
+        public int ContentTypeId { get; set; }
         public int PageSectionDataTypeId { get; set; }
         public string ContentTypeName { get; set; }
         public string SortByName { get; set; }

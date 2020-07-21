@@ -1,14 +1,14 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PageUpdateGet
+@model PageLanguageIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page language")).TermString;
 
 }
 
 <h1>
-    <img src="~/images/icons/s.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page")).TermString
+    <img src="~/images/icons/Pages.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page language")).TermString
 </h1>
 <div class="container">
     <div class="row">
@@ -16,6 +16,11 @@
             @Term.Find(x => x.InternalName.Equals("Id")).TermString
         </div>
         <div class="col-9">@Model.PageId</div>
+    </div><div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        </div><div class="col-9">@Model.PageId</div>
+
     </div>
     <div class="row">
         <div class="col-3">
@@ -79,14 +84,7 @@
                 <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="ShowTitleName" label="Show title name" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
-            </div>
-        </div>
+
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
@@ -95,7 +93,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @Term.Find(x => x.InternalName.Equals("Creator name")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -111,7 +109,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @Term.Find(x => x.InternalName.Equals("Modifier name")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -233,18 +231,18 @@
     }
 </script>
 @*
-        PETER TODO
-        <script type="text/javascript">
-        function FilterDefaultPage(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>
+    PETER TODO 
     <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>*@
+    function FilterDefault(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Defaults)), query);
+            }
+</script>
+<script type="text/javascript">
+    function FilterStatus(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Defaults)), query);
+            }
+</script>*@

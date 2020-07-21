@@ -21,28 +21,40 @@ namespace SIPx.DataAccess
         }
 
 
-        public async Task<List<PageLanguage>> PageLanguageIndexGet(string UserId, int PageId)
+        public async Task<List<PageLanguageIndexGet>> PageLanguageIndexGet(string UserId, int PageId)
         {
-            string usp = "usp_DateLevelIndexGet @UserId, @PageID";
-            var x = await _sqlDataAccess.LoadData<PageLanguage, dynamic>(usp, new { UserId = UserId, PageId = PageId });
+            string usp = "usp_PageLanguageIndexGet @UserId, @PageID";
+            var x = await _sqlDataAccess.LoadData<PageLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageId = PageId });
             return x;
         }
-        public Task<PageLanguage> PageLanguageUpdateGet(string UserId, int PageLanguageId)
+        public Task<PageLanguageIndexGet> PageLanguageUpdateGet(string UserId, int PageLanguageId)
         {
-            string usp = "usp_DateLevelUpdateGet @UserId, @DPageLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<PageLanguage, dynamic>(usp, new { UserId = UserId, PageLanguageId = PageLanguageId });
+            string usp = "usp_PageLanguageUpdateGet @UserId, @PageLanguageID";
+            return _sqlDataAccess.LoadSingleRecord<PageLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageLanguageId = PageLanguageId });
 
         }
-        public async Task<List<Page>> PageIndexGet(string UserId)
+        public async Task<List<PageIndexGet>> PageIndexGet(string UserId)
         {
             string usp = "usp_PageIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<Page, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<PageIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Page> PageUpdateGet(string UserId, int PageId)
+        public Task<PageUpdateGet> PageUpdateGet(string UserId, int PageId)
         {
             string usp = "usp_PageUpdateGet @UserId, @PageID";
-            return _sqlDataAccess.LoadSingleRecord<Page, dynamic>(usp, new { UserId = UserId, PageId = PageId });
+            return _sqlDataAccess.LoadSingleRecord<PageUpdateGet, dynamic>(usp, new { UserId = UserId, PageId = PageId });
+
+        }
+        public async Task<List<PageSectionIndexGet>> PageSectionIndexGet(string UserId, int PageId)
+        {
+            string usp = "usp_PageSectionIndexGet @UserID, @PageID";
+            var x = await _sqlDataAccess.LoadData<PageSectionIndexGet, dynamic>(usp, new { UserId = UserId, PageID = PageId });
+            return x;
+        }
+        public Task<PageSectionUpdateGet> PageSectionUpdateGet(string UserId, int PageSectionId)
+        {
+            string usp = "usp_PageSectionUpdateGet @UserId, @PageSectionID";
+            return _sqlDataAccess.LoadSingleRecord<PageSectionUpdateGet, dynamic>(usp, new { UserId = UserId, PageSectionId = PageSectionId });
 
         }
         public Task<List<PageSectionDataTypeList>> PageSectionDataTypeList(string UserId)
@@ -57,6 +69,17 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<PageSectionTypeList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public async Task<List<PageSectionLanguageIndexGet>> PageSectionLanguageIndexGet(string UserId, int PageSectionId)
+        {
+            string usp = "usp_PageSectionLanguageIndexGet @UserId, @PageSectionID";
+            var x = await _sqlDataAccess.LoadData<PageSectionLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageSectionId = PageSectionId });
+            return x;
+        }
+        public Task<PageSectionLanguageIndexGet> PageSectionLanguageUpdateGet(string UserId, int PageLanguageId)
+        {
+            string usp = "usp_PageLanguageUpdateGet @UserId, @PageLanguageID";
+            return _sqlDataAccess.LoadSingleRecord<PageSectionLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageLanguageId = PageLanguageId });
 
+        }
     }
 }
