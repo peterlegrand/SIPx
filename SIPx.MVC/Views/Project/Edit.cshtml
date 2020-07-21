@@ -29,6 +29,13 @@
 
         <div class="row">
             <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Parent")).TermString
+            </div>    <div class="col-9">
+                @Model.ParentProjectName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>

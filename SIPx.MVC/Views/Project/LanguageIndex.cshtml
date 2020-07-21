@@ -1,4 +1,4 @@
-﻿@model List<OrganizationTypeLanguageIndexGet>
+﻿@model List<ProjectLanguageIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project languages")).TermString;
@@ -17,17 +17,17 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="/OrganizationType/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
+<a href="/Project/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/OrganizationType/Edit/${ClassificationId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/Project/LanguageEdit/${ProjectLanguageId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="OrganizationType/Delete/${ClassificationId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="Project/LanguageDelete/${ProjectLanguageId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

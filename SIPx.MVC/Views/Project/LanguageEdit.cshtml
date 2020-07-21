@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model OrganizationTypeLanguageIndexGet
+@model ProjectLanguageIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project language")).TermString;
@@ -15,12 +15,12 @@
         <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("Id")).TermString
         </div>
-        <div class="col-9">@Model.OrganizationTypeId</div>
+        <div class="col-9">@Model.ProjectId</div>
     </div>
     <div class="row">
         <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.OrganizationTypeLanguageId</div>
+        </div><div class="col-9">@Model.ProjectLanguageId</div>
 
     </div>
 
@@ -71,7 +71,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @Term.Find(x => x.InternalName.Equals("Creator name")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -87,7 +87,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @Term.Find(x => x.InternalName.Equals("Modifier name")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName

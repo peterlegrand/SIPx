@@ -22,13 +22,13 @@ namespace SIPx.DataAccess
 
         public async Task<List<ProjectLanguageIndexGet>> ProjectLanguageIndexGet(string UserId, int ProjectId)
         {
-            string usp = "ProjectLanguagIndexGet @UserId, @ProjectId";
+            string usp = "usp_ProjectLanguageIndexGet @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<ProjectLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }
         public Task<ProjectLanguageUpdateGet> ProjectLanguageUpdateGet(string UserId, int ProjectLanguageId)
         {
-            string usp = "ProjectLanguageUpdateGet @UserId, @ProjectLanguageID";
+            string usp = "usp_ProjectLanguageUpdateGet @UserId, @ProjectLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ProjectLanguageUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectLanguageId = ProjectLanguageId });
 
         }
