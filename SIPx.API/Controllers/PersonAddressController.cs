@@ -19,19 +19,21 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class PersonAddressController : ControllerBase
     {
+        private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonAddressController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonAddressController(IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
 
 
-        [HttpGet("AddressIndex/{Id:int}")]
+        [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> GetPersonAddresses(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -46,13 +48,16 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("AddressUpdate/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetPersonAddress(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonAddressUpdateGet(CurrentUser.Id, Id));
+                var x = await _peopleProvider.PersonAddressUpdateGet(CurrentUser.Id, Id);
+                var y = await _masterProvider.CountryList(CurrentUser.Id);
+                x.Countries = y;
+                return Ok(x);
             }
             return BadRequest(new
             {

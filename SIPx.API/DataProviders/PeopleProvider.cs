@@ -86,28 +86,29 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClaimUpdateGet, dynamic>(usp, new { UserId = UserId, ClaimId = ClaimId });
 
         }
-        public Task<List<PersonAddress>> PersonAddressIndexGet(string UserId, int PersonId)
+        public Task<List<PersonAddressIndexGet>> PersonAddressIndexGet(string UserId, int PersonId)
         {
             string usp = "usp_PersonAddressIndexGet @UserId, @PersonID";
-            return _sqlDataAccess.LoadData<PersonAddress, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
+            var x = _sqlDataAccess.LoadData<PersonAddressIndexGet, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
+            return x;
 
         }
-        public Task<PersonAddress> PersonAddressUpdateGet(string UserId, int PersonAddressId)
+        public Task<PersonAddressUpdateGet> PersonAddressUpdateGet(string UserId, int PersonAddressId)
         {
             string usp = "usp_PersonAddressUpdateGet @UserId, @PersonAddressID";
-            return _sqlDataAccess.LoadSingleRecord<PersonAddress, dynamic>(usp, new { UserId = UserId, PersonAddressId = PersonAddressId });
+            return _sqlDataAccess.LoadSingleRecord<PersonAddressUpdateGet, dynamic>(usp, new { UserId = UserId, PersonAddressId = PersonAddressId });
 
         }
-        public Task<List<PersonRelation>> PersonRelationIndexGet(string UserId, int PersonId)
+        public Task<List<PersonRelationIndexGet>> PersonRelationIndexGet(string UserId, int PersonId)
         {
             string usp = "usp_PersonRelationIndexGet @UserId, @PersonID";
-            return _sqlDataAccess.LoadData<PersonRelation, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
+            return _sqlDataAccess.LoadData<PersonRelationIndexGet, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
 
         }
-        public Task<PersonRelation> PersonRelationUpdateGet(string UserId, int PersonRelationId)
+        public Task<PersonRelationUpdateGet> PersonRelationUpdateGet(string UserId, int PersonRelationId)
         {
             string usp = "usp_PersonRelationUpdateGet @UserId, @PersonRelationID";
-            return _sqlDataAccess.LoadSingleRecord<PersonRelation, dynamic>(usp, new { UserId = UserId, PersonRelationId = PersonRelationId });
+            return _sqlDataAccess.LoadSingleRecord<PersonRelationUpdateGet, dynamic>(usp, new { UserId = UserId, PersonRelationId = PersonRelationId });
 
         }
         public Task<List<PersonRelationTypeLanguage>> PersonRelationTypeLanguageIndexGet(string UserId, int PersonRelationTypeId)
@@ -134,28 +135,28 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PersonRelationType, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
 
         }
-        public Task<List<Person>> PersonIndexGet(string UserId)
+        public Task<List<PersonIndexGet>> PersonIndexGet(string UserId)
         {
             string usp = "usp_PersonIndexGet @UserID";
-            return _sqlDataAccess.LoadData<Person, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<PersonIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<Person> PersonUpdateGet(string UserId, int PersonId)
+        public Task<PersonUpdateGet> PersonUpdateGet(string UserId, int PersonId)
         {
             string usp = "usp_PersonUpdateGet @UserId, @PersonID";
-            return _sqlDataAccess.LoadSingleRecord<Person, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
+            return _sqlDataAccess.LoadSingleRecord<PersonUpdateGet, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
 
         }
-        public Task<List<PersonTelecom>> PersonTelecomIndexGet(string UserId, int PersonId)
+        public Task<List<PersonTelecomIndexGet>> PersonTelecomIndexGet(string UserId, int PersonId)
         {
-            string usp = "usp_PersonIndexGet @UserId, @PersonID";
-            return _sqlDataAccess.LoadData<PersonTelecom, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
+            string usp = "usp_PersonTelecomIndexGet @UserId, @PersonID";
+            return _sqlDataAccess.LoadData<PersonTelecomIndexGet, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
 
         }
-        public Task<PersonTelecom> PersonTelecomUpdateGet(string UserId, int PersonTelecomId)
+        public Task<PersonTelecomUpdateGet> PersonTelecomUpdateGet(string UserId, int PersonTelecomId)
         {
             string usp = "usp_PersonTelecomUpdateGet @UserId, @PersonTelecomID";
-            return _sqlDataAccess.LoadSingleRecord<PersonTelecom, dynamic>(usp, new { UserId = UserId, PersonTelecomId = PersonTelecomId });
+            return _sqlDataAccess.LoadSingleRecord<PersonTelecomUpdateGet, dynamic>(usp, new { UserId = UserId, PersonTelecomId = PersonTelecomId });
 
         }
         public Task<List<PreferenceType>> PreferenceTypeIndexGet(string UserId)
@@ -240,6 +241,12 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_UserList";
             return _sqlDataAccess.LoadData<UserList>(usp);
+
+        }
+        public Task<List<GenderList>> GenderList(string UserId)
+        {
+            string usp = "usp_GenderList @UserID";
+            return _sqlDataAccess.LoadData<GenderList, dynamic>(usp, new { UserId = UserId });
 
         }
     }

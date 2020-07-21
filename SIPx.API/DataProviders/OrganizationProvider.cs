@@ -92,5 +92,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<OrganizationType, dynamic>(usp, new { UserId = UserId, OrganizationTypeId = OrganizationTypeId });
 
         }
+        public async Task<List<OrganizationList>> OrganizationList(string UserId)
+        {
+            string usp = "usp_OrganizationList @UserID";
+            var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
     }
 }

@@ -94,7 +94,7 @@
                 @Term.Find(x => x.InternalName.Equals("Gender")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Gender" dataSource="@Model.Genders" ejs-for="@Model.GenderId" value="@Model.GenderId" index="2" filtering="Genders" popupHeight="220px">
+                <ejs-dropdownlist id="Gender" dataSource="@Model.Genders" ejs-for="@Model.GenderId" value="@Model.GenderId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="GenderId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -119,8 +119,8 @@
                 @Term.Find(x => x.InternalName.Equals("Default organization")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="DefaultOrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.DefaultOrganizationId" value="@Model.DefaultOrganizationId" index="2" filtering="Organizations" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="DefaultOrganizationId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="DefaultOrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.DefaultOrganizationId" value="@Model.DefaultOrganizationId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="OrganizationId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>

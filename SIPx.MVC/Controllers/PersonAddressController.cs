@@ -12,12 +12,11 @@ namespace SIPx.MVC.Controllers
     public class PersonAddressController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-
-        ServiceClient client = new ServiceClient();
+        readonly ServiceClient client = new ServiceClient();
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PersonAddressUpdateGet>>($"{_baseUrl}api/PersonAddress/Index/"+id,token);
+            var response = await client.GetProtectedAsync<List<PersonAddressIndexGet>>($"{_baseUrl}api/PersonAddress/Index/"+id,token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Index", token);
             ViewBag.UITerms = x;
             return View(response);

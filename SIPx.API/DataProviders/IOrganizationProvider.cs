@@ -11,6 +11,7 @@ namespace SIPx.DataAccess
         Task<List<OrganizationIndexGet>> OrganizationIndexGet(string UserId);
         Task<List<OrganizationLanguage>> OrganizationLanguageIndexGet(string UserId, int OrganizationId);
         Task<OrganizationLanguage> OrganizationLanguageUpdateGet(string UserId, int OrganizationLanguageId);
+        Task<List<OrganizationList>> OrganizationList(string UserId);
         Task<List<OrganizationTelecom>> OrganizationTelecomIndexGet(string UserId, int OrganizationId);
         Task<OrganizationTelecom> OrganizationTelecomUpdateGet(string UserId, int OrganizationTelecomId);
         Task<List<OrganizationType>> OrganizationTypeIndexGet(string UserId);

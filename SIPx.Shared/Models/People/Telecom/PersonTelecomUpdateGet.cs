@@ -25,6 +25,5 @@ namespace SIPx.Shared
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<TelecomTypeList> TelecomTypes { get; set; }
     }
 }

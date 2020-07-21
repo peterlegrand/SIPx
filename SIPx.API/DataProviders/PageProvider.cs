@@ -75,10 +75,10 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<PageSectionLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageSectionId = PageSectionId });
             return x;
         }
-        public Task<PageSectionLanguageIndexGet> PageSectionLanguageUpdateGet(string UserId, int PageLanguageId)
+        public Task<PageSectionLanguageIndexGet> PageSectionLanguageUpdateGet(string UserId, int PageSectionLanguageId)
         {
-            string usp = "usp_PageLanguageUpdateGet @UserId, @PageLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<PageSectionLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageLanguageId = PageLanguageId });
+            string usp = "usp_PageSectionLanguageUpdateGet @UserId, @PageSectionLanguageID";
+            return _sqlDataAccess.LoadSingleRecord<PageSectionLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageSectionLanguageId = PageSectionLanguageId });
 
         }
     }

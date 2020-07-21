@@ -11,7 +11,7 @@ namespace SIPx.Shared
         [Key]
         public int PersonAddressId { get; set; }
         public int PersonId { get; set; }
-        public int PersonName { get; set; }
+        public string PersonName { get; set; }
         public int AddressTypeId { get; set; }
         public string AddressTypeName { get; set; }
         public string AttnName { get; set; }

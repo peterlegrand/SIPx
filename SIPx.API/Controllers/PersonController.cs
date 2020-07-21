@@ -17,14 +17,16 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class PeopleController : ControllerBase
+    public class PersonController : ControllerBase
     {
+        private readonly IOrganizationProvider _organizationProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PeopleController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonController(IOrganizationProvider organizationProvider,  IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _organizationProvider = organizationProvider;
             _claimCheck = claimCheck;
             _peopleProvider = peopleProvider;
             _userManager = userManager;
@@ -51,7 +53,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonUpdateGet(CurrentUser.Id, Id));
+                var x = await _peopleProvider.PersonUpdateGet(CurrentUser.Id, Id);
+                var y = await _peopleProvider.GenderList(CurrentUser.Id);
+                var z = await _organizationProvider.OrganizationList(CurrentUser.Id);
+                var a = await _peopleProvider.UserList();
+                x.Genders = y;
+                x.Organizations = z;
+                x.Users = a;
+                return Ok(x);
             }
             return BadRequest(new
             {

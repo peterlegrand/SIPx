@@ -9,6 +9,7 @@ namespace SIPx.Shared
     public class PageSectionLanguageIndexGet { 
         [Key]
         public int PageSectionLanguageId { get; set; }
+        public int PageSectionId { get; set; }
         public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

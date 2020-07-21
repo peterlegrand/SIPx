@@ -1,109 +1,90 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PersonAddressUpdateGet
+@model PageSectionLanguageIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person address")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section language")).TermString;
 
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person address")).TermString
+    <img src="~/images/icons/PageSections.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section language")).TermString
 </h1>
 <div class="container">
     <div class="row">
         <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("Id")).TermString
         </div>
-        <div class="col-9">@Model.PersonAddressId</div>
+        <div class="col-9">@Model.PageSectionId</div>
+    </div><div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        </div><div class="col-9">@Model.PageSectionId</div>
+
     </div>
     <div class="row">
         <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.PersonId</div>
+        </div><div class="col-9">@Model.PageSectionLanguageId</div>
+
     </div>
+
+
     <form method="post">
+
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Attn name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="AttnName" ejs-for="AttnName" cssClass="e-outline" placeholder="Attn name" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Address 1")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="Address1" ejs-for="Address1" cssClass="e-outline" placeholder="Address 1" floatLabelType="Auto"></ejs-textbox>
+            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-9">
+                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                    <e-content-template>
+                    </e-content-template>
+                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                    </e-richtexteditor-toolbarsettings>
+                </ejs-richtexteditor>
             </div>
         </div>
+
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Address 2")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="Address2" ejs-for="Address2" cssClass="e-outline" placeholder="Address 2" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("House number")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="HouseNumber" ejs-for="HouseNumber" cssClass="e-outline" placeholder="House number" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("House number ext")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="HouseNumberExt" ejs-for="HouseNumberExt" cssClass="e-outline" placeholder="House number ext" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("City")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="City" ejs-for="City" cssClass="e-outline" placeholder="City" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Postal code")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="PostalCode" ejs-for="PostalCode" cssClass="e-outline" placeholder="Postal code" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Postal code ext")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="PostalCodeExt" ejs-for="PostalCodeExt" cssClass="e-outline" placeholder="Postal code ext" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Country")).TermString
+                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Country" dataSource="@Model.Countries" ejs-for="@Model.CountryId" value="@Model.CountryId" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="CountryId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
+                <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Province / state")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="ProvinceState" ejs-for="ProvinceState" cssClass="e-outline" placeholder="Province / state" floatLabelType="Auto"></ejs-textbox>
+                @Term.Find(x => x.InternalName.Equals("Title name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="TitleName" ejs-for="TitleName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("County")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="County" ejs-for="County" cssClass="e-outline" placeholder="County" floatLabelType="Auto"></ejs-textbox>
+                @Term.Find(x => x.InternalName.Equals("Title description")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
@@ -112,7 +93,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @Term.Find(x => x.InternalName.Equals("Creator name")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -128,7 +109,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @Term.Find(x => x.InternalName.Equals("Modifier name")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -250,18 +231,18 @@
     }
 </script>
 @*
-        PETER TODO
-        <script type="text/javascript">
-        function FilterDefaultPage(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>
+    PETER TODO 
     <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>*@
+    function FilterDefault(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Defaults)), query);
+            }
+</script>
+<script type="text/javascript">
+    function FilterStatus(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Defaults)), query);
+            }
+</script>*@
