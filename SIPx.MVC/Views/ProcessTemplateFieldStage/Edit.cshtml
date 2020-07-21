@@ -68,7 +68,7 @@
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.ProcessTemplateFields" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -251,7 +251,7 @@
         function Sequences(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Sequences)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFields)), query);
                 }
 </script>
 <script type="text/javascript">

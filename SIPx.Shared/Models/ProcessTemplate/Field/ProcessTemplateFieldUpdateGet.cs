@@ -24,6 +24,6 @@ namespace SIPx.Shared
         public DateTime ModifiedDate { get; set; }
 
         public List<ProcessTemplateFieldTypeList> ProcessTemplateFieldTypes { get; set; }
-
+        
     }
 }

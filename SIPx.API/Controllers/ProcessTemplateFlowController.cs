@@ -77,7 +77,10 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateFlowUpdateGet(CurrentUser.Id, Id));
+                var x = await _processTemplateProvider.ProcessTemplateFlowUpdateGet(CurrentUser.Id, Id);
+                var y = await _processTemplateProvider.ProcessTemplateFlowUpdateGetStageList(CurrentUser.Id, Id);
+                x.ProcessTemplateStages = y;
+                return Ok(x);
             }
             return BadRequest(new
             {

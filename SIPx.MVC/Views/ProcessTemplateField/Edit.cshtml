@@ -68,7 +68,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+                @Term.Find(x => x.InternalName.Equals("Field type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ProcessTemplateFieldTypeId" dataSource="@Model.ProcessTemplateFieldTypes" ejs-for="@Model.ProcessTemplateFieldTypeId" value="@Model.ProcessTemplateFieldTypeId" index="2" filtering="ProcessTemplateFieldTypes" popupHeight="220px">

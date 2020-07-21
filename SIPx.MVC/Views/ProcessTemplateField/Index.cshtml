@@ -10,7 +10,7 @@
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
         <e-grid-column field="ProcessTemplateFieldId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Telecom type")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="ProcessTemplateFieldTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Field type")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Field stages")).TermString" template="#FieldStage" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
@@ -27,19 +27,19 @@
 </script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplate/Edit/${ProcessTemplateFieldId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateField/Edit/${ProcessTemplateFieldId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Language" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplate/LanguageIndex/${ProcessTemplateFieldId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateField/LanguageIndex/${ProcessTemplateFieldId}"><span style="color:red">L</span>anguage</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="ProcessTemplate/Delete/${ProcessTemplateFieldId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="ProcessTemplateField/Delete/${ProcessTemplateFieldId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

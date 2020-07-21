@@ -29,6 +29,34 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateProvider.ProcessTemplateIndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateProvider.ProcessTemplateUpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
         [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> LanguageIndex(int Id)
         {

@@ -68,8 +68,8 @@
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="."></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTemplateFields" dataSource="@Model.ProcessTemplateFields" ejs-for="@Model.Sequence" value="@Model.Sequence" filtering="ProcessTemplateFields"  index="2"popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -240,7 +240,6 @@
     }
 </script>
 
-        PETER TODO
 <script type="text/javascript">
     function ProcessTemplateStageFieldStatuses(e) {
                     var query = new ej.data.Query();
@@ -249,10 +248,10 @@
                 }
 </script>
 <script type="text/javascript">
-    function Sequences(e) {
+    function ProcessTemplateFields(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Sequences)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFields)), query);
                 }
 </script>
 <script type="text/javascript">

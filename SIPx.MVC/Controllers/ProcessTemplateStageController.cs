@@ -33,5 +33,23 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+        public async Task<IActionResult> LanguageIndex(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<List<ProcessTemplateStageLanguageIndexGet>>($"{_baseUrl}api/ProcessTemplateStage/LanguageIndex/" + id, token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateStage/LanguageIndex", token);
+            ViewBag.UITerms = x;
+            return View(response);
+            //return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> LanguageEdit(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<ProcessTemplateStageLanguageIndexGet>($"{_baseUrl}api/ProcessTemplateStage/LanguageUpdate/" + id, token);
+            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateStage/LanguageEdit", token);
+            ViewBag.UITerms = x;
+            return View(response);
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("SFIndex/{Id:int}")]
+        [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> SFIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -43,27 +43,20 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("SFUpdate/{Id:int}")]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> SFUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateStageFieldUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("FSIndex/{Id:int}")]
-        public async Task<IActionResult> FSIndex(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _processTemplateProvider.ProcessTemplateFieldStageIndexGet(CurrentUser.Id, Id));
+                var x = await _processTemplateProvider.ProcessTemplateStageFieldUpdateGet(CurrentUser.Id, Id);
+                var status = await _processTemplateProvider.ProcessTemplateStageFieldUpdateGetStatusList(CurrentUser.Id);
+                var updateType = await _processTemplateProvider.ProcessTemplateStageFieldUpdateGetValueUpdateTypeList(CurrentUser.Id);
+                var Sequence = await _processTemplateProvider.ProcessTemplateStageFieldUpdateGetFieldList(CurrentUser.Id, Id);
+                x.ProcessTemplateStageFieldStatuses = status;
+                x.ValueUpdateTypes = updateType;
+                x.ProcessTemplateFields = Sequence;
+                return Ok(x);
             }
             return BadRequest(new
             {
@@ -91,7 +84,8 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateStageFieldStatusUpdateGet(CurrentUser.Id, Id));
+                var x = await _processTemplateProvider.ProcessTemplateStageFieldStatusUpdateGet(CurrentUser.Id, Id);
+                return Ok(x);
             }
             return BadRequest(new
             {

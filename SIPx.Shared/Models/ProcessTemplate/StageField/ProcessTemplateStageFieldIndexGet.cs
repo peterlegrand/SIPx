@@ -23,7 +23,7 @@ namespace SIPx.Shared
         public string StringValue { get; set; }
         public int IntValue { get; set; }
         public DateTime DateTimeValue { get; set; }
-        public string Name { get; set; }
+        public string FieldName { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
