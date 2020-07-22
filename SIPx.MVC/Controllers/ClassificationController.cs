@@ -22,30 +22,6 @@ namespace SIPx.MVC.Controllers
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
             ViewBag.UITerms = UITerms;
             return View(response);
-            //return View();
-        }
-        //[HttpGet]
-        //public async Task<IActionResult> Create()
-        //{
-        //    var token = HttpContext.Session.GetString("Token");
-        //    var ClassificationCreate = new ClassificationCreateGet();
-
-        //    var statusList = await client.GetProtectedAsync<List<StatusList>>($"{_baseUrl}api/Classification", token);
-        //    var sequenceList = await client.GetProtectedAsync<List<ClassificationCreateGetSequence>>($"{_baseUrl}api/Classification", token);
-        //    ClassificationCreate.Sequences = sequenceList;
-        //    ClassificationCreate.Statuses = statusList;
-        //    var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
-        //    ViewBag.UITerms = UITerms;
-        //    return View(ClassificationCreate);
-        //}
-        [HttpPost]
-        public async Task<IActionResult> Create(ClassificationCreateGet Classification)
-        {
-
-            var token = HttpContext.Session.GetString("Token");
-            await client.PostProtectedAsync< ClassificationCreateGet>($"{_baseUrl}api/Classification/Create", Classification, token);
-     
-            return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -55,6 +31,14 @@ namespace SIPx.MVC.Controllers
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ClassificationCreateGet Classification)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await client.PostProtectedAsync<ClassificationCreateGet>($"{_baseUrl}api/Classification/Create", Classification, token);
+
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)

@@ -32,6 +32,24 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<ClassificationRelationTypeCreateGet>($"{_baseUrl}api/ClassificationRelationType/Create/", token);
+            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ClassificationRelationTypeCreateGet ClassificationRelationType)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await client.PostProtectedAsync<ClassificationRelationTypeCreateGet>($"{_baseUrl}api/ClassificationRelationType/Create", ClassificationRelationType, token);
+
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");

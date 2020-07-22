@@ -32,6 +32,24 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<RoleGroupCreateGet>($"{_baseUrl}api/RoleGroup/Create/", token);
+            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/RoleGroup/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(RoleGroupCreateGet RoleGroup)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await client.PostProtectedAsync<RoleGroupCreateGet>($"{_baseUrl}api/RoleGroup/Create", RoleGroup, token);
+
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");

@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class PersonTelecomCreateGet
     {
         [Key]
-        public int OrganizationId { get; set; }
+        public int PersonId { get; set; }
         public string PersonFirstName { get; set; }
         public string PersonLastName { get; set; }
         public int TelecomTypeId { get; set; }

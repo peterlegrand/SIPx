@@ -51,6 +51,55 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ClassificationLevelCreateGet = new ClassificationLevelCreateGet();
+                var ClassificationLevelCreateGetSequences = await _classificationProvider.ClassificationLevelCreateGetSequence(CurrentUser.Id);
+                var DateLevels = await _masterProvider.DateLevelList(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                ClassificationLevelCreateGet.LanguageId = UserLanguage.LanguageId;
+                ClassificationLevelCreateGet.LanguageName = UserLanguage.Name;
+                ClassificationLevelCreateGet.DateLevels = DateLevels;
+                ClassificationLevelCreateGet.Sequences = ClassificationLevelCreateGetSequences;
+                ClassificationLevelCreateGet.ClassificationId = Id;
+                return Ok(ClassificationLevelCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ClassificationLevelCreatePost ClassificationLevel)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ClassificationLevel.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _classificationProvider.PostClassificationLevelCheck(ClassificationLevel);
+                if (CheckString.Length == 0)
+                {
+                    _classificationProvider.PostClassificationLevel(ClassificationLevel);
+                    return Ok(ClassificationLevel);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
         [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> GetLevelLanguages(int Id)
         {

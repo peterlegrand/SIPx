@@ -32,5 +32,23 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpGet]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<ClassificationValueRoleCreateGet>($"{_baseUrl}api/ClassificationValueRole/Create/" + Id, token);
+            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueRole/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ClassificationValueRoleCreateGet ClassificationValueRole)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await client.PostProtectedAsync<ClassificationValueRoleCreateGet>($"{_baseUrl}api/ClassificationValueRole/Create", ClassificationValueRole, token);
+
+            return RedirectToAction("Index", new { id = ClassificationValueRole.ClassificationId });
+        }
+
     }
 }

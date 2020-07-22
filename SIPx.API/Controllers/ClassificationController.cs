@@ -53,7 +53,6 @@ namespace SIPx.API.Controllers
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationCreateGet.LanguageId = UserLanguage.LanguageId;
                 ClassificationCreateGet.LanguageName = UserLanguage.Name;
-//                ClassificationCreateGet.CreatorId = CurrentUser.Id;
                 ClassificationCreateGet.Statuses = Statuses;
                 ClassificationCreateGet.Sequences = ClassificationCreateGetSequences;
                 return Ok(ClassificationCreateGet);
@@ -82,14 +81,12 @@ namespace SIPx.API.Controllers
                     IsSuccess = false,
                     Message = CheckString,
                 });
-
             }
             return BadRequest(new
             {
                 IsSuccess = false,
                 Message = "No rights",
             });
-
         }
 
         [HttpGet("LanguageIndex/{Id:int}")]

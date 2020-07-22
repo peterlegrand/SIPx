@@ -33,5 +33,23 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<ContentTypeCreateGet>($"{_baseUrl}api/ContentType/Create/", token);
+            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ContentTypeCreateGet ContentType)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await client.PostProtectedAsync<ContentTypeCreateGet>($"{_baseUrl}api/ContentType/Create", ContentType, token);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
