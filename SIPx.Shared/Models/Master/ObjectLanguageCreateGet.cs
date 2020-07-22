@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ObjectLanguageCreatePost 
+    public class ObjectLanguageCreateGet
     {
         [Key]
         public int ObjectId { get; set; }
@@ -15,6 +15,6 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string UserId { get; set; }
-        public string TableName { get; set; }
+        public List<LanguageList> Languages { get; set; }
     }
 }

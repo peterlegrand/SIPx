@@ -24,28 +24,37 @@ namespace SIPx.MVC.Controllers
             return View(response);
             //return View();
         }
+        //[HttpGet]
+        //public async Task<IActionResult> Create()
+        //{
+        //    var token = HttpContext.Session.GetString("Token");
+        //    var ClassificationCreate = new ClassificationCreateGet();
+
+        //    var statusList = await client.GetProtectedAsync<List<StatusList>>($"{_baseUrl}api/Classification", token);
+        //    var sequenceList = await client.GetProtectedAsync<List<ClassificationCreateGetSequence>>($"{_baseUrl}api/Classification", token);
+        //    ClassificationCreate.Sequences = sequenceList;
+        //    ClassificationCreate.Statuses = statusList;
+        //    var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
+        //    ViewBag.UITerms = UITerms;
+        //    return View(ClassificationCreate);
+        //}
+        [HttpPost]
+        public async Task<IActionResult> Create(ClassificationCreateGet Classification)
+        {
+
+            var token = HttpContext.Session.GetString("Token");
+            await client.PostProtectedAsync< ClassificationCreateGet>($"{_baseUrl}api/Classification/Create", Classification, token);
+     
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             var token = HttpContext.Session.GetString("Token");
-            var ClassificationCreate = new ClassificationCreateGet();
-
-            var statusList = await client.GetProtectedAsync<List<StatusList>>($"{_baseUrl}api/Classification", token);
-            var sequenceList = await client.GetProtectedAsync<List<ClassificationCreateGetSequence>>($"{_baseUrl}api/Classification", token);
-            ClassificationCreate.Sequences = sequenceList;
-            ClassificationCreate.Statuses = statusList;
-            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
+            var response = await client.GetProtectedAsync<ClassificationCreateGet>($"{_baseUrl}api/Classification/Create/", token);
+            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
             ViewBag.UITerms = UITerms;
-            return View(ClassificationCreate);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create(ClassificationCreateGet Classification)
-        {
-          //  var token = HttpContext.Session.GetString("Token");
-            await client.PostProtectedAsync< ClassificationCreateGet>($"{_baseUrl}api/Classification", Classification);
-            //(.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
-           
-            return View();
+            return View(response);
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -62,6 +71,7 @@ namespace SIPx.MVC.Controllers
             var response = await client.GetProtectedAsync<List<ClassificationLanguageIndexGet>>($"{_baseUrl}api/Classification/LanguageIndex/" + id, token);
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/LanguageIndex", token);
             ViewBag.UITerms = UITerms;
+            ViewBag.Id = id;
             return View(response);
 
         }
@@ -73,6 +83,25 @@ namespace SIPx.MVC.Controllers
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/LanguageEdit", token);
             ViewBag.UITerms = UITerms;
             return View(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> LanguageCreate(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<ObjectLanguageCreateGet>($"{_baseUrl}api/Classification/LanguageCreate/" + id, token);
+            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/LanguageCreate", token);
+            ViewBag.UITerms = UITerms;
+            response.ObjectId = id;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> LanguageCreate(ObjectLanguageCreateGet ClassificationLanguage)
+        {
+
+            var token = HttpContext.Session.GetString("Token");
+            await client.PostProtectedAsync<ObjectLanguageCreateGet>($"{_baseUrl}api/Classification/LanguageCreate", ClassificationLanguage, token);
+
+            return RedirectToAction("LanguageIndex", new { id = ClassificationLanguage.ObjectId });
         }
     }
 }

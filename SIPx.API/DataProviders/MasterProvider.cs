@@ -25,6 +25,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadSingleRecord<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<LanguageList>> LanguageList(string UserId)
+        {
+            string usp = "usp_LanguageList @UserID";
+            var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public async Task<List<Country>> CountryIndexGet(string UserId)
         {
             string usp = "usp_CountryIndexGet @UserID";
@@ -219,6 +225,19 @@ namespace SIPx.DataAccess
 
         }
 
-
+        public async Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId , int Id)
+        {
+            string usp = "usp_LanguageOnLanguageObject @TableName, @LanguageId, @Id";
+            var x = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { TableName = TableName, LanguageId = LanguageId, Id = Id });
+            if (x > 0)
+                return (false);
+            return (true);
+        }
+        public bool PostObjectLanguage(ObjectLanguageCreatePost ObjectLanguage)
+        {
+            string usp = "usp_ObjectLanguageCreate @TableName, @ObjectId, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserID";
+            _sqlDataAccess.SaveData<ObjectLanguageCreatePost>(usp, ObjectLanguage);
+            return true;
+        }
     }
 }

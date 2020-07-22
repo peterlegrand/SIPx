@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SIPx.Shared
 {
-    public class ClassificationCreateGet : IClassificationCreateGet
+    public class ClassificationCreateGet 
     {
         [Key]
         public int StatusId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public bool HasDropDown { get; set; }
-        public bool DropDownSequence { get; set; }
+        public int DropDownSequence { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

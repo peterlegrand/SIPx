@@ -27,8 +27,8 @@ namespace SIPx.DataAccess
         Task<PreferenceType> PreferenceTypeUpdateGet(string UserId, int PreferenceTypeId);
         Task<List<RoleClaimIndexGet>> RoleClaimIndexGet(string UserId, string RoleId);
         Task<List<RoleGroupIndexGet>> RoleGroupIndexGet(string UserId);
-        Task<List<RoleGroupLanguage>> RoleGroupLanguageIndexGet(string UserId, int RoleGroupId);
-        Task<RoleGroupLanguage> RoleGroupLanguageUpdateGet(string UserId, int RoleGroupLanguageId);
+        Task<List<RoleGroupLanguageIndexGet>> RoleGroupLanguageIndexGet(string UserId, int RoleGroupId);
+        Task<RoleGroupLanguageIndexGet> RoleGroupLanguageUpdateGet(string UserId, int RoleGroupLanguageId);
         Task<RoleGroupUpdateGet> RoleGroupUpdateGet(string UserId, int RoleGroupId);
         Task<List<RoleIndexGet>> RoleIndexGet(string UserId);
         Task<List<RoleLanguageIndexGet>> RoleLanguageIndexGet(string UserId, string RoleId);

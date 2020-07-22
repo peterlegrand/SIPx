@@ -53,6 +53,7 @@ namespace SIPx.API.Controllers
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationCreateGet.LanguageId = UserLanguage.LanguageId;
                 ClassificationCreateGet.LanguageName = UserLanguage.Name;
+//                ClassificationCreateGet.CreatorId = CurrentUser.Id;
                 ClassificationCreateGet.Statuses = Statuses;
                 ClassificationCreateGet.Sequences = ClassificationCreateGetSequences;
                 return Ok(ClassificationCreateGet);
@@ -67,6 +68,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Post(ClassificationCreatePost Classification)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            Classification.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _classificationProvider.PostClassificationCheck(Classification);
@@ -113,30 +115,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        //[HttpGet("{Id:int}")]
-        //public async Task<IActionResult> Get(int Id)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
-        //    {
-        //        if(await _checkProvider.CheckIfRecordExists("Classifications", "ClassificationID", Id) == 0)
-        //            {
-        //            return BadRequest(new
-        //            {
-        //                IsSuccess = false,
-        //                Message = "No record with this ID",
-        //            });
-        //        }
-        //        var x = await _classificationProvider.GetClassification(CurrentUser.Id, Id);
-        //        return Ok(x);
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-            
-        //}
+
 
         [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> GetLanguage(int Id)
@@ -218,6 +197,60 @@ namespace SIPx.API.Controllers
 
         }
 
-        
+        [HttpGet("LanguageCreate/{Id:int}")]
+        public async Task<IActionResult> LanguageCreate(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ClassificationCreateGet = new ObjectLanguageCreateGet();
+                ClassificationCreateGet.ObjectId = Id;
+                var LanguageList = await _classificationProvider.ClassificationLangugageCreateGetLanguageList(CurrentUser.Id, Id);
+                if (LanguageList.Count == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No active languages",
+                    });
+                }
+                ClassificationCreateGet.Languages = LanguageList;
+                return Ok(ClassificationCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("LanguageCreate")]
+        public async Task<IActionResult> LanguagePost(ObjectLanguageCreatePost Classification)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            Classification.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _masterProvider.PostObjectLanguageCheck("CLassification", Classification.LanguageId,Classification.ObjectId);
+                if (CheckString)
+                {
+                    Classification.TableName = "Classification";
+                    _masterProvider.PostObjectLanguage(Classification);
+                    return Ok(Classification);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
     }
 }

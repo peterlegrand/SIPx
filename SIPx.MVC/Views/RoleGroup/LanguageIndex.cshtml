@@ -1,4 +1,4 @@
-﻿@model List<OrganizationTypeLanguageIndexGet>
+﻿@model List<RoleGroupLanguageIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Role group languages")).TermString;
@@ -21,13 +21,13 @@
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/OrganizationType/Edit/${ClassificationId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/RoleGroup/LanguageEdit/${RoleGroupLanguageId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="OrganizationType/Delete/${ClassificationId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="RoleGroup/LanguageDelete/${RoleGroupLanguageId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

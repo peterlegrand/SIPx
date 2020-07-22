@@ -157,6 +157,20 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("LanguageList")]
+        public async Task<IActionResult> LanguageList()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _masterProvider.LanguageList(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
         [HttpGet("LanguagesActive")]
         public async Task<IActionResult> GetLanguagesActive()
         {

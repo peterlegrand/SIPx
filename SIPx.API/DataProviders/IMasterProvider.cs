@@ -18,7 +18,9 @@ namespace SIPx.DataAccess
         Task<Gender> GenderUpdateGet(string UserId, int GenderId);
         Task<List<IntermediateRegion>> IntermediateRegionIndexGet(string UserId);
         Task<List<Language>> LanguageIndexGet(string UserId);
+        Task<List<LanguageList>> LanguageList(string UserId);
         Task<List<Language>> LanguagesActiveGet(string UserId);
+        Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int Id);
         Task<List<SettingUpdateGet>> SettingIndexGet(string UserId);
         Task<SettingUpdateGet> SettingUpdateGet(string UserId, int SettingId);
         Task<List<SortBy>> SortByIndexGet(string UserId);
@@ -39,5 +41,6 @@ namespace SIPx.DataAccess
         Task<LanguageList> UserLanguageUpdateGet(string UserId);
         Task<List<ValueUpdateType>> ValueUpdateTypeIndexGet(string UserId);
         Task<ValueUpdateType> ValueUpdateTypeUpdateGet(string UserId, int ValueUpdateTypeId);
+        bool PostObjectLanguage(ObjectLanguageCreatePost ObjectLanguage);
     }
 }

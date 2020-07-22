@@ -272,12 +272,12 @@ namespace SIPx.CallAPI
         /// <param name="methodUrl">URL of your Web API that represetns the protected POST function </param>
         /// <param name="model"> The model or object that you want to send</param>
         /// <returns></returns>
-        public async Task<T> PostProtectedAsync<T>(string methodUrl, object model)
+        public async Task<T> PostProtectedAsync<T>(string methodUrl, object model, string accessToken)
         {
             HttpClient client = new HttpClient();
 
             // Set the access token for the request 
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AccessToken);
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
             // Now serialzize the object to json 
             string jsonData = JsonConvert.SerializeObject(model);

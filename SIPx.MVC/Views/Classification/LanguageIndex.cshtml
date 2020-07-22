@@ -17,18 +17,18 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" width="5%" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
-<a href="~/Classification/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
+<a href="/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
+<a href="/Classification/LanguageCreate/@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Classification/Edit/${ClassificationId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/Classification/Edit/${ClassificationLanguageId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Classification/Delete/${ClassificationId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="Classification/Delete/${ClassificationLanguageId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

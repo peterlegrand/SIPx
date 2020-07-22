@@ -243,7 +243,7 @@ namespace SIPx.DataAccess
         public Task<List<ClassificationValueUpdateGet>> ClassificationValueIndexGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationValueIndexGet @UserId, @ClassificationID";
-            return _sqlDataAccess.LoadData<ClassificationValueUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
+            return _sqlDataAccess.LoadData<ClassificationValueUpdateGet, dynamic>(usp, new { ClassificationId });
 
         }
         public bool PostClassification(ClassificationCreatePost Classification)
@@ -251,6 +251,12 @@ namespace SIPx.DataAccess
             string usp = "usp_classificationCreate @StatusId, @HasDropDown, @DropDownSequence, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserID";
             _sqlDataAccess.SaveData<ClassificationCreatePost>(usp, Classification);
             return true;
+        }
+        public Task<List<LanguageList>> ClassificationLangugageCreateGetLanguageList(string UserId, int ClassificationId)
+        {
+            string usp = "[usp_ClassificationLangugageCreateGetLanguageList] @UserID, @ClassificationId";
+            return _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId, ClassificationId });
+
         }
         public async Task<string> PostClassificationCheck(ClassificationCreatePost Classification)
         {

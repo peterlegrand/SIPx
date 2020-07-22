@@ -41,7 +41,7 @@ END
 IF  (SELECT COUNT(*) 
 	FROM Languages 
 	WHERE LanguageId = @LanguageId AND languages.StatusId = 1
-) >0
+) =0
 BEGIN
 	SET @Error = @Error + ' - The language is not active'
 END

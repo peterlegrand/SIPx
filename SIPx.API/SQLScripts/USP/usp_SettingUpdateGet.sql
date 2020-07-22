@@ -10,6 +10,7 @@ SELECT Settings.SettingId
 	, Settings.StringValue
 	, Settings.DateTimeValue
 	, Settings.GuidValue
+	, Settings.TypeID
 	, ISNULL(UISettingsNameCustom.Customization,UISettingsName.Name) SettingsName
 	, ISNULL(UISettingsDescriptionCustom.Customization,UISettingsDescription.Name) SettingsDescription
 	, ISNULL(UISettingsMenuNameCustom.Customization,UISettingsMenuName.Name) SettingsMenuName

@@ -30,6 +30,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<SettingUpdateGet>($"{_baseUrl}api/Setting/Update/" + id, token);
+           
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Setting/Edit", token);
             ViewBag.UITerms = x;
             return View(response);

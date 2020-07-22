@@ -1,93 +1,99 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model SettingUpdateGet
+@model ClassificationCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Setting")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification")).TermString;
 
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Setting")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.SettingId</div>
-    </div>
+
 
     <form method="post">
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
             </div>
-                <div class="col-9">@Model.SettingsName</div>
-            
         </div>
-        @switch (Model.TypeId)
-        {
-            case 1:
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("String value")).TermString
-                    </div>
-                    <div class="col-9">
-                        <div class="col-9">
-                            <ejs-dropdownlist id="IntValue" dataSource="@Model.Languages" ejs-for="@Model.IntValue" value="@Model.IntValue" index="2" popupHeight="220px">
-                                <e-dropdownlist-fields text="Name" value="LanguageId"></e-dropdownlist-fields>
-                            </ejs-dropdownlist>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-9">
+                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                    <e-content-template>
+                    </e-content-template>
+                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                    </e-richtexteditor-toolbarsettings>
+                </ejs-richtexteditor>
+            </div>
+        </div>
 
-                        </div>
-                    </div>
-                </div>
-                break;
-            case 2:
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Int value")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-textbox id="IntValue" ejs-for="StringValue" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-                break;
-            case 3:
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Date time value")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-datepicker id="DateTimeValue" ejs-for="DateTimeValue" cssClass="e-outline" placeholder="Date time value" floatLabelType="Auto"></ejs-datepicker>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="HasDropDown" label="Dropdown" ejs-for="HasDropDown" checked="@Model.HasDropDown"></ejs-checkbox>
+            </div>
 
-                break;
-        }
+
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Dropdown sequence")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.DropDownSequence" value="@Model.DropDownSequence" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Status" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-            </div>
-            <div class="col-9">
-                @Model.ModifierName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-            </div>
-            <div class="col-9">
-                <div>@Model.ModifiedDate</div>
-            </div>
-        </div>
+
 
     </form>
 </div>
@@ -196,10 +202,16 @@
     }
 </script>
 <script type="text/javascript">
-    function IntValue(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Languages)), query);
-                }
+    function Sequence(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Sequences)), query);
+            }
 </script>
-
+<script type="text/javascript">
+    function Status(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Statuses)), query);
+            }
+</script>

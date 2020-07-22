@@ -171,16 +171,16 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PreferenceType, dynamic>(usp, new { UserId = UserId, PreferenceTypeId = PreferenceTypeId });
 
         }
-        public Task<List<RoleGroupLanguage>> RoleGroupLanguageIndexGet(string UserId, int RoleGroupId)
+        public Task<List<RoleGroupLanguageIndexGet>> RoleGroupLanguageIndexGet(string UserId, int RoleGroupId)
         {
             string usp = "usp_RoleGroupLanguageIndexGet @UserId, @RoleGroupID";
-            return _sqlDataAccess.LoadData<RoleGroupLanguage, dynamic>(usp, new { UserId = UserId, RoleGroupId = RoleGroupId });
+            return _sqlDataAccess.LoadData<RoleGroupLanguageIndexGet, dynamic>(usp, new { UserId = UserId, RoleGroupId = RoleGroupId });
 
         }
-        public Task<RoleGroupLanguage> RoleGroupLanguageUpdateGet(string UserId, int RoleGroupLanguageId)
+        public Task<RoleGroupLanguageIndexGet> RoleGroupLanguageUpdateGet(string UserId, int RoleGroupLanguageId)
         {
             string usp = "usp_RoleGroupLanguageUpdateGet @UserId, @RoleGroupLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<RoleGroupLanguage, dynamic>(usp, new { UserId = UserId, RoleGroupLanguageId = RoleGroupLanguageId });
+            return _sqlDataAccess.LoadSingleRecord<RoleGroupLanguageIndexGet, dynamic>(usp, new { UserId = UserId, RoleGroupLanguageId = RoleGroupLanguageId });
 
         }
         public Task<List<RoleGroupIndexGet>> RoleGroupIndexGet(string UserId)
