@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PersonRelationCreatePost : IPersonRelationCreatePost
+    public class PersonRelationCreatePost 
     {
         [Key]
         public int FromPersonId { get; set; }
@@ -13,7 +13,7 @@ namespace SIPx.Shared
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTill { get; set; }
         public int PersonRelationTypeId { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
 
     }
 }

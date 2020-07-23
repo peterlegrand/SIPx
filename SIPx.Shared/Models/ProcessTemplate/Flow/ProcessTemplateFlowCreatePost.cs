@@ -5,13 +5,12 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ProcessTemplateFlowCreatePost : IProcessTemplateFlowCreatePost
+    public class ProcessTemplateFlowCreatePost 
     {
         [Key]
         public int ProcessTemplateId { get; set; }
         public int ProcessTemplateFromStageId { get; set; }
         public int ProcessTemplateToStageId { get; set; }
-        public int DateLevelId { get; set; }
         public int OnTheFly { get; set; }
         public int Alhpabetically { get; set; }
         public int CanLink { get; set; }
@@ -22,6 +21,6 @@ namespace SIPx.Shared
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
     }
 }

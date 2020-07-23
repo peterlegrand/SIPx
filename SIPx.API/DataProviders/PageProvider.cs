@@ -81,5 +81,36 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PageSectionLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageSectionLanguageId = PageSectionLanguageId });
 
         }
+        public async Task<string> PageCreatePostCheck(PageCreatePost Page)
+        {
+            string usp = "usp_PageCreatePostCheck @LanguageID, @name, @UserId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
+            return CheckString;
+        }
+
+        public async Task<string> PageCreatePost(PageCreatePost Page)
+        {
+            string usp = "usp_PageCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
+            return CheckString;
+        }
+        public async Task<string> PageSectionCreatePostCheck(PageSectionCreatePost PageSection)
+        {
+            string usp = "usp_PageSectionCreatePostCheck @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @@OneTwoColumns, @ContentTypeId, @SortById, @LanguageId, @Name, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
+            return CheckString;
+        }
+
+        public async Task<string> PageSectionCreatePost(PageSectionCreatePost PageSection)
+        {
+            string usp = "usp_PageSectionCreatePost @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @OneTwoColumns, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
+            return CheckString;
+        }
+        public Task<List<SequenceList>> PageSectionCreateGetSequence(string UserId, int PageId)
+        {
+            string usp = "usp_PageSectionCreateGetSequence @UserID, @PageId";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, PageId });
+        }
     }
 }

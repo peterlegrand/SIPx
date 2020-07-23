@@ -76,6 +76,53 @@ namespace SIPx.API.Controllers
             });
 
         }
+
+        [HttpGet("Create/{Id:int}/{ParentId:int}")]
+        public async Task<IActionResult> Create(int Id, int ParentId)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ClassificationValueCreateGet = new ClassificationValueCreateGet();
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                ClassificationValueCreateGet.LanguageId = UserLanguage.LanguageId;
+                ClassificationValueCreateGet.LanguageName = UserLanguage.Name;
+                ClassificationValueCreateGet.ClassificationId = Id;
+                ClassificationValueCreateGet.ParentId = ParentId;
+                return Ok(ClassificationValueCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ClassificationValueCreatePost ClassificationValue)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ClassificationValue.CreatorId= CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _classificationProvider.ClassificationValueCreatePostCheck(ClassificationValue);
+                if (CheckString.Length == 0)
+                {
+                    _classificationProvider.ClassificationValueCreatePost(ClassificationValue);
+                    return Ok(ClassificationValue);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
         [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> GetValueLanguages(int Id)
         {

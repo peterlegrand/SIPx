@@ -9,7 +9,6 @@ namespace SIPx.Shared
     {
         [Key]
         public int LanguageId { get; set; }
-        public string LanguageName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

@@ -31,6 +31,31 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<DateLevelList>> DateLevelList(string UserId)
+        {
+            string usp = "usp_DateLevelList @UserID";
+            var x = await _sqlDataAccess.LoadData<DateLevelList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+        public async Task<List<AddressTypeList>> AddressTypeList(string UserId)
+        {
+            string usp = "usp_AddressTypeList @UserID";
+            var x = await _sqlDataAccess.LoadData<AddressTypeList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+        public async Task<List<TelecomTypeList>> TelecomTypeList(string UserId)
+        {
+            string usp = "usp_TelecomTypeList @UserID";
+            var x = await _sqlDataAccess.LoadData<TelecomTypeList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+
+        public async Task<List<SecurityLevelList>> SecurityLevelList(string UserId)
+        {
+            string usp = "usp_SecurityLevelList @UserID";
+            var x = await _sqlDataAccess.LoadData<SecurityLevelList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public async Task<List<Country>> CountryIndexGet(string UserId)
         {
             string usp = "usp_CountryIndexGet @UserID";
@@ -225,7 +250,7 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId , int Id)
+        public async Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int Id)
         {
             string usp = "usp_LanguageOnLanguageObject @TableName, @LanguageId, @Id";
             var x = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { TableName = TableName, LanguageId = LanguageId, Id = Id });

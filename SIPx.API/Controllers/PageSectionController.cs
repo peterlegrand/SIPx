@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     public class PageSectionController : ControllerBase
     {
         private readonly IMasterProvider _masterProvider;
+        private readonly IContentMasterProvider _contentMasterProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPageProvider _pageProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PageSectionController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider pageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PageSectionController(IContentMasterProvider contentMasterProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider pageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _masterProvider = masterProvider;
+            _contentMasterProvider = contentMasterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _pageProvider = pageProvider;
@@ -99,5 +101,58 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var PageSectionCreateGet = new PageSectionCreateGet();
+                var PageSectionCreateGetSequences = await _pageProvider.PageSectionCreateGetSequence(CurrentUser.Id, Id);
+                var PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
+                var PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
+                var ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
+                var SortBys = await _masterProvider.SortByList(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                PageSectionCreateGet.LanguageId = UserLanguage.LanguageId;
+                PageSectionCreateGet.LanguageName = UserLanguage.Name;
+                PageSectionCreateGet.PageSectionDataTypes = PageSectionDataTypes;
+                PageSectionCreateGet.PageSectionTypes = PageSectionTypes;
+                PageSectionCreateGet.Sequences = PageSectionCreateGetSequences;
+                PageSectionCreateGet.PageId = Id;
+                return Ok(PageSectionCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(PageSectionCreatePost PageSection)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            PageSection.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _pageProvider.PageSectionCreatePostCheck(PageSection);
+                if (CheckString.Length == 0)
+                {
+                    _pageProvider.PageSectionCreatePost(PageSection);
+                    return Ok(PageSection);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

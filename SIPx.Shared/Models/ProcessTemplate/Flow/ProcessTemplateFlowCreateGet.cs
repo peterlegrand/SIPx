@@ -25,8 +25,6 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string CreatorId { get; set; }
-        public List<ProcessTemplateStageList> ProcessTemplateFromStages { get; set; }
-        public List<ProcessTemplateStageList> ProcessTemplateToStages { get; set; }
-        public List<DateLevelList> DateLevels { get; set; }
+        public List<ProcessTemplateStageList> ProcessTemplateStages { get; set; }
     }
 }

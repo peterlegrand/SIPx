@@ -65,5 +65,51 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var PersonAddressCreateGet = new PersonAddressCreateGet();
+                var AddressTypes = await _masterProvider.AddressTypeList(CurrentUser.Id);
+                var Countries = await _masterProvider.CountryList(CurrentUser.Id);
+                PersonAddressCreateGet.AddressTypes = AddressTypes;
+                PersonAddressCreateGet.Countries = Countries;
+                PersonAddressCreateGet.PersonId = Id;
+                return Ok(PersonAddressCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(PersonAddressCreatePost PersonAddress)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            PersonAddress.CreatorId= CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _peopleProvider.PersonAddressCreatePostCheck(PersonAddress);
+                if (CheckString.Length == 0)
+                {
+                    _peopleProvider.PersonAddressCreatePost(PersonAddress);
+                    return Ok(PersonAddress);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
     }
 }

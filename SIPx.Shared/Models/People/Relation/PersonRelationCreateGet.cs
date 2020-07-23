@@ -18,8 +18,8 @@ namespace SIPx.Shared
         public DateTime ValidTill { get; set; }
         public int PersonRelationTypeId { get; set; }
         public string CreatorId { get; set; }
-        public List<UserList> FromUsers { get; set; }
-        public List<UserList> ToUsers { get; set; }
+        public List<PersonList> FromUsers { get; set; }
+        public List<PersonList> ToUsers { get; set; }
         public List<PersonRelationTypeList> PersonRelationTypes { get; set; }
 
     }

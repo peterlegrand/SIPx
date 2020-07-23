@@ -18,12 +18,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateFlowController : ControllerBase
     {
+        private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateFlowController(IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateFlowController(IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
@@ -88,5 +90,52 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ProcessTemplateFlowCreateGet = new ProcessTemplateFlowCreateGet();
+                var ProcessTemplateStages = await _processTemplateProvider.ProcessTemplateStageList(CurrentUser.Id, Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                ProcessTemplateFlowCreateGet.LanguageId = UserLanguage.LanguageId;
+                ProcessTemplateFlowCreateGet.LanguageName = UserLanguage.Name;
+                ProcessTemplateFlowCreateGet.ProcessTemplateStages = ProcessTemplateStages;
+                ProcessTemplateFlowCreateGet.ProcessTemplateId = Id;
+                return Ok(ProcessTemplateFlowCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ProcessTemplateFlowCreatePost ProcessTemplateFlow)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ProcessTemplateFlow.CreatorId= CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _processTemplateProvider.ProcessTemplateFlowPostCheck(ProcessTemplateFlow);
+                if (CheckString.Length == 0)
+                {
+                    _processTemplateProvider.ProcessTemplateFlowPost(ProcessTemplateFlow);
+                    return Ok(ProcessTemplateFlow);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

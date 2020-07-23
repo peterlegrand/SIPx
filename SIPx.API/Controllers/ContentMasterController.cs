@@ -19,12 +19,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ContentMasterController : ControllerBase
     {
+        private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IContentMasterProvider _contentMasterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentMasterController(IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentMasterController(IMasterProvider masterProvider, IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _contentMasterProvider = contentMasterProvider;
             _userManager = userManager;
@@ -232,5 +234,96 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ContentTypeCreateGet = new ContentTypeCreateGet();
+                var ContentTypeGroups = await _contentMasterProvider.ContentTypeGroupList(CurrentUser.Id);
+                var SecurityLevels = await _masterProvider.SecurityLevelList(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                ContentTypeCreateGet.LanguageId = UserLanguage.LanguageId;
+                ContentTypeCreateGet.LanguageName = UserLanguage.Name;
+                ContentTypeCreateGet.ContentTypeGroups = ContentTypeGroups;
+                ContentTypeCreateGet.SecurityLevels = SecurityLevels;
+                return Ok(ContentTypeCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ContentTypeCreatePost ContentType)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ContentType.CreatorId= CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _contentMasterProvider.ContentTypeCreatePostCheck(ContentType);
+                if (CheckString.Length == 0)
+                {
+                    _contentMasterProvider.ContentTypeCreatePost(ContentType);
+                    return Ok(ContentType);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ContentTypeGroupCreateGet = new ContentTypeGroupCreateGet();
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                ContentTypeGroupCreateGet.LanguageId = UserLanguage.LanguageId;
+                ContentTypeGroupCreateGet.LanguageName = UserLanguage.Name;
+                return Ok(ContentTypeGroupCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ContentTypeGroupCreatePost ContentTypeGroup)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ContentTypeGroup.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _contentMasterProvider.ContentTypeGroupCreatePostCheck(ContentTypeGroup);
+                if (CheckString.Length == 0)
+                {
+                    _contentMasterProvider.ContentTypeGroupCreatePost(ContentTypeGroup);
+                    return Ok(ContentTypeGroup);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

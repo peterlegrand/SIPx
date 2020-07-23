@@ -98,5 +98,61 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<OrganizationTypeList>> OrganizationTypeList(string UserId)
+        {
+            string usp = "usp_OrganizationTypeList @UserID";
+            var x = await _sqlDataAccess.LoadData<OrganizationTypeList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+        public async Task<string> OrganizationAddressCreatePostCheck(OrganizationAddressCreatePost OrganizationAddress)
+        {
+            string usp = "usp_OrganizationAddressCreatePostCheck @OrganizationId, @AddressTypeId  , @CountryId, @UserId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationAddress);
+            return CheckString;
+        }
+        public async Task<string> OrganizationTypeCreatePostCheck(OrganizationTypeCreatePost OrganizationType)
+        {
+            string usp = "usp_OrganizationTypeCreatePostCheck @LanguageId, @Name, @UserId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationType);
+            return CheckString;
+        }
+        public async Task<string> OrganizationTypeCreatePost(OrganizationTypeCreatePost OrganizationType)
+        {
+            string usp = "usp_OrganizationTypeCreatePost @Internal, @LegalEntity,  @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserId ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationType);
+            return String;
+        }
+        public async Task<string> OrganizationTelecomCreatePostCheck(OrganizationTelecomCreatePost OrganizationTelecom)
+        {
+            string usp = "usp_OrganizationTelecomCreatePostCheck @OrganizationId  , @TelecomTypeId, @UserId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationTelecom);
+            return CheckString;
+        }
+        public async Task<string> OrganizationCreatePostCheck(OrganizationCreatePost Organization)
+        {
+            string usp = "usp_OrganizationCreatePostCheck @ParentOrganizationId, @StatusId, @LanguageID, @name, @UserId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Organization);
+            return CheckString;
+        }
+
+        public async Task<string> OrganizationAddressCreatePost(OrganizationAddressCreatePost OrganizationAddress)
+        {
+            string usp = "usp_OrganizationAddressCreatePost @OrganizationId, AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @Location, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationAddress);
+            return CheckString;
+        }
+        public async Task<string> OrganizationTelecomCreatePost(OrganizationTelecomCreatePost OrganizationTelecom)
+        {
+            string usp = "usp_OrganizationTelecomCreatePost  @OrganizationId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskFor, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationTelecom);
+            return CheckString;
+        }
+        public async Task<string> OrganizationCreatePost(OrganizationCreatePost Organization)
+        {
+            string usp = "usp_OrganizationCreatePost @OrganizationTypeId, @ParentOrganizationId, @StatusId, LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Organization);
+            return CheckString;
+        }
+
     }
 }

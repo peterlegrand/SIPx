@@ -99,5 +99,51 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var PageCreateGet = new PageCreateGet();
+                var Statuses = await _masterProvider.StatusList(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                PageCreateGet.LanguageId = UserLanguage.LanguageId;
+                PageCreateGet.LanguageName = UserLanguage.Name;
+                PageCreateGet.Statuses = Statuses;
+                return Ok(PageCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(PageCreatePost Page)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            Page.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _pageProvider.PageCreatePostCheck(Page);
+                if (CheckString.Length == 0)
+                {
+                    _pageProvider.PageCreatePost(Page);
+                    return Ok(Page);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

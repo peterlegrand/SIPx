@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationValueCreatePost : IClassificationValueCreatePost
+    public class ClassificationValueCreatePost 
     {
         [Key]
         public int ClassificationId { get; set; }
@@ -23,6 +23,6 @@ namespace SIPx.Shared
         public string HeaderName { get; set; }
         public string HeaderDescription { get; set; }
         public string TopicName { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
     }
 }

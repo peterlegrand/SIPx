@@ -237,6 +237,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<RoleList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public Task<List<PersonList>> PersonList(string UserId)
+        {
+            string usp = "usp_PersonList @UserID";
+            return _sqlDataAccess.LoadData<PersonList, dynamic>(usp, new { UserId = UserId });
+
+        }
         public Task<List<UserList>> UserList()
         {
             string usp = "usp_UserList";
@@ -249,5 +255,73 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<GenderList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public Task<List<PersonRelationTypeList>> PersonRelationTypeList(string UserId)
+        {
+            string usp = "usp_PersonRelationTypeList @UserID";
+            return _sqlDataAccess.LoadData<PersonRelationTypeList, dynamic>(usp, new { UserId = UserId });
+
+        }
+
+        public async Task<string> PersonAddressCreatePostCheck(PersonAddressCreatePost PersonAddress)
+        {
+            string usp = "usp_PersonAddressCreateCheck @PersonId, @AddressTypeId  , @CountryId, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);
+            return CheckString;
+        }
+        public async Task<string> RoleGroupCreatePostCheck(RoleGroupCreatePost RoleGroup)
+        {
+            string usp = "usp_RoleGroupCreateCheck @Sequence, @LanguageId  , @Name, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, RoleGroup);
+            return CheckString;
+        }
+        public async Task<string> RoleGroupCreatePost(RoleGroupCreatePost RoleGroup)
+        {
+            string usp = "usp_RoleGroupCreate @Sequence, @LanguageId  , @Name, @Description, @MenuName, @MouseOve, @CreatorId ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, RoleGroup);
+            return String;
+        }
+        public async Task<string> PersonTelecomCreatePostCheck(PersonTelecomCreatePost PersonTelecom)
+        {
+            string usp = "usp_PersonTelecomCreateCheck @PersonId  , @TelecomTypeId, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonTelecom);
+            return CheckString;
+        }
+        public async Task<string> PersonCreatePostCheck(PersonCreatePost Person)
+        {
+            string usp = "usp_PersonCreateCheck @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId , @CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Person);
+            return CheckString;
+        }
+        public async Task<string> PersonAddressCreatePost(PersonAddressCreatePost PersonAddress)
+        {
+            string usp = "usp_PersonAddressCreate @PersonId, AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @Location, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);
+            return CheckString;
+        }
+        public async Task<string> PersonTelecomCreatePost(PersonTelecomCreatePost PersonTelecom)
+        {
+            string usp = "usp_PersonTelecomCreate  @PersonId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskFor, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonTelecom);
+            return CheckString;
+        }
+        public async Task<string> PersonCreatePost(PersonCreatePost Person)
+        {
+            string usp = "usp_PersonCreatePost @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Person);
+            return CheckString;
+        }
+        public async Task<string> PersonRelationCreatePostCheck(PersonRelationCreatePost PersonRelation)
+        {
+            string usp = "usp_PersonRelationCreatePostCheck @FromPersonId, @ToPersonId, @ValidFrom, @ValidTill, @PersonRelationTypeId, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonRelation);
+            return CheckString;
+        }
+        public async Task<string> PersonRelationCreatePost(PersonRelationCreatePost PersonRelation)
+        {
+            string usp = "usp_PersonRelationCreatePost @FromPersonId, @ToPersonId, @ValidFrom, @ValidTill, @PersonRelationTypeId, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonRelation);
+            return CheckString;
+        }
+
     }
 }

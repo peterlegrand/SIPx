@@ -11,6 +11,7 @@ namespace SIPx.Shared
         public int ProjectParentId { get; set; }
         public string ProjectParentName { get; set; }
         public int StatusId { get; set; }
+        public int ProjectTypeId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string Name { get; set; }
@@ -19,5 +20,6 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string CreatorId { get; set; }
         public List<StatusList> Statuses { get; set; }
+        public List<ProjectTypeList> ProjectTypes { get; set; }
     }
 }

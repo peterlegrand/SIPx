@@ -17,7 +17,7 @@ namespace SIPx.Shared
         public bool ShowSectionTitleDescription { get; set; }
         public bool ShowContentTypeTitleName { get; set; }
         public bool ShowContentTypeTitleDescription { get; set; }
-        public int OenTwoColumns { get; set; }
+        public int OneTwoColumns { get; set; }
         public int ContentTypeId { get; set; }
         public int SortById { get; set; }
         public int MaxContent { get; set; }

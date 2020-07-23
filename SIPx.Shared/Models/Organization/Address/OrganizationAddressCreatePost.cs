@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class OrganizationAddressCreatePost : IOrganizationAddressCreatePost
+    public class OrganizationAddressCreatePost 
     {
         [Key]
         public int OrganizationId { get; set; }
@@ -22,7 +22,7 @@ namespace SIPx.Shared
         public int CountryId { get; set; }
         public string ProvinceState { get; set; }
         public string County { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
 
     }
 }

@@ -58,7 +58,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationLevelCreateGet = new ClassificationLevelCreateGet();
-                var ClassificationLevelCreateGetSequences = await _classificationProvider.ClassificationLevelCreateGetSequence(CurrentUser.Id);
+                var ClassificationLevelCreateGetSequences = await _classificationProvider.ClassificationLevelCreateGetSequence(CurrentUser.Id, Id);
                 var DateLevels = await _masterProvider.DateLevelList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationLevelCreateGet.LanguageId = UserLanguage.LanguageId;
@@ -81,10 +81,10 @@ namespace SIPx.API.Controllers
             ClassificationLevel.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.PostClassificationLevelCheck(ClassificationLevel);
+                var CheckString = await _classificationProvider.ClassificationLevelCreatePostCheck(ClassificationLevel);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.PostClassificationLevel(ClassificationLevel);
+                    _classificationProvider.ClassificationLevelCreatePost(ClassificationLevel);
                     return Ok(ClassificationLevel);
                 }
                 return BadRequest(new

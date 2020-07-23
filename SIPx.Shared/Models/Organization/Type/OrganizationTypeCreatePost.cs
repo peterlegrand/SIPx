@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class OrganizationTypeCreatePost : IOrganizationTypeCreatePost
+    public class OrganizationTypeCreatePost 
     {
         public bool Internal { get; set; }
         public bool LegalEntity { get; set; }
@@ -14,6 +14,6 @@ namespace SIPx.Shared
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
     }
 }

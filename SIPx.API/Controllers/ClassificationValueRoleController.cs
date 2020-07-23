@@ -74,5 +74,49 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ClassificationValueRoleCreateGet = new ClassificationValueRoleCreateGet();
+                var ClassificationRelationTypes = await _classificationProvider.ClassificationRelationTypeList(CurrentUser.Id);
+                ClassificationValueRoleCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
+                ClassificationValueRoleCreateGet.ClassificationId = Id;
+                return Ok(ClassificationValueRoleCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ClassificationValueRoleCreatePost ClassificationValueRole)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ClassificationValueRole.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _classificationProvider.ClassificationValueRoleCreatePostCheck(ClassificationValueRole);
+                if (CheckString.Length == 0)
+                {
+                    _classificationProvider.ClassificationValueRoleCreatePost(ClassificationValueRole);
+                    return Ok(ClassificationValueRole);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
     }
 }

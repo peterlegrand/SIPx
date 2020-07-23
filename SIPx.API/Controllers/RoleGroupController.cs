@@ -19,12 +19,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class RoleGroupController : ControllerBase
     {
+        private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public RoleGroupController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public RoleGroupController(IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _peopleProvider = peopleProvider;
             _userManager = userManager;
@@ -83,6 +85,49 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 return Ok(await _peopleProvider.RoleGroupUpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var RoleGroupCreateGet = new RoleGroupCreateGet();
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                RoleGroupCreateGet.LanguageId = UserLanguage.LanguageId;
+                RoleGroupCreateGet.LanguageName = UserLanguage.Name;
+                return Ok(RoleGroupCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(RoleGroupCreatePost RoleGroup)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            RoleGroup.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _peopleProvider.RoleGroupCreatePostCheck(RoleGroup);
+                if (CheckString.Length == 0)
+                {
+                    _peopleProvider.RoleGroupCreatePost(RoleGroup);
+                    return Ok(RoleGroup);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
             }
             return BadRequest(new
             {

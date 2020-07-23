@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ContentTypeGroupCreatePost : IContentTypeGroupCreatePost
+    public class ContentTypeGroupCreatePost 
     {
         [Key]
         public int Sequence { get; set; }
@@ -14,7 +14,7 @@ namespace SIPx.Shared
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
 
     }
 }

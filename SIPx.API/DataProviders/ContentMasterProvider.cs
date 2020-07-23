@@ -68,6 +68,35 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ContentTypeGroupLanguage, dynamic>(usp, new { ClassificationLanguageId = ContentTypeGroupLanguageId });
 
         }
+        public Task<List<ContentTypeGroupList>> ContentTypeGroupList(string UserId)
+        {
+            string usp = "usp_ContentTypeGroupList @UserID";
+            return _sqlDataAccess.LoadData<ContentTypeGroupList, dynamic>(usp, new { UserId });
+        }
+        public async Task<string> ContentTypeGroupCreatePostCheck(ContentTypeGroupCreatePost ContentTypeGroup)
+        {
+            string usp = "usp_ContentTypeGroupCreateCheck @Sequence  , @LanguageId , @Name ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentTypeGroup);
+            return CheckString;
+        }
+        public async Task<string> ContentTypeGroupCreatePost(ContentTypeGroupCreatePost ContentTypeGroup)
+        {
+            string usp = "usp_ContentTypeGroupCreate @Sequence  , @LanguageId , @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentTypeGroup);
+            return String;
+        }
+        public async Task<string> ContentTypeCreatePostCheck(ContentTypeCreatePost ContentType)
+        {
+            string usp = "usp_ContentTypeCreateCheck @ContentTypeGroupId, @ProcessTemplateId  ,@SecurityLevelId,  @LanguageId , @Name ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentType);
+            return CheckString;
+        }
+        public async Task<string> ContentTypeCreatePost(ContentTypeCreatePost ContentType)
+        {
+            string usp = "usp_ContentTypeCreate @ContentTypeGroupId  , @ProcessTemplateId  , @LanguageId ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentType);
+            return String;
+        }
         public async Task<List<ContentTypeGroup>> ContentTypeGroupIndexGet(string UserId)
         {
             string usp = "usp_ContentTypeGroupIndexGet @UserID";

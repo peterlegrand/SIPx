@@ -120,6 +120,50 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var PersonRelationCreateGet = new PersonRelationCreateGet();
+                var PersonRelationTypes = await _peopleProvider.PersonRelationTypeList(CurrentUser.Id);
+                var Persons = await _peopleProvider.PersonList(CurrentUser.Id);
+                PersonRelationCreateGet.PersonRelationTypes = PersonRelationTypes;
+                PersonRelationCreateGet.ToUsers = Persons;
+                return Ok(PersonRelationCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(PersonRelationCreatePost PersonRelation)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            PersonRelation.CreatorId= CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _peopleProvider.PersonRelationCreatePostCheck(PersonRelation);
+                if (CheckString.Length == 0)
+                {
+                    _peopleProvider.PersonRelationCreatePost(PersonRelation);
+                    return Ok(PersonRelation);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
 
     }
 }

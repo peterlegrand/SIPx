@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PersonCreatePost : IPersonCreatePost
+    public class PersonCreatePost 
     {
         [Key]
         public string Salutation { get; set; }
@@ -23,7 +23,7 @@ namespace SIPx.Shared
         public DateTime DeceasedDate { get; set; }
         public int DefaultOrganizationId { get; set; }
         public string UserId { get; set; }
-        public string ModifierCreator { get; set; }
+        public string CreatorId { get; set; }
 
     }
 }

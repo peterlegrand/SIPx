@@ -18,12 +18,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateGroupController : ControllerBase
     {
+        private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateGroupController(IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateGroupController(IMasterProvider masterProvider,  IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
@@ -88,5 +90,51 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ProcessTemplateGroupCreateGet = new ProcessTemplateGroupCreateGet();
+                var ProcessTemplateGroupCreateGetSequences = await _processTemplateProvider.ProcessTemplateGroupCreateGetSequence(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                ProcessTemplateGroupCreateGet.LanguageId = UserLanguage.LanguageId;
+                ProcessTemplateGroupCreateGet.LanguageName = UserLanguage.Name;
+                ProcessTemplateGroupCreateGet.Sequences = ProcessTemplateGroupCreateGetSequences;
+                return Ok(ProcessTemplateGroupCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ProcessTemplateGroup.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _processTemplateProvider.ProcessTemplateGroupCreatePostCheck(ProcessTemplateGroup);
+                if (CheckString.Length == 0)
+                {
+                    _processTemplateProvider.ProcessTemplateGroupCreatePost(ProcessTemplateGroup);
+                    return Ok(ProcessTemplateGroup);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

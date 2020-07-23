@@ -246,22 +246,145 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ClassificationValueUpdateGet, dynamic>(usp, new { ClassificationId });
 
         }
-        public bool PostClassification(ClassificationCreatePost Classification)
+        public bool ClassificationCreatePost(ClassificationCreatePost Classification)
         {
-            string usp = "usp_classificationCreate @StatusId, @HasDropDown, @DropDownSequence, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserID";
+            string usp = "usp_classificationCreatePost @StatusId, @HasDropDown, @DropDownSequence, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserID";
             _sqlDataAccess.SaveData<ClassificationCreatePost>(usp, Classification);
             return true;
+        }
+        public bool ClassificationLevelCreatePost(ClassificationLevelCreatePost ClassificationLevel)
+        {
+            string usp = "usp_classificationLevelCreatePost @ClassificationId, @ShowTitleName, @ShowTitleDescription, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @UserID";
+            _sqlDataAccess.SaveData<ClassificationLevelCreatePost>(usp, ClassificationLevel);
+            return true;
+        }
+        public bool ClassificationRelationTypeCreatePost(ClassificationRelationTypeCreatePost ClassificationRelationType)
+        {
+            string usp = "usp_ClassificationRelationTypeCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserID";
+            _sqlDataAccess.SaveData<ClassificationRelationTypeCreatePost>(usp, ClassificationRelationType);
+            return true;
+        }
+        public bool ClassificationRoleCreatePost(ClassificationRoleCreatePost ClassificationRole)
+        {
+            string usp = "usp_ClassificationRoleCreatePost @RoleId, @ClassificationId, @ClassificationRelationTypeId, @UserID";
+            _sqlDataAccess.SaveData<ClassificationRoleCreatePost>(usp, ClassificationRole);
+            return true;
+        }
+        public bool ClassificationPageCreatePost(ClassificationPageCreatePost ClassificationPage)
+        {
+            string usp = "usp_ClassificationPageCreatePost @ClassificationId,@StatusId, @ShowTitleName, @ShowTitleDescription, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId ";
+            _sqlDataAccess.SaveData<ClassificationPageCreatePost>(usp, ClassificationPage);
+            return true;
+        }
+        public bool ClassificationPageSectionCreatePost(ClassificationPageSectionCreatePost ClassificationPageSection)
+        {
+            string usp = "usp_ClassificationPageSectionCreatePost @ClassificationPageId, @ClassificationId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @OneTwoColumns, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId ";
+            _sqlDataAccess.SaveData<ClassificationPageSectionCreatePost>(usp, ClassificationPageSection);
+            return true;
+        }
+        public Task<List<SequenceList>> ClassificationLevelCreateGetSequence(string UserId, int ClassificationId)
+        {
+            string usp = "[usp_ClassificationLevelCreateGetSequence] @UserID, @ClassificationId";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ClassificationId });
         }
         public Task<List<LanguageList>> ClassificationLangugageCreateGetLanguageList(string UserId, int ClassificationId)
         {
             string usp = "[usp_ClassificationLangugageCreateGetLanguageList] @UserID, @ClassificationId";
             return _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId, ClassificationId });
-
         }
-        public async Task<string> PostClassificationCheck(ClassificationCreatePost Classification)
+        public Task<List<SequenceList>> ClassificationPageSectionCreateGetSequence(string UserId, int ClassificationPageId)
         {
-            string usp = "usp_ClassificationCreateCheck @StatusId  , @HasDropDown , @DropDownSequence , @LanguageId , @Name , @Description , @MenuName , @MouseOver , @UserId ";
+            string usp = "usp_ClassificationPageSectionCreateGetSequence @UserID, @ClassificationPageId";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ClassificationPageId });
+        }
+        public Task<List<ClassificationRelationTypeList>> ClassificationRelationTypeList(string UserId)
+        {
+            string usp = "usp_ClassificationRelationTypeList @UserID";
+            return _sqlDataAccess.LoadData<ClassificationRelationTypeList, dynamic>(usp, new { UserId });
+        }
+        public async Task<string> ClassificationCreatePostCheck(ClassificationCreatePost Classification)
+        {
+            string usp = "usp_ClassificationCreatePostCheck @StatusId  , @HasDropDown , @DropDownSequence , @LanguageId , @Name , @Description , @MenuName , @MouseOver , @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Classification);
+            return CheckString;
+        }
+        public async Task<string> ClassificationLevelCreatePostCheck(ClassificationLevelCreatePost ClassificationLevel)
+        {
+            string usp = "usp_ClassificationLevelCreatePostCheck @StatusId  , @HasDropDown , @DropDownSequence , @LanguageId , @Name , @Description , @MenuName , @MouseOver , @UserId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationLevel);
+            return CheckString;
+        }
+        public async Task<string> ClassificationValueCreatePostCheck(ClassificationValueCreatePost ClassificationValue)
+        {
+            string usp = "usp_ClassificationValueCreatePostCheck @Classification, @Parent, @LanguageId , @Name";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValue);
+            return CheckString;
+        }
+        public async Task<string> ClassificationValueCreatePost(ClassificationValueCreatePost ClassificationValue)
+        {
+            string usp = "usp_ClassificationValueCreatePost @ClassificationId, @ParentId, @DateFrom, @DateTo, @Location, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @CreatorId ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValue);
+            return String;
+        }
+        public async Task<string> ClassificationPageCreatePostCheck(ClassificationPageCreatePost ClassificationPage)
+        {
+            string usp = "usp_ClassificationPageCreatePostCheck @ClassificationId, @Status, @LanguageId , @Name";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationPage);
+            return CheckString;
+        }
+        public async Task<string> ClassificationPageSectionCreatePostCheck(ClassificationPageSectionCreatePost ClassificationPageSection)
+        {
+            string usp = "usp_ClassificationPageSectionCreatePostCheck @ClassificationPageId, @Sequence, @PageSectionTypeId, @PageSectionDateTypeId, @ContentTypeId, @SortById , @OneTwoColumns , @LanguageId , @Name";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationPageSection);
+            return CheckString;
+        }
+        public async Task<string> ClassificationRelationTypeCreatePostCheck(ClassificationRelationTypeCreatePost ClassificationRelationType)
+        {
+            string usp = "usp_ClassificationRelationTypeCreatePostCheck @LanguageId , @Name";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationRelationType);
+            return CheckString;
+        }
+        public async Task<string> ClassificationValueRoleCreatePostCheck(ClassificationValueRoleCreatePost ClassificationValueRole)
+        {
+            string usp = "usp_ClassificationValueRoleCreatePostCheck @RoleId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueRole);
+            return CheckString;
+        }
+        public async Task<string> ClassificationValueRoleCreatePost(ClassificationValueRoleCreatePost ClassificationValueRole)
+        {
+            string usp = "usp_ClassificationValueRoleCreatePost @RoleId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueRole);
+            return String;
+        }
+        public async Task<string> ClassificationValueUserCreatePostCheck(ClassificationValueUserCreatePost ClassificationValueUser)
+        {
+            string usp = "usp_ClassificationValueUserCreatePostCheck @UserId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueUser);
+            return CheckString;
+        }
+        public async Task<string> ClassificationValueUserCreatePost(ClassificationValueUserCreatePost ClassificationValueUser)
+        {
+            string usp = "usp_ClassificationValueUserCreatePost @UserId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueUser);
+            return String;
+        }
+
+        public async Task<string> ClassificationRoleCreatePostCheck(ClassificationRoleCreatePost ClassificationRole)
+        {
+            string usp = "usp_ClassificationRoleCreatePostCheck @RoleId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationRole);
+            return CheckString;
+        }
+        public async Task<string> ClassificationUserCreatePost(ClassificationUserCreatePost ClassificationUser)
+        {
+            string usp = "usp_ClassificationUserCreatePost @UserId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationUser);
+            return String;
+        }
+        public async Task<string> ClassificationUserCreatePostCheck(ClassificationUserCreatePost ClassificationUser)
+        {
+            string usp = "usp_ClassificationUserCreatePostCheck @UserId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationUser);
             return CheckString;
         }
         public bool PutClassification(ClassificationUpdatePut Classification)

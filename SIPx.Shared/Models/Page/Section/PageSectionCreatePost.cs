@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PageSectionCreatePost : IPageSectionCreatePost
+    public class PageSectionCreatePost 
     {
         public int PageId { get; set; }
         public int Sequence { get; set; }
@@ -27,6 +27,6 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
     }
 }

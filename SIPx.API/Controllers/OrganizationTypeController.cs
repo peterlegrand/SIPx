@@ -19,12 +19,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationTypeController : ControllerBase
     {
+        private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationTypeController(IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationTypeController(IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _organizationProvider = organizationProvider;
             _userManager = userManager;
@@ -85,5 +87,49 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var OrganizationTypeCreateGet = new OrganizationTypeCreateGet();
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                OrganizationTypeCreateGet.LanguageId = UserLanguage.LanguageId;
+                OrganizationTypeCreateGet.LanguageName = UserLanguage.Name;
+                return Ok(OrganizationTypeCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(OrganizationTypeCreatePost OrganizationType)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            OrganizationType.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _organizationProvider.OrganizationTypeCreatePostCheck(OrganizationType);
+                if (CheckString.Length == 0)
+                {
+                    _organizationProvider.OrganizationTypeCreatePost(OrganizationType);
+                    return Ok(OrganizationType);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

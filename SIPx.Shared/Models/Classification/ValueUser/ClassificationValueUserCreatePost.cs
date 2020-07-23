@@ -5,13 +5,13 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationValueUserCreatePost : IClassificationValueUserCreatePost
+    public class ClassificationValueUserCreatePost 
     {
         [Key]
-        public string @UserOfClassificationId { get; set; }
+        public string @UserId { get; set; }
         public int ClassificationValueId { get; set; }
         public int ClassificationId { get; set; }
         public int ClassificationRelationTypeId { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
     }
 }

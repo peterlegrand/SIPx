@@ -277,6 +277,36 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ProcessTemplateFieldTypeList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public Task<List<ProcessTemplateStageTypeList>> ProcessTemplateStageTypeList(string UserId)
+        {
+            string usp = "usp_ProcessTemplateStageTypeList @UserId";
+            return _sqlDataAccess.LoadData<ProcessTemplateStageTypeList, dynamic>(usp, new { UserId = UserId });
+
+        }
+        public Task<List<ProcessTemplateStageList>> ProcessTemplateStageList(string UserId, int ProcessTemplateId)
+        {
+            string usp = "usp_ProcessTemplateStageList @UserId, @ProcessTemplateId";
+            return _sqlDataAccess.LoadData<ProcessTemplateStageList, dynamic>(usp, new { UserId = UserId });
+
+        }
+        public Task<List<ProcessTemplateFlowConditionTypeList>> ProcessTemplateFlowConditionTypeList(string UserId)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionTypeList @UserId";
+            return _sqlDataAccess.LoadData<ProcessTemplateFlowConditionTypeList, dynamic>(usp, new { UserId = UserId });
+
+        }
+        public Task<List<ComparisonOperatorList>> ComparisonOperatorList(string UserId)
+        {
+            string usp = "usp_ComparisonOperatorList @UserId";
+            return _sqlDataAccess.LoadData<ComparisonOperatorList, dynamic>(usp, new { UserId = UserId });
+
+        }
+        public Task<List<ProcessTemplateFieldList>> ProcessTemplateFieldList(string UserId, int ProcessTemplateId)
+        {
+            string usp = "usp_ProcessTemplateFieldList @UserId, @ProcessTemplateId ";
+            return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId = UserId, ProcessTemplateId = ProcessTemplateId });
+
+        }
         public Task<List<ProcessTemplateStageList>> ProcessTemplateFlowUpdateGetStageList(string UserId, int ProcessTemplateFlowId)
         {
             string usp = "usp_ProcessTemplateFlowUpdateGetStageList @UserId, @ProcessTemplateFlowId";
@@ -307,6 +337,94 @@ namespace SIPx.DataAccess
             string usp = "usp_ProcessTemplateGroupList @UserId";
             return _sqlDataAccess.LoadData<ProcessTemplateGroupList, dynamic>(usp, new { UserId = UserId });
 
+        }
+        public async Task<string> ProcessTemplateFlowPostCheck(ProcessTemplateFlowCreatePost ProcessTemplateFlow)
+        {
+            string usp = "usp_ProcessTemplateFlowCreatePostCheck @ProcessTemplateId, @ProcessTemplateFromStageId, @ProcessTemplateToStageId, @LanguageId, @Name, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlow);
+            return CheckString;
+        }
+        public async Task<string> ProcessTemplateFlowPost(ProcessTemplateFlowCreatePost ProcessTemplateFlow)
+        {
+            string usp = "usp_ProcessTemplateFlowCreatePost @ProcessTemplateId, @ProcessTemplateFromStageId, @ProcessTemplateToStageId, @OnTheFly, @Alhpabetically, @CanLink, @InDropDow, @InMenu, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlow);
+            return String;
+        }
+        public async Task<string> ProcessTemplateGroupCreatePostCheck(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
+        {
+            string usp = "usp_ProcessTemplateGroupCreatePostCheck @Sequence, @LanguageId, @Name, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateGroup);
+            return CheckString;
+        }
+        public async Task<string> ProcessTemplateGroupCreatePost(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
+        {
+            string usp = "usp_ProcessTemplateGroupCreatePost @Sequence, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateGroup);
+            return String;
+        }
+        public async Task<string> ProcessTemplateCreatePostCheck(ProcessTemplateCreatePost ProcessTemplate)
+        {
+            string usp = "usp_ProcessTemplateCreatePostCheck @ProcessTemplateGroupId, @Sequence, @LanguageId, @Name, @CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplate);
+            return CheckString;
+        }
+        public async Task<string> ProcessTemplateCreatePost(ProcessTemplateCreatePost ProcessTemplate)
+        {
+            string usp = "usp_ProcessTemplateCreatePost @ProcessTemplateGroupId, @ShowInPersonalCalendar, @ShowInEventCalendar, @Sequence, @IsPersonal, @ShowInNew, @ShowInSearch, @ShowInReports, @HideEverywhere, @ProcessMultiMax, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplate);
+            return String;
+        }
+
+        public async Task<string> ProcessTemplateStageCreatePostCheck(ProcessTemplateStageCreatePost ProcessTemplateStage)
+        {
+            string usp = "usp_ProcessTemplateStageCreatePostCheck @ProcessTemplateId, @ProcessTemplateTypeId, @LanguageId, @Name, @CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStage);
+            return CheckString;
+        }
+        public async Task<string> ProcessTemplateStageCreatePost(ProcessTemplateStageCreatePost ProcessTemplateStage)
+        {
+            string usp = "usp_ProcessTemplateStageCreatePost @ProcessTemplateId, @ProcessTemplateTypeId, @IsEndStage, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStage);
+            return String;
+        }
+        public async Task<string> ProcessTemplateFieldCreatePostCheck(ProcessTemplateFieldCreatePost ProcessTemplateField)
+        {
+            string usp = "usp_ProcessTemplateFieldCreatePostCheck @ProcessTemplateId, @ProcessTemplateFieldTypeId, @LanguageId, @Name, @CreaterId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateField);
+            return CheckString;
+        }
+        public async Task<string> ProcessTemplateFieldCreatePost(ProcessTemplateFieldCreatePost ProcessTemplateField)
+        {
+            string usp = "usp_ProcessTemplateFieldCreatePost @ProcessTemplateId, @ProcessTemplateFieldTypeId, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreaterId";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateField);
+            return String;
+        }
+        public async Task<string> ProcessTemplateFlowConditionCreatePostCheck(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionCreatePostCheck @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowConditionTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @LanguageId, @Name, @CreaterId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlowCondition);
+            return CheckString;
+        }
+        public async Task<string> ProcessTemplateFlowConditionCreatePost(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionCreatePost @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowConditionTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @ProcessTemplateFlowConditionString, @ProcessTemplateFlowConditionInt, @ProcessTemplateFlowConditionDate, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreaterId";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlowCondition);
+            return String;
+        }
+        public Task<List<SequenceList>> ProcessTemplateCreateGetSequence(string UserId)
+        {
+            string usp = "usp_ProcessTemplateCreateGetSequence @UserID";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
+        }
+        public Task<List<SequenceList>> ProcessTemplateGroupCreateGetSequence(string UserId)
+        {
+            string usp = "usp_ProcessTemplateGroupCreateGetSequence @UserID";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
+        }
+        public Task<List<SequenceList>> ProcessTemplateFlowConditionCreateGetSequence(string UserId, int ProcessTemplateFlowId)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionCreateGetSequence @UserID, @ProcessTemplateFlowId";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
         }
 
     }

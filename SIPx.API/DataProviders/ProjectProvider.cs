@@ -68,5 +68,24 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProjectTypeUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
         }
+        public async Task<List<ProjectTypeList>> ProjectTypeList(string UserId)
+        {
+            string usp = "usp_ProjectTypeList @UserID";
+            var x = await _sqlDataAccess.LoadData<ProjectTypeList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+        public async Task<string> ProjectCreatePost(ProjectCreatePost Project)
+        {
+            string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Project);
+            return CheckString;
+        }
+        public async Task<string> ProjectCreatePostCheck(ProjectCreatePost Project)
+        {
+            string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, LanguageId, @Name, @CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Project);
+            return CheckString;
+        }
+
     }
 }

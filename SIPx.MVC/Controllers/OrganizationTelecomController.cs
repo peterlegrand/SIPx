@@ -12,8 +12,7 @@ namespace SIPx.MVC.Controllers
     public class OrganizationTelecomController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-
-        ServiceClient client = new ServiceClient();
+        readonly ServiceClient client = new ServiceClient();
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -48,7 +47,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");
             await client.PostProtectedAsync<OrganizationTelecomCreateGet>($"{_baseUrl}api/OrganizationTelecom/Create", OrganizationTelecom, token);
 
-            return RedirectToAction("Index", new { id = OrganizationTelecom.ClassificationId });
+            return RedirectToAction("Index", new { id = OrganizationTelecom.OrganizationId });
         }
 
     }

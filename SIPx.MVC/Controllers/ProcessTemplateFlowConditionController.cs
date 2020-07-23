@@ -12,8 +12,7 @@ namespace SIPx.MVC.Controllers
     public class ProcessTemplateFlowConditionController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-
-        ServiceClient client = new ServiceClient();
+        readonly ServiceClient client = new ServiceClient();
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -34,7 +33,7 @@ namespace SIPx.MVC.Controllers
             return View(response);
         }
         [HttpGet]
-        public async Task<IActionResult> Create(int ID)
+        public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await client.GetProtectedAsync<ProcessTemplateFlowConditionCreateGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Create/" + Id, token);

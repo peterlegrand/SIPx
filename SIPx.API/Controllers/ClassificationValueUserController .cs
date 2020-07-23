@@ -84,5 +84,49 @@ namespace SIPx.API.Controllers
             });
         }
 
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User); ;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ClassificationValueUserCreateGet = new ClassificationValueUserCreateGet();
+                var ClassificationRelationTypes = await _classificationProvider.ClassificationRelationTypeList(CurrentUser.Id);
+                ClassificationValueUserCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
+                ClassificationValueUserCreateGet.ClassificationId = Id;
+                return Ok(ClassificationValueUserCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ClassificationValueUserCreatePost ClassificationValueUser)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ClassificationValueUser.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _classificationProvider.ClassificationValueUserCreatePostCheck(ClassificationValueUser);
+                if (CheckString.Length == 0)
+                {
+                    _classificationProvider.ClassificationValueUserCreatePost(ClassificationValueUser);
+                    return Ok(ClassificationValueUser);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

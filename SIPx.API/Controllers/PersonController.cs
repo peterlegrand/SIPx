@@ -68,5 +68,50 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var PersonCreateGet = new PersonCreateGet();
+                var Genders = await _peopleProvider.GenderList(CurrentUser.Id);
+                var Organizations = await _organizationProvider.OrganizationList(CurrentUser.Id);
+                PersonCreateGet.Genders= Genders;
+                PersonCreateGet.Organizations = Organizations;
+                return Ok(PersonCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(PersonCreatePost Person)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            Person.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _peopleProvider.PersonCreatePostCheck(Person);
+                if (CheckString.Length == 0)
+                {
+                    _peopleProvider.PersonCreatePost(Person);
+                    return Ok(Person);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

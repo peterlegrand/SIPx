@@ -115,6 +115,60 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ClassificationPageSectionCreateGet = new ClassificationPageSectionCreateGet();
+                var ClassificationPageSectionCreateGetSequences = await _classificationProvider.ClassificationPageSectionCreateGetSequence(CurrentUser.Id, Id);
+                var PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
+                var PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
+                var ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
+                var SortBys = await _masterProvider.SortByList(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                ClassificationPageSectionCreateGet.LanguageId = UserLanguage.LanguageId;
+                ClassificationPageSectionCreateGet.LanguageName = UserLanguage.Name;
+                ClassificationPageSectionCreateGet.PageSectionDataTypes = PageSectionDataTypes;
+                ClassificationPageSectionCreateGet.PageSectionTypes = PageSectionTypes;
+                ClassificationPageSectionCreateGet.ContentTypes = ContentTypes;
+                ClassificationPageSectionCreateGet.SortBys= SortBys;
+                ClassificationPageSectionCreateGet.ClassificationId = Id;
+                return Ok(ClassificationPageSectionCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ClassificationPageSectionCreatePost ClassificationPageSection)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ClassificationPageSection.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _classificationProvider.ClassificationPageSectionCreatePostCheck(ClassificationPageSection);
+                if (CheckString.Length == 0)
+                {
+                    _classificationProvider.ClassificationPageSectionCreatePost(ClassificationPageSection);
+                    return Ok(ClassificationPageSection);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
         [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> GetPageLanguage(int Id)
         {

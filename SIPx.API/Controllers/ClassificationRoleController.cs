@@ -78,6 +78,50 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var ClassificationRoleCreateGet = new ClassificationRoleCreateGet();
+                var ClassificationRelationTypes = await _classificationProvider.ClassificationRelationTypeList(CurrentUser.Id);
+                ClassificationRoleCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
+                ClassificationRoleCreateGet.ClassificationId = Id;
+                return Ok(ClassificationRoleCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Post(ClassificationRoleCreatePost ClassificationRole)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ClassificationRole.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _classificationProvider.ClassificationRoleCreatePostCheck(ClassificationRole);
+                if (CheckString.Length == 0)
+                {
+                    _classificationProvider.ClassificationRoleCreatePost(ClassificationRole);
+                    return Ok(ClassificationRole);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
 
     }
 }

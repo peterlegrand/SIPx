@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class OrganizationTelecomCreatePost : IOrganizationTelecomCreatePost
+    public class OrganizationTelecomCreatePost 
     {
         [Key]
         public int OrganizationId { get; set; }
@@ -15,6 +15,6 @@ namespace SIPx.Shared
         public string AreaCode { get; set; }
         public string ExtensionCode { get; set; }
         public string AskFor { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
     }
 }
