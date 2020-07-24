@@ -33,5 +33,8 @@ namespace SIPx.Shared
         public string ModifierId { get; set; }
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public int MaxLevel { get; set; }
+        public int Level { get; set; }
+
     }
 }

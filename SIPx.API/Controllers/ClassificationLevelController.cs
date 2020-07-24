@@ -61,6 +61,7 @@ namespace SIPx.API.Controllers
                 var ClassificationLevelCreateGetSequences = await _classificationProvider.ClassificationLevelCreateGetSequence(CurrentUser.Id, Id);
                 var DateLevels = await _masterProvider.DateLevelList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                ClassificationLevelCreateGetSequences.Add(new SequenceList { Sequence = ClassificationLevelCreateGetSequences.Count ,Name = "Add at the end" });
                 ClassificationLevelCreateGet.LanguageId = UserLanguage.LanguageId;
                 ClassificationLevelCreateGet.LanguageName = UserLanguage.Name;
                 ClassificationLevelCreateGet.DateLevels = DateLevels;

@@ -1,45 +1,43 @@
 CREATE PROCEDURE [dbo].usp_ClassificationValueRolePostCheck (
-	@RoleId bit
+	@RoleId nvarchar(450)
 	, @ClassificationValueId bit
 	, @ClassificationId int
 	, @ClassificationRelationTypeId int
-	, CreatorId nvarchar(50)
+	, @CreatorId nvarchar(450))
 AS 
 BEGIN 
 DECLARE @Error varchar(500) = '';
 
-IF @StatusId NOT IN (1,2) 
-BEGIN
-	SET @Error = @Error + ' - StatusId is not correct'
-END
 
-
-IF  @HasDropDown NOT IN (0,1) 
+IF (SELECT COUNT(*) 
+	FROM AspNetRoles WHERE Id = @RoleId ) = 0
 BEGIN
-	SET @Error = @Error + ' - dropdown value must be 0 or 1'
-END
-	
-IF (SELECT MAX(DropDownSequence) 
-	FROM Classifications ) < @DropDownSequence + 1
-BEGIN
-	SET @Error = @Error + ' - dropdown sequence is bigger than current max value '
+	SET @Error = @Error + ' - The role does not exist '
 END
 
 IF  (SELECT COUNT(*) 
-	FROM Classifications 
-	JOIN ClassificationLanguages 
-		ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId 
-	WHERE LanguageId = @LanguageID
-		AND ClassificationLanguages.Name = @Name) >0
+	FROM ClassificationValues 
+	WHERE ClassificationValueId = @ClassificationValueId
+		AND ClassificationId = @ClassificationId) =0
 BEGIN
-	SET @Error = @Error + ' - This classification name for this language already exists'
+	SET @Error = @Error + ' - The value and classification id does not exist'
 END
+
 IF  (SELECT COUNT(*) 
-	FROM Languages 
-	WHERE LanguageId = @LanguageId AND languages.StatusId = 1
+	FROM ClassificationValueRoles
+	WHERE ClassificationValueId = @ClassificationValueId
+		AND ClassificationId = @ClassificationId
+		AND RoleID = @RoleId) >0
+BEGIN
+	SET @Error = @Error + ' - This role already is assigned to the classifcation'
+END
+
+IF  (SELECT COUNT(*) 
+	FROM AspNetUsers 
+	WHERE Id = @CreatorId
 ) =0
 BEGIN
-	SET @Error = @Error + ' - The language is not active'
+	SET @Error = @Error + ' - The user does not exist'
 END
 
 SELECT @Error;

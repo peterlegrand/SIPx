@@ -18,11 +18,15 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString" template="#Add" textAlign="Center" type="string"></e-grid-column>
+        @* PETER TODO New *@
     </e-grid-columns>
 </ejs-grid>
+
 @*PETER TODO Change the back to label in next line*@
+
 <a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
-<a href="~/ClassificationValue/Create">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
+<a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@ViewBag.Id/0">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Edit/${ClassificationValueId}"><span style="color:red">E</span>dit</a>
@@ -39,5 +43,10 @@
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Delete/${ClassificationValueId}"><span style="color:red">D</span>elete</a>
 
+    </div>
+</script>
+<script id="Add" type="text/x-template">
+    <div>
+<a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Create/@ViewBag.Id/${ClassificationValueId}"><span style="color:red">D</span>elete</a>
     </div>
 </script>

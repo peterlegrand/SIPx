@@ -21,6 +21,7 @@ namespace SIPx.MVC.Controllers
             var response = await client.GetProtectedAsync<List<ClassificationLevelIndexGet>>($"{_baseUrl}api/ClassificationLevel/Index/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Index", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = id;
             return View(response);
             //return View();
         }

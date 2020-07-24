@@ -16,7 +16,8 @@ WITH ClassificationValueHierarchy (ClassificationValueID
 	, CreatorID
 	, CreatedDate
 	, ModifierID
-	, ModifiedDate)
+	, ModifiedDate
+	, Level)
 AS
 (
 	SELECT 
@@ -30,6 +31,7 @@ AS
 		, CreatedDate
 		, ModifierID
 		, ModifiedDate
+		, 1
 	FROM ClassificationValues 
 	WHERE ClassificationValues.ParentValueId IS NULL
 		AND ClassificationValues.ClassificationId = @ClassificationID
@@ -46,6 +48,7 @@ AS
 		, ClassificationValueNextLevel.CreatedDate
 		, ClassificationValueNextLevel.ModifierID
 		, ClassificationValueNextLevel.ModifiedDate
+		, Level + 1
 	FROM ClassificationValues ClassificationValueNextLevel
 	JOIN ClassificationValueHierarchy ClassificationValueBaseLevel
 		ON ClassificationValueBaseLevel.ClassificationValueId = ClassificationValueNextLevel.ParentValueID
@@ -77,6 +80,8 @@ SELECT TOP (@Top)
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, ClassificationValueHierarchy.ModifierID
 	, ClassificationValueHierarchy.ModifiedDate
+	, Level
+	, ClassificationLevels.MaxLevel
 FROM   ClassificationValueHierarchy
 LEFT JOIN (SELECT ClassificationId,ClassificationLanguageID, Name FROM ClassificationLanguages WHERE LanguageId = @LanguageID) UserClassificationLanguage
 	ON UserClassificationLanguage.ClassificationID= ClassificationValueHierarchy.ClassificationID
@@ -91,5 +96,7 @@ JOIN Persons Creator
 	ON Creator.UserId = ClassificationValueHierarchy.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = ClassificationValueHierarchy.ModifierID
+JOIN (SELECT MAX(Sequence) MaxLevel, ClassificationId FROM ClassificationLevels GROUP BY ClassificationId) ClassificationLevels
+	ON CLassificationLevels.ClassificationId = ClassificationValueHierarchy.ClassificationID
 ORDER BY Path;
 END;

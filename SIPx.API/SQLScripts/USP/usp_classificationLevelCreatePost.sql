@@ -14,7 +14,11 @@ CREATE PROCEDURE [dbo].[usp_classificationLevelCreatePost] (
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
+
 BEGIN TRANSACTION
+UPDATE ClassificationLevels SET Sequence = Sequence + 1 
+WHERE ClassificationId = @ClassificationId 
+	AND Sequence >= @Sequence
 
 INSERT INTO ClassificationLevels (
 	ClassificationId 

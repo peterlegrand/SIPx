@@ -1,7 +1,9 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationPageCreatePostCheck] (
-	@StatusId bit
+	@ClassificationId int
+	, @StatusId int
 	, @LanguageId int
 	, @Name nvarchar(50)
+	, @CreatorId nvarchar(450)
 ) 
 AS 
 BEGIN 
@@ -13,10 +15,28 @@ BEGIN
 END
 
 
+IF  (SELECT COUNT(*) 
+	FROM Languages 
+	WHERE LanguageID = @LanguageId
+		AND StatusID = 1
+		) =0
+BEGIN
+	SET @Error = @Error + ' - This classification does not exist'
+END
+
+
+IF  (SELECT COUNT(*) 
+	FROM Classifications 
+	WHERE ClassificationID = @ClassificationId
+		) =0
+BEGIN
+	SET @Error = @Error + ' - This classification does not exist'
+END
 
 IF  (SELECT COUNT(*) 
 	FROM ClassificationPageLanguages 
 	WHERE LanguageId = @LanguageID
+		AND ClassificationID = @ClassificationId
 		AND Name = @Name) >0
 BEGIN
 	SET @Error = @Error + ' - This classification page name for this language already exists'

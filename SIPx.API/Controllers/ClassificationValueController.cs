@@ -78,7 +78,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Create/{Id:int}/{ParentId:int}")]
-        public async Task<IActionResult> Create(int Id, int ParentId)
+        public async Task<IActionResult> Create(int Id, int ParentId=0)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))

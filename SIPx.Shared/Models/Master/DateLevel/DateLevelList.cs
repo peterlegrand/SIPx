@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class DateLevelList
     {
         [Key]
-        public int DateLevelListId { get; set; }
+        public int DateLevelId { get; set; }
         public string Name { get; set; }
 
     }

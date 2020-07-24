@@ -19,6 +19,7 @@ namespace SIPx.MVC.Controllers
             var response = await client.GetProtectedAsync<List<ClassificationValueIndexGet>>($"{_baseUrl}api/ClassificationValue/Index/" + id,token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValue/Index", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = id;
             return View(response);
             //return View();
         }
@@ -29,6 +30,7 @@ namespace SIPx.MVC.Controllers
             var response = await client.GetProtectedAsync<ClassificationValueUpdateGet>($"{_baseUrl}api/ClassificationValue/Update/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValue/Edit", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = id;
             return View(response);
         }
         [HttpGet]

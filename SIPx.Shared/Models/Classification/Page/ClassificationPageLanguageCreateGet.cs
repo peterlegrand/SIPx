@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class ClassificationPageLanguageCreate
+    public class ClassificationPageLanguageCreateGet
     {
         [Key]
         public int ClassificationPageId { get; set; }

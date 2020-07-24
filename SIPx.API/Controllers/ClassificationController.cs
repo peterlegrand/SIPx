@@ -70,10 +70,10 @@ namespace SIPx.API.Controllers
             Classification.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.PostClassificationCheck(Classification);
+                var CheckString = await _classificationProvider.ClassificationCreatePostCheck(Classification);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.PostClassification(Classification);
+                    _classificationProvider.ClassificationCreatePost(Classification);
                     return Ok(Classification);
                 }
                 return BadRequest(new

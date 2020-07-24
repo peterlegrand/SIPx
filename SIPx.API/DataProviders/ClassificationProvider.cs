@@ -243,7 +243,7 @@ namespace SIPx.DataAccess
         public Task<List<ClassificationValueUpdateGet>> ClassificationValueIndexGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationValueIndexGet @UserId, @ClassificationID";
-            return _sqlDataAccess.LoadData<ClassificationValueUpdateGet, dynamic>(usp, new { ClassificationId });
+            return _sqlDataAccess.LoadData<ClassificationValueUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
         public bool ClassificationCreatePost(ClassificationCreatePost Classification)
@@ -254,7 +254,7 @@ namespace SIPx.DataAccess
         }
         public bool ClassificationLevelCreatePost(ClassificationLevelCreatePost ClassificationLevel)
         {
-            string usp = "usp_classificationLevelCreatePost @ClassificationId, @ShowTitleName, @ShowTitleDescription, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @UserID";
+            string usp = "usp_classificationLevelCreatePost @ClassificationId, @Sequence, @DateLevelId, @OnTheFly, @Alhpabetically, @CanLink, @InDropDown, @InMenu,  @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserID";
             _sqlDataAccess.SaveData<ClassificationLevelCreatePost>(usp, ClassificationLevel);
             return true;
         }
@@ -310,7 +310,7 @@ namespace SIPx.DataAccess
         }
         public async Task<string> ClassificationLevelCreatePostCheck(ClassificationLevelCreatePost ClassificationLevel)
         {
-            string usp = "usp_ClassificationLevelCreatePostCheck @StatusId  , @HasDropDown , @DropDownSequence , @LanguageId , @Name , @Description , @MenuName , @MouseOver , @UserId ";
+            string usp = "usp_ClassificationLevelCreatePostCheck @ClassificationId  , @Sequence , @LanguageId , @Name, @DateLevelId, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationLevel);
             return CheckString;
         }
@@ -328,7 +328,7 @@ namespace SIPx.DataAccess
         }
         public async Task<string> ClassificationPageCreatePostCheck(ClassificationPageCreatePost ClassificationPage)
         {
-            string usp = "usp_ClassificationPageCreatePostCheck @ClassificationId, @Status, @LanguageId , @Name";
+            string usp = "usp_ClassificationPageCreatePostCheck @ClassificationId, @StatusId, @LanguageId , @Name, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationPage);
             return CheckString;
         }
@@ -346,7 +346,7 @@ namespace SIPx.DataAccess
         }
         public async Task<string> ClassificationValueRoleCreatePostCheck(ClassificationValueRoleCreatePost ClassificationValueRole)
         {
-            string usp = "usp_ClassificationValueRoleCreatePostCheck @RoleId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            string usp = "usp_ClassificationValueRoleCreatePostCheck @RoleId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueRole);
             return CheckString;
         }
