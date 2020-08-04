@@ -1,14 +1,16 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionUpdate] (
 	@ClassificationPageSectionLanguageId int
 	, @ClassificationPageSectionId int
-	, @Sequence int
 	, @PageSectionTypeId int
 	, @PageSectionDataTypeId int
 	, @ShowSectionTitleName bit
 	, @ShowSectionTitleDescription bit
 	, @ShowContentTypeTitleName bit
 	, @ShowContentTypeTitleDescription bit
-	, @OneTwoColumns int
+	, @SizeX int
+	, @SizeY int
+	, @DashboardRow int
+	, @DashboardColumn int
 	, @ContentTypeId int
 	, @SortById int
 	, @MaxContent int
@@ -21,27 +23,19 @@ CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionUpdate] (
 	, @TitleDescription nvarchar(max)
 	, @UserId nvarchar(450)) 
 AS 
-DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM ClassificationPageSections WHERE ClassificationPageSectionId = @ClassificationPageSectionID;
 BEGIN TRANSACTION
-IF @OldSequence > @Sequence
-BEGIN
-UPDATE ClassificationPageSections SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence
-END
-ELSE
-BEGIN
-UPDATE ClassificationPageSections SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence
-END
 
 UPDATE ClassificationPageSections SET 
-	Sequence = @Sequence
-	, PageSectionTypeId = @PageSectionTypeID
+	PageSectionTypeId = @PageSectionTypeID
 	, PageSectionDataTypeId = @PageSectionDataTypeID
 	, ShowSectionTitleName = @ShowSectionTitleName
 	, ShowSectionTitleDescription = @ShowSectionTitleDescription
 	, ShowContentTypeTitleName = @ShowContentTypeTitleName
 	, ShowContentTypeTitleDescription = @ShowContentTypeTitleDescription
-	, OneTwoColumns = @OneTwoColumns 
+	, SizeX=@SizeX 
+	,  SizeY  = @SizeY 
+	, DashboardRow = @DashboardRow 
+	, DashboardColumn = @DashboardColumn 
 	, ContentTypeId = @ContentTypeId 
 	, SortById = @SortByID
 	, MaxContent = @MaxContent

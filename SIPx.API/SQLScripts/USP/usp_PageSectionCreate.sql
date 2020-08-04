@@ -1,13 +1,15 @@
 CREATE PROCEDURE [dbo].[usp_PageSectionCreate] (
 	@PageId int
-	, @Sequence int
 	, @PageSectionTypeId int
 	, @PageSectionDataTypeId int
 	, @ShowSectionTitleName bit
 	, @ShowSectionTitleDescription bit
 	, @ShowContentTypeTitleName bit
 	, @ShowContentTypeTitleDescription bit
-	, @OneTwoColumns int
+	, @SizeX int
+	, @SizeY int
+	, @DashboardRow int
+	, @DashboardColumn int
 	, @ContentTypeId int
 	, @SortById int
 	, @MaxContent int
@@ -23,20 +25,18 @@ CREATE PROCEDURE [dbo].[usp_PageSectionCreate] (
 AS 
 BEGIN TRANSACTION
 
-UPDATE PageSections SET Sequence = Sequence + 1 
-WHERE PageId = @PageId 
-	AND Sequence >= @Sequence
-
 INSERT INTO PageSections (
 	PageID
-	, Sequence
 	, PageSectionTypeID
 	, PageSectionDataTypeID
 	, ShowSectionTitleName
 	, ShowSectionTitleDescription
 	, ShowContentTypeTitleName
 	, ShowContentTypeTitleDescription
-	, OneTwoColumns
+	, SizeX
+	, SizeY 
+	, DashboardRow 
+	, DashboardColumn 
 	, ContentTypeID
 	, SortByID
 	, MaxContent
@@ -47,14 +47,16 @@ INSERT INTO PageSections (
 	, ModifiedDate)
 VALUES (
 	@PageID
-	, @Sequence
 	, @PageSectionTypeID
 	, @PageSectionDataTypeID
 	, @ShowSectionTitleName
 	, @ShowSectionTitleDescription
 	, @ShowContentTypeTitleName
 	, @ShowContentTypeTitleDescription
-	, @OneTwoColumns
+	, @SizeX
+	, @SizeY 
+	, @DashboardRow 
+	, @DashboardColumn 
 	, @ContentTypeID
 	, @SortByID
 	, @MaxContent

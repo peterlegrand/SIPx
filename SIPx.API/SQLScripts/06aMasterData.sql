@@ -206,6 +206,12 @@ SET IDENTITY_INSERT PageSectionTypes ON;
 INSERT INTO PageSectionTypes (PageSectionTypeId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
   (1,333,333,333,333)
 , (2,334,334,334,334)
+, (3,229,229,229,229)
+, (4,1341,1341,1341,1341)
+, (5,1342,1342,1342,1342)
+, (6,1343,1343,1343,1343)
+, (7,1344,1344,1344,1344)
+, (8,1345,1345,1345,1345)
 SET IDENTITY_INSERT PageSectionTypes OFF;
 
 SET IDENTITY_INSERT ContentStatuses ON;
@@ -828,6 +834,10 @@ SET IDENTITY_INSERT PageSectionDataTypes ON;
 INSERT INTO PageSectionDataTypes (PageSectionDataTypeId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
 (1,227,227,227,227)
 , (2,234,234,234,234)
+, (3,41,41,41,41)
+, (4,1232,1232,1232,1232)
+, (5,127,127,127,127)
+, (6,231,231,231,231)
 SET IDENTITY_INSERT PageSectionDataTypes OFF;
 
 SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes ON;

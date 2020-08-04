@@ -12,14 +12,16 @@ SELECT ClassificationPageSections.ClassificationPageSectionID
 	, ISNULL(UserClassificationPageSectionLanguage.MouseOver,ISNULL(DefaultClassificationPageSectionLanguage.MouseOver,'No mouse over for this section')) MouseOver
 	, ISNULL(UserClassificationPageSectionLanguage.TitleName,ISNULL(DefaultClassificationPageSectionLanguage.TitleName,'No title name for this section')) TitleName
 	, ISNULL(UserClassificationPageSectionLanguage.TitleDescription,ISNULL(DefaultClassificationPageSectionLanguage.TitleDescription,'No title description for this section')) TitleDescription
-	, ClassificationPageSections.Sequence
 	, ISNULL(UIPageSectionTypeNameCustom.Customization,UIPageSectionTypeName.Name) PageSectionTypeName
 	, ISNULL(UIPageSectionDataTypeNameCustom.Customization,UIPageSectionDataTypeName.Name) PageSectionDataTypeName
 	, ClassificationPageSections.ShowSectionTitleName
 	, ClassificationPageSections.ShowSectionTitleDescription
 	, ClassificationPageSections.ShowContentTypeTitleName
 	, ClassificationPageSections.ShowContentTypeTitleDescription
-	, ClassificationPageSections.OneTwoColumns
+	, SizeX
+	, SizeY
+	, DashboardRow
+	, DashboardColumn
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this content type')) ContentTypeName
 	, ClassificationPageSections.ContentTypeID
 	, ISNULL(UISortByNameCustom.Customization,UISortByName.Name) SortByName

@@ -1,14 +1,16 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionCreate] (
 	@ClassificationPageId int
 	, @ClassificationId int
-	, @Sequence int
+	, @SizeX int
+	, @SizeY int
+	, @DashboardRow int
+	, @DashboardColumn int
 	, @PageSectionTypeId int
 	, @PageSectionDataTypeId int
 	, @ShowSectionTitleName bit
 	, @ShowSectionTitleDescription bit
 	, @ShowContentTypeTitleName bit
 	, @ShowContentTypeTitleDescription bit
-	, @OneTwoColumns int
 	, @ContentTypeId int
 	, @SortById int
 	, @MaxContent int
@@ -24,22 +26,19 @@ CREATE PROCEDURE [dbo].[usp_ClassificationPageSectionCreate] (
 AS 
 BEGIN TRANSACTION
 
-UPDATE ClassificationPageSections SET Sequence = Sequence + 1 
-WHERE ClassificationId = @ClassificationId 
-	AND ClassificationPageId = @ClassificationPageId 
-	AND Sequence >= @Sequence
-
 INSERT INTO ClassificationPageSections (
 	ClassificationPageID
 	, ClassificationID
-	, Sequence
 	, PageSectionTypeID
 	, PageSectionDataTypeID
 	, ShowSectionTitleName
 	, ShowSectionTitleDescription
 	, ShowContentTypeTitleName
 	, ShowContentTypeTitleDescription
-	, OneTwoColumns
+	, SizeX
+	, SizeY
+	, DashboardRow
+	, DashboardColumn
 	, ContentTypeID
 	, SortByID
 	, MaxContent
@@ -51,14 +50,16 @@ INSERT INTO ClassificationPageSections (
 VALUES (
 	@ClassificationPageID
 	, @ClassificationID
-	, @Sequence
 	, @PageSectionTypeID
 	, @PageSectionDataTypeID
 	, @ShowSectionTitleName
 	, @ShowSectionTitleDescription
 	, @ShowContentTypeTitleName
 	, @ShowContentTypeTitleDescription
-	, @OneTwoColumns
+	, @SizeX
+	, @SizeY
+	, @DashboardRow
+	, @DashboardColumn
 	, @ContentTypeID
 	, @SortByID
 	, @MaxContent

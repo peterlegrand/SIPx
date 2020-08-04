@@ -1335,11 +1335,14 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1333, 'New classification re
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1334, 'New classification role');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1335, 'Classification id');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1336, 'New classification user');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1337, 'Classification id');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1338, 'New classification value');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1339, 'Language id');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1340, 'Parent id');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1341, 'New classification value language');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1342, 'Language id');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1343, 'Parent id');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1337, 'New classification value');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1338, 'Language id');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1339, 'Parent id');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1340, 'New classification value language');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1341, 'Personal calendar');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1342, 'Organization calendar');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1343, 'Project calendar');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1344, 'Platform calendar');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1345, 'General calendar');
+
 SET IDENTITY_INSERT UITerms OFF;

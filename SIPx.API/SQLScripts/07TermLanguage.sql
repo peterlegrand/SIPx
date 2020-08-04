@@ -1340,13 +1340,16 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2667,1334,41,'New classification role', 'New classification role', 'New classification role');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2669,1335,41,'Classification id', 'Classification id', 'Classification id');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2671,1336,41,'New classification user', 'New classification user', 'New classification user');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2673,1337,41,'Classification id', 'Classification id', 'Classification id');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2675,1338,41,'New classification value', 'New classification value', 'New classification value');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2677,1339,41,'Language id', 'Language id', 'Language id');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2679,1340,41,'Parent id', 'Parent id', 'Parent id');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2681,1341,41,'New classification value language', 'New classification value language', 'New classification value language');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2683,1342,41,'Language id', 'Language id', 'Language id');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2685,1343,41,'Parent id', 'Parent id', 'Parent id');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2673,1337,41,'New classification value', 'New classification value', 'New classification value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2675,1338,41,'Language id', 'Language id', 'Language id');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2677,1339,41,'Parent id', 'Parent id', 'Parent id');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2679,1340,41,'New classification value language', 'New classification value language', 'New classification value language');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2681,1341,41,'Personal calendar', 'Personal calendar', 'Personal calendar');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2683,1342,41,'Organization calendar', 'Organization calendar', 'Organization calendar');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2685,1343,41,'Project calendar', 'Project calendar', 'Project calendar');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2687,1344,41,'Platform calendar', 'Platform calendar', 'Platform calendar');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2689,1345,41,'General calendar', 'General calendar', 'General calendar');
+
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2,1,39,'Classificatie', 'Classificatie', 'Classificatie');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(4,2,39,'Id', 'Id', 'Id');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(6,3,39,'Naam', 'Naam', 'Naam');
@@ -2683,13 +2686,13 @@ INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Descr
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2668,1334,39,'New classification role', 'New classification role', 'New classification role');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2670,1335,39,'Classification id', 'Classification id', 'Classification id');
 INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2672,1336,39,'New classification user', 'New classification user', 'New classification user');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2674,1337,39,'Classification id', 'Classification id', 'Classification id');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2676,1338,39,'New classification value', 'New classification value', 'New classification value');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2678,1339,39,'Language id', 'Language id', 'Language id');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2680,1340,39,'Parent id', 'Parent id', 'Parent id');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2682,1341,39,'New classification value language', 'New classification value language', 'New classification value language');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2684,1342,39,'Language id', 'Language id', 'Language id');
-INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2686,1343,39,'Parent id', 'Parent id', 'Parent id');
-
-
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2674,1337,39,'New classification value', 'New classification value', 'New classification value');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2676,1338,39,'Language id', 'Language id', 'Language id');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2678,1339,39,'Parent id', 'Parent id', 'Parent id');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2680,1340,39,'New classification value language', 'New classification value language', 'New classification value language');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2682,1341,39,'Personal calendar', 'Personal calendar', 'Personal calendar');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2684,1342,39,'Organization calendar', 'Organization calendar', 'Organization calendar');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2686,1343,39,'Project calendar', 'Project calendar', 'Project calendar');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2688,1344,39,'Platform calendar', 'Platform calendar', 'Platform calendar');
+INSERT INTO UITermLanguages (UITermLanguageId, UITermID, LanguageID, Name, Description, MouseOver) VALUES(2690,1345,39,'General calendar', 'General calendar', 'General calendar');
 SET IDENTITY_INSERT UITermLanguages OFF;

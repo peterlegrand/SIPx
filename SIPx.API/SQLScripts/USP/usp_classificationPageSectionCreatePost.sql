@@ -1,14 +1,16 @@
 CREATE PROCEDURE [dbo].[usp_classificationPageSectionCreatePost] (
 	@ClassificationPageId int
 	, @ClassificationId int
-	, @Sequence int
+	, @SizeX int
+	, @SizeY int
+	, @DashboardRow int
+	, @DashboardColumn int
 	, @PageSectionTypeId int
 	, @PageSectionDataTypeId int
 	, @ShowSectionTitleName bit
 	, @ShowSectionTitleDescription bit
 	, @ShowContentTypeTitleName bit
 	, @ShowContentTypeTitleDescription bit
-	, @OneTwoColumns bit
 	, @ContentTypeId int
 	, @MaxContent int
 	, @HasPaging bit
@@ -26,14 +28,16 @@ BEGIN TRANSACTION
 INSERT INTO ClassificationPageSections (
 	ClassificationPageId
 	, ClassificationId 
-	, Sequence
 	, PageSectionTypeID
 	, PageSectionDataTypeID
 	, ShowSectionTitleName
 	, ShowSectionTitleDescription
 	, ShowContentTypeTitleName
 	, ShowContentTypeTitleDescription
-	, OneTwoColumns 
+	, SizeX
+	, SizeY
+	, DashboardRow
+	, DashboardColumn
 	, ContentTypeId 
 	, MaxContent 
 	, HasPaging 
@@ -44,14 +48,16 @@ INSERT INTO ClassificationPageSections (
 VALUES (
 	@ClassificationPageId
 	, @ClassificationId 
-	, @Sequence
 	, @PageSectionTypeID
 	, @PageSectionDataTypeID
 	, @ShowSectionTitleName
 	, @ShowSectionTitleDescription
 	, @ShowContentTypeTitleName
 	, @ShowContentTypeTitleDescription
-	, @OneTwoColumns 
+	, @SizeX
+	, @SizeY
+	, @DashboardRow
+	, @DashboardColumn
 	, @ContentTypeId 
 	, @MaxContent 
 	, @HasPaging 

@@ -18,14 +18,12 @@ SELECT ClassificationPageSections.ClassificationPageSectionID
 	, ISNULL(UserClassificationPageSectionLanguage.MouseOver,ISNULL(DefaultClassificationPageSectionLanguage.MouseOver,'No mouse over for this section')) MouseOver
 	, ISNULL(UserClassificationPageSectionLanguage.TitleName,ISNULL(DefaultClassificationPageSectionLanguage.TitleName,'No title name for this section')) TitleName
 	, ISNULL(UserClassificationPageSectionLanguage.TitleDescription,ISNULL(DefaultClassificationPageSectionLanguage.TitleDescription,'No title description for this section')) TitleDescription
-	, ClassificationPageSections.Sequence
 	, ISNULL(UIPageSectionTypeNameCustom.Customization,UIPageSectionTypeName.Name) PageSectionTypeName
 	, ISNULL(UIPageSectionDataTypeNameCustom.Customization,UIPageSectionDataTypeName.Name) PageSectionDataTypeName
 	, ClassificationPageSections.ShowSectionTitleName
 	, ClassificationPageSections.ShowSectionTitleDescription
 	, ClassificationPageSections.ShowContentTypeTitleName
 	, ClassificationPageSections.ShowContentTypeTitleDescription
-	, ClassificationPageSections.OneTwoColumns
 	, ClassificationPageSections.PageSectionTypeID
 	, ClassificationPageSections.PageSectionDataTypeID
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this content type')) ContentTypeName
@@ -94,6 +92,6 @@ WHERE ClassificationPageSections.ClassificationPageId = @ClassificationPageID
 	AND UIPageSectionTypeName.LanguageId = @LanguageID
 	AND UIPageSectionDataTypeName.LanguageId = @LanguageID
 	AND UISortByName.LanguageId = @LanguageID
-ORDER BY ClassificationPageSections.Sequence
+ORDER BY 	ISNULL(UserClassificationPageSectionLanguage.Name,ISNULL(DefaultClassificationPageSectionLanguage.Name,'No name for this section')) 
 
 

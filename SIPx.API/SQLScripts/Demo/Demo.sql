@@ -214,13 +214,15 @@ INSERT INTO ClassificationPageLanguages(ClassificationPageLanguageId, Classifica
 SET IDENTITY_INSERT ClassificationPageLanguages OFF;
 
 SET IDENTITY_INSERT ClassificationPageSections ON;
-INSERT INTO ClassificationPageSections (ClassificationPageSectionId, ClassificationId, ClassificationPageId, Sequence, PageSectionTypeId, PageSectionDataTypeId, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitleName, ShowContentTypeTitleDescription, OneTwoColumns, SortById, MaxContent, HasPaging, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (2, 1, 1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (3, 2, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (4, 2, 2, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (5, 3, 3, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (6, 3, 3, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+INSERT INTO ClassificationPageSections (ClassificationPageSectionId, ClassificationId, ClassificationPageId, PageSectionTypeId, PageSectionDataTypeId,
+ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitleName, ShowContentTypeTitleDescription, SizeX
+,SizeY,DashboardRow, DashboardColumn, SortById, MaxContent, HasPaging, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (2, 1, 1, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (3, 2, 2, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (4, 2, 2, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (5, 3, 3, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+, (6, 3, 3, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ClassificationPageSections OFF;
 
 SET IDENTITY_INSERT ClassificationPageSectionLanguages ON;
@@ -335,13 +337,17 @@ INSERT INTO PageLanguages(PageLanguageId, PageId, LanguageId, Name, Description,
 SET IDENTITY_INSERT PageLanguages OFF;
 
 SET IDENTITY_INSERT PageSections ON;
-INSERT INTO PageSections (PageSectionId, PageId, Sequence, PageSectionTypeId, PageSectionDataTypeId, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitleName, ShowContentTypeTitleDescription, OneTwoColumns, SortById, MaxContent, HasPaging, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (2, 1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (3, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (4, 2, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (5, 3, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
-, (6, 3, 2, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, @User, @User, GETDATE(), GETDATE())
+INSERT INTO PageSections (PageSectionId, PageId, PageSectionTypeId, PageSectionDataTypeId, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitleName, ShowContentTypeTitleDescription,SizeX,SizeY,DashboardRow, DashboardColumn,  SortById, MaxContent, HasPaging, [QueryBuilderRule], CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (2, 1, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (3, 2, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (4, 2, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (5, 3, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (6, 3, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (7, 1, 4, 2, 1, 1, 1, 0, 1,2,2,3, 1, 5, 1, 'UserId =' + @User + '''', @User, @User, GETDATE(), GETDATE())
+, (8, 1, 5, 2, 1, 1, 1, 0, 1,2,2,3, 1, 5, 1, 'OrganizationId = 1', @User, @User, GETDATE(), GETDATE())
+, (9, 1, 6, 2, 1, 1, 1, 0, 1,2,2,3, 1, 5, 1, 'ProjectId = 1',@User, @User, GETDATE(), GETDATE())
+, (10, 1, 7, 2, 1, 1, 1, 0, 1,2,2,3, 1, 5, 1, '',@User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT PageSections OFF;
 
 SET IDENTITY_INSERT PageSectionLanguages ON;
@@ -407,6 +413,18 @@ INSERT INTO ProcessTemplates (ProcessTemplateId, ProcessTemplateGroupId, ShowInP
 , @User, @User, GETDATE(), GETDATE())
 ,(3,2,0,0,0,0
 ,15,1,0,1,1,1,0
+, @User, @User, GETDATE(), GETDATE())
+,(4,2,1,0,0,0
+,15,1,0,1,1,1,0
+, @User, @User, GETDATE(), GETDATE())
+,(5,2,0,1,0,0
+,15,1,0,1,1,1,0
+, @User, @User, GETDATE(), GETDATE())
+,(6,2,0,0,1,0
+,15,1,0,1,1,1,0
+, @User, @User, GETDATE(), GETDATE())
+,(7,2,0,0,0,1
+,15,1,0,1,1,1,0
 , @User, @User, GETDATE(), GETDATE());
 SET IDENTITY_INSERT ProcessTemplates OFF;
 
@@ -415,7 +433,11 @@ INSERT INTO ProcessTemplateLanguages (ProcessTemplateLanguageId, ProcessTemplate
 , CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
 (1,1,41, 'Game assignment', 'Game assignment', 'Game assignment', 'Game assignment', @User, @User, GETDATE(), GETDATE())
 ,(2,2,41, 'Research assignment', 'Research assignment', 'Research assignment', 'Research assignment', @User, @User, GETDATE(), GETDATE())
-,(3,3,41, 'Proof reading', 'Proof reading', 'Proof reading', 'Proof reading', @User, @User, GETDATE(), GETDATE());
+,(3,3,41, 'Proof reading', 'Proof reading', 'Proof reading', 'Proof reading', @User, @User, GETDATE(), GETDATE())
+,(4,4,41, 'Personal appointment', 'Personal appointment', 'Personal appointment', 'Personal appointment', @User, @User, GETDATE(), GETDATE())
+,(5,5,41, 'School event', 'School event', 'School event', 'School event', @User, @User, GETDATE(), GETDATE())
+,(6,6,41, 'Project event', 'Project event', 'Project event', 'Project event', @User, @User, GETDATE(), GETDATE())
+,(7,7,41, 'General event', 'General event', 'General event', 'General event', @User, @User, GETDATE(), GETDATE());
 SET IDENTITY_INSERT ProcessTemplateLanguages OFF;
 
 
@@ -461,6 +483,25 @@ INSERT INTO ProcessTemplateFields (ProcessTemplateFieldId, ProcessTemplateId, Pr
 , (36,2,33, @User, @User, GETDATE(), GETDATE())
 , (37,2,28, @User, @User, GETDATE(), GETDATE())
 , (38,3,28, @User, @User, GETDATE(), GETDATE())
+, (39,4,10, @User, @User, GETDATE(), GETDATE())
+, (40,4,8, @User, @User, GETDATE(), GETDATE())
+, (41,4,9, @User, @User, GETDATE(), GETDATE())
+, (42,4,1, @User, @User, GETDATE(), GETDATE())
+, (43,4,12, @User, @User, GETDATE(), GETDATE())
+, (44,5,10, @User, @User, GETDATE(), GETDATE())
+, (45,5,8, @User, @User, GETDATE(), GETDATE())
+, (46,5,9, @User, @User, GETDATE(), GETDATE())
+, (47,5,1, @User, @User, GETDATE(), GETDATE())
+, (48,5,14, @User, @User, GETDATE(), GETDATE())
+, (49,6,10, @User, @User, GETDATE(), GETDATE())
+, (50,6,8, @User, @User, GETDATE(), GETDATE())
+, (51,6,9, @User, @User, GETDATE(), GETDATE())
+, (52,6,1, @User, @User, GETDATE(), GETDATE())
+, (53,6,16, @User, @User, GETDATE(), GETDATE())
+, (54,7,10, @User, @User, GETDATE(), GETDATE())
+, (55,7,8, @User, @User, GETDATE(), GETDATE())
+, (56,7,9, @User, @User, GETDATE(), GETDATE())
+, (57,7,1, @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFields OFF;
 
@@ -505,6 +546,25 @@ INSERT INTO ProcessTemplateFieldLanguages (ProcessTemplateFieldLanguageId, Proce
 ,(36,2,36,41, 'Role of approver', 'Role of approver', 'Role of approver', 'Role of approver', @User, @User, GETDATE(), GETDATE())
 ,(37,2,37,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level', @User, @User, GETDATE(), GETDATE())
 ,(38,3,38,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level', @User, @User, GETDATE(), GETDATE())
+,(39,4,39,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(40,4,40,41, 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
+,(41,4,41,41, 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
+,(42,4,42,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+,(43,4,43,41, 'User', 'User', 'User', 'User', @User, @User, GETDATE(), GETDATE())
+,(44,5,44,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(45,5,45,41, 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
+,(46,5,46,41, 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
+,(47,5,47,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+,(48,5,48,41, 'Organization', 'Organization', 'Organization', 'Organization', @User, @User, GETDATE(), GETDATE())
+,(49,6,49,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(50,6,50,41, 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
+,(51,6,51,41, 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
+,(52,6,52,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+,(53,6,53,41, 'Project', 'Project', 'Project', 'Project', @User, @User, GETDATE(), GETDATE())
+,(54,7,54,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(55,7,55,41, 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
+,(56,7,56,41, 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
+,(57,7,57,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFieldLanguages OFF;
 
@@ -552,6 +612,14 @@ INSERT INTO ProcessTemplateStages (ProcessTemplateStageId, ProcessTemplateId, Pr
 , (12,1,7,0, @User, @User, GETDATE(), GETDATE())
 , (13,2,7,0, @User, @User, GETDATE(), GETDATE())
 , (14,3,7,0, @User, @User, GETDATE(), GETDATE())
+, (15,4,8,0, @User, @User, GETDATE(), GETDATE())
+, (16,4,7,1, @User, @User, GETDATE(), GETDATE())
+, (17,5,8,0, @User, @User, GETDATE(), GETDATE())
+, (18,5,7,1, @User, @User, GETDATE(), GETDATE())
+, (19,6,8,0, @User, @User, GETDATE(), GETDATE())
+, (20,6,7,1, @User, @User, GETDATE(), GETDATE())
+, (21,7,8,0, @User, @User, GETDATE(), GETDATE())
+, (22,7,7,1, @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateStages OFF;
 
@@ -573,6 +641,14 @@ INSERT INTO ProcessTemplateStageLanguages (ProcessTemplateStageLanguageId,Proces
 , (12,1,12,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
 , (13,2,13,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
 , (14,3,14,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+, (15,4,15,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+, (16,4,16,41, 'Booked', 'Booked', 'Booked', 'Booked', @User, @User, GETDATE(), GETDATE())
+, (17,5,17,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+, (18,5,18,41, 'Booked', 'Booked', 'Booked', 'Booked', @User, @User, GETDATE(), GETDATE())
+, (19,6,19,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+, (20,6,20,41, 'Booked', 'Booked', 'Booked', 'Booked', @User, @User, GETDATE(), GETDATE())
+, (21,7,21,41, 'New', 'New', 'New', 'New', @User, @User, GETDATE(), GETDATE())
+, (22,7,22,41, 'Booked', 'Booked', 'Booked', 'Booked', @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateStageLanguages OFF;
 
@@ -595,6 +671,53 @@ INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTempl
 																													INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (164,3,10,24,2, 1, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (165,3,10,25,2, 2, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (166,3,10,26,2, 3, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (167,3,10,27,2, 4, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (168,3,10,38,1, 5, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (169,3,10,28,1, 6, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (170,3,10,29,2, 7, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (171,3,10,30,1, 8, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (172,3,10,31,1, 9, 1, @user,getdate());
 																													INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (173,3,11,24,2, 1, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (174,3,11,25,2, 2, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (175,3,11,26,2, 3, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (176,3,11,27,2, 4, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (177,3,11,38,1, 5, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (178,3,11,28,1, 6, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (179,3,11,29,2, 7, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (180,3,11,30,1, 8, 1, @user,getdate());	INSERT INTO ProcessTemplateStageFields (ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,ProcessTemplateFieldId,ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) VALUES (181,3,11,31,1, 9, 1, @user,getdate());
 
+INSERT INTO ProcessTemplateStageFields (
+ProcessTemplateStageFieldId,ProcessTemplateId,ProcessTemplateStageId,
+ProcessTemplateFieldId,
+ProcessTemplateStageFieldStatusId,Sequence, ValueUpdateTypeId,ModifierId, ModifiedDate) 
+VALUES 
+(182,4,15,39,3, 1, 1, @user,getdate())
+, (183,4,15,40,3, 2, 1, @user,getdate())
+, (184,4,15,41,3, 3, 1, @user,getdate())
+, (185,4,15,42,3, 4, 1, @user,getdate())
+, (186,4,15,43,3, 5, 1, @user,getdate())
+, (187,4,16,39,2, 1, 1, @user,getdate())
+, (188,4,16,40,2, 2, 1, @user,getdate())
+, (189,4,16,41,2, 3, 1, @user,getdate())
+, (190,4,16,42,2, 4, 1, @user,getdate())
+, (191,4,16,43,2, 5, 1, @user,getdate())
+
+, (192,5,17,44,3, 1, 1, @user,getdate())
+, (193,5,17,45,3, 2, 1, @user,getdate())
+, (194,5,17,46,3, 3, 1, @user,getdate())
+, (195,5,17,47,3, 4, 1, @user,getdate())
+, (196,5,17,48,3, 5, 1, @user,getdate())
+, (197,5,18,44,2, 1, 1, @user,getdate())
+, (198,5,18,45,2, 2, 1, @user,getdate())
+, (199,5,18,46,2, 3, 1, @user,getdate())
+, (200,5,18,47,2, 4, 1, @user,getdate())
+, (201,5,18,48,2, 5, 1, @user,getdate())
+
+, (202,6,19,49,3, 1, 1, @user,getdate())
+, (203,6,19,50,3, 2, 1, @user,getdate())
+, (204,6,19,51,3, 3, 1, @user,getdate())
+, (205,6,19,52,3, 4, 1, @user,getdate())
+, (206,6,19,53,3, 5, 1, @user,getdate())
+, (207,6,20,49,2, 1, 1, @user,getdate())
+, (208,6,20,50,2, 2, 1, @user,getdate())
+, (209,6,20,51,2, 3, 1, @user,getdate())
+, (210,6,20,52,2, 4, 1, @user,getdate())
+, (211,6,20,53,2, 5, 1, @user,getdate())
+
+, (212,7,21,54,3, 1, 1, @user,getdate())
+, (213,7,21,55,3, 2, 1, @user,getdate())
+, (214,7,21,56,3, 3, 1, @user,getdate())
+, (215,7,21,57,3, 4, 1, @user,getdate())
+, (216,7,22,54,2, 1, 1, @user,getdate())
+, (217,7,22,55,2, 2, 1, @user,getdate())
+, (218,7,22,56,2, 3, 1, @user,getdate())
+, (219,7,22,57,2, 4, 1, @user,getdate())
+;		
 SET IDENTITY_INSERT ProcessTemplateStageFields OFF;
 
 
@@ -611,6 +734,10 @@ INSERT INTO ProcessTemplateFlows (ProcessTemplateFlowId, ProcessTemplateId, Proc
 , (9,3,14,9, @User, @User, GETDATE(), GETDATE())
 , (10,3,9,10, @User, @User, GETDATE(), GETDATE())
 , (11,3,9,11, @User, @User, GETDATE(), GETDATE())
+, (12,4,15,16, @User, @User, GETDATE(), GETDATE())
+, (13,5,17,18, @User, @User, GETDATE(), GETDATE())
+, (14,6,19,20, @User, @User, GETDATE(), GETDATE())
+, (15,7,21,22, @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFlows OFF;
 
@@ -629,6 +756,10 @@ ProcessTemplateFlowLanguageId,ProcessTemplateId, ProcessTemplateFlowId, Language
 ,(9,3,9,41, 'Submitting assignment', 'Submitting assignment', 'Submitting assignment', 'Submitting assignment', @User, @User, GETDATE(), GETDATE())
 ,(10,3,10,41, 'Approving assignment', 'Approving assignment', 'Approving assignment', 'Approving assignment', @User, @User, GETDATE(), GETDATE())
 ,(11,3,11,41, 'Rejecting assignment', 'Rejecting assignment', 'Rejecting assignment', 'Rejecting assignment', @User, @User, GETDATE(), GETDATE())
+,(12,4,12,41, 'Create personal event', 'Create personal event', 'Create personal event', 'Create personal event', @User, @User, GETDATE(), GETDATE())
+,(13,5,13,41, 'Create organization event', 'Create organization event', 'Create organization event', 'Create organization event', @User, @User, GETDATE(), GETDATE())
+,(14,6,14,41, 'Create project event', 'Create project event', 'Create project event', 'Create project event', @User, @User, GETDATE(), GETDATE())
+,(15,7,15,41, 'Create general event', 'Create general event', 'Create general event', 'Create general event', @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT  ProcessTemplateFlowLanguages  OFF;
 
@@ -735,6 +866,10 @@ INSERT INTO Processes (ProcessId, ProcessTemplateId, ProcessTemplateStageId, Cre
 , (9,3,9, @User, @User, GETDATE(), GETDATE())
 , (10,3,10, @User, @User, GETDATE(), GETDATE())
 , (11,3,11, @User, @User, GETDATE(), GETDATE())
+, (12,4,16, @User, @User, GETDATE(), GETDATE())
+, (13,5,18, @User, @User, GETDATE(), GETDATE())
+, (14,6,20, @User, @User, GETDATE(), GETDATE())
+, (15,7,22, @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT Processes OFF;
 
@@ -754,6 +889,12 @@ ProcessFieldId, ProcessTemplateId, ProcessId, ProcessTemplateFieldID
 , (10,1,4,1,'Climate', @User, @User, GETDATE(), GETDATE())
 , (11,1,4,3,'How does climate change effect your game', @User, @User, GETDATE(), GETDATE())
 , (12,1,4,5,'We will not get any flooding as we are in the mountains', @User, @User, GETDATE(), GETDATE())
+, (147,4,12,42,'Personal appointment', @User, @User, GETDATE(), GETDATE())
+, (148,5,13,47,'organization appointment', @User, @User, GETDATE(), GETDATE())
+, (149,6,14,52,'project appointment', @User, @User, GETDATE(), GETDATE())
+, (150,7,15,57,'general appointment', @User, @User, GETDATE(), GETDATE())
+
+, (151,4,12,43,@User, @User, @User, GETDATE(), GETDATE())
 ;
 INSERT INTO ProcessFields (
 ProcessFieldId, ProcessTemplateId, ProcessId, ProcessTemplateFieldID
@@ -776,6 +917,8 @@ ProcessFieldId, ProcessTemplateId, ProcessId, ProcessTemplateFieldID
 , (28,1,4,32,3, @User, @User, GETDATE(), GETDATE())
 , (29,1,4,34,2, @User, @User, GETDATE(), GETDATE())
 , (30,1,4,35,2, @User, @User, GETDATE(), GETDATE())
+, (152,5,13,48,1, @User, @User, GETDATE(), GETDATE())
+, (153,6,14,53,1, @User, @User, GETDATE(), GETDATE())
 ;
 --Buttons
 INSERT INTO ProcessFields (
@@ -805,6 +948,10 @@ ProcessFieldId, ProcessTemplateId, ProcessId, ProcessTemplateFieldID
 , (52,1,4,8, @User, @User, GETDATE(), GETDATE())
 , (53,1,4,9, @User, @User, GETDATE(), GETDATE())
 , (54,1,4,12, @User, @User, GETDATE(), GETDATE())
+, (154,4,12,39, @User, @User, GETDATE(), GETDATE())
+, (155,4,13,44, @User, @User, GETDATE(), GETDATE())
+, (156,4,14,45, @User, @User, GETDATE(), GETDATE())
+, (157,4,15,46, @User, @User, GETDATE(), GETDATE())
 ;
 INSERT INTO ProcessFields (
 ProcessFieldId, ProcessTemplateId, ProcessId, ProcessTemplateFieldID
@@ -817,6 +964,14 @@ ProcessFieldId, ProcessTemplateId, ProcessId, ProcessTemplateFieldID
 , (60,1,3,12, getdate(), @User, @User, GETDATE(), GETDATE())
 , (61,1,4,10, getdate(), @User, @User, GETDATE(), GETDATE())
 , (62,1,4,11, getdate(), @User, @User, GETDATE(), GETDATE())
+, (158,4,12,40, getdate(), @User, @User, GETDATE(), GETDATE())
+, (159,4,12,41, getdate(), @User, @User, GETDATE(), GETDATE())
+, (160,5,13,45, getdate(), @User, @User, GETDATE(), GETDATE())
+, (161,5,13,46, getdate(), @User, @User, GETDATE(), GETDATE())
+, (162,6,14,50, getdate(), @User, @User, GETDATE(), GETDATE())
+, (163,6,14,51, getdate(), @User, @User, GETDATE(), GETDATE())
+, (164,7,15,55, getdate(), @User, @User, GETDATE(), GETDATE())
+, (165,7,15,56, getdate(), @User, @User, GETDATE(), GETDATE())
 ;
 INSERT INTO ProcessFields (
 ProcessFieldId, ProcessTemplateId, ProcessId, ProcessTemplateFieldID
