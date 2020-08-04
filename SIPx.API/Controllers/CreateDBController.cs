@@ -133,6 +133,14 @@ namespace SIPx.API.Controllers
                     await _roleManager.AddClaimAsync(Role, new Claim("OrganizationRight", line));
                 }
             }
+            using (StreamReader sr = new StreamReader($"SQLScripts\\ProjectClaim.txt", System.Text.Encoding.UTF8))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = await sr.ReadLineAsync();
+                    await _roleManager.AddClaimAsync(Role, new Claim("ProjectRight", line));
+                }
+            }
 
 
             await _userManager.AddToRoleAsync(identityUser, "Admin");

@@ -45,6 +45,16 @@ namespace SIPx.API.Controllers
                         var OrganizationCalendar = await _frontProvider.FrontIndexOrganizationCalendar(CurrentUser.Id);
                         panel.OrganizationCalendars = OrganizationCalendar;
                     }
+                    if (panel.PageSectionTypeId == 6 & panel.PageSectionDataTypeId == 2)  //Calendar
+                    {
+                        var ProjectCalendar = await _frontProvider.FrontIndexProjectCalendar(CurrentUser.Id);
+                        panel.ProjectCalendars = ProjectCalendar;
+                    }
+                    if (panel.PageSectionTypeId == 7 & panel.PageSectionDataTypeId == 2)  //Calendar
+                    {
+                        var EventCalendar = await _frontProvider.FrontIndexEventCalendar();
+                        panel.EventCalendars = EventCalendar;
+                    }
                 }
                 return Ok(panels);
             }

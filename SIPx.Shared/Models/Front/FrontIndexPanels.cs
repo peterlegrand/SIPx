@@ -21,5 +21,7 @@ namespace SIPx.Shared
 
         public List<AppointmentData> PersonalCalendars { get; set; }
         public List<AppointmentData> OrganizationCalendars { get; set; }
+        public List<AppointmentData> ProjectCalendars { get; set; }
+        public List<AppointmentData> EventCalendars { get; set; }
     }
 }

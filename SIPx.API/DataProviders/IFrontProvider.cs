@@ -6,6 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IFrontProvider
     {
+        Task<List<AppointmentData>> FrontIndexEventCalendar();
         Task<List<AppointmentData>> FrontIndexOrganizationCalendar(string UserId);
         Task<List<FrontIndexPanels>> FrontIndexPanels(int PageId);
         Task<List<AppointmentData>> FrontIndexPersonalCalendar(string UserId);
