@@ -1,7 +1,7 @@
 ﻿@*@model WebApplication.Controllers.HomeController.spacingModel*@
 
 <div>
-    <form  method="post">
+    <form method="post">
         <!--  Button element declaration -->
         <ejs-button id="save" action="Submit" cssClass="e-primary" content="Save"></ejs-button>
         <ejs-button id="restore" cssClass="e-flat e-outline" content="Restore"></ejs-button>
@@ -32,18 +32,57 @@
 </div>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
+   //document.addEventListener('DOMContentLoaded', function () {
+   //     // Create instances for dashboardlayout element
+   //     var dashboard = document.getElementById('dashboard_default').ej2_instances[0];
+   //     // Save the current panels
+   //     document.getElementById('save').onclick = function (e) {
+   //         onCreated();
+           
+   //     };
+   //     // Restore the initial panels
+   //     document.getElementById('restore').onclick = function (e) {
+   //         dashboard.panels = restoreModel;
+   //     };
+   // });
+    document.addEventListener('DOMContentLoaded', function () {
         // Create instances for dashboardlayout element
         var dashboard = document.getElementById('dashboard_default').ej2_instances[0];
         // Save the current panels
-        document.getElementById('save').onclick = function (e) {
-          onCreated();
-        };
+            onCreated();
+
         // Restore the initial panels
         document.getElementById('restore').onclick = function (e) {
             dashboard.panels = restoreModel;
         };
     });
+    document.getElementById('save').onclick = function (e) {
+        onCreated();
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            var val = localStorage.getItem(key);
+            //alert(val);
+            if (key == 'DashboardLayoutdashboard_default') {
+            $.ajax({
+                type: "Post",
+                url: "ReadDataFromLocalStorage.aspx/Insert",
+                data: val,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var mes = data.d;
+                    //alert(mes);
+                    $("#result").append(mes + "<br/>");
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            })
+            }
+        }
+    
+    };
+
     function onCreated() {
             var dashboard = document.getElementById('dashboard_default').ej2_instances[0];
             restoreModel = dashboard.serialize();

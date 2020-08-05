@@ -281,7 +281,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Create")]
+        [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -299,7 +299,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpPost("Create")]
+        [HttpPost("Create2")]
         public async Task<IActionResult> Post(ContentTypeGroupCreatePost ContentTypeGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
