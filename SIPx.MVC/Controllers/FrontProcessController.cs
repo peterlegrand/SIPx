@@ -15,13 +15,23 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient client = new ServiceClient();
 
         [HttpGet]
-        public async Task<IActionResult> New()
+        public async Task<IActionResult> Templates()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<NewProcessShowTemplateGroup>>($"{_baseUrl}api/FrontProcess/New", token);
+            var response = await client.GetProtectedAsync<List<NewProcessShowTemplateGroup>>($"{_baseUrl}api/FrontProcess/Template", token);
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
-   }
+        [HttpGet]
+        public async Task<IActionResult> New(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/"+Id, token);
+            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+
+        }
+    }
 }

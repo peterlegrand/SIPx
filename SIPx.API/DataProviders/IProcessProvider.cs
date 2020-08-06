@@ -1,5 +1,4 @@
-﻿using SIPx.API.Models;
-using SIPx.Shared;
+﻿using SIPx.Shared;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
@@ -8,7 +7,7 @@ namespace SIPx.DataAccess
 {
     public interface IProcessProvider
     {
-        Task<List<NewProcessFromDB>> NewProcessGet(SipUser User, int ProcessTemplateId);
+        Task<List<NewProcessFromDB>> NewProcessGet(string UserId, int ProcessTemplateId);
         Task<List<ProcessTemplateFlowConditionOld>> NewProcessGetFlowConditionList(int FlowId);
         Task<List<int>> NewProcessGetInitialTemplateList();
         Task<List<NewProcessTemplateList>> NewProcessGetTemplateList(string SQLString);

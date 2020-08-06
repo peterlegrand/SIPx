@@ -243,7 +243,7 @@ namespace SIPx.API.Controllers
 
                 if (x.Exists(x => x.ProcessTemplateId == ProcessTemplateId))
                     //TOFIX PETER
-                    return Ok(await _processProvider.NewProcessGet(CurrentUser, ProcessTemplateId));// CurrentUser.LanguageId));
+                    return Ok(await _processProvider.NewProcessGet(CurrentUser.Id, ProcessTemplateId));// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {
@@ -266,7 +266,7 @@ namespace SIPx.API.Controllers
                 if (x.Exists(x => x.ProcessTemplateId == ProcessesFromAPI.ProcessTemplateId))
                 {
 
-                    List<NewProcessFromDB> ProcessesFromDB = await _processProvider.NewProcessGet(CurrentUser, ProcessesFromAPI.ProcessTemplateId);
+                    List<NewProcessFromDB> ProcessesFromDB = await _processProvider.NewProcessGet(CurrentUser.Id, ProcessesFromAPI.ProcessTemplateId);
                     int NoOfFields = ProcessesFromDB.Count();
                     int EqualSequenceCount = 0;
                     if (ProcessesFromDB.Exists(z => z.ProcessTemplateStageId == ProcessesFromAPI.ProcessTemplateStageId) & ProcessesFromDB.Count() == ProcessesFromAPI.ProcessFields.Count())

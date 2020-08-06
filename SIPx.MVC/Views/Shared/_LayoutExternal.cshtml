@@ -1,0 +1,69 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title> - Student Union 1.5 External</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script type="text/javascript" src="~/jquery/jquery.min.js"></script>
+    <script src="~/popper/popper.min.js"></script>
+    <script type="text/javascript" src="~/bootstrap/js/bootstrap.js"></script>
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+
+            $("#Menu").load("/Partial/Menu");
+
+        });
+    </script>
+</head>
+<body>
+    <header class="header" style="height:148px">
+        <h1 style="color:slategrey">
+            <img src="~/images/hitchhiker-symbol-icon.png" style="height:60px; width:60px" />
+            Student Union 1.5
+        </h1>
+
+    </header>
+    <div class="container">
+        <div class="row col-12">
+            <div class="col-sm-8">
+
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="col-12 text-right">
+        @*@if (signInManager.IsSignedIn(User))
+            {
+                <form method="post" asp-action="Logout" asp-controller="User">
+                    <button type="submit" class="nav-link btn btn-link py-0 right float-right right text-right">Logout @User.Identity.Name</button>
+                </form>
+                <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="FrontPage" asp-action="Index">Enter Student Union</a>
+            }*@
+
+        <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="FrontAuth" asp-action="Login">Login</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
+
+
+    </div>
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - StudentUnion0105 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>*@
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

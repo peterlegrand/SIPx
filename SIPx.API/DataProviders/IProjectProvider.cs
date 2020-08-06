@@ -14,6 +14,7 @@ namespace SIPx.DataAccess
         Task<List<ProjectTypeIndexGet>> ProjectTypeIndexGet(string UserId);
         Task<List<ProjectTypeLanguageIndexGet>> ProjectTypeLanguageIndexGet(string UserId, int ProjectTypeId);
         Task<ProjectTypeLanguageUpdateGet> ProjectTypeLanguageUpdateGet(string UserId, int ProjectTypeLanguageId);
+        Task<List<ProjectList>> ProjectList(string UserId);
         Task<List<ProjectTypeList>> ProjectTypeList(string UserId);
         Task<ProjectTypeUpdateGet> ProjectTypeUpdateGet(string UserId, int ProjectTypeId);
         Task<ProjectUpdateGet> ProjectUpdateGet(string UserId, int ProjectId);

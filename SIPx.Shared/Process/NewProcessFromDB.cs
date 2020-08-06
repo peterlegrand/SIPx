@@ -11,7 +11,7 @@ namespace SIPx.Shared
         [Key]
         public int Sequence { get; set; }
         public int ProcessTemplateStageFieldStatusId { get; set; }
-        public int IntValue { get; set; }
+        public int? IntValue { get; set; }
         public DateTime DateTimeValue { get; set; }
         public string StringValue { get; set; }
         public int ValueUpdateTypeId { get; set; }
@@ -19,5 +19,7 @@ namespace SIPx.Shared
         public int ProcessTemplateFieldTypeId { get; set; }
         public int ProcessTemplateId { get; set; }
         public int ProcessTemplateStageId { get; set; }
-    }
+        public string Name { get; set; }
+        public string ControlId { get; set; }
+        }
 }

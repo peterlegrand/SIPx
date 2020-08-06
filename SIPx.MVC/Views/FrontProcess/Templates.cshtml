@@ -1,0 +1,24 @@
+﻿@model List<NewProcessShowTemplateGroup>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
+
+}
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />Process templates</h1>
+<div class=" control-section">
+    @foreach (var x in Model)
+    {
+        <div class="font-weight-bold">@x.ProcessTemplateGroupId</div>
+        <div class="font-weight-bold">@x.Name</div>
+        @foreach (var y in x.templates)
+        {
+<a class="nav-link text-dark font-weight-bold" asp-controller="FrontProcess" asp-action="New" asp-route-id="@y.ProcessTemplateId">@y.Name</a>
+        
+        }
+    }
+</div>
+<!--  DashboardLayout element declaration -->

@@ -11,7 +11,7 @@ using SIPx.Shared;
 
 namespace SIPx.MVC.Controllers
 {
-    public class AuthController : Controller
+    public class FrontAuthController : Controller
     {
         [HttpGet]
         public IActionResult Login()
