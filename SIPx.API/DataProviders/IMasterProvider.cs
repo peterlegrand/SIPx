@@ -46,5 +46,6 @@ namespace SIPx.DataAccess
         Task<LanguageList> UserLanguageUpdateGet(string UserId);
         Task<List<ValueUpdateType>> ValueUpdateTypeIndexGet(string UserId);
         Task<ValueUpdateType> ValueUpdateTypeUpdateGet(string UserId, int ValueUpdateTypeId);
+        Task<List<IconList>> IconList(string UserId);
     }
 }

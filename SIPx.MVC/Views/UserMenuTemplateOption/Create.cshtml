@@ -63,7 +63,7 @@
                 @*PETER TODO Sequence*@
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.Pages" ejs-for="@Model.UserPageLeftId" value="@Model.UserPageLeftId" popupHeight="220px">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.UserMenuTemplateOptions" ejs-for="@Model.UserPageLeftId" value="@Model.UserPageLeftId" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="PageId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -74,7 +74,7 @@
                 @*PETER TODO Sequence*@
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.Pages" ejs-for="@Model.UserPageRightId" value="@Model.UserPageRightId" popupHeight="220px">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.UserMenuTemplateOptions" ejs-for="@Model.UserPageRightId" value="@Model.UserPageRightId" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="PageId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -86,7 +86,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Sequence" dataSource="@Model.Icons" ejs-for="@Model.Icon" value="@Model.Icon" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="FileName"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>

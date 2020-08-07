@@ -21,7 +21,7 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string CreatorId { get; set; }
-        public List<PageList> Pages { get; set; }
+        public List<SequenceList> UserMenuTemplateOptions { get; set; }
         public List<IconList> Icons { get; set; }
     }
 }

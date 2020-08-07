@@ -50,6 +50,13 @@ namespace SIPx.DataAccess
             return x;
         }
 
+        public async Task<List<IconList>> IconList(string UserId)
+        {
+            string usp = "usp_IconList @UserID";
+            var x = await _sqlDataAccess.LoadData<IconList, dynamic>(usp, new { UserId = UserId }); 
+            return x;
+        }
+
         public async Task<List<SecurityLevelList>> SecurityLevelList(string UserId)
         {
             string usp = "usp_SecurityLevelList @UserID";

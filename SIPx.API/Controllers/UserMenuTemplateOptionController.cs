@@ -12,14 +12,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserMenuTemplateOptionController : ControllerBase
     {
+        private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IUserMenuProvider _userMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuTemplateOptionController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuTemplateOptionController(IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _pageProvider = pageProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -28,19 +30,19 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> GetLevels(int Id)
+        public async Task<IActionResult> GetOptions(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "ClassificationID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "ClassificationID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
 
 
                 return Ok(await _userMenuProvider.UserMenuTemplateOptionIndexGet(CurrentUser.Id, Id));
@@ -58,12 +60,11 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var UserMenuTemplateOptionCreateGet = new UserMenuTemplateOptionCreateGet();
+                var iconslist = await _masterProvider.IconList(CurrentUser.Id);
                 var UserMenuTemplateOptionCreateGetSequences = await _userMenuProvider.UserMenuTemplateOptionCreateGetSequence(CurrentUser.Id, Id);
-                var DateLevels = await _masterProvider.DateLevelList(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count ,Name = "Add at the end" });
-                UserMenuTemplateOptionCreateGet.LanguageId = UserLanguage.LanguageId;
-                UserMenuTemplateOptionCreateGet.LanguageName = UserLanguage.Name;
+                UserMenuTemplateOptionCreateGet.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
+                UserMenuTemplateOptionCreateGet.Icons = iconslist;
                 return Ok(UserMenuTemplateOptionCreateGet);
             }
             return BadRequest(new
@@ -76,7 +77,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Post(UserMenuTemplateOptionCreatePost UserMenuTemplateOption)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UserMenuTemplateOption.UserId = CurrentUser.Id;
+            UserMenuTemplateOption.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _userMenuProvider.UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOption);

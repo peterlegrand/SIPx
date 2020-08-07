@@ -1349,5 +1349,9 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1347, 'Secondary person');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1348, 'Options');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1349, 'User menu templates');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1350, 'Add user menu template');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1351, 'User menu template options');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1352, 'Add user menu template option');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1353, 'Right menu');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1354, 'Icon');
 
 SET IDENTITY_INSERT UITerms OFF;

@@ -61,10 +61,10 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<List<UserMenuTemplateOptionIndexGet>> UserMenuTemplateOptionIndexGet(string UserId, int ClassificationId)
+        public async Task<List<UserMenuTemplateOptionIndexGet>> UserMenuTemplateOptionIndexGet(string UserId, int UserMenuTemplateId)
         {
-            string usp = "usp_UserMenuTemplateOptionIndex @UserId, @ClassificationID";
-            var x = await _sqlDataAccess.LoadData<UserMenuTemplateOptionIndexGet, dynamic>(usp, new { UserId, ClassificationId });
+            string usp = "usp_UserMenuTemplateOptionIndexGet @UserId, @UserMenuTemplateID";
+            var x = await _sqlDataAccess.LoadData<UserMenuTemplateOptionIndexGet, dynamic>(usp, new { UserId, UserMenuTemplateId });
             return x;
         }
         public Task<UserMenuTemplateOptionUpdateGet> UserMenuTemplateOptionUpdateGet(string UserId, int UserMenuTemplateOptionId)
@@ -91,10 +91,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<UserMenuTemplateOptionCreatePost>(usp, UserMenuTemplateOption);
             return true;
         }
-        public Task<List<SequenceList>> UserMenuTemplateOptionCreateGetSequence(string UserId, int ClassificationId)
+        public Task<List<SequenceList>> UserMenuTemplateOptionCreateGetSequence(string UserId, int UserMenuTemplateId)
         {
-            string usp = "[usp_UserMenuTemplateOptionCreateGetSequence] @UserID, @ClassificationId";
-            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ClassificationId });
+            string usp = "[usp_UserMenuTemplateOptionCreateGetSequence] @UserID, @UserMenuTemplateId";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, UserMenuTemplateId });
         }
         public async Task<string> UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOptionCreatePost UserMenuTemplateOption)
         {
@@ -102,5 +102,7 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplateOption);
             return CheckString;
         }
+
+
     }
 }
