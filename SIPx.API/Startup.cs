@@ -77,6 +77,7 @@ namespace SIPx.API
             services.AddTransient<IProjectProvider, ProjectProvider>();
             services.AddTransient<IFrontProvider, FrontProvider>();
             services.AddTransient<IFrontProcessProvider, FrontProcessProvider>();
+            services.AddTransient<IUserMenuProvider, UserMenuProvider>();
             services.AddTransient<IPageProvider, PageProvider>();
             services.AddTransient<IProcessProvider, ProcessProvider>();
             services.AddTransient<IProcessTemplateProvider, ProcessTemplateProvider>();

@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageCreate] (
 	@ProcessTemplateId int
 	, @ProcessTemplateTypeId int
-	, @IsEndStage bit
+	, @InToDo bit
 	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
@@ -14,7 +14,7 @@ BEGIN TRANSACTION
 INSERT INTO ProcessTemplateStages (
 	ProcessTemplateID
 	, ProcessTemplateStageTypeID
-	, IsEndStage
+	, InToDo
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -22,7 +22,7 @@ INSERT INTO ProcessTemplateStages (
 VALUES (
 	@ProcessTemplateID
 	, @ProcessTemplateTypeID
-	, @IsEndStage
+	, @InToDo
 	, @UserID
 	, getdate()
 	, @UserID

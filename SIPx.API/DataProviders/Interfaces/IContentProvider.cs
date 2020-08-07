@@ -18,6 +18,6 @@ namespace SIPx.DataAccess
         Task<List<LanguageList>> GetLanguageList(string UserId);
         Task<List<ClassificationList>> GetClassificationList(string UserId, int ContentTypeId);
         Task<List<OrganizationList>> GetOrganizationList(string UserId);
-
+        Task<List<ContentForPanel>> ContentForPanel(string UserId);
     }
 }

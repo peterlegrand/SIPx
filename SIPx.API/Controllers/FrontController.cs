@@ -15,12 +15,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontController : Controller
     {
+        private readonly IContentProvider _contentProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IFrontProvider _frontProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontController(IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontController(IContentProvider contentProvider, IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _contentProvider = contentProvider;
             _claimCheck = claimCheck;
             _frontProvider = frontProvider;
             _userManager = userManager;
@@ -54,6 +56,11 @@ namespace SIPx.API.Controllers
                     {
                         var EventCalendar = await _frontProvider.FrontIndexEventCalendar();
                         panel.EventCalendars = EventCalendar;
+                    }
+                    if (panel.PageSectionTypeId == 1 & panel.PageSectionDataTypeId == 1)  //List content
+                    {
+                        var ContentList = await _contentProvider.ContentForPanel(CurrentUser.Id);
+                        panel.Contents = ContentList;
                     }
                 }
                 return Ok(panels);

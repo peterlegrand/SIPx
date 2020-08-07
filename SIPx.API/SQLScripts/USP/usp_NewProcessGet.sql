@@ -1,4 +1,4 @@
-ALTER PROCEDURE [dbo].[usp_NewProcessGet] ( @ProcessTemplateId int, @UserID nvarchar(450))
+CREATE PROCEDURE [dbo].[usp_NewProcessGet] ( @ProcessTemplateId int, @UserID nvarchar(450))
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

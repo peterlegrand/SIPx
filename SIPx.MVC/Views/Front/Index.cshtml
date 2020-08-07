@@ -23,7 +23,7 @@
                                     </div>
                                 </div>
                                 <div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)">
+                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
                                         <e-schedule-eventsettings dataSource="@x.PersonalCalendars"></e-schedule-eventsettings>
                                     </ejs-schedule>
                                 </div>
@@ -41,7 +41,7 @@
                                         Organization calendar
                                     </div>
                                 </div><div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)">
+                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
                                         <e-schedule-eventsettings dataSource="@x.OrganizationCalendars"></e-schedule-eventsettings>
                                     </ejs-schedule>
                                 </div>
@@ -59,14 +59,15 @@
                                         Project calendar
                                     </div>
                                 </div><div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)">
+                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
                                         <e-schedule-eventsettings dataSource="@x.ProjectCalendars"></e-schedule-eventsettings>
                                     </ejs-schedule>
                                 </div>
                             </div>
                         </e-content-template>
                     </e-dashboardlayout-panel>
-                } @if (x.PageSectionTypeId == 7)
+                }
+                @if (x.PageSectionTypeId == 7)
                 {
                     <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
                         <e-content-template>
@@ -76,21 +77,42 @@
                                         General calendar
                                     </div>
                                 </div><div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId"  selectedDate="new DateTime(2020, 8, 10)">
+                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month" >
                                         <e-schedule-eventsettings dataSource="@x.EventCalendars"></e-schedule-eventsettings>
                                     </ejs-schedule>
                                 </div>
                             </div>
                         </e-content-template>
-        </e-dashboardlayout-panel>
-    }
+                    </e-dashboardlayout-panel>
+                }
+                @if (x.PageSectionTypeId == 1)
+                {
+                    <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                        <e-content-template>
+                            <div class="e-panel-container">
+                                @*<div class="e-panel-header">
+                                        <div>
+                                            Content
+                                        </div>
+                                    </div>*@
+                                <div class="e-panel-content">
+                                    <ejs-grid id="Grid" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#rowtemplate">
+                                        <e-grid-columns>
+                                            <e-grid-column headerText="Content" width="300" field="ControlId" textAlign="Left"></e-grid-column>
+                                        </e-grid-columns>
+                                    </ejs-grid>
+                                </div>
+                            </div>
+                        </e-content-template>
+                    </e-dashboardlayout-panel>
+                }
             }
-            </e-dashboardlayout-panels>
-            </ejs-dashboardlayout>
-            <!-- end of dashboardlayout element -->
-            </div>
+        </e-dashboardlayout-panels>
+    </ejs-dashboardlayout>
+    <!-- end of dashboardlayout element -->
+</div>
 
-            <style>
+<style>
     /* DashboardLayout element styles  */
     #defaultLayout {
         padding: 10px;
@@ -448,4 +470,30 @@
         background: #000;
     }
 
-            </style>
+</style>
+
+<script id="rowtemplate" type="text/x-template">
+    <tr>
+        <td class="details">
+            <table class="CardTable" cellpadding="3" cellspacing="2">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td class="font-weight-bold">${Title} </td>
+                    </tr>
+                    <tr>
+                        <td>${Description} </td>
+                    </tr>
+                    <tr>
+                        <td class="font-italic">
+                            ${CreatorName}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</script>

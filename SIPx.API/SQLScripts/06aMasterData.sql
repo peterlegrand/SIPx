@@ -507,70 +507,6 @@ INSERT INTO Countries (CountryId, ForeignName, ISO31662, ISO31663, ISO3166Num, S
 INSERT INTO Countries (CountryId, ForeignName, ISO31662, ISO31663, ISO3166Num, SubRegionId, IntermediateRegionId, NameTermID) VALUES (249,'Zimbabwe', 'ZW', 'ZWE',716, 17, 8, 622);SET IDENTITY_INSERT Countries OFF;
 SET IDENTITY_INSERT Countries OFF;
 
-SET IDENTITY_INSERT UserMenus ON;
-INSERT INTO UserMenus (
-	UserMenuId, HasMenu
-	, MenuController, MenuAction, MenuImageName
-	, HasAdd
-	, AddController, AddAction, AddImageName
-	, HasSearch
-	, SearchController, SearchAction, SearchImageName
-	, HasAdvancedSearch
-	, AdvancedSearchController, AdvancedSearchAction, AdvancedSearchImageName) VALUES 
-(1, 1, '','','',1, '','','',1,'','','',1, '','','')
-,(2, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(3, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(4, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(5, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(6, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(7, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(8, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(9, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(10, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(11, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(12, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(13, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(14, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(15, 1, '','','',1, '','','',1, '','','',1 , '','','')
-,(16, 1, '','','',1, '','','',1, '','','',1 , '','','')
-SET IDENTITY_INSERT UserMenus OFF;
-
-
-SET IDENTITY_INSERT UserMenuLanguages ON;
-INSERT INTO UserMenuLanguages ( UserMenuLanguageId, UserMenuId, LanguageId, Name, Description, MenuName, MenuMouseOver, AddName, AddMouseOver, SearchName, SearchMouseOver, AdvancedSearchName, AdvancedSearchMouseOver) VALUES 
-  (1, 1, 41, 'My content', 'My content', 'My content', 'My content', 'Add content', 'Add content', 'My content', 'My content', 'Add content', 'Add content')
-, (2, 2, 41, 'My calendar', 'My calendar', 'My calendar', 'My calendar', 'Add appointment', 'Add appointment', 'My calendar', 'My calendar', 'Add appointment', 'Add appointment')
-, (3, 3, 41, 'My projects', 'My projects', 'My projects', 'My projects', 'My projects', 'My projects', 'My projects', 'My projects', 'My projects', 'My projects')
-, (4, 4, 41, 'My relations', 'My relations', 'My relations', 'My relations', 'My relations', 'My relations', 'My relations', 'My relations', 'My relations', 'My relations')
-, (5, 5, 41, 'Chats', 'Chats', 'Chats', 'Chats', 'New chat', 'New chat', 'Chats', 'Chats', 'New chat', 'New chat')
-, (6, 6, 41, 'Conferences', 'Conferences', 'Conferences', 'Conferences', 'New conference', 'New conference', 'Conferences', 'Conferences', 'New conference', 'New conference')
-, (7, 7, 41, 'My favorites', 'My favorites', 'My favorites', 'My favorites', 'My favorites', 'My favorites', 'My favorites', 'My favorites', 'My favorites', 'My favorites')
-, (8, 8, 41, 'Open game', 'Open game', 'Open game', 'Open game', 'Open game', 'Open game', 'Open game', 'Open game', 'Open game', 'Open game')
-, (9, 9, 41, 'To do', 'To do', 'To do', 'To do', 'New workflow', 'New workflow', 'Search workflow', 'Search workflow', 'Search workflow', 'Search workflow')
-, (10, 10, 41, 'General search', 'General search', 'Search', 'Search', 'Advanced search', 'Advanced search', 'General search', 'General search', 'Search', 'Search')
-, (11, 11, 41, 'Content search', 'Content search', 'Content search', 'Content search', 'Content search', 'Content search', 'Content search', 'Content search', 'Advanced content search', 'Advanced content search')
-, (12, 12, 41, 'Project search', 'Project search', 'Project search', 'Project search', 'Project search', 'Project search', 'Project search', 'Project search', 'Advanced project search', 'Advanced project search')
-, (13, 13, 41, 'People search', 'People search', 'People search', 'People search', 'People search', 'People search', 'People search', 'People search', 'Advanced people search', 'Advanced people search')
-, (14, 14, 41, 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu')
-, (15, 15, 41, 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations')
-, (16, 16, 41, 'Users', 'Users', 'Users', 'Users', 'Users', 'Users', 'Users', 'Users', 'Users', 'Users')
-, (17, 1, 39, 'Mijn content', 'Mijn content', 'Mijn content', 'Mijn content', 'Mijn content', 'Mijn content', 'Mijn content', 'Mijn content', 'Mijn content', 'Mijn content')
-, (18, 2, 39, 'Mijn kalender', 'Mijn kalender', 'Mijn kalender', 'Mijn kalender', 'Mijn kalender', 'Mijn kalender', 'Mijn kalender', 'Mijn kalender', 'Mijn kalender', 'Mijn kalender')
-, (19, 3, 39, 'Mijn projecten', 'Mijn projecten', 'Mijn projecten', 'Mijn projecten', 'Mijn projecten', 'Mijn projecten', 'Mijn projecten', 'Mijn projecten', 'Mijn projecten', 'Mijn projecten')
-, (20, 4, 39, 'Mijn relaties', 'Mijn relaties', 'Mijn relaties', 'Mijn relaties', 'Mijn relaties', 'Mijn relaties', 'Mijn relaties', 'Mijn relaties', 'Mijn relaties', 'Mijn relaties')
-, (21, 5, 39, 'Chats', 'Chats', 'Chats', 'Chats', 'Nieuwe chat', 'Nieuwe chat', 'Chats', 'Chats', 'Nieuwe chat', 'Nieuwe chat')
-, (22, 6, 39, 'Conferenties', 'Conferenties', 'Conferenties', 'Conferenties', 'Conferenties', 'Conferenties', 'Conferenties', 'Conferenties', 'Conferenties', 'Conferenties')
-, (23, 7, 39, 'Mijn favorieten', 'Mijn favorieten', 'Mijn favorieten', 'Mijn favorieten', 'Mijn favorieten', 'Mijn favorieten', 'Mijn favorieten', 'Mijn favorieten', 'Mijn favorieten', 'Mijn favorieten')
-, (24, 8, 39, 'Spel openen', 'Spel openen', 'Spel openen', 'Spel openen', 'Spel openen', 'Spel openen', 'Spel openen', 'Spel openen', 'Spel openen', 'Spel openen')
-, (25, 9, 39, 'Te doen', 'Te doen', 'Te doen', 'Te doen', 'Te doen', 'Te doen', 'Te doen', 'Te doen', 'Te doen', 'Te doen')
-, (26, 10, 39, 'Algemeen zoeken', 'Algemeen zoeken', 'Algemeen zoeken', 'Algemeen zoeken', 'Algemeen zoeken', 'Algemeen zoeken', 'Algemeen zoeken', 'Algemeen zoeken', 'Algemeen zoeken', 'Algemeen zoeken')
-, (27, 11, 39, 'Content zoeken', 'Content zoeken', 'Content zoeken', 'Content zoeken', 'Content zoeken', 'Content zoeken', 'Content zoeken', 'Content zoeken', 'Content zoeken', 'Content zoeken')
-, (28, 12, 39, 'Project zoeken', 'Project zoeken', 'Project zoeken', 'Project zoeken', 'Project zoeken', 'Project zoeken', 'Project zoeken', 'Project zoeken', 'Project zoeken', 'Project zoeken')
-, (29, 13, 39, 'Mensen zoeken', 'Mensen zoeken', 'Mensen zoeken', 'Mensen zoeken', 'Mensen zoeken', 'Mensen zoeken', 'Mensen zoeken', 'Mensen zoeken', 'Mensen zoeken', 'Mensen zoeken')
-, (30, 14, 39, 'Gebruikers menu', 'Gebruikers menu', 'Gebruikers menu', 'Gebruikers menu', 'Gebruikers menu', 'Gebruikers menu', 'Gebruikers menu', 'Gebruikers menu', 'Gebruikers menu', 'Gebruikers menu')
-, (31, 15, 39, 'Mijn organizatie', 'Mijn organizatie', 'Mijn organizatie', 'Mijn organizatie', 'Mijn organizatie', 'Mijn organizatie', 'Mijn organizatie', 'Mijn organizatie', 'Mijn organizatie', 'Mijn organizatie')
-, (32, 16, 39, 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers', 'Gebruikers')
-SET IDENTITY_INSERT UserMenuLanguages OFF;
 
 
 SET IDENTITY_INSERT ClaimGroups ON;
@@ -794,7 +730,7 @@ INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeId, NameTermId, D
 ,(13, 656, 656, 656, 656),(14, 657, 657, 657, 657),(15, 658, 658, 658, 658),(16, 659, 659, 659, 659),(17, 660, 660, 660, 660),(18, 661, 661, 661, 661)
 ,(19, 662, 662, 662, 662),(20, 663, 663, 663, 663),(21, 664, 664, 664, 664),(22, 665, 665, 665, 665),(23, 666, 666, 666, 666),(24, 667, 667, 667, 667)
 ,(25, 668, 668, 668, 668),(26, 669, 669, 669, 669),(27, 670, 670, 670, 670),(28, 671, 671, 671, 671),(29, 672, 672, 672, 672),(30, 673, 673, 673, 673)
-,(31, 674, 674, 674, 674),(32, 675, 675, 675, 675),(33, 918, 918, 918, 918),(34, 919, 919, 919, 919),(35, 920, 920, 920, 920);
+,(31, 674, 674, 674, 674),(32, 675, 675, 675, 675),(33, 918, 918, 918, 918),(34, 919, 919, 919, 919),(35, 920, 920, 920, 920),(36, 1346, 1346, 1346, 1346),(37, 1347, 1347, 1347, 1347);
 SET IDENTITY_INSERT ProcessTemplateFieldTypes OFF
 
 SET IDENTITY_INSERT AddressTypes ON

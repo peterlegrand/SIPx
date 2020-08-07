@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageUpdate] (
 	@ProcessTemplateStageId int
 	, @ProcessTemplateStageLanguageId int
 	, @ProcessTemplateStageTypeId int
-	, @IsEndStage bit
+	, @InToDo bit
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -13,7 +13,7 @@ BEGIN TRANSACTION
 
 UPDATE ProcessTemplateStages SET
 	ProcessTemplateStageTypeId = @ProcessTemplateStageTypeId 
-	, IsEndStage = @IsEndStage
+	, InToDo = @InToDo
 	, ModifierId = @UserID
 	, ModifiedDate = Getdate()
 WHERE ProcessTemplateStageId = @ProcessTemplateStageId 

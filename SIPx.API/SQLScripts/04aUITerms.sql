@@ -1344,5 +1344,10 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1342, 'Organization calendar
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1343, 'Project calendar');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1344, 'Platform calendar');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1345, 'General calendar');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1346, 'Primary person');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1347, 'Secondary person');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1348, 'Options');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1349, 'User menu templates');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1350, 'Add user menu template');
 
 SET IDENTITY_INSERT UITerms OFF;

@@ -60,6 +60,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ContentCreateListSet, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
             return x[0];
         }
+        public async Task<List<ContentForPanel>> ContentForPanel(string UserId)
+        {
+            string usp = "usp_ContentForPanel @UserId";
+            var x = await _sqlDataAccess.LoadData<ContentForPanel, dynamic>(usp, new { UserId = UserId});
+            return x;
+        }
         public async Task<List<ClassificationValueList>> GetContentCreateListSet2(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationValues @UserId, @ClassificationID";

@@ -11,7 +11,7 @@ SELECT ProcessTemplateStages.ProcessTemplateStageID
 	, ISNULL(UserProcessTemplateStageLanguage.MenuName,ISNULL(DefaultProcessTemplateStageLanguage.MenuName,'No menu name for this stage')) MenuName
 	, ISNULL(UserProcessTemplateStageLanguage.MouseOver,ISNULL(DefaultProcessTemplateStageLanguage.MouseOver,'No mouse over for this stage')) MouseOver
 	, ISNULL(UserProcessTemplateStageTypeLanguage.Name,ISNULL(DefaultProcessTemplateStageTypeLanguage.Name,'No name for this stage type')) TypeName
-	, ProcessTemplateStages.IsEndStage
+	, ProcessTemplateStages.InToDo
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, ProcessTemplateStages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier

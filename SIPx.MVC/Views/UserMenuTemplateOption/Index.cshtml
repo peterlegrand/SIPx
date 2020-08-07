@@ -1,0 +1,55 @@
+﻿@model List<UserMenuTemplateOptionIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User menu template options")).TermString;
+
+}
+
+<h1><img src="~/images/icons/Classification.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User menu template options")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a href="~/UserMenuTemplate/Create">@Term.Find(x => x.InternalName.Equals("Add user menu template option")).TermString</a>
+<script id="Id" type="text/x-template">
+    <div>
+        ${UserMenuTemplateId}
+    </div>
+</script>
+<script id="Name" type="text/x-template">
+    <div>
+        ${Name}
+    </div>
+</script>
+</script>
+<script id="Options" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplateOption/Index/${UserMenuTemplateId}">
+            <div title="Level"></div><span style="color:red">O</span>ption
+        </a>
+    </div>
+</script>
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplate/Edit/${UserMenuTemplateId}"><span style="color:red">E</span>dit</a>
+
+    </div>
+</script>
+<script id="Languages" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplate/LanguageIndex/${UserMenuTemplateId}"><span style="color:red">L</span>anguage</a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="UserMenuTemplate/Delete/${UserMenuTemplateId}"><span style="color:red">D</span>elete</a>
+
+    </div>
+</script>

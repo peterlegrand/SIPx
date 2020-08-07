@@ -1,4 +1,4 @@
-ALTER PROCEDURE usp_personalOrganizationCalendar (@UserId nvarchar(450))
+CREATE PROCEDURE usp_personalOrganizationCalendar (@UserId nvarchar(450))
 AS
 SELECT Processes.ProcessID Id
 	, FromField.DateTimeValue StartTime
