@@ -823,3 +823,18 @@ INSERT INTO ValueUpdateTypes (
 , (2, 933, 933, 933, 933)
 , (3, 934, 934, 934, 934)
 SET IDENTITY_INSERT ValueUpdateTypes OFF;
+
+
+SET IDENTITY_INSERT [dbo].[Icons] ON 
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, N'Add.png', 5, 5, 5, 5)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, N'calendar.png', 228, 228, 228, 228)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, N'Chat.png', 229, 229, 229, 229)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, N'Classifications.png', 59, 59, 59, 59)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, N'conference.png', 230, 230, 230, 230)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (6, N'content.png', 227, 227, 227, 227)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (7, N'favorites.png', 231, 231, 231, 231)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (8, N'menu.png', 290, 290, 290, 290)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (9, N'process.png', 234, 234, 234, 234)
+INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (10, N'Todo.png', 236, 236, 236, 236)
+SET IDENTITY_INSERT [dbo].[Icons] OFF
+

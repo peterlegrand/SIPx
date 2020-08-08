@@ -9,8 +9,8 @@ namespace SIPx.Shared
     public class UserMenuCreateGet
     {
         public string Icon { get; set; }
-        public int UserPageLeftId { get; set; }
-        public int UserPageRightId { get; set; }
+        public int UserPageIdLeft { get; set; }
+        public int UserPageIdRight { get; set; }
         public string UserId { get; set; }
         public int Sequence { get; set; }
         public string Name { get; set; }
@@ -18,6 +18,9 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string CreatorId { get; set; }
+        public List<IconList> Icons { get; set; }
+        public List<SequenceList> UserMenus { get; set; }
+        public List<PageList> Pages { get; set; }
     }
 }
 

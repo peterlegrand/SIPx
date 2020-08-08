@@ -21,5 +21,7 @@ namespace SIPx.DataAccess
         Task<List<PageSectionTypeList>> PageSectionTypeList(string UserId);
         Task<PageSectionUpdateGet> PageSectionUpdateGet(string UserId, int PageSectionId);
         Task<PageUpdateGet> PageUpdateGet(string UserId, int PageId);
+        Task<List<PageList>> PageListForMenuTemplate(string UserId);
+        Task<List<PageList>> PageListForMenu(string UserId);
     }
 }

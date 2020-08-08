@@ -1353,5 +1353,6 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1351, 'User menu template op
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1352, 'Add user menu template option');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1353, 'Right menu');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1354, 'Icon');
-
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1355, 'User menu');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1356, 'Add user menu');
 SET IDENTITY_INSERT UITerms OFF;

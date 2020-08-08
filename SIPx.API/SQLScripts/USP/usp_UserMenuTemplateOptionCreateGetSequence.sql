@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_UserMenuTemplateOptionCreateGetSequence] (@UserId nvarchar(450), @ClassificationId int) 
+CREATE PROCEDURE [dbo].[usp_UserMenuTemplateOptionCreateGetSequence] (@UserId nvarchar(450), @UserMenuTemplateID int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -12,6 +12,6 @@ LEFT JOIN (SELECT UserMenuTemplateOptionId, Name, Description, MenuName, MouseOv
 	ON UserUserMenuTemplateOptionLanguage.UserMenuTemplateOptionId = UserMenuTemplateOptions.UserMenuTemplateOptionID
 LEFT JOIN (SELECT UserMenuTemplateOptionId, Name, Description, MenuName, MouseOver FROM UserMenuTemplateOptionLanguages JOIN Settings ON UserMenuTemplateOptionLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultUserMenuTemplateOptionLanguage
 	ON DefaultUserMenuTemplateOptionLanguage.UserMenuTemplateOptionId = UserMenuTemplateOptions.UserMenuTemplateOptionID
-WHERE UserMenuTemplateOptions.UserMenuTemplateID = @ClassificationId
-ORDER BY  ISNULL(UserUserMenuTemplateOptionLanguage.Name,ISNULL(DefaultUserMenuTemplateOptionLanguage.Name,'No name for this level'))
+WHERE UserMenuTemplateOptions.UserMenuTemplateID = @UserMenuTemplateID
+ORDER BY  UserMenuTemplateOptions.Sequence
 

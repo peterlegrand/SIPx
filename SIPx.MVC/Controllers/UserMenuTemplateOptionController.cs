@@ -27,10 +27,10 @@ namespace SIPx.MVC.Controllers
             return View(response);
         }
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<UserMenuTemplateOptionCreateGet>($"{_baseUrl}api/UserMenuTemplateOption/Create/", token);
+            var response = await client.GetProtectedAsync<UserMenuTemplateOptionCreateGet>($"{_baseUrl}api/UserMenuTemplateOption/Create/"+id, token);
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplateOption/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
@@ -41,7 +41,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");
             await client.PostProtectedAsync<UserMenuTemplateOptionCreateGet>($"{_baseUrl}api/UserMenuTemplateOption/Create", UserMenuTemplateOption, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = UserMenuTemplateOption.UserMenuTemplateId });
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)

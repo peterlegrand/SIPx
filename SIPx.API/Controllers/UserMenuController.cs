@@ -10,7 +10,7 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class UserMenuTemplateOptionController : ControllerBase
+    public class UserMenuController : ControllerBase
     {
         private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
@@ -19,7 +19,7 @@ namespace SIPx.API.Controllers
         private readonly IUserMenuProvider _userMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuTemplateOptionController(IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuController(IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _pageProvider = pageProvider;
             _masterProvider = masterProvider;
@@ -29,13 +29,13 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> GetOptions(int Id)
+        [HttpGet("Index")]
+        public async Task<IActionResult> GetOptions()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
             {
-                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "ClassificationID", Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists("UserMenus", "ClassificationID", Id) == 0)
                 //{
                 //    return BadRequest(new
                 //    {
@@ -45,7 +45,7 @@ namespace SIPx.API.Controllers
                 //}
 
 
-                return Ok(await _userMenuProvider.UserMenuTemplateOptionIndexGet(CurrentUser.Id, Id));
+                return Ok(await _userMenuProvider.UserMenuIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -59,16 +59,16 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var UserMenuTemplateOptionCreateGet = new UserMenuTemplateOptionCreateGet();
+                var UserMenuCreateGet = new UserMenuCreateGet();
                 var iconslist = await _masterProvider.IconList(CurrentUser.Id);
-                var Pages = await _pageProvider.PageListForMenuTemplate(CurrentUser.Id);
-                var UserMenuTemplateOptionCreateGetSequences = await _userMenuProvider.UserMenuTemplateOptionCreateGetSequence(CurrentUser.Id, Id);
-                UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count ,Name = "Add at the end" });
-                UserMenuTemplateOptionCreateGet.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
-                UserMenuTemplateOptionCreateGet.Icons = iconslist;
-                UserMenuTemplateOptionCreateGet.Pages= Pages;
-                UserMenuTemplateOptionCreateGet.UserMenuTemplateId = Id;
-                return Ok(UserMenuTemplateOptionCreateGet);
+                var Pages = await _pageProvider.PageListForMenu(CurrentUser.Id);
+                var UserMenuCreateGetSequences = await _userMenuProvider.UserMenuCreateGetSequence(CurrentUser.Id);
+                UserMenuCreateGetSequences.Add(new SequenceList { Sequence = UserMenuCreateGetSequences.Count ,Name = "Add at the end" });
+                UserMenuCreateGet.UserMenus = UserMenuCreateGetSequences;
+                UserMenuCreateGet.Icons = iconslist;
+                UserMenuCreateGet.Pages= Pages;
+                UserMenuCreateGet.UserId = CurrentUser.Id;
+                return Ok(UserMenuCreateGet);
             }
             return BadRequest(new
             {
@@ -77,22 +77,22 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
+        public async Task<IActionResult> Post(UserMenuCreateGet UserMenu)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UserMenuTemplateOption.CreatorId = CurrentUser.Id;
+            UserMenu.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userMenuProvider.UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOption);
-                if (CheckString.Length == 0)
-                {
-                    _userMenuProvider.UserMenuTemplateOptionCreatePost(UserMenuTemplateOption);
-                    return Ok(UserMenuTemplateOption);
-                }
-                return BadRequest(new
+                //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
+                //if (CheckString.Length == 0)
+                //{
+                _userMenuProvider.UserMenuCreatePost(UserMenu);
+                return Ok(UserMenu);
+            //}
+            return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -102,37 +102,13 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetLevelLanguages(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
-            {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptionLanguages", "UserMenuTemplateOptionID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-
-
-                return Ok(await _userMenuProvider.UserMenuTemplateOptionLanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetLevel(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
+                if (await _checkProvider.CheckIfRecordExists("UserMenus", "UserMenuID", Id) == 0)
                 {
                     return BadRequest(new
                     {
@@ -140,7 +116,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                return Ok(await _userMenuProvider.UserMenuTemplateOptionUpdateGet(CurrentUser.Id, Id));
+                //return Ok(await _userMenuProvider.UserMenuUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -154,7 +130,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptionLanguages", "UserMenuTemplateOptionLanguageID", Id) == 0)
+                if (await _checkProvider.CheckIfRecordExists("UserMenuLanguages", "UserMenuLanguageID", Id) == 0)
                 {
                     return BadRequest(new
                     {
@@ -163,7 +139,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _userMenuProvider.UserMenuTemplateOptionLanguageUpdateGet(CurrentUser.Id, Id));
+                //return Ok(await _userMenuProvider.UserMenuLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

@@ -57,6 +57,18 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PageSectionUpdateGet, dynamic>(usp, new { UserId = UserId, PageSectionId = PageSectionId });
 
         }
+        public Task<List<PageList>> PageListForMenuTemplate(string UserId)
+        {
+            string usp = "usp_PageListForMenuTemplate @UserId";
+            return _sqlDataAccess.LoadData<PageList, dynamic>(usp, new { UserId = UserId });
+
+        }
+        public Task<List<PageList>> PageListForMenu(string UserId)
+        {
+            string usp = "usp_PageListForMenu @UserId";
+            return _sqlDataAccess.LoadData<PageList, dynamic>(usp, new { UserId = UserId });
+
+        }
         public Task<List<PageSectionDataTypeList>> PageSectionDataTypeList(string UserId)
         {
             string usp = "usp_PageSectionDataTypeList @UserId";

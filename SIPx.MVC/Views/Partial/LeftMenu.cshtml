@@ -1,0 +1,13 @@
+﻿@model List<PartialLeftUserMenu>
+
+<form action="/" method="post">
+    @foreach (var Menu in Model)
+    {
+        
+            <div class="leftMenu row">
+                <a class="text-dark" asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft"><div class="leftMenuText">@Menu.Name</div> </a>
+
+            </div>
+        
+    }
+</form>

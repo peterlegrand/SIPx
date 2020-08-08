@@ -20,7 +20,7 @@
 <a asp-controller="UserMenuTemplateOption" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add user menu template option")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
-        ${UserMenuTemplateId}
+        ${UserMenuTemplateOptionId}
     </div>
 </script>
 <script id="Name" type="text/x-template">
@@ -28,29 +28,28 @@
         ${Name}
     </div>
 </script>
-</script>
 <script id="Options" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplateOption/Index/${UserMenuTemplateId}">
+        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplateOption/Index/${UserMenuTemplateOptionId}">
             <div title="Level"></div><span style="color:red">O</span>ption
         </a>
     </div>
 </script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplate/Edit/${UserMenuTemplateId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplate/Edit/${UserMenuTemplateOptionId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Languages" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplate/LanguageIndex/${UserMenuTemplateId}"><span style="color:red">L</span>anguage</a>
+        <a class="nav-link text-dark font-weight-bold" href="/UserMenuTemplate/LanguageIndex/${UserMenuTemplateOptionId}"><span style="color:red">L</span>anguage</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="UserMenuTemplate/Delete/${UserMenuTemplateId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="UserMenuTemplate/Delete/${UserMenuTemplateOptionId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

@@ -13,8 +13,8 @@ namespace SIPx.Shared
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string Icon { get; set; }
-        public int UserPageLeftId { get; set; }
-        public int UserPageRightId { get; set; }
+        public int UserPageIdLeft { get; set; }
+        public int UserPageIdRight { get; set; }
         public int Sequence { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -22,6 +22,7 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string CreatorId { get; set; }
         public List<SequenceList> UserMenuTemplateOptions { get; set; }
+        public List<PageList> Pages { get; set; }
         public List<IconList> Icons { get; set; }
     }
 }

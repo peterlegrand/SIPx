@@ -18,6 +18,12 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
+        public async Task<List<UserMenuIndexGet>> UserMenuIndexGet(string UserId)
+        {
+            string usp = "usp_UserMenuIndexGet @UserID";
+            List<UserMenuIndexGet> x = await _sqlDataAccess.LoadData<UserMenuIndexGet, dynamic>(usp, new { UserId });
+            return x;
+        }
         public async Task<List<UserMenuTemplateIndexGet>> UserMenuTemplateIndexGet(string UserId)
         {
             string usp = "usp_UserMenuTemplateIndexGet @UserID";
@@ -96,13 +102,44 @@ namespace SIPx.DataAccess
             string usp = "[usp_UserMenuTemplateOptionCreateGetSequence] @UserID, @UserMenuTemplateId";
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, UserMenuTemplateId });
         }
-        public async Task<string> UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOptionCreatePost UserMenuTemplateOption)
+        public Task<List<SequenceList>> UserMenuCreateGetSequence(string UserId)
         {
-            string usp = "usp_UserMenuTemplateOptionCreatePostCheck @UserMenuTemplateId, @Sequence, @UserPageLeftId, @UserPageRightId, @Icon,@Name, @Description, @MenuName, @MouseOver, @CreatorID";
+            string usp = "[usp_UserMenuCreateGetSequence] @UserID";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId});
+        }
+
+
+        public bool UserMenuCreatePost(UserMenuCreateGet UserMenu)
+        {
+            string usp = "usp_UserMenuCreatePost @Name, @UserPageIdLeft, @UserPageIdRight, @Icon, @Sequence,@CreatorID";
+            _sqlDataAccess.SaveData<UserMenuCreateGet>(usp, UserMenu);
+            return true;
+        }
+        //public async Task<string> UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOptionCreatePost UserMenuTemplateOption)
+        //{
+        //    string usp = "usp_UserMenuTemplateOptionCreatePostCheck @UserMenuTemplateId, @Sequence, @UserPageLeftId, @UserPageRightId, @Icon,@Name, @Description, @MenuName, @MouseOver, @CreatorID";
+        //    var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplateOption);
+        //    return CheckString;
+        //}
+
+        public bool UserMenuTemplateOptionCreatePost(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
+        {
+            string usp = "usp_UserMenuTemplateOptionCreatePost @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @UserPageIdLeft , @UserPageIdRight , @Icon , @Sequence , @CreatorId ";
+            _sqlDataAccess.SaveData<UserMenuTemplateOptionCreateGet>(usp, UserMenuTemplateOption);
+            return true;
+        }
+        public async Task<string> UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
+        {
+            string usp = "usp_UserMenuTemplateOptionCreatePostCheck @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @UserPageIdLeft , @UserPageIdRight , @Icon , @Sequence , @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplateOption);
             return CheckString;
         }
 
+        public Task<List<PartialLeftUserMenu>> PartialLeftUserMenu(string UserId)
+        {
+            string usp = "[usp_PartialLeftUserMenu] @UserID";
+            return _sqlDataAccess.LoadData<PartialLeftUserMenu, dynamic>(usp, new { UserId });
+        }
 
     }
 }

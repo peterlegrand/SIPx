@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class IconList
     {
         [Key]
-        public int FileName { get; set; }
+        public string FileName { get; set; }
         public string Name { get; set; }
 
     }
