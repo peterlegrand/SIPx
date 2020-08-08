@@ -1,13 +1,25 @@
 ﻿@model List<PartialLeftUserMenu>
 
 <form action="/" method="post">
-    @foreach (var Menu in Model)
-    {
-        
-            <div class="leftMenu row">
-                <a class="text-dark" asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft"><div class="leftMenuText">@Menu.Name</div> </a>
-
+    <div class="container">
+        @foreach (var Menu in Model)
+        {
+        <div class="row">
+            <div class="col-10 leftMenuText">
+                <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft">
+                    @Menu.Name
+                </a>
             </div>
-        
-    }
+            @if (@Menu.Icon.Length != 15)
+                {<div class="col-2">
+                     <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdRight"><img src="@Menu.Icon" width="20" height="20" /></a>
+</div>}
+            
+
+        </div>
+
+        }
+    </div>
 </form>
+<style>    .leftMenuText{font-size:small}
+</style>
