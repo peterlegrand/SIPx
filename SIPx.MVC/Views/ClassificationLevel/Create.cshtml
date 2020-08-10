@@ -59,8 +59,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
-                @*PETER TODO Sequence*@
+                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" popupHeight="220px">
@@ -110,8 +109,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
-                @* PETER TODO Date level *@
+                @Term.Find(x => x.InternalName.Equals("Date level")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="DateLevelId" dataSource="@Model.DateLevels" ejs-for="@Model.DateLevelId" value="@Model.DateLevelId" popupHeight="220px">

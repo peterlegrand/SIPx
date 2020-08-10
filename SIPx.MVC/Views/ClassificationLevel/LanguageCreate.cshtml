@@ -4,13 +4,12 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification level language")).TermString;
-    //PETER TODO New classification language
+ 
 
 }
 
     <h1>
         <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification level language")).TermString
-        @*//PETER TODO New classification language*@
     </h1>
 <div class="container">
 

@@ -3,7 +3,9 @@ AS
 SELECT 
 	Name
 	, TRIM(Icon) Icon
+	, UserMenuTypeIDLeft
 	, UserPageIdLeft
+	, UserMenuTypeIDRight
 	, UserPageIdRight
 FROM UserMenus
 WHERE UserID = @UserId

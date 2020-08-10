@@ -3,11 +3,10 @@
 @model ClassificationUserUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification relation user")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification user")).TermString;
 
 
 }
-@* PETER TODO The above should be Classification user  *@
 <h1>
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification relation user")).TermString
 </h1>
@@ -30,8 +29,7 @@
 
               <div class="row">
                   <div class="col-3">
-                      @Term.Find(x => x.InternalName.Equals("Name")).TermString
-                      @* PETER TODO User *@
+                      @Term.Find(x => x.InternalName.Equals("User")).TermString
                   </div>
                   <div class="col-9">
                       <ejs-dropdownlist id="User" dataSource="@Model.Users" ejs-for="@Model.UserId" value="@Model.UserId" index="2" filtering="Users" popupHeight="220px">
@@ -42,8 +40,7 @@
               </div>
               <div class="row">
                   <div class="col-3">
-                      @Term.Find(x => x.InternalName.Equals("Name")).TermString
-                      @* PETER TODO Classification relation type *@
+                      @Term.Find(x => x.InternalName.Equals("Classification relation type")).TermString
                   </div>
                   <div class="col-9">
                       <ejs-dropdownlist id="ClassificationRelationTypes" dataSource="@Model.ClassificationRelationTypes" ejs-for="@Model.ClassificationRelationTypeId" value="@Model.ClassificationRelationTypeId" index="2" filtering="ClassificationRelationTypes" popupHeight="220px">

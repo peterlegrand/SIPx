@@ -5,18 +5,127 @@
         @foreach (var Menu in Model)
         {
         <div class="row">
-            <div class="col-10 leftMenuText">
-                <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft">
-                    @Menu.Name
-                </a>
-            </div>
-            @if (@Menu.Icon.Length != 15)
-                {<div class="col-2">
-                     <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdRight"><img src="@Menu.Icon" width="20" height="20" /></a>
-</div>}
-            
+         
+                @if (Menu.UserMenuTypeIDLeft == 1)
+                {
 
-        </div>
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 2)
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="ProcessTemplates">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 3)
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="ContentTypes">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 4)
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 5)
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontSearch" asp-action="Advanced">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 6)
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 7)
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontRelation" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 8)
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 9)
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox id="OrganizationSearch"></ejs-textbox>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 10)
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox id="PersonSearch"></ejs-textbox>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 11)
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox id="ContentSearch"></ejs-textbox>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 12)
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox id="MyContentSearch"></ejs-textbox>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 13)
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox id="ProcessSearch"></ejs-textbox>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 14)
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox id="MyProcessSearch"></ejs-textbox>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 14)
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox id="ProjectSearch"></ejs-textbox>
+                    </div>
+                }
+                @if (Menu.UserMenuTypeIDLeft == 15)
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox id="MyProjectSearch"></ejs-textbox>
+                    </div>
+                }
+                @if (@Menu.Icon.Length != 15)
+                {<div class="col-2">
+                        <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdRight"><img src="@Menu.Icon" width="20" height="20" /></a>
+                    </div>}
+
+
+            </div>
 
         }
     </div>

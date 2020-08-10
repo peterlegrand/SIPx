@@ -19,13 +19,12 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString" template="#Add" textAlign="Center" type="string"></e-grid-column>
-        @* PETER TODO New *@
+       
     </e-grid-columns>
 </ejs-grid>
 
-@*PETER TODO Change the back to label in next line*@
 
-<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
+<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
 <a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@ViewBag.Id/0">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>

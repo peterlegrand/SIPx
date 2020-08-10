@@ -13,5 +13,5 @@ JOIN UITermLanguages UIName
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = Icons.NameTermID
 WHERE UIName.LanguageId = @LanguageID
-ORDER BY ISNULL(UINameCustom.Customization,UIName.Name) 
+ORDER BY Sequence 
 

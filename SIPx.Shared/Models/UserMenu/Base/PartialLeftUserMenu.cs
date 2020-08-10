@@ -10,7 +10,9 @@ namespace SIPx.Shared
     {
         public string Name { get; set; }
         public string Icon { get; set; }
+        public int UserMenuTypeIDLeft { get; set; }
         public int UserPageIdLeft { get; set; }
+        public int UserMenuTypeIDRight { get; set; }
         public int UserPageIdRight { get; set; }
     }
 }

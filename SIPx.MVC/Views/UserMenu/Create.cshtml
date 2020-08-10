@@ -23,11 +23,10 @@
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @* PETER TODO add uiterm for description menu name mouse over *@
         
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
@@ -35,8 +34,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Left menu")).TermString type
-                @*PETER TODO adjust the uiterm*@
+                @Term.Find(x => x.InternalName.Equals("Left menu type")).TermString type
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="UserMenuTypeIDLeft" dataSource="@Model.UserMenuTypesLeft" ejs-for="@Model.UserMenuTypeIDLeft" value="@Model.UserMenuTypeIDLeft" popupHeight="220px">
@@ -57,8 +55,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Left menu")).TermString type
-                @*PETER TODO adjust the uiterm*@
+                @Term.Find(x => x.InternalName.Equals("UserMenu	Create")).TermString type
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="UserMenuTypeIDRight" dataSource="@Model.UserMenuTypesRight" ejs-for="@Model.UserMenuTypeIDRight" value="@Model.UserMenuTypeIDRight" popupHeight="220px">
@@ -90,7 +87,6 @@
         </div><div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
-                @*PETER TODO Sequence*@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Sequence" dataSource="@Model.UserMenus" ejs-for="@Model.Sequence" value="@Model.Sequence" popupHeight="220px">
