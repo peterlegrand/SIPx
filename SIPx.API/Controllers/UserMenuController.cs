@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserMenuController : ControllerBase
     {
+        private readonly IPeopleProvider _peopleProvider;
         private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -19,8 +20,9 @@ namespace SIPx.API.Controllers
         private readonly IUserMenuProvider _userMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuController(IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuController(IPeopleProvider peopleProvider, IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _peopleProvider = peopleProvider;
             _pageProvider = pageProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -63,6 +65,8 @@ namespace SIPx.API.Controllers
                 var iconslist = await _masterProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.PageListForMenu(CurrentUser.Id);
                 var UserMenuCreateGetSequences = await _userMenuProvider.UserMenuCreateGetSequence(CurrentUser.Id);
+                UserMenuCreateGet.UserMenuTypesLeft = await _peopleProvider.UserMenuTypeLeftList(CurrentUser.Id);
+                UserMenuCreateGet.UserMenuTypesRight = await _peopleProvider.UserMenuTypeRightList(CurrentUser.Id);
                 UserMenuCreateGetSequences.Add(new SequenceList { Sequence = UserMenuCreateGetSequences.Count ,Name = "Add at the end" });
                 UserMenuCreateGet.UserMenus = UserMenuCreateGetSequences;
                 UserMenuCreateGet.Icons = iconslist;

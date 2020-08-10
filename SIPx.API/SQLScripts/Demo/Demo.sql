@@ -309,10 +309,6 @@ INSERT INTO OrganizationAddresses (OrganizationAddressId,OrganizationId,AddressT
 VALUES (1, 1, 1, 'Rama 4','Lumpini','110','a',geography::STGeomFromText('POINT(51.477805 -0.0025417)' , 4326),'Bangkok','12000','',221,'Bangkok','',@User, @User, getdate(),getdate());
 SET IDENTITY_INSERT OrganizationAddresses OFF;
 
-SET IDENTITY_INSERT UserPreferences ON;
-INSERT INTO UserPreferences (UserPreferenceId,PreferenceTypeId,UserId,IntPreference, ModifierId, ModifiedDate) 
-VALUES (1, 1, @user, 41, @User, getdate());
-SET IDENTITY_INSERT UserPreferences OFF;
 
 SET IDENTITY_INSERT OrganizationTelecoms ON;
 INSERT INTO OrganizationTelecoms(OrganizationTelecomId, OrganizationId, TelecomTypeId, TelecomValue, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
@@ -1112,3 +1108,15 @@ VALUES
 SET IDENTITY_INSERT ContentClassificationValues OFF;
 
 UPDATE ContentTypes SET ProcessTemplateId = 2 WHERE ContentTypeId IN (1,2);
+
+SET IDENTITY_INSERT [dbo].[OrganizationSettings] ON 
+INSERT [dbo].[OrganizationSettings] ([OrganizationSettingID], [OrganizationSettingTypeID], [OrganizationID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [LocationValue], [ModifierID], [ModifiedDate]) VALUES (1, 1, 1, 1, NULL, NULL, NULL, NULL, @User, getdate())
+INSERT [dbo].[OrganizationSettings] ([OrganizationSettingID], [OrganizationSettingTypeID], [OrganizationID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [LocationValue], [ModifierID], [ModifiedDate]) VALUES (2, 1, 2, 1, NULL, NULL, NULL, NULL, @User, getdate())
+SET IDENTITY_INSERT [dbo].[OrganizationSettings] OFF
+ 
+SET IDENTITY_INSERT [dbo].[UserPreferences] ON 
+INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (1, 1, @User, 41, NULL, NULL, NULL, NULL, @User, getdate())
+INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (2, 2, @User, 1, NULL, NULL, NULL, NULL, @User, getdate())
+INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (3, 1, @User2, 41, NULL, NULL, NULL, NULL, @User, getdate())
+INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (4, 2, @User2, 1, NULL, NULL, NULL, NULL, @User, getdate())
+SET IDENTITY_INSERT [dbo].[UserPreferences] OFF

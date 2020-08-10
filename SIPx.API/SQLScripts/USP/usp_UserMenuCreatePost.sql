@@ -1,7 +1,10 @@
 CREATE PROCEDURE [dbo].[usp_UserMenuCreatePost] (
 	@Name nvarchar(50)
+	, @MouseOver nvarchar(50)
 	, @UserPageIdLeft int
 	, @UserPageIdRight int
+	, @UserMenuTypeIDLeft int
+	, @UserMenuTypeIDRight int
 	, @Icon nvarchar(20)
 	, @Sequence int
 	, @CreatorId nvarchar(450)) 
@@ -17,8 +20,11 @@ WHERE UserId = @CreatorId
 INSERT INTO UserMenus (
 	UserId
 	, Name
+	, MouseOver
 	, UserPageIdLeft
 	, UserPageIdRight
+	, UserMenuTypeIDLeft
+	, UserMenuTypeIDRight
 	, Icon
 	, Sequence
 	, CreatorID
@@ -28,8 +34,11 @@ INSERT INTO UserMenus (
 VALUES (
 	@CreatorId
 	, @Name
+	, @MouseOver
 	, @UserPageIdLeft
 	, @UserPageIdRight
+	, @UserMenuTypeIDLeft
+	, @UserMenuTypeIDRight
 	, @Icon
 	, @Sequence
 	, @CreatorId

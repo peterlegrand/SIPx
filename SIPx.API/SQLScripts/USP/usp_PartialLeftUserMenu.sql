@@ -2,7 +2,7 @@ CREATE PROCEDURE usp_PartialLeftUserMenu (@UserId nvarchar(450))
 AS
 SELECT 
 	Name
-	, Icon
+	, TRIM(Icon) Icon
 	, UserPageIdLeft
 	, UserPageIdRight
 FROM UserMenus

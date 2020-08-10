@@ -27,6 +27,10 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             var Menus = await _userMenuProvider.PartialLeftUserMenu(CurrentUser.Id);
+            foreach(var menu in Menus)
+            {
+                menu.Icon = "/images/icons/"+menu.Icon;
+            }
             return Ok(Menus);
 
 

@@ -282,4 +282,7 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (276, 'UserMenu', 'Create')
 , (277, 'UserMenu', 'Delete')
 , (278, 'UserMenu', 'Edit')
+, (279, 'UserPreference', 'Index')
+, (280, 'UserPreference', 'Edit')
+
 SET IDENTITY_INSERT MVCUIScreens OFF;

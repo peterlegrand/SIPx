@@ -225,11 +225,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<UserPreferenceIndexGet, dynamic>(usp, new { UserId = UserId, SelectedUserId = SelectedUserId });
 
         }
-        public Task<UserPreferenceUpdateGet> UserPreferenceUpdateGet(string UserId, int UserPreferenceId)
+        public async Task<UserPreferenceUpdateGet> UserPreferenceUpdateGet(string UserId, int UserPreferenceId)
         {
             string usp = "usp_UserPreferenceUpdateGet @UserId, @UserPreferenceID";
-            return _sqlDataAccess.LoadSingleRecord<UserPreferenceUpdateGet, dynamic>(usp, new { UserId = UserId, UserPreferenceId = UserPreferenceId });
-
+            var x = await _sqlDataAccess.LoadSingleRecord<UserPreferenceUpdateGet, dynamic>(usp, new { UserId = UserId, UserPreferenceId = UserPreferenceId });
+            return (x);
         }
         public Task<List<RoleList>> RoleList(string UserId)
         {
@@ -237,6 +237,17 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<RoleList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public Task<List<UserMenuTypeList>> UserMenuTypeRightList(string UserId)
+        {
+            string usp = "usp_UserMenuTypeRightList @UserID";
+            return _sqlDataAccess.LoadData<UserMenuTypeList, dynamic>(usp, new { UserId = UserId });
+        }
+        public Task<List<UserMenuTypeList>> UserMenuTypeLeftList(string UserId)
+        {
+            string usp = "usp_UserMenuTypeLeftList @UserID";
+            return _sqlDataAccess.LoadData<UserMenuTypeList, dynamic>(usp, new { UserId = UserId });
+        }
+
         public Task<List<PersonList>> PersonList(string UserId)
         {
             string usp = "usp_PersonList @UserID";

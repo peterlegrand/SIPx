@@ -21,7 +21,7 @@ namespace SIPx.DataAccess
         Task<List<IntermediateRegion>> IntermediateRegionIndexGet(string UserId);
         Task<List<Language>> LanguageIndexGet(string UserId);
         Task<List<LanguageList>> LanguageList(string UserId);
-        Task<List<Language>> LanguagesActiveGet(string UserId);
+        Task<List<LanguageList>> LanguagesActiveList(string UserId);
         bool PostObjectLanguage(ObjectLanguageCreatePost ObjectLanguage);
         Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int Id);
         Task<List<SecurityLevelList>> SecurityLevelList(string UserId);

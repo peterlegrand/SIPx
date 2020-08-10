@@ -55,5 +55,7 @@ namespace SIPx.DataAccess
         Task<UserPreferenceUpdateGet> UserPreferenceUpdateGet(string UserId, int UserPreferenceId);
         Task<List<UserRoleIndexGet>> UserRoleIndexGet(string UserId, string UserRoleUserId);
         Task<UserUpdateGet> UserUpdateGet(string UserId, string SelectedUserId);
+        Task<List<UserMenuTypeList>> UserMenuTypeRightList(string UserId);
+        Task<List<UserMenuTypeList>> UserMenuTypeLeftList(string UserId);
     }
 }

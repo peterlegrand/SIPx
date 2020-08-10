@@ -111,7 +111,7 @@ namespace SIPx.DataAccess
 
         public bool UserMenuCreatePost(UserMenuCreateGet UserMenu)
         {
-            string usp = "usp_UserMenuCreatePost @Name, @UserPageIdLeft, @UserPageIdRight, @Icon, @Sequence,@CreatorID";
+            string usp = "usp_UserMenuCreatePost @Name,  @MouseOver , @UserPageIdLeft, @UserPageIdRight , @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @Icon, @Sequence,@CreatorID";
             _sqlDataAccess.SaveData<UserMenuCreateGet>(usp, UserMenu);
             return true;
         }

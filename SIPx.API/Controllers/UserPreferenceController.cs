@@ -19,23 +19,27 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserPreferenceController : ControllerBase
     {
+        private readonly IMasterProvider _masterProvider;
+        private readonly IPageProvider _pageProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserPreferenceController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserPreferenceController(IMasterProvider masterProvider, IPageProvider pageProvider,  IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterProvider = masterProvider;
+            _pageProvider = pageProvider;
             _claimCheck = claimCheck;
             _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
-        [HttpGet("Index/{Id}")]
-        public async Task<IActionResult> GetUserPreferences(string Id)
+        [HttpGet("Index")]
+        public async Task<IActionResult> GetUserPreferences()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.UserPreferenceIndexGet(CurrentUser.Id, Id));
+                return Ok(await _peopleProvider.UserPreferenceIndexGet(CurrentUser.Id, CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -51,7 +55,17 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.UserPreferenceUpdateGet(CurrentUser.Id, Id));
+                var x = await _peopleProvider.UserPreferenceUpdateGet(CurrentUser.Id, Id);
+             
+                switch(x.PreferenceTypeId )
+                { case 1:
+                        x.Languages = await _masterProvider.LanguagesActiveList(CurrentUser.Id);
+                        break;
+                    case 2:
+                        x.Pages = await _pageProvider.PageListForMenuTemplate(CurrentUser.Id);
+                        break;
+                }
+                return Ok(x);
             }
             return BadRequest(new
             {

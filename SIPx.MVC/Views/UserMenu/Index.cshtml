@@ -11,7 +11,11 @@
     <e-grid-columns>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" Template="#Id" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" Template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Left menu")).TermString" Template="#LeftMenuType" textAlign="Center" type="string"></e-grid-column>
+        @* PETER TODO Add term Left menu type above *@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Left menu")).TermString" Template="#LeftMenu" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Right menu")).TermString" Template="#RightMenuType" textAlign="Center" type="string"></e-grid-column>
+        @* PETER TODO Add term right menu type above *@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Right menu")).TermString" Template="#RightMenu" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" Template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" Template="#Delete" textAlign="Center" type="string"></e-grid-column>
@@ -28,14 +32,24 @@
         ${Name}
     </div>
 </script>
+<script id="LeftMenuType" type="text/x-">
+    <div>
+        ${LeftMenuTypeName}
+    </div>
+</script>
 <script id="LeftMenu" type="text/x-">
     <div>
-        ${LeftMenuName}
+        ${LeftPageName}
+    </div>
+</script>
+<script id="RightMenuType" type="text/x-">
+    <div>
+        ${RightMenuTypeName}
     </div>
 </script>
 <script id="RightMenu" type="text/x-">
     <div>
-        ${RightMenuName}
+        ${RightPageName}
     </div>
 </script>
 <script id="Edit" type="text/x-">

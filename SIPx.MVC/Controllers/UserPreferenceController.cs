@@ -12,12 +12,11 @@ namespace SIPx.MVC.Controllers
     public class UserPreferenceController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-
-        ServiceClient client = new ServiceClient();
-        public async Task<IActionResult> Index(string id)
+        readonly ServiceClient client = new ServiceClient();
+        public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<UserPreferenceUpdateGet>>($"{_baseUrl}api/UserPreference/Index/" + id,token);
+            var response = await client.GetProtectedAsync<List<UserPreferenceIndexGet>>($"{_baseUrl}api/UserPreference/Index/" ,token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPreference/Index", token);
             ViewBag.UITerms = x;
             return View(response);

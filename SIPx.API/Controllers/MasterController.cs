@@ -177,7 +177,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.LanguagesActiveGet(CurrentUser.Id));
+                return Ok(await _masterProvider.LanguagesActiveList(CurrentUser.Id));
             }
             return BadRequest(new
             {
