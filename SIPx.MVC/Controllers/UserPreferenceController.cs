@@ -31,5 +31,13 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserPreferenceUpdateGet UserPreference)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await client.PostProtectedAsync<UserPreferenceUpdateGet>($"{_baseUrl}api/UserPreference/Update", UserPreference, token);
+
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -153,8 +153,9 @@ namespace SIPx.API.Controllers
                 }
                 var x = await _classificationProvider.ClassificationUpdateGet(CurrentUser.Id, Id);
                 var y = await _classificationProvider.ClassificationPageListGet(CurrentUser.Id, Id);
+                var u = await _classificationProvider.ClassificationCreateGetSequence(CurrentUser.Id);
                 var z = await _masterProvider.StatusList(CurrentUser.Id);
-
+                x.DropDownSequences = u;
                 x.DefaultPages = y;
                 x.Statuses = z;
                 return Ok(x);
@@ -167,16 +168,16 @@ namespace SIPx.API.Controllers
 
         }
 
-        [HttpPut("Update")]
-        public async Task<IActionResult> Put(ClassificationUpdatePut Classification)
+        [HttpPost("Update")]
+        public async Task<IActionResult> UpdatePost(ClassificationUpdatePost Classification)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                var CheckString = await _classificationProvider.ClassificationCheckPut(Classification);
+                var CheckString = await _classificationProvider.ClassificationUpdatePostCheck(Classification);
                 if (CheckString.Length==0)
                 { 
-                 _classificationProvider.PutClassification(Classification);
+                 _classificationProvider.ClassificationUpdatePost(Classification);
                 return Ok(Classification);
                 }
                 return BadRequest(new

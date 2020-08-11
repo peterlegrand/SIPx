@@ -11,7 +11,7 @@ SELECT UserPreferences.UserPreferenceID
 	, UserPreferences.IntPreference
 	, UserPreferences.DateTimePreference
 	, UserPreferences.GuidPreference
-	, UserPreferences.LocationPreference
+	, '' LocationPreference
 	, ISNULL(UITypeNameCustom.Customization,UITypeName.Name) TypeName
 FROM UserPreferences 
 JOIN PreferenceTypes

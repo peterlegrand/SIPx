@@ -55,7 +55,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("UserMenu	Create")).TermString type
+                @Term.Find(x => x.InternalName.Equals("Right menu type")).TermString type
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="UserMenuTypeIDRight" dataSource="@Model.UserMenuTypesRight" ejs-for="@Model.UserMenuTypeIDRight" value="@Model.UserMenuTypeIDRight" popupHeight="220px">

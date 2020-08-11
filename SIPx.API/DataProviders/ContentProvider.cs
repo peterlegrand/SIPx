@@ -93,10 +93,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationCreatePost>(usp, Classification);
             return true;
         }
-        public bool PutClassification(ClassificationUpdatePut Classification)
+        public bool ClassificationUpdatePost(ClassificationUpdatePost Classification)
         {
             string usp = "usp_AdminClassificationUpdate @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @ModifierId , @ClassificationId , @Name , @Description , @MenuName , @MouseOver , @LanguageID";
-            _sqlDataAccess.SaveData<ClassificationUpdatePut>(usp, Classification);
+            _sqlDataAccess.SaveData<ClassificationUpdatePost>(usp, Classification);
             return true;
         }
     }

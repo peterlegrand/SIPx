@@ -12,14 +12,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationValueController : ControllerBase
     {
+        private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueController(IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationValueProvider = classificationValueProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -42,7 +44,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationValueIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueProvider.ClassificationValueIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -64,7 +66,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _classificationProvider.ClassificationValueUpdateGet(CurrentUser.Id, Id);
+                var x = await _classificationValueProvider.ClassificationValueUpdateGet(CurrentUser.Id, Id);
                 var z = await _masterProvider.StatusList(CurrentUser.Id);
 
                 return Ok(x);
@@ -104,10 +106,10 @@ namespace SIPx.API.Controllers
             ClassificationValue.CreatorId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.ClassificationValueCreatePostCheck(ClassificationValue);
+                var CheckString = await _classificationValueProvider.ClassificationValueCreatePostCheck(ClassificationValue);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.ClassificationValueCreatePost(ClassificationValue);
+                    _classificationValueProvider.ClassificationValueCreatePost(ClassificationValue);
                     return Ok(ClassificationValue);
                 }
                 return BadRequest(new
@@ -139,7 +141,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationProvider.ClassificationValueLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueProvider.ClassificationValueLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -162,7 +164,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationValueLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueProvider.ClassificationValueLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

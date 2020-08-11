@@ -1377,8 +1377,9 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1375, 'User preference type'
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1376, 'Value');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1377, 'User preference');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1378, 'No icon');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1378, 'Dropdown name');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1378, 'Left menu type');
-INSERT INTO UITerms (UITermId, InternalName) VALUES(1378, 'Right menu type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1379, 'Dropdown name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1380, 'Left menu type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1381, 'Right menu type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1382, 'Edit user menu');
 
 SET IDENTITY_INSERT UITerms OFF;

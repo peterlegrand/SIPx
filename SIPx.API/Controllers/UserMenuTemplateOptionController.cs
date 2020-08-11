@@ -12,6 +12,8 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserMenuTemplateOptionController : ControllerBase
     {
+        private readonly IUserMenuTemplateOptionProvider _userMenuTemplateOptionProvider;
+        private readonly IPeopleProvider _peopleProvider;
         private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -19,8 +21,10 @@ namespace SIPx.API.Controllers
         private readonly IUserMenuProvider _userMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuTemplateOptionController(IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuTemplateOptionController(IUserMenuTemplateOptionProvider userMenuTemplateOptionProvider, IPeopleProvider peopleProvider, IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _userMenuTemplateOptionProvider = userMenuTemplateOptionProvider;
+            _peopleProvider = peopleProvider;
             _pageProvider = pageProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -45,7 +49,7 @@ namespace SIPx.API.Controllers
                 //}
 
 
-                return Ok(await _userMenuProvider.UserMenuTemplateOptionIndexGet(CurrentUser.Id, Id));
+                return Ok(await _userMenuTemplateOptionProvider.UserMenuTemplateOptionIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -62,7 +66,9 @@ namespace SIPx.API.Controllers
                 var UserMenuTemplateOptionCreateGet = new UserMenuTemplateOptionCreateGet();
                 var iconslist = await _masterProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.PageListForMenuTemplate(CurrentUser.Id);
-                var UserMenuTemplateOptionCreateGetSequences = await _userMenuProvider.UserMenuTemplateOptionCreateGetSequence(CurrentUser.Id, Id);
+                var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.UserMenuTemplateOptionCreateGetSequence(CurrentUser.Id, Id);
+                UserMenuTemplateOptionCreateGet.UserMenuTypesLeft = await _peopleProvider.UserMenuTypeLeftList(CurrentUser.Id);
+                UserMenuTemplateOptionCreateGet.UserMenuTypesRight = await _peopleProvider.UserMenuTypeRightList(CurrentUser.Id);
                 UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count ,Name = "Add at the end" });
                 UserMenuTemplateOptionCreateGet.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
                 UserMenuTemplateOptionCreateGet.Icons = iconslist;
@@ -83,10 +89,10 @@ namespace SIPx.API.Controllers
             UserMenuTemplateOption.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userMenuProvider.UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOption);
+                var CheckString = await _userMenuTemplateOptionProvider.UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOption);
                 if (CheckString.Length == 0)
                 {
-                    _userMenuProvider.UserMenuTemplateOptionCreatePost(UserMenuTemplateOption);
+                    _userMenuTemplateOptionProvider.UserMenuTemplateOptionCreatePost(UserMenuTemplateOption);
                     return Ok(UserMenuTemplateOption);
                 }
                 return BadRequest(new
@@ -118,7 +124,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _userMenuProvider.UserMenuTemplateOptionLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _userMenuTemplateOptionProvider.UserMenuTemplateOptionLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -140,7 +146,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                return Ok(await _userMenuProvider.UserMenuTemplateOptionUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _userMenuTemplateOptionProvider.UserMenuTemplateOptionUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -163,7 +169,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _userMenuProvider.UserMenuTemplateOptionLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _userMenuTemplateOptionProvider.UserMenuTemplateOptionLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

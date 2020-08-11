@@ -219,18 +219,6 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<SecurityLevelUpdateGet, dynamic>(usp, new { UserId = UserId, SecurityLevelId = SecurityLevelId });
 
         }
-        public Task<List<UserPreferenceIndexGet>> UserPreferenceIndexGet(string UserId, string SelectedUserId)
-        {
-            string usp = "usp_UserPreferenceIndexGet @UserId, @SelectedUserID";
-            return _sqlDataAccess.LoadData<UserPreferenceIndexGet, dynamic>(usp, new { UserId = UserId, SelectedUserId = SelectedUserId });
-
-        }
-        public async Task<UserPreferenceUpdateGet> UserPreferenceUpdateGet(string UserId, int UserPreferenceId)
-        {
-            string usp = "usp_UserPreferenceUpdateGet @UserId, @UserPreferenceID";
-            var x = await _sqlDataAccess.LoadSingleRecord<UserPreferenceUpdateGet, dynamic>(usp, new { UserId = UserId, UserPreferenceId = UserPreferenceId });
-            return (x);
-        }
         public Task<List<RoleList>> RoleList(string UserId)
         {
             string usp = "usp_RoleList @UserID";
@@ -279,6 +267,8 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);
             return CheckString;
         }
+
+
         public async Task<string> RoleGroupCreatePostCheck(RoleGroupCreatePost RoleGroup)
         {
             string usp = "usp_RoleGroupCreateCheck @Sequence, @LanguageId  , @Name, @CreatorId ";

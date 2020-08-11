@@ -106,6 +106,8 @@ namespace SIPx.API.Controllers
             });
         }
 
+
+
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> GetLevel(int Id)
         {
@@ -120,6 +122,19 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
+                var UserMenu = await _userMenuProvider.UserMenuUpdateGet(Id);
+                var iconslist = await _masterProvider.IconList(CurrentUser.Id);
+                var Pages = await _pageProvider.PageListForMenu(CurrentUser.Id);
+                var UserMenuSequences = await _userMenuProvider.UserMenuCreateGetSequence(CurrentUser.Id);
+                UserMenu.UserMenuTypesLeft = await _peopleProvider.UserMenuTypeLeftList(CurrentUser.Id);
+                UserMenu.UserMenuTypesRight = await _peopleProvider.UserMenuTypeRightList(CurrentUser.Id);
+                UserMenuSequences.Add(new SequenceList { Sequence = UserMenuSequences.Count, Name = "Add at the end" });
+                UserMenu.UserMenus = UserMenuSequences;
+                UserMenu.Icons = iconslist;
+                UserMenu.Pages = Pages;
+                UserMenu.CreatorId = CurrentUser.Id;
+                return Ok(UserMenu);
+
                 //return Ok(await _userMenuProvider.UserMenuUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new

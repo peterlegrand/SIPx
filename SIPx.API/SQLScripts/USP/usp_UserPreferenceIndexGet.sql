@@ -8,11 +8,13 @@ WHERE USerId = @UserID
 
 SELECT UserPreferences.UserPreferenceID 
 	, ISNULL(CustomPreferenceTypeLanguage.Customization ,PreferenceTypeLanguage.Name)UserPreferenceTypeName
+--Default language
 	, CASE WHEN UserPreferenceTypes.UserPreferenceTypeID = 1
 	THEN
 		DefaultLanguage.Name
+--Homepage page
 	WHEN UserPreferenceTypes.UserPreferenceTypeID = 2
-	THEN Pages.Name END AS UserPreferenceName
+	THEN ISNULL(Pages.Name,'No name') END AS UserPreferenceName
 FROM UserPreferences
 LEFT JOIN   (
 	SELECT Languages.LanguageID 	

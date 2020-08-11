@@ -72,7 +72,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Post(ClassificationRelationTypeCreatePost ClassificationRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ClassificationRelationType.CreatorId = CurrentUser.Id;
+            ClassificationRelationType.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _classificationProvider.ClassificationRelationTypeCreatePostCheck(ClassificationRelationType);

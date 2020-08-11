@@ -26,7 +26,7 @@ namespace SIPx.Shared
 
         public List<StatusList> Statuses { get; set; }
         public List<ClassificationPageList> DefaultPages { get; set; }
-        public List<int> Sequences { get; set; }
+        public List<ClassificationCreateGetSequence> DropDownSequences { get; set; }
 
     }
 }

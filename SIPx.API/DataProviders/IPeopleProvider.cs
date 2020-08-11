@@ -51,11 +51,9 @@ namespace SIPx.DataAccess
         Task<SecurityLevelUpdateGet> SecurityLevelUpdateGet(string UserId, int SecurityLevelId);
         Task<List<UserIndexGet>> UserIndexGet(string UserId);
         Task<List<UserList>> UserList();
-        Task<List<UserPreferenceIndexGet>> UserPreferenceIndexGet(string UserId, string SelectedUserId);
-        Task<UserPreferenceUpdateGet> UserPreferenceUpdateGet(string UserId, int UserPreferenceId);
+        Task<List<UserMenuTypeList>> UserMenuTypeLeftList(string UserId);
+        Task<List<UserMenuTypeList>> UserMenuTypeRightList(string UserId);
         Task<List<UserRoleIndexGet>> UserRoleIndexGet(string UserId, string UserRoleUserId);
         Task<UserUpdateGet> UserUpdateGet(string UserId, string SelectedUserId);
-        Task<List<UserMenuTypeList>> UserMenuTypeRightList(string UserId);
-        Task<List<UserMenuTypeList>> UserMenuTypeLeftList(string UserId);
     }
 }

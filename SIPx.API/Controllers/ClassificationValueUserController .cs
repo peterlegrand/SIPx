@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationValueUserController : ControllerBase
     {
+        private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IPeopleProvider _peopleProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -19,8 +20,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueUserController( IPeopleProvider peopleProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueUserController( IClassificationValueProvider classificationValueProvider, IPeopleProvider peopleProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationValueProvider = classificationValueProvider;
             _peopleProvider = peopleProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -45,7 +47,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationValueUserIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueProvider.ClassificationValueUserIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -109,10 +111,10 @@ namespace SIPx.API.Controllers
             ClassificationValueUser.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.ClassificationValueUserCreatePostCheck(ClassificationValueUser);
+                var CheckString = await _classificationValueProvider.ClassificationValueUserCreatePostCheck(ClassificationValueUser);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.ClassificationValueUserCreatePost(ClassificationValueUser);
+                    _classificationValueProvider.ClassificationValueUserCreatePost(ClassificationValueUser);
                     return Ok(ClassificationValueUser);
                 }
                 return BadRequest(new

@@ -24,88 +24,16 @@ namespace SIPx.DataAccess
             List<UserMenuIndexGet> x = await _sqlDataAccess.LoadData<UserMenuIndexGet, dynamic>(usp, new { UserId });
             return x;
         }
-        public async Task<List<UserMenuTemplateIndexGet>> UserMenuTemplateIndexGet(string UserId)
+        public Task<UserMenuUpdateGet> UserMenuUpdateGet(int UserMenuID)
         {
-            string usp = "usp_UserMenuTemplateIndexGet @UserID";
-            List<UserMenuTemplateIndexGet> x = await _sqlDataAccess.LoadData<UserMenuTemplateIndexGet, dynamic>(usp, new { UserId });
-            return x;
-        }
-        public Task<UserMenuTemplateUpdateGet> UserMenuTemplateUpdateGet(string UserId, int UserMenuTemplateID)
-        {
-            string usp = "usp_UserMenuTemplateUpdateGet @UserId, @UserMenuTemplateID";
-            return _sqlDataAccess.LoadSingleRecord<UserMenuTemplateUpdateGet, dynamic>(usp, new { UserId, UserMenuTemplateID });
+            string usp = "usp_UserMenuUpdateGet  @UserMenuID";
+            return _sqlDataAccess.LoadSingleRecord<UserMenuUpdateGet, dynamic>(usp, new { UserMenuID });
 
-        }
-        public bool UserMenuTemplateUpdatePut(UserMenuTemplateUpdateGet UserMenuTemplate)
-        {
-            string usp = "usp_UserMenuTemplateUpdatePut @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @ModifierId ";
-            _sqlDataAccess.SaveData<UserMenuTemplateUpdateGet>(usp, UserMenuTemplate);
-            return true;
-        }
-        public bool UserMenuTemplateCreatePost(UserMenuTemplateCreatePost UserMenuTemplate)
-        {
-            string usp = "usp_UserMenuTemplateCreatePost @Name, @Description, @MenuName, @MouseOver, @CreatorID";
-            _sqlDataAccess.SaveData<UserMenuTemplateCreatePost>(usp, UserMenuTemplate);
-            return true;
-        }
-        public async Task<string> UserMenuTemplateCreatePostCheck(UserMenuTemplateCreatePost UserMenuTemplate)
-        {
-            string usp = "usp_UserMenuTemplateCreatePostCheck @Name, @Description, @MenuName, @MouseOver, @CreatorID";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplate);
-            return CheckString;
-        }
-        public async Task<List<UserMenuTemplateLanguageIndexGet>> UserMenuTemplateLanguageIndexGet(string UserId, int UserMenuTemplateId)
-        {
-            string usp = "usp_UserMenuTemplateLanguageIndexGet @UserId, @UserMenuTemplateID";
-            var x = await _sqlDataAccess.LoadData<UserMenuTemplateLanguageIndexGet, dynamic>(usp, new { UserId, UserMenuTemplateId });
-            return x;
-        }
-        public Task<UserMenuTemplateLanguageIndexGet> UserMenuTemplateLanguageUpdateGet(string UserId, int UserMenuTemplateLanguageId)
-        {
-            string usp = "usp_UserMenuTemplateLanguageUpdateGet @UserId, @UserMenuTemplateLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<UserMenuTemplateLanguageIndexGet, dynamic>(usp, new { UserId, UserMenuTemplateLanguageId });
-
-        }
-
-        public async Task<List<UserMenuTemplateOptionIndexGet>> UserMenuTemplateOptionIndexGet(string UserId, int UserMenuTemplateId)
-        {
-            string usp = "usp_UserMenuTemplateOptionIndexGet @UserId, @UserMenuTemplateID";
-            var x = await _sqlDataAccess.LoadData<UserMenuTemplateOptionIndexGet, dynamic>(usp, new { UserId, UserMenuTemplateId });
-            return x;
-        }
-        public Task<UserMenuTemplateOptionUpdateGet> UserMenuTemplateOptionUpdateGet(string UserId, int UserMenuTemplateOptionId)
-        {
-            string usp = "usp_UserMenuTemplateOptionUpdateGet @UserId, @UserMenuTemplateOptionID";
-            return _sqlDataAccess.LoadSingleRecord<UserMenuTemplateOptionUpdateGet, dynamic>(usp, new { UserId, UserMenuTemplateOptionId });
-
-        }
-        public async Task<List<UserMenuTemplateOptionLanguageIndexGet>> UserMenuTemplateOptionLanguageIndexGet(string UserId, int UserMenuTemplateOptionId)
-        {
-            string usp = "usp_UserMenuTemplateOptionLanguageIndex @UserId, @UserMenuTemplateOptionID";
-            var x = await _sqlDataAccess.LoadData<UserMenuTemplateOptionLanguageIndexGet, dynamic>(usp, new { UserId, UserMenuTemplateOptionId });
-            return x;
-        }
-        public Task<UserMenuTemplateOptionLanguageIndexGet> UserMenuTemplateOptionLanguageUpdateGet(string UserId, int UserMenuTemplateOptionLanguageId)
-        {
-            string usp = "usp_UserMenuTemplateOptionLanguageUpdateGet @UserId, @UserMenuTemplateOptionLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<UserMenuTemplateOptionLanguageIndexGet, dynamic>(usp, new { UserId, UserMenuTemplateOptionLanguageId });
-
-        }
-        public bool UserMenuTemplateOptionCreatePost(UserMenuTemplateOptionCreatePost UserMenuTemplateOption)
-        {
-            string usp = "usp_UserMenuTemplateOptionCreatePost @UserMenuTemplateId, @Sequence, @UserPageLeftId, @UserPageRightId, @Icon,@Name, @Description, @MenuName, @MouseOver, @CreatorID";
-            _sqlDataAccess.SaveData<UserMenuTemplateOptionCreatePost>(usp, UserMenuTemplateOption);
-            return true;
-        }
-        public Task<List<SequenceList>> UserMenuTemplateOptionCreateGetSequence(string UserId, int UserMenuTemplateId)
-        {
-            string usp = "[usp_UserMenuTemplateOptionCreateGetSequence] @UserID, @UserMenuTemplateId";
-            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, UserMenuTemplateId });
         }
         public Task<List<SequenceList>> UserMenuCreateGetSequence(string UserId)
         {
             string usp = "[usp_UserMenuCreateGetSequence] @UserID";
-            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId});
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
         }
 
 
@@ -114,31 +42,6 @@ namespace SIPx.DataAccess
             string usp = "usp_UserMenuCreatePost @Name,  @MouseOver , @UserPageIdLeft, @UserPageIdRight , @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @Icon, @Sequence,@CreatorID";
             _sqlDataAccess.SaveData<UserMenuCreateGet>(usp, UserMenu);
             return true;
-        }
-        //public async Task<string> UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOptionCreatePost UserMenuTemplateOption)
-        //{
-        //    string usp = "usp_UserMenuTemplateOptionCreatePostCheck @UserMenuTemplateId, @Sequence, @UserPageLeftId, @UserPageRightId, @Icon,@Name, @Description, @MenuName, @MouseOver, @CreatorID";
-        //    var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplateOption);
-        //    return CheckString;
-        //}
-
-        public bool UserMenuTemplateOptionCreatePost(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
-        {
-            string usp = "usp_UserMenuTemplateOptionCreatePost @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @UserPageIdLeft , @UserPageIdRight , @Icon , @Sequence , @CreatorId ";
-            _sqlDataAccess.SaveData<UserMenuTemplateOptionCreateGet>(usp, UserMenuTemplateOption);
-            return true;
-        }
-        public async Task<string> UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
-        {
-            string usp = "usp_UserMenuTemplateOptionCreatePostCheck @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @UserPageIdLeft , @UserPageIdRight , @Icon , @Sequence , @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplateOption);
-            return CheckString;
-        }
-
-        public Task<List<PartialLeftUserMenu>> PartialLeftUserMenu(string UserId)
-        {
-            string usp = "[usp_PartialLeftUserMenu] @UserID";
-            return _sqlDataAccess.LoadData<PartialLeftUserMenu, dynamic>(usp, new { UserId });
         }
 
     }

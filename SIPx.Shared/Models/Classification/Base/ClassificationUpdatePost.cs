@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationUpdatePut : IClassificationUpdatePut
+    public class ClassificationUpdatePost 
     {
         [Key]
         public int ClassificationLanguageId { get; set; }
@@ -17,6 +17,6 @@ namespace SIPx.Shared
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string ModifierId { get; set; }
+        public string UserId { get; set; }
     }
 }

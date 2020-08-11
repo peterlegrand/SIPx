@@ -6,7 +6,6 @@ namespace SIPx.DataAccess
 {
     public interface IClassificationProvider
     {
-        Task<string> ClassificationCheckPut(ClassificationUpdatePut Classification);
         Task<List<ClassificationCreateGetSequence>> ClassificationCreateGetSequence(string UserId);
         bool ClassificationCreatePost(ClassificationCreatePost Classification);
         Task<string> ClassificationCreatePostCheck(ClassificationCreatePost Classification);
@@ -14,13 +13,6 @@ namespace SIPx.DataAccess
         Task<List<ClassificationLanguageIndexGet>> ClassificationLanguageIndexGet(string UserId, int ClassificationId);
         Task<ClassificationLanguageIndexGet> ClassificationLanguageUpdateGet(string UserId, int ClassificationLanguageId);
         Task<List<LanguageList>> ClassificationLangugageCreateGetLanguageList(string UserId, int ClassificationId);
-        Task<List<SequenceList>> ClassificationLevelCreateGetSequence(string UserId, int ClassificationId);
-        bool ClassificationLevelCreatePost(ClassificationLevelCreatePost ClassificationLevel);
-        Task<string> ClassificationLevelCreatePostCheck(ClassificationLevelCreatePost ClassificationLevel);
-        Task<List<ClassificationLevelIndexGet>> ClassificationLevelIndexGet(string UserId, int ClassificationId);
-        Task<List<ClassificationLevelLanguageIndexGet>> ClassificationLevelLanguageIndexGet(string UserId, int ClassificationLevelId);
-        Task<ClassificationLevelLanguageIndexGet> ClassificationLevelLanguageUpdateGet(string UserId, int ClassificationLevelLanguageId);
-        Task<ClassificationLevelUpdateGet> ClassificationLevelUpdateGet(string UserId, int ClassificationLevelId);
         bool ClassificationPageCreatePost(ClassificationPageCreatePost ClassificationPage);
         Task<string> ClassificationPageCreatePostCheck(ClassificationPageCreatePost ClassificationPage);
         Task<List<ClassificationPageIndexGet>> ClassificationPageIndexGet(string UserId, int ClassificationId);
@@ -48,25 +40,12 @@ namespace SIPx.DataAccess
         Task<List<ClassificationRoleIndexGet>> ClassificationRoleIndexGet(string UserId, int ClassificationId);
         Task<ClassificationRoleUpdateGet> ClassificationRoleUpdateGet(string UserId, int ClassificationRoleId);
         Task<ClassificationUpdateGet> ClassificationUpdateGet(string UserId, int ClassificationId);
+        bool ClassificationUpdatePost(ClassificationUpdatePost Classification);
+        Task<string> ClassificationUpdatePostCheck(ClassificationUpdatePost Classification);
         Task<string> ClassificationUserCreatePost(ClassificationUserCreatePost ClassificationUser);
         Task<string> ClassificationUserCreatePostCheck(ClassificationUserCreatePost ClassificationUser);
         Task<List<ClassificationUserIndexGet>> ClassificationUserIndexGet(string UserId, int ClassificationId);
         Task<ClassificationUserUpdateGet> ClassificationUserUpdateGet(string UserId, int ClassificationUserId);
-        Task<string> ClassificationValueCreatePost(ClassificationValueCreatePost ClassificationValue);
-        Task<string> ClassificationValueCreatePostCheck(ClassificationValueCreatePost ClassificationValue);
-        Task<List<ClassificationValueUpdateGet>> ClassificationValueIndexGet(string UserId, int ClassificationId);
-        Task<List<ClassificationValueLanguageIndexGet>> ClassificationValueLanguageIndexGet(string UserId, int ClassificationValueId);
-        Task<ClassificationValueLanguageIndexGet> ClassificationValueLanguageUpdateGet(string UserId, int ClassificationValueLanguageId);
-        Task<string> ClassificationValueRoleCreatePost(ClassificationValueRoleCreatePost ClassificationValueRole);
-        Task<string> ClassificationValueRoleCreatePostCheck(ClassificationValueRoleCreatePost ClassificationValueRole);
-        Task<List<ClassificationValueRoleUpdateGet>> ClassificationValueRoleIndexGet(string UserId, int ClassificationId);
-        Task<ClassificationValueRoleUpdateGet> ClassificationValueRoleUpdateGet(string UserId, int ClassificationValueRoleId);
-        Task<ClassificationValueUpdateGet> ClassificationValueUpdateGet(string UserId, int ClassificationValueId);
-        Task<string> ClassificationValueUserCreatePost(ClassificationValueUserCreatePost ClassificationValueUser);
-        Task<string> ClassificationValueUserCreatePostCheck(ClassificationValueUserCreatePost ClassificationValueUser);
-        Task<List<ClassificationValueUserUpdateGet>> ClassificationValueUserIndexGet(string UserId, int ClassificationId);
-        Task<ClassificationValueUserUpdateGet> ClassificationValueUserUpdateGet(string UserId, int ClassificationValueUserId);
         Task<ClassificationPageLanguageIndexGet> GetClassificationPageLanguageUpdateGet(string UserId, int ClassificationPageLanguageId);
-        bool PutClassification(ClassificationUpdatePut Classification);
     }
 }

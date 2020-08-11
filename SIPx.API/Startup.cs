@@ -73,11 +73,16 @@ namespace SIPx.API
                 services.AddScoped<IUserService, UserService>();
             services.AddControllers();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<IClassificationProvider, ClassificationProvider>();
+            services.AddTransient<IClassificationLevelProvider, ClassificationLevelProvider>();
+            services.AddTransient<IClassificationValueProvider, ClassificationValueProvider>();
             services.AddTransient<IPeopleProvider, PeopleProvider>();
             services.AddTransient<IProjectProvider, ProjectProvider>();
             services.AddTransient<IFrontProvider, FrontProvider>();
             services.AddTransient<IFrontProcessProvider, FrontProcessProvider>();
             services.AddTransient<IUserMenuProvider, UserMenuProvider>();
+            services.AddTransient<IUserMenuTemplateProvider, UserMenuTemplateProvider>();
+            services.AddTransient<IUserMenuTemplateOptionProvider, UserMenuTemplateOptionProvider>();
             services.AddTransient<IPageProvider, PageProvider>();
             services.AddTransient<IProcessProvider, ProcessProvider>();
             services.AddTransient<IProcessTemplateProvider, ProcessTemplateProvider>();
@@ -87,7 +92,8 @@ namespace SIPx.API
             services.AddTransient<IContentMasterProvider, ContentMasterProvider>();
             services.AddTransient<IMasterProvider, MasterProvider>();
             services.AddTransient<ICheckProvider, CheckProvider>();
-            services.AddTransient<IClassificationProvider, ClassificationProvider>();
+            services.AddTransient<ILanguageProvider, LanguageProvider>();
+            services.AddTransient<IUserPreferenceProvider, UserPreferenceProvider>();
             services.AddTransient<SIPx.API.DataProviders.IUITermLanguageCustomizationProvider, UITermLanguageCustomizationProvider>();
             services.AddSwaggerGen(x =>
             {

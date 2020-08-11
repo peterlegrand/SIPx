@@ -59,8 +59,18 @@
         </div>
         <div class="row">
             <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Left menu type")).TermString type
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="UserMenuTypeIDLeft" dataSource="@Model.UserMenuTypesLeft" ejs-for="@Model.UserMenuTypeIDLeft" value="@Model.UserMenuTypeIDLeft" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="UserMenuTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Left menu")).TermString
-    
+
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="UserPageIdLeft" dataSource="@Model.Pages" ejs-for="@Model.UserPageIdLeft" value="@Model.UserPageIdLeft" popupHeight="220px">
@@ -70,8 +80,18 @@
         </div>
         <div class="row">
             <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Right menu type")).TermString type
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="UserMenuTypeIDRight" dataSource="@Model.UserMenuTypesRight" ejs-for="@Model.UserMenuTypeIDRight" value="@Model.UserMenuTypeIDRight" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="UserMenuTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Right menu")).TermString
-   
+
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="UserPageIdRight" dataSource="@Model.Pages" ejs-for="@Model.UserPageIdRight" value="@Model.UserPageIdRight" popupHeight="220px">
@@ -82,7 +102,7 @@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Icon")).TermString
-       
+
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Icon" dataSource="@Model.Icons" ejs-for="@Model.Icon" value="@Model.Icon" popupHeight="220px">

@@ -14,10 +14,10 @@ namespace SIPx.API.Controllers
     {
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IUserMenuProvider _UserMenuTemplateProvider;
+        private readonly IUserMenuTemplateProvider _UserMenuTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuTemplateController( ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider UserMenuTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuTemplateController( ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuTemplateProvider UserMenuTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -79,6 +79,35 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(UserMenuTemplateUpdateGet UserMenuTemplate)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            UserMenuTemplate.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var CheckString = await _UserMenuTemplateProvider.UserMenuTemplateUpdatePostCheck(UserMenuTemplate);
+                if (CheckString.Length == 0)
+                {
+                    _UserMenuTemplateProvider.UserMenuTemplateUpdatePost(UserMenuTemplate);
+                    return Ok(UserMenuTemplate);
+                }
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
 
         [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> GetLanguages(int Id)

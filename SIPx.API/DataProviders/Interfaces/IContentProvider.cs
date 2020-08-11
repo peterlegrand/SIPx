@@ -12,8 +12,8 @@ namespace SIPx.DataAccess
         Task<ContentCreateListSet> GetContentCreateListSet(string UserId, int ContentTypeId);
         Task<List<ClassificationValueList>> GetContentCreateListSet2(string UserId, int ClassificationId);
         List<ClassificationIndexGet> GetClassifications2(int LanguageId);
-        bool PostClassification(ClassificationCreatePost Classification);
-        bool PutClassification(ClassificationUpdatePut Classification);
+        //bool PostClassification(ClassificationCreatePost Classification);
+        //bool PutClassification(ClassificationUpdatePut Classification);
 
         Task<List<LanguageList>> GetLanguageList(string UserId);
         Task<List<ClassificationList>> GetClassificationList(string UserId, int ContentTypeId);

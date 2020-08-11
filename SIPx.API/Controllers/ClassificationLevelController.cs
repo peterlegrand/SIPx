@@ -12,14 +12,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationLevelController : ControllerBase
     {
+        private readonly IClassificationLevelProvider _classificationLevelProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationLevelController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationLevelController(IClassificationLevelProvider classificationLevelProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationLevelProvider = classificationLevelProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -43,7 +45,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationProvider.ClassificationLevelIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationLevelProvider.ClassificationLevelIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -58,7 +60,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationLevelCreateGet = new ClassificationLevelCreateGet();
-                var ClassificationLevelCreateGetSequences = await _classificationProvider.ClassificationLevelCreateGetSequence(CurrentUser.Id, Id);
+                var ClassificationLevelCreateGetSequences = await _classificationLevelProvider.ClassificationLevelCreateGetSequence(CurrentUser.Id, Id);
                 var DateLevels = await _masterProvider.DateLevelList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationLevelCreateGetSequences.Add(new SequenceList { Sequence = ClassificationLevelCreateGetSequences.Count ,Name = "Add at the end" });
@@ -82,10 +84,10 @@ namespace SIPx.API.Controllers
             ClassificationLevel.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.ClassificationLevelCreatePostCheck(ClassificationLevel);
+                var CheckString = await _classificationLevelProvider.ClassificationLevelCreatePostCheck(ClassificationLevel);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.ClassificationLevelCreatePost(ClassificationLevel);
+                    _classificationLevelProvider.ClassificationLevelCreatePost(ClassificationLevel);
                     return Ok(ClassificationLevel);
                 }
                 return BadRequest(new
@@ -117,7 +119,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationProvider.ClassificationLevelLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationLevelProvider.ClassificationLevelLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -139,7 +141,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                return Ok(await _classificationProvider.ClassificationLevelUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationLevelProvider.ClassificationLevelUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -162,7 +164,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationLevelLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationLevelProvider.ClassificationLevelLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

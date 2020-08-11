@@ -6,6 +6,8 @@ CREATE PROCEDURE [dbo].[usp_UserMenuTemplateOptionCreatePost] (
 	, @MouseOver nvarchar(50)
 	, @UserPageIdLeft int
 	, @UserPageIdRight int
+	, @UserMenuTypeIDLeft int
+	, @UserMenuTypeIDRight int
 	, @Icon nvarchar(20)
 	, @Sequence int
 	, @CreatorId nvarchar(450)) 
@@ -27,6 +29,8 @@ INSERT INTO UserMenuTemplateOptions (
 	UserMenuTemplateId
 	, UserPageIdLeft
 	, UserPageIdRight
+	, UserMenuTypeIDLeft
+	, UserMenuTypeIDRight
 	, Icon
 	, Sequence
 	, CreatorID
@@ -37,6 +41,8 @@ VALUES (
 	@UserMenuTemplateId
 	, @UserPageIdLeft
 	, @UserPageIdRight
+	, @UserMenuTypeIDLeft
+	, @UserMenuTypeIDRight
 	, @Icon
 	, @Sequence
 	, @CreatorId

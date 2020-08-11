@@ -21,7 +21,6 @@ INSERT INTO Languages (LanguageId, ForeignName, ISO6391, ISO6392, StatusId, Name
 , (12,N'avesta', 'ae', 'ave', 2, 704, @User, getdate())
 , (13,N'aymar aru', 'ay', 'aym', 2, 705, @User, getdate())
 , (14,N'azərbaycan dili', 'az', 'aze', 2, 706, @User, getdate())
-, (14,N'azərbaycan dili', 'az', 'aze', 2, 706, @User, getdate())
 , (15,N'bamanankan', 'bm', 'bam', 2, 707, @User, getdate())
 , (16,N'башҡорт теле', 'ba', 'bak', 2, 708, @User, getdate())
 , (17,N'euskara, euskera', 'eu', 'eus', 2, 709, @User, getdate())
