@@ -10,6 +10,7 @@ WHERE USerId = @UserID
 WITH ProjectHierarchy (ProjectID
 	, StatusID
 	, Path
+	, ProjectTypeID
 	, CreatedDate
 	, CreatorID
 	, ModifierID
@@ -20,6 +21,7 @@ AS
 		Projects.ProjectID
 		, StatusID
 		, CAST(Projects.ProjectId AS VARCHAR(255)) AS Path
+		, ProjectTypeID
 		, CreatedDate
 		, CreatorID
 		, ModifierID
@@ -32,6 +34,7 @@ AS
 		ProjectNextLevel.ProjectID
 		, ProjectNextLevel.StatusID
 		, CAST(ProjectBaseLevel.Path + '.' + CAST(ProjectNextLevel.ProjectId AS VARCHAR(255)) AS VARCHAR(255))
+		, ProjectNextLevel.ProjectTypeID
 	, ProjectNextLevel.CreatedDate
 	, ProjectNextLevel.CreatorID
 	, ProjectNextLevel.ModifierID
@@ -50,11 +53,15 @@ SELECT TOP (@Top)
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this Project')) MouseOver
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
 	, Path
+	, ProjectHierarchy.ProjectTypeID
+	, ProjectTypeLanguages.Name
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, ProjectHierarchy.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ProjectHierarchy.ModifiedDate
 FROM   ProjectHierarchy
+JOIN ProjectTypeLanguages
+	ON ProjectHierarchy.ProjectTypeID = ProjectTypeLanguages.ProjectTypeID 
 JOIN Statuses
 	ON Statuses.StatusId = ProjectHierarchy.StatusID
 LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserLanguage

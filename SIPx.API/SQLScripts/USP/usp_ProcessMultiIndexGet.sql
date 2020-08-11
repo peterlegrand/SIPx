@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_Processes] (@UserId nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_ProcessMultiIndexGet] (@UserId nvarchar(450), @ProcessMultiId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -34,6 +34,7 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserId = Processes.ModifierID
 WHERE ProcessTemplateFields.ProcessTemplateFieldTypeId = 1
+	AND @ProcessMultiId = Processes.ProcessMultiID
 ORDER BY ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this process template')) 
 	, ProcessFields.StringValue
 

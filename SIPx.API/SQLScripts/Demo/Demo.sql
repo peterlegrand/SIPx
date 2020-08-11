@@ -763,14 +763,21 @@ ProcessTemplateFlowLanguageId,ProcessTemplateId, ProcessTemplateFlowId, Language
 ;
 SET IDENTITY_INSERT  ProcessTemplateFlowLanguages  OFF;
 
-SET IDENTITY_INSERT Projects ON;
-INSERT INTO Projects (ProjectId, StatusId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-(1, 1, @User, @User, GETDATE(), GETDATE())
-;
-INSERT INTO Projects (ProjectId,ParentProjectId, StatusId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-(2,1, 1, @User, @User, GETDATE(), GETDATE())
-;
-SET IDENTITY_INSERT Projects OFF;
+SET IDENTITY_INSERT [dbo].[ProjectTypes] ON 
+INSERT [dbo].[ProjectTypes] ([ProjectTypeID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[ProjectTypes] ([ProjectTypeID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, @User, @User, Getdate(), Getdate())
+SET IDENTITY_INSERT [dbo].[ProjectTypes] OFF
+
+SET IDENTITY_INSERT [dbo].[Projects] ON 
+INSERT [dbo].[Projects] ([ProjectID], [ParentProjectID], [ProjectTypeID], [StatusID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, NULL, 1, 1, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[Projects] ([ProjectID], [ParentProjectID], [ProjectTypeID], [StatusID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 1, 1, 1, @User, @User, Getdate(), Getdate())
+SET IDENTITY_INSERT [dbo].[Projects] OFF
+
+SET IDENTITY_INSERT [dbo].[ProjectTypeLanguages] ON 
+INSERT [dbo].[ProjectTypeLanguages] ([ProjectTypeLanguageID], [ProjectTypeID], [LanguageID], [Name], [Description], [MenuName], [MouseOver], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 41, N'General', N'General', N'General', N'General', @User, @User, Getdate(), Getdate())
+INSERT [dbo].[ProjectTypeLanguages] ([ProjectTypeLanguageID], [ProjectTypeID], [LanguageID], [Name], [Description], [MenuName], [MouseOver], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 2, 41, N'Game', N'Game', N'Game', N'Game', @User, @User, Getdate(), Getdate())
+SET IDENTITY_INSERT [dbo].[ProjectTypeLanguages] OFF
+
 
 SET IDENTITY_INSERT ProjectLanguages ON;
 INSERT INTO ProjectLanguages (ProjectLanguageId, ProjectId, LanguageId , Name, Description, MenuName, MouseOver
