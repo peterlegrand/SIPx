@@ -769,8 +769,11 @@ INSERT [dbo].[ProjectTypes] ([ProjectTypeID], [CreatorID], [ModifierID], [Modifi
 SET IDENTITY_INSERT [dbo].[ProjectTypes] OFF
 
 SET IDENTITY_INSERT [dbo].[Projects] ON 
-INSERT [dbo].[Projects] ([ProjectID], [ParentProjectID], [ProjectTypeID], [StatusID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, NULL, 1, 1, @User, @User, Getdate(), Getdate())
-INSERT [dbo].[Projects] ([ProjectID], [ParentProjectID], [ProjectTypeID], [StatusID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 1, 1, 1, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[Projects] (
+[ProjectID], [ParentProjectID], [SecurityLevelId], [ProjectTypeID], [StatusID], 
+[CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) 
+VALUES (1, NULL,1, 1, 1, @User, @User, Getdate(), Getdate()),
+(2, 1 ,1, 1, 1, @User, @User, Getdate(), Getdate())
 SET IDENTITY_INSERT [dbo].[Projects] OFF
 
 SET IDENTITY_INSERT [dbo].[ProjectTypeLanguages] ON 

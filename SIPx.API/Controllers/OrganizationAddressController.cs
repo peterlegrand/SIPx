@@ -19,13 +19,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationAddressController : ControllerBase
     {
+        private readonly IOrganizationAddressProvider _organizationAddressProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationAddressController(IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationAddressController(IOrganizationAddressProvider organizationAddressProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _organizationAddressProvider = organizationAddressProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _organizationProvider = organizationProvider;
@@ -38,7 +40,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationAddressIndexGet(CurrentUser.Id, Id));
+                return Ok(await _organizationAddressProvider.OrganizationAddressIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -52,7 +54,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationAddressUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _organizationAddressProvider.OrganizationAddressUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -87,10 +89,10 @@ namespace SIPx.API.Controllers
             OrganizationAddress.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationProvider.OrganizationAddressCreatePostCheck(OrganizationAddress);
+                var CheckString = await _organizationAddressProvider.OrganizationAddressCreatePostCheck(OrganizationAddress);
                 if (CheckString.Length == 0)
                 {
-                    _organizationProvider.OrganizationAddressCreatePost(OrganizationAddress);
+                    _organizationAddressProvider.OrganizationAddressCreatePost(OrganizationAddress);
                     return Ok(OrganizationAddress);
                 }
                 return BadRequest(new

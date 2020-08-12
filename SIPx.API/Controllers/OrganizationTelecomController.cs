@@ -19,13 +19,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationTelecomController : ControllerBase
     {
+        private readonly IOrganizationTelecomProvider _organizationTelecomProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationTelecomController(IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationTelecomController(IOrganizationTelecomProvider organizationTelecomProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _organizationTelecomProvider = organizationTelecomProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _organizationProvider = organizationProvider;
@@ -38,7 +40,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationTelecomIndexGet(CurrentUser.Id, Id));
+                return Ok(await _organizationTelecomProvider.OrganizationTelecomIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -52,7 +54,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationTelecomUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _organizationTelecomProvider.OrganizationTelecomUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -86,10 +88,10 @@ namespace SIPx.API.Controllers
             OrganizationTelecom.CreatorId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationProvider.OrganizationTelecomCreatePostCheck(OrganizationTelecom);
+                var CheckString = await _organizationTelecomProvider.OrganizationTelecomCreatePostCheck(OrganizationTelecom);
                 if (CheckString.Length == 0)
                 {
-                    _organizationProvider.OrganizationTelecomCreatePost(OrganizationTelecom);
+                    _organizationTelecomProvider.OrganizationTelecomCreatePost(OrganizationTelecom);
                     return Ok(OrganizationTelecom);
                 }
                 return BadRequest(new

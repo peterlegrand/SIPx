@@ -284,5 +284,17 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (278, 'UserMenu', 'Edit')
 , (279, 'UserPreference', 'Index')
 , (280, 'UserPreference', 'Edit')
+, (281, 'ProjectType', 'Index')
+, (282, 'ProjectType', 'Create')
+, (283, 'ProjectType', 'Edit')
+, (284, 'ProjectType', 'Delete')
+, (285, 'ProjectTypeLanguage', 'Index')
+, (286, 'ProjectTypeLanguage', 'Create')
+, (287, 'ProjectTypeLanguage', 'Edit')
+, (288, 'ProjectTypeLanguage', 'Delete')
+, (289, 'ProcessTemplateStageType', 'Index')
+, (290, 'ProcessTemplateStageType', 'Create')
+, (291, 'ProcessTemplateStageType', 'Edit')
+, (292, 'ProcessTemplateStageType', 'Delete')
 
 SET IDENTITY_INSERT MVCUIScreens OFF;

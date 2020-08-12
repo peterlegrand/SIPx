@@ -17,30 +17,29 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class OrganizationController : ControllerBase
+    public class ProjectTypeController : ControllerBase
     {
-        private readonly IOrganizationTypeProvider _organizationTypeProvider;
+        private readonly IProjectTypeProvider _projectTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IOrganizationProvider _organizationProvider;
+        private readonly IProjectProvider _ProjectProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationController(IOrganizationTypeProvider organizationTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProjectTypeController(IProjectTypeProvider projectTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
-            _organizationTypeProvider = organizationTypeProvider;
+            _projectTypeProvider = projectTypeProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _organizationProvider = organizationProvider;
+            _ProjectProvider = ProjectProvider;
             _userManager = userManager;
         }
-
         [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationLanguages(int Id)
+        public async Task<IActionResult> GetProjectTypeLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _ProjectProvider.ProjectTypeLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -49,12 +48,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationLanguage(int Id)
+        public async Task<IActionResult> GetProjectTypeLanguage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _ProjectProvider.ProjectTypeLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -63,12 +62,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Index")]
-        public async Task<IActionResult> GetOrganizations()
+        public async Task<IActionResult> GetProjectTypes()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationIndexGet(CurrentUser.Id));
+                return Ok(await _ProjectProvider.ProjectTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -77,12 +76,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetOrganization(int Id)
+        public async Task<IActionResult> GetProjectType(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _ProjectProvider.ProjectTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -90,22 +89,17 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Create/{Id:int}")]
+        [HttpGet("Create")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var OrganizationCreateGet = new OrganizationCreateGet();
-                var Statuses = await _masterProvider.StatusList(CurrentUser.Id);
-                var OrganizationTypes = await _organizationTypeProvider.OrganizationTypeList(CurrentUser.Id);
+                var ProjectTypeCreateGet = new ProjectTypeCreateGet();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                OrganizationCreateGet.LanguageId = UserLanguage.LanguageId;
-                OrganizationCreateGet.LanguageName = UserLanguage.Name;
-                OrganizationCreateGet.OrganizationTypes = OrganizationTypes;
-                OrganizationCreateGet.Statuses = Statuses;
-                OrganizationCreateGet.ParentOrganizationId = Id;
-                return Ok(OrganizationCreateGet);
+                ProjectTypeCreateGet.LanguageId = UserLanguage.LanguageId;
+                ProjectTypeCreateGet.LanguageName = UserLanguage.Name;
+                return Ok(ProjectTypeCreateGet);
             }
             return BadRequest(new
             {
@@ -114,17 +108,17 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(OrganizationCreatePost Organization)
+        public async Task<IActionResult> Post(ProjectTypeCreatePost ProjectType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Organization.CreatorId= CurrentUser.Id;
+            ProjectType.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationProvider.OrganizationCreatePostCheck(Organization);
+                var CheckString = await _projectTypeProvider.ProjectTypeCreatePostCheck(ProjectType);
                 if (CheckString.Length == 0)
                 {
-                    _organizationProvider.OrganizationCreatePost(Organization);
-                    return Ok(Organization);
+                    _projectTypeProvider.ProjectTypeCreatePost(ProjectType);
+                    return Ok(ProjectType);
                 }
                 return BadRequest(new
                 {

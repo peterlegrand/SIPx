@@ -1381,5 +1381,13 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1379, 'Dropdown name');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1380, 'Left menu type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1381, 'Right menu type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1382, 'Edit user menu');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1383, 'Project type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1384, 'Add new project type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1385, 'Project type languages');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1386, 'Project type language');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1387, 'Project types');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1388, 'Add new process template stage type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1389, 'Process template stage type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1390, 'Process template stage types');
 
 SET IDENTITY_INSERT UITerms OFF;

@@ -17,30 +17,29 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class OrganizationController : ControllerBase
+    public class ProcessTemplateStageTypeController : ControllerBase
     {
-        private readonly IOrganizationTypeProvider _organizationTypeProvider;
+        private readonly IProcessTemplateStageTypeProvider _ProcessTemplateStageTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IOrganizationProvider _organizationProvider;
+        private readonly IProjectProvider _ProjectProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationController(IOrganizationTypeProvider organizationTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateStageTypeController(IProcessTemplateStageTypeProvider ProcessTemplateStageTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
-            _organizationTypeProvider = organizationTypeProvider;
+            _ProcessTemplateStageTypeProvider = ProcessTemplateStageTypeProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _organizationProvider = organizationProvider;
+            _ProjectProvider = ProjectProvider;
             _userManager = userManager;
         }
-
         [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationLanguages(int Id)
+        public async Task<IActionResult> GetProcessTemplateStageTypeLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -49,12 +48,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationLanguage(int Id)
+        public async Task<IActionResult> GetProcessTemplateStageTypeLanguage(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -63,12 +62,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Index")]
-        public async Task<IActionResult> GetOrganizations()
+        public async Task<IActionResult> GetProcessTemplateStageTypes()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationIndexGet(CurrentUser.Id));
+                return Ok(await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -77,12 +76,12 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetOrganization(int Id)
+        public async Task<IActionResult> GetProcessTemplateStageType(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -90,22 +89,17 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("Create/{Id:int}")]
+        [HttpGet("Create")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var OrganizationCreateGet = new OrganizationCreateGet();
-                var Statuses = await _masterProvider.StatusList(CurrentUser.Id);
-                var OrganizationTypes = await _organizationTypeProvider.OrganizationTypeList(CurrentUser.Id);
+                var ProcessTemplateStageTypeCreateGet = new ProcessTemplateStageTypeCreateGet();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                OrganizationCreateGet.LanguageId = UserLanguage.LanguageId;
-                OrganizationCreateGet.LanguageName = UserLanguage.Name;
-                OrganizationCreateGet.OrganizationTypes = OrganizationTypes;
-                OrganizationCreateGet.Statuses = Statuses;
-                OrganizationCreateGet.ParentOrganizationId = Id;
-                return Ok(OrganizationCreateGet);
+                ProcessTemplateStageTypeCreateGet.LanguageId = UserLanguage.LanguageId;
+                ProcessTemplateStageTypeCreateGet.LanguageName = UserLanguage.Name;
+                return Ok(ProcessTemplateStageTypeCreateGet);
             }
             return BadRequest(new
             {
@@ -114,17 +108,17 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(OrganizationCreatePost Organization)
+        public async Task<IActionResult> Post(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Organization.CreatorId= CurrentUser.Id;
+            ProcessTemplateStageType.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationProvider.OrganizationCreatePostCheck(Organization);
+                var CheckString = await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeCreatePostCheck(ProcessTemplateStageType);
                 if (CheckString.Length == 0)
                 {
-                    _organizationProvider.OrganizationCreatePost(Organization);
-                    return Ok(Organization);
+                    _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeCreatePost(ProcessTemplateStageType);
+                    return Ok(ProcessTemplateStageType);
                 }
                 return BadRequest(new
                 {

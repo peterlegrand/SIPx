@@ -19,5 +19,10 @@ namespace SIPx.MVC.Controllers
         {
             return View();
         }
-   }
+        [HttpGet]
+        public IActionResult Menu()
+        {
+            return View();
+        }
+    }
 }
