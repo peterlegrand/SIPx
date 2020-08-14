@@ -7,8 +7,8 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT UserMenus.UserMenuID
 	, UserMenus.Name
-	, UserMenus.Icon
-	, UserMenus.UserPageIdLeft
+		, ISNULL(UIDefaultIconName.Customization,UIIconName.Name) IconName
+, UserMenus.UserPageIdLeft
 	, ISNULL(leftPage.Name, 'No name for left page') LeftPageName
 	, ISNULL(RightPage.Name, 'No name for right page') RightPageName
 	, ISNULL( LeftUserLanguageName.Customization, LeftLanguageName.Name) LeftMenuTypeName
@@ -21,6 +21,13 @@ SELECT UserMenus.UserMenuID
 	, UserMenus.ModifierID
 	, UserMenus.ModifiedDate
 FROM UserMenus 
+JOIN Icons
+	ON Icons.IconId = UserMenus.iconid
+JOIN UITermLanguages UIIconName
+	ON UIIconName.UITermId = Icons.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIDefaultIconName
+	ON UIDefaultIconName.UITermId = Icons.NameTermID
+
 JOIN PageLanguages leftPage
 	 ON leftPage.PageID = UserMenus.UserPageIdLeft
 JOIN PageLanguages RightPage
@@ -46,4 +53,5 @@ WHERE UserMenus.UserId= @UserId
 	AND RightPage.LanguageID = @LanguageId
 	AND LeftLanguageName.LanguageID = @LanguageId
 	AND RightLanguageName.LanguageID = @LanguageId
+	AND UIIconName.LanguageId = @LanguageID
 ORDER BY  Sequence

@@ -11,7 +11,7 @@ namespace SIPx.Shared
         [Key]
         public int UserMenuId { get; set; }
         public string Name { get; set; }
-        public string Icon { get; set; }
+        public string IconName{ get; set; }
         public int UserPageLeftId { get; set; }
         public string LeftMenuTypeName { get; set; }
         public string LeftPageName { get; set; }

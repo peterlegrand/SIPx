@@ -16,7 +16,8 @@
     </e-grid-columns>
 </ejs-grid>
 
-<a asp-controller="UserMenu" asp-action="Index">User menu</a>
+<a asp-controller="UserMenu" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User menu")).TermString</a>
+<a asp-controller="UserPages" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User pages")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
         ${UserPreferenceId}

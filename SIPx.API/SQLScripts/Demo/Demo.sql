@@ -1154,8 +1154,8 @@ SET IDENTITY_INSERT [dbo].[UserPreferences] OFF
 
 
 SET IDENTITY_INSERT [dbo].[UserMenus] ON 
-INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [Icon], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 1, @User, N'Home', N'Home', N'11', 11, 11, 1, @User, @User, Getdate(), Getdate())
-INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [Icon], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 1, 2, @User, N'To do', N'To do', N'1', 12, 12, 2, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [Icon], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 1, @User, N'Home', N'Home', N'11', 1, 1, 1, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [Icon], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 1, 2, @User, N'To do', N'To do', N'1', 4,4, 2, @User, @User, Getdate(), Getdate())
 INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [Icon], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 13, 13, @User, N'Search', N'Search process', N'11', 11, 11, 3, @User, @User, Getdate(), Getdate())
 SET IDENTITY_INSERT [dbo].[UserMenus] OFF
 

@@ -13,7 +13,7 @@ namespace SIPx.MVC.Controllers
     public class FrontController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-        readonly ServiceClient client = new ServiceClient();
+        readonly ServiceClient _client = new ServiceClient();
 
         [HttpGet]
         public IActionResult FrontPage()
@@ -83,8 +83,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int Id=1)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<FrontIndexPanels>>($"{_baseUrl}api/Front/Index/"+Id, token);
-            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Front/Index", token);
+            var response = await _client.GetProtectedAsync<List<FrontIndexPanels>>($"{_baseUrl}api/Front/Index/"+Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Front/Index", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }

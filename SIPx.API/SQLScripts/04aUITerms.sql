@@ -1400,5 +1400,17 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1398, 'Internal name');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1399, 'Customization');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1400, 'Add user');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1401, 'New page');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1402, 'User pages');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1403, 'Size X');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1404, 'Size Y');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1405, 'Position X');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1406, 'Position Y');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1407, 'Add new user page');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1408, 'User page sections');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1409, 'Back to user pages');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1410, 'Add new user page section');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1411, 'User page');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1412, 'User page section');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1413, 'New user page');
 
 SET IDENTITY_INSERT UITerms OFF;

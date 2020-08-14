@@ -82,6 +82,8 @@ namespace SIPx.API
 
             services.AddTransient<IRoleGroupProvider, RoleGroupProvider>();
 
+            services.AddTransient<IUserPageProvider, UserPageProvider>();
+            services.AddTransient<IPartialProvider, PartialProvider>();
             services.AddTransient<IContentProvider, ContentProvider>();
             services.AddTransient<IContentStatusProvider, ContentStatusProvider>();
             services.AddTransient<IContentTypeClassificationProvider, ContentTypeClassificationProvider>();

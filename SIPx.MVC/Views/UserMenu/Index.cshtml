@@ -11,6 +11,7 @@
     <e-grid-columns>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" Template="#Id" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" Template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Icon")).TermString" Template="#IconName" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Left menu type")).TermString" Template="#LeftMenuType" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Left menu")).TermString" Template="#LeftMenu" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Right menu type")).TermString" Template="#RightMenuType" textAlign="Center" type="string"></e-grid-column>
@@ -28,6 +29,11 @@
 <script id="Name" type="text/x-">
     <div>
         ${Name}
+    </div>
+</script>
+<script id="IconName" type="text/x-">
+    <div>
+        ${IconName}
     </div>
 </script>
 <script id="LeftMenuType" type="text/x-">

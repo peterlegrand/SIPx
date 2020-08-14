@@ -13,12 +13,12 @@ namespace SIPx.MVC.Controllers
     {
 
         private readonly string _baseUrl = "https://localhost:44393/";
-        readonly ServiceClient client = new ServiceClient();
+        readonly ServiceClient _client = new ServiceClient();
 
         public async Task<IActionResult> LeftMenu()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PartialLeftUserMenu>>($"{_baseUrl}api/Partial/LeftMenu/", token);
+            var response = await _client.GetProtectedAsync<List<PartialLeftUserMenu>>($"{_baseUrl}api/Partial/LeftMenu/", token);
             return PartialView(response);
             
         }

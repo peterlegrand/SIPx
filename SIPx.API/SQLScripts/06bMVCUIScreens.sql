@@ -313,5 +313,13 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (307, 'ContentType', 'Index')
 , (308, 'ContentTypeGroup', 'Index')
 , (309, 'PersonRelationType', 'Index')
+, (310, 'UserPageSection', 'Index')
+, (311, 'UserPageSection', 'Create')
+, (312, 'UserPageSection', 'Edit')
+, (313, 'UserPageSection', 'Delete')
+, (314, 'UserPage', 'Index')
+, (315, 'UserPage', 'Create')
+, (316, 'UserPage', 'Edit')
+, (317, 'UserPage', 'Delete')
 
 SET IDENTITY_INSERT MVCUIScreens OFF;
