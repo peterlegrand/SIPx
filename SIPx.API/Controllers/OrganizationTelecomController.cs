@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationTelecomController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IOrganizationTelecomProvider _organizationTelecomProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationTelecomController(IOrganizationTelecomProvider organizationTelecomProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationTelecomController(IMasterListProvider masterListProvider, IOrganizationTelecomProvider organizationTelecomProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _organizationTelecomProvider = organizationTelecomProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
@@ -70,7 +72,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var OrganizationTelecomCreateGet = new OrganizationTelecomCreateGet();
-                var TelecomTypes = await _masterProvider.TelecomTypeList(CurrentUser.Id);
+                var TelecomTypes = await _masterListProvider.TelecomTypeList(CurrentUser.Id);
                 OrganizationTelecomCreateGet.TelecomTypes = TelecomTypes;
                 OrganizationTelecomCreateGet.OrganizationId = Id;
                 return Ok(OrganizationTelecomCreateGet);

@@ -1,0 +1,59 @@
+﻿@model List<UserIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Users")).TermString;
+
+    Layout = "_LayoutAdmin";
+}
+
+<h1><img src="~/images/icons/Classification.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Users")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" Template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("User name")).TermString" Template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" Template="#FirstName" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" Template="#LastName" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" Template="#Organization" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" Template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" Template="#Delete" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a href="~/UserMenu/Create">@Term.Find(x => x.InternalName.Equals("Add user")).TermString</a>
+<script id="Id" type="text/x-">
+    <div>
+        ${UserMenuId}
+    </div>
+</script>
+<script id="Name" type="text/x-">
+    <div>
+        ${Name}
+    </div>
+</script>
+<script id="FirstName" type="text/x-">
+    <div>
+        ${FirstName}
+    </div>
+</script>
+<script id="LastName" type="text/x-">
+    <div>
+        ${LastName}
+    </div>
+</script>
+<script id="Organization" type="text/x-">
+    <div>
+        ${OrganizationName}
+    </div>
+</script>
+<script id="Edit" type="text/x-">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/User/Edit/${UserId}"><span style="color:red">E</span>dit</a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="User/Delete/${UserId}"><span style="color:red">D</span>elete</a>
+
+    </div>
+</script>

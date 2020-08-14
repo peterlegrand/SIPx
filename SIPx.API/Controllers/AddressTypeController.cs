@@ -19,12 +19,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class AddressTypeController : ControllerBase
     {
+        private readonly IAddressTypeProvider _addressTypeProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public AddressTypeController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public AddressTypeController(IAddressTypeProvider addressTypeProvider, IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _addressTypeProvider = addressTypeProvider;
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;
             _userManager = userManager;
@@ -36,7 +38,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.AddressTypeIndexGet(CurrentUser.Id));
+                return Ok(await _addressTypeProvider.AddressTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -51,7 +53,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.AddressTypeUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _addressTypeProvider.AddressTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

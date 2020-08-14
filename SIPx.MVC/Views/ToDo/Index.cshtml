@@ -1,0 +1,20 @@
+﻿@model List<ToDoIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+
+    Layout = "_Layout";
+}
+
+<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />
+    @*@Term.Find(x => x.InternalName.Equals("Persons")).TermString*@
+    </h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="ProcessID" headerText="ID" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProcessTemplateName" headerText="ProcessTemplateName" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProcessTemplateFieldName" headerText="ProcessTemplateFieldName" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProcessTemplateStageTypeName" headerText="ProcessTemplateStageTypeName" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Title" headerText="Title" textAlign="Right" type="number"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>

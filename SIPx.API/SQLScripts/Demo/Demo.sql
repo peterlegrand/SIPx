@@ -323,10 +323,12 @@ INSERT INTO OrganizationTelecomPhones(OrganizationTelecomId, CountryCode, AreaCo
 (2, '+66', '2', '42', 'Ford')
 
 SET IDENTITY_INSERT Pages ON;
-INSERT INTO Pages (PageId, StatusId, ShowtitleName, ShowTitleDescription, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
-, (2, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
-, (3, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
+INSERT INTO Pages (PageId, StatusId, ShowtitleName,  ShowTitleDescription, UserID,CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
+, (2, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
+, (3, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
+, (4, 1, 1, 1, @User,  @User, @User, GETDATE(), GETDATE())
+, (5, 1, 1, 1, @User,  @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT Pages OFF;
 
 SET IDENTITY_INSERT PageLanguages ON;
@@ -334,21 +336,30 @@ INSERT INTO PageLanguages(PageLanguageId, PageId, LanguageId, Name, Description,
 (1, 1, 41, 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', @User, @User, GETDATE(), GETDATE())
 , (2, 2, 41, 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', @User, @User, GETDATE(), GETDATE())
 , (3, 3, 41, 'Project stories', 'Project stories', 'Project stories', 'Project stories', 'Project stories', 'Project stories', @User, @User, GETDATE(), GETDATE())
+, (4, 4, 41, 'To do', 'To do', 'To do', 'To do', 'To do', 'To do', @User, @User, GETDATE(), GETDATE())
+, (5, 5, 41, 'Calendar', 'Calendar', 'Calendar', 'Calendar', 'Calendar', 'Calendar', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT PageLanguages OFF;
 
 SET IDENTITY_INSERT PageSections ON;
-INSERT INTO PageSections (PageSectionId, PageId, PageSectionTypeId, PageSectionDataTypeId, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitleName, ShowContentTypeTitleDescription,SizeX,SizeY,DashboardRow, DashboardColumn,  SortById, MaxContent, HasPaging, [QueryBuilderRule], CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
-, (2, 1, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
-, (3, 2, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
-, (4, 2, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
-, (5, 3, 1, 1, 1, 1, 1, 0, 1,1,1,1, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
-, (6, 3, 1, 1, 1, 1, 1, 0, 1,1,1,2, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
-, (7, 1, 4, 2, 1, 1, 1, 0, 1,2,2,3, 1, 5, 1, 'UserId =' + @User + '''', @User, @User, GETDATE(), GETDATE())
-, (8, 1, 5, 2, 1, 1, 1, 0, 1,2,2,3, 1, 5, 1, 'OrganizationId = 1', @User, @User, GETDATE(), GETDATE())
-, (9, 1, 6, 2, 1, 1, 1, 0, 1,2,2,3, 1, 5, 1, 'ProjectId = 1',@User, @User, GETDATE(), GETDATE())
-, (10, 1, 7, 2, 1, 1, 1, 0, 1,2,2,3, 1, 5, 1, '',@User, @User, GETDATE(), GETDATE())
+INSERT INTO PageSections (PageSectionId, PageId, 
+PageSectionTypeId, PageSectionDataTypeId,
+ShowSectionTitleName, ShowSectionTitleDescription, 
+ShowContentTypeTitleName, ShowContentTypeTitleDescription,
+SizeX,SizeY,DashboardRow, DashboardColumn,  SortById, MaxContent, HasPaging, [QueryBuilderRule], CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1, 1, 1, 1, 1, 0, 4,4,0,0, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (2, 1, 1, 1, 1, 1, 1, 0, 4,4,0,4, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (3, 2, 1, 1, 1, 1, 1, 0, 4,4,0,0, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (4, 2, 1, 1, 1, 1, 1, 0, 0,4,0,4, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (5, 3, 1, 1, 1, 1, 1, 0, 0,0,0,0, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (6, 3, 1, 1, 1, 1, 1, 0, 0,4,0,4, 1, 5, 1, '', @User, @User, GETDATE(), GETDATE())
+, (7, 1, 4, 2, 1, 1, 1, 0, 4,4,4,0, 1, 5, 1, 'UserId =' + @User + '''', @User, @User, GETDATE(), GETDATE())
+, (8, 1, 5, 2, 1, 1, 1, 0, 4,4,4,4, 1, 5, 1, 'OrganizationId = 1', @User, @User, GETDATE(), GETDATE())
+, (9, 1, 6, 2, 1, 1, 1, 0, 4,4,8,0, 1, 5, 1, 'ProjectId = 1',@User, @User, GETDATE(), GETDATE())
+, (10, 1, 7, 2, 1, 1, 1, 0, 4,4,8,4, 1, 5, 1, '',@User, @User, GETDATE(), GETDATE())
+, (11, 4, 1, 2, 1, 1, 1, 0, 10,10,0,0, 1, 5, 1, '',@User, @User, GETDATE(), GETDATE())
+, (12, 5, 4, 2, 1, 1, 1, 0, 10,10,0,0, 1, 5, 1, '',@User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT PageSections OFF;
+
 
 SET IDENTITY_INSERT PageSectionLanguages ON;
 INSERT INTO PageSectionLanguages(PageSectionLanguageId,  PageId, PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
@@ -357,7 +368,13 @@ INSERT INTO PageSectionLanguages(PageSectionLanguageId,  PageId, PageSectionId, 
 , (3, 2, 3, 41, 'Approved research', 'Approved research', 'Approved research', 'Approved research', 'Approved research', 'Approved research', @User, @User, GETDATE(), GETDATE())
 , (4, 2, 4, 41, 'Pending research', 'Pending research', 'Pending research', 'Pending research', 'Pending research', 'Pending research', @User, @User, GETDATE(), GETDATE())
 , (5, 3, 5, 41, 'Newest completed projects', 'Newest completed projects', 'Newest completed projects', 'Newest completed projects', 'Newest completed projects', 'Newest completed projects', @User, @User, GETDATE(), GETDATE())
-, (6, 3, 6, 41, 'Projects in Process', 'Projects in Process', 'Projects in Process', 'Projects in Process', 'Projects in Process', 'Projects in Process', @User, @User, GETDATE(), GETDATE())
+, (6, 3, 6, 41, 'Content', 'Content', 'Content', 'Content', 'Content', 'Content', @User, @User, GETDATE(), GETDATE())
+, (7, 3, 7, 41, 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', @User, @User, GETDATE(), GETDATE())
+, (8, 3, 8, 41, 'Organization calendar', 'Organization calendar', 'Organization calendar', 'Organization calendar', 'Organization calendar', 'Organization calendar', @User, @User, GETDATE(), GETDATE())
+, (9, 3, 9, 41, 'Project calendar', 'Project calendar', 'Project calendar', 'Project calendar', 'Project calendar', 'Project calendar', @User, @User, GETDATE(), GETDATE())
+, (10, 3, 10, 41, 'General calendar', 'General calendar', 'General calendar', 'General calendar', 'General calendar', 'General calendar', @User, @User, GETDATE(), GETDATE())
+, (11, 4, 11, 41, 'To do', 'To do', 'To do', 'To do', 'To do', 'To do', @User, @User, GETDATE(), GETDATE())
+, (12, 5, 12, 41, 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT PageSectionLanguages OFF;
 
 SET IDENTITY_INSERT Persons ON;
@@ -1134,3 +1151,11 @@ INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID]
 INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (3, 1, @User2, 41, NULL, NULL, NULL, NULL, @User, getdate())
 INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (4, 2, @User2, 1, NULL, NULL, NULL, NULL, @User, getdate())
 SET IDENTITY_INSERT [dbo].[UserPreferences] OFF
+
+
+SET IDENTITY_INSERT [dbo].[UserMenus] ON 
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [Icon], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 1, @User, N'Home', N'Home', N'11', 11, 11, 1, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [Icon], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 1, 2, @User, N'To do', N'To do', N'1', 12, 12, 2, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [Icon], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 13, 13, @User, N'Search', N'Search process', N'11', 11, 11, 3, @User, @User, Getdate(), Getdate())
+SET IDENTITY_INSERT [dbo].[UserMenus] OFF
+

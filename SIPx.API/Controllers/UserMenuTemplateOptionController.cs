@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserMenuTemplateOptionController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IUserMenuTemplateOptionProvider _userMenuTemplateOptionProvider;
         private readonly IPeopleProvider _peopleProvider;
         private readonly IPageProvider _pageProvider;
@@ -21,8 +22,9 @@ namespace SIPx.API.Controllers
         private readonly IUserMenuProvider _userMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuTemplateOptionController(IUserMenuTemplateOptionProvider userMenuTemplateOptionProvider, IPeopleProvider peopleProvider, IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuTemplateOptionController(IMasterListProvider masterListProvider, IUserMenuTemplateOptionProvider userMenuTemplateOptionProvider, IPeopleProvider peopleProvider, IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _userMenuTemplateOptionProvider = userMenuTemplateOptionProvider;
             _peopleProvider = peopleProvider;
             _pageProvider = pageProvider;
@@ -64,7 +66,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var UserMenuTemplateOptionCreateGet = new UserMenuTemplateOptionCreateGet();
-                var iconslist = await _masterProvider.IconList(CurrentUser.Id);
+                var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.PageListForMenuTemplate(CurrentUser.Id);
                 var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.UserMenuTemplateOptionCreateGetSequence(CurrentUser.Id, Id);
                 UserMenuTemplateOptionCreateGet.UserMenuTypesLeft = await _peopleProvider.UserMenuTypeLeftList(CurrentUser.Id);

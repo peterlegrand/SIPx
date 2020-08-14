@@ -77,7 +77,7 @@
                                         General calendar
                                     </div>
                                 </div><div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month" >
+                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
                                         <e-schedule-eventsettings dataSource="@x.EventCalendars"></e-schedule-eventsettings>
                                     </ejs-schedule>
                                 </div>
@@ -85,20 +85,41 @@
                         </e-content-template>
                     </e-dashboardlayout-panel>
                 }
-                @if (x.PageSectionTypeId == 1)
+                @if (x.PageSectionTypeId == 1 && x.PageSectionDataTypeId == 1)
                 {
                     <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
                         <e-content-template>
                             <div class="e-panel-container">
                                 @*<div class="e-panel-header">
-                                        <div>
-                                            Content
-                                        </div>
-                                    </div>*@
+                                <div>
+                                    Content
+                                </div>
+                            </div>*@
                                 <div class="e-panel-content">
-                                    <ejs-grid id="Grid" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#rowtemplate">
+                                    <ejs-grid id="@x.SubPanelId" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#rowtemplate">
                                         <e-grid-columns>
                                             <e-grid-column headerText="Content" width="300" field="ControlId" textAlign="Left"></e-grid-column>
+                                        </e-grid-columns>
+                                    </ejs-grid>
+                                </div>
+                            </div>
+                        </e-content-template>
+                    </e-dashboardlayout-panel>
+                }
+                @if (x.PageSectionTypeId == 1 && x.PageSectionDataTypeId == 2)
+                {
+                    <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                        <e-content-template>
+                            <div class="e-panel-container">
+                                <div class="e-panel-header">
+                                <div>
+                                    Process todo
+                                </div>
+                            </div>
+                                <div class="e-panel-content">
+                                    <ejs-grid id="@x.SubPanelId" dataSource="@x.ToDos" height="335" width="auto" rowTemplate="#ToDotemplate">
+                                        <e-grid-columns>
+                                            <e-grid-column headerText="Id" width="300" field="ProcedssId" textAlign="Left"></e-grid-column>
                                         </e-grid-columns>
                                     </ejs-grid>
                                 </div>
@@ -490,6 +511,36 @@
                     <tr>
                         <td class="font-italic">
                             ${CreatorName}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</script>
+<script id="ToDotemplate" type="text/x-template">
+    <tr>
+        <td class="details">
+            <table class="CardTable" cellpadding="3" cellspacing="2">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td class="font-weight-bold">${Title} </td>
+                    </tr>
+                    <tr>
+                        <td>${ProcessTemplateFieldName} </td>
+                    </tr>
+                    <tr>
+                        <td class="font-italic">
+                            ${ProcessTemplateStageTypeName}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-italic">
+                            ${ProcessTemplateName}
                         </td>
                     </tr>
                 </tbody>

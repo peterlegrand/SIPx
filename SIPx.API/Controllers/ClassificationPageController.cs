@@ -12,14 +12,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationPageController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationPageController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationPageController(IMasterListProvider masterListProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -58,7 +60,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationPageCreateGet = new ClassificationPageCreateGet();
-                var Statuses = await _masterProvider.StatusList(CurrentUser.Id);
+                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationPageCreateGet.LanguageId = UserLanguage.LanguageId;
                 ClassificationPageCreateGet.LanguageName = UserLanguage.Name;

@@ -1,0 +1,51 @@
+﻿@model List<UITermIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Terms")).TermString;
+
+    Layout = "_LayoutAdmin";
+}
+
+<h1><img src="~/images/icons/Classification.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Terms")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" Template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Internal name")).TermString" Template="#InternalName" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" Template="#Name" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" Template="#MouseOver" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Customization")).TermString" Template="#Customization" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" Template="#Language" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<script id="Id" type="text/x-">
+    <div>
+        ${UITermId}
+    </div>
+</script>
+<script id="InternalName" type="text/x-">
+    <div>
+        ${InternalName}
+    </div>
+</script>
+<script id="Name" type="text/x-">
+    <div>
+        ${Name}
+    </div>
+</script>
+<script id="MouseOver" type="text/x-">
+    <div>
+        ${MouseOver}
+    </div>
+</script>
+<script id="Customization" type="text/x-">
+    <div>
+        ${Customization}
+    </div>
+</script>
+<script id="Language" type="text/x-">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/UITerm/LanguageIndex/${UITermId}"><span style="color:red">L</span>anguages</a>
+
+    </div>
+</script>

@@ -47,5 +47,6 @@ namespace SIPx.DataAccess
         Task<List<ClassificationUserIndexGet>> ClassificationUserIndexGet(string UserId, int ClassificationId);
         Task<ClassificationUserUpdateGet> ClassificationUserUpdateGet(string UserId, int ClassificationUserId);
         Task<ClassificationPageLanguageIndexGet> GetClassificationPageLanguageUpdateGet(string UserId, int ClassificationPageLanguageId);
+        Task<List<ClassificationList>> ClassificationList(string UserId);
     }
 }

@@ -31,10 +31,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<OrganizationTypeLanguage, dynamic>(usp, new { UserId = UserId, OrganizationTypeLanguageId = OrganizationTypeLanguageId });
 
         }
-        public Task<List<OrganizationType>> OrganizationTypeIndexGet(string UserId)
+        public Task<List<OrganizationTypeIndexGet>> OrganizationTypeIndexGet(string UserId)
         {
             string usp = "usp_OrganizationTypeIndexGet @UserID";
-            return _sqlDataAccess.LoadData<OrganizationType, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<OrganizationTypeIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
         public Task<OrganizationType> OrganizationTypeUpdateGet(string UserId, int OrganizationTypeId)

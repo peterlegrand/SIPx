@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface ILanguageProvider
     {
-        Task<List<Language>> LanguageIndexGet(string UserId);
+        Task<List<LanguageIndexGet>> LanguageIndexGet(string UserId);
         Task<List<LanguageList>> LanguageList(string UserId);
         Task<List<LanguageList>> LanguagesActiveList(string UserId);
         bool PostObjectLanguage(ObjectLanguageCreatePost ObjectLanguage);

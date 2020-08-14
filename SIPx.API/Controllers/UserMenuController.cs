@@ -12,7 +12,8 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserMenuController : ControllerBase
     {
-        private readonly IPeopleProvider _peopleProvider;
+        private readonly IUserProvider _userProvider;
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -20,9 +21,10 @@ namespace SIPx.API.Controllers
         private readonly IUserMenuProvider _userMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuController(IPeopleProvider peopleProvider, IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuController(IUserProvider userProvider, IMasterListProvider masterListProvider,  IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
-            _peopleProvider = peopleProvider;
+            _userProvider = userProvider;
+            _masterListProvider = masterListProvider;
             _pageProvider = pageProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -62,11 +64,11 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var UserMenuCreateGet = new UserMenuCreateGet();
-                var iconslist = await _masterProvider.IconList(CurrentUser.Id);
+                var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.PageListForMenu(CurrentUser.Id);
                 var UserMenuCreateGetSequences = await _userMenuProvider.UserMenuCreateGetSequence(CurrentUser.Id);
-                UserMenuCreateGet.UserMenuTypesLeft = await _peopleProvider.UserMenuTypeLeftList(CurrentUser.Id);
-                UserMenuCreateGet.UserMenuTypesRight = await _peopleProvider.UserMenuTypeRightList(CurrentUser.Id);
+                UserMenuCreateGet.UserMenuTypesLeft = await _userProvider.UserMenuTypeLeftList(CurrentUser.Id);
+                UserMenuCreateGet.UserMenuTypesRight = await _userProvider.UserMenuTypeRightList(CurrentUser.Id);
                 UserMenuCreateGetSequences.Add(new SequenceList { Sequence = UserMenuCreateGetSequences.Count ,Name = "Add at the end" });
                 UserMenuCreateGet.UserMenus = UserMenuCreateGetSequences;
                 UserMenuCreateGet.Icons = iconslist;
@@ -123,11 +125,11 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var UserMenu = await _userMenuProvider.UserMenuUpdateGet(Id);
-                var iconslist = await _masterProvider.IconList(CurrentUser.Id);
+                var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.PageListForMenu(CurrentUser.Id);
                 var UserMenuSequences = await _userMenuProvider.UserMenuCreateGetSequence(CurrentUser.Id);
-                UserMenu.UserMenuTypesLeft = await _peopleProvider.UserMenuTypeLeftList(CurrentUser.Id);
-                UserMenu.UserMenuTypesRight = await _peopleProvider.UserMenuTypeRightList(CurrentUser.Id);
+                UserMenu.UserMenuTypesLeft = await _userProvider.UserMenuTypeLeftList(CurrentUser.Id);
+                UserMenu.UserMenuTypesRight = await _userProvider.UserMenuTypeRightList(CurrentUser.Id);
                 UserMenuSequences.Add(new SequenceList { Sequence = UserMenuSequences.Count, Name = "Add at the end" });
                 UserMenu.UserMenus = UserMenuSequences;
                 UserMenu.Icons = iconslist;

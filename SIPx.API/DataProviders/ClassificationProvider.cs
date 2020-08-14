@@ -198,6 +198,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationPageSectionCreatePost>(usp, ClassificationPageSection);
             return true;
         }
+        public async Task<List<ClassificationList>> ClassificationList(string UserId)
+        {
+            string usp = "usp_ClassificationList @UserID";
+            var x = await _sqlDataAccess.LoadData<ClassificationList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public Task<List<LanguageList>> ClassificationLangugageCreateGetLanguageList(string UserId, int ClassificationId)
         {
             string usp = "[usp_ClassificationLangugageCreateGetLanguageList] @UserID, @ClassificationId";

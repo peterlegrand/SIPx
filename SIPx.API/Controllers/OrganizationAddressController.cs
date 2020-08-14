@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationAddressController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IOrganizationAddressProvider _organizationAddressProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationAddressController(IOrganizationAddressProvider organizationAddressProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationAddressController(IMasterListProvider masterListProvider, IOrganizationAddressProvider organizationAddressProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _organizationAddressProvider = organizationAddressProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
@@ -69,8 +71,8 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var OrganizationAddressCreateGet = new OrganizationAddressCreateGet();
-                var AddressTypes = await _masterProvider.AddressTypeList(CurrentUser.Id);
-                var Countries = await _masterProvider.CountryList(CurrentUser.Id);
+                var AddressTypes = await _masterListProvider.AddressTypeList(CurrentUser.Id);
+                var Countries = await _masterListProvider.CountryList(CurrentUser.Id);
                 OrganizationAddressCreateGet.AddressTypes = AddressTypes;
                 OrganizationAddressCreateGet.Countries = Countries;
                 OrganizationAddressCreateGet.OrganizationId = Id;

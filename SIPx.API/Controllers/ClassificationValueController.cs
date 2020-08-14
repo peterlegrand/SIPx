@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationValueController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -19,8 +20,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueController(IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueController(IMasterListProvider masterListProvider, IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _classificationValueProvider = classificationValueProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -67,7 +69,7 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var x = await _classificationValueProvider.ClassificationValueUpdateGet(CurrentUser.Id, Id);
-                var z = await _masterProvider.StatusList(CurrentUser.Id);
+                var z = await _masterListProvider.StatusList(CurrentUser.Id);
 
                 return Ok(x);
             }

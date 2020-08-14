@@ -21,14 +21,14 @@ namespace SIPx.API.Controllers
     {
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
+        private readonly IRoleGroupProvider _roleGroupProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public RoleGroupController(IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public RoleGroupController(IMasterProvider masterProvider, IClaimCheck claimCheck, IRoleGroupProvider roleGroupProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
+            _roleGroupProvider = roleGroupProvider;
             _userManager = userManager;
         }
 
@@ -38,7 +38,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.RoleGroupLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _roleGroupProvider.RoleGroupLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -54,7 +54,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.RoleGroupLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _roleGroupProvider.RoleGroupLanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -68,7 +68,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.RoleGroupIndexGet(CurrentUser.Id));
+                return Ok(await _roleGroupProvider.RoleGroupIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -84,7 +84,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.RoleGroupUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _roleGroupProvider.RoleGroupUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -117,10 +117,10 @@ namespace SIPx.API.Controllers
             RoleGroup.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _peopleProvider.RoleGroupCreatePostCheck(RoleGroup);
+                var CheckString = await _roleGroupProvider.RoleGroupCreatePostCheck(RoleGroup);
                 if (CheckString.Length == 0)
                 {
-                    _peopleProvider.RoleGroupCreatePost(RoleGroup);
+                    _roleGroupProvider.RoleGroupCreatePost(RoleGroup);
                     return Ok(RoleGroup);
                 }
                 return BadRequest(new

@@ -19,13 +19,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class PersonAddressController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonAddressController(IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonAddressController(IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _peopleProvider = peopleProvider;
@@ -55,7 +57,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 var x = await _peopleProvider.PersonAddressUpdateGet(CurrentUser.Id, Id);
-                var y = await _masterProvider.CountryList(CurrentUser.Id);
+                var y = await _masterListProvider.CountryList(CurrentUser.Id);
                 x.Countries = y;
                 return Ok(x);
             }
@@ -73,8 +75,8 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PersonAddressCreateGet = new PersonAddressCreateGet();
-                var AddressTypes = await _masterProvider.AddressTypeList(CurrentUser.Id);
-                var Countries = await _masterProvider.CountryList(CurrentUser.Id);
+                var AddressTypes = await _masterListProvider.AddressTypeList(CurrentUser.Id);
+                var Countries = await _masterListProvider.CountryList(CurrentUser.Id);
                 PersonAddressCreateGet.AddressTypes = AddressTypes;
                 PersonAddressCreateGet.Countries = Countries;
                 PersonAddressCreateGet.PersonId = Id;

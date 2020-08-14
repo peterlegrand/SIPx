@@ -19,12 +19,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class GenderController : ControllerBase
     {
+        private readonly IGenderProvider _genderProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public GenderController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public GenderController(IGenderProvider genderProvider, IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _genderProvider = genderProvider;
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;
             _userManager = userManager;
@@ -37,7 +39,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GenderIndexGet(CurrentUser.Id));
+                return Ok(await _genderProvider.GenderIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -51,7 +53,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GendersActive(CurrentUser.Id));
+                return Ok(await _genderProvider.GendersActive(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -66,7 +68,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.GenderUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _genderProvider.GenderUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

@@ -19,45 +19,47 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ValueUpdateTypeController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ValueUpdateTypeController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ValueUpdateTypeController(IMasterListProvider masterListProvider, IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;
             _userManager = userManager;
         }
 
-        [HttpGet("Index")]
-        public async Task<IActionResult> GetValueUpdateTypes()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.ValueUpdateTypeIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("Index")]
+        //public async Task<IActionResult> GetValueUpdateTypes()
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _masterProvider.ValueUpdateTypeIndexGet(CurrentUser.Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetValueUpdateType(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _masterProvider.ValueUpdateTypeUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("Update/{Id:int}")]
+        //public async Task<IActionResult> GetValueUpdateType(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _masterListProvider.ValueUpdateTypeUpdateGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
     }
 }

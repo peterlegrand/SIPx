@@ -74,20 +74,38 @@ namespace SIPx.API
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
-            services.AddTransient<IClassificationProvider, ClassificationProvider>();
+            services.AddTransient<ICheckProvider, CheckProvider>();
+            services.AddTransient<ISettingProvider, SettingProvider>();
             services.AddTransient<IClassificationLevelProvider, ClassificationLevelProvider>();
+            services.AddTransient<IClassificationProvider, ClassificationProvider>();
             services.AddTransient<IClassificationValueProvider, ClassificationValueProvider>();
-            
+
+            services.AddTransient<IRoleGroupProvider, RoleGroupProvider>();
+
+            services.AddTransient<IContentProvider, ContentProvider>();
+            services.AddTransient<IContentStatusProvider, ContentStatusProvider>();
+            services.AddTransient<IContentTypeClassificationProvider, ContentTypeClassificationProvider>();
+            services.AddTransient<IContentTypeClassificationStatusProvider, ContentTypeClassificationStatusProvider>();
+            services.AddTransient<IContentTypeGroupProvider, ContentTypeGroupProvider>();
+            services.AddTransient<IContentTypeProvider, ContentTypeProvider>();
+
+            services.AddTransient<IFrontProcessProvider, FrontProcessProvider>();
+            services.AddTransient<IFrontProvider, FrontProvider>();
+            services.AddTransient<IGenderProvider, GenderProvider>();
+
+            services.AddTransient<ILanguageProvider, LanguageProvider>();
+
+            services.AddTransient<IRoleProvider, RoleProvider>();
             services.AddTransient<IUserMenuProvider, UserMenuProvider>();
             services.AddTransient<IUserMenuTemplateProvider, UserMenuTemplateProvider>();
+            services.AddTransient<IUserProvider, UserProvider>();
+            services.AddTransient<IPersonRelationTypeProvider, PersonRelationTypeProvider>();
             services.AddTransient<IUserMenuTemplateOptionProvider, UserMenuTemplateOptionProvider>();
             services.AddTransient<IUserPreferenceProvider, UserPreferenceProvider>();
 
             services.AddTransient<IProjectProvider, ProjectProvider>();
             services.AddTransient<IProjectTypeProvider, ProjectTypeProvider>();
             
-            services.AddTransient<IFrontProvider, FrontProvider>();
-            services.AddTransient<IFrontProcessProvider, FrontProcessProvider>();
 
             services.AddTransient<IPageProvider, PageProvider>();
 
@@ -101,15 +119,11 @@ namespace SIPx.API
             services.AddTransient<IOrganizationTelecomProvider, OrganizationTelecomProvider>();
             services.AddTransient<IOrganizationTypeProvider, OrganizationTypeProvider>();
 
-            services.AddTransient<IPeopleProvider, PeopleProvider>();
             services.AddTransient<IMetaProvider, MetaProvider>();
             services.AddTransient<IMasterProvider, MasterProvider>();
+            services.AddTransient<IMasterListProvider, MasterListProvider>();
 
-            services.AddTransient<IContentProvider, ContentProvider>();
-            services.AddTransient<IContentMasterProvider, ContentMasterProvider>();
-            
-            services.AddTransient<ICheckProvider, CheckProvider>();
-            services.AddTransient<ILanguageProvider, LanguageProvider>();
+
             services.AddTransient<SIPx.API.DataProviders.IUITermLanguageCustomizationProvider, UITermLanguageCustomizationProvider>();
             services.AddSwaggerGen(x =>
             {

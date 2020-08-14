@@ -19,13 +19,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ContentMasterController : ControllerBase
     {
+        private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IContentMasterProvider _contentMasterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentMasterController(IMasterProvider masterProvider, IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentMasterController(ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _securityLevelProvider = securityLevelProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _contentMasterProvider = contentMasterProvider;
@@ -242,7 +244,7 @@ namespace SIPx.API.Controllers
             {
                 var ContentTypeCreateGet = new ContentTypeCreateGet();
                 var ContentTypeGroups = await _contentMasterProvider.ContentTypeGroupList(CurrentUser.Id);
-                var SecurityLevels = await _masterProvider.SecurityLevelList(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.SecurityLevelList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ContentTypeCreateGet.LanguageId = UserLanguage.LanguageId;
                 ContentTypeCreateGet.LanguageName = UserLanguage.Name;

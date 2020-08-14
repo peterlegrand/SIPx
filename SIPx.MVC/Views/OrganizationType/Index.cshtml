@@ -3,6 +3,7 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization types")).TermString;
 
+    Layout = "_LayoutAdmin";
 }
 
 <h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organization types")).TermString</h1>

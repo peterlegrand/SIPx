@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationLevelController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IClassificationLevelProvider _classificationLevelProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -19,8 +20,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationLevelController(IClassificationLevelProvider classificationLevelProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationLevelController(IMasterListProvider masterListProvider, IClassificationLevelProvider classificationLevelProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _classificationLevelProvider = classificationLevelProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -61,7 +63,7 @@ namespace SIPx.API.Controllers
             {
                 var ClassificationLevelCreateGet = new ClassificationLevelCreateGet();
                 var ClassificationLevelCreateGetSequences = await _classificationLevelProvider.ClassificationLevelCreateGetSequence(CurrentUser.Id, Id);
-                var DateLevels = await _masterProvider.DateLevelList(CurrentUser.Id);
+                var DateLevels = await _masterListProvider.DateLevelList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationLevelCreateGetSequences.Add(new SequenceList { Sequence = ClassificationLevelCreateGetSequences.Count ,Name = "Add at the end" });
                 ClassificationLevelCreateGet.LanguageId = UserLanguage.LanguageId;

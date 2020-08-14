@@ -4,8 +4,8 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification language")).TermString;
-   
 
+    Layout = "_LayoutAdmin";
 }
 
     <h1>

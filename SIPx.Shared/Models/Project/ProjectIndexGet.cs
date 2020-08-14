@@ -9,14 +9,11 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProjectId { get; set; }
-        public string ProjectName { get; set; }
-        public int ProjectLanguageId { get; set; }
+        public int LanguageId { get; set; }
         public int? ParentProjectId { get; set; }
         public string ParentProjectName { get; set; }
         public int StatusId { get; set; }
         public string StatusName { get; set; }
-        public int LanguageId { get; set; }
-        public string LanguageName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

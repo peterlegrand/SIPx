@@ -1389,5 +1389,16 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1387, 'Project types');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1388, 'Add new process template stage type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1389, 'Process template stage type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1390, 'Process template stage types');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1391, 'Add role');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1392, 'Group name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1393, 'Add new content type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1394, 'Content type groups');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1395, 'Add new content type group');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1396, 'Person relation types');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1397, 'Add new person relation type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1398, 'Internal name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1399, 'Customization');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1400, 'Add user');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1401, 'New page');
 
 SET IDENTITY_INSERT UITerms OFF;

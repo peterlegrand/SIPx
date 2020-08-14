@@ -63,7 +63,7 @@ namespace SIPx.DataAccess
         public async Task<List<ContentForPanel>> ContentForPanel(string UserId)
         {
             string usp = "usp_ContentForPanel @UserId";
-            var x = await _sqlDataAccess.LoadData<ContentForPanel, dynamic>(usp, new { UserId = UserId});
+            var x = await _sqlDataAccess.LoadData<ContentForPanel, dynamic>(usp, new { UserId = UserId });
             return x;
         }
         public async Task<List<ClassificationValueList>> GetContentCreateListSet2(string UserId, int ClassificationId)
@@ -77,7 +77,7 @@ namespace SIPx.DataAccess
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@LanguageID", LanguageId);
             string usp = "usp_AdminClassficationList @LanguageID";
-            var x = _sqlDataAccess.LoadData2<ClassificationIndexGet>(usp, parameters );
+            var x = _sqlDataAccess.LoadData2<ClassificationIndexGet>(usp, parameters);
             return x;
         }
 

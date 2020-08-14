@@ -12,5 +12,6 @@ namespace SIPx.DataAccess
         Task<List<int>> NewProcessGetInitialTemplateList();
         Task<List<NewProcessTemplateList>> NewProcessGetTemplateList(string SQLString);
         Task<bool> NewProcessInsert(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields);
+        Task<List<ToDoIndexGet>> ToDoIndexGet(string SQLString);
     }
 }

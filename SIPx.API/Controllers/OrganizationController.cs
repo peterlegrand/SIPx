@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IOrganizationTypeProvider _organizationTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationController(IOrganizationTypeProvider organizationTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationController(IMasterListProvider masterListProvider, IOrganizationTypeProvider organizationTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _organizationTypeProvider = organizationTypeProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
@@ -97,7 +99,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var OrganizationCreateGet = new OrganizationCreateGet();
-                var Statuses = await _masterProvider.StatusList(CurrentUser.Id);
+                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
                 var OrganizationTypes = await _organizationTypeProvider.OrganizationTypeList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 OrganizationCreateGet.LanguageId = UserLanguage.LanguageId;

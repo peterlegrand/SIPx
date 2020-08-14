@@ -54,7 +54,7 @@ SELECT TOP (@Top)
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
 	, Path
 	, ProjectHierarchy.ProjectTypeID
-	, ProjectTypeLanguages.Name
+	, ProjectTypeLanguages.Name ProjectTypeName
 	, Creator.FirstName + ' ' + Creator.LastName Creator
 	, ProjectHierarchy.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier

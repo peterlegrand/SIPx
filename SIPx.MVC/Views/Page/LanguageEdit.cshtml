@@ -5,6 +5,7 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page language")).TermString;
 
+    Layout = "_LayoutAdmin";
 }
 
 <h1>

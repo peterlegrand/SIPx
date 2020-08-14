@@ -13,14 +13,16 @@ namespace SIPx.API.Controllers
     public class ClassificationController : ControllerBase
     {
         private readonly IMasterProvider _masterProvider;
+        private readonly IMasterListProvider _masterListProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationController(IMasterProvider masterProvider, IMasterListProvider masterListProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _masterProvider = masterProvider;
+            _masterListProvider = masterListProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;
@@ -49,7 +51,7 @@ namespace SIPx.API.Controllers
             {
                 var ClassificationCreateGet = new ClassificationCreateGet();
                 var ClassificationCreateGetSequences = await _classificationProvider.ClassificationCreateGetSequence(CurrentUser.Id);
-                var Statuses = await _masterProvider.StatusList(CurrentUser.Id);
+                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationCreateGet.LanguageId = UserLanguage.LanguageId;
                 ClassificationCreateGet.LanguageName = UserLanguage.Name;
@@ -154,7 +156,7 @@ namespace SIPx.API.Controllers
                 var x = await _classificationProvider.ClassificationUpdateGet(CurrentUser.Id, Id);
                 var y = await _classificationProvider.ClassificationPageListGet(CurrentUser.Id, Id);
                 var u = await _classificationProvider.ClassificationCreateGetSequence(CurrentUser.Id);
-                var z = await _masterProvider.StatusList(CurrentUser.Id);
+                var z = await _masterListProvider.StatusList(CurrentUser.Id);
                 x.DropDownSequences = u;
                 x.DefaultPages = y;
                 x.Statuses = z;

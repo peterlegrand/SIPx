@@ -19,12 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class SettingController : ControllerBase
     {
+        private readonly ISettingProvider _settingProvider;
+        private readonly ILanguageProvider _languageProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public SettingController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public SettingController(ISettingProvider settingProvider, ILanguageProvider languageProvider, IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _settingProvider = settingProvider;
+            _languageProvider = languageProvider;
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;
             _userManager = userManager;
@@ -37,7 +41,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.SettingIndexGet(CurrentUser.Id));
+                return Ok(await _settingProvider.SettingIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -52,11 +56,11 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _masterProvider.SettingUpdateGet(CurrentUser.Id, Id);
+                var x = await _settingProvider.SettingUpdateGet(CurrentUser.Id, Id);
 
                 if (x.TypeId == 1)
                 {
-                    var LanguageList = await _masterProvider.LanguageList(CurrentUser.Id);
+                    var LanguageList = await _languageProvider.LanguageList(CurrentUser.Id);
                     x.Languages = LanguageList;
                 }
                 return Ok(x);

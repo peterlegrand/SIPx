@@ -54,6 +54,11 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<NewProcessTemplateList>(SQLString);
             return x;
         }
+        public async Task<List<ToDoIndexGet>> ToDoIndexGet(string SQLString)
+        {
+            var x = await _sqlDataAccess.LoadData<ToDoIndexGet>(SQLString);
+            return x;
+        }
 
         public async Task<bool> NewProcessInsert(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields)
         {

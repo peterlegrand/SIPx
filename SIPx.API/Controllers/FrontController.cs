@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SIPx.API.Classes;
 using SIPx.API.Models;
 using SIPx.DataAccess;
 using SIPx.Shared;
@@ -15,13 +16,17 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontController : Controller
     {
+        private readonly IProcessProvider _processProvider;
+        private readonly IFrontProcessProvider _frontProcessProvider;
         private readonly IContentProvider _contentProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IFrontProvider _frontProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontController(IContentProvider contentProvider, IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontController(IProcessProvider processProvider, IFrontProcessProvider frontProcessProvider, IContentProvider contentProvider, IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processProvider = processProvider;
+            _frontProcessProvider = frontProcessProvider;
             _contentProvider = contentProvider;
             _claimCheck = claimCheck;
             _frontProvider = frontProvider;
@@ -61,6 +66,12 @@ namespace SIPx.API.Controllers
                     {
                         var ContentList = await _contentProvider.ContentForPanel(CurrentUser.Id);
                         panel.Contents = ContentList;
+                    }
+                    if (panel.PageSectionTypeId == 1 & panel.PageSectionDataTypeId == 2)  //List Todo
+                    {
+                        var x = new ToDo(_processProvider);
+                        var ContentList = await x.GetList(CurrentUser.Id, CurrentUser.SecurityLevelId);
+                        panel.ToDos = ContentList;
                     }
                 }
                 return Ok(panels);

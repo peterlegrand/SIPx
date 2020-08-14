@@ -19,12 +19,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class TelecomTypeController : ControllerBase
     {
+        private readonly ITelecomTypeProvider _telecomTypeProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public TelecomTypeController(IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public TelecomTypeController(ITelecomTypeProvider telecomTypeProvider, IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _telecomTypeProvider = telecomTypeProvider;
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;
             _userManager = userManager;
@@ -37,7 +39,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.TelecomTypeIndexGet(CurrentUser.Id));
+                return Ok(await _telecomTypeProvider.TelecomTypeIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -53,7 +55,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.TelecomTypeUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _telecomTypeProvider.TelecomTypeUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

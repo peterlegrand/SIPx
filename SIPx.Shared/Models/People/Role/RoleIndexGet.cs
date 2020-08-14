@@ -9,18 +9,18 @@ namespace SIPx.Shared
     public class RoleIndexGet
     {
         [Key]
-        public string RoleId { get; set; }
-        public string InternalName { get; set; }
+        public string Id { get; set; }
+        public int RoleLanguageId { get; set; }
+        public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public int RoleGroupId { get; set; }
-        public int Sequence { get; set; }
-        public string GroupName { get; set; }
-        public string GroupDescription { get; set; }
-        public string GroupMenuName { get; set; }
-        public string GroupMouseOver { get; set; }
-
+        public string CreatorID { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string CreatorName { get; set; }
+        public string ModifierID { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public string ModifierName { get; set; }
     }
 }

@@ -19,13 +19,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProjectController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProjectProvider _projectProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProjectController(IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProjectController(IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _projectProvider = ProjectProvider;
@@ -96,7 +98,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ProjectCreateGet = new ProjectCreateGet();
-                var Statuses = await _masterProvider.StatusList(CurrentUser.Id);
+                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
                 var ProjectTypes = await _projectProvider.ProjectTypeList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ProjectCreateGet.LanguageId = UserLanguage.LanguageId;

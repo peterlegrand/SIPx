@@ -24,7 +24,6 @@ namespace SIPx.API.Controllers
         private readonly IMasterProvider _masterProvider;
         private readonly IPageProvider _pageProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
         public UserPreferenceController(IUserPreferenceProvider userPreferenceProvider
@@ -32,7 +31,6 @@ namespace SIPx.API.Controllers
             , IMasterProvider masterProvider
             , IPageProvider pageProvider
             , IClaimCheck claimCheck
-            , IPeopleProvider peopleProvider
             , UserManager<SipUser> userManager)
         {
             _userPreferenceProvider = userPreferenceProvider;
@@ -40,7 +38,6 @@ namespace SIPx.API.Controllers
             _masterProvider = masterProvider;
             _pageProvider = pageProvider;
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
         [HttpGet("Index")]

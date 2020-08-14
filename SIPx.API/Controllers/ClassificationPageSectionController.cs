@@ -13,6 +13,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationPageSectionController  : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IContentMasterProvider _contentMasterProvider;
@@ -21,8 +22,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationPageSectionController(IPageProvider pageProvider, IMasterProvider masterProvider, IContentMasterProvider contentMasterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationPageSectionController(IMasterListProvider masterListProvider , IPageProvider pageProvider, IMasterProvider masterProvider, IContentMasterProvider contentMasterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _pageProvider = pageProvider;
             _masterProvider = masterProvider;
             _contentMasterProvider = contentMasterProvider;
@@ -99,7 +101,7 @@ namespace SIPx.API.Controllers
                 cps.ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
                 cps.PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
                 cps.PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
-                cps.SortBys = await _masterProvider.SortByList(CurrentUser.Id);
+                cps.SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
                 cps.Sequences = await _classificationProvider.ClassificationPageSectionSequenceListBySectionIdGet(CurrentUser.Id, Id);
                 var intlist = new List<int>();
                 intlist.Add(1);
@@ -126,7 +128,7 @@ namespace SIPx.API.Controllers
                 var PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
                 var PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
                 var ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
-                var SortBys = await _masterProvider.SortByList(CurrentUser.Id);
+                var SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationPageSectionCreateGet.LanguageId = UserLanguage.LanguageId;
                 ClassificationPageSectionCreateGet.LanguageName = UserLanguage.Name;

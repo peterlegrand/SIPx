@@ -19,15 +19,17 @@ namespace SIPx.API.Controllers
     public class PageSectionController : ControllerBase
     {
         private readonly IMasterProvider _masterProvider;
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IContentMasterProvider _contentMasterProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPageProvider _pageProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PageSectionController(IContentMasterProvider contentMasterProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider pageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PageSectionController(IMasterListProvider masterListProvider, IContentMasterProvider contentMasterProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider pageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _masterProvider = masterProvider;
+            _masterListProvider = masterListProvider;
             _contentMasterProvider = contentMasterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -112,7 +114,7 @@ namespace SIPx.API.Controllers
                 var PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
                 var PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
                 var ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
-                var SortBys = await _masterProvider.SortByList(CurrentUser.Id);
+                var SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 PageSectionCreateGet.LanguageId = UserLanguage.LanguageId;
                 PageSectionCreateGet.LanguageName = UserLanguage.Name;

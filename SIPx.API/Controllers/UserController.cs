@@ -20,13 +20,13 @@ namespace SIPx.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
+        private readonly IUserProvider _userProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserController(IClaimCheck claimCheck, IUserProvider userProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
+            _userProvider = userProvider;
             _userManager = userManager;
         }
 
@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.UserIndexGet(CurrentUser.Id));
+                return Ok(await _userProvider.UserIndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.UserUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _userProvider.UserUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

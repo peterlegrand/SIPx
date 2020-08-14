@@ -6,18 +6,17 @@ namespace SIPx.DataAccess
 {
     public interface IContentProvider
     {
+        bool ClassificationUpdatePost(ClassificationUpdatePost Classification);
+        Task<List<ContentForPanel>> ContentForPanel(string UserId);
         Task<ClassificationIndexGet> GetClassificationById(int Id, int LanguageId);
-        Task<List<Content>> GetContents(string UserId);
-        Task<List<ContentType>> GetContentTypes(string UserId);
+        Task<List<ClassificationList>> GetClassificationList(string UserId, int ContentTypeId);
+        List<ClassificationIndexGet> GetClassifications2(int LanguageId);
         Task<ContentCreateListSet> GetContentCreateListSet(string UserId, int ContentTypeId);
         Task<List<ClassificationValueList>> GetContentCreateListSet2(string UserId, int ClassificationId);
-        List<ClassificationIndexGet> GetClassifications2(int LanguageId);
-        //bool PostClassification(ClassificationCreatePost Classification);
-        //bool PutClassification(ClassificationUpdatePut Classification);
-
+        Task<List<Content>> GetContents(string UserId);
+        Task<List<ContentType>> GetContentTypes(string UserId);
         Task<List<LanguageList>> GetLanguageList(string UserId);
-        Task<List<ClassificationList>> GetClassificationList(string UserId, int ContentTypeId);
         Task<List<OrganizationList>> GetOrganizationList(string UserId);
-        Task<List<ContentForPanel>> ContentForPanel(string UserId);
+        bool PostClassification(ClassificationCreatePost Classification);
     }
 }

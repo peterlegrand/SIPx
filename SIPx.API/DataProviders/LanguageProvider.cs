@@ -31,10 +31,10 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<Language>> LanguageIndexGet(string UserId)
+        public async Task<List<LanguageIndexGet>> LanguageIndexGet(string UserId)
         {
             string usp = "usp_LanguageIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<Language, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<LanguageIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
         public async Task<List<LanguageList>> LanguagesActiveList(string UserId)

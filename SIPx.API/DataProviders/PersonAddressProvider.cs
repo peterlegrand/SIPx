@@ -1,0 +1,49 @@
+﻿
+using Dapper;
+using SIPx.Shared;
+//using SIPx.Shared;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SIPx.DataAccess
+{
+    public class PersonAddressProvider : IPersonAddressProvider
+    {
+        private readonly ISqlDataAccess _sqlDataAccess;
+
+        public PersonAddressProvider(ISqlDataAccess sqlDataAccess)
+        {
+            _sqlDataAccess = sqlDataAccess;
+        }
+
+        public Task<List<PersonAddressIndexGet>> PersonAddressIndexGet(string UserId, int PersonId)
+        {
+            string usp = "usp_PersonAddressIndexGet @UserId, @PersonID";
+            var x = _sqlDataAccess.LoadData<PersonAddressIndexGet, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
+            return x;
+
+        }
+        public Task<PersonAddressUpdateGet> PersonAddressUpdateGet(string UserId, int PersonAddressId)
+        {
+            string usp = "usp_PersonAddressUpdateGet @UserId, @PersonAddressID";
+            return _sqlDataAccess.LoadSingleRecord<PersonAddressUpdateGet, dynamic>(usp, new { UserId = UserId, PersonAddressId = PersonAddressId });
+
+        }
+        public async Task<string> PersonAddressCreatePostCheck(PersonAddressCreatePost PersonAddress)
+        {
+            string usp = "usp_PersonAddressCreateCheck @PersonId, @AddressTypeId  , @CountryId, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);
+            return CheckString;
+        }
+        public async Task<string> PersonAddressCreatePost(PersonAddressCreatePost PersonAddress)
+        {
+            string usp = "usp_PersonAddressCreate @PersonId, AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @Location, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);
+            return CheckString;
+        }
+    }
+}
