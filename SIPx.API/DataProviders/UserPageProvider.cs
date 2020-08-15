@@ -27,6 +27,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<PageIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<PageDeleteGet> UserPageDeleteGet(string UserId, int PageId)
+        {
+            string usp = "usp_UserPageDeleteGet @UserID, @PageId";
+            var x = await _sqlDataAccess.LoadSingleRecord<PageDeleteGet, dynamic>(usp, new { UserId = UserId , PageId});
+            return x;
+        }
         public Task<PageUpdateGet> UserPageUpdateGet(string UserId, int PageId)
         {
             string usp = "usp_UserPageUpdateGet @UserId, @PageID";
@@ -70,9 +76,9 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public async Task<string> UserPageCreatePost(PageCreatePost Page)
+        public async Task<string> UserPageCreatePost(PageCreateGet Page)
         {
-            string usp = "usp_UserPageCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId";
+            string usp = "usp_UserPageCreatePost @ShowTitleName , @ShowTitleDescription , @CreatorId , @Name , @Description , @MenuName , @MouseOver , @TitleName , @TitleDescription ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
             return CheckString;
         }
@@ -99,6 +105,12 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_UserPageSectionCreateGetSequence @UserID, @PageId";
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, PageId });
+        }
+        public bool UserPageDeletePost(PageDeleteGet Page)
+        {
+            string usp = "usp_UserPageDeletePost @UserId, @PageID";
+            _sqlDataAccess.SaveData<PageDeleteGet>(usp, Page);
+            return true;
         }
     }
 }

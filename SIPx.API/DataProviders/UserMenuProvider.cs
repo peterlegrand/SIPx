@@ -30,6 +30,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<UserMenuUpdateGet, dynamic>(usp, new { UserMenuID });
 
         }
+        public Task<UserMenuDeleteGet> UserMenuDeleteGet(string UserID, int UserMenuID)
+        {
+            string usp = "usp_UserMenuDeleteGet @UserId,  @UserMenuID";
+            return _sqlDataAccess.LoadSingleRecord<UserMenuDeleteGet, dynamic>(usp, new { UserID, UserMenuID });
+
+        }
         public Task<List<SequenceList>> UserMenuCreateGetSequence(string UserId)
         {
             string usp = "[usp_UserMenuCreateGetSequence] @UserID";
@@ -47,6 +53,18 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_UserMenuUpdatePost @UserMenuID, @Name, @MouseOver , @UserPageIdLeft, @UserPageIdRight , @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @IconId, @Sequence, @ModifierID";
             _sqlDataAccess.SaveData<UserMenuUpdateGet>(usp, UserMenu);
+            return true;
+        }
+        public bool UserMenuDeletePost(UserMenuDeleteGet UserMenu)
+        {
+            string usp = "usp_UserMenuDeletePost @UserMenuID";
+            _sqlDataAccess.SaveData<UserMenuDeleteGet>(usp, UserMenu);
+            return true;
+        }
+        public bool UserMenuUpdatePost(int UserMenuId)
+        {
+            string usp = "usp_UserMenuDeletePost @UserMenuID";
+            _sqlDataAccess.SaveData<int>(usp, UserMenuId);
             return true;
         }
 

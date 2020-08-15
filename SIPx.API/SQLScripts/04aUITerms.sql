@@ -1412,5 +1412,9 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1410, 'Add new user page sec
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1411, 'User page');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1412, 'User page section');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1413, 'New user page');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1414, 'Delete user menu');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1415, 'Left menu page');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1416, 'Right menu page');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1417, 'Delete user page');
 
 SET IDENTITY_INSERT UITerms OFF;

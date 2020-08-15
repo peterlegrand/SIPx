@@ -17,7 +17,7 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Page/Create">@Term.Find(x => x.InternalName.Equals("Add new user page")).TermString</a>
+<a asp-action="Create" >@Term.Find(x => x.InternalName.Equals("Add new user page")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>

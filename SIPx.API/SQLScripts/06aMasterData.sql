@@ -873,3 +873,25 @@ SET IDENTITY_INSERT [dbo].[OrganizationSettingTypes] ON
 INSERT [dbo].[OrganizationSettingTypes] ([OrganizationSettingTypeID], [OrganizationSettingTypeGroupID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 1, 1373, 1373, 1373, 1373)
 SET IDENTITY_INSERT [dbo].[OrganizationSettingTypes] OFF
  
+SET IDENTITY_INSERT MenuTypes ON 
+INSERT MenuTypes([MenuTypeID], NameTermID, DescriptionTermID, MenuNameTermID, MouseOverTermID,FirstLevelOnly) 
+VALUES (1, 1210, 1210, 1210, 1210,0)
+,(2, 233, 233, 233, 233,0)
+,(3, 226, 266, 266, 226,0)
+,(4, 1360, 1360, 1360, 1360,0)
+,(5, 1357, 1357, 1357, 1357,0)
+,(6, 1358, 1358, 1358, 1358,0)
+,(7, 1359, 1359, 1359, 1359,0)
+,(8, 1361, 1361, 1361, 1361,0)
+,(9, 1362, 1362, 1362, 1362,0)
+,(10, 1363, 1363, 1363, 1363,0)
+,(11, 1364, 1364, 1364, 1364,0)
+,(12, 1365, 1365, 1365, 1365,0)
+,(13, 1366, 1366, 1366, 1366,0)
+,(14, 1367, 1367, 1367, 1367,0)
+,(15, 1368, 1368, 1368, 1368,0)
+,(16, 1369, 1369, 1369, 1369,0)
+,(17,1,1,1,1,1)
+,(18, 1357, 1357, 1357, 1357,0)
+,(19, 921, 921, 921, 921,0)
+SET IDENTITY_INSERT MenuTypes OFF

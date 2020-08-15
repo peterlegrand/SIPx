@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IUserPageProvider
     {
-        Task<string> UserPageCreatePost(PageCreatePost Page);
+        Task<string> UserPageCreatePost(PageCreateGet Page);
         Task<string> UserPageCreatePostCheck(PageCreatePost Page);
         Task<List<PageIndexGet>> UserPageIndexGet(string UserId);
         Task<List<PageList>> UserPageListForMenu(string UserId);
@@ -19,5 +19,7 @@ namespace SIPx.DataAccess
         Task<PageUpdateGet> UserPageUpdateGet(string UserId, int PageId);
         Task<string> UserPageUpdatePost(PageUpdateGet Page);
         Task<string> UserPageUpdatePostCheck(PageUpdateGet Page);
+        Task<PageDeleteGet> UserPageDeleteGet(string UserId, int PageId);
+        bool UserPageDeletePost(PageDeleteGet Page);
     }
 }

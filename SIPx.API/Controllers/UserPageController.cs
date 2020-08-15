@@ -138,22 +138,22 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(PageCreatePost Page)
+        public async Task<IActionResult> CreatePost(PageCreateGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Page.UserId = CurrentUser.Id;
+            Page.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userPageProvider.UserPageCreatePostCheck(Page);
-                if (CheckString.Length == 0)
-                {
-                    _pageProvider.PageCreatePost(Page);
+                //var CheckString = await _userPageProvider.UserPageCreatePostCheck(Page);
+                //if (CheckString.Length == 0)
+                //{
+                _userPageProvider.UserPageCreatePost(Page);
                     return Ok(Page);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -162,6 +162,55 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("Pages", "PageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _userPageProvider.UserPageDeleteGet(CurrentUser.Id, Id);
 
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Post(PageDeleteGet Page)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            Page.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _userPageProvider.UserPageDeletePostCheck(Page);
+                //if (CheckString.Length == 0)
+                //{
+                    _userPageProvider.UserPageDeletePost(Page);
+                    return Ok(Page);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
     }
 }

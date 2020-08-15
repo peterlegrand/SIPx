@@ -1,16 +1,22 @@
-﻿@model List<FrontIndexPanels>
+﻿@model FrontIndexGetDashboard
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
 
 }
-
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />Page / dashboard</h1>
+@if (Model.ShowTitleName)
+{
+    <h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Model.TitleName</h1>
+}
+@if (Model.ShowTitleDescription)
+{
+    <h3>@Model.TitleDescription</h3>
+}
 <div class=" control-section">
     <!--  DashboardLayout element declaration -->
     <ejs-dashboardlayout id="defaultLayout" columns="10" allowResizing="false">
         <e-dashboardlayout-panels>
-            @foreach (var x in Model)
+            @foreach (var x in Model.Panels)
             {
                 @if (x.PageSectionTypeId == 4)
                 {
@@ -519,9 +525,9 @@
         <td class="details">
             <table class="CardTable" cellpadding="3" cellspacing="2">
                 @*<colgroup>
-                    <col width="50%">
-                    <col width="50%">
-                </colgroup>*@
+                        <col width="50%">
+                        <col width="50%">
+                    </colgroup>*@
                 <tbody>
                     <tr>
                         <td class="font-weight-bold">${Title} </td>

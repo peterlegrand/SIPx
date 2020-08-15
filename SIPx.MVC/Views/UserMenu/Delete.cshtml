@@ -1,14 +1,14 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model UserMenuUpdateGet
+@model UserMenuDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Edit user menu")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete user menu")).TermString;
 
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Edit user menu")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete user menu")).TermString
 </h1>
 <div class="container">
 
@@ -27,7 +27,7 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" enabled="false" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
 
@@ -36,74 +36,102 @@
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="MouseOver" ejs-for="MouseOver" enabled="false" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Left menu type")).TermString type
+                @Term.Find(x => x.InternalName.Equals("Left menu type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserMenuTypeIDLeft" dataSource="@Model.UserMenuTypesLeft" ejs-for="@Model.UserMenuTypeIDLeft" value="@Model.UserMenuTypeIDLeft" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="UserMenuTypeId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
+                <ejs-textbox id="MenuTypeNameLeft" ejs-for="UserMenuTypeNameLeft" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Left menu")).TermString
+                @Term.Find(x => x.InternalName.Equals("Right menu type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="UserMenuTypeNameRight" ejs-for="UserMenuTypeNameRight" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Left menu page")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="UserPageNameLeft" ejs-for="UserPageNameLeft" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Right menu page")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="UserPageNameRight" ejs-for="UserPageNameRight" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
 
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="UserPageIdLeft" dataSource="@Model.Pages" ejs-for="@Model.UserPageIdLeft" value="@Model.UserPageIdLeft" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="PageId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Right menu type")).TermString type
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="UserMenuTypeIDRight" dataSource="@Model.UserMenuTypesRight" ejs-for="@Model.UserMenuTypeIDRight" value="@Model.UserMenuTypeIDRight" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="UserMenuTypeId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Right menu")).TermString
-
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="UserPageIdRight" dataSource="@Model.Pages" ejs-for="@Model.UserPageIdRight" value="@Model.UserPageIdRight" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="PageId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-            </div>
-        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Icon")).TermString
 
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Icon" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
+                <div class="col-9">
+                    <ejs-textbox id="IconName" ejs-for="IconName" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+                </div>
             </div>
-        </div><div class="row">
+        </div>
+
+
+        <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.UserMenus" ejs-for="@Model.Sequence" value="@Model.Sequence" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
+                <div class="col-9">
+                    <ejs-textbox id="CreatorName" ejs-for="CreatorName" enabled="false" cssClass="e-outline" placeholder="" floatLabelType="Auto"></ejs-textbox>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+
+            </div>
+            <div class="col-9">
+                <div class="col-9">
+                    <ejs-textbox id="CreatedDate" ejs-for="CreatedDate" enabled="false" cssClass="e-outline" placeholder="" floatLabelType="Auto"></ejs-textbox>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+
+            </div>
+            <div class="col-9">
+                <div class="col-9">
+                    <ejs-textbox id="ModifierName" ejs-for="ModifierName" enabled="false" cssClass="e-outline" placeholder="" floatLabelType="Auto"></ejs-textbox>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+
+            </div>
+            <div class="col-9">
+                <div class="col-9">
+                    <ejs-textbox id="ModifiedDate" ejs-for="ModifiedDate" enabled="false" cssClass="e-outline" placeholder="" floatLabelType="Auto"></ejs-textbox>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>

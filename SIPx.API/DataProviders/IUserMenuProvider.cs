@@ -8,8 +8,11 @@ namespace SIPx.DataAccess
     {
         Task<List<SequenceList>> UserMenuCreateGetSequence(string UserId);
         bool UserMenuCreatePost(UserMenuCreateGet UserMenu);
+        Task<UserMenuDeleteGet> UserMenuDeleteGet(string UserID, int UserMenuID);
         Task<List<UserMenuIndexGet>> UserMenuIndexGet(string UserId);
         Task<UserMenuUpdateGet> UserMenuUpdateGet(int UserMenuID);
-        bool UserMenuUpdatePost(UserMenuUpdateGet UserMenu);
+        bool UserMenuUpdatePost(int UserMenuId);
+        bool UserMenuUpdatePost(UserMenuUpdateGet UserMenu); 
+        bool UserMenuDeletePost(UserMenuDeleteGet UserMenu);
     }
 }

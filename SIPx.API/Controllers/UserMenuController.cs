@@ -172,5 +172,59 @@ namespace SIPx.API.Controllers
             });
         }
 
+
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> DeleteGet(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("UserMenus", "UserMenuID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var UserMenu = await _userMenuProvider.UserMenuDeleteGet(CurrentUser.Id, Id);
+                UserMenu.CreatorId = CurrentUser.Id;
+                return Ok(UserMenu);
+
+                //return Ok(await _userMenuProvider.UserMenuUpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(UserMenuDeleteGet UserMenu)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            UserMenu.ModifierId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
+                //if (CheckString.Length == 0)
+                //{
+                _userMenuProvider.UserMenuDeletePost(UserMenu);
+                return Ok(UserMenu);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
     }
 }

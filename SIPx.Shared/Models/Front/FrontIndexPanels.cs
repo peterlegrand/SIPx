@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontIndexPanels
+    public class FrontIndexGetPanels
     {
         [Key]
         public int PageSectionId { get; set; }

@@ -37,11 +37,11 @@ namespace SIPx.MVC.Controllers
             if (responseObject.IsSuccess)
             {
                 HttpContext.Session.SetString("Token", responseObject.Message);
-                return RedirectToAction("Index", "Admin");
+                return RedirectToAction("Index", "Front");
             }
             else
             {
-                return RedirectToAction("Index");
+                return RedirectToAction(  "Index");
                     }
         }
 

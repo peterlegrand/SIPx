@@ -36,9 +36,12 @@ namespace SIPx.API.Controllers
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
+            
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
+
+                var dashboard = await _frontProvider.FrontIndexGetDashboard(CurrentUser.Id, Id);
                 var panels = await _frontProvider.FrontIndexPanels(Id);
                 foreach(var panel in panels)
                 {
@@ -74,7 +77,8 @@ namespace SIPx.API.Controllers
                         panel.ToDos = ContentList;
                     }
                 }
-                return Ok(panels);
+                dashboard.Panels = panels;
+                return Ok(dashboard);
             }
             return BadRequest(new
             {

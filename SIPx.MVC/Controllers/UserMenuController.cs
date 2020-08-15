@@ -62,5 +62,32 @@ namespace SIPx.MVC.Controllers
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> Delete(UserMenuDeleteGet UserMenu)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/UserMenu/Delete", UserMenu, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/UserMenu/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenu/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Edit(UserMenuDeleteGet UserMenu)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/UserMenu/Delete", UserMenu, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
     }
 }
