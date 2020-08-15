@@ -94,8 +94,34 @@ namespace SIPx.API.Controllers
                 //{
                 _userMenuProvider.UserMenuCreatePost(UserMenu);
                 return Ok(UserMenu);
-            //}
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+            }
             return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(UserMenuUpdateGet UserMenu)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            UserMenu.ModifierId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
+                //if (CheckString.Length == 0)
+                //{
+                _userMenuProvider.UserMenuUpdatePost(UserMenu);
+                return Ok(UserMenu);
+                //}
+                return BadRequest(new
                 {
                     IsSuccess = false,
                     //Message = CheckString,
@@ -145,28 +171,6 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetLevelLanguage(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
-            {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuLanguages", "UserMenuLanguageID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
 
-                //return Ok(await _userMenuProvider.UserMenuLanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
     }
 }

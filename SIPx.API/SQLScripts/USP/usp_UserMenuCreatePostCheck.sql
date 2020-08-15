@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[usp_UserMenuCreatePostCheck] (
 	, @MouseOver nvarchar(50)
 	, @UserPageIdLeft int
 	, @UserPageIdRight int
-	, @Icon nvarchar(20)
+	, @IconId int
 	, @Sequence int
 	, @CreatorId nvarchar(450))  
 AS 

@@ -12,21 +12,21 @@
     <img src="~/images/icons/s.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User page")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.PageId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.PageLanguageId</div>
-
-    </div>
 
 
     <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+            </div>
+            <div class="col-9">  <ejs-numerictextbox id="Id" ejs-for="PageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox></div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+            </div><div class="col-9">@Model.PageLanguageId</div>
+
+        </div>
 
         <div class="row">
             <div class="col-3">

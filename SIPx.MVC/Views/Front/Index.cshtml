@@ -91,10 +91,10 @@
                         <e-content-template>
                             <div class="e-panel-container">
                                 @*<div class="e-panel-header">
-                                <div>
-                                    Content
-                                </div>
-                            </div>*@
+                                        <div>
+                                            Content
+                                        </div>
+                                    </div>*@
                                 <div class="e-panel-content">
                                     <ejs-grid id="@x.SubPanelId" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#rowtemplate">
                                         <e-grid-columns>
@@ -111,15 +111,11 @@
                     <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
                         <e-content-template>
                             <div class="e-panel-container">
-                                <div class="e-panel-header">
-                                <div>
-                                    Process todo
-                                </div>
-                            </div>
+
                                 <div class="e-panel-content">
                                     <ejs-grid id="@x.SubPanelId" dataSource="@x.ToDos" height="335" width="auto" rowTemplate="#ToDotemplate">
                                         <e-grid-columns>
-                                            <e-grid-column headerText="Id" width="300" field="ProcedssId" textAlign="Left"></e-grid-column>
+                                            <e-grid-column headerText="To do" width="300" field="ProcedssId" textAlign="Left"></e-grid-column>
                                         </e-grid-columns>
                                     </ejs-grid>
                                 </div>
@@ -522,27 +518,25 @@
     <tr>
         <td class="details">
             <table class="CardTable" cellpadding="3" cellspacing="2">
-                <colgroup>
+                @*<colgroup>
                     <col width="50%">
                     <col width="50%">
-                </colgroup>
+                </colgroup>*@
                 <tbody>
                     <tr>
                         <td class="font-weight-bold">${Title} </td>
                     </tr>
                     <tr>
                         <td>${ProcessTemplateFieldName} </td>
-                    </tr>
-                    <tr>
                         <td class="font-italic">
                             ${ProcessTemplateStageTypeName}
                         </td>
-                    </tr>
-                    <tr>
                         <td class="font-italic">
                             ${ProcessTemplateName}
                         </td>
+
                     </tr>
+
                 </tbody>
             </table>
         </td>

@@ -8,7 +8,7 @@ namespace SIPx.Shared
 {
     public class UserMenuCreateGet
     {
-        public string Icon { get; set; }
+        public int IconId { get; set; }
         public int UserMenuTypeIDLeft { get; set; }
         public int UserPageIdLeft { get; set; }
         public int UserMenuTypeIDRight { get; set; }

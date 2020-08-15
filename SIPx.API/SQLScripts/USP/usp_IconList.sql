@@ -5,7 +5,7 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
-SELECT Icons.FileName 
+SELECT Icons.IconId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 FROM Icons
 JOIN UITermLanguages UIName

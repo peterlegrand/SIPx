@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[usp_UserMenuCreatePost] (
 	, @UserPageIdRight int
 	, @UserMenuTypeIDLeft int
 	, @UserMenuTypeIDRight int
-	, @Icon nvarchar(20)
+	, @IconId Int
 	, @Sequence int
 	, @CreatorId nvarchar(450)) 
 
@@ -25,7 +25,7 @@ INSERT INTO UserMenus (
 	, UserPageIdRight
 	, UserMenuTypeIDLeft
 	, UserMenuTypeIDRight
-	, Icon
+	, IconId
 	, Sequence
 	, CreatorID
 	, CreatedDate
@@ -39,7 +39,7 @@ VALUES (
 	, @UserPageIdRight
 	, @UserMenuTypeIDLeft
 	, @UserMenuTypeIDRight
-	, @Icon
+	, @IconId
 	, @Sequence
 	, @CreatorId
 	, getdate()

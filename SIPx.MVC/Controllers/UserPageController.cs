@@ -49,6 +49,14 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(PageUpdateGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PageUpdateGet>($"{_baseUrl}api/UserPage/Update", Page, token);
+
+            return RedirectToAction("Index");
+        }
 
     }
 }

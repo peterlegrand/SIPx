@@ -17,5 +17,7 @@ namespace SIPx.DataAccess
         Task<List<PageSectionIndexGet>> UserPageSectionIndexGet(string UserId, int PageId);
         Task<PageSectionUpdateGet> UserPageSectionUpdateGet(string UserId, int PageSectionId);
         Task<PageUpdateGet> UserPageUpdateGet(string UserId, int PageId);
+        Task<string> UserPageUpdatePost(PageUpdateGet Page);
+        Task<string> UserPageUpdatePostCheck(PageUpdateGet Page);
     }
 }

@@ -20,7 +20,7 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="Id" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+                <ejs-numerictextbox id="Id" ejs-for="UserMenuId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -87,8 +87,8 @@
 
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Icon" dataSource="@Model.Icons" ejs-for="@Model.Icon" value="@Model.Icon" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="FileName"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="Icon" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div><div class="row">

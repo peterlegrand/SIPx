@@ -57,35 +57,47 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<PageList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public async Task<string> UserPageUpdatePostCheck(PageUpdateGet Page)
+        {
+            string usp = "usp_UserPageUpdatePostCheck @name ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
+            return CheckString;
+        }
         public async Task<string> UserPageCreatePostCheck(PageCreatePost Page)
         {
-            string usp = "usp_PageCreatePostCheck @LanguageID, @name, @UserId ";
+            string usp = "usp_UserPageCreatePostCheck @LanguageID, @name, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
             return CheckString;
         }
 
         public async Task<string> UserPageCreatePost(PageCreatePost Page)
         {
-            string usp = "usp_PageCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId";
+            string usp = "usp_UserPageCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
+            return CheckString;
+        }
+        public async Task<string> UserPageUpdatePost(PageUpdateGet Page)
+        {
+            string usp = "usp_UserPageUpdatePost @PageID, @StatusId, @ShowTitleName, @ShowTitleDescription, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @ModifierID";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
             return CheckString;
         }
         public async Task<string> UserPageSectionCreatePostCheck(PageSectionCreatePost PageSection)
         {
-            string usp = "usp_PageSectionCreatePostCheck @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @@OneTwoColumns, @ContentTypeId, @SortById, @LanguageId, @Name, @CreatorId ";
+            string usp = "usp_UserPageSectionCreatePostCheck @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @@OneTwoColumns, @ContentTypeId, @SortById,, @Name, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
             return CheckString;
         }
 
         public async Task<string> UserPageSectionCreatePost(PageSectionCreatePost PageSection)
         {
-            string usp = "usp_PageSectionCreatePost @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @OneTwoColumns, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId ";
+            string usp = "usp_UserPageSectionCreatePost @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @OneTwoColumns, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
             return CheckString;
         }
         public Task<List<SequenceList>> UserPageSectionCreateGetSequence(string UserId, int PageId)
         {
-            string usp = "usp_PageSectionCreateGetSequence @UserID, @PageId";
+            string usp = "usp_UserPageSectionCreateGetSequence @UserID, @PageId";
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, PageId });
         }
     }

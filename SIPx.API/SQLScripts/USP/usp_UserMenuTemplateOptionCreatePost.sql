@@ -8,7 +8,7 @@ CREATE PROCEDURE [dbo].[usp_UserMenuTemplateOptionCreatePost] (
 	, @UserPageIdRight int
 	, @UserMenuTypeIDLeft int
 	, @UserMenuTypeIDRight int
-	, @Icon nvarchar(20)
+	, @IconId int
 	, @Sequence int
 	, @CreatorId nvarchar(450)) 
 
@@ -31,7 +31,7 @@ INSERT INTO UserMenuTemplateOptions (
 	, UserPageIdRight
 	, UserMenuTypeIDLeft
 	, UserMenuTypeIDRight
-	, Icon
+	, IconId
 	, Sequence
 	, CreatorID
 	, CreatedDate
@@ -43,7 +43,7 @@ VALUES (
 	, @UserPageIdRight
 	, @UserMenuTypeIDLeft
 	, @UserMenuTypeIDRight
-	, @Icon
+	, @IconId
 	, @Sequence
 	, @CreatorId
 	, getdate()

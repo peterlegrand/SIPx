@@ -112,6 +112,31 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpPost("Update")]
+        public async Task<IActionResult> Post(PageUpdateGet Page)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            Page.ModifierId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _userPageProvider.UserPageUpdatePostCheck(Page);
+                //if (CheckString.Length == 0)
+                //{
+                    _userPageProvider.UserPageUpdatePost(Page);
+                    return Ok(Page);
+                //}
+                //return BadRequest(new
+                //{
+                //    IsSuccess = false,
+                //    Message = CheckString,
+                //});
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
         [HttpPost("Create")]
         public async Task<IActionResult> Post(PageCreatePost Page)
         {

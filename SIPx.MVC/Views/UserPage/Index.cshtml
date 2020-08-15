@@ -14,33 +14,26 @@
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Sections")).TermString" template="#Sections" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Page/Create">@Term.Find(x => x.InternalName.Equals("Add user new page")).TermString</a>
+<a href="~/Page/Create">@Term.Find(x => x.InternalName.Equals("Add new user page")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Page/Edit/${PageId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/UserPage/Edit/${PageId}"><span style="color:red">E</span>dit</a>
     </div>
 </script>
 
 <script id="Sections" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/PageSection/Index/${PageId}"><span style="color:red">S</span>ections</a>
-
-    </div>
-</script>
-<script id="Languages" type="text/x-template">
-    <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Page/LanguageIndex/${PageId}"><span style="color:red">L</span>anguage</a>
+        <a class="nav-link text-dark font-weight-bold" href="/UserPageSection/Index/${PageId}"><span style="color:red">S</span>ections</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Page/Delete/${PageId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/UserPage/Delete/${PageId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>
