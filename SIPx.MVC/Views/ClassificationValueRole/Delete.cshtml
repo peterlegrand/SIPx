@@ -1,101 +1,84 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PersonRelationTypeUpdateGet
+@model ClassificationValueRoleDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create person relation type")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value Role")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Create person relation type group")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification Role")).TermString
 </h1>
 <div class="container">
-    
     <form method="post">
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="PersonRelationTypeId" ejs-for="@Model.PersonRelationTypeId" cssClass="e-outline" placeholder="PersonRelationTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ClassificationValueRoleId" ejs-for="@Model.ClassificationValueRoleId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+                @Term.Find(x => x.InternalName.Equals("Role name")).TermString
             </div>
-        </div>
-        <div class="row">
-            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
-                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
-                    <e-content-template>
-                    </e-content-template>
-                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
-                    </e-richtexteditor-toolbarsettings>
-                </ejs-richtexteditor>
+                <ejs-textbox id="RoleName" ejs-for="RoleName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
+                @Model.CreatorName
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+                @Model.CreatedDate
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("From is an X of to")).TermString
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="FromIsAnXOfTo" ejs-for="FromIsAnXOfTo" cssClass="e-outline" placeholder="From is an X of to" floatLabelType="Auto"></ejs-textbox>
+                @Model.ModifierName
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("To is an X of from")).TermString
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ToIsAnXOfFrom" ejs-for="ToIsAnXOfFrom" cssClass="e-outline" placeholder="To is an X of from" floatLabelType="Auto"></ejs-textbox>
+                <div>@Model.ModifiedDate</div>
             </div>
         </div>
 
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("See personal")).TermString
+                @Term.Find(x => x.InternalName.Equals("Classification relation type")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="SeePersonal" ejs-for="SeePersonal" cssClass="e-outline" placeholder="SeePersonal" floatLabelType="Auto"></ejs-checkbox>
+                <ejs-textbox id="ClassificationRelationTypeName" ejs-for="ClassificationRelationTypeName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
-
     </form>
 </div>
 
@@ -202,4 +185,3 @@
         }
     }
 </script>
-

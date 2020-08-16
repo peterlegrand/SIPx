@@ -191,7 +191,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Post(PageDeleteGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Page.UserId = CurrentUser.Id;
+            Page.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _userPageProvider.UserPageDeletePostCheck(Page);

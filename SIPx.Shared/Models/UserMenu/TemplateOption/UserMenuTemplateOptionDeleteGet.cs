@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class RoleGroupUpdateGet 
+    public class UserMenuTemplateOptionDeleteGet
     {
-        [Key]
-        public int RoleGroupId { get; set; }
-        public int RoleGroupLanguageId { get; set; }
-        public int Sequence { get; set; }
+
+        public int UserMenuTemplateOptionId { get; set; }
+        public string IconName { get; set; }
+        public string UserPageLeftName { get; set; }
+        public string UserPageRightName { get; set; }
+        public string UserTypeLeftName { get; set; }
+        public string UserTypeRightName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -21,6 +25,6 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public List<SequenceList> Sequences { get; set; }
     }
 }
+

@@ -5,17 +5,21 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PageDeleteGet
+    public class PageSectionDeleteGet
     {
         [Key]
-        public int PageId { get; set; }
-        public string PRojectName { get; set; }
-        public string OrganizationName { get; set; }
-        public string ClassificationName { get; set; }
-        public string UserName { get; set; }
+        public int PageSectionId { get; set; }
+        public string PageSectionTypeName { get; set; }
+        public string PageSectionDataTypeName { get; set; }
         public bool ShowTitleName { get; set; }
         public bool ShowTitleDescription { get; set; }
-         public string Name { get; set; }
+        public bool ShowContentTypeTitleName { get; set; }
+        public bool ShowContentTypeTitleDescription { get; set; }
+        public string ContentTypeName { get; set; }
+        public string SortByName { get; set; }
+        public int? MaxContent { get; set; }
+        public bool HasPaging { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }

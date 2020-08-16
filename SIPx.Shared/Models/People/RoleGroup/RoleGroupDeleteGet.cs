@@ -5,12 +5,10 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class RoleGroupUpdateGet 
+    public class RoleGroupDeleteGet
     {
         [Key]
         public int RoleGroupId { get; set; }
-        public int RoleGroupLanguageId { get; set; }
-        public int Sequence { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -21,6 +19,5 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public List<SequenceList> Sequences { get; set; }
     }
 }

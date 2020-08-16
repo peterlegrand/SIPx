@@ -1,27 +1,27 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PersonRelationTypeUpdateGet
+@model PageSectionDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create person relation type")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Create person relation type group")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section")).TermString
 </h1>
 <div class="container">
-    
     <form method="post">
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="PersonRelationTypeId" ejs-for="@Model.PersonRelationTypeId" cssClass="e-outline" placeholder="PersonRelationTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
+
 
         <div class="row">
             <div class="col-3">
@@ -59,39 +59,137 @@
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("From is an X of to")).TermString
+                @Term.Find(x => x.InternalName.Equals("Title name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="FromIsAnXOfTo" ejs-for="FromIsAnXOfTo" cssClass="e-outline" placeholder="From is an X of to" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="TitleName" ejs-for="TitleName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("To is an X of from")).TermString
+                @Term.Find(x => x.InternalName.Equals("Title description")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ToIsAnXOfFrom" ejs-for="ToIsAnXOfFrom" cssClass="e-outline" placeholder="To is an X of from" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("See personal")).TermString
+                @Term.Find(x => x.InternalName.Equals("Page section type")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="SeePersonal" ejs-for="SeePersonal" cssClass="e-outline" placeholder="SeePersonal" floatLabelType="Auto"></ejs-checkbox>
+                <ejs-textbox id="PageSectionTypeName" ejs-for="PageSectionTypeName" cssClass="e-outline" placeholder="PageSectionTypeName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Page section data type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="PageSectionDataTypeName" ejs-for="PageSectionDataTypeName" cssClass="e-outline" placeholder="PageSectionDataTypeName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="ShowTitleName" label="OnTheFly" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Show title description")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="ShowTitleDescription" label="ShowTitleDescription" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Show content type title name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="ShowContentTypeTitleName" label="OnTheFly" ejs-for="ShowContentTypeTitleName" checked="@Model.ShowContentTypeTitleName"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Show content type title description")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="ShowContentTypeTitleDescription" label="ShowContentTypeTitleDescription" ejs-for="ShowContentTypeTitleDescription" checked="@Model.ShowContentTypeTitleDescription"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Content type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="ContentTypeName" ejs-for="ContentTypeName" cssClass="e-outline" placeholder="ContentTypeName" floatLabelType="Auto"></ejs-textbox>\
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Sort by")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="SortByName" ejs-for="SortByName" cssClass="e-outline" placeholder="SortByName" floatLabelType="Auto"></ejs-textbox>\
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Max content")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MaxContent" ejs-for="MaxContent"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Has paging")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="HasPaging" label="HasPaging" ejs-for="HasPaging" checked="@Model.HasPaging"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatorName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatedDate
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ModifierName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
@@ -202,4 +300,3 @@
         }
     }
 </script>
-

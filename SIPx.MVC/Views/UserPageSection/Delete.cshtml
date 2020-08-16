@@ -1,37 +1,28 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationPageSectionUpdateGet
+@model PageSectionDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification page section")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User page section")).TermString;
 
-    Layout = "_LayoutAdmin";
+    Layout = "_Layout";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification page section")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User page section")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.ClassificationPageSectionId</div>
-    </div><div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.ClassificationId</div>
-
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.ClassificationPageSectionLanguageId</div>
-
-    </div>
 
 
     <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-3">
@@ -85,7 +76,17 @@
                 <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
 
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Page section type")).TermString
@@ -110,18 +111,18 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show section title name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowSectionTitleName" label="OnTheFly" ejs-for="ShowSectionTitleName" checked="@Model.ShowSectionTitleName"></ejs-checkbox>
+                <ejs-checkbox id="ShowTitleName" label="OnTheFly" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show section title description")).TermString
+                @Term.Find(x => x.InternalName.Equals("Show title description")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowSectionTitleDescription" label="ShowSectionTitleDescription" ejs-for="ShowSectionTitleDescription" checked="@Model.ShowSectionTitleDescription"></ejs-checkbox>
+                <ejs-checkbox id="ShowTitleDescription" label="ShowTitleDescription" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
             </div>
         </div>
         <div class="row">
@@ -145,18 +146,7 @@
                 @Term.Find(x => x.InternalName.Equals("One two columns")).TermString
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="OneTwoColumns" label="OneTwoColumns" ejs-for="OneTwoColumns"></ejs-numerictextbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-
+                <ejs-textbox id="OneTwoColumns" label="OneTwoColumns" ejs-for="OneTwoColumns"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -176,7 +166,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="SortBy" dataSource="@Model.SortBys" ejs-for="@Model.SortById" value="@Model.SortById" index="2" filtering="SortBys" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="SortById"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="SortBId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -186,7 +176,7 @@
                 @Term.Find(x => x.InternalName.Equals("Max content")).TermString
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="MaxContent" ejs-for="@Model.MaxContent"></ejs-numerictextbox>
+                <ejs-textbox id="MaxContent" ejs-for="MaxContent"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -199,12 +189,10 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-            
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Creator")).TermString
@@ -345,12 +333,11 @@
     }
 </script>
 
-@*PETER TODO*@
 <script type="text/javascript">
-        function PageSectionTypes(e) {
+        function Sequences(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PageSectionTypes)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Sequences)), query);
                 }
 </script>
 <script type="text/javascript">
@@ -361,21 +348,23 @@
                 }
 </script>
 <script type="text/javascript">
-    function SortBys(e) {
+    function PageSectionTypes(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.SortBys)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PageSectionTypes)), query);
                 }
-</script><script type="text/javascript">
+</script>
+<script type="text/javascript">
     function ContentTypes(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
                     e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ContentTypes)), query);
                 }
-</script><script type="text/javascript">
-    function Sequences(e) {
+</script>
+<script type="text/javascript">
+    function SortBys(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Sequences)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.SortBys)), query);
                 }
 </script>

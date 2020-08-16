@@ -5,22 +5,23 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class RoleGroupUpdateGet 
+    public class PersonTelecomDeleteGet
     {
         [Key]
-        public int RoleGroupId { get; set; }
-        public int RoleGroupLanguageId { get; set; }
-        public int Sequence { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string MenuName { get; set; }
-        public string MouseOver { get; set; }
+        public int PersonTelecomId { get; set; }
+        public bool PhoneProperties { get; set; }
+        public string TelecomTypeName { get; set; }
+        public string TelecomValue { get; set; }
+        public string CountryCode { get; set; }
+        public string AreaCode { get; set; }
+        public string ExtensionCode { get; set; }
+        public string AskForName { get; set; }
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public List<SequenceList> Sequences { get; set; }
+
     }
 }

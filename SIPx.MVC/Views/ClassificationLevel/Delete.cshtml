@@ -1,28 +1,27 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PersonRelationTypeUpdateGet
+@model ClassificationLevelDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create person relation type")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification level")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Create person relation type group")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification level")).TermString
 </h1>
 <div class="container">
-    
+
     <form method="post">
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="PersonRelationTypeId" ejs-for="@Model.PersonRelationTypeId" cssClass="e-outline" placeholder="PersonRelationTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -60,42 +59,95 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("From is an X of to")).TermString
+                @Term.Find(x => x.InternalName.Equals("Date level name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="FromIsAnXOfTo" ejs-for="FromIsAnXOfTo" cssClass="e-outline" placeholder="From is an X of to" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="DateLevelName" ejs-for="DateLevelName" cssClass="e-outline" placeholder="DateLevelName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("To is an X of from")).TermString
+                @Term.Find(x => x.InternalName.Equals("On the fly")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ToIsAnXOfFrom" ejs-for="ToIsAnXOfFrom" cssClass="e-outline" placeholder="To is an X of from" floatLabelType="Auto"></ejs-textbox>
+                <ejs-checkbox id="OnTheFly" label="OnTheFly" ejs-for="OnTheFly" checked="@Model.OnTheFly"></ejs-checkbox>
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("See personal")).TermString
+                @Term.Find(x => x.InternalName.Equals("Alphabetically")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="SeePersonal" ejs-for="SeePersonal" cssClass="e-outline" placeholder="SeePersonal" floatLabelType="Auto"></ejs-checkbox>
+                <ejs-checkbox id="Alphabetically" label="Alphabetically" ejs-for="Alphabetically" checked="@Model.Alphabetically"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Can link")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="CanLink" label="CanLink" ejs-for="CanLink" checked="@Model.CanLink"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("In dropdown")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="InDropDown" label="InDropDown" ejs-for="InDropDown" checked="@Model.InDropDown"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("In menu")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="InMenu" label="InMenu" ejs-for="InMenu" checked="@Model.InMenu"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatorName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatedDate
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ModifierName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
+
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
-
     </form>
 </div>
 
@@ -202,4 +254,3 @@
         }
     }
 </script>
-

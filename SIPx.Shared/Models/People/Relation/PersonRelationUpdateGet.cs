@@ -16,7 +16,7 @@ namespace SIPx.Shared
         public int ToPersonId { get; set; }
         public DateTime ValidFrom { get; set; }
         public DateTime? ValidTill { get; set; }
-        public string PersonRelationTypeId { get; set; }
+        public int PersonRelationTypeId { get; set; }
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

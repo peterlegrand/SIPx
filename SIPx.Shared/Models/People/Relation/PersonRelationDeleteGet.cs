@@ -5,22 +5,21 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class RoleGroupUpdateGet 
+    public class PersonRelationDeleteGet
     {
         [Key]
-        public int RoleGroupId { get; set; }
-        public int RoleGroupLanguageId { get; set; }
-        public int Sequence { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string MenuName { get; set; }
-        public string MouseOver { get; set; }
+        public int PersonRelationId { get; set; }
+        public string FromPersonFirstName { get; set; }
+        public string FromPersonLastName { get; set; }
+        public string FromOrganizationName { get; set; }
+        public DateTime ValidFrom { get; set; }
+        public DateTime? ValidTill { get; set; }
+        public string PersonRelationTypeName { get; set; }
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public List<SequenceList> Sequences { get; set; }
     }
 }
