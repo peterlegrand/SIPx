@@ -1,108 +1,68 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PersonTelecomUpdateGet
+@model ClassificationValueUserCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person telecom")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification User")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person telecom")).TermString
+    <img src="~/images/icons/ClassificationPages.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification User")).TermString
 </h1>
 <div class="container">
+
+
     <form method="post">
+
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Classification id")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Classification")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="ClassificationName" ejs-for="ClassificationName" cssClass="e-outline" placeholder="ClassificationName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="PersonTelecomId" ejs-for="@Model.PersonTelecomId" cssClass="e-outline" placeholder="PersonTelecomId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-dropdownlist id="UserId" dataSource="@Model.Users" ejs-for="@Model.UserId" value="@Model.UserId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Telecom value")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="TelecomValue" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+                @Term.Find(x => x.InternalName.Equals("Relation type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="ClassificationRelationTypeId" dataSource="@Model.ClassificationRelationTypes" ejs-for="@Model.ClassificationRelationTypeId" value="@Model.ClassificationRelationTypeId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ClassificationRelationTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
             </div>
         </div>
-        @if (Model.PhoneProperties)
-        {
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Country code")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-textbox id="CountryCode" ejs-for="CountryCode" cssClass="e-outline" placeholder="Country code" floatLabelType="Auto"></ejs-textbox>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Area code")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-textbox id="AreaCode" ejs-for="AreaCode" cssClass="e-outline" placeholder="Area code" floatLabelType="Auto"></ejs-textbox>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Extension code")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-textbox id="ExtensionCode" ejs-for="ExtensionCode" cssClass="e-outline" placeholder="Extension code" floatLabelType="Auto"></ejs-textbox>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Ask for")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-textbox id="AskForName" ejs-for="AskForName" cssClass="e-outline" placeholder="Ask for" floatLabelType="Auto"></ejs-textbox>
-                </div>
-            </div>
-        }
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatorName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatedDate
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-            </div>
-            <div class="col-9">
-                @Model.ModifierName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-            </div>
-            <div class="col-9">
-                <div>@Model.ModifiedDate</div>
-            </div>
-        </div>
+
 
     </form>
 </div>
@@ -210,19 +170,11 @@
         }
     }
 </script>
-@*
-        PETER TODO
-        <script type="text/javascript">
-        function FilterDefaultPage(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>
-    <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>*@
+<script type="text/javascript">
+    function ClassificationRelationTypeId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ClassificationRelationTypes)), query);
+            }
+</script>
+

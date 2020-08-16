@@ -12,24 +12,16 @@
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template field")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.ProcessTemplateFieldId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.ProcessTemplateId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.ProcessTemplateFieldLanguageId</div>
-    </div>
     <form method="post">
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="ProcessTemplateFieldId" ejs-for="@Model.ProcessTemplateFieldId" cssClass="e-outline" placeholder="ProcessTemplateFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-3">

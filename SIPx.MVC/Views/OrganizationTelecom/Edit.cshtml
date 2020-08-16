@@ -12,23 +12,16 @@
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organization telecom")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.OrganizationTelecomId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.OrganizationId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Telecom type")).TermString
-        </div><div class="col-9">@Model.TelecomTypeName</div>
-    </div>
+
     <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="OrganizationTelecomId" ejs-for="@Model.OrganizationTelecomId" cssClass="e-outline" placeholder="OrganizationTelecomId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Telecom value")).TermString
@@ -39,79 +32,79 @@
         @if (Model.PhoneProperties)
         {
             <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Country code")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-textbox id="CountryCode" ejs-for="CountryCode" cssClass="e-outline" placeholder="Country code" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Area code")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-textbox id="AreaCode" ejs-for="AreaCode" cssClass="e-outline" placeholder="Area code" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Extension code")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-textbox id="ExtensionCode" ejs-for="ExtensionCode" cssClass="e-outline" placeholder="Extension code" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Ask for")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-textbox id="AskForName" ejs-for="AskForName" cssClass="e-outline" placeholder="Ask for" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-            }
-            <div class="row">
-                <div class="col-3 offset-3">
-                    <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                    <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                    @Term.Find(x => x.InternalName.Equals("Country code")).TermString
                 </div>
                 <div class="col-9">
-                    @Model.CreatorName
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-                </div>
-                <div class="col-9">
-                    @Model.CreatedDate
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-                </div>
-                <div class="col-9">
-                    @Model.ModifierName
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-                </div>
-                <div class="col-9">
-                    <div>@Model.ModifiedDate</div>
+                    <ejs-textbox id="CountryCode" ejs-for="CountryCode" cssClass="e-outline" placeholder="Country code" floatLabelType="Auto"></ejs-textbox>
                 </div>
             </div>
 
-        </form>
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Area code")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-textbox id="AreaCode" ejs-for="AreaCode" cssClass="e-outline" placeholder="Area code" floatLabelType="Auto"></ejs-textbox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Extension code")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-textbox id="ExtensionCode" ejs-for="ExtensionCode" cssClass="e-outline" placeholder="Extension code" floatLabelType="Auto"></ejs-textbox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Ask for")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-textbox id="AskForName" ejs-for="AskForName" cssClass="e-outline" placeholder="Ask for" floatLabelType="Auto"></ejs-textbox>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatorName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatedDate
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ModifierName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
+            </div>
+        </div>
+
+    </form>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>

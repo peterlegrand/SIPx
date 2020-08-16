@@ -12,22 +12,17 @@
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organization")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.OrganizationId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.OrganizationLanguageId</div>
-
-    </div>
 
 
     <form method="post">
-
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="OrganizationId" ejs-for="@Model.OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -68,7 +63,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
         <div class="row">

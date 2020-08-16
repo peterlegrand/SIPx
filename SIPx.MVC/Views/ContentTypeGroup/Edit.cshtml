@@ -1,70 +1,63 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PersonTelecomUpdateGet
+@model ContentTypeGroupUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person telecom")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content type group")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person telecom")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Content type group")).TermString
 </h1>
 <div class="container">
+
     <form method="post">
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="PersonTelecomId" ejs-for="@Model.PersonTelecomId" cssClass="e-outline" placeholder="PersonTelecomId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ContentTypeGroupId" ejs-for="@Model.ContentTypeGroupId" cssClass="e-outline" placeholder="ContentTypeGroupId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-9">
+                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                    <e-content-template>
+                    </e-content-template>
+                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                    </e-richtexteditor-toolbarsettings>
+                </ejs-richtexteditor>
             </div>
         </div>
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Telecom value")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="TelecomValue" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @if (Model.PhoneProperties)
-        {
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Country code")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-textbox id="CountryCode" ejs-for="CountryCode" cssClass="e-outline" placeholder="Country code" floatLabelType="Auto"></ejs-textbox>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Area code")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-textbox id="AreaCode" ejs-for="AreaCode" cssClass="e-outline" placeholder="Area code" floatLabelType="Auto"></ejs-textbox>
-                </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Extension code")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-textbox id="ExtensionCode" ejs-for="ExtensionCode" cssClass="e-outline" placeholder="Extension code" floatLabelType="Auto"></ejs-textbox>
-                </div>
+            <div class="col-9">
+                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Ask for")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-textbox id="AskForName" ejs-for="AskForName" cssClass="e-outline" placeholder="Ask for" floatLabelType="Auto"></ejs-textbox>
-                </div>
-            </div>
-        }
+        </div>
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
@@ -211,18 +204,18 @@
     }
 </script>
 @*
-        PETER TODO
-        <script type="text/javascript">
-        function FilterDefaultPage(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>
+    PETER TODO 
     <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>*@
+    function FilterDefaultPage(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+            }
+</script>
+<script type="text/javascript">
+    function FilterStatus(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+            }
+</script>*@

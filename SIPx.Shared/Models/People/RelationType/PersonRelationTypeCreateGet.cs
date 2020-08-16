@@ -8,6 +8,7 @@ namespace SIPx.Shared
     public class PersonRelationTypeCreateGet
     {
         [Key]
+        public int PersonRelationTypeId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string Name { get; set; }

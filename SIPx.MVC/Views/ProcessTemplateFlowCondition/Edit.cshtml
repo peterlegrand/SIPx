@@ -12,30 +12,16 @@
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template flow condition")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.ProcessTemplateFlowConditionId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.ProcessTemplateId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.ProcessTemplateFlowId</div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.ProcessTemplateFlowConditionLanguageId</div>
-    </div>
     <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="ProcessTemplateFlowConditionId" ejs-for="@Model.ProcessTemplateFlowConditionId" cssClass="e-outline" placeholder="ProcessTemplateFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
+
 
         <div class="row">
             <div class="col-3">

@@ -12,14 +12,16 @@
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.PersonId</div>
-    </div>
-    <form method="post">
 
+    <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Salutation")).TermString

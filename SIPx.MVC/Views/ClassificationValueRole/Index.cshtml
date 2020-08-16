@@ -1,4 +1,4 @@
-﻿@model List<ClassificationRoleIndexGet>
+﻿@model List<ClassificationValueRoleIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification roles")).TermString;
@@ -17,17 +17,17 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
-<a asp-controller="ClassificationRole" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new classification role")).TermString</a>
+<a href="~/ClassificationValue/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
+<a asp-controller="ClassificationValueRole" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new classification value role")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationRole/Edit/${ClassificationRoleId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueRole/Edit/${ClassificationValueRoleId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationRole/Delete/${ClassificationRoleId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueRole/Delete/${ClassificationValeRoleId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

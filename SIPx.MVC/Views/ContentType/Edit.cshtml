@@ -1,15 +1,15 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationLevelUpdateGet
+@model ContentTypeUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification level")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content type")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification level")).TermString
+    <img src="~/images/icons/ContentTypes.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Content type")).TermString
 </h1>
 
 
@@ -19,10 +19,9 @@
             @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
         </div>
         <div class="col-9">
-            <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="ClassificationLevelId" floatLabelType="Auto"></ejs-numerictextbox>
+            <ejs-numerictextbox id="ContentTypeId" ejs-for="@Model.ContentTypeId" cssClass="e-outline" placeholder="ContentTypeId" floatLabelType="Auto"></ejs-numerictextbox>
         </div>
     </div>
-
     <div class="row">
         <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -50,7 +49,6 @@
             <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
         </div>
     </div>
-
     <div class="row">
         <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -59,75 +57,39 @@
             <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
         </div>
     </div>
-
-
     <div class="row">
         <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+            @Term.Find(x => x.InternalName.Equals("Content type group")).TermString
         </div>
         <div class="col-9">
-            <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" popupHeight="220px">
-                <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+            <ejs-dropdownlist id="ContentTypeGroupId" dataSource="@Model.ContentTypeGroups" ejs-for="@Model.ContentTypeGroupId" value="@Model.ContentTypeGroupId" popupHeight="220px">
+                <e-dropdownlist-fields text="Name" value="ContentTypeGroupId"></e-dropdownlist-fields>
             </ejs-dropdownlist>
-
         </div>
     </div>
-
     <div class="row">
         <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Date level")).TermString
+            @Term.Find(x => x.InternalName.Equals("Process template")).TermString
         </div>
         <div class="col-9">
-            <ejs-dropdownlist id="DateLevelId" dataSource="@Model.DateLevels" ejs-for="@Model.DateLevelId" value="@Model.DateLevelId" index="2" popupHeight="220px">
-                <e-dropdownlist-fields text="Name" value="DateLevelListId"></e-dropdownlist-fields>
+            <ejs-dropdownlist id="ProcessTemplateId" dataSource="@Model.ProcessTemplates" ejs-for="@Model.ProcessTemplateId" value="@Model.ProcessTemplateId" popupHeight="220px">
+                <e-dropdownlist-fields text="Name" value="ProcessTemplateId"></e-dropdownlist-fields>
             </ejs-dropdownlist>
-
         </div>
     </div>
     <div class="row">
         <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("On the fly")).TermString
+            @Term.Find(x => x.InternalName.Equals("Security level")).TermString
         </div>
         <div class="col-9">
-            <ejs-checkbox id="OnTheFly" label="OnTheFly" ejs-for="OnTheFly" checked="@Model.OnTheFly"></ejs-checkbox>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Alphabetically")).TermString
-        </div>
-        <div class="col-9">
-            <ejs-checkbox id="Alphabetically" label="Alphabetically" ejs-for="Alphabetically" checked="@Model.Alphabetically"></ejs-checkbox>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Can link")).TermString
-        </div>
-        <div class="col-9">
-            <ejs-checkbox id="CanLink" label="CanLink" ejs-for="CanLink" checked="@Model.CanLink"></ejs-checkbox>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("In dropdown")).TermString
-        </div>
-        <div class="col-9">
-            <ejs-checkbox id="InDropDown" label="InDropDown" ejs-for="InDropDown" checked="@Model.InDropDown"></ejs-checkbox>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("In menu")).TermString
-        </div>
-        <div class="col-9">
-            <ejs-checkbox id="InMenu" label="InMenu" ejs-for="InMenu" checked="@Model.InMenu"></ejs-checkbox>
+            <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.SecurityLevelId" value="@Model.SecurityLevelId" popupHeight="220px">
+                <e-dropdownlist-fields text="Name" value="SecurityLevelId"></e-dropdownlist-fields>
+            </ejs-dropdownlist>
         </div>
     </div>
     <div class="row">
         <div class="col-3 offset-3">
             <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-
             <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
         </div>
     </div>
@@ -268,4 +230,25 @@
             setTimeout(function () { rteObj.toolbarModule.refreshToolbarOverflow(); }, 400);
         }
     }
+</script>
+<script type="text/javascript">
+    function ContentTypeGroupId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ContentTypeGroups)), query);
+            }
+</script>
+<script type="text/javascript">
+    function ProcessTemplateId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplates)), query);
+            }
+</script>
+<script type="text/javascript">
+    function SecurityLevelId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.SecurityLevels)), query);
+            }
 </script>

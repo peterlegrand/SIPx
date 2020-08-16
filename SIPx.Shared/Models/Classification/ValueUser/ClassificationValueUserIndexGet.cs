@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationValueUserIndextGet 
+    public class ClassificationValueUserIndexGet 
     {
         [Key]
         public int ClassificationValueUserId { get; set; }
