@@ -15,3 +15,4 @@ LEFT JOIN (SELECT PageId, TitleName, TitleDescription FROM PageLanguages WHERE L
 	ON UserLanguage.PageID= Pages.PageID
 LEFT JOIN (SELECT PageId, TitleName, TitleDescription FROM PageLanguages JOIN Settings ON PageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
 	ON DefaultLanguage.PageId = Pages.PageID
+WHERE Pages.PageID = @PageId

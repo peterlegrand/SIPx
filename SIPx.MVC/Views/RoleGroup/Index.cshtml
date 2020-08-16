@@ -17,7 +17,7 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/ProcessTemplate/Create">@Term.Find(x => x.InternalName.Equals("Add new role group")).TermString</a>
+<a href="~/RoleGroup/Create">@Term.Find(x => x.InternalName.Equals("Add new role group")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/RoleGroup/Edit/${RoleGroupId}"><span style="color:red">E</span>dit</a>

@@ -10,6 +10,8 @@ namespace SIPx.Shared
         [Key]
         public int ProcessTemplateGroupId { get; set; }
         public bool ShowInPersonalCalendar { get; set; }
+        public bool ShowInOrganizationCalendar { get; set; }
+        public bool ShowInProjectCalendar { get; set; }
         public bool ShowInEventCalendar { get; set; }
         public int ProcessMultiMax { get; set; }
         public int Sequence { get; set; }

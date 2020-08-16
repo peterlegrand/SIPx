@@ -1416,5 +1416,12 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1414, 'Delete user menu');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1415, 'Left menu page');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1416, 'Right menu page');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1417, 'Delete user page');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1418, 'Term customizations');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1419, 'Back to terms');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1420, 'Create project type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1421, 'Internal');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1422, 'Legal entity');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1423, 'Create person relation type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1424, 'See personal');
 
 SET IDENTITY_INSERT UITerms OFF;

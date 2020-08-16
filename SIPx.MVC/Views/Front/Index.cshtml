@@ -3,6 +3,7 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
 
+    Layout = "_Layout";
 }
 @if (Model.ShowTitleName)
 {
@@ -12,9 +13,9 @@
 {
     <h3>@Model.TitleDescription</h3>
 }
-<div class=" control-section">
+<div class=" control-section" >
     <!--  DashboardLayout element declaration -->
-    <ejs-dashboardlayout id="defaultLayout" columns="10" allowResizing="false">
+    <ejs-dashboardlayout id="defaultLayout" columns="10" showGridLines="true" allowResizing="false">
         <e-dashboardlayout-panels>
             @foreach (var x in Model.Panels)
             {
@@ -548,3 +549,4 @@
         </td>
     </tr>
 </script>
+

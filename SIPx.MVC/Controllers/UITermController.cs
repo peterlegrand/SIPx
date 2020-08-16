@@ -29,7 +29,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<ObjectLanguageIndexGet>>($"{_baseUrl}api/UITerm/LanguageIndex/" + id, token);
+            var response = await _client.GetProtectedAsync<List<UITermLanguageIndexGet>>($"{_baseUrl}api/UITerm/LanguageIndex/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UITerm/LanguageIndex", token);
             ViewBag.UITerms = UITerms;
             ViewBag.Id = id;

@@ -16,6 +16,9 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
+            if(token == null)
+            { return RedirectToAction("Login","FrontAuth");
+            }
             var response = await _client.GetProtectedAsync<List<ProjectIndexGet>>($"{_baseUrl}api/Project/Index",token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Project/Index", token);
             ViewBag.UITerms = x;

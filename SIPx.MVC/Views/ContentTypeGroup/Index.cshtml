@@ -1,7 +1,7 @@
 ﻿@model List<ContentTypeGroupIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content type  groups")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content type groups")).TermString;
 
     Layout = "_LayoutAdmin";
 }
@@ -17,7 +17,7 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/ContentType/Create">@Term.Find(x => x.InternalName.Equals("Add new content type group")).TermString</a>
+<a href="~/ContentTypeGroup/Create">@Term.Find(x => x.InternalName.Equals("Add new content type group")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
         ${ContentTypeGroupId}

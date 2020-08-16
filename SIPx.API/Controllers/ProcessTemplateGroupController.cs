@@ -91,7 +91,7 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Create")]
-        public async Task<IActionResult> Create(int Id)
+        public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))

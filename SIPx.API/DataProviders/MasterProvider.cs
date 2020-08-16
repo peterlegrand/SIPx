@@ -38,10 +38,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<UITermLanguageCustomization, dynamic>(usp, new { UserId = UserId, UITermLanguageCustomizationId = UITermLanguageCustomizationId });
 
         }
-        public async Task<List<UITermLanguage>> UITermLanguageIndexGet(string UserId)
+        public async Task<List<UITermLanguage>> UITermLanguageIndexGet(string UserId,int TermID)
         {
-            string usp = "usp_UITermLanguageIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<UITermLanguage, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_UITermLanguageIndexGet @UserID, @TermID";
+            var x = await _sqlDataAccess.LoadData<UITermLanguage, dynamic>(usp, new { UserId = UserId, TermID });
             return x;
         }
         public Task<UITermLanguage> UITermLanguageUpdateGet(string UserId, int UITermLanguageId)

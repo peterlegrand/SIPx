@@ -45,13 +45,13 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("LanguageIndex")]
-        public async Task<IActionResult> GetUITermLanguages()
+        [HttpGet("LanguageIndex/{Id:int}")]
+        public async Task<IActionResult> GetUITermLanguages(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _masterProvider.UITermLanguageIndexGet(CurrentUser.Id));
+                return Ok(await _masterProvider.UITermLanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

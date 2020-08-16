@@ -22,6 +22,6 @@ namespace SIPx.Shared
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<int> Sequences { get; set; }
+        public List<SequenceList> Sequences { get; set; }
     }
 }

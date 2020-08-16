@@ -321,5 +321,11 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (315, 'UserPage', 'Create')
 , (316, 'UserPage', 'Edit')
 , (317, 'UserPage', 'Delete')
+, (318, 'UITerm', 'LanguageIndex')
+, (319, 'UITerm', 'LanguageCreate')
+, (320, 'UITerm', 'LanguageEdit')
+, (321, 'UITerm', 'LanguageDelete')
+, (322, 'ContentTypeGroup', 'Create')
+, (323, 'PersonRelationType', 'Create')
 
 SET IDENTITY_INSERT MVCUIScreens OFF;

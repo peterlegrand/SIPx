@@ -17,7 +17,7 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Template/Create">@Term.Find(x => x.InternalName.Equals("Add new project")).TermString</a>
+<a href="~/Project/Create">@Term.Find(x => x.InternalName.Equals("Add new project")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/Project/Edit/${ProjectId}"><span style="color:red">E</span>dit</a>
