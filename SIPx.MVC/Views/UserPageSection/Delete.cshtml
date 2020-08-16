@@ -78,24 +78,10 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Page section type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="PageSectionTypeId" dataSource="@Model.PageSectionTypes" ejs-for="@Model.PageSectionTypeId" value="@Model.PageSectionTypeId" index="2" filtering="PageSectionTypes" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="PageSectionTypeId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-
+                <ejs-textbox id="PageSectionTypeName" ejs-for="PageSectionTypeName" cssClass="e-outline" placeholder="PageSectionTypeName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -103,10 +89,7 @@
                 @Term.Find(x => x.InternalName.Equals("Page section data type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="PageSectionDataTypes" dataSource="@Model.PageSectionDataTypes" ejs-for="@Model.PageSectionDataTypeId" value="@Model.PageSectionDataTypeId" index="2" filtering="PageSectionDataTypes" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="PageSectionDataTypeId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-
+                <ejs-textbox id="PageSectionDataTypeName" ejs-for="PageSectionDataTypeName" cssClass="e-outline" placeholder="PageSectionDataTypeName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -143,21 +126,10 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("One two columns")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-textbox id="OneTwoColumns" label="OneTwoColumns" ejs-for="OneTwoColumns"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Content type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ContentType" dataSource="@Model.ContentTypes" ejs-for="@Model.ContentTypeId" value="@Model.ContentTypeId" index="2" filtering="ContentTypes" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ContentTypeId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-
+                <ejs-textbox id="ContentTypeName" ejs-for="ContentTypeName" cssClass="e-outline" placeholder="ContentTypeName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -165,10 +137,7 @@
                 @Term.Find(x => x.InternalName.Equals("Sort by")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="SortBy" dataSource="@Model.SortBys" ejs-for="@Model.SortById" value="@Model.SortById" index="2" filtering="SortBys" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="SortBId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-
+                <ejs-textbox id="SortByName" ejs-for="SortByName" cssClass="e-outline" placeholder="SortByName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -333,38 +302,3 @@
     }
 </script>
 
-<script type="text/javascript">
-        function Sequences(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Sequences)), query);
-                }
-</script>
-<script type="text/javascript">
-        function PageSectionDataTypes(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PageSectionDataTypes)), query);
-                }
-</script>
-<script type="text/javascript">
-    function PageSectionTypes(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PageSectionTypes)), query);
-                }
-</script>
-<script type="text/javascript">
-    function ContentTypes(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ContentTypes)), query);
-                }
-</script>
-<script type="text/javascript">
-    function SortBys(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.SortBys)), query);
-                }
-</script>
