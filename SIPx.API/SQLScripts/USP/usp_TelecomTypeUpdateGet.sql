@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_TelecomTypeIndexGet] (@UserId nvarchar(450), @TelecomTypeID int) 
+CREATE PROCEDURE [dbo].[usp_TelecomTypeUpdateGet] (@UserId nvarchar(450), @TelecomTypeID int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

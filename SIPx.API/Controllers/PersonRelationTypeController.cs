@@ -19,19 +19,21 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class PersonRelationTypeController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPersonRelationTypeProvider _personRelationTypeProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonRelationTypeController(IClaimCheck claimCheck, IPersonRelationTypeProvider personRelationTypeProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonRelationTypeController(IMasterListProvider masterListProvider, IClaimCheck claimCheck, IPersonRelationTypeProvider personRelationTypeProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _claimCheck = claimCheck;
             _personRelationTypeProvider = personRelationTypeProvider;
             _userManager = userManager;
         }
 
-        [HttpGet("TypeLanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetPersonRelationTypeLanguages(int Id)
+        [HttpGet("LanguageIndex/{Id:int}")]
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -46,8 +48,8 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("TypeLanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetPersonRelationTypeLanguage(int Id)
+        [HttpGet("LanguageUpdate/{Id:int}")]
+        public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -60,8 +62,8 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("TypeIndex")]
-        public async Task<IActionResult> GetPersonRelationTypes()
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -76,13 +78,17 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("TypeUpdate/{Id:int}")]
-        public async Task<IActionResult> GetPersonRelationType(int Id)
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _personRelationTypeProvider.PersonRelationTypeUpdateGet(CurrentUser.Id, Id));
+                var x = await _personRelationTypeProvider.PersonRelationTypeUpdateGet(CurrentUser.Id, Id);
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                x.Icons = icons;
+
+                return Ok(x);
             }
             return BadRequest(new
             {
@@ -91,6 +97,26 @@ namespace SIPx.API.Controllers
             });
         }
 
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var PersonRelationTypeCreateGet = new PersonRelationTypeCreateGet();
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                PersonRelationTypeCreateGet.Icons = icons;
 
+                //var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                //ProcessTemplateStageTypeCreateGet.LanguageId = UserLanguage.LanguageId;
+                //ProcessTemplateStageTypeCreateGet.LanguageName = UserLanguage.Name;
+                return Ok(PersonRelationTypeCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
     }
 }

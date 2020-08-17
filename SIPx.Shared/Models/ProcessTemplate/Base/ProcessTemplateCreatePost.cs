@@ -19,6 +19,7 @@ namespace SIPx.Shared
         public bool ShowInReports { get; set; }
         public bool HideEverywhere { get; set; }
         public string Color { get; set; }
+        public int IconId { get; set; }
         public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

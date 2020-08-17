@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroupDeleteGet] (@UserId nvarchar(450), @ProcessTemplateGroup int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroupDeleteGet] (@UserId nvarchar(450), @ProcessTemplateGroupId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

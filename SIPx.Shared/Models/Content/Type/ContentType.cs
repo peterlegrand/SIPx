@@ -20,6 +20,10 @@ namespace SIPx.Shared
         public string ProcessTemplateName { get; set; }
         public int ProcessTemplateId { get; set; }
         public string Color { get; set; }
+        public int IconId { get; set; }
+        public List<IconList> Icons { get; set; }
+        public List<ContentTypeGroupList> ContentTypeGroups { get; set; }
+        public List<SecurityLevelList> SecurityLevels { get; set; }
 
     }
 }

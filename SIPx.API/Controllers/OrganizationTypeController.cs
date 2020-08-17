@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationTypeController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IOrganizationTypeProvider _organizationTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationTypeController(IOrganizationTypeProvider organizationTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationTypeController(IMasterListProvider masterListProvider, IOrganizationTypeProvider organizationTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _organizationTypeProvider = organizationTypeProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
@@ -81,7 +83,11 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationTypeProvider.OrganizationTypeUpdateGet(CurrentUser.Id, Id));
+                var x = await _organizationTypeProvider.OrganizationTypeUpdateGet(CurrentUser.Id, Id);
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                x.Icons = icons;
+
+                return Ok(x);
             }
             return BadRequest(new
             {
@@ -96,9 +102,11 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var OrganizationTypeCreateGet = new OrganizationTypeCreateGet();
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                OrganizationTypeCreateGet.LanguageId = UserLanguage.LanguageId;
-                OrganizationTypeCreateGet.LanguageName = UserLanguage.Name;
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                OrganizationTypeCreateGet.Icons = icons;
+                //var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                //OrganizationTypeCreateGet.LanguageId = UserLanguage.LanguageId;
+                //OrganizationTypeCreateGet.LanguageName = UserLanguage.Name;
                 return Ok(OrganizationTypeCreateGet);
             }
             return BadRequest(new

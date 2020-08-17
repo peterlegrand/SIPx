@@ -27,6 +27,7 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string Color { get; set; }
+        public int IconId { get; set; }
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -35,7 +36,8 @@ namespace SIPx.Shared
         public DateTime ModifiedDate { get; set; }
 
         public List<ProcessTemplateGroupList> ProcessTemplateGroups { get; set; }
-        public List<int> Sequences { get; set; }
+        public List<SequenceList> Sequences { get; set; }
+        public List<IconList> Icons { get; set; }
 
     }
 }

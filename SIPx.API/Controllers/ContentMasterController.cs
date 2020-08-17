@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ContentMasterController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IContentMasterProvider _contentMasterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentMasterController(ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentMasterController(IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _securityLevelProvider = securityLevelProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
@@ -228,7 +230,11 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.ContentTypeUpdateGet(CurrentUser.Id, Id));
+                var x = await _contentMasterProvider.ContentTypeUpdateGet(CurrentUser.Id, Id);
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                x.Icons = icons;
+
+                return Ok(x);
             }
             return BadRequest(new
             {

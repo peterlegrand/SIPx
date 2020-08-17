@@ -27,4 +27,4 @@ JOIN Persons Creator
 	ON Creator.UserId = ContentTypeGroups.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = ContentTypeGroups.ModifierID
-WHERE ContentTypeGroupID = @ContentTypeGroupID
+WHERE ContentTypeGroups.ContentTypeGroupID = @ContentTypeGroupID

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationRoleUpdateGet] (@UserId nvarchar(450), @ClassificationRoleId int) 
+CREATE PROCEDURE [dbo].[usp_ClassificationRoleDeleteGet] (@UserId nvarchar(450), @ClassificationRoleID int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -6,11 +6,11 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationRoles.RoleID
-	, ClassificationRoles.ClassificationRoleID
-		, ClassificationRoles.ClassificationID
-		, ClassificationRoles.ClassificationRelationTypeID
-	,ClassificationRoles.RoleID 
-	,ClassificationRoles.ClassificationRelationTypeID
+, ClassificationRoles.ClassificationRoleID
+, ClassificationRoles.ClassificationID
+, ClassificationRoles.ClassificationRelationTypeID
+	, ISNULL(UserRoleLanguage.Name,ISNULL(DefaultRoleLanguage.Name,'No name for this role')) RoleName
+	, ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typerole')) ClassificationRelationTypeName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ClassificationRoles.CreatorID
 	, ClassificationRoles.CreatedDate
@@ -30,4 +30,4 @@ JOIN Persons Creator
 	ON Creator.UserId = ClassificationRoles.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = ClassificationRoles.ModifierID
-WHERE ClassificationRoles.ClassificationroleId = @ClassificationRoleID
+WHERE ClassificationRoles.ClassificationRoleID = @ClassificationRoleID

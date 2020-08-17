@@ -19,7 +19,9 @@ namespace SIPx.Shared
         public string ToIsAnXOfFrom { get; set; }
         public bool SeePersonal { get; set; }
         public string Color { get; set; }
+        public int IconId { get; set; }
         public string CreatorId { get; set; }
+        public List<IconList> Icons { get; set; }
 
     }
 }

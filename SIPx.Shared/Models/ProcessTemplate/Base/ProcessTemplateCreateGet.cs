@@ -21,6 +21,7 @@ namespace SIPx.Shared
         public bool ShowInReports { get; set; }
         public bool HideEverywhere { get; set; }
         public string Color { get; set; }
+        public int IconId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string Name { get; set; }
@@ -31,5 +32,6 @@ namespace SIPx.Shared
 
         public List<SequenceList> ProcessTemplates { get; set; }
         public List<ProcessTemplateGroupList> ProcessTemplateGroups{ get; set; }
+        public List<IconList> Icons { get; set; }
     }
 }

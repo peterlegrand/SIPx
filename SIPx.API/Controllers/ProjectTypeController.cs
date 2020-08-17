@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProjectTypeController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly IProjectTypeProvider _projectTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProjectProvider _ProjectProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProjectTypeController(IProjectTypeProvider projectTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProjectTypeController(IMasterListProvider masterListProvider, IProjectTypeProvider projectTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _projectTypeProvider = projectTypeProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
@@ -81,7 +83,11 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _ProjectProvider.ProjectTypeUpdateGet(CurrentUser.Id, Id));
+                var x = await _ProjectProvider.ProjectTypeUpdateGet(CurrentUser.Id, Id);
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                x.Icons = icons;
+
+                return Ok(x);
             }
             return BadRequest(new
             {
@@ -96,9 +102,12 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ProjectTypeCreateGet = new ProjectTypeCreateGet();
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ProjectTypeCreateGet.LanguageId = UserLanguage.LanguageId;
-                ProjectTypeCreateGet.LanguageName = UserLanguage.Name;
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                ProjectTypeCreateGet.Icons = icons;
+
+                //var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                //ProjectTypeCreateGet.LanguageId = UserLanguage.LanguageId;
+                //ProjectTypeCreateGet.LanguageName = UserLanguage.Name;
                 return Ok(ProjectTypeCreateGet);
             }
             return BadRequest(new
