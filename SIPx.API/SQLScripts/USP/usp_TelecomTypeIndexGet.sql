@@ -11,6 +11,7 @@ SELECT
 	, ISNULL( UserLanguageDescription.Customization, LanguageDescription.Name) Description
 	, ISNULL( UserLanguageMenuName.Customization, LanguageMenuName.Name) MenuName
 	, ISNULL( UserLanguageMouseOver.Customization, LanguageMouseOver.Name) MouseOver
+	, Active
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, TelecomTypes.ModifiedDate
 FROM TelecomTypes 
@@ -37,5 +38,3 @@ WHERE LanguageName.LanguageId =@LanguageId
 	AND LanguageMenuName.LanguageId =@LanguageId 	
 	AND LanguageMouseOver.LanguageId =@LanguageId 	
 ORDER BY  	ISNULL( UserLanguageName.Customization, LanguageName.Name) 
-	
-

@@ -12,8 +12,10 @@ namespace SIPx.Shared
         public int UserMenuTemplateOptionId { get; set; }
         public int UserMenuTemplateId { get; set; }
         public string Icon { get; set; }
-        public int UserPageLeftId { get; set; }
-        public int UserPageRightId { get; set; }
+        public int UserPageIdLeft { get; set; }
+        public int UserPageIdRight { get; set; }
+        public int UserMenuTypeIDLeft { get; set; }
+        public int UserMenuTypeIDRight { get; set; }
         public int Sequence { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -25,6 +27,12 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public List<SequenceList> UserMenuTemplateOptions { get; set; }
+        public List<PageList> Pages { get; set; }
+        public List<IconList> Icons { get; set; }
+        public List<UserMenuTypeList> UserMenuTypesLeft { get; set; }
+        public List<UserMenuTypeList> UserMenuTypesRight { get; set; }
+
     }
 }
 

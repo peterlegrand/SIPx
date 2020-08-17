@@ -19,6 +19,7 @@ namespace SIPx.Shared
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }
         public bool SeePersonal { get; set; }
+        public string Color { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }

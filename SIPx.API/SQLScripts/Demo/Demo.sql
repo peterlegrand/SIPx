@@ -7,10 +7,10 @@ DECLARE @Role as nvarchar(450);
 Select @Role = Id from AspNetRoles 
 
 SET IDENTITY_INSERT Classifications ON;
-INSERT INTO Classifications (ClassificationId, StatusId, HasDropDown, DropDownSequence, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-(1, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
-, (2, 1, 1, 2, @User, @User, GETDATE(), GETDATE())
-, (3, 1, 1, 3, @User, @User, GETDATE(), GETDATE()) 
+INSERT INTO Classifications (ClassificationId, StatusId, HasDropDown, DropDownSequence, Color, IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+(1, 1, 1, 1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
+, (2, 1, 1, 2, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
+, (3, 1, 1, 3, '#008000ff', 1,@User, @User, GETDATE(), GETDATE()) 
 SET IDENTITY_INSERT Classifications OFF;
 
 SET IDENTITY_INSERT ClassificationLanguages ON;
@@ -254,10 +254,10 @@ INSERT INTO ContentTypeGroupLanguages(ContentTypeGroupLanguageId, ContentTypeGro
 SET IDENTITY_INSERT ContentTypeGroupLanguages OFF;
 
 SET IDENTITY_INSERT ContentTypes ON;
-INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, @User, @User, GETDATE(), GETDATE())
- , (2, 1, 1, @User, @User, GETDATE(), GETDATE())
- , (3, 2, 1, @User, @User, GETDATE(), GETDATE())
+INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId, Color, IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
+ , (2, 1, 1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+ , (3, 2, 1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypes OFF;
 
 SET IDENTITY_INSERT ContentTypeLanguages ON;
@@ -281,9 +281,9 @@ INSERT INTO ContentTypeClassifications ( ContentTypeClassificationId, ContentTyp
 SET IDENTITY_INSERT ContentTypeClassifications OFF;
 
 SET IDENTITY_INSERT OrganizationTypes ON;
-INSERT INTO OrganizationTypes (OrganizationTypeId, Internal, LegalEntity, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1,1,1, @User, @User, GETDATE(), GETDATE())
-, (2,1,0, @User, @User, GETDATE(), GETDATE())
+INSERT INTO OrganizationTypes (OrganizationTypeId, Internal, LegalEntity, Color,IconId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1,1,1,'#008000ff', 1,@User, @User, GETDATE(), GETDATE())
+, (2,1,0, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT OrganizationTypes OFF;
 
 SET IDENTITY_INSERT OrganizationTypeLanguages ON;
@@ -420,28 +420,28 @@ SET IDENTITY_INSERT ProcessTemplateGroupLanguages OFF;
 
 SET IDENTITY_INSERT ProcessTemplates ON;
 INSERT INTO ProcessTemplates (ProcessTemplateId, ProcessTemplateGroupId, ShowInPersonalCalendar, ShowInOrganizationCalendar, ShowInProjectCalendar, ShowInEventCalendar
-, ProcessMultiMax, Sequence, IsPersonal, ShowInNew, ShowInSearch, ShowInReports, HideEverywhere
+, ProcessMultiMax, Sequence, IsPersonal, ShowInNew, ShowInSearch, ShowInReports, HideEverywhere, Color, IconID
 , CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
 (1,1,0,0,0,0
-,10,1,0,1,1,1,0
+,10,1,0,1,1,1,0, '#008000ff',1
 , @User, @User, GETDATE(), GETDATE())
 ,(2,1,0,0,0,0
-,15,2,0,1,1,1,0
+,15,2,0,1,1,1,0, '#008000ff',1
 , @User, @User, GETDATE(), GETDATE())
 ,(3,2,0,0,0,0
-,15,1,0,1,1,1,0
+,15,1,0,1,1,1,0, '#008000ff',1
 , @User, @User, GETDATE(), GETDATE())
 ,(4,2,1,0,0,0
-,15,1,0,1,1,1,0
+,15,1,0,1,1,1,0, '#008000ff',1
 , @User, @User, GETDATE(), GETDATE())
 ,(5,2,0,1,0,0
-,15,1,0,1,1,1,0
+,15,1,0,1,1,1,0, '#008000ff',1
 , @User, @User, GETDATE(), GETDATE())
 ,(6,2,0,0,1,0
-,15,1,0,1,1,1,0
+,15,1,0,1,1,1,0, '#008000ff',1
 , @User, @User, GETDATE(), GETDATE())
 ,(7,2,0,0,0,1
-,15,1,0,1,1,1,0
+,15,1,0,1,1,1,0, '#008000ff',1
 , @User, @User, GETDATE(), GETDATE());
 SET IDENTITY_INSERT ProcessTemplates OFF;
 
@@ -586,15 +586,15 @@ INSERT INTO ProcessTemplateFieldLanguages (ProcessTemplateFieldLanguageId, Proce
 SET IDENTITY_INSERT ProcessTemplateFieldLanguages OFF;
 
 SET IDENTITY_INSERT ProcessTemplateStageTypes ON;
-INSERT INTO ProcessTemplateStageTypes (ProcessTemplateStageTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-(1, @User, @User, GETDATE(), GETDATE())
-, (2, @User, @User, GETDATE(), GETDATE())
-, (3, @User, @User, GETDATE(), GETDATE())
-, (4, @User, @User, GETDATE(), GETDATE())
-, (5, @User, @User, GETDATE(), GETDATE())
-, (6, @User, @User, GETDATE(), GETDATE())
-, (7, @User, @User, GETDATE(), GETDATE())
-, (8, @User, @User, GETDATE(), GETDATE())
+INSERT INTO ProcessTemplateStageTypes (ProcessTemplateStageTypeId, IconID, Color, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+(1, 1,'#008000ff',@User, @User, GETDATE(), GETDATE())
+, (2, 1,'#008000ff',@User, @User, GETDATE(), GETDATE())
+, (3, 1,'#008000ff',@User, @User, GETDATE(), GETDATE())
+, (4, 1,'#008000ff',@User, @User, GETDATE(), GETDATE())
+, (5, 1,'#008000ff',@User, @User, GETDATE(), GETDATE())
+, (6, 1,'#008000ff',@User, @User, GETDATE(), GETDATE())
+, (7, 1,'#008000ff',@User, @User, GETDATE(), GETDATE())
+, (8, 1,'#008000ff',@User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateStageTypes OFF;
 
@@ -781,8 +781,8 @@ ProcessTemplateFlowLanguageId,ProcessTemplateId, ProcessTemplateFlowId, Language
 SET IDENTITY_INSERT  ProcessTemplateFlowLanguages  OFF;
 
 SET IDENTITY_INSERT [dbo].[ProjectTypes] ON 
-INSERT [dbo].[ProjectTypes] ([ProjectTypeID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, @User, @User, Getdate(), Getdate())
-INSERT [dbo].[ProjectTypes] ([ProjectTypeID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[ProjectTypes] ([ProjectTypeID], Color,IconID, [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1,'#008000ff',1, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[ProjectTypes] ([ProjectTypeID], Color,IconID, [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2,'#008000ff',1, @User, @User, Getdate(), Getdate())
 SET IDENTITY_INSERT [dbo].[ProjectTypes] OFF
 
 SET IDENTITY_INSERT [dbo].[Projects] ON 
@@ -852,9 +852,9 @@ INSERT INTO ProcessTemplateFlowConditionLanguages (ProcessTemplateFlowConditionL
 SET IDENTITY_INSERT ProcessTemplateFlowConditionLanguages OFF;
 
 SET IDENTITY_INSERT PersonRelationTypes ON;
-INSERT INTO PersonRelationTypes (PersonRelationTypeId, SeePersonal, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-( 1,0, @User, @User, GETDATE(), GETDATE())
-,( 2,0, @User, @User, GETDATE(), GETDATE())
+INSERT INTO PersonRelationTypes (PersonRelationTypeId, SeePersonal, Color,IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+( 1,0,'#008000ff', 1,@User, @User, GETDATE(), GETDATE())
+,( 2,0, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT PersonRelationTypes OFF;
 

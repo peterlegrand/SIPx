@@ -9,12 +9,14 @@ namespace SIPx.Shared
         [Key]
         public int ClassificationId { get; set; }
         public string StatusName { get; set; }
-        public string DefaultPageName { get; set; }
+//        public string DefaultPageName { get; set; }
         public bool HasDropDown { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
+        public string Color { get; set; }
+
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }

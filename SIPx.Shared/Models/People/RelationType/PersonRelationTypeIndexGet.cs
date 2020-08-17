@@ -19,6 +19,8 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string FromIsAnXOfTo { get; set; }
         public string ToIsAnXOfFrom { get; set; }
+        public bool SeePersonal { get; set; }
+        public string Color { get; set; }
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }

@@ -20,6 +20,7 @@ namespace SIPx.Shared
         public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }
+        public string Color { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

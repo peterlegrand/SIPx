@@ -130,7 +130,7 @@ namespace SIPx.API.Controllers
                 var PersonRelationTypes = await _peopleProvider.PersonRelationTypeList(CurrentUser.Id);
                 var Persons = await _peopleProvider.PersonList(CurrentUser.Id);
                 PersonRelationCreateGet.PersonRelationTypes = PersonRelationTypes;
-                PersonRelationCreateGet.ToUsers = Persons;
+                PersonRelationCreateGet.Persons = Persons;
                 return Ok(PersonRelationCreateGet);
             }
             return BadRequest(new

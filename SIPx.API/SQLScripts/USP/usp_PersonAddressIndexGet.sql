@@ -12,13 +12,17 @@ SELECT PersonAddresses.PersonAddressId
 	, PersonAddresses.Address2
 	, PersonAddresses.HouseNumber
 	, PersonAddresses.HouseNumberExt
+	, PersonAddresses.Location
 	, PersonAddresses.City
 	, PersonAddresses.PostalCode
 	, PersonAddresses.PostalCodeExt
 	, ISNULL(UICountryCustom.Customization,UICountryName.Name) CountryName
 	, PersonAddresses.ProvinceState
 	, PersonAddresses.County
-
+	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, PersonAddresses.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, PersonAddresses.ModifiedDate
 FROM PersonAddresses
 JOIN AddressTypes
 	ON PersonAddresses.AddressTypeId = AddressTypes.AddressTypeID
@@ -32,6 +36,10 @@ LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHE
 	ON UICountryCustom.UITermId = Countries.NameTermID
 JOIN UITermLanguages UICountryName
 	ON UICountryName.UITermId = Countries.NameTermID
+JOIN Persons Creator
+	ON Creator.UserId = PersonAddresses.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserId = PersonAddresses.ModifierID
 WHERE UICountryName.LanguageId = @LanguageID
 	AND UIAddressTypeName.LanguageId = @LanguageID
 		AND PersonAddresses.PersonId = @PersonID

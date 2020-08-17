@@ -24,6 +24,7 @@ namespace SIPx.Shared
         public bool ShowInSearch { get; set; }
         public bool ShowInReports { get; set; }
         public bool HideEverywhere { get; set; }
+        public string Color { get; set; }
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

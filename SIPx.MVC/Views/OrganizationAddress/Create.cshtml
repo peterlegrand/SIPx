@@ -1,0 +1,226 @@
+﻿@using Syncfusion.EJ2
+@using Newtonsoft.Json
+@model OrganizationAddressCreateGet
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization address")).TermString;
+
+    Layout = "_LayoutAdmin";
+}
+
+<h1>
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organization address")).TermString
+</h1>
+<div class="container">
+
+    <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Attn name")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="AttnName" ejs-for="AttnName" cssClass="e-outline" placeholder="Attn name" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Address 1")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="Address1" ejs-for="Address1" cssClass="e-outline" placeholder="Address 1" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Address 2")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="Address2" ejs-for="Address2" cssClass="e-outline" placeholder="Address 2" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("House number")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="HouseNumber" ejs-for="HouseNumber" cssClass="e-outline" placeholder="House number" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("House number ext")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="HouseNumberExt" ejs-for="HouseNumberExt" cssClass="e-outline" placeholder="House number ext" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("City")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="City" ejs-for="City" cssClass="e-outline" placeholder="City" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Postal code")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="PostalCode" ejs-for="PostalCode" cssClass="e-outline" placeholder="Postal code" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Postal code ext")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="PostalCodeExt" ejs-for="PostalCodeExt" cssClass="e-outline" placeholder="Postal code ext" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Country")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Country" dataSource="@Model.Countries" ejs-for="CountryId" value="@Model.CountryId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="CountryId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Province / state")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="ProvinceState" ejs-for="ProvinceState" cssClass="e-outline" placeholder="Province / state" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("County")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="County" ejs-for="County" cssClass="e-outline" placeholder="County" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/css/css.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+<style>
+    .e-code-mirror::before {
+        content: '\e345';
+    }
+
+    .e-html-preview::before {
+        content: '\e350';
+    }
+
+    .CodeMirror-linenumber,
+    .CodeMirror-gutters {
+        display: none;
+    }
+
+    .sb-header {
+        z-index: 100;
+    }
+
+    .sb-content.e-view.hide-header {
+        top: 0 !important;
+    }
+
+    .sb-header.e-view.hide-header {
+        display: none;
+    }
+
+    .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #F4F5F7;
+    }
+
+    .highcontrast .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #303030;
+    }
+</style>
+<script type="text/javascript">
+    var rteObj, myCodeMirror, textArea;
+    function created() {
+        rteObj = this;
+        textArea = rteObj.contentModule.getEditPanel();
+    }
+    function mirrorConversion(e) {
+        var id = rteObj.getID() + 'mirror-view';
+        var mirrorView = rteObj.element.querySelector('#' + id);
+        var charCount = rteObj.element.querySelector('.e-rte-character-count');
+        if (e.targetItem === 'Preview') {
+            textArea.style.display = 'block';
+            mirrorView.style.display = 'none';
+            textArea.innerHTML = myCodeMirror.getValue();
+            charCount.style.display = 'block';
+        }
+        else {
+            if (!mirrorView) {
+                mirrorView = ej.base.createElement('div', { className: 'e-content' });
+                mirrorView.id = id;
+                textArea.parentNode.appendChild(mirrorView);
+            }
+            else {
+                mirrorView.innerHTML = '';
+            }
+            textArea.style.display = 'none';
+            mirrorView.style.display = 'block';
+            renderCodeMirror(mirrorView, defaultRTE.value);
+            charCount.style.display = 'none';
+        }
+    }
+    function renderCodeMirror(mirrorView, content) {
+        myCodeMirror = CodeMirror(mirrorView, {
+            value: content,
+            lineNumbers: true,
+            mode: 'text/html',
+            lineWrapping: true,
+        });
+    }
+    function handleFullScreen(e) {
+        var sbCntEle = document.querySelector('.sb-content.e-view');
+        var sbHdrEle = document.querySelector('.sb-header.e-view');
+        if (e.targetItem === 'Maximize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.addClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+        else if (e.targetItem === 'Minimize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.removeClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+    }
+    function actionCompleteHandler(e) {
+        if (e.targetItem && (e.targetItem === 'SourceCode' || e.targetItem === 'Preview')) {
+            this.sourceCodeModule.getPanel().style.display = 'none';
+            mirrorConversion(e);
+        }
+        else {
+            setTimeout(function () { rteObj.toolbarModule.refreshToolbarOverflow(); }, 400);
+        }
+    }
+</script>
+@*
+    PETER TODO 
+    <script type="text/javascript">
+    function FilterDefaultPage(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+            }
+</script>
+<script type="text/javascript">
+    function FilterStatus(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+            }
+</script>*@

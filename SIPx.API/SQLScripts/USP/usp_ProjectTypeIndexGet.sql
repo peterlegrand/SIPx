@@ -12,6 +12,8 @@ SELECT ProjectTypes.ProjectTypeID
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this ProjectType')) Description
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this ProjectType')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this ProjectType')) MouseOver
+	, Color
+	, ISNULL(UINameCustom.Customization,UIName.Name) IconName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ProjectTypes.CreatorID
 	, ProjectTypes.CreatedDate
@@ -27,6 +29,13 @@ JOIN Persons Creator
 	ON Creator.UserId = ProjectTypes.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = ProjectTypes.ModifierID
+JOIN Icons
+	ON Icons.IconId = ProjectTypes.IconID
+JOIN UITermLanguages UIName
+	ON UIName.UITermId = Icons.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = Icons.NameTermID
+WHERE UIName.LanguageId = @LanguageID 
 ORDER BY  ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this ProjectType')) 
 
 

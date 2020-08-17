@@ -16,7 +16,8 @@ namespace SIPx.Shared
         public string CountryCode { get; set; }
         public string AreaCode { get; set; }
         public string ExtensionCode { get; set; }
-        public string AskFor { get; set; }
+        public string AskForName { get; set; }
+        public bool PhoneProperties { get; set; }
         public string CreatorId { get; set; }
         public List<TelecomTypeList> TelecomTypes { get; set; }
     }

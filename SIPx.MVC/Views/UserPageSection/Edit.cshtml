@@ -12,26 +12,17 @@
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User page section")).TermString
 </h1>
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.PageSectionId</div>
-    </div><div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.PageId</div>
-
-    </div>
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.PageSectionLanguageId</div>
-
-    </div>
 
 
     <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-3">
@@ -123,7 +114,7 @@
                 @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowTitleName" label="OnTheFly" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
+                <ejs-checkbox id="ShowTitleName" label="OnTheFly" ejs-for="ShowSectionTitleName" checked="@Model.ShowSectionTitleName"></ejs-checkbox>
             </div>
         </div>
         <div class="row">
@@ -131,7 +122,7 @@
                 @Term.Find(x => x.InternalName.Equals("Show title description")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowTitleDescription" label="ShowTitleDescription" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
+                <ejs-checkbox id="ShowTitleDescription" label="ShowTitleDescription" ejs-for="ShowSectionTitleDescription" checked="@Model.ShowSectionTitleDescription"></ejs-checkbox>
             </div>
         </div>
         <div class="row">

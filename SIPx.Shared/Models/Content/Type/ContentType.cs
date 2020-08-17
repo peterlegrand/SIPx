@@ -19,6 +19,7 @@ namespace SIPx.Shared
         public string SecurityLevelName { get; set; }
         public string ProcessTemplateName { get; set; }
         public int ProcessTemplateId { get; set; }
+        public string Color { get; set; }
 
     }
 }
