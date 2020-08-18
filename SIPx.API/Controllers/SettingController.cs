@@ -41,7 +41,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _settingProvider.SettingIndexGet(CurrentUser.Id));
+                return Ok(await _settingProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -56,11 +56,11 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _settingProvider.SettingUpdateGet(CurrentUser.Id, Id);
+                var x = await _settingProvider.UpdateGet(CurrentUser.Id, Id);
 
                 if (x.TypeId == 1)
                 {
-                    var LanguageList = await _languageProvider.LanguageList(CurrentUser.Id);
+                    var LanguageList = await _languageProvider.List(CurrentUser.Id);
                     x.Languages = LanguageList;
                 }
                 return Ok(x);

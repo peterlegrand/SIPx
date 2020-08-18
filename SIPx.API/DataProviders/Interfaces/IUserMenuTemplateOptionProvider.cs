@@ -6,13 +6,13 @@ namespace SIPx.DataAccess
 {
     public interface IUserMenuTemplateOptionProvider
     {
-        Task<List<SequenceList>> UserMenuTemplateOptionCreateGetSequence(string UserId, int UserMenuTemplateId);
-        bool UserMenuTemplateOptionCreatePost(UserMenuTemplateOptionCreateGet UserMenuTemplateOption);
-        bool UserMenuTemplateOptionCreatePost(UserMenuTemplateOptionCreatePost UserMenuTemplateOption);
-        Task<string> UserMenuTemplateOptionCreatePostCheck(UserMenuTemplateOptionCreateGet UserMenuTemplateOption);
-        Task<List<UserMenuTemplateOptionIndexGet>> UserMenuTemplateOptionIndexGet(string UserId, int UserMenuTemplateId);
-        Task<List<UserMenuTemplateOptionLanguageIndexGet>> UserMenuTemplateOptionLanguageIndexGet(string UserId, int UserMenuTemplateOptionId);
-        Task<UserMenuTemplateOptionLanguageIndexGet> UserMenuTemplateOptionLanguageUpdateGet(string UserId, int UserMenuTemplateOptionLanguageId);
-        Task<UserMenuTemplateOptionUpdateGet> UserMenuTemplateOptionUpdateGet(string UserId, int UserMenuTemplateOptionId);
+        Task<List<SequenceList>> CreateGetSequence(string UserId, int UserMenuTemplateId);
+        bool CreatePost(UserMenuTemplateOptionCreateGet UserMenuTemplateOption);
+        bool CreatePost(UserMenuTemplateOptionCreatePost UserMenuTemplateOption);
+        Task<string> CreatePostCheck(UserMenuTemplateOptionCreateGet UserMenuTemplateOption);
+        Task<List<UserMenuTemplateOptionIndexGet>> IndexGet(string UserId, int UserMenuTemplateId);
+        Task<List<UserMenuTemplateOptionLanguageIndexGet>> LanguageIndexGet(string UserId, int UserMenuTemplateOptionId);
+        Task<UserMenuTemplateOptionLanguageIndexGet> LanguageUpdateGet(string UserId, int UserMenuTemplateOptionLanguageId);
+        Task<UserMenuTemplateOptionUpdateGet> UpdateGet(string UserId, int UserMenuTemplateOptionId);
     }
 }

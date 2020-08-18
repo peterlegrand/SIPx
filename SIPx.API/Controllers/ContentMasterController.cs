@@ -250,7 +250,7 @@ namespace SIPx.API.Controllers
             {
                 var ContentTypeCreateGet = new ContentTypeCreateGet();
                 var ContentTypeGroups = await _contentMasterProvider.ContentTypeGroupList(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.SecurityLevelList(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ContentTypeCreateGet.LanguageId = UserLanguage.LanguageId;
                 ContentTypeCreateGet.LanguageName = UserLanguage.Name;

@@ -10,5 +10,6 @@ namespace SIPx.DataAccess
         Task<string> PersonTelecomCreatePostCheck(PersonTelecomCreatePost PersonTelecom);
         Task<List<PersonTelecomIndexGet>> PersonTelecomIndexGet(string UserId, int PersonId);
         Task<PersonTelecomUpdateGet> PersonTelecomUpdateGet(string UserId, int PersonTelecomId);
+        bool UpdatePost(PersonTelecomUpdateGet PersonTelecom);
     }
 }

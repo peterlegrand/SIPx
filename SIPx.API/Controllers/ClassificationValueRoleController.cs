@@ -48,7 +48,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationValueProvider.ClassificationValueRoleIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -106,10 +106,10 @@ namespace SIPx.API.Controllers
             ClassificationValueRole.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationValueProvider.ClassificationValueRoleCreatePostCheck(ClassificationValueRole);
+                var CheckString = await _classificationValueRoleProvider.CreatePostCheck(ClassificationValueRole);
                 if (CheckString.Length == 0)
                 {
-                    _classificationValueProvider.ClassificationValueRoleCreatePost(ClassificationValueRole);
+                    _classificationValueRoleProvider.CreatePost(ClassificationValueRole);
                     return Ok(ClassificationValueRole);
                 }
                 return BadRequest(new

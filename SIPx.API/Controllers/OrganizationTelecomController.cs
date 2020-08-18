@@ -42,7 +42,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationTelecomProvider.OrganizationTelecomIndexGet(CurrentUser.Id, Id));
+                return Ok(await _organizationTelecomProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -56,7 +56,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationTelecomProvider.OrganizationTelecomUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _organizationTelecomProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -90,10 +90,10 @@ namespace SIPx.API.Controllers
             OrganizationTelecom.CreatorId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationTelecomProvider.OrganizationTelecomCreatePostCheck(OrganizationTelecom);
+                var CheckString = await _organizationTelecomProvider.CreatePostCheck(OrganizationTelecom);
                 if (CheckString.Length == 0)
                 {
-                    _organizationTelecomProvider.OrganizationTelecomCreatePost(OrganizationTelecom);
+                    _organizationTelecomProvider.CreatePost(OrganizationTelecom);
                     return Ok(OrganizationTelecom);
                 }
                 return BadRequest(new

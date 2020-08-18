@@ -38,7 +38,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _roleGroupProvider.RoleGroupLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _roleGroupProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -54,7 +54,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _roleGroupProvider.RoleGroupLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _roleGroupProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -68,7 +68,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _roleGroupProvider.RoleGroupIndexGet(CurrentUser.Id));
+                return Ok(await _roleGroupProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -84,7 +84,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _roleGroupProvider.RoleGroupUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _roleGroupProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -117,10 +117,10 @@ namespace SIPx.API.Controllers
             RoleGroup.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _roleGroupProvider.RoleGroupCreatePostCheck(RoleGroup);
+                var CheckString = await _roleGroupProvider.CreatePostCheck(RoleGroup);
                 if (CheckString.Length == 0)
                 {
-                    _roleGroupProvider.RoleGroupCreatePost(RoleGroup);
+                    _roleGroupProvider.CreatePost(RoleGroup);
                     return Ok(RoleGroup);
                 }
                 return BadRequest(new

@@ -92,7 +92,7 @@ namespace SIPx.API.Controllers
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
                 x.Icons = icons;
                 var ContentTypeGroups = await _contentMasterProvider.ContentTypeGroupList(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.SecurityLevelList(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 x.ContentTypeGroups = ContentTypeGroups;
                 x.SecurityLevels = SecurityLevels;
 
@@ -112,7 +112,7 @@ namespace SIPx.API.Controllers
             {
                 var ContentTypeCreateGet = new ContentTypeCreateGet();
                 var ContentTypeGroups = await _contentMasterProvider.ContentTypeGroupList(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.SecurityLevelList(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ContentTypeCreateGet.ContentTypeGroups = ContentTypeGroups;
                 ContentTypeCreateGet.SecurityLevels = SecurityLevels;

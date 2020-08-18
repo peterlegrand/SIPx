@@ -40,7 +40,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _languageProvider.LanguageIndexGet(CurrentUser.Id));
+                return Ok(await _languageProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -54,7 +54,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _languageProvider.LanguagesActiveList(CurrentUser.Id));
+                return Ok(await _languageProvider.ActiveList(CurrentUser.Id));
             }
             return BadRequest(new
             {

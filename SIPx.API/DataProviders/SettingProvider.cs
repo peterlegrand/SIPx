@@ -19,13 +19,13 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<SettingIndexGet>> SettingIndexGet(string UserId)
+        public async Task<List<SettingIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_SettingIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<SettingIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<SettingUpdateGet> SettingUpdateGet(string UserId, int SettingId)
+        public Task<SettingUpdateGet> UpdateGet(string UserId, int SettingId)
         {
             string usp = "usp_SettingUpdateGet @UserId, @SettingID";
             return _sqlDataAccess.LoadSingleRecord<SettingUpdateGet, dynamic>(usp, new { UserId = UserId, SettingId = SettingId });

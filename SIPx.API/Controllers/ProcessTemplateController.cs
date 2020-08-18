@@ -18,14 +18,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateController : ControllerBase
     {
+        private readonly IProcessTemplateGroupProvider _processTemplateGroupProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateController(IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateController(IProcessTemplateGroupProvider processTemplateGroupProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processTemplateGroupProvider = processTemplateGroupProvider;
             _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
@@ -39,7 +41,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateIndexGet(CurrentUser.Id));
+                return Ok(await _processTemplateProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -53,7 +55,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _processTemplateProvider.ProcessTemplateUpdateGet(CurrentUser.Id, Id);
+                var x = await _processTemplateProvider.UpdateGet(CurrentUser.Id, Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
                 x.Icons = icons;
 
@@ -71,7 +73,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -85,7 +87,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -100,8 +102,8 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ProcessTemplateCreateGet = new ProcessTemplateCreateGet();
-                var Sequences = await _processTemplateProvider.ProcessTemplateCreateGetSequence(CurrentUser.Id);
-                var ProcessTemplateGroups = await _processTemplateProvider.ProcessTemplateGroupList(CurrentUser.Id);
+                var Sequences = await _processTemplateProvider.CreateGetSequence(CurrentUser.Id);
+                var ProcessTemplateGroups = await _processTemplateGroupProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ProcessTemplateCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProcessTemplateCreateGet.LanguageName = UserLanguage.Name;
@@ -122,10 +124,10 @@ namespace SIPx.API.Controllers
             ProcessTemplate.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateProvider.ProcessTemplateCreatePostCheck(ProcessTemplate);
+                var CheckString = await _processTemplateProvider.CreatePostCheck(ProcessTemplate);
                 if (CheckString.Length == 0)
                 {
-                    _processTemplateProvider.ProcessTemplateCreatePost(ProcessTemplate);
+                    _processTemplateProvider.CreatePost(ProcessTemplate);
                     return Ok(ProcessTemplate);
                 }
                 return BadRequest(new

@@ -18,13 +18,21 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateFlowConditionController : ControllerBase
     {
+        private readonly IProcessTemplateFlowConditionComparisonOperatorProvider _processTemplateFlowConditionComparisonOperatorProvider;
+        private readonly IProcessTemplateFieldProvider _processTemplateFieldProvider;
+        private readonly IProcessTemplateFlowConditionTypeProvider _processTemplateFlowConditionTypeProvider;
+        private readonly IProcessTemplateFlowConditionProvider _processTemplateFlowConditionProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateFlowConditionController(IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateFlowConditionController(IProcessTemplateFlowConditionComparisonOperatorProvider  processTemplateFlowConditionComparisonOperatorProvider , IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateFlowConditionTypeProvider processTemplateFlowConditionTypeProvider, IProcessTemplateFlowConditionProvider processTemplateFlowConditionProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processTemplateFlowConditionComparisonOperatorProvider = processTemplateFlowConditionComparisonOperatorProvider;
+            _processTemplateFieldProvider = processTemplateFieldProvider;
+            _processTemplateFlowConditionTypeProvider = processTemplateFlowConditionTypeProvider;
+            _processTemplateFlowConditionProvider = processTemplateFlowConditionProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _processTemplateProvider = processTemplateProvider;
@@ -37,7 +45,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateFlowConditionLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateFlowConditionProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -51,7 +59,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateFlowConditionLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateFlowConditionProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -65,7 +73,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateFlowConditionIndexGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateFlowConditionProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -79,7 +87,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateFlowConditionUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateFlowConditionProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -94,10 +102,10 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ProcessTemplateFlowConditionCreateGet = new ProcessTemplateFlowConditionCreateGet();
-                var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateProvider.ProcessTemplateFlowConditionCreateGetSequence(CurrentUser.Id, Id);
-                var ProcessTemplateFlowConditionTypes = await _processTemplateProvider.ProcessTemplateFlowConditionTypeList(CurrentUser.Id);
-                var ProcessTemplateFields = await _processTemplateProvider.ProcessTemplateFieldList(CurrentUser.Id, Id);
-                var ComparisonOperators = await _processTemplateProvider.ComparisonOperatorList(CurrentUser.Id);
+                var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.CreateGetSequence(CurrentUser.Id, Id);
+                var ProcessTemplateFlowConditionTypes = await _processTemplateFlowConditionTypeProvider.List(CurrentUser.Id);
+                var ProcessTemplateFields = await _processTemplateFieldProvider.List(CurrentUser.Id, Id);
+                var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ProcessTemplateFlowConditionCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProcessTemplateFlowConditionCreateGet.LanguageName = UserLanguage.Name;
@@ -122,10 +130,10 @@ namespace SIPx.API.Controllers
             ProcessTemplateFlowCondition.CreaterId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateProvider.ProcessTemplateFlowConditionCreatePostCheck(ProcessTemplateFlowCondition);
+                var CheckString = await _processTemplateFlowConditionProvider.CreatePostCheck(ProcessTemplateFlowCondition);
                 if (CheckString.Length == 0)
                 {
-                    _processTemplateProvider.ProcessTemplateFlowConditionCreatePost(ProcessTemplateFlowCondition);
+                    _processTemplateFlowConditionProvider.CreatePost(ProcessTemplateFlowCondition);
                     return Ok(ProcessTemplateFlowCondition);
                 }
                 return BadRequest(new

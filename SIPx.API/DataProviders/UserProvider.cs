@@ -21,36 +21,20 @@ namespace SIPx.DataAccess
         }
 
 
-        public async Task<List<UserRoleIndexGet>> UserRoleIndexGet(string UserId, string UserRoleUserId)
-        {
-            string usp = "usp_UserRoleIndexGet @UserId, @UserRoleUserID";
-            var x = await _sqlDataAccess.LoadData<UserRoleIndexGet, dynamic>(usp, new { UserId = UserId, UserRoleUserId = UserRoleUserId });
-            return x;
-        }
-        public async Task<List<UserIndexGet>> UserIndexGet(string UserId)
+        public async Task<List<UserIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_UserIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<UserIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<UserUpdateGet> UserUpdateGet(string UserId, string SelectedUserId)
+        public Task<UserUpdateGet> UpdateGet(string UserId, string SelectedUserId)
         {
             string usp = "usp_UserUpdateGet @UserId, @SelectedUserID";
             return _sqlDataAccess.LoadSingleRecord<UserUpdateGet, dynamic>(usp, new { UserId = UserId, SelectedUserId = SelectedUserId });
 
         }
-        public Task<List<UserMenuTypeList>> UserMenuTypeRightList(string UserId)
-        {
-            string usp = "usp_UserMenuTypeRightList @UserID";
-            return _sqlDataAccess.LoadData<UserMenuTypeList, dynamic>(usp, new { UserId = UserId });
-        }
-        public Task<List<UserMenuTypeList>> UserMenuTypeLeftList(string UserId)
-        {
-            string usp = "usp_UserMenuTypeLeftList @UserID";
-            return _sqlDataAccess.LoadData<UserMenuTypeList, dynamic>(usp, new { UserId = UserId });
-        }
 
-        public Task<List<UserList>> UserList()
+        public Task<List<UserList>> List()
         {
             string usp = "usp_UserList";
             return _sqlDataAccess.LoadData<UserList>(usp);

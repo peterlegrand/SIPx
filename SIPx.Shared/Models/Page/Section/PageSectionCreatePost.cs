@@ -20,6 +20,10 @@ namespace SIPx.Shared
         public int SortById { get; set; }
         public int MaxContent { get; set; }
         public bool HasPaging { get; set; }
+        public int SizeX { get; set; }
+        public int SizeY { get; set; }
+        public int DashboardRow { get; set; }
+        public int DashboardColumn { get; set; }
         public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

@@ -24,6 +24,10 @@ namespace SIPx.Shared
         public bool ShowContentTypeTitleName { get; set; }
         public bool ShowContentTypeTitleDescription { get; set; }
         public int OneTwoColumns { get; set; }
+        public int SizeX { get; set; }
+        public int SizeY { get; set; }
+        public int DashboardRow { get; set; }
+        public int DashboardColumn { get; set; }
         public string ContentTypeName { get; set; }
         public int? ContentTypeId { get; set; }
         public string SortByName { get; set; }

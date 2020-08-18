@@ -19,44 +19,44 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public Task<List<ProjectTypeLanguage>> ProjectTypeLanguageIndexGet(string UserId, int ProjectTypeId)
+        public Task<List<ProjectTypeLanguage>> LanguageIndexGet(string UserId, int ProjectTypeId)
         {
             string usp = "usp_ProjectTypeLanguageIndexGet @UserId, @ProjectTypeID";
             return _sqlDataAccess.LoadData<ProjectTypeLanguage, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
         }
-        public Task<ProjectTypeLanguage> ProjectTypeLanguageUpdateGet(string UserId, int ProjectTypeLanguageId)
+        public Task<ProjectTypeLanguage> LanguageUpdateGet(string UserId, int ProjectTypeLanguageId)
         {
             string usp = "usp_ProjectTypeLanguageUpdateGet @UserId, @ProjectTypeLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ProjectTypeLanguage, dynamic>(usp, new { UserId = UserId, ProjectTypeLanguageId = ProjectTypeLanguageId });
 
         }
-        public Task<List<ProjectType>> ProjectTypeIndexGet(string UserId)
+        public Task<List<ProjectType>> IndexGet(string UserId)
         {
             string usp = "usp_ProjectTypeIndexGet @UserID";
             return _sqlDataAccess.LoadData<ProjectType, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<ProjectType> ProjectTypeUpdateGet(string UserId, int ProjectTypeId)
+        public Task<ProjectType> UpdateGet(string UserId, int ProjectTypeId)
         {
             string usp = "usp_ProjectTypeUpdateGet @UserId, @ProjectTypeID";
             return _sqlDataAccess.LoadSingleRecord<ProjectType, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
         }
-        public async Task<List<ProjectTypeList>> ProjectTypeList(string UserId)
+        public async Task<List<ProjectTypeList>> List(string UserId)
         {
             string usp = "usp_ProjectTypeList @UserID";
             var x = await _sqlDataAccess.LoadData<ProjectTypeList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
 
-        public async Task<string> ProjectTypeCreatePostCheck(ProjectTypeCreatePost ProjectType)
+        public async Task<string> CreatePostCheck(ProjectTypeCreatePost ProjectType)
         {
             string usp = "usp_ProjectTypeCreatePostCheck @LanguageId, @Name, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);
             return CheckString;
         }
-        public async Task<string> ProjectTypeCreatePost(ProjectTypeCreateGet ProjectType)
+        public async Task<string> CreatePost(ProjectTypeCreateGet ProjectType)
         {
             string usp = "usp_ProjectTypeCreatePost @Name, @Description, @MenuName, @MouseOver, @Color ,@IconID, @CreatorId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);

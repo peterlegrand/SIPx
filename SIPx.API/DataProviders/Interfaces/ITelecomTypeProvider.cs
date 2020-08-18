@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface ITelecomTypeProvider
     {
-        Task<List<TelecomType>> TelecomTypeIndexGet(string UserId);
-        Task<TelecomType> TelecomTypeUpdateGet(string UserId, int TelecomTypeId);
+        Task<List<TelecomType>> IndexGet(string UserId);
+        Task<TelecomType> UpdateGet(string UserId, int TelecomTypeId);
     }
 }

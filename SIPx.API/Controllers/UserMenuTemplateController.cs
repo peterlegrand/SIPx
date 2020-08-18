@@ -12,16 +12,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserMenuTemplateController : ControllerBase
     {
+        private readonly IUserMenuTemplateProvider _userMenuTemplateProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IUserMenuTemplateProvider _UserMenuTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuTemplateController( ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuTemplateProvider UserMenuTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuTemplateController(IUserMenuTemplateProvider userMenuTemplateProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _userMenuTemplateProvider = userMenuTemplateProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
-            _UserMenuTemplateProvider = UserMenuTemplateProvider;
             _userManager = userManager;
         }
 
@@ -31,7 +31,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
             {
-                return Ok(await _UserMenuTemplateProvider.UserMenuTemplateIndexGet(CurrentUser.Id));
+                return Ok(await _userMenuTemplateProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -61,10 +61,10 @@ namespace SIPx.API.Controllers
             UserMenuTemplate.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _UserMenuTemplateProvider.UserMenuTemplateCreatePostCheck(UserMenuTemplate);
+                var CheckString = await _userMenuTemplateProvider.CreatePostCheck(UserMenuTemplate);
                 if (CheckString.Length == 0)
                 {
-                    _UserMenuTemplateProvider.UserMenuTemplateCreatePost(UserMenuTemplate);
+                    _userMenuTemplateProvider.CreatePost(UserMenuTemplate);
                     return Ok(UserMenuTemplate);
                 }
                 return BadRequest(new
@@ -88,10 +88,10 @@ namespace SIPx.API.Controllers
             UserMenuTemplate.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _UserMenuTemplateProvider.UserMenuTemplateUpdatePostCheck(UserMenuTemplate);
+                var CheckString = await _userMenuTemplateProvider.UpdatePostCheck(UserMenuTemplate);
                 if (CheckString.Length == 0)
                 {
-                    _UserMenuTemplateProvider.UserMenuTemplateUpdatePost(UserMenuTemplate);
+                    _userMenuTemplateProvider.UpdatePost(UserMenuTemplate);
                     return Ok(UserMenuTemplate);
                 }
                 return BadRequest(new
@@ -124,7 +124,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _UserMenuTemplateProvider.UserMenuTemplateLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _userMenuTemplateProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -149,7 +149,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))  
             {
-                return Ok(await _UserMenuTemplateProvider.UserMenuTemplateLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _userMenuTemplateProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -171,7 +171,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _UserMenuTemplateProvider.UserMenuTemplateUpdateGet(CurrentUser.Id, Id);
+                var x = await _userMenuTemplateProvider.UpdateGet(CurrentUser.Id, Id);
 
                 return Ok(x);
             }

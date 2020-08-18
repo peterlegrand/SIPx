@@ -19,18 +19,18 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public Task<List<SecurityLevelIndexGet>> SecurityLevelIndexGet(string UserId)
-        {
-            string usp = "usp_SecurityLevelIndexGet @UserID";
-            return _sqlDataAccess.LoadData<SecurityLevelIndexGet, dynamic>(usp, new { UserId = UserId });
+        //public Task<List<SecurityLevelIndexGet>> IndexGet(string UserId)
+        //{
+        //    string usp = "usp_SecurityLevelIndexGet @UserID";
+        //    return _sqlDataAccess.LoadData<SecurityLevelIndexGet, dynamic>(usp, new { UserId = UserId });
 
-        }
-        public Task<SecurityLevelUpdateGet> SecurityLevelUpdateGet(string UserId, int SecurityLevelId)
-        {
-            string usp = "usp_SecurityLevelUpdateGet @UserId, @SecurityLevelID";
-            return _sqlDataAccess.LoadSingleRecord<SecurityLevelUpdateGet, dynamic>(usp, new { UserId = UserId, SecurityLevelId = SecurityLevelId });
-        }
-        public async Task<List<SecurityLevelList>> SecurityLevelList(string UserId)
+        //}
+        //public Task<SecurityLevelUpdateGet> UpdateGet(string UserId, int SecurityLevelId)
+        //{
+        //    string usp = "usp_SecurityLevelUpdateGet @UserId, @SecurityLevelID";
+        //    return _sqlDataAccess.LoadSingleRecord<SecurityLevelUpdateGet, dynamic>(usp, new { UserId = UserId, SecurityLevelId = SecurityLevelId });
+        //}
+        public async Task<List<SecurityLevelList>> List(string UserId)
         {
             string usp = "usp_SecurityLevelList @UserID";
             var x = await _sqlDataAccess.LoadData<SecurityLevelList, dynamic>(usp, new { UserId = UserId });

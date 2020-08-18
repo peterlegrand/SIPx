@@ -46,7 +46,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationValueProvider.ClassificationValueIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -68,7 +68,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _classificationValueProvider.ClassificationValueUpdateGet(CurrentUser.Id, Id);
+                var x = await _classificationValueProvider.UpdateGet(CurrentUser.Id, Id);
                 var z = await _masterListProvider.StatusList(CurrentUser.Id);
 
                 return Ok(x);
@@ -108,10 +108,10 @@ namespace SIPx.API.Controllers
             ClassificationValue.CreatorId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationValueProvider.ClassificationValueCreatePostCheck(ClassificationValue);
+                var CheckString = await _classificationValueProvider.CreatePostCheck(ClassificationValue);
                 if (CheckString.Length == 0)
                 {
-                    _classificationValueProvider.ClassificationValueCreatePost(ClassificationValue);
+                    _classificationValueProvider.CreatePost(ClassificationValue);
                     return Ok(ClassificationValue);
                 }
                 return BadRequest(new
@@ -143,7 +143,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationValueProvider.ClassificationValueLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -166,7 +166,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationValueProvider.ClassificationValueLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

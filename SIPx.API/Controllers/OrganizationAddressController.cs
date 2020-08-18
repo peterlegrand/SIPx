@@ -42,7 +42,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationAddressProvider.OrganizationAddressIndexGet(CurrentUser.Id, Id));
+                return Ok(await _organizationAddressProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -56,7 +56,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationAddressProvider.OrganizationAddressUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _organizationAddressProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -91,10 +91,10 @@ namespace SIPx.API.Controllers
             OrganizationAddress.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationAddressProvider.OrganizationAddressCreatePostCheck(OrganizationAddress);
+                var CheckString = await _organizationAddressProvider.CreatePostCheck(OrganizationAddress);
                 if (CheckString.Length == 0)
                 {
-                    _organizationAddressProvider.OrganizationAddressCreatePost(OrganizationAddress);
+                    _organizationAddressProvider.CreatePost(OrganizationAddress);
                     return Ok(OrganizationAddress);
                 }
                 return BadRequest(new

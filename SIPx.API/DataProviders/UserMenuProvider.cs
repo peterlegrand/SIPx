@@ -18,25 +18,25 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public async Task<List<UserMenuIndexGet>> UserMenuIndexGet(string UserId)
+        public async Task<List<UserMenuIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_UserMenuIndexGet @UserID";
             List<UserMenuIndexGet> x = await _sqlDataAccess.LoadData<UserMenuIndexGet, dynamic>(usp, new { UserId });
             return x;
         }
-        public Task<UserMenuUpdateGet> UserMenuUpdateGet(int UserMenuID)
+        public Task<UserMenuUpdateGet> UpdateGet(int UserMenuID)
         {
             string usp = "usp_UserMenuUpdateGet  @UserMenuID";
             return _sqlDataAccess.LoadSingleRecord<UserMenuUpdateGet, dynamic>(usp, new { UserMenuID });
 
         }
-        public Task<UserMenuDeleteGet> UserMenuDeleteGet(string UserID, int UserMenuID)
+        public Task<UserMenuDeleteGet> DeleteGet(string UserID, int UserMenuID)
         {
             string usp = "usp_UserMenuDeleteGet @UserId,  @UserMenuID";
             return _sqlDataAccess.LoadSingleRecord<UserMenuDeleteGet, dynamic>(usp, new { UserID, UserMenuID });
 
         }
-        public Task<List<SequenceList>> UserMenuCreateGetSequence(string UserId)
+        public Task<List<SequenceList>> CreateGetSequence(string UserId)
         {
             string usp = "[usp_UserMenuCreateGetSequence] @UserID";
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
@@ -49,19 +49,19 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<UserMenuCreateGet>(usp, UserMenu);
             return true;
         }
-        public bool UserMenuUpdatePost(UserMenuUpdateGet UserMenu)
+        public bool UpdatePost(UserMenuUpdateGet UserMenu)
         {
             string usp = "usp_UserMenuUpdatePost @UserMenuID, @Name, @MouseOver , @UserPageIdLeft, @UserPageIdRight , @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @IconId, @Sequence, @ModifierID";
             _sqlDataAccess.SaveData<UserMenuUpdateGet>(usp, UserMenu);
             return true;
         }
-        public bool UserMenuDeletePost(UserMenuDeleteGet UserMenu)
+        public bool DeletePost(UserMenuDeleteGet UserMenu)
         {
             string usp = "usp_UserMenuDeletePost @UserMenuID";
             _sqlDataAccess.SaveData<UserMenuDeleteGet>(usp, UserMenu);
             return true;
         }
-        public bool UserMenuUpdatePost(int UserMenuId)
+        public bool UpdatePost(int UserMenuId)
         {
             string usp = "usp_UserMenuDeletePost @UserMenuID";
             _sqlDataAccess.SaveData<int>(usp, UserMenuId);

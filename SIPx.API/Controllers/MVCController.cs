@@ -28,7 +28,7 @@ namespace SIPx.API.Controllers
             //Namecontroller = "Classification";
             //action = "Index";
             
-            var a = _uITermProvider.UITermLanguageCustomizationIndexGet(controllerName, actionName, CurrentUser.Id);
+            var a = _uITermProvider.IndexGet(controllerName, actionName, CurrentUser.Id);
             return Ok(a);
 
 

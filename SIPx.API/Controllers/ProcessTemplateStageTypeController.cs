@@ -41,7 +41,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _ProcessTemplateStageTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -55,7 +55,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _ProcessTemplateStageTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -69,7 +69,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeIndexGet(CurrentUser.Id));
+                return Ok(await _ProcessTemplateStageTypeProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -83,7 +83,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeUpdateGet(CurrentUser.Id, Id);
+                var x = await _ProcessTemplateStageTypeProvider.UpdateGet(CurrentUser.Id, Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
                 x.Icons = icons;
 
@@ -123,10 +123,10 @@ namespace SIPx.API.Controllers
             ProcessTemplateStageType.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeCreatePostCheck(ProcessTemplateStageType);
+                var CheckString = await _ProcessTemplateStageTypeProvider.CreatePostCheck(ProcessTemplateStageType);
                 if (CheckString.Length == 0)
                 {
-                    _ProcessTemplateStageTypeProvider.ProcessTemplateStageTypeCreatePost(ProcessTemplateStageType);
+                    _ProcessTemplateStageTypeProvider.CreatePost(ProcessTemplateStageType);
                     return Ok(ProcessTemplateStageType);
                 }
                 return BadRequest(new

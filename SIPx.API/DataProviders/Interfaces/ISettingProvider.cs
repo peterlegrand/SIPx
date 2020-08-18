@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface ISettingProvider
     {
-        Task<List<SettingIndexGet>> SettingIndexGet(string UserId);
-        Task<SettingUpdateGet> SettingUpdateGet(string UserId, int SettingId);
+        Task<List<SettingIndexGet>> IndexGet(string UserId);
+        Task<SettingUpdateGet> UpdateGet(string UserId, int SettingId);
     }
 }

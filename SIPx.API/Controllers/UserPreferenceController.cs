@@ -46,7 +46,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _userPreferenceProvider.UserPreferenceIndexGet(CurrentUser.Id, CurrentUser.Id));
+                return Ok(await _userPreferenceProvider.IndexGet(CurrentUser.Id, CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -62,15 +62,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _userPreferenceProvider.UserPreferenceUpdateGet(CurrentUser.Id, Id);
+                var x = await _userPreferenceProvider.UpdateGet(CurrentUser.Id, Id);
 
                 switch (x.PreferenceTypeId)
                 {
                     case 1:
-                        x.Languages = await _LanguageProvider.LanguagesActiveList(CurrentUser.Id);
+                        x.Languages = await _LanguageProvider.ActiveList(CurrentUser.Id);
                         break;
                     case 2:
-                        x.Pages = await _pageProvider.PageListForMenuTemplate(CurrentUser.Id);
+                        x.Pages = await _pageProvider.ListForMenuTemplate(CurrentUser.Id);
                         break;
                 }
                 return Ok(x);
@@ -88,10 +88,10 @@ namespace SIPx.API.Controllers
             UserPreference.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userPreferenceProvider.UserPreferenceUpdatePostCheck(UserPreference);
+                var CheckString = await _userPreferenceProvider.UpdatePostCheck(UserPreference);
                 if (CheckString.Length == 0)
                 {
-                    _userPreferenceProvider.UserPreferenceUpdatePost(UserPreference);
+                    _userPreferenceProvider.UpdatePost(UserPreference);
                     return Ok(UserPreference);
                 }
                 return BadRequest(new

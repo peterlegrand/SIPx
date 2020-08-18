@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProjectController : ControllerBase
     {
+        private readonly IProjectTypeProvider _projectTypeProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProjectProvider _projectProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProjectController(IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProjectController(IProjectTypeProvider projectTypeProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _projectTypeProvider = projectTypeProvider;
             _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
@@ -40,7 +42,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _projectProvider.ProjectLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _projectProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -54,7 +56,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _projectProvider.ProjectLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _projectProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -68,7 +70,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _projectProvider.ProjectIndexGet(CurrentUser.Id));
+                return Ok(await _projectProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -82,7 +84,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _projectProvider.ProjectUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _projectProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -99,7 +101,7 @@ namespace SIPx.API.Controllers
             {
                 var ProjectCreateGet = new ProjectCreateGet();
                 var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var ProjectTypes = await _projectProvider.ProjectTypeList(CurrentUser.Id);
+                var ProjectTypes = await _projectTypeProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ProjectCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProjectCreateGet.LanguageName = UserLanguage.Name;
@@ -121,10 +123,10 @@ namespace SIPx.API.Controllers
             Project.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _projectProvider.ProjectCreatePostCheck(Project);
+                var CheckString = await _projectProvider.CreatePostCheck(Project);
                 if (CheckString.Length == 0)
                 {
-                    _projectProvider.ProjectCreatePost(Project);
+                    _projectProvider.CreatePost(Project);
                     return Ok(Project);
                 }
                 return BadRequest(new

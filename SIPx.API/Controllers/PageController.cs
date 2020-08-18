@@ -48,7 +48,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
             {
-                return Ok(await _pageProvider.PageIndexGet(CurrentUser.Id));
+                return Ok(await _pageProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -70,7 +70,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _pageProvider.PageUpdateGet(CurrentUser.Id, Id);
+                var x = await _pageProvider.UpdateGet(CurrentUser.Id, Id);
 
                 return Ok(x);
             }
@@ -87,7 +87,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _pageProvider.PageLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _pageProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -101,7 +101,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _pageProvider.PageLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _pageProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -117,10 +117,10 @@ namespace SIPx.API.Controllers
             {
                 var PageCreateGet = new PageCreateGet();
                 var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var Projects = await _projectProvider.ProjectList(CurrentUser.Id);
-                var Organizations = await _organizationProvider.OrganizationList(CurrentUser.Id);
+                var Projects = await _projectProvider.List(CurrentUser.Id);
+                var Organizations = await _organizationProvider.List(CurrentUser.Id);
                 var Classifications = await _classificationProvider.List(CurrentUser.Id);
-                var Users = await _userProvider.UserList();
+                var Users = await _userProvider.List();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 PageCreateGet.LanguageId = UserLanguage.LanguageId;
                 PageCreateGet.LanguageName = UserLanguage.Name;
@@ -145,10 +145,10 @@ namespace SIPx.API.Controllers
             Page.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _pageProvider.PageCreatePostCheck(Page);
+                var CheckString = await _pageProvider.CreatePostCheck(Page);
                 if (CheckString.Length == 0)
                 {
-                    _pageProvider.PageCreatePost(Page);
+                    _pageProvider.CreatePost(Page);
                     return Ok(Page);
                 }
                 return BadRequest(new

@@ -72,7 +72,7 @@ namespace SIPx.API.Controllers
                     newProcessWithMaster.ProcessFields = newprocess;
                     if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 16))
                     {
-                        var projects = await _projectProvider.ProjectList(CurrentUser.Id);
+                        var projects = await _projectProvider.List(CurrentUser.Id);
                         newProcessWithMaster.Projects = projects;
                     }
                     if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 12))

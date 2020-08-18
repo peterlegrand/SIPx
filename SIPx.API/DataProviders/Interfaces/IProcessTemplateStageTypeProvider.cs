@@ -6,12 +6,12 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateStageTypeProvider
     {
-        Task<string> ProcessTemplateStageTypeCreatePost(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType);
-        Task<string> ProcessTemplateStageTypeCreatePostCheck(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType);
-        Task<List<ProcessTemplateStageType>> ProcessTemplateStageTypeIndexGet(string UserId);
-        Task<List<ProcessTemplateStageTypeLanguage>> ProcessTemplateStageTypeLanguageIndexGet(string UserId, int ProcessTemplateStageTypeId);
-        Task<ProcessTemplateStageTypeLanguage> ProcessTemplateStageTypeLanguageUpdateGet(string UserId, int ProcessTemplateStageTypeLanguageId);
-        Task<List<ProcessTemplateStageTypeList>> ProcessTemplateStageTypeList(string UserId);
-        Task<ProcessTemplateStageType> ProcessTemplateStageTypeUpdateGet(string UserId, int ProcessTemplateStageTypeId);
+        Task<string> CreatePost(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType);
+        Task<string> CreatePostCheck(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType);
+        Task<List<ProcessTemplateStageType>> IndexGet(string UserId);
+        Task<List<ProcessTemplateStageTypeLanguage>> LanguageIndexGet(string UserId, int ProcessTemplateStageTypeId);
+        Task<ProcessTemplateStageTypeLanguage> LanguageUpdateGet(string UserId, int ProcessTemplateStageTypeLanguageId);
+        Task<List<ProcessTemplateStageTypeList>> List(string UserId);
+        Task<ProcessTemplateStageType> UpdateGet(string UserId, int ProcessTemplateStageTypeId);
     }
 }

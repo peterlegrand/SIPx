@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserMenuController : ControllerBase
     {
+        private readonly IUserMenuTypeProvider _userMenuTypeProvider;
         private readonly IUserProvider _userProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IPageProvider _pageProvider;
@@ -21,8 +22,9 @@ namespace SIPx.API.Controllers
         private readonly IUserMenuProvider _userMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuController(IUserProvider userProvider, IMasterListProvider masterListProvider,  IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuController(IUserMenuTypeProvider userMenuTypeProvider,  IUserProvider userProvider, IMasterListProvider masterListProvider,  IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _userMenuTypeProvider = userMenuTypeProvider;
             _userProvider = userProvider;
             _masterListProvider = masterListProvider;
             _pageProvider = pageProvider;
@@ -49,7 +51,7 @@ namespace SIPx.API.Controllers
                 //}
 
 
-                return Ok(await _userMenuProvider.UserMenuIndexGet(CurrentUser.Id));
+                return Ok(await _userMenuProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -65,10 +67,10 @@ namespace SIPx.API.Controllers
             {
                 var UserMenuCreateGet = new UserMenuCreateGet();
                 var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
-                var Pages = await _pageProvider.PageListForMenu(CurrentUser.Id);
-                var UserMenuCreateGetSequences = await _userMenuProvider.UserMenuCreateGetSequence(CurrentUser.Id);
-                UserMenuCreateGet.UserMenuTypesLeft = await _userProvider.UserMenuTypeLeftList(CurrentUser.Id);
-                UserMenuCreateGet.UserMenuTypesRight = await _userProvider.UserMenuTypeRightList(CurrentUser.Id);
+                var Pages = await _pageProvider.ListForMenu(CurrentUser.Id);
+                var UserMenuCreateGetSequences = await _userMenuProvider.CreateGetSequence(CurrentUser.Id);
+                UserMenuCreateGet.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
+                UserMenuCreateGet.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
                 UserMenuCreateGetSequences.Add(new SequenceList { Sequence = UserMenuCreateGetSequences.Count ,Name = "Add at the end" });
                 UserMenuCreateGet.UserMenus = UserMenuCreateGetSequences;
                 UserMenuCreateGet.Icons = iconslist;
@@ -118,7 +120,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
                 //if (CheckString.Length == 0)
                 //{
-                _userMenuProvider.UserMenuUpdatePost(UserMenu);
+                _userMenuProvider.UpdatePost(UserMenu);
                 return Ok(UserMenu);
                 //}
                 return BadRequest(new
@@ -150,12 +152,12 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var UserMenu = await _userMenuProvider.UserMenuUpdateGet(Id);
+                var UserMenu = await _userMenuProvider.UpdateGet(Id);
                 var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
-                var Pages = await _pageProvider.PageListForMenu(CurrentUser.Id);
-                var UserMenuSequences = await _userMenuProvider.UserMenuCreateGetSequence(CurrentUser.Id);
-                UserMenu.UserMenuTypesLeft = await _userProvider.UserMenuTypeLeftList(CurrentUser.Id);
-                UserMenu.UserMenuTypesRight = await _userProvider.UserMenuTypeRightList(CurrentUser.Id);
+                var Pages = await _pageProvider.ListForMenu(CurrentUser.Id);
+                var UserMenuSequences = await _userMenuProvider.CreateGetSequence(CurrentUser.Id);
+                UserMenu.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
+                UserMenu.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
                 UserMenuSequences.Add(new SequenceList { Sequence = UserMenuSequences.Count, Name = "Add at the end" });
                 UserMenu.UserMenus = UserMenuSequences;
                 UserMenu.Icons = iconslist;
@@ -187,7 +189,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var UserMenu = await _userMenuProvider.UserMenuDeleteGet(CurrentUser.Id, Id);
+                var UserMenu = await _userMenuProvider.DeleteGet(CurrentUser.Id, Id);
                 UserMenu.CreatorId = CurrentUser.Id;
                 return Ok(UserMenu);
 
@@ -209,7 +211,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
                 //if (CheckString.Length == 0)
                 //{
-                _userMenuProvider.UserMenuDeletePost(UserMenu);
+                _userMenuProvider.DeletePost(UserMenu);
                 return Ok(UserMenu);
                 //}
                 return BadRequest(new

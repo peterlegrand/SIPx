@@ -41,7 +41,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationTypeProvider.OrganizationTypeLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _organizationTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -55,7 +55,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationTypeProvider.OrganizationTypeLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _organizationTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -69,7 +69,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationTypeProvider.OrganizationTypeIndexGet(CurrentUser.Id));
+                return Ok(await _organizationTypeProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -83,7 +83,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _organizationTypeProvider.OrganizationTypeUpdateGet(CurrentUser.Id, Id);
+                var x = await _organizationTypeProvider.UpdateGet(CurrentUser.Id, Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
                 x.Icons = icons;
 
@@ -122,10 +122,10 @@ namespace SIPx.API.Controllers
             OrganizationType.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationTypeProvider.OrganizationTypeCreatePostCheck(OrganizationType);
+                var CheckString = await _organizationTypeProvider.CreatePostCheck(OrganizationType);
                 if (CheckString.Length == 0)
                 {
-                    _organizationTypeProvider.OrganizationTypeCreatePost(OrganizationType);
+                    _organizationTypeProvider.CreatePost(OrganizationType);
                     return Ok(OrganizationType);
                 }
                 return BadRequest(new

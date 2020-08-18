@@ -18,7 +18,7 @@ namespace SIPx.API.DataProviders
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public List<UITermLanguageCustomizationList> UITermLanguageCustomizationIndexGet(string Controller, string Action, string UserId)
+        public List<UITermLanguageCustomizationList> IndexGet(string Controller, string Action, string UserId)
         {
             string usp = "usp_MVCUITermLanguageCustomizationIndexGet @Controller, @Action, @UserId";
             // List<SqlParameter> parameters = new List<SqlParameter> {new SqlParameter ("@Controller" , Controller),

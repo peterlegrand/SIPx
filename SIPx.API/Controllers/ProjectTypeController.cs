@@ -41,7 +41,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _ProjectProvider.ProjectTypeLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _ProjectProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -55,7 +55,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _ProjectProvider.ProjectTypeLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _ProjectProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -69,7 +69,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _ProjectProvider.ProjectTypeIndexGet(CurrentUser.Id));
+                return Ok(await _ProjectProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -83,9 +83,9 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _ProjectProvider.ProjectTypeUpdateGet(CurrentUser.Id, Id);
+                var x = await _projectTypeProvider.UpdateGet(CurrentUser.Id, Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                x.Icons = icons;
+               // x.Icons = icons;
 
                 return Ok(x);
             }
@@ -126,7 +126,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _projectTypeProvider.ProjectTypeCreatePostCheck(ProjectType);
                 //if (CheckString.Length == 0)
                 //{
-                    _projectTypeProvider.ProjectTypeCreatePost(ProjectType);
+                    _projectTypeProvider.CreatePost(ProjectType);
                     return Ok(ProjectType);
                 //}
                 return BadRequest(new

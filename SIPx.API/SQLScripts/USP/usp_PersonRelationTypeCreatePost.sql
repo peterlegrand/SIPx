@@ -1,22 +1,32 @@
 CREATE PROCEDURE [dbo].[usp_PersonRelationTypeCreatePost] (
-	@LanguageId int
-	, @Name nvarchar(50)
+	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @FromIsAnXOfTo nvarchar(50)
 	, @ToIsAnXOfFrom nvarchar(50)
+	, @Color char(9)
+	, @IconId int
 	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserId
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 INSERT INTO PersonRelationTypes (
-	CreatorID
+	Color
+	, IconId 
+	, CreatorID
 	, CreatedDate
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@UserID
+	@Color
+	, @IconId 
+	,	@UserID
 	, getdate()
 	, @UserID
 	, getdate())

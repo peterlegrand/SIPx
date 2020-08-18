@@ -29,6 +29,10 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
+        public int SizeX { get; set; }
+        public int SizeY { get; set; }
+        public int DashboardRow { get; set; }
+        public int DashboardColumn { get; set; }
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

@@ -18,13 +18,17 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateFieldController : ControllerBase
     {
+        private readonly IProcessTemplateFieldProvider _processTemplateFieldProvider;
+        private readonly IProcessTemplateFieldTypeProvider _processTemplateFieldTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateFieldController(IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateFieldController(IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateFieldTypeProvider processTemplateFieldTypeProvider,  IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processTemplateFieldProvider = processTemplateFieldProvider;
+            _processTemplateFieldTypeProvider = processTemplateFieldTypeProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _processTemplateProvider = processTemplateProvider;
@@ -37,7 +41,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateFieldLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateFieldProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -51,7 +55,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateFieldLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateFieldProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -65,7 +69,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateFieldIndexGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateFieldProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -79,8 +83,8 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _processTemplateProvider.ProcessTemplateFieldUpdateGet(CurrentUser.Id, Id);
-                var y = await _processTemplateProvider.ProcessTemplateFieldTypeList(CurrentUser.Id);
+                var x = await _processTemplateFieldProvider.UpdateGet(CurrentUser.Id, Id);
+                var y = await _processTemplateFieldTypeProvider.List(CurrentUser.Id);
                 x.ProcessTemplateFieldTypes = y;
 
                 return Ok(x);
@@ -91,20 +95,20 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("TypeIndex")]
-        public async Task<IActionResult> TypeIndex()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _processTemplateProvider.ProcessTemplateFieldTypeIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("TypeIndex")]
+        //public async Task<IActionResult> TypeIndex()
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _processTemplateFieldTypeProvider.IndexGet(CurrentUser.Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -112,7 +116,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ProcessTemplateFieldCreateGet = new ProcessTemplateFieldCreateGet();
-                var ProcessTemplateFieldTypes = await _processTemplateProvider.ProcessTemplateFieldTypeList(CurrentUser.Id);
+                var ProcessTemplateFieldTypes = await _processTemplateFieldTypeProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ProcessTemplateFieldCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProcessTemplateFieldCreateGet.LanguageName = UserLanguage.Name;
@@ -133,10 +137,10 @@ namespace SIPx.API.Controllers
             ProcessTemplateField.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateProvider.ProcessTemplateFieldCreatePostCheck(ProcessTemplateField);
+                var CheckString = await _processTemplateFieldProvider.CreatePostCheck(ProcessTemplateField);
                 if (CheckString.Length == 0)
                 {
-                    _processTemplateProvider.ProcessTemplateFieldCreatePost(ProcessTemplateField);
+                    _processTemplateFieldProvider.CreatePost(ProcessTemplateField);
                     return Ok(ProcessTemplateField);
                 }
                 return BadRequest(new

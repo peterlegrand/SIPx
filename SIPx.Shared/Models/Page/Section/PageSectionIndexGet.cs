@@ -31,6 +31,10 @@ namespace SIPx.Shared
         public int PageSectionDataTypeId { get; set; }
         public string ContentTypeName { get; set; }
         public string SortByName { get; set; }
+        public int SizeX { get; set; }
+        public int SizeY { get; set; }
+        public int DashboardRow { get; set; }
+        public int DashboardColumn { get; set; }
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }

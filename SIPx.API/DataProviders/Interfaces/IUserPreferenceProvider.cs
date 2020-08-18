@@ -6,9 +6,9 @@ namespace SIPx.API.DataProviders
 {
     public interface IUserPreferenceProvider
     {
-        Task<List<UserPreferenceIndexGet>> UserPreferenceIndexGet(string UserId, string SelectedUserId);
-        Task<UserPreferenceUpdateGet> UserPreferenceUpdateGet(string UserId, int UserPreferenceId);
-        Task<bool> UserPreferenceUpdatePost(UserPreferenceUpdateGet UserPreference);
-        Task<string> UserPreferenceUpdatePostCheck(UserPreferenceUpdateGet UserPreference);
+        Task<List<UserPreferenceIndexGet>> IndexGet(string UserId, string SelectedUserId);
+        Task<UserPreferenceUpdateGet> UpdateGet(string UserId, int UserPreferenceId);
+        Task<bool> UpdatePost(UserPreferenceUpdateGet UserPreference);
+        Task<string> UpdatePostCheck(UserPreferenceUpdateGet UserPreference);
     }
 }

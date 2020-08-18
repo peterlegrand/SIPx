@@ -19,6 +19,10 @@ namespace SIPx.API.Controllers
     public class UserPageSectionController : ControllerBase
     {
         private readonly IMasterProvider _masterProvider;
+        private readonly IPageSectionTypeProvider _pageSectionTypeProvider;
+        private readonly IPageSectionDataTypeProvider _pageSectionDataTypeProvider;
+        private readonly IUserPageSectionProvider _userPageSectionProvider;
+        private readonly IPageSectionProvider _pageSectionProvider;
         private readonly IUserPageProvider _userPageProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IContentMasterProvider _contentMasterProvider;
@@ -27,9 +31,13 @@ namespace SIPx.API.Controllers
         private readonly IPageProvider _pageProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserPageSectionController(IUserPageProvider userPageProvider, IMasterListProvider masterListProvider, IContentMasterProvider contentMasterProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider pageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserPageSectionController( IPageSectionTypeProvider pageSectionTypeProvider, IPageSectionDataTypeProvider pageSectionDataTypeProvider, IUserPageSectionProvider userPageSectionProvider, IPageSectionProvider pageSectionProvider, IUserPageProvider userPageProvider, IMasterListProvider masterListProvider, IContentMasterProvider contentMasterProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider pageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _masterProvider = masterProvider;
+            _pageSectionTypeProvider = pageSectionTypeProvider;
+            _pageSectionDataTypeProvider = pageSectionDataTypeProvider;
+            _userPageSectionProvider = userPageSectionProvider;
+            _pageSectionProvider = pageSectionProvider;
             _userPageProvider = userPageProvider;
             _masterListProvider = masterListProvider;
             _contentMasterProvider = contentMasterProvider;
@@ -44,7 +52,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
             {
-                return Ok(await _pageProvider.PageSectionIndexGet(CurrentUser.Id, Id));
+                return Ok(await _userPageSectionProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -66,7 +74,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _pageProvider.PageSectionUpdateGet(CurrentUser.Id, Id);
+                var x = await _userPageSectionProvider.UpdateGet(CurrentUser.Id, Id);
 
                 return Ok(x);
             }
@@ -77,20 +85,20 @@ namespace SIPx.API.Controllers
             });
 
         }
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> LanguageIndex(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _pageProvider.PageSectionLanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("LanguageIndex/{Id:int}")]
+        //public async Task<IActionResult> LanguageIndex(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _userPageSectionProvider.LanguageIndexGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -98,9 +106,9 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PageSectionCreateGet = new PageSectionCreateGet();
-                var PageSectionCreateGetSequences = await _pageProvider.PageSectionCreateGetSequence(CurrentUser.Id, Id);
-                var PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
-                var PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
+                var PageSectionCreateGetSequences = await _userPageSectionProvider.CreateGetSequence(CurrentUser.Id, Id);
+                var PageSectionTypes = await _pageSectionTypeProvider.List(CurrentUser.Id);
+                var PageSectionDataTypes = await _pageSectionDataTypeProvider.List(CurrentUser.Id);
                 var ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
                 var SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
@@ -125,10 +133,10 @@ namespace SIPx.API.Controllers
             PageSection.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userPageProvider.UserPageSectionCreatePostCheck(PageSection);
+                var CheckString = await _userPageSectionProvider.CreatePostCheck(PageSection);
                 if (CheckString.Length == 0)
                 {
-                    _pageProvider.PageSectionCreatePost(PageSection);
+                    _userPageSectionProvider.CreatePost(PageSection);
                     return Ok(PageSection);
                 }
                 return BadRequest(new

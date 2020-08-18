@@ -55,7 +55,7 @@ namespace SIPx.API.Controllers
             {
                 var x = await _peopleProvider.PersonUpdateGet(CurrentUser.Id, Id);
                 var y = await _peopleProvider.GenderList(CurrentUser.Id);
-                var z = await _organizationProvider.OrganizationList(CurrentUser.Id);
+                var z = await _organizationProvider.List(CurrentUser.Id);
                 var a = await _peopleProvider.UserList();
                 x.Genders = y;
                 x.Organizations = z;
@@ -76,7 +76,7 @@ namespace SIPx.API.Controllers
             {
                 var PersonCreateGet = new PersonCreateGet();
                 var Genders = await _peopleProvider.GenderList(CurrentUser.Id);
-                var Organizations = await _organizationProvider.OrganizationList(CurrentUser.Id);
+                var Organizations = await _organizationProvider.List(CurrentUser.Id);
                 PersonCreateGet.Genders= Genders;
                 PersonCreateGet.Organizations = Organizations;
                 return Ok(PersonCreateGet);

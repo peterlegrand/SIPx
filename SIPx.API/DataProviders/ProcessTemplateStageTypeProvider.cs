@@ -19,44 +19,44 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public Task<List<ProcessTemplateStageTypeLanguage>> ProcessTemplateStageTypeLanguageIndexGet(string UserId, int ProcessTemplateStageTypeId)
+        public Task<List<ProcessTemplateStageTypeLanguage>> LanguageIndexGet(string UserId, int ProcessTemplateStageTypeId)
         {
             string usp = "usp_ProcessTemplateStageTypeLanguageIndexGet @UserId, @ProcessTemplateStageTypeID";
             return _sqlDataAccess.LoadData<ProcessTemplateStageTypeLanguage, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageTypeId = ProcessTemplateStageTypeId });
 
         }
-        public Task<ProcessTemplateStageTypeLanguage> ProcessTemplateStageTypeLanguageUpdateGet(string UserId, int ProcessTemplateStageTypeLanguageId)
+        public Task<ProcessTemplateStageTypeLanguage> LanguageUpdateGet(string UserId, int ProcessTemplateStageTypeLanguageId)
         {
             string usp = "usp_ProcessTemplateStageTypeLanguageUpdateGet @UserId, @ProcessTemplateStageTypeLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageTypeLanguage, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageTypeLanguageId = ProcessTemplateStageTypeLanguageId });
 
         }
-        public Task<List<ProcessTemplateStageType>> ProcessTemplateStageTypeIndexGet(string UserId)
+        public Task<List<ProcessTemplateStageType>> IndexGet(string UserId)
         {
             string usp = "usp_ProcessTemplateStageTypeIndexGet @UserID";
             return _sqlDataAccess.LoadData<ProcessTemplateStageType, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<ProcessTemplateStageType> ProcessTemplateStageTypeUpdateGet(string UserId, int ProcessTemplateStageTypeId)
+        public Task<ProcessTemplateStageType> UpdateGet(string UserId, int ProcessTemplateStageTypeId)
         {
             string usp = "usp_ProcessTemplateStageTypeUpdateGet @UserId, @ProcessTemplateStageTypeID";
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageType, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageTypeId = ProcessTemplateStageTypeId });
 
         }
-        public async Task<List<ProcessTemplateStageTypeList>> ProcessTemplateStageTypeList(string UserId)
+        public async Task<List<ProcessTemplateStageTypeList>> List(string UserId)
         {
             string usp = "usp_ProcessTemplateStageTypeList @UserID";
             var x = await _sqlDataAccess.LoadData<ProcessTemplateStageTypeList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
 
-        public async Task<string> ProcessTemplateStageTypeCreatePostCheck(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
+        public async Task<string> CreatePostCheck(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
         {
             string usp = "usp_ProcessTemplateStageTypeCreatePostCheck @LanguageId, @Name, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStageType);
             return CheckString;
         }
-        public async Task<string> ProcessTemplateStageTypeCreatePost(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
+        public async Task<string> CreatePost(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
         {
             string usp = "usp_ProcessTemplateStageTypeCreatePost @Internal, @LegalEntity,  @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStageType);

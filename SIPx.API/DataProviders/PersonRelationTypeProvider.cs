@@ -20,31 +20,43 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public Task<List<PersonRelationTypeLanguage>> PersonRelationTypeLanguageIndexGet(string UserId, int PersonRelationTypeId)
+        public async Task<string> CreatePost(PersonRelationTypeCreatePost PersonRelationType)
+        {
+            string usp = "usp_PersonRelationTypeCreatePost @Name, @Description , @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom, @Color, @IconId, @UserId";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonRelationType);
+            return CheckString;
+        }
+        public Task<List<PersonRelationTypeLanguage>> LanguageIndexGet(string UserId, int PersonRelationTypeId)
         {
             string usp = "usp_PersonRelationTypeLanguageIndexGet @UserId, @PersonRelationTypeID";
             return _sqlDataAccess.LoadData<PersonRelationTypeLanguage, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
 
         }
-        public Task<PersonRelationTypeLanguage> PersonRelationTypeLanguageUpdateGet(string UserId, int PersonRelationTypeLanguageId)
+        public Task<PersonRelationTypeLanguage> LanguageUpdateGet(string UserId, int PersonRelationTypeLanguageId)
         {
             string usp = "usp_PersonRelationTypeLanguageUpdateGet @UserId, @PersonRelationTypeLanguageID";
             return _sqlDataAccess.LoadSingleRecord<PersonRelationTypeLanguage, dynamic>(usp, new { UserId = UserId, PersonRelationTypeLanguageId = PersonRelationTypeLanguageId });
 
         }
-        public Task<List<PersonRelationType>> PersonRelationTypeIndexGet(string UserId)
+        public Task<List<PersonRelationType>> IndexGet(string UserId)
         {
             string usp = "usp_PersonRelationTypeIndexGet @UserID";
             return _sqlDataAccess.LoadData<PersonRelationType, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<PersonRelationType> PersonRelationTypeUpdateGet(string UserId, int PersonRelationTypeId)
+        public Task<PersonRelationType> UpdateGet(string UserId, int PersonRelationTypeId)
         {
             string usp = "usp_PersonRelationTypeUpdateGet @UserId, @PersonRelationTypeID";
             return _sqlDataAccess.LoadSingleRecord<PersonRelationType, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
 
         }
-        public Task<List<PersonRelationTypeList>> PersonRelationTypeList(string UserId)
+        public bool UpdatePost(PersonRelationTypeUpdateGet PersonRelationType)
+        {
+            string usp = "usp_PersonRelationTypeUpdatePost @PersonRelationTypeId, @Name, @Description, @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom, @Color, @IconId, @ModifierId";
+            _sqlDataAccess.SaveData<PersonRelationTypeUpdateGet>(usp, PersonRelationType);
+            return true;
+        }
+        public Task<List<PersonRelationTypeList>> List(string UserId)
         {
             string usp = "usp_PersonRelationTypeList @UserID";
             return _sqlDataAccess.LoadData<PersonRelationTypeList, dynamic>(usp, new { UserId = UserId });

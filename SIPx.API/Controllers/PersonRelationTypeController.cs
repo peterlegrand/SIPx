@@ -38,7 +38,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _personRelationTypeProvider.PersonRelationTypeLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _personRelationTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -54,7 +54,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _personRelationTypeProvider.PersonRelationTypeLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _personRelationTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -68,7 +68,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _personRelationTypeProvider.PersonRelationTypeIndexGet(CurrentUser.Id));
+                return Ok(await _personRelationTypeProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -84,7 +84,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _personRelationTypeProvider.PersonRelationTypeUpdateGet(CurrentUser.Id, Id);
+                var x = await _personRelationTypeProvider.UpdateGet(CurrentUser.Id, Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
                 x.Icons = icons;
 

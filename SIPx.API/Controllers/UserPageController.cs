@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
             {
-                return Ok(await _userPageProvider.UserPageIndexGet(CurrentUser.Id));
+                return Ok(await _userPageProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -72,7 +72,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _userPageProvider.UserPageUpdateGet(CurrentUser.Id, Id);
+                var x = await _userPageProvider.UpdateGet(CurrentUser.Id, Id);
 
                 return Ok(x);
             }
@@ -91,10 +91,10 @@ namespace SIPx.API.Controllers
             {
                 var PageCreateGet = new PageCreateGet();
                 var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var Projects = await _projectProvider.ProjectList(CurrentUser.Id);
-                var Organizations = await _organizationProvider.OrganizationList(CurrentUser.Id);
+                var Projects = await _projectProvider.List(CurrentUser.Id);
+                var Organizations = await _organizationProvider.List(CurrentUser.Id);
                 var Classifications = await _classificationProvider.List(CurrentUser.Id);
-                var Users = await _userProvider.UserList();
+                var Users = await _userProvider.List();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 PageCreateGet.LanguageId = UserLanguage.LanguageId;
                 PageCreateGet.LanguageName = UserLanguage.Name;
@@ -122,7 +122,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userPageProvider.UserPageUpdatePostCheck(Page);
                 //if (CheckString.Length == 0)
                 //{
-                    _userPageProvider.UserPageUpdatePost(Page);
+                    _userPageProvider.UpdatePost(Page);
                     return Ok(Page);
                 //}
                 //return BadRequest(new
@@ -147,7 +147,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userPageProvider.UserPageCreatePostCheck(Page);
                 //if (CheckString.Length == 0)
                 //{
-                _userPageProvider.UserPageCreatePost(Page);
+                _userPageProvider.CreatePost(Page);
                     return Ok(Page);
                 //}
                 return BadRequest(new
@@ -176,7 +176,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _userPageProvider.UserPageDeleteGet(CurrentUser.Id, Id);
+                var x = await _userPageProvider.DeleteGet(CurrentUser.Id, Id);
 
                 return Ok(x);
             }
@@ -197,7 +197,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userPageProvider.UserPageDeletePostCheck(Page);
                 //if (CheckString.Length == 0)
                 //{
-                    _userPageProvider.UserPageDeletePost(Page);
+                    _userPageProvider.DeletePost(Page);
                     return Ok(Page);
                 //}
                 return BadRequest(new

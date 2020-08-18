@@ -43,5 +43,11 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonTelecom);
             return CheckString;
         }
+        public bool UpdatePost(PersonTelecomUpdateGet PersonTelecom)
+        {
+            string usp = "usp_PersonTelecomUpdatePost @PersonTelecomId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @ModifierId";
+            _sqlDataAccess.SaveData<PersonTelecomUpdateGet>(usp, PersonTelecom);
+            return true;
+        }
     }
 }

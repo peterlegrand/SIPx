@@ -6,9 +6,10 @@ namespace SIPx.DataAccess
 {
     public interface IPersonAddressProvider
     {
-        Task<string> PersonAddressCreatePost(PersonAddressCreatePost PersonAddress);
-        Task<string> PersonAddressCreatePostCheck(PersonAddressCreatePost PersonAddress);
-        Task<List<PersonAddressIndexGet>> PersonAddressIndexGet(string UserId, int PersonId);
-        Task<PersonAddressUpdateGet> PersonAddressUpdateGet(string UserId, int PersonAddressId);
+        Task<string> CreatePost(PersonAddressCreatePost PersonAddress);
+        Task<string> CreatePostCheck(PersonAddressCreatePost PersonAddress);
+        Task<List<PersonAddressIndexGet>> IndexGet(string UserId, int PersonId);
+        Task<PersonAddressUpdateGet> UpdateGet(string UserId, int PersonAddressId);
+        bool UpdatePost(PersonAddressUpdateGet PersonAddress);
     }
 }

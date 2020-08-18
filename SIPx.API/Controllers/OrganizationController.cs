@@ -42,7 +42,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _organizationProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -56,7 +56,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _organizationProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -70,7 +70,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationIndexGet(CurrentUser.Id));
+                return Ok(await _organizationProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -84,7 +84,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.OrganizationUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _organizationProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -100,7 +100,7 @@ namespace SIPx.API.Controllers
             {
                 var OrganizationCreateGet = new OrganizationCreateGet();
                 var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var OrganizationTypes = await _organizationTypeProvider.OrganizationTypeList(CurrentUser.Id);
+                var OrganizationTypes = await _organizationTypeProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 OrganizationCreateGet.LanguageId = UserLanguage.LanguageId;
                 OrganizationCreateGet.LanguageName = UserLanguage.Name;
@@ -122,10 +122,10 @@ namespace SIPx.API.Controllers
             Organization.CreatorId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationProvider.OrganizationCreatePostCheck(Organization);
+                var CheckString = await _organizationProvider.CreatePostCheck(Organization);
                 if (CheckString.Length == 0)
                 {
-                    _organizationProvider.OrganizationCreatePost(Organization);
+                    _organizationProvider.CreatePost(Organization);
                     return Ok(Organization);
                 }
                 return BadRequest(new

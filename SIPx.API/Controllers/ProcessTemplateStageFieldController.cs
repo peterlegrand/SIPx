@@ -18,12 +18,18 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateStageFieldController : ControllerBase
     {
+        private readonly IProcessTemplateFieldProvider _processTemplateFieldProvider;
+        private readonly IProcessTemplateStageFieldStatusProvider _processTemplateStageFieldStatus;
+        private readonly IProcessTemplateStageFieldProvider _processTemplateStageFieldProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateStageFieldController(IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateStageFieldController(IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateStageFieldStatusProvider processTemplateStageFieldStatus, IProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processTemplateFieldProvider = processTemplateFieldProvider;
+            _processTemplateStageFieldStatus = processTemplateStageFieldStatus;
+            _processTemplateStageFieldProvider = processTemplateStageFieldProvider;
             _claimCheck = claimCheck;
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
@@ -35,7 +41,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateProvider.ProcessTemplateStageFieldIndexGet(CurrentUser.Id, Id));
+                return Ok(await _processTemplateStageFieldProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -49,12 +55,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _processTemplateProvider.ProcessTemplateStageFieldUpdateGet(CurrentUser.Id, Id);
-                var status = await _processTemplateProvider.ProcessTemplateStageFieldUpdateGetStatusList(CurrentUser.Id);
-                var updateType = await _processTemplateProvider.ProcessTemplateStageFieldUpdateGetValueUpdateTypeList(CurrentUser.Id);
-                var Sequence = await _processTemplateProvider.ProcessTemplateStageFieldUpdateGetFieldList(CurrentUser.Id, Id);
-                x.ProcessTemplateStageFieldStatuses = status;
-                x.ValueUpdateTypes = updateType;
+                var x = await _processTemplateStageFieldProvider.UpdateGet(CurrentUser.Id, Id);
+
+                //PETER TODO this need to be active again to fill dropdowns
+                //var status = await _processTemplateStageFieldStatus.List(CurrentUser.Id);
+                //var updateType = await _processTemplateStageFieldProvider.UpdateGetValueUpdateTypeList(CurrentUser.Id);
+                var Sequence = await _processTemplateFieldProvider.List(CurrentUser.Id, Id);
+                //x.ProcessTemplateStageFieldStatuses = status;
+                //x.ValueUpdateTypes = updateType;
                 x.ProcessTemplateFields = Sequence;
                 return Ok(x);
             }
@@ -64,34 +72,34 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("StatusIndex")]
-        public async Task<IActionResult> StatusIndex()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _processTemplateProvider.ProcessTemplateStageFieldStatusIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("StatusUpdate/{Id:int}")]
-        public async Task<IActionResult> StatusUpdate(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                var x = await _processTemplateProvider.ProcessTemplateStageFieldStatusUpdateGet(CurrentUser.Id, Id);
-                return Ok(x);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("StatusIndex")]
+        //public async Task<IActionResult> StatusIndex()
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _processTemplateProvider.ProcessTemplateStageFieldStatusIndexGet(CurrentUser.Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
+        //[HttpGet("StatusUpdate/{Id:int}")]
+        //public async Task<IActionResult> StatusUpdate(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        var x = await _processTemplateProvider.ProcessTemplateStageFieldStatusUpdateGet(CurrentUser.Id, Id);
+        //        return Ok(x);
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
     }
 }
