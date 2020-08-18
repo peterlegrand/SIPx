@@ -117,22 +117,22 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(ProjectTypeCreatePost ProjectType)
+        public async Task<IActionResult> Post(ProjectTypeCreateGet ProjectType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProjectType.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _projectTypeProvider.ProjectTypeCreatePostCheck(ProjectType);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _projectTypeProvider.ProjectTypeCreatePostCheck(ProjectType);
+                //if (CheckString.Length == 0)
+                //{
                     _projectTypeProvider.ProjectTypeCreatePost(ProjectType);
                     return Ok(ProjectType);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new

@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationPageController : ControllerBase
     {
+        private readonly IClassificationPageProvider _classificationPageProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -19,8 +20,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationPageController(IMasterListProvider masterListProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationPageController(IClassificationPageProvider classificationPageProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationPageProvider = classificationPageProvider;
             _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -45,7 +47,7 @@ namespace SIPx.API.Controllers
                 }
 
 
-                return Ok(await _classificationProvider.ClassificationPageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationPageProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -81,10 +83,10 @@ namespace SIPx.API.Controllers
             ClassificationPage.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.ClassificationPageCreatePostCheck(ClassificationPage);
+                var CheckString = await _classificationPageProvider.CreatePostCheck(ClassificationPage);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.ClassificationPageCreatePost(ClassificationPage);
+                    _classificationPageProvider.CreatePost(ClassificationPage);
                     return Ok(ClassificationPage);
                 }
                 return BadRequest(new
@@ -115,7 +117,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationPageLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationPageProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -138,7 +140,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationPageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationPageProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -161,7 +163,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationPageLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationPageProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

@@ -12,6 +12,8 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationValueRoleController : ControllerBase
     {
+        private readonly IClassificationValueRoleProvider _classificationValueRoleProvider;
+        private readonly IClassificationRelationTypeProvider _classificationRelationTypeProvider;
         private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -19,8 +21,10 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueRoleController(IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueRoleController(IClassificationValueRoleProvider classificationValueRoleProvider, IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationValueRoleProvider = classificationValueRoleProvider;
+            _classificationRelationTypeProvider = classificationRelationTypeProvider;
             _classificationValueProvider = classificationValueProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -68,7 +72,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationValueProvider.ClassificationValueRoleUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueRoleProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -84,7 +88,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationValueRoleCreateGet = new ClassificationValueRoleCreateGet();
-                var ClassificationRelationTypes = await _classificationProvider.ClassificationRelationTypeList(CurrentUser.Id);
+                var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationValueRoleCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
                 ClassificationValueRoleCreateGet.ClassificationId = Id;
                 return Ok(ClassificationValueRoleCreateGet);

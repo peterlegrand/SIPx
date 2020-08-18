@@ -12,6 +12,8 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationValueUserController : ControllerBase
     {
+        private readonly IClassificationRelationTypeProvider _classificationRelationTypeProvider;
+        private readonly IClassificationValueUserProvider _classificationValueUserProvider;
         private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IPeopleProvider _peopleProvider;
         private readonly IMasterProvider _masterProvider;
@@ -20,8 +22,10 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueUserController( IClassificationValueProvider classificationValueProvider, IPeopleProvider peopleProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueUserController(IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationValueUserProvider classificationValueUserProvider, IClassificationValueProvider classificationValueProvider, IPeopleProvider peopleProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationRelationTypeProvider = classificationRelationTypeProvider;
+            _classificationValueUserProvider = classificationValueUserProvider;
             _classificationValueProvider = classificationValueProvider;
             _peopleProvider = peopleProvider;
             _masterProvider = masterProvider;
@@ -71,8 +75,8 @@ namespace SIPx.API.Controllers
                     });
                 }
                 //PETER I UPDATED THIS IN THE Wrong controller
-                var ClassificationUser = await _classificationProvider.ClassificationUserUpdateGet(CurrentUser.Id, Id);
-                var RelationTypeList = await _classificationProvider.ClassificationRelationTypeListGet(CurrentUser.Id);
+                var ClassificationUser = await _classificationValueUserProvider.UpdateGet(CurrentUser.Id, Id);
+                var RelationTypeList = await _classificationRelationTypeProvider.ListGet(CurrentUser.Id);
                 var UserList = await _peopleProvider.UserList();
                 ClassificationUser.ClassificationRelationTypes = RelationTypeList;
                 ClassificationUser.Users = UserList;
@@ -93,7 +97,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationValueUserCreateGet = new ClassificationValueUserCreateGet();
-                var ClassificationRelationTypes = await _classificationProvider.ClassificationRelationTypeList(CurrentUser.Id);
+                var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationValueUserCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
                 ClassificationValueUserCreateGet.ClassificationId = Id;
                 return Ok(ClassificationValueUserCreateGet);

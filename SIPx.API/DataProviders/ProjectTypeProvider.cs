@@ -56,9 +56,9 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);
             return CheckString;
         }
-        public async Task<string> ProjectTypeCreatePost(ProjectTypeCreatePost ProjectType)
+        public async Task<string> ProjectTypeCreatePost(ProjectTypeCreateGet ProjectType)
         {
-            string usp = "usp_ProjectTypeCreatePost @Internal, @LegalEntity,  @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserId ";
+            string usp = "usp_ProjectTypeCreatePost @Name, @Description, @MenuName, @MouseOver, @Color ,@IconID, @CreatorId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);
             return String;
         }

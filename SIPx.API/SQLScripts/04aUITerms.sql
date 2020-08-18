@@ -1423,5 +1423,5 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1421, 'Internal');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1422, 'Legal entity');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1423, 'Create person relation type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1424, 'See personal');
-
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1425, 'Color');
 SET IDENTITY_INSERT UITerms OFF;

@@ -6,9 +6,10 @@ namespace SIPx.DataAccess
 {
     public interface IOrganizationTelecomProvider
     {
-        Task<string> OrganizationTelecomCreatePost(OrganizationTelecomCreatePost OrganizationTelecom);
-        Task<string> OrganizationTelecomCreatePostCheck(OrganizationTelecomCreatePost OrganizationTelecom);
-        Task<List<OrganizationTelecom>> OrganizationTelecomIndexGet(string UserId, int OrganizationId);
-        Task<OrganizationTelecom> OrganizationTelecomUpdateGet(string UserId, int OrganizationTelecomId);
+        Task<string> CreatePost(OrganizationTelecomCreatePost OrganizationTelecom);
+        Task<string> CreatePostCheck(OrganizationTelecomCreatePost OrganizationTelecom);
+        Task<List<OrganizationTelecom>> IndexGet(string UserId, int OrganizationId);
+        Task<OrganizationTelecom> UpdateGet(string UserId, int OrganizationTelecomId);
+        bool UpdatePost(OrganizationTelecomUpdateGet OrganizationTelecom);
     }
 }

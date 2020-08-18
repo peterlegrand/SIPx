@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationCreate] (
+CREATE PROCEDURE [dbo].[usp_OrganizationCreatePost] (
 	@ParentOrganizationId int
 	, @StatusId int 
 	, @OrganizationTypeId int 

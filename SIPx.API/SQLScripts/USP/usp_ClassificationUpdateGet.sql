@@ -15,6 +15,8 @@ SELECT Classifications.ClassificationID
 	, ClassificationLanguages.Description
 	, ClassificationLanguages.MenuName
 	, ClassificationLanguages.MouseOver
+	, Classifications.Color
+	, Classifications.IconID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Classifications.CreatorID
 	, Classifications.CreatedDate

@@ -12,5 +12,6 @@ namespace SIPx.Shared
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Subject { get; set; }
+        public string Color { get; set; }
     }
 }

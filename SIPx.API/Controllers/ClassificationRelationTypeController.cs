@@ -12,14 +12,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationRelationTypeController : ControllerBase
     {
+        private readonly IClassificationRelationTypeProvider _classificationRelationTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationRelationTypeController(IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationRelationTypeController(IClassificationRelationTypeProvider classificationRelationTypeProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationRelationTypeProvider = classificationRelationTypeProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -42,7 +44,7 @@ namespace SIPx.API.Controllers
                 //    });
                 //}
 
-                return Ok(await _classificationProvider.ClassificationRelationTypeIndexGet(CurrentUser.Id));
+                return Ok(await _classificationRelationTypeProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -75,10 +77,10 @@ namespace SIPx.API.Controllers
             ClassificationRelationType.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.ClassificationRelationTypeCreatePostCheck(ClassificationRelationType);
+                var CheckString = await _classificationRelationTypeProvider.CreatePostCheck(ClassificationRelationType);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.ClassificationRelationTypeCreatePost(ClassificationRelationType);
+                    _classificationRelationTypeProvider.CreatePost(ClassificationRelationType);
                     return Ok(ClassificationRelationType);
                 }
                 return BadRequest(new
@@ -109,7 +111,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationRelationTypeLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationRelationTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -133,7 +135,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationRelationTypeUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationRelationTypeProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             { 
@@ -156,7 +158,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationRelationTypeLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationRelationTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

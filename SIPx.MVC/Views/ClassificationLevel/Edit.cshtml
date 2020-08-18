@@ -19,6 +19,7 @@
             @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
         </div>
         <div class="col-9">
+            <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
             <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="ClassificationLevelId" floatLabelType="Auto"></ejs-numerictextbox>
         </div>
     </div>
@@ -79,7 +80,7 @@
         </div>
         <div class="col-9">
             <ejs-dropdownlist id="DateLevelId" dataSource="@Model.DateLevels" ejs-for="@Model.DateLevelId" value="@Model.DateLevelId" index="2" popupHeight="220px">
-                <e-dropdownlist-fields text="Name" value="DateLevelListId"></e-dropdownlist-fields>
+                <e-dropdownlist-fields text="Name" value="DateLevelId"></e-dropdownlist-fields>
             </ejs-dropdownlist>
 
         </div>

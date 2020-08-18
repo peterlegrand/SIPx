@@ -7,6 +7,8 @@ CREATE PROCEDURE [dbo].[usp_ClassificationCreatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
+	, @IconId int
+	, @Color char(9)
 	, @UserId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
@@ -15,6 +17,8 @@ INSERT INTO Classifications (
 	StatusID
 	, HasDropDown
 	, DropDownSequence
+	, IconId 
+	, Color 
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -23,6 +27,8 @@ VALUES (
 	@StatusID
 	, @HasDropDown
 	, @DropDownSequence
+	, @IconId 
+	, @Color 
 	, @UserID
 	, getdate()
 	, @UserID

@@ -26,11 +26,14 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ContentTypeClassificationStatus, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<ContentTypeClassificationStatus> ContentTypeClassificationStatusUpdateGet(string UserId, int ContentTypeClassificationStatusId)
-        {
-            string usp = "usp_ContentTypeClassificationStatusUpdateGet @UserId, @ContentTypeClassificationStatusID";
-            return _sqlDataAccess.LoadSingleRecord<ContentTypeClassificationStatus, dynamic>(usp, new { UserId = UserId, ContentTypeClassificationStatusId = ContentTypeClassificationStatusId });
 
-        }
+        //PETER This is a uiterms table
+
+        //public Task<ContentTypeClassificationStatus> ContentTypeClassificationStatusUpdateGet(string UserId, int ContentTypeClassificationStatusId)
+        //{
+        //    string usp = "usp_ContentTypeClassificationStatusUpdateGet @UserId, @ContentTypeClassificationStatusID";
+        //    return _sqlDataAccess.LoadSingleRecord<ContentTypeClassificationStatus, dynamic>(usp, new { UserId = UserId, ContentTypeClassificationStatusId = ContentTypeClassificationStatusId });
+
+        //}
     }
 }

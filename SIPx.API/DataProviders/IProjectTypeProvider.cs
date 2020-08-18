@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IProjectTypeProvider
     {
-        Task<string> ProjectTypeCreatePost(ProjectTypeCreatePost ProjectType);
+        Task<string> ProjectTypeCreatePost(ProjectTypeCreateGet ProjectType);
         Task<string> ProjectTypeCreatePostCheck(ProjectTypeCreatePost ProjectType);
         Task<List<ProjectType>> ProjectTypeIndexGet(string UserId);
         Task<List<ProjectTypeLanguage>> ProjectTypeLanguageIndexGet(string UserId, int ProjectTypeId);

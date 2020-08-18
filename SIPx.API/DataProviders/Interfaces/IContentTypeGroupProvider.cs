@@ -6,10 +6,10 @@ namespace SIPx.DataAccess
 {
     public interface IContentTypeGroupProvider
     {
-        Task<string> ContentTypeGroupCreatePost(ContentTypeGroupCreatePost ContentTypeGroup);
-        Task<string> ContentTypeGroupCreatePostCheck(ContentTypeGroupCreatePost ContentTypeGroup);
-        Task<List<ContentTypeGroup>> ContentTypeGroupIndexGet(string UserId);
-        Task<List<ContentTypeGroupList>> ContentTypeGroupList(string UserId);
-        Task<ContentTypeGroup> ContentTypeGroupUpdateGet(string UserId, int ContentTypeGroupId);
+        Task<string> CreatePost(ContentTypeGroupCreatePost ContentTypeGroup);
+        Task<string> CreatePostCheck(ContentTypeGroupCreatePost ContentTypeGroup);
+        Task<List<ContentTypeGroup>> IndexGet(string UserId);
+        Task<List<ContentTypeGroupList>> List(string UserId);
+        Task<ContentTypeGroup> UpdateGet(string UserId, int ContentTypeGroupId);
     }
 }

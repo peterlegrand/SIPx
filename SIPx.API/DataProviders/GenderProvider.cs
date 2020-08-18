@@ -19,29 +19,39 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public Task<List<GenderList>> GenderList(string UserId)
-        {
-            string usp = "usp_GenderList @UserID";
-            return _sqlDataAccess.LoadData<GenderList, dynamic>(usp, new { UserId = UserId });
-        }
 
-        public async Task<List<Gender>> GenderIndexGet(string UserId)
+        public async Task<List<Gender>> IndexGet(string UserId)
         {
             string usp = "usp_GenderIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<Gender, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<Gender> GenderUpdateGet(string UserId, int GenderId)
+
+        public Task<Gender> UpdateGet(string UserId, int GenderId)
         {
             string usp = "usp_GenderUpdateGet @UserId, @GenderID";
             return _sqlDataAccess.LoadSingleRecord<Gender, dynamic>(usp, new { UserId = UserId, GenderId = GenderId });
 
         }
-        public Task<List<Gender>> GendersActive(string UserId)
+
+        public bool UpdatePost(GenderUpdateGet Gender)
+        {
+            string usp = "usp_GenderUpdatePost @GenderId, Active , @ModifierId";
+            _sqlDataAccess.SaveData<GenderUpdateGet>(usp, Gender);
+            return true;
+        }
+
+        public Task<List<Gender>> Active(string UserId)
         {
             string usp = "usp_GendersActive @UserID";
             return _sqlDataAccess.LoadData<Gender, dynamic>(usp, new { UserId = UserId });
 
+        }
+
+        public Task<List<GenderList>> List(string UserId)
+        {
+            string usp = "usp_GenderList @UserID";
+            return _sqlDataAccess.LoadData<GenderList, dynamic>(usp, new { UserId = UserId });
         }
     }
 }

@@ -13,6 +13,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationPageSectionController  : ControllerBase
     {
+        private readonly IClassificationPageSectionProvider _classificationPageSectionProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
@@ -22,8 +23,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationPageSectionController(IMasterListProvider masterListProvider , IPageProvider pageProvider, IMasterProvider masterProvider, IContentMasterProvider contentMasterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationPageSectionController(IClassificationPageSectionProvider classificationPageSectionProvider, IMasterListProvider masterListProvider , IPageProvider pageProvider, IMasterProvider masterProvider, IContentMasterProvider contentMasterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationPageSectionProvider = classificationPageSectionProvider;
             _masterListProvider = masterListProvider;
             _pageProvider = pageProvider;
             _masterProvider = masterProvider;
@@ -49,7 +51,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                var x = await _classificationProvider.ClassificationPageSectionIndexGet(CurrentUser.Id, Id);
+                var x = await _classificationPageSectionProvider.IndexGet(CurrentUser.Id, Id);
                 return Ok(x);
             }
             return BadRequest(new
@@ -73,7 +75,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationPageSectionLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationPageSectionProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -97,12 +99,12 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var cps = new ClassificationPageSectionUpdateGet();
-                cps = await _classificationProvider.ClassificationPageSectionUpdateGet(CurrentUser.Id, Id);
+                cps = await _classificationPageSectionProvider.UpdateGet(CurrentUser.Id, Id);
                 cps.ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
                 cps.PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
                 cps.PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
                 cps.SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
-                cps.Sequences = await _classificationProvider.ClassificationPageSectionSequenceListBySectionIdGet(CurrentUser.Id, Id);
+                cps.Sequences = await _classificationPageSectionProvider.SequenceListBySectionIdGet(CurrentUser.Id, Id);
                 var intlist = new List<int>();
                 intlist.Add(1);
                 intlist.Add(2);
@@ -124,7 +126,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationPageSectionCreateGet = new ClassificationPageSectionCreateGet();
-                var ClassificationPageSectionCreateGetSequences = await _classificationProvider.ClassificationPageSectionCreateGetSequence(CurrentUser.Id, Id);
+                var ClassificationPageSectionCreateGetSequences = await _classificationPageSectionProvider.CreateGetSequence(CurrentUser.Id, Id);
                 var PageSectionTypes = await _pageProvider.PageSectionTypeList(CurrentUser.Id);
                 var PageSectionDataTypes = await _pageProvider.PageSectionDataTypeList(CurrentUser.Id);
                 var ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
@@ -152,10 +154,10 @@ namespace SIPx.API.Controllers
             ClassificationPageSection.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.ClassificationPageSectionCreatePostCheck(ClassificationPageSection);
+                var CheckString = await _classificationPageSectionProvider.CreatePostCheck(ClassificationPageSection);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.ClassificationPageSectionCreatePost(ClassificationPageSection);
+                    _classificationPageSectionProvider.CreatePost(ClassificationPageSection);
                     return Ok(ClassificationPageSection);
                 }
                 return BadRequest(new
@@ -186,7 +188,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationPageSectionLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _classificationPageSectionProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

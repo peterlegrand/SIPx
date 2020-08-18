@@ -1,5 +1,5 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationUpdatePost] (
-	@ClassificationLanguageId int
+ALTER PROCEDURE [dbo].[usp_ClassificationUpdatePost] (
+	@ClassificationId int
 	, @StatusId int
 	, @DefaultPageId int
 	, @HasDropDown bit
@@ -8,11 +8,18 @@ CREATE PROCEDURE [dbo].[usp_ClassificationUpdatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
+	, @Color char(9) 
+	, @IconId int 
 	, @UserId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 DECLARE @OldSequence int;
-DECLARE @ClassificationId int;
-SELECT @OldSequence = DropDownSequence, @ClassificationId = Classifications.ClassificationId FROM ClassificationLanguages JOIN Classifications ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId  WHERE ClassificationLanguageID= @ClassificationLanguageID;
+SELECT @OldSequence = DropDownSequence FROM ClassificationLanguages JOIN Classifications ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId  WHERE ClassificationLanguageID= @ClassificationLanguageID;
 BEGIN TRANSACTION
 IF @OldSequence > @DropDownSequence
 BEGIN
@@ -28,6 +35,8 @@ UPDATE Classifications SET
 	, DefaultPageId = @DefaultPageID
 	, HasDropDown = @HasDropDown
 	, DropDownSequence = @DropDownSequence
+	, Color = @Color
+	, IconId = @IconId
 	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
 WHERE ClassificationId = @ClassificationID
@@ -39,7 +48,8 @@ UPDATE  ClassificationLanguages SET
 	, MouseOver = @MouseOver
 	, ModifierId = @UserID
 	, ModifiedDate = getdate()
-WHERE ClassificationLanguageID= @ClassificationLanguageID
+WHERE ClassificationId = @ClassificationID
+	AND LanguageID = @LanguageID
 
 COMMIT TRANSACTION
 

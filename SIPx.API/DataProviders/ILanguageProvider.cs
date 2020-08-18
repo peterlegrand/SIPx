@@ -6,9 +6,9 @@ namespace SIPx.DataAccess
 {
     public interface ILanguageProvider
     {
-        Task<List<LanguageIndexGet>> LanguageIndexGet(string UserId);
-        Task<List<LanguageList>> LanguageList(string UserId);
-        Task<List<LanguageList>> LanguagesActiveList(string UserId);
+        Task<List<LanguageIndexGet>> IndexGet(string UserId);
+        Task<List<LanguageList>> List(string UserId);
+        Task<List<LanguageList>> ActiveList(string UserId);
         bool PostObjectLanguage(ObjectLanguageCreatePost ObjectLanguage);
         Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int Id);
         Task<List<UITermLanguageCustomization>> UITermLanguageCustomizationIndexGet(string UserId);
@@ -16,5 +16,6 @@ namespace SIPx.DataAccess
         Task<List<UITermLanguage>> UITermLanguageIndexGet(string UserId);
         Task<UITermLanguage> UITermLanguageUpdateGet(string UserId, int UITermLanguageId);
         Task<LanguageList> UserLanguageUpdateGet(string UserId);
+        bool UpdatePost(LanguageUpdateGet ContentType);
     }
 }

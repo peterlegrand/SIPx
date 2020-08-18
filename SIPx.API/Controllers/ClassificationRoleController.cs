@@ -12,14 +12,18 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationRoleController : ControllerBase
     {
+        private readonly IClassificationRelationTypeProvider _classificationRelationTypeProvider;
+        private readonly IClassificationRoleProvider _classificationRoleProvider;
         private readonly IPeopleProvider _peopleProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationRoleController( IPeopleProvider peopleProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationRoleController(IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationRoleProvider classificationRoleProvider, IPeopleProvider peopleProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationRelationTypeProvider = classificationRelationTypeProvider;
+            _classificationRoleProvider = classificationRoleProvider;
             _peopleProvider = peopleProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -43,7 +47,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationRoleIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationRoleProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -65,8 +69,8 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var ClassificationRole = await _classificationProvider.ClassificationRoleUpdateGet(CurrentUser.Id, Id);
-                var RelationTypeList = await _classificationProvider.ClassificationRelationTypeListGet(CurrentUser.Id);
+                var ClassificationRole = await _classificationRoleProvider.UpdateGet(CurrentUser.Id, Id);
+                var RelationTypeList = await _classificationRelationTypeProvider.ListGet(CurrentUser.Id);
                 var RoleList = await _peopleProvider.RoleList(CurrentUser.Id);
                 ClassificationRole.ClassificationRelationTypes = RelationTypeList;
                 ClassificationRole.Roles = RoleList;
@@ -85,7 +89,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationRoleCreateGet = new ClassificationRoleCreateGet();
-                var ClassificationRelationTypes = await _classificationProvider.ClassificationRelationTypeList(CurrentUser.Id);
+                var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationRoleCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
                 ClassificationRoleCreateGet.ClassificationId = Id;
                 return Ok(ClassificationRoleCreateGet);
@@ -103,10 +107,10 @@ namespace SIPx.API.Controllers
             ClassificationRole.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.ClassificationRoleCreatePostCheck(ClassificationRole);
+                var CheckString = await _classificationRoleProvider.CreatePostCheck(ClassificationRole);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.ClassificationRoleCreatePost(ClassificationRole);
+                    _classificationRoleProvider.CreatePost(ClassificationRole);
                     return Ok(ClassificationRole);
                 }
                 return BadRequest(new

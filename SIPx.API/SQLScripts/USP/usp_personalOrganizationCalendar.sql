@@ -4,6 +4,7 @@ SELECT Processes.ProcessID Id
 	, FromField.DateTimeValue StartTime
 	, ToField.DateTimeValue EndTime
 	, SubjectField.StringValue Subject
+	, ProcessTemplates.Color
 FROM processTemplates 
 JOIN Processes 
 	ON ProcessTemplates.ProcessTemplateID = Processes.ProcessTemplateID

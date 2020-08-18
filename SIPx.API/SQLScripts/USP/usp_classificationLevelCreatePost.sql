@@ -3,17 +3,21 @@ CREATE PROCEDURE [dbo].[usp_classificationLevelCreatePost] (
 	, @Sequence int
 	, @DateLevelId int
 	, @OnTheFly bit
-	, @Alhpabetically bit
+	, @Alphabetically bit
 	, @CanLink bit
 	, @InDropDown bit
 	, @InMenu bit
-	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 BEGIN TRANSACTION
 UPDATE ClassificationLevels SET Sequence = Sequence + 1 
@@ -38,7 +42,7 @@ VALUES (
 	, @Sequence 
 	, @DateLevelId 
 	, @OnTheFly 
-	, @Alhpabetically 
+	, @Alphabetically 
 	, @CanLink 
 	, @InDropDown 
 	, @InMenu 

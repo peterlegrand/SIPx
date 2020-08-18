@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IContentTypeClassificationProvider
     {
-        Task<List<ContentTypeClassification>> ContentTypeClassificationIndexGet(string UserId, int ContentTypeId);
-        Task<ContentTypeClassification> ContentTypeClassificationUpdateGet(string UserId, int ContentTypeClassificationId);
+        Task<List<ContentTypeClassification>> IndexGet(string UserId, int ContentTypeId);
+        Task<ContentTypeClassification> UpdateGet(string UserId, int ContentTypeClassificationId);
     }
 }

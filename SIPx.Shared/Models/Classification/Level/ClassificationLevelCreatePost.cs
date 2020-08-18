@@ -12,7 +12,7 @@ namespace SIPx.Shared
         public int Sequence { get; set; }
         public int DateLevelId { get; set; }
         public bool OnTheFly { get; set; }
-        public bool Alhpabetically { get; set; }
+        public bool Alphabetically { get; set; }
         public bool CanLink { get; set; }
         public bool InDropDown { get; set; }
         public bool InMenu { get; set; }

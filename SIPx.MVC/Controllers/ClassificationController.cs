@@ -17,15 +17,6 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient _client = new ServiceClient();
 
         [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<ClassificationIndexGet>>($"{_baseUrl}api/Classification/Index", token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
-        [HttpGet]
         public async Task<IActionResult> Create()
         {
             var token = HttpContext.Session.GetString("Token");
@@ -34,6 +25,7 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View(response);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(ClassificationCreateGet Classification)
         {
@@ -43,6 +35,16 @@ namespace SIPx.MVC.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<List<ClassificationIndexGet>>($"{_baseUrl}api/Classification/Index", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -51,6 +53,35 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ClassificationUpdateGet Classification)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ClassificationUpdateGet>($"{_baseUrl}api/Classification/Update", Classification, token);
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ClassificationDeleteGet>($"{_baseUrl}api/Classification/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ClassificationDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ClassificationDeleteGet>($"{_baseUrl}api/Classification/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -61,6 +92,7 @@ namespace SIPx.MVC.Controllers
             return View(response);
 
         }
+
         [HttpGet]
         public async Task<IActionResult> LanguageEdit(int id)
         {
@@ -70,6 +102,7 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View(response);
         }
+
         [HttpGet]
         public async Task<IActionResult> LanguageCreate(int id)
         {
@@ -80,6 +113,7 @@ namespace SIPx.MVC.Controllers
             response.ObjectId = id;
             return View(response);
         }
+
         [HttpPost]
         public async Task<IActionResult> LanguageCreate(ObjectLanguageCreateGet ClassificationLanguage)
         {

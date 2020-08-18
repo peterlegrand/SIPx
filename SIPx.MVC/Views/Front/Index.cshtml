@@ -13,7 +13,7 @@
 {
     <h3>@Model.TitleDescription</h3>
 }
-<div class=" control-section" >
+<div class=" control-section">
     <!--  DashboardLayout element declaration -->
     <ejs-dashboardlayout id="defaultLayout" columns="10" showGridLines="true" allowResizing="false">
         <e-dashboardlayout-panels>
@@ -32,6 +32,10 @@
                                 <div class="e-panel-content">
                                     <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
                                         <e-schedule-eventsettings dataSource="@x.PersonalCalendars"></e-schedule-eventsettings>
+                                        <e-schedule-views>
+                                            <e-schedule-view option="Month" eventTemplate="#event-template"></e-schedule-view>
+                                            <e-schedule-view option="TimelineWeek" eventTemplate="#timeline-event-template"></e-schedule-view>
+                                        </e-schedule-views>
                                     </ejs-schedule>
                                 </div>
                             </div>
@@ -550,3 +554,13 @@
     </tr>
 </script>
 
+<script id="event-template" type="text/x-template">
+    <div class='template-wrap' style='background:${SecondaryColor}'>
+        @*<div class="subject" style='background:${PrimaryColor}'>${PersonalCalendars.Title}</div>
+        <div class="time" style='background:${PrimaryColor}'>Time: ${getTimeString(PersonalCalendars.StartTime)} - ${getTimeString(PersonalCalendars.EndTime)}</div>*@
+        <div class="image">s
+        </div>
+        <div class="description">b</div>
+        <div class="footer" style='background:${PrimaryColor}'></div>
+    </div>
+</script>

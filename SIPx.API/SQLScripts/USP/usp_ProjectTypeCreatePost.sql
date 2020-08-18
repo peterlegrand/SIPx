@@ -1,14 +1,18 @@
 CREATE PROCEDURE [dbo].[usp_ProjectTypeCreatePost] (
-	@LanguageId int
-	, @Name nvarchar(50)
+	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @Color char(9)
 	, @IconID int
-	, @UserId nvarchar(450)) 
+	, @CreatorId nvarchar(450)) 
 AS 
 BEGIN TRANSACTION
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @CreatorId
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
 INSERT INTO ProjectTypes (
 	Color 
@@ -20,9 +24,9 @@ INSERT INTO ProjectTypes (
 VALUES (
 	@Color 
 	, @IconID 
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 
@@ -46,9 +50,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 	COMMIT TRANSACTION

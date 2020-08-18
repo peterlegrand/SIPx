@@ -78,7 +78,15 @@ namespace SIPx.API
             services.AddTransient<ISettingProvider, SettingProvider>();
             services.AddTransient<IClassificationLevelProvider, ClassificationLevelProvider>();
             services.AddTransient<IClassificationProvider, ClassificationProvider>();
+            services.AddTransient<IClassificationUserProvider, ClassificationUserProvider>();
+            services.AddTransient<IClassificationRoleProvider, ClassificationRoleProvider>();
+            services.AddTransient<IClassificationPageProvider, ClassificationPageProvider>();
+            services.AddTransient<IClassificationPageSectionProvider, ClassificationPageSectionProvider>();
+            services.AddTransient<IClassificationRelationTypeProvider, ClassificationRelationTypeProvider>();
+            services.AddTransient<IClassificationProvider, ClassificationProvider>();
             services.AddTransient<IClassificationValueProvider, ClassificationValueProvider>();
+            services.AddTransient<IClassificationValueRoleProvider, ClassificationValueRoleProvider>();
+            services.AddTransient<IClassificationValueUserProvider, ClassificationValueUserProvider>();
 
             services.AddTransient<IRoleGroupProvider, RoleGroupProvider>();
 

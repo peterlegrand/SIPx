@@ -85,7 +85,7 @@
                 @Term.Find(x => x.InternalName.Equals("Color")).TermString
             </div>
             <div class="col-9">
-                <ejs-colorpicker id='color-picker' ejs-for="Color" value="Color"></ejs-colorpicker>
+                <ejs-colorpicker id='color-picker' ejs-for="@Model.Color" value="@Model.Color"></ejs-colorpicker>
             </div>
         </div>
 

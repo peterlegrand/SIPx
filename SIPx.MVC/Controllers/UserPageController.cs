@@ -13,25 +13,6 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
-        public async Task<IActionResult> Index()
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<PageIndexGet>>($"{_baseUrl}api/UserPage/Index",token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPage/Index", token);
-            ViewBag.UITerms = x;
-            return View(response);
-            //return View();
-        }
-        //PETER TODO Check for objectViewGet to be replaced by editget
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<PageUpdateGet>($"{_baseUrl}api/UserPage/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPage/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
-        }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -41,6 +22,7 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View(response);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(PageCreateGet Page)
         {
@@ -49,6 +31,27 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Index()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<List<PageIndexGet>>($"{_baseUrl}api/UserPage/Index",token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPage/Index", token);
+            ViewBag.UITerms = x;
+            return View(response);
+            //return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<PageUpdateGet>($"{_baseUrl}api/UserPage/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPage/Edit", token);
+            ViewBag.UITerms = x;
+            return View(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Edit(PageUpdateGet Page)
         {
@@ -57,6 +60,17 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<PageDeleteGet>($"{_baseUrl}api/UserPage/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPage/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Delete(PageDeleteGet Page)
         {
@@ -65,15 +79,6 @@ namespace SIPx.MVC.Controllers
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
-        }
-        [HttpGet]
-        public async Task<IActionResult> Delete (int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<PageDeleteGet>($"{_baseUrl}api/UserPage/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPage/Delete", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
         }
     }
 }

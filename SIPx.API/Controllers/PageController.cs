@@ -119,7 +119,7 @@ namespace SIPx.API.Controllers
                 var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
                 var Projects = await _projectProvider.ProjectList(CurrentUser.Id);
                 var Organizations = await _organizationProvider.OrganizationList(CurrentUser.Id);
-                var Classifications = await _classificationProvider.ClassificationList(CurrentUser.Id);
+                var Classifications = await _classificationProvider.List(CurrentUser.Id);
                 var Users = await _userProvider.UserList();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 PageCreateGet.LanguageId = UserLanguage.LanguageId;

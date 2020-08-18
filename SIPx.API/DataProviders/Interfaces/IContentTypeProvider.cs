@@ -6,12 +6,13 @@ namespace SIPx.DataAccess
 {
     public interface IContentTypeProvider
     {
-        Task<string> ContentTypeCreatePost(ContentTypeCreatePost ContentType);
-        Task<string> ContentTypeCreatePostCheck(ContentTypeCreatePost ContentType);
-        Task<List<ContentType>> ContentTypeIndexGet(string UserId);
-        Task<List<ContentTypeLanguage>> ContentTypeLanguageIndexGet(string UserId, int ContentTypeId);
-        Task<ContentTypeLanguage> ContentTypeLanguageUpdateGet(string UserId, int ContentTypeLanguageId);
-        Task<List<ContentTypeList>> ContentTypeList(string UserId);
-        Task<ContentType> ContentTypeUpdateGet(string UserId, int ContentTypeId);
+        Task<string> CreatePost(ContentTypeCreatePost ContentType);
+        Task<string> CreatePostCheck(ContentTypeCreatePost ContentType);
+        Task<List<ContentType>> IndexGet(string UserId);
+        Task<List<ContentTypeLanguage>> LanguageIndexGet(string UserId, int ContentTypeId);
+        Task<ContentTypeLanguage> LanguageUpdateGet(string UserId, int ContentTypeLanguageId);
+        Task<List<ContentTypeList>> List(string UserId);
+        Task<ContentTypeUpdateGet> UpdateGet(string UserId, int ContentTypeId);
+        bool UpdatePost(ContentTypeUpdateGet ContentType);
     }
 }

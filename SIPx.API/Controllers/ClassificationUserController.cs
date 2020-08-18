@@ -12,14 +12,18 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationUserController : ControllerBase
     {
+        private readonly IClassificationRelationTypeProvider _classificationRelationTypeProvider;
+        private readonly IClassificationUserProvider _classificationUserProvider;
         private readonly IPeopleProvider _peopleProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationUserController(IPeopleProvider peopleProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationUserController(IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationUserProvider classificationUserProvider, IPeopleProvider peopleProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationRelationTypeProvider = classificationRelationTypeProvider;
+            _classificationUserProvider = classificationUserProvider;
             _peopleProvider = peopleProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -42,7 +46,7 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _classificationProvider.ClassificationUserIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationUserProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -66,8 +70,8 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var ClassificationUser = await _classificationProvider.ClassificationUserUpdateGet(CurrentUser.Id, Id);
-                var RelationTypeList = await _classificationProvider.ClassificationRelationTypeListGet(CurrentUser.Id);
+                var ClassificationUser = await _classificationUserProvider.UpdateGet(CurrentUser.Id, Id);
+                var RelationTypeList = await _classificationRelationTypeProvider.ListGet(CurrentUser.Id);
                 var UserList = await _peopleProvider.UserList();
                 ClassificationUser.ClassificationRelationTypes = RelationTypeList;
                 ClassificationUser.Users = UserList;
@@ -86,7 +90,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationUserCreateGet = new ClassificationUserCreateGet();
-                var ClassificationRelationTypes = await _classificationProvider.ClassificationRelationTypeList(CurrentUser.Id);
+                var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationUserCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
                 ClassificationUserCreateGet.ClassificationId = Id;
                 return Ok(ClassificationUserCreateGet);
@@ -104,10 +108,10 @@ namespace SIPx.API.Controllers
             ClassificationUser.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationProvider.ClassificationUserCreatePostCheck(ClassificationUser);
+                var CheckString = await _classificationUserProvider.CreatePostCheck(ClassificationUser);
                 if (CheckString.Length == 0)
                 {
-                    _classificationProvider.ClassificationUserCreatePost(ClassificationUser);
+                    _classificationUserProvider.CreatePost(ClassificationUser);
                     return Ok(ClassificationUser);
                 }
                 return BadRequest(new

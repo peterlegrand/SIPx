@@ -6,12 +6,13 @@ namespace SIPx.DataAccess
 {
     public interface IOrganizationProvider
     {
-        Task<string> OrganizationCreatePost(OrganizationCreatePost Organization);
-        Task<string> OrganizationCreatePostCheck(OrganizationCreatePost Organization);
-        Task<List<OrganizationIndexGet>> OrganizationIndexGet(string UserId);
-        Task<List<OrganizationLanguage>> OrganizationLanguageIndexGet(string UserId, int OrganizationId);
-        Task<OrganizationLanguage> OrganizationLanguageUpdateGet(string UserId, int OrganizationLanguageId);
-        Task<List<OrganizationList>> OrganizationList(string UserId);
-        Task<OrganizationUpdateGet> OrganizationUpdateGet(string UserId, int OrganizationId);
+        Task<string> CreatePost(OrganizationCreatePost Organization);
+        Task<string> CreatePostCheck(OrganizationCreatePost Organization);
+        Task<List<OrganizationIndexGet>> IndexGet(string UserId);
+        Task<List<OrganizationLanguage>> LanguageIndexGet(string UserId, int OrganizationId);
+        Task<OrganizationLanguage> LanguageUpdateGet(string UserId, int OrganizationLanguageId);
+        Task<List<OrganizationList>> List(string UserId);
+        Task<OrganizationUpdateGet> UpdateGet(string UserId, int OrganizationId);
+        bool UpdatePost(OrganizationUpdateGet Organization);
     }
 }

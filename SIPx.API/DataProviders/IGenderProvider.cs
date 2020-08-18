@@ -6,9 +6,10 @@ namespace SIPx.DataAccess
 {
     public interface IGenderProvider
     {
-        Task<List<Gender>> GenderIndexGet(string UserId);
-        Task<List<GenderList>> GenderList(string UserId);
-        Task<List<Gender>> GendersActive(string UserId);
-        Task<Gender> GenderUpdateGet(string UserId, int GenderId);
+        Task<List<Gender>> IndexGet(string UserId);
+        Task<List<GenderList>> List(string UserId);
+        Task<List<Gender>> Active(string UserId);
+        Task<Gender> UpdateGet(string UserId, int GenderId);
+        bool UpdatePost(GenderUpdateGet Gender);
     }
 }

@@ -19,25 +19,38 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+        public async Task<List<LanguageIndexGet>> IndexGet(string UserId)
+        {
+            string usp = "usp_LanguageIndexGet @UserID";
+            var x = await _sqlDataAccess.LoadData<LanguageIndexGet, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+        public Task<LanguageUpdateGet> UpdateGet(string UserId, int LanguageId)
+        {
+            string usp = "usp_LanguageUpdateGet @UserId, @LanguageID";
+            return _sqlDataAccess.LoadSingleRecord<LanguageUpdateGet, dynamic>(usp, new { UserId = UserId, LanguageId = LanguageId });
+
+        }
+        public bool UpdatePost(LanguageUpdateGet ContentType)
+        {
+            string usp = "usp_LanguageUpdatePost @LanguageId, @StatusId, @ModifierID";
+            _sqlDataAccess.SaveData<LanguageUpdateGet>(usp, ContentType);
+            return true;
+        }
         public async Task<LanguageList> UserLanguageUpdateGet(string UserId)
         {
             string usp = "usp_GetUserLanguageUpdateGet @UserID";
             var x = await _sqlDataAccess.LoadSingleRecord<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<LanguageList>> LanguageList(string UserId)
+
+        public async Task<List<LanguageList>> List(string UserId)
         {
-            string usp = "usp_LanguageList @UserID";
+            string usp = "usp_LanguagesList @UserID";
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public async Task<List<LanguageIndexGet>> LanguageIndexGet(string UserId)
-        {
-            string usp = "usp_LanguageIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<LanguageIndexGet, dynamic>(usp, new { UserId = UserId });
-            return x;
-        }
-        public async Task<List<LanguageList>> LanguagesActiveList(string UserId)
+        public async Task<List<LanguageList>> ActiveList(string UserId)
         {
             string usp = "usp_LanguagesActiveList @UserID";
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });

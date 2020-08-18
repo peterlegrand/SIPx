@@ -11,6 +11,7 @@ namespace SIPx.Shared
         public int ClassificationValueId { get; set; }
         public int ClassificationId { get; set; }
         public string ParentName { get; set; }
+        public int ParentValueId { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public int ClassificationLanguageId { get; set; }
