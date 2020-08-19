@@ -264,6 +264,59 @@ namespace SIPx.API.Controllers
         //    });
 
         //}
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _userMenuTemplateProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(UserMenuTemplateDeleteGet UserMenuTemplate)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                UserMenuTemplate.CreatorId = CurrentUser.Id;
+                //var CheckString = await _UserMenuTemplateProvider.DeletePostCheck(UserMenuTemplate);
+                //if (CheckString.Length == 0)
+                //{
+                _userMenuTemplateProvider.DeletePost(UserMenuTemplate.UserMenuTemplateId);
+                return Ok(UserMenuTemplate);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+
+        }
 
     }
 }

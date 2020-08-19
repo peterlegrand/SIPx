@@ -18,6 +18,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateController : ControllerBase
     {
+        private readonly ICheckProvider _checkProvider;
         private readonly IProcessTemplateGroupProvider _processTemplateGroupProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
@@ -25,8 +26,9 @@ namespace SIPx.API.Controllers
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateController(IProcessTemplateGroupProvider processTemplateGroupProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateController(ICheckProvider checkProvider, IProcessTemplateGroupProvider processTemplateGroupProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _checkProvider = checkProvider;
             _processTemplateGroupProvider = processTemplateGroupProvider;
             _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
@@ -141,6 +143,59 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("ProcessTemplates", "ProcessTemplateID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _processTemplateProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(ProcessTemplateDeleteGet ProcessTemplate)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                ProcessTemplate.CreatorId = CurrentUser.Id;
+                //var CheckString = await _ProcessTemplateProvider.DeletePostCheck(ProcessTemplate);
+                //if (CheckString.Length == 0)
+                //{
+                _processTemplateProvider.DeletePost(ProcessTemplate.ProcessTemplateId);
+                return Ok(ProcessTemplate);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+
         }
 
     }

@@ -177,6 +177,59 @@ namespace SIPx.API.Controllers
             });
         }
 
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationPageSections", "ClassificationPageSectionID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _classificationPageSectionProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(ClassificationPageSectionDeleteGet ClassificationPageSection)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                ClassificationPageSection.CreatorId = CurrentUser.Id;
+                //var CheckString = await _ClassificationPageSectionProvider.DeletePostCheck(ClassificationPageSection);
+                //if (CheckString.Length == 0)
+                //{
+                _classificationPageSectionProvider.DeletePost(ClassificationPageSection.ClassificationPageSectionId);
+                return Ok(ClassificationPageSection);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
         [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> GetPageLanguage(int Id)
         {

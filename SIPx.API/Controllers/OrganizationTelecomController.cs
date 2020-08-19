@@ -19,6 +19,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationTelecomController : ControllerBase
     {
+        private readonly ICheckProvider _checkProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IOrganizationTelecomProvider _organizationTelecomProvider;
         private readonly IMasterProvider _masterProvider;
@@ -26,8 +27,9 @@ namespace SIPx.API.Controllers
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationTelecomController(IMasterListProvider masterListProvider, IOrganizationTelecomProvider organizationTelecomProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationTelecomController(ICheckProvider checkProvider, IMasterListProvider masterListProvider, IOrganizationTelecomProvider organizationTelecomProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _checkProvider = checkProvider;
             _masterListProvider = masterListProvider;
             _organizationTelecomProvider = organizationTelecomProvider;
             _masterProvider = masterProvider;
@@ -107,6 +109,59 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("OrganizationTelecoms", "OrganizationTelecomID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _organizationTelecomProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(OrganizationTelecomDeleteGet OrganizationTelecom)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                OrganizationTelecom.CreatorId = CurrentUser.Id;
+                //var CheckString = await _OrganizationTelecomProvider.DeletePostCheck(OrganizationTelecom);
+                //if (CheckString.Length == 0)
+                //{
+                _organizationTelecomProvider.DeletePost(OrganizationTelecom.OrganizationTelecomId);
+                return Ok(OrganizationTelecom);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+
         }
 
     }

@@ -19,13 +19,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class RoleGroupController : ControllerBase
     {
+        private readonly ICheckProvider _checkProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IRoleGroupProvider _roleGroupProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public RoleGroupController(IMasterProvider masterProvider, IClaimCheck claimCheck, IRoleGroupProvider roleGroupProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public RoleGroupController(ICheckProvider checkProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IRoleGroupProvider roleGroupProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _checkProvider = checkProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _roleGroupProvider = roleGroupProvider;
@@ -134,6 +136,59 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("RoleGroups", "RoleGroupID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _roleGroupProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(RoleGroupDeleteGet RoleGroup)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                RoleGroup.CreatorId = CurrentUser.Id;
+                //var CheckString = await _RoleGroupProvider.DeletePostCheck(RoleGroup);
+                //if (CheckString.Length == 0)
+                //{
+                _roleGroupProvider.DeletePost(RoleGroup.RoleGroupId);
+                return Ok(RoleGroup);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+
         }
 
     }

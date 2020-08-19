@@ -19,12 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class PersonRelationController : ControllerBase
     {
+        private readonly IPersonRelationProvider _personRelationProvider;
+        private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonRelationController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonRelationController(IPersonRelationProvider personRelationProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _personRelationProvider = personRelationProvider;
+            _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _peopleProvider = peopleProvider;
             _userManager = userManager;
@@ -163,6 +167,59 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("PersonRelations", "PersonRelationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _personRelationProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(PersonRelationDeleteGet PersonRelation)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                PersonRelation.CreatorId = CurrentUser.Id;
+                //var CheckString = await _PersonRelationProvider.DeletePostCheck(PersonRelation);
+                //if (CheckString.Length == 0)
+                //{
+                _personRelationProvider.DeletePost(PersonRelation.PersonRelationId);
+                return Ok(PersonRelation);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+
         }
 
     }
