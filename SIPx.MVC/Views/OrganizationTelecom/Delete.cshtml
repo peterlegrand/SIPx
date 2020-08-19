@@ -3,7 +3,7 @@
 @model OrganizationTelecomDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization telecom")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete organization telecom")).TermString;
 
     Layout = "_LayoutAdmin";
 }

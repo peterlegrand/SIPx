@@ -3,13 +3,13 @@
 @model ClassificationValueRoleDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value Role")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete lassification value role")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification Role")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete lassification value role")).TermString
 </h1>
 <div class="container">
     <form method="post">
@@ -24,7 +24,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Role name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Role")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="RoleName" ejs-for="RoleName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>

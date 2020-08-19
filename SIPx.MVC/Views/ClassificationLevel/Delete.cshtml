@@ -3,13 +3,13 @@
 @model ClassificationLevelDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification level")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete classification level")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification level")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete classification level")).TermString
 </h1>
 <div class="container">
 
@@ -61,7 +61,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Date level name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Date level")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="DateLevelName" ejs-for="DateLevelName" cssClass="e-outline" placeholder="DateLevelName" floatLabelType="Auto"></ejs-textbox>

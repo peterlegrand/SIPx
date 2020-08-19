@@ -1,4 +1,4 @@
-ALTER PROCEDURE [dbo].[usp_ClassificationUpdatePost] (
+CREATE PROCEDURE [dbo].[usp_ClassificationUpdatePost] (
 	@ClassificationId int
 	, @StatusId int
 	, @DefaultPageId int
@@ -19,7 +19,7 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 DECLARE @OldSequence int;
-SELECT @OldSequence = DropDownSequence FROM ClassificationLanguages JOIN Classifications ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId  WHERE ClassificationLanguageID= @ClassificationLanguageID;
+SELECT @OldSequence = DropDownSequence FROM Classifications  WHERE ClassificationID= @ClassificationID;
 BEGIN TRANSACTION
 IF @OldSequence > @DropDownSequence
 BEGIN

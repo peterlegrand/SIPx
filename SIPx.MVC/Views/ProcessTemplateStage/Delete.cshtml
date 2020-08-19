@@ -3,13 +3,13 @@
 @model ProcessTemplateStageDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template stage")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete process template stage")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template stage")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete process template stage")).TermString
 </h1>
 <div class="container">
     <form method="post">
@@ -59,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Is end stage")).TermString
+                @Term.Find(x => x.InternalName.Equals("In to do")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox id="IsEndStage" label="Is end stage" ejs-for="IsEndStage" checked="@Model.IsEndStage"></ejs-checkbox>

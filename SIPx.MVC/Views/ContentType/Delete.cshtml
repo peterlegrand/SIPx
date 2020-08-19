@@ -3,13 +3,13 @@
 @model ContentTypeDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content type")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete content type")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/ContentTypes.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Content type")).TermString
+    <img src="~/images/icons/ContentTypes.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete content type")).TermString
 </h1>
 <div class="container">
 
@@ -59,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Content type group name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Content type group")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="ContentTypeGroupName" ejs-for="ContentTypeGroupName" cssClass="e-outline" placeholder="ContentTypeGroupName" floatLabelType="Auto"></ejs-textbox>
@@ -76,7 +76,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Security level name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Security level")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="SecurityLevelName" ejs-for="SecurityLevelName" cssClass="e-outline" placeholder="SecurityLevelName" floatLabelType="Auto"></ejs-textbox>

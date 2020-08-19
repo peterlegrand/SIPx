@@ -3,13 +3,13 @@
 @model PersonTelecomDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person telecom")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete person telecom")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person telecom")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete person telecom")).TermString
 </h1>
 <div class="container">
     <form method="post">

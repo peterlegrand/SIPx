@@ -3,13 +3,13 @@
 @model ProjectTypeDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project type")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete project type")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Project type")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete project type")).TermString
 </h1>
 <div class="container">
     <form method="post">
@@ -56,22 +56,6 @@
             </div>
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Internal")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="Internal" label="Internal" ejs-for="Internal" checked="@Model.Internal"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Legal entity")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="LegalEntity" label="LegalEntity" ejs-for="LegalEntity" checked="@Model.LegalEntity"></ejs-checkbox>
             </div>
         </div>
         <div class="row">

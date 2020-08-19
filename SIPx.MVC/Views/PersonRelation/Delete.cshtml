@@ -3,13 +3,13 @@
 @model PersonRelationDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person relation")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete person relation")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person relation")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete person relation")).TermString
 </h1>
 <div class="container">
     <form method="post">
@@ -32,7 +32,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Person first name")).TermString
+                @Term.Find(x => x.InternalName.Equals("To first name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="FromPersonFirstName" ejs-for="FromPersonFirstName" cssClass="e-outline" placeholder="ToPersonName" floatLabelType="Auto"></ejs-textbox>
@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Person last name")).TermString
+                @Term.Find(x => x.InternalName.Equals("To last name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="FromPersonLastName" ejs-for="FromPersonLastName" cssClass="e-outline" placeholder="FromPersonLastName" floatLabelType="Auto"></ejs-textbox>
@@ -48,10 +48,18 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Person first name")).TermString
+                @Term.Find(x => x.InternalName.Equals("From first name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="FromPersonFirstName" ejs-for="FromPersonFirstName" cssClass="e-outline" placeholder="ToPersonName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("From last name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="FromPersonLastName" ejs-for="FromPersonLastName" cssClass="e-outline" placeholder="ToPersonName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">

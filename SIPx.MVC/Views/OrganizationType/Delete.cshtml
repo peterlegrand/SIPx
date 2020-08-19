@@ -3,13 +3,13 @@
 @model OrganizationTypeDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization type")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete organization type")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organization type")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete organization type")).TermString
 </h1>
 <div class="container">
     <form method="post">

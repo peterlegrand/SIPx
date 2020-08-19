@@ -3,13 +3,13 @@
 @model PageDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete page")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/s.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page")).TermString
+    <img src="~/images/icons/s.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete page")).TermString
 </h1>
 <div class="container">
 
@@ -81,6 +81,13 @@
             </div>
             <div class="col-9">
                 <ejs-checkbox id="ShowTitleName" label="Show title name" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
+            </div>
+        </div>        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Show title description")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="ShowTitleDescription" label="Show title description" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
             </div>
         </div>
         <div class="row">

@@ -332,4 +332,7 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (326, 'ContentType', 'Edit')
 , (327, 'PersonRelationType', 'Delete')
 , (328, 'PersonRelationType', 'Edit')
+, (329, 'ContentTypeGroup', 'Delete')
+, (330, 'Organization address', 'Delete')
+
 SET IDENTITY_INSERT MVCUIScreens OFF;

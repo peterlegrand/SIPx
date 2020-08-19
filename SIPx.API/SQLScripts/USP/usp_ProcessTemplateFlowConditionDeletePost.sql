@@ -1,0 +1,8 @@
+CREATE PROCEDURE usp_ProcessTemplateFlowConditionDeletePost (@ProcessTemplateFlowConditionId int)
+AS
+BEGIN TRANSACTION
+
+DELETE FROM ProcessTemplateFlowConditionLanguages WHERE ProcessTemplateFlowConditionId = @ProcessTemplateFlowConditionId
+DELETE FROM ProcessTemplateFlowConditions WHERE ProcessTemplateFlowConditionId = @ProcessTemplateFlowConditionId
+
+COMMIT TRANSACTION

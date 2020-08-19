@@ -3,13 +3,13 @@
 @model ProcessTemplateFlowConditionDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template flow condition")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete process template flow condition")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template flow condition")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete process template flow condition")).TermString
 </h1>
 <div class="container">
     <form method="post">
@@ -60,7 +60,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Process template flow condition type name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Process template flow condition type")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="ProcessTemplateFlowConditionTypeName" ejs-for="ProcessTemplateFlowConditionTypeName" cssClass="e-outline" placeholder="ProcessTemplateFlowConditionTypeName" floatLabelType="Auto"></ejs-textbox>
@@ -68,10 +68,18 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Process template fiel name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Process template field")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="ProcessTemplateFieldName" ejs-for="ProcessTemplateFieldName" cssClass="e-outline" placeholder="ProcessTemplateFieldName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Process template field role")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="ProcessTemplateFieldNameRole" ejs-for="ProcessTemplateFieldNameRole" cssClass="e-outline" placeholder="ProcessTemplateFieldNameRole" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -80,14 +88,6 @@
             </div>
             <div class="col-9">
                 <ejs-textbox id="ComparisonOperatorName" ejs-for="ComparisonOperatorName" cssClass="e-outline" placeholder="ComparisonOperatorName" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Process template flow conditiontype")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-textbox id="ProcessTemplateFlowConditionTypeName" ejs-for="ProcessTemplateFlowConditionTypeName" cssClass="e-outline" placeholder="ProcessTemplateFlowConditionTypeName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">

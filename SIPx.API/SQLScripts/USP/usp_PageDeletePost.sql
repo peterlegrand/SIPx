@@ -1,0 +1,9 @@
+CREATE PROCEDURE usp_PageDeletePost ( @PageId int)
+AS
+BEGIN TRANSACTION
+DELETE FROM PageLanguages 
+WHERE PageID  = @PageId 
+
+DELETE FROM Pages 
+WHERE PageID = @PageId
+COMMIT TRANSACTION

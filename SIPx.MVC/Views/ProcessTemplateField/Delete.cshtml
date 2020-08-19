@@ -3,13 +3,13 @@
 @model ProcessTemplateFieldDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template field")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete process template field")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template field")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete process template field")).TermString
 </h1>
 <div class="container">
     <form method="post">
