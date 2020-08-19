@@ -71,7 +71,7 @@ namespace SIPx.DataAccess
         public bool DeletePost(int Id)
         {
             string usp = "usp_ProcessTemplateStageTypeDeletePost @ProcessTemplateStageTypeId";
-            _sqlDataAccess.SaveData<int>(usp, Id);
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationId = classificationId });
             return true;
         }
 

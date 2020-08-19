@@ -66,10 +66,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ContentTypeGroupDeleteGet, dynamic>(usp, new { UserId, ContentTypeGroupId });
 
         }
-        public bool DeletePost(int Id)
+        public bool DeletePost(int ContentTypeGroupId)
         {
             string usp = "usp_ContentTypeGroupDeletePost @ContentTypeGroupId";
-            _sqlDataAccess.SaveData<int>(usp, Id);
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentTypeGroupId = ContentTypeGroupId });
             return true;
         }
 

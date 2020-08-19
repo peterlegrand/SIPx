@@ -61,10 +61,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PersonDeleteGet, dynamic>(usp, new { UserId, PersonId });
 
         }
-        public bool DeletePost(int Id)
+        public bool DeletePost(int PersonId)
         {
             string usp = "usp_PersonDeletePost @PersonId";
-            _sqlDataAccess.SaveData<int>(usp, Id);
+            _sqlDataAccess.SaveData<dynamic>(usp, new { PersonId = PersonId });
             return true;
         }
 

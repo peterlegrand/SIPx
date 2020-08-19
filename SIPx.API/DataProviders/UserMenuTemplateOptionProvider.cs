@@ -77,7 +77,7 @@ namespace SIPx.DataAccess
         public bool DeletePost(int Id)
         {
             string usp = "usp_UserMenuTemplateOptionDeletePost @UserMenuTemplateOptionId";
-            _sqlDataAccess.SaveData<int>(usp, Id);
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationId = classificationId });
             return true;
         }
 

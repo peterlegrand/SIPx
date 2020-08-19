@@ -60,7 +60,7 @@ namespace SIPx.DataAccess
         public bool DeletePost(int Id)
         {
             string usp = "usp_UserPageSectionDeletePost @UserPageSectionId";
-            _sqlDataAccess.SaveData<int>(usp, Id);
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationId = classificationId });
             return true;
         }
 

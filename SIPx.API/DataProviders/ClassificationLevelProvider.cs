@@ -65,10 +65,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationLevelDeleteGet, dynamic>(usp, new { UserId, ClassificationLevelId });
 
         }
-        public bool DeletePost(int Id)
+        public bool DeletePost(int ClassificationLevelId)
         {
             string usp = "usp_ClassificationLevelDeletePost @ClassificationLevelId";
-            _sqlDataAccess.SaveData<int>(usp, Id);
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationLevelId = ClassificationLevelId });
             return true;
         }
 

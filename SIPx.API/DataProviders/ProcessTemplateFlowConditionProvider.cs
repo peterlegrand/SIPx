@@ -68,10 +68,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateFlowConditionDeleteGet, dynamic>(usp, new { UserId, ProcessTemplateFlowConditionId });
 
         }
-        public bool DeletePost(int Id)
+        public bool DeletePost(int ProcessTemplateFlowConditionId)
         {
             string usp = "usp_ProcessTemplateFlowConditionDeletePost @ProcessTemplateFlowConditionId";
-            _sqlDataAccess.SaveData<int>(usp, Id);
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ProcessTemplateFlowConditionId = ProcessTemplateFlowConditionId });
             return true;
         }
 

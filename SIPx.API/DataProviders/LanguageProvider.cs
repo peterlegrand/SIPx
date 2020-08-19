@@ -46,7 +46,7 @@ namespace SIPx.DataAccess
 
         public async Task<List<LanguageList>> List(string UserId)
         {
-            string usp = "usp_LanguagesList @UserID";
+            string usp = "usp_LanguageList @UserID";
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }

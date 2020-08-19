@@ -12,19 +12,19 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationRoleController : ControllerBase
     {
+        private readonly IRoleProvider _roleProvider;
         private readonly IClassificationRelationTypeProvider _classificationRelationTypeProvider;
         private readonly IClassificationRoleProvider _classificationRoleProvider;
-        private readonly IPeopleProvider _peopleProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationRoleController(IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationRoleProvider classificationRoleProvider, IPeopleProvider peopleProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationRoleController(IRoleProvider roleProvider, IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationRoleProvider classificationRoleProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _roleProvider = roleProvider;
             _classificationRelationTypeProvider = classificationRelationTypeProvider;
             _classificationRoleProvider = classificationRoleProvider;
-            _peopleProvider = peopleProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;
@@ -71,7 +71,7 @@ namespace SIPx.API.Controllers
                 }
                 var ClassificationRole = await _classificationRoleProvider.UpdateGet(CurrentUser.Id, Id);
                 var RelationTypeList = await _classificationRelationTypeProvider.ListGet(CurrentUser.Id);
-                var RoleList = await _peopleProvider.RoleList(CurrentUser.Id);
+                var RoleList = await _roleProvider.List(CurrentUser.Id);
                 ClassificationRole.ClassificationRelationTypes = RelationTypeList;
                 ClassificationRole.Roles = RoleList;
                 return Ok(ClassificationRole);

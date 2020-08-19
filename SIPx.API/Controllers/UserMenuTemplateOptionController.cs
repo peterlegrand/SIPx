@@ -12,9 +12,9 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserMenuTemplateOptionController : ControllerBase
     {
+        private readonly IUserMenuTypeProvider _userMenuTypeProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IUserMenuTemplateOptionProvider _userMenuTemplateOptionProvider;
-        private readonly IPeopleProvider _peopleProvider;
         private readonly IPageProvider _pageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
@@ -22,11 +22,11 @@ namespace SIPx.API.Controllers
         private readonly IUserMenuProvider _userMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuTemplateOptionController(IMasterListProvider masterListProvider, IUserMenuTemplateOptionProvider userMenuTemplateOptionProvider, IPeopleProvider peopleProvider, IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuTemplateOptionController(IUserMenuTypeProvider userMenuTypeProvider, IMasterListProvider masterListProvider, IUserMenuTemplateOptionProvider userMenuTemplateOptionProvider, IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _userMenuTypeProvider = userMenuTypeProvider;
             _masterListProvider = masterListProvider;
             _userMenuTemplateOptionProvider = userMenuTemplateOptionProvider;
-            _peopleProvider = peopleProvider;
             _pageProvider = pageProvider;
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
@@ -69,8 +69,8 @@ namespace SIPx.API.Controllers
                 var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.ListForMenuTemplate(CurrentUser.Id);
                 var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.CreateGetSequence(CurrentUser.Id, Id);
-                UserMenuTemplateOptionCreateGet.UserMenuTypesLeft = await _peopleProvider.UserMenuTypeLeftList(CurrentUser.Id);
-                UserMenuTemplateOptionCreateGet.UserMenuTypesRight = await _peopleProvider.UserMenuTypeRightList(CurrentUser.Id);
+                UserMenuTemplateOptionCreateGet.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
+                UserMenuTemplateOptionCreateGet.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
                 UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count ,Name = "Add at the end" });
                 UserMenuTemplateOptionCreateGet.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
                 UserMenuTemplateOptionCreateGet.Icons = iconslist;
