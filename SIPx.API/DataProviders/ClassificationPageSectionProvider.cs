@@ -18,7 +18,7 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        
+
         public Task<List<SequenceList>> CreateGetSequence(string UserId, int ClassificationPageId)
         {
             string usp = "usp_ClassificationPageSectionCreateGetSequence @UserID, @ClassificationPageId";
@@ -53,11 +53,23 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageSectionUpdateGet, dynamic>(usp, new { UserId, ClassificationPageSectionId });
 
         }
-        
+
         public bool UpdatePost(ClassificationPageSectionUpdateGet ClassificationPageSection)
         {
             string usp = "usp_ClassificationPageSectionUpdatePost @ClassificationPageSectionId,  @ClassificationId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @OneTwoColumns, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @ModifierId";
             _sqlDataAccess.SaveData<ClassificationPageSectionUpdateGet>(usp, ClassificationPageSection);
+            return true;
+        }
+        public Task<ClassificationPageSectionDeleteGet> DeleteGet(string UserId, int ClassificationPageSectionId)
+        {
+            string usp = "usp_ClassificationPageSectionDeleteGet @UserId, @ClassificationPageSectionID";
+            return _sqlDataAccess.LoadSingleRecord<ClassificationPageSectionDeleteGet, dynamic>(usp, new { UserId, ClassificationPageSectionId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ClassificationPageSectionDeletePost @ClassificationPageSectionId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
             return true;
         }
 
@@ -67,14 +79,14 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ClassificationPageSectionLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationPageSectionId });
 
         }
-       
+
         public Task<ClassificationPageSectionLanguageIndexGet> LanguageUpdateGet(string UserId, int ClassificationPageSectionLanguageId)
         {
             string usp = "usp_ClassificationPageSectionLanguageUpdateGet @UserId, @ClassificationPageSectionLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageSectionLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationPageSectionLanguageId });
 
         }
-       
+
         public Task<List<ClassificationPageSectionSequenceList>> SequenceListBySectionIdGet(string UserId, int ClassificationPageSectionId)
         {
             string usp = "usp_ClassificationPageSectionSequenceList @UserId, @ClassificationPageSectionID";

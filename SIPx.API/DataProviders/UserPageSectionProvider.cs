@@ -51,5 +51,18 @@ namespace SIPx.DataAccess
             string usp = "usp_UserPageSectionCreateGetSequence @UserID, @PageId";
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, PageId });
         }
+        public Task<PageSectionDeleteGet> DeleteGet(string UserId, int UserPageSectionId)
+        {
+            string usp = "usp_UserPageSectionDeleteGet @UserId, @UserPageSectionID";
+            return _sqlDataAccess.LoadSingleRecord<PageSectionDeleteGet, dynamic>(usp, new { UserId, UserPageSectionId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_UserPageSectionDeletePost @UserPageSectionId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
+
     }
 }

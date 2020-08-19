@@ -68,6 +68,18 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<OrganizationTypeList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public Task<OrganizationTypeDeleteGet> DeleteGet(string UserId, int OrganizationTypeId)
+        {
+            string usp = "usp_OrganizationTypeDeleteGet @UserId, @OrganizationTypeID";
+            return _sqlDataAccess.LoadSingleRecord<OrganizationTypeDeleteGet, dynamic>(usp, new { UserId, OrganizationTypeId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_OrganizationTypeDeletePost @OrganizationTypeId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
     }
 }

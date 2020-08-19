@@ -26,8 +26,8 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentType);
             return CheckString;
         }
-//PETER Probably this doesn't work as the table as parameter needs to be inserted
-//see sp name of update or create without post
+        //PETER Probably this doesn't work as the table as parameter needs to be inserted
+        //see sp name of update or create without post
         public async Task<string> CreatePost(ContentTypeCreatePost ContentType)
         {
             string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
@@ -76,5 +76,18 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ContentTypeList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public Task<ContentTypeDeleteGet> DeleteGet(string UserId, int ContentTypeId)
+        {
+            string usp = "usp_ContentTypeDeleteGet @UserId, @ContentTypeID";
+            return _sqlDataAccess.LoadSingleRecord<ContentTypeDeleteGet, dynamic>(usp, new { UserId, ContentTypeId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ContentTypeDeletePost @ContentTypeId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
+
     }
 }

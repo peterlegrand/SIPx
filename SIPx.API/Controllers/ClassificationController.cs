@@ -160,6 +160,61 @@ namespace SIPx.API.Controllers
 
         }
 
+        [HttpGet("Delete/{Id:int}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("Classifications", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _classificationProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(ClassificationDeleteGet Classification)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                Classification.CreatorId = CurrentUser.Id;
+                //var CheckString = await _classificationProvider.DeletePostCheck(Classification);
+                //if (CheckString.Length == 0)
+                //{
+                _classificationProvider.DeletePost(Classification.ClassificationId);
+                return Ok(Classification);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+
+
         [HttpPost("LanguageCreate")]
         public async Task<IActionResult> LanguageCreate(ObjectLanguageCreatePost Classification)
         {
@@ -188,6 +243,8 @@ namespace SIPx.API.Controllers
             });
 
         }
+
+
 
         [HttpGet("LanguageCreate/{Id:int}")]
         public async Task<IActionResult> LanguageCreate(int Id)

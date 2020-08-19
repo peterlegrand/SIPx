@@ -56,5 +56,18 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<RoleList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public Task<RoleDeleteGet> DeleteGet(string UserId, int RoleId)
+        {
+            string usp = "usp_RoleDeleteGet @UserId, @RoleID";
+            return _sqlDataAccess.LoadSingleRecord<RoleDeleteGet, dynamic>(usp, new { UserId, RoleId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_RoleDeletePost @RoleId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
+
     }
 }

@@ -32,6 +32,18 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationRoleCreatePost>(usp, ClassificationRole);
             return true;
         }
+        public Task<ClassificationRoleDeleteGet> DeleteGet(string UserId, int ClassificationRoleId)
+        {
+            string usp = "usp_ClassificationRoleDeleteGet @UserId, @ClassificationRoleID";
+            return _sqlDataAccess.LoadSingleRecord<ClassificationRoleDeleteGet, dynamic>(usp, new { UserId, ClassificationRoleId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ClassificationRoleDeletePost @ClassificationRoleId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
         public Task<List<ClassificationRoleIndexGet>> IndexGet(string UserId, int ClassificationId)
         {

@@ -39,7 +39,7 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<OrganizationAddress, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
-        
+
         public Task<OrganizationAddress> UpdateGet(string UserId, int OrganizationAddressId)
         {
             string usp = "usp_OrganizationAddressUpdateGet @UserId, @OrganizationAddressID";
@@ -51,6 +51,18 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_OrganizationAddressUpdatePost @OrganizationAddressId , AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @Location, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @ModifierId";
             _sqlDataAccess.SaveData<OrganizationAddressUpdateGet>(usp, OrganizationAddress);
+            return true;
+        }
+        public Task<OrganizationAddressDeleteGet> DeleteGet(string UserId, int OrganizationAddressId)
+        {
+            string usp = "usp_OrganizationAddressDeleteGet @UserId, @OrganizationAddressID";
+            return _sqlDataAccess.LoadSingleRecord<OrganizationAddressDeleteGet, dynamic>(usp, new { UserId, OrganizationAddressId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_OrganizationAddressDeletePost @OrganizationAddressId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
             return true;
         }
 

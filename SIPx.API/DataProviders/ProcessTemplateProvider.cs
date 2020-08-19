@@ -62,6 +62,18 @@ namespace SIPx.DataAccess
             string usp = "usp_ProcessTemplateCreateGetSequence @UserID";
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
         }
+        public Task<ProcessTemplateDeleteGet> DeleteGet(string UserId, int ProcessTemplateId)
+        {
+            string usp = "usp_ProcessTemplateDeleteGet @UserId, @ProcessTemplateID";
+            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateDeleteGet, dynamic>(usp, new { UserId, ProcessTemplateId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ProcessTemplateDeletePost @ProcessTemplateId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
     }
 }

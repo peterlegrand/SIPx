@@ -73,5 +73,18 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplate);
             return CheckString;
         }
+        public Task<UserMenuTemplateDeleteGet> DeleteGet(string UserId, int UserMenuTemplateId)
+        {
+            string usp = "usp_UserMenuTemplateDeleteGet @UserId, @UserMenuTemplateID";
+            return _sqlDataAccess.LoadSingleRecord<UserMenuTemplateDeleteGet, dynamic>(usp, new { UserId, UserMenuTemplateId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_UserMenuTemplateDeletePost @UserMenuTemplateId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
+
     }
 }

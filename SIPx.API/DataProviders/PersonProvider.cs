@@ -55,6 +55,18 @@ namespace SIPx.DataAccess
             string usp = "usp_PersonList @UserID";
             return _sqlDataAccess.LoadData<PersonList, dynamic>(usp, new { UserId = UserId });
         }
+        public Task<PersonDeleteGet> DeleteGet(string UserId, int PersonId)
+        {
+            string usp = "usp_PersonDeleteGet @UserId, @PersonID";
+            return _sqlDataAccess.LoadSingleRecord<PersonDeleteGet, dynamic>(usp, new { UserId, PersonId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_PersonDeletePost @PersonId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
     }
 }

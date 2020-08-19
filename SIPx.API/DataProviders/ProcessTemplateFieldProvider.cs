@@ -75,5 +75,18 @@ namespace SIPx.DataAccess
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateField);
             return String;
         }
+        public Task<ProcessTemplateFieldDeleteGet> DeleteGet(string UserId, int ProcessTemplateFieldId)
+        {
+            string usp = "usp_ProcessTemplateFieldDeleteGet @UserId, @ProcessTemplateFieldID";
+            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateFieldDeleteGet, dynamic>(usp, new { UserId, ProcessTemplateFieldId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ProcessTemplateFieldDeletePost @ProcessTemplateFieldId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
+
     }
 }

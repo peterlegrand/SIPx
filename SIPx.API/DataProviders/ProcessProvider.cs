@@ -22,10 +22,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        //public async Task<List<ClassificationViewGet>> GetClassifications(int LanguageId)
+        //public async Task<List<ProcessViewGet>> GetProcesss(int LanguageId)
         //{
-        //    string usp = "usp_ClassificationViewGet @LanguageID";
-        //    var x = await _sqlDataAccess.LoadData<ClassificationViewGet, dynamic>(usp, new { LanguageId = LanguageId });
+        //    string usp = "usp_ProcessViewGet @LanguageID";
+        //    var x = await _sqlDataAccess.LoadData<ProcessViewGet, dynamic>(usp, new { LanguageId = LanguageId });
         //    return x;
         //}
         public async Task<List<int>> NewProcessGetInitialTemplateList()
@@ -66,6 +66,18 @@ namespace SIPx.DataAccess
             return true;
         }
 
+        public Task<ProcessDeleteGet> DeleteGet(string UserId, int ProcessId)
+        {
+            string usp = "usp_ProcessDeleteGet @UserId, @ProcessID";
+            return _sqlDataAccess.LoadSingleRecord<ProcessDeleteGet, dynamic>(usp, new { UserId, ProcessId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ProcessDeletePost @ProcessId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
 
         //public async Task<List<ProcessType>> GetProcessTypes(string UserId)

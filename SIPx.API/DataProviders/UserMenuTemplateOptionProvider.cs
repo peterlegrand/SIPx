@@ -68,6 +68,18 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
+        public Task<UserMenuTemplateOptionDeleteGet> DeleteGet(string UserId, int UserMenuTemplateOptionId)
+        {
+            string usp = "usp_UserMenuTemplateOptionDeleteGet @UserId, @UserMenuTemplateOptionID";
+            return _sqlDataAccess.LoadSingleRecord<UserMenuTemplateOptionDeleteGet, dynamic>(usp, new { UserId, UserMenuTemplateOptionId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_UserMenuTemplateOptionDeletePost @UserMenuTemplateOptionId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
     }
 }

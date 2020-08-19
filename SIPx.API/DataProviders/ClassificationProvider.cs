@@ -67,6 +67,18 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationUpdateGet>(usp, Classification);
             return true;
         } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.
+        public Task<ClassificationDeleteGet> DeleteGet(string UserId, int ClassificationId)
+        {
+            string usp = "usp_ClassificationDeleteGet @UserId, @classificationID";
+            return _sqlDataAccess.LoadSingleRecord<ClassificationDeleteGet, dynamic>(usp, new { UserId, ClassificationId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ClassificationDeletePost @classificationId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
         public Task<List<LanguageList>> LangugageCreateGetLanguageList(string UserId, int ClassificationId)
         {

@@ -62,5 +62,18 @@ namespace SIPx.DataAccess
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);
             return String;
         }
+        public Task<ProjectTypeDeleteGet> DeleteGet(string UserId, int ProjectTypeId)
+        {
+            string usp = "usp_ProjectTypeDeleteGet @UserId, @ProjectTypeID";
+            return _sqlDataAccess.LoadSingleRecord<ProjectTypeDeleteGet, dynamic>(usp, new { UserId, ProjectTypeId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ProjectTypeDeletePost @ProjectTypeId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
+
     }
 }

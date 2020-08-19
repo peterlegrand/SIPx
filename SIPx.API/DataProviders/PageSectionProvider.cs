@@ -75,6 +75,18 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PageSectionLanguageIndexGet, dynamic>(usp, new { UserId = UserId, PageSectionLanguageId = PageSectionLanguageId });
 
         }
+        public Task<PageSectionDeleteGet> DeleteGet(string UserId, int PageSectionId)
+        {
+            string usp = "usp_PageSectionDeleteGet @UserId, @PageSectionID";
+            return _sqlDataAccess.LoadSingleRecord<PageSectionDeleteGet, dynamic>(usp, new { UserId, PageSectionId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_PageSectionDeletePost @PageSectionId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
     }
 }

@@ -67,5 +67,19 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationValueLanguageId });
 
         }
+    
+    public Task<ClassificationValueDeleteGet> DeleteGet(string UserId, int ClassificationValueId)
+    {
+        string usp = "usp_ClassificationValueDeleteGet @UserId, @ClassificationValueID";
+        return _sqlDataAccess.LoadSingleRecord<ClassificationValueDeleteGet, dynamic>(usp, new { UserId, ClassificationValueId });
+
     }
+    public bool DeletePost(int Id)
+    {
+        string usp = "usp_ClassificationValueDeletePost @ClassificationValueId";
+        _sqlDataAccess.SaveData<int>(usp, Id);
+        return true;
+    }
+
+}
 }

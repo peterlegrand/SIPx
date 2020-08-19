@@ -60,5 +60,18 @@ namespace SIPx.DataAccess
             string usp = "usp_ContentTypeGroupList @UserID";
             return _sqlDataAccess.LoadData<ContentTypeGroupList, dynamic>(usp, new { UserId });
         }
+        public Task<ContentTypeGroupDeleteGet> DeleteGet(string UserId, int ContentTypeGroupId)
+        {
+            string usp = "usp_ContentTypeGroupDeleteGet @UserId, @ContentTypeGroupID";
+            return _sqlDataAccess.LoadSingleRecord<ContentTypeGroupDeleteGet, dynamic>(usp, new { UserId, ContentTypeGroupId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ContentTypeGroupDeletePost @ContentTypeGroupId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
+
     }
 }

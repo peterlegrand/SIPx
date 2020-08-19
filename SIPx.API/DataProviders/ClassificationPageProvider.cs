@@ -32,7 +32,7 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        
+
         public Task<List<ClassificationPageList>> ListGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationPageList @UserId, @ClassificationID";
@@ -60,6 +60,18 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationPageUpdateGet>(usp, ClassificationPage);
             return true;
         }
+        public Task<ClassificationPageDeleteGet> DeleteGet(string UserId, int ClassificationPageId)
+        {
+            string usp = "usp_ClassificationPageDeleteGet @UserId, @ClassificationPageID";
+            return _sqlDataAccess.LoadSingleRecord<ClassificationPageDeleteGet, dynamic>(usp, new { UserId, ClassificationPageId });
+
+        }
+        public bool DeletePost(int Id)
+        {
+            string usp = "usp_ClassificationPageDeletePost @ClassificationPageId";
+            _sqlDataAccess.SaveData<int>(usp, Id);
+            return true;
+        }
 
         public Task<List<ClassificationPageLanguageIndexGet>> LanguageIndexGet(string UserId, int ClassificationPageId)
         {
@@ -67,7 +79,7 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ClassificationPageLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationPageId });
 
         }
-        
+
         public Task<ClassificationPageLanguageIndexGet> LanguageUpdateGet(string UserId, int ClassificationPageLanguageId)
         {
             string usp = "usp_ClassificationPageLanguageUpdateGet @UserId, @ClassificationPageLanguageID";
