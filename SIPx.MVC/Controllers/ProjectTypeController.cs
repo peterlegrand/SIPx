@@ -68,5 +68,35 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProjectTypeUpdateGet ProjectType)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ProjectTypeUpdateGet>($"{_baseUrl}api/ProjectType/Update", ProjectType, token);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ProjectTypeDeleteGet>($"{_baseUrl}api/ProjectType/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProjectType/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProjectTypeDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ProjectTypeDeleteGet>($"{_baseUrl}api/ProjectType/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

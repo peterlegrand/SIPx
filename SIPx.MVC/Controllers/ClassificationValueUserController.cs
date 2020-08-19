@@ -12,12 +12,30 @@ namespace SIPx.MVC.Controllers
     public class ClassificationValueUserController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-        readonly ServiceClient client = new ServiceClient();
+        readonly ServiceClient _client = new ServiceClient();
+        [HttpGet]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ClassificationValueUserCreateGet>($"{_baseUrl}api/ClassificationValueUser/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ClassificationValueUserCreateGet ClassificationValueUser)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ClassificationValueUserCreateGet>($"{_baseUrl}api/ClassificationValueUser/Create", ClassificationValueUser, token);
+
+            return RedirectToAction("Index", new { id = ClassificationValueUser.ClassificationId });
+        }
+        [HttpGet]
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ClassificationValueUserUpdateGet>>($"{_baseUrl}api/ClassificationValueUser/Index/" + id,token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Index", token);
+            var response = await _client.GetProtectedAsync<List<ClassificationValueUserUpdateGet>>($"{_baseUrl}api/ClassificationValueUser/Index/" + id,token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -26,27 +44,37 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ClassificationValueUserUpdateGet>($"{_baseUrl}api/ClassificationValueUser/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Edit", token);
+            var response = await _client.GetProtectedAsync<ClassificationValueUserUpdateGet>($"{_baseUrl}api/ClassificationValueUser/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
-        [HttpGet]
-        public async Task<IActionResult> Create(int Id)
+        [HttpPost]
+        public async Task<IActionResult> Edit(ClassificationValueUserUpdateGet ClassificationValueUser)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ClassificationValueUserCreateGet>($"{_baseUrl}api/ClassificationValueUser/Create/" + Id, token);
-            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Create", token);
+            await _client.PostProtectedAsync<ClassificationValueUserUpdateGet>($"{_baseUrl}api/ClassificationValueUser/Update", ClassificationValueUser, token);
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ClassificationValueUserDeleteGet>($"{_baseUrl}api/ClassificationValueUser/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Delete", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
+
         [HttpPost]
-        public async Task<IActionResult> Create(ClassificationValueUserCreateGet ClassificationValueUser)
+        public async Task<IActionResult> Delete(ClassificationValueUserDeleteGet Page)
         {
             var token = HttpContext.Session.GetString("Token");
-            await client.PostProtectedAsync<ClassificationValueUserCreateGet>($"{_baseUrl}api/ClassificationValueUser/Create", ClassificationValueUser, token);
+            await _client.PostProtectedAsync<ClassificationValueUserDeleteGet>($"{_baseUrl}api/ClassificationValueUser/Delete", Page, token);
 
-            return RedirectToAction("Index", new { id = ClassificationValueUser.ClassificationId });
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
         }
 
     }

@@ -49,6 +49,35 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(PersonRelationTypeUpdateGet PersonRelationType)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PersonRelationTypeUpdateGet>($"{_baseUrl}api/PersonRelationType/Update", PersonRelationType, token);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<PersonRelationTypeDeleteGet>($"{_baseUrl}api/PersonRelationType/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(PersonRelationTypeDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PersonRelationTypeDeleteGet>($"{_baseUrl}api/PersonRelationType/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

@@ -35,5 +35,14 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(SettingUpdateGet Setting)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<SettingUpdateGet>($"{_baseUrl}api/Setting/Update", Setting, token);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

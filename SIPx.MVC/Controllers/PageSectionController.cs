@@ -12,12 +12,12 @@ namespace SIPx.MVC.Controllers
     public class PageSectionController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-        readonly ServiceClient client = new ServiceClient();
+        readonly ServiceClient _client = new ServiceClient();
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PageSectionIndexGet>>($"{_baseUrl}api/PageSection/Index/"+id,token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/Index", token);
+            var response = await _client.GetProtectedAsync<List<PageSectionIndexGet>>($"{_baseUrl}api/PageSection/Index/"+id,token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -27,8 +27,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<PageSectionUpdateGet>($"{_baseUrl}api/PageSection/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/Edit", token);
+            var response = await _client.GetProtectedAsync<PageSectionUpdateGet>($"{_baseUrl}api/PageSection/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
@@ -36,8 +36,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<PageSectionCreateGet>($"{_baseUrl}api/PageSection/Create/" +Id, token);
-            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/Create", token);
+            var response = await _client.GetProtectedAsync<PageSectionCreateGet>($"{_baseUrl}api/PageSection/Create/" +Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
@@ -45,7 +45,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(PageSectionCreateGet PageSection)
         {
             var token = HttpContext.Session.GetString("Token");
-            await client.PostProtectedAsync<PageSectionCreateGet>($"{_baseUrl}api/PageSection/Create", PageSection, token);
+            await _client.PostProtectedAsync<PageSectionCreateGet>($"{_baseUrl}api/PageSection/Create", PageSection, token);
 
             return RedirectToAction("Index", new { id = PageSection.PageId });
         }
@@ -53,8 +53,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PageSectionLanguageIndexGet>>($"{_baseUrl}api/PageSection/LanguageIndex/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageIndex", token);
+            var response = await _client.GetProtectedAsync<List<PageSectionLanguageIndexGet>>($"{_baseUrl}api/PageSection/LanguageIndex/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageIndex", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -63,10 +63,40 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageEdit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<PageSectionLanguageIndexGet>($"{_baseUrl}api/PageSection/LanguageUpdate/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageEdit", token);
+            var response = await _client.GetProtectedAsync<PageSectionLanguageIndexGet>($"{_baseUrl}api/PageSection/LanguageUpdate/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageEdit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(PageSectionUpdateGet PageSection)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PageSectionUpdateGet>($"{_baseUrl}api/PageSection/Update", PageSection, token);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<PageSectionDeleteGet>($"{_baseUrl}api/PageSection/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(PageSectionDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PageSectionDeleteGet>($"{_baseUrl}api/PageSection/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

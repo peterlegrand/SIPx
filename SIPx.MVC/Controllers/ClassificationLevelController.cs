@@ -15,6 +15,27 @@ namespace SIPx.MVC.Controllers
 
         //PETER TODO put base url somewhere central
         readonly ServiceClient _client = new ServiceClient();
+
+        [HttpGet]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ClassificationLevelCreateGet>($"{_baseUrl}api/ClassificationLevel/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ClassificationLevelCreateGet ClassificationLevel)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ClassificationLevelCreateGet>($"{_baseUrl}api/ClassificationLevel/Create", ClassificationLevel, token);
+
+            return RedirectToAction("Index", new { id = ClassificationLevel.ClassificationId });
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -35,6 +56,37 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ClassificationLevelUpdateGet ClassificationLevel)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ClassificationLevelUpdateGet>($"{_baseUrl}api/ClassificationLevel/Update", ClassificationLevel, token);
+
+            return RedirectToAction("Index", new { id = ClassificationLevel.ClassificationId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ClassificationLevelDeleteGet>($"{_baseUrl}api/ClassificationLevel/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ClassificationLevelDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ClassificationLevelDeleteGet>($"{_baseUrl}api/ClassificationLevel/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -43,31 +95,6 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = x;
             return View(response);
             //return View();
-        }
-        [HttpGet]
-        public async Task<IActionResult> Create(int Id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<ClassificationLevelCreateGet>($"{_baseUrl}api/ClassificationLevel/Create/"+Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Create", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create(ClassificationLevelCreateGet ClassificationLevel)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            await _client.PostProtectedAsync<ClassificationLevelCreateGet>($"{_baseUrl}api/ClassificationLevel/Create", ClassificationLevel, token);
-
-            return RedirectToAction("Index", new { id = ClassificationLevel.ClassificationId });
-        }
-        [HttpPost]
-        public async Task<IActionResult> Edit(ClassificationLevelUpdateGet ClassificationLevel)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            await _client.PostProtectedAsync<ClassificationLevelUpdateGet>($"{_baseUrl}api/ClassificationLevel/Update", ClassificationLevel, token);
-
-            return RedirectToAction("Index", new { id = ClassificationLevel.ClassificationId });
         }
 
         [HttpGet]

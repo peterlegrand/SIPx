@@ -12,12 +12,12 @@ namespace SIPx.MVC.Controllers
     public class PersonAddressController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-        readonly ServiceClient client = new ServiceClient();
+        readonly ServiceClient _client = new ServiceClient();
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<PersonAddressIndexGet>>($"{_baseUrl}api/PersonAddress/Index/"+id,token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Index", token);
+            var response = await _client.GetProtectedAsync<List<PersonAddressIndexGet>>($"{_baseUrl}api/PersonAddress/Index/"+id,token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -27,8 +27,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<PersonAddressUpdateGet>($"{_baseUrl}api/PersonAddress/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Edit", token);
+            var response = await _client.GetProtectedAsync<PersonAddressUpdateGet>($"{_baseUrl}api/PersonAddress/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
@@ -36,8 +36,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create/"+Id, token);
-            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Create", token);
+            var response = await _client.GetProtectedAsync<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create/"+Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
@@ -45,10 +45,39 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(PersonAddressCreateGet PersonAddress)
         {
             var token = HttpContext.Session.GetString("Token");
-            await client.PostProtectedAsync<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create", PersonAddress, token);
+            await _client.PostProtectedAsync<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create", PersonAddress, token);
 
             return RedirectToAction("Index", new { id = PersonAddress.PersonId });
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(PersonAddressUpdateGet PersonAddress)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PersonAddressUpdateGet>($"{_baseUrl}api/PersonAddress/Update", PersonAddress, token);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<PersonAddressDeleteGet>($"{_baseUrl}api/PersonAddress/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(PersonAddressDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PersonAddressDeleteGet>($"{_baseUrl}api/PersonAddress/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

@@ -49,6 +49,35 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(RoleUpdateGet Role)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<RoleUpdateGet>($"{_baseUrl}api/Role/Update", Role, token);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<RoleDeleteGet>($"{_baseUrl}api/Role/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(RoleDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<RoleDeleteGet>($"{_baseUrl}api/Role/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

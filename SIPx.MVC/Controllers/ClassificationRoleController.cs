@@ -12,12 +12,29 @@ namespace SIPx.MVC.Controllers
     public class ClassificationRoleController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-        readonly ServiceClient client = new ServiceClient();
+        readonly ServiceClient _client = new ServiceClient();
+        [HttpGet]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ClassificationRoleCreateGet>($"{_baseUrl}api/ClassificationRole/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ClassificationRoleCreateGet ClassificationRole)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ClassificationRoleCreateGet>($"{_baseUrl}api/ClassificationRole/Create", ClassificationRole, token);
+
+            return RedirectToAction("Index", new { id = ClassificationRole.ClassificationId });
+        }
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ClassificationRoleIndexGet>>($"{_baseUrl}api/ClassificationRole/Index/" + id,token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Index", token);
+            var response = await _client.GetProtectedAsync<List<ClassificationRoleIndexGet>>($"{_baseUrl}api/ClassificationRole/Index/" + id,token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -26,27 +43,37 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ClassificationRoleUpdateGet>($"{_baseUrl}api/ClassificationRole/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Edit", token);
+            var response = await _client.GetProtectedAsync<ClassificationRoleUpdateGet>($"{_baseUrl}api/ClassificationRole/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
-        [HttpGet]
-        public async Task<IActionResult> Create(int Id)
+        [HttpPost]
+        public async Task<IActionResult> Edit(ClassificationRoleUpdateGet ClassificationRole)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ClassificationRoleCreateGet>($"{_baseUrl}api/ClassificationRole/Create/"+Id, token);
-            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Create", token);
+            await _client.PostProtectedAsync<ClassificationRoleUpdateGet>($"{_baseUrl}api/ClassificationRole/Update", ClassificationRole, token);
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ClassificationRoleDeleteGet>($"{_baseUrl}api/ClassificationRole/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Delete", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
+
         [HttpPost]
-        public async Task<IActionResult> Create(ClassificationRoleCreateGet ClassificationRole)
+        public async Task<IActionResult> Delete(ClassificationRoleDeleteGet Page)
         {
             var token = HttpContext.Session.GetString("Token");
-            await client.PostProtectedAsync<ClassificationRoleCreateGet>($"{_baseUrl}api/ClassificationRole/Create", ClassificationRole, token);
+            await _client.PostProtectedAsync<ClassificationRoleDeleteGet>($"{_baseUrl}api/ClassificationRole/Delete", Page, token);
 
-            return RedirectToAction("Index", new { id = ClassificationRole.ClassificationId });
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
         }
 
     }

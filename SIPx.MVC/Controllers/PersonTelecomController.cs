@@ -49,6 +49,35 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index", new { id = PersonTelecom.PersonId });
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(PersonTelecomUpdateGet PersonTelecom)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PersonTelecomUpdateGet>($"{_baseUrl}api/PersonTelecom/Update", PersonTelecom, token);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<PersonTelecomDeleteGet>($"{_baseUrl}api/PersonTelecom/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(PersonTelecomDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PersonTelecomDeleteGet>($"{_baseUrl}api/PersonTelecom/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

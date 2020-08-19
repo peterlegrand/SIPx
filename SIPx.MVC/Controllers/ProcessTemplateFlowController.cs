@@ -12,12 +12,12 @@ namespace SIPx.MVC.Controllers
     public class ProcessTemplateFlowController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
-        readonly ServiceClient client = new ServiceClient();
+        readonly ServiceClient _client = new ServiceClient();
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ProcessTemplateFlowIndexGet>>($"{_baseUrl}api/ProcessTemplateFlow/Index/" + id, token);
-           var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Index", token);
+            var response = await _client.GetProtectedAsync<List<ProcessTemplateFlowIndexGet>>($"{_baseUrl}api/ProcessTemplateFlow/Index/" + id, token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -27,8 +27,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ProcessTemplateFlowUpdateGet>($"{_baseUrl}api/ProcessTemplateFlow/Update/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Edit", token);
+            var response = await _client.GetProtectedAsync<ProcessTemplateFlowUpdateGet>($"{_baseUrl}api/ProcessTemplateFlow/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
@@ -36,8 +36,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ProcessTemplateFlowCreateGet>($"{_baseUrl}api/ProcessTemplateFlow/Create/" + Id, token);
-            var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Create", token);
+            var response = await _client.GetProtectedAsync<ProcessTemplateFlowCreateGet>($"{_baseUrl}api/ProcessTemplateFlow/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
@@ -45,7 +45,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(ProcessTemplateFlowCreateGet ProcessTemplateFlow)
         {
             var token = HttpContext.Session.GetString("Token");
-            await client.PostProtectedAsync<ProcessTemplateFlowCreateGet>($"{_baseUrl}api/ProcessTemplateFlow/Create", ProcessTemplateFlow, token);
+            await _client.PostProtectedAsync<ProcessTemplateFlowCreateGet>($"{_baseUrl}api/ProcessTemplateFlow/Create", ProcessTemplateFlow, token);
 
             return RedirectToAction("Index", new { id = ProcessTemplateFlow.ProcessTemplateId });
         }
@@ -53,8 +53,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<List<ProcessTemplateFlowLanguageIndexGet>>($"{_baseUrl}api/ProcessTemplateFlow/LanguageIndex/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/LanguageIndex", token);
+            var response = await _client.GetProtectedAsync<List<ProcessTemplateFlowLanguageIndexGet>>($"{_baseUrl}api/ProcessTemplateFlow/LanguageIndex/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/LanguageIndex", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
@@ -63,10 +63,40 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageEdit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await client.GetProtectedAsync<ProcessTemplateFlowLanguageIndexGet>($"{_baseUrl}api/ProcessTemplateFlow/LanguageUpdate/" + id, token);
-            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/LanguageEdit", token);
+            var response = await _client.GetProtectedAsync<ProcessTemplateFlowLanguageIndexGet>($"{_baseUrl}api/ProcessTemplateFlow/LanguageUpdate/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/LanguageEdit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProcessTemplateFlowUpdateGet ProcessTemplateFlow)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ProcessTemplateFlowUpdateGet>($"{_baseUrl}api/ProcessTemplateFlow/Update", ProcessTemplateFlow, token);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ProcessTemplateFlowDeleteGet>($"{_baseUrl}api/ProcessTemplateFlow/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProcessTemplateFlowDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<ProcessTemplateFlowDeleteGet>($"{_baseUrl}api/ProcessTemplateFlow/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
