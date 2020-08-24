@@ -1,0 +1,87 @@
+﻿@model FrontOrganizationIndexGet
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+
+    Layout = "_Layout";
+}
+<div class="row">
+    <div class="col-12">
+        <h1>Organization dashboard: @Model.Name</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-7 ">
+        @Model.Description
+    </div>
+    
+    <div class="col-2">
+            <div> Parent: </div>
+            <div> Status:</div>
+            <div> Type:</div>
+            <div> Security level</div>
+            <div> Creator</div>
+            <div> Created date</div>
+            <div> Modifier</div>
+            <div> Modified date</div>
+        </div>
+    <div class="col-3">
+        <div> @Model.ParentOrganizationName</div>
+        <div> @Model.StatusName</div>
+        <div> @Model.OrganizationTypeName</div>
+        <div> @Model.SecurityLevelName</div>
+        <div> @Model.CreatorName</div>
+        <div> @Model.CreatedDate</div>
+        <div> @Model.ModifierName</div>
+        <div> @Model.ModifiedDate</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div><h2>Sub Organizations</h2></div>
+        <ejs-grid id="SubOrganizations" dataSource="@Model.SubOrganizations" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column field="Name" headerText="" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="OrganizationTypeName" headerText="" textAlign="Right" type="text"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+    <div class="col-6">
+        <div><h2>Members</h2></div>
+        <ejs-grid id="Members" dataSource="@Model.Members" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="" field="RoleName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="" field="FirstName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="" field="LastName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="" field="DefaultOrganizationName" textAlign="Right" type="text"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+        <ejs-treeview id="listdata">
+            <e-treeview-fields dataSource="@Model.SubOrganizationTree" id="Name" parentId="Name" text="Name" hasChildren="SubOrganizations" expanded="expanded"></e-treeview-fields>
+        </ejs-treeview>    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div><h2>Content</h2></div>
+        <ejs-grid id="Contents" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="" field="Title" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="" field="TypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="" field="StatusName" textAlign="Right" type="text"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+    <div class="col-6">
+        <div><h2>Processes</h2></div>
+        <ejs-grid id="Processes" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="" field="Subject" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="" field="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="" field="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</div>

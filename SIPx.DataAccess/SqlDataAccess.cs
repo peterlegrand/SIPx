@@ -83,7 +83,7 @@ namespace SIPx.DataAccess
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
 
-                var data = await connection.ExecuteAsync(sql, parameters);
+                var data = await connection.ExecuteAsync(sql, parameters,commandType : CommandType.StoredProcedure);
             }
         }
 

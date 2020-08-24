@@ -66,14 +66,39 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _classificationLevelProvider.CreatePostCheck(ClassificationLevel);
                 //if (CheckString.Length == 0)
                 //{
-                    _classificationLevelProvider.CreatePost(ClassificationLevel);
-                    return Ok(ClassificationLevel);
+                _classificationLevelProvider.CreatePost(ClassificationLevel);
+                return Ok(ClassificationLevel);
                 //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
                     //Message = CheckString,
                 });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Index/{Id:int}")]
+        public async Task<IActionResult> Index(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
+
+                return Ok(await _classificationLevelProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -108,31 +133,6 @@ namespace SIPx.API.Controllers
             });
         }
 
-
-        [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> Index(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
-            {
-                if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-
-
-                return Ok(await _classificationLevelProvider.IndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
 
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)

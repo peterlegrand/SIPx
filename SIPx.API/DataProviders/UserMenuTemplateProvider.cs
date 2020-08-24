@@ -79,10 +79,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<UserMenuTemplateDeleteGet, dynamic>(usp, new { UserId, UserMenuTemplateId });
 
         }
-        public bool DeletePost(int Id)
+        public bool DeletePost(int UserMenuTemplateId)
         {
             string usp = "usp_UserMenuTemplateDeletePost @UserMenuTemplateId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationId = classificationId });
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserMenuTemplateId = UserMenuTemplateId });
             return true;
         }
 

@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("ValueUserIndex/{Id:int}")]
+        [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> GetValueUsers(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -60,7 +60,7 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("ValueUserEdit/{Id:int}")]
+        [HttpGet("Edit/{Id:int}")]
         public async Task<IActionResult> GetValueUser(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

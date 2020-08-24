@@ -64,66 +64,66 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpGet("TypeLanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetPersonRelationTypeLanguages(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _peopleProvider.PersonRelationTypeLanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("TypeLanguageIndex/{Id:int}")]
+        //public async Task<IActionResult> GetPersonRelationTypeLanguages(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _peopleProvider.PersonRelationTypeLanguageIndexGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
 
-        [HttpGet("TypeLanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetPersonRelationTypeLanguage(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _peopleProvider.PersonRelationTypeLanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("TypeIndex")]
-        public async Task<IActionResult> GetPersonRelationTypes()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _peopleProvider.PersonRelationTypeIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("TypeLanguageUpdate/{Id:int}")]
+        //public async Task<IActionResult> GetPersonRelationTypeLanguage(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _peopleProvider.PersonRelationTypeLanguageUpdateGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
+        //[HttpGet("TypeIndex")]
+        //public async Task<IActionResult> GetPersonRelationTypes()
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _peopleProvider.PersonRelationTypeIndexGet(CurrentUser.Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
 
-        [HttpGet("TypeUpdate/{Id:int}")]
-        public async Task<IActionResult> GetPersonRelationType(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _peopleProvider.PersonRelationTypeUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("TypeUpdate/{Id:int}")]
+        //public async Task<IActionResult> GetPersonRelationType(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _peopleProvider.PersonRelationTypeUpdateGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {

@@ -505,8 +505,8 @@
         <td class="details">
             <table class="CardTable" cellpadding="3" cellspacing="2">
                 <colgroup>
-                    <col width="50%">
-                    <col width="50%">
+                    @*<col width="50%">
+                    <col width="50%">*@
                 </colgroup>
                 <tbody>
                     <tr>
@@ -538,7 +538,8 @@
                         <td class="font-weight-bold">${Title} </td>
                     </tr>
                     <tr>
-                        <td>${ProcessTemplateFieldName} </td>
+                        <td>
+                            <a href="/FrontProcess/Edit/${ProcessId}">  ${ProcessTemplateFieldName} </a></td>
                         <td class="font-italic">
                             ${ProcessTemplateStageTypeName}
                         </td>

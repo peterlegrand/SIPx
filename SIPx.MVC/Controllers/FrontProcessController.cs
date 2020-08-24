@@ -28,10 +28,26 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");
             var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
             ViewBag.UITerms = UITerms;
             return View(response);
 
+        }
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<FrontProcessEditGet>($"{_baseUrl}api/FrontProcess/Update/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/Edit", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(FrontProcessEditGet Process)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<FrontProcessEditGet>($"{_baseUrl}api/FrontProcess/Update", Process, token);
+
+            return RedirectToAction("Index");
         }
 
     }

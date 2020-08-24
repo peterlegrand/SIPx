@@ -57,7 +57,7 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("ValueRoleEdit/{Id:int}")]
+        [HttpGet("Edit/{Id:int}")]
         public async Task<IActionResult> GetValueRole(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

@@ -61,10 +61,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<RoleGroupDeleteGet, dynamic>(usp, new { UserId, RoleGroupId });
 
         }
-        public bool DeletePost(int Id)
+        public bool DeletePost(int RoleGroupId)
         {
             string usp = "usp_RoleGroupDeletePost @RoleGroupId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationId = classificationId });
+            _sqlDataAccess.SaveData<dynamic>(usp, new { RoleGroupId = RoleGroupId });
             return true;
         }
 
