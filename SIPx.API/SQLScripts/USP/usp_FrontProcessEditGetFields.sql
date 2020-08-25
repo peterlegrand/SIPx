@@ -1,4 +1,4 @@
-ALTER PROCEDURE usp_FrontProcessEditGetFields (@UserId nvarchar(450), @ProcessId int)
+CREATE PROCEDURE usp_FrontProcessEditGetFields (@UserId nvarchar(450), @ProcessId int)
 AS
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

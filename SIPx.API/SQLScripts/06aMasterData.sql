@@ -803,6 +803,34 @@ INSERT INTO ProcessTemplateFlowConditionTypes (ProcessTemplateFlowConditionTypeI
 , (23, 929, 931, 929,929)
 SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes OFF;
 
+SET IDENTITY_INSERT ProcessTemplateFlowPassTypes ON;
+INSERT INTO ProcessTemplateFlowPassTypes (ProcessTemplateFlowPassTypeId, NameTermId,DescriptionTermId,MenuNameTermId,MouseOverTermID) VALUES
+(1, 880, 881, 880,880)
+, (2, 882, 883, 882,882)
+, (3, 884, 885, 884,884)
+, (4, 886, 887, 886,886)
+, (5, 888, 889, 888,888)
+, (6, 890, 891, 890,890)
+, (7, 892, 893, 892,892)
+, (8, 894, 895, 894,894)
+, (9, 896, 897, 896,896)
+, (10, 898, 899, 898,898)
+, (11, 900, 901, 900,900)
+, (12, 902, 903, 902,904)
+, (13, 904, 905, 904,904)
+, (14, 906, 907, 906,906)
+, (15, 908, 909, 908,908)
+, (16, 910, 909, 910,910)
+, (17, 911, 909, 911,911)
+, (18, 912, 909, 912,912)
+, (19, 913, 914, 913,913)
+, (20, 915, 916, 915,915)
+, (21, 917, 918, 917,917)
+, (22, 928, 930, 928,928)
+, (23, 929, 931, 929,929)
+SET IDENTITY_INSERT ProcessTemplateFlowPassTypes OFF;
+
+
 SET IDENTITY_INSERT ProcessTemplateFlowConditionComparisonOperators ON;
 INSERT INTO ProcessTemplateFlowConditionComparisonOperators (
 	ProcessTemplateFlowConditionComparisonOperatorId, Symbol, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
@@ -814,6 +842,18 @@ INSERT INTO ProcessTemplateFlowConditionComparisonOperators (
 , (6, '<=', 926, 926, 926, 926)
 , (7, '<>', 927, 927, 927, 927);
 SET IDENTITY_INSERT ProcessTemplateFlowConditionComparisonOperators OFF;
+
+SET IDENTITY_INSERT ProcessTemplateFlowPassComparisonOperators ON;
+INSERT INTO ProcessTemplateFlowPassComparisonOperators (
+	ProcessTemplateFlowPassComparisonOperatorId, Symbol, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(1, '', 921, 921, 921, 921)
+, (2, '=', 922, 922, 922, 922)
+, (3, '>', 923, 923, 923, 923)
+, (4, '<', 924, 924, 924, 924)
+, (5, '>=', 925, 925, 925, 925)
+, (6, '<=', 926, 926, 926, 926)
+, (7, '<>', 927, 927, 927, 927);
+SET IDENTITY_INSERT ProcessTemplateFlowPassComparisonOperators OFF;
 
 
 SET IDENTITY_INSERT ValueUpdateTypes ON;

@@ -16,5 +16,6 @@ namespace SIPx.DataAccess
         Task<List<OrganizationList>> List(string UserId);
         Task<OrganizationUpdateGet> UpdateGet(string UserId, int OrganizationId);
         bool UpdatePost(OrganizationUpdateGet Organization);
+        Task<List<OrganizationList>> ListofUser(string UserId);
     }
 }

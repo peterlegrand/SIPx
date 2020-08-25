@@ -15,5 +15,6 @@ namespace SIPx.DataAccess
         Task<ProjectLanguageUpdateGet> LanguageUpdateGet(string UserId, int ProjectLanguageId);
         Task<List<ProjectList>> List(string UserId);
         Task<ProjectUpdateGet> UpdateGet(string UserId, int ProjectId);
+        Task<List<ProjectList>> ListofUser(string UserId);
     }
 }

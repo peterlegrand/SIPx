@@ -8,5 +8,6 @@ namespace SIPx.DataAccess
     {
         Task<List<ContentStatus>> IndexGet(string UserId);
         //Task<ContentStatus> UpdateGet(string UserId, int ContentStatusId);
+        Task<List<ContentStatusList>> List(string UserId);
     }
 }

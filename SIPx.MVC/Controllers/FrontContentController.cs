@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using SIPx.CallAPI;
+using SIPx.Shared;
+using Syncfusion.EJ2.QueryBuilder;
+
+namespace SIPx.MVC.Controllers
+{
+    public class FrontContentController : Controller
+    {
+        private readonly string _baseUrl = "https://localhost:44393/";
+        readonly ServiceClient _client = new ServiceClient();
+
+        [HttpGet]
+        public async Task<IActionResult> ContentType()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<List<FrontContentContentTypeGroup>>($"{_baseUrl}api/FrontContent/ContentType", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ContentNew(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew/"+Id, token);
+            //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
+         //   ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ContentNew(FrontContentContentNew Content)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew", Content, token);
+
+            return RedirectToAction("Index", "Front");
+        }
+    }
+}

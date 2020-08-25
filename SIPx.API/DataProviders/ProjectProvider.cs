@@ -50,6 +50,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ProjectList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<ProjectList>> ListofUser(string UserId)
+        {
+            string usp = "usp_ProjectListOfUser @UserID";
+            var x = await _sqlDataAccess.LoadData<ProjectList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public async Task<string> CreatePost(ProjectCreatePost Project)
         {
             string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";

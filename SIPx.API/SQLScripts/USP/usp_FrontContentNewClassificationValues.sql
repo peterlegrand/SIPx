@@ -51,8 +51,8 @@ AS
 -- Statement using the CTE
 SELECT TOP (@Top) 
 	ClassificationValueHierarchy.ClassificationValueID
-	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this value')) ClassificationValueName
-	, @ClassificationId
+	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this value')) Name
+	, @ClassificationId ClassificationId
 FROM   ClassificationValueHierarchy
 LEFT JOIN (SELECT ClassificationValueId, Name, Description, MenuName, MouseOver, DropDownName, PageName, PageDescription, HeaderName, HeaderDescription, TopicName  FROM ClassificationValueLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.ClassificationValueID= ClassificationValueHierarchy.ClassificationValueID

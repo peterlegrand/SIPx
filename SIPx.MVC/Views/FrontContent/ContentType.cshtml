@@ -1,0 +1,18 @@
+﻿@model List<FrontContentContentTypeGroup>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
+
+    Layout = "_LayoutAdmin";
+}
+
+@*<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classifications")).TermString</h1>*@
+@foreach (var x in Model)
+{
+    <h1>@x.ContentTypeGroupName</h1>
+    @foreach (var y in x.ContentTypes)
+    {
+        <a asp-action="ContentNew" asp-route-id="@y.ContentTypeID">@y.ContentTypeName</a>
+        <br />
+    }
+}

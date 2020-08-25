@@ -7,5 +7,6 @@ namespace SIPx.DataAccess
     public interface ISecurityLevelProvider
     {
         Task<List<SecurityLevelList>> List(string UserId);
+        Task<List<SecurityLevelList>> ListofUser(string UserId);
     }
 }

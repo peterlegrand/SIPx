@@ -1,0 +1,24 @@
+CREATE PROCEDURE usp_FrontContentNewClassifications ( @UserId nvarchar(450),@ContentTypeId int)
+AS
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
+SELECT 
+	ContentTypeClassifications.ClassificationID
+, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this content type')) ClassificationName
+, 'ControlA' + cast(ContentTypeClassifications.ClassificationID as varchar(5)) ControlA
+, 'ControlB' + cast(ContentTypeClassifications.ClassificationID  as varchar(5)) ControlB
+FROM ContentTypeClassifications 
+JOIN Classifications
+	ON ContentTypeClassifications.ClassificationID = Classifications.ClassificationID
+LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver, ClassificationLanguageID FROM ClassificationLanguages WHERE LanguageId = @LanguageID) UserLanguage
+	ON UserLanguage.ClassificationID= ContentTypeClassifications.ClassificationID
+LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver, ClassificationLanguageID FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ClassificationId = ContentTypeClassifications.ClassificationID
+	
+WHERE ContentTypeClassifications.ContentTypeClassificationStatusID IN (2,3)
+	AND ContentTypeID = @ContentTypeId
+ORDER BY Classifications.DropDownSequence

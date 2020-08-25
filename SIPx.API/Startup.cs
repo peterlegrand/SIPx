@@ -76,6 +76,7 @@ namespace SIPx.API
 
             services.AddTransient<IFrontProjectProvider, FrontProjectProvider>();
             services.AddTransient<IFrontOrganizationProvider, FrontOrganizationProvider>();
+            services.AddTransient<IFrontContentProvider, FrontContentProvider>();
             services.AddTransient<ICheckProvider, CheckProvider>();
             services.AddTransient<ISettingProvider, SettingProvider>();
             services.AddTransient<IClassificationLevelProvider, ClassificationLevelProvider>();

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_FrontOrganizationIndexGet] (@UserId nvarchar(450), @OrganizationId int) 
+CREATE PROCEDURE [dbo].[usp_FrontProjectIndexGet] (@UserId nvarchar(450), @ProjectId int) 
 AS 
 BEGIN
 DECLARE @LanguageId int;
@@ -15,55 +15,55 @@ WHERE Id = @UserID
 
 
 SELECT
-	Organizations.OrganizationID
-	, Organizations.ParentOrganizationID
-	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this Organization')) Name
-	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this Organization')) Description
-	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this Organization')) MenuName
-	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this Organization')) MouseOver
-	, Organizations.StatusID 
-	, CASE WHEN Organizations.ParentOrganizationId = NULL THEN 'No parent Organization' ELSE ISNULL(UserParentOrganizationLanguage.Name,ISNULL(DefaultParentOrganizationLanguage.Name,'No name for this parent Organization')) END ParentOrganizationName
+	Projects.ProjectID
+	, Projects.ParentProjectID
+	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this Project')) Name
+	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this Project')) Description
+	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this Project')) MenuName
+	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this Project')) MouseOver
+	, Projects.StatusID 
+	, CASE WHEN Projects.ParentProjectId = NULL THEN 'No parent Project' ELSE ISNULL(UserParentProjectLanguage.Name,ISNULL(DefaultParentProjectLanguage.Name,'No name for this parent Project')) END ParentProjectName
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
-	, Organizations.OrganizationTypeID
-	, OrganizationTypeLanguages.Name OrganizationTypeName
-	, Organizations.SecurityLevelID
+	, Projects.ProjectTypeID
+	, ProjectTypeLanguages.Name ProjectTypeName
+	, Projects.SecurityLevelID
 	, ISNULL( UserSecurityLevelName.Customization, SecurityLevelName.Name) SecurityLevelName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Organizations.CreatorID
-	, Organizations.CreatedDate
+	, Projects.CreatorID
+	, Projects.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Organizations.ModifierID
-	, Organizations.ModifiedDate
-FROM   Organizations
-LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserParentOrganizationLanguage
-	ON UserParentOrganizationLanguage.OrganizationID= Organizations.ParentOrganizationID
-LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultParentOrganizationLanguage
-	ON DefaultParentOrganizationLanguage.OrganizationId = Organizations.ParentOrganizationID
-LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserLanguage
-	ON UserLanguage.OrganizationID= Organizations.OrganizationID
-LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
-	ON DefaultLanguage.OrganizationId = Organizations.OrganizationID
-JOIN OrganizationTypeLanguages
-	ON Organizations.OrganizationTypeID = OrganizationTypeLanguages.OrganizationTypeID 
+	, Projects.ModifierID
+	, Projects.ModifiedDate
+FROM   Projects
+LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserParentProjectLanguage
+	ON UserParentProjectLanguage.ProjectID= Projects.ParentProjectID
+LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultParentProjectLanguage
+	ON DefaultParentProjectLanguage.ProjectId = Projects.ParentProjectID
+LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserLanguage
+	ON UserLanguage.ProjectID= Projects.ProjectID
+LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ProjectId = Projects.ProjectID
+JOIN ProjectTypeLanguages
+	ON Projects.ProjectTypeID = ProjectTypeLanguages.ProjectTypeID 
 JOIN Statuses
-	ON Statuses.StatusId = Organizations.StatusID
+	ON Statuses.StatusId = Projects.StatusID
 JOIN UITermLanguages StatusName
 	ON Statuses.NameTermId = StatusName.UITermId  
 LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserStatusName
 	ON Statuses.NameTermId = UserStatusName.UITermId  
 JOIN SecurityLevels
-	ON SecurityLevels.SecurityLevelId = Organizations.SecurityLevelID
+	ON SecurityLevels.SecurityLevelId = Projects.SecurityLevelID
 JOIN UITermLanguages SecurityLevelName
 	ON SecurityLevels.NameTermId = SecurityLevelName.UITermId  
 LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserSecurityLevelName
 	ON SecurityLevels.NameTermId = UserSecurityLevelName.UITermId  
 
 JOIN Persons Creator
-	ON Creator.UserId = Organizations.CreatorID
+	ON Creator.UserId = Projects.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserId = Organizations.ModifierID
-WHERE  Organizations.OrganizationId = @OrganizationId
+	ON Modifier.UserId = Projects.ModifierID
+WHERE  Projects.ProjectId = @ProjectId
 	AND StatusName.LanguageId = @LanguageID
 	AND SecurityLevelName.LanguageId = @LanguageID
-	AND Organizations.SecurityLevelId <= @SecurityLevelId 
+	AND Projects.SecurityLevelId <= @SecurityLevelId 
 END;

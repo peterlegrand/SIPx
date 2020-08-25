@@ -25,7 +25,7 @@ SELECT
 	, CASE WHEN Organizations.ParentOrganizationId = NULL THEN 'No parent Organization' ELSE ISNULL(UserParentOrganizationLanguage.Name,ISNULL(DefaultParentOrganizationLanguage.Name,'No name for this parent Organization')) END ParentOrganizationName
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
 	, Organizations.OrganizationTypeID
-	, ISNULL(UserTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this Organization type')) TypeName
+	, OrganizationTypeLanguages.Name OrganizationTypeName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Organizations.CreatorID
 	, Organizations.CreatedDate
@@ -41,17 +41,14 @@ LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM Or
 	ON UserLanguage.OrganizationID= Organizations.OrganizationID
 LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
 	ON DefaultLanguage.OrganizationId = Organizations.OrganizationID
-LEFT JOIN (SELECT OrganizationTypeId, Name FROM OrganizationTypeLanguages WHERE LanguageId = @LanguageID) UserTypeLanguage
-	ON UserTypeLanguage.OrganizationTypeID= Organizations.OrganizationTypeID
-LEFT JOIN (SELECT OrganizationTypeId, Name FROM OrganizationTypeLanguages JOIN Settings ON OrganizationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultTypeLanguage
-	ON DefaultTypeLanguage.OrganizationTypeId = Organizations.OrganizationTypeID
+JOIN OrganizationTypeLanguages
+	ON Organizations.OrganizationTypeID = OrganizationTypeLanguages.OrganizationTypeID 
 JOIN Statuses
 	ON Statuses.StatusId = Organizations.StatusID
 JOIN UITermLanguages StatusName
 	ON Statuses.NameTermId = StatusName.UITermId  
 LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserStatusName
 	ON Statuses.NameTermId = UserStatusName.UITermId  
-
 JOIN Persons Creator
 	ON Creator.UserId = Organizations.CreatorID
 JOIN Persons Modifier

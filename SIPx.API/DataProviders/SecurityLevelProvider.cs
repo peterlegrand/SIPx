@@ -36,6 +36,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<SecurityLevelList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<SecurityLevelList>> ListofUser(string UserId)
+        {
+            string usp = "usp_SecurityLevelListOfUser @UserID";
+            var x = await _sqlDataAccess.LoadData<SecurityLevelList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
 
     }
 }

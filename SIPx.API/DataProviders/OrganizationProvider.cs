@@ -70,6 +70,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<OrganizationList>> ListofUser(string UserId)
+        {
+            string usp = "usp_OrganizationListOfUser @UserID";
+            var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public Task<OrganizationDeleteGet> DeleteGet(string UserId, int OrganizationId)
         {
             string usp = "usp_OrganizationDeleteGet @UserId, @OrganizationID";

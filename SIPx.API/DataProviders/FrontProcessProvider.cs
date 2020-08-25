@@ -85,7 +85,7 @@ namespace SIPx.DataAccess
                 if (x.DateTimeValue == null)
                 { x.DateTimeValue = DateTime.Today; }
                 else
-                { x.DateTimeValue = Convert.ToDateTime(DateTime.Now.ToString("dd MMMM yyyy hh:mm:ss tt").tod; }
+                { x.DateTimeValue = Convert.ToDateTime(DateTime.Now.ToString("dd MMMM yyyy hh:mm:ss tt")); }
             x.ModifiedDate = DateTime.Today; 
                 if (x.ModifierId== null)
                 { x.ModifierId = UserId; }
