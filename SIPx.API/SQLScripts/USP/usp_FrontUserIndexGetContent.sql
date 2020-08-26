@@ -1,30 +1,28 @@
-CREATE PROCEDURE [dbo].[usp_FrontOrganizationIndexGetContent] (@UserId nvarchar(450), @OrganizationId int) 
+CREATE PROCEDURE [dbo].[usp_FrontUserIndexGetContent] (@CurrentUserId nvarchar(450), @SelectedPersonId int) 
 AS 
 BEGIN
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @UserID
+WHERE USerId = @CurrentUserId 
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 DECLARE @SecurityLevelId int;
 SELECT @SecurityLevelId = SecurityLevelId
 FROM AspNetUsers
-WHERE Id = @UserID
+WHERE Id = @CurrentUserId 
 ;
 
 
 SELECT 
 	Contents.ContentID
 	, Contents.ContentTypeID
-	, Contents.OrganizationID
 	, Contents.LanguageID
 	, ISNULL(Contents.ParentContentID, 0) ParentContentID
 	, Contents.SecurityLevelID
 	, Contents.Title
 	, Contents.Description
- 	, ISNULL(UserOrganizationLanguage.Name,ISNULL(DefaultOrganizationLanguage.Name,'No organization')) OrganizationName
-	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this Organization type')) TypeName
+	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this SelectedPerson type')) TypeName
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
 	, ISNULL( UserSecurityLevelName.Customization, SecurityLevelName.Name) SecurityLevelName
 	, ISNULL( UserLanguageName.Customization, LanguageName.Name) LanguageName
@@ -60,17 +58,12 @@ LEFT JOIN (SELECT ContentTypeId, Name FROM ContentTypeLanguages JOIN Settings ON
 	ON DefaultTypeLanguage.ContentTypeId = Contents.ContentTypeID
 LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserSecurityLevelName
 	ON SecurityLevels.NameTermId = UserSecurityLevelName.UITermId  
-LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserOrganizationLanguage
-	ON UserOrganizationLanguage.OrganizationID= Contents.OrganizationID
-LEFT JOIN (SELECT OrganizationId, Name FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultOrganizationLanguage
-	ON DefaultOrganizationLanguage.OrganizationID = Contents.OrganizationID
-
 JOIN Persons Creator
 	ON Creator.UserId = Contents.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = Contents.ModifierID
 
-WHERE Contents.OrganizationID = @OrganizationId
+WHERE Creator.PersonID= @SelectedPersonId
 	AND Contents.SecurityLevelID <= @SecurityLevelId
 	AND StatusName.LanguageId = @LanguageID
 	AND LanguageName.LanguageId = @LanguageID

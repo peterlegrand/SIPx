@@ -25,10 +25,10 @@ SELECT Persons.PersonID
 	, Persons.BirthDate
 	, Persons.DeceasedDate
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Persons.CreatorID
+	, Creator.PersonID CreatorID
 	, Persons.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Persons.ModifierID
+	, Modifier.PersonID ModifierID
 	, Persons.ModifiedDate
 FROM Persons 
 LEFT JOIN AspNetUsers ON Persons.UserId = AspNetUsers.ID

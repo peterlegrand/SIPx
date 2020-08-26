@@ -28,9 +28,18 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> ContentNew(int Id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew/"+Id, token);
+            var response = await _client.GetProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew/" + Id, token);
             //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
-         //   ViewBag.UITerms = UITerms;
+            //   ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowContent(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<FrontContentShowContent>($"{_baseUrl}api/FrontContent/ShowContent/" + Id, token);
+            //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
+            //   ViewBag.UITerms = UITerms;
             return View(response);
         }
         [HttpPost]

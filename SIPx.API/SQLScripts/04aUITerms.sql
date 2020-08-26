@@ -1442,5 +1442,13 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1440, 'In to do');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1441, 'Delete process template stage type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1442, 'Delete project');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1443, 'Delete project type');
-
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1444, 'Organization dashboard');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1445, 'Sub organizations');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1446, 'Members');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1447, 'Processes');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1448, 'Subject');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1449, 'Address type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1450, 'Project dashboard');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1451, 'Sub projects');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1452, 'Parent content');
 SET IDENTITY_INSERT UITerms OFF;

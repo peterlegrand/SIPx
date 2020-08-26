@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,16 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontContentContentTypeGroup, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<FrontContentShowContent> FrontContentShowContent(string UserId, int ContentId)
+        {
+            string usp = "usp_FrontContentShowContent @UserId, @ContentId";
+            var x = await _sqlDataAccess.LoadSingleRecord<FrontContentShowContent, dynamic>(usp, new { UserId = UserId, ContentId = ContentId });
+            string usp2 = "usp_FrontContentShowContentClassificationValues @UserId, @ContentId";
+            var y = await _sqlDataAccess.LoadData<FrontContentShowContentClassificationValue, dynamic>(usp2, new { UserId = UserId, ContentId = ContentId });
+            x.ClassificationValues = y;
+            return x;
+        }
+
         public async Task<List<FrontContentContentType>> ContentType(string UserId, int ContentTypeGroupId)
         {
             string usp = "usp_FrontContentTypeIndexGetContent @UserId, @ContentTypeGroupId";

@@ -10,10 +10,10 @@ SELECT Contents.ContentID
 	, Contents.Description
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this ContentType')) ContentTypeName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Contents.CreatorID
+	, Creator.PersonID CreatorID
 	, Contents.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Contents.ModifierID
+	, Modifier.PersonId ModifierID
 	, Contents.ModifiedDate
 	, CONCAT('controlID',Contents.ContentId) ControlId
 FROM Contents

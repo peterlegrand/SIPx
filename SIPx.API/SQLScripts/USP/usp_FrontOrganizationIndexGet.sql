@@ -27,10 +27,10 @@ SELECT
 	, Organizations.OrganizationTypeID
 	, OrganizationTypeLanguages.Name OrganizationTypeName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Organizations.CreatorID
+	, Creator.PersonID CreatorID
 	, Organizations.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Organizations.ModifierID
+	, Modifier.PersonID ModifierID
 	, Organizations.ModifiedDate
 FROM   Organizations
 LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserParentOrganizationLanguage

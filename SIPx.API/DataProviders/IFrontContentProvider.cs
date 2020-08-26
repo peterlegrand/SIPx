@@ -11,5 +11,6 @@ namespace SIPx.DataAccess
         Task<List<FrontContentContentNewClassification>> NewClassifications(string UserId, int ContentTypeId);
         Task<List<FrontContentContentNewClassificationValue>> NewClassificationValues(string UserId, int ClassificationId);
         Task<bool> FrontContentCreatePost(string UserId, FrontContentContentNew Content);
+        Task<FrontContentShowContent> FrontContentShowContent(string UserId, int ContentId);
     }
 }

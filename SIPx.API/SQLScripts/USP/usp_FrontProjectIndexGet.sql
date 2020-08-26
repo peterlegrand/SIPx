@@ -29,10 +29,10 @@ SELECT
 	, Projects.SecurityLevelID
 	, ISNULL( UserSecurityLevelName.Customization, SecurityLevelName.Name) SecurityLevelName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Projects.CreatorID
+	, Creator.PersonID CreatorID
 	, Projects.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Projects.ModifierID
+	, Modifier.PersonID ModifierID
 	, Projects.ModifiedDate
 FROM   Projects
 LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserParentProjectLanguage

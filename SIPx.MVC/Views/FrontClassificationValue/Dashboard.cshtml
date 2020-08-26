@@ -1,4 +1,4 @@
-﻿@model FrontOrganizationIndexGet
+﻿@model FrontClassificationValueIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
 
@@ -6,41 +6,18 @@
 }
 <div class="row">
     <div class="col-12">
-        <h1>Organization dashboard: @Model.Name</h1>
+        <h1>Organization dashboard: @Model.ClassificationValue - @Model.ClassificationName</h1>
     </div>
 </div>
-<div class="row">
-    <div class="col-7 ">
-        @Model.Description
-    </div>
 
-    <div class="col-2">
-        <div> Parent: </div>
-        <div> Status:</div>
-        <div> Type:</div>
-        <div> Creator</div>
-        <div> Created date</div>
-        <div> Modifier</div>
-        <div> Modified date</div>
-    </div>
-    <div class="col-3">
-        <div> @Model.ParentOrganizationName</div>
-        <div> @Model.StatusName</div>
-        <div> @Model.OrganizationTypeName</div>
-        <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.CreatorId"> @Model.CreatorName</a></div>
-        <div> @Model.CreatedDate</div>
-        <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.ModifierId"> @Model.ModifierName</a></div>
-        <div> @Model.ModifiedDate</div>
-    </div>
-</div>
 <div class="row">
     <div class="col-6">
         <div><h2>Sub Organizations</h2></div>
-        <ejs-grid id="SubOrganizations" dataSource="@Model.SubOrganizations" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+        <ejs-grid id="SubOrganizations" dataSource="@Model.Users" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column field="Name" headerText="" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column field="OrganizationTypeName" headerText="" textAlign="Right" type="text" template="#OrganizationName"></e-grid-column>
+                <e-grid-column field="FirstName" headerText="" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="LastName" headerText="" textAlign="Right" type="text" template="#OrganizationName"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>

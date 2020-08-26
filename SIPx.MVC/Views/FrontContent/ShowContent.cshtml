@@ -1,0 +1,68 @@
+﻿@using Syncfusion.EJ2
+@using Newtonsoft.Json
+@model FrontContentShowContent
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification")).TermString;
+
+    Layout = "_Layout";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Content: @Model.Title</h1>
+        </div>
+    </div>    <div class="row">
+        <div class="col-12">
+            @Model.Description
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-2">
+            <div> ID: </div>
+            <div> Parent content:</div>
+            <div> Status:</div>
+            <div> Type:</div>
+            <div> Organization:</div>
+            @if (Model.ProjectId != 0)
+            {<div> Project:</div>}
+            <div> Security level:</div>
+            <div> Creator</div>
+            <div> Created date</div>
+            <div> Modifier</div>
+            <div> Modified date</div>
+        </div>
+        <div class="col-3">
+            <div> @Model.ContentId</div>
+            <div> @Model.ParentContentTitle</div>
+            <div> @Model.ContentStatusName</div>
+            <div> @Model.ContentTypeName</div>
+            <div> <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId"> @Model.OrganizationName</a></div>
+            @if (Model.ProjectId != 0)
+            {
+                <div> <a asp-controller="FrontProject" asp-action="Dashboard" asp-route-id="@Model.ProjectId"> @Model.ProjectName</a></div>
+
+            }
+            <div> @Model.SecurityLevelName</div>
+            <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.CreatorId"> @Model.CreatorName</a></div>
+            <div> @Model.CreatedDate</div>
+            <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.ModifierId"> @Model.ModifierName</a></div>
+            <div> @Model.ModifiedDate</div>
+        </div>
+    </div>
+    @foreach (var x in Model.ClassificationValues)
+    {
+
+        <div class="row">
+            <div class="col-2">
+                <div> @x.ClassificationName </div>
+            </div>
+            <div class="col-3">
+                <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@x.ClassificationValueId"> @x.ClassificationValueName</a></div>
+            </div>
+        </div>
+
+    }
+
+</div>

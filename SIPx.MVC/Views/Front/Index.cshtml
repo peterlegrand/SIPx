@@ -107,7 +107,7 @@
                                         </div>
                                     </div>*@
                                 <div class="e-panel-content">
-                                    <ejs-grid id="@x.SubPanelId" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#rowtemplate">
+                                    <ejs-grid id="@x.SubPanelId" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#ContentTemplate">
                                         <e-grid-columns>
                                             <e-grid-column headerText="Content" width="300" field="ControlId" textAlign="Left"></e-grid-column>
                                         </e-grid-columns>
@@ -500,7 +500,7 @@
 
 </style>
 
-<script id="rowtemplate" type="text/x-template">
+<script id="ContentTemplate" type="text/x-template">
     <tr>
         <td class="details">
             <table class="CardTable" cellpadding="3" cellspacing="2">
@@ -513,12 +513,12 @@
                         <td class="font-weight-bold">${Title} </td>
                     </tr>
                     <tr>
-                        <td>${Description} </td>
+                        <td><a href="/FrontContent/ShowContent/${ContentId}">${Description}</a> </td>
                     </tr>
                     <tr>
                         <td class="font-italic">
-                            ${CreatorName}
-                        </td>
+                            <a href="/FrontUser/Dashboard/${CreatorId}">${CreatorName}</a>
+</td>
                     </tr>
                 </tbody>
             </table>

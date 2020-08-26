@@ -63,6 +63,26 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("ShowContent/{Id:int}")]
+        public async Task<IActionResult> ShowContent(int Id)
+        {
+
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+
+                var FrontContentShowContent = await _frontContentProvider.FrontContentShowContent(CurrentUser.Id, Id);
+
+                return Ok(FrontContentShowContent);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
         [HttpGet("ContentNew/{Id:int}")]
         public async Task<IActionResult> ContentNew(int Id)
         {

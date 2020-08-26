@@ -13,25 +13,25 @@
     <div class="col-7 ">
         @Model.Description
     </div>
-    
+
     <div class="col-2">
-            <div> Parent: </div>
-            <div> Status:</div>
-            <div> Type:</div>
-            <div> Security level</div>
-            <div> Creator</div>
-            <div> Created date</div>
-            <div> Modifier</div>
-            <div> Modified date</div>
-        </div>
+        <div> Parent: </div>
+        <div> Status:</div>
+        <div> Type:</div>
+        <div> Security level</div>
+        <div> Creator</div>
+        <div> Created date</div>
+        <div> Modifier</div>
+        <div> Modified date</div>
+    </div>
     <div class="col-3">
         <div> @Model.ParentProjectName</div>
         <div> @Model.StatusName</div>
         <div> @Model.ProjectTypeName</div>
         <div> @Model.SecurityLevelName</div>
-        <div> @Model.CreatorName</div>
+        <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.CreatorId"> @Model.CreatorName</a></div>
         <div> @Model.CreatedDate</div>
-        <div> @Model.ModifierName</div>
+        <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.ModifierId"> @Model.ModifierName</a></div>
         <div> @Model.ModifiedDate</div>
     </div>
 </div>
@@ -42,7 +42,7 @@
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
                 <e-grid-column field="Name" headerText="" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column field="ProjectTypeName" headerText="" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="ProjectTypeName" headerText="" textAlign="Right" type="text" template="#ProjectName"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
@@ -59,7 +59,8 @@
         </ejs-grid>
         <ejs-treeview id="listdata">
             <e-treeview-fields dataSource="@Model.SubProjectTree" id="Name" parentId="Name" text="Name" hasChildren="SubProjects" expanded="expanded"></e-treeview-fields>
-        </ejs-treeview>    </div>
+        </ejs-treeview>
+    </div>
 </div>
 <div class="row">
     <div class="col-6">
@@ -67,7 +68,7 @@
         <ejs-grid id="Contents" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="Title" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="" field="Title" textAlign="Right" type="text" template="#Content"></e-grid-column>
                 <e-grid-column headerText="" field="TypeName" textAlign="Right" type="text"></e-grid-column>
                 <e-grid-column headerText="" field="StatusName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
@@ -85,3 +86,15 @@
         </ejs-grid>
     </div>
 </div>
+<script id="ProjectName" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontProject/Dashboard/${ProjectId}"><u>${ProjectName}</u></a>
+
+    </div>
+</script>
+<script id="Content" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontContent/ShowContent/${ContentId}"><u>${Title}</u></a>
+
+    </div>
+</script>
