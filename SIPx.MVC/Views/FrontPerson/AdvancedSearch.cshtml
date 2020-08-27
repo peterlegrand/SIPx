@@ -1,0 +1,147 @@
+﻿@using Syncfusion.EJ2
+@using Newtonsoft.Json
+@model FrontPersonAdvancedSearchGet
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person advanced search")).TermString;
+
+    Layout = "_Layout";
+}
+<h1>@Term.Find(x => x.InternalName.Equals("Person advanced search")).TermString</h1>
+<div class="container">
+
+    <form method="post">
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("First name")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-textbox ejs-for="@Model.FirstName" id="FirstName"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Last name")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-textbox ejs-for="@Model.LastName" id="LastName"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Nick name")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-textbox ejs-for="@Model.NickName" id="NickName"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Gender")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Parent" dataSource="@Model.Genders" ejs-for="@Model.GenderId" value="0" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="GenderId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("From age")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox ejs-for="@Model.FromAge" id="FromAge" value="0" min="0" max="120" step="1" format="n0" ></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("To age")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox ejs-for="@Model.ToAge" id="ToAge" value="@Model.ToAge" min="0" max="120" step="1" format="n0" ></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Organization")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Organizations" dataSource="@Model.Organizations" ejs-for="@Model.OrganizationId" value="0" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="OrganizationId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Project")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Projects" dataSource="@Model.Projects" ejs-for="@Model.ProjectId" value="0" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Is user")).TermString :
+            </div>
+            <div class="col-9">
+
+                <div class="radio-control">
+                    <div class="row">
+                        <ejs-radiobutton id="IsUserAny" label="@Term.Find(x => x.InternalName.Equals("Any")).TermString" name="IsUser" value="0" checked="true"></ejs-radiobutton>
+                    </div>
+                    <div class="row">
+                        <ejs-radiobutton id="IsUserNo" label="@Term.Find(x => x.InternalName.Equals("No")).TermString" name="IsUser" value="1"></ejs-radiobutton>
+                    </div>
+                    <div class="row">
+                        <ejs-radiobutton id="IsUserYes" label="@Term.Find(x => x.InternalName.Equals("Yes")).TermString" name="IsUser" value="2"></ejs-radiobutton>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Relation with person")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="RelationWithPersons" dataSource="@Model.RelationWithPersons" ejs-for="@Model.RelationWithPersonId" value="0" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="RelationWithPersonId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("State / province")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="State" ejs-for="@Model.PersonProvinceState"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("City")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="City" ejs-for="PersonCity"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Country")).TermString :
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Country" dataSource="@Model.Countries" ejs-for="@Model.CountryId" value="0" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="CountryId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+
+        <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Search")).TermString" action="Submit" isPrimary="true"></ejs-button>
+
+    </form>
+</div>

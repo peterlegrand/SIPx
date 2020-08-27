@@ -19,14 +19,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class PersonRelationController : ControllerBase
     {
+        private readonly IPersonProvider _personProvider;
         private readonly IPersonRelationProvider _personRelationProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonRelationController(IPersonRelationProvider personRelationProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonRelationController(IPersonProvider personProvider, IPersonRelationProvider personRelationProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _personProvider = personProvider;
             _personRelationProvider = personRelationProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -132,7 +134,7 @@ namespace SIPx.API.Controllers
             {
                 var PersonRelationCreateGet = new PersonRelationCreateGet();
                 var PersonRelationTypes = await _peopleProvider.PersonRelationTypeList(CurrentUser.Id);
-                var Persons = await _peopleProvider.PersonList(CurrentUser.Id);
+                var Persons = await _personProvider.List();
                 PersonRelationCreateGet.PersonRelationTypes = PersonRelationTypes;
                 PersonRelationCreateGet.Persons = Persons;
                 return Ok(PersonRelationCreateGet);

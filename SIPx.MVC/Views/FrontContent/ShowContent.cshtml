@@ -3,14 +3,14 @@
 @model FrontContentShowContent
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content")).TermString+" "+Model.Title;
 
     Layout = "_Layout";
 }
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Content: @Model.Title</h1>
+            <h1>@Term.Find(x => x.InternalName.Equals("Content")).TermString: @Model.Title</h1>
         </div>
     </div>    <div class="row">
         <div class="col-12">
@@ -20,18 +20,18 @@
     <div class="row">
 
         <div class="col-2">
-            <div> ID: </div>
-            <div> Parent content:</div>
-            <div> Status:</div>
-            <div> Type:</div>
-            <div> Organization:</div>
+            <div> @Term.Find(x => x.InternalName.Equals("Id")).TermString: </div>
+            <div> @Term.Find(x => x.InternalName.Equals("Parent content")).TermString:</div>
+            <div> @Term.Find(x => x.InternalName.Equals("Status")).TermString:</div>
+            <div> @Term.Find(x => x.InternalName.Equals("Type")).TermString:</div>
+            <div> @Term.Find(x => x.InternalName.Equals("Organization")).TermString:</div>
             @if (Model.ProjectId != 0)
-            {<div> Project:</div>}
-            <div> Security level:</div>
-            <div> Creator</div>
-            <div> Created date</div>
-            <div> Modifier</div>
-            <div> Modified date</div>
+            {<div> @Term.Find(x => x.InternalName.Equals("Project")).TermString:</div>}
+            <div> @Term.Find(x => x.InternalName.Equals("Security level")).TermString:</div>
+            <div> @Term.Find(x => x.InternalName.Equals("Creator")).TermString</div>
+            <div> @Term.Find(x => x.InternalName.Equals("Created date")).TermString</div>
+            <div> @Term.Find(x => x.InternalName.Equals("Modifier")).TermString</div>
+            <div> @Term.Find(x => x.InternalName.Equals("Modified date")).TermString</div>
         </div>
         <div class="col-3">
             <div> @Model.ContentId</div>
@@ -59,7 +59,7 @@
                 <div> @x.ClassificationName </div>
             </div>
             <div class="col-3">
-                <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@x.ClassificationValueId"> @x.ClassificationValueName</a></div>
+                <div> <a asp-controller="FrontClassificationValue" asp-action="Dashboard" asp-route-id="@x.ClassificationValueId"> @x.ClassificationValueName</a></div>
             </div>
         </div>
 

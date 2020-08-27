@@ -1,55 +1,49 @@
 ﻿@model FrontClassificationValueIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification dashboard")).TermString;
     Layout = "_Layout";
 }
 <div class="row">
     <div class="col-12">
-        <h1>Organization dashboard: @Model.ClassificationValue - @Model.ClassificationName</h1>
+        <h1>@Term.Find(x => x.InternalName.Equals("Classification dashboard")).TermString: @Model.ClassificationValue - @Model.ClassificationName</h1>
     </div>
 </div>
 
 <div class="row">
     <div class="col-6">
-        <div><h2>Sub Organizations</h2></div>
-        <ejs-grid id="SubOrganizations" dataSource="@Model.Users" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Users")).TermString</h2></div>
+        <ejs-grid id="Users" dataSource="@Model.Users" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column field="FirstName" headerText="" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column field="LastName" headerText="" textAlign="Right" type="text" template="#OrganizationName"></e-grid-column>
+                <e-grid-column field="FirstName" headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" textAlign="Right" type="text" template="#UserTemplate"></e-grid-column>
+                <e-grid-column field="LastName" headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" textAlign="Right" type="text" ></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>Members</h2></div>
-        <ejs-grid id="Members" dataSource="@Model.Members" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Roles")).TermString</h2></div>
+        <ejs-grid id="Members" dataSource="@Model.Roles" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="RoleName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="FirstName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="LastName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="DefaultOrganizationName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Role")).TermString" field="Name" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
-        <ejs-treeview id="listdata">
-            <e-treeview-fields dataSource="@Model.SubOrganizationTree" id="Name" parentId="Name" text="Name" hasChildren="SubOrganizations" expanded="expanded"></e-treeview-fields>
-        </ejs-treeview>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>Content</h2></div>
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Content")).TermString</h2></div>
         <ejs-grid id="Contents" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="Title" textAlign="Right" type="text" template="#Content"></e-grid-column>
-                <e-grid-column headerText="" field="TypeName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="StatusName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" field="Title" textAlign="Right" type="text" template="#ContentTemplate"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Content type")).TermString" field="ContentTypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Status")).TermString" field="StatusName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
-    <div class="col-6">
+    @*<div class="col-6">
         <div><h2>Processes</h2></div>
         <ejs-grid id="Processes" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
@@ -59,15 +53,15 @@
                 <e-grid-column headerText="" field="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
-    </div>
+    </div>*@
 </div>
-<script id="OrganizationName" type="text/x-template">
+<script id="UserTemplate" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${OrganizationName}</u></a>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontUser/Dashboard/${PersonId}"><u>${FirstName}</u></a>
 
     </div>
 </script>
-<script id="Content" type="text/x-template">
+<script id="ContentTemplate" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/FrontContent/ShowContent/${ContentId}"><u>${Title}</u></a>
 

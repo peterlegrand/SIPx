@@ -11,7 +11,7 @@ namespace SIPx.DataAccess
         Task<PersonDeleteGet> DeleteGet(string UserId, int PersonId);
         bool DeletePost(int Id);
         Task<List<PersonIndexGet>> IndexGet(string UserId);
-        Task<List<PersonList>> List(string UserId);
+        Task<List<PersonList>> List();
         Task<PersonUpdateGet> UpdateGet(string UserId, int PersonId);
         bool UpdatePost(PersonUpdateGet Person);
     }

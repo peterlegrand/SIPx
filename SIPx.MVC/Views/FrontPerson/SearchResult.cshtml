@@ -1,0 +1,149 @@
+﻿@model FrontPersonAdvancedSearchGet
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person search result")).TermString;
+    Layout = "_Layout";
+}
+<h1>@Term.Find(x => x.InternalName.Equals("Person search result")).TermString</h1>
+<div class="container">
+    @if (Model.FirstName != null && Model.FirstName != "")
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("First name")).TermString :
+            </div>
+            <div class="col-9">
+                @Model.FirstName
+            </div>
+        </div>}
+    @if (Model.LastName != null && Model.LastName != "")
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Last name")).TermString :
+            </div>
+            <div class="col-9">
+                @Model.LastName
+            </div>
+        </div>}
+    @if (Model.NickName != null && Model.NickName != "")
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Nick name")).TermString :
+            </div>
+            <div class="col-9">
+                @Model.NickName
+            </div>
+        </div>}
+    @if (Model.GenderId != 0)
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Gender")).TermString :
+            </div>
+            <div class="col-9">
+            </div>
+        </div>}
+    @if (Model.FirstName != null)
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("First name")).TermString :
+            </div>
+            <div class="col-9">
+                @Model.FirstName
+            </div>
+        </div>}
+    <div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("From age")).TermString :
+        </div>
+        <div class="col-9">
+            @Model.FromAge
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("To age")).TermString :
+        </div>
+        <div class="col-9">
+            @Model.ToAge
+        </div>
+    </div>
+    @if (Model.OrganizationId != 0)
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Organization")).TermString :
+            </div>
+            <div class="col-9">
+            </div>
+        </div>}
+    @if (Model.ProjectId != 0)
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Project")).TermString :
+            </div>
+            <div class="col-9">
+                @Model.FirstName
+            </div>
+        </div>}
+    @if (Model.IsUser != 0)
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Us user")).TermString :
+            </div>
+            <div class="col-9">
+                @if (Model.IsUser == 1)
+                {
+                    <p>@Term.Find(x => x.InternalName.Equals("No")).TermString</p>
+                }
+                @if (Model.IsUser == 2)
+                {
+                    <p>@Term.Find(x => x.InternalName.Equals("Yes")).TermString</p>
+                }
+            </div>
+        </div>}
+    @if (Model.RelationWithPersonId != 0)
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Relation with person")).TermString :
+            </div>
+            <div class="col-9">
+                @Model.FirstName
+            </div>
+        </div>}
+    @if (Model.PersonProvinceState != null && Model.PersonProvinceState != "")
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("State / Province")).TermString :
+            </div>
+            <div class="col-9">
+                @Model.FirstName
+            </div>
+        </div>}
+    @if (Model.PersonCity != null && Model.PersonCity != "")
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("City")).TermString :
+            </div>
+            <div class="col-9">
+            </div>
+        </div>}
+    @if (Model.CountryId != 0)
+    {<div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Country")).TermString :
+            </div>
+            <div class="col-9">
+            </div>
+        </div>}
+</div>
+    @*<img src="~/images/icons/Persons.png" width="50" height="50" />*@
+    <ejs-grid id="Grid" dataSource="@Model.SearchResult" allowPaging="true" allowSorting="true" allowResizing="true">
+        <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+        <e-grid-columns>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" template="#FirstName" textAlign="Center" type="string"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>
+    <script id="FirstName" type="text/x-template">
+        <div>
+            <a class="nav-link text-dark font-weight-bold" href="/FrontUser/Dashboard/${PersonId}"><u>${FirstName}</u></a>
+
+        </div>
+    </script>

@@ -18,7 +18,7 @@ namespace SIPx.DataAccess
         Task<string> PersonCreatePost(PersonCreatePost Person);
         Task<string> PersonCreatePostCheck(PersonCreatePost Person);
         Task<List<PersonIndexGet>> PersonIndexGet(string UserId);
-        Task<List<PersonList>> PersonList(string UserId);
+        Task<List<UserList>> UserList(string UserId);
         Task<string> PersonRelationCreatePost(PersonRelationCreatePost PersonRelation);
         Task<string> PersonRelationCreatePostCheck(PersonRelationCreatePost PersonRelation);
         Task<List<PersonRelationIndexGet>> PersonRelationIndexGet(string UserId, int PersonId);

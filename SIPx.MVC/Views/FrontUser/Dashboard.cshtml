@@ -1,103 +1,102 @@
 ﻿@model FrontUserIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User dashboard")).TermString;
     Layout = "_Layout";
 }
 <div class="row">
     <div class="col-12">
-        <h1>User dashboard: @Model.FirstName</h1>
+        <h1>@Term.Find(x => x.InternalName.Equals("User dashboard")).TermString: @Model.FirstName</h1>
     </div>
 </div>
 <div class="row">
 
     <div class="col-2">
-        <div> Salutation: </div>
-        <div> First name:</div>
-        <div> Middle name:</div>
-        <div> Last name:</div>
-        <div> PersonalTitle</div>
-        <div> Suffix</div>
-        <div> NickName</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Salutation")).TermString: </div>
+        <div> @Term.Find(x => x.InternalName.Equals("First name")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Middle name")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Last name")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Personal title")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Suffix")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Nick name")).TermString:</div>
     </div>
     <div class="col-3">
-        <div> @Model.Salutation</div>
-        <div> @Model.FirstName</div>
-        <div> @Model.MiddleName</div>
-        <div> @Model.LastName</div>
-        <div> @Model.PersonalTitle</div>
-        <div> @Model.Suffix</div>
-        <div> @Model.NickName</div>
+        <div>&nbsp;@Model.Salutation</div>
+        <div>&nbsp;@Model.FirstName</div>
+        <div>&nbsp;@Model.MiddleName</div>
+        <div>&nbsp;@Model.LastName</div>
+        <div>&nbsp;@Model.PersonalTitle</div>
+        <div>&nbsp;@Model.Suffix</div>
+        <div>&nbsp;@Model.NickName</div>
     </div>
     <div class="col-2">
-        <div> FirstNameLocal: </div>
-        @if (@Model.MiddleNameLocal != null)
-        {<div> MiddleNameLocal:</div>}
-        <div> LastNameLocal:</div>
-        <div> GenderName:</div>
-        <div> BirthDate</div>
-        <div> SecurityLevelName</div>
-        <div> OrganizationName</div>
-        <div> Creator</div>
-        <div> Created date</div>
-        <div> Modifier</div>
-        <div> Modified date</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Local first name")).TermString: </div>
+        <div> @Term.Find(x => x.InternalName.Equals("Local middle name")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Local last name")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Gender")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Birth date")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Security level")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Organization")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Creator")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Created date")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Modifier")).TermString:</div>
+        <div> @Term.Find(x => x.InternalName.Equals("Modified date")).TermString:</div>
     </div>
     <div class="col-3">
-        <div> @Model.FirstNameLocal</div>
-        <div> @Model.MiddleNameLocal</div>
-        <div> @Model.LastNameLocal</div>
-        <div> @Model.GenderName</div>
-        <div> @Model.BirthDate</div>
-        <div> @Model.SecurityLevelName</div>
-        <div> @Model.OrganizationName</div>
-        <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.CreatorId"> @Model.CreatorName</a></div>
-        <div> @Model.CreatedDate</div>
-        <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.ModifierId"> @Model.ModifierName</a></div>
-        <div> @Model.ModifiedDate</div>
+        <div>&nbsp;@Model.FirstNameLocal</div>
+        <div>&nbsp;@Model.MiddleNameLocal</div>
+        <div>&nbsp;@Model.LastNameLocal</div>
+        <div>&nbsp;@Model.GenderName</div>
+        <div>&nbsp;@Model.BirthDate</div>
+        <div>&nbsp;@Model.SecurityLevelName</div>
+        <div>&nbsp;@Model.OrganizationName</div>
+        <div>&nbsp;<a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.CreatorId">@Model.CreatorName</a></div>
+        <div>&nbsp;@Model.CreatedDate</div>
+        <div>&nbsp;<a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.ModifierId">@Model.ModifierName</a></div>
+        <div>&nbsp;@Model.ModifiedDate</div>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>Addresses</h2></div>
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Addresses")).TermString</h2></div>
         <ejs-grid id="Address" dataSource="@Model.Addresses" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column field="AddressTypeName" headerText="" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column field="CountryName" headerText="" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column field="City" headerText="" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="AddressTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Address type")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="CountryName" headerText="@Term.Find(x => x.InternalName.Equals("Country")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="City" headerText="@Term.Find(x => x.InternalName.Equals("City")).TermString" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>Telecom</h2></div>
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Telecom")).TermString</h2></div>
         <ejs-grid id="Telecom" dataSource="@Model.Telecoms" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="TelecomTypeName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="TelecomValue" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Type")).TermString" field="TelecomTypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Telecom value")).TermString" field="TelecomValue" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>Organizations</h2></div>
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Organizations")).TermString</h2></div>
         <ejs-grid id="Organization" dataSource="@Model.Organizations" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="RoleName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="OrganizationName" textAlign="Right" type="text" template="#OrganizationName"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Role")).TermString" field="RoleName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" field="OrganizationName" textAlign="Right" type="text" template="#OrganizationName"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>Projects</h2></div>
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Projects")).TermString</h2></div>
         <ejs-grid id="Project" dataSource="@Model.Projects" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="RoleName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="ProjectName" textAlign="Right" type="text" template="#ProjectName"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Role")).TermString" field="RoleName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" field="ProjectName" textAlign="Right" type="text" template="#ProjectName"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
@@ -105,23 +104,23 @@
 
 <div class="row">
     <div class="col-6">
-        <div><h2>Processes</h2></div>
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Processes")).TermString</h2></div>
         <ejs-grid id="Process" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="Subject" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Process template")).TermString" field="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" field="Subject" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" field="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>Content</h2></div>
+        <div><h2>@Term.Find(x => x.InternalName.Equals("Content")).TermString</h2></div>
         <ejs-grid id="Content" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="Title" textAlign="Right" type="text" template="#ContentPanel"></e-grid-column>
-                <e-grid-column headerText="" field="TypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" field="Title" textAlign="Right" type="text" template="#ContentPanel"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Type")).TermString" field="TypeName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>

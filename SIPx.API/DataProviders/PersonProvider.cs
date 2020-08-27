@@ -50,10 +50,10 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<PersonList>> List(string UserId)
+        public Task<List<PersonList>> List()
         {
-            string usp = "usp_PersonList @UserID";
-            return _sqlDataAccess.LoadData<PersonList, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_PersonList";
+            return _sqlDataAccess.LoadData<PersonList>(usp);
         }
         public Task<PersonDeleteGet> DeleteGet(string UserId, int PersonId)
         {

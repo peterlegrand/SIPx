@@ -101,7 +101,52 @@ namespace SIPx.API.Controllers
             });
 
         }
+        [HttpGet("AdvancedSearch")]
+        public async Task<IActionResult> AdvancedSearch()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                var OrganizationAdvancedSearch = new FrontOrganizationAdvancedSearchGet();
+                OrganizationAdvancedSearch = await _frontOrganizationProvider.FrontOrganizationAdvancedSearchGet(CurrentUser.Id);
+                return Ok(OrganizationAdvancedSearch);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
 
+        }
+
+        [HttpPost("AdvancedSearch")]
+        public async Task<IActionResult> AdvancedSearch(FrontOrganizationAdvancedSearchGet SearchData)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                SearchData.UserId= CurrentUser.Id;
+                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
+                //if (CheckString.Length == 0)
+                //{
+               var SearchResult = await _frontOrganizationProvider.FrontOrganizationAdvancedSearchPost(SearchData);
+                SearchData.SearchResult = SearchResult;
+                return Ok(SearchData);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
         [HttpPost("Update")]
         public async Task<IActionResult> Update(ClassificationUpdateGet Classification)
         {
@@ -112,8 +157,8 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{
-                    _classificationProvider.UpdatePost(Classification);
-                    return Ok(Classification);
+                _classificationProvider.UpdatePost(Classification);
+                return Ok(Classification);
                 //}
                 return BadRequest(new
                 {
