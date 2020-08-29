@@ -15,16 +15,6 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<UserMenuTemplateIndexGet>>($"{_baseUrl}api/UserMenuTemplate/Index", token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Index", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -42,6 +32,16 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<List<UserMenuTemplateIndexGet>>($"{_baseUrl}api/UserMenuTemplate/Index", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Index", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -51,6 +51,35 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserMenuTemplateUpdateGet UserMenuTemplate)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<UserMenuTemplateUpdateGet>($"{_baseUrl}api/UserMenuTemplate/Update", UserMenuTemplate, token);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<UserMenuTemplateDeleteGet>($"{_baseUrl}api/UserMenuTemplate/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Delete", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(UserMenuTemplateDeleteGet Page)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<UserMenuTemplateDeleteGet>($"{_baseUrl}api/UserMenuTemplate/Delete", Page, token);
+
+            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -88,34 +117,6 @@ namespace SIPx.MVC.Controllers
             await _client.PostProtectedAsync<ObjectLanguageCreateGet>($"{_baseUrl}api/UserMenuTemplate/LanguageCreate", UserMenuTemplateLanguage, token);
 
             return RedirectToAction("LanguageIndex", new { id = UserMenuTemplateLanguage.ObjectId });
-        }
-        [HttpPost]
-        public async Task<IActionResult> Edit(UserMenuTemplateUpdateGet UserMenuTemplate)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            await _client.PostProtectedAsync<UserMenuTemplateUpdateGet>($"{_baseUrl}api/UserMenuTemplate/Update", UserMenuTemplate, token);
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<UserMenuTemplateDeleteGet>($"{_baseUrl}api/UserMenuTemplate/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Delete", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(UserMenuTemplateDeleteGet Page)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            await _client.PostProtectedAsync<UserMenuTemplateDeleteGet>($"{_baseUrl}api/UserMenuTemplate/Delete", Page, token);
-
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
         }
 
 

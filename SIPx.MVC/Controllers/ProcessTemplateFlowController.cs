@@ -13,25 +13,6 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
-        public async Task<IActionResult> Index(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<ProcessTemplateFlowIndexGet>>($"{_baseUrl}api/ProcessTemplateFlow/Index/" + id, token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Index", token);
-            ViewBag.UITerms = x;
-            return View(response);
-            //return View();
-        }
-        //PETER TODO Check for objectViewGet to be replaced by editget
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<ProcessTemplateFlowUpdateGet>($"{_baseUrl}api/ProcessTemplateFlow/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
-        }
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
@@ -49,22 +30,23 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index", new { id = ProcessTemplateFlow.ProcessTemplateId });
         }
-
-        public async Task<IActionResult> LanguageIndex(int id)
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<ProcessTemplateFlowLanguageIndexGet>>($"{_baseUrl}api/ProcessTemplateFlow/LanguageIndex/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/LanguageIndex", token);
+            var response = await _client.GetProtectedAsync<List<ProcessTemplateFlowIndexGet>>($"{_baseUrl}api/ProcessTemplateFlow/Index/" + id, token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
         }
+        //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
-        public async Task<IActionResult> LanguageEdit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<ProcessTemplateFlowLanguageIndexGet>($"{_baseUrl}api/ProcessTemplateFlow/LanguageUpdate/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/LanguageEdit", token);
+            var response = await _client.GetProtectedAsync<ProcessTemplateFlowUpdateGet>($"{_baseUrl}api/ProcessTemplateFlow/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
@@ -95,6 +77,25 @@ namespace SIPx.MVC.Controllers
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> LanguageIndex(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<List<ProcessTemplateFlowLanguageIndexGet>>($"{_baseUrl}api/ProcessTemplateFlow/LanguageIndex/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/LanguageIndex", token);
+            ViewBag.UITerms = x;
+            return View(response);
+            //return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> LanguageEdit(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<ProcessTemplateFlowLanguageIndexGet>($"{_baseUrl}api/ProcessTemplateFlow/LanguageUpdate/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlow/LanguageEdit", token);
+            ViewBag.UITerms = x;
+            return View(response);
         }
 
 

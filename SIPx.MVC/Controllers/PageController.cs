@@ -13,25 +13,6 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
-        public async Task<IActionResult> Index()
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<PageIndexGet>>($"{_baseUrl}api/Page/Index",token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Page/Index", token);
-            ViewBag.UITerms = x;
-            return View(response);
-            //return View();
-        }
-        //PETER TODO Check for objectViewGet to be replaced by editget
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<PageUpdateGet>($"{_baseUrl}api/Page/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Page/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
-        }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -49,22 +30,23 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
-
-        public async Task<IActionResult> LanguageIndex(int id)
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<PageLanguageIndexGet>>($"{_baseUrl}api/Page/LanguageIndex/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Page/LanguageIndex", token);
+            var response = await _client.GetProtectedAsync<List<PageIndexGet>>($"{_baseUrl}api/Page/Index",token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Page/Index", token);
             ViewBag.UITerms = x;
             return View(response);
             //return View();
         }
+        //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
-        public async Task<IActionResult> LanguageEdit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<PageLanguageIndexGet>($"{_baseUrl}api/Page/LanguageUpdate/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Page/LanguageEdit", token);
+            var response = await _client.GetProtectedAsync<PageUpdateGet>($"{_baseUrl}api/Page/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Page/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
@@ -95,6 +77,25 @@ namespace SIPx.MVC.Controllers
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> LanguageIndex(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<List<PageLanguageIndexGet>>($"{_baseUrl}api/Page/LanguageIndex/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Page/LanguageIndex", token);
+            ViewBag.UITerms = x;
+            return View(response);
+            //return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> LanguageEdit(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<PageLanguageIndexGet>($"{_baseUrl}api/Page/LanguageUpdate/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Page/LanguageEdit", token);
+            ViewBag.UITerms = x;
+            return View(response);
         }
 
 

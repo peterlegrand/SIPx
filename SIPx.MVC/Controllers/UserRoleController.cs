@@ -13,6 +13,7 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient client = new ServiceClient();
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");

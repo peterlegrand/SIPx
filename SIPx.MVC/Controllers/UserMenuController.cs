@@ -15,22 +15,11 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
-
-        [HttpGet]
-        public async Task<IActionResult> Index(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<UserMenuIndexGet>>($"{_baseUrl}api/UserMenu/Index", token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenu/Index", token);
-            ViewBag.UITerms = UITerms;
-            ViewBag.Id = id;
-            return View(response);
-        }
         [HttpGet]
         public async Task<IActionResult> Create(int id)
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<UserMenuCreateGet>($"{_baseUrl}api/UserMenu/Create/"+id, token);
+            var response = await _client.GetProtectedAsync<UserMenuCreateGet>($"{_baseUrl}api/UserMenu/Create/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenu/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
@@ -43,6 +32,17 @@ namespace SIPx.MVC.Controllers
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<List<UserMenuIndexGet>>($"{_baseUrl}api/UserMenu/Index", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenu/Index", token);
+            ViewBag.UITerms = UITerms;
+            ViewBag.Id = id;
+            return View(response);
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -62,15 +62,6 @@ namespace SIPx.MVC.Controllers
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
         }
-        [HttpPost]
-        public async Task<IActionResult> Delete(UserMenuDeleteGet UserMenu)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            await _client.PostProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/UserMenu/Delete", UserMenu, token);
-
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
-        }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -80,8 +71,8 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View(response);
         }
-        [HttpDelete]
-        public async Task<IActionResult> Edit(UserMenuDeleteGet UserMenu)
+        [HttpPost]
+        public async Task<IActionResult> Delete(UserMenuDeleteGet UserMenu)
         {
             var token = HttpContext.Session.GetString("Token");
             await _client.PostProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/UserMenu/Delete", UserMenu, token);
@@ -89,5 +80,14 @@ namespace SIPx.MVC.Controllers
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
         }
+        //[HttpDelete]
+        //public async Task<IActionResult> EdDit(UserMenuDeleteGet UserMenu)
+        //{
+        //    var token = HttpContext.Session.GetString("Token");
+        //    await _client.PostProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/UserMenu/Delete", UserMenu, token);
+
+        //    //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
+        //    return RedirectToAction("Index");
+        //}
     }
 }

@@ -13,6 +13,24 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
+        [HttpGet]
+        public async Task<IActionResult> Create(string Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<RoleClaimCreateGet>($"{_baseUrl}api/RoleClaim/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/RoleClaim/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(RoleClaimCreateGet RoleClaim)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<RoleClaimCreateGet>($"{_baseUrl}api/RoleClaim/Create", RoleClaim, token);
+
+            return RedirectToAction("Index", new { id = RoleClaim.RoleId });
+        }
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");
@@ -31,23 +49,6 @@ namespace SIPx.MVC.Controllers
             var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/RoleClaim/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
-        }
-        [HttpGet]
-        public async Task<IActionResult> Create(string Id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<RoleClaimCreateGet>($"{_baseUrl}api/RoleClaim/Create/"+Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/RoleClaim/Create", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create(RoleClaimCreateGet RoleClaim)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            await _client.PostProtectedAsync<RoleClaimCreateGet>($"{_baseUrl}api/RoleClaim/Create", RoleClaim, token);
-
-            return RedirectToAction("Index", new { id = RoleClaim.RoleId });
         }
         [HttpPost]
         public async Task<IActionResult> Edit(RoleClaimUpdateGet RoleClaim)

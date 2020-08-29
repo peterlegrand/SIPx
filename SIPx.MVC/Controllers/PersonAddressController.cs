@@ -13,6 +13,24 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
+        [HttpGet]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var response = await _client.GetProtectedAsync<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Create", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(PersonAddressCreateGet PersonAddress)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            await _client.PostProtectedAsync<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create", PersonAddress, token);
+
+            return RedirectToAction("Index", new { id = PersonAddress.PersonId });
+        }
+        [HttpGet]
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -31,23 +49,6 @@ namespace SIPx.MVC.Controllers
             var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
-        }
-        [HttpGet]
-        public async Task<IActionResult> Create(int Id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create/"+Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Create", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create(PersonAddressCreateGet PersonAddress)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            await _client.PostProtectedAsync<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create", PersonAddress, token);
-
-            return RedirectToAction("Index", new { id = PersonAddress.PersonId });
         }
         [HttpPost]
         public async Task<IActionResult> Edit(PersonAddressUpdateGet PersonAddress)
