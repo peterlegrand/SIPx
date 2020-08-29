@@ -6,6 +6,6 @@ namespace SIPx.DataAccess
 {
     public interface IDateLevelProvider
     {
-        Task<List<DateLevelList>> DateLevelList(string UserId);
+        Task<List<DateLevelList>> List(string UserId);
     }
 }

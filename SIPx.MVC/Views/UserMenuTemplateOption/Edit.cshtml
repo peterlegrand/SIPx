@@ -71,7 +71,7 @@
                 @Term.Find(x => x.InternalName.Equals("Left menu type")).TermString type
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserMenuTypeIDLeft" dataSource="@Model.UserMenuTypesLeft" ejs-for="@Model.UserMenuTypeIDLeft" value="@Model.UserMenuTypeIDLeft" popupHeight="220px">
+                <ejs-dropdownlist id="UserMenuTypeIDLeft" dataSource="@Model.UserMenuTypesLeft" ejs-for="@Model.UserMenuTypeIdLeft" value="@Model.UserMenuTypeIdLeft" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserMenuTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -92,7 +92,7 @@
                 @Term.Find(x => x.InternalName.Equals("Right menu type")).TermString type
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserMenuTypeIDRight" dataSource="@Model.UserMenuTypesRight" ejs-for="@Model.UserMenuTypeIDRight" value="@Model.UserMenuTypeIDRight" popupHeight="220px">
+                <ejs-dropdownlist id="UserMenuTypeIDRight" dataSource="@Model.UserMenuTypesRight" ejs-for="@Model.UserMenuTypeIdRight" value="@Model.UserMenuTypeIdRight" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserMenuTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -114,7 +114,7 @@
 
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Icon" dataSource="@Model.Icons" ejs-for="@Model.Icon" value="@Model.Icon" popupHeight="220px">
+                <ejs-dropdownlist id="Icon" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="FileName"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>

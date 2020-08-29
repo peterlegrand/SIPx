@@ -12,6 +12,7 @@ namespace SIPx.Shared
         public int ProjectLanguageId { get; set; }
         public int? ParentProjectId { get; set; }
         public string ParentProjectName { get; set; }
+        public int ProjectTypeId { get; set; }
         public int StatusId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

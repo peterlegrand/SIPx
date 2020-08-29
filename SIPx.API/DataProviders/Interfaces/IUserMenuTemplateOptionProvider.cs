@@ -16,5 +16,6 @@ namespace SIPx.DataAccess
         Task<List<UserMenuTemplateOptionLanguageIndexGet>> LanguageIndexGet(string UserId, int UserMenuTemplateOptionId);
         Task<UserMenuTemplateOptionLanguageIndexGet> LanguageUpdateGet(string UserId, int UserMenuTemplateOptionLanguageId);
         Task<UserMenuTemplateOptionUpdateGet> UpdateGet(string UserId, int UserMenuTemplateOptionId);
+        bool UpdatePost(UserMenuTemplateOptionUpdateGet UserMenuTemplateOption);
     }
 }

@@ -15,5 +15,6 @@ namespace SIPx.DataAccess
         bool UpdatePost(ClassificationValueUpdateGet ClassificationValue);
         bool DeletePost(int Id);
         Task<ClassificationValueDeleteGet> DeleteGet(string UserId, int ClassificationValueId);
+        Task<int> CreateGet(int ClassificationId, int ClassificationValueId);
     }
 }

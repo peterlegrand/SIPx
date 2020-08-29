@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
 
      
         [HttpGet("Index")]
-        public async Task<IActionResult> GetSettings()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -51,7 +51,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> SettingUpdateGet(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -70,6 +70,34 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(SettingUpdateGet Setting)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                Setting.ModifierId = CurrentUser.Id;
+                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
+                //if (CheckString.Length == 0)
+                //{
+                _settingProvider.UpdatePost(Setting);
+                return Ok(Setting);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
         }
 
     }

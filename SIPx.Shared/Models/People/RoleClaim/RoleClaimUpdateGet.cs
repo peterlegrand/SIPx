@@ -19,5 +19,6 @@ namespace SIPx.Shared
         public string GroupDescription { get; set; }
         public string GroupMenuName { get; set; }
         public string GroupMouseOver { get; set; }
+        public string ModifierId { get; set; }
     }
 }

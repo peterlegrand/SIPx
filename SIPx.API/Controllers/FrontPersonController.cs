@@ -26,8 +26,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-       
-        
         [HttpGet("AdvancedSearch")]
         public async Task<IActionResult> AdvancedSearch()
         {

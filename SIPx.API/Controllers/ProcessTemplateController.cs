@@ -37,66 +37,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index")]
-        public async Task<IActionResult> Index()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _processTemplateProvider.IndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> Update(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                var x = await _processTemplateProvider.UpdateGet(CurrentUser.Id, Id);
-                var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                x.Icons = icons;
-
-                return Ok(x);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> LanguageIndex(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _processTemplateProvider.LanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> LanguageUpdate(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _processTemplateProvider.LanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
@@ -119,8 +59,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(ProcessTemplateCreatePost ProcessTemplate)
+        public async Task<IActionResult> Create(ProcessTemplateCreatePost ProcessTemplate)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProcessTemplate.CreatorId = CurrentUser.Id;
@@ -144,6 +85,69 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateProvider.IndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                var x = await _processTemplateProvider.UpdateGet(CurrentUser.Id, Id);
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                x.Icons = icons;
+
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(ProcessTemplateUpdateGet ProcessTemplate)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                ProcessTemplate.ModifierId = CurrentUser.Id;
+                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
+                //if (CheckString.Length == 0)
+                //{
+                _processTemplateProvider.UpdatePost(ProcessTemplate);
+                return Ok(ProcessTemplate);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
@@ -196,6 +200,36 @@ namespace SIPx.API.Controllers
             });
 
 
+        }
+
+        [HttpGet("LanguageIndex/{Id:int}")]
+        public async Task<IActionResult> LanguageIndex(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateProvider.LanguageIndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("LanguageUpdate/{Id:int}")]
+        public async Task<IActionResult> LanguageUpdate(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateProvider.LanguageUpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
         }
 
     }

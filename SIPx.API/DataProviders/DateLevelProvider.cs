@@ -18,7 +18,7 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public async Task<List<DateLevelList>> DateLevelList(string UserId)
+        public async Task<List<DateLevelList>> List(string UserId)
         {
             string usp = "usp_DateLevelList @UserID";
             var x = await _sqlDataAccess.LoadData<DateLevelList, dynamic>(usp, new { UserId = UserId });

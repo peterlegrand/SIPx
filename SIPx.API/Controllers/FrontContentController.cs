@@ -111,6 +111,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("ContentNew")]
         public async Task<IActionResult> ContentNew(FrontContentContentNew Content)
         {

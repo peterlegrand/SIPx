@@ -14,6 +14,11 @@ namespace SIPx.DataAccess
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
+        public ClassificationPageProvider(ISqlDataAccess sqlDataAccess)
+        {
+            _sqlDataAccess = sqlDataAccess;
+        }
+
         public async Task<string> CreatePostCheck(ClassificationPageCreatePost ClassificationPage)
         {
             string usp = "usp_ClassificationPageCreatePostCheck @ClassificationId, @StatusId, @LanguageId , @Name, @CreatorId";
@@ -28,17 +33,6 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public ClassificationPageProvider(ISqlDataAccess sqlDataAccess)
-        {
-            _sqlDataAccess = sqlDataAccess;
-        }
-
-        public Task<List<ClassificationPageList>> ListGet(string UserId, int ClassificationId)
-        {
-            string usp = "usp_ClassificationPageList @UserId, @ClassificationID";
-            return _sqlDataAccess.LoadData<ClassificationPageList, dynamic>(usp, new { UserId, ClassificationId });
-
-        }
 
         public async Task<List<ClassificationPageIndexGet>> IndexGet(string UserId, int ClassificationId)
         {
@@ -60,12 +54,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationPageUpdateGet>(usp, ClassificationPage);
             return true;
         }
+
         public Task<ClassificationPageDeleteGet> DeleteGet(string UserId, int ClassificationPageId)
         {
             string usp = "usp_ClassificationPageDeleteGet @UserId, @ClassificationPageID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageDeleteGet, dynamic>(usp, new { UserId, ClassificationPageId });
 
         }
+
         public bool DeletePost(int ClassificationPageId)
         {
             string usp = "usp_ClassificationPageDeletePost @ClassificationPageId";
@@ -87,5 +83,10 @@ namespace SIPx.DataAccess
 
         }
 
+        public Task<List<ClassificationPageList>> List(string UserId, int ClassificationId)
+        {
+            string usp = "usp_ClassificationPageList @UserId, @ClassificationID";
+            return _sqlDataAccess.LoadData<ClassificationPageList, dynamic>(usp, new { UserId, ClassificationId });
+        }
     }
 }

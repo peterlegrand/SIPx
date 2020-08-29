@@ -25,18 +25,21 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<LanguageIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public Task<LanguageUpdateGet> UpdateGet(string UserId, int LanguageId)
         {
             string usp = "usp_LanguageUpdateGet @UserId, @LanguageID";
             return _sqlDataAccess.LoadSingleRecord<LanguageUpdateGet, dynamic>(usp, new { UserId = UserId, LanguageId = LanguageId });
 
         }
+
         public bool UpdatePost(LanguageUpdateGet ContentType)
         {
             string usp = "usp_LanguageUpdatePost @LanguageId, @StatusId, @ModifierID";
             _sqlDataAccess.SaveData<LanguageUpdateGet>(usp, ContentType);
             return true;
         }
+
         public async Task<LanguageList> UserLanguageUpdateGet(string UserId)
         {
             string usp = "usp_GetUserLanguageUpdateGet @UserID";
@@ -50,30 +53,35 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<List<LanguageList>> ActiveList(string UserId)
         {
             string usp = "usp_LanguagesActiveList @UserID";
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<List<UITermLanguageCustomization>> UITermLanguageCustomizationIndexGet(string UserId)
         {
             string usp = "usp_UITermLanguageCustomizationIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<UITermLanguageCustomization, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public Task<UITermLanguageCustomization> UITermLanguageCustomizationUpdateGet(string UserId, int UITermLanguageCustomizationId)
         {
             string usp = "usp_UITermLanguageCustomizationUpdateGet @UserId, @UITermLanguageCustomizationID";
             return _sqlDataAccess.LoadSingleRecord<UITermLanguageCustomization, dynamic>(usp, new { UserId = UserId, UITermLanguageCustomizationId = UITermLanguageCustomizationId });
 
         }
+
         public async Task<List<UITermLanguage>> UITermLanguageIndexGet(string UserId)
         {
             string usp = "usp_UITermLanguageIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<UITermLanguage, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public Task<UITermLanguage> UITermLanguageUpdateGet(string UserId, int UITermLanguageId)
         {
             string usp = "usp_UITermLanguageUpdateGet @UserId, @UITermLanguageID";
@@ -81,14 +89,15 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int Id)
+        public async Task<bool> NoOfLanguagesOnLanguageObject(string TableName, int LanguageId, int Id)
         {
-            string usp = "usp_LanguageOnLanguageObject @TableName, @LanguageId, @Id";
+            string usp = "usp_NoOfLanguagesOnLanguageObject @TableName, @LanguageId, @Id";
             var x = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { TableName = TableName, LanguageId = LanguageId, Id = Id });
             if (x > 0)
                 return (false);
             return (true);
         }
+
         public bool PostObjectLanguage(ObjectLanguageCreatePost ObjectLanguage)
         {
             string usp = "usp_ObjectLanguageCreate @TableName, @ObjectId, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserID";

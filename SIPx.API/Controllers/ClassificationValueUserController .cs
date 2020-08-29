@@ -35,61 +35,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-
-        [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> GetValueUsers(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))  //PETER TODO looks like there is also a value 54
-            {
-                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-
-                return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
-        [HttpGet("Edit/{Id:int}")]
-        public async Task<IActionResult> GetValueUser(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))
-            {
-                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueUserID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-                //PETER I UPDATED THIS IN THE Wrong controller
-                var ClassificationUser = await _classificationValueUserProvider.UpdateGet(CurrentUser.Id, Id);
-                var RelationTypeList = await _classificationRelationTypeProvider.ListGet(CurrentUser.Id);
-                var UserList = await _userProvider.List();
-                ClassificationUser.ClassificationRelationTypes = RelationTypeList;
-                ClassificationUser.Users = UserList;
-                return Ok(ClassificationUser);
-//                return Ok(await _classificationProvider.UpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -108,8 +53,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(ClassificationValueUserCreatePost ClassificationValueUser)
+        public async Task<IActionResult> Create(ClassificationValueUserCreatePost ClassificationValueUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationValueUser.CreatorId = CurrentUser.Id;
@@ -132,6 +78,88 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+
+        [HttpGet("Index/{Id:int}")]
+        public async Task<IActionResult> Index(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))  //PETER TODO looks like there is also a value 54
+            {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
+                return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueUserID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                //PETER I UPDATED THIS IN THE Wrong controller
+                var ClassificationUser = await _classificationValueUserProvider.UpdateGet(CurrentUser.Id, Id);
+                var RelationTypeList = await _classificationRelationTypeProvider.List(CurrentUser.Id);
+                var UserList = await _userProvider.List();
+                ClassificationUser.ClassificationRelationTypes = RelationTypeList;
+                ClassificationUser.Users = UserList;
+                return Ok(ClassificationUser);
+//                return Ok(await _classificationProvider.UpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(ClassificationValueUserUpdateGet ClassificationValueUser)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                ClassificationValueUser.CreatorId = CurrentUser.Id;
+                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
+                //if (CheckString.Length == 0)
+                //{
+                _classificationValueUserProvider.UpdatePost(ClassificationValueUser);
+                return Ok(ClassificationValueUser);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
         }
 
         [HttpGet("Delete/{Id:int}")]

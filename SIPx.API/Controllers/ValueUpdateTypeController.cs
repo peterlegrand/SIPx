@@ -32,34 +32,5 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        //[HttpGet("Index")]
-        //public async Task<IActionResult> GetValueUpdateTypes()
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-        //    {
-        //        return Ok(await _masterProvider.ValueUpdateTypeIndexGet(CurrentUser.Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
-
-        //[HttpGet("Update/{Id:int}")]
-        //public async Task<IActionResult> GetValueUpdateType(int Id)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-        //    {
-        //        return Ok(await _masterListProvider.ValueUpdateTypeUpdateGet(CurrentUser.Id, Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
     }
 }

@@ -156,7 +156,6 @@ namespace SIPx.API.Controllers
             List<MetaListClassification> MasterList = await _metaProvider.Classifications(DefaultUser);
             return View(MasterList);
         }
-
         public async Task<IActionResult> ClassificationLevels(int Id)
         {
             string DefaultUser = await _metaProvider.GetDefaultUser();

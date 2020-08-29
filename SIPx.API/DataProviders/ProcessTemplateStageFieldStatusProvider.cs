@@ -20,12 +20,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public Task<List<ProcessTemplateStageFieldStatus>> IndexGet(string UserId)
-        {
-            string usp = "usp_ProcessTemplateStageFieldStatusIndexGet @UserID";
-            return _sqlDataAccess.LoadData<ProcessTemplateStageFieldStatus, dynamic>(usp, new { UserId = UserId });
+        //public Task<List<ProcessTemplateStageFieldStatus>> IndexGet(string UserId)
+        //{
+        //    string usp = "usp_ProcessTemplateStageFieldStatusIndexGet @UserID";
+        //    return _sqlDataAccess.LoadData<ProcessTemplateStageFieldStatus, dynamic>(usp, new { UserId = UserId });
 
-        }
+        //}
         //public Task<ProcessTemplateStageFieldStatus> ProcessTemplateStageFieldStatuIndexGet(string UserId, int ProcessTemplateStageFieldStatusId)
         //{
         //    string usp = "usp_ProcessTemplateStageFieldStatus @UserId, @ProcessTemplateStageFieldStatusID";

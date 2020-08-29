@@ -20,12 +20,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-
         public Task<List<UserMenuTypeList>> RightList(string UserId)
         {
             string usp = "usp_UserMenuTypeRightList @UserID";
             return _sqlDataAccess.LoadData<UserMenuTypeList, dynamic>(usp, new { UserId = UserId });
         }
+
         public Task<List<UserMenuTypeList>> LeftList(string UserId)
         {
             string usp = "usp_UserMenuTypeLeftList @UserID";

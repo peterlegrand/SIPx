@@ -44,8 +44,65 @@ namespace SIPx.API.Controllers
             _pageProvider = PageProvider;
             _userManager = userManager;
         }
+
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var PageCreateGet = new PageCreateGet();
+                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                var Projects = await _projectProvider.List(CurrentUser.Id);
+                var Organizations = await _organizationProvider.List(CurrentUser.Id);
+                var Classifications = await _classificationProvider.List(CurrentUser.Id);
+                var Users = await _userProvider.List();
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                PageCreateGet.LanguageId = UserLanguage.LanguageId;
+                PageCreateGet.LanguageName = UserLanguage.Name;
+                PageCreateGet.Statuses = Statuses;
+                PageCreateGet.Projects = Projects;
+                PageCreateGet.Organizations = Organizations;
+                PageCreateGet.Classifications = Classifications;
+                PageCreateGet.Users = Users;
+
+                return Ok(PageCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create(PageCreateGet Page)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            Page.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _userPageProvider.UserPageCreatePostCheck(Page);
+                //if (CheckString.Length == 0)
+                //{
+                _userPageProvider.CreatePost(Page);
+                return Ok(Page);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
         [HttpGet("Index")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
@@ -58,8 +115,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> EditGet(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
@@ -83,37 +141,9 @@ namespace SIPx.API.Controllers
             });
 
         }
-        [HttpGet("Create")]
-        public async Task<IActionResult> Create()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                var PageCreateGet = new PageCreateGet();
-                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var Projects = await _projectProvider.List(CurrentUser.Id);
-                var Organizations = await _organizationProvider.List(CurrentUser.Id);
-                var Classifications = await _classificationProvider.List(CurrentUser.Id);
-                var Users = await _userProvider.List();
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                PageCreateGet.LanguageId = UserLanguage.LanguageId;
-                PageCreateGet.LanguageName = UserLanguage.Name;
-                PageCreateGet.Statuses = Statuses;
-                PageCreateGet.Projects = Projects;
-                PageCreateGet.Organizations= Organizations;
-                PageCreateGet.Classifications= Classifications;
-                PageCreateGet.Users = Users;
 
-                return Ok(PageCreateGet);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
         [HttpPost("Update")]
-        public async Task<IActionResult> Post(PageUpdateGet Page)
+        public async Task<IActionResult> Update(PageUpdateGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Page.ModifierId = CurrentUser.Id;
@@ -137,31 +167,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        [HttpPost("Create")]
-        public async Task<IActionResult> CreatePost(PageCreateGet Page)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            Page.CreatorId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                //var CheckString = await _userPageProvider.UserPageCreatePostCheck(Page);
-                //if (CheckString.Length == 0)
-                //{
-                _userPageProvider.CreatePost(Page);
-                    return Ok(Page);
-                //}
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
@@ -187,8 +193,9 @@ namespace SIPx.API.Controllers
             });
 
         }
-        [HttpPost("Delete")]
-        public async Task<IActionResult> Post(PageDeleteGet Page)
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(PageDeleteGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Page.CreatorId = CurrentUser.Id;

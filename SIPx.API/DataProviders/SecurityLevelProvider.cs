@@ -30,12 +30,14 @@ namespace SIPx.DataAccess
         //    string usp = "usp_SecurityLevelUpdateGet @UserId, @SecurityLevelID";
         //    return _sqlDataAccess.LoadSingleRecord<SecurityLevelUpdateGet, dynamic>(usp, new { UserId = UserId, SecurityLevelId = SecurityLevelId });
         //}
+
         public async Task<List<SecurityLevelList>> List(string UserId)
         {
             string usp = "usp_SecurityLevelList @UserID";
             var x = await _sqlDataAccess.LoadData<SecurityLevelList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<List<SecurityLevelList>> ListofUser(string UserId)
         {
             string usp = "usp_SecurityLevelListOfUser @UserID";

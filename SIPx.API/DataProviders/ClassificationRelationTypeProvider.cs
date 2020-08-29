@@ -18,6 +18,7 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
+
         public async Task<string> CreatePostCheck(ClassificationRelationTypeCreatePost ClassificationRelationType)
         {
             string usp = "usp_ClassificationRelationTypeCreatePostCheck @LanguageId , @Name";
@@ -52,12 +53,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationRelationTypeUpdateGet>(usp, ClassificationRelationType);
             return true;
         }
+        
         public Task<ClassificationRelationTypeDeleteGet> DeleteGet(string UserId, int ClassificationRelationTypeId)
         {
             string usp = "usp_ClassificationRelationTypeDeleteGet @UserId, @ClassificationRelationTypeID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationRelationTypeDeleteGet, dynamic>(usp, new { UserId, ClassificationRelationTypeId });
 
         }
+        
         public bool DeletePost(int ClassificationRelationTypeId)
         {
             string usp = "usp_ClassificationRelationTypeDeletePost @ClassificationRelationTypeId";
@@ -83,13 +86,6 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_ClassificationRelationTypeList @UserID";
             return _sqlDataAccess.LoadData<ClassificationRelationTypeList, dynamic>(usp, new { UserId });
-        }
-
-        public Task<List<ClassificationRelationTypeList>> ListGet(string UserId)
-        {
-            string usp = "usp_ClassificationRelationTypeList @UserID";
-            return _sqlDataAccess.LoadData<ClassificationRelationTypeList, dynamic>(usp, new { UserId = UserId });
-
         }
     }
 }

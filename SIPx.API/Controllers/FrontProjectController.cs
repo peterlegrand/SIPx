@@ -38,8 +38,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-       
-        
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
@@ -83,7 +81,7 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var x = await _classificationProvider.UpdateGet(CurrentUser.Id, Id);
-                var y = await _classificationPageProvider.ListGet(CurrentUser.Id, Id);
+                var y = await _classificationPageProvider.List(CurrentUser.Id, Id);
                 var u = await _classificationProvider.CreateGetSequence(CurrentUser.Id);
                 var z = await _masterListProvider.StatusList(CurrentUser.Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
@@ -183,8 +181,6 @@ namespace SIPx.API.Controllers
 
         }
 
-
-
         [HttpPost("LanguageCreate")]
         public async Task<IActionResult> LanguageCreate(ObjectLanguageCreatePost Classification)
         {
@@ -213,8 +209,6 @@ namespace SIPx.API.Controllers
             });
 
         }
-
-
 
         [HttpGet("LanguageCreate/{Id:int}")]
         public async Task<IActionResult> LanguageCreate(int Id)
@@ -290,6 +284,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -317,6 +312,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
         public async Task<IActionResult> Post(ProjectCreatePost Project)
         {

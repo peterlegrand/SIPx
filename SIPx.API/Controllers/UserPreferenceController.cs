@@ -41,7 +41,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
         [HttpGet("Index")]
-        public async Task<IActionResult> GetUserPreferences()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -55,9 +55,8 @@ namespace SIPx.API.Controllers
             });
         }
 
-
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetUserPreference(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -81,8 +80,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        
         [HttpPost("Update")]
-        public async Task<IActionResult> Post(UserPreferenceUpdateGet UserPreference)
+        public async Task<IActionResult> Update(UserPreferenceUpdateGet UserPreference)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             UserPreference.CreatorId = CurrentUser.Id;
@@ -106,31 +106,6 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        //[HttpPut("Update")]
-        //public async Task<IActionResult> Put(UserPreferenceUpdateGet UserPreference)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
-        //    {
-        //        var CheckString = await _userPreferenceProvider.ClassificationCheckPut(Classification);
-        //        if (CheckString.Length == 0)
-        //        {
-        //            _classificationProvider.PutClassification(Classification);
-        //            return Ok(Classification);
-        //        }
-        //        return BadRequest(new
-        //        {
-        //            IsSuccess = false,
-        //            Message = CheckString,
-        //        });
-
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //PETER TODO put or post. When to use what.
     }
 
 

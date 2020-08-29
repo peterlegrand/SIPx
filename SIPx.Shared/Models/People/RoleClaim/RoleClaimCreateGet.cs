@@ -11,6 +11,7 @@ namespace SIPx.Shared
         [Key]
         public string RoleId { get; set; }
         public string ClaimId { get; set; }
+        public string CreatorId { get; set; }
         public List<ClaimList> Claims { get; set; }
     }
 }

@@ -9,11 +9,11 @@ namespace SIPx.DataAccess
     {
         Task<ProcessDeleteGet> DeleteGet(string UserId, int ProcessId);
         bool DeletePost(int Id);
-        Task<List<NewProcessFromDB>> NewProcessGet(string UserId, int ProcessTemplateId);
-        Task<List<ProcessTemplateFlowConditionOld>> NewProcessGetFlowConditionList(int FlowId);
-        Task<List<int>> NewProcessGetInitialTemplateList();
-        Task<List<NewProcessTemplateList>> NewProcessGetTemplateList(string SQLString);
-        Task<bool> NewProcessInsert(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields);
+        Task<List<NewProcessFromDB>> CreateGet(string UserId, int ProcessTemplateId);
+        Task<List<ProcessTemplateFlowConditionOld>> CreateGetFlowConditionList(int FlowId);
+        Task<List<int>> CreateGetInitialTemplateList();
+        Task<List<NewProcessTemplateList>> CreateGetTemplateList(string SQLString);
+        Task<bool> CreatePost(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields);
         Task<List<ToDoIndexGet>> ToDoIndexGet(string SQLString);
     }
 }

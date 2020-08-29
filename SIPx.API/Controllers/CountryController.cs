@@ -32,9 +32,8 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-
         [HttpGet("List")]
-        public async Task<IActionResult> GetCountryList()
+        public async Task<IActionResult> List()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))

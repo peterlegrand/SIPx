@@ -19,6 +19,13 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+        public async Task<int> CreateGet(int ClassificationId, int ClassificationValueId)
+        {
+            string usp = "usp_ClassificationValueCreateGet @ClassificationId, @ClassificationValueId";
+            return await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { ClassificationId, ClassificationValueId });
+
+        }
+
         public async Task<string> CreatePostCheck(ClassificationValueCreatePost ClassificationValue)
         {
             string usp = "usp_ClassificationValueCreatePostCheck @ClassificationId, @ParentId, @LanguageId , @Name, @CreatorID";
@@ -74,6 +81,7 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueDeleteGet, dynamic>(usp, new { UserId, ClassificationValueId });
 
         }
+
         public bool DeletePost(int ClassificationValueId)
         {
             string usp = "usp_ClassificationValueDeletePost @ClassificationValueId";

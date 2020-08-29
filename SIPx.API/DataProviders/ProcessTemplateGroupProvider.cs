@@ -20,28 +20,72 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public Task<List<ProcessTemplateGroupLanguageIndexGet>> LanguageIndexGet(string UserId, int ProcessTemplateGroupId)
+        public Task<List<SequenceList>> CreateGetSequence(string UserId)
         {
-            string usp = "usp_ProcessTemplateGroupLanguageIndexGet @UserId, @ProcessTemplateGroupID";
-            return _sqlDataAccess.LoadData<ProcessTemplateGroupLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateGroupId = ProcessTemplateGroupId });
-
+            string usp = "usp_ProcessTemplateGroupCreateGetSequence @UserID";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
         }
-        public Task<ProcessTemplateGroupLanguageIndexGet> LanguageUpdateGet(string UserId, int ProcessTemplateGroupLanguageId)
+
+        public async Task<string> CreatePostCheck(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
         {
-            string usp = "usp_ProcessTemplateGroupLanguageUpdateGet @UserId, @ProcessTemplateGroupLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateGroupLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateGroupLanguageId = ProcessTemplateGroupLanguageId });
-
+            string usp = "usp_ProcessTemplateGroupCreatePostCheck @Sequence, @LanguageId, @Name, @CreatorId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateGroup);
+            return CheckString;
         }
+
+        public async Task<string> CreatePost(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
+        {
+            string usp = "usp_ProcessTemplateGroupCreatePost @Sequence, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateGroup);
+            return String;
+        }
+
         public Task<List<ProcessTemplateGroupIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_ProcessTemplateGroupIndexGet @UserID";
             return _sqlDataAccess.LoadData<ProcessTemplateGroupIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
+
         public Task<ProcessTemplateGroupUpdateGet> UpdateGet(string UserId, int ProcessTemplateGroupId)
         {
             string usp = "usp_ProcessTemplateGroupUpdateGet @UserId, @ProcessTemplateGroupID";
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateGroupUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateGroupId = ProcessTemplateGroupId });
+
+        }
+
+        public bool UpdatePost(ProcessTemplateGroupUpdateGet ProcessTemplateGroup)
+        {
+            string usp = "usp_ProcessTemplateGroupUpdatePost @ProcessTemplateGroupId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            _sqlDataAccess.SaveData<ProcessTemplateGroupUpdateGet>(usp, ProcessTemplateGroup);
+            return true;
+        }
+
+        public Task<ProcessTemplateGroupDeleteGet> DeleteGet(string UserId, int ProcessTemplateGroupId)
+        {
+            string usp = "usp_ProcessTemplateGroupDeleteGet @UserId, @ProcessTemplateGroupID";
+            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateGroupDeleteGet, dynamic>(usp, new { UserId, ProcessTemplateGroupId });
+
+        }
+
+        public bool DeletePost(int ProcessTemplateGroupId)
+        {
+            string usp = "usp_ProcessTemplateGroupDeletePost @ProcessTemplateGroupId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ProcessTemplateGroupId = ProcessTemplateGroupId });
+            return true;
+        }
+
+        public Task<List<ProcessTemplateGroupLanguageIndexGet>> LanguageIndexGet(string UserId, int ProcessTemplateGroupId)
+        {
+            string usp = "usp_ProcessTemplateGroupLanguageIndexGet @UserId, @ProcessTemplateGroupID";
+            return _sqlDataAccess.LoadData<ProcessTemplateGroupLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateGroupId = ProcessTemplateGroupId });
+
+        }
+
+        public Task<ProcessTemplateGroupLanguageIndexGet> LanguageUpdateGet(string UserId, int ProcessTemplateGroupLanguageId)
+        {
+            string usp = "usp_ProcessTemplateGroupLanguageUpdateGet @UserId, @ProcessTemplateGroupLanguageID";
+            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateGroupLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateGroupLanguageId = ProcessTemplateGroupLanguageId });
 
         }
 
@@ -51,35 +95,5 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ProcessTemplateGroupList, dynamic>(usp, new { UserId = UserId });
 
         }
-        public async Task<string> CreatePostCheck(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
-        {
-            string usp = "usp_ProcessTemplateGroupCreatePostCheck @Sequence, @LanguageId, @Name, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateGroup);
-            return CheckString;
-        }
-        public async Task<string> CreatePost(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
-        {
-            string usp = "usp_ProcessTemplateGroupCreatePost @Sequence, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
-            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateGroup);
-            return String;
-        }
-        public Task<List<SequenceList>> CreateGetSequence(string UserId)
-        {
-            string usp = "usp_ProcessTemplateGroupCreateGetSequence @UserID";
-            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
-        }
-        public Task<ProcessTemplateGroupDeleteGet> DeleteGet(string UserId, int ProcessTemplateGroupId)
-        {
-            string usp = "usp_ProcessTemplateGroupDeleteGet @UserId, @ProcessTemplateGroupID";
-            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateGroupDeleteGet, dynamic>(usp, new { UserId, ProcessTemplateGroupId });
-
-        }
-        public bool DeletePost(int ProcessTemplateGroupId)
-        {
-            string usp = "usp_ProcessTemplateGroupDeletePost @ProcessTemplateGroupId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ProcessTemplateGroupId = ProcessTemplateGroupId });
-            return true;
-        }
-
     }
 }

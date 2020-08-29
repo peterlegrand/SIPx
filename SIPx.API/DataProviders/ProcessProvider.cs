@@ -22,26 +22,33 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+        public async Task<List<ToDoIndexGet>> ToDoIndexGet(string SQLString)
+        {
+            var x = await _sqlDataAccess.LoadData<ToDoIndexGet>(SQLString);
+            return x;
+        }
+
         //public async Task<List<ProcessViewGet>> GetProcesss(int LanguageId)
         //{
         //    string usp = "usp_ProcessViewGet @LanguageID";
         //    var x = await _sqlDataAccess.LoadData<ProcessViewGet, dynamic>(usp, new { LanguageId = LanguageId });
         //    return x;
         //}
-        public async Task<List<int>> NewProcessGetInitialTemplateList()
+        public async Task<List<int>> CreateGetInitialTemplateList()
         {
             string usp = "usp_NewProcessGetInitialTemplateFlowList";
             var x = await _sqlDataAccess.LoadData<int>(usp);
             return x;
         }
 
-        public async Task<List<ProcessTemplateFlowConditionOld>> NewProcessGetFlowConditionList(int FlowId)
+        public async Task<List<ProcessTemplateFlowConditionOld>> CreateGetFlowConditionList(int FlowId)
         {
             string usp = "usp_NewProcessGetFlowConditionList @FlowID";
             var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowConditionOld, dynamic>(usp, new { FlowId = FlowId });
             return x;
         }
-        public async Task<List<NewProcessFromDB>> NewProcessGet(string UserId, int ProcessTemplateId)
+
+        public async Task<List<NewProcessFromDB>> CreateGet(string UserId, int ProcessTemplateId)
         {
 
             string usp = "usp_NewProcessGet @ProcessTemplateID, @UserId";
@@ -49,21 +56,16 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<List<NewProcessTemplateList>> NewProcessGetTemplateList(string SQLString)
-        {
-            var x = await _sqlDataAccess.LoadData<NewProcessTemplateList>(SQLString);
-            return x;
-        }
-        public async Task<List<ToDoIndexGet>> ToDoIndexGet(string SQLString)
-        {
-            var x = await _sqlDataAccess.LoadData<ToDoIndexGet>(SQLString);
-            return x;
-        }
-
-        public async Task<bool> NewProcessInsert(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields)
+        public async Task<bool> CreatePost(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields)
         {
             await _sqlDataAccess.SaveData2<dynamic>(SQLString, new { User = UserId, ProcessTemplateId = TemplateId, ProcessTemplateStageId = StageId, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
             return true;
+        }
+
+        public async Task<List<NewProcessTemplateList>> CreateGetTemplateList(string SQLString)
+        {
+            var x = await _sqlDataAccess.LoadData<NewProcessTemplateList>(SQLString);
+            return x;
         }
 
         public Task<ProcessDeleteGet> DeleteGet(string UserId, int ProcessId)
@@ -72,6 +74,7 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessDeleteGet, dynamic>(usp, new { UserId, ProcessId });
 
         }
+
         public bool DeletePost(int ProcessId)
         {
             string usp = "usp_ProcessDeletePost @ProcessId";

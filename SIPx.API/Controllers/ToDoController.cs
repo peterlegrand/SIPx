@@ -76,10 +76,10 @@ namespace SIPx.API.Controllers
                 "    ON UserLanguage.ProcessTemplateID = ProcessTemplates.ProcessTemplateId " +
                 "LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
                 "   ON DefaultLanguage.ProcessTemplateId = ProcessTemplates.ProcessTemplateId";
-                List<int> TemplateIDs = await _processProvider.NewProcessGetInitialTemplateList();
+                List<int> TemplateIDs = await _processProvider.CreateGetInitialTemplateList();
                 foreach (var TemplateId in TemplateIDs)
                 {
-                    List<ProcessTemplateFlowConditionOld> TemplateFlowConditions = await _processProvider.NewProcessGetFlowConditionList(TemplateId);
+                    List<ProcessTemplateFlowConditionOld> TemplateFlowConditions = await _processProvider.CreateGetFlowConditionList(TemplateId);
 
                     if (TemplateFlowConditions.Count() > 0)
                     { SQLWhere += " AND "; }
@@ -268,7 +268,7 @@ namespace SIPx.API.Controllers
 
                 if (x.Exists(x => x.ProcessTemplateId == ProcessTemplateId))
                     //TOFIX PETER
-                    return Ok(await _processProvider.NewProcessGet(CurrentUser.Id, ProcessTemplateId));// CurrentUser.LanguageId));
+                    return Ok(await _processProvider.CreateGet(CurrentUser.Id, ProcessTemplateId));// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {
@@ -291,7 +291,7 @@ namespace SIPx.API.Controllers
                 if (x.Exists(x => x.ProcessTemplateId == ProcessesFromAPI.ProcessTemplateId))
                 {
 
-                    List<NewProcessFromDB> ProcessesFromDB = await _processProvider.NewProcessGet(CurrentUser.Id, ProcessesFromAPI.ProcessTemplateId);
+                    List<NewProcessFromDB> ProcessesFromDB = await _processProvider.CreateGet(CurrentUser.Id, ProcessesFromAPI.ProcessTemplateId);
                     int NoOfFields = ProcessesFromDB.Count();
                     int EqualSequenceCount = 0;
                     if (ProcessesFromDB.Exists(z => z.ProcessTemplateStageId == ProcessesFromAPI.ProcessTemplateStageId) & ProcessesFromDB.Count() == ProcessesFromAPI.ProcessFields.Count())
@@ -553,7 +553,7 @@ namespace SIPx.API.Controllers
                     //    , new System.Data.SqlClient.SqlParameter("@ProcessTemplateStageID", ProcessesFromAPI.ProcessTemplateStageId)
                     //    , new System.Data.SqlClient.SqlParameter("@FieldsTable", ProcessFields)
                     //};
-                        await _processProvider.NewProcessInsert("usp_CreateProcess @User, @ProcessTemplateId, @ProcessTemplateStageId, @FieldsTable", CurrentUser.Id,  ProcessesFromAPI.ProcessTemplateId, ProcessesFromAPI.ProcessTemplateStageId, ProcessFields );
+                        await _processProvider.CreatePost("usp_CreateProcess @User, @ProcessTemplateId, @ProcessTemplateStageId, @FieldsTable", CurrentUser.Id,  ProcessesFromAPI.ProcessTemplateId, ProcessesFromAPI.ProcessTemplateStageId, ProcessFields );
                         return Ok();
                     }
 

@@ -20,17 +20,17 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public Task<List<PreferenceType>> PreferenceTypeIndexGet(string UserId)
-        {
-            string usp = "usp_PreferenceTypeIndexGet @UserID";
-            return _sqlDataAccess.LoadData<PreferenceType, dynamic>(usp, new { UserId = UserId });
+        //public Task<List<PreferenceType>> PreferenceTypeIndexGet(string UserId)
+        //{
+        //    string usp = "usp_PreferenceTypeIndexGet @UserID";
+        //    return _sqlDataAccess.LoadData<PreferenceType, dynamic>(usp, new { UserId = UserId });
 
-        }
-        public Task<PreferenceType> PreferenceTypeUpdateGet(string UserId, int PreferenceTypeId)
-        {
-            string usp = "usp_PreferenceTypeUpdateGet @UserId, @PreferenceTypeID";
-            return _sqlDataAccess.LoadSingleRecord<PreferenceType, dynamic>(usp, new { UserId = UserId, PreferenceTypeId = PreferenceTypeId });
+        //}
+        //public Task<PreferenceType> PreferenceTypeUpdateGet(string UserId, int PreferenceTypeId)
+        //{
+        //    string usp = "usp_PreferenceTypeUpdateGet @UserId, @PreferenceTypeID";
+        //    return _sqlDataAccess.LoadSingleRecord<PreferenceType, dynamic>(usp, new { UserId = UserId, PreferenceTypeId = PreferenceTypeId });
 
-        }
+        //}
     }
 }

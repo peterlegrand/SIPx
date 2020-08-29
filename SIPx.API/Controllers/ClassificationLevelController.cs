@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationLevelController : ControllerBase
     {
+        private readonly IDateLevelProvider _dateLevelProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IClassificationLevelProvider _classificationLevelProvider;
         private readonly IMasterProvider _masterProvider;
@@ -20,8 +21,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationLevelController(IMasterListProvider masterListProvider, IClassificationLevelProvider classificationLevelProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationLevelController(IDateLevelProvider dateLevelProvider, IMasterListProvider masterListProvider, IClassificationLevelProvider classificationLevelProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _dateLevelProvider = dateLevelProvider;
             _masterListProvider = masterListProvider;
             _classificationLevelProvider = classificationLevelProvider;
             _masterProvider = masterProvider;
@@ -39,7 +41,7 @@ namespace SIPx.API.Controllers
             {
                 var ClassificationLevelCreateGet = new ClassificationLevelCreateGet();
                 var ClassificationLevelCreateGetSequences = await _classificationLevelProvider.CreateGetSequence(CurrentUser.Id, Id);
-                var DateLevels = await _masterListProvider.DateLevelList(CurrentUser.Id);
+                var DateLevels = await _dateLevelProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ClassificationLevelCreateGetSequences.Add(new SequenceList { Sequence = ClassificationLevelCreateGetSequences.Count, Name = "Add at the end" });
                 ClassificationLevelCreateGet.LanguageId = UserLanguage.LanguageId;
@@ -133,7 +135,6 @@ namespace SIPx.API.Controllers
             });
         }
 
-
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
@@ -149,7 +150,7 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var classificationLevel = await _classificationLevelProvider.UpdateGet(CurrentUser.Id, Id);
-                classificationLevel.DateLevels = await _masterListProvider.DateLevelList(CurrentUser.Id);
+                classificationLevel.DateLevels = await _dateLevelProvider.List(CurrentUser.Id);
                 classificationLevel.Sequences = await _classificationLevelProvider.CreateGetSequence(CurrentUser.Id, classificationLevel.ClassificationId);
                 return Ok(classificationLevel);
             }
@@ -214,7 +215,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> lLanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))

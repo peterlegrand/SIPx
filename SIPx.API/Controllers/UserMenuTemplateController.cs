@@ -25,20 +25,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index")]
-        public async Task<IActionResult> Get()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
-            {
-                return Ok(await _userMenuTemplateProvider.IndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
@@ -54,8 +40,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(UserMenuTemplateCreatePost UserMenuTemplate)
+        public async Task<IActionResult> Create(UserMenuTemplateCreatePost UserMenuTemplate)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             UserMenuTemplate.CreatorId = CurrentUser.Id;
@@ -80,6 +67,46 @@ namespace SIPx.API.Controllers
             });
         }
 
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
+            {
+                return Ok(await _userMenuTemplateProvider.IndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _userMenuTemplateProvider.UpdateGet(CurrentUser.Id, Id);
+
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
 
         [HttpPost("Update")]
         public async Task<IActionResult> Update(UserMenuTemplateUpdateGet UserMenuTemplate)
@@ -107,163 +134,6 @@ namespace SIPx.API.Controllers
             });
         }
 
-
-
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetLanguages(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))
-            {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateLanguages", "UserMenuTemplateID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-
-                return Ok(await _userMenuTemplateProvider.LanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
-
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetLanguage(int Id)
-        {
-            if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateLanguages", "UserMenuTemplateLanguageID", Id) == 0)
-            {
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    Message = "No record with this ID",
-                });
-            }
-
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))  
-            {
-                return Ok(await _userMenuTemplateProvider.LanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> EditGet(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
-            {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-                var x = await _userMenuTemplateProvider.UpdateGet(CurrentUser.Id, Id);
-
-                return Ok(x);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
-        }
-
-        //[HttpPut("Update")]
-        //public async Task<IActionResult> Put(UserMenuTemplateUpdatePut UserMenuTemplate)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
-        //    {
-        //        var CheckString = await _UserMenuTemplateProvider.UserMenuTemplateCheckPut(UserMenuTemplate);
-        //        if (CheckString.Length==0)
-        //        { 
-        //         _UserMenuTemplateProvider.PutUserMenuTemplate(UserMenuTemplate);
-        //        return Ok(UserMenuTemplate);
-        //        }
-        //        return BadRequest(new
-        //        {
-        //            IsSuccess = false,
-        //            Message = CheckString,
-        //        });
-
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-
-        //}
-
-        //[HttpGet("LanguageCreate/{Id:int}")]
-        //public async Task<IActionResult> LanguageCreate(int Id)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-        //    {
-        //        var UserMenuTemplateCreateGet = new ObjectLanguageCreateGet();
-        //        UserMenuTemplateCreateGet.ObjectId = Id;
-        //        var LanguageList = await _UserMenuTemplateProvider.UserMenuTemplateLanguageCreateGetLanguageList(CurrentUser.Id, Id);
-        //        if (LanguageList.Count == 0)
-        //        {
-        //            return BadRequest(new
-        //            {
-        //                IsSuccess = false,
-        //                Message = "No active languages",
-        //            });
-        //        }
-        //        UserMenuTemplateCreateGet.Languages = LanguageList;
-        //        return Ok(UserMenuTemplateCreateGet);
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
-        //[HttpPost("LanguageCreate")]
-        //public async Task<IActionResult> LanguagePost(ObjectLanguageCreatePost UserMenuTemplate)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    UserMenuTemplate.UserId = CurrentUser.Id;
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-        //    {
-        //        var CheckString = await _masterProvider.PostObjectLanguageCheck("UserMenuTemplate", UserMenuTemplate.LanguageId,UserMenuTemplate.ObjectId);
-        //        if (CheckString)
-        //        {
-        //            UserMenuTemplate.TableName = "UserMenuTemplate";
-        //            _masterProvider.PostObjectLanguage(UserMenuTemplate);
-        //            return Ok(UserMenuTemplate);
-        //        }
-        //        return BadRequest(new
-        //        {
-        //            IsSuccess = false,
-        //            Message = CheckString,
-        //        });
-
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-
-        //}
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
@@ -316,6 +186,54 @@ namespace SIPx.API.Controllers
             });
 
 
+        }
+
+        [HttpGet("LanguageUpdate/{Id:int}")]
+        public async Task<IActionResult> LanguageUpdate(int Id)
+        {
+            if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateLanguages", "UserMenuTemplateLanguageID", Id) == 0)
+            {
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    Message = "No record with this ID",
+                });
+            }
+
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))
+            {
+                return Ok(await _userMenuTemplateProvider.LanguageUpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("LanguageIndex/{Id:int}")]
+        public async Task<IActionResult> LanguageIndex(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateLanguages", "UserMenuTemplateID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
+                return Ok(await _userMenuTemplateProvider.LanguageIndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
         }
 
     }

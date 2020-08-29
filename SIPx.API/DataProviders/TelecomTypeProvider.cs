@@ -18,17 +18,33 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
+
         public async Task<List<TelecomType>> IndexGet(string UserId)
         {
             string usp = "usp_TelecomTypeIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<TelecomType, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<TelecomType> UpdateGet(string UserId, int TelecomTypeId)
+
+        public Task<TelecomTypeUpdateGet> UpdateGet(string UserId, int TelecomTypeId)
         {
             string usp = "usp_TelecomTypeUpdateGet @UserId, @TelecomTypeID";
-            return _sqlDataAccess.LoadSingleRecord<TelecomType, dynamic>(usp, new { UserId = UserId, TelecomTypeId = TelecomTypeId });
+            return _sqlDataAccess.LoadSingleRecord<TelecomTypeUpdateGet, dynamic>(usp, new { UserId = UserId, TelecomTypeId = TelecomTypeId });
 
+        }
+
+        public bool UpdatePost(TelecomTypeUpdateGet TelecomType)
+        {
+            string usp = "usp_TelecomTypeUpdatePost @TelecomTypeId, @StatusId, @ModifierId";
+            _sqlDataAccess.SaveData<TelecomTypeUpdateGet>(usp, TelecomType);
+            return true;
+        }
+
+        public async Task<List<TelecomTypeList>> List(string UserId)
+        {
+            string usp = "usp_TelecomTypeList @UserID";
+            var x = await _sqlDataAccess.LoadData<TelecomTypeList, dynamic>(usp, new { UserId = UserId });
+            return x;
         }
     }
 }

@@ -25,11 +25,19 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<SettingIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public Task<SettingUpdateGet> UpdateGet(string UserId, int SettingId)
         {
             string usp = "usp_SettingUpdateGet @UserId, @SettingID";
             return _sqlDataAccess.LoadSingleRecord<SettingUpdateGet, dynamic>(usp, new { UserId = UserId, SettingId = SettingId });
 
+        }
+
+        public bool UpdatePost(SettingUpdateGet Setting)
+        {
+            string usp = "usp_RoleGroupUpdatePost @SettingId, @IntValue, @StringValue, @DateTimeValue, @ModifierId";
+            _sqlDataAccess.SaveData<SettingUpdateGet>(usp, Setting);
+            return true;
         }
     }
 }

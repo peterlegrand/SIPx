@@ -19,6 +19,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class PersonAddressController : ControllerBase
     {
+        private readonly IAddressTypeProvider _addressTypeProvider;
         private readonly IPersonAddressProvider _personAddressProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IMasterListProvider _masterListProvider;
@@ -27,8 +28,9 @@ namespace SIPx.API.Controllers
         private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonAddressController(IPersonAddressProvider personAddressProvider, ICheckProvider checkProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonAddressController(IAddressTypeProvider addressTypeProvider, IPersonAddressProvider personAddressProvider, ICheckProvider checkProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _addressTypeProvider = addressTypeProvider;
             _personAddressProvider = personAddressProvider;
             _checkProvider = checkProvider;
             _masterListProvider = masterListProvider;
@@ -38,40 +40,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-
-        [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> GetPersonAddresses(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _peopleProvider.PersonAddressIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetPersonAddress(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                var x = await _peopleProvider.PersonAddressUpdateGet(CurrentUser.Id, Id);
-                var y = await _masterListProvider.CountryList(CurrentUser.Id);
-                x.Countries = y;
-                return Ok(x);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -79,7 +47,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PersonAddressCreateGet = new PersonAddressCreateGet();
-                var AddressTypes = await _masterListProvider.AddressTypeList(CurrentUser.Id);
+                var AddressTypes = await _addressTypeProvider.List(CurrentUser.Id);
                 var Countries = await _masterListProvider.CountryList(CurrentUser.Id);
                 PersonAddressCreateGet.AddressTypes = AddressTypes;
                 PersonAddressCreateGet.Countries = Countries;
@@ -92,11 +60,12 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(PersonAddressCreatePost PersonAddress)
+        public async Task<IActionResult> Create(PersonAddressCreatePost PersonAddress)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            PersonAddress.CreatorId= CurrentUser.Id;
+            PersonAddress.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _peopleProvider.PersonAddressCreatePostCheck(PersonAddress);
@@ -117,6 +86,68 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("Index/{Id:int}")]
+        public async Task<IActionResult> Index(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.PersonAddressIndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                var x = await _peopleProvider.PersonAddressUpdateGet(CurrentUser.Id, Id);
+                var y = await _masterListProvider.CountryList(CurrentUser.Id);
+                x.Countries = y;
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(PersonAddressUpdateGet PersonAddress)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                PersonAddress.ModifierId = CurrentUser.Id;
+                //var CheckString = await _PersonAddressProvider.UpdatePostCheck(PersonAddress);
+                //if (CheckString.Length == 0)
+                //{
+                _personAddressProvider.UpdatePost(PersonAddress);
+                return Ok(PersonAddress);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {

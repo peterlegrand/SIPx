@@ -29,29 +29,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index")]
-        public async Task<IActionResult> GetRelationTypes() //int Id) PETER CHECK it had this Id but I think no need
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "30"))
-            {
-                //if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypes", "ClassificationRelationTypeID", Id) == 0)
-                //{
-                //    return BadRequest(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "No record with this ID",
-                //    });
-                //}
-
-                return Ok(await _classificationRelationTypeProvider.IndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
         [HttpGet("Create")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -70,8 +47,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(ClassificationRelationTypeCreatePost ClassificationRelationType)
+        public async Task<IActionResult> Create(ClassificationRelationTypeCreatePost ClassificationRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationRelationType.UserId = CurrentUser.Id;
@@ -96,22 +74,22 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetRelationTypeLanguages(int Id)
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index() //int Id) PETER CHECK it had this Id but I think no need
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "34"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "30"))
             {
-                if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypeLanguages", "ClassificationRelationTypeID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypes", "ClassificationRelationTypeID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
 
-                return Ok(await _classificationRelationTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationRelationTypeProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -121,9 +99,9 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetRelationType(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User); 
+            var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "30"))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypes", "ClassificationRelationTypeID", Id) == 0)
@@ -138,33 +116,38 @@ namespace SIPx.API.Controllers
                 return Ok(await _classificationRelationTypeProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
-            { 
+            {
                 IsSuccess = false,
                 Message = "No rights",
             });
         }
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetRelationTypeLanguage(int Id)
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(ClassificationRelationTypeUpdateGet ClassificationRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "34"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypeLanguages", "ClassificationRelationTypeLanguageID", Id) == 0)
+                ClassificationRelationType.CreatorId = CurrentUser.Id;
+                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
+                //if (CheckString.Length == 0)
+                //{
+                _classificationRelationTypeProvider.UpdatePost(ClassificationRelationType);
+                return Ok(ClassificationRelationType);
+                //}
+                return BadRequest(new
                 {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
 
-                return Ok(await _classificationRelationTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
                 IsSuccess = false,
                 Message = "No rights",
             });
+
         }
 
         [HttpGet("Delete/{Id:int}")]
@@ -211,6 +194,54 @@ namespace SIPx.API.Controllers
                     //Message = CheckString,
                 });
 
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("LanguageIndex/{Id:int}")]
+        public async Task<IActionResult> LanguageIndex(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "34"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypeLanguages", "ClassificationRelationTypeID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
+                return Ok(await _classificationRelationTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("LanguageUpdate/{Id:int}")]
+        public async Task<IActionResult> LanguageUpdate(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "34"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypeLanguages", "ClassificationRelationTypeLanguageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+
+                return Ok(await _classificationRelationTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

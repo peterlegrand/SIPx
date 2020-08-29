@@ -14,7 +14,6 @@ namespace SIPx.DataAccess
         Task<List<ClassificationRelationTypeLanguageUpdateGet>> LanguageIndexGet(string UserId, int ClassificationRelationTypeId);
         Task<ClassificationRelationTypeLanguageIndexGet> LanguageUpdateGet(string UserId, int ClassificationRelationTypeLanguageId);
         Task<List<ClassificationRelationTypeList>> List(string UserId);
-        Task<List<ClassificationRelationTypeList>> ListGet(string UserId);
         Task<ClassificationRelationTypeUpdateGet> UpdateGet(string UserId, int ClassificationRelationTypeId);
         bool UpdatePost(ClassificationRelationTypeUpdateGet ClassificationRelationType);
     }

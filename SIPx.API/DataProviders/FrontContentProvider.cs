@@ -27,6 +27,7 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontContentContentTypeGroup, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<FrontContentShowContent> FrontContentShowContent(string UserId, int ContentId)
         {
             string usp = "usp_FrontContentShowContent @UserId, @ContentId";
@@ -43,18 +44,21 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontContentContentType, dynamic>(usp, new { UserId = UserId, ContentTypeGroupId = ContentTypeGroupId });
             return x;
         }
+
         public async Task<List<FrontContentContentNewClassification>> NewClassifications(string UserId, int ContentTypeId)
         {
             string usp = "usp_FrontContentNewClassifications @UserId, @ContentTypeId";
             var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassification, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
             return x;
         }
+
         public async Task<List<FrontContentContentNewClassificationValue>> NewClassificationValues(string UserId, int ClassificationId)
         {
             string usp = "usp_FrontContentNewClassificationValues @UserId, @ClassificationId";
             var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassificationValue, dynamic>(usp, new { UserId = UserId, ClassificationId = ClassificationId });
             return x;
         }
+
         public async Task<bool> FrontContentCreatePost(string UserId, FrontContentContentNew Content)
         {
            

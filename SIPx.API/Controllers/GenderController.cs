@@ -32,9 +32,8 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-     
         [HttpGet("Index")]
-        public async Task<IActionResult> GetGenders()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -47,8 +46,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("Active")]
-        public async Task<IActionResult> GetGendersActive()
+        public async Task<IActionResult> ActiveList()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -63,7 +63,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetGender(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -75,6 +75,34 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
-               }
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(GenderUpdateGet Gender)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                Gender.ModifierId = CurrentUser.Id;
+                //var CheckString = await _GenderProvider.UpdatePostCheck(Gender);
+                //if (CheckString.Length == 0)
+                //{
+                _genderProvider.UpdatePost(Gender);
+                return Ok(Gender);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
     }
 }

@@ -20,12 +20,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<ContentTypeClassificationStatus>> ContentTypeClassificationStatusIndexGet(string UserId)
-        {
-            string usp = "usp_ContentTypeClassificationStatusIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<ContentTypeClassificationStatus, dynamic>(usp, new { UserId = UserId });
-            return x;
-        }
+        //public async Task<List<ContentTypeClassificationStatus>> ContentTypeClassificationStatusIndexGet(string UserId)
+        //{
+        //    string usp = "usp_ContentTypeClassificationStatusIndexGet @UserID";
+        //    var x = await _sqlDataAccess.LoadData<ContentTypeClassificationStatus, dynamic>(usp, new { UserId = UserId });
+        //    return x;
+        //}
 
         //PETER This is a uiterms table
 

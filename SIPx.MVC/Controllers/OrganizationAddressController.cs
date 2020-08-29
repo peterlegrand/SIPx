@@ -38,6 +38,7 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync<List<OrganizationAddressIndexGet>>($"{_baseUrl}api/OrganizationAddress/Index/" +id,token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationAddress/Index", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = id;
             return View(response);
             //return View();
         }
@@ -59,7 +60,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");
             await _client.PostProtectedAsync<OrganizationAddressUpdateGet>($"{_baseUrl}api/OrganizationAddress/Update", OrganizationAddress, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index/"+OrganizationAddress.OrganizationId);
         }
 
         [HttpGet]

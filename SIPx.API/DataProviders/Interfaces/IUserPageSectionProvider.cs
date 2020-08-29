@@ -13,5 +13,6 @@ namespace SIPx.DataAccess
         bool DeletePost(int Id);
         Task<List<PageSectionIndexGet>> IndexGet(string UserId, int PageId);
         Task<PageSectionUpdateGet> UpdateGet(string UserId, int PageSectionId);
+        bool UpdatePost(PageSectionUpdateGet PageSection);
     }
 }

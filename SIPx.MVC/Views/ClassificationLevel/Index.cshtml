@@ -23,24 +23,23 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-    
-    <a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
-    <a asp-controller="ClassificationLevel" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new classification level")).TermString</a>
-        <script id="Edit" type="text/x-template">
-            <div>
-                <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Edit/${ClassificationLevelId}"><span style="color:red">E</span>dit</a>
+<a asp-controller="Classification" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
+<a asp-controller="ClassificationLevel" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new classification level")).TermString</a>
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Edit/${ClassificationLevelId}"><span style="color:red">E</span>dit</a>
 
-            </div>
-        </script>
-        <script id="Languages" type="text/x-template">
-            <div>
-                <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/LanguageIndex/${ClassificationLevelId}"><span style="color:red">L</span>anguage</a>
+    </div>
+</script>
+<script id="Languages" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/LanguageIndex/${ClassificationLevelId}"><span style="color:red">L</span>anguage</a>
 
-            </div>
-        </script>
-        <script id="Delete" type="text/x-template">
-            <div>
-                <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Delete/${ClassificationLevelId}"><span style="color:red">D</span>elete</a>
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Delete/${ClassificationLevelId}"><span style="color:red">D</span>elete</a>
 
-            </div>
-        </script>
+    </div>
+</script>

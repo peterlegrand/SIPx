@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationLevels.ClassificationLevelID
+	, ClassificationLevels.ClassificationID
 	, ISNULL(CustomDateLevel.Customization,DefaultDateLevel.Name) DateLevelName
 	, ClassificationLevels.OnTheFly
 	, ClassificationLevels.Alphabetically

@@ -22,6 +22,7 @@ namespace SIPx.API.Controllers
             _contentProvider = ContentProvider;
             _userManager = userManager;
         }
+        
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -31,7 +32,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
             {
                 //TOFIX PETER
-                return Ok(await _contentProvider.GetContents(CurrentUser.Id));// CurrentUser.LanguageId));
+                return Ok(await _contentProvider.IndexGet(CurrentUser.Id));// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {
@@ -40,6 +41,7 @@ namespace SIPx.API.Controllers
             });
 
         }
+
         [HttpGet("ContentType")]
         public async Task<IActionResult> ContentType()
         {
@@ -49,7 +51,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
             {
                 //TOFIX PETER
-                return Ok(await _contentProvider.GetContentTypes(CurrentUser.Id));// CurrentUser.LanguageId));
+                return Ok(await _contentProvider.CreateGetContentTypes(CurrentUser.Id));// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {
@@ -70,9 +72,9 @@ namespace SIPx.API.Controllers
                 //TOFIX PETER
                 var Set = new ContentCreateListSet();
                 Set.ContentTypeId = ContentTypeId;
-                Set.LanguageList = await _contentProvider.GetLanguageList(CurrentUser.Id);
-                Set.ClassificationList = await _contentProvider.GetClassificationList(CurrentUser.Id, ContentTypeId);
-                Set.OrganizationList = await _contentProvider.GetOrganizationList(CurrentUser.Id);
+                Set.LanguageList = await _contentProvider.CreateGetLanguageList(CurrentUser.Id);
+                Set.ClassificationList = await _contentProvider.CreateGetClassificationList(CurrentUser.Id, ContentTypeId);
+                Set.OrganizationList = await _contentProvider.CreateGetOrganizationList(CurrentUser.Id);
                 
                 foreach (var Classification in Set.ClassificationList)
                 {

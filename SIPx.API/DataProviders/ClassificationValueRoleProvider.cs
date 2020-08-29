@@ -51,12 +51,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationValueRoleUpdateGet>(usp, ClassificationValueRole);
             return true;
         }
+
         public Task<ClassificationValueRoleDeleteGet> DeleteGet(string UserId, int ClassificationValueRoleId)
         {
             string usp = "usp_ClassificationValueRoleDeleteGet @UserId, @ClassificationValueRoleID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueRoleDeleteGet, dynamic>(usp, new { UserId, ClassificationValueRoleId });
 
         }
+
         public bool DeletePost(int ClassificationValueRoleId)
         {
             string usp = "usp_ClassificationValueRoleDeletePost @ClassificationValueRoleId";

@@ -20,6 +20,13 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+        public async Task<List<SequenceList>> CreateGetSequence(string UserId)
+        {
+            string usp = "usp_ContentTypeGroupCreateGetSequence @UserID";
+            var x = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+
         public async Task<string> CreatePostCheck(ContentTypeGroupCreatePost ContentTypeGroup)
         {
             string usp = "usp_ContentTypeGroupCreateCheck @Sequence  , @LanguageId , @Name ";
@@ -55,22 +62,24 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<ContentTypeGroupList>> List(string UserId)
-        {
-            string usp = "usp_ContentTypeGroupList @UserID";
-            return _sqlDataAccess.LoadData<ContentTypeGroupList, dynamic>(usp, new { UserId });
-        }
         public Task<ContentTypeGroupDeleteGet> DeleteGet(string UserId, int ContentTypeGroupId)
         {
             string usp = "usp_ContentTypeGroupDeleteGet @UserId, @ContentTypeGroupID";
             return _sqlDataAccess.LoadSingleRecord<ContentTypeGroupDeleteGet, dynamic>(usp, new { UserId, ContentTypeGroupId });
 
         }
+
         public bool DeletePost(int ContentTypeGroupId)
         {
             string usp = "usp_ContentTypeGroupDeletePost @ContentTypeGroupId";
             _sqlDataAccess.SaveData<dynamic>(usp, new { ContentTypeGroupId = ContentTypeGroupId });
             return true;
+        }
+
+        public Task<List<ContentTypeGroupList>> List(string UserId)
+        {
+            string usp = "usp_ContentTypeGroupList @UserID";
+            return _sqlDataAccess.LoadData<ContentTypeGroupList, dynamic>(usp, new { UserId });
         }
 
     }

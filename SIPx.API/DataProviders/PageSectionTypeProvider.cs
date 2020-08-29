@@ -20,8 +20,6 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-
-
         public Task<List<PageSectionTypeList>> List(string UserId)
         {
             string usp = "usp_PageSectionTypeList @UserId";

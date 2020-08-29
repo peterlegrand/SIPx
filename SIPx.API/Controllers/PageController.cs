@@ -42,73 +42,7 @@ namespace SIPx.API.Controllers
             _pageProvider = PageProvider;
             _userManager = userManager;
         }
-        [HttpGet("Index")]
-        public async Task<IActionResult> Get()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
-            {
-                return Ok(await _pageProvider.IndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> EditGet(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
-            {
-                if (await _checkProvider.CheckIfRecordExists("Pages", "PageID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-                var x = await _pageProvider.UpdateGet(CurrentUser.Id, Id);
-
-                return Ok(x);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
-        }
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> LanguageIndex(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _pageProvider.LanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> LanguageUpdate(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _pageProvider.LanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
@@ -126,8 +60,8 @@ namespace SIPx.API.Controllers
                 PageCreateGet.LanguageName = UserLanguage.Name;
                 PageCreateGet.Statuses = Statuses;
                 PageCreateGet.Projects = Projects;
-                PageCreateGet.Organizations= Organizations;
-                PageCreateGet.Classifications= Classifications;
+                PageCreateGet.Organizations = Organizations;
+                PageCreateGet.Classifications = Classifications;
                 PageCreateGet.Users = Users;
 
                 return Ok(PageCreateGet);
@@ -138,8 +72,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(PageCreatePost Page)
+        public async Task<IActionResult> Create(PageCreatePost Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Page.UserId = CurrentUser.Id;
@@ -163,6 +98,76 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
+            {
+                return Ok(await _pageProvider.IndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("Pages", "PageID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _pageProvider.UpdateGet(CurrentUser.Id, Id);
+
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(PageUpdateGet Page)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                Page.ModifierId = CurrentUser.Id;
+                //var CheckString = await _PageProvider.UpdatePostCheck(Page);
+                //if (CheckString.Length == 0)
+                //{
+                _pageProvider.UpdatePost(Page);
+                return Ok(Page);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
@@ -215,6 +220,36 @@ namespace SIPx.API.Controllers
             });
 
 
+        }
+
+        [HttpGet("LanguageIndex/{Id:int}")]
+        public async Task<IActionResult> LanguageIndex(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _pageProvider.LanguageIndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("LanguageUpdate/{Id:int}")]
+        public async Task<IActionResult> LanguageUpdate(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _pageProvider.LanguageUpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
         }
 
     }

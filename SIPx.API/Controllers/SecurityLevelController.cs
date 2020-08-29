@@ -45,19 +45,6 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetSecurityLevel(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _peopleProvider.SecurityLevelUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+       
     }
 }

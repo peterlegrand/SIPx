@@ -33,30 +33,49 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Organization);
             return CheckString;
         }
+
         public async Task<List<OrganizationIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_OrganizationIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<OrganizationIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public Task<OrganizationUpdateGet> UpdateGet(string UserId, int OrganizationId)
         {
             string usp = "usp_OrganizationUpdateGet @UserId, @OrganizationID";
             return _sqlDataAccess.LoadSingleRecord<OrganizationUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
 
         }
+
         public bool UpdatePost(OrganizationUpdateGet Organization)
         {
             string usp = "usp_OrganizationUpdatePost @OrganizationId , @ParentOrganizationId, @StatusId, @OrganizationTypeID, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
             _sqlDataAccess.SaveData<OrganizationUpdateGet>(usp, Organization);
             return true;
         }
+
+        public Task<OrganizationDeleteGet> DeleteGet(string UserId, int OrganizationId)
+        {
+            string usp = "usp_OrganizationDeleteGet @UserId, @OrganizationID";
+            return _sqlDataAccess.LoadSingleRecord<OrganizationDeleteGet, dynamic>(usp, new { UserId, OrganizationId });
+
+        }
+
+        public bool DeletePost(int OrganizationId)
+        {
+            string usp = "usp_OrganizationDeletePost @OrganizationId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { OrganizationId = OrganizationId });
+            return true;
+        }
+
         public async Task<List<OrganizationLanguage>> LanguageIndexGet(string UserId, int OrganizationId)
         {
             string usp = "usp_OrganizationLanguageIndexGet @UserId, @OrganizationId";
             var x = await _sqlDataAccess.LoadData<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
+
         public Task<OrganizationLanguage> LanguageUpdateGet(string UserId, int OrganizationLanguageId)
         {
             string usp = "usp_OrganizationLanguageUpdateGet @UserId, @OrganizationLanguageID";
@@ -70,23 +89,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<List<OrganizationList>> ListofUser(string UserId)
         {
             string usp = "usp_OrganizationListOfUser @UserID";
             var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserId = UserId });
             return x;
-        }
-        public Task<OrganizationDeleteGet> DeleteGet(string UserId, int OrganizationId)
-        {
-            string usp = "usp_OrganizationDeleteGet @UserId, @OrganizationID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationDeleteGet, dynamic>(usp, new { UserId, OrganizationId });
-
-        }
-        public bool DeletePost(int OrganizationId)
-        {
-            string usp = "usp_OrganizationDeletePost @OrganizationId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { OrganizationId = OrganizationId });
-            return true;
         }
 
     }

@@ -35,43 +35,7 @@ namespace SIPx.API.Controllers
             _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
-        [HttpGet("Index")]
-        public async Task<IActionResult> GetPersons()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _peopleProvider.PersonIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
 
-
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetPerson(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                var x = await _peopleProvider.PersonUpdateGet(CurrentUser.Id, Id);
-                var y = await _peopleProvider.GenderList(CurrentUser.Id);
-                var z = await _organizationProvider.List(CurrentUser.Id);
-                var a = await _peopleProvider.UserList();
-                x.Genders = y;
-                x.Organizations = z;
-                x.Users = a;
-                return Ok(x);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
@@ -81,7 +45,7 @@ namespace SIPx.API.Controllers
                 var PersonCreateGet = new PersonCreateGet();
                 var Genders = await _peopleProvider.GenderList(CurrentUser.Id);
                 var Organizations = await _organizationProvider.List(CurrentUser.Id);
-                PersonCreateGet.Genders= Genders;
+                PersonCreateGet.Genders = Genders;
                 PersonCreateGet.Organizations = Organizations;
                 return Ok(PersonCreateGet);
             }
@@ -91,8 +55,9 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(PersonCreatePost Person)
+        public async Task<IActionResult> Create(PersonCreatePost Person)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Person.UserId = CurrentUser.Id;
@@ -116,6 +81,73 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _peopleProvider.PersonIndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                var x = await _peopleProvider.PersonUpdateGet(CurrentUser.Id, Id);
+                var y = await _peopleProvider.GenderList(CurrentUser.Id);
+                var z = await _organizationProvider.List(CurrentUser.Id);
+                var a = await _peopleProvider.UserList();
+                x.Genders = y;
+                x.Organizations = z;
+                x.Users = a;
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(PersonUpdateGet Person)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                Person.ModifierId = CurrentUser.Id;
+                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
+                //if (CheckString.Length == 0)
+                //{
+                _personProvider.UpdatePost(Person);
+                return Ok(Person);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {

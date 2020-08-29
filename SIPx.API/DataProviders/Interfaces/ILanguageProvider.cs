@@ -10,12 +10,13 @@ namespace SIPx.DataAccess
         Task<List<LanguageList>> List(string UserId);
         Task<List<LanguageList>> ActiveList(string UserId);
         bool PostObjectLanguage(ObjectLanguageCreatePost ObjectLanguage);
-        Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int Id);
+        Task<bool> NoOfLanguagesOnLanguageObject(string TableName, int LanguageId, int Id);
         Task<List<UITermLanguageCustomization>> UITermLanguageCustomizationIndexGet(string UserId);
         Task<UITermLanguageCustomization> UITermLanguageCustomizationUpdateGet(string UserId, int UITermLanguageCustomizationId);
         Task<List<UITermLanguage>> UITermLanguageIndexGet(string UserId);
         Task<UITermLanguage> UITermLanguageUpdateGet(string UserId, int UITermLanguageId);
         Task<LanguageList> UserLanguageUpdateGet(string UserId);
         bool UpdatePost(LanguageUpdateGet ContentType);
+        Task<LanguageUpdateGet> UpdateGet(string UserId, int LanguageId);
     }
 }

@@ -35,8 +35,60 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                var UserMenuCreateGet = new UserMenuCreateGet();
+                var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
+                var Pages = await _pageProvider.ListForMenu(CurrentUser.Id);
+                var UserMenuCreateGetSequences = await _userMenuProvider.CreateGetSequence(CurrentUser.Id);
+                UserMenuCreateGet.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
+                UserMenuCreateGet.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
+                UserMenuCreateGetSequences.Add(new SequenceList { Sequence = UserMenuCreateGetSequences.Count, Name = "Add at the end" });
+                UserMenuCreateGet.UserMenus = UserMenuCreateGetSequences;
+                UserMenuCreateGet.Icons = iconslist;
+                UserMenuCreateGet.Pages = Pages;
+                UserMenuCreateGet.UserId = CurrentUser.Id;
+                return Ok(UserMenuCreateGet);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create(UserMenuCreateGet UserMenu)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            UserMenu.CreatorId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
+                //if (CheckString.Length == 0)
+                //{
+                _userMenuProvider.CreatePost(UserMenu);
+                return Ok(UserMenu);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
         [HttpGet("Index")]
-        public async Task<IActionResult> GetOptions()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
@@ -52,56 +104,6 @@ namespace SIPx.API.Controllers
 
 
                 return Ok(await _userMenuProvider.IndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Create/{Id:int}")]
-        public async Task<IActionResult> Create(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                var UserMenuCreateGet = new UserMenuCreateGet();
-                var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
-                var Pages = await _pageProvider.ListForMenu(CurrentUser.Id);
-                var UserMenuCreateGetSequences = await _userMenuProvider.CreateGetSequence(CurrentUser.Id);
-                UserMenuCreateGet.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
-                UserMenuCreateGet.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
-                UserMenuCreateGetSequences.Add(new SequenceList { Sequence = UserMenuCreateGetSequences.Count ,Name = "Add at the end" });
-                UserMenuCreateGet.UserMenus = UserMenuCreateGetSequences;
-                UserMenuCreateGet.Icons = iconslist;
-                UserMenuCreateGet.Pages= Pages;
-                UserMenuCreateGet.UserId = CurrentUser.Id;
-                return Ok(UserMenuCreateGet);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpPost("Create")]
-        public async Task<IActionResult> Post(UserMenuCreateGet UserMenu)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            UserMenu.CreatorId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
-                //if (CheckString.Length == 0)
-                //{
-                _userMenuProvider.UserMenuCreatePost(UserMenu);
-                return Ok(UserMenu);
-                //}
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
             }
             return BadRequest(new
             {
@@ -136,10 +138,8 @@ namespace SIPx.API.Controllers
             });
         }
 
-
-
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetLevel(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
@@ -174,9 +174,8 @@ namespace SIPx.API.Controllers
             });
         }
 
-
         [HttpGet("Delete/{Id:int}")]
-        public async Task<IActionResult> DeleteGet(int Id)
+        public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
@@ -201,6 +200,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Delete")]
         public async Task<IActionResult> Delete(UserMenuDeleteGet UserMenu)
         {

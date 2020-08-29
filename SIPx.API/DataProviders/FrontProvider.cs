@@ -25,30 +25,35 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontIndexGetPanels, dynamic>(usp, new { PageId = PageId });
             return x;
         }
+
         public async Task<List<AppointmentData>> FrontIndexPersonalCalendar(string UserId)
         {
             string usp = "usp_personalCalendar @UserId";
             var x = await _sqlDataAccess.LoadData<AppointmentData, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<List<AppointmentData>> FrontIndexOrganizationCalendar(string UserId)
         {
             string usp = "usp_personalOrganizationCalendar @UserId";
             var x = await _sqlDataAccess.LoadData<AppointmentData, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<List<AppointmentData>> FrontIndexProjectCalendar(string UserId)
         {
             string usp = "usp_personalProjectCalendar @UserId";
             var x = await _sqlDataAccess.LoadData<AppointmentData, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<List<AppointmentData>> FrontIndexEventCalendar()
         {
             string usp = "usp_EventCalendar";
             var x = await _sqlDataAccess.LoadData<AppointmentData>(usp);
             return x;
         }
+
         public Task<FrontIndexGetDashboard> FrontIndexGetDashboard(string UserId, int PageId)
         {
             string usp = "usp_FrontIndexGetDashboard @UserId, @PageId";

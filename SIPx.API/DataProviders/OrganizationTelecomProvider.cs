@@ -26,36 +26,42 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationTelecom);
             return CheckString;
         }
+
         public async Task<string> CreatePost(OrganizationTelecomCreatePost OrganizationTelecom)
         {
             string usp = "usp_OrganizationTelecomCreatePost  @OrganizationId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationTelecom);
             return CheckString;
         }
+
         public Task<List<OrganizationTelecom>> IndexGet(string UserId, int OrganizationId)
         {
             string usp = "usp_OrganizationTelecomIndexGet @UserId, @OrganizationID";
             return _sqlDataAccess.LoadData<OrganizationTelecom, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
 
         }
+
         public Task<OrganizationTelecom> UpdateGet(string UserId, int OrganizationTelecomId)
         {
             string usp = "usp_OrganizationTelecomUpdateGet @UserId, @OrganizationTelecomID";
             return _sqlDataAccess.LoadSingleRecord<OrganizationTelecom, dynamic>(usp, new { UserId = UserId, OrganizationTelecomId = OrganizationTelecomId });
 
         }
+
         public bool UpdatePost(OrganizationTelecomUpdateGet OrganizationTelecom)
         {
             string usp = "usp_OrganizationTelecomUpdatePost @OrganizationTelecomId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @ModifierId";
             _sqlDataAccess.SaveData<OrganizationTelecomUpdateGet>(usp, OrganizationTelecom);
             return true;
         }
+
         public Task<OrganizationTelecomDeleteGet> DeleteGet(string UserId, int OrganizationTelecomId)
         {
             string usp = "usp_OrganizationTelecomDeleteGet @UserId, @OrganizationTelecomID";
             return _sqlDataAccess.LoadSingleRecord<OrganizationTelecomDeleteGet, dynamic>(usp, new { UserId, OrganizationTelecomId });
 
         }
+
         public bool DeletePost(int OrganizationTelecomId)
         {
             string usp = "usp_OrganizationTelecomDeletePost @OrganizationTelecomId";

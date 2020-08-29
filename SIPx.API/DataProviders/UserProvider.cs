@@ -20,13 +20,13 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-
         public async Task<List<UserIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_UserIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<UserIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public Task<UserUpdateGet> UpdateGet(string UserId, string SelectedUserId)
         {
             string usp = "usp_UserUpdateGet @UserId, @SelectedUserID";

@@ -33,12 +33,12 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Index")]
-        public async Task<IActionResult> GetAddressTypes()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _addressTypeProvider.AddressTypeIndexGet(CurrentUser.Id));
+                return Ok(await _addressTypeProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -48,12 +48,12 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetAddressType(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _addressTypeProvider.AddressTypeUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _addressTypeProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -61,5 +61,34 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(AddressTypeUpdateGet AddressType)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                AddressType.ModifierId = CurrentUser.Id;
+                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
+                //if (CheckString.Length == 0)
+                //{
+                _addressTypeProvider.UpdatePost(AddressType);
+                return Ok(AddressType);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
     }
 }

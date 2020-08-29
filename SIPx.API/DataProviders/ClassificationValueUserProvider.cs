@@ -18,42 +18,49 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public Task<List<ClassificationValueUserUpdateGet>> IndexGet(string UserId, int ClassificationId)
-        {
-            string usp = "usp_ClassificationValueUserIndex @UserId, @ClassificationID";
-            return _sqlDataAccess.LoadData<ClassificationValueUserUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
 
-        }
-        public Task<ClassificationValueUserUpdateGet> UpdateGet(string UserId, int ClassificationValueUserId)
-        {
-            string usp = "usp_ClassificationValueUserUpdateGet @UserId, @ClassificationValueUserID";
-            return _sqlDataAccess.LoadSingleRecord<ClassificationValueUserUpdateGet, dynamic>(usp, new { UserId, ClassificationValueUserId });
-
-        }
         public async Task<string> CreatePostCheck(ClassificationValueUserCreatePost ClassificationValueUser)
         {
             string usp = "usp_ClassificationValueUserCreatePostCheck @UserId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueUser);
             return CheckString;
         }
+
         public async Task<string> CreatePost(ClassificationValueUserCreatePost ClassificationValueUser)
         {
             string usp = "usp_ClassificationValueUserCreatePost @UserId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueUser);
             return String;
         }
+
+        public Task<List<ClassificationValueUserUpdateGet>> IndexGet(string UserId, int ClassificationId)
+        {
+            string usp = "usp_ClassificationValueUserIndex @UserId, @ClassificationID";
+            return _sqlDataAccess.LoadData<ClassificationValueUserUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
+
+        }
+
+        public Task<ClassificationValueUserUpdateGet> UpdateGet(string UserId, int ClassificationValueUserId)
+        {
+            string usp = "usp_ClassificationValueUserUpdateGet @UserId, @ClassificationValueUserID";
+            return _sqlDataAccess.LoadSingleRecord<ClassificationValueUserUpdateGet, dynamic>(usp, new { UserId, ClassificationValueUserId });
+
+        }
+
         public bool UpdatePost(ClassificationValueUserUpdateGet ClassificationValueUser)
         {
             string usp = "usp_ClassificationValueUserUpdatePost @ClassificationValueUserId, @UserId, @ClassificationValueId, @ClassificationRelationTypeId, @ModifierId";
             _sqlDataAccess.SaveData<ClassificationValueUserUpdateGet>(usp, ClassificationValueUser);
             return true;
         }
+
         public Task<ClassificationValueUserDeleteGet> DeleteGet(string UserId, int ClassificationValueUserId)
         {
             string usp = "usp_ClassificationValueUserDeleteGet @UserId, @ClassificationValueUserID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueUserDeleteGet, dynamic>(usp, new { UserId, ClassificationValueUserId });
 
         }
+
         public bool DeletePost(int ClassificationValueUserId)
         {
             string usp = "usp_ClassificationValueUserDeletePost @ClassificationValueUserId";

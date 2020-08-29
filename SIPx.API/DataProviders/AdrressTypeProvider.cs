@@ -18,18 +18,33 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public async Task<List<AddressType>> AddressTypeIndexGet(string UserId)
+
+        public async Task<List<AddressType>> IndexGet(string UserId)
         {
             string usp = "usp_AddressTypeIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<AddressType, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        public Task<AddressType> AddressTypeUpdateGet(string UserId, int AddressTypeId)
+
+        public Task<AddressTypeUpdateGet> UpdateGet(string UserId, int AddressTypeId)
         {
             string usp = "usp_AddressTypeUpdateGet @UserId, @AddressTypeID";
-            return _sqlDataAccess.LoadSingleRecord<AddressType, dynamic>(usp, new { UserId = UserId, AddressTypeId = AddressTypeId });
+            return _sqlDataAccess.LoadSingleRecord<AddressTypeUpdateGet, dynamic>(usp, new { UserId = UserId, AddressTypeId = AddressTypeId });
 
         }
 
+        public bool UpdatePost(AddressTypeUpdateGet AddressType)
+        {
+            string usp = "usp_AddressTypeUpdatePost @AddressTypeId, @StatusId, @ModifierId";
+            _sqlDataAccess.SaveData<AddressTypeUpdateGet>(usp, AddressType);
+            return true;
+        }
+
+        public async Task<List<AddressTypeList>> List(string UserId)
+        {
+            string usp = "usp_AddressTypeList @UserID";
+            var x = await _sqlDataAccess.LoadData<AddressTypeList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
     }
 }

@@ -6,19 +6,20 @@ namespace SIPx.DataAccess
 {
     public interface IContentProvider
     {
-        bool ClassificationUpdatePost(ClassificationUpdatePost Classification);
+        bool UpdatePostClassification(ClassificationUpdatePost Classification);
         Task<List<ContentForPanel>> ContentForPanel(string UserId);
         Task<ContentDeleteGet> DeleteGet(string UserId, int ContentId);
         bool DeletePost(int Id);
-        Task<ClassificationIndexGet> GetClassificationById(int Id, int LanguageId);
-        Task<List<ClassificationList>> GetClassificationList(string UserId, int ContentTypeId);
-        List<ClassificationIndexGet> GetClassifications2(int LanguageId);
-        Task<ContentCreateListSet> GetContentCreateListSet(string UserId, int ContentTypeId);
-        Task<List<ClassificationValueList>> GetContentCreateListSet2(string UserId, int ClassificationId);
-        Task<List<Content>> GetContents(string UserId);
-        Task<List<ContentType>> GetContentTypes(string UserId);
-        Task<List<LanguageList>> GetLanguageList(string UserId);
-        Task<List<OrganizationList>> GetOrganizationList(string UserId);
-        bool PostClassification(ClassificationCreatePost Classification);
+        Task<ClassificationIndexGet> CreateGetClassificationById(int Id, int LanguageId);
+        Task<List<ClassificationList>> CreateGetClassificationList(string UserId, int ContentTypeId);
+        List<ClassificationIndexGet> CreateGetClassifications2(int LanguageId);
+        Task<ContentCreateListSet> CreateGetContentCreateListSet(string UserId, int ContentTypeId);
+        Task<List<ClassificationValueList>> CreateGetContentCreateListSet2(string UserId, int ClassificationId);
+        Task<List<Content>> IndexGet(string UserId);
+        //Task<List<ContentType>> GetContentTypes(string UserId);
+        Task<List<LanguageList>> CreateGetLanguageList(string UserId);
+        Task<List<OrganizationList>> CreateGetOrganizationList(string UserId);
+        bool CreatePostClassification(ClassificationCreatePost Classification);
+        Task<List<ContentType>> CreateGetContentTypes(string UserId);
     }
 }

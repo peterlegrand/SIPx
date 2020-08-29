@@ -25,36 +25,42 @@ namespace SIPx.DataAccess
             var Organization = await _sqlDataAccess.LoadSingleRecord<FrontOrganizationIndexGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return Organization;
         }
+
         public async Task<List<FrontOrganizationIndexGetSubOrganization>> IndexGetSubOrganization(string UserId, int OrganizationId)
         {
             string usp = "usp_FrontOrganizationIndexGetSubOrganization @UserId, @OrganizationId";
             var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetSubOrganization, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
+
         public async Task<List<FrontOrganizationIndexGetMember>> IndexGetMember(string UserId, int OrganizationId)
         {
             string usp = "usp_FrontOrganizationIndexGetMember @UserId, @OrganizationId";
             var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetMember, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
+
         public async Task<List<FrontOrganizationIndexGetContent>> IndexGetContent(string UserId, int OrganizationId)
         {
             string usp = "usp_FrontOrganizationIndexGetContent @UserId, @OrganizationId";
             var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetContent, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
+
         public async Task<List<FrontOrganizationIndexGetProcess>> IndexGetProcess(string UserId, int OrganizationId)
         {
             string usp = "usp_FrontOrganizationIndexGetProcess @UserId, @OrganizationId";
             var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetProcess, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
+
         public async Task<string> IndexGetSubOrganizationTree(string UserId, int OrganizationId)
         {
             string usp = "usp_SubOrganizationsToJason @OrganizationId, @IsRoot, @UserId ";
             var x = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { OrganizationId = OrganizationId, IsRoot = 1, UserId = UserId });
             return x;
         }
+
         public async Task<FrontOrganizationAdvancedSearchGet> FrontOrganizationAdvancedSearchGet(string UserId)
         {
             var AdvancedOrganizationSearch = new FrontOrganizationAdvancedSearchGet();
@@ -78,6 +84,7 @@ namespace SIPx.DataAccess
 
             return AdvancedOrganizationSearch;
         }
+
         public async Task<List<OrganizationList>> FrontOrganizationAdvancedSearchPost(FrontOrganizationAdvancedSearchGet SearchData)
         {
             string usp = "usp_FrontOrganizationAdvancedSearchPost @UserId, @OrganizationName, @OrganizationParentId, @OrganizationStatusId, @OrganizationTypeId , @CountryId, @OrganizationProvinceState , @OrganizationCity , @LegalEntity, @Internal, @IAmMemberOfOrganization ";

@@ -27,12 +27,14 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<NewProcessShowTemplateGroup, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<List<NewProcessShowTemplate>> NewProcessShowTemplate(string UserId)
         {
             string usp = "usp_FrontNewProcessShowTemplate @UserID";
             var x = await _sqlDataAccess.LoadData<NewProcessShowTemplate, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+
         public async Task<FrontProcessEditGet> FrontProcessEditGet(string UserId, int ProcessId)
         {
             string usp = "usp_FrontProcessEditGet @UserID, @ProcessId";
@@ -42,6 +44,7 @@ namespace SIPx.DataAccess
             x.ProcessFields = y;
             return x;
         }
+
         public async Task<bool> FrontProcessEditPost(FrontProcessEditGet Process, string UserId)
         {
 //            DataTable fields = new DataTable();

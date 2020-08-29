@@ -32,7 +32,7 @@ namespace SIPx.API.Controllers
 
      
         [HttpGet("LanguageCustomizationIndex")]
-        public async Task<IActionResult> GetUITermLanguageCustomizations()
+        public async Task<IActionResult> LanguageCustomizationIndex()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -46,7 +46,7 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetUITermLanguages(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -61,7 +61,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetUITermLanguage(int Id)
+        public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -75,7 +75,7 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Index")]
-        public async Task<IActionResult> GetUITerms()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -90,7 +90,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetUITerm(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))

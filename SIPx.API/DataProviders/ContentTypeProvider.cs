@@ -56,6 +56,20 @@ namespace SIPx.DataAccess
             return true;
         }
 
+        public Task<ContentTypeDeleteGet> DeleteGet(string UserId, int ContentTypeId)
+        {
+            string usp = "usp_ContentTypeDeleteGet @UserId, @ContentTypeID";
+            return _sqlDataAccess.LoadSingleRecord<ContentTypeDeleteGet, dynamic>(usp, new { UserId, ContentTypeId });
+
+        }
+
+        public bool DeletePost(int ContentTypeId)
+        {
+            string usp = "usp_ContentTypeDeletePost @ContentTypeId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentTypeId = ContentTypeId });
+            return true;
+        }
+
         public async Task<List<ContentTypeLanguage>> LanguageIndexGet(string UserId, int ContentTypeId)
         {
             string usp = "usp_ContentTypeLanguageIndexGet @UserId, @ContentTypeID";
@@ -75,18 +89,6 @@ namespace SIPx.DataAccess
             string usp = "usp_ContentTypeList @UserID";
             return _sqlDataAccess.LoadData<ContentTypeList, dynamic>(usp, new { UserId = UserId });
 
-        }
-        public Task<ContentTypeDeleteGet> DeleteGet(string UserId, int ContentTypeId)
-        {
-            string usp = "usp_ContentTypeDeleteGet @UserId, @ContentTypeID";
-            return _sqlDataAccess.LoadSingleRecord<ContentTypeDeleteGet, dynamic>(usp, new { UserId, ContentTypeId });
-
-        }
-        public bool DeletePost(int ContentTypeId)
-        {
-            string usp = "usp_ContentTypeDeletePost @ContentTypeId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentTypeId = ContentTypeId });
-            return true;
         }
 
     }

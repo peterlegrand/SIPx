@@ -29,10 +29,10 @@ namespace SIPx.API.Classes
                 " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
                 " ON DefaultLanguage.ProcessTemplateId = ProcessTemplates.ProcessTemplateId ";
 
-            List<int> TemplateIDs = await _processProvider.NewProcessGetInitialTemplateList();
+            List<int> TemplateIDs = await _processProvider.CreateGetInitialTemplateList();
             foreach (var TemplateId in TemplateIDs)
             {
-                List<ProcessTemplateFlowConditionOld> TemplateFlowConditions = await _processProvider.NewProcessGetFlowConditionList(TemplateId);
+                List<ProcessTemplateFlowConditionOld> TemplateFlowConditions = await _processProvider.CreateGetFlowConditionList(TemplateId);
 
                 if (TemplateFlowConditions.Count() > 0)
                 { SQLWhere += " AND "; }
@@ -196,7 +196,7 @@ namespace SIPx.API.Classes
                     }
                 }
             }
-            List<NewProcessTemplateList> NewTemplateList = await _processProvider.NewProcessGetTemplateList(SQLJOIN + SQLWhere);
+            List<NewProcessTemplateList> NewTemplateList = await _processProvider.CreateGetTemplateList(SQLJOIN + SQLWhere);
             return NewTemplateList;
             
         }

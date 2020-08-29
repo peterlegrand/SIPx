@@ -31,7 +31,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Index/{Id}")]
-        public async Task<IActionResult> GetUserRoles(string Id)
+        public async Task<IActionResult> Index(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))

@@ -118,22 +118,50 @@
                 <ejs-textbox id="TopicName" ejs-for="TopicName" cssClass="e-outline" placeholder="TopicName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("From date")).TermString
+        @if (Model.DateLevel == 2 || Model.DateLevel == 3)
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("From date")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-datepicker id="DateFrom" label="DateFrom" ejs-for="DateFrom" checked="@Model.DateFrom"></ejs-datepicker>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-datepicker id="DateFrom" label="DateFrom" ejs-for="DateFrom" checked="@Model.DateFrom"></ejs-datepicker>
+        }
+        @if (Model.DateLevel == 4 || Model.DateLevel == 5)
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("From date")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-datetimepicker id="DateFrom" label="DateFrom" ejs-for="DateFrom" checked="@Model.DateFrom"></ejs-datetimepicker>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("To date")).TermString
+        }
+        @if (Model.DateLevel == 3)
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("To date")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-datepicker id="DateTo" label="DateTo" ejs-for="DateTo" checked="@Model.DateTo"></ejs-datepicker>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-datepicker id="DateTo" label="DateTo" ejs-for="DateTo" checked="@Model.DateTo"></ejs-datepicker>
+        }
+        @if (Model.DateLevel == 5)
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("To date")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-datetimepicker id="DateTo" label="DateTo" ejs-for="DateTo" checked="@Model.DateTo"></ejs-datetimepicker>
+                </div>
             </div>
-        </div>
+        }
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>

@@ -25,6 +25,7 @@ namespace SIPx.API.Controllers
             _sqlDataAccess = sqlDataAccess;
             _roleManager = roleManager;
         }
+        
         [HttpGet]
         public IActionResult Index()
         { return View(); }

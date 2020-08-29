@@ -14,5 +14,6 @@ namespace SIPx.DataAccess
         Task<List<ContentTypeGroupList>> List(string UserId);
         Task<ContentTypeGroup> UpdateGet(string UserId, int ContentTypeGroupId);
         bool UpdatePost(ContentTypeGroupUpdateGet ContentTypeGroup);
+        Task<List<SequenceList>> CreateGetSequence(string UserId);
     }
 }

@@ -31,34 +31,5 @@ namespace SIPx.API.Controllers
         }
 
 
-        //[HttpGet("IntermediateRegion")]
-        //public async Task<IActionResult> GetIntermediateRegions()
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-        //    {
-        //        return Ok(await _masterProvider.IntermediateRegionIndexGet(CurrentUser.Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
-        //    [HttpGet("SubRegions")]
-        //    public async Task<IActionResult> GetSubRegions()
-        //    {
-        //        var CurrentUser = await _userManager.GetUserAsync(User);
-        //        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-        //        {
-        //            return Ok(await _masterProvider.SubRegionIndexGet(CurrentUser.Id));
-        //        }
-        //        return BadRequest(new
-        //        {
-        //            IsSuccess = false,
-        //            Message = "No rights",
-        //        });
-        //    }
-        //}
     }
 }

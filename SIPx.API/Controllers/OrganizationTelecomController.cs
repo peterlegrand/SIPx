@@ -19,6 +19,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class OrganizationTelecomController : ControllerBase
     {
+        private readonly ITelecomTypeProvider _telecomTypeProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IOrganizationTelecomProvider _organizationTelecomProvider;
@@ -27,8 +28,9 @@ namespace SIPx.API.Controllers
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationTelecomController(ICheckProvider checkProvider, IMasterListProvider masterListProvider, IOrganizationTelecomProvider organizationTelecomProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public OrganizationTelecomController(ITelecomTypeProvider telecomTypeProvider, ICheckProvider checkProvider, IMasterListProvider masterListProvider, IOrganizationTelecomProvider organizationTelecomProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IOrganizationProvider organizationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _telecomTypeProvider = telecomTypeProvider;
             _checkProvider = checkProvider;
             _masterListProvider = masterListProvider;
             _organizationTelecomProvider = organizationTelecomProvider;
@@ -38,35 +40,6 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationTelecoms(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationTelecomProvider.IndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetOrganizationTelecom(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _organizationTelecomProvider.UpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -74,7 +47,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var OrganizationTelecomCreateGet = new OrganizationTelecomCreateGet();
-                var TelecomTypes = await _masterListProvider.TelecomTypeList(CurrentUser.Id);
+                var TelecomTypes = await _telecomTypeProvider.List(CurrentUser.Id);
                 OrganizationTelecomCreateGet.TelecomTypes = TelecomTypes;
                 OrganizationTelecomCreateGet.OrganizationId = Id;
                 return Ok(OrganizationTelecomCreateGet);
@@ -85,11 +58,12 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(OrganizationTelecomCreatePost OrganizationTelecom)
+        public async Task<IActionResult> Create(OrganizationTelecomCreatePost OrganizationTelecom)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            OrganizationTelecom.CreatorId= CurrentUser.Id;
+            OrganizationTelecom.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _organizationTelecomProvider.CreatePostCheck(OrganizationTelecom);
@@ -110,6 +84,65 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("Index/{Id:int}")]
+        public async Task<IActionResult> Index(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _organizationTelecomProvider.IndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _organizationTelecomProvider.UpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(OrganizationTelecomUpdateGet OrganizationTelecom)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                OrganizationTelecom.ModifierId = CurrentUser.Id;
+                //var CheckString = await _OrganizationTelecomProvider.UpdatePostCheck(OrganizationTelecom);
+                //if (CheckString.Length == 0)
+                //{
+                _organizationTelecomProvider.UpdatePost(OrganizationTelecom);
+                return Ok(OrganizationTelecom);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {

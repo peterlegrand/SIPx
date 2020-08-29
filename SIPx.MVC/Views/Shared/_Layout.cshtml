@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <!-- Syncfusion Essential JS 2 Styles -->
-    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/fabric-dark.css" />
     <link href="~/css/site.css" rel="stylesheet" />
     <!-- Syncfusion Essential JS 2 Scripts -->
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
@@ -23,24 +23,22 @@
     </script>
 </head>
 <body>
-    <header>
+    <header class="header">
         @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
+        <h1 style="color:slategrey">
+            <img src="~/images/hitchhiker-symbol-icon.png" style="height:60px; width:60px" />
+            Student Union 1.5
+        </h1>
         <div class="container">
             <div class="row">
-                <h1 style="color:slategrey">
-                    <img src="~/images/hitchhiker-symbol-icon.png" style="height:60px; width:60px" />
-                    Student Union 1.5
-                </h1>
-            </div>
-            <div class="row">
                 <div class="offset-3 col-5">
-                    <ejs-textbox id="GeneralSearch"></ejs-textbox>
+                    <ejs-textbox id="GeneralSearch" cssClass="transparent"></ejs-textbox>
                 </div>
                 <div class="col-1">
                     <img src="~/images/icons/Search.png" width="20" height="20" />
                 </div>
                 <div class="col-3 ">
-                    <a  class="float-right" asp-controller="UserPreference" asp-action="Index">User preference</a>
+                    <a class="text-black-50 float-right font-weight-bold transparent" asp-controller="UserPreference" asp-action="Index">&nbsp;&nbsp;User preference&nbsp;</a>&nbsp;&nbsp;
                 </div>
             </div>
         </div>

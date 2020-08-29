@@ -77,13 +77,13 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(ClassificationLevelDeleteGet Page)
+        public async Task<IActionResult> Delete(ClassificationLevelDeleteGet ClassificationLevel)
         {
             var token = HttpContext.Session.GetString("Token");
-            await _client.PostProtectedAsync<ClassificationLevelDeleteGet>($"{_baseUrl}api/ClassificationLevel/Delete", Page, token);
+            await _client.PostProtectedAsync<ClassificationLevelDeleteGet>($"{_baseUrl}api/ClassificationLevel/Delete", ClassificationLevel, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index/"+ ClassificationLevel.ClassificationId);
         }
 
         [HttpGet]

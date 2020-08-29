@@ -32,10 +32,8 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-     
-
         [HttpGet("Index")]
-        public async Task<IActionResult> GetLanguages()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -48,6 +46,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("Active")]
         public async Task<IActionResult> GetLanguagesActive()
         {
@@ -61,6 +60,49 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _languageProvider.UpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(LanguageUpdateGet language)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                language.ModifierId = CurrentUser.Id;
+                //var CheckString = await _languageProvider.UpdatePostCheck(language);
+                //if (CheckString.Length == 0)
+                //{
+                _languageProvider.UpdatePost(language);
+                return Ok(language);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
         }
 
     }

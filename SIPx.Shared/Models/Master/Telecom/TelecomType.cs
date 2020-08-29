@@ -15,6 +15,6 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public bool PhoneProperties { get; set; }
-        public bool Active { get; set; }
+        public int StatusId { get; set; }
     }
 }

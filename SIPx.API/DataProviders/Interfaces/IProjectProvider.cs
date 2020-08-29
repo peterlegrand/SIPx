@@ -16,5 +16,7 @@ namespace SIPx.DataAccess
         Task<List<ProjectList>> List(string UserId);
         Task<ProjectUpdateGet> UpdateGet(string UserId, int ProjectId);
         Task<List<ProjectList>> ListofUser(string UserId);
+        bool UpdatePost(ProjectUpdateGet Project);
+
     }
 }

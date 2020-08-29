@@ -27,6 +27,7 @@ namespace SIPx.API.Controllers
             _claimCheck = claimCheck;
             _userManager = userManager;
         }
+
         //[HttpGet("Index")]
         //public async Task<IActionResult> GetClaimGroups()
         //{

@@ -68,7 +68,7 @@ namespace SIPx.API.Controllers
                 if (x.Exists(x => x.ProcessTemplateId == Id))
                 {
                     //TOFIX PETER
-                    var newprocess = await _processProvider.NewProcessGet(CurrentUser.Id, Id);
+                    var newprocess = await _processProvider.CreateGet(CurrentUser.Id, Id);
                     var newProcessWithMaster = new NewProcessWithMaster();
                     newProcessWithMaster.ProcessFields = newprocess;
                     if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 16))
@@ -91,6 +91,7 @@ namespace SIPx.API.Controllers
             });
 
         }
+
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Edit(int Id)
         {
@@ -132,10 +133,10 @@ namespace SIPx.API.Controllers
             "    ON UserLanguage.ProcessTemplateID = ProcessTemplates.ProcessTemplateId " +
             "LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
             "   ON DefaultLanguage.ProcessTemplateId = ProcessTemplates.ProcessTemplateId";
-            List<int> TemplateIDs = await _processProvider.NewProcessGetInitialTemplateList();
+            List<int> TemplateIDs = await _processProvider.CreateGetInitialTemplateList();
             foreach (var TemplateId in TemplateIDs)
             {
-                List<ProcessTemplateFlowConditionOld> TemplateFlowConditions = await _processProvider.NewProcessGetFlowConditionList(TemplateId);
+                List<ProcessTemplateFlowConditionOld> TemplateFlowConditions = await _processProvider.CreateGetFlowConditionList(TemplateId);
 
                 if (TemplateFlowConditions.Count() > 0)
                 { SQLWhere += " AND "; }
@@ -313,6 +314,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Update")]
         public async Task<IActionResult> Edit(FrontProcessEditGet Process)
         {

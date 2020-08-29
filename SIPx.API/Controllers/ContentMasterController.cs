@@ -36,34 +36,36 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Statuses")]
-        public async Task<IActionResult> GetStatuses()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _contentMasterProvider.ContentStatusIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Status/{Id:int}")]
-        public async Task<IActionResult> GetStatus(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _contentMasterProvider.ContentStatusUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("Statuses")]
+        //public async Task<IActionResult> GetStatuses()
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _contentMasterProvider.ContentStatusIndexGet(CurrentUser.Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
+
+        //[HttpGet("Status/{Id:int}")]
+        //public async Task<IActionResult> GetStatus(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _contentMasterProvider.ContentStatusUpdateGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
+
         [HttpGet("ContentTypeClassifications/{Id:int}")]
         public async Task<IActionResult> ContentTypeClassificationsIndexGet(int Id)
         {
@@ -78,6 +80,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("GetContentTypeClassification/{Id:int}")]
         public async Task<IActionResult> ContentTypeClassificationUpdateGet(int Id)
         {
@@ -92,6 +95,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("ContentTypeClassificationStatuses")]
         public async Task<IActionResult> GetContentTypeClassificationStatuses()
         {
@@ -106,6 +110,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("ContentTypeClassificationStatus/{Id:int}")]
         public async Task<IActionResult> GetContentTypeClassificationStatus(int Id)
         {
@@ -120,6 +125,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("ContentTypeGroupLanguages/{Id:int}")]
         public async Task<IActionResult> ContentTypeGroupLanguageIndexGet(int Id)
         {
@@ -134,6 +140,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("ContentTypeGroupLanguage/{Id:int}")]
         public async Task<IActionResult> ContentTypeGroupLanguageUpdateGet(int Id)
         {
@@ -208,6 +215,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("ContentTypes")]
         public async Task<IActionResult> GetContentTypes()
         {
@@ -222,7 +230,6 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-
 
         [HttpGet("ContentType/{Id:int}")]
         public async Task<IActionResult> GetContentType(int Id)
@@ -242,6 +249,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
@@ -264,6 +272,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
         public async Task<IActionResult> Post(ContentTypeCreatePost ContentType)
         {
@@ -289,6 +298,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -307,6 +317,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create2")]
         public async Task<IActionResult> Post(ContentTypeGroupCreatePost ContentTypeGroup)
         {

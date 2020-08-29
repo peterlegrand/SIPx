@@ -2,16 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <title> - Student Union 1.5 External</title>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="~/css/site.css" />
     <script type="text/javascript" src="~/jquery/jquery.min.js"></script>
     <script src="~/popper/popper.min.js"></script>
     <script type="text/javascript" src="~/bootstrap/js/bootstrap.js"></script>
-    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/css/site.css" rel="stylesheet" />
     <script>
         $(document).ready(function () {
 
@@ -21,8 +22,8 @@
     </script>
 </head>
 <body>
-    <header class="header" style="height:148px">
-        <h1 style="color:slategrey">
+    <header class="header">
+        <h1 style="color:slategrey" >
             <img src="~/images/hitchhiker-symbol-icon.png" style="height:60px; width:60px" />
             Student Union 1.5
         </h1>
@@ -30,13 +31,8 @@
     </header>
     <div class="container">
         <div class="row col-12">
-            <div class="col-sm-8">
-
-                <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="FrontAuth" asp-action="Login">Login</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
 
                 @RenderBody()
-            </div>
         </div>
     </div>
     <div class="col-12 text-right">

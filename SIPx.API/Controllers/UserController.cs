@@ -31,7 +31,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Index")]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -45,7 +45,7 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Update/{Id}")]
-        public async Task<IActionResult> GetUser(string Id)
+        public async Task<IActionResult> Update(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))

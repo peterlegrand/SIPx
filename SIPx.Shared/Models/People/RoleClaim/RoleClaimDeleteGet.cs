@@ -9,7 +9,7 @@ namespace SIPx.Shared
     public class RoleClaimDeleteGet
     {
         [Key]
-        public int ClaimId { get; set; }
+        public int RoleClaimId { get; set; }
         public int ClaimGroupName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

@@ -21,7 +21,7 @@ namespace SIPx.API.Controllers
     {
         private readonly ICheckProvider _checkProvider;
         private readonly IMasterListProvider _masterListProvider;
-        private readonly IProcessTemplateStageTypeProvider _ProcessTemplateStageTypeProvider;
+        private readonly IProcessTemplateStageTypeProvider _processTemplateStageTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProjectProvider _ProjectProvider;
@@ -31,72 +31,14 @@ namespace SIPx.API.Controllers
         {
             _checkProvider = checkProvider;
             _masterListProvider = masterListProvider;
-            _ProcessTemplateStageTypeProvider = ProcessTemplateStageTypeProvider;
+            _processTemplateStageTypeProvider = ProcessTemplateStageTypeProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _ProjectProvider = ProjectProvider;
             _userManager = userManager;
         }
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> GetProcessTemplateStageTypeLanguages(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _ProcessTemplateStageTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> GetProcessTemplateStageTypeLanguage(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _ProcessTemplateStageTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Index")]
-        public async Task<IActionResult> GetProcessTemplateStageTypes()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _ProcessTemplateStageTypeProvider.IndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-        [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> GetProcessTemplateStageType(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                var x = await _ProcessTemplateStageTypeProvider.UpdateGet(CurrentUser.Id, Id);
-                var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                x.Icons = icons;
 
-                return Ok(x);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+
         [HttpGet("Create")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -118,17 +60,18 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
+        public async Task<IActionResult> Create(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProcessTemplateStageType.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _ProcessTemplateStageTypeProvider.CreatePostCheck(ProcessTemplateStageType);
+                var CheckString = await _processTemplateStageTypeProvider.CreatePostCheck(ProcessTemplateStageType);
                 if (CheckString.Length == 0)
                 {
-                    _ProcessTemplateStageTypeProvider.CreatePost(ProcessTemplateStageType);
+                    _processTemplateStageTypeProvider.CreatePost(ProcessTemplateStageType);
                     return Ok(ProcessTemplateStageType);
                 }
                 return BadRequest(new
@@ -143,6 +86,69 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateStageTypeProvider.IndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                var x = await _processTemplateStageTypeProvider.UpdateGet(CurrentUser.Id, Id);
+                var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                x.Icons = icons;
+
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(ProcessTemplateStageTypeUpdateGet ProcessTemplateStageType)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                ProcessTemplateStageType.ModifierId = CurrentUser.Id;
+                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
+                //if (CheckString.Length == 0)
+                //{
+                _processTemplateStageTypeProvider.UpdatePost(ProcessTemplateStageType);
+                return Ok(ProcessTemplateStageType);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
@@ -157,7 +163,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _ProcessTemplateStageTypeProvider.DeleteGet(CurrentUser.Id, Id);
+                var x = await _processTemplateStageTypeProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }
             return BadRequest(new
@@ -178,7 +184,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ProcessTemplateStageTypeProvider.DeletePostCheck(ProcessTemplateStageType);
                 //if (CheckString.Length == 0)
                 //{
-                _ProcessTemplateStageTypeProvider.DeletePost(ProcessTemplateStageType.ProcessTemplateStageTypeId);
+                _processTemplateStageTypeProvider.DeletePost(ProcessTemplateStageType.ProcessTemplateStageTypeId);
                 return Ok(ProcessTemplateStageType);
                 //}
                 return BadRequest(new
@@ -195,6 +201,36 @@ namespace SIPx.API.Controllers
             });
 
 
+        }
+
+        [HttpGet("LanguageIndex/{Id:int}")]
+        public async Task<IActionResult> LanguageIndex(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateStageTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("LanguageUpdate/{Id:int}")]
+        public async Task<IActionResult> LanguageUpdate(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateStageTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
         }
 
     }

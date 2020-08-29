@@ -60,12 +60,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationPageSectionUpdateGet>(usp, ClassificationPageSection);
             return true;
         }
+
         public Task<ClassificationPageSectionDeleteGet> DeleteGet(string UserId, int ClassificationPageSectionId)
         {
             string usp = "usp_ClassificationPageSectionDeleteGet @UserId, @ClassificationPageSectionID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationPageSectionDeleteGet, dynamic>(usp, new { UserId, ClassificationPageSectionId });
 
         }
+
         public bool DeletePost(int ClassificationPageSectionId)
         {
             string usp = "usp_ClassificationPageSectionDeletePost @ClassificationPageSectionId";

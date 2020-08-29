@@ -20,7 +20,6 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-
         //public Task<List<ProcessTemplateFieldType>> ProcessTemplateFieldTypeIndexGet(string UserId)
         //{
         //    string usp = "usp_ProcessTemplateFieldTypeIndexGet @UserID";

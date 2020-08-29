@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> SFIndex(int Id)
+        public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpGet("Update/{Id:int}")]
-        public async Task<IActionResult> SFUpdate(int Id)
+        public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
@@ -72,34 +72,33 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        //[HttpGet("StatusIndex")]
-        //public async Task<IActionResult> StatusIndex()
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-        //    {
-        //        return Ok(await _processTemplateProvider.ProcessTemplateStageFieldStatusIndexGet(CurrentUser.Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
-        //[HttpGet("StatusUpdate/{Id:int}")]
-        //public async Task<IActionResult> StatusUpdate(int Id)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-        //    {
-        //        var x = await _processTemplateProvider.ProcessTemplateStageFieldStatusUpdateGet(CurrentUser.Id, Id);
-        //        return Ok(x);
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                ProcessTemplateStageField.ModifierId = CurrentUser.Id;
+                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
+                //if (CheckString.Length == 0)
+                //{
+                _processTemplateStageFieldProvider.UpdatePost(ProcessTemplateStageField);
+                return Ok(ProcessTemplateStageField);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
     }
 }

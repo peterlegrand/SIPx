@@ -19,17 +19,26 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
+
         public Task<List<ProcessTemplateStageFieldIndexGet>> IndexGet(string UserId, int ProcessTemplateFieldId)
         {
             string usp = "usp_ProcessTemplateFieldStageIndexGet @UserId, @ProcessTemplateFieldID";
             return _sqlDataAccess.LoadData<ProcessTemplateStageFieldIndexGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateFieldId = ProcessTemplateFieldId });
 
         }
+
         public Task<ProcessTemplateStageFieldUpdateGet> UpdateGet(string UserId, int ProcessTemplateStageFieldID)
         {
             string usp = "usp_ProcessTemplateStageFieldUpdateGet @UserId, @ProcessTemplateStageFieldID";
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageFieldUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldID = ProcessTemplateStageFieldID });
 
+        }
+
+        public bool UpdatePost(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
+        {
+            string usp = "usp_ProcessTemplateUpdatePost @ProcessTemplateStageFieldId, @ValueUpdateTypeId, @ProcessTemplateStageFieldStatusId, @Sequence, @StringValue, @IntValue, @DateTimeValue, @ModifierId";
+            _sqlDataAccess.SaveData<ProcessTemplateStageFieldUpdateGet>(usp, ProcessTemplateStageField);
+            return true;
         }
     }
 }

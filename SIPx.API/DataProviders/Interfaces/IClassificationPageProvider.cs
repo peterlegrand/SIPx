@@ -13,7 +13,7 @@ namespace SIPx.DataAccess
         Task<List<ClassificationPageIndexGet>> IndexGet(string UserId, int ClassificationId);
         Task<List<ClassificationPageLanguageIndexGet>> LanguageIndexGet(string UserId, int ClassificationPageId);
         Task<ClassificationPageLanguageIndexGet> LanguageUpdateGet(string UserId, int ClassificationPageLanguageId);
-        Task<List<ClassificationPageList>> ListGet(string UserId, int ClassificationId);
+        Task<List<ClassificationPageList>> List(string UserId, int ClassificationId);
         Task<ClassificationPageUpdateGet> UpdateGet(string UserId, int ClassificationPageId);
         bool UpdatePost(ClassificationPageUpdateGet ClassificationPage);
     }

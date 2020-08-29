@@ -20,7 +20,6 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-
         public async Task<List<UserRoleIndexGet>> IndexGet(string UserId, string UserRoleUserId)
         {
             string usp = "usp_UserRoleIndexGet @UserId, @UserRoleUserID";

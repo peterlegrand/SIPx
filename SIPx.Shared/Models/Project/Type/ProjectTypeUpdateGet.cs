@@ -10,8 +10,6 @@ namespace SIPx.Shared
         [Key]
         public int ProjectTypeId { get; set; }
         public int ProjectTypeLanguageId { get; set; }
-        public bool Internal { get; set; }
-        public bool LegalEntity { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

@@ -3,8 +3,14 @@
     ViewData["Title"] = "LoginExternal";
     Layout = "_LayoutExternal";
 }
+<div class="container">
+    <div class="row">
+        <div class="col-12 ">
+            <h1>Login</h1>
+            <form method="post">
+                <input asp-for="@Model.Email" class="form-control" /><input asp-for="@Model.Password" type="password" class="form-control" /><button type="submit" class="btn btn-primary btn-dark">Login</button>
+            </form>
 
-<h1>Login</h1>
-<form method="post">
-    <input asp-for="@Model.Email" class="form-control" /><input  asp-for="@Model.Password" type="password" class="form-control" /><button type="submit" class="btn btn-primary btn-dark">Login</button>
-</form>
+        </div>
+    </div>
+</div>

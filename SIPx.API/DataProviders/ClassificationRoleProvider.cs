@@ -32,18 +32,6 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationRoleCreatePost>(usp, ClassificationRole);
             return true;
         }
-        public Task<ClassificationRoleDeleteGet> DeleteGet(string UserId, int ClassificationRoleId)
-        {
-            string usp = "usp_ClassificationRoleDeleteGet @UserId, @ClassificationRoleID";
-            return _sqlDataAccess.LoadSingleRecord<ClassificationRoleDeleteGet, dynamic>(usp, new { UserId, ClassificationRoleId });
-
-        }
-        public bool DeletePost(int ClassificationRoleId)
-        {
-            string usp = "usp_ClassificationRoleDeletePost @ClassificationRoleId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationRoleId = ClassificationRoleId });
-            return true;
-        }
 
         public Task<List<ClassificationRoleIndexGet>> IndexGet(string UserId, int ClassificationId)
         {
@@ -63,6 +51,20 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_ClassificationRoleUpdatePost @RoleId, @ClassificationId, @ClassificationRelationTypeId, @UserID";
             _sqlDataAccess.SaveData<ClassificationRoleUpdateGet>(usp, ClassificationRole);
+            return true;
+        }
+
+        public Task<ClassificationRoleDeleteGet> DeleteGet(string UserId, int ClassificationRoleId)
+        {
+            string usp = "usp_ClassificationRoleDeleteGet @UserId, @ClassificationRoleID";
+            return _sqlDataAccess.LoadSingleRecord<ClassificationRoleDeleteGet, dynamic>(usp, new { UserId, ClassificationRoleId });
+
+        }
+
+        public bool DeletePost(int ClassificationRoleId)
+        {
+            string usp = "usp_ClassificationRoleDeletePost @ClassificationRoleId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationRoleId = ClassificationRoleId });
             return true;
         }
 

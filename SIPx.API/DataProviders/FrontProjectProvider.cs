@@ -25,30 +25,35 @@ namespace SIPx.DataAccess
             var Project = await _sqlDataAccess.LoadSingleRecord<FrontProjectIndexGet, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return Project;
         }
+
         public async Task<List<FrontOrganizationIndexGetSubProject>> IndexGetSubProject(string UserId, int ProjectId)
         {
             string usp = "usp_FrontProjectIndexGetSubProject @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetSubProject, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }
+
         public async Task<List<FrontProjectIndexGetMember>> IndexGetMember(string UserId, int ProjectId)
         {
             string usp = "usp_FrontProjectIndexGetMember @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<FrontProjectIndexGetMember, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }
+
         public async Task<List<FrontProjectIndexGetContent>> IndexGetContent(string UserId, int ProjectId)
         {
             string usp = "usp_FrontProjectIndexGetContent @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<FrontProjectIndexGetContent, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }
+
         public async Task<List<FrontProjectIndexGetProcess>> IndexGetProcess(string UserId, int ProjectId)
         {
             string usp = "usp_FrontProjectIndexGetProcess @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<FrontProjectIndexGetProcess, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }
+
         //public async Task<string> IndexGetSubProjectTree(string UserId, int ProjectId)
         //{
         //    string usp = "usp_SubProjectsToJason @ProjectId, @IsRoot, @UserId ";

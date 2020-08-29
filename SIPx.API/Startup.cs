@@ -74,6 +74,7 @@ namespace SIPx.API
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
+            services.AddTransient<IRoleClaimProvider, RoleClaimProvider>();
             services.AddTransient<IFrontPersonProvider, FrontPersonProvider>();
             services.AddTransient<IFrontClassificationValueProvider, FrontClassificationValueProvider>();
             services.AddTransient<IFrontUserProvider, FrontUserProvider>();

@@ -2,7 +2,7 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
-
+    ViewData["Title"] = "Dashboard";
     Layout = "_Layout";
 }
 @if (Model.ShowTitleName)
@@ -160,12 +160,12 @@
       width: calc(100% - 60px);
     }
 
-    .header {
+/*    .header {
       border-bottom: 1px solid rgba(0, 0, 0, 0.12);
       height: 55px;
       position: relative;
     }
-
+*/
     .e-dashboardlayout.e-control .e-panel .e-panel-container .e-panel-header {
       padding: 10px;
       border-bottom: 2px solid #e6e9ed !important;

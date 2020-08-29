@@ -11,8 +11,7 @@ namespace SIPx.DataAccess
         bool DeletePost(UserMenuDeleteGet UserMenu);
         Task<List<UserMenuIndexGet>> IndexGet(string UserId);
         Task<UserMenuUpdateGet> UpdateGet(int UserMenuID);
-        bool UpdatePost(int UserMenuId);
         bool UpdatePost(UserMenuUpdateGet UserMenu);
-        bool UserMenuCreatePost(UserMenuCreateGet UserMenu);
+        bool CreatePost(UserMenuCreateGet UserMenu);
     }
 }
