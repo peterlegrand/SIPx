@@ -20,9 +20,11 @@ SELECT ProcessTemplates.ProcessTemplateID
 	, ProcessTemplates.ShowInSearch
 	, ProcessTemplates.ShowInReports
 	, ProcessTemplates.HideEverywhere
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ProcessTemplates.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ProcessTemplates.ModifiedDate
 FROM ProcessTemplates 
 JOIN ProcessTemplateGroups

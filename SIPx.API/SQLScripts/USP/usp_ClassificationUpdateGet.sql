@@ -18,10 +18,10 @@ SELECT Classifications.ClassificationID
 	, Classifications.Color
 	, Classifications.IconID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Classifications.CreatorID
+	, Creator.PersonID CreatorID
 	, Classifications.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Classifications.ModifierID
+	, Modifier.PersonID ModifierID
 	, Classifications.ModifiedDate
 FROM Classifications 
 JOIN ClassificationLanguages 

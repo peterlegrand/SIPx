@@ -18,7 +18,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> ContentType()
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<FrontContentContentTypeGroup>>($"{_baseUrl}api/FrontContent/ContentType", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
             ViewBag.UITerms = UITerms;
@@ -27,7 +27,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> ContentNew(int Id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew/" + Id, token);
             //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
             //   ViewBag.UITerms = UITerms;
@@ -36,7 +36,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowContent(int Id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<FrontContentShowContent>($"{_baseUrl}api/FrontContent/ShowContent/" + Id, token);
             //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
             //   ViewBag.UITerms = UITerms;
@@ -45,7 +45,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> ContentNew(FrontContentContentNew Content)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew", Content, token);
 
             return RedirectToAction("Index", "Front");

@@ -12,9 +12,11 @@ SELECT PersonRelationTypes.PersonRelationTypeID
 	, ISNULL(UserPersonRelationTypeLanguage.MouseOver,ISNULL(DefaultPersonRelationTypeLanguage.MouseOver,'No mouse over for this relation type')) MouseOver
 	, ISNULL(UserPersonRelationTypeLanguage.FromIsAnXOfTo,ISNULL(DefaultPersonRelationTypeLanguage.FromIsAnXOfTo,'No from is an X Of to for this relation type')) FromIsAnXOfTo
 	, ISNULL(UserPersonRelationTypeLanguage.ToIsAnXOfFrom,ISNULL(DefaultPersonRelationTypeLanguage.ToIsAnXOfFrom,'No to is an X of from for this relation type')) ToIsAnXOfFrom
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, PersonRelationTypes.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, PersonRelationTypes.ModifiedDate
 FROM PersonRelationTypes 
 LEFT JOIN (SELECT PersonRelationTypeId, Name, Description, MenuName, MouseOver, FromIsAnXOfTo, ToIsAnXOfFrom FROM PersonRelationTypeLanguages WHERE LanguageId = @LanguageID) UserPersonRelationTypeLanguage

@@ -82,7 +82,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int Id=1)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<FrontIndexGetDashboard>($"{_baseUrl}api/Front/Index/"+Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Front/Index", token);
             ViewBag.UITerms = UITerms;

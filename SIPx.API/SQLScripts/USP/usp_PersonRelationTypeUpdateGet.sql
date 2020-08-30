@@ -14,10 +14,10 @@ SELECT PersonRelationTypes.PersonRelationTypeId
 	, ISNULL(UserPersonRelationTypeLanguage.MenuName,ISNULL(DefaultPersonRelationTypeLanguage.MenuName,'No menu name for this role')) MenuName
 	, ISNULL(UserPersonRelationTypeLanguage.MouseOver,ISNULL(DefaultPersonRelationTypeLanguage.MouseOver,'No mouse over for this role')) MouseOver
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, PersonRelationTypes.CreatorID
+	, Creator.PersonID CreatorID
 	, PersonRelationTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, PersonRelationTypes.ModifierID
+	, Modifier.PersonID ModifierID
 	, PersonRelationTypes.ModifiedDate
 FROM PersonRelationTypes
 LEFT JOIN (SELECT PersonRelationTypeId, Name, Description, MenuName, MouseOver, PersonRelationTypeLanguageId FROM PersonRelationTypeLanguages WHERE LanguageId = @LanguageID) UserPersonRelationTypeLanguage

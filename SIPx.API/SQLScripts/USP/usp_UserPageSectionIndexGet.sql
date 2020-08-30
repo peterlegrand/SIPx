@@ -28,9 +28,11 @@ SELECT PageSections.PageSectionID
 	, PageSections.SortByID
 	, PageSections.MaxContent
 	, PageSections.HasPaging
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, PageSections.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, PageSections.ModifiedDate
 FROM PageSections 
 JOIN Pages 

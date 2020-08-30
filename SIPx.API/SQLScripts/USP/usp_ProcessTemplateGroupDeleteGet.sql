@@ -11,9 +11,11 @@ SELECT ProcessTemplateGroups.ProcessTemplateGroupID
 	, ISNULL(UserProcessTemplateGroupLanguage.MenuName,ISNULL(DefaultProcessTemplateGroupLanguage.MenuName,'No menu name for this role')) MenuName
 	, ISNULL(UserProcessTemplateGroupLanguage.MouseOver,ISNULL(DefaultProcessTemplateGroupLanguage.MouseOver,'No mouse over for this role')) MouseOver
 	, ProcessTemplateGroups.Sequence
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ProcessTemplateGroups.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateGroups.ModifiedDate
 FROM ProcessTemplateGroups 
 LEFT JOIN (SELECT ProcessTemplateGroupId, Name, Description, MenuName, MouseOver FROM ProcessTemplateGroupLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateGroupLanguage

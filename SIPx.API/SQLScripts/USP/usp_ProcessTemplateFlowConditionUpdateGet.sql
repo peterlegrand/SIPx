@@ -21,10 +21,10 @@ SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
 	, ISNULL(UserProcessTemplateFlowConditionLanguage.MenuName,ISNULL(DefaultProcessTemplateFlowConditionLanguage.MenuName,'No menu name for this role')) MenuName
 	, ISNULL(UserProcessTemplateFlowConditionLanguage.MouseOver,ISNULL(DefaultProcessTemplateFlowConditionLanguage.MouseOver,'No mouse over for this role')) MouseOver
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ProcessTemplateFlowConditions.CreatorID
+	, Creator.PersonID CreatorID
 	, ProcessTemplateFlowConditions.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ProcessTemplateFlowConditions.ModifierID
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateFlowConditions.ModifiedDate
 FROM ProcessTemplateFlowConditions 
 LEFT JOIN (SELECT ProcessTemplateFlowConditionId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowConditionLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFlowConditionLanguage

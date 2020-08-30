@@ -17,10 +17,10 @@ SELECT
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
 	, CASE WHEN Projects.ParentProjectId = NULL THEN 'No parent project' ELSE ISNULL(UserParentProjectLanguage.Name,ISNULL(DefaultParentProjectLanguage.Name,'No name for this parent project')) END ParentProjectName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Projects.CreatorID
+	, Creator.PersonID CreatorID
 	, Projects.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Projects.ModifierID
+	, Modifier.PersonID ModifierID
 	, Projects.ModifiedDate
 FROM   Projects
 LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserParentProjectLanguage

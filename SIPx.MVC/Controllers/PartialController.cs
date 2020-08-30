@@ -17,7 +17,7 @@ namespace SIPx.MVC.Controllers
 
         public async Task<IActionResult> LeftMenu()
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<PartialLeftUserMenu>>($"{_baseUrl}api/Partial/LeftMenu/", token);
             return PartialView(response);
             

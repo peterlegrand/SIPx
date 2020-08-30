@@ -15,10 +15,10 @@ SELECT Organizations.OrganizationId
 	, OrganizationLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, OrganizationLanguages.CreatorId
+	, Creator.PersonID CreatorID
 	, OrganizationLanguages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, OrganizationLanguages.ModifierId
+	, Modifier.PersonID ModifierID
 	, OrganizationLanguages.ModifiedDate
 FROM Organizations
 JOIN OrganizationLanguages

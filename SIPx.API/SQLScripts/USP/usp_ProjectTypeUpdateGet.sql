@@ -13,10 +13,10 @@ SELECT ProjectTypes.ProjectTypeID
 	, IconID
 	, Color
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ProjectTypes.CreatorID
+	, Creator.PersonID CreatorID
 	, ProjectTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ProjectTypes.ModifierID
+	, Modifier.PersonID ModifierID
 	, ProjectTypes.ModifiedDate
 FROM ProjectTypes 
 LEFT JOIN (SELECT ProjectTypeId, Name, Description, MenuName, MouseOver FROM ProjectTypeLanguages WHERE LanguageId = @LanguageID) UserProjectTypeLanguage

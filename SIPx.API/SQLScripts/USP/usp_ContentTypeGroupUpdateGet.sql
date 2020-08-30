@@ -12,10 +12,10 @@ SELECT ContentTypeGroups.ContentTypeGroupID
 	, ISNULL(UserGroupLanguage.MenuName,ISNULL(DefaultGroupLanguage.MenuName,'No menu name for this content type group')) MenuName
 	, ISNULL(UserGroupLanguage.MouseOver,ISNULL(DefaultGroupLanguage.MouseOver,'No mouse over for this content type group')) MouseOver
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ContentTypeGroups.CreatorID
+	, Creator.PersonID CreatorID
 	, ContentTypeGroups.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ContentTypeGroups.ModifierID
+	, Modifier.PersonID ModifierID
 	, ContentTypeGroups.ModifiedDate
 FROM ContentTypeGroups
 LEFT JOIN (SELECT ContentTypeGroupId, Name, Description, MenuName, MouseOver FROM ContentTypeGroupLanguages WHERE LanguageId = @LanguageID) UserGroupLanguage

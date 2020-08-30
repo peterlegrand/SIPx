@@ -13,9 +13,11 @@ SELECT ClassificationLanguages.ClassificationLanguageID
 	, ClassificationLanguages.MenuName
 	, ClassificationLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ClassificationLanguages.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Creator.PersonID ModifierID
 	, ClassificationLanguages.ModifiedDate
 FROM Classifications
 JOIN ClassificationLanguages

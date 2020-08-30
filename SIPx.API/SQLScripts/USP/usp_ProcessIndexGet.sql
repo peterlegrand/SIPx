@@ -12,9 +12,11 @@ SELECT Processes.ProcessID
 	, ISNULL(Processes.ProcessMultiID,0) ProcessMultiID
 	, Processes.ProcessTemplateID
 	, Processes.ProcessTemplateStageID
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, Processes.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, Processes.ModifiedDate
 FROM Processes 
 JOIN ProcessFields

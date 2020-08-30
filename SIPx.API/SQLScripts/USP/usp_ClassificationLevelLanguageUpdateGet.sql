@@ -18,10 +18,10 @@ SELECT ClassificationLevelLanguages.ClassificationLevelLanguageID
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ClassificationLevelLanguages.CreatedDate
-	, ClassificationLevelLanguages.CreatorID
+	, Creator.PersonID CreatorID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, ClassificationLevelLanguages.ModifiedDate
-	, ClassificationLevelLanguages.ModifierID
+	, Modifier.PersonID ModifierID
 FROM ClassificationLevels
 JOIN ClassificationLevelLanguages
 	ON ClassificationLevels.ClassificationLevelId = ClassificationLevelLanguages.ClassificationLevelID

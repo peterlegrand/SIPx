@@ -14,10 +14,10 @@ SELECT ContentTypeGroupLanguages.ContentTypeGroupLanguageID
 	, ContentTypeGroupLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ContentTypeGroupLanguages.CreatorID
+	, Creator.PersonID CreatorID
 	, ContentTypeGroupLanguages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ContentTypeGroupLanguages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ContentTypeGroupLanguages.ModifiedDate
 FROM ContentTypeGroups
 JOIN ContentTypeGroupLanguages

@@ -55,9 +55,11 @@ SELECT TOP (@Top)
 	, Path
 	, ProjectHierarchy.ProjectTypeID
 	, ProjectTypeLanguages.Name ProjectTypeName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ProjectHierarchy.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, ProjectHierarchy.ModifiedDate
 FROM   ProjectHierarchy
 JOIN ProjectTypeLanguages

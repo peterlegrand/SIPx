@@ -15,9 +15,11 @@ SELECT Pages.PageID
 	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) StatusName
 	, Pages.ShowTitleName
 	, Pages.ShowTitleDescription
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, Pages.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, Pages.ModifiedDate
 FROM Pages 
 LEFT JOIN (SELECT PageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM PageLanguages WHERE LanguageId = @LanguageID) UserPageLanguage

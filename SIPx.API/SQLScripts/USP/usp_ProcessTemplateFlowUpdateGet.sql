@@ -13,10 +13,10 @@ SELECT ProcessTemplateFlows.ProcessTemplateFlowID
 	, ProcessTemplateFlows.ProcessTemplateFromStageID
 	, ProcessTemplateFlows.ProcessTemplateToStageID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ProcessTemplateFlows.CreatorId
+	, Creator.PersonID CreatorID
 	, ProcessTemplateFlows.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ProcessTemplateFlows.ModifierId
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateFlows.ModifiedDate
 FROM ProcessTemplateFlows 
 LEFT JOIN (SELECT ProcessTemplateFlowId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFlowLanguage

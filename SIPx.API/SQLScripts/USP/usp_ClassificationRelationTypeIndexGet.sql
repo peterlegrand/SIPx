@@ -14,10 +14,10 @@ SELECT ClassificationRelationTypes.ClassificationRelationTypeID
 	, @LanguageId LanguageId
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationRelationTypes.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationRelationTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationRelationTypes.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationRelationTypes.ModifiedDate
 FROM ClassificationRelationTypes 
 LEFT JOIN (SELECT ClassificationRelationTypeId, Name, Description, MenuName, MouseOver, ClassificationRelationTypeLanguageID FROM ClassificationRelationTypeLanguages WHERE LanguageId = @LanguageID) UserClassificationRelationTypeLanguage

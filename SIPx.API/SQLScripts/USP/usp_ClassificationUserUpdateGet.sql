@@ -10,10 +10,10 @@ SELECT ClassificationUsers.ClassificationUserID
 	, ClassificationUsers.ClassificationRelationTypeID
 	,ClassificationUsers.UserID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationUsers.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationUsers.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationUsers.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationUsers.ModifiedDate
 FROM ClassificationUsers 
 JOIN Persons Creator

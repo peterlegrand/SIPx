@@ -15,7 +15,7 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient client = new ServiceClient();
         public async Task<IActionResult> Index()
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<List<ClaimGroupUpdateGet>>($"{_baseUrl}api/ClaimGroup",token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClaimGroup/Index", token);
             ViewBag.UITerms = x;
@@ -26,7 +26,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<ClaimGroupUpdateGet>($"{_baseUrl}api/ClaimGroup/Update/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClaimGroup/Edit", token);
             ViewBag.UITerms = x;

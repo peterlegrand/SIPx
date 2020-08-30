@@ -16,7 +16,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<OrganizationTypeCreateGet>($"{_baseUrl}api/OrganizationType/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationType/Create", token);
             ViewBag.UITerms = UITerms;
@@ -25,7 +25,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(OrganizationTypeCreateGet OrganizationType)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<OrganizationTypeCreateGet>($"{_baseUrl}api/OrganizationType/Create", OrganizationType, token);
 
             return RedirectToAction("Index");
@@ -33,7 +33,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<OrganizationTypeIndexGet>>($"{_baseUrl}api/OrganizationType/Index",token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationType/Index", token);
             ViewBag.UITerms = x;
@@ -44,7 +44,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<OrganizationTypeUpdateGet>($"{_baseUrl}api/OrganizationType/Update/" + id, token);
             var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationType/Edit", token);
             ViewBag.UITerms = x;
@@ -53,7 +53,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(OrganizationTypeUpdateGet OrganizationType)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<OrganizationTypeUpdateGet>($"{_baseUrl}api/OrganizationType/Update", OrganizationType, token);
 
             return RedirectToAction("Index");
@@ -62,7 +62,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<OrganizationTypeDeleteGet>($"{_baseUrl}api/OrganizationType/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationType/Delete", token);
             ViewBag.UITerms = UITerms;
@@ -72,7 +72,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(OrganizationTypeDeleteGet Page)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<OrganizationTypeDeleteGet>($"{_baseUrl}api/OrganizationType/Delete", Page, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
@@ -81,7 +81,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageIndex(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<OrganizationTypeLanguageIndexGet>>($"{_baseUrl}api/OrganizationType/LanguageIndex/" + id, token);
             var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationType/LanguageIndex", token);
             ViewBag.UITerms = x;
@@ -91,7 +91,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageEdit(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<OrganizationTypeLanguageIndexGet>($"{_baseUrl}api/OrganizationType/LanguageUpdate/" + id, token);
             var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationType/LanguageEdit", token);
             ViewBag.UITerms = x;

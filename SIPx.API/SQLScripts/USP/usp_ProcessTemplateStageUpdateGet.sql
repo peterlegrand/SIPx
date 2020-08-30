@@ -13,10 +13,10 @@ SELECT ProcessTemplateStages.ProcessTemplateStageID
 	, ISNULL(UserProcessTemplateStageTypeLanguage.Name,ISNULL(DefaultProcessTemplateStageTypeLanguage.Name,'No name for this stage type')) TypeName
 	, ProcessTemplateStages.InToDo
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ProcessTemplateStages.CreatorID
+	, Creator.PersonID CreatorID
 	, ProcessTemplateStages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ProcessTemplateStages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateStages.ModifiedDate
 FROM ProcessTemplateStages 
 LEFT JOIN (SELECT ProcessTemplateStageId, Name, Description, MenuName, MouseOver FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageLanguage

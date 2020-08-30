@@ -19,9 +19,11 @@ SELECT OrganizationAddresses.OrganizationAddressId
 	, ISNULL(UICountryCustom.Customization,UICountryName.Name) CountryName
 	, OrganizationAddresses.ProvinceState
 	, OrganizationAddresses.County
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, OrganizationAddresses.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, OrganizationAddresses.ModifiedDate
 FROM OrganizationAddresses
 JOIN AddressTypes

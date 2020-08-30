@@ -15,7 +15,7 @@ SELECT Settings.SettingId
 	, ISNULL(UISettingsDescriptionCustom.Customization,UISettingsDescription.Name) SettingsDescription
 	, ISNULL(UISettingsMenuNameCustom.Customization,UISettingsMenuName.Name) SettingsMenuName
 	, ISNULL(UISettingsMouseOverCustom.Customization,UISettingsMouseOver.Name) SettingsMouseOver
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Settings.ModifierID
 	, Settings.ModifiedDate
 FROM Settings

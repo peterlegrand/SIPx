@@ -15,10 +15,10 @@ SELECT RoleGroupLanguages.RoleGroupLanguageID
 	, RoleGroupLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, RoleGroupLanguages.CreatorID
+	, Creator.PersonID CreatorID
 	, RoleGroupLanguages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, RoleGroupLanguages.ModifierID
+	, Modifier.PersonID ModifierID
 	, RoleGroupLanguages.ModifiedDate
 FROM RoleGroups
 JOIN RoleGroupLanguages

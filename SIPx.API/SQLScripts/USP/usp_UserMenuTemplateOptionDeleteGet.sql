@@ -14,10 +14,10 @@ SELECT UserMenuTemplateOptions.UserMenuTemplateOptionID
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this user menu template option')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this user menu template option')) MouseOver
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, UserMenuTemplateOptions.CreatorID
+	, Creator.PersonID CreatorID
 	, UserMenuTemplateOptions.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, UserMenuTemplateOptions.ModifierID
+	, Modifier.PersonID ModifierID
 	, UserMenuTemplateOptions.ModifiedDate
 FROM UserMenuTemplateOptions 
 LEFT JOIN (SELECT UserMenuTemplateOptionId, Name, Description, MenuName, MouseOver, UserMenuTemplateOptionLanguageID FROM UserMenuTemplateOptionLanguages WHERE LanguageId = @LanguageID) UserLanguage

@@ -19,10 +19,10 @@ SELECT ClassificationPages.ClassificationPageID
 	, ClassificationPages.ShowTitleName
 	, ClassificationPages.ShowTitleDescription
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationPages.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationPages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationPages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationPages.ModifiedDate
 FROM ClassificationPages 
 LEFT JOIN (SELECT ClassificationPageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, ClassificationPageLanguageID FROM ClassificationPageLanguages WHERE LanguageId = @LanguageID) UserClassificationPageLanguage

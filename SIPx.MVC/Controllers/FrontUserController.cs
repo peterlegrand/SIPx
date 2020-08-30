@@ -18,7 +18,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Dashboard(int Id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<FrontUserIndexGet>($"{_baseUrl}api/FrontUser/Index/"+Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUser/Dashboard", token);
             ViewBag.UITerms = UITerms;
@@ -27,7 +27,7 @@ namespace SIPx.MVC.Controllers
 
         //public async Task<IActionResult> Create()
         //{
-        //    var token = HttpContext.Session.GetString("Token");
+        //    var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
         //    var response = await _client.GetProtectedAsync<UserCreateGet>($"{_baseUrl}api/User/Create/", token);
         //    var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Create", token);
         //    ViewBag.UITerms = UITerms;
@@ -36,7 +36,7 @@ namespace SIPx.MVC.Controllers
         //[HttpPost]
         //public async Task<IActionResult> Create(UserCreateGet User)
         //{
-        //    var token = HttpContext.Session.GetString("Token");
+        //    var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
         //    await _client.PostProtectedAsync<UserCreateGet>($"{_baseUrl}api/User/Create", User, token);
 
         //    return RedirectToAction("Index");

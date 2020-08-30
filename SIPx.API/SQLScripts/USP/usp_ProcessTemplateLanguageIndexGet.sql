@@ -13,9 +13,11 @@ SELECT ProcessTemplateLanguages.ProcessTemplateLanguageID
 	, ProcessTemplateLanguages.MenuName
 	, ProcessTemplateLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ProcessTemplateLanguages.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateLanguages.ModifiedDate
 FROM ProcessTemplates
 JOIN ProcessTemplateLanguages

@@ -29,8 +29,10 @@ SELECT PageSections.PageSectionID
 	, PageSections.MaxContent
 	, PageSections.HasPaging
 	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.PersonID CreatorId
 	, PageSections.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.PersonID ModifierId
 	, PageSections.ModifiedDate
 FROM PageSections 
 LEFT JOIN (SELECT PageSectionId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription FROM PageSectionLanguages WHERE LanguageId = @LanguageID) UserPageSectionLanguage

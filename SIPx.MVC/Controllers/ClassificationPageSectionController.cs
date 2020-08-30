@@ -15,7 +15,7 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient client = new ServiceClient();
         public async Task<IActionResult> Index(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<List<ClassificationPageSectionIndexGet>>($"{_baseUrl}api/ClassificationPageSection/Index/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/Index", token);
             ViewBag.UITerms = x;
@@ -25,7 +25,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<ClassificationPageSectionUpdateGet>($"{_baseUrl}api/ClassificationPageSection/Update/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/Edit", token);
             ViewBag.UITerms = x;
@@ -34,7 +34,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<ClassificationPageSectionCreateGet>($"{_baseUrl}api/ClassificationPageSection/Create/"+Id, token);
             var UITerms = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/Create", token);
             ViewBag.UITerms = UITerms;
@@ -43,7 +43,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ClassificationPageSectionCreateGet ClassificationPageSection)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await client.PostProtectedAsync<ClassificationPageSectionCreateGet>($"{_baseUrl}api/ClassificationPageSection/Create", ClassificationPageSection, token);
 
             return RedirectToAction("Index", new { id = ClassificationPageSection.ClassificationPageId });
@@ -51,7 +51,7 @@ namespace SIPx.MVC.Controllers
 
         public async Task<IActionResult> LanguageIndex(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<List<ClassificationPageSectionLanguageIndexGet>>($"{_baseUrl}api/ClassificationPageSection/LanguageIndex/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/LanguageIndex", token);
             ViewBag.UITerms = x;
@@ -61,7 +61,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageEdit(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<ClassificationPageSectionLanguageIndexGet>($"{_baseUrl}api/ClassificationPageSection/LanguageUpdate/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationPageSection/LanguageEdit", token);
             ViewBag.UITerms = x;

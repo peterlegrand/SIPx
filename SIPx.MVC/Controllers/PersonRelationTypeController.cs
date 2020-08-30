@@ -16,7 +16,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<PersonRelationTypeCreateGet>($"{_baseUrl}api/PersonRelationType/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Create", token);
             ViewBag.UITerms = UITerms;
@@ -25,16 +25,16 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PersonRelationTypeCreateGet PersonRelationType)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<PersonRelationTypeCreateGet>($"{_baseUrl}api/PersonTelecom/Create", PersonRelationType, token);
 
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index()
         {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _client.GetProtectedAsync<List<PersonRelationTypeIndexGet>>($"{_baseUrl}api/PersonRelationType/Index/" + id,token);
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
+            var response = await _client.GetProtectedAsync<List<PersonRelationTypeIndexGet>>($"{_baseUrl}api/PersonRelationType/Index/",token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Index", token);
             ViewBag.UITerms = x;
             return View(response);
@@ -44,7 +44,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<PersonRelationTypeUpdateGet>($"{_baseUrl}api/PersonRelationType/Update/" + id, token);
             var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Edit", token);
             ViewBag.UITerms = x;
@@ -53,7 +53,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(PersonRelationTypeUpdateGet PersonRelationType)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<PersonRelationTypeUpdateGet>($"{_baseUrl}api/PersonRelationType/Update", PersonRelationType, token);
 
             return RedirectToAction("Index");
@@ -62,7 +62,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<PersonRelationTypeDeleteGet>($"{_baseUrl}api/PersonRelationType/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Delete", token);
             ViewBag.UITerms = UITerms;
@@ -72,7 +72,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(PersonRelationTypeDeleteGet Page)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<PersonRelationTypeDeleteGet>($"{_baseUrl}api/PersonRelationType/Delete", Page, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });

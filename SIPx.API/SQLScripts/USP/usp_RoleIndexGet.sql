@@ -33,7 +33,11 @@ LEFT JOIN (
 		, RoleLanguages.CreatedDate
 		, RoleLanguages.ModifiedDate 
 		, Creator.FirstName + ' ' + Creator.LastName CreatorName
+		, Creator.PersonID CreatorID
+		, RoleLanguages.CreatedDate
 		, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+		, Modifier.PersonID ModifierId
+		, RoleLanguages.ModifiedDate
 	FROM RoleLanguages 
 	JOIN Persons Creator
 		ON Creator.UserId = RoleLanguages.CreatorID

@@ -16,10 +16,10 @@ SELECT ClassificationLanguages.ClassificationLanguageID
 	, ClassificationLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationLanguages.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationLanguages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationLanguages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationLanguages.ModifiedDate
 FROM Classifications
 JOIN ClassificationLanguages

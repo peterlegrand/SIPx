@@ -23,10 +23,10 @@ SELECT ClassificationValues.ClassificationValueID
 	, ClassificationValues.DateTo
 --	, Location
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationValues.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationValues.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationValues.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationValues.ModifiedDate
 FROM ClassificationValues 
 LEFT JOIN (SELECT ClassificationValueId, Name, Description, MenuName, MouseOver, DropDownName, PageName, PageDescription, HeaderName, HeaderDescription, TopicName FROM ClassificationValueLanguages WHERE LanguageId = @LanguageID) UserClassificationValueLanguage

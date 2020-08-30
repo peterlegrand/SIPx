@@ -12,10 +12,10 @@ SELECT ContentClassificationValues.ContentClassificationValueID
 	, ISNULL(ClassificationValueLanguages.Name, 'No classification value name') ClassificationValueName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ContentClassificationValues.CreatedDate
-	, ContentClassificationValues.CreatorID
+	, Creator.PersonID CreatorID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, ContentClassificationValues.ModifiedDate
-	, ContentClassificationValues.ModifierID
+	, Modifier.PersonID ModifierId
 FROM ContentClassificationValues
 JOIN ClassificationValueLanguages
 	ON ContentClassificationValues.ClassificationValueID = ClassificationValueLanguages.ClassificationValueID

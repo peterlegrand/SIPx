@@ -12,10 +12,10 @@ SELECT ClassificationRelationTypes.ClassificationRelationTypeID
 	, ISNULL(UserClassificationRelationTypeLanguage.MenuName,ISNULL(DefaultClassificationRelationTypeLanguage.MenuName,'No menu name for this role')) MenuName
 	, ISNULL(UserClassificationRelationTypeLanguage.MouseOver,ISNULL(DefaultClassificationRelationTypeLanguage.MouseOver,'No mouse over for this role')) MouseOver
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationRelationTypes.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationRelationTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationRelationTypes.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationRelationTypes.ModifiedDate
 FROM ClassificationRelationTypes 
 LEFT JOIN (SELECT ClassificationRelationTypeId, Name, Description, MenuName, MouseOver, classificationRelationTypeLanguageId FROM ClassificationRelationTypeLanguages WHERE LanguageId = @LanguageID) UserClassificationRelationTypeLanguage

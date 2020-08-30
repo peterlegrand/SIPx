@@ -12,10 +12,10 @@ SELECT ProcessTemplateFields.ProcessTemplateFieldID
 	, ISNULL(UserProcessTemplateFieldLanguage.MouseOver,ISNULL(DefaultProcessTemplateFieldLanguage.MouseOver,'No mouse over for this role')) MouseOver
 	, ProcessTemplateFields.ProcessTemplateFieldTypeID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ProcessTemplateFields.CreatorID
+	, Creator.PersonID CreatorID
 	, ProcessTemplateFields.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ProcessTemplateFields.ModifierID
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateFields.ModifiedDate
 FROM ProcessTemplateFields 
 LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage

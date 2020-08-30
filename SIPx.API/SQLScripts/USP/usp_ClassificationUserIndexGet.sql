@@ -14,10 +14,10 @@ SELECT ClassificationUsers.ClassificationUserID
 	, ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typeUser')) ClassificationRelationTypeName
 	, ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,'No name for this organization')) OrganizationName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationUsers.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationUsers.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationUsers.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationUsers.ModifiedDate
 FROM ClassificationUsers 
 JOIN Persons

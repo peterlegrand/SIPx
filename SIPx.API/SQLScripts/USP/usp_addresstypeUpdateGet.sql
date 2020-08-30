@@ -10,6 +10,9 @@ SELECT AddressTypes.AddressTypeId
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
 	, ISNULL(UIMenuNameCustom.Customization,UIMenuName.Name) MenuName
 	, ISNULL(UIMouseOverCustom.Customization,UIMouseOver.Name) MouseOver
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, AddressTypes.ModifierID
+	, AddressTypes.ModifiedDate
 FROM AddressTypes 
 JOIN UITermLanguages UIName
 	ON UIName.UITermId = AddressTypes.NameTermID
@@ -27,6 +30,8 @@ LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHE
 	ON UIMenuNameCustom.UITermId = AddressTypes.MenuNameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMouseOverCustom
 	ON UIMouseOverCustom.UITermId = AddressTypes.MouseOverTermID
+JOIN Persons Modifier
+	ON Modifier.UserId = AddressTypes.ModifierID
 WHERE UIName.LanguageId = @LanguageID
 	AND UIDescription.LanguageId = @LanguageID
 	AND UIMenuName.LanguageId = @LanguageID

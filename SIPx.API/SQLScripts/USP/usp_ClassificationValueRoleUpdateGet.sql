@@ -10,9 +10,11 @@ SELECT ClassificationValueRoles.RoleID
 	,ClassificationValueRoles.ClassificationRelationTypeID
 	,ClassificationValueRoles.ClassificationValueID
 	,ClassificationValueRoles.ClassificationValueRoleID
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ClassificationValueRoles.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ClassificationValueRoles.ModifiedDate
 FROM ClassificationValueRoles 
 JOIN Persons Creator

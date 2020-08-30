@@ -21,10 +21,10 @@ SELECT OrganizationAddresses.OrganizationAddressId
 	, OrganizationAddresses.ProvinceState
 	, OrganizationAddresses.County
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, OrganizationAddresses.CreatorID
+	, Creator.PersonID CreatorID
 	, OrganizationAddresses.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, OrganizationAddresses.ModifierID
+	, Modifier.PersonID ModifierID
 	, OrganizationAddresses.ModifiedDate
 FROM OrganizationAddresses
 JOIN AddressTypes

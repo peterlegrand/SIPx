@@ -19,9 +19,11 @@ SELECT PersonAddresses.PersonAddressId
 	, ISNULL(UICountryCustom.Customization,UICountryName.Name) CountryName
 	, PersonAddresses.ProvinceState
 	, PersonAddresses.County
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, PersonAddresses.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, PersonAddresses.ModifiedDate
 FROM PersonAddresses
 JOIN AddressTypes

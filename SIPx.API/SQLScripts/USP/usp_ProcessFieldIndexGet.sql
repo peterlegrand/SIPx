@@ -12,9 +12,11 @@ SELECT
 	, ProcessFields.DateTimeValue
 	, ProcessFields.LocationValue
 	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) FieldStatusName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ProcessFields.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, ProcessFields.ModifiedDate
 FROM Processes
 JOIN ProcessTemplateStageFields

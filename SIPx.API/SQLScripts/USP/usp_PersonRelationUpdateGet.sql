@@ -14,9 +14,11 @@ SELECT PersonRelations.PersonRelationID
 	, ValidTill
 	, PersonRelations.PersonRelationTypeID
 	, ISNULL(UserRelationTypeLanguage.Name,ISNULL(DefaultRelationTypeLanguage.Name,'No name for this relation type')) PersonRelationTypeName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, PersonRelations.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, PersonRelations.ModifiedDate
 FROM PersonRelations
 JOIN Persons FromPersons

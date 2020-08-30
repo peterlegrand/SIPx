@@ -12,10 +12,10 @@ SELECT Pages.PageID
 	, TitleName
 	, TitleDescription
 	, Creator.FirstName + ' ' + Creator.LastName Creator
-	, Pages.CreatorID
+	, Creator.PersonID CreatorID
 	, Pages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
-	, Pages.ModifierID
+	, Modifier.PersonID ModifierID
 	, Pages.ModifiedDate
 
 FROM Pages 

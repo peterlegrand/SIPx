@@ -9,7 +9,8 @@ SELECT Languages.LanguageID
 	, ForeignName
 	, ISNULL(UINameCustom.Customization ,UIName.Name) LanguageName
 	, Languages.StatusID
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Languages.ModifierID
 	, Languages.ModifiedDate
 FROM Languages 
 JOIN UITermLanguages UIName

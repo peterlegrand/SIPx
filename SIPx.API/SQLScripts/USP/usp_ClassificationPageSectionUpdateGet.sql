@@ -34,10 +34,10 @@ SELECT ClassificationPageSections.ClassificationPageSectionID
 	, ClassificationPageSections.MaxContent
 	, ClassificationPageSections.HasPaging
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationPageSections.CreatorId
+	, Creator.PersonID CreatorID
 	, ClassificationPageSections.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationPageSections.ModifierId
+	, Modifier.PersonID ModifierID
 	, ClassificationPageSections.ModifiedDate
 FROM ClassificationPageSections 
 LEFT JOIN (SELECT ClassificationPageSectionId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription,ClassificationPageSectionLanguageID FROM ClassificationPageSectionLanguages WHERE LanguageId = @LanguageID) UserClassificationPageSectionLanguage

@@ -57,6 +57,38 @@
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
+        </div>        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Icon")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="IconName" ejs-for="IconName" cssClass="e-outline" placeholder="IconName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Color")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="Color" ejs-for="Color" cssClass="e-outline" placeholder="Color" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Legal entity")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="LegalEntity" ejs-for="LegalEntity"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Internal")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="Internal" ejs-for="Internal"></ejs-checkbox>
+            </div>
         </div>
         <div class="row">
             <div class="col-3">

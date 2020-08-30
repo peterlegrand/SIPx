@@ -12,10 +12,10 @@ SELECT ClassificationValueUsers.ClassificationValueUserID
 	, OrganizationLanguages.Name OrganizationName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ClassificationValueUsers.CreatedDate
-	, ClassificationValueUsers.CreatorID
+	, Creator.PersonID CreatorID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, ClassificationValueUsers.ModifiedDate
-	, ClassificationValueUsers.ModifierID
+	, Modifier.PersonID ModifierId
 FROM ClassificationValueUsers
 JOIN Persons
 	ON ClassificationValueUsers.UserID = Persons.UserID

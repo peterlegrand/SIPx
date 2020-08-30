@@ -15,9 +15,11 @@ SELECT PageSectionLanguages.PageSectionLanguageID
 	, PageSectionLanguages.TitleName
 	, PageSectionLanguages.TitleDescription
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, PageSectionLanguages.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, PageSectionLanguages.ModifiedDate
 FROM PageSections
 JOIN PageSectionLanguages

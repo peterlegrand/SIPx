@@ -18,7 +18,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> AdvancedSearch()
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<FrontPersonAdvancedSearchGet>($"{_baseUrl}api/FrontPerson/AdvancedSearch/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/AdvancedSearch", token);
             ViewBag.UITerms = UITerms;
@@ -27,7 +27,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> AdvancedSearch(FrontPersonAdvancedSearchGet SearchData)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var result = await _client.PostProtectedAsync<FrontPersonAdvancedSearchGet>($"{_baseUrl}api/FrontPerson/AdvancedSearch", SearchData, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/SearchResult", token);
             ViewBag.UITerms = UITerms;
@@ -39,7 +39,7 @@ namespace SIPx.MVC.Controllers
             var SearchData = new FrontPersonAdvancedSearchGet();
             SearchData.FirstName = Search;
             SearchData.ToAge = 120;
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var result = await _client.PostProtectedAsync<FrontPersonAdvancedSearchGet>($"{_baseUrl}api/FrontPerson/AdvancedSearch", SearchData, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/SearchResult", token);
             ViewBag.UITerms = UITerms;

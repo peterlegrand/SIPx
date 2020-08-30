@@ -22,9 +22,9 @@ SELECT ClassificationPageSectionLanguages.ClassificationPageSectionLanguageID
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ClassificationPageSectionLanguages.CreatedDate
-	, ClassificationPageSectionLanguages.CreatorId
+	, Creator.PersonID CreatorID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationPageSectionLanguages.ModifierId
+	, Modifier.PersonID ModifierID
 	, ClassificationPageSectionLanguages.ModifiedDate
 FROM ClassificationPageSections
 JOIN ClassificationPageSectionLanguages

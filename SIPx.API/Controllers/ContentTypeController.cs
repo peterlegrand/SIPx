@@ -19,41 +19,28 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ContentTypeController : ControllerBase
     {
+        private readonly IProcessTemplateProvider _processTemplateProvider;
+        private readonly IContentTypeGroupProvider _contentTypeGroupProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IContentTypeProvider _contentTypeProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IContentMasterProvider _contentMasterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentTypeController(ICheckProvider checkProvider, IContentTypeProvider contentTypeProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentTypeController(IProcessTemplateProvider processTemplateProvider, IContentTypeGroupProvider contentTypeGroupProvider, ICheckProvider checkProvider, IContentTypeProvider contentTypeProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processTemplateProvider = processTemplateProvider;
+            _contentTypeGroupProvider = contentTypeGroupProvider;
             _checkProvider = checkProvider;
             _contentTypeProvider = contentTypeProvider;
             _masterListProvider = masterListProvider;
             _securityLevelProvider = securityLevelProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _contentMasterProvider = contentMasterProvider;
             _userManager = userManager;
         }
-        [HttpGet("Index")]
-        public async Task<IActionResult> Index()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _contentMasterProvider.ContentTypeIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
@@ -61,7 +48,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ContentTypeCreateGet = new ContentTypeCreateGet();
-                var ContentTypeGroups = await _contentMasterProvider.ContentTypeGroupList(CurrentUser.Id);
+                var ContentTypeGroups = await _contentTypeGroupProvider.List(CurrentUser.Id);
                 var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ContentTypeCreateGet.ContentTypeGroups = ContentTypeGroups;
@@ -81,10 +68,10 @@ namespace SIPx.API.Controllers
             ContentType.CreatorId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _contentMasterProvider.ContentTypeCreatePostCheck(ContentType);
+                var CheckString = await _contentTypeProvider.CreatePostCheck(ContentType);
                 if (CheckString.Length == 0)
                 {
-                    _contentMasterProvider.ContentTypeCreatePost(ContentType);
+                    _contentTypeProvider.CreatePost(ContentType);
                     return Ok(ContentType);
                 }
                 return BadRequest(new
@@ -100,19 +87,36 @@ namespace SIPx.API.Controllers
             });
         }
 
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _contentTypeProvider.IndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _contentMasterProvider.ContentTypeUpdateGet(CurrentUser.Id, Id);
+                var x = await _contentTypeProvider.UpdateGet(CurrentUser.Id, Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                x.Icons = icons;
-                var ContentTypeGroups = await _contentMasterProvider.ContentTypeGroupList(CurrentUser.Id);
+                var ContentTypeGroups = await _contentTypeGroupProvider.List(CurrentUser.Id);
                 var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                var ProcessTemplates = await _processTemplateProvider.List(CurrentUser.Id);
                 x.ContentTypeGroups = ContentTypeGroups;
                 x.SecurityLevels = SecurityLevels;
+                x.ProcessTemplates = ProcessTemplates;
+                x.Icons = icons;
 
                 return Ok(x);
             }
@@ -211,7 +215,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.ContentTypeLanguageIndexGet(CurrentUser.Id, Id));
+                return Ok(await _contentTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -226,7 +230,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.ContentTypeLanguageUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _contentTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

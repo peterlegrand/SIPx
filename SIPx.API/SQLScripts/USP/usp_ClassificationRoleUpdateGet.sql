@@ -12,10 +12,10 @@ SELECT ClassificationRoles.RoleID
 	, ISNULL(UserRoleLanguage.Name,ISNULL(DefaultRoleLanguage.Name,'No name for this role')) RoleName
 	, ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typerole')) RelationTypeName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationRoles.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationRoles.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationRoles.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationRoles.ModifiedDate
 FROM ClassificationRoles 
 LEFT JOIN (SELECT RoleId, Name, Description, MenuName, MouseOver FROM RoleLanguages WHERE LanguageId = @LanguageID) UserRoleLanguage

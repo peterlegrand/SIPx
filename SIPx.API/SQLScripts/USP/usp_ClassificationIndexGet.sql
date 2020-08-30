@@ -19,10 +19,10 @@ SELECT Classifications.ClassificationID
 	, Classifications.HasDropDown 
 	, Classifications.DropDownSequence
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Classifications.CreatorID
+	, Creator.PersonID CreatorID
 	, Classifications.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Classifications.ModifierID
+	, Modifier.PersonID ModifierID
 	, Classifications.ModifiedDate
 FROM Classifications 
 JOIN Statuses 

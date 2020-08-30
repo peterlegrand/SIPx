@@ -19,20 +19,20 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ContentTypeClassificationController : ControllerBase
     {
+        private readonly IContentTypeClassificationProvider _contentTypeClassificationProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IContentMasterProvider _contentMasterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentTypeClassificationController(IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentTypeClassificationController(IContentTypeClassificationProvider contentTypeClassificationProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck,  Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _contentTypeClassificationProvider = contentTypeClassificationProvider;
             _masterListProvider = masterListProvider;
             _securityLevelProvider = securityLevelProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _contentMasterProvider = contentMasterProvider;
             _userManager = userManager;
         }
 
@@ -43,7 +43,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.ContentTypeClassificationIndexGet(CurrentUser.Id, Id));
+                return Ok(await _contentTypeClassificationProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -58,7 +58,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.ContentTypeClassificationUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _contentTypeClassificationProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

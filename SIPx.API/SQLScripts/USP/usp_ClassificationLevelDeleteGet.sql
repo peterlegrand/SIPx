@@ -18,10 +18,10 @@ SELECT ClassificationLevels.ClassificationLevelID
 	, ISNULL(UserClassificationLevelLanguage.MenuName,ISNULL(DefaultClassificationLevelLanguage.MenuName,'No menu name for this classification level')) MenuName
 	, ISNULL(UserClassificationLevelLanguage.MouseOver,ISNULL(DefaultClassificationLevelLanguage.MouseOver,'No drop Mouse over for this classification level')) MouseOver
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationLevels.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationLevels.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationLevels.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationLevels.ModifiedDate
 FROM ClassificationLevels
 LEFT JOIN (SELECT ClassificationLevelId, Name, Description, MenuName, MouseOver FROM ClassificationLevelLanguages WHERE LanguageId = @LanguageID) UserClassificationLevelLanguage

@@ -12,10 +12,10 @@ SELECT Contents.Title
 	, ISNULL(CustomStatusLanguage.Customization, DefaultStatusLanguage.Name) ContentStatusName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Contents.CreatedDate
-	, Contents.CreatorID
+	, Creator.PersonID CreatorID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Contents.ModifiedDate
-	, Contents.ModifierID
+	, Modifier.PersonID ModifierId
 FROM Contents
 JOIN ContentTypeLanguages
 	ON ContentTypeLanguages.ContentTypeID = Contents.ContentTypeID

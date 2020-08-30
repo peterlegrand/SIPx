@@ -15,10 +15,11 @@ SELECT UserMenus.UserMenuID
 	, ISNULL( RightUserLanguageName.Customization, RightLanguageName.Name) RightMenuTypeName
 	, UserMenus.UserPageIdRight
 	, UserMenus.Sequence
-	, UserMenus.CreatorID
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, UserMenus.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, UserMenus.ModifierID
+	, Modifier.PersonID ModifierId
 	, UserMenus.ModifiedDate
 FROM UserMenus 
 JOIN Icons

@@ -20,10 +20,10 @@ SELECT ClassificationLevels.ClassificationLevelID
 	, ClassificationLevels.InMenu
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ClassificationLevels.CreatedDate
-	, ClassificationLevels.CreatorID
+	, Creator.PersonID CreatorID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, ClassificationLevels.ModifiedDate
-	, ClassificationLevels.ModifierID
+	, Modifier.PersonID ModifierID
 FROM ClassificationLevels 
 LEFT JOIN (SELECT ClassificationLevelId, Name, Description, MenuName, MouseOver, ClassificationLevelLanguageId FROM ClassificationLevelLanguages WHERE LanguageId = @LanguageID) UserClassificationLevelLanguage
 	ON UserClassificationLevelLanguage.ClassificationLevelId = ClassificationLevels.ClassificationLevelID

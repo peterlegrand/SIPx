@@ -21,9 +21,11 @@ SELECT Persons.PersonID
 	, ISNULL(UserOrganizationLanguages.Name,ISNULL(DefaultOrganizationLanguages.Name,'No name for default organization')) OrganizationName
 	, Persons.BirthDate
 	, Persons.DeceasedDate
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, Persons.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, Persons.ModifiedDate
 FROM Persons 
 LEFT JOIN AspNetUsers ON Persons.UserId = AspNetUsers.ID

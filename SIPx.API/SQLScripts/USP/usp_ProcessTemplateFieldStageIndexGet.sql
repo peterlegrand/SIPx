@@ -17,7 +17,8 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldID
 	, ProcessTemplateStageFields.StringValue
 	, ProcessTemplateStageFields.ValueUpdateTypeID
 	, ProcessTemplateStageFields.Sequence
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, ProcessTemplateStageFields.ModifierID
 	, ProcessTemplateStageFields.ModifiedDate
 FROM ProcessTemplateStageFields 
 LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageLanguage

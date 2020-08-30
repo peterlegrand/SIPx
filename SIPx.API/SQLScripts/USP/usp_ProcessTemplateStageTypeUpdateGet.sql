@@ -13,10 +13,10 @@ SELECT ProcessTemplateStageTypes.ProcessTemplateStageTypeID
 	, IconID
 	, Color
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ProcessTemplateStageTypes.CreatorID
+	, Creator.PersonID CreatorID
 	, ProcessTemplateStageTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ProcessTemplateStageTypes.ModifierID
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateStageTypes.ModifiedDate
 FROM ProcessTemplateStageTypes 
 LEFT JOIN (SELECT ProcessTemplateStageTypeId, Name, Description, MenuName, MouseOver FROM ProcessTemplateStageTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageTypeLanguage

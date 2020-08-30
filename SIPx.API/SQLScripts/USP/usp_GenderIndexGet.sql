@@ -11,6 +11,9 @@ SELECT Genders.GenderId
 	, ISNULL(UIMenuNameCustom.Customization,UIMenuName.Name) MenuName
 	, ISNULL(UIMouseOverCustom.Customization,UIMouseOver.Name) MouseOver
 	, Genders.Active
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
+	, Genders.ModifiedDate
 FROM Genders 
 JOIN UITermLanguages UIName
 	ON UIName.UITermId = Genders.NameTermID
@@ -28,6 +31,8 @@ LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHE
 	ON UIMenuNameCustom.UITermId = Genders.MenuNameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIMouseOverCustom
 	ON UIMouseOverCustom.UITermId = Genders.MouseOverTermID
+JOIN Persons Modifier
+	ON Modifier.UserId = Genders.ModifierID
 WHERE UIName.LanguageId = @LanguageID
 	AND UIDescription.LanguageId = @LanguageID
 	AND UIMenuName.LanguageId = @LanguageID

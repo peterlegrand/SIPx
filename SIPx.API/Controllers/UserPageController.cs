@@ -194,30 +194,30 @@ namespace SIPx.API.Controllers
 
         }
 
-        [HttpPost("Update")]
-        public async Task<IActionResult> Update(PageDeleteGet Page)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            Page.CreatorId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                //var CheckString = await _userPageProvider.UserPageDeletePostCheck(Page);
-                //if (CheckString.Length == 0)
-                //{
-                    _userPageProvider.DeletePost(Page);
-                    return Ok(Page);
-                //}
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpPost("Update")]
+        //public async Task<IActionResult> Update(PageDeleteGet Page)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    Page.CreatorId = CurrentUser.Id;
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+        //    {
+        //        //var CheckString = await _userPageProvider.UserPageDeletePostCheck(Page);
+        //        //if (CheckString.Length == 0)
+        //        //{
+        //            _userPageProvider.DeletePost(Page);
+        //            return Ok(Page);
+        //        //}
+        //        return BadRequest(new
+        //        {
+        //            IsSuccess = false,
+        //            //Message = CheckString,
+        //        });
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
     }
 }

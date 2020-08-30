@@ -58,8 +58,10 @@ SELECT TOP (@Top)
 	, OrganizationTypes.Internal
 	, OrganizationTypes.LegalEntity
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, OrganizationHierarchy.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, OrganizationHierarchy.ModifiedDate
 FROM   OrganizationHierarchy
 JOIN Statuses

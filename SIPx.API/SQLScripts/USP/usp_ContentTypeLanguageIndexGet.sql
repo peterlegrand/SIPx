@@ -15,10 +15,10 @@ SELECT ContentTypes.ContentTypeId
 	, ContentTypeLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ContentTypeLanguages.CreatorID
+	, Creator.PersonID CreatorID
 	, ContentTypeLanguages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ContentTypeLanguages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ContentTypeLanguages.ModifiedDate
 FROM ContentTypes
 JOIN ContentTypeLanguages

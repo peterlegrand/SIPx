@@ -19,10 +19,10 @@ SELECT ClassificationPageLanguages.ClassificationPageLanguageID
 	, ClassificationPageLanguages.TitleDescription
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationPageLanguages.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationPageLanguages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationPageLanguages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationPageLanguages.ModifiedDate
 FROM ClassificationPages
 JOIN ClassificationPageLanguages

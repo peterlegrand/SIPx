@@ -14,8 +14,8 @@ SELECT Settings.SettingId
 	, ISNULL(UISettingsDescriptionCustom.Customization,UISettingsDescription.Name) SettingsDescription
 	, ISNULL(UISettingsMenuNameCustom.Customization,UISettingsMenuName.Name) SettingsMenuName
 	, ISNULL(UISettingsMouseOverCustom.Customization,UISettingsMouseOver.Name) SettingsMouseOver
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
-	, Settings.ModifierID
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, Settings.ModifiedDate
 FROM Settings
 JOIN UITermLanguages UISettingsName

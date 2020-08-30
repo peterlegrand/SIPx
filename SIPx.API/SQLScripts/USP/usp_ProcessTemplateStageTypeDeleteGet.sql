@@ -10,9 +10,11 @@ SELECT ProcessTemplateStageTypes.ProcessTemplateStageTypeID
 	, ISNULL(UserProcessTemplateStageTypeLanguage.Description,ISNULL(DefaultProcessTemplateStageTypeLanguage.Description,'No description for this relation type')) Description
 	, ISNULL(UserProcessTemplateStageTypeLanguage.MenuName,ISNULL(DefaultProcessTemplateStageTypeLanguage.MenuName,'No menu name for this relation type')) MenuName
 	, ISNULL(UserProcessTemplateStageTypeLanguage.MouseOver,ISNULL(DefaultProcessTemplateStageTypeLanguage.MouseOver,'No mouse over for this relation type')) MouseOver
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ProcessTemplateStageTypes.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateStageTypes.ModifiedDate
 FROM ProcessTemplateStageTypes 
 LEFT JOIN (SELECT ProcessTemplateStageTypeId, Name, Description, MenuName, MouseOver FROM ProcessTemplateStageTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageTypeLanguage

@@ -13,10 +13,10 @@ SELECT OrganizationTypes.OrganizationTypeID
 	, OrganizationTypes.Internal
 	, OrganizationTypes.LegalEntity
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, OrganizationTypes.CreatorID
+	, Creator.PersonID CreatorID
 	, OrganizationTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, OrganizationTypes.ModifierID
+	, Modifier.PersonID ModifierID
 	, OrganizationTypes.ModifiedDate
 FROM OrganizationTypes 
 LEFT JOIN (SELECT OrganizationTypeId, Name, Description, MenuName, MouseOver FROM OrganizationTypeLanguages WHERE LanguageId = @LanguageID) UserLanguage

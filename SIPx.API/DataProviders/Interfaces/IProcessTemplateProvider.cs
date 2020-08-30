@@ -16,5 +16,6 @@ namespace SIPx.DataAccess
         Task<ProcessTemplateLanguageIndexGet> LanguageUpdateGet(string UserId, int ProcessTemplateLanguageId);
         Task<ProcessTemplateUpdateGet> UpdateGet(string UserId, int ProcessTemplateId);
         bool UpdatePost(ProcessTemplateUpdateGet ProcessTemplate);
+        Task<List<ProcessTemplateList>> List(string UserId);
     }
 }

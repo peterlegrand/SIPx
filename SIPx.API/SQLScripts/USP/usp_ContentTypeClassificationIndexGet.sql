@@ -9,7 +9,7 @@ SELECT ContentTypeClassifications.ContentTypeClassificationID
 	, ISNULL(UserClassificationLanguage.Name,ISNULL(DefaultClassificationLanguage.Name,'No name for this classification')) ClassificationName
 	, ISNULL(UINameCustom.Customization,UIName.Name) StatusName
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ContentTypeClassifications.ModifierID
+	, Modifier.PersonID ModifierID
 	, ContentTypeClassifications.ModifiedDate
 FROM ContentTypeClassifications
 LEFT JOIN (SELECT ClassificationId, Name FROM ClassificationLanguages WHERE LanguageId = @LanguageID) UserClassificationLanguage

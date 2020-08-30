@@ -16,10 +16,10 @@ SELECT Pages.PageId
 	,Pages.ShowTitleName
 	, Pages.ShowTitleDescription
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, Pages.CreatorID
+	, Creator.PersonID CreatorID
 	, Pages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, Pages.ModifierID
+	, Modifier.PersonID ModifierID
 	, Pages.ModifiedDate
 FROM Pages
 

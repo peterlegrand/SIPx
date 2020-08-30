@@ -12,10 +12,10 @@ SELECT UserMenus.UserMenuId
 	, ISNULL(UserRightPage.Name,ISNULL(DefaultRightPage.Name,'No right page name')) RightPageName
 	, ISNULL(UserIcon.Customization,ISNULL(DefaultIcon.Name,'No icon name')) IconName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, UserMenus.CreatorID
+	, Creator.PersonID CreatorID
 	, UserMenus.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, UserMenus.ModifierID
+	, Modifier.PersonID ModifierID
 	, UserMenus.ModifiedDate
 FROM UserMenus
 

@@ -22,11 +22,11 @@ SELECT ClassificationValueLanguages.ClassificationValueLanguageID
 	, ClassificationValueLanguages.TopicName
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ClassificationValueLanguages.CreatedDate
-	, ClassificationValueLanguages.CreatorID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ClassificationValueLanguages.ModifiedDate
-	, ClassificationValueLanguages.ModifierID
 FROM ClassificationValues
 JOIN ClassificationValueLanguages
 	ON ClassificationValues.ClassificationValueId = ClassificationValueLanguages.ClassificationValueID

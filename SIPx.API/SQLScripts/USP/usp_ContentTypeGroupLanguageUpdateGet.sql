@@ -7,9 +7,11 @@ SELECT ContentTypeGroups.ContentTypeGroupId
 	, ContentTypeGroupLanguages.Description
 	, ContentTypeGroupLanguages.MenuName
 	, ContentTypeGroupLanguages.MouseOver
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ContentTypeGroupLanguages.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ContentTypeGroupLanguages.ModifiedDate
 FROM ContentTypeGroups
 JOIN ContentTypeGroupLanguages

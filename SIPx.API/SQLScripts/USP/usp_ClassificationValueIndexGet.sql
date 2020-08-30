@@ -75,10 +75,10 @@ SELECT TOP (@Top)
 	, ISNULL(UserLanguage.TopicName,ISNULL(DefaultLanguage.TopicName,'No topic name for this value')) TopicName
 	, Path
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ClassificationValueHierarchy.CreatorID
+	, Creator.PersonID CreatorID
 	, ClassificationValueHierarchy.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationValueHierarchy.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationValueHierarchy.ModifiedDate
 	, Level
 	, ClassificationLevels.MaxLevel

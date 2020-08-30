@@ -13,9 +13,11 @@ SELECT ProcessTemplateFieldLanguages.ProcessTemplateFieldLanguageID
 	, ProcessTemplateFieldLanguages.MenuName
 	, ProcessTemplateFieldLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ProcessTemplateFieldLanguages.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateFieldLanguages.ModifiedDate
 FROM ProcessTemplateFields
 JOIN ProcessTemplateFieldLanguages

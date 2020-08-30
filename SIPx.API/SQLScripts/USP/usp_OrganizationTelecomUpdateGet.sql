@@ -13,10 +13,10 @@ SELECT OrganizationTelecoms.OrganizationTelecomID
 	, ISNULL(OrganizationTelecomPhones.ExtensionCode,'') ExtensionCode
 	, ISNULL(OrganizationTelecomPhones.AskForName,'') AskForName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, OrganizationTelecoms.CreatorID
+	, Creator.PersonID CreatorID
 	, OrganizationTelecoms.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, OrganizationTelecoms.ModifierID
+	, Modifier.PersonID ModifierID
 	, OrganizationTelecoms.ModifiedDate
 FROM OrganizationTelecoms
 JOIN TelecomTypes

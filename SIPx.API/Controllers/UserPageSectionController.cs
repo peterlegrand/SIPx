@@ -19,28 +19,28 @@ namespace SIPx.API.Controllers
     public class UserPageSectionController : ControllerBase
     {
         private readonly IMasterProvider _masterProvider;
+        private readonly IContentTypeProvider _contentTypeProvider;
         private readonly IPageSectionTypeProvider _pageSectionTypeProvider;
         private readonly IPageSectionDataTypeProvider _pageSectionDataTypeProvider;
         private readonly IUserPageSectionProvider _userPageSectionProvider;
         private readonly IPageSectionProvider _pageSectionProvider;
         private readonly IUserPageProvider _userPageProvider;
         private readonly IMasterListProvider _masterListProvider;
-        private readonly IContentMasterProvider _contentMasterProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IPageProvider _pageProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserPageSectionController( IPageSectionTypeProvider pageSectionTypeProvider, IPageSectionDataTypeProvider pageSectionDataTypeProvider, IUserPageSectionProvider userPageSectionProvider, IPageSectionProvider pageSectionProvider, IUserPageProvider userPageProvider, IMasterListProvider masterListProvider, IContentMasterProvider contentMasterProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider pageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserPageSectionController( IContentTypeProvider contentTypeProvider, IPageSectionTypeProvider pageSectionTypeProvider, IPageSectionDataTypeProvider pageSectionDataTypeProvider, IUserPageSectionProvider userPageSectionProvider, IPageSectionProvider pageSectionProvider, IUserPageProvider userPageProvider, IMasterListProvider masterListProvider,  IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider pageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _masterProvider = masterProvider;
+            _contentTypeProvider = contentTypeProvider;
             _pageSectionTypeProvider = pageSectionTypeProvider;
             _pageSectionDataTypeProvider = pageSectionDataTypeProvider;
             _userPageSectionProvider = userPageSectionProvider;
             _pageSectionProvider = pageSectionProvider;
             _userPageProvider = userPageProvider;
             _masterListProvider = masterListProvider;
-            _contentMasterProvider = contentMasterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _pageProvider = pageProvider;
@@ -57,7 +57,7 @@ namespace SIPx.API.Controllers
                 var PageSectionCreateGetSequences = await _userPageSectionProvider.CreateGetSequence(CurrentUser.Id, Id);
                 var PageSectionTypes = await _pageSectionTypeProvider.List(CurrentUser.Id);
                 var PageSectionDataTypes = await _pageSectionDataTypeProvider.List(CurrentUser.Id);
-                var ContentTypes = await _contentMasterProvider.ContentTypeList(CurrentUser.Id);
+                var ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
                 var SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 PageSectionCreateGet.LanguageId = UserLanguage.LanguageId;

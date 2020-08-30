@@ -25,10 +25,9 @@ namespace SIPx.API.Controllers
         private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IContentMasterProvider _contentMasterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentTypeGroupController(ICheckProvider checkProvider, IContentTypeGroupProvider contentTypeGroupProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IContentMasterProvider contentMasterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentTypeGroupController(ICheckProvider checkProvider, IContentTypeGroupProvider contentTypeGroupProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _checkProvider = checkProvider;
             _contentTypeGroupProvider = contentTypeGroupProvider;
@@ -36,7 +35,6 @@ namespace SIPx.API.Controllers
             _securityLevelProvider = securityLevelProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _contentMasterProvider = contentMasterProvider;
             _userManager = userManager;
         }
 
@@ -95,7 +93,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.ContentTypeGroupIndexGet(CurrentUser.Id));
+                return Ok(await _contentTypeGroupProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -110,7 +108,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentMasterProvider.ContentTypeGroupUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _contentTypeGroupProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -201,35 +199,35 @@ namespace SIPx.API.Controllers
 
         }
 
-        [HttpGet("ContentTypeGroupLanguages/{Id:int}")]
-        public async Task<IActionResult> ContentTypeGroupLanguageIndexGet(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _contentMasterProvider.ContentTypeGroupLanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("ContentTypeGroupLanguages/{Id:int}")]
+        //public async Task<IActionResult> ContentTypeGroupLanguageIndexGet(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _contentTypeGroupProvider.LanguageIndexGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
-        [HttpGet("ContentTypeGroupLanguage/{Id:int}")]
-        public async Task<IActionResult> ContentTypeGroupLanguageUpdateGet(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _contentMasterProvider.ContentTypeGroupLanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("ContentTypeGroupLanguage/{Id:int}")]
+        //public async Task<IActionResult> ContentTypeGroupLanguageUpdateGet(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _contentTypeGroupProvider.LanguageUpdateGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
     }
 }

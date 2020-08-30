@@ -65,8 +65,10 @@ SELECT TOP (@Top)
 	, ISNULL(UserLanguage.TopicName,ISNULL(DefaultLanguage.TopicName,'No topic name for this value')) TopicName
 	, Path
 	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.PersonID CreatorID
 	, ClassificationValueHierarchy.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.PersonID ModifierId
 	, ClassificationValueHierarchy.ModifiedDate
 FROM   ClassificationValueHierarchy
 LEFT JOIN (SELECT ClassificationValueId, Name, Description, MenuName, MouseOver, DropDownName, PageName, PageDescription, HeaderName, HeaderDescription, TopicName  FROM ClassificationValueLanguages WHERE LanguageId = @LanguageID) UserLanguage

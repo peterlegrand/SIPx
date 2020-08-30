@@ -18,10 +18,10 @@ SELECT PersonRelationTypes.PersonRelationTypeID
 	, Color
 	, ISNULL(UINameCustom.Customization,UIName.Name) IconName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, PersonRelationTypes.CreatorID
+	, Creator.PersonID CreatorID
 	, PersonRelationTypes.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, PersonRelationTypes.ModifierID
+	, Modifier.PersonID ModifierID
 	, PersonRelationTypes.ModifiedDate
 FROM PersonRelationTypes 
 LEFT JOIN (SELECT PersonRelationTypeId, Name, Description, MenuName, MouseOver,FromIsAnXOfTo, ToIsAnXOfFrom, PersonRelationTypeLanguageID FROM PersonRelationTypeLanguages WHERE LanguageId = @LanguageID) UserLanguage

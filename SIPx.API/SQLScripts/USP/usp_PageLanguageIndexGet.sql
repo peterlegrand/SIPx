@@ -16,9 +16,11 @@ SELECT Pages.PageId
 	, PageLanguages.TitleName
 	, PageLanguages.TitleDescription
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, PageLanguages.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, PageLanguages.ModifiedDate
 FROM Pages
 JOIN PageLanguages

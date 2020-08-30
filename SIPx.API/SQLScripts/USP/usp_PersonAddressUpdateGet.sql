@@ -21,10 +21,10 @@ SELECT PersonAddresses.PersonAddressId
 	, PersonAddresses.ProvinceState
 	, PersonAddresses.County
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, PersonAddresses.CreatorID
+	, Creator.PersonID CreatorID
 	, PersonAddresses.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, PersonAddresses.ModifierID
+	, Modifier.PersonID ModifierID
 	, PersonAddresses.ModifiedDate
 
 FROM PersonAddresses

@@ -7,22 +7,30 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ContentTypes.ContentTypeID
 	, @LanguageId LanguageId
-	, ContentTypeGroups.Sequence
+	, ContentTypeGroups.Sequence GroupSequence
+	, ContentTypeGroups.ContentTypeGroupID
+	, ISNULL(UserGroupLanguage.Name,ISNULL(DefaultGroupLanguage.Name,'No name for this content type group')) ContentTypeGroupName
+	, ISNULL(UserGroupLanguage.Description,ISNULL(DefaultGroupLanguage.Description,'No description for this content type group')) GroupDescription
+	, ISNULL(UserGroupLanguage.MenuName,ISNULL(DefaultGroupLanguage.MenuName,'No menu name for this content type group')) GroupMenuName
+	, ISNULL(UserGroupLanguage.MouseOver,ISNULL(DefaultGroupLanguage.MouseOver,'No mouse over for this content type group')) GroupMouseOver
+	, @LanguageId LanguageId
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this content type')) Name
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this content type')) Description
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this content type')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this content type')) MouseOver
-	, ISNULL(UserGroupLanguage.Name,ISNULL(DefaultGroupLanguage.Name,'No name for this content type group')) GroupName
-	, ISNULL(UserGroupLanguage.Description,ISNULL(DefaultGroupLanguage.Description,'No description for this content type group')) GroupDescription
-	, ISNULL(UserGroupLanguage.MenuName,ISNULL(DefaultGroupLanguage.MenuName,'No menu name for this content type group')) GroupMenuName
-	, ISNULL(UserGroupLanguage.MouseOver,ISNULL(DefaultGroupLanguage.MouseOver,'No mouse over for this content type group')) GroupMouseOver
+	, ISNULL(ContentTypes.SecurityLevelId,0) SecurityLevelId 
 	, ISNULL(UISecurityLevelNameCustom.Customization ,UISecurityLevelName.Name) SecurityLevelName
+	, ISNULL(ContentTypes.ProcessTemplateID,0) ProcessTemplateID
 	, CASE WHEN ContentTypes.ProcessTemplateId IS NOT NULL THEN ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguageLanguage.Name,'No name for the process template')) ELSE 'There is process no template' END ProcessTemplateName
-	, ISNULL(ContentTypes.ProcessTemplateId,0) ProcessTemplateId
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, ContentTypes.Color
+	, ContentTypes.IconID
+	, ISNULL(UIIconNameCustom.Customization ,UIIconName.Name) IconName
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ContentTypes.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, ContentTypes.ModifiedDate
 FROM ContentTypes 
 JOIN ContentTypeGroups
@@ -51,9 +59,17 @@ JOIN UITermLanguages UILanguageName
 	ON UILanguageName.UITermId = Languages.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UILanguageNameCustom
 	ON UILanguageNameCustom.UITermId = Languages.NameTermID
+JOIN Icons
+	ON Icons.IconID= Contenttypes.IconID
+JOIN UITermLanguages UIIconName
+	ON UIIconName.UITermId = Icons.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIIconNameCustom
+	ON UIIconNameCustom.UITermId = Icons.NameTermID
 JOIN Persons Creator
 	ON Creator.UserId = ContentTypes.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = ContentTypes.ModifierID
 WHERE UISecurityLevelName.LanguageId = @LanguageID
+	AND UIIconName.LanguageId = @LanguageID
+	AND UILanguageName.LanguageId = @LanguageID
 ORDER BY ContentTypeGroups.Sequence, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this ContentType')) 

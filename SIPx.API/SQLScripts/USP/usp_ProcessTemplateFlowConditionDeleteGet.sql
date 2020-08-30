@@ -18,9 +18,11 @@ SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
 	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionString
 	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionInt
 	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionDate
-	, Creator.FirstName + ' ' + Creator.LastName Creator
+	, Creator.FirstName + ' ' + Creator.LastName CreatorName
+	, Creator.PersonID CreatorID
 	, ProcessTemplateFlowConditions.CreatedDate
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateFlowConditions.ModifiedDate
 FROM ProcessTemplateFlowConditions 
 LEFT JOIN (SELECT ProcessTemplateFlowConditionId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowConditionLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFlowConditionLanguage

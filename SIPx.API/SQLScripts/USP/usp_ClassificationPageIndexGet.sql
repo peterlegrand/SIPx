@@ -23,9 +23,9 @@ SELECT ClassificationPages.ClassificationPageID
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ClassificationPages.CreatedDate
-	, ClassificationPages.CreatorID
+	, Creator.PersonID CreatorID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ClassificationPages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ClassificationPages.ModifiedDate
 FROM ClassificationPages 
 LEFT JOIN (SELECT ClassificationPageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, ClassificationPageLanguageID FROM ClassificationPageLanguages WHERE LanguageId = @LanguageID) UserClassificationPageLanguage

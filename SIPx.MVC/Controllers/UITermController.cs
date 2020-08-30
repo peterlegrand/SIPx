@@ -19,7 +19,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<UITermIndexGet>>($"{_baseUrl}api/UITerm/Index", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UITerm/Index", token);
             ViewBag.UITerms = UITerms;
@@ -28,7 +28,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageIndex(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<UITermLanguageIndexGet>>($"{_baseUrl}api/UITerm/LanguageIndex/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UITerm/LanguageIndex", token);
             ViewBag.UITerms = UITerms;
@@ -39,7 +39,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageEdit(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<ObjectLanguageUpdateGet>($"{_baseUrl}api/UITerm/LanguageUpdate/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UITerm/LanguageEdit", token);
             ViewBag.UITerms = UITerms;
@@ -48,7 +48,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageCreate(int id)
         {
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<ObjectLanguageCreateGet>($"{_baseUrl}api/UITerm/LanguageCreate/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UITerm/LanguageCreate", token);
             ViewBag.UITerms = UITerms;
@@ -59,7 +59,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageCreate(ObjectLanguageCreateGet UITermLanguage)
         {
 
-            var token = HttpContext.Session.GetString("Token");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ObjectLanguageCreateGet>($"{_baseUrl}api/UITerm/LanguageCreate", UITermLanguage, token);
 
             return RedirectToAction("LanguageIndex", new { id = UITermLanguage.ObjectId });

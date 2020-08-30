@@ -13,6 +13,7 @@ SELECT
 	, ISNULL( UserLanguageName.Customization, LanguageName.Name) LanguageName
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.PersonID ModifierId
 	, Languages.ModifiedDate
 FROM Languages 
 JOIN Statuses	

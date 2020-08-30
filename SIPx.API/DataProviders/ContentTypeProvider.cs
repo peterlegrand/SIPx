@@ -35,10 +35,10 @@ namespace SIPx.DataAccess
             return String;
         }
 
-        public Task<List<ContentType>> IndexGet(string UserId)
+        public Task<List<ContentTypeIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_ContentTypeIndexGet @UserID";
-            return _sqlDataAccess.LoadData<ContentType, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<ContentTypeIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
 

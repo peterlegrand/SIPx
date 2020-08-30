@@ -13,6 +13,9 @@ SELECT UserPreferences.UserPreferenceID
 	, UserPreferences.GuidPreference
 	, '' LocationPreference
 	, ISNULL(UITypeNameCustom.Customization,UITypeName.Name) TypeName
+	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, UserPreferences.ModifierID
+	, UserPreferences.ModifiedDate
 FROM UserPreferences 
 JOIN PreferenceTypes
 	ON UserPreferences.PreferenceTypeId = PreferenceTypes.PreferenceTypeID
@@ -20,6 +23,8 @@ JOIN UITermLanguages UITypeName
 	ON UITypeName.UITermId = PreferenceTypes.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UITypeNameCustom
 	ON UITypeNameCustom.UITermId = PreferenceTypes.NameTermID
+JOIN Persons Modifier
+	ON Modifier.UserId = UserPreferences.ModifierID
 WHERE UITypeName.LanguageId = @LanguageID
 AND UserPreferences.UserPreferenceId = @UserPreferenceID
 

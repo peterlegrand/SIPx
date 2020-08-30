@@ -15,10 +15,10 @@ SELECT ProcessTemplateFlows.ProcessTemplateFlowId
 	, ProcessTemplateFlowLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ProcessTemplateFlowLanguages.CreatorID
+	, Creator.PersonID CreatorID
 	, ProcessTemplateFlowLanguages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ProcessTemplateFlowLanguages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ProcessTemplateFlowLanguages.ModifiedDate
 FROM ProcessTemplateFlows
 JOIN ProcessTemplateFlowLanguages

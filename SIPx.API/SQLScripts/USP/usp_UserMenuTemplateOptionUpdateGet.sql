@@ -22,10 +22,10 @@ SELECT UserMenuTemplateOptions.UserMenuTemplateOptionID
 	, UserMenuTemplateOptions.UserPageIdRight
 	, UserMenuTemplateOptions.UserPageIdLeft
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, UserMenuTemplateOptions.CreatorID
+	, Creator.PersonID CreatorID
 	, UserMenuTemplateOptions.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, UserMenuTemplateOptions.ModifierID
+	, Modifier.PersonID ModifierID
 	, UserMenuTemplateOptions.ModifiedDate
 FROM UserMenuTemplateOptions 
 LEFT JOIN (SELECT UserMenuTemplateOptionId, Name, Description, MenuName, MouseOver, UserMenuTemplateOptionLanguageID FROM UserMenuTemplateOptionLanguages WHERE LanguageId = @LanguageID) UserLanguage

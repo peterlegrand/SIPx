@@ -11,7 +11,8 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Process\" />
-    <Folder Include="Models\UserPage\Base\" />
+    <Folder Include="Models\Master\SecurityLevel\" />
+    <Folder Include="Models\UserPage\" />
   </ItemGroup>
 
 </Project>

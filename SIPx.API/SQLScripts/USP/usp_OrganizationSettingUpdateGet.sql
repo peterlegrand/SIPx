@@ -15,7 +15,7 @@ SELECT OrganizationSettings.OrganizationSettingId
 	, ISNULL(UIOrganizationSettingsDescriptionCustom.Customization,UIOrganizationSettingsDescription.Name) OrganizationSettingsDescription
 	, ISNULL(UIOrganizationSettingsMenuNameCustom.Customization,UIOrganizationSettingsMenuName.Name) OrganizationSettingsMenuName
 	, ISNULL(UIOrganizationSettingsMouseOverCustom.Customization,UIOrganizationSettingsMouseOver.Name) OrganizationSettingsMouseOver
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, OrganizationSettings.ModifierID
 	, OrganizationSettings.ModifiedDate
 FROM OrganizationSettings

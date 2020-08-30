@@ -12,7 +12,8 @@ SELECT
 	, ISNULL( UserLanguageMenuName.Customization, LanguageMenuName.Name) MenuName
 	, ISNULL( UserLanguageMouseOver.Customization, LanguageMouseOver.Name) MouseOver
 	, Active
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, TelecomTypes.ModifiedDate
 FROM TelecomTypes 
 JOIN UITermLanguages LanguageName

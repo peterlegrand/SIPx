@@ -14,10 +14,10 @@ SELECT  ProjectLanguages.ProjectLanguageID
 	, ProjectLanguages.MouseOver
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, ProjectLanguages.CreatorID
+	, Creator.PersonID CreatorID
 	, ProjectLanguages.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, ProjectLanguages.ModifierID
+	, Modifier.PersonID ModifierID
 	, ProjectLanguages.ModifiedDate
 FROM Projects
 JOIN ProjectLanguages

@@ -14,8 +14,8 @@ SELECT OrganizationSettings.OrganizationSettingID
 --Homepage page
 	WHEN OrganizationSettings.OrganizationSettingTypeID= 2
 	THEN ISNULL(Pages.Name,'No name') END AS ValueName
-	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
-	, OrganizationSettings.ModifierID
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierId
 	, OrganizationSettings.ModifiedDate
 FROM OrganizationSettings
 JOIN OrganizationSettingTypes
