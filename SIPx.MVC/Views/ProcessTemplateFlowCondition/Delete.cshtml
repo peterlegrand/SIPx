@@ -18,6 +18,7 @@
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
             </div>
             <div class="col-9">
+                <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
                 <ejs-numerictextbox id="ProcessTemplateFlowConditionId" ejs-for="@Model.ProcessTemplateFlowConditionId" cssClass="e-outline" placeholder="ProcessTemplateFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
@@ -149,7 +150,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
-                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.ProcessTemplateFlowId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

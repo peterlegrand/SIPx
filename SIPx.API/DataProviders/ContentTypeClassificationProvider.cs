@@ -20,17 +20,17 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<ContentTypeClassification>> IndexGet(string UserId, int ContentTypeId)
+        public async Task<List<ContentTypeClassificationIndexGet>> IndexGet(string UserId, int ContentTypeId)
         {
             string usp = "usp_ContentTypeClassificationIndexGet @UserId, @ContentTypeID";
-            var x = await _sqlDataAccess.LoadData<ContentTypeClassification, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
+            var x = await _sqlDataAccess.LoadData<ContentTypeClassificationIndexGet, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
             return x;
         }
 
-        public Task<ContentTypeClassification> UpdateGet(string UserId, int ContentTypeClassificationId)
+        public Task<ContentTypeClassificationUpdateGet> UpdateGet(string UserId, int ContentTypeClassificationId)
         {
             string usp = "usp_ContentTypeClassificationUpdateIndex @UserId, @ContentTypeClassificationID";
-            return _sqlDataAccess.LoadSingleRecord<ContentTypeClassification, dynamic>(usp, new { UserId = UserId, ContentTypeClassificationId = ContentTypeClassificationId });
+            return _sqlDataAccess.LoadSingleRecord<ContentTypeClassificationUpdateGet, dynamic>(usp, new { UserId = UserId, ContentTypeClassificationId = ContentTypeClassificationId });
         }
 
         public bool UpdatePost(ContentTypeClassificationUpdateGet ContentTypeClassification)

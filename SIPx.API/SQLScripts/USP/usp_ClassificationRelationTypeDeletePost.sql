@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ClassificationRelationTypeDeletePost (@UserId nvarchar(450), @ClassificationRelationTypeId int)
+CREATE PROCEDURE usp_ClassificationRelationTypeDeletePost (@ClassificationRelationTypeId int)
 AS
 BEGIN TRANSACTION
 DELETE FROM ClassificationRelationTypeLanguages 

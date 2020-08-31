@@ -10,6 +10,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int RoleClaimId { get; set; }
+        public string RoleId { get; set; }
         public int ClaimGroupName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

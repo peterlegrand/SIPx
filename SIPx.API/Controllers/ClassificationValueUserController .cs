@@ -86,14 +86,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))  //PETER TODO looks like there is also a value 54
             {
-                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
 
                 return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
             }

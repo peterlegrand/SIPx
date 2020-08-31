@@ -19,30 +19,30 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class SecurityLevelController : ControllerBase
     {
+        private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public SecurityLevelController(IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public SecurityLevelController(ISecurityLevelProvider securityLevelProvider, IClaimCheck claimCheck,  Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _securityLevelProvider = securityLevelProvider;
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
-        [HttpGet("Index")]
-        public async Task<IActionResult> GetSecurityLevels()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _peopleProvider.SecurityLevelIndexGet(CurrentUser.Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("Index")]
+        //public async Task<IActionResult> GetSecurityLevels()
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _securityLevelProvider.IndexGet(CurrentUser.Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
 
        

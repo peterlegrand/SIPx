@@ -56,7 +56,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<PersonAddressUpdateGet>($"{_baseUrl}api/PersonAddress/Update", PersonAddress, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = PersonAddress.PersonId });
         }
 
         [HttpGet]
@@ -70,13 +70,12 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(PersonAddressDeleteGet Page)
+        public async Task<IActionResult> Delete(PersonAddressDeleteGet PersonAddress)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PersonAddressDeleteGet>($"{_baseUrl}api/PersonAddress/Delete", Page, token);
+            await _client.PostProtectedAsync<PersonAddressDeleteGet>($"{_baseUrl}api/PersonAddress/Delete", PersonAddress, token);
 
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = PersonAddress.PersonId });
         }
 
 

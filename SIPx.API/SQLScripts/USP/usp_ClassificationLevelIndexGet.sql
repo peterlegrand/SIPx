@@ -34,4 +34,5 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserId = ClassificationLevels.ModifierID
 WHERE ClassificationLevels.ClassificationID = @ClassificationID
+	AND UILanguageName.LanguageID= @LanguageID
 ORDER BY ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification level')) 

@@ -19,10 +19,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<AddressType>> IndexGet(string UserId)
+        public async Task<List<AddressTypeIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_AddressTypeIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<AddressType, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<AddressTypeIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
 

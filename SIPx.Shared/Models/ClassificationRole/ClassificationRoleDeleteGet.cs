@@ -9,6 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ClassificationRoleId { get; set; }
+        public int ClassificationId { get; set; }
         public string RoleName { get; set; }
         public string ClassificationRelationTypeName { get; set; }
         public string CreatorName { get; set; }

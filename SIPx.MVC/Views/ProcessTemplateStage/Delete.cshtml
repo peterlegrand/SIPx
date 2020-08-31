@@ -17,8 +17,9 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="ProcessTemplateStageId" ejs-for="ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-textbox>
-            </div>
+    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+    <ejs-textbox id="ProcessTemplateStageId" ejs-for="ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-textbox>
+</div>
         </div>
 
         <div class="row">
@@ -100,7 +101,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
-                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.ProcessTemplateId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

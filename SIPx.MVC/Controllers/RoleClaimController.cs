@@ -56,7 +56,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<RoleClaimUpdateGet>($"{_baseUrl}api/RoleClaim/Update", RoleClaim, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = RoleClaim.RoleId });
         }
 
         [HttpGet]
@@ -70,13 +70,12 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(RoleClaimDeleteGet Page)
+        public async Task<IActionResult> Delete(RoleClaimDeleteGet RoleClaim)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<RoleClaimDeleteGet>($"{_baseUrl}api/RoleClaim/Delete", Page, token);
+            await _client.PostProtectedAsync<RoleClaimDeleteGet>($"{_baseUrl}api/RoleClaim/Delete", RoleClaim, token);
 
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = RoleClaim.RoleId });
         }
 
 

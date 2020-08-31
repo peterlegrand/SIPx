@@ -8,7 +8,9 @@ namespace SIPx.Shared
     public class PersonRelationUpdateGet 
     {
         [Key]
+        
         public int PersonRelationId { get; set; }
+        public int OriginPersonId { get; set; }
         public string FromPersonFirstName { get; set; }
         public string FromPersonLastName { get; set; }
         public string FromOrganizationName { get; set; }

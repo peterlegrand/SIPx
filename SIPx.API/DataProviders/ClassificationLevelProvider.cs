@@ -41,7 +41,7 @@ namespace SIPx.DataAccess
 
         public async Task<List<ClassificationLevelIndexGet>> IndexGet(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationLevelIndex @UserId, @ClassificationID";
+            string usp = "usp_ClassificationLevelIndexGet @UserId, @ClassificationID";
             var x = await _sqlDataAccess.LoadData<ClassificationLevelIndexGet, dynamic>(usp, new { UserId, ClassificationId });
             return x;
         }

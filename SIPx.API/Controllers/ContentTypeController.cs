@@ -209,35 +209,35 @@ namespace SIPx.API.Controllers
 
         }
 
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> LanguageIndex(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _contentTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("LanguageIndex/{Id:int}")]
+        //public async Task<IActionResult> LanguageIndex(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _contentTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> LanguageUpdate(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _contentTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("LanguageUpdate/{Id:int}")]
+        //public async Task<IActionResult> LanguageUpdate(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _contentTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
     }
 }

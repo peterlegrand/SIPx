@@ -28,10 +28,6 @@ LEFT JOIN (
 		, MenuName
 		, MouseOver
 		, RoleLanguageID
-		, RoleLanguages.CreatorID
-		, RoleLanguages.ModifierID
-		, RoleLanguages.CreatedDate
-		, RoleLanguages.ModifiedDate 
 		, Creator.FirstName + ' ' + Creator.LastName CreatorName
 		, Creator.PersonID CreatorID
 		, RoleLanguages.CreatedDate

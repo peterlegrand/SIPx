@@ -1,4 +1,4 @@
-ALTER PROCEDURE [dbo].[usp_ContentTypeUpdateGet] (@UserId nvarchar(450), @ContentTypeId int) 
+CREATE PROCEDURE [dbo].[usp_ContentTypeUpdateGet] (@UserId nvarchar(450), @ContentTypeId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

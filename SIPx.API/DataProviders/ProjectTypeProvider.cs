@@ -34,10 +34,10 @@ namespace SIPx.DataAccess
             return String;
         }
 
-        public Task<List<ProjectType>> IndexGet(string UserId)
+        public Task<List<ProjectTypeIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_ProjectTypeIndexGet @UserID";
-            return _sqlDataAccess.LoadData<ProjectType, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<ProjectTypeIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
 
@@ -69,17 +69,17 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<ProjectTypeLanguage>> LanguageIndexGet(string UserId, int ProjectTypeId)
+        public Task<List<ProjectTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ProjectTypeId)
         {
             string usp = "usp_ProjectTypeLanguageIndexGet @UserId, @ProjectTypeID";
-            return _sqlDataAccess.LoadData<ProjectTypeLanguage, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
+            return _sqlDataAccess.LoadData<ProjectTypeLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
         }
 
-        public Task<ProjectTypeLanguage> LanguageUpdateGet(string UserId, int ProjectTypeLanguageId)
+        public Task<ProjectTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ProjectTypeLanguageId)
         {
             string usp = "usp_ProjectTypeLanguageUpdateGet @UserId, @ProjectTypeLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<ProjectTypeLanguage, dynamic>(usp, new { UserId = UserId, ProjectTypeLanguageId = ProjectTypeLanguageId });
+            return _sqlDataAccess.LoadSingleRecord<ProjectTypeLanguageUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeLanguageId = ProjectTypeLanguageId });
 
         }
 

@@ -10,9 +10,9 @@ namespace SIPx.DataAccess
         Task<string> CreatePostCheck(ProjectTypeCreatePost ProjectType);
         Task<ProjectTypeDeleteGet> DeleteGet(string UserId, int ProjectTypeId);
         bool DeletePost(int Id);
-        Task<List<ProjectType>> IndexGet(string UserId);
-        Task<List<ProjectTypeLanguage>> LanguageIndexGet(string UserId, int ProjectTypeId);
-        Task<ProjectTypeLanguage> LanguageUpdateGet(string UserId, int ProjectTypeLanguageId);
+        Task<List<ProjectTypeIndexGet>> IndexGet(string UserId);
+        Task<List<ProjectTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ProjectTypeId);
+        Task<ProjectTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ProjectTypeLanguageId);
         Task<List<ProjectTypeList>> List(string UserId);
         Task<ProjectTypeUpdateGet> UpdateGet(string UserId, int ProjectTypeId);
         bool UpdatePost(ProjectTypeUpdateGet ProjectType);

@@ -20,17 +20,17 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<Gender>> IndexGet(string UserId)
+        public async Task<List<GenderIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_GenderIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<Gender, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<GenderIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
 
-        public Task<Gender> UpdateGet(string UserId, int GenderId)
+        public Task<GenderUpdateGet> UpdateGet(string UserId, int GenderId)
         {
             string usp = "usp_GenderUpdateGet @UserId, @GenderID";
-            return _sqlDataAccess.LoadSingleRecord<Gender, dynamic>(usp, new { UserId = UserId, GenderId = GenderId });
+            return _sqlDataAccess.LoadSingleRecord<GenderUpdateGet, dynamic>(usp, new { UserId = UserId, GenderId = GenderId });
 
         }
 
@@ -41,10 +41,10 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<Gender>> Active(string UserId)
+        public Task<List<GenderList>> Active(string UserId)
         {
             string usp = "usp_GendersActive @UserID";
-            return _sqlDataAccess.LoadData<Gender, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<GenderList, dynamic>(usp, new { UserId = UserId });
 
         }
 

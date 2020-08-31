@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ContentTypeClassificationUpdateGet>($"{_baseUrl}api/ContentTypeClassification/Update", ContentTypeClassification, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ContentTypeClassification.ContentTypeId });
         }
     }
 }

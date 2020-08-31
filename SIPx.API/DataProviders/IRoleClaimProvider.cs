@@ -9,7 +9,7 @@ namespace SIPx.DataAccess
         Task<string> CreatePost(RoleClaimCreateGet RoleClaim);
         Task<RoleClaimDeleteGet> DeleteGet(string UserId, int RoleClaimId);
         bool DeletePost(int RoleClaimId);
-        Task<List<RoleClaimIndexGet>> IndexGet(string UserId);
+        Task<List<RoleClaimIndexGet>> IndexGet(string UserId, string RoleId);
         Task<RoleClaimUpdateGet> UpdateGet(string UserId, int RoleClaimId);
         bool UpdatePost(RoleClaimUpdateGet RoleClaim);
     }

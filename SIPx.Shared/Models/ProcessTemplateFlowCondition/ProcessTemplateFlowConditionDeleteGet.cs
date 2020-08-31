@@ -9,6 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProcessTemplateFlowConditionId { get; set; }
+        public int ProcessTemplateFlowId { get; set; }
         public int ProcessTemplateFlowConditionTypeName { get; set; }
         public int ProcessTemplateFieldName { get; set; }
         public int ProcessTemplateFieldNameRole { get; set; }

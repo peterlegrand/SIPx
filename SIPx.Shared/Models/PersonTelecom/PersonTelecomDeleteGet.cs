@@ -9,6 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int PersonTelecomId { get; set; }
+        public int PersonId { get; set; }
         public bool PhoneProperties { get; set; }
         public string TelecomTypeName { get; set; }
         public string TelecomValue { get; set; }

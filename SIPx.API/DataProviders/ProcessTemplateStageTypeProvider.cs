@@ -34,10 +34,10 @@ namespace SIPx.DataAccess
             return String;
         }
 
-        public Task<List<ProcessTemplateStageType>> IndexGet(string UserId)
+        public Task<List<ProcessTemplateStageTypeIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_ProcessTemplateStageTypeIndexGet @UserID";
-            return _sqlDataAccess.LoadData<ProcessTemplateStageType, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<ProcessTemplateStageTypeIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
 
@@ -69,17 +69,17 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<ProcessTemplateStageTypeLanguage>> LanguageIndexGet(string UserId, int ProcessTemplateStageTypeId)
+        public Task<List<ProcessTemplateStageTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ProcessTemplateStageTypeId)
         {
             string usp = "usp_ProcessTemplateStageTypeLanguageIndexGet @UserId, @ProcessTemplateStageTypeID";
-            return _sqlDataAccess.LoadData<ProcessTemplateStageTypeLanguage, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageTypeId = ProcessTemplateStageTypeId });
+            return _sqlDataAccess.LoadData<ProcessTemplateStageTypeLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageTypeId = ProcessTemplateStageTypeId });
 
         }
 
-        public Task<ProcessTemplateStageTypeLanguage> LanguageUpdateGet(string UserId, int ProcessTemplateStageTypeLanguageId)
+        public Task<ProcessTemplateStageTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ProcessTemplateStageTypeLanguageId)
         {
             string usp = "usp_ProcessTemplateStageTypeLanguageUpdateGet @UserId, @ProcessTemplateStageTypeLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageTypeLanguage, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageTypeLanguageId = ProcessTemplateStageTypeLanguageId });
+            return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageTypeLanguageUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageTypeLanguageId = ProcessTemplateStageTypeLanguageId });
 
         }
 

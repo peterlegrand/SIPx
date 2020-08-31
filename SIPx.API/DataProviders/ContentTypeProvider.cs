@@ -70,19 +70,19 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public async Task<List<ContentTypeLanguage>> LanguageIndexGet(string UserId, int ContentTypeId)
-        {
-            string usp = "usp_ContentTypeLanguageIndexGet @UserId, @ContentTypeID";
-            var x = await _sqlDataAccess.LoadData<ContentTypeLanguage, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
-            return x;
-        }
+        //public async Task<List<ContentTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ContentTypeId)
+        //{
+        //    string usp = "usp_ContentTypeLanguageIndexGet @UserId, @ContentTypeID";
+        //    var x = await _sqlDataAccess.LoadData<ContentTypeLanguage, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
+        //    return x;
+        //}
 
-        public Task<ContentTypeLanguage> LanguageUpdateGet(string UserId, int ContentTypeLanguageId)
-        {
-            string usp = "usp_ContentTypeLanguageUpdateGet @ContentTypeLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<ContentTypeLanguage, dynamic>(usp, new { ContentTypeLanguageId = ContentTypeLanguageId });
+        //public Task<ContentTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ContentTypeLanguageId)
+        //{
+        //    string usp = "usp_ContentTypeLanguageUpdateGet @ContentTypeLanguageID";
+        //    return _sqlDataAccess.LoadSingleRecord<ContentTypeLanguageLanguageUpdateGet, dynamic>(usp, new { ContentTypeLanguageId = ContentTypeLanguageId });
 
-        }
+        //}
 
         public Task<List<ContentTypeList>> List(string UserId)
         {

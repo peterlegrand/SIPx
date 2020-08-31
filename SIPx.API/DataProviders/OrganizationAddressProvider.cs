@@ -34,17 +34,17 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public async Task<List<OrganizationAddress>> IndexGet(string UserId, int OrganizationId)
+        public async Task<List<OrganizationAddressIndexGet>> IndexGet(string UserId, int OrganizationId)
         {
             string usp = "usp_OrganizationAddressIndexGet @UserId, @OrganizationID";
-            var x = await _sqlDataAccess.LoadData<OrganizationAddress, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            var x = await _sqlDataAccess.LoadData<OrganizationAddressIndexGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
 
-        public Task<OrganizationAddress> UpdateGet(string UserId, int OrganizationAddressId)
+        public Task<OrganizationAddressUpdateGet> UpdateGet(string UserId, int OrganizationAddressId)
         {
             string usp = "usp_OrganizationAddressUpdateGet @UserId, @OrganizationAddressID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationAddress, dynamic>(usp, new { UserId = UserId, OrganizationAddressId = OrganizationAddressId });
+            return _sqlDataAccess.LoadSingleRecord<OrganizationAddressUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationAddressId = OrganizationAddressId });
 
         }
 

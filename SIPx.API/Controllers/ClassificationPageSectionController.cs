@@ -101,14 +101,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "10"))
             {
-                if (await _checkProvider.CheckIfRecordExists("ClassificationPages", "ClassificationID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("ClassificationPages", "ClassificationID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
 
                 var x = await _classificationPageSectionProvider.IndexGet(CurrentUser.Id, Id);
                 return Ok(x);

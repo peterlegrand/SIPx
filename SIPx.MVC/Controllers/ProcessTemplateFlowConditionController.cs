@@ -29,6 +29,7 @@ namespace SIPx.MVC.Controllers
             await _client.PostProtectedAsync<ProcessTemplateFlowConditionCreateGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Create", ProcessTemplateFlowCondition, token);
 
             return RedirectToAction("Index", new { id = ProcessTemplateFlowCondition.ProcessTemplateFlowId });
+       
         }
         [HttpGet]
         public async Task<IActionResult> Index(int id)
@@ -56,7 +57,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ProcessTemplateFlowConditionUpdateGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Update", ProcessTemplateFlowCondition, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ProcessTemplateFlowCondition.ProcessTemplateFlowId });
         }
 
         [HttpGet]
@@ -70,13 +71,12 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(ProcessTemplateFlowConditionDeleteGet Page)
+        public async Task<IActionResult> Delete(ProcessTemplateFlowConditionDeleteGet ProcessTemplateFlowCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ProcessTemplateFlowConditionDeleteGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Delete", Page, token);
+            await _client.PostProtectedAsync<ProcessTemplateFlowConditionDeleteGet>($"{_baseUrl}api/ProcessTemplateFlowCondition/Delete", ProcessTemplateFlowCondition, token);
 
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ProcessTemplateFlowCondition.ProcessTemplateFlowId });
         }
 
         public async Task<IActionResult> LanguageIndex(int id)

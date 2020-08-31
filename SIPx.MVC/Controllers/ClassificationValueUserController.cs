@@ -34,7 +34,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<ClassificationValueUserUpdateGet>>($"{_baseUrl}api/ClassificationValueUser/Index/" + id,token);
+            var response = await _client.GetProtectedAsync<List<ClassificationValueUserIndexGet>>($"{_baseUrl}api/ClassificationValueUser/Index/" + id,token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Index", token);
             ViewBag.UITerms = x;
             return View(response);
@@ -55,7 +55,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ClassificationValueUserUpdateGet>($"{_baseUrl}api/ClassificationValueUser/Update", ClassificationValueUser, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ClassificationValueUser.ClassificationId });
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
@@ -68,13 +68,12 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(ClassificationValueUserDeleteGet Page)
+        public async Task<IActionResult> Delete(ClassificationValueUserDeleteGet ClassificationValueUser)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationValueUserDeleteGet>($"{_baseUrl}api/ClassificationValueUser/Delete", Page, token);
+            await _client.PostProtectedAsync<ClassificationValueUserDeleteGet>($"{_baseUrl}api/ClassificationValueUser/Delete", ClassificationValueUser, token);
 
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ClassificationValueUser.ClassificationValueId });
         }
 
     }

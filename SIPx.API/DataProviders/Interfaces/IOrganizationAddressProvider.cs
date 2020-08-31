@@ -10,8 +10,8 @@ namespace SIPx.DataAccess
         Task<string> CreatePostCheck(OrganizationAddressCreatePost OrganizationAddress);
         Task<OrganizationAddressDeleteGet> DeleteGet(string UserId, int OrganizationAddressId);
         bool DeletePost(int Id);
-        Task<List<OrganizationAddress>> IndexGet(string UserId, int OrganizationId);
-        Task<OrganizationAddress> UpdateGet(string UserId, int OrganizationAddressId);
+        Task<List<OrganizationAddressIndexGet>> IndexGet(string UserId, int OrganizationId);
+        Task<OrganizationAddressUpdateGet> UpdateGet(string UserId, int OrganizationAddressId);
         bool UpdatePost(OrganizationAddressUpdateGet OrganizationAddress);
     }
 }

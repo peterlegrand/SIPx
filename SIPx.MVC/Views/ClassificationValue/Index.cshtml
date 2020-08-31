@@ -26,7 +26,7 @@
 
 
 <a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
-<a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@ViewBag.Id/0">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
+<a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@ViewBag.Id" asp-route-ParentId="0">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Edit/${ClassificationValueId}"><span style="color:red">E</span>dit</a>

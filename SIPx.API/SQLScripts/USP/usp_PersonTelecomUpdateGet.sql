@@ -8,6 +8,7 @@ WHERE USerId = @UserID
 SELECT PersonTelecoms.PersonTelecomID
 	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) TelecomTypeName
 	, PersonTelecoms.TelecomValue
+	, PersonTelecoms.PersonID
 	, ISNULL(PersonTelecomPhones.AreaCode,'') AreaCode
 	, ISNULL(PersonTelecomPhones.CountryCode,'') CountryCode
 	, ISNULL(PersonTelecomPhones.ExtensionCode,'') ExtensionCode

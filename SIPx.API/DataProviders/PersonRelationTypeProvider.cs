@@ -27,17 +27,17 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public Task<List<PersonRelationType>> IndexGet(string UserId)
+        public Task<List<PersonRelationTypeIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_PersonRelationTypeIndexGet @UserID";
-            return _sqlDataAccess.LoadData<PersonRelationType, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<PersonRelationTypeIndexGet, dynamic>(usp, new { UserId = UserId });
 
         }
 
-        public Task<PersonRelationType> UpdateGet(string UserId, int PersonRelationTypeId)
+        public Task<PersonRelationTypeUpdateGet> UpdateGet(string UserId, int PersonRelationTypeId)
         {
             string usp = "usp_PersonRelationTypeUpdateGet @UserId, @PersonRelationTypeID";
-            return _sqlDataAccess.LoadSingleRecord<PersonRelationType, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
+            return _sqlDataAccess.LoadSingleRecord<PersonRelationTypeUpdateGet, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
 
         }
 
@@ -62,19 +62,19 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<PersonRelationTypeLanguage>> LanguageIndexGet(string UserId, int PersonRelationTypeId)
-        {
-            string usp = "usp_PersonRelationTypeLanguageIndexGet @UserId, @PersonRelationTypeID";
-            return _sqlDataAccess.LoadData<PersonRelationTypeLanguage, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
+        //public Task<List<PersonRelationTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int PersonRelationTypeId)
+        //{
+        //    string usp = "usp_PersonRelationTypeLanguageIndexGet @UserId, @PersonRelationTypeID";
+        //    return _sqlDataAccess.LoadData<PersonRelationTypeLanguage, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
 
-        }
+        //}
 
-        public Task<PersonRelationTypeLanguage> LanguageUpdateGet(string UserId, int PersonRelationTypeLanguageId)
-        {
-            string usp = "usp_PersonRelationTypeLanguageUpdateGet @UserId, @PersonRelationTypeLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<PersonRelationTypeLanguage, dynamic>(usp, new { UserId = UserId, PersonRelationTypeLanguageId = PersonRelationTypeLanguageId });
+        //public Task<PersonRelationTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int PersonRelationTypeLanguageId)
+        //{
+        //    string usp = "usp_PersonRelationTypeLanguageUpdateGet @UserId, @PersonRelationTypeLanguageID";
+        //    return _sqlDataAccess.LoadSingleRecord<PersonRelationTypeLanguage, dynamic>(usp, new { UserId = UserId, PersonRelationTypeLanguageId = PersonRelationTypeLanguageId });
 
-        }
+        //}
 
         public Task<List<PersonRelationTypeList>> List(string UserId)
         {

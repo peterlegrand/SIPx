@@ -9,6 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int OrganizationAddressId { get; set; }
+        public int OrganizationId { get; set; }
         public string AddressTypeName { get; set; }
         public string AttnName { get; set; }
         public string Address1 { get; set; }

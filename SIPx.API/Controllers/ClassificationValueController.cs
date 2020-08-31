@@ -40,7 +40,7 @@ namespace SIPx.API.Controllers
             {
                 var ClassificationValueCreateGet = new ClassificationValueCreateGet();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                var DateLevel = await _classificationValueProvider.CreateGet(Id, ParentId);
+                var DateLevel = await _classificationValueProvider.CreateGetDateLevel(Id, ParentId);
                 ClassificationValueCreateGet.LanguageId = UserLanguage.LanguageId;
                 ClassificationValueCreateGet.LanguageName = UserLanguage.Name;
                 ClassificationValueCreateGet.ClassificationId = Id;
@@ -89,14 +89,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "6"))
             {
-                if (await _checkProvider.CheckIfRecordExists("ClassificationValues", "ClassificationID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("ClassificationValues", "ClassificationID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
 
                 return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
             }

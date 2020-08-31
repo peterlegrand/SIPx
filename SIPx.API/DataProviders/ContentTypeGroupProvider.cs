@@ -41,17 +41,17 @@ namespace SIPx.DataAccess
             return String;
         }
 
-        public async Task<List<ContentTypeGroup>> IndexGet(string UserId)
+        public async Task<List<ContentTypeGroupIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_ContentTypeGroupIndexGet @UserID";
-            var x = await _sqlDataAccess.LoadData<ContentTypeGroup, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<ContentTypeGroupIndexGet, dynamic>(usp, new { UserId = UserId });
             return x;
         }
 
-        public Task<ContentTypeGroup> UpdateGet(string UserId, int ContentTypeGroupId)
+        public Task<ContentTypeGroupUpdateGet> UpdateGet(string UserId, int ContentTypeGroupId)
         {
             string usp = "usp_ContentTypeGroupUpdateGet @UserId, @ContentTypeGroupID";
-            return _sqlDataAccess.LoadSingleRecord<ContentTypeGroup, dynamic>(usp, new { UserId = UserId, ContentTypeGroupId = ContentTypeGroupId });
+            return _sqlDataAccess.LoadSingleRecord<ContentTypeGroupUpdateGet, dynamic>(usp, new { UserId = UserId, ContentTypeGroupId = ContentTypeGroupId });
 
         }
 

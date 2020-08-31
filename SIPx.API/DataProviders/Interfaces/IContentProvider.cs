@@ -20,6 +20,6 @@ namespace SIPx.DataAccess
         Task<List<LanguageList>> CreateGetLanguageList(string UserId);
         Task<List<OrganizationList>> CreateGetOrganizationList(string UserId);
         bool CreatePostClassification(ClassificationCreatePost Classification);
-        Task<List<ContentType>> CreateGetContentTypes(string UserId);
+        Task<List<ContentTypeCreateGet>> ContentTypesCreateGet(string UserId);
     }
 }

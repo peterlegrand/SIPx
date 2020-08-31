@@ -11,7 +11,8 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Process\" />
-    <Folder Include="Models\Master\SecurityLevel\" />
+    <Folder Include="Models\PreferenceType\" />
+    <Folder Include="Models\ProcessTemplateFlowConditionComparisonOperator\" />
     <Folder Include="Models\UserPage\" />
   </ItemGroup>
 

@@ -39,7 +39,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ProcessTemplateStageFieldUpdateGet>($"{_baseUrl}api/ProcessTemplateStageField/Update", ProcessTemplateStageField, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ProcessTemplateStageField.ProcessTemplateStageId });
         }
 
     }

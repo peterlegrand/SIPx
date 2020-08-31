@@ -11,6 +11,7 @@ namespace SIPx.Shared
         public int ClassificationValueUserId { get; set; }
         public string UserId { get; set; }
         public int ClassificationValueId { get; set; }
+        public int ClassificationId { get; set; }
         public int ClassificationRelationTypeId { get; set; }
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }

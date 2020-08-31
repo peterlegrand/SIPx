@@ -10,7 +10,7 @@ namespace SIPx.DataAccess
         Task<string> CreatePostCheck(ClassificationValueUserCreatePost ClassificationValueUser);
         Task<ClassificationValueUserDeleteGet> DeleteGet(string UserId, int ClassificationValueUserId);
         bool DeletePost(int Id);
-        Task<List<ClassificationValueUserUpdateGet>> IndexGet(string UserId, int ClassificationId);
+        Task<List<ClassificationValueUserIndexGet>> IndexGet(string UserId, int ClassificationId);
         Task<ClassificationValueUserUpdateGet> UpdateGet(string UserId, int ClassificationValueUserId);
         bool UpdatePost(ClassificationValueUserUpdateGet ClassificationValueUser);
     }

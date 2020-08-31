@@ -104,7 +104,7 @@ namespace SIPx.MVC.Controllers
             await _client.PostProtectedAsync<ClassificationLevelDeleteGet>($"{_baseUrl}api/ClassificationLevel/Delete", ClassificationLevel, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index/"+ ClassificationLevel.ClassificationId);
+            return RedirectToAction("Index", ClassificationLevel.ClassificationId);
         }
 
         [HttpGet]

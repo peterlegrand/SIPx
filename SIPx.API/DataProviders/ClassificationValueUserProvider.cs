@@ -33,10 +33,10 @@ namespace SIPx.DataAccess
             return String;
         }
 
-        public Task<List<ClassificationValueUserUpdateGet>> IndexGet(string UserId, int ClassificationId)
+        public Task<List<ClassificationValueUserIndexGet>> IndexGet(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationValueUserIndex @UserId, @ClassificationID";
-            return _sqlDataAccess.LoadData<ClassificationValueUserUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
+            string usp = "usp_ClassificationValueUserIndexGet @UserId, @ClassificationID";
+            return _sqlDataAccess.LoadData<ClassificationValueUserIndexGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
 

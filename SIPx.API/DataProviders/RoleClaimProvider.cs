@@ -28,10 +28,10 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public Task<List<RoleClaimIndexGet>> IndexGet(string UserId)
+        public Task<List<RoleClaimIndexGet>> IndexGet(string UserId, string RoleId)
         {
-            string usp = "usp_RoleClaimIndexGet @UserID";
-            return _sqlDataAccess.LoadData<RoleClaimIndexGet, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_RoleClaimIndexGet @UserID, @RoleId";
+            return _sqlDataAccess.LoadData<RoleClaimIndexGet, dynamic>(usp, new { UserId = UserId , RoleId = RoleId });
 
         }
 

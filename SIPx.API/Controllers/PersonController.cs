@@ -19,20 +19,22 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class PersonController : ControllerBase
     {
+        private readonly IUserProvider _userProvider;
+        private readonly IGenderProvider _genderProvider;
         private readonly IPersonProvider _personProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonController(IPersonProvider personProvider, ICheckProvider checkProvider,  IOrganizationProvider organizationProvider,  IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonController(IUserProvider userProvider, IGenderProvider genderProvider, IPersonProvider personProvider, ICheckProvider checkProvider,  IOrganizationProvider organizationProvider,  IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _userProvider = userProvider;
+            _genderProvider = genderProvider;
             _personProvider = personProvider;
             _checkProvider = checkProvider;
             _organizationProvider = organizationProvider;
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
 
@@ -43,7 +45,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PersonCreateGet = new PersonCreateGet();
-                var Genders = await _peopleProvider.GenderList(CurrentUser.Id);
+                var Genders = await _genderProvider.List(CurrentUser.Id);
                 var Organizations = await _organizationProvider.List(CurrentUser.Id);
                 PersonCreateGet.Genders = Genders;
                 PersonCreateGet.Organizations = Organizations;
@@ -63,10 +65,10 @@ namespace SIPx.API.Controllers
             Person.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _peopleProvider.PersonCreatePostCheck(Person);
+                var CheckString = await _personProvider.CreatePostCheck(Person);
                 if (CheckString.Length == 0)
                 {
-                    _peopleProvider.PersonCreatePost(Person);
+                    _personProvider.CreatePost(Person);
                     return Ok(Person);
                 }
                 return BadRequest(new
@@ -88,7 +90,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonIndexGet(CurrentUser.Id));
+                return Ok(await _personProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -104,10 +106,10 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _peopleProvider.PersonUpdateGet(CurrentUser.Id, Id);
-                var y = await _peopleProvider.GenderList(CurrentUser.Id);
+                var x = await _personProvider.UpdateGet(CurrentUser.Id, Id);
+                var y = await _genderProvider.List(CurrentUser.Id);
                 var z = await _organizationProvider.List(CurrentUser.Id);
-                var a = await _peopleProvider.UserList();
+                var a = await _userProvider.List();
                 x.Genders = y;
                 x.Organizations = z;
                 x.Users = a;

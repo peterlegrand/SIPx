@@ -84,6 +84,7 @@ namespace SIPx.API
             services.AddTransient<ICheckProvider, CheckProvider>();
             services.AddTransient<ISettingProvider, SettingProvider>();
             services.AddTransient<IClassificationLevelProvider, ClassificationLevelProvider>();
+            services.AddTransient<IDateLevelProvider, DateLevelProvider>();
             services.AddTransient<IAddressTypeProvider, AddressTypeProvider>();
             services.AddTransient<IPersonAddressProvider, PersonAddressProvider>();
             services.AddTransient<IPersonRelationProvider, PersonRelationProvider>();

@@ -25,10 +25,10 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<List<ContentType>> CreateGetContentTypes(string UserId)
+        public async Task<List<ContentTypeCreateGet>> ContentTypesCreateGet(string UserId)
         {
-            string usp = "usp_ContentTypes @UserID";
-            var x = await _sqlDataAccess.LoadData<ContentType, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_ContentTypeCreateGet @UserID";
+            var x = await _sqlDataAccess.LoadData<ContentTypeCreateGet, dynamic>(usp, new { UserId = UserId });
             return x;
             }
 

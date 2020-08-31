@@ -10,6 +10,7 @@ namespace SIPx.Shared
     {
 
         public int UserMenuTemplateOptionId { get; set; }
+        public int UserMenuTemplateId { get; set; }
         public string IconName { get; set; }
         public string UserPageLeftName { get; set; }
         public string UserPageRightName { get; set; }

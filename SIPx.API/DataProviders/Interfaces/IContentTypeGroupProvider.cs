@@ -10,9 +10,9 @@ namespace SIPx.DataAccess
         Task<string> CreatePostCheck(ContentTypeGroupCreatePost ContentTypeGroup);
         Task<ContentTypeGroupDeleteGet> DeleteGet(string UserId, int ContentTypeGroupId);
         bool DeletePost(int Id);
-        Task<List<ContentTypeGroup>> IndexGet(string UserId);
+        Task<List<ContentTypeGroupIndexGet>> IndexGet(string UserId);
         Task<List<ContentTypeGroupList>> List(string UserId);
-        Task<ContentTypeGroup> UpdateGet(string UserId, int ContentTypeGroupId);
+        Task<ContentTypeGroupUpdateGet> UpdateGet(string UserId, int ContentTypeGroupId);
         bool UpdatePost(ContentTypeGroupUpdateGet ContentTypeGroup);
         Task<List<SequenceList>> CreateGetSequence(string UserId);
     }

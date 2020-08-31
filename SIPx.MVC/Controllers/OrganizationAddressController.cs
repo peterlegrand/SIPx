@@ -60,7 +60,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<OrganizationAddressUpdateGet>($"{_baseUrl}api/OrganizationAddress/Update", OrganizationAddress, token);
 
-            return RedirectToAction("Index/"+OrganizationAddress.OrganizationId);
+            return RedirectToAction("Index", new { id = OrganizationAddress.OrganizationId });
         }
 
         [HttpGet]
@@ -74,13 +74,12 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(OrganizationAddressDeleteGet Page)
+        public async Task<IActionResult> Delete(OrganizationAddressDeleteGet OrganizationAddress)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<OrganizationAddressDeleteGet>($"{_baseUrl}api/OrganizationAddress/Delete", Page, token);
+            await _client.PostProtectedAsync<OrganizationAddressDeleteGet>($"{_baseUrl}api/OrganizationAddress/Delete", OrganizationAddress, token);
 
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = OrganizationAddress.OrganizationId });
         }
 
 

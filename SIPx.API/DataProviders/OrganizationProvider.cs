@@ -69,19 +69,19 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public async Task<List<OrganizationLanguage>> LanguageIndexGet(string UserId, int OrganizationId)
+        public async Task<List<OrganizationLanguageIndexGet>> LanguageIndexGet(string UserId, int OrganizationId)
         {
             string usp = "usp_OrganizationLanguageIndexGet @UserId, @OrganizationId";
-            var x = await _sqlDataAccess.LoadData<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            var x = await _sqlDataAccess.LoadData<OrganizationLanguageIndexGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
 
-        public Task<OrganizationLanguage> LanguageUpdateGet(string UserId, int OrganizationLanguageId)
-        {
-            string usp = "usp_OrganizationLanguageUpdateGet @UserId, @OrganizationLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationLanguageId = OrganizationLanguageId });
+        //public Task<OrganizationLanguageUpdateGet> LanguageUpdateGet(string UserId, int OrganizationLanguageId)
+        //{
+        //    string usp = "usp_OrganizationLanguageUpdateGet @UserId, @OrganizationLanguageID";
+        //    return _sqlDataAccess.LoadSingleRecord<OrganizationLanguage, dynamic>(usp, new { UserId = UserId, OrganizationLanguageId = OrganizationLanguageId });
 
-        }
+        //}
 
         public async Task<List<OrganizationList>> List(string UserId)
         {

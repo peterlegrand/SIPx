@@ -35,3 +35,4 @@ UPDATE Persons SET
 	, UserId = @UserId 
 	, ModifierId = @Modifier
 	, ModifiedDate = Getdate()
+WHERE PersonID = @PersonId

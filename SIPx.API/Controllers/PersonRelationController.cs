@@ -19,20 +19,20 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class PersonRelationController : ControllerBase
     {
+        private readonly IPersonRelationTypeProvider _personRelationTypeProvider;
         private readonly IPersonProvider _personProvider;
         private readonly IPersonRelationProvider _personRelationProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonRelationController(IPersonProvider personProvider, IPersonRelationProvider personRelationProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonRelationController(IPersonRelationTypeProvider personRelationTypeProvider, IPersonProvider personProvider, IPersonRelationProvider personRelationProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _personRelationTypeProvider = personRelationTypeProvider;
             _personProvider = personProvider;
             _personRelationProvider = personRelationProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
 
@@ -43,7 +43,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PersonRelationCreateGet = new PersonRelationCreateGet();
-                var PersonRelationTypes = await _peopleProvider.PersonRelationTypeList(CurrentUser.Id);
+                var PersonRelationTypes = await _personRelationTypeProvider.List(CurrentUser.Id);
                 var Persons = await _personProvider.List();
                 PersonRelationCreateGet.PersonRelationTypes = PersonRelationTypes;
                 PersonRelationCreateGet.Persons = Persons;
@@ -63,10 +63,10 @@ namespace SIPx.API.Controllers
             PersonRelation.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _peopleProvider.PersonRelationCreatePostCheck(PersonRelation);
+                var CheckString = await _personRelationProvider.CreatePostCheck(PersonRelation);
                 if (CheckString.Length == 0)
                 {
-                    _peopleProvider.PersonRelationCreatePost(PersonRelation);
+                    _personRelationProvider.CreatePost(PersonRelation);
                     return Ok(PersonRelation);
                 }
                 return BadRequest(new
@@ -88,7 +88,8 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonRelationIndexGet(CurrentUser.Id, Id));
+                //Need to go back to this page from from and to
+                return Ok(await _personRelationProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -103,7 +104,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonRelationUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _personRelationProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

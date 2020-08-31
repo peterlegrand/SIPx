@@ -7,6 +7,7 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT OrganizationAddresses.OrganizationAddressId 
 	, ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) AddressTypeName
+	, OrganizationAddresses.OrganizationID
 	, OrganizationAddresses.AttnName
 	, OrganizationAddresses.Address1
 	, OrganizationAddresses.Address2

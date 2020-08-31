@@ -19,14 +19,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class UserRoleController : ControllerBase
     {
+        private readonly IUserRoleProvider _userRoleProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserRoleController( IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserRoleController(IUserRoleProvider userRoleProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _userRoleProvider = userRoleProvider;
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
 
@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.UserRoleIndexGet(CurrentUser.Id, Id));
+                return Ok(await _userRoleProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class UserRoleProvider
+    public class UserRoleProvider : IUserRoleProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 

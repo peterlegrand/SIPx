@@ -34,17 +34,17 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public Task<List<OrganizationTelecom>> IndexGet(string UserId, int OrganizationId)
+        public Task<List<OrganizationTelecomIndexGet>> IndexGet(string UserId, int OrganizationId)
         {
             string usp = "usp_OrganizationTelecomIndexGet @UserId, @OrganizationID";
-            return _sqlDataAccess.LoadData<OrganizationTelecom, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            return _sqlDataAccess.LoadData<OrganizationTelecomIndexGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
 
         }
 
-        public Task<OrganizationTelecom> UpdateGet(string UserId, int OrganizationTelecomId)
+        public Task<OrganizationTelecomUpdateGet> UpdateGet(string UserId, int OrganizationTelecomId)
         {
             string usp = "usp_OrganizationTelecomUpdateGet @UserId, @OrganizationTelecomID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationTelecom, dynamic>(usp, new { UserId = UserId, OrganizationTelecomId = OrganizationTelecomId });
+            return _sqlDataAccess.LoadSingleRecord<OrganizationTelecomUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationTelecomId = OrganizationTelecomId });
 
         }
 

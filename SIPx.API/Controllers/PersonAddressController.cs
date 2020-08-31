@@ -25,10 +25,10 @@ namespace SIPx.API.Controllers
         private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
+        //private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonAddressController(IAddressTypeProvider addressTypeProvider, IPersonAddressProvider personAddressProvider, ICheckProvider checkProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonAddressController( IAddressTypeProvider addressTypeProvider, IPersonAddressProvider personAddressProvider, ICheckProvider checkProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck,  Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _addressTypeProvider = addressTypeProvider;
             _personAddressProvider = personAddressProvider;
@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
             _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
+            //_peopleProvider = peopleProvider;
             _userManager = userManager;
         }
 
@@ -68,10 +68,10 @@ namespace SIPx.API.Controllers
             PersonAddress.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _peopleProvider.PersonAddressCreatePostCheck(PersonAddress);
+                var CheckString = await _personAddressProvider.CreatePostCheck(PersonAddress);
                 if (CheckString.Length == 0)
                 {
-                    _peopleProvider.PersonAddressCreatePost(PersonAddress);
+                    _personAddressProvider.CreatePost(PersonAddress);
                     return Ok(PersonAddress);
                 }
                 return BadRequest(new
@@ -93,7 +93,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonAddressIndexGet(CurrentUser.Id, Id));
+                return Ok(await _personAddressProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -108,7 +108,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _peopleProvider.PersonAddressUpdateGet(CurrentUser.Id, Id);
+                var x = await _personAddressProvider.UpdateGet(CurrentUser.Id, Id);
                 var y = await _masterListProvider.CountryList(CurrentUser.Id);
                 x.Countries = y;
                 return Ok(x);

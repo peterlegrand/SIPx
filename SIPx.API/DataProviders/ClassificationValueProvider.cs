@@ -19,7 +19,7 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<int> CreateGet(int ClassificationId, int ClassificationValueId)
+        public async Task<int> CreateGetDateLevel(int ClassificationId, int ClassificationValueId)
         {
             string usp = "usp_ClassificationValueCreateGet @ClassificationId, @ClassificationValueId";
             return await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { ClassificationId, ClassificationValueId });

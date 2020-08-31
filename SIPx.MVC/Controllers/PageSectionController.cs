@@ -56,7 +56,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<PageSectionUpdateGet>($"{_baseUrl}api/PageSection/Update", PageSection, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = PageSection.PageId });
         }
 
         [HttpGet]
@@ -70,13 +70,12 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(PageSectionDeleteGet Page)
+        public async Task<IActionResult> Delete(PageSectionDeleteGet PageSection)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PageSectionDeleteGet>($"{_baseUrl}api/PageSection/Delete", Page, token);
+            await _client.PostProtectedAsync<PageSectionDeleteGet>($"{_baseUrl}api/PageSection/Delete", PageSection, token);
 
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = PageSection.PageId });
         }
         [HttpGet]
         public async Task<IActionResult> LanguageIndex(int id)

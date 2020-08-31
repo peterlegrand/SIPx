@@ -25,10 +25,9 @@ namespace SIPx.API.Controllers
         private readonly IMasterListProvider _masterListProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IPeopleProvider _peopleProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonTelecomController(ITelecomTypeProvider telecomTypeProvider , IPersonTelecomProvider personTelecomProvider, ICheckProvider checkProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IPeopleProvider peopleProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonTelecomController(ITelecomTypeProvider telecomTypeProvider , IPersonTelecomProvider personTelecomProvider, ICheckProvider checkProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck,  Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _telecomTypeProvider = telecomTypeProvider;
             _personTelecomProvider = personTelecomProvider;
@@ -36,7 +35,6 @@ namespace SIPx.API.Controllers
             _masterListProvider = masterListProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _peopleProvider = peopleProvider;
             _userManager = userManager;
         }
 
@@ -66,10 +64,10 @@ namespace SIPx.API.Controllers
             PersonTelecom.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _peopleProvider.PersonTelecomCreatePostCheck(PersonTelecom);
+                var CheckString = await _personTelecomProvider.CreatePostCheck(PersonTelecom);
                 if (CheckString.Length == 0)
                 {
-                    _peopleProvider.PersonTelecomCreatePost(PersonTelecom);
+                    _personTelecomProvider.CreatePost(PersonTelecom);
                     return Ok(PersonTelecom);
                 }
                 return BadRequest(new
@@ -91,7 +89,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonTelecomIndexGet(CurrentUser.Id, Id));
+                return Ok(await _personTelecomProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -106,7 +104,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _peopleProvider.PersonTelecomUpdateGet(CurrentUser.Id, Id));
+                return Ok(await _personTelecomProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {

@@ -11,8 +11,8 @@ namespace SIPx.DataAccess
         Task<ContentTypeDeleteGet> DeleteGet(string UserId, int ContentTypeId);
         bool DeletePost(int Id);
         Task<List<ContentTypeIndexGet>> IndexGet(string UserId);
-        Task<List<ContentTypeLanguage>> LanguageIndexGet(string UserId, int ContentTypeId);
-        Task<ContentTypeLanguage> LanguageUpdateGet(string UserId, int ContentTypeLanguageId);
+        //Task<List<ContentTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ContentTypeId);
+        //Task<ContentTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ContentTypeLanguageId);
         Task<List<ContentTypeList>> List(string UserId);
         Task<ContentTypeUpdateGet> UpdateGet(string UserId, int ContentTypeId);
         bool UpdatePost(ContentTypeUpdateGet ContentType);

@@ -58,7 +58,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<UserMenuTemplateOptionUpdateGet>($"{_baseUrl}api/UserMenuTemplateOption/Update", UserMenuTemplateOption, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = UserMenuTemplateOption.UserMenuTemplateId });
         }
 
         [HttpGet]
@@ -72,13 +72,12 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(UserMenuTemplateOptionDeleteGet Page)
+        public async Task<IActionResult> Delete(UserMenuTemplateOptionDeleteGet UserMenuTemplateOption)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<UserMenuTemplateOptionDeleteGet>($"{_baseUrl}api/UserMenuTemplateOption/Delete", Page, token);
+            await _client.PostProtectedAsync<UserMenuTemplateOptionDeleteGet>($"{_baseUrl}api/UserMenuTemplateOption/Delete", UserMenuTemplateOption, token);
 
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = UserMenuTemplateOption.UserMenuTemplateId });
         }
         [HttpGet]
         public async Task<IActionResult> LanguageIndex(int id)

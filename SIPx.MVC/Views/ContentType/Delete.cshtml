@@ -117,7 +117,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

@@ -12,12 +12,14 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ContentController : ControllerBase
     {
+        private readonly IContentTypeProvider _contentTypeProvider;
         private  IClaimCheck _claimCheck;
         private readonly IContentProvider _contentProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentController(IClaimCheck claimCheck, IContentProvider ContentProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentController(IContentTypeProvider contentTypeProvider, IClaimCheck claimCheck, IContentProvider ContentProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _contentTypeProvider = contentTypeProvider;
             _claimCheck = claimCheck;
             _contentProvider = ContentProvider;
             _userManager = userManager;
@@ -51,7 +53,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
             {
                 //TOFIX PETER
-                return Ok(await _contentProvider.CreateGetContentTypes(CurrentUser.Id));// CurrentUser.LanguageId));
+                return Ok(await _contentTypeProvider.List(CurrentUser.Id));// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {

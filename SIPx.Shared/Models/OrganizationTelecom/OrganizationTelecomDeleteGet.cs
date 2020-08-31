@@ -9,6 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int OrganizationTelecomId { get; set; }
+        public int OrganizationId { get; set; }
         public string TelecomTypeName { get; set; }
         public string TelecomValue { get; set; }
         public string CountryCode { get; set; }

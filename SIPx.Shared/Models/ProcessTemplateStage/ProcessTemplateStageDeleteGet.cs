@@ -9,6 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProcessTemplateStageId { get; set; }
+        public int ProcessTemplateId { get; set; }
         public bool IsEndStage { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

@@ -9,6 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int PageSectionId { get; set; }
+        public int PageId { get; set; }
         public string PageSectionTypeName { get; set; }
         public string PageSectionDataTypeName { get; set; }
         public bool ShowTitleName { get; set; }

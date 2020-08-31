@@ -56,7 +56,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ProcessTemplateFieldUpdateGet>($"{_baseUrl}api/ProcessTemplateField/Update", ProcessTemplateField, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ProcessTemplateField.ProcessTemplateId });
         }
 
         [HttpGet]
@@ -70,13 +70,12 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(ProcessTemplateFieldDeleteGet Page)
+        public async Task<IActionResult> Delete(ProcessTemplateFieldDeleteGet ProcessTemplateField)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ProcessTemplateFieldDeleteGet>($"{_baseUrl}api/ProcessTemplateField/Delete", Page, token);
+            await _client.PostProtectedAsync<ProcessTemplateFieldDeleteGet>($"{_baseUrl}api/ProcessTemplateField/Delete", ProcessTemplateField, token);
 
-            //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ProcessTemplateField.ProcessTemplateId });
         }
         public async Task<IActionResult> LanguageIndex(int id)
         {

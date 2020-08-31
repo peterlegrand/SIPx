@@ -55,7 +55,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ClassificationUserUpdateGet>($"{_baseUrl}api/ClassificationUser/Update", ClassificationUser, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = ClassificationUser.ClassificationId });
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
@@ -68,13 +68,13 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(ClassificationUserDeleteGet Page)
+        public async Task<IActionResult> Delete(ClassificationUserDeleteGet ClassificationUser)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationUserDeleteGet>($"{_baseUrl}api/ClassificationUser/Delete", Page, token);
+            await _client.PostProtectedAsync<ClassificationUserDeleteGet>($"{_baseUrl}api/ClassificationUser/Delete", ClassificationUser, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", ClassificationUser.ClassificationId);
         }
 
     }
