@@ -354,4 +354,9 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (348, 'FrontContent', 'SearchResult')
 , (349, 'FrontProcess', 'SearchResult')
 , (350, 'FrontClassificationValue', 'Dashboard')
+, (351, 'Language', 'Index')
+, (352, 'Language', 'Edit')
+, (353, 'User', 'Create')
+, (354, 'User', 'Edit')
+, (355, 'User', 'Delete')
 SET IDENTITY_INSERT MVCUIScreens OFF;

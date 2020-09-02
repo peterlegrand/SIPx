@@ -35,7 +35,10 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(SettingUpdateGet Setting)
         {
-            string usp = "usp_RoleGroupUpdatePost @SettingId, @IntValue, @StringValue, @DateTimeValue, @ModifierId";
+            if (Setting.StringValue == null) { Setting.StringValue = ""; }
+            if (Setting.IntValue== null) { Setting.IntValue = 0; }
+            if (Setting.SettingId == 1 ) { Setting.DateTimeValue= DateTime.Now; }
+            string usp = "usp_SettingUpdatePost @SettingId, @IntValue, @StringValue, @DateTimeValue, @ModifierId";
             _sqlDataAccess.SaveData<SettingUpdateGet>(usp, Setting);
             return true;
         }

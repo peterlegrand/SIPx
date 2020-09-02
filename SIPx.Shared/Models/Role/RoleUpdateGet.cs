@@ -17,10 +17,14 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public int RoleGroupId { get; set; }
         public int Sequence { get; set; }
-        public string GroupName { get; set; }
-        public string GroupDescription { get; set; }
-        public string GroupMenuName { get; set; }
-        public string GroupMouseOver { get; set; }
+        public string CreatorId { get; set; }
+        public string CreatorName { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string ModifierId { get; set; }
+        public string ModifierName { get; set; }
+        public DateTime ModifiedDate { get; set; }
+
+        public List<RoleGroupList> roleGroups { get; set; }
 
     }
 }

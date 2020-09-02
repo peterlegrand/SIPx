@@ -70,10 +70,10 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(PersonDeleteGet Page)
+        public async Task<IActionResult> Delete(PersonDeleteGet Person)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PersonDeleteGet>($"{_baseUrl}api/Person/Delete", Page, token);
+            await _client.PostProtectedAsync<PersonDeleteGet>($"{_baseUrl}api/Person/Delete", Person, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_LanguageList] (@UserID nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_LanguageListActive] (@UserID nvarchar(450)) 
 AS 
 BEGIN
 DECLARE @LanguageID int;
@@ -15,5 +15,6 @@ JOIN UITermLanguages UIName
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
 	ON UINameCustom.UITermID = Languages.NameTermID
 WHERE UIName.LanguageID = @LanguageID
+AND Languages.LanguageID = @LanguageID
 AND Languages.StatusID = 1
 END

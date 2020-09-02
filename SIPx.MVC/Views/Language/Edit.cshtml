@@ -1,75 +1,54 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model SettingUpdateGet
+@model LanguageUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Setting")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Language")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Setting")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Language")).TermString
 </h1>
 <div class="container">
 
     <form method="post">
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString 
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="SettingId" ejs-for="@Model.SettingId" cssClass="e-outline" placeholder="SettingId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="LanguageId" ejs-for="@Model.LanguageId" cssClass="e-outline" placeholder="LanguageId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>
-            <div class="col-9">@Model.SettingsName</div>
-
+            <div class="col-9">
+                @Model.Name
+            </div>
         </div>
-        @switch (Model.TypeId)
-        {
-            case 1:
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("String value")).TermString
-                    </div>
-                    <div class="col-9">
-                        <div class="col-9">
-                            <ejs-dropdownlist id="IntValue" dataSource="@Model.Languages" ejs-for="@Model.IntValue" value="@Model.IntValue" index="2" popupHeight="220px">
-                                <e-dropdownlist-fields text="Name" value="LanguageId"></e-dropdownlist-fields>
-                            </ejs-dropdownlist>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Foreign name")).TermString 
+            </div>
+            <div class="col-9">
+                @Model.ForeignName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="StatusId" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
 
-                        </div>
-                    </div>
-                </div>
-                break;
-            case 2:
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Int value")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-textbox id="IntValue" ejs-for="StringValue" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-                break;
-            case 3:
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Date time value")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-datepicker id="DateTimeValue" ejs-for="DateTimeValue" cssClass="e-outline" placeholder="Date time value" floatLabelType="Auto"></ejs-datepicker>
-                    </div>
-                </div>
-
-                break;
-        }
+            </div>
+        </div>
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
@@ -199,11 +178,19 @@
         }
     }
 </script>
-<script type="text/javascript">
-    function IntValue(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Languages)), query);
-                }
+@*
+    PETER TODO 
+    <script type="text/javascript">
+    function FilterDefaultPage(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+            }
 </script>
-
+<script type="text/javascript">
+    function FilterStatus(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+            }
+</script>*@

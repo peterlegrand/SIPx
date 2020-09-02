@@ -14,5 +14,6 @@ namespace SIPx.DataAccess
         Task<RoleLanguageUpdateGet> LanguageUpdateGet(string UserId, int RoleLanguageId);
         Task<List<RoleList>> List(string UserId);
         Task<RoleUpdateGet> UpdateGet(string UserId, string RoleId);
+        bool UpdatePost(RoleUpdateGet Role);
     }
 }

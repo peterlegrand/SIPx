@@ -8,6 +8,15 @@ namespace SIPx.DataAccess
     {
         Task<List<UserIndexGet>> IndexGet(string UserId);
         Task<List<UserList>> List();
-        Task<UserUpdateGet> UpdateGet(string UserId, string SelectedUserId);
+        //Task<UserUpdateGet> UpdateGet(string UserId, string SelectedUserId);
+        bool CreatePost(UserCreateGet CreateUser);
+        Task<UserUpdateGetPerson> UpdateGetPerson(int SelectedPersonId);
+        Task<UserUpdateGetUser> UpdateGetUser(int SelectedPersonId);
+        bool UpdatePost(UserUpdateGet UpdateUser);
+        Task<string> usp_UserUpdatePostGetUserId(int SelectedPersonId);
+        Task<UserDeleteGetUser> DeleteGetUser(string UserId, int SelectedPersonId);
+        Task<UserDeleteGetPerson> DeleteGetPerson(string UserId, int SelectedPersonId);
+        bool DeletePost(int SelectedPersonId);
+
     }
 }

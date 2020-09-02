@@ -6,25 +6,10 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class UserUpdateGet
+    public class UserUpdateGetPerson
     {
         [Key]
         public int PersonId { get; set; }
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string UserPhoneNumber { get; set; }
-        public bool PhoneNumberConfirmed { get; set; }
-        public bool TwoFactorEnabled { get; set; }
-        public DateTime LockOutEnd { get; set; }
-        public string OldPassword { get; set; }
-        public string NewPassword { get; set; }
-        public string ConfirmPassword { get; set; }
-        public bool LockOutEnabled { get; set; }
-        public int AccessFailedCount { get; set; }
-        public int SecurityLevelId { get; set; }
-        public List<SecurityLevelList> SecurityLevels { get; set; }
-
         public string Salutation { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -46,7 +31,5 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
-    //public UserUpdateGetUser User { get; set; }
-    //    public UserUpdateGetPerson Person { get; set; }
     }
 }

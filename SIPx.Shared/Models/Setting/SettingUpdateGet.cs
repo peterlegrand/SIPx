@@ -11,7 +11,7 @@ namespace SIPx.Shared
         public int SettingId { get; set; }
         public int IntValue { get; set; }
         public string StringValue { get; set; }
-        public int DateTimeValue { get; set; }
+        public DateTime DateTimeValue { get; set; }
         public Guid GuidValue { get; set; }
         public string SettingsName { get; set; }
         public string Description { get; set; }

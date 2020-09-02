@@ -19,15 +19,21 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class RoleController : ControllerBase
     {
+        private readonly IRoleGroupProvider _roleGroupProvider;
+        private readonly ICheckProvider _checkProvider;
         private readonly IRoleProvider _roleProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly UserManager<SipUser> _userManager;
+        private readonly RoleManager<SipRole> _roleManager;
 
-        public RoleController(IRoleProvider roleProvider, IClaimCheck claimCheck,  Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public RoleController(IRoleGroupProvider roleGroupProvider, ICheckProvider checkProvider, IRoleProvider roleProvider, IClaimCheck claimCheck,  Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager, RoleManager<SipRole> roleManager)
         {
+            _roleGroupProvider = roleGroupProvider;
+            _checkProvider = checkProvider;
             _roleProvider = roleProvider;
             _claimCheck = claimCheck;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet("Index")]
@@ -43,6 +49,85 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+        public async Task<IActionResult> Update(string Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                if (await _checkProvider.CheckIfRecordExists("Roles", "RoleID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _roleProvider.UpdateGet(CurrentUser.Id, Id);
+                var y = await _roleGroupProvider.List(CurrentUser.Id);
+
+                x.roleGroups = y;
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(RoleUpdateGet Role)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+
+
+
+                Role.ModifierId = CurrentUser.Id;
+
+
+
+
+                var RoleToBeUpdate = await _roleManager.FindByIdAsync(Role.RoleId);
+                RoleToBeUpdate.Name = Role.Name;
+                RoleToBeUpdate.RoleGroupId = Role.RoleGroupId;
+                
+                var x = await _roleManager.UpdateAsync(RoleToBeUpdate);
+                if (x.Succeeded )
+                {
+                    _roleProvider.UpdatePost(Role);
+                    return Ok(Role);
+                }
+
+
+
+
+
+
+
+
+                //var CheckString = await _RoleProvider.UpdatePostCheck(Role);
+                //if (CheckString.Length == 0)
+                //{
+                _roleProvider.UpdatePost(Role);
+                return Ok(Role);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
         }
 
         [HttpGet("LanguageIndex/{Id}")]

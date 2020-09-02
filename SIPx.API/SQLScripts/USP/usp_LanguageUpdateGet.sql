@@ -7,7 +7,7 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT Languages.LanguageID
 	, ForeignName
-	, ISNULL(UINameCustom.Customization ,UIName.Name) LanguageName
+	, ISNULL(UINameCustom.Customization ,UIName.Name) Name
 	, Languages.StatusID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Languages.ModifierID

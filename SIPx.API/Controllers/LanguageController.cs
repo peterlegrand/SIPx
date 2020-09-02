@@ -19,13 +19,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class LanguageController : ControllerBase
     {
+        private readonly IMasterListProvider _masterListProvider;
         private readonly ILanguageProvider _languageProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public LanguageController(ILanguageProvider languageProvider, IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public LanguageController(IMasterListProvider masterListProvider, ILanguageProvider languageProvider, IClaimCheck claimCheck, IMasterProvider masterProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _masterListProvider = masterListProvider;
             _languageProvider = languageProvider;
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;
@@ -68,7 +70,10 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _languageProvider.UpdateGet(CurrentUser.Id, Id));
+                var x = await _languageProvider.UpdateGet(CurrentUser.Id, Id);
+                x.Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                return Ok(x);
+
             }
             return BadRequest(new
             {

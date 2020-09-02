@@ -50,12 +50,14 @@ LEFT JOIN (
 		, MenuName
 		, MouseOver
 		, RoleLanguageID
-		, RoleLanguages.CreatorID
-		, RoleLanguages.ModifierID
+		--, RoleLanguages.CreatorID
+		--, RoleLanguages.ModifierID
 		, RoleLanguages.CreatedDate
 		, RoleLanguages.ModifiedDate 
 		, Creator.FirstName + ' ' + Creator.LastName CreatorName
 		, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+		, Creator.PersonID  CreatorID
+		, Modifier.PersonID  ModifierID
 	FROM RoleLanguages 
 	JOIN Persons Creator
 		ON Creator.UserId = RoleLanguages.CreatorID
@@ -66,10 +68,6 @@ LEFT JOIN (
 	WHERE Settings.SettingId = 1
 	) DefaultLanguage
 	ON DefaultLanguage.RoleId = AspNetRoles.ID
-JOIN Persons Creator
-	ON Creator.UserId = UserLanguage.CreatorID
-JOIN Persons Modifier
-	ON Modifier.UserId = UserLanguage.ModifierID
 ORDER BY  ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this Role')) 
 
 

@@ -11,7 +11,6 @@
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" Template="#Id" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("User name")).TermString" Template="#Name" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" Template="#FirstName" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" Template="#LastName" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" Template="#Organization" textAlign="Center" type="string"></e-grid-column>
@@ -19,15 +18,10 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" Template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/UserMenu/Create">@Term.Find(x => x.InternalName.Equals("Add user")).TermString</a>
+<a asp-action="Create">@Term.Find(x => x.InternalName.Equals("Add user")).TermString</a>
 <script id="Id" type="text/x-">
     <div>
-        ${UserMenuId}
-    </div>
-</script>
-<script id="Name" type="text/x-">
-    <div>
-        ${Name}
+        ${PersonId}
     </div>
 </script>
 <script id="FirstName" type="text/x-">
@@ -47,13 +41,13 @@
 </script>
 <script id="Edit" type="text/x-">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/User/Edit/${UserId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/User/Edit/${PersonId}"><span style="color:red">E</span>dit</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="User/Delete/${UserId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="User/Delete/${PersonId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

@@ -83,5 +83,12 @@ namespace SIPx.DataAccess
 
         }
 
+        public async Task<List<RoleGroupList>> List(string UserId)
+        {
+            string usp = "usp_RoleGroupList @UserID";
+            var x = await _sqlDataAccess.LoadData<RoleGroupList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+
     }
 }
