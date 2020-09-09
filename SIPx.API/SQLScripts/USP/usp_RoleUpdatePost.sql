@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_RoleUpdatePost] (
-	@RoleId int
+	@RoleId nvarchar(450)
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)

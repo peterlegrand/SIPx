@@ -20,5 +20,6 @@ namespace SIPx.DataAccess
         Task<bool> CheckUser(string UserId);
         Task<bool> CheckUserRelation(int PersonRelationId);
         Task<List<int>> NewProcessGetInitialTemplateList();
+        Task<int> CheckIfRecordExists(string TableName, string IDField, string Id);
     }
 }

@@ -31,12 +31,13 @@ namespace SIPx.MVC.Controllers
             return RedirectToAction("Index", new { id = RoleClaim.RoleId });
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<RoleClaimUpdateGet>>($"{_baseUrl}api/RoleClaim/Index",token);
+            var response = await _client.GetProtectedAsync<List<RoleClaimIndexGet>>($"{_baseUrl}api/RoleClaim/Index/"+Id,token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/RoleClaim/Index", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = Id;
             return View(response);
             //return View();
         }

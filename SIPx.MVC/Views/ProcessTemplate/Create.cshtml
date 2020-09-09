@@ -12,9 +12,7 @@
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Create process template")).TermString
 </h1>
 <div class="container">
-
     <form method="post">
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -33,7 +31,6 @@
                 </ejs-richtexteditor>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
@@ -42,7 +39,6 @@
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -88,10 +84,19 @@
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.ProcessTemplates" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.ProcessTemplates" ejs-for="@Model.Sequence" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
-
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="ProcessTemplateGroupId" dataSource="@Model.ProcessTemplateGroups" ejs-for="@Model.ProcessTemplateGroupId"  popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTemplateGroupId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
             </div>
         </div>
         <div class="row">
@@ -140,7 +145,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="SecurityLevelId"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
@@ -152,14 +157,12 @@
                 <ejs-colorpicker id='color-picker' ejs-for="Color" value="Color"></ejs-colorpicker>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
                 <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
-
     </form>
 </div>
 

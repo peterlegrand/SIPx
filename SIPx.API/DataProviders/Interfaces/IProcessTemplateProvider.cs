@@ -7,8 +7,8 @@ namespace SIPx.DataAccess
     public interface IProcessTemplateProvider
     {
         Task<List<SequenceList>> CreateGetSequence(string UserId);
-        Task<string> CreatePost(ProcessTemplateCreatePost ProcessTemplate);
-        Task<string> CreatePostCheck(ProcessTemplateCreatePost ProcessTemplate);
+        Task<string> CreatePost(ProcessTemplateCreateGet ProcessTemplate);
+        Task<string> CreatePostCheck(ProcessTemplateCreateGet ProcessTemplate);
         Task<ProcessTemplateDeleteGet> DeleteGet(string UserId, int ProcessTemplateId);
         bool DeletePost(int Id);
         Task<List<ProcessTemplateIndexGet>> IndexGet(string UserId);

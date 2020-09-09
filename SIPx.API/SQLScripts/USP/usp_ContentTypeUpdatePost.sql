@@ -7,14 +7,14 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeUpdatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserId nvarchar(450)
+	, @ModifierId nvarchar(450)
 )
 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @UserID
+WHERE USerId = @ModifierId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 BEGIN TRANSACTION
@@ -22,7 +22,7 @@ UPDATE ContentTypes SET
 	ContentTypeGroupID= @ContentTypeGroupID
 	, ProcessTemplateId = @ProcessTemplateID
 	, SecurityLevelId = @SecurityLevelID
-	, ModifierId = @UserID
+	, ModifierId = @ModifierId
 	, ModifiedDate = GETDATE()
 WHERE ContentTypeId = @ContentTypeID
 
@@ -31,7 +31,7 @@ UPDATE  ContentTypeLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierId = @UserID
+	, ModifierId = @ModifierId
 	, ModifiedDate = getdate()
 WHERE ContentTypeID= @ContentTypeID	
 	AND LanguageID = @LanguageID

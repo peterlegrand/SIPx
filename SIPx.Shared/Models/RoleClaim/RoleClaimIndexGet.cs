@@ -9,6 +9,7 @@ namespace SIPx.Shared
     public class RoleClaimIndexGet
     {
         [Key]
+        public int RoleClaimId { get; set; }
         public int ClaimId { get; set; }
         public int ClaimGroupId { get; set; }
         public string Name { get; set; }

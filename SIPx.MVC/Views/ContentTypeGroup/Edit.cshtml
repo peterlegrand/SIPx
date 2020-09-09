@@ -59,6 +59,17 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequence" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+        <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
                 <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>

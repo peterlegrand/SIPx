@@ -24,7 +24,7 @@ namespace SIPx.API.Controllers
         private readonly IProjectTypeProvider _projectTypeProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
-        private readonly IProjectProvider _ProjectProvider;
+        private readonly IProjectProvider _projectProvider;
         private readonly UserManager<SipUser> _userManager;
 
         public ProjectTypeController(ICheckProvider checkProvider, IMasterListProvider masterListProvider, IProjectTypeProvider projectTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
@@ -34,7 +34,7 @@ namespace SIPx.API.Controllers
             _projectTypeProvider = projectTypeProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
-            _ProjectProvider = ProjectProvider;
+            _projectProvider = ProjectProvider;
             _userManager = userManager;
         }
 
@@ -92,7 +92,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _ProjectProvider.IndexGet(CurrentUser.Id));
+                return Ok(await _projectTypeProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -202,35 +202,35 @@ namespace SIPx.API.Controllers
 
         }
 
-        [HttpGet("LanguageIndex/{Id:int}")]
-        public async Task<IActionResult> LanguageIndex(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _ProjectProvider.LanguageIndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("LanguageIndex/{Id:int}")]
+        //public async Task<IActionResult> LanguageIndex(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _ProjectProvider.LanguageIndexGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
-        [HttpGet("LanguageUpdate/{Id:int}")]
-        public async Task<IActionResult> LanguageUpdate(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-            {
-                return Ok(await _ProjectProvider.LanguageUpdateGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpGet("LanguageUpdate/{Id:int}")]
+        //public async Task<IActionResult> LanguageUpdate(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //    {
+        //        return Ok(await _ProjectProvider.LanguageUpdateGet(CurrentUser.Id, Id));
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
     }
 }

@@ -86,7 +86,7 @@ namespace SIPx.DataAccess
         public Task<List<ProcessTemplateStageList>> List(string UserId, int ProcessTemplateId)
         {
             string usp = "usp_ProcessTemplateStageList @UserId, @ProcessTemplateId";
-            return _sqlDataAccess.LoadData<ProcessTemplateStageList, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<ProcessTemplateStageList, dynamic>(usp, new { UserId = UserId, ProcessTemplateId = ProcessTemplateId });
 
         }
     }

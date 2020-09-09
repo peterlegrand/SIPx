@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class ProcessTemplateGroupList
     {
         [Key]
-        public int Sequence { get; set; }
+        public int ProcessTemplateGroupId { get; set; }
         public string Name { get; set; }
 
     }

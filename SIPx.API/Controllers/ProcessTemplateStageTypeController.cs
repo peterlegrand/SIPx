@@ -68,16 +68,16 @@ namespace SIPx.API.Controllers
             ProcessTemplateStageType.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateStageTypeProvider.CreatePostCheck(ProcessTemplateStageType);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _processTemplateStageTypeProvider.CreatePostCheck(ProcessTemplateStageType);
+                //if (CheckString.Length == 0)
+                //{
                     _processTemplateStageTypeProvider.CreatePost(ProcessTemplateStageType);
                     return Ok(ProcessTemplateStageType);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new

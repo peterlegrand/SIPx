@@ -50,7 +50,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ProjectTypeUpdateGet ProjectType)
         {
-            string usp = "usp_ProjectTypeUpdatePost @ProjectTypeId, @Color, @IconId, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ProjectTypeUpdatePost @ProjectTypeId,  @Name, @Description, @MenuName, @MouseOver, @Color, @IconId,@ModifierId";
             _sqlDataAccess.SaveData<ProjectTypeUpdateGet>(usp, ProjectType);
             return true;
         }

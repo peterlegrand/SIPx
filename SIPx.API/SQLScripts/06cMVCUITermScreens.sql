@@ -5547,3 +5547,236 @@ INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 355)
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (119, 355);
 
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (312, 355);
+
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1479, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (3, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1392, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (21, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1295, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1481, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1481, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (139, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1482, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (52, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1483, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (139, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1482, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (21, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 358);
+
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (130, 293);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (139, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (3, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (22, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (36, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (37, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1260, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (52, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (67, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (68, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (206, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (207, 295);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1479, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (3, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1392, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (21, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1295, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1481, 356);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1481, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (139, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1482, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (52, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 357);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1483, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (139, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1482, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (21, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1480, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (67, 358);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (206, 358);
+
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1391, 294);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (3, 294);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (22, 294);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (36, 294);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (37, 294);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (52, 294);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 294);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1392, 294);
+
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1484, 294);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1014, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (3, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (22, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (36, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (37, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1484, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (21, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (67, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (206, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (68, 296);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (207, 296);
+
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1485, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (3, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (22, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (36, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (37, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1425, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1354, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (52, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 290);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1425, 291);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1354, 291);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1475, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (3, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (22, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (36, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (37, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (319, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (320, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (312, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1354, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1425, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (52, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 324);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (319, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (3, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (22, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (36, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (37, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (61, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (13, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (52, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (67, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (206, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (68, 359);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (207, 359);

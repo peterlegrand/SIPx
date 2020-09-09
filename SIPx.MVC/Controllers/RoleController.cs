@@ -42,7 +42,7 @@ namespace SIPx.MVC.Controllers
         }
         //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(string id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<RoleUpdateGet>($"{_baseUrl}api/Role/Update/" + id, token);
@@ -60,7 +60,7 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<RoleDeleteGet>($"{_baseUrl}api/Role/Delete/" + id, token);

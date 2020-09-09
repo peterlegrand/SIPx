@@ -81,6 +81,7 @@ namespace SIPx.API
             services.AddTransient<IFrontProjectProvider, FrontProjectProvider>();
             services.AddTransient<IFrontOrganizationProvider, FrontOrganizationProvider>();
             services.AddTransient<IFrontContentProvider, FrontContentProvider>();
+            services.AddTransient<IProcessTemplateFlowProvider, ProcessTemplateFlowProvider>();
             services.AddTransient<ICheckProvider, CheckProvider>();
             services.AddTransient<ISettingProvider, SettingProvider>();
             services.AddTransient<IClassificationLevelProvider, ClassificationLevelProvider>();
@@ -91,12 +92,13 @@ namespace SIPx.API
             services.AddTransient<IPersonTelecomProvider, PersonTelecomProvider>();
             services.AddTransient<IProcessTemplateGroupProvider, ProcessTemplateGroupProvider>();
             services.AddTransient<IProcessTemplateStageFieldProvider, ProcessTemplateStageFieldProvider>();
-            services.AddTransient<IProcessTemplateFieldProvider, ProcessTemplateFieldProvider>();
+            services.AddTransient<IProcessTemplateFieldTypeProvider, ProcessTemplateFieldTypeProvider>();
             services.AddTransient<IPersonProvider, PersonProvider>();
             services.AddTransient<IPageSectionDataTypeProvider, PageSectionDataTypeProvider>();
             services.AddTransient<ISecurityLevelProvider, SecurityLevelProvider>();
             services.AddTransient<IProcessTemplateStageProvider, ProcessTemplateStageProvider>();
             services.AddTransient<IProcessTemplateGroupProvider, ProcessTemplateGroupProvider>();
+            //services.AddTransient<IProcessTemplateFieldProvider, ProcessTemplateFieldProvider>();
             services.AddTransient<IProcessTemplateStageProvider, ProcessTemplateStageProvider>();
             services.AddTransient<IPageSectionTypeProvider, PageSectionTypeProvider>();
             services.AddTransient<IUserMenuTypeProvider, UserMenuTypeProvider>();

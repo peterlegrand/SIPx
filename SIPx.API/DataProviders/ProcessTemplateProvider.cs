@@ -26,16 +26,35 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateCreatePost ProcessTemplate)
+        public async Task<string> CreatePostCheck(ProcessTemplateCreateGet ProcessTemplate)
         {
             string usp = "usp_ProcessTemplateCreatePostCheck @ProcessTemplateGroupId, @Sequence, @LanguageId, @Name, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplate);
             return CheckString;
         }
 
-        public async Task<string> CreatePost(ProcessTemplateCreatePost ProcessTemplate)
+        public async Task<string> CreatePost(ProcessTemplateCreateGet ProcessTemplate)
         {
-            string usp = "usp_ProcessTemplateCreatePost @ProcessTemplateGroupId, @ShowInPersonalCalendar, @ShowInEventCalendar, @Sequence, @IsPersonal, @ShowInNew, @ShowInSearch, @ShowInReports, @HideEverywhere, @ProcessMultiMax, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
+            string usp = "usp_ProcessTemplateCreatePost" +
+                " @ProcessTemplateGroupId" +
+                ", @ShowInOrganizationCalendar " +
+                ", @ShowInProjectCalendar " +
+                ", @ShowInPersonalCalendar" +
+                ", @ShowInEventCalendar" +
+                ", @ProcessMultiMax" +
+                ", @Sequence" +
+                ", @IsPersonal" +
+                ", @ShowInNew" +
+                ", @ShowInSearch" +
+                ", @ShowInReports" +
+                ", @HideEverywhere" +
+                ", @Name" +
+                ", @Description" +
+                ", @MenuName" +
+                ", @MouseOver" +
+                ", @Color" +
+                ", @IconId" +
+                ", @CreatorId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplate);
             return String;
         }

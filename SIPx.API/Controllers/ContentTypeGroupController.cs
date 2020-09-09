@@ -52,6 +52,7 @@ namespace SIPx.API.Controllers
                 ContentTypeGroupCreateGet.LanguageId = UserLanguage.LanguageId;
                 ContentTypeGroupCreateGet.LanguageName = UserLanguage.Name;
                 ContentTypeGroupCreateGet.Sequences = ContentTypeGroupCreateGetSequences;
+                ContentTypeGroupCreateGet.Sequences.Add(new SequenceList { Sequence = ContentTypeGroupCreateGetSequences.Count, Name = "Add at the end" });
                 return Ok(ContentTypeGroupCreateGet);
             }
             return BadRequest(new
@@ -108,7 +109,9 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _contentTypeGroupProvider.UpdateGet(CurrentUser.Id, Id));
+                var ContentGroupType = await _contentTypeGroupProvider.UpdateGet(CurrentUser.Id, Id);
+                ContentGroupType.Sequences = await _contentTypeGroupProvider.CreateGetSequence(CurrentUser.Id);
+                return Ok(ContentGroupType);
             }
             return BadRequest(new
             {

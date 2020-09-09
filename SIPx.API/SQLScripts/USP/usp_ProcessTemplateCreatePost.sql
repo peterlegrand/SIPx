@@ -1,6 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateCreatePost] (
 	 @ProcessTemplateGroupId int
 	, @ShowInPersonalCalendar bit
+	, @ShowInOrganizationCalendar bit
+	, @ShowInProjectCalendar bit
 	, @ShowInEventCalendar bit
 	, @ProcessMultiMax int
 	, @Sequence int
@@ -9,15 +11,20 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateCreatePost] (
 	, @ShowInSearch bit
 	, @ShowInReports bit
 	, @HideEverywhere bit
-	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @Color char(9)
 	, @IconID int
-	, @UserId nvarchar(450)) 
+	, @CreatorId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @CreatorId
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 BEGIN TRANSACTION
 
 UPDATE ProcessTemplates SET Sequence = Sequence + 1 
@@ -54,9 +61,9 @@ VALUES (
 	, @HideEverywhere
 	, @Color 
 	, @IconID 
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 
@@ -80,9 +87,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 	COMMIT TRANSACTION

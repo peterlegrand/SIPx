@@ -88,7 +88,7 @@ namespace SIPx.API.Controllers
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
+            var CurrentUser = await _userManager.GetUserAsync(User); 
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 return Ok(await _processTemplateFlowProvider.IndexGet(CurrentUser.Id, Id));

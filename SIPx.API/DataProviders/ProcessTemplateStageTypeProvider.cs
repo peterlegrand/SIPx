@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
         {
-            string usp = "usp_ProcessTemplateStageTypeCreatePost @Internal, @LegalEntity,  @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserId ";
+            string usp = "usp_ProcessTemplateStageTypeCreatePost @Name, @Description, @MenuName, @MouseOver,@color, @IconId, @CreatorId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStageType);
             return String;
         }

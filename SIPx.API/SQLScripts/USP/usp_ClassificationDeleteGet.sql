@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ClassificationDeleteGet (@UserId nvarchar(450),@ClassificationId int)
+CREATE PROCEDURE [dbo].[usp_ClassificationDeleteGet] (@UserId nvarchar(450),@ClassificationId int)
 AS
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

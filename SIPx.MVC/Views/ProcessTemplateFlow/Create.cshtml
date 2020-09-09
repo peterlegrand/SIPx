@@ -3,7 +3,7 @@
 @model ProcessTemplateFlowCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template flow")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add process template flow")).TermString;
 
     Layout = "_LayoutAdmin";
 }

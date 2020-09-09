@@ -128,7 +128,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationRelationType.CreatorId = CurrentUser.Id;
+                ClassificationRelationType.ModifierId = CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{

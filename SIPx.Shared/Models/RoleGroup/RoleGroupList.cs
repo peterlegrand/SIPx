@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class RoleGroupList
     {
         [Key]
-        public string RoleGroupId { get; set; }
+        public int RoleGroupId { get; set; }
         public string Name { get; set; }
 
     }

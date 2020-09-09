@@ -16,7 +16,6 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public int RoleGroupId { get; set; }
-        public int Sequence { get; set; }
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -24,7 +23,7 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<RoleGroupList> roleGroups { get; set; }
+        public List<RoleGroupList> RoleGroups { get; set; }
 
     }
 }

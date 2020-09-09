@@ -11,5 +11,6 @@ namespace SIPx.DataAccess
         Task<List<IconList>> IconList(string UserId);
         Task<List<SortByList>> SortByList(string UserId);
         Task<List<StatusList>> StatusList(string UserId);
+        Task<List<ClaimList>> ClaimList(string UserId);
     }
 }

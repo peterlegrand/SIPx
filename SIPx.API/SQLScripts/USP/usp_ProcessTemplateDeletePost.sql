@@ -2,6 +2,10 @@ CREATE PROCEDURE usp_ProcessTemplateDeletePost ( @ProcessTemplateId int)
 AS
 BEGIN TRANSACTION
 
+DECLARE @Sequence int;
+SELECT @Sequence = Sequence FROM ProcessTemplates where ProcessTemplateID = @ProcessTemplateId
+
+
 DELETE FROM ProcessTemplateStageFields WHERE ProcessTemplateID = @ProcessTemplateId
 
 DELETE FROM ProcessTemplateFlowConditionLanguages WHERE ProcessTemplateID = @ProcessTemplateId
@@ -15,5 +19,5 @@ DELETE FROM ProcessTemplateStages WHERE ProcessTemplateID = @ProcessTemplateId
 
 DELETE FROM ProcessTemplateLanguages WHERE ProcessTemplateID = @ProcessTemplateId
 DELETE FROM ProcessTemplates WHERE ProcessTemplateID = @ProcessTemplateId
-
+UPDATE ProcessTemplates SET Sequence = Sequence - 1 WHERE Sequence > @Sequence
 COMMIT TRANSACTION

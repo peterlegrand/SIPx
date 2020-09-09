@@ -18,7 +18,8 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/ProcessTemplate/Create">@Term.Find(x => x.InternalName.Equals("Add new process template stage")).TermString</a>
+<a asp-action="Create" asp-route-id="@ViewBag.Id">Term.Find(x => x.InternalName.Equals("Add new process template stage")).TermString</a>
+
 <script id="StageField" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateStageField/Index/${ProcessTemplateStageId}"><span style="color:red">S</span>tage field</a>

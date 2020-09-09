@@ -109,7 +109,10 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationProvider.UpdateGet(CurrentUser.Id, Id));
+                var Organization = await _organizationProvider.UpdateGet(CurrentUser.Id, Id);
+                Organization.Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                Organization.OrganizationTypes = await _organizationTypeProvider.List(CurrentUser.Id);
+                return Ok(Organization);
             }
             return BadRequest(new
             {

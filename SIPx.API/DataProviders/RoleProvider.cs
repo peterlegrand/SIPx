@@ -19,7 +19,12 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-
+        public bool CreatePost(RoleCreateGet Role)
+        {
+            string usp = "usp_RoleCreatePost @RoleId, @Name, @Description, @MenuName, @MouseOver, @UserID";
+            _sqlDataAccess.SaveData<RoleCreateGet>(usp, Role);
+            return true;
+        }
         public async Task<List<RoleClaimIndexGet>> ClaimIndexGet(string UserId, string RoleId)
         {
             string usp = "usp_RoleClaimIndexGet @UserId, @RoleID";
@@ -47,14 +52,14 @@ namespace SIPx.DataAccess
             return true;
         } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.
 
-        public Task<RoleDeleteGet> DeleteGet(string UserId, int RoleId)
+        public Task<RoleDeleteGet> DeleteGet(string UserId, string RoleId)
         {
             string usp = "usp_RoleDeleteGet @UserId, @RoleID";
             return _sqlDataAccess.LoadSingleRecord<RoleDeleteGet, dynamic>(usp, new { UserId, RoleId });
 
         }
 
-        public bool DeletePost(int RoleId)
+        public bool DeletePost(string RoleId)
         {
             string usp = "usp_RoleDeletePost @RoleId";
             _sqlDataAccess.SaveData<dynamic>(usp, new { RoleId = RoleId });

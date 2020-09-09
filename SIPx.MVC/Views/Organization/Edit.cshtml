@@ -59,6 +59,27 @@
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="StatusId" dataSource="@Model.Statuses" ejs-for="StatusId" value="@Model.StatusId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="OrganizationTypeId" dataSource="@Model.OrganizationTypes" ejs-for="OrganizationTypeId" value="@Model.OrganizationTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="OrganizationTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-3 offset-3">

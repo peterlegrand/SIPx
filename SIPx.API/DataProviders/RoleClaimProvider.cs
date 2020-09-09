@@ -20,12 +20,25 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-
-        public async Task<string> CreatePost(RoleClaimCreateGet RoleClaim)
+        public Task<RoleClaimCreateGet> CreateGet(string UserId, string RoleId)
         {
-            string usp = "usp_RoleClaimCreatePost @Salutation, @FirstName, @MiddleName, @LastName, @RoleClaimalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, RoleClaim);
-            return CheckString;
+            string usp = "usp_RoleClaimCreateGet @UserId, @RoleID";
+            return _sqlDataAccess.LoadSingleRecord<RoleClaimCreateGet, dynamic>(usp, new { UserId, RoleId });
+
+        }
+        public Task<List<ClaimList>> CreateGetClaimList(string UserId, string RoleId)
+        {
+            string usp = "usp_RoleClaimCreateGetClaimList @UserId, @RoleID";
+            return _sqlDataAccess.LoadData<ClaimList, dynamic>(usp, new { UserId, RoleId });
+
+        }
+
+
+        public  bool CreatePost(RoleClaimCreateGet RoleClaim)
+        {
+            string usp = "usp_RoleClaimCreatePost @RoleId, @ClaimId";
+            _sqlDataAccess.SaveData<RoleClaimCreateGet>(usp, RoleClaim);
+            return true;
         }
 
         public Task<List<RoleClaimIndexGet>> IndexGet(string UserId, string RoleId)
@@ -35,23 +48,11 @@ namespace SIPx.DataAccess
 
         }
 
-        public Task<RoleClaimUpdateGet> UpdateGet(string UserId, int RoleClaimId)
-        {
-            string usp = "usp_RoleClaimUpdateGet @UserId, @RoleClaimID";
-            return _sqlDataAccess.LoadSingleRecord<RoleClaimUpdateGet, dynamic>(usp, new { UserId = UserId, RoleClaimId = RoleClaimId });
-        }
 
-        public bool UpdatePost(RoleClaimUpdateGet RoleClaim)
-        {
-            string usp = "usp_RoleClaimUpdatePost @RoleClaimId , @Salutation, @FirstName, @MiddleName, @LastName, @RoleClaimalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId, @ModifierId";
-            _sqlDataAccess.SaveData<RoleClaimUpdateGet>(usp, RoleClaim);
-            return true;
-        }
-
-        public Task<RoleClaimDeleteGet> DeleteGet(string UserId, int RoleClaimId)
+        public async Task<RoleClaimDeleteGet> DeleteGet(string UserId, int RoleClaimId)
         {
             string usp = "usp_RoleClaimDeleteGet @UserId, @RoleClaimID";
-            return _sqlDataAccess.LoadSingleRecord<RoleClaimDeleteGet, dynamic>(usp, new { UserId, RoleClaimId });
+            return await _sqlDataAccess.LoadSingleRecord<RoleClaimDeleteGet, dynamic>(usp, new { UserId, RoleClaimId });
 
         }
 

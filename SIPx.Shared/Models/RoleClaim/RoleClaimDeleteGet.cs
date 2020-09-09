@@ -11,11 +11,9 @@ namespace SIPx.Shared
         [Key]
         public int RoleClaimId { get; set; }
         public string RoleId { get; set; }
-        public int ClaimGroupName { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string MenuName { get; set; }
-        public string MouseOver { get; set; }
-        public string GroupName { get; set; }
+        public string ClaimGroupName { get; set; }
+        public string ClaimName { get; set; }
+        public string RoleName { get; set; }
+
     }
 }

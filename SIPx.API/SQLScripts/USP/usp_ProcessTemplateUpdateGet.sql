@@ -12,7 +12,12 @@ SELECT ProcessTemplates.ProcessTemplateID
 	, ISNULL(UserProcessTemplateLanguage.MouseOver,ISNULL(DefaultProcessTemplateLanguage.MouseOver,'No mouse over for this ')) MouseOver
 	, ISNULL(UserProcessTemplateGroupLanguage.Name,ISNULL(DefaultProcessTemplateGroupLanguage.Name,'No name for this  type')) GroupName
 	, ProcessTemplates.ShowInPersonalCalendar
+	, ProcessTemplates.ShowInProjectCalendar
+	, ProcessTemplates.ShowInOrganizationCalendar
 	, ProcessTemplates.ShowInEventCalendar
+	, ProcessTemplates.ProcessTemplateGroupID
+	, ProcessTemplates.IconID
+	, ProcessTemplates.Color
 	, ProcessTemplates.ProcessMultiMax
 	, ProcessTemplates.Sequence
 	, ProcessTemplates.IsPersonal

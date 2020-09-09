@@ -22,6 +22,8 @@ SELECT ContentTypes.ContentTypeID
 	, contenttypes.SecurityLevelID
 	, CASE WHEN ContentTypes.ProcessTemplateId IS NOT NULL THEN ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguageLanguage.Name,'No name for the process template')) ELSE 'There is process template' END ProcessTemplateName
 	, ISNULL(ContentTypes.ProcessTemplateId,0) ProcessTemplateId
+	, Contenttypes.Color
+	, Contenttypes.IconID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, ContentTypes.CreatedDate

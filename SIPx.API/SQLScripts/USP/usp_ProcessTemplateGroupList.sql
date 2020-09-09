@@ -5,7 +5,7 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
-SELECT ProcessTemplateGroups.Sequence 
+SELECT ProcessTemplateGroups.ProcessTemplateGroupID
 	, ISNULL(UserProcessTemplateGroupLanguage.Name,ISNULL(DefaultProcessTemplateGroupLanguage.Name,'No name for this group')) Name
 FROM ProcessTemplateGroups
 LEFT JOIN (SELECT ProcessTemplateGroupId, Name, Description, MenuName, MouseOver FROM ProcessTemplateGroupLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateGroupLanguage

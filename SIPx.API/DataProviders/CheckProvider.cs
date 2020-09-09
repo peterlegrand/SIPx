@@ -112,5 +112,11 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { TableName = TableName, IDField = IDField, Id = Id });
             return x.First();
         }
+        public async Task<int> CheckIfRecordExists(string TableName, string IDField, string Id)
+        {
+            string usp = "usp_CheckIfRecordExistsString @TableName, @IDField, @ID";
+            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { TableName = TableName, IDField = IDField, Id = Id });
+            return x.First();
+        }
     }
 }

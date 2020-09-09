@@ -14,6 +14,7 @@ SELECT Claims.ClaimId
 	, ISNULL(UIGroupDescriptionCustom.Customization,UIGroupDescription.Name) GroupDescription
 	, ISNULL(UIGroupMenuNameCustom.Customization,UIGroupMenuName.Name) GroupMenuName
 	, ISNULL(UIGroupMouseOverCustom.Customization,UIGroupMouseOver.Name) GroupMouseOver
+	, AspNetRoleClaims.Id RoleClaimId
 FROM Claims 
 JOIN ClaimGroups
 	ON Claims.ClaimGroupId = ClaimGroups.ClaimGroupID
