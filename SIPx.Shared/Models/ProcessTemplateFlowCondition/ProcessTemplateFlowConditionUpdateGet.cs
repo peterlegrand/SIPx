@@ -14,10 +14,10 @@ namespace SIPx.Shared
         public int ProcessTemplateId { get; set; }
         public int ProcessTemplateLanguageId { get; set; }
         public int Sequence { get; set; }
-        public int ProcessTemplateFlowConditionTypeID { get; set; }
-        public int ProcessTemplateFieldID { get; set; }
-        public int ProcessTemplateFieldIDRole { get; set; }
-        public int ComparisonOperatorID { get; set; }
+        public int ProcessTemplateFlowConditionTypeId { get; set; }
+        public int ProcessTemplateFieldId { get; set; }
+        public int ProcessTemplateFieldIdRole { get; set; }
+        public int ComparisonOperatorId { get; set; }
         public string ProcessTemplateFlowConditionString { get; set; }
         public int? ProcessTemplateFlowConditionInt { get; set; }
         public DateTime? ProcessTemplateFlowConditionDate { get; set; }
@@ -26,17 +26,18 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string CreatorName { get; set; }
-        public string CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }
-        public string ModifierId { get; set; }
+        public int ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string UserId { get; set; }
 
-        public List<int> Sequences { get; set; }
+        public List<SequenceList> Sequences { get; set; }
         public List<ProcessTemplateFlowConditionTypeList> ProcessTemplateFlowConditionTypes { get; set; }
         public List<ProcessTemplateFieldList> ProcessTemplateFields { get; set; }
-        public List<ProcessTemplateFieldRoleList> ProcessTemplateFieldRoles { get; set; }
-        public List<ComparisonOperatorList> ComparisonOperators { get; set; }
+        public List<ProcessTemplateFieldList> ProcessTemplateFieldRoles { get; set; }
+        public List<ProcessTemplateFlowConditionComparisonOperatorList> ComparisonOperators { get; set; }
 
     }
 }

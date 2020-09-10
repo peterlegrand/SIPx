@@ -33,10 +33,10 @@ namespace SIPx.DataAccess
 
         //}
 
-        public Task<List<ComparisonOperatorList>> List(string UserId)
+        public Task<List<ProcessTemplateFlowConditionComparisonOperatorList>> List(string UserId)
         {
-            string usp = "usp_ComparisonOperatorList @UserId";
-            return _sqlDataAccess.LoadData<ComparisonOperatorList, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_ProcessTemplateFlowConditionComparisonOperatorList @UserId";
+            return _sqlDataAccess.LoadData<ProcessTemplateFlowConditionComparisonOperatorList, dynamic>(usp, new { UserId = UserId });
 
         }
 

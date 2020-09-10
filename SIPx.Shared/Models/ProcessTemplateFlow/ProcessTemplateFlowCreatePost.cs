@@ -22,5 +22,6 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string CreatorId { get; set; }
+        public string UserId { get; set; }
     }
 }

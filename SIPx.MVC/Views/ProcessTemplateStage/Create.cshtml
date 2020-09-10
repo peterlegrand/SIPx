@@ -18,8 +18,9 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
-            </div>
+    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+    <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+</div>
         </div>
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
@@ -49,13 +50,25 @@
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
+        </div>        
+        <div class="row">
+            <div class="col-3">
+                @* PETER TODO change this to Stage type *@
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="ProcessTemplateStageTypeId" dataSource="@Model.ProcessTemplateStageTypes" ejs-for="@Model.ProcessTemplateStageTypeId" value="@Model.ProcessTemplateStageTypeId" index="2" filtering="ProcessTemplateStageTypeId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTemplateStageTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Is end stage")).TermString
+                @Term.Find(x => x.InternalName.Equals("In to do")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="IsEndStage" label="Is end stage" ejs-for="IsEndStage" checked="@Model.IsEndStage"></ejs-checkbox>
+                <ejs-checkbox id="InToDo" label="In to do" ejs-for="InToDo" checked="@Model.InToDo"></ejs-checkbox>
             </div>
         </div>
         <div class="row">

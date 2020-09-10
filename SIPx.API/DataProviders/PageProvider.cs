@@ -27,9 +27,14 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public async Task<string> CreatePost(PageCreatePost Page)
+        public async Task<string> CreatePost(PageCreateGet Page)
         {
-            string usp = "usp_PageCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId";
+            string usp = "usp_PageCreatePost @ShowTitleName , @ShowTitleDescription , @StatusId, @Name, @Description , @MenuName , @MouseOver , @TitleName , @TitleDescription , @UserId,@OrganizationId, @ProjectId, @SelectedUserId ";
+
+            
+
+
+//            string usp = "usp_PageCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @UserId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
             return CheckString;
         }

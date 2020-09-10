@@ -77,19 +77,19 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ProcessTemplateFieldCreatePost ProcessTemplateField)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplateField.UserId = CurrentUser.Id;
+            ProcessTemplateField.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateFieldProvider.CreatePostCheck(ProcessTemplateField);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _processTemplateFieldProvider.CreatePostCheck(ProcessTemplateField);
+                //if (CheckString.Length == 0)
+                //{
                     _processTemplateFieldProvider.CreatePost(ProcessTemplateField);
                     return Ok(ProcessTemplateField);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -139,10 +139,11 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-              //  ProcessTemplateField.ModifierId = CurrentUser.Id;
+                //  ProcessTemplateField.ModifierId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{
+                ProcessTemplateField.UserId = CurrentUser.Id;
                 _processTemplateFieldProvider.UpdatePost(ProcessTemplateField);
                 return Ok(ProcessTemplateField);
                 //}

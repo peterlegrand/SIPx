@@ -2,19 +2,18 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowCreatePost] (
 	@ProcessTemplateId int
 	, @ProcessTemplateFromStageId int
 	, @ProcessTemplateToStageId int
-	, @DateLevelId int
-	, @OnTheFly bit
-	, @Alhpabetically bit
-	, @CanLink bit
-	, @InDropDown bit
-	, @InMenu bit
-	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 BEGIN TRANSACTION
 
 INSERT INTO ProcessTemplateFlows (
@@ -39,6 +38,7 @@ DECLARE @NewProcessTemplateFlowId int	= scope_identity();
 
 INSERT INTO ProcessTemplateFlowLanguages (
 	ProcessTemplateFlowID
+	, ProcessTemplateID
 	, LanguageID
 	, Name
 	, Description
@@ -50,6 +50,7 @@ INSERT INTO ProcessTemplateFlowLanguages (
 	, ModifiedDate)
 VALUES (
 	@NewProcessTemplateFlowId 
+	, @ProcessTemplateID
 	, @LanguageID
 	, @Name
 	, @Description

@@ -109,7 +109,7 @@ namespace SIPx.API.Controllers
             {
                 var x = await _projectTypeProvider.UpdateGet(CurrentUser.Id, Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
-               // x.Icons = icons;
+                x.Icons = icons;
 
                 return Ok(x);
             }

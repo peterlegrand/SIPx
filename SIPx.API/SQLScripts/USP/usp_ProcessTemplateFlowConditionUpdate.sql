@@ -1,6 +1,5 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionUpdate] (
-	@ProcessTemplateFlowConditionLanguageId int
-	, @ProcessTemplateFlowConditionId int
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionUpdatePost] (
+	 @ProcessTemplateFlowConditionId int
 	, @Sequence int
 	, @ProcessTemplateFlowConditionTypeId int
 	, @ProcessTemplateFieldId int
@@ -15,7 +14,12 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionUpdate] (
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
-BEGIN TRANSACTION
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 DECLARE @OldSequence int;
 DECLARE @ProcessTemplateFlowId int;
 SELECT @OldSequence = Sequence, @ProcessTemplateFlowId = ProcessTemplateFlowId FROM ProcessTemplateFlowConditions WHERE ProcessTemplateFlowConditionId = @ProcessTemplateFlowConditionID;
@@ -51,8 +55,8 @@ UPDATE  ProcessTemplateFlowConditionLanguages SET
 	, MouseOver = @MouseOver
 	, ModifierId = @UserID
 	, ModifiedDate = getdate()
-WHERE ProcessTemplateFlowConditionLanguageID= @ProcessTemplateFlowConditionLanguageID
-
+WHERE ProcessTemplateFlowConditionID= @ProcessTemplateFlowConditionID
+	AND LanguageID = @LanguageId
 COMMIT TRANSACTION
 
 

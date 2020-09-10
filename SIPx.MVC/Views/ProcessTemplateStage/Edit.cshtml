@@ -62,10 +62,23 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Is end stage")).TermString
+                @* PETER TODO change this to Stage type *@
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="IsEndStage" label="Is end stage" ejs-for="IsEndStage" checked="@Model.IsEndStage"></ejs-checkbox>
+                <ejs-dropdownlist id="ProcessTemplateStageTypeId" dataSource="@Model.ProcessTemplateStageTypes" ejs-for="@Model.ProcessTemplateStageTypeId" value="@Model.ProcessTemplateStageTypeId" index="2" filtering="ProcessTemplateStageTypeId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTemplateStageTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("In to do")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="InToDo" label="Is end stage" ejs-for="InToDo" checked="@Model.InToDo"></ejs-checkbox>
             </div>
         </div>
         <div class="row">

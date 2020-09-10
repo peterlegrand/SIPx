@@ -50,17 +50,19 @@ namespace SIPx.API.Controllers
                 var ProcessTemplateFlowConditionCreateGet = new ProcessTemplateFlowConditionCreateGet();
                 var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.CreateGetSequence(CurrentUser.Id, Id);
                 var ProcessTemplateFlowConditionTypes = await _processTemplateFlowConditionTypeProvider.List(CurrentUser.Id);
-                var ProcessTemplateFields = await _processTemplateFieldProvider.List(CurrentUser.Id, Id);
+                var ProcessTemplateFields = await _processTemplateFlowConditionProvider.CreateGetFieldList(CurrentUser.Id, Id);
+                var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.CreateGetFieldRoleList(CurrentUser.Id, Id);
                 var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 ProcessTemplateFlowConditionCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProcessTemplateFlowConditionCreateGet.LanguageName = UserLanguage.Name;
                 ProcessTemplateFlowConditionCreateGet.Sequences = ProcessTemplateFlowConditionCreateGetSequences;
                 ProcessTemplateFlowConditionCreateGet.ProcessTemplateFlowConditionTypes = ProcessTemplateFlowConditionTypes;
-                ProcessTemplateFlowConditionCreateGet.ProcessTemplateFlowConditionTypes = ProcessTemplateFlowConditionTypes;
+                ProcessTemplateFlowConditionCreateGet.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
                 ProcessTemplateFlowConditionCreateGet.ProcessTemplateFields = ProcessTemplateFields;
                 ProcessTemplateFlowConditionCreateGet.ComparisonOperators = ComparisonOperators;
                 ProcessTemplateFlowConditionCreateGet.ProcessTemplateFlowId = Id;
+                ProcessTemplateFlowConditionCreateGet.UserId = CurrentUser.Id;
                 return Ok(ProcessTemplateFlowConditionCreateGet);
             }
             return BadRequest(new
@@ -71,22 +73,22 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition)
+        public async Task<IActionResult> Create(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplateFlowCondition.CreaterId = CurrentUser.Id;
+            ProcessTemplateFlowCondition.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateFlowConditionProvider.CreatePostCheck(ProcessTemplateFlowCondition);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _processTemplateFlowConditionProvider.CreatePostCheck(ProcessTemplateFlowCondition);
+                //if (CheckString.Length == 0)
+                //{
                     _processTemplateFlowConditionProvider.CreatePost(ProcessTemplateFlowCondition);
                     return Ok(ProcessTemplateFlowCondition);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -117,7 +119,25 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateFlowConditionProvider.UpdateGet(CurrentUser.Id, Id));
+
+                var ProcessTemplateFlowConditionUpdateGet = await _processTemplateFlowConditionProvider.UpdateGet(CurrentUser.Id, Id);
+                var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.CreateGetSequence(CurrentUser.Id, Id);
+                var ProcessTemplateFlowConditionTypes = await _processTemplateFlowConditionTypeProvider.List(CurrentUser.Id);
+                var ProcessTemplateFields = await _processTemplateFlowConditionProvider.CreateGetFieldList(CurrentUser.Id, Id);
+                var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.CreateGetFieldRoleList(CurrentUser.Id, Id);
+                var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                //ProcessTemplateFlowConditionUpdateGet.LanguageId = UserLanguage.LanguageId;
+                //ProcessTemplateFlowConditionUpdateGet.LanguageName = UserLanguage.Name;
+                ProcessTemplateFlowConditionUpdateGet.Sequences = ProcessTemplateFlowConditionCreateGetSequences;
+                ProcessTemplateFlowConditionUpdateGet.ProcessTemplateFlowConditionTypes = ProcessTemplateFlowConditionTypes;
+                ProcessTemplateFlowConditionUpdateGet.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
+                ProcessTemplateFlowConditionUpdateGet.ProcessTemplateFields = ProcessTemplateFields;
+                ProcessTemplateFlowConditionUpdateGet.ComparisonOperators = ComparisonOperators;
+                //ProcessTemplateFlowConditionUpdateGet.ProcessTemplateFlowId = Id;
+
+
+                return Ok(ProcessTemplateFlowConditionUpdateGet);
             }
             return BadRequest(new
             {
@@ -131,7 +151,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateFlowCondition.ModifierId = CurrentUser.Id;
+                ProcessTemplateFlowCondition.UserId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{
@@ -159,14 +179,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists("ProcessTemplateFlowConditions", "ProcessTemplateFlowConditionID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("ProcessTemplateFlowConditions", "ProcessTemplateFlowConditionID", Id) == 0)
+                //{
+                    //return BadRequest(new
+                    //{
+                    //    IsSuccess = false,
+                    //    Message = "No record with this ID",
+                    //});
+                //}
                 var x = await _processTemplateFlowConditionProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }
@@ -184,7 +204,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateFlowCondition.CreatorId = CurrentUser.Id;
+//                ProcessTemplateFlowCondition.U = CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateFlowConditionProvider.DeletePostCheck(ProcessTemplateFlowCondition);
                 //if (CheckString.Length == 0)
                 //{

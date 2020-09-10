@@ -26,6 +26,18 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
         }
 
+        public Task<List<ProcessTemplateFieldList>> CreateGetFieldList(string UserId, int ProcessTemplateFlowId)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionCreateGetFieldList @UserID, @ProcessTemplateFlowId";
+            return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
+        }
+
+        public Task<List<ProcessTemplateFieldList>> CreateGetFieldRoleList(string UserId, int ProcessTemplateFlowId)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionCreateGetFieldRoleList @UserID, @ProcessTemplateFlowId";
+            return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
+        }
+
         public async Task<string> CreatePostCheck(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition)
         {
             string usp = "usp_ProcessTemplateFlowConditionCreatePostCheck @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowConditionTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @LanguageId, @Name, @CreaterId";
@@ -33,9 +45,9 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public async Task<string> CreatePost(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition)
+        public async Task<string> CreatePost(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition)
         {
-            string usp = "usp_ProcessTemplateFlowConditionCreatePost @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowConditionTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @ProcessTemplateFlowConditionString, @ProcessTemplateFlowConditionInt, @ProcessTemplateFlowConditionDate, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreaterId";
+            string usp = "usp_ProcessTemplateFlowConditionCreatePost @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowConditionTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @ProcessTemplateFlowConditionString, @ProcessTemplateFlowConditionInt, @ProcessTemplateFlowConditionDate, @Name, @Description, @MenuName, @MouseOver, @UserId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlowCondition);
             return String;
         }
@@ -49,14 +61,14 @@ namespace SIPx.DataAccess
 
         public Task<ProcessTemplateFlowConditionUpdateGet> UpdateGet(string UserId, int ProcessTemplateFlowConditionId)
         {
-            string usp = "usp_ProcessTemplateFlowConditioUpdateGetn @UserId, @ProcessTemplateFlowConditionID";
+            string usp = "usp_ProcessTemplateFlowConditionUpdateGet @UserId, @ProcessTemplateFlowConditionID";
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateFlowConditionUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateFlowConditionId = ProcessTemplateFlowConditionId });
 
         }
 
         public bool UpdatePost(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition)
         {
-            string usp = "usp_ProcessTemplateFlowConditionUpdatePost @ProcessTemplateFlowConditionId , @Sequence ,@ProcessTemplateFlowConditionTypeID, @ProcessTemplateFieldID, @ProcessTemplateFieldIDRole, @ComparisonOperatorID, @ProcessTemplateFlowConditionString, @ProcessTemplateFlowConditionInt, @ProcessTemplateFlowConditionDate, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ProcessTemplateFlowConditionUpdatePost @ProcessTemplateFlowConditionId , @Sequence ,@ProcessTemplateFlowConditionTypeID, @ProcessTemplateFieldID, @ProcessTemplateFieldIDRole, @ComparisonOperatorID, @ProcessTemplateFlowConditionString, @ProcessTemplateFlowConditionInt, @ProcessTemplateFlowConditionDate, @Name, @Description, @MenuName, @MouseOver, @UserId";
             _sqlDataAccess.SaveData<ProcessTemplateFlowConditionUpdateGet>(usp, ProcessTemplateFlowCondition);
             return true;
         }

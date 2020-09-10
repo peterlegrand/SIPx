@@ -6,10 +6,13 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateFlows.ProcessTemplateFlowID
+	, ProcessTemplateFlows.ProcessTemplateID
 	, ISNULL(UserProcessTemplateFlowLanguage.Name,ISNULL(DefaultProcessTemplateFlowLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserProcessTemplateFlowLanguage.Description,ISNULL(DefaultProcessTemplateFlowLanguage.Description,'No description for this role')) Description
 	, ISNULL(UserProcessTemplateFlowLanguage.MenuName,ISNULL(DefaultProcessTemplateFlowLanguage.MenuName,'No menu name for this role')) MenuName
 	, ISNULL(UserProcessTemplateFlowLanguage.MouseOver,ISNULL(DefaultProcessTemplateFlowLanguage.MouseOver,'No mouse over for this role')) MouseOver
+	, ISNULL(UserFromStageLanguage.Name,ISNULL(DefaultFromStageLanguage.Name,'No name for from stage')) ProcessTemplateFromStageName
+	, ISNULL(UserToStageLanguage.Name,ISNULL(DefaultToStageLanguage.Name,'No name for to stage')) ProcessTemplateToStageName
 	, ProcessTemplateFlows.ProcessTemplateFromStageID
 	, ProcessTemplateFlows.ProcessTemplateToStageID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
@@ -23,6 +26,14 @@ LEFT JOIN (SELECT ProcessTemplateFlowId, Name, Description, MenuName, MouseOver 
 	ON UserProcessTemplateFlowLanguage.ProcessTemplateFlowId = ProcessTemplateFlows.ProcessTemplateFlowID
 LEFT JOIN (SELECT ProcessTemplateFlowId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFlowLanguages JOIN Settings ON ProcessTemplateFlowLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFlowLanguage
 	ON DefaultProcessTemplateFlowLanguage.ProcessTemplateFlowId = ProcessTemplateFlows.ProcessTemplateFlowID
+LEFT JOIN (SELECT ProcessTemplateStageId, Name, Description, MenuName, MouseOver FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserFromStageLanguage
+	ON UserFromStageLanguage.ProcessTemplateStageId = ProcessTemplateFlows.ProcessTemplateFromStageID
+LEFT JOIN (SELECT ProcessTemplateStageId, Name, Description, MenuName, MouseOver FROM ProcessTemplateStageLanguages JOIN Settings ON ProcessTemplateStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultFromStageLanguage
+	ON DefaultFromStageLanguage.ProcessTemplateStageId = ProcessTemplateFlows.ProcessTemplateFromStageID
+LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserToStageLanguage
+	ON UserToStageLanguage.ProcessTemplateStageId = ProcessTemplateFlows.ProcessTemplateToStageID
+LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages JOIN Settings ON ProcessTemplateStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultToStageLanguage
+	ON DefaultToStageLanguage.ProcessTemplateStageId = ProcessTemplateFlows.ProcessTemplateToStageID
 JOIN Persons Creator
 	ON Creator.UserId = ProcessTemplateFlows.CreatorID
 JOIN Persons Modifier

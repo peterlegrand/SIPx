@@ -59,6 +59,25 @@
         </div>
         <div class="row">
             <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="TitleName" ejs-for="TitleName" cssClass="e-outline" placeholder="TitleName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-9">
+                <ejs-richtexteditor ejs-for="TitleDescription" id="defaultRTE2" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                    <e-content-template>
+                    </e-content-template>
+                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                    </e-richtexteditor-toolbarsettings>
+                </ejs-richtexteditor>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
             </div>
             <div class="col-9">

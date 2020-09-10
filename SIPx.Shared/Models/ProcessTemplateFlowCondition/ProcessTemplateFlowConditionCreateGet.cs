@@ -27,10 +27,11 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<SequenceList> Sequences { get; set; }
         public List<ProcessTemplateFlowConditionTypeList> ProcessTemplateFlowConditionTypes { get; set; }
         public List<ProcessTemplateFieldList> ProcessTemplateFields { get; set; }
         public List<ProcessTemplateFieldList> ProcessTemplateFieldRoles { get; set; }
-        public List<ComparisonOperatorList> ComparisonOperators { get; set; }
+        public List<ProcessTemplateFlowConditionComparisonOperatorList> ComparisonOperators { get; set; }
     }
 }

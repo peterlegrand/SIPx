@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ProcessTemplateFieldCreatePost ProcessTemplateField)
         {
-            string usp = "usp_ProcessTemplateFieldCreatePost @ProcessTemplateId, @ProcessTemplateFieldTypeId, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreaterId";
+            string usp = "usp_ProcessTemplateFieldCreatePost @ProcessTemplateId, @ProcessTemplateFieldTypeId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateField);
             return String;
         }
@@ -64,7 +64,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ProcessTemplateFieldUpdateGet ProcessTemplateField)
         {
-            string usp = "usp_ProcessTemplateFieldUpdatePost @ProcessTemplateFieldId , @ProcessTemplateFieldTypeId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ProcessTemplateFieldUpdatePost @ProcessTemplateFieldId , @ProcessTemplateFieldTypeId , @Name, @Description, @MenuName, @MouseOver, @UserId";
             _sqlDataAccess.SaveData<ProcessTemplateFieldUpdateGet>(usp, ProcessTemplateField);
             return true;
         }

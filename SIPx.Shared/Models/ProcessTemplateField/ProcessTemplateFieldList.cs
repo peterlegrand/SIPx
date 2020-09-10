@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class ProcessTemplateFieldList
     {
         [Key]
-        public int Sequence { get; set; }
+        public int ProcessTemplateFieldId { get; set; }
         public string Name { get; set; }
 
     }

@@ -6,6 +6,6 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateFlowConditionComparisonOperatorProvider
     {
-        Task<List<ComparisonOperatorList>> List(string UserId);
+        Task<List<ProcessTemplateFlowConditionComparisonOperatorList>> List(string UserId);
     }
 }

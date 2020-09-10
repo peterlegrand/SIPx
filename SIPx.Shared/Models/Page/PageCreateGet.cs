@@ -14,6 +14,7 @@ namespace SIPx.Shared
         public int? OrganizationId { get; set; }
         public int? ProjectId { get; set; }
         public string UserId { get; set; }
+        public string SelectedUserId { get; set; }
         public int? ClassificationId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }

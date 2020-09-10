@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateFields.ProcessTemplateFieldID
+	, ProcessTemplateFields.ProcessTemplateID
 	, ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserProcessTemplateFieldLanguage.Description,ISNULL(DefaultProcessTemplateFieldLanguage.Description,'No description for this role')) Description
 	, ISNULL(UserProcessTemplateFieldLanguage.MenuName,ISNULL(DefaultProcessTemplateFieldLanguage.MenuName,'No menu name for this role')) MenuName

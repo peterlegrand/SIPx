@@ -64,11 +64,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ProcessTemplateStageCreatePost ProcessTemplateStage)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplateStage.UserId = CurrentUser.Id;
+            ProcessTemplateStage.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateStageProvider.CreatePostCheck(ProcessTemplateStage);
-                if (CheckString.Length == 0)
+                //var CheckString = await _processTemplateStageProvider.CreatePostCheck(ProcessTemplateStage);
+                //if (CheckString.Length == 0)
                 {
                     _processTemplateStageProvider.CreatePost(ProcessTemplateStage);
                     return Ok(ProcessTemplateStage);
@@ -76,7 +76,7 @@ namespace SIPx.API.Controllers
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -107,7 +107,10 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateStageProvider.UpdateGet(CurrentUser.Id, Id));
+                var Stage = await _processTemplateStageProvider.UpdateGet(CurrentUser.Id, Id);
+                var ProcessTemplateStageTypes = await _processTemplateStageTypeProvider.List(CurrentUser.Id);
+                Stage.ProcessTemplateStageTypes = ProcessTemplateStageTypes;
+                return Ok(Stage);
             }
             return BadRequest(new
             {
@@ -122,7 +125,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateStage.ModifierId = CurrentUser.Id;
+                ProcessTemplateStage.UserId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{

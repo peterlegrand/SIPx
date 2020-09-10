@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IPageProvider
     {
-        Task<string> CreatePost(PageCreatePost Page);
+        Task<string> CreatePost(PageCreateGet Page);
         Task<string> CreatePostCheck(PageCreatePost Page);
         Task<PageDeleteGet> DeleteGet(string UserId, int PageId);
         bool DeletePost(int Id);

@@ -1484,4 +1484,13 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1482, 'Right');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1483, 'Delete right');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1484, 'Group');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1485, 'New process template stage type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1486, 'Add process template field');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1487, 'Add process template stage');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1488, 'Add process template flow');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1489, 'Stage type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1490, 'Create process template flow');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1491, 'Add process template flow condition');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1492, 'Condition type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1493, 'Role field');
+
 SET IDENTITY_INSERT UITerms OFF;

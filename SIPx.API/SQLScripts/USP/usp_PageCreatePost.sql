@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_PageCreatePost] (
 	@ShowTitleName bit
 	, @ShowTitleDescription bit
-	, @LanguageId int
+	, @StatusId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -10,11 +10,18 @@ CREATE PROCEDURE [dbo].[usp_PageCreatePost] (
 	, @TitleDescription nvarchar(max)
 	, @UserId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 BEGIN TRANSACTION
 
 INSERT INTO Pages (
 	ShowTitleName
 	, ShowTitleDescription
+	, StatusId
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -22,6 +29,7 @@ INSERT INTO Pages (
 VALUES (
 	@ShowTitleName
 	, @ShowTitleDescription
+	, @StatusId
 	, @UserID
 	, getdate()
 	, @UserID

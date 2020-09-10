@@ -5,10 +5,10 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ComparisonOperatorList
+    public class ProcessTemplateFlowConditionComparisonOperatorList
     {
         [Key]
-        public int ComparisonOperatorId { get; set; }
+        public int ProcessTemplateFlowConditionComparisonOperatorId { get; set; }
         public string Name { get; set; }
 
     }

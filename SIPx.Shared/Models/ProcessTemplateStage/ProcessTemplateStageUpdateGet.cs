@@ -9,9 +9,9 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProcessTemplateStageId { get; set; }
-        public int ProcessTemplateStageLanguageId { get; set; }
         public int ProcessTemplateId { get; set; }
-        public bool IsEndStage { get; set; }
+        public int ProcessTemplateStageTypeId { get; set; }
+        public bool InToDo { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -22,5 +22,7 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string UserId { get; set; }
+        public List<ProcessTemplateStageTypeList> ProcessTemplateStageTypes { get; set; }
     }
 }

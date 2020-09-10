@@ -74,22 +74,26 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(PageCreatePost Page)
+        public async Task<IActionResult> Create(PageCreateGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Page.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _pageProvider.CreatePostCheck(Page);
-                if (CheckString.Length == 0)
-                {
-                    _pageProvider.CreatePost(Page);
+                //var CheckString = await _pageProvider.CreatePostCheck(Page);
+                //if (CheckString.Length == 0)
+                //{
+                Page.SelectedUserId = CurrentUser.Id;
+                if (Page.OrganizationId == null) { Page.OrganizationId = 0; }
+                if (Page.ProjectId== null) { Page.ProjectId= 0; }
+                if (Page.UserId == null) { Page.UserId= ""; }
+                _pageProvider.CreatePost(Page);
                     return Ok(Page);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new

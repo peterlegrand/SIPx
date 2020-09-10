@@ -12,5 +12,6 @@
         string TitleDescription { get; set; }
         string TitleName { get; set; }
         string UserId { get; set; }
+        string SelectedUserId { get; set; }
     }
 }

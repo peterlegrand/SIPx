@@ -17,9 +17,9 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString
             </div>    <div class="col-9">
-    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-    <ejs-textbox id="ProcessTemplateStageId" ejs-for="ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-textbox>
-</div>
+                <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
         </div>
 
         <div class="row">
@@ -50,6 +50,7 @@
             </div>
         </div>
 
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -58,6 +59,15 @@
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="TypeName" ejs-for="TypeName" cssClass="e-outline" placeholder="TypeName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        @* PETER TODO change this to Stage type *@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("In to do")).TermString

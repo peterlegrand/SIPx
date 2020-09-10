@@ -20,10 +20,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public Task<List<ProcessTemplateStageFieldIndexGet>> IndexGet(string UserId, int ProcessTemplateFieldId)
+        public Task<List<ProcessTemplateStageFieldIndexGet>> IndexGet(string UserId, int ProcessTemplateStageId)
         {
-            string usp = "usp_ProcessTemplateFieldStageIndexGet @UserId, @ProcessTemplateFieldID";
-            return _sqlDataAccess.LoadData<ProcessTemplateStageFieldIndexGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateFieldId = ProcessTemplateFieldId });
+            string usp = "usp_ProcessTemplateStageFieldIndexGet @UserId, @ProcessTemplateStageId";
+            return _sqlDataAccess.LoadData<ProcessTemplateStageFieldIndexGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageId = ProcessTemplateStageId });
 
         }
 
@@ -36,7 +36,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
         {
-            string usp = "usp_ProcessTemplateUpdatePost @ProcessTemplateStageFieldId, @ValueUpdateTypeId, @ProcessTemplateStageFieldStatusId, @Sequence, @StringValue, @IntValue, @DateTimeValue, @ModifierId";
+            string usp = "usp_ProcessTemplateStageFieldUpdatePost @ProcessTemplateStageFieldId, @ProcessTemplateStageFieldStatusId, @ValueUpdateTypeId,@Sequence, @StringValue, @IntValue, @DateTimeValue, @UserId";
             _sqlDataAccess.SaveData<ProcessTemplateStageFieldUpdateGet>(usp, ProcessTemplateStageField);
             return true;
         }

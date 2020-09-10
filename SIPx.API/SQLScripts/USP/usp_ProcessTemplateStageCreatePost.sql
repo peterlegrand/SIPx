@@ -1,14 +1,19 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageCreatePost] (
 	@ProcessTemplateId int
-	, @ProcessTemplateTypeId int
+	, @ProcessTemplateStageTypeId int
 	, @InToDo bit
-	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserId nvarchar(450)) 
+	, @CreatorId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @CreatorId
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 BEGIN TRANSACTION
 
 INSERT INTO ProcessTemplateStages (
@@ -21,11 +26,11 @@ INSERT INTO ProcessTemplateStages (
 	, ModifiedDate)
 VALUES (
 	@ProcessTemplateID
-	, @ProcessTemplateTypeID
+	, @ProcessTemplateStageTypeID
 	, @InToDo
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 
@@ -33,6 +38,7 @@ DECLARE @NewProcessTemplateStageId int	= scope_identity();
 
 INSERT INTO ProcessTemplateStageLanguages (
 	ProcessTemplateStageID
+	, ProcessTemplateID
 	, LanguageID
 	, Name
 	, Description
@@ -44,14 +50,37 @@ INSERT INTO ProcessTemplateStageLanguages (
 	, ModifiedDate)
 VALUES (
 	@NewProcessTemplateStageId 
+	, @ProcessTemplateID
 	, @LanguageID
 	, @Name
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
+
+	INSERT INTO ProcessTemplateStageFields(
+	ProcessTemplateId
+	, ProcessTemplateFieldID
+	, ProcessTemplateStageId
+	, ProcessTemplateStageFieldStatusID
+	, Sequence
+	, ValueUpdateTypeID
+	, ModifierID
+	, ModifiedDate)
+SELECT 
+	@ProcessTemplateId
+	,ProcessTemplateFieldId
+	, @NewProcessTemplateStageId
+	, 1
+	, ROW_NUMBER()  OVER(ORDER BY ProcessTemplateFieldID ASC) AS Sequence
+	,1 
+	, @CreatorId
+	, getdate()
+	FROM ProcessTemplateFields WHERE ProcessTemplateID  = @ProcessTemplateId
+
+
 
 	COMMIT TRANSACTION

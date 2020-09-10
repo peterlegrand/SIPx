@@ -74,6 +74,9 @@ namespace SIPx.API
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
+            services.AddTransient<IProcessTemplateFlowConditionProvider, ProcessTemplateFlowConditionProvider>();
+            services.AddTransient<IProcessTemplateFlowConditionTypeProvider, ProcessTemplateFlowConditionTypeProvider>();
+
             services.AddTransient<IRoleClaimProvider, RoleClaimProvider>();
             services.AddTransient<IFrontPersonProvider, FrontPersonProvider>();
             services.AddTransient<IFrontClassificationValueProvider, FrontClassificationValueProvider>();
@@ -90,6 +93,7 @@ namespace SIPx.API
             services.AddTransient<IPersonAddressProvider, PersonAddressProvider>();
             services.AddTransient<IPersonRelationProvider, PersonRelationProvider>();
             services.AddTransient<IPersonTelecomProvider, PersonTelecomProvider>();
+            services.AddTransient<IProcessTemplateStageFieldStatusProvider, ProcessTemplateStageFieldStatusProvider>();
             services.AddTransient<IProcessTemplateGroupProvider, ProcessTemplateGroupProvider>();
             services.AddTransient<IProcessTemplateStageFieldProvider, ProcessTemplateStageFieldProvider>();
             services.AddTransient<IProcessTemplateFieldTypeProvider, ProcessTemplateFieldTypeProvider>();

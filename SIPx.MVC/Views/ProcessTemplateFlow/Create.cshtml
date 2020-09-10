@@ -3,16 +3,23 @@
 @model ProcessTemplateFlowCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add process template flow")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Name")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template flow")).TermString
+    @* PETER TODO Create process template flow BOTH LINES*@
+<img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Name")).TermString
 </h1>
 <div class="container">
     <form method="post">
+        <div class="row">
+            <div class="col-3">
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="ProcessTemplateId" ejs-for="ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString

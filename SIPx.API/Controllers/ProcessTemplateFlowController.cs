@@ -66,16 +66,17 @@ namespace SIPx.API.Controllers
             ProcessTemplateFlow.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateFlowProvider.CreatePostCheck(ProcessTemplateFlow);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _processTemplateFlowProvider.CreatePostCheck(ProcessTemplateFlow);
+                //if (CheckString.Length == 0)
+                //{
+                ProcessTemplateFlow.UserId = CurrentUser.Id;
                     _processTemplateFlowProvider.CreatePost(ProcessTemplateFlow);
                     return Ok(ProcessTemplateFlow);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -176,7 +177,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateFlow.CreatorId = CurrentUser.Id;
+               // ProcessTemplateFlow.CreatorId = CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateFlowProvider.DeletePostCheck(ProcessTemplateFlow);
                 //if (CheckString.Length == 0)
                 //{

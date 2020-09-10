@@ -10,6 +10,7 @@ namespace SIPx.Shared
         public bool ShowTitleName { get; set; }
         public bool ShowTitleDescription { get; set; }
         public int LanguageId { get; set; }
+        public int StatusId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -17,5 +18,6 @@ namespace SIPx.Shared
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
         public string UserId { get; set; }
+        public string SelectedUserId { get; set; }
     }
 }

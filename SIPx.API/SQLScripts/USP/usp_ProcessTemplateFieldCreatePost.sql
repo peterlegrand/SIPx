@@ -1,13 +1,17 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldCreatePost] (
 	@ProcessTemplateId int
 	, @ProcessTemplateFieldTypeId int
-	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserId nvarchar(450)) 
+	, @CreatorId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @CreatorId
+	AND UserPreferences.PreferenceTypeId = 1 ;
 BEGIN TRANSACTION
 
 INSERT INTO ProcessTemplateFields (
@@ -20,9 +24,9 @@ INSERT INTO ProcessTemplateFields (
 VALUES (
 	@ProcessTemplateID
 	, @ProcessTemplateFieldTypeID
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 
@@ -30,6 +34,7 @@ DECLARE @NewProcessTemplateFieldId int	= scope_identity();
 
 INSERT INTO ProcessTemplateFieldLanguages (
 	ProcessTemplateFieldID
+	,ProcessTemplateID
 	, LanguageID
 	, Name
 	, Description
@@ -41,14 +46,15 @@ INSERT INTO ProcessTemplateFieldLanguages (
 	, ModifiedDate)
 VALUES (
 	@NewProcessTemplateFieldId 
+	,@ProcessTemplateID
 	, @LanguageID
 	, @Name
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 	COMMIT TRANSACTION

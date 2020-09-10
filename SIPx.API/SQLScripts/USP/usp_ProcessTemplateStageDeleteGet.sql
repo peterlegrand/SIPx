@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateStages.ProcessTemplateStageID
+	, ProcessTemplateStages.ProcessTemplateID
 	, ISNULL(UserProcessTemplateStageLanguage.Name,ISNULL(DefaultProcessTemplateStageLanguage.Name,'No name for this stage')) Name
 	, ISNULL(UserProcessTemplateStageLanguage.Description,ISNULL(DefaultProcessTemplateStageLanguage.Description,'No description for this stage')) Description
 	, ISNULL(UserProcessTemplateStageLanguage.MenuName,ISNULL(DefaultProcessTemplateStageLanguage.MenuName,'No menu name for this stage')) MenuName

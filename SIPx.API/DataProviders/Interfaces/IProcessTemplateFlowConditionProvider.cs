@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IProcessTemplateFlowConditionProvider
     {
         Task<List<SequenceList>> CreateGetSequence(string UserId, int ProcessTemplateFlowId);
-        Task<string> CreatePost(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition);
+        Task<string> CreatePost(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition);
         Task<string> CreatePostCheck(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition);
         Task<ProcessTemplateFlowConditionDeleteGet> DeleteGet(string UserId, int ProcessTemplateFlowConditionId);
         bool DeletePost(int Id);
@@ -16,5 +16,7 @@ namespace SIPx.DataAccess
         Task<ProcessTemplateFlowConditionLanguageIndexGet> LanguageUpdateGet(string UserId, int ProcessTemplateFlowConditionLanguageId);
         Task<ProcessTemplateFlowConditionUpdateGet> UpdateGet(string UserId, int ProcessTemplateFlowConditionId);
         bool UpdatePost(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition);
+        Task<List<ProcessTemplateFieldList>> CreateGetFieldList(string UserId, int ProcessTemplateFlowId);
+        Task<List<ProcessTemplateFieldList>> CreateGetFieldRoleList(string UserId, int ProcessTemplateFlowId);
     }
 }

@@ -6,14 +6,15 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
+	, ProcessTemplateFlowConditions.ProcessTemplateFlowID
 	, ISNULL(UserProcessTemplateFlowConditionLanguage.Name,ISNULL(DefaultProcessTemplateFlowConditionLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserProcessTemplateFlowConditionLanguage.Description,ISNULL(DefaultProcessTemplateFlowConditionLanguage.Description,'No description for this role')) Description
 	, ISNULL(UserProcessTemplateFlowConditionLanguage.MenuName,ISNULL(DefaultProcessTemplateFlowConditionLanguage.MenuName,'No menu name for this role')) MenuName
 	, ISNULL(UserProcessTemplateFlowConditionLanguage.MouseOver,ISNULL(DefaultProcessTemplateFlowConditionLanguage.MouseOver,'No mouse over for this role')) MouseOver
-	, ISNULL(UITypeNameCustom.Customization,UITypeName.Name) ConditionTypeName
+	, ISNULL(UITypeNameCustom.Customization,UITypeName.Name) ProcessTemplateFlowConditionTypeName
 	, ProcessTemplateFlowConditions.Sequence
-	, ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this field')) FieldName
-	, ISNULL(UserProcessTemplateFieldRoleLanguage.Name,ISNULL(DefaultProcessTemplateFieldRoleLanguage.Name,'No name for this field role')) FieldRoleName
+	, ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this field')) ProcessTemplateFieldName
+	, ISNULL(UserProcessTemplateFieldRoleLanguage.Name,ISNULL(DefaultProcessTemplateFieldRoleLanguage.Name,'No name for this field role')) ProcessTemplateFieldNameRole
 	, ProcessTemplateFlowConditionComparisonOperators.Symbol
 	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionString
 	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionInt

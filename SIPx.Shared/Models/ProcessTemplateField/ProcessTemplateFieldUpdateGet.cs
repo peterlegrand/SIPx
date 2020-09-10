@@ -25,6 +25,7 @@ namespace SIPx.Shared
         public int ModifierId { get; set; }
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string UserId { get; set; }
         public List<ProcessTemplateFieldTypeList> ProcessTemplateFieldTypes { get; set; }
     }
 }

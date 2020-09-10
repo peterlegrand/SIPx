@@ -53,10 +53,16 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ClaimList, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<ValueUpdateTypeList> ValueUpdateTypeList(string UserId)
+        public Task<List<ValueUpdateTypeList>> ValueUpdateTypeList(string UserId)
         {
             string usp = "usp_ValueUpdateTypeList @UserId";
-            return _sqlDataAccess.LoadSingleRecord<ValueUpdateTypeList, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<ValueUpdateTypeList, dynamic>(usp, new { UserId = UserId });
+
+        }
+        public Task<List<ProcessTemplateStageFieldStatusList>> ProcessTemplateStageFieldStatusList(string UserId)
+        {
+            string usp = "usp_ProcessTemplateStageFieldStatusList @UserId";
+            return _sqlDataAccess.LoadData<ProcessTemplateStageFieldStatusList, dynamic>(usp, new { UserId = UserId });
 
         }
 

@@ -11,7 +11,7 @@ namespace SIPx.Shared
         public int ProcessTemplateId { get; set; }
         public string ProcessTemplateName { get; set; }
         public int ProcessTemplateStageTypeId { get; set; }
-        public bool IsEndStage { get; set; }
+        public bool InToDo { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string Name { get; set; }
