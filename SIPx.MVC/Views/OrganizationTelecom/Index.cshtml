@@ -17,7 +17,8 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/OrganizationTelecom/Create/${OrganizationId}">@Term.Find(x => x.InternalName.Equals("Add new organization telecom")).TermString</a>
+<a asp-action="Index" asp-controller="Organization">@Term.Find(x => x.InternalName.Equals("Back to organizations")).TermString</a>
+<a asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new organization telecom")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/OrganizationTelecom/Edit/${OrganizationTelecomId}"><span style="color:red">E</span>dit</a>
@@ -26,7 +27,7 @@
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="OrganizationTelecom/Delete/${OrganizationTelecomId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/OrganizationTelecom/Delete/${OrganizationTelecomId}"><span style="color:red">D</span>elete</a>
 
     </div>
 </script>

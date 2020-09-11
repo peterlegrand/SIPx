@@ -10,10 +10,9 @@ CREATE PROCEDURE [dbo].[usp_PersonCreatePost] (
 	, @MiddleNameLocal nvarchar(50)
 	, @LastNameLocal nvarchar(50)
 	, @GenderId int
-	, @Birthdate DateTime
-	, @DeceasedDate DateTime
+	, @Birthdate DateTime 
 	, @DefaultOrganizationId int
-	, @UserId nvarchar(450)
+	, @UserId nvarchar(450) =''
 	, @ModifierCreator nvarchar(450)) 
 AS 
 INSERT INTO Persons (
@@ -29,7 +28,6 @@ INSERT INTO Persons (
 	, LastNameLocal 
 	, GenderId 
 	, Birthdate 
-	, DeceasedDate 
 	, DefaultOrganizationId 
 	, UserId 
 	, CreatorID
@@ -50,7 +48,6 @@ VALUES (
 	, @LastNameLocal 
 	, @GenderId 
 	, @Birthdate 
-	, @DeceasedDate 
 	, @DefaultOrganizationId 
 	, @UserId 
 	, @ModifierCreator 

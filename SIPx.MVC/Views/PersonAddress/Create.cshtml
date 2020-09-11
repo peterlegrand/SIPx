@@ -3,17 +3,33 @@
 @model PersonAddressCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person address")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add person address")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person address")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add person address")).TermString
 </h1>
 <div class="container">
 
     <form method="post">
+        <div class="row">
+            <div class="col-3">
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="PersonId" ejs-for="PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Country")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="AddressTypeId" dataSource="@Model.AddressTypes" ejs-for="@Model.AddressTypeId" value="@Model.AddressTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="AddressTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Attn name")).TermString

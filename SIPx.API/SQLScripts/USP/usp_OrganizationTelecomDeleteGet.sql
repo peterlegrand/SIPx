@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT OrganizationTelecoms.OrganizationTelecomID
+	, OrganizationTelecoms.OrganizationID
 	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) AddressTypeName
 	, OrganizationTelecoms.TelecomValue
 	, ISNULL(OrganizationTelecomPhones.AreaCode,'') AreaCode

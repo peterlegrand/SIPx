@@ -6,19 +6,19 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT PersonAddresses.PersonAddressId 
+	, PersonAddresses.PersonID
 	, ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) AddressTypeName
-	, PersonAddresses.AttnName
-	, PersonAddresses.Address1
-	, PersonAddresses.Address2
-	, PersonAddresses.HouseNumber
-	, PersonAddresses.HouseNumberExt
-	, PersonAddresses.Location
-	, PersonAddresses.City
-	, PersonAddresses.PostalCode
-	, PersonAddresses.PostalCodeExt
+	, ISNULL(PersonAddresses.AttnName,'') AttnName
+	, ISNULL(PersonAddresses.Address1 ,'') Address1
+	, ISNULL(PersonAddresses.Address2 ,'') Address2
+	, ISNULL(PersonAddresses.HouseNumber ,'') HouseNumber
+	, ISNULL(PersonAddresses.HouseNumberExt ,'') HouseNumberExt
+	, ISNULL(PersonAddresses.City ,'') City
+	, ISNULL(PersonAddresses.PostalCode,'')  PostalCode
+	, ISNULL(PersonAddresses.PostalCodeExt ,'') PostalCodeExt
 	, ISNULL(UICountryCustom.Customization,UICountryName.Name) CountryName
-	, PersonAddresses.ProvinceState
-	, PersonAddresses.County
+	, ISNULL(PersonAddresses.ProvinceState ,'') ProvinceState
+	, ISNULL(PersonAddresses.County ,'') County
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, PersonAddresses.CreatedDate

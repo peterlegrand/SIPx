@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(PersonAddressCreatePost PersonAddress)
         {
-            string usp = "usp_PersonAddressCreate @PersonId, AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @Location, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @CreatorId ";
+            string usp = "usp_PersonAddressCreatePost @PersonId, @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);
             return CheckString;
         }
@@ -51,7 +51,32 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(PersonAddressUpdateGet PersonAddress)
         {
-            string usp = "usp_PersonAddressUpdatePost @PersonAddressId , AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @Location, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @ModifierId";
+            PersonAddress.Address1 = PersonAddress.Address1 ?? "";
+            PersonAddress.Address2 = PersonAddress.Address2 ?? "";
+            PersonAddress.HouseNumber = PersonAddress.HouseNumber ?? "";
+            PersonAddress.HouseNumberExt = PersonAddress.HouseNumberExt ?? "";
+            PersonAddress.AttnName = PersonAddress.AttnName ?? "";
+            PersonAddress.City = PersonAddress.City ?? "";
+            PersonAddress.County = PersonAddress.County ?? "";
+            PersonAddress.PostalCode = PersonAddress.PostalCode ?? "";
+            PersonAddress.PostalCodeExt = PersonAddress.PostalCodeExt ?? "";
+            PersonAddress.ProvinceState = PersonAddress.ProvinceState ?? "";
+            
+            string usp = "usp_PersonAddressUpdatePost " +
+                "@PersonAddressId " +
+                ", @AddressTypeId" +
+                ", @AttnName" +
+                ", @Address1" +
+                ", @Address2" +
+                ", @HouseNumber" +
+                ", @HouseNumberExt" +
+                ", @City" +
+                ", @PostalCode" +
+                ", @PostalCodeExt" +
+                ", @CountryId" +
+                ", @ProvinceState" +
+                ", @County" +
+                ", @ModifierId";
             _sqlDataAccess.SaveData<PersonAddressUpdateGet>(usp, PersonAddress);
             return true;
         }

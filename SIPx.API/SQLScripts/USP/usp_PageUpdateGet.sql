@@ -15,6 +15,11 @@ SELECT Pages.PageID
 	, ISNULL(UserPageLanguage.TitleDescription,ISNULL(DefaultPageLanguage.TitleDescription,'No title description for this role')) TitleDescription
 	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) StatusName
 	, Pages.ShowTitleName
+	, Pages.OrganizationID
+	, Pages.ProjectID
+	, Pages.ClassificationID
+	, Pages.UserID
+	, Pages.StatusID
 	, Pages.ShowTitleDescription
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID

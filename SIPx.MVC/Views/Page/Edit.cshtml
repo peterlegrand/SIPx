@@ -9,17 +9,17 @@
 }
 
 <h1>
-    <img src="~/images/icons/s.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page")).TermString
+    <img src="~/images/icons/Pages.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page")).TermString
 </h1>
 <div class="container">
+
 
     <form method="post">
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
-            </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+            </div>    <div class="col-9">
+                <ejs-Numerictextbox id="PageId" ejs-for="PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-Numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -49,7 +49,6 @@
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -63,15 +62,18 @@
                 @Term.Find(x => x.InternalName.Equals("Title name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="TitleName" ejs-for="TitleName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="TitleName" ejs-for="TitleName" cssClass="e-outline" placeholder="TitleName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Title description")).TermString
-            </div>
+            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Title description")).TermString</div>
             <div class="col-9">
-                <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
+                <ejs-richtexteditor ejs-for="TitleDescription" id="defaultRTE2" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                    <e-content-template>
+                    </e-content-template>
+                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                    </e-richtexteditor-toolbarsettings>
+                </ejs-richtexteditor>
             </div>
         </div>
         <div class="row">
@@ -79,47 +81,75 @@
                 @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowTitleName" label="Show title name" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
+                <ejs-checkbox id="ShowTitleName" label="ShowTitleName" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Show title description")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="ShowTitleDescription" label="ShowTitleDescription" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Organization")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Organization" dataSource="@Model.Organizations" ejs-for="@Model.OrganizationId" value="@Model.OrganizationId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="OrganizationId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Project")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Project" dataSource="@Model.Projects" ejs-for="@Model.ProjectId" value="@Model.ProjectId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Classification")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Classification" dataSource="@Model.Classifications" ejs-for="@Model.ClassificationId" value="@Model.ClassificationId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ClassificationId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("User")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="User" dataSource="@Model.Users" ejs-for="@Model.UserId" value="@Model.UserId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Status" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
             </div>
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
                 <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatorName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatedDate
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-            </div>
-            <div class="col-9">
-                @Model.ModifierName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-            </div>
-            <div class="col-9">
-                <div>@Model.ModifiedDate</div>
-            </div>
-        </div>
+
 
     </form>
 </div>
@@ -227,19 +257,38 @@
         }
     }
 </script>
-@*
-        PETER TODO
-        <script type="text/javascript">
-        function FilterDefaultPage(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>
-    <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>*@
+<script type="text/javascript">
+    function Organization(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Organizations)), query);
+            }
+</script>
+<script type="text/javascript">
+    function Project(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Projects)), query);
+            }
+</script>
+<script type="text/javascript">
+    function Classification(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Classifications)), query);
+            }
+</script>
+<script type="text/javascript">
+    function User(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Users)), query);
+            }
+</script>
+<script type="text/javascript">
+    function Status(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Statuses)), query);
+            }
+</script>

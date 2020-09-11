@@ -3,20 +3,26 @@
 @model PersonTelecomCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person telecom")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add person telecom")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person telecom")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add person telecom")).TermString
 </h1>
 <div class="container">
 
     <form method="post">
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Telecom value")).TermString
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="PersonId" ejs-for="PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Value")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="TelecomValue" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>

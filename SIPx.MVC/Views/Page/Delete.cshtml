@@ -71,8 +71,14 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Title description")).TermString
             </div>
+
             <div class="col-9">
-                <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
+                <ejs-richtexteditor ejs-for="TitleDescription" id="defaultRTE2" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                    <e-content-template>
+                    </e-content-template>
+                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                    </e-richtexteditor-toolbarsettings>
+                </ejs-richtexteditor>
             </div>
         </div>
         <div class="row">
@@ -88,6 +94,38 @@
             </div>
             <div class="col-9">
                 <ejs-checkbox id="ShowTitleDescription" label="Show title description" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Organization")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="OrganizationName" ejs-for="OrganizationName" cssClass="e-outline" placeholder="OrganizationName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Project")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="ProjectName" ejs-for="ProjectName" cssClass="e-outline" placeholder="ProjectName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Classification")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="ClassificationName" ejs-for="ClassificationName" cssClass="e-outline" placeholder="ClassificationName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("User")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="UserName" ejs-for="UserName" cssClass="e-outline" placeholder="UserName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">

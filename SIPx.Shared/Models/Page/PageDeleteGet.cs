@@ -9,7 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int PageId { get; set; }
-        public string PRojectName { get; set; }
+        public string ProjectName { get; set; }
         public string OrganizationName { get; set; }
         public string ClassificationName { get; set; }
         public string UserName { get; set; }

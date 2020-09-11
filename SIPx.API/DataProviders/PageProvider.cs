@@ -55,7 +55,21 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(PageUpdateGet Page)
         {
-            string usp = "usp_PageUpdatePost @PageId, @PageGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_PageUpdatePost @PageId " +
+                ", @ShowTitleName " +
+                ", @ShowTitleDescription " +
+                ", @StatusId " +
+                ", @Name " +
+                ", @Description " +
+                ", @MenuName " +
+                ", @MouseOver " +
+                ", @TitleName " +
+                ", @TitleDescription " +
+                ", @UserId " +
+                ", @OrganizationId " +
+                ", @ProjectId " +
+                ", @SelectedUserId ";
+
             _sqlDataAccess.SaveData<PageUpdateGet>(usp, Page);
             return true;
         }

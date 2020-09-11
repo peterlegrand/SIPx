@@ -49,7 +49,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(PersonTelecomUpdateGet PersonTelecom)
         {
-            string usp = "usp_PersonTelecomUpdatePost @PersonTelecomId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @ModifierId";
+            string usp = "usp_PersonTelecomUpdatePost @PersonTelecomId  , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @ModifierId";
             _sqlDataAccess.SaveData<PersonTelecomUpdateGet>(usp, PersonTelecom);
             return true;
         }

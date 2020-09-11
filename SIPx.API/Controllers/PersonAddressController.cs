@@ -68,16 +68,16 @@ namespace SIPx.API.Controllers
             PersonAddress.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _personAddressProvider.CreatePostCheck(PersonAddress);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _personAddressProvider.CreatePostCheck(PersonAddress);
+                //if (CheckString.Length == 0)
+                //{
                     _personAddressProvider.CreatePost(PersonAddress);
                     return Ok(PersonAddress);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -109,8 +109,10 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 var x = await _personAddressProvider.UpdateGet(CurrentUser.Id, Id);
-                var y = await _masterListProvider.CountryList(CurrentUser.Id);
-                x.Countries = y;
+                var Countries = await _masterListProvider.CountryList(CurrentUser.Id);
+                var AddressTypes = await _addressTypeProvider.List(CurrentUser.Id);
+                x.Countries = Countries;
+                x.AddressTypes = AddressTypes;
                 return Ok(x);
             }
             return BadRequest(new
@@ -154,14 +156,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists("PersonAddresss", "PersonAddressID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("PersonAddresss", "PersonAddressID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
                 var x = await _personAddressProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }

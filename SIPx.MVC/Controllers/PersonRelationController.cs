@@ -37,6 +37,7 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync<List<PersonRelationIndexGet>>($"{_baseUrl}api/PersonRelation/Index/"+ id,token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelation/Index", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = id;
             return View(response);
             //return View();
         }

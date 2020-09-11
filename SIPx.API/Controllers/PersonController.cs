@@ -62,19 +62,19 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(PersonCreatePost Person)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Person.UserId = CurrentUser.Id;
+            Person.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _personProvider.CreatePostCheck(Person);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _personProvider.CreatePostCheck(Person);
+                //if (CheckString.Length == 0)
+                //{
                     _personProvider.CreatePost(Person);
                     return Ok(Person);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new

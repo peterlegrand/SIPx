@@ -13,6 +13,11 @@ namespace SIPx.Shared
         public int StatusId { get; set; }
         public bool ShowTitleName { get; set; }
         public bool ShowTitleDescription { get; set; }
+        public int? OrganizationId { get; set; }
+        public int? ProjectId { get; set; }
+        public string UserId { get; set; }
+        public string SelectedUserId { get; set; }
+        public int? ClassificationId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -25,6 +30,10 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public List<UserList> Users { get; set; }
+        public List<OrganizationList> Organizations { get; set; }
+        public List<ProjectList> Projects { get; set; }
+        public List<ClassificationList> Classifications { get; set; }
         public List<StatusList> Statuses { get; set; }
     }
 }

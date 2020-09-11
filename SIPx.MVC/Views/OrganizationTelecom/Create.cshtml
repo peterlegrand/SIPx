@@ -16,6 +16,12 @@
     <form method="post">
         <div class="row">
             <div class="col-3">
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="OrganizationId" ejs-for="OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Telecom value")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="TelecomValue" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>

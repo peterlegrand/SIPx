@@ -8,18 +8,17 @@ WHERE USerId = @UserID
 SELECT OrganizationAddresses.OrganizationAddressId 
 	, OrganizationAddresses.OrganizationID
 	, ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) AddressTypeName
-	, OrganizationAddresses.AttnName
-	, OrganizationAddresses.Address1
-	, OrganizationAddresses.Address2
-	, OrganizationAddresses.HouseNumber
-	, OrganizationAddresses.HouseNumberExt
-	, OrganizationAddresses.Location
-	, OrganizationAddresses.City
-	, OrganizationAddresses.PostalCode
-	, OrganizationAddresses.PostalCodeExt
+	, ISNULL(OrganizationAddresses.AttnName,'') AttnName
+	, ISNULL(OrganizationAddresses.Address1,'') Address1
+	, ISNULL(OrganizationAddresses.Address2,'') Address2
+	, ISNULL(OrganizationAddresses.HouseNumber,'') HouseNumber
+	, ISNULL(OrganizationAddresses.HouseNumberExt,'') HouseNumberExt
+	, ISNULL(OrganizationAddresses.City,'') City
+	, ISNULL(OrganizationAddresses.PostalCode,'') PostalCode
+	, ISNULL(OrganizationAddresses.PostalCodeExt,'') PostalCodeExt
 	, ISNULL(UICountryCustom.Customization,UICountryName.Name) CountryName
-	, OrganizationAddresses.ProvinceState
-	, OrganizationAddresses.County
+	, ISNULL(OrganizationAddresses.ProvinceState,'') ProvinceState
+	, ISNULL(OrganizationAddresses.County,'') County
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, OrganizationAddresses.CreatedDate

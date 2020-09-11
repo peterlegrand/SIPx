@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationAddressDeleteGet] (@UserId nvarchar(450), @OrganizationId int) 
+CREATE PROCEDURE [dbo].[usp_OrganizationAddressDeleteGet] (@UserId nvarchar(450), @OrganizationAddressId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT OrganizationAddresses.OrganizationAddressId 
+	, OrganizationAddresses.OrganizationID
 	, ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) AddressTypeName
 	, OrganizationAddresses.AttnName
 	, OrganizationAddresses.Address1
@@ -44,5 +45,5 @@ JOIN Persons Modifier
 	ON Modifier.UserId = OrganizationAddresses.ModifierID
 WHERE UICountryName.LanguageId = @LanguageID
 	AND UIAddressTypeName.LanguageId = @LanguageID
-		AND OrganizationAddresses.OrganizationId = @OrganizationID
+		AND OrganizationAddresses.OrganizationAddressId = @OrganizationAddressID
 ORDER BY ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) 

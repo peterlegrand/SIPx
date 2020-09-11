@@ -3,13 +3,13 @@
 @model PersonCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add person")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add person")).TermString
 </h1>
 <div class="container">
 
@@ -102,13 +102,13 @@
                 <ejs-datepicker id="BirthDate" ejs-for="BirthDate" cssClass="e-outline" placeholder="Birth date" floatLabelType="Auto"></ejs-datepicker>
             </div>
         </div>
-        <div class="row">
+        @*<div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Deceased date")).TermString
             </div>    <div class="col-9">
                 <ejs-datepicker id="DeceasedDate" ejs-for="DeceasedDate" cssClass="e-outline" placeholder="Deceased date" floatLabelType="Auto"></ejs-datepicker>
             </div>
-        </div>
+        </div>*@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Default organization")).TermString

@@ -124,17 +124,29 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists("Pages", "PageID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-                var x = await _pageProvider.UpdateGet(CurrentUser.Id, Id);
-
-                return Ok(x);
+                //if (await _checkProvider.CheckIfRecordExists("Pages", "PageID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
+                var PageUpdateGet = await _pageProvider.UpdateGet(CurrentUser.Id, Id);
+                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                var Projects = await _projectProvider.List(CurrentUser.Id);
+                var Organizations = await _organizationProvider.List(CurrentUser.Id);
+                var Classifications = await _classificationProvider.List(CurrentUser.Id);
+                var Users = await _userProvider.List();
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                //PageUpdateGet.LanguageId = UserLanguage.LanguageId;
+                //PageUpdateGet.LanguageName = UserLanguage.Name;
+                PageUpdateGet.Statuses = Statuses;
+                PageUpdateGet.Projects = Projects;
+                PageUpdateGet.Organizations = Organizations;
+                PageUpdateGet.Classifications = Classifications;
+                PageUpdateGet.Users = Users;
+                return Ok(PageUpdateGet);
             }
             return BadRequest(new
             {
@@ -172,6 +184,7 @@ namespace SIPx.API.Controllers
 
         }
 
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
@@ -196,7 +209,6 @@ namespace SIPx.API.Controllers
             });
 
         }
-
         [HttpPost("Delete")]
         public async Task<IActionResult> Delete(PageDeleteGet Page)
         {

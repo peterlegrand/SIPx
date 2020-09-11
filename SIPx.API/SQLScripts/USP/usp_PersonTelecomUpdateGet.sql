@@ -9,10 +9,12 @@ SELECT PersonTelecoms.PersonTelecomID
 	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) TelecomTypeName
 	, PersonTelecoms.TelecomValue
 	, PersonTelecoms.PersonID
+	, PersonTelecoms.TelecomTypeID
 	, ISNULL(PersonTelecomPhones.AreaCode,'') AreaCode
 	, ISNULL(PersonTelecomPhones.CountryCode,'') CountryCode
 	, ISNULL(PersonTelecomPhones.ExtensionCode,'') ExtensionCode
 	, ISNULL(PersonTelecomPhones.AskForName,'') AskForName
+	, TelecomTypes.PhoneProperties
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, PersonTelecoms.CreatedDate

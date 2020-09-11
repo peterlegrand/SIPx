@@ -66,16 +66,16 @@ namespace SIPx.API.Controllers
             OrganizationTelecom.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationTelecomProvider.CreatePostCheck(OrganizationTelecom);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _organizationTelecomProvider.CreatePostCheck(OrganizationTelecom);
+                //if (CheckString.Length == 0)
+                //{
                     _organizationTelecomProvider.CreatePost(OrganizationTelecom);
                     return Ok(OrganizationTelecom);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new

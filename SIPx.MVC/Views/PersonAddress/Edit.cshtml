@@ -25,6 +25,17 @@
         </div>
         <div class="row">
             <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Country")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="AddressTypeId" dataSource="@Model.AddressTypes" ejs-for="@Model.AddressTypeId" value="@Model.AddressTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="AddressTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Attn name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="AttnName" ejs-for="AttnName" cssClass="e-outline" placeholder="Attn name" floatLabelType="Auto"></ejs-textbox>

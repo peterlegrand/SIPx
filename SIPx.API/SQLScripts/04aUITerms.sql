@@ -1492,5 +1492,8 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1490, 'Create process templa
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1491, 'Add process template flow condition');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1492, 'Condition type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1493, 'Role field');
-
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1494, 'Add person address');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1495, 'Add organization address');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1496, 'Add person telecom');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1497, 'Add organization telecom');
 SET IDENTITY_INSERT UITerms OFF;
