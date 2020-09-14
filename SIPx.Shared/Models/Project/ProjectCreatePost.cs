@@ -8,12 +8,14 @@ namespace SIPx.Shared
     public class ProjectCreatePost : IProjectCreatePost
     {
         [Key]
-        public int ProjectParentId { get; set; }
+        public int ParentProjectId { get; set; }
+        public int ProjectTypeId { get; set; }
         public int StatusId { get; set; }
+        public int SecurityLevelId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
     }
 }

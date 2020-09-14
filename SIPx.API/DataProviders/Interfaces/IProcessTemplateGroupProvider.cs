@@ -17,5 +17,6 @@ namespace SIPx.DataAccess
         Task<List<ProcessTemplateGroupList>> List(string UserId);
         Task<ProcessTemplateGroupUpdateGet> UpdateGet(string UserId, int ProcessTemplateGroupId);
         bool UpdatePost(ProcessTemplateGroupUpdateGet ProcessTemplateGroup);
+        Task<List<SequenceList>>UpdateGetSequence(string UserId);
     }
 }

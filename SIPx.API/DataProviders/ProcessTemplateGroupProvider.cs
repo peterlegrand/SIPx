@@ -35,7 +35,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
         {
-            string usp = "usp_ProcessTemplateGroupCreatePost @Sequence, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
+            string usp = "usp_ProcessTemplateGroupCreatePost @Sequence, @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateGroup);
             return String;
         }
@@ -56,7 +56,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ProcessTemplateGroupUpdateGet ProcessTemplateGroup)
         {
-            string usp = "usp_ProcessTemplateGroupUpdatePost @ProcessTemplateGroupId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ProcessTemplateGroupUpdatePost @ProcessTemplateGroupId, @Sequence, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
             _sqlDataAccess.SaveData<ProcessTemplateGroupUpdateGet>(usp, ProcessTemplateGroup);
             return true;
         }
@@ -93,6 +93,12 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_ProcessTemplateGroupList @UserId";
             return _sqlDataAccess.LoadData<ProcessTemplateGroupList, dynamic>(usp, new { UserId = UserId });
+
+        }
+        public Task<List<SequenceList>> UpdateGetSequence(string UserId)
+        {
+            string usp = "usp_ProcessTemplateGroupUpdateGetSequence @UserId";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId = UserId });
 
         }
     }

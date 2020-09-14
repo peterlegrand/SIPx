@@ -19,6 +19,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProjectController : ControllerBase
     {
+        private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IProjectTypeProvider _projectTypeProvider;
         private readonly IMasterListProvider _masterListProvider;
@@ -27,8 +28,9 @@ namespace SIPx.API.Controllers
         private readonly IProjectProvider _projectProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProjectController(ICheckProvider checkProvider, IProjectTypeProvider projectTypeProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProjectController(ISecurityLevelProvider securityLevelProvider, ICheckProvider checkProvider, IProjectTypeProvider projectTypeProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _securityLevelProvider = securityLevelProvider;
             _checkProvider = checkProvider;
             _projectTypeProvider = projectTypeProvider;
             _masterListProvider = masterListProvider;
@@ -39,8 +41,8 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("Create/{Id:int}")]
-        public async Task<IActionResult> Create(int Id)
+        [HttpGet("Create/{Id:int?}")]
+        public async Task<IActionResult> Create(int? Id=null)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
@@ -49,11 +51,13 @@ namespace SIPx.API.Controllers
                 var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
                 var ProjectTypes = await _projectTypeProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 ProjectCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProjectCreateGet.LanguageName = UserLanguage.Name;
                 ProjectCreateGet.ProjectTypes = ProjectTypes;
                 ProjectCreateGet.Statuses = Statuses;
                 ProjectCreateGet.ProjectParentId = Id;
+                ProjectCreateGet.SecurityLevels = SecurityLevels;
                 return Ok(ProjectCreateGet);
             }
             return BadRequest(new
@@ -67,19 +71,19 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ProjectCreatePost Project)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Project.UserId = CurrentUser.Id;
+            Project.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _projectProvider.CreatePostCheck(Project);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _projectProvider.CreatePostCheck(Project);
+                //if (CheckString.Length == 0)
+                //{
                     _projectProvider.CreatePost(Project);
                     return Ok(Project);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -110,7 +114,17 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _projectProvider.UpdateGet(CurrentUser.Id, Id));
+
+                var Project = await _projectProvider.UpdateGet(CurrentUser.Id, Id);
+                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                var ProjectTypes = await _projectTypeProvider.List(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                Project.ProjectTypes = ProjectTypes;
+                Project.Statuses = Statuses;
+             //   Project.ParentProjectId = Id;
+                Project.SecurityLevels = SecurityLevels;
+                return Ok(Project);
             }
             return BadRequest(new
             {
@@ -125,7 +139,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                Project.ModifierId = CurrentUser.Id;
+                Project.UserId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{

@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(OrganizationTypeCreatePost OrganizationType)
         {
-            string usp = "usp_OrganizationTypeCreatePost @Internal, @LegalEntity,  @LanguageId, @Name, @Description, @MenuName, @MouseOver, @UserId ";
+            string usp = "usp_OrganizationTypeCreatePost @Internal, @LegalEntity, @Name, @Description, @Color, @IconId, @MenuName, @MouseOver, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationType);
             return String;
         }
@@ -50,7 +50,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(OrganizationTypeUpdateGet OrganizationType)
         {
-            string usp = "usp_OrganizationTypeUpdatePost @OrganizationTypeId,  @Internal, @LegalEntity,  @LanguageId, @Name, @Description, @MenuName, @MouseOver,  @ModifierId";
+            string usp = "usp_OrganizationTypeUpdatePost @OrganizationTypeId,  @Internal, @LegalEntity, @Name, @Description, @MenuName, @MouseOver,  @ModifierId";
             _sqlDataAccess.SaveData<OrganizationTypeUpdateGet>(usp, OrganizationType);
             return true;
         }

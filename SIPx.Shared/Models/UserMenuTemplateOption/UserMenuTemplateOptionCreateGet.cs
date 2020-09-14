@@ -12,7 +12,7 @@ namespace SIPx.Shared
         public int UserMenuTemplateId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
-        public string Icon { get; set; }
+        public int IconId { get; set; }
         public int UserPageIdLeft { get; set; }
         public int UserPageIdRight { get; set; }
         public int UserMenuTypeIDLeft { get; set; }

@@ -317,7 +317,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Post(ProjectCreatePost Project)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Project.UserId = CurrentUser.Id;
+            Project.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _projectProvider.CreatePostCheck(Project);

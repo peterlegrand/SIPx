@@ -6,12 +6,12 @@ CREATE PROCEDURE [dbo].[usp_OrganizationCreatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserId nvarchar(450)) 
+	, @CreatorId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @UserID
+WHERE UserId = @CreatorId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 BEGIN TRANSACTION
 INSERT INTO Organizations (
@@ -26,9 +26,9 @@ VALUES (
 	@ParentOrganizationID
 	, @StatusID
 	, @OrganizationTypeID
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 	DECLARE @NewOrganizationId int	= scope_identity();
@@ -51,9 +51,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 	COMMIT TRANSACTION

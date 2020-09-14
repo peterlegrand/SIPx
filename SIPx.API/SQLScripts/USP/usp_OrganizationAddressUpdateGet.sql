@@ -8,6 +8,7 @@ WHERE USerId = @UserID
 SELECT OrganizationAddresses.OrganizationAddressId 
 	, ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) AddressTypeName
 	, OrganizationAddresses.OrganizationID
+	, OrganizationAddresses.AddressTypeID
 	, OrganizationAddresses.AttnName
 	, OrganizationAddresses.Address1
 	, OrganizationAddresses.Address2

@@ -6,6 +6,7 @@ CREATE PROCEDURE [dbo].[usp_PersonRelationTypeUpdatePost] (
 	, @MouseOver nvarchar(50)
 	, @FromIsAnXOfTo nvarchar(50)
 	, @ToIsAnXOfFrom nvarchar(50)
+	, @SeePersonal bit
 	, @Color char(9)
 	, @IconId int
 	, @ModifierId nvarchar(450)) 
@@ -19,6 +20,7 @@ WHERE USerId = @ModifierId
 
 UPDATE PersonRelationTypes
 SET Color = @Color
+	, SeePersonal = @SeePersonal
 	, IconID = @IconId
 	, ModifierId = @ModifierId
 	, ModifiedDate = GETDATE()

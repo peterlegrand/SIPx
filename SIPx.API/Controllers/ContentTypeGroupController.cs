@@ -126,7 +126,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ContentTypeGroup.CreatorId = CurrentUser.Id;
+                ContentTypeGroup.UserId = CurrentUser.Id;
                 //var CheckString = await _ContentTypeGroupProvider.UpdatePostCheck(ContentTypeGroup);
                 //if (CheckString.Length == 0)
                 //{
@@ -174,17 +174,17 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Delete")]
-        public async Task<IActionResult> Delete(ContentTypeDeleteGet ContentType)
+        public async Task<IActionResult> Delete(ContentTypeGroupDeleteGet ContentTypeGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ContentType.CreatorId = CurrentUser.Id;
+//                ContentType.CreatorId = CurrentUser.Id;
                 //var CheckString = await _ContentTypeProvider.DeletePostCheck(ContentType);
                 //if (CheckString.Length == 0)
                 //{
-                _contentTypeGroupProvider.DeletePost(ContentType.ContentTypeId);
-                return Ok(ContentType);
+                _contentTypeGroupProvider.DeletePost(ContentTypeGroup.ContentTypeGroupId);
+                return Ok(ContentTypeGroup);
                 //}
                 return BadRequest(new
                 {

@@ -35,7 +35,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Create")]
-        public async Task<IActionResult> Create(int Id)
+        public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
@@ -88,7 +88,9 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _personRelationTypeProvider.IndexGet(CurrentUser.Id));
+                var Type = await _personRelationTypeProvider.IndexGet(CurrentUser.Id);
+                return Ok(Type);
+
             }
             return BadRequest(new
             {

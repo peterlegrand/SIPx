@@ -57,7 +57,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ContentTypeGroupUpdateGet ContentTypeGroup)
         {
-            string usp = "usp_ContentTypeGroupUpdatePost @ContentTypeGroupId, @Sequence , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ContentTypeGroupUpdatePost @ContentTypeGroupId, @Sequence , @Name, @Description, @MenuName, @MouseOver, @UserId";
             _sqlDataAccess.SaveData<ContentTypeGroupUpdateGet>(usp, ContentTypeGroup);
             return true;
         }

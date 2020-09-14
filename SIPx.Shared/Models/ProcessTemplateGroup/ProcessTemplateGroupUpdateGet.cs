@@ -22,7 +22,7 @@ namespace SIPx.Shared
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<ProcessTemplateGroupList> ProcessTemplateGroups { get; set; }
+        public List<SequenceList>Sequences { get; set; }
 
     }
 }

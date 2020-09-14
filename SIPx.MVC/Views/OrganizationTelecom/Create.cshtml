@@ -3,13 +3,13 @@
 @model OrganizationTelecomCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization telecom")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add organization telecom")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organization telecom")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add organization telecom")).TermString
 </h1>
 <div class="container">
 
@@ -22,14 +22,14 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Telecom value")).TermString
+                @Term.Find(x => x.InternalName.Equals("Value")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="TelecomValue" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Role")).TermString
+                @Term.Find(x => x.InternalName.Equals("Type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="TelecomTypeId" dataSource="@Model.TelecomTypes" ejs-for="@Model.TelecomTypeId" value="@Model.TelecomTypeId" popupHeight="220px">

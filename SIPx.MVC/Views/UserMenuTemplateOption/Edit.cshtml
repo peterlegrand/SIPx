@@ -3,13 +3,13 @@
 @model UserMenuTemplateOptionUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add user menu template option")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Edit user menu template option")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add user menu template option")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Edit user menu template option")).TermString
 </h1>
 <div class="container">
 
@@ -25,14 +25,7 @@
             </div>
         </div>
 
-
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="UserMenuTemplateId" ejs-for="UserMenuTemplateId" cssClass="e-outline" placeholder="UserMenuTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-            </div>
-        </div>        <div class="row">
+    <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
@@ -116,7 +109,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Icon" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="FileName"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div><div class="row">

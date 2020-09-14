@@ -6,14 +6,13 @@ CREATE PROCEDURE [dbo].[usp_OrganizationAddressCreatePost] (
 	, @Address2 nvarchar(100)
 	, @HouseNumber nvarchar(20)
 	, @HouseNumberExt nvarchar(20)
-	, @Location Geography
 	, @City nvarchar(50)
 	, @PostalCode nvarchar(50)
 	, @PostalCodeExt nvarchar(50)
 	, @CountryId int
 	, @ProvinceState nvarchar(50)
 	, @County nvarchar(50)
-	, @UserId nvarchar(450)) 
+	, @CreatorId nvarchar(450)) 
 AS 
 
 INSERT INTO OrganizationAddresses (
@@ -24,7 +23,6 @@ INSERT INTO OrganizationAddresses (
 	, Address2 
 	, HouseNumber 
 	, HouseNumberExt 
-	, Location 
 	, City 
 	, PostalCode 
 	, PostalCodeExt 
@@ -43,16 +41,15 @@ VALUES (
 	, @Address2 
 	, @HouseNumber 
 	, @HouseNumberExt 
-	, @Location 
 	, @City 
 	, @PostalCode 
 	, @PostalCodeExt 
 	, @CountryID
 	, @ProvinceState 
 	, @County 
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 

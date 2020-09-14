@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PersonRelationTypeUpdateGet
+@model PersonRelationTypeCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create person relation type")).TermString;
@@ -9,7 +9,7 @@
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Create person relation type group")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Create person relation type")).TermString
 </h1>
 <div class="container">
     
@@ -63,7 +63,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("From is an X of to")).TermString
+                @Term.Find(x => x.InternalName.Equals("From is an x of to")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="FromIsAnXOfTo" ejs-for="FromIsAnXOfTo" cssClass="e-outline" placeholder="From is an X of to" floatLabelType="Auto"></ejs-textbox>
@@ -72,7 +72,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("To is an X of from")).TermString
+                @Term.Find(x => x.InternalName.Equals("To is an x of from")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="ToIsAnXOfFrom" ejs-for="ToIsAnXOfFrom" cssClass="e-outline" placeholder="To is an X of from" floatLabelType="Auto"></ejs-textbox>
@@ -94,7 +94,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="SecurityLevelId"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>

@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(OrganizationCreatePost Organization)
         {
-            string usp = "usp_OrganizationCreatePost @OrganizationTypeId, @ParentOrganizationId, @StatusId, @OrganizationTypeID, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
+            string usp = "usp_OrganizationCreatePost @ParentOrganizationId, @StatusId, @OrganizationTypeID, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Organization);
             return CheckString;
         }

@@ -68,16 +68,16 @@ namespace SIPx.API.Controllers
             UserMenuTemplateOption.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userMenuTemplateOptionProvider.CreatePostCheck(UserMenuTemplateOption);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _userMenuTemplateOptionProvider.CreatePostCheck(UserMenuTemplateOption);
+                //if (CheckString.Length == 0)
+                //{
                     _userMenuTemplateOptionProvider.CreatePost(UserMenuTemplateOption);
                     return Ok(UserMenuTemplateOption);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -118,15 +118,25 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-                return Ok(await _userMenuTemplateOptionProvider.UpdateGet(CurrentUser.Id, Id));
+                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
+                var UserMenuTemplateOption = await _userMenuTemplateOptionProvider.UpdateGet(CurrentUser.Id, Id);
+                var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
+                var Pages = await _pageProvider.ListForMenuTemplate(CurrentUser.Id);
+                var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.CreateGetSequence(CurrentUser.Id, Id);
+                UserMenuTemplateOption.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
+                UserMenuTemplateOption.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
+                UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = "Add at the end" });
+                UserMenuTemplateOption.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
+                UserMenuTemplateOption.Icons = iconslist;
+                UserMenuTemplateOption.Pages = Pages;
+                return Ok(UserMenuTemplateOption);
             }
             return BadRequest(new
             {
@@ -167,14 +177,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
                 var x = await _userMenuTemplateOptionProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }
@@ -221,14 +231,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptionLanguages", "UserMenuTemplateOptionID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptionLanguages", "UserMenuTemplateOptionID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
 
 
                 return Ok(await _userMenuTemplateOptionProvider.LanguageIndexGet(CurrentUser.Id, Id));

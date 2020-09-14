@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[usp_PersonRelationTypeCreatePost] (
 	, @MouseOver nvarchar(50)
 	, @FromIsAnXOfTo nvarchar(50)
 	, @ToIsAnXOfFrom nvarchar(50)
+	, @SeePersonal bit
 	, @Color char(9)
 	, @IconId int
 	, @UserId nvarchar(450)) 
@@ -19,6 +20,7 @@ WHERE USerId = @UserId
 INSERT INTO PersonRelationTypes (
 	Color
 	, IconId 
+	, SeePersonal
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -26,6 +28,7 @@ INSERT INTO PersonRelationTypes (
 VALUES (
 	@Color
 	, @IconId 
+	, @SeePersonal
 	,	@UserID
 	, getdate()
 	, @UserID

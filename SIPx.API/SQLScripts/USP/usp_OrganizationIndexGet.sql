@@ -27,7 +27,7 @@ AS
 		, ModifierID
 		, ModifiedDate
 	FROM Organizations 
-	WHERE Organizations.ParentOrganizationId IS NULL
+	WHERE Organizations.ParentOrganizationId IS NULL  
 
    UNION ALL
 	SELECT 

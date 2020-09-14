@@ -22,7 +22,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(PersonRelationTypeCreatePost PersonRelationType)
         {
-            string usp = "usp_PersonRelationTypeCreatePost @Name, @Description , @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom, @Color, @IconId, @UserId";
+            string usp = "usp_PersonRelationTypeCreatePost @Name, @Description , @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom, @SeePersonal, @Color, @IconId, @UserId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonRelationType);
             return CheckString;
         }
@@ -43,7 +43,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(PersonRelationTypeUpdateGet PersonRelationType)
         {
-            string usp = "usp_PersonRelationTypeUpdatePost @PersonRelationTypeId, @Name, @Description, @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom, @Color, @IconId, @ModifierId";
+            string usp = "usp_PersonRelationTypeUpdatePost @PersonRelationTypeId, @Name, @Description, @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom,@SeePersonal, @Color, @IconId, @ModifierId";
             _sqlDataAccess.SaveData<PersonRelationTypeUpdateGet>(usp, PersonRelationType);
             return true;
         }

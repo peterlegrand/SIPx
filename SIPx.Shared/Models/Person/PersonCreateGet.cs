@@ -9,6 +9,8 @@ namespace SIPx.Shared
     {
         [Key]
         public string Salutation { get; set; }
+
+        //[Required(ErrorMessage = "Choose first name")]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }

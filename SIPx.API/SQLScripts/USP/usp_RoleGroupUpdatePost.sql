@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_RoleGroupUpdate] (
+CREATE PROCEDURE [dbo].[usp_RoleGroupUpdatePost] (
 	@RoleGroupId int 
 	, @Sequence int
 	, @Name nvarchar(50)

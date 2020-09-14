@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(RoleGroupCreatePost RoleGroup)
         {
-            string usp = "usp_RoleGroupCreate @Sequence, @LanguageId  , @Name, @Description, @MenuName, @MouseOve, @CreatorId ";
+            string usp = "usp_RoleGroupCreatePost @Sequence , @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, RoleGroup);
             return String;
         }
@@ -50,7 +50,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(RoleGroupUpdateGet RoleGroup)
         {
-            string usp = "usp_RoleGroupUpdatePost @RoleGroupId, @Sequence, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_RoleGroupUpdatePost @RoleGroupId, @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserId";
             _sqlDataAccess.SaveData<RoleGroupUpdateGet>(usp, RoleGroup);
             return true;
         }
@@ -83,12 +83,17 @@ namespace SIPx.DataAccess
 
         }
 
+        public async Task<List<SequenceList>> CreateGetSequence(string UserId)
+        {
+            string usp = "usp_RoleGroupCreateGetSequence @UserID";
+            var x = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public async Task<List<RoleGroupList>> List(string UserId)
         {
             string usp = "usp_RoleGroupList @UserID";
             var x = await _sqlDataAccess.LoadData<RoleGroupList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-
     }
 }

@@ -23,6 +23,18 @@
                 <ejs-numerictextbox id="OrganizationAddressId" ejs-for="@Model.OrganizationAddressId" cssClass="e-outline" placeholder="OrganizationAddressId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
+        @* PETER TODO Change to address type *@
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Country")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="AddressTypeId" dataSource="@Model.AddressTypes" ejs-for="@Model.AddressTypeId" value="@Model.AddressTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="AddressTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Attn name")).TermString

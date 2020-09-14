@@ -42,6 +42,7 @@ namespace SIPx.API.Controllers
             {
                 var RoleGroupCreateGet = new RoleGroupCreateGet();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                RoleGroupCreateGet.Sequences = await _roleGroupProvider.CreateGetSequence(CurrentUser.Id);
                 RoleGroupCreateGet.LanguageId = UserLanguage.LanguageId;
                 RoleGroupCreateGet.LanguageName = UserLanguage.Name;
                 return Ok(RoleGroupCreateGet);
@@ -59,16 +60,16 @@ namespace SIPx.API.Controllers
             RoleGroup.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _roleGroupProvider.CreatePostCheck(RoleGroup);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _roleGroupProvider.CreatePostCheck(RoleGroup);
+                //if (CheckString.Length == 0)
+                //{
                     _roleGroupProvider.CreatePost(RoleGroup);
                     return Ok(RoleGroup);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -99,7 +100,9 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _roleGroupProvider.UpdateGet(CurrentUser.Id, Id));
+                var RoleGroup = await _roleGroupProvider.UpdateGet(CurrentUser.Id, Id);
+                RoleGroup.Sequences = await _roleGroupProvider.CreateGetSequence(CurrentUser.Id);
+                return Ok(RoleGroup);
             }
             return BadRequest(new
             {
@@ -114,7 +117,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                RoleGroup.ModifierId = CurrentUser.Id;
+                RoleGroup.UserId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{

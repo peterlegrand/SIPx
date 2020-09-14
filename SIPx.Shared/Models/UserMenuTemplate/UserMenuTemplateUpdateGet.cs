@@ -20,6 +20,7 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string UserId { get; set; }
     }
 }
 

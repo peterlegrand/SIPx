@@ -63,16 +63,16 @@ namespace SIPx.API.Controllers
             ProcessTemplateGroup.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _processTemplateGroupProvider.CreatePostCheck(ProcessTemplateGroup);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _processTemplateGroupProvider.CreatePostCheck(ProcessTemplateGroup);
+                //if (CheckString.Length == 0)
+                //{
                     _processTemplateGroupProvider.CreatePost(ProcessTemplateGroup);
                     return Ok(ProcessTemplateGroup);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -104,8 +104,8 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 var x = await _processTemplateGroupProvider.UpdateGet(CurrentUser.Id, Id);
-                var y = await _processTemplateGroupProvider.List(CurrentUser.Id);
-                x.ProcessTemplateGroups = y;
+                var y = await _processTemplateGroupProvider.UpdateGetSequence(CurrentUser.Id);
+                x.Sequences = y;
                 return Ok(x);
             }
             return BadRequest(new

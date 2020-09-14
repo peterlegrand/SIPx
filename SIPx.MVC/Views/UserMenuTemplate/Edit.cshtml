@@ -3,13 +3,13 @@
 @model UserMenuTemplateUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User menu template")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Edit user menu template")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User menu template")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Edit user menu template")).TermString
 </h1>
 <div class="container">
 

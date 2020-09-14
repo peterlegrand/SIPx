@@ -21,7 +21,7 @@ namespace SIPx.DataAccess
 
         public bool CreatePost(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
         {
-            string usp = "usp_UserMenuTemplateOptionCreatePost @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @UserPageIdLeft , @UserPageIdRight ,@UserMenuTypeIDLeft, @UserMenuTypeIDRight, @Icon , @Sequence , @CreatorId ";
+            string usp = "usp_UserMenuTemplateOptionCreatePost @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @UserPageIdLeft , @UserPageIdRight ,@UserMenuTypeIDLeft, @UserMenuTypeIDRight, @IconId , @Sequence , @CreatorId ";
             _sqlDataAccess.SaveData<UserMenuTemplateOptionCreateGet>(usp, UserMenuTemplateOption);
             return true;
         }

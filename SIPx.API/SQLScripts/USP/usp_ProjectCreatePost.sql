@@ -1,31 +1,42 @@
 CREATE PROCEDURE [dbo].[usp_ProjectCreatePost] (
-	@ParentProjectId int
+	@ProjectTypeId int
+	, @ParentProjectId int =NULL
 	, @StatusId int 
+	, @SecurityLevelId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @UserId nvarchar(450)) 
+	, @CreatorId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @UserID
+WHERE USerId = @CreatorId
 	AND UserPreferences.PreferenceTypeId = 1 ;
+IF @ParentProjectId = 0
+BEGIN
+SET @ParentProjectId = NULL
+END
+
 BEGIN TRANSACTION
 INSERT INTO Projects (
 	ParentProjectID
+	, ProjectTypeID
 	, StatusID
+	, SecurityLevelId
 	, CreatorID
 	, CreatedDate
 	, ModifierID
 	, ModifiedDate)
 VALUES (
 	@ParentProjectID
+	, @ProjectTypeID
 	, @StatusID
-	, @UserID
+	, @SecurityLevelId
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 	DECLARE @NewProjectId int	= scope_identity();
@@ -48,9 +59,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 	COMMIT TRANSACTION

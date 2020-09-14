@@ -14,10 +14,10 @@ namespace SIPx.MVC.Controllers
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
         [HttpGet]
-        public async Task<IActionResult> Create(int Id)
+        public async Task<IActionResult> Create()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PersonRelationTypeCreateGet>($"{_baseUrl}api/PersonRelationType/Create/" + Id, token);
+            var response = await _client.GetProtectedAsync<PersonRelationTypeCreateGet>($"{_baseUrl}api/PersonRelationType/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
@@ -26,7 +26,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(PersonRelationTypeCreateGet PersonRelationType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PersonRelationTypeCreateGet>($"{_baseUrl}api/PersonTelecom/Create", PersonRelationType, token);
+            await _client.PostProtectedAsync<PersonRelationTypeCreateGet>($"{_baseUrl}api/PersonRelationType/Create", PersonRelationType, token);
 
             return RedirectToAction("Index");
         }

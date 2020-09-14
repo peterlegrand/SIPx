@@ -15,7 +15,7 @@ SELECT
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this Project')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this Project')) MouseOver
 	, projects.StatusID 
-	, CASE WHEN Projects.ParentProjectId = NULL THEN 'No parent project' ELSE ISNULL(UserParentProjectLanguage.Name,ISNULL(DefaultParentProjectLanguage.Name,'No name for this parent project')) END ParentProjectName
+	, CASE WHEN Projects.ParentProjectId = NULL THEN 'No parent project' ELSE ISNULL(UserParentProjectLanguage.Name,ISNULL(DefaultParentProjectLanguage.Name,'No name for this parent project')) END ProjectParentName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, Projects.CreatedDate

@@ -38,8 +38,8 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Create/{Id:int}")]
-        public async Task<IActionResult> Create(int Id)
+        [HttpGet("Create/{Id:int?}")]
+        public async Task<IActionResult> Create(int? Id =null)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
@@ -69,16 +69,20 @@ namespace SIPx.API.Controllers
             Organization.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationProvider.CreatePostCheck(Organization);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _organizationProvider.CreatePostCheck(Organization);
+                //if (CheckString.Length == 0)
+                //{
+                //if(Organization.ParentOrganizationId==null)
+                //{
+                //    Organization.ParentOrganizationId = 0;
+                //}
                     _organizationProvider.CreatePost(Organization);
                     return Ok(Organization);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new

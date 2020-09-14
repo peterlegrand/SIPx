@@ -6,8 +6,10 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1>@*<img src="~/images/icons/Organizations.png" width="50" height="50" />*@
-    <span style="color:red;font-size:14px">O</span>@Term.Find(x => x.InternalName.Equals("Organizations")).TermString</h1>
+<h1>
+    @*<img src="~/images/icons/Organizations.png" width="50" height="50" />*@
+<span style="color:red;font-size:14px">O</span>@Term.Find(x => x.InternalName.Equals("Organizations")).TermString
+</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -17,6 +19,7 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Language" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Add new organization")).TermString" template="#Add" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/Organization/Create">@Term.Find(x => x.InternalName.Equals("Add new organization")).TermString</a>
@@ -47,6 +50,12 @@
 <script id="Delete" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="Organization/Delete/${OrganizationId}"><span style="color:red">D</span>elete</a>
+
+    </div>
+</script>
+<script id="Add" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/Organization/Create/${OrganizationId}"><span style="color:red">A</span>dd</a>
 
     </div>
 </script>

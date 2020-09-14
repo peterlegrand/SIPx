@@ -17,5 +17,6 @@ namespace SIPx.Shared
         public string Color { get; set; }
         public int IconId { get; set; }
         public string CreatorId { get; set; }
+        public string UserId { get; set; }
     }
 }

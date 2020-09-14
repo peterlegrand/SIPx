@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ProjectCreatePost Project)
         {
-            string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, LanguageId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
+            string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, @SecurityLevelId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Project);
             return CheckString;
         }
@@ -50,7 +50,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ProjectUpdateGet Project)
         {
-            string usp = "usp_ProjectUpdatePost @ProjectId, @ParentProjectId, @ProjectTypeId, @StatusId, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ProjectUpdatePost @ProjectId, @ProjectTypeId, @StatusId, @SecurityLevelId, @Name, @Description, @MenuName, @MouseOver, @UserId";
             _sqlDataAccess.SaveData<ProjectUpdateGet>(usp, Project);
             return true;
         }

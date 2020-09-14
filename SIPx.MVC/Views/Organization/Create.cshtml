@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model OrganizationUpdateGet
+@model OrganizationCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create organization")).TermString;
@@ -15,6 +15,13 @@
  
     <form method="post">
 
+        <div class="row">
+            <div class="col-3">
+                
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="ParentOrganizationId" ejs-for="ParentOrganizationId" cssClass="e-outline" placeholder="ParentOrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -63,7 +70,8 @@
             </div>
         </div>        <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Type")).TermString
+                @* PETER TODO type *@
+                @Term.Find(x => x.InternalName.Equals("Status")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="OrganizationTypeId" dataSource="@Model.OrganizationTypes" ejs-for="OrganizationTypeId" value="@Model.OrganizationTypeId" index="2" popupHeight="220px">

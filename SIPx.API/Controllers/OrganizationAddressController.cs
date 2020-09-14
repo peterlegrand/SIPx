@@ -68,16 +68,16 @@ namespace SIPx.API.Controllers
             OrganizationAddress.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _organizationAddressProvider.CreatePostCheck(OrganizationAddress);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _organizationAddressProvider.CreatePostCheck(OrganizationAddress);
+                //if (CheckString.Length == 0)
+                //{
                     _organizationAddressProvider.CreatePost(OrganizationAddress);
                     return Ok(OrganizationAddress);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -108,7 +108,11 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _organizationAddressProvider.UpdateGet(CurrentUser.Id, Id));
+
+                var Address = await _organizationAddressProvider.UpdateGet(CurrentUser.Id, Id);
+                Address.AddressTypes = await _addressTypeProvider.List(CurrentUser.Id);
+                Address.Countries = await _masterListProvider.CountryList(CurrentUser.Id);
+                return Ok(Address);
             }
             return BadRequest(new
             {
@@ -151,14 +155,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists("OrganizationAddresss", "OrganizationAddressID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("OrganizationAddresss", "OrganizationAddressID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
                 var x = await _organizationAddressProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }

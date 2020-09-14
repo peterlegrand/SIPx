@@ -12,8 +12,8 @@ SELECT PersonRelationTypes.PersonRelationTypeID
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this person relation type')) Description
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this person relation type')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this person relation type')) MouseOver
-	, ISNULL(UserLanguage.FromIsAnXOfTo,ISNULL(DefaultLanguage.FromIsAnXOfTo,'No mouse over for this FromIsAnXOfTo')) MouseOver
-	, ISNULL(UserLanguage.ToIsAnXOfFrom,ISNULL(DefaultLanguage.ToIsAnXOfFrom,'No mouse over for this ToIsAnXOfFrom')) MouseOver
+	, ISNULL(UserLanguage.FromIsAnXOfTo,ISNULL(DefaultLanguage.FromIsAnXOfTo,'No mouse over for this FromIsAnXOfTo')) FromIsAnXOfTo
+	, ISNULL(UserLanguage.ToIsAnXOfFrom,ISNULL(DefaultLanguage.ToIsAnXOfFrom,'No mouse over for this ToIsAnXOfFrom')) ToIsAnXOfFrom
 	, SeePersonal
 	, Color
 	, ISNULL(UINameCustom.Customization,UIName.Name) IconName

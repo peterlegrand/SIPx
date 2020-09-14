@@ -23,8 +23,9 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("First name")).TermString
-            </div>    <div class="col-9">
+                @*@Html.ValidationMessage("StudentName", "", new { @class = "text-danger" })*@
+                        @Term.Find(x => x.InternalName.Equals("First name")).TermString<span asp-validation-m asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>    <div class="col-9">
                 <ejs-textbox id="FirstName" ejs-for="FirstName" cssClass="e-outline" placeholder="First name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>

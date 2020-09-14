@@ -5,12 +5,12 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeGroupUpdatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @ModifierId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @ModifierId
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 DECLARE @OldSequence int;
@@ -27,7 +27,7 @@ END
 
 UPDATE ContentTypeGroups SET 
 	Sequence = @Sequence
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = GETDATE()
 WHERE ContentTypeGroupId = @ContentTypeGroupID
 
@@ -36,7 +36,7 @@ UPDATE  ContentTypeGroupLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = getdate()
 WHERE ContentTypeGroupID= @ContentTypeGroupID
 	AND LanguageID = @LanguageID

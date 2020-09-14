@@ -48,16 +48,16 @@ namespace SIPx.API.Controllers
             UserMenuTemplate.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userMenuTemplateProvider.CreatePostCheck(UserMenuTemplate);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _userMenuTemplateProvider.CreatePostCheck(UserMenuTemplate);
+                //if (CheckString.Length == 0)
+                //{
                     _userMenuTemplateProvider.CreatePost(UserMenuTemplate);
                     return Ok(UserMenuTemplate);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -88,14 +88,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
                 var x = await _userMenuTemplateProvider.UpdateGet(CurrentUser.Id, Id);
 
                 return Ok(x);
@@ -115,16 +115,17 @@ namespace SIPx.API.Controllers
             UserMenuTemplate.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userMenuTemplateProvider.UpdatePostCheck(UserMenuTemplate);
-                if (CheckString.Length == 0)
-                {
+                UserMenuTemplate.UserId = CurrentUser.Id;
+                //var CheckString = await _userMenuTemplateProvider.UpdatePostCheck(UserMenuTemplate);
+                //if (CheckString.Length == 0)
+                //{
                     _userMenuTemplateProvider.UpdatePost(UserMenuTemplate);
                     return Ok(UserMenuTemplate);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -140,14 +141,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
+                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
                 var x = await _userMenuTemplateProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }

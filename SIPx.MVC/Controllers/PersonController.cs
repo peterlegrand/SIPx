@@ -25,10 +25,18 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PersonCreateGet Person)
         {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PersonCreateGet>($"{_baseUrl}api/Person/Create", Person, token);
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
 
-            return RedirectToAction("Index");
+            //if (ModelState.IsValid)
+            //{
+                await _client.PostProtectedAsync<PersonCreateGet>($"{_baseUrl}api/Person/Create", Person, token);
+
+                return RedirectToAction("Index");
+            //}
+            //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Person/Create", token);
+            //ViewBag.UITerms = UITerms;
+
+            //return View(Person);
         }
         [HttpGet]
         public async Task<IActionResult> Index()

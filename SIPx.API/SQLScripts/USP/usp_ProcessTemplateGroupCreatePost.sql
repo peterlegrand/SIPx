@@ -1,11 +1,17 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroupCreatePost] (
-	@Sequence int	, @LanguageId int
+	@Sequence int	
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 BEGIN TRANSACTION
 
 UPDATE ProcessTemplateGroups SET Sequence = Sequence + 1 
