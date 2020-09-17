@@ -24,6 +24,8 @@ namespace SIPx.Shared
         public string titleDescription { get; set; }
         public string PanelId { get; set; }
         public string SubPanelId { get; set; }
+        public int RealRow { get; set; }
+        public int RealY { get; set; }
     }
 }
 

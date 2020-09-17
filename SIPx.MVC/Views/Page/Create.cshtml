@@ -59,14 +59,14 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("title name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Title name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="TitleName" ejs-for="TitleName" cssClass="e-outline" placeholder="TitleName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
-            <div class="col-3">@Term.Find(x => x.InternalName.Equals("title description")).TermString</div>
+            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Title description")).TermString</div>
             <div class="col-9">
                 <ejs-richtexteditor ejs-for="TitleDescription" id="defaultRTE2" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
                     <e-content-template>

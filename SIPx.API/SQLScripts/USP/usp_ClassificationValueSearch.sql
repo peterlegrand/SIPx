@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ClassificationValueSearch(@Contains nvarchar(500),  @UserId nvarchar(450))
+CREATE PROCEDURE [dbo].[usp_ClassificationValueSearch](@Contains nvarchar(500),  @UserId nvarchar(450))
 AS
 DECLARE @LanguageID int;
 SELECT @LanguageID = IntPreference
@@ -15,9 +15,9 @@ SELECT ClassificationValues.ClassificationValueID
 	, ISNULL(ClassificationUserLanguage.Name,ISNULL(ClassificationDefaultLanguage.Name,'No name for this Classification')) ClassificationName
 FROM 
 	ClassificationValues
-LEFT JOIN (SELECT ClassificationValueId, Name, Description, MenuName, MouseOver, ClassificationValueLanguageID, FullText FROM ClassificationValueLanguages WHERE LanguageId = @LanguageID AND Freetext(ClassificationValueLanguages.Fulltext, @Contains)) ClassificationValueUserLanguage
+LEFT JOIN (SELECT ClassificationValueId, Name, Description, MenuName, MouseOver, ClassificationValueLanguageID, FullText FROM ClassificationValueLanguages WHERE LanguageId = @LanguageID AND Contains(ClassificationValueLanguages.Fulltext, @Contains)) ClassificationValueUserLanguage
 	ON ClassificationValueUserLanguage.ClassificationValueID= ClassificationValues.ClassificationValueID
-LEFT JOIN (SELECT ClassificationValueId, Name, Description, MenuName, MouseOver, ClassificationValueLanguageID, FullText FROM ClassificationValueLanguages JOIN Settings ON ClassificationValueLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1 AND Freetext(ClassificationValueLanguages.Fulltext, @Contains)) ClassificationValueDefaultLanguage
+LEFT JOIN (SELECT ClassificationValueId, Name, Description, MenuName, MouseOver, ClassificationValueLanguageID, FullText FROM ClassificationValueLanguages JOIN Settings ON ClassificationValueLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1 AND Contains(ClassificationValueLanguages.Fulltext, @Contains)) ClassificationValueDefaultLanguage
 	ON ClassificationValueDefaultLanguage.ClassificationValueId = ClassificationValues.ClassificationValueID
 LEFT JOIN (SELECT ClassificationId, Name FROM ClassificationLanguages WHERE LanguageId = @LanguageID ) ClassificationUserLanguage
 	ON ClassificationUserLanguage.ClassificationID= ClassificationValues.ClassificationID

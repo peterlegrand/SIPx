@@ -63,6 +63,7 @@ namespace SIPx.API.Controllers
                 PageCreateGet.Organizations = Organizations;
                 PageCreateGet.Classifications = Classifications;
                 PageCreateGet.Users = Users;
+                PageCreateGet.StatusId = 1;
 
                 return Ok(PageCreateGet);
             }

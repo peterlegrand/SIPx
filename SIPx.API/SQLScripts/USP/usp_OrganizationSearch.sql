@@ -15,9 +15,9 @@ SELECT Organizations.OrganizationID
 
 FROM 
 	Organizations
-LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID, FullText FROM OrganizationLanguages WHERE LanguageId = @LanguageID AND Contains(OrganizationLanguages.Fulltext, @Contains)) OrganizationUserLanguage
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID, FullText FROM OrganizationLanguages WHERE LanguageId = @LanguageID AND Freetext(OrganizationLanguages.Fulltext, @Contains)) OrganizationUserLanguage
 	ON OrganizationUserLanguage.OrganizationID= Organizations.OrganizationID
-LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID, FullText FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1 AND Contains(OrganizationLanguages.Fulltext, @Contains)) OrganizationDefaultLanguage
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID, FullText FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1 AND Freetext(OrganizationLanguages.Fulltext, @Contains)) OrganizationDefaultLanguage
 	ON OrganizationDefaultLanguage.OrganizationId = Organizations.OrganizationID
 JOIN Persons 
 	ON Persons.UserID = Organizations.CreatorID

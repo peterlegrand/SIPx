@@ -15,9 +15,9 @@ SELECT Projects.ProjectID
 
 FROM 
 	Projects
-LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID, FullText FROM ProjectLanguages WHERE LanguageId = @LanguageID AND Contains(ProjectLanguages.Fulltext, @Contains)) ProjectUserLanguage
+LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID, FullText FROM ProjectLanguages WHERE LanguageId = @LanguageID AND FREETEXT(ProjectLanguages.Fulltext, @Contains)) ProjectUserLanguage
 	ON ProjectUserLanguage.ProjectID= Projects.ProjectID
-LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID, FullText FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1 AND Contains(ProjectLanguages.Fulltext, @Contains)) ProjectDefaultLanguage
+LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID, FullText FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1 AND FREETEXT(ProjectLanguages.Fulltext, @Contains)) ProjectDefaultLanguage
 	ON ProjectDefaultLanguage.ProjectId = Projects.ProjectID
 JOIN Persons 
 	ON Persons.UserID = Projects.CreatorID

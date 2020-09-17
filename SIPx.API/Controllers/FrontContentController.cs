@@ -98,6 +98,7 @@ namespace SIPx.API.Controllers
                 ContentNew.SecurityLevels = await _securityLevelProvider.ListofUser(CurrentUser.Id);
                 ContentNew.ContentStatuses = await _contentStatusProvider.List(CurrentUser.Id);
                 ContentNew.Classifications= await _frontContentProvider.NewClassifications(CurrentUser.Id, Id);
+                ContentNew.OrganizationId = ContentNew.Organizations.First().OrganizationId;
                 foreach (var Classification in ContentNew.Classifications)
                 {
                     Classification.ClassificationValues = await _frontContentProvider.NewClassificationValues(CurrentUser.Id, Classification.ClassificationId);

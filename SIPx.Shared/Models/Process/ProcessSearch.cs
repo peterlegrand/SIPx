@@ -13,6 +13,8 @@ namespace SIPx.Shared
         public string Subject { get; set; }
         public string ProcessTemplateName { get; set; }
         public string ProcessTemplateStageName { get; set; }
+        public string ProcessTemplateIcon { get; set; }
+        public string ProcessTemplateStageTypeColor { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

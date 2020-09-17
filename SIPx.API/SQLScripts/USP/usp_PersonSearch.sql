@@ -28,5 +28,5 @@ LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, Organi
 JOIN Persons Creator
 	ON Creator.UserId = Persons.CreatorID
 
-WHERE Contains(Persons.Fulltext, @Contains)
+WHERE Freetext(Persons.Fulltext, @Contains)
 	AND OrganizationLanguages.LanguageID = @LanguageID
