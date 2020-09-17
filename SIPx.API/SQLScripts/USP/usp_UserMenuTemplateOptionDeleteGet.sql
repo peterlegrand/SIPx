@@ -24,6 +24,21 @@ LEFT JOIN (SELECT UserMenuTemplateOptionId, Name, Description, MenuName, MouseOv
 	ON UserLanguage.UserMenuTemplateOptionID= UserMenuTemplateOptions.UserMenuTemplateOptionID
 LEFT JOIN (SELECT UserMenuTemplateOptionId, Name, Description, MenuName, MouseOver, UserMenuTemplateOptionLanguageID FROM UserMenuTemplateOptionLanguages JOIN Settings ON UserMenuTemplateOptionLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
 	ON DefaultLanguage.UserMenuTemplateOptionId = UserMenuTemplateOptions.UserMenuTemplateOptionID
+JOIN UserMenuTypes TypesLeft
+	ON UserMenuTemplateOptions.UserMenuTypeIDLeft = TypesLeft.UserMenuTypeID
+JOIN UITermLanguages LeftTypeDefaultName
+	ON LeftTypeDefaultName.UITermId = TypesLeft.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) LeftTypeCustomName
+	ON LeftTypeCustomName.UITermId = TypesLeft.NameTermID
+
+JOIN UserMenuTypes TypesRight
+	ON UserMenuTemplateOptions.UserMenuTypeIDRight = TypesRight.UserMenuTypeID
+JOIN UITermLanguages RightTypeDefaultName
+	ON RightTypeDefaultName.UITermId = TypesRight.NameTermID
+Right JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) RightTypeCustomName
+	ON RightTypeCustomName.UITermId = TypesRight.NameTermID
+
+
 JOIN Persons Creator
 	ON Creator.UserId = UserMenuTemplateOptions.CreatorID
 JOIN Persons Modifier

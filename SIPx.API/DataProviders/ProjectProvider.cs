@@ -97,5 +97,12 @@ namespace SIPx.DataAccess
             return x;
         }
 
+        public Task<List<ProjectSearch>> ProjectSearch(string Contains, string UserId)
+        {
+            string usp = "usp_ProjectSearch @Contains, @UserId";
+            return _sqlDataAccess.LoadData<ProjectSearch, dynamic>(usp, new { Contains, UserId });
+
+        }
+
     }
 }

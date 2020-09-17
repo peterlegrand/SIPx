@@ -96,6 +96,11 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public Task<List<OrganizationSearch>> OrganizationSearch(string Contains, string UserId)
+        {
+            string usp = "usp_OrganizationSearch @Contains, @UserId";
+            return _sqlDataAccess.LoadData<OrganizationSearch, dynamic>(usp, new { Contains, UserId });
 
+        }
     }
 }

@@ -117,6 +117,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<dynamic>(usp, new { ContentId = ContentId });
             return true;
         }
+        public Task<List<ContentSearch>> ContentSearch(string Contains, string UserId)
+        {
+            string usp = "usp_ContentSearch @Contains, @UserId";
+            return _sqlDataAccess.LoadData<ContentSearch, dynamic>(usp, new { Contains, UserId });
+
+        }
 
     }
 }

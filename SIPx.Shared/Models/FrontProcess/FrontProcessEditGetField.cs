@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontProcessEditGetFields
+    public class FrontProcessEditGetField
     {
        
         public int ProcessId { get; set; }

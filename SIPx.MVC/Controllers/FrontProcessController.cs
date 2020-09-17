@@ -49,6 +49,15 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public async Task<IActionResult> View(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync<FrontProcessView>($"{_baseUrl}api/FrontProcess/ViewGet/" + Id, token);
+            //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
+           // ViewBag.UITerms = UITerms;
+            return View(response);
 
+        }
     }
 }

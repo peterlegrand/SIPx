@@ -1,0 +1,366 @@
+﻿
+@model SearchGlobalPost
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Search result")).TermString;
+
+    Layout = "_Layout";
+}
+<h1>@Term.Find(x => x.InternalName.Equals("Search result")).TermString</h1>
+@*<ejs-grid id="ContentGrid" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+        <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+        <e-grid-columns>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ContentId" textAlign="Right" type="number"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" template="#ContentTitle" textAlign="Right" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#ContentDescription" textAlign="Right" type="boolean"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" template="#ContentOrganizationName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ContentCreatorName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ContentCreatedDate" textAlign="Center" type="string"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>
+    <h2>@Term.Find(x => x.InternalName.Equals("Processes")).TermString</h2>
+    <ejs-grid id="ProcessGrid" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+        <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+        <e-grid-columns>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProcessId" textAlign="Right" type="number"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" template="#ProcessSubject" textAlign="Right" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessTemplate" textAlign="Right" type="boolean"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" template="#ProcessStage" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProcessCreatorName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProcessCreatedDate" textAlign="Center" type="string"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>*@
+<ejs-dashboardlayout id="defaultLayout" columns="10" showGridLines="true" allowResizing="false">
+    <e-dashboardlayout-panels>
+        @foreach (var x in Model.Page.PageSections)
+        {
+            @if (x.PageSectionDataTypeId == 1 && Model.Contents.Count!=0)
+            {
+                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                    <e-content-template>
+                        <div class="e-panel-container">
+                            <div class="e-panel-header">
+                                @if (x.ShowSectiontitleName)
+                                {
+                                    <div>
+                                        @x.titleName
+                                    </div>
+                                }
+                            </div>
+                            <div class="e-panel-content">
+                                <ejs-grid id="@x.SubPanelId" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+                                    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+                                    <e-grid-columns>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ContentId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" template="#ContentTitle" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#ContentDescription" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" template="#ContentOrganizationName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ContentCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ContentCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                    </e-grid-columns>
+                                </ejs-grid>
+
+                            </div>
+                        </div>
+                    </e-content-template>
+                </e-dashboardlayout-panel>
+            }
+
+            @if (x.PageSectionDataTypeId == 2 && Model.Processes.Count != 0)
+            {
+                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                    <e-content-template>
+                        <div class="e-panel-container">
+                            <div class="e-panel-header">
+                                @if (x.ShowSectiontitleName)
+                                {
+                                    <div>
+                                        @x.titleName
+                                    </div>
+                                }
+                            </div>
+                            <div class="e-panel-content">
+                                <ejs-grid id="@x.SubPanelId" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+                                    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+                                    <e-grid-columns>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProcessId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" template="#ProcessSubject" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessTemplate" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" template="#ProcessStage" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProcessCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProcessCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                    </e-grid-columns>
+                                </ejs-grid>
+
+
+                            </div>
+                        </div>
+                    </e-content-template>
+                </e-dashboardlayout-panel>
+            }
+            @if (x.PageSectionDataTypeId == 3 && Model.Organizations.Count != 0)
+            {
+                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                    <e-content-template>
+                        <div class="e-panel-container">
+                            <div class="e-panel-header">
+                                @if (x.ShowSectiontitleName)
+                                {
+                                    <div>
+                                        @x.titleName
+                                    </div>
+                                }
+                            </div>
+                            <div class="e-panel-content">
+                                <ejs-grid id="@x.SubPanelId" dataSource="@Model.Organizations" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+                                    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+                                    <e-grid-columns>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#OrganizationId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#OrganizationName" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#OrganizationDescription" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#OrganizationCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#OrganizationCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                    </e-grid-columns>
+                                </ejs-grid>
+
+
+                            </div>
+                        </div>
+                    </e-content-template>
+                </e-dashboardlayout-panel>
+            }
+            @if (x.PageSectionDataTypeId == 4 && Model.Persons.Count != 0)
+            {
+                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                    <e-content-template>
+                        <div class="e-panel-container">
+                            <div class="e-panel-header">
+                                @if (x.ShowSectiontitleName)
+                                {
+                                    <div>
+                                        @x.titleName
+                                    </div>
+                                }
+                            </div>
+                            <div class="e-panel-content">
+                                <ejs-grid id="@x.SubPanelId" dataSource="@Model.Persons" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+                                    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+                                    <e-grid-columns>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#PersonId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" template="#PersonFirstName" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Middle name")).TermString" template="#PersonMiddleName" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" template="#PersonLastName" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Nick name")).TermString" template="#PersonNickName" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Person")).TermString" template="#PersonOrganizationName" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#PersonCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#PersonCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                    </e-grid-columns>
+                                </ejs-grid>
+
+
+                            </div>
+                        </div>
+                    </e-content-template>
+                </e-dashboardlayout-panel>
+            }
+            @if (x.PageSectionDataTypeId == 5 && Model.Projects .Count != 0)
+            {
+                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                    <e-content-template>
+                        <div class="e-panel-container">
+                            <div class="e-panel-header">
+                                @if (x.ShowSectiontitleName)
+                                {
+                                    <div>
+                                        @x.titleName
+                                    </div>
+                                }
+                            </div>
+                            <div class="e-panel-content">
+                                <ejs-grid id="@x.SubPanelId" dataSource="@Model.Projects" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+                                    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+                                    <e-grid-columns>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProjectId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#ProjectName" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#ProjectDescription" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProjectCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProjectCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                    </e-grid-columns>
+                                </ejs-grid>
+
+
+                            </div>
+                        </div>
+                    </e-content-template>
+                </e-dashboardlayout-panel>
+            }
+        }
+
+    </e-dashboardlayout-panels>
+</ejs-dashboardlayout>
+<script id="ContentId" type="text/x-template">
+    <div>
+        ${ContentId}
+    </div>
+</script>
+<script id="ContentTitle" type="text/x-template">
+    <div>
+        <a href="/FrontContent/ShowContent/${ContentId}">${Title}</a>
+    </div>
+</script>
+<script id="ContentDescription" type="text/x-template">
+    <div>
+        ${Description}
+    </div>
+</script>
+<script id="ContentOrganizationName" type="text/x-template">
+    <div>
+        <a href="/FrontOrganization/Dashboard/${OrganizationId}">${OrganizationName}</a>
+    </div>
+</script>
+<script id="ContentCreatorName" type="text/x-template">
+    <div>
+        <a href="/FrontUser/Dashboard/${CreatorId}">${CreatorName}</a>
+    </div>
+</script>
+<script id="ContentCreatedDate" type="text/x-template">
+    <div>
+        ${CreatedDate}
+    </div>
+</script>
+<script id="ProcessId" type="text/x-template">
+    <div>
+        ${ProcessId}
+    </div>
+</script>
+<script id="ProcessSubject" type="text/x-template">
+    <div>
+        <a href="/FrontProcess/View/${ProcessId}">${Subject}</a>
+    </div>
+</script>
+<script id="ProcessTemplate" type="text/x-template">
+    <div>
+        ${ProcessTemplateName}
+    </div>
+</script>
+<script id="ProcessStage" type="text/x-template">
+    <div>
+        ${ProcessTemplateStageName}
+    </div>
+</script>
+<script id="ProcessCreatorName" type="text/x-template">
+    <div>
+        <a href="/FrontUser/Dashboard/${CreatorId}">${CreatorName}</a>
+    </div>
+</script>
+<script id="ProcessCreatedDate" type="text/x-template">
+    <div>
+        ${CreatedDate}
+    </div>
+</script>
+
+<script id="OrganizationId" type="text/x-template">
+    <div>
+        ${OrganizationId}
+    </div>
+</script>
+<script id="OrganizationName" type="text/x-template">
+    <div>
+        <a href="/FrontOrganization/Dashboard/${OrganizationId}">${OrganizationName}</a>
+    </div>
+</script>
+<script id="OrganizationDescription" type="text/x-template">
+    <div>
+        ${OrganizationDescription}
+    </div>
+</script>
+<script id="OrganizationCreatorName" type="text/x-template">
+    <div>
+        <a href="/FrontUser/Dashboard/${CreatorId}">${CreatorName}</a>
+    </div>
+</script>
+<script id="OrganizationCreatedDate" type="text/x-template">
+    <div>
+        ${CreatedDate}
+    </div>
+</script>
+
+
+<script id="PersonId" type="text/x-template">
+    <div>
+        ${PersonId}
+    </div>
+</script>
+<script id="PersonFirstName" type="text/x-template">
+    <div>
+        ${if(IsUser === 1)}
+        <div>
+            <a href="/FrontUser/Dashboard/${PersonId}">${FirstName}</a>
+        </div>
+        ${else}
+        <div>
+            ${FirstName}
+        </div>
+        ${/if}
+    </div>
+</script>
+<script id="PersonMiddleName" type="text/x-template">
+    <div>
+        ${MiddleName}
+    </div>
+</script>
+<script id="PersonLastName" type="text/x-template">
+    <div>
+        ${LastName}
+    </div>
+</script>
+<script id="PersonNickName" type="text/x-template">
+    <div>
+        ${NickName}
+    </div>
+</script>
+<script id="PersonOrganizationName" type="text/x-template">
+    <div>
+        ${OrganizationName}
+    </div>
+</script>
+<script id="PersonCreatorName" type="text/x-template">
+    <div>
+        <a href="/FrontUser/Dashboard/${CreatorId}">${CreatorName}</a>
+    </div>
+</script>
+<script id="PersonCreatedDate" type="text/x-template">
+    <div>
+        ${CreatedDate}
+    </div>
+</script>
+
+
+<script id="ProjectId" type="text/x-template">
+    <div>
+        ${ProjectId}
+    </div>
+</script>
+<script id="ProjectName" type="text/x-template">
+    <div>
+        <a href="/FrontProject/Dashboard/${ProjectId}">${ProjectName}</a>
+    </div>
+</script>
+<script id="ProjectDescription" type="text/x-template">
+    <div>
+        ${ProjectDescription}
+    </div>
+</script>
+<script id="ProjectCreatorName" type="text/x-template">
+    <div>
+        <a href="/FrontUser/Dashboard/${CreatorId}">${CreatorName}</a>
+    </div>
+</script>
+<script id="ProjectCreatedDate" type="text/x-template">
+    <div>
+        ${CreatedDate}
+    </div>
+</script>
+
+
+

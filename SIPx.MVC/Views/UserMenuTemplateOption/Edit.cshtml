@@ -15,17 +15,16 @@
 
 
     <form method="post">
+
+
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
-            </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="UserMenuTemplateId" ejs-for="@Model.UserMenuTemplateId" cssClass="e-outline" placeholder="UserMenuTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="UserMenuTemplateOptionId" ejs-for="@Model.UserMenuTemplateOptionId" cssClass="e-outline" placeholder="UserMenuTemplateOptionId" floatLabelType="Auto"></ejs-numerictextbox>
-            </div>
-        </div>
-
-    <div class="row">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+            </div>    <div class="col-9">
+    <ejs-numerictextbox id="UserMenuTemplateId" ejs-for="UserMenuTemplateId" cssClass="e-outline" placeholder="UserMenuTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+    <ejs-numerictextbox id="UserMenuTemplateOptionId" ejs-for="UserMenuTemplateOptionId" cssClass="e-outline" placeholder="UserMenuTemplateOptionId" floatLabelType="Auto"></ejs-numerictextbox>
+</div>
+        </div>        <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
@@ -65,7 +64,7 @@
                 @Term.Find(x => x.InternalName.Equals("Left menu type")).TermString type
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserMenuTypeIDLeft" dataSource="@Model.UserMenuTypesLeft" ejs-for="@Model.UserMenuTypeIdLeft" value="@Model.UserMenuTypeIdLeft" popupHeight="220px">
+                <ejs-dropdownlist id="UserMenuTypeIdLeft" dataSource="@Model.UserMenuTypesLeft" ejs-for="@Model.UserMenuTypeIdLeft" value="@Model.UserMenuTypeIdLeft" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserMenuTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -86,7 +85,7 @@
                 @Term.Find(x => x.InternalName.Equals("Right menu type")).TermString type
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserMenuTypeIDRight" dataSource="@Model.UserMenuTypesRight" ejs-for="@Model.UserMenuTypeIdRight" value="@Model.UserMenuTypeIdRight" popupHeight="220px">
+                <ejs-dropdownlist id="UserMenuTypeIdRight" dataSource="@Model.UserMenuTypesRight" ejs-for="@Model.UserMenuTypeIdRight" value="@Model.UserMenuTypeIdRight" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserMenuTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -108,7 +107,7 @@
 
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Icon" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
+                <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -128,6 +127,7 @@
                 <a asp-action="Index" asp-route-id="@Model.UserMenuTemplateId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
+
 
 
         <div class="row">

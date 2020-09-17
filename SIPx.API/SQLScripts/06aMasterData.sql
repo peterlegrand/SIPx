@@ -195,6 +195,7 @@ SET IDENTITY_INSERT Languages OFF
 
 SET IDENTITY_INSERT Settings ON
 INSERT INTO Settings (SettingId, IntValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (1,41,120,120,120,120,1, @User, getdate());
+INSERT INTO Settings (SettingId, IntValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (2,1,1,1,1,1,1, @User, getdate());
 SET IDENTITY_INSERT Settings OFF
 
 SET IDENTITY_INSERT DateLevels ON
@@ -774,7 +775,9 @@ INSERT INTO PageSectionDataTypes (PageSectionDataTypeId, NameTermId, Description
 , (4,1232,1232,1232,1232)
 , (5,127,127,127,127)
 , (6,231,231,231,231)
+, (7,1,1,1,1)
 SET IDENTITY_INSERT PageSectionDataTypes OFF;
+
 
 SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes ON;
 INSERT INTO ProcessTemplateFlowConditionTypes (ProcessTemplateFlowConditionTypeId, NameTermId,DescriptionTermId,MenuNameTermId,MouseOverTermID) VALUES
@@ -917,6 +920,7 @@ SET IDENTITY_INSERT [dbo].[OrganizationSettingTypeGroups] OFF
  
 SET IDENTITY_INSERT [dbo].[OrganizationSettingTypes] ON 
 INSERT [dbo].[OrganizationSettingTypes] ([OrganizationSettingTypeID], [OrganizationSettingTypeGroupID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 1, 1373, 1373, 1373, 1373)
+INSERT [dbo].[OrganizationSettingTypes] ([OrganizationSettingTypeID], [OrganizationSettingTypeGroupID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 1, 1, 1, 1, 1)
 SET IDENTITY_INSERT [dbo].[OrganizationSettingTypes] OFF
  
 SET IDENTITY_INSERT MenuTypes ON 
@@ -941,3 +945,62 @@ VALUES (1, 1210, 1210, 1210, 1210,0)
 ,(18, 1357, 1357, 1357, 1357,0)
 ,(19, 921, 921, 921, 921,0)
 SET IDENTITY_INSERT MenuTypes OFF
+
+SET IDENTITY_INSERT Pages ON;
+INSERT INTO Pages (PageID, StatusID, ShowTitleName, ShowTitleDescription, CreatorID, CreatedDate, ModifierID, ModifiedDate) VALUES (1, 1, 1, 0, @User, getdate(), @User, getdate())
+SET IDENTITY_INSERT Pages OFF;
+
+SET IDENTITY_INSERT PageSections ON;
+INSERT INTO PageSections (
+	PageSectionId, PageID, PageSectionTypeID, PageSectionDataTypeID
+	, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitleName, ShowContentTypeTitleDescription
+	, SizeX, SizeY, DashboardRow, DashboardColumn
+	, SortById, MaxContent, HasPaging
+	, CreatorId, CreatedDate, ModifierId, ModifiedDate) VALUES 
+	(1, 1, 2, 1
+	,1,0,0,0
+	, 10, 1, 0,0
+	,1,5,1
+	,@User, getdate(), @User, getdate())
+	, (2, 1, 2, 2
+	,1,0,0,0
+	, 10, 1, 1,0
+	,1,5,1
+	,@User, getdate(), @User, getdate())
+	, (3, 1, 2, 3
+	,1,0,0,0
+	, 10, 2, 1,0
+	,1,5,1
+	,@User, getdate(), @User, getdate())
+	, (4, 1, 2, 4
+	,1,0,0,0
+	, 10, 3, 1,0
+	,1,5,1
+	,@User, getdate(), @User, getdate())
+	, (5, 1, 2, 5
+	,1,0,0,0
+	, 10, 4, 1,0
+	,1,5,1
+	,@User, getdate(), @User, getdate())
+	, (6, 1, 2, 7
+	,1,0,0,0
+	, 10, 4, 1,0
+	,1,5,1
+	,@User, getdate(), @User, getdate())
+SET IDENTITY_INSERT PageSections OFF;
+
+SET IDENTITY_INSERT PageLanguages ON;
+INSERT INTO PageLanguages(PageLanguageId, PageId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
+  (1, 1, 41, 'Search results', 'Search results', 'Search results', 'Search results', 'Search results', 'Search results', @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT PageLanguages OFF;
+
+
+SET IDENTITY_INSERT PageSectionLanguages ON;
+INSERT INTO PageSectionLanguages(PageSectionLanguageId,  PageId, PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
+  (1, 1, 1, 41, 'Content', 'Content', 'Content', 'Content', 'Content', 'Content', @User, @User, GETDATE(), GETDATE())
+, (2, 1, 2, 41, 'Processes', 'Processes', 'Processes', 'Processes', 'Processes', 'Processes', @User, @User, GETDATE(), GETDATE())
+, (3, 1, 3, 41, 'Organizations', 'Organizations', 'Organizations', 'Organizations', 'Organizations', 'Organizations', @User, @User, GETDATE(), GETDATE())
+, (4, 1, 4, 41, 'Persons', 'Persons', 'Persons', 'Persons', 'Persons', 'Persons', @User, @User, GETDATE(), GETDATE())
+, (5, 1, 5, 41, 'Projects', 'Projects', 'Projects', 'Projects', 'Projects', 'Projects', @User, @User, GETDATE(), GETDATE())
+, (6, 1, 6, 41, 'Classification values', 'Classification values', 'Classification values', 'Classification values', 'Classification values', 'Classification values', @User, @User, GETDATE(), GETDATE())
+SET IDENTITY_INSERT PageSectionLanguages OFF;

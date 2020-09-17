@@ -126,6 +126,7 @@ namespace SIPx.API.Controllers
                 //        Message = "No record with this ID",
                 //    });
                 //}
+
                 var UserMenuTemplateOption = await _userMenuTemplateOptionProvider.UpdateGet(CurrentUser.Id, Id);
                 var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.ListForMenuTemplate(CurrentUser.Id);
@@ -152,6 +153,8 @@ namespace SIPx.API.Controllers
             UserMenuTemplateOption.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
+
+                UserMenuTemplateOption.UserId = CurrentUser.Id;
                 //var CheckString = await _userMenuTemplateOptionProvider.UpdatePostCheck(UserMenuTemplateOption);
                 //if (CheckString.Length == 0)
                 {

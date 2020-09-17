@@ -1502,4 +1502,10 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1500, 'Edit user menu templa
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1501, 'Delete user menu template');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1502, 'Delete user menu template option');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1503, 'Edit user menu template option');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1504, 'Search result');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1505, 'Value name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1506, 'Value description');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1507, 'Template');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1508, 'Default search page');
+
 SET IDENTITY_INSERT UITerms OFF;

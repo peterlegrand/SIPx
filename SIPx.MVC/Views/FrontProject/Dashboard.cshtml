@@ -65,7 +65,7 @@
         <ejs-grid id="Contents" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" field="Title" textAlign="Right" type="text" template="#Content"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" field="Title" textAlign="Right" type="text"></e-grid-column>
                 <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Content type")).TermString" field="TypeName" textAlign="Right" type="text"></e-grid-column>
                 <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Status")).TermString" field="StatusName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
@@ -76,7 +76,7 @@
         <ejs-grid id="Processes" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" field="Subject" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" field="Subject" textAlign="Right" type="text" template="#ProcessSubject"></e-grid-column>
                 <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Process template")).TermString" field="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
                 <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" field="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
@@ -86,6 +86,12 @@
 <script id="ProjectName" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/FrontProject/Dashboard/${ProjectId}"><u>${ProjectName}</u></a>
+
+    </div>
+</script>
+<script id="ProcessSubject" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontProcess/View/${ProcessId}"><u>${Subject}</u></a>
 
     </div>
 </script>

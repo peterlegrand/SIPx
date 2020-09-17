@@ -330,5 +330,31 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("ViewGet/{Id:int}")]
+        public async Task<IActionResult> ViewGet(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            {
+                //if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationID", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
+
+                var Process = await _frontProcessProvider.FrontProcessView(CurrentUser.Id, Id);
+                Process.ProcessFields = await _frontProcessProvider.FrontProcessViewGetField(CurrentUser.Id, Id);
+                return Ok(Process);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
     }
 }

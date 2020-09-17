@@ -363,5 +363,5 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (357, 'RoleClaim', 'Create')
 , (358, 'RoleClaim', 'Delete')
 , (359, 'ContentTypeGroup', 'Edit')
-
+, (360, 'Search', 'Global')
 SET IDENTITY_INSERT MVCUIScreens OFF;

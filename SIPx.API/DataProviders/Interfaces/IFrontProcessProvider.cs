@@ -10,5 +10,7 @@ namespace SIPx.DataAccess
         Task<List<NewProcessShowTemplateGroup>> NewProcessShowTemplateGroup(string UserId);
         Task<FrontProcessEditGet> FrontProcessEditGet(string UserId, int ProcessId);
         Task<bool> FrontProcessEditPost(FrontProcessEditGet Process, string UserId);
+        Task<FrontProcessView> FrontProcessView(string UserId, int ProcessId);
+        Task<List<FrontProcessViewGetField>> FrontProcessViewGetField(string UserId, int ProcessId);
     }
 }

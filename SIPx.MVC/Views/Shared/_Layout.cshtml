@@ -31,12 +31,10 @@
         </h1>
         <div class="container">
             <div class="row">
-                <div class="offset-3 col-5">
-                    <ejs-textbox id="GeneralSearch" cssClass="transparent"></ejs-textbox>
-                </div>
-                <div class="col-1">
-                    <img src="~/images/icons/Search.png" width="20" height="20" />
-                </div>
+                <<form typeof="post" asp-controller="Search" asp-action="General">
+    <ejs-textbox width="200" id="a" name="Search"></ejs-textbox>
+   <ejs-button id="GeneralSearch" cssClass="transparent"  type="submit" value="Submit" content="Search"></ejs-button> 
+</form>
                 <div class="col-3 ">
                     <a class="text-black-50 float-right font-weight-bold transparent" asp-controller="UserPreference" asp-action="Index">&nbsp;&nbsp;User preference&nbsp;</a>&nbsp;&nbsp;
                 </div>
@@ -59,6 +57,14 @@
         </div>
         @*</nav>*@
     </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+
+                
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-2">

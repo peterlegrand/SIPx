@@ -40,7 +40,7 @@ namespace SIPx.DataAccess
             string usp = "usp_FrontProcessEditGet @UserID, @ProcessId";
             string usp2 = "usp_FrontProcessEditGetFields @UserID, @ProcessId";
             var x = await _sqlDataAccess.LoadSingleRecord<FrontProcessEditGet, dynamic>(usp, new { UserId = UserId, ProcessId = ProcessId });
-            var y = await _sqlDataAccess.LoadData<FrontProcessEditGetFields, dynamic>(usp2, new { UserId = UserId, ProcessId = ProcessId });
+            var y = await _sqlDataAccess.LoadData<FrontProcessEditGetField, dynamic>(usp2, new { UserId = UserId, ProcessId = ProcessId });
             x.ProcessFields = y;
             return x;
         }
@@ -203,6 +203,18 @@ namespace SIPx.DataAccess
             string usp = "usp_ProcessUpdatePost @UserId, @ProcessId , @ProcessFieldTable ";
             _sqlDataAccess.SaveData<dynamic>(usp, new { UserId = UserId, ProcessId = Process.ProcessId , ProcessFieldTable = ProcessFieldTable.AsTableValuedParameter("udt_ProcessFieldUpdate") });
             return true;
+        }
+        public async Task<FrontProcessView> FrontProcessView(string UserId, int ProcessId)
+        {
+            string usp = "usp_FrontProcessView @UserId, @ProcessId";
+            var x = await _sqlDataAccess.LoadSingleRecord<FrontProcessView, dynamic>(usp, new { UserId = UserId, ProcessId = ProcessId });
+            return x;
+        }
+        public async Task<List<FrontProcessViewGetField>> FrontProcessViewGetField(string UserId, int ProcessId)
+        {
+            string usp = "usp_FrontProcessViewGetField @UserId, @ProcessId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessViewGetField, dynamic>(usp, new { UserId = UserId, ProcessId = ProcessId });
+            return x;
         }
     }
 }

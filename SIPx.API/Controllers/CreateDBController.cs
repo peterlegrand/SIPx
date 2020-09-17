@@ -53,6 +53,11 @@ namespace SIPx.API.Controllers
                 string line = await sr.ReadToEndAsync();
                 await _sqlDataAccess.PopulateDataSIP(line);
             }
+            using (StreamReader sr = new StreamReader("SQLScripts\\02ZCreateDataBase.sql", System.Text.Encoding.UTF8))
+            {
+                string line = await sr.ReadToEndAsync();
+                await _sqlDataAccess.PopulateDataSIP(line);
+            }
 
             using (StreamReader sr = new StreamReader("SQLScripts\\03CreateDataBase.sql", System.Text.Encoding.UTF8))
             {

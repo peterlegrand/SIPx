@@ -82,7 +82,12 @@ namespace SIPx.DataAccess
             return true;
         }
 
+        public Task<List<ProcessSearch>> ProcessSearch(string Contains, string UserId)
+        {
+            string usp = "usp_ProcessSearch @Contains, @UserId";
+            return _sqlDataAccess.LoadData<ProcessSearch, dynamic>(usp, new { Contains, UserId });
 
+        }
         //public async Task<List<ProcessType>> GetProcessTypes(string UserId)
         //{
         //    string usp = "usp_ProcessTypes @UserID";

@@ -89,5 +89,11 @@ namespace SIPx.DataAccess
             return true;
         }
 
+        public Task<List<ClassificationValueSearch>> ClassificationValueSearch(string Contains, string UserId)
+        {
+            string usp = "usp_ClassificationValueSearch @Contains, @UserId";
+            return _sqlDataAccess.LoadData<ClassificationValueSearch, dynamic>(usp, new { Contains,  UserId});
+
+        }
     }
 }

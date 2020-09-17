@@ -62,7 +62,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(UserMenuTemplateOptionUpdateGet UserMenuTemplateOption)
         {
-            string usp = "usp_UserMenuTemplateOptionUpdatePost @UserMenuTemplateOptionId, @IconId, @UserPageIdLeft, @UserPageIdRight, @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @Sequence, @Name, @MouseOver, @ModifierID";
+            string usp = "usp_UserMenuTemplateOptionUpdatePost @UserMenuTemplateOptionId, @IconId, @UserPageIdLeft, @UserPageIdRight, @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserID";
             _sqlDataAccess.SaveData<UserMenuTemplateOptionUpdateGet>(usp, UserMenuTemplateOption);
             return true;
         }

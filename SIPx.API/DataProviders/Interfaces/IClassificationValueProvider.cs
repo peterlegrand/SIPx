@@ -16,5 +16,6 @@ namespace SIPx.DataAccess
         bool DeletePost(int Id);
         Task<ClassificationValueDeleteGet> DeleteGet(string UserId, int ClassificationValueId);
         Task<int> CreateGetDateLevel(int ClassificationId, int ClassificationValueId);
+        Task<List<ClassificationValueSearch>> ClassificationValueSearch(string Contains, string UserId);
     }
 }

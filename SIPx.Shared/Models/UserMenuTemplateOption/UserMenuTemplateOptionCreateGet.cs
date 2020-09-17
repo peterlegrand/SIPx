@@ -15,8 +15,8 @@ namespace SIPx.Shared
         public int IconId { get; set; }
         public int UserPageIdLeft { get; set; }
         public int UserPageIdRight { get; set; }
-        public int UserMenuTypeIDLeft { get; set; }
-        public int UserMenuTypeIDRight { get; set; }
+        public int UserMenuTypeIdLeft { get; set; }
+        public int UserMenuTypeIdRight { get; set; }
         public int Sequence { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
