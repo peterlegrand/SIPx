@@ -1,0 +1,349 @@
+﻿@using Syncfusion.EJ2
+@using Newtonsoft.Json
+@model ProcessAdvancedSearchPost
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person")).TermString;
+    Layout = "_Layout";
+}
+
+<h1>
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@*@Term.Find(x => x.InternalName.Equals("Person")).TermString*@Person advance search
+</h1>
+<div class="container">
+
+    <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@name
+            </div>    <div class="col-9">
+                <ejs-textbox id="Contains" ejs-for="Contains" cssClass="e-outline" placeholder="Contains" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@number
+            </div>    <div class="col-9">
+                <ejs-textbox id="Number" ejs-for="Number" cssClass="e-outline" placeholder="Number" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@DateFrom
+            </div>    <div class="col-9">
+                <ejs-datepicker id="DateFrom" ejs-for="DateFrom" cssClass="e-outline" placeholder="DateFrom" floatLabelType="Auto"></ejs-datepicker>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@DateTo
+            </div>    <div class="col-9">
+                <ejs-datepicker id="DateTo" ejs-for="DateTo" cssClass="e-outline" placeholder="DateTo" floatLabelType="Auto"></ejs-datepicker>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Last name")).TermString*@User
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="SelectedUserId" dataSource="@Model.SelectedUsers" ejs-for="@Model.SelectedUserId" value="@Model.SelectedUserId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ Organization
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="OrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.OrganizationId" value="@Model.OrganizationId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="OrganizationId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ Project
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="ProjectId" dataSource="@Model.Projects" ejs-for="@Model.ProjectId" value="@Model.ProjectId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ Language
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="LanguageId" dataSource="@Model.Languages" ejs-for="@Model.LanguageId" value="@Model.LanguageId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="LanguageId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ Classification
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="ClassificationId" dataSource="@Model.Classifications" ejs-for="@Model.ClassificationId" value="@Model.ClassificationId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ClassificationId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ ClassificationValue
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="ClassificationValueId" dataSource="@Model.ClassificationValues" ejs-for="@Model.ClassificationValueId" value="@Model.ClassificationValueId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ Content
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="ContentId" dataSource="@Model.Contents" ejs-for="@Model.ContentId" value="@Model.ContentId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="title" value="ContentId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ Country
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="CountryId" dataSource="@Model.Countries" ejs-for="@Model.CountryId" value="@Model.CountryId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="CountryId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Nick name")).TermString*@SecurityLevel
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.SecurityLevelId" value="@Model.SecurityLevelId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="SecurityLevelId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Local middle name")).TermString*@Person
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="PersonId" dataSource="@Model.Persons" ejs-for="@Model.PersonId" value="@Model.PersonId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="PersonId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Local middle name")).TermString*@Role
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="RoleId" dataSource="@Model.Roles" ejs-for="@Model.RoleId" value="@Model.RoleId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="RoleId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @*@Term.Find(x => x.InternalName.Equals("Local middle name")).TermString*@ProcessTemplateStageType
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="ProcessTemplateStageTypeId" dataSource="@Model.ProcessTemplateStageTypes" ejs-for="@Model.ProcessTemplateStageTypeId" value="@Model.ProcessTemplateStageTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTemplateStageTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="Search" isPrimary="true"></ejs-button>
+                <a asp-action="Index">Cancel</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/css/css.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+<style>
+    .e-code-mirror::before {
+        content: '\e345';
+    }
+
+    .e-html-preview::before {
+        content: '\e350';
+    }
+
+    .CodeMirror-linenumber,
+    .CodeMirror-gutters {
+        display: none;
+    }
+
+    .sb-header {
+        z-index: 100;
+    }
+
+    .sb-content.e-view.hide-header {
+        top: 0 !important;
+    }
+
+    .sb-header.e-view.hide-header {
+        display: none;
+    }
+
+    .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #F4F5F7;
+    }
+
+    .highcontrast .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #303030;
+    }
+</style>
+<script type="text/javascript">
+    var rteObj, myCodeMirror, textArea;
+    function created() {
+        rteObj = this;
+        textArea = rteObj.contentModule.getEditPanel();
+    }
+    function mirrorConversion(e) {
+        var id = rteObj.getID() + 'mirror-view';
+        var mirrorView = rteObj.element.querySelector('#' + id);
+        var charCount = rteObj.element.querySelector('.e-rte-character-count');
+        if (e.targetItem === 'Preview') {
+            textArea.style.display = 'block';
+            mirrorView.style.display = 'none';
+            textArea.innerHTML = myCodeMirror.getValue();
+            charCount.style.display = 'block';
+        }
+        else {
+            if (!mirrorView) {
+                mirrorView = ej.base.createElement('div', { className: 'e-content' });
+                mirrorView.id = id;
+                textArea.parentNode.appendChild(mirrorView);
+            }
+            else {
+                mirrorView.innerHTML = '';
+            }
+            textArea.style.display = 'none';
+            mirrorView.style.display = 'block';
+            renderCodeMirror(mirrorView, defaultRTE.value);
+            charCount.style.display = 'none';
+        }
+    }
+    function renderCodeMirror(mirrorView, content) {
+        myCodeMirror = CodeMirror(mirrorView, {
+            value: content,
+            lineNumbers: true,
+            mode: 'text/html',
+            lineWrapping: true,
+        });
+    }
+    function handleFullScreen(e) {
+        var sbCntEle = document.querySelector('.sb-content.e-view');
+        var sbHdrEle = document.querySelector('.sb-header.e-view');
+        if (e.targetItem === 'Maximize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.addClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+        else if (e.targetItem === 'Minimize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.removeClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+    }
+    function actionCompleteHandler(e) {
+        if (e.targetItem && (e.targetItem === 'SourceCode' || e.targetItem === 'Preview')) {
+            this.sourceCodeModule.getPanel().style.display = 'none';
+            mirrorConversion(e);
+        }
+        else {
+            setTimeout(function () { rteObj.toolbarModule.refreshToolbarOverflow(); }, 400);
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function SelectedUserId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.SelectedUsers)), query);
+            }
+</script>
+<script type="text/javascript">
+    function Organizations(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Organizations)), query);
+            }
+</script>
+<script type="text/javascript">
+    function ProjectId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Projects)), query);
+            }
+</script>
+<script type="text/javascript">
+    function LanguageId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Languages)), query);
+            }
+</script>
+<script type="text/javascript">
+    function ClassificationId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Classifications)), query);
+            }
+</script>
+<script type="text/javascript">
+    function ClassificationValueId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ClassificationValues)), query);
+            }
+</script>
+<script type="text/javascript">
+    function ContentId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Contents)), query);
+            }
+</script>
+<script type="text/javascript">
+    function CountryId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Countries)), query);
+            }
+</script>
+<script type="text/javascript">
+    function SecurityLevelId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.SecurityLevels)), query);
+            }
+</script>
+<script type="text/javascript">
+    function PersonId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Persons)), query);
+            }
+</script>
+<script type="text/javascript">
+    function RoleId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Roles)), query);
+            }
+</script>
+<script type="text/javascript">
+    function ProcessTemplateStageTypeId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateStageTypes)), query);
+            }
+</script>

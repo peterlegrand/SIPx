@@ -51,12 +51,12 @@ namespace SIPx.API.Controllers
                 //if (CheckString.Length == 0)
                 //{
                 var ResultPost = new SearchGlobalPost();
-                ResultPost.ClassificationValues = await _classificationValueProvider.ClassificationValueSearch(Contains, CurrentUser.Id);
-                ResultPost.Contents = await _contentProvider.ContentSearch(Contains, CurrentUser.Id);
-                ResultPost.Organizations = await _organizationProvider.OrganizationSearch(Contains, CurrentUser.Id);
-                ResultPost.Persons = await _personProvider.PersonSearch(Contains, CurrentUser.Id);
-                ResultPost.Processes = await _processProvider.ProcessSearch(Contains, CurrentUser.Id);
-                ResultPost.Projects = await _projectProvider.ProjectSearch(Contains, CurrentUser.Id);
+                ResultPost.ClassificationValues = await _classificationValueProvider.Search(Contains, CurrentUser.Id);
+                ResultPost.Contents = await _contentProvider.Search(Contains, CurrentUser.Id);
+                ResultPost.Organizations = await _organizationProvider.Search(Contains, CurrentUser.Id);
+                ResultPost.Persons = await _personProvider.Search(Contains, CurrentUser.Id);
+                ResultPost.Processes = await _processProvider.Search(Contains, CurrentUser.Id);
+                ResultPost.Projects = await _projectProvider.Search(Contains, CurrentUser.Id);
                 ResultPost.Page = await _searchProvider.GlobalPostPage(CurrentUser.Id);
                 ResultPost.Page.PageSections = await _searchProvider.GlobalPostPageSection(CurrentUser.Id, ResultPost.Page.PageId);
                 var RowPosition = 0;

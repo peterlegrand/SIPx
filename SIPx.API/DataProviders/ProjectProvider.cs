@@ -97,12 +97,17 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public Task<List<ProjectSearch>> ProjectSearch(string Contains, string UserId)
+        public Task<List<ProjectSearch>>Search(string Contains, string UserId)
         {
             string usp = "usp_ProjectSearch @Contains, @UserId";
             return _sqlDataAccess.LoadData<ProjectSearch, dynamic>(usp, new { Contains, UserId });
 
         }
-
+        public Task<List<ProjectAdvancedSearchResult>> AdvancedSearch(string UserId, ProjectAdvancedSearchPost AdvancedSearch)
+        {
+            string usp = "usp_ProjectAdvancedSearch @UserId, @Contains, @ParentProjectId, @ProjectTypeId, @SecurityLevelId, @StatusId, @PersonId ";
+            return _sqlDataAccess.LoadData<ProjectAdvancedSearchResult, dynamic>(usp, new { UserId, AdvancedSearch });
+        }
+       
     }
 }

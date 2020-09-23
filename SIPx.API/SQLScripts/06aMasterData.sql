@@ -904,6 +904,7 @@ INSERT [dbo].[UserMenuTypes] ([UserMenuTypeID], [AvailableForLeft], [AvailableFo
 INSERT [dbo].[UserMenuTypes] ([UserMenuTypeID], [AvailableForLeft], [AvailableForRight], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (20, 1, 1, 1456, 1456, 1456, 1456)
 INSERT [dbo].[UserMenuTypes] ([UserMenuTypeID], [AvailableForLeft], [AvailableForRight], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (21, 1, 1, 1457, 1457, 1457, 1457)
 INSERT [dbo].[UserMenuTypes] ([UserMenuTypeID], [AvailableForLeft], [AvailableForRight], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (22, 1, 1, 1458, 1458, 1458, 1458)
+INSERT [dbo].[UserMenuTypes] ([UserMenuTypeID], [AvailableForLeft], [AvailableForRight], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (23, 1, 1, 1509, 1509, 1509, 1509)
 
 SET IDENTITY_INSERT [dbo].[UserPreferenceTypeGroups] ON 
 INSERT [dbo].[UserPreferenceTypeGroups] ([UserPreferenceTypeGroupID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 1370, 1370, 1370, 1370)

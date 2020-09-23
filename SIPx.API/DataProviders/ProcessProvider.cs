@@ -82,7 +82,7 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<ProcessSearch>> ProcessSearch(string Contains, string UserId)
+        public Task<List<ProcessSearch>> Search(string Contains, string UserId)
         {
             string usp = "usp_ProcessSearch @Contains, @UserId";
             return _sqlDataAccess.LoadData<ProcessSearch, dynamic>(usp, new { Contains, UserId });
@@ -94,6 +94,11 @@ namespace SIPx.DataAccess
         //    var x = await _sqlDataAccess.LoadData<ProcessType, dynamic>(usp, new { UserId = UserId });
         //    return x;
         //}
+        public Task<List<ProcessAdvancedSearchResult>> AdvancedSearch(string UserId, ProcessAdvancedSearchPost AdvancedSearch)
+        {
+            string usp = "usp_ProcessAdvancedSearch @UserId, @Contains, @Number, @DateFrom, @DateTo, @SelectedUserId, @OrganizationId, @ProjectId, @LanguageId, @ClassificationId, @ClassificationValueId, @ContentId, @CountryId, @SecurityLevelId, @RoleId, @PersonId, @ProcessTemplateStageTypeId ";
+            return _sqlDataAccess.LoadData<ProcessAdvancedSearchResult, dynamic>(usp, new { UserId, AdvancedSearch });
+        }
 
     }
 }

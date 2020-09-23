@@ -15,6 +15,7 @@ namespace SIPx.DataAccess
         Task<List<NewProcessTemplateList>> CreateGetTemplateList(string SQLString);
         Task<bool> CreatePost(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields);
         Task<List<ToDoIndexGet>> ToDoIndexGet(string SQLString);
-        Task<List<ProcessSearch>> ProcessSearch(string Contains, string UserId);
+        Task<List<ProcessSearch>> Search(string Contains, string UserId);
+        Task<List<ProcessAdvancedSearchResult>> AdvancedSearch(string UserId, ProcessAdvancedSearchPost AdvancedSearch);
     }
 }

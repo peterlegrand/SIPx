@@ -50,7 +50,7 @@ namespace SIPx.DataAccess
 
         public async Task<List<FrontPersonSearchResult>> FrontPersonAdvancedSearchPost(FrontPersonAdvancedSearchGet SearchData)
         {
-            string usp = "usp_FrontPersonAdvancedSearchPost @UserId, @FirstName, @LastName, @NickName, @GenderId, @FromAge, @ToAge, @OrganizationId, @IsUser, @RelationWithPersonId, @ProjectId,@CountryId, @PersonProvinceState , @PersonCity ";
+            string usp = "usp_FrontPersonAdvancedSearchPost @UserId, @Contains, @Age, @Birthdate, @MainOrganizationId, @IsUser, @RoleId, @OrganizationId, @ProjectId, @CountryId, @ProvinceState , @County , @City, @ClassificationId, @ClassificationValueId ";
             var x = await _sqlDataAccess.LoadData<FrontPersonSearchResult, dynamic>(usp, SearchData);
             return x;
         }

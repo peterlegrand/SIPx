@@ -30,9 +30,9 @@ namespace SIPx.DataAccess
             string usp = "usp_ContentTypeCreateGet @UserID";
             var x = await _sqlDataAccess.LoadData<ContentTypeCreateGet, dynamic>(usp, new { UserId = UserId });
             return x;
-            }
+        }
 
-            public async Task<List<LanguageList>> CreateGetLanguageList(string UserId)
+        public async Task<List<LanguageList>> CreateGetLanguageList(string UserId)
         {
             string usp = "usp_ContentCreateLanguages @UserID";
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
@@ -117,12 +117,33 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<dynamic>(usp, new { ContentId = ContentId });
             return true;
         }
-        public Task<List<ContentSearch>> ContentSearch(string Contains, string UserId)
+        public Task<List<ContentSearch>> Search(string Contains, string UserId)
         {
             string usp = "usp_ContentSearch @Contains, @UserId";
             return _sqlDataAccess.LoadData<ContentSearch, dynamic>(usp, new { Contains, UserId });
+        }
+        public async Task<List<ContentAdvancedSearchResult>> AdvancedSearch(string UserId, ContentAdvancedSearchPost AdvancedSearch)
+        {
+            string usp = "usp_ContentAdvancedSearch @UserId, @Contains, @OrganizationId, @ProjectId, @ContentTypeId, @ContentStatusId, @LanguageId, @ClassificationValueTable";
+            System.Data.DataTable ClassificationValueTable = ContentClassificationValueDataTable.CreateTable();
+            var xy = new List<int>();
+
+            foreach (var x in AdvancedSearch.ClassificationValueIds)
+            {
+                if (x != null && x != 0)
+                {
+                    ClassificationValueTable.Rows.Add(
+
+                    x);
+                }
+            }
+            var result = await _sqlDataAccess.LoadData<ContentAdvancedSearchResult,dynamic>(usp, new { UserId = AdvancedSearch.UserId, Contains = AdvancedSearch.Contains , OranizationId = AdvancedSearch.OrganizationId , ProjectId = AdvancedSearch.ProjectId, ContentTypeId = AdvancedSearch.ContentTypeId, ContentStatusId = AdvancedSearch.ContentStatusId , LanguageId= AdvancedSearch.LanguageId , ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentAdvancedSearchClassificationValues") });
+            return result;
+
+
 
         }
+
 
     }
 }

@@ -13,6 +13,8 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationValueController : ControllerBase
     {
+        private readonly IPersonProvider _personProvider;
+        private readonly IDateLevelProvider _dateLevelProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IMasterProvider _masterProvider;
@@ -21,8 +23,10 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueController(IMasterListProvider masterListProvider, IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueController(IPersonProvider personProvider, IDateLevelProvider dateLevelProvider, IMasterListProvider masterListProvider, IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _personProvider = personProvider;
+            _dateLevelProvider = dateLevelProvider;
             _masterListProvider = masterListProvider;
             _classificationValueProvider = classificationValueProvider;
             _masterProvider = masterProvider;
@@ -257,6 +261,60 @@ namespace SIPx.API.Controllers
                 }
 
                 return Ok(await _classificationValueProvider.LanguageUpdateGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpGet("AdvancedSearch")]
+        public async Task<IActionResult> AdvancedSearch()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                var ClassificationValueSearch = new ClassificationValueAdvancedSearchPost();
+                ClassificationValueSearch.DateLevels = await _dateLevelProvider.List(CurrentUser.Id);
+                ClassificationValueSearch.Classifications = await _classificationProvider.List(CurrentUser.Id);
+                ClassificationValueSearch.Persons = await _personProvider.List();
+                return Ok(ClassificationValueSearch);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpPost("AdvancedSearch")]
+        public async Task<IActionResult> AdvancedSearch(ClassificationValueAdvancedSearchPost AdvancedSearch)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            AdvancedSearch.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _ClassificationValueProvider.CreatePostCheck(ClassificationValue);
+                //if (CheckString.Length == 0)
+                //{
+                if (AdvancedSearch.Contains == null)
+                { AdvancedSearch.Contains = ""; }
+                if (AdvancedSearch.ClassificationId == null)
+                { AdvancedSearch.ClassificationId = 0; }
+                if (AdvancedSearch.DateLevelId == null)
+                { AdvancedSearch.DateLevelId = 1; }
+                if (AdvancedSearch.PersonId == null)
+                { AdvancedSearch.PersonId = 0; }
+                var Result = await _classificationValueProvider.AdvancedSearch(CurrentUser.Id, AdvancedSearch);
+                return Ok(Result);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
             }
             return BadRequest(new
             {

@@ -1,0 +1,20 @@
+﻿@model List<ProcessAdvancedSearchResult>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person search result")).TermString;
+    Layout = "_Layout";
+}
+@*<h1>@Term.Find(x => x.InternalName.Equals("Person search result")).TermString</h1>*@
+<div class="container">
+    @*<img src="~/images/icons/Persons.png" width="50" height="50" />*@
+    <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+        <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+        <e-grid-columns>
+            <e-grid-column headerText="" template="#Subject" textAlign="Center" type="string"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>
+    <script id="Subject" type="text/x-template">
+        <div>
+            <a class="nav-link text-dark font-weight-bold" href="/FrontProcess/View/${ProcessId}"><u>${Subject}</u></a>
+        </div>
+    </script>

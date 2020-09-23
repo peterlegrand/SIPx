@@ -1,147 +1,202 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model FrontOrganizationAdvancedSearchGet
+@model OrganizationAdvancedSearchPost
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization advanced search")).TermString;
+    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person")).TermString;
 
     Layout = "_Layout";
 }
-<h1>@Term.Find(x => x.InternalName.Equals("Organization advanced search")).TermString</h1>
+
+<h1>
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@*@Term.Find(x => x.InternalName.Equals("Person")).TermString*@Person advance search
+</h1>
 <div class="container">
 
-
-    <form method="post" id="form1">
-
+    <form method="post">
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString :
-            </div>
-            <div class="col-9">
-                <ejs-textbox ejs-for="@Model.OrganizationName" id="OrganizationName"></ejs-textbox>
+                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@name
+            </div>    <div class="col-9">
+                <ejs-textbox id="Contains" ejs-for="Contains" cssClass="e-outline" placeholder="Contains" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Parent organization")).TermString :
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="Parent" dataSource="@Model.ParentOrganizations" ejs-for="@Model.OrganizationParentId" value="0" popupHeight="220px">
+                @*@Term.Find(x => x.InternalName.Equals("Last name")).TermString*@Main organization
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="ParentOrganizationId" dataSource="@Model.ParentOrganizations" ejs-for="@Model.ParentOrganizationId" value="@Model.ParentOrganizationId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="OrganizationId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Status")).TermString :
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="Status" dataSource="@Model.Statuses" ejs-for="@Model.OrganizationStatusId" value="0" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Organization type")).TermString :
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="Type" dataSource="@Model.OrganizationTypes" ejs-for="@Model.OrganizationTypeId" value="0" popupHeight="220px">
+                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ OrganizationTypeId
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="OrganizationTypeId" dataSource="@Model.OrganizationTypes" ejs-for="@Model.OrganizationTypeId" value="@Model.OrganizationTypeId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="OrganizationTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Country")).TermString :
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="Country" dataSource="@Model.Countries" ejs-for="@Model.CountryId" value="0" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="CountryId"></e-dropdownlist-fields>
+                @*@Term.Find(x => x.InternalName.Equals("Local middle name")).TermString*@Status
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="StatusId" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("State / province")).TermString :
-            </div>
-            <div class="col-9">
-                <ejs-textbox id="State" ejs-for="@Model.OrganizationProvinceState"></ejs-textbox>
+                @*@Term.Find(x => x.InternalName.Equals("Local middle name")).TermString*@Person
+            </div>    <div class="col-9">
+                <ejs-dropdownlist id="PersonId" dataSource="@Model.Persons" ejs-for="@Model.PersonId" value="@Model.PersonId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="PersonId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
             </div>
         </div>
-
         <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("City")).TermString :
-            </div>
-            <div class="col-9">
-                <ejs-textbox id="City" ejs-for="OrganizationCity"></ejs-textbox>
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="Search" isPrimary="true"></ejs-button>
+                <a asp-action="Index">Cancel</a>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Legal entity")).TermString :
-            </div>
-            <div class="col-9">
-
-                <div class="radio-control">
-                    <div class="row">
-                        <ejs-radiobutton id="LegalEntityAny" label="@Term.Find(x => x.InternalName.Equals("Any")).TermString" name="LegalEntity" value="0" checked="true"></ejs-radiobutton>
-                    </div>
-                    <div class="row">
-                        <ejs-radiobutton id="LegalEntityNo" label="@Term.Find(x => x.InternalName.Equals("No legal entity")).TermString" name="LegalEntity" value="1"></ejs-radiobutton>
-                    </div>
-                    <div class="row">
-                        <ejs-radiobutton id="LegalEntityYes" label="@Term.Find(x => x.InternalName.Equals("Legal entity")).TermString" name="LegalEntity" value="2"></ejs-radiobutton>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Internal")).TermString :
-            </div>
-            <div class="col-9">
-
-                <div class="radio-control">
-                    <div class="row">
-                        <ejs-radiobutton id="InternalAny" label="@Term.Find(x => x.InternalName.Equals("Any")).TermString" name="Internal" value="0" checked="true"></ejs-radiobutton>
-                    </div>
-                    <div class="row">
-                        <ejs-radiobutton id="InternalNo" label="@Term.Find(x => x.InternalName.Equals("External")).TermString" name="Internal" value="1"></ejs-radiobutton>
-                    </div>
-                    <div class="row">
-                        <ejs-radiobutton id="InternalYes" label="@Term.Find(x => x.InternalName.Equals("Internal")).TermString" name="Internal" value="2"></ejs-radiobutton>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("I am a member")).TermString :
-            </div>
-            <div class="col-9">
-
-                <div class="radio-control">
-                    <div class="row">
-                        <ejs-radiobutton id="IAmAMemberAny" label="@Term.Find(x => x.InternalName.Equals("Any")).TermString" name="IAmMemberOfOrganization" value="0" checked="true"></ejs-radiobutton>
-                    </div>
-                    <div class="row">
-                        <ejs-radiobutton id="IAmAMemberNo" label="@Term.Find(x => x.InternalName.Equals("Yes")).TermString" name="IAmMemberOfOrganization" value="1"></ejs-radiobutton>
-                    </div>
-                    <div class="row">
-                        <ejs-radiobutton id="IAmAMemberYes" label="@Term.Find(x => x.InternalName.Equals("No")).TermString" name="IAmMemberOfOrganization" value="2"></ejs-radiobutton>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Search")).TermString" action="Submit" isPrimary="true"></ejs-button>
 
     </form>
-    
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/css/css.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+<style>
+    .e-code-mirror::before {
+        content: '\e345';
+    }
+
+    .e-html-preview::before {
+        content: '\e350';
+    }
+
+    .CodeMirror-linenumber,
+    .CodeMirror-gutters {
+        display: none;
+    }
+
+    .sb-header {
+        z-index: 100;
+    }
+
+    .sb-content.e-view.hide-header {
+        top: 0 !important;
+    }
+
+    .sb-header.e-view.hide-header {
+        display: none;
+    }
+
+    .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #F4F5F7;
+    }
+
+    .highcontrast .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #303030;
+    }
+</style>
+<script type="text/javascript">
+    var rteObj, myCodeMirror, textArea;
+    function created() {
+        rteObj = this;
+        textArea = rteObj.contentModule.getEditPanel();
+    }
+    function mirrorConversion(e) {
+        var id = rteObj.getID() + 'mirror-view';
+        var mirrorView = rteObj.element.querySelector('#' + id);
+        var charCount = rteObj.element.querySelector('.e-rte-character-count');
+        if (e.targetItem === 'Preview') {
+            textArea.style.display = 'block';
+            mirrorView.style.display = 'none';
+            textArea.innerHTML = myCodeMirror.getValue();
+            charCount.style.display = 'block';
+        }
+        else {
+            if (!mirrorView) {
+                mirrorView = ej.base.createElement('div', { className: 'e-content' });
+                mirrorView.id = id;
+                textArea.parentNode.appendChild(mirrorView);
+            }
+            else {
+                mirrorView.innerHTML = '';
+            }
+            textArea.style.display = 'none';
+            mirrorView.style.display = 'block';
+            renderCodeMirror(mirrorView, defaultRTE.value);
+            charCount.style.display = 'none';
+        }
+    }
+    function renderCodeMirror(mirrorView, content) {
+        myCodeMirror = CodeMirror(mirrorView, {
+            value: content,
+            lineNumbers: true,
+            mode: 'text/html',
+            lineWrapping: true,
+        });
+    }
+    function handleFullScreen(e) {
+        var sbCntEle = document.querySelector('.sb-content.e-view');
+        var sbHdrEle = document.querySelector('.sb-header.e-view');
+        if (e.targetItem === 'Maximize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.addClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+        else if (e.targetItem === 'Minimize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.removeClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+    }
+    function actionCompleteHandler(e) {
+        if (e.targetItem && (e.targetItem === 'SourceCode' || e.targetItem === 'Preview')) {
+            this.sourceCodeModule.getPanel().style.display = 'none';
+            mirrorConversion(e);
+        }
+        else {
+            setTimeout(function () { rteObj.toolbarModule.refreshToolbarOverflow(); }, 400);
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function ParentOrganizationId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ParentOrganizations)), query);
+            }
+</script>
+<script type="text/javascript">
+    function OrganizationTypeId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.OrganizationTypes)), query);
+            }
+</script>
+<script type="text/javascript">
+    function StatusId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Statuses)), query);
+            }
+</script>
+
+<script type="text/javascript">
+    function PersonId(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Persons)), query);
+            }
+</script>

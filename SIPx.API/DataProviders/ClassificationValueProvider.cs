@@ -89,11 +89,26 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<ClassificationValueSearch>> ClassificationValueSearch(string Contains, string UserId)
+        public Task<List<ClassificationValueSearch>> Search(string Contains, string UserId)
         {
             string usp = "usp_ClassificationValueSearch @Contains, @UserId";
-            return _sqlDataAccess.LoadData<ClassificationValueSearch, dynamic>(usp, new { Contains,  UserId});
+            return _sqlDataAccess.LoadData<ClassificationValueSearch, dynamic>(usp, new { Contains, UserId });
 
+        }
+       public Task<List<ClassificationValueAdvancedSearchResult>> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch)
+    //    public async Task<string> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch)
+        {
+            string usp = "usp_ClassificationValueAdvancedSearch @UserId, @Contains, @ClassificationId, @DateLevelId, @DateFrom, @DateTo, @PersonId";
+//            var x = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, AdvancedSearch);
+  //          return x;
+      return _sqlDataAccess.LoadData<ClassificationValueAdvancedSearchResult, dynamic>(usp, AdvancedSearch);
+        }
+
+        public async Task<List<ClassificationValueList>> List(string UserId)
+        {
+            string usp = "usp_ClassificationValueList @UserID";
+            var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId });
+            return x;
         }
     }
 }

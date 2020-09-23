@@ -1,127 +1,20 @@
-﻿@model FrontOrganizationAdvancedSearchGet
+﻿@model List<OrganizationAdvancedSearchResult>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization search result")).TermString;
+    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person search result")).TermString;
     Layout = "_Layout";
 }
-<h1>@Term.Find(x => x.InternalName.Equals("Organization search result")).TermString</h1>
+@*<h1>@Term.Find(x => x.InternalName.Equals("Person search result")).TermString</h1>*@
 <div class="container">
-    @if (Model.OrganizationName != null)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString :
-            </div>
-            <div class="col-9">
-                @Model.OrganizationName
-            </div>
-        </div>}
-    @if (Model.OrganizationParentId != 0)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Parent organization")).TermString :
-            </div>
-            <div class="col-9">
-            </div>
-        </div>}
-    @if (Model.OrganizationStatusId != 0)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Status")).TermString :
-            </div>
-            <div class="col-9">
-            </div>
-        </div>}
-    @if (Model.OrganizationTypeId != 0)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Organization type")).TermString :
-            </div>
-            <div class="col-9">
-            </div>
-        </div>}
-    @if (Model.CountryId != 0)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Country")).TermString :
-            </div>
-            <div class="col-9">
-            </div>
-        </div>}
-    @if (Model.OrganizationProvinceState != "" && Model.OrganizationProvinceState != null)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("State / Province")).TermString :
-            </div>
-            <div class="col-9">
-            </div>
-        </div>}
-    @if (Model.OrganizationCity != "" && Model.OrganizationCity != null)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("City")).TermString :
-            </div>
-            <div class="col-9">
-            </div>
-        </div>}
-    @if (Model.LegalEntity != 0)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Legal entity")).TermString :
-            </div>
-            <div class="col-9">
-                @if (Model.LegalEntity == 1)
-                {
-                    <p>@Term.Find(x => x.InternalName.Equals("No")).TermString</p>
-                }
-                @if (Model.LegalEntity == 2)
-                {
-                    <p>@Term.Find(x => x.InternalName.Equals("Yes")).TermString</p>
-                }
-            </div>
-        </div>}
-    @if (Model.Internal != 0)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Internal")).TermString :
-            </div>
-            <div class="col-9">
-                @if (Model.LegalEntity == 1)
-                {
-                    <p>@Term.Find(x => x.InternalName.Equals("External")).TermString</p>
-                }
-                @if (Model.LegalEntity == 2)
-                {
-                    <p>@Term.Find(x => x.InternalName.Equals("Internal")).TermString</p>
-                }
-            </div>
-        </div>}
-    @if (Model.IAmMemberOfOrganization!= 0)
-    {<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("I am a member")).TermString :
-            </div>
-            <div class="col-9">
-                @if (Model.LegalEntity == 1)
-                {
-                    <p>@Term.Find(x => x.InternalName.Equals("No")).TermString</p>
-                }
-                @if (Model.LegalEntity == 2)
-                {
-                    <p>@Term.Find(x => x.InternalName.Equals("Yes")).TermString</p>
-                }
-            </div>
-        </div>}
-</div>
-@*<img src="~/images/icons/Organizations.png" width="50" height="50" />*@
-<ejs-grid id="Grid" dataSource="@Model.SearchResult" allowPaging="true" allowSorting="true" allowResizing="true">
-    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
-    <e-grid-columns>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Organization name")).TermString" template="#OrganizationName" textAlign="Center" type="string"></e-grid-column>
-    </e-grid-columns>
-</ejs-grid>
-<script id="OrganizationName" type="text/x-template">
-    <div>
-        <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${Name}</u></a>
-
-    </div>
-</script>
+    @*<img src="~/images/icons/Persons.png" width="50" height="50" />*@
+    <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+        <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+        <e-grid-columns>
+            <e-grid-column headerText="" template="#OrganizationName" textAlign="Center" type="string"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>
+    <script id="OrganizationName" type="text/x-template">
+        <div>
+            <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${OrganizationName}</u></a>
+        </div>
+    </script>

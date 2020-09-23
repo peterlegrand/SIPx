@@ -19,16 +19,16 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> AdvancedSearch()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<FrontPersonAdvancedSearchGet>($"{_baseUrl}api/FrontPerson/AdvancedSearch/", token);
+            var response = await _client.GetProtectedAsync<PersonAdvancedSearchPost>($"{_baseUrl}api/Person/AdvancedSearch/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/AdvancedSearch", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
         [HttpPost]
-        public async Task<IActionResult> AdvancedSearch(FrontPersonAdvancedSearchGet SearchData)
+        public async Task<IActionResult> AdvancedSearch(PersonAdvancedSearchPost SearchData)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var result = await _client.PostProtectedAsync<FrontPersonAdvancedSearchGet>($"{_baseUrl}api/FrontPerson/AdvancedSearch", SearchData, token);
+            var result = await _client.PostProtectedAsync<List<PersonAdvancedSearchResult>>($"{_baseUrl}api/Person/AdvancedSearch", SearchData, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/SearchResult", token);
             ViewBag.UITerms = UITerms;
             return View("SearchResult", result);

@@ -24,6 +24,24 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View(response);
         }
+        [HttpGet]
+        public async Task<IActionResult> AdvancedSearch()
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync<ClassificationValueAdvancedSearchPost>($"{_baseUrl}api/ClassificationValue/AdvancedSearch/", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontClassificationValue/AdvancedSearch", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AdvancedSearch(ClassificationValueAdvancedSearchPost SearchData)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var result = await _client.PostProtectedAsync<List<ClassificationValueAdvancedSearchResult>>($"{_baseUrl}api/ClassificationValue/AdvancedSearch", SearchData, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontClassificationValue/SearchResult", token);
+            ViewBag.UITerms = UITerms;
+            return View("SearchResult", result);
+        }
 
     }
 

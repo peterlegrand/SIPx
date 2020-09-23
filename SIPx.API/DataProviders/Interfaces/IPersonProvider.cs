@@ -14,6 +14,8 @@ namespace SIPx.DataAccess
         Task<List<PersonList>> List();
         Task<PersonUpdateGet> UpdateGet(string UserId, int PersonId);
         bool UpdatePost(PersonUpdateGet Person);
-        Task<List<PersonSearch>> PersonSearch(string Contains, string UserId);
+        Task<List<PersonSearch>> Search(string Contains, string UserId);
+        Task<List<PersonAdvancedSearchResult>> AdvancedSearch(string UserId, PersonAdvancedSearchPost AdvancedSearch);
+        //List<PersonAdvancedSearchResult>
     }
 }

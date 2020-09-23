@@ -21,6 +21,7 @@ namespace SIPx.DataAccess
         Task<List<OrganizationList>> CreateGetOrganizationList(string UserId);
         bool CreatePostClassification(ClassificationCreatePost Classification);
         Task<List<ContentTypeCreateGet>> ContentTypesCreateGet(string UserId);
-        Task<List<ContentSearch>> ContentSearch(string Contains, string UserId);
+        Task<List<ContentSearch>> Search(string Contains, string UserId);
+        Task<List<ContentAdvancedSearchResult>> AdvancedSearch(string UserId, ContentAdvancedSearchPost AdvancedSearch);
     }
 }
