@@ -43,6 +43,12 @@ namespace SIPx.API.DataProviders
             _sqlDataAccess.SaveData<UserPreferenceUpdateGet>(usp, UserPreference);
             return true;
         }
+        public async Task<UserPreferenceGetOnePreference> GetOnePreference(string UserId, int PreferenceTypeId)
+        {
+            string usp = "usp_UserPreferenceGetOnePreference @UserId, @PreferenceTypeId";
+            var x = await _sqlDataAccess.LoadSingleRecord<UserPreferenceGetOnePreference, dynamic>(usp, new { UserId = UserId, PreferenceTypeId = PreferenceTypeId });
+            return (x);
+        }
 
 
     }

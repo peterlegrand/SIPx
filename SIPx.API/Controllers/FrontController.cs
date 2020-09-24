@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Classes;
+using SIPx.API.DataProviders;
 using SIPx.API.Models;
 using SIPx.DataAccess;
 using SIPx.Shared;
@@ -16,6 +17,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontController : Controller
     {
+        private readonly IUserPreferenceProvider _userPreferenceProvider;
         private readonly IProcessProvider _processProvider;
         private readonly IFrontProcessProvider _frontProcessProvider;
         private readonly IContentProvider _contentProvider;
@@ -23,8 +25,9 @@ namespace SIPx.API.Controllers
         private readonly IFrontProvider _frontProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontController(IProcessProvider processProvider, IFrontProcessProvider frontProcessProvider, IContentProvider contentProvider, IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontController(IUserPreferenceProvider userPreferenceProvider, IProcessProvider processProvider, IFrontProcessProvider frontProcessProvider, IContentProvider contentProvider, IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _userPreferenceProvider = userPreferenceProvider;
             _processProvider = processProvider;
             _frontProcessProvider = frontProcessProvider;
             _contentProvider = contentProvider;
@@ -33,15 +36,19 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index/{Id:int}")]
+        [HttpGet("Index/{Id}")]
         public async Task<IActionResult> Index(int Id)
         {
             
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-
-                var dashboard = await _frontProvider.FrontIndexGetDashboard(CurrentUser.Id, Id);
+                if (Id == 0)
+                {
+                    var PageOfUser = await _userPreferenceProvider.GetOnePreference(CurrentUser.Id, 2);
+                    Id = PageOfUser.IntPreference;
+                }
+                    var dashboard = await _frontProvider.FrontIndexGetDashboard(CurrentUser.Id, Id);
                 var panels = await _frontProvider.FrontIndexPanels(Id);
                 foreach(var panel in panels)
                 {

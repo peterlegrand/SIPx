@@ -21,5 +21,6 @@ namespace SIPx.Shared
         public int ProcessTemplateStageId { get; set; }
         public string Name { get; set; }
         public string ControlId { get; set; }
-        }
+        public string ControlId2 { get; set; }
+    }
 }

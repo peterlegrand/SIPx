@@ -26,8 +26,18 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> New(int Id)
         {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> New(NewProcessWithMaster Fields, string submit)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/" , token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
             ViewBag.UITerms = UITerms;
             return View(response);

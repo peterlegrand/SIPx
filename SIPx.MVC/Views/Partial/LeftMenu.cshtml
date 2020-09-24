@@ -1,233 +1,490 @@
 ﻿@using Syncfusion.EJ2
 @model List<PartialLeftUserMenu>
-    <head>
-        <script src="~/lib/jquery/jquery.min.js"></script>
+<head>
+    <script src="~/lib/jquery/jquery.min.js"></script>
 
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
-        <link href="~/css/site.css" rel="stylesheet" />
-        <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
 
-    </head>
-    <form action="/" method="post">
-        <div class="container">
-            @foreach (var Menu in Model)
+</head>
+<form action="/" method="post">
+    <div class="container">
+        @foreach (var Menu in Model)
+        {
+        <div class="row">
+
+            @if (Menu.UserMenuTypeIDLeft == 1) //Page
             {
-                <div class="row">
+                <hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-tooltip id="Tooltip" target="#Test" content="Hi">
+                            <e-content-template>
+                                <a class="text-dark " asp-area="" id="Test" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft">
+                                    @Menu.Name
+                                </a>
+                            </e-content-template>
+                        </ejs-tooltip>
 
-                    @if (Menu.UserMenuTypeIDLeft == 1) //Page
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 2) //Add process
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="Templates">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 3) //Add content
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="ContentType">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 4) //Add person
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="Create">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 5) //Advanced search
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontSearch" asp-action="Advanced">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 6) //Add project
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="Create">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 7) //Add relation
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontRelation" asp-action="Create">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 8) //Add organization
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="Create">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 9) //Search organization
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 10) //Search person
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 11) //Search content
-                    {
-                        <hr />
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox id="@Menu.LeftControl" action=""></ejs-textbox> 
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 12) //search my content
-                    {
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox id="@Menu.LeftControl"></ejs-textbox> 
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 13) //Search process
-                    {
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox placeholder="test" id="@Menu.LeftControl"></ejs-textbox> 
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 14) //Search my process
-                    {
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox id="@Menu.LeftControl"></ejs-textbox> 
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 15) // search relations
-                    {
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox id="@Menu.LeftControl"></ejs-textbox> 
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 16) // search projects
-                    {
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox id="@Menu.LeftControl"></ejs-textbox> 
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 17) // search my projects
-                    {
-                        <div class="col-10 leftMenuText">
-                            <ejs-textbox id="@Menu.LeftControl"></ejs-textbox> 
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 18) // advanced search person
-                    {
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="AdvancedSearch">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 19) // advanced search organization
-                    {
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="AdvancedSearch">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 20) // advanced search project
-                    {
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="AdvancedSearch">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 21) // advanced search content
-                    {
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="AdvancedSearch">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (Menu.UserMenuTypeIDLeft == 22) // advanced search process
-                    {
-                        <div class="col-10 leftMenuText">
-                            <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="AdvancedSearch">
-                                @Menu.Name
-                            </a>
-                        </div>
-                    }
-                    @if (@Menu.Icon.Length != 15)
-                    {
-                        <div class="col-2">
-                            <a class="text-dark " asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdRight"><img src="@Menu.Icon" width="20" height="20" /></a>
-                        </div>
-                    }
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+            }
+            @if (Menu.UserMenuTypeIDLeft == 2) //Add process
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="Templates">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="Templates">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+            }
+            @if (Menu.UserMenuTypeIDLeft == 3) //Add content
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="ContentType">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="ContentType">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.UserMenuTypeIDLeft == 4) //Add person
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.UserMenuTypeIDLeft == 5) //Advanced search
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontSearch" asp-action="Advanced">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontSearch" asp-action="Advanced">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.UserMenuTypeIDLeft == 6) //Add project
+            {
+                <hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
 
 
+            }
+            @if (Menu.UserMenuTypeIDLeft == 7) //Add relation
+            {
+                <hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontRelation" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontRelation" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.UserMenuTypeIDLeft == 8) //Add organization
+            {
+                <hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="Create">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.UserMenuTypeIDLeft == 9) //Search organization
+            {
+                <hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
+                    </div>
+                }
+                <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 10) //Search person
+            {
+                <hr />
+                <div class="col-10 leftMenuText">
+                    <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
                 </div>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 11) //Search content
+            {
+                <hr />
+                <div class="col-10 leftMenuText">
+                    <ejs-textbox id="@Menu.LeftControl" action=""></ejs-textbox>
+                </div>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 12) //search my content
+            {<ejs-tooltip id="Tooltip2" content="Hia" position=TopCenter  showTipPointer="true">
+                    <e-content-template>
+                        <div class="col-10 leftMenuText">
+                            <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
+                        </div>
+                    </e-content-template>
+                </ejs-tooltip>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 13) //Search process
+            {
+                <div class="col-10 leftMenuText">
+                    <ejs-textbox placeholder="test" id="@Menu.LeftControl"></ejs-textbox>
+                </div>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 14) //Search my process
+            {
+                <div class="col-10 leftMenuText">
+                    <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
+                </div>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 15) // search relations
+            {
+                <div class="col-10 leftMenuText">
+                    <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
+                </div>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 16) // search projects
+            {
+                <div class="col-10 leftMenuText">
+                    <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
+                </div>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 17) // search my projects
+            {
+                <div class="col-10 leftMenuText">
+                    <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
+                </div>
+            }
+            @if (Menu.UserMenuTypeIDLeft == 18) // advanced search person
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
 
             }
+            @if (Menu.UserMenuTypeIDLeft == 19) // advanced search organization
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.UserMenuTypeIDLeft == 20) // advanced search project
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.UserMenuTypeIDLeft == 21) // advanced search content
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.UserMenuTypeIDLeft == 22) // advanced search process
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 1)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdRight"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 2)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="Templates"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 3)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="ContentType"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 4)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="Create"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 5)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontSearch" asp-action="Advanced"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 6)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="Create"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 7)
+            {
+
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontRelation" asp-action="Create"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 8)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="Create"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 18)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 19)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 20)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 21)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 22)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+
+
         </div>
-    </form>
-    <style>
-        .leftMenuText {
-            font-size: small
+
         }
-    </style>
-    <script>
-        // Get the input field
-        var OrganizationSearch = document.getElementById("OrganizationSearch");
+    </div>
+</form>
+<style>
+    .leftMenuText {
+        font-size: small
+    }
+</style>
+<script>
+    // Get the input field
+    var OrganizationSearch = document.getElementById("OrganizationSearch");
 
-        // Execute a function when the user releases a key on the keyboard
-        OrganizationSearch.addEventListener("keyup", function (event) {
-            // Number 13 is the "Enter" key on the keyboard
-            if (event.keyCode === 13) {
-                // Cancel the default action, if needed
-                event.preventDefault();
-                // Trigger the button element with a click
-                window.location.href = "/FrontOrganization/QuickSearch?Search=" + document.getElementById("OrganizationSearch").value;
-            }
-        });
+    // Execute a function when the user releases a key on the keyboard
+    OrganizationSearch.addEventListener("keyup", function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            window.location.href = "/FrontOrganization/QuickSearch?Search=" + document.getElementById("OrganizationSearch").value;
+        }
+    });
 
-        var PersonSearch = document.getElementById("PersonSearch");
+    var PersonSearch = document.getElementById("PersonSearch");
 
-        // Execute a function when the user releases a key on the keyboard
-        PersonSearch.addEventListener("keyup", function (event) {
-            // Number 13 is the "Enter" key on the keyboard
-            if (event.keyCode === 13) {
-                // Cancel the default action, if needed
-                event.preventDefault();
-                // Trigger the button element with a click
-                window.location.href = "/FrontPerson/QuickSearch?Search=" + document.getElementById("PersonSearch").value;
-            }
-        });
-    </script>
+    // Execute a function when the user releases a key on the keyboard
+    PersonSearch.addEventListener("keyup", function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            window.location.href = "/FrontPerson/QuickSearch?Search=" + document.getElementById("PersonSearch").value;
+        }
+    });
+</script>

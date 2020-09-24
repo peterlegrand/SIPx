@@ -18,6 +18,8 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
 	, ProcessTemplateFields.ProcessTemplateID
 	, ProcessTemplateStageFields.ProcessTemplateStageID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this field')) Name
+	, 'ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId
+	, 'IDControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId2
 	--, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this field')) Description
 	--, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.Name,'No menu name for this field')) MenuName
 	--, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this field')) MouseOver

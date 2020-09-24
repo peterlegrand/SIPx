@@ -1507,5 +1507,5 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1505, 'Value name');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1506, 'Value description');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1507, 'Template');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1508, 'Default search page');
-
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1509, 'Classification value advanced search');
 SET IDENTITY_INSERT UITerms OFF;

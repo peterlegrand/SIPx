@@ -10,7 +10,7 @@
     <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
-            <e-grid-column headerText="" template="#ProjectName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Person")).TermString" template="#ProjectName" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="" template="#Creator" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="" template="#" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>

@@ -1147,9 +1147,9 @@ SET IDENTITY_INSERT [dbo].[OrganizationSettings] OFF
  
 SET IDENTITY_INSERT [dbo].[UserPreferences] ON 
 INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (1, 1, @User, 41, NULL, NULL, NULL, NULL, @User, getdate())
-INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (2, 2, @User, 7, NULL, NULL, NULL, NULL, @User, getdate())
+INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (2, 2, @User, 2, NULL, NULL, NULL, NULL, @User, getdate())
 INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (3, 1, @User2, 41, NULL, NULL, NULL, NULL, @User, getdate())
-INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (4, 2, @User2, 7, NULL, NULL, NULL, NULL, @User, getdate())
+INSERT [dbo].[UserPreferences] ([UserPreferenceID], [PreferenceTypeID], [UserID], [IntPreference], [StringPreference], [DateTimePreference], [GuidPreference], [LocationPreference], [ModifierID], [ModifiedDate]) VALUES (4, 2, @User2, 2, NULL, NULL, NULL, NULL, @User, getdate())
 SET IDENTITY_INSERT [dbo].[UserPreferences] OFF
 
 

@@ -80,7 +80,7 @@ namespace SIPx.MVC.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> Index(int Id=1)
+        public async Task<IActionResult> Index(int? Id=0)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<FrontIndexGetDashboard>($"{_baseUrl}api/Front/Index/"+Id, token);

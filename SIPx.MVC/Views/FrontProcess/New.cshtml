@@ -5,78 +5,82 @@
 <h1><img src="~/images/icons/Classifications.png" width="50" height="50" />New process</h1>
 <div class=" control-section">
     <div class="container">
-        @foreach (var x in Model.ProcessFields)
-        {
-            if (new[] { 3, 4 }.Contains(x.ProcessTemplateStageFieldStatusId))
+        <form method="post">
+            @Html.EditorForModel()
+            @for (int i = 0; i < Model.ProcessFields.Count; i++)
             {
-                <div class="row">
-                    @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                        <div class="font-weight-bold col-4">@x.Name</div>
-                    }
-                    @if (new[] { 1, 2 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                        <div class="col-8"> <ejs-textbox id="@x.ControlId" value="@x.StringValue"></ejs-textbox></div>
-                    }
-                    @if (new[] { 3 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                        <div class="col-8">
-                            <ejs-numerictextbox id="@x.ControlId" value="@x.IntValue"></ejs-numerictextbox>
-                        </div>
-                    }
-                    @if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                        <div class="col-8">
-                            <div id="wrapper" class="datepicker-section">
-                                <ejs-datepicker allowEdit="true" id="@x.ControlId" calendarMode="Gregorian" dayHeaderFormat="Narrow" placeholder="Choose a Date" ejs-for="@x.DateTimeValue"></ejs-datepicker>
+                <ejs-numerictextbox id="@Model.ProcessFields[i].ControlId2" ejs-for="@Model.ProcessFields[i].Sequence"></ejs-numerictextbox>
+                if (new[] { 3, 4 }.Contains(Model.ProcessFields[i].ProcessTemplateStageFieldStatusId))
+                {
+                    <div class="row">
+                        @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="font-weight-bold col-4">@Model.ProcessFields[i].Name</div>
+                        }
+                        @if (new[] { 1, 2 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="col-8"> <ejs-textbox id="@Model.ProcessFields[i].ControlId" ejs-for="@Model.ProcessFields[i].StringValue" value="@Model.ProcessFields[i].StringValue"></ejs-textbox></div>
+                        }
+                        @if (new[] { 3 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="col-8">
+                                <ejs-numerictextbox id="@Model.ProcessFields[i].ControlId" ejs-for="@Model.ProcessFields[i].IntValue" value="@Model.ProcessFields[i].IntValue"></ejs-numerictextbox>
                             </div>
-                        </div>
-                    }
-                    @if (new[] { 10 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                        <div class="offset-4 col-8">
-                            <ejs-button isPrimary="true" id="@x.ControlId">@x.Name</ejs-button>
-                        </div>
-                    }
-                    @if (new[] { 11 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                        <div class="offset-4 col-8">
-                            <ejs-button isPrimary="false" id="@x.ControlId">@x.Name</ejs-button>
-                        </div>
-                    }
-                    @if (new[] { 12 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                <div class="col-8">
-                    <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@x.StringValue" id="@x.ControlId">
-                        <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-                </div>
-                    }
-                    @if (new[] { 16 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                <div class="col-8">
-                    <ejs-dropdownlist dataSource="@Model.Projects" ejs-for="@x.IntValue" id="@x.ControlId">
-                        <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-                </div>
-                    }
-                    @if (new[] { 32 }.Contains(x.ProcessTemplateFieldTypeId))
-                    {
-                        <div class="col-8">
-                            <div class="col-9">
-                                <ejs-richtexteditor ejs-for="@x.StringValue" id="@x.ControlId" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
-                                    <e-content-template>
-                                    </e-content-template>
-                                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
-                                    </e-richtexteditor-toolbarsettings>
-                                </ejs-richtexteditor>
+                        }
+                        @if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="col-8">
+                                <div id="wrapper" class="datepicker-section">
+                                    <ejs-datepicker allowEdit="true" id="@Model.ProcessFields[i].ControlId" calendarMode="Gregorian" dayHeaderFormat="Narrow" placeholder="Choose a Date" ejs-for="@Model.ProcessFields[i].DateTimeValue"></ejs-datepicker>
+                                </div>
                             </div>
-                        </div>
-                    }
-                </div>
+                        }
+                        @if (new[] { 10 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="offset-4 col-8">
+                                <ejs-button isPrimary="true" name="submit" action="submit" value="@Model.ProcessFields[i].ControlId" id="submit">@Model.ProcessFields[i].Name</ejs-button>
+                            </div>
+                        }
+                        @if (new[] { 11 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="offset-4 col-8">
+                                <ejs-button isPrimary="false" name="submit" action="submit" value="@Model.ProcessFields[i].ControlId" id="submit">@Model.ProcessFields[i].Name</ejs-button>
+                            </div>
+                        }
+                        @if (new[] { 12 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="col-8">
+                                <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@Model.ProcessFields[i].StringValue" id="@Model.ProcessFields[i].ControlId">
+                                    <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                            </div>
+                        }
+                        @if (new[] { 16 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="col-8">
+                                <ejs-dropdownlist dataSource="@Model.Projects" ejs-for="@Model.ProcessFields[i].IntValue" id="@Model.ProcessFields[i].ControlId">
+                                    <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                            </div>
+                        }
+                        @if (new[] { 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="col-8">
+                                <div class="col-9">
+                                    <ejs-richtexteditor ejs-for="@Model.ProcessFields[i].StringValue" id="@Model.ProcessFields[i].ControlId" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                                        <e-content-template>
+                                        </e-content-template>
+                                        <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                                        </e-richtexteditor-toolbarsettings>
+                                    </ejs-richtexteditor>
+                                </div>
+                            </div>
+                        }
+                    </div>
 
+                }
             }
-        }
+        </form>
     </div>
 </div>
 <!--  DashboardLayout element declaration -->

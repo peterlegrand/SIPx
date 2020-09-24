@@ -3,40 +3,40 @@
 @model PersonAdvancedSearchPost
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person advanced search")).TermString;
     Layout = "_Layout";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@*@Term.Find(x => x.InternalName.Equals("Person")).TermString*@Person advance search
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person advanced search")).TermString
 </h1>
 <div class="container">
 
     <form method="post">
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@name
+                @Term.Find(x => x.InternalName.Equals("Contains")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Contains" ejs-for="Contains" cssClass="e-outline" placeholder="Contains" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Last name")).TermString*@Number
+                @Term.Find(x => x.InternalName.Equals("Age")).TermString
             </div>    <div class="col-9">
                 <ejs-numerictextbox id="Age" ejs-for="Age" cssClass="e-outline" placeholder="Age" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Last name")).TermString*@BirthDate
+                @Term.Find(x => x.InternalName.Equals("Birth date")).TermString
             </div>    <div class="col-9">
                 <ejs-datepicker id="BirthDate" ejs-for="BirthDate" cssClass="e-outline" placeholder="BirthDate" floatLabelType="Auto"></ejs-datepicker>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ MainOrganizationId
+                @Term.Find(x => x.InternalName.Equals("Main organization")).TermString
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="MainOrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.MainOrganizationId" value="@Model.MainOrganizationId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="OrganizationId"></e-dropdownlist-fields>
@@ -45,7 +45,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Last name")).TermString*@IsUser
+                @Term.Find(x => x.InternalName.Equals("Is user")).TermString
             </div>    <div class="col-9">
     <div class="radio-control">
         <div class="row">
@@ -64,7 +64,7 @@
 </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ RoleId
+                @Term.Find(x => x.InternalName.Equals("Role")).TermString
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="RoleId" dataSource="@Model.Roles" ejs-for="@Model.RoleId" value="@Model.RoleId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="RoleId"></e-dropdownlist-fields>
@@ -73,7 +73,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ ProjectId
+                @Term.Find(x => x.InternalName.Equals("Project")).TermString
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="ProjectId" dataSource="@Model.Projects" ejs-for="@Model.ProjectId" value="@Model.ProjectId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
@@ -82,7 +82,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ Country
+                @Term.Find(x => x.InternalName.Equals("Country")).TermString
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="CountryId" dataSource="@Model.Countries" ejs-for="@Model.CountryId" value="@Model.CountryId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="CountryId"></e-dropdownlist-fields>
@@ -91,21 +91,21 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@ProvinceState
+                @Term.Find(x => x.InternalName.Equals("Province / state")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="ProvinceState" ejs-for="ProvinceState" cssClass="e-outline" placeholder="ProvinceState" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@County
+                @Term.Find(x => x.InternalName.Equals("County")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="County" ejs-for="County" cssClass="e-outline" placeholder="County" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@City
+                @Term.Find(x => x.InternalName.Equals("City")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="City" ejs-for="City" cssClass="e-outline" placeholder="City" floatLabelType="Auto"></ejs-textbox>
             </div>
@@ -114,7 +114,7 @@
 
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ ClassificationId
+                @Term.Find(x => x.InternalName.Equals("Classification")).TermString 
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="ClassificationId" dataSource="@Model.Classifications" ejs-for="@Model.ClassificationId" value="@Model.ClassificationId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ClassificationId"></e-dropdownlist-fields>
@@ -123,7 +123,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ ClassificationValueId
+                @Term.Find(x => x.InternalName.Equals("Classification value")).TermString 
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="ClassificationValueId" dataSource="@Model.ClassificationValues" ejs-for="@Model.ClassificationValueId" value="@Model.ClassificationId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
@@ -132,8 +132,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="Search" isPrimary="true"></ejs-button>
-                <a asp-action="Index">Cancel</a>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Search")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

@@ -3,7 +3,7 @@ CREATE PROCEDURE usp_ProjectAdvancedSearch(
 	, @Contains nvarchar(500)
 	, @ParentProjectId int
 	, @ProjectTypeId int
-	, @SecurityLevelId int
+	, @SecurityLevelId int     
 	, @StatusId int
 	, @PersonId int)
 AS
