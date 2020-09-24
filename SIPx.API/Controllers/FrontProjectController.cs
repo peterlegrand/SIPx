@@ -13,6 +13,8 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontProjectController : ControllerBase
     {
+        private readonly IPersonProvider _personProvider;
+        private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly IProjectProvider _projectProvider;
         private readonly IProjectTypeProvider _projectTypeProvider;
         private readonly IFrontProjectProvider _frontProjectProvider;
@@ -24,8 +26,10 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontProjectController(IProjectProvider projectProvider, IProjectTypeProvider projectTypeProvider, IFrontProjectProvider frontProjectProvider, IClassificationPageProvider classificationPageProvider, IMasterProvider masterProvider, IMasterListProvider masterListProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontProjectController(IPersonProvider personProvider, ISecurityLevelProvider securityLevelProvider, IProjectProvider projectProvider, IProjectTypeProvider projectTypeProvider, IFrontProjectProvider frontProjectProvider, IClassificationPageProvider classificationPageProvider, IMasterProvider masterProvider, IMasterListProvider masterListProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _personProvider = personProvider;
+            _securityLevelProvider = securityLevelProvider;
             _projectProvider = projectProvider;
             _projectTypeProvider = projectTypeProvider;
             _frontProjectProvider = frontProjectProvider;
@@ -330,6 +334,57 @@ namespace SIPx.API.Controllers
                 {
                     IsSuccess = false,
                     Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("AdvancedSearch")]
+        public async Task<IActionResult> AdvancedSearch()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            {
+                var ProjectAdvancedSearch = new ProjectAdvancedSearchPost();
+                ProjectAdvancedSearch.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                ProjectAdvancedSearch.ParentProjects = await _projectProvider.List(CurrentUser.Id);
+                ProjectAdvancedSearch.Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                ProjectAdvancedSearch.ProjectTypes = await _projectTypeProvider.List(CurrentUser.Id);
+                ProjectAdvancedSearch.Persons = await _personProvider.List();
+//                ProjectAdvancedSearch = await _projectProvider.FrontProjectAdvancedSearchGet(CurrentUser.Id);
+                return Ok(ProjectAdvancedSearch);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+        [HttpPost("AdvancedSearch")]
+        public async Task<IActionResult> AdvancedSearch(ProjectAdvancedSearchPost AdvancedSearch)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            AdvancedSearch.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _ProjectProvider.CreatePostCheck(Project);
+                //if (CheckString.Length == 0)
+                //{
+
+                if (AdvancedSearch.Contains == null)
+                { AdvancedSearch.Contains = ""; }
+
+                var Result = await _projectProvider.AdvancedSearch(AdvancedSearch);
+                return Ok(Result);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new

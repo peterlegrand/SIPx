@@ -97,7 +97,7 @@ namespace SIPx.DataAccess
         public Task<List<ProcessAdvancedSearchResult>> AdvancedSearch(string UserId, ProcessAdvancedSearchPost AdvancedSearch)
         {
             string usp = "usp_ProcessAdvancedSearch @UserId, @Contains, @Number, @DateFrom, @DateTo, @SelectedUserId, @OrganizationId, @ProjectId, @LanguageId, @ClassificationId, @ClassificationValueId, @ContentId, @CountryId, @SecurityLevelId, @RoleId, @PersonId, @ProcessTemplateStageTypeId ";
-            return _sqlDataAccess.LoadData<ProcessAdvancedSearchResult, dynamic>(usp, new { UserId, AdvancedSearch });
+            return _sqlDataAccess.LoadData<ProcessAdvancedSearchResult, dynamic>(usp,  AdvancedSearch );
         }
 
     }

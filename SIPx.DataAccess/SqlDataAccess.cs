@@ -39,6 +39,16 @@ namespace SIPx.DataAccess
                 return data.ToList();
             }
         }
+        public async Task<List<T>> LoadData4<T, U>(string sql, U parameters)
+        {
+            string connectionString = _config.GetConnectionString("DefaultConnection");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = await connection.QueryAsync<T>(sql, parameters, commandType: CommandType.StoredProcedure);
+                return data.ToList();
+            }
+        }
+
         public async Task<List<T>> LoadData<T, U>(string sql)
         {
             string connectionString = _config.GetConnectionString("DefaultConnection");
@@ -77,6 +87,17 @@ namespace SIPx.DataAccess
                 var data = await connection.ExecuteAsync(sql, parameters);
             }
         }
+
+        public async Task<List<T>> LoadData2<T, U>(string sql, U parameters)
+        {
+            string connectionString = _config.GetConnectionString("DefaultConnection");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = await connection.QueryAsync<T>(sql, parameters, commandType: CommandType.StoredProcedure);
+                return data.ToList();
+            }
+        }
+
         public async Task SaveData2<T>(string sql, T parameters)
         {
             string connectionString = _config.GetConnectionString("DefaultConnection");

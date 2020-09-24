@@ -63,7 +63,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> AdvancedSearch(ContentAdvancedSearchPost SearchData)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            var result = await _client.PostProtectedAsync<ContentAdvancedSearchPost>($"{_baseUrl}api/FrontContent/AdvancedSearch", SearchData, token);
+            var result = await _client.PostProtectedAsync<List<ContentAdvancedSearchResult>>($"{_baseUrl}api/FrontContent/AdvancedSearch", SearchData, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/SearchResult", token);
             ViewBag.UITerms = UITerms;
             return View("SearchResult", result);

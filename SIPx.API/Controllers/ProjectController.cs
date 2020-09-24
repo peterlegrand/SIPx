@@ -245,30 +245,5 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpPost("AdvancedSearch")]
-        public async Task<IActionResult> AdvancedSearch(ProjectAdvancedSearchPost AdvancedSearch)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            AdvancedSearch.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                //var CheckString = await _ProjectProvider.CreatePostCheck(Project);
-                //if (CheckString.Length == 0)
-                //{
-                var Result = await _projectProvider.AdvancedSearch(CurrentUser.Id, AdvancedSearch);
-                return Ok(Result);
-                //}
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
     }
 }

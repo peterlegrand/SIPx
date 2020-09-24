@@ -19,7 +19,7 @@ DECLARE @FROM NVARCHAR(2200);
 DECLARE @WHERE NVARCHAR(2200);
 
 
-DECLARE ClassificationValues CURSOR 
+DECLARE ClassificationValuesCursor CURSOR 
   LOCAL STATIC READ_ONLY FORWARD_ONLY
 FOR 
 SELECT DISTINCT ClassificationValueId 
@@ -50,28 +50,28 @@ SET @FROM = @FROM+ ' AND Contains(Contents.Fulltext, ''' + trim(@Contains)  + ''
 END
 
 
-IF @OrganizationId IS NOT NULL
+IF @OrganizationId IS NOT NULL AND @OrganizationId <> 0
 BEGIN
-SET @WHERE = @WHERE + ' AND OrganizationId = ' + trim(cast(@OrganizationId as varchar(10))) 
+SET @WHERE = @WHERE + ' AND Contents.OrganizationId = ' + trim(cast(@OrganizationId as varchar(10))) 
 END
 
-IF @ProjectId IS NOT NULL
+IF @ProjectId IS NOT NULL AND @ProjectId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND ProjectId  = ' + trim(cast(@ProjectId  as varchar(10))) 
 END
 
-IF @ContentTypeId IS NOT NULL
+IF @ContentTypeId IS NOT NULL AND @ContentTypeId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND ContentTypeId = ' + trim(cast(@ContentTypeId as varchar(10))) 
 END
 
-IF @ContentStatusId IS NOT NULL
+IF @ContentStatusId IS NOT NULL AND @ContentStatusId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND ContentStatusId = ' + trim(cast(@ContentStatusId as varchar(10))) 
 END
 
 
-IF @LanguageId IS NOT NULL
+IF @LanguageId IS NOT NULL AND @LanguageId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND LanguageId = ' + trim(cast(@LanguageId as varchar(10))) 
 END
@@ -79,16 +79,18 @@ END
 
 
 DECLARE @ClassificationValueId int;
-OPEN ClassificationValues
-FETCH NEXT FROM ClassificationValues INTO @ClassificationValueId
+OPEN ClassificationValuesCursor
+FETCH NEXT FROM ClassificationValuesCursor INTO @ClassificationValueId
 WHILE @@FETCH_STATUS = 0
 BEGIN 
-SET @WHERE = @WHERE + ' AND ContentId IN (SELECT ContentId FROM ContentClassificationValues WHERE ClassificationValues = ' + trim(cast(@ClassificationValueId as varchar(10)))  + ') '
+--SET @WHERE = @WHERE + '1'
+SET @WHERE = @WHERE + ' AND ContentId IN (SELECT ContentId FROM ContentClassificationValues WHERE ClassificationValueId = ' + trim(cast(@ClassificationValueId as varchar(10)))  + ') '
+FETCH NEXT FROM ClassificationValuesCursor INTO @ClassificationValueId
 END
-CLOSE MY_CURSOR
-DEALLOCATE MY_CURSOR
+CLOSE ClassificationValuesCursor
+DEALLOCATE ClassificationValuesCursor
 
 
 SET @statement = TRIM(@FROM) + ' ' + TRIM(@WHERE)
-
+--SELECT @statement
 EXECUTE sp_executesql @statement

@@ -52,28 +52,28 @@ SET @FROM = @FROM + ') OrganizationDefaultLanguage ' +
 SET @WHERE = '  WHERE OrganizationUserLanguage.OrganizationID IS NOT NULL AND OrganizationDefaultLanguage.OrganizationID IS NOT NULL '
 
 
-IF @ParentOrganizationId IS NOT NULL
+IF @ParentOrganizationId IS NOT NULL  AND @ParentOrganizationId <>0
 BEGIN
 SET @WHERE = @WHERE + ' AND Organizations.ParentOrganizationId = ' + trim(cast(@ParentOrganizationId as varchar(10)))   
 END
 
 
-IF @OrganizationTypeId IS NOT NULL
+IF @OrganizationTypeId IS NOT NULL AND @OrganizationTypeId <>0
 BEGIN
 SET @WHERE = @WHERE + ' AND Organizations.OrganizationTypeId = ' + trim(cast(@OrganizationTypeId as varchar(10))) 
 END
 
-IF @StatusId IS NOT NULL
+IF @StatusId IS NOT NULL AND @StatusId <>0
 BEGIN
 SET @WHERE = @WHERE + ' AND Organizations.StatusId = ' + trim(cast(@StatusId as varchar(10))) 
 END
 
 
-IF @PersonId IS NOT NULL
+IF @PersonId IS NOT NULL AND @PersonId <>0
 BEGIN
 SET @WHERE = @WHERE + ' AND CAST(Organizations.OrganizationId as varchar(10) IN (SELECT ClaimValue FROM AspRoleClaims JOIN AspUserRoles ON AspRoleClaims.RoleId = AspUserRoles.RoleId JOIN Persons ON AspUserRoles.UserId = Persons.UserId WHERE PersonId = ' + trim(cast(@PersonId as varchar(10)))  + ' AND AspRoleClaims.ClaimType = ''OrganizationRight'')' 
 END
 
 SET @statement = TRIM(@FROM) + ' ' + TRIM(@WHERE)
-
+--SELECT @statement
 EXECUTE sp_executesql @statement

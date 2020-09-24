@@ -11,10 +11,16 @@
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
             <e-grid-column headerText="" template="#OrganizationName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="" template="#CreatorName" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>
     <script id="OrganizationName" type="text/x-template">
         <div>
             <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${OrganizationName}</u></a>
+        </div>
+    </script>
+    <script id="CreatorName" type="text/x-template">
+        <div>
+            <a class="nav-link text-dark font-weight-bold" href="/FrontUser/Dashboard/${CreatorId}"><u>${CreatorName}</u></a>
         </div>
     </script>

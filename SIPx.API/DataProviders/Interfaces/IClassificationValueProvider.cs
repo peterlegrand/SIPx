@@ -20,5 +20,6 @@ namespace SIPx.DataAccess
         Task<List<ClassificationValueAdvancedSearchResult>> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch);
 //        Task<string> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch);
         Task<List<ClassificationValueList>> List(string UserId);
+        Task<List<ClassificationValueList>> ListPerClassification(string UserId, int ClassificationId);
     }
 }

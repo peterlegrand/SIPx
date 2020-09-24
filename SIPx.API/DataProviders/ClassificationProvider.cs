@@ -106,5 +106,11 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ClassificationList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<ContentAdvancedSearchPostClassification>> ClassificationsWithValues(string UserId)
+        {
+            string usp = "usp_ClassificationsWithValues @UserID";
+            var x = await _sqlDataAccess.LoadData<ContentAdvancedSearchPostClassification, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
     }
 }

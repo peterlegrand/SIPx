@@ -23,5 +23,6 @@ namespace SIPx.DataAccess
         Task<List<ContentTypeCreateGet>> ContentTypesCreateGet(string UserId);
         Task<List<ContentSearch>> Search(string Contains, string UserId);
         Task<List<ContentAdvancedSearchResult>> AdvancedSearch(string UserId, ContentAdvancedSearchPost AdvancedSearch);
+        Task<List<ContentList>> List();
     }
 }

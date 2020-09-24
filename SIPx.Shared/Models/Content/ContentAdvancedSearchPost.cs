@@ -17,8 +17,7 @@ namespace SIPx.Shared
         public int ContentStatusId { get; set; }
         public int LanguageId { get; set; }
         public int NoOfClassifications { get; set; }
-        public List<int> ClassificationValueIds { get; set; }
-        public List<ClassificationValueList> ClassificationValues { get; set; }
+        public List<ContentAdvancedSearchPostClassification> Classifications { get; set; }
         public List<OrganizationList> Organizations { get; set; }
         public List<ProjectList> Projects { get; set; }
         public List<ContentTypeList> ContentTypes { get; set; }

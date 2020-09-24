@@ -24,7 +24,7 @@
             <div class="col-3">
                 @*@Term.Find(x => x.InternalName.Equals("Salutation")).TermString*@number
             </div>    <div class="col-9">
-                <ejs-textbox id="Number" ejs-for="Number" cssClass="e-outline" placeholder="Number" floatLabelType="Auto"></ejs-textbox>
+                <ejs-numerictextbox id="Number" ejs-for="Number" cssClass="e-outline" placeholder="Number" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -45,7 +45,7 @@
             <div class="col-3">
                 @*@Term.Find(x => x.InternalName.Equals("Last name")).TermString*@User
             </div>    <div class="col-9">
-                <ejs-dropdownlist id="SelectedUserId" dataSource="@Model.SelectedUsers" ejs-for="@Model.SelectedUserId" value="@Model.SelectedUserId" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="SelectedUserId" dataSource="@Model.SelectedUsers" ejs-for="@Model.SelectedUserId" value="@Model.SelectedUserId" >
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -100,7 +100,7 @@
                 @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ Content
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="ContentId" dataSource="@Model.Contents" ejs-for="@Model.ContentId" value="@Model.ContentId" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="title" value="ContentId"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Title" value="ContentId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>

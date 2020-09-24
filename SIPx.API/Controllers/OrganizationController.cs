@@ -246,7 +246,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _OrganizationProvider.CreatePostCheck(Organization);
                 //if (CheckString.Length == 0)
                 //{
-                var Result = await _organizationProvider.AdvancedSearch(CurrentUser.Id, AdvancedSearch);
+                var Result = await _organizationProvider.AdvancedSearch( AdvancedSearch);
                 return Ok(Result);
                 //}
                 return BadRequest(new

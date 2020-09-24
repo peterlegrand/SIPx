@@ -53,33 +53,33 @@ SET @FROM = @FROM + ') ProjectDefaultLanguage ' +
 SET @WHERE = '  WHERE ProjectUserLanguage.ProjectID IS NOT NULL AND ProjectDefaultLanguage.ProjectID IS NOT NULL '
 
 
-IF @ParentProjectId IS NOT NULL
+IF @ParentProjectId IS NOT NULL AND @ParentProjectId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND Projects.ParentProjectId = ' + trim(cast(@ParentProjectId as varchar(10)))   
 END
 
 
-IF @ProjectTypeId IS NOT NULL
+IF @ProjectTypeId IS NOT NULL AND @ProjectTypeId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND Projects.ProjectTypeId = ' + trim(cast(@ProjectTypeId as varchar(10))) 
 END
 
-IF @SecurityLevelId IS NOT NULL
+IF @SecurityLevelId IS NOT NULL AND @SecurityLevelId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND Projects.SecurityLevelId = ' + trim(cast(@SecurityLevelId as varchar(10))) 
 END
 
-IF @StatusId IS NOT NULL
+IF @StatusId IS NOT NULL AND @StatusId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND Projects.StatusId = ' + trim(cast(@StatusId as varchar(10))) 
 END
 
 
-IF @PersonId IS NOT NULL
+IF @PersonId IS NOT NULL AND @PersonId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND CAST(Projects.ProjectId as varchar(10) IN (SELECT ClaimValue FROM AspRoleClaims JOIN AspUserRoles ON AspRoleClaims.RoleId = AspUserRoles.RoleId JOIN Persons ON AspUserRoles.UserId = Persons.UserId WHERE PersonId = ' + trim(cast(@PersonId as varchar(10)))  + ' AND AspRoleClaims.ClaimType = ''ProjectRight'')' 
 END
 
 SET @statement = TRIM(@FROM) + ' ' + TRIM(@WHERE)
-
+--SELECT @statement
 EXECUTE sp_executesql @statement

@@ -16,6 +16,8 @@ namespace SIPx.DataAccess
         Task SaveData2<T>(string sql, T parameters);
         Task PopulateDataSIP(string sql);
         Task PopulateDataMaster(string sql);
+        Task<List<T>> LoadData2<T, U>(string sql, U parameters);
+        Task<List<T>> LoadData4<T, U>(string sql, U parameters);
 
     }
 }

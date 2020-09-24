@@ -16,6 +16,16 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontProcessController : Controller
     {
+        private readonly IProcessTemplateStageTypeProvider _processTemplateStageTypeProvider;
+        private readonly IPersonProvider _personProvider;
+        private readonly IRoleProvider _roleProvider;
+        private readonly ISecurityLevelProvider _securityLevelProvider;
+        private readonly IClassificationValueProvider _classificationValueProvider;
+        private readonly IClassificationProvider _classificationProvider;
+        private readonly IContentProvider _contentProvider;
+        private readonly ILanguageProvider _languageProvider;
+        private readonly IMasterListProvider _masterListProvider;
+        private readonly IOrganizationProvider _organizationProvider;
         private readonly IUserProvider _userProvider;
         private readonly IProjectProvider _projectProvider;
         private readonly IClaimCheck _claimCheck;
@@ -23,8 +33,18 @@ namespace SIPx.API.Controllers
         private readonly IProcessProvider _processProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontProcessController(IUserProvider userProvider, IProjectProvider projectProvider, IClaimCheck claimCheck, IFrontProcessProvider frontProcessProvider, IProcessProvider processProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontProcessController(IProcessTemplateStageTypeProvider processTemplateStageTypeProvider, IPersonProvider personProvider, IRoleProvider roleProvider, ISecurityLevelProvider securityLevelProvider, IClassificationValueProvider classificationValueProvider, IClassificationProvider classificationProvider, IContentProvider contentProvider, ILanguageProvider languageProvider, IMasterListProvider masterListProvider, IOrganizationProvider organizationProvider, IUserProvider userProvider, IProjectProvider projectProvider, IClaimCheck claimCheck, IFrontProcessProvider frontProcessProvider, IProcessProvider processProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processTemplateStageTypeProvider = processTemplateStageTypeProvider;
+            _personProvider = personProvider;
+            _roleProvider = roleProvider;
+            _securityLevelProvider = securityLevelProvider;
+            _classificationValueProvider = classificationValueProvider;
+            _classificationProvider = classificationProvider;
+            _contentProvider = contentProvider;
+            _languageProvider = languageProvider;
+            _masterListProvider = masterListProvider;
+            _organizationProvider = organizationProvider;
             _userProvider = userProvider;
             _projectProvider = projectProvider;
             _claimCheck = claimCheck;
@@ -356,5 +376,64 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("AdvancedSearch")]
+        public async Task<IActionResult> AdvancedSearch()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                var ProcessSearch = new ProcessAdvancedSearchPost();
+                ProcessSearch.SelectedUsers = await _userProvider.List();
+                ProcessSearch.Organizations = await _organizationProvider.List(CurrentUser.Id);
+                ProcessSearch.Projects = await _projectProvider.List(CurrentUser.Id);
+                ProcessSearch.Languages = await _languageProvider.ActiveList(CurrentUser.Id);
+                ProcessSearch.Classifications = await _classificationProvider.List(CurrentUser.Id);
+                ProcessSearch.ClassificationValues = await _classificationValueProvider.List(CurrentUser.Id);
+                ProcessSearch.Contents = await _contentProvider.List();
+                ProcessSearch.Countries = await _masterListProvider.CountryList(CurrentUser.Id);
+                ProcessSearch.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                ProcessSearch.Roles = await _roleProvider.List(CurrentUser.Id);
+                ProcessSearch.Persons = await _personProvider.List();
+                ProcessSearch.ProcessTemplateStageTypes = await _processTemplateStageTypeProvider.List(CurrentUser.Id);
+                return Ok(ProcessSearch);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpPost("AdvancedSearch")]
+        public async Task<IActionResult> AdvancedSearch(ProcessAdvancedSearchPost AdvancedSearch)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            AdvancedSearch.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            {
+                //var CheckString = await _ProcessProvider.CreatePostCheck(Process);
+                //if (CheckString.Length == 0)
+                //{
+                if (AdvancedSearch.Contains == null)
+                { AdvancedSearch.Contains = ""; }
+                if (AdvancedSearch.RoleId == null)
+                { AdvancedSearch.RoleId = ""; }
+                if (AdvancedSearch.SelectedUserId == null)
+                { AdvancedSearch.SelectedUserId = ""; }
+                var Result = await _processProvider.AdvancedSearch(CurrentUser.Id, AdvancedSearch);
+                return Ok(Result);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
     }
 }

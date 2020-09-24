@@ -13,6 +13,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontOrganizationController : ControllerBase
     {
+        private readonly IPersonProvider _personProvider;
         private readonly IOrganizationTypeProvider _organizationTypeProvider;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly IFrontOrganizationProvider _frontOrganizationProvider;
@@ -24,8 +25,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontOrganizationController(IOrganizationTypeProvider organizationTypeProvider, IOrganizationProvider organizationProvider, IFrontOrganizationProvider frontOrganizationProvider, IClassificationPageProvider classificationPageProvider, IMasterProvider masterProvider, IMasterListProvider masterListProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontOrganizationController (IPersonProvider personProvider, IOrganizationTypeProvider organizationTypeProvider, IOrganizationProvider organizationProvider, IFrontOrganizationProvider frontOrganizationProvider, IClassificationPageProvider classificationPageProvider, IMasterProvider masterProvider, IMasterListProvider masterListProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _personProvider = personProvider;
             _organizationTypeProvider = organizationTypeProvider;
             _organizationProvider = organizationProvider;
             _frontOrganizationProvider = frontOrganizationProvider;
@@ -106,8 +108,12 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                var OrganizationAdvancedSearch = new FrontOrganizationAdvancedSearchGet();
-                OrganizationAdvancedSearch = await _frontOrganizationProvider.FrontOrganizationAdvancedSearchGet(CurrentUser.Id);
+                var OrganizationAdvancedSearch = new OrganizationAdvancedSearchPost();
+                OrganizationAdvancedSearch.ParentOrganizations = await _organizationProvider.List(CurrentUser.Id);
+                OrganizationAdvancedSearch.Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                OrganizationAdvancedSearch.OrganizationTypes = await _organizationTypeProvider.List(CurrentUser.Id);
+                OrganizationAdvancedSearch.Persons =await _personProvider.List();
+//                OrganizationAdvancedSearch = await _organizationProvider.FrontOrganizationAdvancedSearchGet(CurrentUser.Id);
                 return Ok(OrganizationAdvancedSearch);
             }
             return BadRequest(new
@@ -119,7 +125,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("AdvancedSearch")]
-        public async Task<IActionResult> AdvancedSearch(FrontOrganizationAdvancedSearchGet SearchData)
+        public async Task<IActionResult> AdvancedSearch(OrganizationAdvancedSearchPost SearchData)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
@@ -128,9 +134,10 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{
-               var SearchResult = await _frontOrganizationProvider.FrontOrganizationAdvancedSearchPost(SearchData);
-                SearchData.SearchResult = SearchResult;
-                return Ok(SearchData);
+                if (SearchData.Contains == null)
+                { SearchData.Contains = ""; }
+                var SearchResult = await _organizationProvider.AdvancedSearch(SearchData);
+                return Ok(SearchResult);
                 //}
                 return BadRequest(new
                 {

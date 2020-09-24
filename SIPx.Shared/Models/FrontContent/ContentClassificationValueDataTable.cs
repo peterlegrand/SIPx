@@ -11,7 +11,7 @@ namespace SIPx.Shared
             {
                 DataTable ProcessFields = new DataTable();
 //                ProcessFields.Columns.Add("ContentID", typeof(Int32));
-                ProcessFields.Columns.Add("ClassificationCalueID", typeof(Int32));
+                ProcessFields.Columns.Add("ClassificationValueId", typeof(Int32));
                 ProcessFields.Columns.Add("ClassificationId", typeof(Int32));
                 ProcessFields.Columns.Add("CreatorId", typeof(string));
                 ProcessFields.Columns.Add("CreatedDate", typeof(DateTime));

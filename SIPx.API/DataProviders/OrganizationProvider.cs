@@ -102,10 +102,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<OrganizationSearch, dynamic>(usp, new { Contains, UserId });
 
         }
-        public Task<List<OrganizationAdvancedSearchResult>> AdvancedSearch(string UserId, OrganizationAdvancedSearchPost AdvancedSearch)
+        public Task<List<OrganizationAdvancedSearchResult>> AdvancedSearch(OrganizationAdvancedSearchPost AdvancedSearch)
         {
             string usp = "usp_OrganizationAdvancedSearch @UserId, @Contains, @ParentOrganizationId, @OrganizationTypeId, @StatusId, @PersonId ";
-            return _sqlDataAccess.LoadData<OrganizationAdvancedSearchResult, dynamic>(usp, new { UserId, AdvancedSearch });
+            return _sqlDataAccess.LoadData<OrganizationAdvancedSearchResult, dynamic>(usp, AdvancedSearch );
         }
 
     }

@@ -110,5 +110,11 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<ClassificationValueList>> ListPerClassification(string UserId, int ClassificationId)
+        {
+            string usp = "usp_ClassificationValueListPerClassification @UserID, @ClassificationId";
+            var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId, ClassificationId = ClassificationId });
+            return x;
+        }
     }
 }
