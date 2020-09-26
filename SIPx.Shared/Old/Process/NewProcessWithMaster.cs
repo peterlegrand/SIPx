@@ -12,5 +12,8 @@ namespace SIPx.Shared
         public List<NewProcessFromDB> ProcessFields { get; set; }
         public List<UserList> Users { get; set; }
         public List<ProjectList> Projects { get; set; }
+        public int ProcessTemplateId { get; set; }
+        public string UserId { get; set; }
+        public int ProcessTemplateFlowId { get; set; }
     }
 }

@@ -4,17 +4,186 @@ using SIPx.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace SIPx.API.Classes
 {
-    public  class NewProcessCheckAllowed
+    public class NewProcessCheckAllowed
     {
+        private readonly IUserProvider _userProvider;
         private readonly IProcessProvider _processProvider;
+        private readonly IFrontProcessProvider _frontProcessProvider;
 
-        public NewProcessCheckAllowed(IProcessProvider ProcessProvider)
+        public NewProcessCheckAllowed(IUserProvider userProvider, IProcessProvider ProcessProvider, IFrontProcessProvider frontProcessProvider)
         {
+            _userProvider = userProvider;
             _processProvider = ProcessProvider;
+            _frontProcessProvider = frontProcessProvider;
+        }
+        public async Task<int> ReturnProcessTemplateFlowPass(SipUser CurrentUser, NewProcessWithMaster NewProcess)
+        {
+            var Flows = await _frontProcessProvider.FrontProcessNewReturnFlows(NewProcess.ProcessTemplateId);
+            foreach (var FlowId in Flows)
+            {
+                string From = "SELECT ProcessTemplateFlowId FROM ProcessTemplateFlowPasses";
+                string Where = " WHERE ProcessTemplateFlowId = " + FlowId + " AND ";
+                var Passes = await _frontProcessProvider.FrontProcessNewReturnFlowPasses(FlowId);
+                foreach (var Pass in Passes)
+                {
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 1) //Creator is user
+                    {
+                        //                    From = From + NewProcess. '  '
+                        //Have to check if this can be used in general or only new processes
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 2) //  Field
+                    {
+                        if (!new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Pass.ProcessTemplateFieldTypeId))
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 3) //  Security level user
+                    {
+                        var UserSecurityLevel = await _userProvider.UserSecurityLevel(CurrentUser.Id);
+                        if (Pass.ComparisonOperatorID == 1)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                        if (Pass.ComparisonOperatorID == 2 && UserSecurityLevel != Pass.ProcessTemplateFlowConditionInt)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                        if (Pass.ComparisonOperatorID == 3 && UserSecurityLevel <= Pass.ProcessTemplateFlowConditionInt)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                        if (Pass.ComparisonOperatorID == 4 && UserSecurityLevel >= Pass.ProcessTemplateFlowConditionInt)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                        if (Pass.ComparisonOperatorID == 5 && UserSecurityLevel < Pass.ProcessTemplateFlowConditionInt)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                        if (Pass.ComparisonOperatorID == 6 && UserSecurityLevel > Pass.ProcessTemplateFlowConditionInt)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                        if (Pass.ComparisonOperatorID == 7 && UserSecurityLevel == Pass.ProcessTemplateFlowConditionInt)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 4) // Role user
+                    {
+                        var Roles = await _userProvider.UserRoles(CurrentUser.Id);
+                        if (!Roles.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).StringValue ?? ""))
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                    }
+                    //PETER not sure yet
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 5) //  Manager user field
+                    {
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 6) //  Organization user
+                    {
+                        var Organizations = await _userProvider.UserOrganizations(CurrentUser.Id);
+                        if (!Organizations.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 7) //  Organization role user
+                    {
+                        var RoleId = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldIDRole).StringValue ?? "";
+                        var Organizations = await _userProvider.UserRoleOrganizations(CurrentUser.Id, RoleId);
+                        if (!Organizations.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                    }
+                    //PETER TODO
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 8) //  Organization parent user
+                    { }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 9) //  Organization parent role user
+                    { }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 10) // Project user
+                    {
+                        var Projects = await _userProvider.UserProjects(CurrentUser.Id);
+                        if (!Projects.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 11) //Project role user
+                    {
+                        var RoleId = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldIDRole).StringValue ?? "";
+                        var Projects = await _userProvider.UserRoleProjects(CurrentUser.Id, RoleId);
+                        if (!Projects.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 12) //Project parent user
+                    { }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 13) //Project parent role user
+                    { }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 14) //Default organization user
+                    {
+                        var Organization = await _userProvider.UserDefaultOrganization(CurrentUser.Id);
+                        var OrganizationInField = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0;
+                        if (Organization != OrganizationInField)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 15) //Open bracket
+                    {
+                        Where = Where + " ( ";
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 16) //and
+                    {
+                        Where = Where + " AND ";
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 17) //or
+                    {
+                        Where = Where + " OR ";
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 18) //Close bracket
+                    {
+                        Where = Where + " ) ";
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 19) //User
+                    {
+                        var UserInField = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).StringValue ?? "";
+                        if (CurrentUser.Id != UserInField)
+                        {
+                            Where = Where + " 1=2 ";
+                        }
+                    }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 20) //Relation to creator
+                    { }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 21) //Relation to user field
+                    { }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 22) //Classification relation
+                    { }
+                    if (Pass.ProcessTemplateFlowConditionTypeId == 23) //Classification relation type
+                    { }
+                }
+                if (Where == " WHERE ProcessTemplateFlowId = " + FlowId + " AND ")
+                { Where = " WHERE ProcessTemplateFlowId = " + FlowId; }
+                var SQLStatement = From + Where;
+                var x = await _frontProcessProvider.ReturnProcessTemplateFlowPass(CurrentUser.Id, SQLStatement);
+                if (x.Count() > 0)
+                {
+                    return x.First();
+                }
+               
+            }
+            return 0;
         }
         public async Task<List<NewProcessTemplateList>> CheckProcessTemplateID(SipUser CurrentUser, int TemplateToCheckId)
         {
@@ -198,7 +367,7 @@ namespace SIPx.API.Classes
             }
             List<NewProcessTemplateList> NewTemplateList = await _processProvider.CreateGetTemplateList(SQLJOIN + SQLWhere);
             return NewTemplateList;
-            
+
         }
     }
 }

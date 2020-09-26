@@ -216,5 +216,55 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontProcessViewGetField, dynamic>(usp, new { UserId = UserId, ProcessId = ProcessId });
             return x;
         }
+        public async Task<List<int>> FrontProcessNewReturnFlows(int ProcessTemplateId)
+        {
+            string usp = "usp_FrontProcessNewReturnFlows @ProcessTemplateId";
+            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { ProcessTemplateId = ProcessTemplateId });
+            return x;
+        }
+        public async Task<List<FrontProcessNewReturnFlowPass>> FrontProcessNewReturnFlowPasses(int ProcessTemplateFlowId)
+        {
+            string usp = "usp_FrontProcessNewReturnFlowPasses @ProcessTemplateFlowId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessNewReturnFlowPass, dynamic>(usp, new { ProcessTemplateFlowId = ProcessTemplateFlowId });
+            return x;
+        }
+        public async Task<List<int>> ReturnProcessTemplateFlowPass(string UserId, string SQLStatement)
+        {
+            string usp = "usp_NewProcessPass @UserId, @SQLStatement";
+            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { UserId = UserId , SQLStatement = SQLStatement });
+            return x;
+        }
+        public async Task<bool> FrontProcessCreatePost(NewProcessWithMaster Process)
+        {
+
+            DataTable ProcessFieldValueTable = new DataTable();
+            ProcessFieldValueTable.Columns.Add("ProcessTemplateId", typeof(Int32));
+            ProcessFieldValueTable.Columns.Add("ProcessTemplateFieldId", typeof(Int32));
+            ProcessFieldValueTable.Columns.Add("StringValue", typeof(string));
+            ProcessFieldValueTable.Columns.Add("IntValue", typeof(Int32));
+            ProcessFieldValueTable.Columns.Add("DateTimeValue", typeof(DateTime));
+            //var xy = new List<DataTable>();
+
+            foreach (var x in Process.ProcessFields)
+            {
+                //if (x.ProcessTemplateFieldId != null && x.ClassificationValueId != 0)
+                //{
+                ProcessFieldValueTable.Rows.Add(
+
+                    x.ProcessTemplateId
+                            , x.ProcessTemplateFieldId
+                            , x.StringValue
+                            , x.IntValue
+                            , x.DateTimeValue
+                            );
+                //}
+            }
+            string usp = "usp_ProcessCreatePost @UserId, @ProcessTemplateId , @ProcessTemplateFlowId, , @ProcessFieldValueTable ";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId  = Process.UserId, ProcessTemplateId = Process.ProcessTemplateId, ProcessTemplateFlowId = Process.ProcessTemplateFlowId , ProcessFieldValueTable = ProcessFieldValueTable.AsTableValuedParameter("udt_ProcessFieldsNew") });
+            return true;
+
+
+        }
+
     }
 }

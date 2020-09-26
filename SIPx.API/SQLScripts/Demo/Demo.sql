@@ -493,7 +493,7 @@ INSERT INTO ProcessTemplateFields (ProcessTemplateFieldId, ProcessTemplateId, Pr
 , (29,3,32, @User, @User, GETDATE(), GETDATE())
 , (30,3,10, @User, @User, GETDATE(), GETDATE())
 , (31,3,10, @User, @User, GETDATE(), GETDATE())
-, (32,1,36, @User, @User, GETDATE(), GETDATE())
+, (32,1,12, @User, @User, GETDATE(), GETDATE())
 , (33,2,12, @User, @User, GETDATE(), GETDATE())
 , (34,1,28, @User, @User, GETDATE(), GETDATE())
 , (35,1,33, @User, @User, GETDATE(), GETDATE())

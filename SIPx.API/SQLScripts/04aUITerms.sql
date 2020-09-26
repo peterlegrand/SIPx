@@ -1508,4 +1508,18 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1506, 'Value description');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1507, 'Template');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1508, 'Default search page');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1509, 'Classification value advanced search');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1510, 'Countains');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1511, 'Age');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1512, 'Main organization');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1513, 'Contains');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1514, 'Date from');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1515, 'Date to');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1516, 'Content advanced search');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1517, 'Process advanced search');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1518, 'Project advanced search');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1519, 'Classification value search result');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1520, 'Content search result');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1521, 'Process search result');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1522, 'Project search result');
+
 SET IDENTITY_INSERT UITerms OFF;

@@ -1,18 +1,18 @@
 ﻿@model List<ProcessAdvancedSearchResult>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person search result")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process search result")).TermString;
     Layout = "_Layout";
 }
-@*<h1>@Term.Find(x => x.InternalName.Equals("Person search result")).TermString</h1>*@
+<h1>@Term.Find(x => x.InternalName.Equals("Process search result")).TermString</h1>
 <div class="container">
     @*<img src="~/images/icons/Persons.png" width="50" height="50" />*@
     <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
-            <e-grid-column headerText="" template="#Subject" textAlign="Center" type="string"></e-grid-column>
-            <e-grid-column headerText="" template="#Template" textAlign="Center" type="string"></e-grid-column>
-            <e-grid-column headerText="" template="#Stage" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" template="#Subject" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Process template")).TermString" template="#Template" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" template="#Stage" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>
     <script id="Subject" type="text/x-template">

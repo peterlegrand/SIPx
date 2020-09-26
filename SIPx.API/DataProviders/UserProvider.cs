@@ -81,5 +81,40 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<UserList>(usp);
 
         }
+        public Task<int> UserSecurityLevel(string UserId)
+        {
+            string usp = "usp_UserSecurityLevel @UserId";
+            return _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { UserId = UserId });
+        }
+        public Task<List<string>> UserRoles(string UserId)
+        {
+            string usp = "usp_UserRoles @UserId";
+            return _sqlDataAccess.LoadData<string, dynamic>(usp, new { UserId = UserId });
+        }
+        public Task<List<int>> UserOrganizations(string UserId)
+        {
+            string usp = "usp_UserOrganizations @UserId";
+            return _sqlDataAccess.LoadData<int, dynamic>(usp, new { UserId = UserId });
+        }
+        public Task<int> UserDefaultOrganization(string UserId)
+        {
+            string usp = "usp_UserDefaultOrganization @UserId";
+            return _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { UserId = UserId });
+        }
+        public Task<List<int>> UserProjects(string UserId)
+        {
+            string usp = "usp_UserProjects @UserId";
+            return _sqlDataAccess.LoadData<int, dynamic>(usp, new { UserId = UserId });
+        }
+        public Task<List<int>> UserRoleOrganizations(string UserId, string RoleId)
+        {
+            string usp = "usp_UserRoleOrganizations @UserId, @RoleId";
+            return _sqlDataAccess.LoadData<int, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
+        }
+        public Task<List<int>> UserRoleProjects(string UserId, string RoleId)
+        {
+            string usp = "usp_UserRoleProjects @UserId, @RoleId";
+            return _sqlDataAccess.LoadData<int, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
+        }
     }
 }

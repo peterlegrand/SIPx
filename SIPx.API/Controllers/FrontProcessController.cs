@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -75,11 +76,11 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("New/{Id:int}")]
-        public async Task<IActionResult> New(int Id)
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var testifallowed = new NewProcessCheckAllowed(_processProvider);
+            var testifallowed = new NewProcessCheckAllowed(_userProvider, _processProvider, _frontProcessProvider);
 
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
             {
@@ -433,6 +434,35 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(NewProcessWithMaster Fields)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var testifallowed = new NewProcessCheckAllowed(_userProvider, _processProvider,_frontProcessProvider);
+
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+            {
+
+                //Check if the template is allowed to be created
+                var Condition = await testifallowed.CheckProcessTemplateID(CurrentUser, Fields.ProcessTemplateId);
+                var Pass = await testifallowed.ReturnProcessTemplateFlowPass(CurrentUser, Fields);
+                if(Condition.Count(x => x.ProcessTemplateId == Fields.ProcessTemplateId)>0 && Pass!= 0)
+                {
+                    Fields.ProcessTemplateFlowId = Pass;
+                    _frontProcessProvider.FrontProcessCreatePost(Fields);
+                }
+             
+                    return Ok(Fields);// CurrentUser.LanguageId));
+                
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
         }
 
     }

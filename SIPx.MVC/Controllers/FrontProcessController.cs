@@ -24,23 +24,27 @@ namespace SIPx.MVC.Controllers
             return View(response);
         }
         [HttpGet]
-        public async Task<IActionResult> New(int Id)
+        public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
+            var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
 
         }
         [HttpPost]
-        public async Task<IActionResult> New(NewProcessWithMaster Fields, string submit)
+        public async Task<IActionResult> Create(NewProcessWithMaster Fields, string submit)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/" , token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
+            await _client.PostProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/Create", Fields, token);
+            //            var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/" , token);
+            //          var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
+            //        ViewBag.UITerms = UITerms;
+            //      return View(response);
+            return RedirectToAction("Index");
+
+            //PETER TODO Add the button pressed to the pass
 
         }
         public async Task<IActionResult> Edit(int Id)

@@ -20,13 +20,17 @@ namespace SIPx.API.Controllers
     [ApiController]
     public class ProcessController : ControllerBase
     {
+        private readonly IUserProvider _userProvider;
+        private readonly IFrontProcessProvider _frontProcessProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessProvider _processProvider;
         private readonly Microsoft.AspNetCore.Identity.UserManager<SipUser> _userManager;
         private readonly ICheckProvider _checkProvider;
 
-        public ProcessController(IClaimCheck claimCheck, IProcessProvider ProcessProvider, Microsoft.AspNetCore.Identity.UserManager<SipUser> userManager, ICheckProvider checkProvider)
+        public ProcessController(IUserProvider userProvider, IFrontProcessProvider frontProcessProvider, IClaimCheck claimCheck, IProcessProvider ProcessProvider, Microsoft.AspNetCore.Identity.UserManager<SipUser> userManager, ICheckProvider checkProvider)
         {
+            _userProvider = userProvider;
+            _frontProcessProvider = frontProcessProvider;
             _claimCheck = claimCheck;
             _processProvider = ProcessProvider;
             _userManager = userManager;
@@ -456,7 +460,7 @@ namespace SIPx.API.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var testifallowed = new NewProcessCheckAllowed(_processProvider);
+            var testifallowed = new NewProcessCheckAllowed(_userProvider, _processProvider, _frontProcessProvider);
 
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
             {
@@ -478,7 +482,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> CreateNewProcess(NewProcessFromAPI ProcessesFromAPI)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var testifallowed = new NewProcessCheckAllowed(_processProvider);
+            var testifallowed = new NewProcessCheckAllowed(_userProvider, _processProvider, _frontProcessProvider);
             DataTable ProcessFields = NewProcessField.CreateTable();
 
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "186"))  //11
