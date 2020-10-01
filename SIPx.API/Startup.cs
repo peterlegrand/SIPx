@@ -79,6 +79,7 @@ namespace SIPx.API
             services.AddTransient<IProcessTemplateFlowConditionProvider, ProcessTemplateFlowConditionProvider>();
             services.AddTransient<IProcessTemplateFlowConditionTypeProvider, ProcessTemplateFlowConditionTypeProvider>();
 
+            services.AddTransient<IUserRoleProvider, UserRoleProvider>();
             services.AddTransient<IRoleClaimProvider, RoleClaimProvider>();
             services.AddTransient<IFrontPersonProvider, FrontPersonProvider>();
             services.AddTransient<IFrontClassificationValueProvider, FrontClassificationValueProvider>();

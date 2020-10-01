@@ -1,15 +1,23 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model NewProcessWithMaster
+@model FrontProcessNewProcessWithMaster
 
 <h1><img src="~/images/icons/Classifications.png" width="50" height="50" />New process</h1>
 <div class=" control-section">
     <div class="container">
         <form method="post">
-            @Html.EditorForModel()
+            <p hidden>
+                <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId"></ejs-numerictextbox>
+            </p>
+            @*  @Html.EditorForModel()*@
             @for (int i = 0; i < Model.ProcessFields.Count; i++)
             {
-                <ejs-numerictextbox id="@Model.ProcessFields[i].ControlId2" ejs-for="@Model.ProcessFields[i].Sequence"></ejs-numerictextbox>
+
+                <div hidden>FieldId</div>
+            <p hidden>
+                    <ejs-numerictextbox id="@Model.ProcessFields[i].ControlId2" ejs-for="@Model.ProcessFields[i].ProcessTemplateFieldId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="@Model.ProcessFields[i].ControlId3" ejs-for="@Model.ProcessFields[i].ProcessTemplateFieldTypeId"></ejs-numerictextbox>
+                </p>
                 if (new[] { 3, 4 }.Contains(Model.ProcessFields[i].ProcessTemplateStageFieldStatusId))
                 {
                     <div class="row">

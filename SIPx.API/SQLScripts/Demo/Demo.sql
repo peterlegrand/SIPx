@@ -810,8 +810,8 @@ SET IDENTITY_INSERT ProjectLanguages OFF;
 SET IDENTITY_INSERT ProcessTemplateFlowConditions ON;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionId, ProcessTemplateId, ProcessTemplateFlowID
 , ProcessTemplateFlowConditionTypeId , ComparisonOperatorId, ProcessTemplateFlowConditionInt, Sequence, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-(1, 1, 1, 3, 6, 3, 1, @User, @User, GETDATE(), GETDATE())
-,(2, 2, 5, 3, 6, 6, 2, @User, @User, GETDATE(), GETDATE())
+(1, 1, 1, 3, 5, 3, 1, @User, @User, GETDATE(), GETDATE())
+,(2, 2, 5, 3, 5, 6, 2, @User, @User, GETDATE(), GETDATE())
 ,(3, 3, 9, 3, 6, 5 , 3, @User, @User, GETDATE(), GETDATE())
 ;
 INSERT INTO ProcessTemplateFlowConditions (ProcessTemplateFlowConditionId, ProcessTemplateId, ProcessTemplateFlowID
@@ -1159,3 +1159,13 @@ INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRig
 INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconId], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 13, 13, @User, N'Search', N'Search process', 11, 11, 11, 3, @User, @User, Getdate(), Getdate())
 SET IDENTITY_INSERT [dbo].[UserMenus] OFF
 
+
+SET IDENTITY_INSERT [dbo].[ProcessTemplateFlowPasses] ON 
+INSERT [dbo].[ProcessTemplateFlowPasses] ([ProcessTemplateFlowPassID], [ProcessTemplateID], [ProcessTemplateFlowID], [Sequence], [ProcessTemplateFlowPassTypeID], [ProcessTemplateFieldID], [ProcessTemplateFieldIDRole], [ComparisonOperatorID], [ProcessTemplateFlowPassString], [ProcessTemplateFlowPassInt], [ProcessTemplateFlowPassDate], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) 
+VALUES (1, 1, 1, 1, 3, NULL, NULL, 5, NULL, NULL, NULL, @User, @User, getdate(), getdate())
+SET IDENTITY_INSERT [dbo].[ProcessTemplateFlowPasses] OFF
+
+SET IDENTITY_INSERT [dbo].[ProcessTemplateFlowPassLanguages] ON 
+INSERT [dbo].[ProcessTemplateFlowPassLanguages] ([ProcessTemplateFlowPassLanguageID], [ProcessTemplateID], [ProcessTemplateFlowID], [ProcessTemplateFlowPassID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) 
+VALUES (1, 1, 1, 1, 41, N'Security level', N'Security level', N'Security level', N'Security level', @User, @User, getdate(), getdate())
+SET IDENTITY_INSERT [dbo].[ProcessTemplateFlowPassLanguages] OFF

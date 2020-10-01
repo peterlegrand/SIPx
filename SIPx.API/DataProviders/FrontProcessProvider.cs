@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,10 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<List<NewProcessShowTemplate>> NewProcessShowTemplate(string UserId)
+        public async Task<List<NewProcessTemplateList>> NewProcessShowTemplate(string UserId)
         {
             string usp = "usp_FrontNewProcessShowTemplate @UserID";
-            var x = await _sqlDataAccess.LoadData<NewProcessShowTemplate, dynamic>(usp, new { UserId = UserId });
+            var x = await _sqlDataAccess.LoadData<NewProcessTemplateList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
 
@@ -45,7 +46,7 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<bool> FrontProcessEditPost(FrontProcessEditGet Process, string UserId)
+        public async Task<bool> FrontProcessEditPost(FrontProcessUpdateGet Process, string UserId)
         {
 //            DataTable fields = new DataTable();
 //            fields.Columns.Add("ProcessFieldId", typeof(int));
@@ -79,7 +80,7 @@ namespace SIPx.DataAccess
             var xy = new List<ProcessFieldsToDataTable>();
 
            // for (int i = 0; i < Process.ProcessFields.Count; i++)
-            foreach (var x in Process.ProcessFields)
+            foreach (var x in Process.Fields)
             {
                 if (x.StringValue == null)
                 { x.StringValue = ""; }
@@ -111,97 +112,19 @@ namespace SIPx.DataAccess
                 //xy.Add(y);
                 ProcessFieldTable.Rows.Add(
 
-                x.ProcessfieldId
+                x.ProcessFieldId
                         , x.ProcessId
                         , x.StringValue
                         , x.IntValue
                         , x.DateTimeValue
                         , x.ModifierId
                         , x.ModifiedDate);
-                //Process.ProcessFields[i].ProcessfieldId
-                //, Process.ProcessFields[i].ProcessId
-                //, Process.ProcessFields[i].StringValue
-                //, Process.ProcessFields[i].IntValue
-                //, Process.ProcessFields[i].DateTimeValue
-                //, Process.ProcessFields[i].ModifierId
-                //, Process.ProcessFields[i].ModifiedDate);
+               
             }
-            // DataTable z = xy.ToDataTable();
-        //    ProcessFieldTable.Rows.Add(
+            
 
-        //            1
-        //            , 1
-        //            , ""
-        //            , 0
-        //            , DateTime.Today
-        //            , UserId
-        //            , DateTime.Today);
-        //    ProcessFieldTable.Rows.Add(
-
-        //14
-        //, 1
-        //, ""
-        //, 0
-        //, DateTime.Today
-        //, UserId
-        //, DateTime.Today);
-        //    ProcessFieldTable.Rows.Add(
-
-        //2
-        //, 1
-        //, "wbla bla new "
-        //, 0
-        //, DateTime.Today
-        //, UserId
-        //, DateTime.Today);
-        //    ProcessFieldTable.Rows.Add(
-
-        //32
-        //, 1
-        //, ""
-        //, 0
-        //, DateTime.Today
-        //, UserId
-        //, DateTime.Today);
-        //    ProcessFieldTable.Rows.Add(
-
-        //3
-        //, 1
-        //, "wbla bla new  2"
-        //, 0
-        //, DateTime.Today
-        //, UserId
-        //, DateTime.Today);
-        //    ProcessFieldTable.Rows.Add(
-
-        //32
-        //, 1
-        //, "wbla bla new  2"
-        //, 0
-        //, DateTime.Today
-        //, UserId
-        //, DateTime.Today);
-        //    ProcessFieldTable.Rows.Add(
-
-        //55
-        //, 1
-        //, "wbla bla new  2"
-        //, 0
-        //, DateTime.Today
-        //, UserId
-        //, DateTime.Today);
-        //    ProcessFieldTable.Rows.Add(
-
-        //36
-        //, 1
-        //, "wbla bla new  2"
-        //, 0
-        //, DateTime.Today
-        //, UserId
-        //, DateTime.Today);
-
-            string usp = "usp_ProcessUpdatePost @UserId, @ProcessId , @ProcessFieldTable ";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId = UserId, ProcessId = Process.ProcessId , ProcessFieldTable = ProcessFieldTable.AsTableValuedParameter("udt_ProcessFieldUpdate") });
+            string usp = "usp_ProcessUpdatePost @UserId, @ProcessId ,@ProcessTemplateFlowId, @ProcessFieldTable ";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId = UserId, ProcessId = Process.ProcessId , ProcessTemplateFlowId = Process.ProcessTemplateFlowId, ProcessFieldTable = ProcessFieldTable.AsTableValuedParameter("udt_ProcessFieldUpdate") });
             return true;
         }
         public async Task<FrontProcessView> FrontProcessView(string UserId, int ProcessId)
@@ -216,10 +139,40 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontProcessViewGetField, dynamic>(usp, new { UserId = UserId, ProcessId = ProcessId });
             return x;
         }
+        public async Task<List<int>> FrontProcessToDoFlows()
+        {
+            string usp = "usp_FrontProcessToDoFlowList";
+            var x = await _sqlDataAccess.LoadData<int>(usp);
+            return x;
+        }
+        public async Task<List<FrontProcessToDoFlowCondition>> FrontProcessToDoConditions(int ProcessTemplateFlowId)
+        {
+            string usp = "usp_FrontProcessToDoFlowConditionList @ProcessTemplateFlowId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessToDoFlowCondition, dynamic>(usp, new { ProcessTemplateFlowId = ProcessTemplateFlowId});
+            return x;
+        }
+        public async Task<List<FrontProcessToDoProcess>> FrontProcessToDoProcesses(int ProcessTemplateFlowId)
+        {
+            string usp = "usp_FrontProcessToDoProcessList @ProcessTemplateFlowId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessToDoProcess, dynamic>(usp, new { ProcessTemplateFlowId = ProcessTemplateFlowId });
+            return x;
+        }
+        public async Task<List<FrontProcessToDoProcessField>> FrontProcessToDoProcessFields(int ProcessId)
+        {
+            string usp = "usp_FrontProcessToDoProcessFieldList @ProcessId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessToDoProcessField, dynamic>(usp, new { ProcessId = ProcessId });
+            return x;
+        }
         public async Task<List<int>> FrontProcessNewReturnFlows(int ProcessTemplateId)
         {
             string usp = "usp_FrontProcessNewReturnFlows @ProcessTemplateId";
             var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { ProcessTemplateId = ProcessTemplateId });
+            return x;
+        }
+        public async Task<List<int>> FrontProcessUpdateReturnFlows(int ProcessTemplateStageId)
+        {
+            string usp = "usp_FrontProcessUpdateReturnFlows @ProcessTemplateStageId";
+            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { ProcessTemplateStageId = ProcessTemplateStageId });
             return x;
         }
         public async Task<List<FrontProcessNewReturnFlowPass>> FrontProcessNewReturnFlowPasses(int ProcessTemplateFlowId)
@@ -230,11 +183,11 @@ namespace SIPx.DataAccess
         }
         public async Task<List<int>> ReturnProcessTemplateFlowPass(string UserId, string SQLStatement)
         {
-            string usp = "usp_NewProcessPass @UserId, @SQLStatement";
-            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { UserId = UserId , SQLStatement = SQLStatement });
+            string usp = "usp_NewProcessPass @SQLStatement";
+            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, new { SQLStatement = SQLStatement });
             return x;
         }
-        public async Task<bool> FrontProcessCreatePost(NewProcessWithMaster Process)
+        public async Task<bool> FrontProcessCreatePost(FrontProcessNewProcessWithMaster Process)
         {
 
             DataTable ProcessFieldValueTable = new DataTable();
@@ -249,21 +202,72 @@ namespace SIPx.DataAccess
             {
                 //if (x.ProcessTemplateFieldId != null && x.ClassificationValueId != 0)
                 //{
+                DateTime NewDate;
+                int NewInt;
+                if (1==1)//x.ProcessTemplateFieldId
+                {
+                    if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(x.ProcessTemplateFieldTypeId))
+                    {
+                        if (x.DateTimeValue.ToString() == "1/1/0001 12:00:00 AM")
+                        {
+                            NewDate = DateTime.Now;
+                        }
+                        else
+                        {
+                            NewDate = x.DateTimeValue;
+                        }
+                    }
+                    else
+                    {
+                        NewDate = DateTime.Now;
+                    }
+                    if (new[] { 3, 14, 15, 16, 17, 18,19,20,21,22,23,24,25,26,27,28,29,36,37 }.Contains(x.ProcessTemplateFieldTypeId))
+                    {
+                        NewInt = x.IntValue??0;
+                    }
+                    else
+                    {
+                        NewInt = 0;
+                    }
                 ProcessFieldValueTable.Rows.Add(
 
-                    x.ProcessTemplateId
-                            , x.ProcessTemplateFieldId
+                    Process.ProcessTemplateId
+                            , x.ProcessTemplateFieldId 
                             , x.StringValue
-                            , x.IntValue
-                            , x.DateTimeValue
+                            , NewInt
+                            , NewDate //DateTime.Now //
                             );
-                //}
+                    //}
+                }
             }
-            string usp = "usp_ProcessCreatePost @UserId, @ProcessTemplateId , @ProcessTemplateFlowId, , @ProcessFieldValueTable ";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId  = Process.UserId, ProcessTemplateId = Process.ProcessTemplateId, ProcessTemplateFlowId = Process.ProcessTemplateFlowId , ProcessFieldValueTable = ProcessFieldValueTable.AsTableValuedParameter("udt_ProcessFieldsNew") });
+            string usp = "usp_ProcessCreatePost @UserId, @ProcessTemplateId , @ProcessTemplateFlowId , @ProcessFieldValueTable ";
+               
+            _sqlDataAccess.SaveData<dynamic>(usp, new { 
+                UserId  = Process.UserId
+                , ProcessTemplateId = Process.ProcessTemplateId
+                , ProcessTemplateFlowId = Process.ProcessTemplateFlowId 
+                , ProcessFieldValueTable = ProcessFieldValueTable.AsTableValuedParameter("udt_ProcessFieldsNew") });
             return true;
 
 
+        }
+        public async Task<List<FrontProcessToDo>> FrontProcessToDo(string SQLStatement)
+        {
+            string usp = "usp_FrontProcessToDo @SQLStatement";
+            var x = await _sqlDataAccess.LoadData<FrontProcessToDo, dynamic>(usp, new { SQLStatement = SQLStatement });
+            return x;
+        }
+        public async Task<FrontProcessUpdateGet> FrontProcessUpdateGet(string UserId, int ProcessId)
+        {
+            string usp = "usp_FrontProcessUpdateGet @UserId, @ProcessId";
+            var x = await _sqlDataAccess.LoadSingleRecord<FrontProcessUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessId = ProcessId });
+            return x;
+        }
+        public async Task<List<FrontProcessUpdateGetField>> FrontProcessUpdateGetFields(string UserId, int ProcessId)
+        {
+            string usp = "usp_FrontProcessUpdateGetFields  @UserId, @ProcessId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessUpdateGetField, dynamic>(usp, new { UserId = UserId, ProcessId = ProcessId });
+            return x;
         }
 
     }

@@ -12,12 +12,14 @@
 <div class=" control-section">
     @foreach (var x in Model)
     {
-        <div class="font-weight-bold">@x.ProcessTemplateGroupId</div>
-        <div class="font-weight-bold">@x.Name</div>
-        @foreach (var y in x.templates)
+        if (x.templates.Count > 0)
         {
-<a class="nav-link text-dark font-weight-bold" asp-controller="FrontProcess" asp-action="Create" asp-route-id="@y.ProcessTemplateId">@y.Name</a>
-        
+            <div class="font-weight-bold" hidden>@x.ProcessTemplateGroupId</div>
+            <div class="font-weight-bold"><h2>@x.Name</h2></div>
+            @foreach (var y in x.templates)
+            {
+                <a class="nav-link text-dark font-weight-bold" asp-controller="FrontProcess" asp-action="Create" asp-route-id="@y.ProcessTemplateId">@y.Name</a>
+            }
         }
     }
 </div>

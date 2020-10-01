@@ -7,10 +7,13 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
-	, ProcessTemplateStageFields.Sequence
-	, ProcessTemplateStageFields.IntValue
-	, ProcessTemplateStageFields.DateTimeValue
-	, ProcessTemplateStageFields.StringValue
+	,  ProcessTemplateStageFields.Sequence
+	, CASE WHEN ProcessTemplateStageFields.ValueUpdateTypeID = 1
+	 THEN NULL ELSE ProcessTemplateStageFields.IntValue END IntValue
+	, CASE WHEN ProcessTemplateStageFields.ValueUpdateTypeID = 1 
+	 THEN '1900-01-01' ELSE ProcessTemplateStageFields.DateTimeValue END DateTimeValue 
+	, CASE WHEN ProcessTemplateStageFields.ValueUpdateTypeID = 1
+	 THEN '' ELSE ProcessTemplateStageFields.StringValue END StringValue
 --	, ProcessTemplateStageFields.LocationValue
 	, ProcessTemplateStageFields.ValueUpdateTypeID
 	, ProcessTemplateFields.ProcessTemplateFieldID
@@ -19,7 +22,8 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
 	, ProcessTemplateStageFields.ProcessTemplateStageID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this field')) Name
 	, 'ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId
-	, 'IDControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId2
+	, 'ID1ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId2
+	, 'ID2ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId3
 	--, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this field')) Description
 	--, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.Name,'No menu name for this field')) MenuName
 	--, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this field')) MouseOver

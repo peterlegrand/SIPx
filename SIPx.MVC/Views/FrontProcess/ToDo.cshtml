@@ -1,0 +1,28 @@
+﻿@model List<FrontProcessToDo>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+
+    Layout = "_Layout";
+}
+
+<h1>
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />
+    @*@Term.Find(x => x.InternalName.Equals("Persons")).TermString*@
+</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="ProcessId" headerText="ProcessId" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProcessTemplateName" headerText="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
+        <e-grid-column field="Subject" headerText="Subject" textAlign="Right" type="text" template="#Subject" ></e-grid-column>
+        <e-grid-column field="ProcessTemplateStageTypeName" headerText="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
+        <e-grid-column field="CreatorName" headerText="CreatorName" textAlign="Right" type="text"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<script id="Subject" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontProcess/Edit/${ProcessId}">
+            ${Subject}
+        </a>
+    </div>
+</script>

@@ -26,5 +26,11 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<UserRoleIndexGet, dynamic>(usp, new { UserId = UserId, UserRoleUserId = UserRoleUserId });
             return x;
         }
+        public async Task<List<string>> UserRoleIDsPerUser(string UserId)
+        {
+            string usp = "usp_UserRoleIDPerUser @UserId";
+            var x = await _sqlDataAccess.LoadData<string, dynamic>(usp, UserId);
+            return x;
+        }
     }
 }

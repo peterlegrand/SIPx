@@ -125,6 +125,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
+                Content.CreatorId = CurrentUser.Id;
                 _frontContentProvider.FrontContentCreatePost(CurrentUser.Id, Content);
                 return Ok(Content);
             }

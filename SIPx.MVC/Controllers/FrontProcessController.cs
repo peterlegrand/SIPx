@@ -17,8 +17,17 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Templates()
         {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync<List<NewProcessShowTemplateGroup>>($"{_baseUrl}api/FrontProcess/Template", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ToDo()
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync<List<FrontProcessToDo>>($"{_baseUrl}api/FrontProcess/ToDo", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Index", token);
             ViewBag.UITerms = UITerms;
             return View(response);
@@ -27,22 +36,28 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/Create/" + Id, token);
+            var response = await _client.GetProtectedAsync<FrontProcessNewProcessWithMaster>($"{_baseUrl}api/FrontProcess/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
 
         }
         [HttpPost]
-        public async Task<IActionResult> Create(NewProcessWithMaster Fields, string submit)
+        public async Task<IActionResult> Create(FrontProcessNewProcessWithMaster Fields, string submit)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            await _client.PostProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/Create", Fields, token);
+            var x = await _client.PostProtectedAsync<FrontProcessNewProcessWithMaster>($"{_baseUrl}api/FrontProcess/Create", Fields, token);
+            //if()
             //            var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/" , token);
             //          var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
             //        ViewBag.UITerms = UITerms;
             //      return View(response);
-            return RedirectToAction("Index");
+            
+            //PETER TODO if an error from API
+            //if(x.ProcessTemplateId == 0)
+            //{ return View(Fields);
+            //}
+            return RedirectToAction("Templates");
 
             //PETER TODO Add the button pressed to the pass
 
@@ -50,18 +65,18 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<FrontProcessEditGet>($"{_baseUrl}api/FrontProcess/Update/" + Id, token);
+            var response = await _client.GetProtectedAsync<FrontProcessUpdateGet>($"{_baseUrl}api/FrontProcess/Update/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/Edit", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(FrontProcessEditGet Process)
+        public async Task<IActionResult> Edit(FrontProcessUpdateGet Process)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<FrontProcessEditGet>($"{_baseUrl}api/FrontProcess/Update", Process, token);
+            await _client.PostProtectedAsync<FrontProcessUpdateGet>($"{_baseUrl}api/FrontProcess/Update", Process, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ToDo");
         }
         [HttpGet]
         public async Task<IActionResult> View(int Id)

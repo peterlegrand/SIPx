@@ -6,10 +6,11 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class NewProcessWithMaster : INewProcessWithMaster
+    public class FrontProcessNewProcessWithMaster : INewProcessWithMaster
     {
-     
-        public List<NewProcessFromDB> ProcessFields { get; set; }
+
+        public List<FrontProcessNewProcessField> ProcessFields { get; set; }
+      //  public List<FrontProcessNewProcessDefaultValues> DefaultFieldValues { get; set; }
         public List<UserList> Users { get; set; }
         public List<ProjectList> Projects { get; set; }
         public int ProcessTemplateId { get; set; }

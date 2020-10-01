@@ -34,25 +34,26 @@ namespace SIPx.DataAccess
         //    var x = await _sqlDataAccess.LoadData<ProcessViewGet, dynamic>(usp, new { LanguageId = LanguageId });
         //    return x;
         //}
-        public async Task<List<int>> CreateGetInitialTemplateList()
+        public async Task<List<FrontProcessTemplateIdFlowId>> CreateGetInitialTemplateFlowList()
         {
             string usp = "usp_NewProcessGetInitialTemplateFlowList";
-            var x = await _sqlDataAccess.LoadData<int>(usp);
+            var x = await _sqlDataAccess.LoadData<FrontProcessTemplateIdFlowId>(usp);
             return x;
         }
 
-        public async Task<List<ProcessTemplateFlowConditionOld>> CreateGetFlowConditionList(int FlowId)
+
+        public async Task<List<FrontProcessProcessTemplateFlowConditions>> CreateGetInitialTemplateFlowConditionList(int ProcessTemplateFlowId)
         {
-            string usp = "usp_NewProcessGetFlowConditionList @FlowID";
-            var x = await _sqlDataAccess.LoadData<ProcessTemplateFlowConditionOld, dynamic>(usp, new { FlowId = FlowId });
+            string usp = "usp_NewProcessGetFlowConditionList @ProcessTemplateFlowId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessProcessTemplateFlowConditions, dynamic>(usp, new { ProcessTemplateFlowId = ProcessTemplateFlowId });
             return x;
         }
 
-        public async Task<List<NewProcessFromDB>> CreateGet(string UserId, int ProcessTemplateId)
+        public async Task<List<FrontProcessNewProcessField>> CreateGet(string UserId, int ProcessTemplateId)
         {
 
             string usp = "usp_NewProcessGet @ProcessTemplateID, @UserId";
-            var x = await _sqlDataAccess.LoadData<NewProcessFromDB, dynamic>(usp, new { UserId = UserId, ProcessTemplateId = ProcessTemplateId });
+            var x = await _sqlDataAccess.LoadData<FrontProcessNewProcessField, dynamic>(usp, new { UserId = UserId, ProcessTemplateId = ProcessTemplateId });
             return x;
         }
 

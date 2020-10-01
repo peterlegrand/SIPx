@@ -80,8 +80,8 @@ namespace SIPx.API.Controllers
                     if (panel.PageSectionTypeId == 1 & panel.PageSectionDataTypeId == 2)  //List Todo
                     {
                         var x = new ToDo(_processProvider);
-                        var ContentList = await x.GetList(CurrentUser.Id, CurrentUser.SecurityLevelId);
-                        panel.ToDos = ContentList;
+                        //var ContentList = await x.GetList(CurrentUser.Id, CurrentUser.SecurityLevelId);
+                        //panel.ToDos = ContentList;
                     }
                 }
                 dashboard.Panels = panels;

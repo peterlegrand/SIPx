@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class NewProcessFromDB : INewProcessFromDB
+    public class FrontProcessNewProcessField : INewProcessFromDB
     {
         [Key]
         public int Sequence { get; set; }
@@ -22,5 +22,6 @@ namespace SIPx.Shared
         public string Name { get; set; }
         public string ControlId { get; set; }
         public string ControlId2 { get; set; }
+        public string ControlId3 { get; set; }
     }
 }

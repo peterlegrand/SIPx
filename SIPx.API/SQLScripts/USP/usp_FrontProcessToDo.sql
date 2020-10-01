@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_NewProcessPass (
+CREATE PROCEDURE usp_FrontProcessToDo (
 	@SQLStatement nvarchar(max)
 )
 AS

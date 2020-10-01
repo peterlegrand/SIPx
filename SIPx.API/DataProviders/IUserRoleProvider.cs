@@ -7,5 +7,6 @@ namespace SIPx.DataAccess
     public interface IUserRoleProvider
     {
         Task<List<UserRoleIndexGet>> IndexGet(string UserId, string UserRoleUserId);
+        Task<List<string>> UserRoleIDsPerUser(string UserId);
     }
 }

@@ -107,6 +107,17 @@ namespace SIPx.DataAccess
             string usp = "usp_OrganizationAdvancedSearch @UserId, @Contains, @ParentOrganizationId, @OrganizationTypeId, @StatusId, @PersonId ";
             return _sqlDataAccess.LoadData<OrganizationAdvancedSearchResult, dynamic>(usp, AdvancedSearch );
         }
+        public async Task<List<int>> OrganizationIDsPerUser(string UserId)
+        {
+            string usp = "usp_OrganizationIDPerUser @UserId";
+            var x = await _sqlDataAccess.LoadData<int, dynamic>(usp, UserId);
+            return x;
+        }
+        public Task<int> MainOrganizationIDPerUser(string UserId)
+        {
+            string usp = "usp_MainOrganizationIDPerUser @UserId";
+            return _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, UserId );
+        }
 
     }
 }

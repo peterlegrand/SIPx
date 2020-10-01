@@ -21,6 +21,7 @@ INSERT INTO Contents (
 	, SecurityLevelID
 	, ProjectID
 	, OrganizationID
+	, ProcessID
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -34,6 +35,7 @@ INSERT INTO Contents (
 	, @SecurityLevelID
 	, @ProjectID
 	, @OrganizationID
+	,1
 	, @CreatorID
 	, getdate()
 	, @CreatorID

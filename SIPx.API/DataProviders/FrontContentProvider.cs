@@ -78,7 +78,17 @@ namespace SIPx.DataAccess
                 }
             }
             string usp = "usp_FrontContentNewPost @ContentTypeId, @ContentStatusID , @LanguageID , @Title , @Description , @SecurityLevelID , @ProjectID , @OrganizationId , @CreatorID, @ClassificationValueTable ";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentTypeId = Content.ContentTypeId, ContentStatusId = Content.ContentStatusId, LanguageId = Content.LanguageId, Title = Content.Title, Description = Content.Description, SecurityLevelID = Content.SecurityLevelId, OrganizationId = Content.OrganizationId, ProjectId = Content.ProjectId, CreatorId = UserId, ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert") });
+            _sqlDataAccess.SaveData<dynamic>(usp, new { 
+                ContentTypeId = Content.ContentTypeId
+                , ContentStatusId = Content.ContentStatusId
+                , LanguageId = Content.LanguageId
+                , Title = Content.Title
+                , Description = Content.Description
+                , SecurityLevelID = Content.SecurityLevelId
+                , OrganizationId = Content.OrganizationId
+                , ProjectId = Content.ProjectId
+                , CreatorId = UserId
+                , ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert") });
             return true;
         
 
