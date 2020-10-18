@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IContentTypeProvider
     {
-        Task<string> CreatePost(ContentTypeCreatePost ContentType);
+        Task<bool> CreatePost(ContentTypeCreateGet ContentType);
         Task<string> CreatePostCheck(ContentTypeCreatePost ContentType);
         Task<ContentTypeDeleteGet> DeleteGet(string UserId, int ContentTypeId);
         bool DeletePost(int Id);
@@ -16,5 +16,6 @@ namespace SIPx.DataAccess
         Task<List<ContentTypeList>> List(string UserId);
         Task<ContentTypeUpdateGet> UpdateGet(string UserId, int ContentTypeId);
         bool UpdatePost(ContentTypeUpdateGet ContentType);
+        Task<List<ProcessTemplateList>> CreateGetProcessTemplates(string UserId);
     }
 }

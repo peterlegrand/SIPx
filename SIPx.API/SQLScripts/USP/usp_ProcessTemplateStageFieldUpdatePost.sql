@@ -16,7 +16,7 @@ BEGIN TRANSACTION
 
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE ProcessTemplateStageFields SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @StageId = ProcessTemplateStageID
+UPDATE ProcessTemplateStageFields SET Sequence = Sequence + 1 WHERE Sequence >= @Sequence AND Sequence < @OldSequence AND @StageId = ProcessTemplateStageID
 END
 ELSE
 BEGIN

@@ -20,6 +20,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+        public async Task<List<ContentTypeCreateGetClassification>> CreateGetClassifications(string UserId)
+        {
+            string usp = "usp_ContentTypeCreateGetClassifications @UserId";
+            var x = await _sqlDataAccess.LoadData<ContentTypeCreateGetClassification, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
         public async Task<List<ContentTypeClassificationIndexGet>> IndexGet(string UserId, int ContentTypeId)
         {
             string usp = "usp_ContentTypeClassificationIndexGet @UserId, @ContentTypeID";

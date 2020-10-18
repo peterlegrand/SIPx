@@ -18,6 +18,7 @@ SELECT ClassificationLevels.ClassificationLevelID
 	, ClassificationLevels.OnTheFly
 	, ClassificationLevels.InDropDown
 	, ClassificationLevels.InMenu
+	, ClassificationLevels.CanLink
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, ClassificationLevels.CreatedDate
 	, Creator.PersonID CreatorID

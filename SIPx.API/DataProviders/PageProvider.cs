@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(PageCreateGet Page)
         {
-            string usp = "usp_PageCreatePost @ShowTitleName , @ShowTitleDescription , @StatusId, @Name, @Description , @MenuName , @MouseOver , @TitleName , @TitleDescription , @UserId,@OrganizationId, @ProjectId, @SelectedUserId ";
+            string usp = "usp_PageCreatePost @ShowTitleName , @ShowTitleDescription , @StatusId, @Name, @Description , @MenuName , @MouseOver , @TitleName , @TitleDescription , @UserId,@OrganizationId, @ProjectId,@ClassificationId, @SelectedUserId ";
 
             
 
@@ -68,6 +68,7 @@ namespace SIPx.DataAccess
                 ", @UserId " +
                 ", @OrganizationId " +
                 ", @ProjectId " +
+                ", @ClassificationId " +
                 ", @SelectedUserId ";
 
             _sqlDataAccess.SaveData<PageUpdateGet>(usp, Page);

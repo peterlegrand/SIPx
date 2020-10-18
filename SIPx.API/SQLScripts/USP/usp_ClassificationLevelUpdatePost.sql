@@ -25,7 +25,7 @@ SELECT @OldSequence = Sequence, @ClassificationId = ClassificationId FROM Classi
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE ClassificationLevels SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND @ClassificationId = ClassificationId 
+UPDATE ClassificationLevels SET Sequence = Sequence + 1 WHERE Sequence >= @Sequence AND Sequence < @OldSequence AND @ClassificationId = ClassificationId 
 END
 ELSE
 BEGIN

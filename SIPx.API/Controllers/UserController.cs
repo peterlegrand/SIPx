@@ -155,6 +155,12 @@ namespace SIPx.API.Controllers
                 UserPerson.NewPassword = user.NewPassword;
                 UserPerson.ConfirmPassword = user.ConfirmPassword;
                 UserPerson.SecurityLevelId = user.SecurityLevelId;
+                UserPerson.CreatedDate = person.CreatedDate;
+                UserPerson.CreatorId = person.CreatorId;
+                UserPerson.CreatorName = person.CreatorName;
+                UserPerson.ModifierId = person.ModifierId;
+                UserPerson.ModifiedDate = person.ModifiedDate;
+                UserPerson.ModifierName = person.ModifierName;
                 //UserPerson.Person = person;
                 //UserPerson.User = user;
                 UserPerson.PersonId = person.PersonId;
@@ -170,7 +176,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(UserUpdateGet UpdateUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UpdateUser.ModifierId = CurrentUser.Id;
+            UpdateUser.UserModifierId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _userProvider.CreatePostCheck(CreateUser);

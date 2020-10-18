@@ -18,7 +18,7 @@ SELECT Pages.PageID
 	, Pages.OrganizationID
 	, Pages.ProjectID
 	, Pages.ClassificationID
-	, Pages.UserID
+	, Pages.UserID SelectedUserId
 	, Pages.StatusID
 	, Pages.ShowTitleDescription
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName

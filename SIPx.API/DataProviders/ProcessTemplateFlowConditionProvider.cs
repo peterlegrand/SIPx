@@ -20,10 +20,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public Task<List<SequenceList>> CreateGetSequence(string UserId, int ProcessTemplateFlowId)
+        public async Task<List<SequenceList>> CreateGetSequence(string UserId, int ProcessTemplateFlowId)
         {
             string usp = "usp_ProcessTemplateFlowConditionCreateGetSequence @UserID, @ProcessTemplateFlowId";
-            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
+            var Conditions = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
+            Conditions.Add(new SequenceList { Sequence = Conditions.Count + 1, Name = "At the end" });
+            return Conditions;
         }
 
         public Task<List<ProcessTemplateFieldList>> CreateGetFieldList(string UserId, int ProcessTemplateFlowId)
@@ -64,6 +66,12 @@ namespace SIPx.DataAccess
             string usp = "usp_ProcessTemplateFlowConditionUpdateGet @UserId, @ProcessTemplateFlowConditionID";
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateFlowConditionUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateFlowConditionId = ProcessTemplateFlowConditionId });
 
+        }
+        public async Task<List<SequenceList>> UpdateGetSequence(string UserId, int ProcessTemplateFlowId)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionCreateGetSequence @UserID, @ProcessTemplateFlowId";
+            var Conditions = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
+            return Conditions;
         }
 
         public bool UpdatePost(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition)

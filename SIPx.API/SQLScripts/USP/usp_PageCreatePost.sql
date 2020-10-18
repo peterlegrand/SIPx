@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[usp_PageCreatePost] (
 	, @UserId nvarchar(450)
 	, @OrganizationId int
 	, @ProjectId int
+	, @ClassificationId int
 	, @SelectedUserId nvarchar(450))
 AS
 
@@ -40,6 +41,16 @@ SET @ProjectString1 = ' , ProjectId ';
 SET @ProjectString2 = ' , '+ CAST(@ProjectId as varchar(10));
 END
 
+DECLARE @ClassificationString1 varchar(50);
+DECLARE @ClassificationString2 varchar(50);
+SET @ClassificationString1 ='';
+SET @ClassificationString2 ='';
+IF @ClassificationId <> 0
+BEGIN 
+SET @ClassificationString1 = ' , ClassificationId ';
+SET @ClassificationString2 = ' , '+ CAST(@ClassificationId as varchar(10));
+END
+
 DECLARE @UserString1 varchar(50);
 DECLARE @UserString2 varchar(550);
 SET @UserString1 ='';
@@ -55,7 +66,7 @@ END
 BEGIN
 DECLARE @statement NVARCHAR(2200);
 SET @statement =  'BEGIN TRANSACTION; INSERT INTO Pages ( ShowTitleName, ShowTitleDescription, StatusId, CreatorID, CreatedDate, ModifierID, ModifiedDate ' 
-+ @OrganizationString1 + @ProjectString1 + @UserString1 + ') VALUES ( ' + 
++ @OrganizationString1 + @ProjectString1 + @ClassificationString1 + @UserString1 + ') VALUES ( ' + 
 	 +  CAST(@ShowTitleName as varchar(1)) +
 	+ ', ' +  CAST(@ShowTitleDescription as varchar(1)) +
 	+ ', ' +  CAST(@StatusId as varchar(2)) +
@@ -65,6 +76,7 @@ SET @statement =  'BEGIN TRANSACTION; INSERT INTO Pages ( ShowTitleName, ShowTit
 	+ ''', ''' +  CAST(getdate() as varchar(20)) +''''+ 
 	+ @OrganizationString2
 	+ @ProjectString2
+	+ @ClassificationString2
 	+ @UserString2
 	+ ');'
 

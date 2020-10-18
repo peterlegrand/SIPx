@@ -31,6 +31,14 @@
             <div class="col-9">@Model.SettingsName</div>
 
         </div>
+        <div class="row">
+            <div class="col-3">
+@* PETER TODO unhide *@
+                Description@*@Term.Find(x => x.InternalName.Equals("Description")).TermString*@
+            </div>
+            <div class="col-9">@Html.Raw(Model.Description)</div>
+
+        </div>
         @switch (Model.TypeId)
         {
             case 1:

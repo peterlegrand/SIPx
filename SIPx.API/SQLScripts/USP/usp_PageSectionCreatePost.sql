@@ -14,7 +14,6 @@ CREATE PROCEDURE [dbo].[usp_PageSectionCreatePost] (
 	, @SortById int
 	, @MaxContent int
 	, @HasPaging bit
-	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -23,6 +22,12 @@ CREATE PROCEDURE [dbo].[usp_PageSectionCreatePost] (
 	, @TitleDescription nvarchar(max)
 	, @UserId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserId
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 BEGIN TRANSACTION
 
 INSERT INTO PageSections (

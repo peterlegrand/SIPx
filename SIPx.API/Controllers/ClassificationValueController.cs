@@ -36,7 +36,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Create/{Id:int}/{ParentId:int}")]
+        [HttpGet("Create/{Id:int}/{ParentId:int?}")]
         public async Task<IActionResult> Create(int Id, int ParentId = 0)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -71,7 +71,7 @@ namespace SIPx.API.Controllers
                 var CheckString = await _classificationValueProvider.CreatePostCheck(ClassificationValue);
                 if (CheckString.Length == 0)
                 {
-                    _classificationValueProvider.CreatePost(ClassificationValue);
+                    await _classificationValueProvider.CreatePost(ClassificationValue);
                     return Ok(ClassificationValue);
                 }
                 return BadRequest(new

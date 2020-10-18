@@ -7,6 +7,8 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeCreatePost] (
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)
+	, @Color char(9)
+	, @IconID int
 	, @ContentTypeClassificationTable AS udt_ContentTypeClassificationNew READONLY)
 AS 
 DECLARE @LanguageId int;
@@ -20,6 +22,8 @@ INSERT INTO ContentTypes (
 	ContentTypeGroupID
 	, ProcessTemplateID
 	, SecurityLevelID
+	, Color 
+	, IconID 
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -28,6 +32,8 @@ VALUES (
 	@ContentTypeGroupID
 	, @ProcessTemplateID
 	, @SecurityLevelID
+	, @Color 
+	, @IconID 
 	, @UserID
 	, getdate()
 	, @UserID

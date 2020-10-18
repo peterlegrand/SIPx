@@ -20,13 +20,13 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString
             </div>    <div class="col-9">
-                <ejs-numerictextbox id="ParentId" ejs-for="ProjectParentId" cssClass="e-outline" placeholder="ProjectParentId " floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ParentId" ejs-for="ParentProjectId" cssClass="e-outline" placeholder="ParentProjectId " floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>        <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Parent")).TermString
             </div>    <div class="col-9">
-                @if (Model.ProjectParentId != null)
+                @if (Model.ParentProjectId != null)
                 {@Model.ProjectParentName
             }
             else
@@ -44,13 +44,13 @@
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
-                @*<ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
                     <e-content-template>
                     </e-content-template>
                     <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
                     </e-richtexteditor-toolbarsettings>
-                </ejs-richtexteditor>*@
-                <div class="row  e-rte-custom-tbar-section">
+                </ejs-richtexteditor>
+                @*<div class="row  e-rte-custom-tbar-section">
                         <div class="control-wrapper" id="rteSection">
                             <div class="control-section">
                                 <ejs-richtexteditor id="customtool" created="onCreate">
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
             </div>
 
         </div>

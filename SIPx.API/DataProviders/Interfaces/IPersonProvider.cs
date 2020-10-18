@@ -17,5 +17,7 @@ namespace SIPx.DataAccess
         Task<List<PersonSearch>> Search(string Contains, string UserId);
         Task<List<PersonAdvancedSearchResult>> AdvancedSearch(string UserId, PersonAdvancedSearchPost AdvancedSearch);
         //List<PersonAdvancedSearchResult>
+        Task<List<UserList>> CreateGetUsers();
+        Task<List<UserList>> EditGetUsers(int PersonId);
     }
 }

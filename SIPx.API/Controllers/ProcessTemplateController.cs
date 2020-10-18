@@ -52,6 +52,7 @@ namespace SIPx.API.Controllers
                 ProcessTemplateCreateGet.LanguageName = UserLanguage.Name;
                 ProcessTemplateCreateGet.Icons = Icons;
                 ProcessTemplateCreateGet.ProcessTemplates = Sequences;
+                ProcessTemplateCreateGet.ProcessTemplates.Add(new SequenceList { Sequence = Sequences.Count + 1, Name = "Add at the end" });
                 ProcessTemplateCreateGet.ProcessTemplateGroups = ProcessTemplateGroups;
                 return Ok(ProcessTemplateCreateGet);
             }

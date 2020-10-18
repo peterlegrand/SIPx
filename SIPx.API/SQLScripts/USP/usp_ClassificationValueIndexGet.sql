@@ -33,7 +33,7 @@ AS
 		, ModifiedDate
 		, 1
 	FROM ClassificationValues 
-	WHERE ClassificationValues.ParentValueId IS NULL
+	WHERE ClassificationValues.ParentValueId IS NULL 
 		AND ClassificationValues.ClassificationId = @ClassificationID
 
    UNION ALL

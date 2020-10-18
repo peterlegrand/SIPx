@@ -22,7 +22,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Country")).TermString
+                @Term.Find(x => x.InternalName.Equals("Type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="AddressTypeId" dataSource="@Model.AddressTypes" ejs-for="@Model.AddressTypeId" value="@Model.AddressTypeId" index="2" popupHeight="220px">

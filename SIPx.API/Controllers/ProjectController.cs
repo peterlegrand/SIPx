@@ -56,7 +56,7 @@ namespace SIPx.API.Controllers
                 ProjectCreateGet.LanguageName = UserLanguage.Name;
                 ProjectCreateGet.ProjectTypes = ProjectTypes;
                 ProjectCreateGet.Statuses = Statuses;
-                ProjectCreateGet.ProjectParentId = Id;
+                ProjectCreateGet.ParentProjectId = Id;
                 ProjectCreateGet.SecurityLevels = SecurityLevels;
                 return Ok(ProjectCreateGet);
             }
@@ -68,7 +68,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ProjectCreatePost Project)
+        public async Task<IActionResult> Create(ProjectCreateGet Project)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Project.CreatorId = CurrentUser.Id;

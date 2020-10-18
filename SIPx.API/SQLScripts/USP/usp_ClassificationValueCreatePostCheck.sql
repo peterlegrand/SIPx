@@ -9,7 +9,7 @@ BEGIN
 
 DECLARE @Error varchar(500) = '';
 
-If @ParentId IS NOT NULL
+If @ParentId IS NOT NULL AND @ParentId <> 0
 BEGIN
 	IF  (SELECT COUNT(*) 
 	

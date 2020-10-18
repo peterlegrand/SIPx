@@ -59,6 +59,7 @@ namespace SIPx.API.Controllers
                 var Organizations = await _organizationProvider.List(CurrentUser.Id);
                 PersonCreateGet.Genders = Genders;
                 PersonCreateGet.Organizations = Organizations;
+                PersonCreateGet.Users = await _personProvider.CreateGetUsers();
                 return Ok(PersonCreateGet);
             }
             return BadRequest(new
@@ -116,14 +117,15 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _personProvider.UpdateGet(CurrentUser.Id, Id);
-                var y = await _genderProvider.List(CurrentUser.Id);
-                var z = await _organizationProvider.List(CurrentUser.Id);
-                var a = await _userProvider.List();
-                x.Genders = y;
-                x.Organizations = z;
-                x.Users = a;
-                return Ok(x);
+                var Person = await _personProvider.UpdateGet(CurrentUser.Id, Id);
+                var Gender = await _genderProvider.List(CurrentUser.Id);
+                var Organization = await _organizationProvider.List(CurrentUser.Id);
+                var Users = await _personProvider.EditGetUsers(Id);
+
+                Person.Genders = Gender;
+                Person.Organizations = Organization;
+                Person.Users = Users;
+                return Ok(Person);
             }
             return BadRequest(new
             {

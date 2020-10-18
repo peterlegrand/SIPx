@@ -18,7 +18,7 @@ SELECT @OldSequence = Sequence FROM ContentTypeGroups WHERE ContentTypeGroupId =
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE ContentTypeGroups SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence
+UPDATE ContentTypeGroups SET Sequence = Sequence + 1 WHERE Sequence >= @Sequence AND Sequence < @OldSequence
 END
 ELSE
 BEGIN

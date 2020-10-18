@@ -6,9 +6,9 @@ namespace SIPx.DataAccess
 {
     public interface IClassificationValueProvider
     {
-        Task<string> CreatePost(ClassificationValueCreatePost ClassificationValue);
+        Task<bool> CreatePost(ClassificationValueCreatePost ClassificationValue);
         Task<string> CreatePostCheck(ClassificationValueCreatePost ClassificationValue);
-        Task<List<ClassificationValueUpdateGet>> IndexGet(string UserId, int ClassificationId);
+        Task<List<ClassificationValueIndexGet>> IndexGet(string UserId, int ClassificationId);
         Task<List<ClassificationValueLanguageIndexGet>> LanguageIndexGet(string UserId, int ClassificationValueId);
         Task<ClassificationValueLanguageIndexGet> LanguageUpdateGet(string UserId, int ClassificationValueLanguageId);
         Task<ClassificationValueUpdateGet> UpdateGet(string UserId, int ClassificationValueId);

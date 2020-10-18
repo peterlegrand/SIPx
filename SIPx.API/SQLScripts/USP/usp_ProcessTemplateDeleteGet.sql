@@ -12,6 +12,8 @@ SELECT ProcessTemplates.ProcessTemplateID
 	, ISNULL(UserProcessTemplateLanguage.MouseOver,ISNULL(DefaultProcessTemplateLanguage.MouseOver,'No mouse over for this ')) MouseOver
 	, ISNULL(UserProcessTemplateGroupLanguage.Name,ISNULL(DefaultProcessTemplateGroupLanguage.Name,'No name for this  type')) GroupName
 	, ProcessTemplates.ShowInPersonalCalendar
+	, ProcessTemplates.ShowInOrganizationCalendar
+	, ProcessTemplates.ShowInProjectCalendar
 	, ProcessTemplates.ShowInEventCalendar
 	, ProcessTemplates.ProcessMultiMax
 	, ProcessTemplates.Sequence

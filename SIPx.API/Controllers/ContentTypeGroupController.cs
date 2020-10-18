@@ -52,7 +52,7 @@ namespace SIPx.API.Controllers
                 ContentTypeGroupCreateGet.LanguageId = UserLanguage.LanguageId;
                 ContentTypeGroupCreateGet.LanguageName = UserLanguage.Name;
                 ContentTypeGroupCreateGet.Sequences = ContentTypeGroupCreateGetSequences;
-                ContentTypeGroupCreateGet.Sequences.Add(new SequenceList { Sequence = ContentTypeGroupCreateGetSequences.Count, Name = "Add at the end" });
+                ContentTypeGroupCreateGet.Sequences.Add(new SequenceList { Sequence = ContentTypeGroupCreateGetSequences.Count+1, Name = "Add at the end" });
                 return Ok(ContentTypeGroupCreateGet);
             }
             return BadRequest(new

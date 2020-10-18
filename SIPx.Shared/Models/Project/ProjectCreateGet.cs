@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class ProjectCreateGet
     {
         [Key]
-        public int? ProjectParentId { get; set; }
+        public int? ParentProjectId { get; set; }
         public string ProjectParentName { get; set; }
         public int StatusId { get; set; }
         public int ProjectTypeId { get; set; }

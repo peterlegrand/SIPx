@@ -20,14 +20,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(ProjectCreatePost Project)
+        public async Task<string> CreatePostCheck(ProjectCreateGet Project)
         {
             string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, LanguageId, @Name, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Project);
             return CheckString;
         }
 
-        public async Task<string> CreatePost(ProjectCreatePost Project)
+        public async Task<string> CreatePost(ProjectCreateGet Project)
         {
             string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, @SecurityLevelId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Project);

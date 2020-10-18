@@ -21,6 +21,7 @@ namespace SIPx.Shared
         public int IconId { get; set; }
         public string CreatorId { get; set; }
         public List<ContentTypeCreateGetClassification> ContentTypeClassifications { get; set; }
+        public List<ContentTypeClassificationStatusList> ContentTypeClassificationStatuses { get; set; }
         public List<ContentTypeGroupList> ContentTypeGroups { get; set; }
         public List<ProcessTemplateList> ProcessTemplates { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }

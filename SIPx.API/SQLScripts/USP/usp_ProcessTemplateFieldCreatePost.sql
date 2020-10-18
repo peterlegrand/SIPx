@@ -12,8 +12,18 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @CreatorId
 	AND UserPreferences.PreferenceTypeId = 1 ;
-BEGIN TRANSACTION
 
+DECLARE @NewSequence int;
+SET @NewSequence = 1
+SELECT @NewSequence = MAX(Sequence)+1  
+FROM ProcessTemplateStageFields 
+WHERE processtemplateId = @ProcessTemplateId
+IF @NewSequence IS NULL
+BEGIN 
+SET @NewSequence = 1
+END
+
+BEGIN TRANSACTION
 INSERT INTO ProcessTemplateFields (
 	ProcessTemplateID
 	, ProcessTemplateFieldTypeID
@@ -56,6 +66,9 @@ VALUES (
 	, getdate()
 	, @CreatorId
 	, getdate())
+
+INSERT INTO ProcessTemplateStageFields (ProcessTemplateId, ProcessTemplateStageId, ProcessTemplateFieldId, ProcessTemplateStageFieldStatusID, Sequence, ValueUpdateTypeID, ModifierID, ModifiedDate)
+SELECT @ProcessTemplateId, ProcessTemplateStageID, @NewProcessTemplateFieldId, 1, @NewSequence, 1, @CreatorId, Getdate() FROM ProcessTemplateStages WHERE ProcessTemplateId = @ProcessTemplateId
 
 	COMMIT TRANSACTION
 

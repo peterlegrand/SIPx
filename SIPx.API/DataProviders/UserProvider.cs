@@ -51,7 +51,7 @@ namespace SIPx.DataAccess
         }
         public bool UpdatePost(UserUpdateGet UpdateUser)
         {
-            string usp = "usp_UserUpdatePost @PersonId , @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId , @BirthDate, @DefaultOrganizationId , @ModifierId ";
+            string usp = "usp_UserUpdatePost @PersonId , @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId , @BirthDate, @DefaultOrganizationId , @UserModifierId ";
             _sqlDataAccess.SaveData<UserUpdateGet>(usp, UpdateUser);
             return true;
         }

@@ -33,17 +33,18 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public async Task<string> CreatePost(ClassificationValueCreatePost ClassificationValue)
+        public async Task<bool> CreatePost(ClassificationValueCreatePost ClassificationValue)
         {
-            string usp = "usp_ClassificationValueCreatePost @ClassificationId, @ParentId, @DateFrom, @DateTo, @Location, @LanguageId, @Name, @Description, @DropDownName, @MenuName, @MouseOver, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @CreatorId ";
-            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValue);
-            return String;
+            string usp = "usp_ClassificationValueCreatePost @ClassificationId, @ParentId, @DateFrom, @DateTo, @Name, @Description, @MenuName, @MouseOver, @DropDownName, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @CreatorId ";
+            _sqlDataAccess.SaveData<ClassificationValueCreatePost>(usp, ClassificationValue);
+            return true;
         }
 
-        public Task<List<ClassificationValueUpdateGet>> IndexGet(string UserId, int ClassificationId)
+        public async Task<List<ClassificationValueIndexGet>> IndexGet(string UserId, int ClassificationId)
         {
             string usp = "usp_ClassificationValueIndexGet @UserId, @ClassificationID";
-            return _sqlDataAccess.LoadData<ClassificationValueUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
+            var x = await _sqlDataAccess.LoadData<ClassificationValueIndexGet, dynamic>(usp, new { UserId, ClassificationId });
+            return x;
 
         }
 

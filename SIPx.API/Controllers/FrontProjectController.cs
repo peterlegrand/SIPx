@@ -307,7 +307,7 @@ namespace SIPx.API.Controllers
                 {
                     Id = 0;
                 }
-                ProjectCreateGet.ProjectParentId = Id;
+                ProjectCreateGet.ParentProjectId = Id;
                 return Ok(ProjectCreateGet);
             }
             return BadRequest(new
@@ -318,7 +318,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(ProjectCreatePost Project)
+        public async Task<IActionResult> Post(ProjectCreateGet Project)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Project.CreatorId = CurrentUser.Id;

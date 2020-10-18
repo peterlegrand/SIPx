@@ -164,6 +164,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
                 Page.ModifierId = CurrentUser.Id;
+                Page.UserId= CurrentUser.Id;
                 //var CheckString = await _PageProvider.UpdatePostCheck(Page);
                 //if (CheckString.Length == 0)
                 //{

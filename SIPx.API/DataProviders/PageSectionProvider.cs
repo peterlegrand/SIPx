@@ -36,7 +36,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(PageSectionCreatePost PageSection)
         {
-            string usp = "usp_PageSectionCreatePost @PageId, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName , @ShowSectionTitleDescription , @ShowContentTypeTitleName , @ShowContentTypeTitleDescription , @SizeX, @SizeY, @DashboardRow, @DashboardColumn, @ContentTypeId, @SortById, @MaxContent, @HasPaging , @LanguageId, @Name , @Description , @MenuName 	, @MouseOver 	, @TitleName 	, @TitleDescription , @UserId ";
+            string usp = "usp_PageSectionCreatePost @PageId, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName , @ShowSectionTitleDescription , @ShowContentTypeTitleName , @ShowContentTypeTitleDescription , @SizeX, @SizeY, @DashboardRow, @DashboardColumn, @ContentTypeId, @SortById, @MaxContent, @HasPaging , @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
             return CheckString;
         }

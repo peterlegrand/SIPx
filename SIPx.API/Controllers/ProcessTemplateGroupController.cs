@@ -47,6 +47,7 @@ namespace SIPx.API.Controllers
                 ProcessTemplateGroupCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProcessTemplateGroupCreateGet.LanguageName = UserLanguage.Name;
                 ProcessTemplateGroupCreateGet.Sequences = ProcessTemplateGroupCreateGetSequences;
+                ProcessTemplateGroupCreateGet.Sequences.Add(new SequenceList { Sequence = ProcessTemplateGroupCreateGetSequences.Count+1, Name = "Add at the end" });
                 return Ok(ProcessTemplateGroupCreateGet);
             }
             return BadRequest(new

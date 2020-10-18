@@ -35,5 +35,11 @@ namespace SIPx.DataAccess
         //    return _sqlDataAccess.LoadSingleRecord<ContentTypeClassificationStatus, dynamic>(usp, new { UserId = UserId, ContentTypeClassificationStatusId = ContentTypeClassificationStatusId });
 
         //}
+        public async Task<List<ContentTypeClassificationStatusList>> List(string UserId)
+        {
+            string usp = "usp_ContentTypeClassificationStatusList @UserID";
+            var x = await _sqlDataAccess.LoadData<ContentTypeClassificationStatusList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
     }
 }

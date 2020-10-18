@@ -13,10 +13,11 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
-        public async Task<IActionResult> Create()
+        [HttpGet]
+        public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<OrganizationCreateGet>($"{_baseUrl}api/Organization/Create/", token);
+            var response = await _client.GetProtectedAsync<OrganizationCreateGet>($"{_baseUrl}api/Organization/Create/"+Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Organization/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);

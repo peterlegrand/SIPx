@@ -42,9 +42,11 @@ namespace SIPx.API.Controllers
             {
                 var RoleGroupCreateGet = new RoleGroupCreateGet();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                RoleGroupCreateGet.Sequences = await _roleGroupProvider.CreateGetSequence(CurrentUser.Id);
+                var Sequences = await _roleGroupProvider.CreateGetSequence(CurrentUser.Id);
                 RoleGroupCreateGet.LanguageId = UserLanguage.LanguageId;
                 RoleGroupCreateGet.LanguageName = UserLanguage.Name;
+                RoleGroupCreateGet.Sequences = Sequences;
+                RoleGroupCreateGet.Sequences.Add(new SequenceList { Sequence = Sequences.Count + 1, Name = "Add at the end" });
                 return Ok(RoleGroupCreateGet);
             }
             return BadRequest(new

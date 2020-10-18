@@ -73,6 +73,16 @@ namespace SIPx.DataAccess
             string usp = "usp_PersonList";
             return _sqlDataAccess.LoadData<PersonList>(usp);
         }
+        public Task<List<UserList>> CreateGetUsers()
+        {
+            string usp = "usp_PersonCreateGetUsers";
+            return _sqlDataAccess.LoadData<UserList>(usp);
+        }
+        public Task<List<UserList>> EditGetUsers(int PersonId)
+        {
+            string usp = "usp_PersonCreateGetUsers @PersonId";
+            return _sqlDataAccess.LoadData<UserList,dynamic>(usp, new { PersonId });
+        }
         public Task<List<PersonSearch>> Search(string Contains, string UserId)
         {
             string usp = "usp_PersonSearch @Contains, @UserId";

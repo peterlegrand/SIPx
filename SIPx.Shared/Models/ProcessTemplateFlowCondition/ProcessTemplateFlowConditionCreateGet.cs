@@ -33,5 +33,12 @@ namespace SIPx.Shared
         public List<ProcessTemplateFieldList> ProcessTemplateFields { get; set; }
         public List<ProcessTemplateFieldList> ProcessTemplateFieldRoles { get; set; }
         public List<ProcessTemplateFlowConditionComparisonOperatorList> ComparisonOperators { get; set; }
+
+        public List<SecurityLevelList> SecurityLevels { get; set; }
+        public List<RoleList> Roles { get; set; }
+        public List<OrganizationList> Organizations { get; set; }
+        public List<ProjectList> Projects { get; set; }
+        public List<UserList> Users { get; set; }
+        //public List<RelationList> Users { get; set; }
     }
 }

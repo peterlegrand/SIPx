@@ -19,6 +19,11 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
+        public Task<List<ProcessTemplateList>> CreateGetProcessTemplates(string UserId)
+        {
+            string usp = "usp_ContentTypeCreateGetProcessTemplates @UserId";
+            return _sqlDataAccess.LoadData<ProcessTemplateList, dynamic>(usp, new { UserId = UserId});
+        }
 
         public async Task<string> CreatePostCheck(ContentTypeCreatePost ContentType)
         {
@@ -28,11 +33,56 @@ namespace SIPx.DataAccess
         }
         //PETER Probably this doesn't work as the table as parameter needs to be inserted
         //see sp name of update or create without post
-        public async Task<string> CreatePost(ContentTypeCreatePost ContentType)
+        //public async Task<string> CreatePost(ContentTypeCreatePost ContentType)
+        //{
+        //    string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @Color, @IconId,  ";
+        //    var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentType);
+        //    return String;
+        //}
+        public async Task<bool> CreatePost( ContentTypeCreateGet ContentType)
         {
-            string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
-            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentType);
-            return String;
+
+            System.Data.DataTable ClassificationTable = ContentTypeClassificationValueDataTable.CreateTable();
+            var xy = new List<ContentTypeClassification>();
+
+            foreach (var x in ContentType.ContentTypeClassifications)
+            {
+                //if (x. != null && x.ClassificationValueId != 0)
+                //{
+                ClassificationTable.Rows.Add(
+
+                x.ClassificationId
+                        , x.ContentTypeClassificationStatusId);
+                //}
+            }
+            string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
+            _sqlDataAccess.SaveData<dynamic>(usp, new
+            {
+                ContentTypeGroupId = ContentType.ContentTypeGroupId
+                ,
+                ProcessTemplateId = ContentType.@ProcessTemplateId
+                ,
+                SecurityLevelId = ContentType.SecurityLevelId
+                ,
+                Name = ContentType.Name
+                ,
+                Description = ContentType.Description
+                ,
+                MenuName = ContentType.MenuName
+                ,
+                MouseOver = ContentType.MouseOver
+                ,
+                CreatorId = ContentType.CreatorId
+                ,
+                Color = ContentType.Color
+                ,
+                IconId = ContentType.IconId
+                ,
+                ContentTypeClassificationTable = ClassificationTable.AsTableValuedParameter("udt_ContentTypeClassificationInsert")
+            });
+            return true;
+
+
         }
 
         public Task<List<ContentTypeIndexGet>> IndexGet(string UserId)

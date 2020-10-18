@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateGroupUpdatePost] (
+CREATE PROCEDURE usp_ProcessTemplateGroupUpdatePost (
 	
 	 @ProcessTemplateGroupId int
 	, @Sequence int
@@ -20,7 +20,7 @@ SELECT @OldSequence = Sequence FROM ProcessTemplateGroups WHERE ProcessTemplateG
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE ProcessTemplateGroups SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence
+UPDATE ProcessTemplateGroups SET Sequence = Sequence + 1 WHERE Sequence >= @Sequence AND Sequence < @OldSequence
 END
 ELSE
 BEGIN

@@ -13,7 +13,7 @@ CREATE PROCEDURE usp_UserUpdatePost (
 	, @GenderId int
 	, @BirthDate datetime
 	, @DefaultOrganizationId int
-	, @ModifierId nvarchar(450)
+	, @USerModifierId nvarchar(450)
 	 )
 AS
 UPDATE Persons
@@ -30,6 +30,6 @@ SET Salutation = @Salutation
 	, GenderId = @GenderId 
 	, BirthDate = @BirthDate 
 	, DefaultOrganizationId = @DefaultOrganizationId 
-	, ModifierId = @ModifierId 
+	, ModifierId = @USerModifierId
 	, ModifiedDate = getdate()
 WHERE PersonId = @PersonId 

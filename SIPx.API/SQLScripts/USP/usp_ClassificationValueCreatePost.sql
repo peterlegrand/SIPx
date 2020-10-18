@@ -3,8 +3,8 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueCreatePost] (
 	, @ParentId int = NULL
 	, @DateFrom datetime = NULL
 	, @DateTo datetime = NULL
-	, @Location nvarchar(100) = NULL
-	, @LanguageId int
+--	, @Location nvarchar(100) = NULL
+--	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -17,8 +17,17 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueCreatePost] (
 	, @TopicName nvarchar(50)
 	, @CreatorId nvarchar(450)) 
 AS 
-BEGIN TRANSACTION
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @CreatorId
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
+BEGIN TRANSACTION
+IF @ParentId = 0
+BEGIN
+SET @ParentId = NULL
+END
 INSERT INTO ClassificationValues (
 	ClassificationID
 	, ParentValueID

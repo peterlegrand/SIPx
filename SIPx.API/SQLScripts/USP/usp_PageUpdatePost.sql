@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[usp_PageUpdatePost] (
 	, @UserId nvarchar(450)
 	, @OrganizationId int
 	, @ProjectId int
+	, @ClassificationId int
 	, @SelectedUserId nvarchar(450))
 AS
 
@@ -35,9 +36,16 @@ BEGIN
 SET @ProjectString = ' ,  ProjectId = '+ CAST(@ProjectId as varchar(10)) ;
 END
 
+DECLARE @ClassificationString varchar(50);
+SET @ClassificationString ='';
+IF @ClassificationId <> 0
+BEGIN 
+SET @ClassificationString = ' ,  ClassificationId = '+ CAST(@ClassificationId as varchar(10)) ;
+END
+
 DECLARE @UserString nvarchar(550);
 SET @UserString ='';
-IF @ProjectId <> ''
+IF @UserId <> ''
 BEGIN 
 SET @UserString = ' ,  UserId = '''+ @SelectedUserId  + ''' ';
 END
@@ -46,7 +54,11 @@ BEGIN
 DECLARE @statement NVARCHAR(2200);
 SET @statement =  'BEGIN TRANSACTION; UPDATE Pages SET StatusId = ' + CAST(@StatusID as varchar(10)) 
 	+ ', ShowtitleName = ' + CAST(@ShowtitleName as varchar(1)) 
-	+ ', ShowtitleDescription = ' + CAST(@ShowtitleDescription as varchar(1)) 
+	+ ', ShowtitleDescription = ' + CAST(@ShowtitleDescription as varchar(1))
+	+ @OrganizationString
+	+ @ProjectString
+	+ @ClassificationString
+	+ @UserString
 	+ ', ModifierId = ''' + @UserID + '''' +
 	+ ', ModifiedDate = ''' +CAST(GETDATE() as varchar(20)) +  '''' 
 	+ ' WHERE PageId = ' + CAST(@PageID as varchar(10)) + ';'
@@ -62,6 +74,6 @@ SET @statement =  'BEGIN TRANSACTION; UPDATE Pages SET StatusId = ' + CAST(@Stat
 	+ ' WHERE PageID= ' + CAST(@PageID as varchar(10)) 
 	+ ' AND LanguageID= ' + CAST(@LanguageID as varchar(10)) +';'
 	+ ' COMMIT TRANSACTION; '
-
+--	select @statement
 EXECUTE sp_executesql @statement
 END

@@ -1521,5 +1521,6 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1519, 'Classification value 
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1520, 'Content search result');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1521, 'Process search result');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1522, 'Project search result');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1523, 'Add page section');
 
 SET IDENTITY_INSERT UITerms OFF;

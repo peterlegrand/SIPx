@@ -69,6 +69,8 @@ namespace SIPx.API.Controllers
             Organization.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
+                if(Organization.ParentOrganizationId == 0)
+                { Organization.ParentOrganizationId = null; }
                 //var CheckString = await _organizationProvider.CreatePostCheck(Organization);
                 //if (CheckString.Length == 0)
                 //{

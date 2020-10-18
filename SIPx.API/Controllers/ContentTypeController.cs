@@ -19,6 +19,9 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ContentTypeController : ControllerBase
     {
+        private readonly IClassificationValueProvider _classificationValueProvider;
+        private readonly IContentTypeClassificationProvider _contentTypeClassificationProvider;
+        private readonly IContentTypeClassificationStatusProvider _contentTypeClassificationStatusProvider;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly IContentTypeGroupProvider _contentTypeGroupProvider;
         private readonly ICheckProvider _checkProvider;
@@ -29,8 +32,11 @@ namespace SIPx.API.Controllers
         private readonly IClaimCheck _claimCheck;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentTypeController(IProcessTemplateProvider processTemplateProvider, IContentTypeGroupProvider contentTypeGroupProvider, ICheckProvider checkProvider, IContentTypeProvider contentTypeProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentTypeController(IClassificationValueProvider classificationValueProvider, IContentTypeClassificationProvider contentTypeClassificationProvider, IContentTypeClassificationStatusProvider contentTypeClassificationStatusProvider, IProcessTemplateProvider processTemplateProvider, IContentTypeGroupProvider contentTypeGroupProvider, ICheckProvider checkProvider, IContentTypeProvider contentTypeProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _classificationValueProvider = classificationValueProvider;
+            _contentTypeClassificationProvider = contentTypeClassificationProvider;
+            _contentTypeClassificationStatusProvider = contentTypeClassificationStatusProvider;
             _processTemplateProvider = processTemplateProvider;
             _contentTypeGroupProvider = contentTypeGroupProvider;
             _checkProvider = checkProvider;
@@ -49,10 +55,19 @@ namespace SIPx.API.Controllers
             {
                 var ContentTypeCreateGet = new ContentTypeCreateGet();
                 var ContentTypeGroups = await _contentTypeGroupProvider.List(CurrentUser.Id);
+                var ProcessTemplates = await _contentTypeProvider.CreateGetProcessTemplates(CurrentUser.Id);
                 var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ContentTypeCreateGet.ContentTypeGroups = ContentTypeGroups;
+                var Icons = await _masterListProvider.IconList(CurrentUser.Id);
+                var ContentTypeClassificationStatuses = await _contentTypeClassificationStatusProvider.List(CurrentUser.Id);
+                var ContentTypeClassifications = await _contentTypeClassificationProvider.CreateGetClassifications(CurrentUser.Id);
+   
+                    ContentTypeCreateGet.ContentTypeGroups = ContentTypeGroups;
+                ContentTypeCreateGet.Icons = Icons;
                 ContentTypeCreateGet.SecurityLevels = SecurityLevels;
+                ContentTypeCreateGet.ProcessTemplates = ProcessTemplates;
+                ContentTypeCreateGet.ContentTypeClassificationStatuses = ContentTypeClassificationStatuses;
+                ContentTypeCreateGet.ContentTypeClassifications = ContentTypeClassifications;
                 return Ok(ContentTypeCreateGet);
             }
             return BadRequest(new
@@ -62,22 +77,22 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ContentTypeCreatePost ContentType)
+        public async Task<IActionResult> Create(ContentTypeCreateGet ContentType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ContentType.CreatorId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _contentTypeProvider.CreatePostCheck(ContentType);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _contentTypeProvider.CreatePostCheck(ContentType);
+                //if (CheckString.Length == 0)
+                //{
                     _contentTypeProvider.CreatePost(ContentType);
                     return Ok(ContentType);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new

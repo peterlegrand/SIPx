@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PageSectionCreateGet = new PageSectionCreateGet();
-                var PageSectionCreateGetSequences = await _pageSectionProvider.CreateGetSequence(CurrentUser.Id, Id);
+              //  var PageSectionCreateGetSequences = await _pageSectionProvider.CreateGetSequence(CurrentUser.Id, Id);
                 var PageSectionTypes = await _pageSectionTypeProvider.List(CurrentUser.Id);
                 var PageSectionDataTypes = await _pageSectionDataTypeProvider.List(CurrentUser.Id);
                 var ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
@@ -60,7 +60,10 @@ namespace SIPx.API.Controllers
                 PageSectionCreateGet.LanguageName = UserLanguage.Name;
                 PageSectionCreateGet.PageSectionDataTypes = PageSectionDataTypes;
                 PageSectionCreateGet.PageSectionTypes = PageSectionTypes;
-                PageSectionCreateGet.Sequences = PageSectionCreateGetSequences;
+                PageSectionCreateGet.ContentTypes = ContentTypes;
+                PageSectionCreateGet.SortBys= SortBys;
+
+                //                PageSectionCreateGet.Sequences = PageSectionCreateGetSequences;
                 PageSectionCreateGet.PageId = Id;
                 return Ok(PageSectionCreateGet);
             }
@@ -74,12 +77,13 @@ namespace SIPx.API.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Create(PageSectionCreatePost PageSection)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
+                var CurrentUser = await _userManager.GetUserAsync(User);
             PageSection.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _pageSectionProvider.CreatePostCheck(PageSection);
-                if (CheckString.Length == 0)
+                PageSection.UserId = CurrentUser.Id;
+//                var CheckString = await _pageSectionProvider.CreatePostCheck(PageSection);
+  //              if (CheckString.Length == 0)
                 {
                     _pageSectionProvider.CreatePost(PageSection);
                     return Ok(PageSection);
@@ -87,7 +91,7 @@ namespace SIPx.API.Controllers
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+    //                Message = CheckString,
                 });
             }
             return BadRequest(new

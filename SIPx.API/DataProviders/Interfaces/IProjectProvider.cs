@@ -6,8 +6,8 @@ namespace SIPx.DataAccess
 {
     public interface IProjectProvider
     {
-        Task<string> CreatePost(ProjectCreatePost Project);
-        Task<string> CreatePostCheck(ProjectCreatePost Project);
+        Task<string> CreatePost(ProjectCreateGet Project);
+        Task<string> CreatePostCheck(ProjectCreateGet Project);
         Task<ProjectDeleteGet> DeleteGet(string UserId, int ProjectId);
         bool DeletePost(int Id);
         Task<List<ProjectIndexGet>> IndexGet(string UserId);

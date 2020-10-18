@@ -18,6 +18,11 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateFlowConditionController : ControllerBase
     {
+        private readonly IOrganizationProvider _organizationProvider;
+        private readonly IProjectProvider _projectProvider;
+        private readonly IUserProvider _userProvider;
+        private readonly IRoleProvider _roleProvider;
+        private readonly ISecurityLevelProvider _securityLevelProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IProcessTemplateFlowConditionComparisonOperatorProvider _processTemplateFlowConditionComparisonOperatorProvider;
         private readonly IProcessTemplateFieldProvider _processTemplateFieldProvider;
@@ -28,8 +33,13 @@ namespace SIPx.API.Controllers
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateFlowConditionController(ICheckProvider checkProvider, IProcessTemplateFlowConditionComparisonOperatorProvider processTemplateFlowConditionComparisonOperatorProvider , IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateFlowConditionTypeProvider processTemplateFlowConditionTypeProvider, IProcessTemplateFlowConditionProvider processTemplateFlowConditionProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateFlowConditionController(IOrganizationProvider organizationProvider, IProjectProvider projectProvider, IUserProvider userProvider , IRoleProvider roleProvider, ISecurityLevelProvider securityLevelProvider, ICheckProvider checkProvider, IProcessTemplateFlowConditionComparisonOperatorProvider processTemplateFlowConditionComparisonOperatorProvider , IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateFlowConditionTypeProvider processTemplateFlowConditionTypeProvider, IProcessTemplateFlowConditionProvider processTemplateFlowConditionProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _organizationProvider = organizationProvider;
+            _projectProvider = projectProvider;
+            _userProvider = userProvider;
+            _roleProvider = roleProvider;
+            _securityLevelProvider = securityLevelProvider;
             _checkProvider = checkProvider;
             _processTemplateFlowConditionComparisonOperatorProvider = processTemplateFlowConditionComparisonOperatorProvider;
             _processTemplateFieldProvider = processTemplateFieldProvider;
@@ -54,6 +64,11 @@ namespace SIPx.API.Controllers
                 var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.CreateGetFieldRoleList(CurrentUser.Id, Id);
                 var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                var Roles = await _roleProvider.List(CurrentUser.Id);
+                var Organizations = await _organizationProvider.List(CurrentUser.Id);
+                var Projects = await _projectProvider.List(CurrentUser.Id);
+                var Users = await _userProvider.List();
                 ProcessTemplateFlowConditionCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProcessTemplateFlowConditionCreateGet.LanguageName = UserLanguage.Name;
                 ProcessTemplateFlowConditionCreateGet.Sequences = ProcessTemplateFlowConditionCreateGetSequences;
@@ -63,6 +78,11 @@ namespace SIPx.API.Controllers
                 ProcessTemplateFlowConditionCreateGet.ComparisonOperators = ComparisonOperators;
                 ProcessTemplateFlowConditionCreateGet.ProcessTemplateFlowId = Id;
                 ProcessTemplateFlowConditionCreateGet.UserId = CurrentUser.Id;
+                ProcessTemplateFlowConditionCreateGet.SecurityLevels = SecurityLevels;
+                ProcessTemplateFlowConditionCreateGet.Roles = Roles;
+                ProcessTemplateFlowConditionCreateGet.Organizations = Organizations;
+                ProcessTemplateFlowConditionCreateGet.Projects = Projects;
+                ProcessTemplateFlowConditionCreateGet.Users = Users;
                 return Ok(ProcessTemplateFlowConditionCreateGet);
             }
             return BadRequest(new

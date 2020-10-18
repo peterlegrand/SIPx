@@ -18,7 +18,7 @@ SELECT @OldSequence = Sequence FROM RoleGroups WHERE RoleGroupId = @RoleGroupID;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE RoleGroups SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence
+UPDATE RoleGroups SET Sequence = Sequence + 1 WHERE Sequence >= @Sequence AND Sequence < @OldSequence
 END
 ELSE
 BEGIN

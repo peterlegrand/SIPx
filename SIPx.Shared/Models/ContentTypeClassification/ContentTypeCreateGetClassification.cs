@@ -10,7 +10,11 @@ namespace SIPx.Shared
         [Key]
         public int ClassificationId { get; set; }
         public int ContentTypeClassificationStatusId { get; set; }
-        public List<ContentTypeClassificationStatusList> ContentTypeClassificationStatuses { get; set; }
+        public string Name { get; set; }
+        public string MouseOver { get; set; }
+        public string ControlA { get; set; }
+        public string ControlB { get; set; }
+        public string ControlC { get; set; }
 
     }
 }

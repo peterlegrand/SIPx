@@ -7,7 +7,20 @@
 
     Layout = "_LayoutAdmin";
 }
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+        $(document).ready(function () {
+            $('#ProcessTemplateFlowConditionTypeId_hidden').on('change', function () {
+                if (this.value == '3') {
+                    $("#SecurityLevel").show();
+                }
+                else {
+                    $("#SecurityLevel").hide();
+                }
+            });
+    });
+</script>
 <h1>
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add process template flow condition")).TermString
 </h1>
@@ -60,27 +73,38 @@
             </div>
         </div>
         <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-
-                </div>
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
         <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-dropdownlist id="ProcessTemplateFlowConditionTypeId" dataSource="@Model.ProcessTemplateFlowConditionTypes" ejs-for="@Model.ProcessTemplateFlowConditionTypeId" value="@Model.ProcessTemplateFlowConditionTypeId" index="2" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ProcessTemplateFlowConditionTypeId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-
-                </div>
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
             </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="ProcessTemplateFlowConditionTypeId" dataSource="@Model.ProcessTemplateFlowConditionTypes" ejs-for="@Model.ProcessTemplateFlowConditionTypeId" value="@Model.ProcessTemplateFlowConditionTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFlowConditionTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+        <div class="row" id="SecurityLevel">
+            <div class="col-3">
+    Security level            
+    @*@Term.Find(x => x.InternalName.Equals("Condition type")).TermString*@
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="SecurityLevel1" dataSource="@Model.SecurityLevels" ejs-for="@Model.ProcessTemplateFlowConditionInt" value="@Model.ProcessTemplateFlowConditionInt" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="SecurityLevelId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Process template field")).TermString
@@ -92,27 +116,27 @@
             </div>
         </div>
         <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Comparison operator")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-dropdownlist id="ComparisonOperatorId" dataSource="@Model.ComparisonOperators" ejs-for="@Model.ComparisonOperatorId" value="@Model.ComparisonOperatorId" index="2" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ProcessTemplateFlowConditionComparisonOperatorId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-
-                </div>
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Comparison operator")).TermString
             </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Role field")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-dropdownlist id="ProcessTemplateFieldIdRole" dataSource="@Model.ProcessTemplateFieldRoles" ejs-for="@Model.ProcessTemplateFieldIdRole" value="@Model.ProcessTemplateFieldIdRole" index="2"  popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ProcessTemplateFlowConditionTypeId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
+            <div class="col-9">
+                <ejs-dropdownlist id="ComparisonOperatorId" dataSource="@Model.ComparisonOperators" ejs-for="@Model.ComparisonOperatorId" value="@Model.ComparisonOperatorId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFlowConditionComparisonOperatorId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
 
-                </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Role field")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="ProcessTemplateFieldIdRole" dataSource="@Model.ProcessTemplateFieldRoles" ejs-for="@Model.ProcessTemplateFieldIdRole" value="@Model.ProcessTemplateFieldIdRole" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFlowConditionTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("String value")).TermString

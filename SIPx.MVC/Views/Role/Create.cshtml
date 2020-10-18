@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-3">
                 @* PETER TODO change to group *@
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Group")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="RoleGroupId" dataSource="@Model.RoleGroups" ejs-for="@Model.RoleGroupId" value="@Model.RoleGroupId" index="2" filtering="RoleGroupId" popupHeight="220px">

@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class PageSectionDataTypeList
     {
         [Key]
-        public int PageSectionTypeId { get; set; }
+        public int PageSectionDataTypeId { get; set; }
         public string Name { get; set; }
 
     }

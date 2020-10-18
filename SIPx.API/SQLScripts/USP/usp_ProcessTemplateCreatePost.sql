@@ -34,6 +34,8 @@ WHERE ProcessTemplateGroupId = @ProcessTemplateGroupID
 INSERT INTO ProcessTemplates (
 	ProcessTemplateGroupID
 	, ShowInPersonalCalendar
+	, ShowInOrganizationCalendar
+	, ShowInProjectCalendar
 	, ShowInEventCalendar
 	, ProcessMultiMax
 	, Sequence
@@ -51,6 +53,8 @@ INSERT INTO ProcessTemplates (
 VALUES (
 	@ProcessTemplateGroupID
 	, @ShowInPersonalCalendar
+	, @ShowInOrganizationCalendar
+	, @ShowInProjectCalendar
 	, @ShowInEventCalendar
 	, @ProcessMultiMax
 	, @Sequence

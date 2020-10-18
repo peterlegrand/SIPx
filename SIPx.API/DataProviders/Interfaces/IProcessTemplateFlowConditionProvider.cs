@@ -6,6 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateFlowConditionProvider
     {
+        Task<List<SequenceList>> UpdateGetSequence(string UserId, int ProcessTemplateFlowId);
         Task<List<SequenceList>> CreateGetSequence(string UserId, int ProcessTemplateFlowId);
         Task<string> CreatePost(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition);
         Task<string> CreatePostCheck(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition);

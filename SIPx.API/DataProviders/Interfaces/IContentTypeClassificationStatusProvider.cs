@@ -8,5 +8,6 @@ namespace SIPx.DataAccess
     {
         //Task<List<ContentTypeClassificationStatus>> ContentTypeClassificationStatusIndexGet(string UserId);
         //Task<ContentTypeClassificationStatus> ContentTypeClassificationStatusUpdateGet(string UserId, int ContentTypeClassificationStatusId);
+        Task<List<ContentTypeClassificationStatusList>> List(string UserId);
     }
 }
