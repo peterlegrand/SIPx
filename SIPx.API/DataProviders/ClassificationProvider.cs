@@ -19,10 +19,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<ClassificationCreateGetSequence>> CreateGetSequence(string UserId)
+        public async Task<List<SequenceList>> CreateGetSequence(string UserId)
         {
             string usp = "usp_ClassificationCreateGetSequence @UserID";
-            var x = await _sqlDataAccess.LoadData<ClassificationCreateGetSequence, dynamic>(usp, new { UserId });
+            var x = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
             return x;
         }
 

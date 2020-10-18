@@ -12,6 +12,7 @@ BEGIN TRANSACTION
 
 DECLARE @IsPhone bit;
 SELECT @IsPhone = PhoneProperties FROM PersonTelecoms JOIN Telecomtypes ON PersonTelecoms.TelecomTypeId = Telecomtypes.TelecomTypeId 
+WHERE PersonTelecoms.PersonTelecomId = @PersonTelecomId
 
 UPDATE PersonTelecoms SET TelecomValue = @TelecomValue, ModifierId = @UserId, ModifiedDate = Getdate() WHERE PersonTelecomId = @PersonTelecomID
 IF @IsPhone = 1

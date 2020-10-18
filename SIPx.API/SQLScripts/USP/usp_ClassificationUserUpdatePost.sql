@@ -1,12 +1,13 @@
 CREATE PROCEDURE usp_ClassificationUserUpdatePost (
-	@UserId nvarchar(450)
-	, @ClassificationId int
+	 @ClassificationUserId int
+	, @UserOfClassificationId nvarchar(450)
 	, @ClassificationRelationTypeId int
-	, @ModifierID nvarchar(450)) 
+	, @UserId nvarchar(450)
+) 
 AS 
 UPDATE  ClassificationUsers SET 
-	UserId = @UserId
+	UserId = @UserOfClassificationId
 	, ClassificationRelationTypeId = @ClassificationRelationTypeId
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = getdate()
-WHERE ClassificationId= @ClassificationId
+WHERE ClassificationUserId= @ClassificationUserId

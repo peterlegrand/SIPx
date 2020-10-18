@@ -15,7 +15,6 @@
         <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString" template="#HasDropDown" textAlign="Right" type="boolean"></e-grid-column>
         <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Values")).TermString" template="#Values" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Pages")).TermString" template="#Pages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
@@ -50,12 +49,6 @@
 <script id="Values" type="text/x-template">
     <div >
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Index/${ClassificationId}"><span style="color:red">V</span>alue</a>
-
-    </div>
-</script>
-<script id="Pages" type="text/x-template">
-    <div >
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationPage/Index/${ClassificationId}"><span style="color:red">P</span>age</a>
 
     </div>
 </script>

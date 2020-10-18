@@ -5,7 +5,7 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
-SELECT TelecomTypes.TelecomTypeId 
+SELECT CONCAT('CONCAT',TelecomTypes.PhoneProperties, TelecomTypes.TelecomTypeId) TelecomTypeId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 FROM TelecomTypes
 JOIN UITermLanguages UIName

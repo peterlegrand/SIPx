@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class TelecomTypeList
     {
         [Key]
-        public int TelecomTypeId { get; set; }
+        public string TelecomTypeId { get; set; }
         public string Name { get; set; }
 
     }

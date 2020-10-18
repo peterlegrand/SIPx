@@ -8,7 +8,7 @@ WHERE USerId = @UserID
 SELECT ClassificationUsers.ClassificationUserID
 	, ClassificationUsers.ClassificationID
 	, ClassificationUsers.ClassificationRelationTypeID
-	,ClassificationUsers.UserID
+	,ClassificationUsers.UserID UserOfClassificationId
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, ClassificationUsers.CreatedDate

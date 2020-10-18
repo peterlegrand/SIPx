@@ -13,11 +13,12 @@ namespace SIPx.Shared
         public int ClassificationId { get; set; }
         public int ClassificationRelationTypeId { get; set; }
         public string CreatorName { get; set; }
-        public string CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }
-        public string ModifierId { get; set; }
+        public int ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string UserId { get; set; }
 
         public List<RoleList> Roles { get; set; }
         public List<ClassificationRelationTypeList> ClassificationRelationTypes { get; set; }

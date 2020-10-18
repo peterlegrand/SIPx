@@ -57,7 +57,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ClassificationValueUpdateGet ClassificationValue)
         {
-            string usp = "usp_ClassificationValueUpdatePost @ClassificationValueId, @ParentValueId, @DateFrom, @DateTo, @Location, @LanguageId, @Name, @Description, @DropDownName, @MenuName, @MouseOver, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @ModifierId";
+            string usp = "usp_ClassificationValueUpdatePost @ClassificationValueId, @DateFrom, @DateTo, @Name, @Description, @MenuName, @MouseOver, @DropDownName, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @UserId";
             _sqlDataAccess.SaveData<ClassificationValueUpdateGet>(usp, ClassificationValue);
             return true;
         }

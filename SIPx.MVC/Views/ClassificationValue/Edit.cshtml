@@ -73,6 +73,15 @@
         </div>
         <div class="row">
             <div class="col-3">
+                @* PETERR TODO *@Down name 
+                @*@Term.Find(x => x.InternalName.Equals("Dropdown name")).TermString*@
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="DropDownName" ejs-for="DropDownName" cssClass="e-outline" placeholder="DropDownName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Page name")).TermString
             </div>
             <div class="col-9">

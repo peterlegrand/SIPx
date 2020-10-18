@@ -40,6 +40,7 @@ namespace SIPx.API.Controllers
                 var ClassificationRoleCreateGet = new ClassificationRoleCreateGet();
                 var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationRoleCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
+                ClassificationRoleCreateGet.Roles = await _roleProvider.List(CurrentUser.Id);
                 ClassificationRoleCreateGet.ClassificationId = Id;
                 return Ok(ClassificationRoleCreateGet);
             }
@@ -57,8 +58,8 @@ namespace SIPx.API.Controllers
             ClassificationRole.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationRoleProvider.CreatePostCheck(ClassificationRole);
-                if (CheckString.Length == 0)
+            //    var CheckString = await _classificationRoleProvider.CreatePostCheck(ClassificationRole);
+            //    if (CheckString.Length == 0)
                 {
                     _classificationRoleProvider.CreatePost(ClassificationRole);
                     return Ok(ClassificationRole);
@@ -66,7 +67,7 @@ namespace SIPx.API.Controllers
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+            //        Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -134,7 +135,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationRole.CreatorId = CurrentUser.Id;
+                ClassificationRole.UserId = CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{

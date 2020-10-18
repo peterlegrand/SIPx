@@ -47,6 +47,7 @@ namespace SIPx.API.Controllers
                 ClassificationCreateGet.LanguageName = UserLanguage.Name;
                 ClassificationCreateGet.Statuses = Statuses;
                 ClassificationCreateGet.Sequences = ClassificationCreateGetSequences;
+                ClassificationCreateGet.Sequences.Add(new SequenceList { Sequence = ClassificationCreateGetSequences.Count + 1, Name = "Add at the end" });
                 return Ok(ClassificationCreateGet);
             }
             return BadRequest(new

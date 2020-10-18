@@ -16,11 +16,14 @@
         <e-grid-column field="MouseOver" headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="DateFrom" headerText="@Term.Find(x => x.InternalName.Equals("From date")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="DateTo" headerText="@Term.Find(x => x.InternalName.Equals("To date")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString" template="#Add" textAlign="Center" type="string"></e-grid-column>
-       
+
     </e-grid-columns>
 </ejs-grid>
 
@@ -47,6 +50,24 @@
 </script>
 <script id="Add" type="text/x-template">
     <div>
-<a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Create/@ViewBag.Id/${ClassificationValueId}"><span style="color:red">D</span>elete</a>
+
+        ${if(MaxLevel === Level)}
+        Deepest level
+        ${else}
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Create/@ViewBag.Id?ParentId=${ClassificationValueId}"><span style="color:red">A</span>dd</a>
+        ${/if}
+    </div>
+</script>
+
+<script id="Roles" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueRole/Index/${ClassificationId}"><span style="color:red">R</span>ole</a>
+
+    </div>
+</script>
+<script id="Users" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueUser/Index/${ClassificationId}"><span style="color:red">U</span>ser</a>
+
     </div>
 </script>

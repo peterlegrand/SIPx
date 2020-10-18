@@ -19,14 +19,14 @@
         <div class="row">
             <div class="col-3">
             </div>    <div class="col-9">
-                <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ClassificationValueId" ejs-for="ClassificationValueId" cssClass="e-outline" placeholder="ClassificationValueId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Classification id")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-textbox>
+                <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -41,7 +41,7 @@
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserId" dataSource="@Model.Users" ejs-for="@Model.UserId" value="@Model.UserId" popupHeight="220px">
+                <ejs-dropdownlist id="UserOfClassificationValueId" dataSource="@Model.Users" ejs-for="@Model.UserOfClassificationValueId" value="@Model.UserOfClassificationValueId" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>

@@ -44,6 +44,7 @@ namespace SIPx.API.Controllers
                 var ClassificationValueUserCreateGet = new ClassificationValueUserCreateGet();
                 var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationValueUserCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
+                ClassificationValueUserCreateGet.Users = await _userProvider.List();
                 ClassificationValueUserCreateGet.ClassificationId = Id;
                 return Ok(ClassificationValueUserCreateGet);
             }
@@ -55,22 +56,22 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ClassificationValueUserCreatePost ClassificationValueUser)
+        public async Task<IActionResult> Create(ClassificationValueUserCreateGet ClassificationValueUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ClassificationValueUser.CreatorId = CurrentUser.Id;
+            ClassificationValueUser.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationValueUserProvider.CreatePostCheck(ClassificationValueUser);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _classificationValueUserProvider.CreatePostCheck(ClassificationValueUser);
+                //if (CheckString.Length == 0)
+                //{
                     _classificationValueUserProvider.CreatePost(ClassificationValueUser);
                     return Ok(ClassificationValueUser);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -140,7 +141,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationValueUser.CreatorId = CurrentUser.Id;
+                ClassificationValueUser.UserId = CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{

@@ -26,9 +26,9 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public async Task<string> CreatePost(ClassificationValueUserCreatePost ClassificationValueUser)
+        public async Task<string> CreatePost(ClassificationValueUserCreateGet ClassificationValueUser)
         {
-            string usp = "usp_ClassificationValueUserCreatePost @UserId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            string usp = "usp_ClassificationValueUserCreatePost @UserOfClassificationId , @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, @UserId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueUser);
             return String;
         }
@@ -49,7 +49,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ClassificationValueUserUpdateGet ClassificationValueUser)
         {
-            string usp = "usp_ClassificationValueUserUpdatePost @ClassificationValueUserId, @UserId, @ClassificationValueId, @ClassificationRelationTypeId, @ModifierId";
+            string usp = "usp_ClassificationValueUserUpdatePost @ClassificationValueUserId, @UserOfClassificationId, @ClassificationRelationTypeId, @UserId";
             _sqlDataAccess.SaveData<ClassificationValueUserUpdateGet>(usp, ClassificationValueUser);
             return true;
         }

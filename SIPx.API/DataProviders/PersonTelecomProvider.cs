@@ -20,16 +20,16 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(PersonTelecomCreatePost PersonTelecom)
+        public async Task<string> CreatePostCheck(PersonTelecomCreateGet PersonTelecom)
         {
             string usp = "usp_PersonTelecomCreateCheck @PersonId  , @TelecomTypeId, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonTelecom);
             return CheckString;
         }
 
-        public async Task<string> CreatePost(PersonTelecomCreatePost PersonTelecom)
+        public async Task<string> CreatePost(PersonTelecomCreateGet PersonTelecom)
         {
-            string usp = "usp_PersonTelecomCreate  @PersonId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskFor, @CreatorId ";
+            string usp = "usp_PersonTelecomCreatePost  @PersonId , @TelecomTypeId , @TelecomValue, @CountryCode, @AreaCode, @ExtensionCode,@AskForName, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonTelecom);
             return CheckString;
         }
@@ -49,7 +49,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(PersonTelecomUpdateGet PersonTelecom)
         {
-            string usp = "usp_PersonTelecomUpdatePost @PersonTelecomId  , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @ModifierId";
+            string usp = "usp_PersonTelecomUpdatePost @PersonTelecomId  , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @UserId";
             _sqlDataAccess.SaveData<PersonTelecomUpdateGet>(usp, PersonTelecom);
             return true;
         }

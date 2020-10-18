@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ClassificationRoleDeletePost (@UserId nvarchar(450), @ClassificationRoleId int)
+CREATE PROCEDURE usp_ClassificationRoleDeletePost ( @ClassificationRoleId int)
 AS
 DELETE FROM ClassificationRoles 
 WHERE ClassificationRoleID = @ClassificationRoleId

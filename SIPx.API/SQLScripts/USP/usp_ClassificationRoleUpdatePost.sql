@@ -1,6 +1,6 @@
 CREATE PROCEDURE usp_ClassificationRoleUpdatePost (
 	@RoleId nvarchar(450)
-	, @ClassificationId int
+	, @ClassificationRoleId int
 	, @ClassificationRelationTypeId int
 	, @UserID nvarchar(450)) 
 AS 
@@ -9,4 +9,4 @@ UPDATE  ClassificationRoles SET
 	, ClassificationRelationTypeId = @ClassificationRelationTypeId
 	, ModifierId = @UserID
 	, ModifiedDate = getdate()
-WHERE ClassificationId= @ClassificationId
+WHERE ClassificationRoleId= @ClassificationRoleId

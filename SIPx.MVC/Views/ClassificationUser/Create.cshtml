@@ -3,13 +3,13 @@
 @model ClassificationUserCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification User")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification user")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/ClassificationPages.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification User")).TermString
+    <img src="~/images/icons/ClassificationPages.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification user")).TermString
 </h1>
 <div class="container">
 
@@ -18,15 +18,9 @@
 
         <div class="row">
             <div class="col-3">
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Classification id")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-textbox>
+                <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -41,7 +35,7 @@
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserId" dataSource="@Model.Users" ejs-for="@Model.UserId" value="@Model.UserId" popupHeight="220px">
+                <ejs-dropdownlist id="UserOfClassificationId" dataSource="@Model.Users" ejs-for="@Model.UserOfClassificationId" value="@Model.UserOfClassificationId" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>

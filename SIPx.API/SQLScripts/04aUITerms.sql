@@ -1522,5 +1522,15 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1520, 'Content search result
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1521, 'Process search result');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1522, 'Project search result');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1523, 'Add page section');
-
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1524, 'Pass');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1525, 'Add role to classification');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1526, 'Classification value roles');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1527, 'New classification value role');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1528, 'Classification value id');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1529, 'Classification value role');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1530, 'Classification value users');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1531, 'Add user to classification value');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1532, 'Add new classification value user');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1533, 'New classification value user');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1534, 'Classification value user');
 SET IDENTITY_INSERT UITerms OFF;

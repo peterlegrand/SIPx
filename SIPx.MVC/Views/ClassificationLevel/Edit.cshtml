@@ -111,18 +111,18 @@
     </div>
     <div class="row">
         <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("In dropdown")).TermString
-        </div>
-        <div class="col-9">
-            <ejs-checkbox id="InDropDown" ejs-for="InDropDown" checked="@Model.InDropDown"></ejs-checkbox>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
             @Term.Find(x => x.InternalName.Equals("In menu")).TermString
         </div>
         <div class="col-9">
             <ejs-checkbox id="InMenu" ejs-for="InMenu" checked="@Model.InMenu"></ejs-checkbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("In dropdown")).TermString
+        </div>
+        <div class="col-9">
+            <ejs-checkbox id="InDropDown" ejs-for="InDropDown" checked="@Model.InDropDown"></ejs-checkbox>
         </div>
     </div>
     <div class="row">

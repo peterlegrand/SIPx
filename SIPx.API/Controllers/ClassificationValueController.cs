@@ -36,8 +36,8 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Create/{Id:int}/{ParentId:int?}")]
-        public async Task<IActionResult> Create(int Id, int ParentId = 0)
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id, [FromQuery(Name = "ParentId")] int ParentId =0)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
@@ -101,8 +101,8 @@ namespace SIPx.API.Controllers
                 //        Message = "No record with this ID",
                 //    });
                 //}
-
-                return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
+                var x = await _classificationValueProvider.IndexGet(CurrentUser.Id, Id);
+                return Ok(x);
             }
             return BadRequest(new
             {
@@ -144,7 +144,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationValue.CreatorId = CurrentUser.Id;
+                ClassificationValue.UserId = CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{

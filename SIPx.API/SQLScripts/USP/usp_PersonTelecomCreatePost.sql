@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[usp_PersonTelecomCreatePost] (
 	, @CountryCode nvarchar(10)
 	, @AreaCode nvarchar(10)
 	, @ExtensionCode nvarchar(10)
-	, @AskFor nvarchar(50)
+	, @AskForName nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
 
@@ -21,7 +21,7 @@ SELECT @IsPhone = TelecomTypes.PhoneProperties FROM TelecomTypes WHERE  TelecomT
 IF @IsPhone = 1
 BEGIN
 INSERT INTO PersonTelecomPhones (PersonTelecomId, CountryCode, AreaCode, ExtensionCode, AskForName) VALUES (
-	@NewPersonTelecomId, @CountryCode, @AreaCode, @ExtensionCode, @AskFor)
+	@NewPersonTelecomId, @CountryCode, @AreaCode, @ExtensionCode, @AskForName)
 END
 	COMMIT TRANSACTION
 

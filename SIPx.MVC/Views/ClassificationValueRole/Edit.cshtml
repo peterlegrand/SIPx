@@ -3,13 +3,13 @@
 @model ClassificationValueRoleUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value Role")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value role")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification Role")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification value role")).TermString
 </h1>
 <div class="container">
 
@@ -29,7 +29,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Roles" dataSource="@Model.Roles" ejs-for="@Model.RoleId" value="@Model.RoleId" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="RoleId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>

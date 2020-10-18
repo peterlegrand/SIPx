@@ -3,13 +3,13 @@
 @model ClassificationRoleUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification relation role")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification role")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification relation role")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification role")).TermString
 </h1>
 <div class="container">
 

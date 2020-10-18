@@ -1,9 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationValueUpdatePost] (
 	@ClassificationValueId int
-	, @ParentValueId int
 	, @DateFrom Datetime
 	, @DateTo Datetime
-	, @Location Geography
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -14,22 +12,20 @@ CREATE PROCEDURE [dbo].[usp_ClassificationValueUpdatePost] (
 	, @HeaderName nvarchar(50)
 	, @HeaderDescription nvarchar(max)
 	, @TopicName nvarchar(50)
-	, @ModifierId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @ModifierId
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 
 BEGIN TRANSACTION
 UPDATE ClassificationValues SET 
-	ParentValueId = @ParentValueID
-	, DateFrom = @DateFrom
+	 DateFrom = @DateFrom
 	, DateTo = @DateTo
-	, Location = @Location
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = GETDATE()
 WHERE ClassificationValueId = @ClassificationValueID
 
@@ -44,7 +40,7 @@ UPDATE  ClassificationValueLanguages SET
 	, HeaderName = @HeaderName 
 	, HeaderDescription = @HeaderDescription
 	, TopicName = @TopicName 
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = getdate()
 WHERE ClassificationValueID= @ClassificationValueID
 	AND LanguageID = @LanguageID

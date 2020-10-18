@@ -9,7 +9,7 @@
     Layout = "_LayoutAdmin";
 }
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification relation user")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification user")).TermString
 </h1>
 <div class="container">
 
@@ -30,7 +30,7 @@
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="User" dataSource="@Model.Users" ejs-for="@Model.UserId" value="@Model.UserId" index="2" filtering="Users" popupHeight="220px">
+                <ejs-dropdownlist id="UserOfClassificationId" dataSource="@Model.Users" ejs-for="@Model.UserOfClassificationId" value="@Model.UserOfClassificationId" index="2" filtering="Users" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 

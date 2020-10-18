@@ -12,6 +12,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationValueRoleController : ControllerBase
     {
+        private readonly IRoleProvider _roleProvider;
         private readonly IClassificationValueRoleProvider _classificationValueRoleProvider;
         private readonly IClassificationRelationTypeProvider _classificationRelationTypeProvider;
         private readonly IClassificationValueProvider _classificationValueProvider;
@@ -21,8 +22,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueRoleController(IClassificationValueRoleProvider classificationValueRoleProvider, IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueRoleController(IRoleProvider roleProvider, IClassificationValueRoleProvider classificationValueRoleProvider, IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _roleProvider = roleProvider;
             _classificationValueRoleProvider = classificationValueRoleProvider;
             _classificationRelationTypeProvider = classificationRelationTypeProvider;
             _classificationValueProvider = classificationValueProvider;
@@ -43,6 +45,7 @@ namespace SIPx.API.Controllers
                 var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationValueRoleCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
                 ClassificationValueRoleCreateGet.ClassificationId = Id;
+                ClassificationValueRoleCreateGet.Roles = await _roleProvider.List(CurrentUser.Id);
                 return Ok(ClassificationValueRoleCreateGet);
             }
             return BadRequest(new
@@ -53,22 +56,22 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ClassificationValueRoleCreatePost ClassificationValueRole)
+        public async Task<IActionResult> Create(ClassificationValueRoleCreateGet ClassificationValueRole)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationValueRole.CreatorId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationValueRoleProvider.CreatePostCheck(ClassificationValueRole);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _classificationValueRoleProvider.CreatePostCheck(ClassificationValueRole);
+                //if (CheckString.Length == 0)
+                //{
                     _classificationValueRoleProvider.CreatePost(ClassificationValueRole);
                     return Ok(ClassificationValueRole);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -132,7 +135,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationValueRole.CreatorId = CurrentUser.Id;
+                ClassificationValueRole.UserId = CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{

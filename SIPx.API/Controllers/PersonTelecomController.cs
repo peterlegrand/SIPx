@@ -47,6 +47,7 @@ namespace SIPx.API.Controllers
                 var PersonTelecomCreateGet = new PersonTelecomCreateGet();
                 var TelecomTypes = await _telecomTypeProvider.List(CurrentUser.Id);
                 PersonTelecomCreateGet.TelecomTypes = TelecomTypes;
+                PersonTelecomCreateGet.ConcatTelecomTypeId = "CONCAT11";
                 PersonTelecomCreateGet.PersonId = Id;
                 return Ok(PersonTelecomCreateGet);
             }
@@ -58,7 +59,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(PersonTelecomCreatePost PersonTelecom)
+        public async Task<IActionResult> Create(PersonTelecomCreateGet PersonTelecom)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             PersonTelecom.CreatorId = CurrentUser.Id;
@@ -67,7 +68,9 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _personTelecomProvider.CreatePostCheck(PersonTelecom);
                 //if (CheckString.Length == 0)
                 //{
-                    _personTelecomProvider.CreatePost(PersonTelecom);
+                PersonTelecom.UserId = CurrentUser.Id;
+                PersonTelecom.TelecomTypeId = Int32.Parse(PersonTelecom.ConcatTelecomTypeId.Substring(7));
+                _personTelecomProvider.CreatePost(PersonTelecom);
                     return Ok(PersonTelecom);
                 //}
                 return BadRequest(new
@@ -119,7 +122,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                PersonTelecom.ModifierId = CurrentUser.Id;
+                PersonTelecom.UserId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{

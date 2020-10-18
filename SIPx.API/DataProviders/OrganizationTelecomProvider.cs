@@ -27,7 +27,7 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        public async Task<string> CreatePost(OrganizationTelecomCreatePost OrganizationTelecom)
+        public async Task<string> CreatePost(OrganizationTelecomCreateGet OrganizationTelecom)
         {
             string usp = "usp_OrganizationTelecomCreatePost  @OrganizationId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationTelecom);
@@ -50,7 +50,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(OrganizationTelecomUpdateGet OrganizationTelecom)
         {
-            string usp = "usp_OrganizationTelecomUpdatePost @OrganizationTelecomId , @TelecomTypeId , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @ModifierId";
+            string usp = "usp_OrganizationTelecomUpdatePost @OrganizationTelecomId , @TelecomValue, @CountryCode, @AreaCode, @ExtensionCode,@AskForName, @UserId";
             _sqlDataAccess.SaveData<OrganizationTelecomUpdateGet>(usp, OrganizationTelecom);
             return true;
         }

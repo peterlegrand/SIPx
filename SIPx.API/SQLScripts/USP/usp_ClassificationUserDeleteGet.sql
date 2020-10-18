@@ -11,7 +11,8 @@ SELECT ClassificationUsers.ClassificationUserID
 	,ClassificationUsers.UserID
 	, Persons.FirstName
 	, Persons.LastName
-	,  ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typeUser')) RelationTypeName
+	, AspNetUsers.UserName
+	,  ISNULL(UserClassificationRelationTypeLanguage.Name,ISNULL(DefaultClassificationRelationTypeLanguage.Name,'No name for this relation typeUser')) ClassificationRelationTypeName
 	, ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,'No name for this organization')) OrganizationName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
@@ -22,6 +23,8 @@ SELECT ClassificationUsers.ClassificationUserID
 FROM ClassificationUsers 
 JOIN Persons
 	ON Persons.Userid = ClassificationUsers.UserID
+JOIN AspNetUsers
+	ON persons.UserID = AspNetUsers.Id
 LEFT JOIN (SELECT ClassificationRelationTypeId, Name FROM ClassificationRelationTypeLanguages WHERE LanguageId = @LanguageID) UserClassificationRelationTypeLanguage
 	ON UserClassificationRelationTypeLanguage.ClassificationRelationTypeId = ClassificationUsers.ClassificationRelationTypeID
 LEFT JOIN (SELECT ClassificationRelationTypeId, Name FROM ClassificationRelationTypeLanguages JOIN Settings ON ClassificationRelationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationRelationTypeLanguage

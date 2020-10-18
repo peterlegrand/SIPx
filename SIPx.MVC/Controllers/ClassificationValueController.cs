@@ -14,10 +14,18 @@ namespace SIPx.MVC.Controllers
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
         [HttpGet]
-        public async Task<IActionResult> Create(int Id)
+        public async Task<IActionResult> Create(int Id, int ParentId = 0)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ClassificationValueCreateGet>($"{_baseUrl}api/ClassificationValue/Create/" + Id, token);
+            ClassificationValueCreateGet response = new ClassificationValueCreateGet();
+            if (ParentId == 0)
+            {
+                response = await _client.GetProtectedAsync<ClassificationValueCreateGet>($"{_baseUrl}api/ClassificationValue/Create/" + Id, token);
+            }
+            else
+            {
+                response = await _client.GetProtectedAsync<ClassificationValueCreateGet>($"{_baseUrl}api/ClassificationValue/Create/" + Id + "?ParentId=" + ParentId, token);
+            }
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValue/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);

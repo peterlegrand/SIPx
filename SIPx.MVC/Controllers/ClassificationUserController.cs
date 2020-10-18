@@ -37,6 +37,7 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync<List<ClassificationUserIndexGet>>($"{_baseUrl}api/ClassificationUser/Index/" + id,token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationUser/Index", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = id;
             return View(response);
             //return View();
         }
@@ -74,7 +75,7 @@ namespace SIPx.MVC.Controllers
             await _client.PostProtectedAsync<ClassificationUserDeleteGet>($"{_baseUrl}api/ClassificationUser/Delete", ClassificationUser, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
-            return RedirectToAction("Index", ClassificationUser.ClassificationId);
+            return RedirectToAction("Index", new { id = ClassificationUser.ClassificationId });
         }
 
     }

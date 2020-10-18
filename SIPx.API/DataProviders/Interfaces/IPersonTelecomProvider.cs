@@ -8,8 +8,8 @@ namespace SIPx.DataAccess
     {
         Task<PersonTelecomDeleteGet> DeleteGet(string UserId, int PersonTelecomId);
         bool DeletePost(int Id);
-        Task<string> CreatePost(PersonTelecomCreatePost PersonTelecom);
-        Task<string> CreatePostCheck(PersonTelecomCreatePost PersonTelecom);
+        Task<string> CreatePost(PersonTelecomCreateGet PersonTelecom);
+        Task<string> CreatePostCheck(PersonTelecomCreateGet PersonTelecom);
         Task<List<PersonTelecomIndexGet>> IndexGet(string UserId, int PersonId);
         Task<PersonTelecomUpdateGet> UpdateGet(string UserId, int PersonTelecomId);
         bool UpdatePost(PersonTelecomUpdateGet PersonTelecom);

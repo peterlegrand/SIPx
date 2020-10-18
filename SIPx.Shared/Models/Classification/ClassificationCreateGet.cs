@@ -22,7 +22,7 @@ namespace SIPx.Shared
         public string CreatorId { get; set; }
 
         public List<StatusList> Statuses { get; set; }
-        public List<ClassificationCreateGetSequence> Sequences { get; set; }
+        public List<SequenceList> Sequences { get; set; }
         public List<IconList> Icons { get; set; }
 
     }

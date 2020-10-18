@@ -9,7 +9,7 @@
 }
 
 <h1>
-    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification user")).TermString
+    <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification value user")).TermString
 </h1>
 <div class="container">
 
@@ -28,8 +28,8 @@
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Roles" dataSource="@Model.Users" ejs-for="@Model.UserId" value="@Model.UserId" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="UserOfClassificationValueId" dataSource="@Model.Users" ejs-for="@Model.UserOfClassificationValueId" value="@Model.UserOfClassificationValueId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>

@@ -69,6 +69,18 @@
 
         <div class="row">
             <div class="col-3">
+                @* PETER TODO *@
+                @*@Term.Find(x => x.InternalName.Equals("Dropdown sequence")).TermString*@
+                DROPDOWN SEQUENCe
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.DropDownSequences" ejs-for="@Model.DropDownSequence" value="@Model.DropDownSequence" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Default page")).TermString
             </div>
             <div class="col-9">

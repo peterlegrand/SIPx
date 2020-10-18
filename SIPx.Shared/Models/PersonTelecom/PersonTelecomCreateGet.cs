@@ -12,6 +12,7 @@ namespace SIPx.Shared
         public string PersonFirstName { get; set; }
         public string PersonLastName { get; set; }
         public int TelecomTypeId { get; set; }
+        public string ConcatTelecomTypeId { get; set; }
         public string TelecomValue { get; set; }
         public string CountryCode { get; set; }
         public string AreaCode { get; set; }
@@ -19,6 +20,7 @@ namespace SIPx.Shared
         public string AskForName { get; set; }
         public bool PhoneProperties { get; set; }
         public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<TelecomTypeList> TelecomTypes { get; set; }
     }
 }

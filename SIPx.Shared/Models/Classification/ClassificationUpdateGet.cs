@@ -11,7 +11,7 @@ namespace SIPx.Shared
         public int StatusId { get; set; }
         public int? DefaultPageId { get; set; }
         public bool HasDropDown { get; set; }
-        public bool DropDownSequence { get; set; }
+        public int DropDownSequence { get; set; }
         public int ClassificationLanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -28,7 +28,7 @@ namespace SIPx.Shared
 
         public List<StatusList> Statuses { get; set; }
         public List<ClassificationPageList> DefaultPages { get; set; }
-        public List<ClassificationCreateGetSequence> DropDownSequences { get; set; }
+        public List<SequenceList> DropDownSequences { get; set; }
         public List<IconList> Icons { get; set; }
 
     }

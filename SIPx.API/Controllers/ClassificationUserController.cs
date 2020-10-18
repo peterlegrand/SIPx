@@ -40,6 +40,7 @@ namespace SIPx.API.Controllers
                 var ClassificationUserCreateGet = new ClassificationUserCreateGet();
                 var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationUserCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
+                ClassificationUserCreateGet.Users = await _userProvider.List();
                 ClassificationUserCreateGet.ClassificationId = Id;
                 return Ok(ClassificationUserCreateGet);
             }
@@ -51,22 +52,22 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ClassificationUserCreatePost ClassificationUser)
+        public async Task<IActionResult> Create(ClassificationUserCreateGet ClassificationUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationUser.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationUserProvider.CreatePostCheck(ClassificationUser);
-                if (CheckString.Length == 0)
-                {
+                //var CheckString = await _classificationUserProvider.CreatePostCheck(ClassificationUser);
+                //if (CheckString.Length == 0)
+                //{
                     _classificationUserProvider.CreatePost(ClassificationUser);
                     return Ok(ClassificationUser);
-                }
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                    //Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -134,7 +135,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationUser.CreatorId = CurrentUser.Id;
+                ClassificationUser.UserId = CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{
