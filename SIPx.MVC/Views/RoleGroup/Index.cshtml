@@ -6,21 +6,21 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Role groups")).TermString</h1>
+<h1><img src="~/images/icons/Group.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Role groups")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
         <e-grid-column field="RoleGroupId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Language" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Language" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/RoleGroup/Create">@Term.Find(x => x.InternalName.Equals("Add new role group")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/RoleGroup/Edit/${RoleGroupId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/RoleGroup/Edit/${RoleGroupId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
@@ -32,7 +32,7 @@
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="RoleGroup/Delete/${RoleGroupId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="RoleGroup/Delete/${RoleGroupId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

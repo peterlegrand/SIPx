@@ -6,7 +6,7 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Classification.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Terms")).TermString</h1>
+<h1><img src="~/images/icons/UITerm.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Terms")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -15,7 +15,7 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" Template="#Name" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" Template="#MouseOver" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Customization")).TermString" Template="#Customization" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" Template="#Language" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Language" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <script id="Id" type="text/x-">

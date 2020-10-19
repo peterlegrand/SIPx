@@ -6,7 +6,7 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification values")).TermString</h1>
+<h1><img src="~/images/icons/Value.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification values")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -18,9 +18,9 @@
         <e-grid-column field="DateTo" headerText="@Term.Find(x => x.InternalName.Equals("To date")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
 
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString" template="#Add" textAlign="Center" type="string"></e-grid-column>
 
@@ -32,7 +32,7 @@
 <a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@ViewBag.Id" asp-route-ParentId="0">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Edit/${ClassificationValueId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Edit/${ClassificationValueId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
@@ -44,7 +44,7 @@
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Delete/${ClassificationValueId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Delete/${ClassificationValueId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

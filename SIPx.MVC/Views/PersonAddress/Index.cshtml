@@ -6,7 +6,7 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person addresses")).TermString</h1>
+<h1><img src="~/images/icons/Address.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person addresses")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -15,21 +15,21 @@
         <e-grid-column field="City" headerText="@Term.Find(x => x.InternalName.Equals("City")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="ProvinceState" headerText="@Term.Find(x => x.InternalName.Equals("State / province")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="CountryName" headerText="@Term.Find(x => x.InternalName.Equals("Country")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a asp-action="Index" asp-controller="Person">@Term.Find(x => x.InternalName.Equals("Back to persons")).TermString</a>
 <a asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new person address")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/PersonAddress/Edit/${PersonAddressId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/PersonAddress/Edit/${PersonAddressId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/PersonAddress/Delete/${PersonAddressId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="/PersonAddress/Delete/${PersonAddressId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

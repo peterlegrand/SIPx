@@ -5,7 +5,7 @@
 
 }
 
-<h1><img src="~/images/icons/Classification.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User menu")).TermString</h1>
+<h1><img src="~/images/icons/UserMenu.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User menu")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -16,8 +16,8 @@
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Left menu")).TermString" Template="#LeftMenu" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Right menu type")).TermString" Template="#RightMenuType" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Right menu")).TermString" Template="#RightMenu" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" Template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" Template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/UserMenu/Create">@Term.Find(x => x.InternalName.Equals("Add user menu")).TermString</a>
@@ -58,13 +58,13 @@
 </script>
 <script id="Edit" type="text/x-">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/UserMenu/Edit/${UserMenuId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/UserMenu/Edit/${UserMenuId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="UserMenu/Delete/${UserMenuId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="UserMenu/Delete/${UserMenuId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

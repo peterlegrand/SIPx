@@ -6,7 +6,7 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Languages")).TermString</h1>
+<h1><img src="~/images/icons/Language.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Languages")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -14,12 +14,12 @@
         <e-grid-column field="ForeignName" headerText="@Term.Find(x => x.InternalName.Equals("Foreign name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="LanguageName" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="StatusName" headerText="@Term.Find(x => x.InternalName.Equals("Status")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Language/Edit/${LanguageId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/Language/Edit/${LanguageId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>

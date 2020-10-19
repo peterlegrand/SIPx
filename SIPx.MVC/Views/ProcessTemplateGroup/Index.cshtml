@@ -6,33 +6,33 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template groups")).TermString</h1>
+<h1><img src="~/images/icons/Group.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template groups")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
         <e-grid-column field="ProcessTemplateGroupId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Language" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Language" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/ProcessTemplateGroup/Create">@Term.Find(x => x.InternalName.Equals("Add new process template group")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateGroup/Edit/${ProcessTemplateGroupId}"><span style="color:red">E</span>dit</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateGroup/Edit/${ProcessTemplateGroupId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Language" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateGroup/LanguageIndex/${ProcessTemplateGroupId}"><span style="color:red">L</span>anguage</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateGroup/LanguageIndex/${ProcessTemplateGroupId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="ProcessTemplateGroup/Delete/${ProcessTemplateGroupId}"><span style="color:red">D</span>elete</a>
+        <a class="nav-link text-dark font-weight-bold" href="ProcessTemplateGroup/Delete/${ProcessTemplateGroupId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>
