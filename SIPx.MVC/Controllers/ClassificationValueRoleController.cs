@@ -34,9 +34,10 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<ClassificationValueRoleUpdateGet>>($"{_baseUrl}api/ClassificationValueRole/Index/" + id,token);
+            var response = await _client.GetProtectedAsync<List<ClassificationValueRoleIndexGet>>($"{_baseUrl}api/ClassificationValueRole/Index/" + id,token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueRole/Index", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = id;
             return View(response);
             //return View();
         }
@@ -55,7 +56,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ClassificationValueRoleUpdateGet>($"{_baseUrl}api/ClassificationValueRole/Update", ClassificationValueRole, token);
 
-            return RedirectToAction("Index", new { id = ClassificationValueRole.ClassificationId });
+            return RedirectToAction("Index", new { id = ClassificationValueRole.ClassificationValueId });
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)

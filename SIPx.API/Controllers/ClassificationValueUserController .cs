@@ -16,18 +16,20 @@ namespace SIPx.API.Controllers
         private readonly IClassificationValueUserProvider _classificationValueUserProvider;
         private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IMasterProvider _masterProvider;
+        private readonly IClassificationValueRoleProvider _classificationValueRoleProvider;
         private readonly IUserProvider _userProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationValueUserController(IUserProvider userProvider, IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationValueUserProvider classificationValueUserProvider, IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationValueUserController(IClassificationValueRoleProvider classificationValueRoleProvider, IUserProvider userProvider, IClassificationRelationTypeProvider classificationRelationTypeProvider, IClassificationValueUserProvider classificationValueUserProvider, IClassificationValueProvider classificationValueProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _classificationRelationTypeProvider = classificationRelationTypeProvider;
             _classificationValueUserProvider = classificationValueUserProvider;
             _classificationValueProvider = classificationValueProvider;
             _masterProvider = masterProvider;
+            _classificationValueRoleProvider = classificationValueRoleProvider;
             _userProvider = userProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -44,8 +46,11 @@ namespace SIPx.API.Controllers
                 var ClassificationValueUserCreateGet = new ClassificationValueUserCreateGet();
                 var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 ClassificationValueUserCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
+                var x = await _classificationValueRoleProvider.ClassificationValueRoleCreateGetClassificationName(CurrentUser.Id, Id);
+                ClassificationValueUserCreateGet.ClassificationId = x.ClassificationId;
+                ClassificationValueUserCreateGet.ClassificationValueName = x.ClassificationValueName;
                 ClassificationValueUserCreateGet.Users = await _userProvider.List();
-                ClassificationValueUserCreateGet.ClassificationId = Id;
+                ClassificationValueUserCreateGet.ClassificationValueId = Id;
                 return Ok(ClassificationValueUserCreateGet);
             }
             return BadRequest(new
@@ -96,7 +101,7 @@ namespace SIPx.API.Controllers
                 //    });
                 //}
 
-                return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueUserProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -120,12 +125,12 @@ namespace SIPx.API.Controllers
                     });
                 }
                 //PETER I UPDATED THIS IN THE Wrong controller
-                var ClassificationUser = await _classificationValueUserProvider.UpdateGet(CurrentUser.Id, Id);
+                var ClassificationValueUser = await _classificationValueUserProvider.UpdateGet(CurrentUser.Id, Id);
                 var RelationTypeList = await _classificationRelationTypeProvider.List(CurrentUser.Id);
                 var UserList = await _userProvider.List();
-                ClassificationUser.ClassificationRelationTypes = RelationTypeList;
-                ClassificationUser.Users = UserList;
-                return Ok(ClassificationUser);
+                ClassificationValueUser.ClassificationRelationTypes = RelationTypeList;
+                ClassificationValueUser.Users = UserList;
+                return Ok(ClassificationValueUser);
 //                return Ok(await _classificationProvider.UpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new

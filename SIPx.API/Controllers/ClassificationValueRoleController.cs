@@ -43,8 +43,11 @@ namespace SIPx.API.Controllers
             {
                 var ClassificationValueRoleCreateGet = new ClassificationValueRoleCreateGet();
                 var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
+                var x = await _classificationValueRoleProvider.ClassificationValueRoleCreateGetClassificationName(CurrentUser.Id, Id);
+                ClassificationValueRoleCreateGet.ClassificationId = x.ClassificationId;
+                ClassificationValueRoleCreateGet.ClassificationValueName= x.ClassificationValueName;
                 ClassificationValueRoleCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
-                ClassificationValueRoleCreateGet.ClassificationId = Id;
+                ClassificationValueRoleCreateGet.ClassificationValueId = Id;
                 ClassificationValueRoleCreateGet.Roles = await _roleProvider.List(CurrentUser.Id);
                 return Ok(ClassificationValueRoleCreateGet);
             }
@@ -96,7 +99,7 @@ namespace SIPx.API.Controllers
                 //    });
                 //}
 
-                return Ok(await _classificationValueProvider.IndexGet(CurrentUser.Id, Id));
+                return Ok(await _classificationValueRoleProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -119,8 +122,12 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
+                var ClassificationValueRole = await _classificationValueRoleProvider.UpdateGet(CurrentUser.Id, Id);
+                var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
+                ClassificationValueRole.ClassificationRelationTypes = ClassificationRelationTypes;
+                ClassificationValueRole.Roles = await _roleProvider.List(CurrentUser.Id);
 
-                return Ok(await _classificationValueRoleProvider.UpdateGet(CurrentUser.Id, Id));
+                return Ok(ClassificationValueRole);
             }
             return BadRequest(new
             {

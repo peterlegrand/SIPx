@@ -3,13 +3,13 @@
 @model ClassificationValueRoleCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification role")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification value role")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Role.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification role")).TermString
+    <img src="~/images/icons/Role.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification value role")).TermString
 </h1>
 <div class="container">
 
@@ -24,16 +24,16 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification id")).TermString
+                @Term.Find(x => x.InternalName.Equals("Classification value id")).TermString
             </div>    <div class="col-9">
                 <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification")).TermString
+                @Term.Find(x => x.InternalName.Equals("Classification value")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="ClassificationName" ejs-for="ClassificationName" cssClass="e-outline" placeholder="ClassificationName" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="ClassificationValueName" ejs-for="ClassificationValueName" cssClass="e-outline" placeholder="ClassificationValueName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">

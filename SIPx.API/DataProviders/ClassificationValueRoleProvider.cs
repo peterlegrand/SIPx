@@ -28,15 +28,15 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ClassificationValueRoleCreateGet ClassificationValueRole)
         {
-            string usp = "usp_ClassificationValueRoleCreatePost @RoleId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            string usp = "usp_ClassificationValueRoleCreatePost @RoleId, @ClassificationValueId, @ClassificationRelationTypeId, @CreatorId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueRole);
             return String;
         }
 
-        public Task<List<ClassificationValueRoleUpdateGet>> IndexGet(string UserId, int ClassificationId)
+        public Task<List<ClassificationValueRoleIndexGet>> IndexGet(string UserId, int ClassificationValueId)
         {
-            string usp = "usp_ClassificationValueRoleIndexGet @UserId, @ClassificationID";
-            return _sqlDataAccess.LoadData<ClassificationValueRoleUpdateGet, dynamic>(usp, new { UserId, ClassificationId });
+            string usp = "usp_ClassificationValueRoleIndexGet @UserId, @ClassificationValueID";
+            return _sqlDataAccess.LoadData<ClassificationValueRoleIndexGet, dynamic>(usp, new { UserId, ClassificationValueId });
         }
 
         public Task<ClassificationValueRoleUpdateGet> UpdateGet(string UserId, int ClassificationValueRoleId)
@@ -45,9 +45,15 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueRoleUpdateGet, dynamic>(usp, new { UserId, ClassificationValueRoleId });
         }
 
+        public Task<ClassificationValueRoleCreateGetClassificationName> ClassificationValueRoleCreateGetClassificationName(string UserId, int ClassificationValueId)
+        {
+            string usp = "usp_ClassificationValueRoleCreateGetClassificationName @UserId, @ClassificationValueID";
+            return _sqlDataAccess.LoadSingleRecord<ClassificationValueRoleCreateGetClassificationName, dynamic>(usp, new { UserId, ClassificationValueId });
+        }
+
         public bool UpdatePost(ClassificationValueRoleUpdateGet ClassificationValueRole)
         {
-            string usp = "usp_ClassificationValueRoleUpdatePost @ClassificationValueRoleId, @RoleId, @ClassificationRelationTypeId, @ModifierId";
+            string usp = "usp_ClassificationValueRoleUpdatePost @ClassificationValueRoleId, @RoleId, @ClassificationRelationTypeId, @UserId";
             _sqlDataAccess.SaveData<ClassificationValueRoleUpdateGet>(usp, ClassificationValueRole);
             return true;
         }

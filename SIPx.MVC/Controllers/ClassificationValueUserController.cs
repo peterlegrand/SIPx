@@ -28,7 +28,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ClassificationValueUserCreateGet>($"{_baseUrl}api/ClassificationValueUser/Create", ClassificationValueUser, token);
 
-            return RedirectToAction("Index", new { id = ClassificationValueUser.ClassificationId });
+            return RedirectToAction("Index", new { id = ClassificationValueUser.ClassificationValueId });
         }
         [HttpGet]
         public async Task<IActionResult> Index(int id)
@@ -37,6 +37,7 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync<List<ClassificationValueUserIndexGet>>($"{_baseUrl}api/ClassificationValueUser/Index/" + id,token);
            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueUser/Index", token);
             ViewBag.UITerms = x;
+            ViewBag.Id = id;
             return View(response);
             //return View();
         }
@@ -55,7 +56,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<ClassificationValueUserUpdateGet>($"{_baseUrl}api/ClassificationValueUser/Update", ClassificationValueUser, token);
 
-            return RedirectToAction("Index", new { id = ClassificationValueUser.ClassificationId });
+            return RedirectToAction("Index", new { id = ClassificationValueUser.ClassificationValueId });
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)

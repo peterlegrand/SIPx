@@ -38,7 +38,7 @@
 </script>
 <script id="Languages" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/LanguageIndex/${ClassificationValueId}"><span style="color:red">L</span>anguages</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/LanguageIndex/${ClassificationValueId}"><img src="/images/icons/LanguageS.png" height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
@@ -54,20 +54,20 @@
         ${if(MaxLevel === Level)}
         Deepest level
         ${else}
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Create/@ViewBag.Id?ParentId=${ClassificationValueId}"><span style="color:red">A</span>dd</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Create/@ViewBag.Id?ParentId=${ClassificationValueId}"><img src="/images/icons/AddS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" /></a>
         ${/if}
     </div>
 </script>
 
 <script id="Roles" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueRole/Index/${ClassificationId}"><span style="color:red">R</span>ole</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueRole/Index/${ClassificationValueId}"><span style="color:red">R</span>ole</a>
 
     </div>
 </script>
 <script id="Users" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueUser/Index/${ClassificationId}"><span style="color:red">U</span>ser</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueUser/Index/${ClassificationValueId}"><span style="color:red">U</span>ser</a>
 
     </div>
 </script>

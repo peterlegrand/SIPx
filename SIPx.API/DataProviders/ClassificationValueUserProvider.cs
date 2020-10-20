@@ -28,15 +28,15 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ClassificationValueUserCreateGet ClassificationValueUser)
         {
-            string usp = "usp_ClassificationValueUserCreatePost @UserOfClassificationId , @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, @UserId";
+            string usp = "usp_ClassificationValueUserCreatePost @UserOfClassificationValueId , @ClassificationValueId, @ClassificationRelationTypeId, @UserId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueUser);
             return String;
         }
 
-        public Task<List<ClassificationValueUserIndexGet>> IndexGet(string UserId, int ClassificationId)
+        public Task<List<ClassificationValueUserIndexGet>> IndexGet(string UserId, int ClassificationValueId)
         {
-            string usp = "usp_ClassificationValueUserIndexGet @UserId, @ClassificationID";
-            return _sqlDataAccess.LoadData<ClassificationValueUserIndexGet, dynamic>(usp, new { UserId, ClassificationId });
+            string usp = "usp_ClassificationValueUserIndexGet @UserId, @ClassificationValueID";
+            return _sqlDataAccess.LoadData<ClassificationValueUserIndexGet, dynamic>(usp, new { UserId, ClassificationValueId });
 
         }
 
@@ -49,7 +49,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ClassificationValueUserUpdateGet ClassificationValueUser)
         {
-            string usp = "usp_ClassificationValueUserUpdatePost @ClassificationValueUserId, @UserOfClassificationId, @ClassificationRelationTypeId, @UserId";
+            string usp = "usp_ClassificationValueUserUpdatePost @ClassificationValueUserId, @UserOfClassificationValueId, @ClassificationRelationTypeId, @UserId";
             _sqlDataAccess.SaveData<ClassificationValueUserUpdateGet>(usp, ClassificationValueUser);
             return true;
         }

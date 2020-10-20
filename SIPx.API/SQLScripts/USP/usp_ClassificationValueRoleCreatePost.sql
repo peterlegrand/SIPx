@@ -1,10 +1,11 @@
 CREATE PROCEDURE [dbo].[usp_ClassificationValueRoleCreatePost] (
 	@RoleId nvarchar(450)
 	, @ClassificationValueId int 
-	, @ClassificationId int 
 	, @ClassificationRelationTypeId int
-	, @UserId nvarchar(450)) 
+	, @CreatorId nvarchar(450)) 
 AS 
+DECLARE @ClassificationId int
+SELECT @ClassificationId = ClassificationId FROM ClassificationValues WHERE ClassificationValueId = @ClassificationValueId;
 INSERT INTO ClassificationValueRoles (
 	RoleID
 	, ClassificationValueID
@@ -19,9 +20,9 @@ VALUES (
 	, @ClassificationValueID
 	, @ClassificationID
 	, @ClassificationRelationTypeID
-	, @UserID
+	, @CreatorId
 	, getdate()
-	, @UserID
+	, @CreatorId
 	, getdate())
 
 

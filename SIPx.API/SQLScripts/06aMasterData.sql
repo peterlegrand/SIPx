@@ -869,18 +869,109 @@ SET IDENTITY_INSERT ValueUpdateTypes OFF;
 
 
 SET IDENTITY_INSERT [dbo].[Icons] ON 
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (1, N'Add.png', 5, 5, 5, 5,2)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (2, N'calendar.png', 228, 228, 228, 228,3)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (3, N'Chat.png', 229, 229, 229, 229,4)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (4, N'Classifications.png', 59, 59, 59, 59,5)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (5, N'conference.png', 230, 230, 230, 230,6)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (6, N'content.png', 227, 227, 227, 227,7)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (7, N'favorites.png', 231, 231, 231, 231,8)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (8, N'menu.png', 290, 290, 290, 290,9)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (9, N'process.png', 234, 234, 234, 234,10)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (10, N'Todo.png', 236, 236, 236, 236,11)
-INSERT [dbo].[Icons] ([IconId], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [Sequence]) VALUES (11, N'Todo.png', 1378, 1378, 1378, 1378,1)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 2, N'Add.png             ', 5, 5, 5, 5)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 3, N'Calendar.png        ', 228, 228, 228, 228)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 4, N'Chat.png            ', 229, 229, 229, 229)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 5, N'Classification.png  ', 59, 59, 59, 59)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 6, N'Conference.png      ', 230, 230, 230, 230)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (6, 7, N'Content.png         ', 227, 227, 227, 227)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (7, 8, N'Favorites.png       ', 231, 231, 231, 231)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (8, 9, N'Menu.png            ', 290, 290, 290, 290)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (9, 10, N'Process.png         ', 234, 234, 234, 234)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (10, 11, N'Todo.png            ', 236, 236, 236, 236)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (11, 1, N'                    ', 1378, 1378, 1378, 1378)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (12, 12, N'Box.png             ', 1535, 1535, 1535, 1535)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (13, 13, N'CheckList.png       ', 1536, 1536, 1536, 1536)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (14, 14, N'Label.png           ', 1537, 1537, 1537, 1537)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (15, 15, N'Light.png           ', 1538, 1538, 1538, 1538)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (16, 16, N'Search.png          ', 237, 237, 237, 237)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (17, 17, N'Setting.png         ', 54, 54, 54, 54)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (18, 18, N'Spotlight.png       ', 1539, 1539, 1539, 1539)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (19, 19, N'Template.png        ', 1507, 1507, 1507, 1507)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (20, 20, N'User.png            ', 318, 318, 318, 318)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (21, 21, N'UserPreference.png  ', 1377, 1377, 1377, 1377)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (22, 22, N'Address.png         ', 1540, 1540, 1540, 1540)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (23, 23, N'Claim.png           ', 1541, 1541, 1541, 1541)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (25, 24, N'Condition.png       ', 1542, 1542, 1542, 1542)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (27, 25, N'DeleteS.png         ', 1543, 1543, 1543, 1543)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (28, 26, N'EditS.png           ', 1544, 1544, 1544, 1544)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (29, 27, N'Field.png           ', 882, 882, 882, 882)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (30, 28, N'Flow.png            ', 143, 143, 143, 143)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (31, 29, N'Group.png           ', 1484, 1484, 1484, 1484)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (32, 30, N'Language.png        ', 33, 33, 33, 33)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (33, 31, N'LanguageS.png       ', 1545, 1545, 1545, 1545)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (34, 32, N'Level.png           ', 1546, 1546, 1546, 1546)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (35, 33, N'New.png             ', 1547, 1547, 1547, 1547)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (36, 34, N'Option.png          ', 1548, 1548, 1548, 1548)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (37, 35, N'Organization.png    ', 41, 41, 41, 41)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (38, 36, N'Page.png            ', 1210, 1210, 1210, 1210)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (39, 37, N'Panel.png           ', 1549, 1549, 1549, 1549)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (40, 38, N'Person.png          ', 1232, 1232, 1232, 1232)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (41, 39, N'Project.png         ', 127, 127, 127, 127)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (42, 40, N'Relation.png        ', 299, 299, 299, 299)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (43, 41, N'Role.png            ', 139, 139, 139, 139)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (44, 42, N'SIP.png             ', 1550, 1550, 1550, 1550)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (45, 43, N'StageField.png      ', 1551, 1551, 1551, 1551)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (46, 44, N'SU.png              ', 1552, 1552, 1552, 1552)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (47, 45, N'Telecom.png         ', 1160, 1160, 1160, 1160)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (48, 46, N'Type.png            ', 79, 79, 79, 79)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (49, 47, N'UITerm.png          ', 1553, 1553, 1553, 1553)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (50, 48, N'UserMenu.png        ', 1355, 1355, 1355, 1355)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (51, 49, N'UserTemplate.png    ', 1554, 1554, 1554, 1554)
+
+INSERT [dbo].[Icons] ([IconId], [Sequence], [FileName], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (52, 50, N'Value.png           ', 1376, 1376, 1376, 1376)
+
 SET IDENTITY_INSERT [dbo].[Icons] OFF
+
 
 INSERT [dbo].[UserMenuTypes] ([UserMenuTypeID], [AvailableForLeft], [AvailableForRight], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 1, 1, 1210, 1210, 1210, 1210)
 INSERT [dbo].[UserMenuTypes] ([UserMenuTypeID], [AvailableForLeft], [AvailableForRight], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 1, 1, 233, 233, 233, 233)

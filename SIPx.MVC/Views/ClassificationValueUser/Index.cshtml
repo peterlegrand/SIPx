@@ -1,16 +1,16 @@
 ﻿@model List<ClassificationValueUserIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification users")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value users")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/User.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification users")).TermString</h1>
+<h1><img src="~/images/icons/User.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification value users")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ClassificationUserId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ClassificationValueUserId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="FirstName" headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="LastName" headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="OrganizationName" headerText="@Term.Find(x => x.InternalName.Equals("Organization name")).TermString" textAlign="Right" type="string"></e-grid-column>
@@ -19,7 +19,7 @@
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
+<a href="~/Classification/Index">@Term.Find(x => x.InternalName.Equals("Back to classification values")).TermString</a>
 <a asp-controller="ClassificationValueUser" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new classification value user")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
