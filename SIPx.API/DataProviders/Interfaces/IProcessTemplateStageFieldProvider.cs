@@ -6,8 +6,9 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateStageFieldProvider
     {
-        Task<List<ProcessTemplateStageFieldIndexGet>> IndexGet(string UserId, int ProcessTemplateFieldId);
+        Task<List<ProcessTemplateStageFieldIndexGetFields>> IndexGet(string UserId, int ProcessTemplateFieldId);
         Task<ProcessTemplateStageFieldUpdateGet> UpdateGet(string UserId, int ProcessTemplateStageFieldID);
         bool UpdatePost(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField);
+        Task<List<ProcessTemplateFieldList>> Sequence(string UserId, int ProcessTemplateId, int ProcessTemplateStageId);
     }
 }

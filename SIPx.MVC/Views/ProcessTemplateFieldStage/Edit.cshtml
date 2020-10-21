@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateStageFieldUpdateGet
+@model ProcessTemplateFieldStageUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template field stage")).TermString;
@@ -52,7 +52,7 @@
 
             </div>
         </div>
-        <div class="row">
+        @*<div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
@@ -62,7 +62,7 @@
                 </ejs-dropdownlist>
 
             </div>
-        </div>
+        </div>*@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Value update type")).TermString
@@ -87,7 +87,7 @@
                 @Term.Find(x => x.InternalName.Equals("Int value")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="IntValue" ejs-for="StringValue" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-textbox>
+                <ejs-numerictextbox id="IntValue" ejs-for="IntValue" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -236,13 +236,13 @@
                     e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateStageFieldStatuses)), query);
                 }
 </script>
-<script type="text/javascript">
+@*<script type="text/javascript">
         function Sequences(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
                     e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFields)), query);
                 }
-</script>
+</script>*@
 <script type="text/javascript">
     function ValueUpdateTypes(e) {
                     var query = new ej.data.Query();

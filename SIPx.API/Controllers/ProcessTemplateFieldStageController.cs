@@ -18,13 +18,23 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateFieldStageController : ControllerBase
     {
-        private readonly ProcessTemplateStageFieldProvider _processTemplateStageFieldProvider;
+        private readonly IProcessTemplateFieldStageProvider _processTemplateFieldStageProvider;
+        private readonly IProcessTemplateStageFieldStatusProvider _processTemplateStageFieldStatusProvider;
+        private readonly IProcessTemplateStageProvider _processTemplateStageProvider;
+        private readonly IMasterListProvider _masterListProvider;
+        private readonly IProcessTemplateFieldProvider _processTemplateFieldProvider;
+        private readonly IProcessTemplateStageFieldProvider _processTemplateStageFieldProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateFieldStageController(ProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateFieldStageController(IProcessTemplateFieldStageProvider processTemplateFieldStageProvider, IProcessTemplateStageFieldStatusProvider processTemplateStageFieldStatusProvider, IProcessTemplateStageProvider processTemplateStageProvider, IMasterListProvider masterListProvider, IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processTemplateFieldStageProvider = processTemplateFieldStageProvider;
+            _processTemplateStageFieldStatusProvider = processTemplateStageFieldStatusProvider;
+            _processTemplateStageProvider = processTemplateStageProvider;
+            _masterListProvider = masterListProvider;
+            _processTemplateFieldProvider = processTemplateFieldProvider;
             _processTemplateStageFieldProvider = processTemplateStageFieldProvider;
             _claimCheck = claimCheck;
             _processTemplateProvider = processTemplateProvider;
@@ -37,7 +47,17 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateStageFieldProvider.IndexGet(CurrentUser.Id, Id));
+
+                var FieldInfo = new ProcessTemplateFieldStageIndexGet();
+                var x = await _processTemplateFieldProvider.UpdateGet(CurrentUser.Id, Id);
+                FieldInfo.ProcessTemplateFieldId = x.ProcessTemplateFieldId;
+                FieldInfo.ProcessTemplateFieldName = x.Name;
+                var FieldStages = await _processTemplateFieldStageProvider.IndexGet(CurrentUser.Id, Id);
+                FieldInfo.Stages = FieldStages;
+                return Ok(FieldInfo);
+
+
+               // return Ok(await _processTemplateStageFieldProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -52,7 +72,10 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateStageFieldProvider.UpdateGet(CurrentUser.Id, Id));
+                var x = await _processTemplateFieldStageProvider.UpdateGet(CurrentUser.Id, Id);
+                x.ValueUpdateTypes = await _masterListProvider.ValueUpdateTypeList(CurrentUser.Id);
+                x.ProcessTemplateStageFieldStatuses = await _masterListProvider.ProcessTemplateStageFieldStatusList(CurrentUser.Id);
+                return Ok(x);
             }
             return BadRequest(new
             {
@@ -62,17 +85,17 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
+        public async Task<IActionResult> Update(ProcessTemplateFieldStageUpdateGet ProcessTemplateFieldStage)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateStageField.ModifierId = CurrentUser.Id;
+                ProcessTemplateFieldStage.ModifierId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{
-                _processTemplateStageFieldProvider.UpdatePost(ProcessTemplateStageField);
-                return Ok(ProcessTemplateStageField);
+                _processTemplateFieldStageProvider.UpdatePost(ProcessTemplateFieldStage);
+                return Ok(ProcessTemplateFieldStage);
                 //}
                 return BadRequest(new
                 {

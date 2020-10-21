@@ -18,19 +18,21 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateStageFieldController : ControllerBase
     {
+        private readonly IProcessTemplateStageProvider _processTemplateStageProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IProcessTemplateFieldProvider _processTemplateFieldProvider;
-        private readonly IProcessTemplateStageFieldStatusProvider _processTemplateStageFieldStatus;
+        private readonly IProcessTemplateStageFieldStatusProvider _processTemplateStageFieldStatusProvider;
         private readonly IProcessTemplateStageFieldProvider _processTemplateStageFieldProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateStageFieldController(IMasterListProvider masterListProvider, IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateStageFieldStatusProvider processTemplateStageFieldStatus, IProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateStageFieldController(IProcessTemplateStageProvider processTemplateStageProvider, IMasterListProvider masterListProvider, IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateStageFieldStatusProvider processTemplateStageFieldStatus, IProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _processTemplateStageProvider = processTemplateStageProvider;
             _masterListProvider = masterListProvider;
             _processTemplateFieldProvider = processTemplateFieldProvider;
-            _processTemplateStageFieldStatus = processTemplateStageFieldStatus;
+            _processTemplateStageFieldStatusProvider = processTemplateStageFieldStatus;
             _processTemplateStageFieldProvider = processTemplateStageFieldProvider;
             _claimCheck = claimCheck;
             _processTemplateProvider = processTemplateProvider;
@@ -43,7 +45,13 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _processTemplateStageFieldProvider.IndexGet(CurrentUser.Id, Id));
+                var StageInfo = new ProcessTemplateStageFieldIndexGet();
+                var x = await _processTemplateStageProvider.UpdateGet(CurrentUser.Id, Id);
+                StageInfo.ProcessTemplateStageId = x.ProcessTemplateStageId;
+                StageInfo.ProcessTemplateStageName = x.Name;
+                var StageFields = await _processTemplateStageFieldProvider.IndexGet(CurrentUser.Id, Id);
+                StageInfo.Fields = StageFields;
+                return Ok(StageInfo);
             }
             return BadRequest(new
             {
@@ -62,7 +70,7 @@ namespace SIPx.API.Controllers
                 //PETER TODO this need to be active again to fill dropdowns
                 //var status = await _processTemplateStageFieldStatus.List(CurrentUser.Id);
                 //var updateType = await _processTemplateStageFieldProvider.UpdateGetValueUpdateTypeList(CurrentUser.Id);
-                var Sequence = await _processTemplateFieldProvider.List(CurrentUser.Id, x.ProcessTemplateId);
+                var Sequence = await _processTemplateStageFieldProvider.Sequence(CurrentUser.Id, x.ProcessTemplateId, x.ProcessTemplateStageId);
                 x.ValueUpdateTypes = await _masterListProvider.ValueUpdateTypeList(CurrentUser.Id);
                 x.ProcessTemplateStageFieldStatuses= await _masterListProvider.ProcessTemplateStageFieldStatusList(CurrentUser.Id);
                 //x.ProcessTemplateStageFieldStatuses = status;

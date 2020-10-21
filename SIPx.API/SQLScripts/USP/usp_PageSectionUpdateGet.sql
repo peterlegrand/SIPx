@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PageSectionUpdateGet] (@UserId nvarchar(450), @PageSectionId  int) 
+create PROCEDURE [dbo].[usp_PageSectionUpdateGet] (@UserId nvarchar(450), @PageSectionId  int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT PageSections.PageSectionID
+, PageSections.PageID
 	, ISNULL(UserPageSectionLanguage.Name,ISNULL(DefaultPageSectionLanguage.Name,'No name for this section')) Name
 	, ISNULL(UserPageSectionLanguage.Description,ISNULL(DefaultPageSectionLanguage.Description,'No description for this section')) Description
 	, ISNULL(UserPageSectionLanguage.MenuName,ISNULL(DefaultPageSectionLanguage.MenuName,'No menu name for this section')) MenuName
@@ -20,6 +21,8 @@ SELECT PageSections.PageSectionID
 	, PageSections.ShowContentTypeTitleDescription
 	, SizeX
 	, SizeY 
+	,PageSections.PageSectionDataTypeID
+	, PageSections.PageSectionTypeID
 	, DashboardRow 
 	, DashboardColumn 
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this content type')) ContentTypeName

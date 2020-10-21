@@ -130,9 +130,18 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _pageSectionProvider.UpdateGet(CurrentUser.Id, Id);
+                var PageSection = await _pageSectionProvider.UpdateGet(CurrentUser.Id, Id);
+                var PageSectionTypes = await _pageSectionTypeProvider.List(CurrentUser.Id);
+                var PageSectionDataTypes = await _pageSectionDataTypeProvider.List(CurrentUser.Id);
+                var ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
+                var SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
+                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                PageSection.PageSectionDataTypes = PageSectionDataTypes;
+                PageSection.PageSectionTypes = PageSectionTypes;
+                PageSection.ContentTypes = ContentTypes;
+                PageSection.SortBys = SortBys;
 
-                return Ok(x);
+                return Ok(PageSection);
             }
             return BadRequest(new
             {
@@ -184,6 +193,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
+
                 var x = await _pageSectionProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }

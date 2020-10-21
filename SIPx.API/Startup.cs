@@ -99,6 +99,7 @@ namespace SIPx.API
             services.AddTransient<IProcessTemplateStageFieldStatusProvider, ProcessTemplateStageFieldStatusProvider>();
             services.AddTransient<IProcessTemplateGroupProvider, ProcessTemplateGroupProvider>();
             services.AddTransient<IProcessTemplateStageFieldProvider, ProcessTemplateStageFieldProvider>();
+            services.AddTransient<IProcessTemplateFieldStageProvider, ProcessTemplateFieldStageProvider>();
             services.AddTransient<IProcessTemplateFieldTypeProvider, ProcessTemplateFieldTypeProvider>();
             services.AddTransient<IPersonProvider, PersonProvider>();
             services.AddTransient<IPageSectionDataTypeProvider, PageSectionDataTypeProvider>();

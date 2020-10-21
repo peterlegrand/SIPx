@@ -17,7 +17,7 @@
     <form method="post">
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString 
             </div>
             <div class="col-9">
                 <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -76,7 +76,7 @@
                 <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        <div class="row">
+        @*<div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
@@ -86,7 +86,7 @@
                 </ejs-dropdownlist>
 
             </div>
-        </div>
+        </div>*@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Page section type")).TermString
@@ -114,7 +114,7 @@
                 @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowTitleName" label="OnTheFly" ejs-for="ShowSectionTitleName" checked="@Model.ShowSectionTitleName"></ejs-checkbox>
+                <ejs-checkbox id="ShowTitleName" ejs-for="ShowSectionTitleName" checked="@Model.ShowSectionTitleName"></ejs-checkbox>
             </div>
         </div>
         <div class="row">
@@ -122,7 +122,7 @@
                 @Term.Find(x => x.InternalName.Equals("Show title description")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowTitleDescription" label="ShowTitleDescription" ejs-for="ShowSectionTitleDescription" checked="@Model.ShowSectionTitleDescription"></ejs-checkbox>
+                <ejs-checkbox id="ShowTitleDescription" ejs-for="ShowSectionTitleDescription" checked="@Model.ShowSectionTitleDescription"></ejs-checkbox>
             </div>
         </div>
         <div class="row">
@@ -130,7 +130,7 @@
                 @Term.Find(x => x.InternalName.Equals("Show content type title name")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowContentTypeTitleName" label="OnTheFly" ejs-for="ShowContentTypeTitleName" checked="@Model.ShowContentTypeTitleName"></ejs-checkbox>
+                <ejs-checkbox id="ShowContentTypeTitleName" ejs-for="ShowContentTypeTitleName" checked="@Model.ShowContentTypeTitleName"></ejs-checkbox>
             </div>
         </div>
         <div class="row">
@@ -138,17 +138,17 @@
                 @Term.Find(x => x.InternalName.Equals("Show content type title description")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="ShowContentTypeTitleDescription" label="ShowContentTypeTitleDescription" ejs-for="ShowContentTypeTitleDescription" checked="@Model.ShowContentTypeTitleDescription"></ejs-checkbox>
+                <ejs-checkbox id="ShowContentTypeTitleDescription" ejs-for="ShowContentTypeTitleDescription" checked="@Model.ShowContentTypeTitleDescription"></ejs-checkbox>
             </div>
         </div>
-        <div class="row">
+        @*<div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("One two columns")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="OneTwoColumns" label="OneTwoColumns" ejs-for="OneTwoColumns"></ejs-textbox>
+                <ejs-numerictextbox id="OneTwoColumns" label="OneTwoColumns" ejs-for="OneTwoColumns"></ejs-numerictextbox>
             </div>
-        </div>
+        </div>*@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Content type")).TermString
@@ -166,7 +166,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="SortBy" dataSource="@Model.SortBys" ejs-for="@Model.SortById" value="@Model.SortById" index="2" filtering="SortBys" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="SortBId"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="SortById"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -176,7 +176,7 @@
                 @Term.Find(x => x.InternalName.Equals("Max content")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MaxContent" ejs-for="MaxContent"></ejs-textbox>
+                <ejs-numerictextbox id="MaxContent" ejs-for="MaxContent"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -184,7 +184,7 @@
                 @Term.Find(x => x.InternalName.Equals("Has paging")).TermString
             </div>
             <div class="col-9">
-                <ejs-checkbox id="HasPaging" label="HasPaging" ejs-for="HasPaging" checked="@Model.HasPaging"></ejs-checkbox>
+                <ejs-checkbox id="HasPaging" ejs-for="HasPaging" checked="@Model.HasPaging"></ejs-checkbox>
             </div>
         </div>
         <div class="row">

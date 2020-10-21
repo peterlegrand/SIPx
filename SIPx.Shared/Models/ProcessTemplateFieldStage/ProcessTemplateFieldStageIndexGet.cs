@@ -5,11 +5,11 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ProcessTemplateStageFieldIndexGet 
+    public class ProcessTemplateFieldStageIndexGet 
     {
         [Key]
-        public int ProcessTemplateStageId { get; set; }
-        public string ProcessTemplateStageName { get; set; }
+        public int ProcessTemplateFieldId { get; set; }
+        public string ProcessTemplateFieldName { get; set; }
         //public int ProcessTemplateId { get; set; }
         //public string ProcessTemplateName { get; set; }
         //public string CreatorName { get; set; }
@@ -18,6 +18,6 @@ namespace SIPx.Shared
         //public string ModifierName { get; set; }
         //public string ModifierId { get; set; }
         //public DateTime ModifiedDate { get; set; }
-        public List<ProcessTemplateStageFieldIndexGetFields> Fields { get; set; }
+        public List<ProcessTemplateFieldStageIndexGetStages> Stages { get; set; }
     }
 }

@@ -1,23 +1,39 @@
-﻿@model List<ProcessTemplateStageFieldIndexGet>
+﻿@model ProcessTemplateFieldStageIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template stage fields")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template field stages")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/StageField.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template stage fields")).TermString</h1>
-<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+<h1><img src="~/images/icons/StageField.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Process template field stages")).TermString</h1>
+<div class="row">
+    <div class="col-3">
+        @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+    </div>
+    <div class="col-9">
+        <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateFieldId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-numerictextbox>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        @Term.Find(x => x.InternalName.Equals("Name")).TermString
+    </div>    <div class="col-9">
+        <ejs-textbox id="ProcessTemplateStageName" ejs-for="@Model.ProcessTemplateFieldName" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+    </div>
+</div>
+<ejs-grid id="Grid" dataSource="@Model.Stages" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ProcessTemplateStageFieldsId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Telecom type")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="ProcessTemplateStageFieldId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="StageName" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateStageField/Edit/${ProcessTemplateGroupId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFieldStage/Edit/${ProcessTemplateStageFieldId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>

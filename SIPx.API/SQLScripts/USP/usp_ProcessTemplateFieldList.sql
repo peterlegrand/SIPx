@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldList] (@UserId nvarchar(450), @ProcessTemplateId int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldList] (@UserId nvarchar(450), @ProcessTemplateId int, @ProcessTemplateStageId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -15,4 +15,5 @@ LEFT JOIN (SELECT ProcessTemplateFieldId, Name FROM ProcessTemplateFieldLanguage
 LEFT JOIN (SELECT ProcessTemplateFieldId, Name FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage
 	ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
 WHERE ProcessTemplateFields.ProcessTemplateId = @ProcessTemplateID
+	AND ProcessTemplateStageFields.ProcessTemplateStageId = @ProcessTemplateStageId
 ORDER BY ProcessTemplateStageFields.Sequence
