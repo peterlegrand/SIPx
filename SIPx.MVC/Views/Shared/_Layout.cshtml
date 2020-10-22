@@ -23,23 +23,30 @@
     </script>
 </head>
 <body>
-    <header class="header">
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
-        <h1 style="color:slategrey">
-            <img src="~/images/su_logo.png" style="height:60px; width:90px" />
-            Student Union 1.5
-        </h1>
+    <header>
         <div class="container">
             <div class="row">
-                <<form typeof="post" asp-controller="Search" asp-action="General">
-    <ejs-textbox width="200" id="a" name="Search"></ejs-textbox>
-   <ejs-button id="GeneralSearch" cssClass="transparent"  type="submit" value="Submit" content="Search"></ejs-button> 
-</form>
+                <div class="col-3 ">
+                    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
+                    <h1 style="color:slategrey">
+                        <img src="~/images/su_logo.png" style="height:60px; width:90px" />
+                        Student Union 1.5
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-3 col-6" id="searchBox">
+                    <form typeof="post" asp-controller="Search" asp-action="General">
+                        <ejs-textbox width="200" id="a" name="Search"></ejs-textbox>
+                        <ejs-button id="GeneralSearch" cssClass="transparent" type="submit" value="Submit" content="Search"></ejs-button>
+                    </form>
+                </div>
                 <div class="col-3 ">
                     <a class="text-black-50 float-right font-weight-bold transparent" asp-controller="UserPreference" asp-action="Index">&nbsp;&nbsp;User preference&nbsp;</a>&nbsp;&nbsp;
                 </div>
             </div>
         </div>
+
         @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,14 +61,13 @@
                     </li>
                 </ul>
             </div>*@
-        </div>
         @*</nav>*@
     </header>
     <div class="container">
         <div class="row">
             <div class="col-2">
 
-                
+
             </div>
         </div>
     </div>
@@ -93,7 +99,7 @@
         </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="@*border-top*@ footer text-muted">
         <div class="container-fluid">
             &copy; 2020 - SIPx.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

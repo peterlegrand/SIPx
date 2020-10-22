@@ -9,5 +9,6 @@ namespace SIPx.DataAccess
         Task<List<ContentTypeClassificationIndexGet>> IndexGet(string UserId, int ContentTypeId);
         Task<ContentTypeClassificationUpdateGet> UpdateGet(string UserId, int ContentTypeClassificationId);
         Task<List<ContentTypeCreateGetClassification>> CreateGetClassifications(string UserId);
+        Task<List<ContentTypeCreateGetClassification>> UpdateGetClassifications(string UserId, int ContentTypeId);
     }
 }

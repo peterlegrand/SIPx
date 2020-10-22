@@ -79,6 +79,10 @@ namespace SIPx.API
             services.AddTransient<IProcessTemplateFlowConditionProvider, ProcessTemplateFlowConditionProvider>();
             services.AddTransient<IProcessTemplateFlowConditionTypeProvider, ProcessTemplateFlowConditionTypeProvider>();
 
+            services.AddTransient<IProcessTemplateFlowPassComparisonOperatorProvider, ProcessTemplateFlowPassComparisonOperatorProvider>();
+            services.AddTransient<IProcessTemplateFlowPassTypeProvider, ProcessTemplateFlowPassTypeProvider>();
+            services.AddTransient<IProcessTemplateFlowPassProvider, ProcessTemplateFlowPassProvider>();
+
             services.AddTransient<IUserRoleProvider, UserRoleProvider>();
             services.AddTransient<IRoleClaimProvider, RoleClaimProvider>();
             services.AddTransient<IFrontPersonProvider, FrontPersonProvider>();
@@ -154,6 +158,8 @@ namespace SIPx.API
 
             services.AddTransient<IPageProvider, PageProvider>();
             services.AddTransient<IPageSectionProvider, PageSectionProvider>();
+            services.AddTransient<IPageSectionConditionProvider, PageSectionConditionProvider>();
+            services.AddTransient<IPageSectionConditionTypeProvider, PageSectionConditionTypeProvider>();
 
             services.AddTransient<IProcessProvider, ProcessProvider>();
 

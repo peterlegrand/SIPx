@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowConditionUpdatePost] (
+CREATE PROCEDURE usp_ProcessTemplateFlowConditionUpdatePost (
 	 @ProcessTemplateFlowConditionId int
 	, @Sequence int
 	, @ProcessTemplateFlowConditionTypeId int

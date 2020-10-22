@@ -25,7 +25,7 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontIndexGetPanels, dynamic>(usp, new { PageId = PageId });
             return x;
         }
-
+         
         public async Task<List<AppointmentData>> FrontIndexPersonalCalendar(string UserId)
         {
             string usp = "usp_personalCalendar @UserId";

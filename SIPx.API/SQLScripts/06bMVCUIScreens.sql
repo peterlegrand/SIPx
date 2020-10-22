@@ -377,4 +377,13 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (371, 'FrontProcess', 'SearchResult')
 , (372, 'FrontProject', 'SearchResult')
 , (373, 'FrontOrganization', 'SearchResult')
+, (374, 'ProcessTemplateFlowPass', 'Index')
+, (375, 'ProcessTemplateFlowPass', 'Create')
+, (376, 'ProcessTemplateFlowPass', 'Edit')
+, (377, 'ProcessTemplateFlowPass', 'Delete')
+, (378, 'ProcessTemplateFlowPass', 'LanguageIndex')
+, (379, 'ProcessTemplateFlowPass', 'LanguageCreate')
+, (380, 'ProcessTemplateFlowPass', 'LanguageEdit')
+, (381, 'ProcessTemplateFlowPass', 'LanguageDelete')
+
 SET IDENTITY_INSERT MVCUIScreens OFF;

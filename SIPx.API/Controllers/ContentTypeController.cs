@@ -128,7 +128,15 @@ namespace SIPx.API.Controllers
                 var ContentTypeGroups = await _contentTypeGroupProvider.List(CurrentUser.Id);
                 var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 var ProcessTemplates = await _processTemplateProvider.List(CurrentUser.Id);
+
+                var ContentTypeClassifications = await _contentTypeClassificationProvider.UpdateGetClassifications(CurrentUser.Id, Id);
+
+
+                var ContentTypeClassificationStatuses = await _contentTypeClassificationStatusProvider.List(CurrentUser.Id);
+                x.ContentTypeClassificationStatuses = ContentTypeClassificationStatuses;
                 x.ContentTypeGroups = ContentTypeGroups;
+                x.ContentTypeClassifications= ContentTypeClassifications;
+
                 x.SecurityLevels = SecurityLevels;
                 x.ProcessTemplates = ProcessTemplates;
                 x.Icons = icons;

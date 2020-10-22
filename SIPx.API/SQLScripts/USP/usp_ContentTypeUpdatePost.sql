@@ -8,7 +8,9 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeUpdatePost] (
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @ModifierId nvarchar(450)
-)
+	, @Color char(9)
+	, @IconID int
+	, @ContentTypeClassificationTable AS udt_ContentTypeClassificationNew READONLY)
 
 AS 
 DECLARE @LanguageId int;
@@ -22,6 +24,8 @@ UPDATE ContentTypes SET
 	ContentTypeGroupID= @ContentTypeGroupID
 	, ProcessTemplateId = @ProcessTemplateID
 	, SecurityLevelId = @SecurityLevelID
+	, Color = @Color
+	, IconID = @IconID
 	, ModifierId = @ModifierId
 	, ModifiedDate = GETDATE()
 WHERE ContentTypeId = @ContentTypeID
@@ -36,6 +40,9 @@ UPDATE  ContentTypeLanguages SET
 WHERE ContentTypeID= @ContentTypeID	
 	AND LanguageID = @LanguageID
 
+UPDATE ContentTypeClassifications SET ContentTypeClassifications.ContentTypeClassificationStatusId = UDT.ContentTypeClassificationStatusID , ModifierId = @ModifierId, ModifiedDate = getdate()
+FROM  ContentTypeClassifications JOIN @ContentTypeClassificationTable UDT ON UDT.ClassificationId = ContentTypeClassifications.ClassificationID 
+WHERE ContentTypeClassifications.ContentTypeID = @ContentTypeId
 
 COMMIT TRANSACTION
 

@@ -1,0 +1,8 @@
+CREATE PROCEDURE usp_ProcessTemplateFlowPassDeletePost (@ProcessTemplateFlowPassId int)
+AS
+BEGIN TRANSACTION
+
+DELETE FROM ProcessTemplateFlowPassLanguages WHERE ProcessTemplateFlowPassId = @ProcessTemplateFlowPassId
+DELETE FROM ProcessTemplateFlowPasses WHERE ProcessTemplateFlowPassId = @ProcessTemplateFlowPassId
+
+COMMIT TRANSACTION

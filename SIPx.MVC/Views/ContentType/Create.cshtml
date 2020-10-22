@@ -9,19 +9,13 @@
 }
 
 <h1>
-    <img src="~/images/icons/Template.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New content type")).TermString
+    <img src="~/images/icons/Type.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New content type")).TermString
 </h1>
+
+
 <div class="container">
-
-
     <form method="post">
-
-        <div class="row">
-            <div class="col-3">
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
-            </div>
-        </div>
+        
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString

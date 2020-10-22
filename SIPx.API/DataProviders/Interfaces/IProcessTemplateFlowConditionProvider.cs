@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateFlowConditionProvider
     {
-        Task<List<SequenceList>> UpdateGetSequence(string UserId, int ProcessTemplateFlowId);
+        Task<List<SequenceList>> UpdateGetSequence(string UserId, int ProcessTemplateFlowConditionId);
         Task<List<SequenceList>> CreateGetSequence(string UserId, int ProcessTemplateFlowId);
         Task<string> CreatePost(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition);
         Task<string> CreatePostCheck(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition);
@@ -19,5 +19,7 @@ namespace SIPx.DataAccess
         bool UpdatePost(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition);
         Task<List<ProcessTemplateFieldList>> CreateGetFieldList(string UserId, int ProcessTemplateFlowId);
         Task<List<ProcessTemplateFieldList>> CreateGetFieldRoleList(string UserId, int ProcessTemplateFlowId);
+        Task<List<ProcessTemplateFieldList>> UpdateGetFieldList(string UserId, int ProcessTemplateFlowConditionId);
+        Task<List<ProcessTemplateFieldList>> UpdateGetFieldRoleList(string UserId, int ProcessTemplateFlowConditionId);
     }
 }

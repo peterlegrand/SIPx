@@ -27,17 +27,33 @@ namespace SIPx.DataAccess
             Conditions.Add(new SequenceList { Sequence = Conditions.Count + 1, Name = "At the end" });
             return Conditions;
         }
+        public async Task<List<SequenceList>> UpdateGetSequence(string UserId, int ProcessTemplateFlowConditionId)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionUpdateGetSequence @UserID, @ProcessTemplateFlowConditionId";
+            var Conditions = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowConditionId });
+            return Conditions;
+        }
 
         public Task<List<ProcessTemplateFieldList>> CreateGetFieldList(string UserId, int ProcessTemplateFlowId)
         {
             string usp = "usp_ProcessTemplateFlowConditionCreateGetFieldList @UserID, @ProcessTemplateFlowId";
             return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
         }
+        public Task<List<ProcessTemplateFieldList>> UpdateGetFieldList(string UserId, int ProcessTemplateFlowConditionId)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionUpdateGetFieldList @UserID, @ProcessTemplateFlowConditionId";
+            return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId, ProcessTemplateFlowConditionId });
+        }
 
         public Task<List<ProcessTemplateFieldList>> CreateGetFieldRoleList(string UserId, int ProcessTemplateFlowId)
         {
             string usp = "usp_ProcessTemplateFlowConditionCreateGetFieldRoleList @UserID, @ProcessTemplateFlowId";
             return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
+        }
+        public Task<List<ProcessTemplateFieldList>> UpdateGetFieldRoleList(string UserId, int ProcessTemplateFlowConditionId)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionUpdateGetFieldRoleList @UserID, @ProcessTemplateFlowConditionId";
+            return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId, ProcessTemplateFlowConditionId });
         }
 
         public async Task<string> CreatePostCheck(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition)
@@ -67,12 +83,7 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateFlowConditionUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateFlowConditionId = ProcessTemplateFlowConditionId });
 
         }
-        public async Task<List<SequenceList>> UpdateGetSequence(string UserId, int ProcessTemplateFlowId)
-        {
-            string usp = "usp_ProcessTemplateFlowConditionCreateGetSequence @UserID, @ProcessTemplateFlowId";
-            var Conditions = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
-            return Conditions;
-        }
+      
 
         public bool UpdatePost(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition)
         {

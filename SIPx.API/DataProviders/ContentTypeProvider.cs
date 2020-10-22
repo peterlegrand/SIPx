@@ -55,7 +55,7 @@ namespace SIPx.DataAccess
                         , x.ContentTypeClassificationStatusId);
                 //}
             }
-            string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
+            string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @Color, @IconID, @ContentTypeClassificationTable ";
             _sqlDataAccess.SaveData<dynamic>(usp, new
             {
                 ContentTypeGroupId = ContentType.ContentTypeGroupId
@@ -78,7 +78,7 @@ namespace SIPx.DataAccess
                 ,
                 IconId = ContentType.IconId
                 ,
-                ContentTypeClassificationTable = ClassificationTable.AsTableValuedParameter("udt_ContentTypeClassificationInsert")
+                ContentTypeClassificationTable = ClassificationTable.AsTableValuedParameter("udt_ContentTypeClassificationNew")
             });
             return true;
 
@@ -93,7 +93,7 @@ namespace SIPx.DataAccess
         }
 
         public Task<ContentTypeUpdateGet> UpdateGet(string UserId, int ContentTypeId)
-        {
+            {
             string usp = "usp_ContentTypeUpdateGet @UserId, @ContentTypeID";
             return _sqlDataAccess.LoadSingleRecord<ContentTypeUpdateGet, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
 
@@ -101,8 +101,52 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ContentTypeUpdateGet ContentType)
         {
-            string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @ModifierId";
-            _sqlDataAccess.SaveData<ContentTypeUpdateGet>(usp, ContentType);
+            string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @ModifierId, @Color, @IconId, @ContentTypeClassificationTable";
+            //_sqlDataAccess.SaveData<ContentTypeUpdateGet>(usp, ContentType);
+            //return true;
+
+
+
+            System.Data.DataTable ClassificationTable = ContentTypeClassificationValueDataTable.CreateTable();
+            var xy = new List<ContentTypeClassification>();
+
+            foreach (var x in ContentType.ContentTypeClassifications)
+            {
+                //if (x. != null && x.ClassificationValueId != 0)
+                //{
+                ClassificationTable.Rows.Add(
+
+                x.ClassificationId
+                        , x.ContentTypeClassificationStatusId);
+                //}
+            }
+        //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
+            _sqlDataAccess.SaveData<dynamic>(usp, new
+            {
+                ContentTypeId = ContentType.ContentTypeId
+                ,
+                ContentTypeGroupId = ContentType.ContentTypeGroupId
+                ,
+                ProcessTemplateId = ContentType.@ProcessTemplateId
+                ,
+                SecurityLevelId = ContentType.SecurityLevelId
+                ,
+                Name = ContentType.Name
+                ,
+                Description = ContentType.Description
+                ,
+                MenuName = ContentType.MenuName
+                ,
+                MouseOver = ContentType.MouseOver
+                ,
+                ModifierId = ContentType.ModifierId
+                ,
+                Color = ContentType.Color
+                ,
+                IconId = ContentType.IconId
+                ,
+                ContentTypeClassificationTable = ClassificationTable.AsTableValuedParameter("udt_ContentTypeClassificationNew")
+            });
             return true;
         }
 

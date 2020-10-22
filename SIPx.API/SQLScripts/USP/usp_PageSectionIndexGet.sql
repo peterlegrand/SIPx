@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PageSectionIndexGet] (@UserId nvarchar(450), @PageId int) 
+CREATE PROCEDURE usp_PageSectionIndexGet (@UserId nvarchar(450), @PageId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -70,5 +70,3 @@ WHERE PageSections.PageId = @PageID
 	AND UIPageSectionDataTypeName.LanguageId = @LanguageID
 	AND UISortByName.LanguageId = @LanguageID
 ORDER BY ISNULL(UserPageSectionLanguage.Name,ISNULL(DefaultPageSectionLanguage.Name,'No name for this section'))
-
-

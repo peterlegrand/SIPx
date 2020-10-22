@@ -10,12 +10,6 @@ SELECT ContentTypeClassificationStatuses.ContentTypeClassificationStatusId
 FROM ContentTypeClassificationStatuses 
 JOIN UITermLanguages UIName
 	ON UIName.UITermId = ContentTypeClassificationStatuses.NameTermID
-JOIN UITermLanguages UIDescription
-	ON UIDescription.UITermId = ContentTypeClassificationStatuses.NameTermID
-JOIN UITermLanguages UIMenuName
-	ON UIMEnuName.UITermId = ContentTypeClassificationStatuses.NameTermID
-JOIN UITermLanguages UIMouseOver
-	ON UIMouseOver.UITermId = ContentTypeClassificationStatuses.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = ContentTypeClassificationStatuses.NameTermID
 WHERE UIName.LanguageId = @LanguageID

@@ -141,10 +141,10 @@ namespace SIPx.API.Controllers
             {
 
                 var ProcessTemplateFlowConditionUpdateGet = await _processTemplateFlowConditionProvider.UpdateGet(CurrentUser.Id, Id);
-                var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.CreateGetSequence(CurrentUser.Id, Id);
+                var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.UpdateGetSequence(CurrentUser.Id, Id);
                 var ProcessTemplateFlowConditionTypes = await _processTemplateFlowConditionTypeProvider.List(CurrentUser.Id);
-                var ProcessTemplateFields = await _processTemplateFlowConditionProvider.CreateGetFieldList(CurrentUser.Id, Id);
-                var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.CreateGetFieldRoleList(CurrentUser.Id, Id);
+                var ProcessTemplateFields = await _processTemplateFlowConditionProvider.UpdateGetFieldList(CurrentUser.Id, Id);
+                var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.UpdateGetFieldRoleList(CurrentUser.Id, Id);
                 var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 //ProcessTemplateFlowConditionUpdateGet.LanguageId = UserLanguage.LanguageId;

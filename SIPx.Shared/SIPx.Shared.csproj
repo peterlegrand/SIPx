@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Process\" />
+    <Folder Include="Models\ProcessTemplateFlowPassComparisonOperator\" />
     <Folder Include="Models\PreferenceType\" />
     <Folder Include="Models\ProcessTemplateFlowConditionComparisonOperator\" />
     <Folder Include="Models\UserPage\" />

@@ -25,6 +25,8 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public List<ContentTypeCreateGetClassification> ContentTypeClassifications { get; set; }
+        public List<ContentTypeClassificationStatusList> ContentTypeClassificationStatuses { get; set; }
 
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<ProcessTemplateList> ProcessTemplates { get; set; }

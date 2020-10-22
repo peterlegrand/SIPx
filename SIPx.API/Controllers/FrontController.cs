@@ -71,7 +71,7 @@ namespace SIPx.API.Controllers
                     {
                         var EventCalendar = await _frontProvider.FrontIndexEventCalendar();
                         panel.EventCalendars = EventCalendar;
-                    }
+                    } 
                     if (panel.PageSectionTypeId == 1 & panel.PageSectionDataTypeId == 1)  //List content
                     {
                         var ContentList = await _contentProvider.ContentForPanel(CurrentUser.Id);

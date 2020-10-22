@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldList] (@UserId nvarchar(450), @ProcessTemplateId int, @ProcessTemplateStageId int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageFieldUpdateGetSequence] (@UserId nvarchar(450), @ProcessTemplateId int, @ProcessTemplateStageId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
