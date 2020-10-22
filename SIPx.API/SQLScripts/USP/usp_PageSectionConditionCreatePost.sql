@@ -47,6 +47,7 @@ DECLARE @NewPageSectionConditionId int	= scope_identity();
 
 INSERT INTO PageSectionConditionLanguages (
 	PageSectionConditionID
+	, PageSectionID
 	, PageID
 	, LanguageID
 	, Name
@@ -59,6 +60,7 @@ INSERT INTO PageSectionConditionLanguages (
 	, ModifiedDate)
 VALUES (
 	@NewPageSectionConditionId 
+	, @PageSectionID
 	, @PageID
 	, @LanguageID
 	, @Name

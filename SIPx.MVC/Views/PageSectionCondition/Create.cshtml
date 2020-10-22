@@ -7,9 +7,98 @@
 
     Layout = "_LayoutAdmin";
 }
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function () {
+        $(".values").hide();
+        $("#ContainsCondition").hide();
+        $("#ContentStatusCondition").hide();
+        $("#UserCondition").hide();
+        $("#ModifierCondition").hide();
+        $("#CreatorCondition").hide();
+        $("#OrganizationCondition").hide();
+        $("#ProjectCondition").hide();
+        $("#CreatedFromDateCondition").hide();
+        $("#CreatedToDateCondition").hide();
+        $("#CreatedFromDateCondition").hide();
+        $("#ModifiedToDateCondition").hide();
+        $("#ModifiedFromDateCondition").hide();
+        $("#SecurityLevelCondition").hide();
+        $("#LanguageCondition").hide();
+        $("#ContentTypeCondition").hide();
+        $("#ClassificationValueCondition").hide();
+        $('#PageSectionConditionTypeIdExtended_hidden').on('change', function () {
+            $(".values").hide();
+            $("#ContainsCondition").hide();
+            $("#ContentStatusCondition").hide();
+            $("#UserCondition").hide();
+            $("#ModifierCondition").hide();
+            $("#CreatorCondition").hide();
+            $("#OrganizationCondition").hide();
+            $("#ProjectCondition").hide();
+            $("#CreatedFromDateCondition").hide();
+            $("#CreatedToDateCondition").hide();
+            $("#CreatedFromDateCondition").hide();
+            $("#ModifiedToDateCondition").hide();
+            $("#ModifiedFromDateCondition").hide();
+            $("#SecurityLevelCondition").hide();
+            $("#LanguageCondition").hide();
+            $("#ContentTypeCondition").hide();
+            $("#ClassificationValueCondition").hide();
+            var str1 = "#";
+            var res = str1.concat(this.value.substring(0, 2));
+            if (this.value.substring(0, 1) == 'V') {
+                $(res).show();
+            }
+            if (this.value == 'T1' ) {
+                $("#UserCondition").show();
+            }
+            if (this.value == 'T2') {
+                $("#ContainsCondition").show();
+            }
+            if (this.value == 'T3') {
+                $("#OrganizationCondition").show();
+            }
+            if (this.value == 'T4') {
+                $("#ProjectCondition").show();
+            }
+            if (this.value == 'T5') {
+                $("#ContentTypeCondition").show();
+            }
+            if (this.value == 'T6') {
+                $("#ContentStatusCondition").show();
+            }
+            if (this.value == 'T7') {
+                $("#LanguageCondition").show();
+            }
+            if (this.value == 'T8') {
+                $("#SecurityLevelCondition").show();
+            }
+            if (this.value == 'T9') {
+                $("#CreatorCondition").show();
+            }
+            if (this.value == 'T10') {
+                $("#ModifierCondition").show();
+            }
+            if (this.value == 'T12') {
+                $("#CreatedFromDateCondition").show();
+            }
+            if (this.value == 'T13') {
+                $("#CreatedToDateCondition").show();
+            }
+            if (this.value == 'T14') {
+                $("#ModifiedFromDateCondition").show();
+            }
+            if (this.value == 'T15') {
+                $("#ModifiedToDateCondition").show();
+            }
+        });
+        
+    });
+</script>
 <h1>
-    <img src="~/images/icons/Panel.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add page section condition")).TermString
+    <img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add page section condition")).TermString
 </h1>
 <div class="container">
 
@@ -63,8 +152,8 @@
                 @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="PageSectionConditionTypeId" dataSource="@Model.PageSectionConditionTypes" ejs-for="@Model.PageSectionConditionTypeId" value="@Model.PageSectionConditionTypeId" index="2" filtering="PageSectionTypes" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="PageSectionConditionTypeId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="PageSectionConditionTypeIdExtended" dataSource="@Model.PageSectionConditionTypes" ejs-for="@Model.PageSectionConditionTypeIdExtended" value="@Model.PageSectionConditionTypeIdExtended" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ExtendedId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -124,6 +213,22 @@
 
             </div>
         </div>
+        <div id="ClassificationValueCondition">
+            @for (int i = 0; i < Model.Classifications.Count; i++)
+            {
+                <div class="row values" id="@Model.Classifications[i].ControlA" >
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-9">
+                        <ejs-dropdownlist id="@Model.Classifications[i].ControlB" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                            <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+
+                    </div>
+                </div>
+            }
+        </div>
         <div class="row" id="CreatedFromDateCondition">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Created from date")).TermString
@@ -158,13 +263,22 @@
         </div>
         <div class="row" id="SecurityLevelCondition">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("SecurityLevel")).TermString
+                @Term.Find(x => x.InternalName.Equals("Security level")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="SecurityLevelId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
+            </div>
+        </div>
+        <div class="row" id="ContainsCondition">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Contains")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="Contains" ejs-for="@Model.PageSectionConditionString" value="@Model.PageSectionConditionString" index="2" popupHeight="220px">
+                </ejs-textbox>
             </div>
         </div>
         <div class="row" id="LanguageCondition">
@@ -315,37 +429,9 @@
 </script>
 
 <script type="text/javascript">
-        function Sequences(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Sequences)), query);
-                }
-</script>
-<script type="text/javascript">
-        function PageSectionDataTypes(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PageSectionDataTypes)), query);
-                }
-</script>
-<script type="text/javascript">
-    function PageSectionTypes(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PageSectionTypes)), query);
-                }
-</script>
-<script type="text/javascript">
     function ContentTypes(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
                     e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ContentTypes)), query);
-                }
-</script>
-<script type="text/javascript">
-    function SortBys(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.SortBys)), query);
                 }
 </script>

@@ -15,5 +15,8 @@ namespace SIPx.DataAccess
         Task<PageSectionLanguageIndexGet> LanguageUpdateGet(string UserId, int PageSectionLanguageId);
         Task<PageSectionConditionUpdateGet> UpdateGet(string UserId, int PageSectionConditionId);
         bool UpdatePost(PageSectionConditionUpdateGet PageSectionCondition);
+          Task<List<PageSectionConditionCreateGetClassifications>> CreateGetClassifications(string UserId);
+        Task<List<ClassificationValueList>> CreateGetClassificationValues(string UserId, int ClassificationId);
+
     }
 }

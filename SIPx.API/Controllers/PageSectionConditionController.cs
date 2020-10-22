@@ -34,10 +34,10 @@ namespace SIPx.API.Controllers
         private readonly IClaimCheck _claimCheck;
         private readonly UserManager<SipUser> _userManager;
 
-        public PageSectionConditionController(IPageSectionConditionProvider pageSectionConditionProvider,
+        public PageSectionConditionController( IPageSectionConditionProvider pageSectionConditionProvider,
             IPageSectionConditionTypeProvider pageSectionConditionTypeProvider,
             IUserProvider userProvider, IOrganizationProvider organizationProvider,
-            IProjectProvider projectProvider, IContentStatusProvider contentStatusProvider,
+            IProjectProvider projectProvider, IContentStatusProvider contentStatusProvider, IContentTypeProvider contentTypeProvider,
             ILanguageProvider languageProvider, IClassificationProvider classificationProvider, ISecurityLevelProvider securityLevelProvider,
             IMasterListProvider masterListProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
@@ -51,12 +51,13 @@ namespace SIPx.API.Controllers
             _languageProvider = languageProvider;
             _classificationProvider = classificationProvider;
             _securityLevelProvider = securityLevelProvider;
+            _contentTypeProvider = contentTypeProvider;
             _masterListProvider = masterListProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _userManager = userManager;
         }
-        
+
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
@@ -64,13 +65,18 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PageSectionConditionCreateGet = new PageSectionConditionCreateGet();
-                PageSectionConditionCreateGet.PageSectionConditionTypes  = await _pageSectionConditionTypeProvider.List(CurrentUser.Id);
+                PageSectionConditionCreateGet.PageSectionConditionTypes  = await _pageSectionConditionTypeProvider.ListExtended(CurrentUser.Id);
                 PageSectionConditionCreateGet.Users = await _userProvider.List();
                 PageSectionConditionCreateGet.Projects = await _projectProvider.List(CurrentUser.Id);
                 PageSectionConditionCreateGet.ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
                 PageSectionConditionCreateGet.ContentStatuses = await _contentStatusProvider.List(CurrentUser.Id);
                 PageSectionConditionCreateGet.Languages = await _languageProvider.List(CurrentUser.Id);
                 PageSectionConditionCreateGet.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                PageSectionConditionCreateGet.Classifications = await _pageSectionConditionProvider.CreateGetClassifications(CurrentUser.Id);
+                for(int i = 0; i < PageSectionConditionCreateGet.Classifications.Count(); i++)
+                {
+                    PageSectionConditionCreateGet.Classifications[i].ClassificationValues = await _pageSectionConditionProvider.CreateGetClassificationValues(CurrentUser.Id, PageSectionConditionCreateGet.Classifications[i].ClassificationId);
+                }
                 PageSectionConditionCreateGet.PageSectionId = Id;
                 //PageSectionConditionCreateGet.Classifications = await _classificationProvider.List(CurrentUser.Id);
                 //  var PageSectionCreateGetSequences = await _pageSectionProvider.CreateGetSequence(CurrentUser.Id, Id);
@@ -90,13 +96,14 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(PageSectionConditionCreateGet PageSectionCondition)
         {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-            PageSectionCondition.CreatorId = CurrentUser.Id;
+            PageSectionCondition.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 
 //                var CheckString = await _pageSectionProvider.CreatePostCheck(PageSection);
   //              if (CheckString.Length == 0)
                 {
+                    PageSectionCondition.PageSectionConditionTypeId = int.Parse(PageSectionCondition.PageSectionConditionTypeIdExtended.Substring(1));
                     _pageSectionConditionProvider.CreatePost(PageSectionCondition);
                     return Ok(PageSectionCondition);
                 }

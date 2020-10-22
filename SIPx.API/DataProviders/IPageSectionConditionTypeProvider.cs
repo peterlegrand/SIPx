@@ -7,5 +7,6 @@ namespace SIPx.DataAccess
     public interface IPageSectionConditionTypeProvider
     {
         Task<List<PageSectionConditionTypeList>> List(string UserId);
+        Task<List<PageSectionConditionTypeListExtended>> ListExtended(string UserId);
     }
 }

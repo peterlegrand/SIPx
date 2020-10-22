@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(PageSectionConditionCreateGet PageSectionCondition)
         {
-            string usp = "usp_PageSectionCreatePost @PageSectionId, @PageSectionConditionTypeId, @Name, @Description, @MenuName, @MouseOver, @UserId ";
+            string usp = "usp_PageSectionConditionCreatePost @PageSectionId, @PageSectionConditionTypeId, @PageSectionConditionInt, @PageSectionConditionString, @PageSectionConditionDate, @Name, @Description, @MenuName, @MouseOver, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSectionCondition);
             return CheckString;
         }
@@ -40,8 +40,20 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<PageSectionConditionIndexGet, dynamic>(usp, new { UserId = UserId, PageSectionID = PageSectionId });
             return x;
         }
+        public async Task<List<PageSectionConditionCreateGetClassifications>> CreateGetClassifications(string UserId)
+        {
+            string usp = "usp_PageSectionConditionCreateGetClassifications @UserID";
+            var x = await _sqlDataAccess.LoadData<PageSectionConditionCreateGetClassifications, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+        public async Task<List<ClassificationValueList>> CreateGetClassificationValues(string UserId, int ClassificationId)
+        {
+            string usp = "usp_PageSectionConditionCreateGetClassificationValues @UserID, @ClassificationId";
+            var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId, ClassificationId= ClassificationId });
+            return x;
+        }
 
-        public Task<PageSectionConditionUpdateGet> UpdateGet(string UserId, int PageSectionConditionId)
+        public  Task<PageSectionConditionUpdateGet> UpdateGet(string UserId, int PageSectionConditionId)
         {
             string usp = "usp_PageSectionUpdateGet @UserId, @PageSectionConditionID";
             return _sqlDataAccess.LoadSingleRecord<PageSectionConditionUpdateGet, dynamic>(usp, new { UserId = UserId, PageSectionConditionId = PageSectionConditionId });

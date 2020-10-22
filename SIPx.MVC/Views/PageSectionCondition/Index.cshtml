@@ -6,7 +6,7 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Panel.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section conditions")).TermString</h1>
+<h1><img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section conditions")).TermString</h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>

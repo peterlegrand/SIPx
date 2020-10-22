@@ -26,6 +26,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<PageSectionConditionTypeList, dynamic>(usp, new { UserId = UserId });
 
         }
+        public Task<List<PageSectionConditionTypeListExtended>> ListExtended(string UserId)
+        {
+            string usp = "usp_PageSectionConditionTypeListExtended @UserId";
+            return _sqlDataAccess.LoadData<PageSectionConditionTypeListExtended, dynamic>(usp, new { UserId = UserId });
+
+        }
 
     }
 }
