@@ -385,5 +385,8 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (379, 'ProcessTemplateFlowPass', 'LanguageCreate')
 , (380, 'ProcessTemplateFlowPass', 'LanguageEdit')
 , (381, 'ProcessTemplateFlowPass', 'LanguageDelete')
-
+, (382, 'PageSectionCondition', 'Create')
+, (383, 'PageSectionCondition', 'Delete')
+, (384, 'PageSectionCondition', 'Index')
+, (385, 'PageSectionCondition', 'Edit')
 SET IDENTITY_INSERT MVCUIScreens OFF;

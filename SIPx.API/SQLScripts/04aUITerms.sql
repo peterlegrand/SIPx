@@ -1561,4 +1561,12 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1559, 'Process template flow
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1560, 'Delete process template flow pass');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1561, 'Add process template flow pass');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1562, 'Pass type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1563, 'Created from date');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1564, 'Created to date');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1565, 'Modified from date');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1566, 'Modified to date');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1567, 'Add page section condition');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1568, 'Page section conditions');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1569, 'Add new page section condition');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1570, 'Delete page section condition');
 SET IDENTITY_INSERT UITerms OFF;
