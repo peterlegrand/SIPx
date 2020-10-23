@@ -8,20 +8,21 @@ CREATE PROCEDURE usp_PageSectionConditionUpdatePost (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @User nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @User
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
+BEGIN TRANSACTION
 UPDATE PageSectionConditions SET 
 	PageSectionConditionTypeId = @PageSectionConditionTypeID
 	, PageSectionConditionInt = @PageSectionConditionInt 
 	, PageSectionConditionDate = @PageSectionConditionDate 
 	, PageSectionConditionString = @PageSectionConditionString 
-	, ModifierId = @User
+	, ModifierId = @UserId
 	, ModifiedDate = GETDATE()
 WHERE PageSectionConditionId = @PageSectionConditionID
 
@@ -30,7 +31,7 @@ UPDATE  PageSectionConditionLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierId = @User
+	, ModifierId = @UserId
 	, ModifiedDate = getdate()
 WHERE PageSectionConditionID= @PageSectionConditionId
 	AND LanguageID = @LanguageID

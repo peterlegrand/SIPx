@@ -55,14 +55,14 @@ namespace SIPx.DataAccess
 
         public  Task<PageSectionConditionUpdateGet> UpdateGet(string UserId, int PageSectionConditionId)
         {
-            string usp = "usp_PageSectionUpdateGet @UserId, @PageSectionConditionID";
+            string usp = "usp_PageSectionConditionUpdateGet @UserId, @PageSectionConditionID";
             return _sqlDataAccess.LoadSingleRecord<PageSectionConditionUpdateGet, dynamic>(usp, new { UserId = UserId, PageSectionConditionId = PageSectionConditionId });
 
         }
 
         public bool UpdatePost(PageSectionConditionUpdateGet PageSectionCondition)
         {
-            string usp = "usp_PageSectionConditionUpdatePost @PageSectionId, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @SizeX, @SizeY, @DashboardRow, @DashboardColumn, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @Name, @Description, @MenuName , @MouseOver, @TitleName, @TitleDescription , @ModifierId ";
+            string usp = "usp_PageSectionConditionUpdatePost @PageSectionConditionId, @PageSectionConditionTypeId, @PageSectionConditionInt, @PageSectionConditionDate, @PageSectionConditionString, @Name, @Description, @MenuName , @MouseOver, @UserId ";
             _sqlDataAccess.SaveData<PageSectionConditionUpdateGet>(usp, PageSectionCondition);
             return true;
         }

@@ -34,7 +34,7 @@ namespace SIPx.API.Controllers
         private readonly IClaimCheck _claimCheck;
         private readonly UserManager<SipUser> _userManager;
 
-        public PageSectionConditionController( IPageSectionConditionProvider pageSectionConditionProvider,
+        public PageSectionConditionController(IPageSectionConditionProvider pageSectionConditionProvider,
             IPageSectionConditionTypeProvider pageSectionConditionTypeProvider,
             IUserProvider userProvider, IOrganizationProvider organizationProvider,
             IProjectProvider projectProvider, IContentStatusProvider contentStatusProvider, IContentTypeProvider contentTypeProvider,
@@ -65,7 +65,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PageSectionConditionCreateGet = new PageSectionConditionCreateGet();
-                PageSectionConditionCreateGet.PageSectionConditionTypes  = await _pageSectionConditionTypeProvider.ListExtended(CurrentUser.Id);
+                PageSectionConditionCreateGet.PageSectionConditionTypes = await _pageSectionConditionTypeProvider.ListExtended(CurrentUser.Id);
                 PageSectionConditionCreateGet.Users = await _userProvider.List();
                 PageSectionConditionCreateGet.Projects = await _projectProvider.List(CurrentUser.Id);
                 PageSectionConditionCreateGet.ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
@@ -73,7 +73,7 @@ namespace SIPx.API.Controllers
                 PageSectionConditionCreateGet.Languages = await _languageProvider.List(CurrentUser.Id);
                 PageSectionConditionCreateGet.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 PageSectionConditionCreateGet.Classifications = await _pageSectionConditionProvider.CreateGetClassifications(CurrentUser.Id);
-                for(int i = 0; i < PageSectionConditionCreateGet.Classifications.Count(); i++)
+                for (int i = 0; i < PageSectionConditionCreateGet.Classifications.Count(); i++)
                 {
                     PageSectionConditionCreateGet.Classifications[i].ClassificationValues = await _pageSectionConditionProvider.CreateGetClassificationValues(CurrentUser.Id, PageSectionConditionCreateGet.Classifications[i].ClassificationId);
                 }
@@ -95,13 +95,13 @@ namespace SIPx.API.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Create(PageSectionConditionCreateGet PageSectionCondition)
         {
-                var CurrentUser = await _userManager.GetUserAsync(User);
+            var CurrentUser = await _userManager.GetUserAsync(User);
             PageSectionCondition.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                
-//                var CheckString = await _pageSectionProvider.CreatePostCheck(PageSection);
-  //              if (CheckString.Length == 0)
+
+                //                var CheckString = await _pageSectionProvider.CreatePostCheck(PageSection);
+                //              if (CheckString.Length == 0)
                 {
                     PageSectionCondition.PageSectionConditionTypeId = int.Parse(PageSectionCondition.PageSectionConditionTypeIdExtended.Substring(1));
                     _pageSectionConditionProvider.CreatePost(PageSectionCondition);
@@ -110,7 +110,7 @@ namespace SIPx.API.Controllers
                 return BadRequest(new
                 {
                     IsSuccess = false,
-    //                Message = CheckString,
+                    //                Message = CheckString,
                 });
             }
             return BadRequest(new
@@ -150,14 +150,41 @@ namespace SIPx.API.Controllers
                 //    });
                 //}
                 var PageSectionCondition = await _pageSectionConditionProvider.UpdateGet(CurrentUser.Id, Id);
-                PageSectionCondition.PageSectionConditionTypes = await _pageSectionConditionTypeProvider.List(CurrentUser.Id);
+                PageSectionCondition.PageSectionConditionTypes = await _pageSectionConditionTypeProvider.ListExtended(CurrentUser.Id);
+
                 PageSectionCondition.Users = await _userProvider.List();
                 PageSectionCondition.Projects = await _projectProvider.List(CurrentUser.Id);
                 PageSectionCondition.ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
                 PageSectionCondition.ContentStatuses = await _contentStatusProvider.List(CurrentUser.Id);
                 PageSectionCondition.Languages = await _languageProvider.List(CurrentUser.Id);
                 PageSectionCondition.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                PageSectionCondition.Classifications = await _pageSectionConditionProvider.CreateGetClassifications(CurrentUser.Id);
+                PageSectionCondition.UserId = CurrentUser.Id;
 
+                for (int i = 0; i < PageSectionCondition.Classifications.Count(); i++)
+                {
+                    PageSectionCondition.Classifications[i].ClassificationValues = await _pageSectionConditionProvider.CreateGetClassificationValues(CurrentUser.Id, PageSectionCondition.Classifications[i].ClassificationId);
+                }
+                PageSectionCondition.PageSectionConditionId = Id;
+                if (PageSectionCondition.PageSectionConditionTypeId == 11)
+                { PageSectionCondition.PageSectionConditionTypeIdExtended = "V" + PageSectionCondition.PageSectionConditionInt; }
+                else
+                { PageSectionCondition.PageSectionConditionTypeIdExtended = "T" + PageSectionCondition.PageSectionConditionTypeId; }
+                if (new[] { "T1", "T2", "T9", "T10" }.Contains(PageSectionCondition.PageSectionConditionTypeIdExtended))
+                {
+                    PageSectionCondition.PageSectionConditionTypes.Find(x => x.ExtendedId == PageSectionCondition.PageSectionConditionTypeIdExtended).StringValue = PageSectionCondition.PageSectionConditionString;
+                }
+                else
+                {
+                    if (new[] { "T12", "T13", "T13", "T15" }.Contains(PageSectionCondition.PageSectionConditionTypeIdExtended))
+                    {
+                        PageSectionCondition.PageSectionConditionTypes.Find(x => x.ExtendedId == PageSectionCondition.PageSectionConditionTypeIdExtended).DateValue = PageSectionCondition.PageSectionConditionDate;
+                    }
+                    else
+                    {
+                        PageSectionCondition.PageSectionConditionTypes.Find(x => x.ExtendedId == PageSectionCondition.PageSectionConditionTypeIdExtended).IntValue = PageSectionCondition.PageSectionConditionInt;
+                    }
+                }
                 return Ok(PageSectionCondition);
             }
             return BadRequest(new
@@ -178,6 +205,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _PageSectionProvider.UpdatePostCheck(PageSection);
                 //if (CheckString.Length == 0)
                 //{
+                PageSectionCondition.PageSectionConditionTypeId = int.Parse(PageSectionCondition.PageSectionConditionTypeIdExtended.Substring(1));
                 _pageSectionConditionProvider.UpdatePost(PageSectionCondition);
                 return Ok(PageSectionCondition);
                 //}

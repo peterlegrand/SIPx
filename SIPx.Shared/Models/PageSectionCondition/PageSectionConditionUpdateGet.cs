@@ -10,6 +10,7 @@ namespace SIPx.Shared
         [Key]
         public int PageSectionId { get; set; }
         public int PageSectionConditionId { get; set; }
+        public string PageSectionConditionTypeIdExtended { get; set; }
         public int PageSectionConditionTypeId { get; set; }
         public int PageSectionConditionInt { get; set; }
         public DateTime PageSectionConditionDate { get; set; }
@@ -25,7 +26,7 @@ namespace SIPx.Shared
         public int ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string UserId { get; set; }
-        public List<PageSectionConditionTypeList> PageSectionConditionTypes { get; set; }
+        public List<PageSectionConditionTypeListExtended> PageSectionConditionTypes { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<UserList> Users { get; set; }
         public List<OrganizationList> Organizations { get; set; }

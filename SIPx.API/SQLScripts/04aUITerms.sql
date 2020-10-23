@@ -1569,4 +1569,5 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1567, 'Add page section cond
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1568, 'Page section conditions');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1569, 'Add new page section condition');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1570, 'Delete page section condition');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1571, 'Page section condition');
 SET IDENTITY_INSERT UITerms OFF;

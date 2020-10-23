@@ -3,13 +3,40 @@
 @model PageSectionConditionUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section condition")).TermString;
+    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section condition")).TermString;
 
     Layout = "_LayoutAdmin";
 }
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function () {
+        var strx = "@Model.PageSectionConditionTypeIdExtended";
+        @foreach(var x in Model.PageSectionConditionTypes)
+        {
+        @x.ControlHide
+            if(Model.PageSectionConditionTypeIdExtended==x.ExtendedId)
+            {
+                @x.ControlShow
+            }
+        }
+        $('#PageSectionConditionTypeIdExtended_hidden').on('change', function () {
+        var strx = "@Model.PageSectionConditionTypeIdExtended";
+        @foreach(var x in Model.PageSectionConditionTypes)
+        {
+        @x.ControlHide
+            if(Model.PageSectionConditionTypeIdExtended==x.ExtendedId)
+            {
+                @x.ControlShow
+            }
+        }
+        });
 
+    });
+</script>
+@* PETER TODO uncomment *@
 <h1>
-    <img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section condition")).TermString
+    @*<img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section condition")).TermString*@
 </h1>
 <div class="container">
 
@@ -65,12 +92,29 @@
                 @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="PageSectionConditionTypeId" dataSource="@Model.PageSectionConditionTypes" ejs-for="@Model.PageSectionConditionTypeId" value="@Model.PageSectionConditionTypeId" index="2" filtering="PageSectionTypes" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="PageSectionConditionTypeId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="PageSectionConditionTypeIdExtended" dataSource="@Model.PageSectionConditionTypes" ejs-for="@Model.PageSectionConditionTypeIdExtended" value="@Model.PageSectionConditionTypeIdExtended" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ExtendedId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
         </div>
+        @if(Model.PageSectionConditionTypes.Contains(Model.PageSectionConditionTypes.Find(x => x.ExtendedId == Model.PageSectionConditionTypeIdExtended)))
+        {
+            if (new[] { "T1", "T2", "T9", "T10" }.Contains(Model.PageSectionConditionTypeIdExtended))
+            {
+                <div>text</div>
+            }
+            else
+            {
+                if (new[] { "T12", "T13", "T14", "T15" }.Contains(Model.PageSectionConditionTypeIdExtended))
+                    {
+                    <div>date</div>
+                }
+                else
+                {
+                    <div>number</div>}
+            }
+        }
         <div class="row" id="UserCondition">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
@@ -104,6 +148,16 @@
 
             </div>
         </div>
+        <div class="row" id="ContainsCondition">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Contains")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="Contains" ejs-for="@Model.PageSectionConditionString" value="@Model.PageSectionConditionString" index="2" popupHeight="220px">
+                </ejs-textbox>
+            </div>
+        </div>
+
         <div class="row" id="OrganizationCondition">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Organization")).TermString
@@ -160,7 +214,7 @@
         </div>
         <div class="row" id="SecurityLevelCondition">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("SecurityLevel")).TermString
+                @Term.Find(x => x.InternalName.Equals("Security level")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
@@ -201,6 +255,22 @@
                 </ejs-dropdownlist>
 
             </div>
+        </div>
+        <div id="ClassificationValueCondition">
+            @for (int i = 0; i < Model.Classifications.Count; i++)
+            {
+                <div class="row values" id="@Model.Classifications[i].ControlA">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-9">
+                        <ejs-dropdownlist id="@Model.Classifications[i].ControlB" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                            <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+
+                    </div>
+                </div>
+            }
         </div>
         <div class="row">
             <div class="col-3 offset-3">
