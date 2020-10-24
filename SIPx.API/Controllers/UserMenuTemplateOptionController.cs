@@ -7,7 +7,7 @@ using SIPx.Shared;
 
 namespace SIPx.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(api/[controller])]
     [ApiController]
     //[Authorize]
     public class UserMenuTemplateOptionController : ControllerBase
@@ -35,11 +35,11 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Create/{Id:int}")]
+        [HttpGet(Create/{Id:int})]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
             {
                 var UserMenuTemplateOptionCreateGet = new UserMenuTemplateOptionCreateGet();
                 var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
@@ -47,7 +47,7 @@ namespace SIPx.API.Controllers
                 var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.CreateGetSequence(CurrentUser.Id, Id);
                 UserMenuTemplateOptionCreateGet.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
                 UserMenuTemplateOptionCreateGet.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
-                UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = "Add at the end" });
+                UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = Add at the end });
                 UserMenuTemplateOptionCreateGet.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
                 UserMenuTemplateOptionCreateGet.Icons = iconslist;
                 UserMenuTemplateOptionCreateGet.Pages = Pages;
@@ -57,16 +57,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpPost("Create")]
+        [HttpPost(Create)]
         public async Task<IActionResult> Create(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             UserMenuTemplateOption.CreatorId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
             {
                 //var CheckString = await _userMenuTemplateOptionProvider.CreatePostCheck(UserMenuTemplateOption);
                 //if (CheckString.Length == 0)
@@ -83,22 +83,22 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpGet("Index/{Id:int}")]
+        [HttpGet(Index/{Id:int})]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 2))
             {
-                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "ClassificationID", Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists(UserMenuTemplateOptions, ClassificationID, Id) == 0)
                 //{
                 //    return BadRequest(new
                 //    {
                 //        IsSuccess = false,
-                //        Message = "No record with this ID",
+                //        Message = No record with this ID,
                 //    });
                 //}
 
@@ -108,22 +108,22 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpGet("Update/{Id:int}")]
+        [HttpGet(Update/{Id:int})]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 2))
             {
-                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists(UserMenuTemplateOptions, UserMenuTemplateOptionID, Id) == 0)
                 //{
                 //    return BadRequest(new
                 //    {
                 //        IsSuccess = false,
-                //        Message = "No record with this ID",
+                //        Message = No record with this ID,
                 //    });
                 //}
 
@@ -133,7 +133,7 @@ namespace SIPx.API.Controllers
                 var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.CreateGetSequence(CurrentUser.Id, Id);
                 UserMenuTemplateOption.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
                 UserMenuTemplateOption.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
-                UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = "Add at the end" });
+                UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = Add at the end });
                 UserMenuTemplateOption.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
                 UserMenuTemplateOption.Icons = iconslist;
                 UserMenuTemplateOption.Pages = Pages;
@@ -142,16 +142,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpPost("Update")]
+        [HttpPost(Update)]
         public async Task<IActionResult> Update(UserMenuTemplateOptionUpdateGet UserMenuTemplateOption)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             UserMenuTemplateOption.CreatorId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
             {
 
                 UserMenuTemplateOption.UserId = CurrentUser.Id;
@@ -170,22 +170,22 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpGet("Delete/{Id:int}")]
+        [HttpGet(Delete/{Id:int})]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
             {
-                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists(UserMenuTemplateOptions, UserMenuTemplateOptionID, Id) == 0)
                 //{
                 //    return BadRequest(new
                 //    {
                 //        IsSuccess = false,
-                //        Message = "No record with this ID",
+                //        Message = No record with this ID,
                 //    });
                 //}
                 var x = await _userMenuTemplateOptionProvider.DeleteGet(CurrentUser.Id, Id);
@@ -194,16 +194,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
 
         }
 
-        [HttpPost("Delete")]
+        [HttpPost(Delete)]
         public async Task<IActionResult> Delete(UserMenuTemplateOptionDeleteGet UserMenuTemplateOption)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
             {
                 UserMenuTemplateOption.CreatorId = CurrentUser.Id;
                 //var CheckString = await _UserMenuTemplateOptionProvider.DeletePostCheck(UserMenuTemplateOption);
@@ -222,24 +222,24 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
 
 
         }
 
-        [HttpGet("LanguageIndex/{Id:int}")]
+        [HttpGet(LanguageIndex/{Id:int})]
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 16))
             {
-                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptionLanguages", "UserMenuTemplateOptionID", Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists(UserMenuTemplateOptionLanguages, UserMenuTemplateOptionID, Id) == 0)
                 //{
                 //    return BadRequest(new
                 //    {
                 //        IsSuccess = false,
-                //        Message = "No record with this ID",
+                //        Message = No record with this ID,
                 //    });
                 //}
 
@@ -249,22 +249,22 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpGet("LanguageUpdate/{Id:int}")]
+        [HttpGet(LanguageUpdate/{Id:int})]
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 16))
             {
-                if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptionLanguages", "UserMenuTemplateOptionLanguageID", Id) == 0)
+                if (await _checkProvider.CheckIfRecordExists(UserMenuTemplateOptionLanguages, UserMenuTemplateOptionLanguageID, Id) == 0)
                 {
                     return BadRequest(new
                     {
                         IsSuccess = false,
-                        Message = "No record with this ID",
+                        Message = No record with this ID,
                     });
                 }
 
@@ -273,7 +273,7 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 

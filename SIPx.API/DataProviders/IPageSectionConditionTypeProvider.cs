@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public interface IPageSectionConditionTypeProvider
+    public interface IPageSectionContentConditionTypeProvider
     {
-        Task<List<PageSectionConditionTypeList>> List(string UserId);
-        Task<List<PageSectionConditionTypeListExtended>> ListExtended(string UserId);
+        Task<List<PageSectionContentConditionTypeList>> List(string UserId);
+        Task<List<PageSectionContentConditionTypeListExtended>> ListExtended(string UserId);
     }
 }

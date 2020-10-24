@@ -1,9 +1,9 @@
-CREATE PROCEDURE usp_PageSectionConditionCreatePost (
+CREATE PROCEDURE usp_PageSectionContentConditionCreatePost (
 	@PageSectionId int
-	, @PageSectionConditionTypeId int
-	, @PageSectionConditionInt int = null
-	, @PageSectionConditionString nvarchar(max)
-	, @PageSectionConditionDate datetime
+	, @PageSectionContentConditionTypeId int
+	, @PageSectionContentConditionInt int = null
+	, @PageSectionContentConditionString nvarchar(max)
+	, @PageSectionContentConditionDate datetime
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -19,13 +19,13 @@ DECLARE @PageId int;
 SELECT @PageId = PageId FROM PageSections WHERE PageSectionId = @PageSectionId;
 BEGIN TRANSACTION
 
-INSERT INTO PageSectionConditions (
+INSERT INTO PageSectionContentConditions (
 	PageSectionID
 	, PageID
-	, PageSectionConditionTypeID
-	, PageSectionConditionInt 
-	, PageSectionConditionString 
-	, PageSectionConditionDate 
+	, PageSectionContentConditionTypeID
+	, PageSectionContentConditionInt 
+	, PageSectionContentConditionString 
+	, PageSectionContentConditionDate 
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -33,20 +33,20 @@ INSERT INTO PageSectionConditions (
 VALUES (
 	@PageSectionID
 	, @PageID
-	, @PageSectionConditionTypeID
-	, @PageSectionConditionInt 
-	, @PageSectionConditionString 
-	, @PageSectionConditionDate 
+	, @PageSectionContentConditionTypeID
+	, @PageSectionContentConditionInt 
+	, @PageSectionContentConditionString 
+	, @PageSectionContentConditionDate 
 	, @UserID
 	, getdate()
 	, @UserID
 	, getdate())
 
 
-DECLARE @NewPageSectionConditionId int	= scope_identity();
+DECLARE @NewPageSectionContentConditionId int	= scope_identity();
 
-INSERT INTO PageSectionConditionLanguages (
-	PageSectionConditionID
+INSERT INTO PageSectionContentConditionLanguages (
+	PageSectionContentConditionID
 	, PageSectionID
 	, PageID
 	, LanguageID
@@ -59,7 +59,7 @@ INSERT INTO PageSectionConditionLanguages (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@NewPageSectionConditionId 
+	@NewPageSectionContentConditionId 
 	, @PageSectionID
 	, @PageID
 	, @LanguageID

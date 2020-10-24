@@ -5,16 +5,16 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PageSectionConditionUpdateGet
+    public class PageSectionContentConditionUpdateGet
     {
         [Key]
         public int PageSectionId { get; set; }
-        public int PageSectionConditionId { get; set; }
-        public string PageSectionConditionTypeIdExtended { get; set; }
-        public int PageSectionConditionTypeId { get; set; }
-        public int PageSectionConditionInt { get; set; }
-        public DateTime PageSectionConditionDate { get; set; }
-        public string PageSectionConditionString { get; set; }
+        public int PageSectionContentConditionId { get; set; }
+        public string PageSectionContentConditionTypeIdExtended { get; set; }
+        public int PageSectionContentConditionTypeId { get; set; }
+        public int PageSectionContentConditionInt { get; set; }
+        public DateTime PageSectionContentConditionDate { get; set; }
+        public string PageSectionContentConditionString { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -26,7 +26,7 @@ namespace SIPx.Shared
         public int ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string UserId { get; set; }
-        public List<PageSectionConditionTypeListExtended> PageSectionConditionTypes { get; set; }
+        public List<PageSectionContentConditionTypeListExtended> PageSectionContentConditionTypes { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<UserList> Users { get; set; }
         public List<OrganizationList> Organizations { get; set; }
@@ -34,6 +34,6 @@ namespace SIPx.Shared
         public List<ContentTypeList> ContentTypes { get; set; }
         public List<ContentStatusList> ContentStatuses { get; set; }
         public List<LanguageList> Languages { get; set; }
-        public List<PageSectionConditionCreateGetClassifications> Classifications { get; set; }
+        public List<PageSectionContentConditionCreateGetClassifications> Classifications { get; set; }
     }
 }

@@ -5,14 +5,15 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PageSectionConditionDeleteGet
+    public class PageSectionContentConditionIndexGet
     {
         [Key]
-        public int PageSectionConditionId { get; set; }
+        public int PageSectionContentConditionId { get; set; }
         public int PageSectionId { get; set; }
         public int PageId { get; set; }
-        public string PageSectionConditionTypeName { get; set; }
-        public string PageSectionConditionName { get; set; }
+        public string PageSectionContentConditionTypeName { get; set; }
+        public string PageSectionContentConditionName { get; set; }
+        public string ClassificationName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }
@@ -23,5 +24,6 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+
     }
 }

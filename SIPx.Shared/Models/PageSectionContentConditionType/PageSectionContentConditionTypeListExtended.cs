@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PageSectionConditionTypeListExtended
+    public class PageSectionContentConditionTypeListExtended
     {
         [Key]
         public string ExtendedId { get; set; }

@@ -1,21 +1,21 @@
-ALTER PROCEDURE [dbo].[usp_PageSectionConditionTypeListExtended] (@UserId nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_PageSectionContentConditionTypeListExtended] (@UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
-SELECT * FROM (SELECT Concat('T',PageSectionConditionTypes.PageSectionConditionTypeId) ExtendedId 
+SELECT * FROM (SELECT Concat('T',PageSectionContentConditionTypes.PageSectionContentConditionTypeId) ExtendedId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
-	, Concat('ControlT',PageSectionConditionTypes.PageSectionConditionTypeId) ControlA
-	, Concat('$("#ControlT',PageSectionConditionTypes.PageSectionConditionTypeId,'").hide();') ControlHide
-	, Concat('$("#ControlT',PageSectionConditionTypes.PageSectionConditionTypeId,'").show();') ControlShow
-FROM PageSectionConditionTypes
+	, Concat('ControlT',PageSectionContentConditionTypes.PageSectionContentConditionTypeId) ControlA
+	, Concat('$("#ControlT',PageSectionContentConditionTypes.PageSectionContentConditionTypeId,'").hide();') ControlHide
+	, Concat('$("#ControlT',PageSectionContentConditionTypes.PageSectionContentConditionTypeId,'").show();') ControlShow
+FROM PageSectionContentConditionTypes
 JOIN UITermLanguages UIName
-	ON UIName.UITermId = PageSectionConditionTypes.NameTermID
+	ON UIName.UITermId = PageSectionContentConditionTypes.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
-	ON UINameCustom.UITermId = PageSectionConditionTypes.NameTermID
-WHERE UIName.LanguageId = @LanguageID AND PageSectionConditionTypeID <> 11
+	ON UINameCustom.UITermId = PageSectionContentConditionTypes.NameTermID
+WHERE UIName.LanguageId = @LanguageID AND PageSectionContentConditionTypeID <> 11
 
 UNION ALL
 

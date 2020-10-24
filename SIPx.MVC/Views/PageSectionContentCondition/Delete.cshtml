@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PageSectionConditionDeleteGet
+@model PageSectionContentConditionDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete page section condition")).TermString;
@@ -65,7 +65,7 @@
                 @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="TitleName" ejs-for="PageSectionConditionTypeName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="TitleName" ejs-for="PageSectionContentConditionTypeName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -73,7 +73,7 @@
                 @Term.Find(x => x.InternalName.Equals("Condition")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="TitleDescription" ejs-for="PageSectionConditionName" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="TitleDescription" ejs-for="PageSectionContentConditionName" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">

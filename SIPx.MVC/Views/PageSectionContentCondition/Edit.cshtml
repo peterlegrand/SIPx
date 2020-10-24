@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PageSectionConditionUpdateGet
+@model PageSectionContentConditionUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section condition")).TermString;
@@ -11,21 +11,21 @@
 </script>
 <script>
     $(document).ready(function () {
-        var strx = "@Model.PageSectionConditionTypeIdExtended";
-        @foreach(var x in Model.PageSectionConditionTypes)
+        var strx = "@Model.PageSectionContentConditionTypeIdExtended";
+        @foreach(var x in Model.PageSectionContentConditionTypes)
         {
         @x.ControlHide
-            if(Model.PageSectionConditionTypeIdExtended==x.ExtendedId)
+            if(Model.PageSectionContentConditionTypeIdExtended==x.ExtendedId)
             {
                 @x.ControlShow
             }
         }
-        $('#PageSectionConditionTypeIdExtended_hidden').on('change', function () {
-        var strx = "@Model.PageSectionConditionTypeIdExtended";
-        @foreach(var x in Model.PageSectionConditionTypes)
+        $('#PageSectionContentConditionTypeIdExtended_hidden').on('change', function () {
+        var strx = "@Model.PageSectionContentConditionTypeIdExtended";
+        @foreach(var x in Model.PageSectionContentConditionTypes)
         {
         @x.ControlHide
-            if(Model.PageSectionConditionTypeIdExtended==x.ExtendedId)
+            if(Model.PageSectionContentConditionTypeIdExtended==x.ExtendedId)
             {
                 @x.ControlShow
             }
@@ -47,7 +47,7 @@
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="PageSectionConditionId" ejs-for="@Model.PageSectionConditionId" cssClass="e-outline" placeholder="PageSectionConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="PageSectionContentConditionId" ejs-for="@Model.PageSectionContentConditionId" cssClass="e-outline" placeholder="PageSectionContentConditionId" floatLabelType="Auto"></ejs-numerictextbox>
                 <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
@@ -92,21 +92,21 @@
                 @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="PageSectionConditionTypeIdExtended" dataSource="@Model.PageSectionConditionTypes" ejs-for="@Model.PageSectionConditionTypeIdExtended" value="@Model.PageSectionConditionTypeIdExtended" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="PageSectionContentConditionTypeIdExtended" dataSource="@Model.PageSectionContentConditionTypes" ejs-for="@Model.PageSectionContentConditionTypeIdExtended" value="@Model.PageSectionContentConditionTypeIdExtended" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ExtendedId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
         </div>
-        @if(Model.PageSectionConditionTypes.Contains(Model.PageSectionConditionTypes.Find(x => x.ExtendedId == Model.PageSectionConditionTypeIdExtended)))
+        @if(Model.PageSectionContentConditionTypes.Contains(Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended)))
         {
-            if (new[] { "T1", "T2", "T9", "T10" }.Contains(Model.PageSectionConditionTypeIdExtended))
+            if (new[] { "T1", "T2", "T9", "T10" }.Contains(Model.PageSectionContentConditionTypeIdExtended))
             {
                 <div>text</div>
             }
             else
             {
-                if (new[] { "T12", "T13", "T14", "T15" }.Contains(Model.PageSectionConditionTypeIdExtended))
+                if (new[] { "T12", "T13", "T14", "T15" }.Contains(Model.PageSectionContentConditionTypeIdExtended))
                     {
                     <div>date</div>
                 }
@@ -120,7 +120,7 @@
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserId" dataSource="@Model.Users" ejs-for="@Model.PageSectionConditionString" value="@Model.PageSectionConditionString" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="UserId" dataSource="@Model.Users" ejs-for="@Model.PageSectionContentConditionString" value="@Model.PageSectionContentConditionString" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -131,7 +131,7 @@
                 @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ModifierId" dataSource="@Model.Users" ejs-for="@Model.PageSectionConditionString" value="@Model.PageSectionConditionString" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="ModifierId" dataSource="@Model.Users" ejs-for="@Model.PageSectionContentConditionString" value="@Model.PageSectionContentConditionString" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -142,7 +142,7 @@
                 @Term.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="CreatorId" dataSource="@Model.Users" ejs-for="@Model.PageSectionConditionString" value="@Model.PageSectionConditionString" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="CreatorId" dataSource="@Model.Users" ejs-for="@Model.PageSectionContentConditionString" value="@Model.PageSectionContentConditionString" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -153,7 +153,7 @@
                 @Term.Find(x => x.InternalName.Equals("Contains")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="Contains" ejs-for="@Model.PageSectionConditionString" value="@Model.PageSectionConditionString" index="2" popupHeight="220px">
+                <ejs-textbox id="Contains" ejs-for="@Model.PageSectionContentConditionString" value="@Model.PageSectionContentConditionString" index="2" popupHeight="220px">
                 </ejs-textbox>
             </div>
         </div>
@@ -163,7 +163,7 @@
                 @Term.Find(x => x.InternalName.Equals("Organization")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="OrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="OrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="OrganizationId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -174,7 +174,7 @@
                 @Term.Find(x => x.InternalName.Equals("Project")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProjectId" dataSource="@Model.Projects" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="ProjectId" dataSource="@Model.Projects" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -185,7 +185,7 @@
                 @Term.Find(x => x.InternalName.Equals("Created from date")).TermString
             </div>
             <div class="col-9">
-                <ejs-datepicker id="CreatedDateFrom" ejs-for="@Model.PageSectionConditionDate" value="@Model.PageSectionConditionDate"></ejs-datepicker>
+                <ejs-datepicker id="CreatedDateFrom" ejs-for="@Model.PageSectionContentConditionDate" value="@Model.PageSectionContentConditionDate"></ejs-datepicker>
             </div>
         </div>
         <div class="row" id="CreatedToDateCondition">
@@ -193,7 +193,7 @@
                 @Term.Find(x => x.InternalName.Equals("Created to date")).TermString
             </div>
             <div class="col-9">
-                <ejs-datepicker id="CreatedDateTo" ejs-for="@Model.PageSectionConditionDate" value="@Model.PageSectionConditionDate"></ejs-datepicker>
+                <ejs-datepicker id="CreatedDateTo" ejs-for="@Model.PageSectionContentConditionDate" value="@Model.PageSectionContentConditionDate"></ejs-datepicker>
             </div>
         </div>
         <div class="row" id="ModifiedFromDateCondition">
@@ -201,7 +201,7 @@
                 @Term.Find(x => x.InternalName.Equals("Modified from date")).TermString
             </div>
             <div class="col-9">
-                <ejs-datepicker id="ModifiedDateFrom" ejs-for="@Model.PageSectionConditionDate" value="@Model.PageSectionConditionDate"></ejs-datepicker>
+                <ejs-datepicker id="ModifiedDateFrom" ejs-for="@Model.PageSectionContentConditionDate" value="@Model.PageSectionContentConditionDate"></ejs-datepicker>
             </div>
         </div>
         <div class="row" id="ModifiedToDateCondition">
@@ -209,7 +209,7 @@
                 @Term.Find(x => x.InternalName.Equals("Modified to date")).TermString
             </div>
             <div class="col-9">
-                <ejs-datepicker id="ModifiedDateTo" ejs-for="@Model.PageSectionConditionDate" value="@Model.PageSectionConditionDate"></ejs-datepicker>
+                <ejs-datepicker id="ModifiedDateTo" ejs-for="@Model.PageSectionContentConditionDate" value="@Model.PageSectionContentConditionDate"></ejs-datepicker>
             </div>
         </div>
         <div class="row" id="SecurityLevelCondition">
@@ -217,7 +217,7 @@
                 @Term.Find(x => x.InternalName.Equals("Security level")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="SecurityLevelId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -228,7 +228,7 @@
                 @Term.Find(x => x.InternalName.Equals("Language")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="LanguageId" dataSource="@Model.Languages" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="LanguageId" dataSource="@Model.Languages" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="LanguageId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -239,7 +239,7 @@
                 @Term.Find(x => x.InternalName.Equals("Content type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ContentTypeId" dataSource="@Model.ContentTypes" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="ContentTypeId" dataSource="@Model.ContentTypes" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ContentTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -250,7 +250,7 @@
                 @Term.Find(x => x.InternalName.Equals("Content status")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ContentStatusId" dataSource="@Model.ContentStatuses" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="ContentStatusId" dataSource="@Model.ContentStatuses" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ContentStatusId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -264,7 +264,7 @@
 
                     </div>
                     <div class="col-9">
-                        <ejs-dropdownlist id="@Model.Classifications[i].ControlB" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.PageSectionConditionInt" value="@Model.PageSectionConditionInt" index="2" popupHeight="220px">
+                        <ejs-dropdownlist id="@Model.Classifications[i].ControlB" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
                             <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
                         </ejs-dropdownlist>
 
@@ -419,10 +419,10 @@
 </script>
 
 <script type="text/javascript">
-    function PageSectionConditionTypeId(e) {
+    function PageSectionContentConditionTypeId(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PageSectionConditionTypes)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PageSectionContentConditionTypes)), query);
                 }
 </script>
 <script type="text/javascript">

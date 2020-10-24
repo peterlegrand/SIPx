@@ -11,7 +11,7 @@ using SIPx.Shared;
 
 namespace SIPx.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(api/[controller])]
     [ApiController]
     //[Authorize]
     public class FrontContentController : Controller
@@ -47,12 +47,12 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("ContentType")]
+        [HttpGet(ContentType)]
         public async Task<IActionResult> ContentType()
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
             {
 
                 var ContentTypeGroups = await _frontContentProvider.ContentTypeContentTypeGroup(CurrentUser.Id);
@@ -66,16 +66,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpGet("ShowContent/{Id:int}")]
+        [HttpGet(ShowContent/{Id:int})]
         public async Task<IActionResult> ShowContent(int Id)
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
             {
 
                 var FrontContentShowContent = await _frontContentProvider.FrontContentShowContent(CurrentUser.Id, Id);
@@ -85,16 +85,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpGet("ContentNew/{Id:int}")]
+        [HttpGet(ContentNew/{Id:int})]
         public async Task<IActionResult> ContentNew(int Id)
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
             {
                 var ContentNew = new FrontContentContentNew();
                 ContentNew.ContentTypeId = Id;
@@ -115,15 +115,15 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpPost("ContentNew")]
+        [HttpPost(ContentNew)]
         public async Task<IActionResult> ContentNew(FrontContentContentNew Content)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
             {
                 Content.CreatorId = CurrentUser.Id;
                 _frontContentProvider.FrontContentCreatePost(CurrentUser.Id, Content);
@@ -132,15 +132,15 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
-        [HttpGet("AdvancedSearch")]
+        [HttpGet(AdvancedSearch)]
         public async Task<IActionResult> AdvancedSearch()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
             {
                 var ContentSearch = new ContentAdvancedSearchPost();
                 ContentSearch.Classifications = await _classificationProvider.ClassificationsWithValues(CurrentUser.Id);
@@ -161,23 +161,23 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
 
 
-        [HttpPost("AdvancedSearch")]
+        [HttpPost(AdvancedSearch)]
         public async Task<IActionResult> AdvancedSearch(ContentAdvancedSearchPost AdvancedSearch)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             AdvancedSearch.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
             {
                 //var CheckString = await _ContentProvider.CreatePostCheck(Content);
                 //if (CheckString.Length == 0)
                 //{
                 if (AdvancedSearch.Contains == null)
-                { AdvancedSearch.Contains = ""; }
+                { AdvancedSearch.Contains = ; }
                 if (AdvancedSearch.OrganizationId == null)
                 { AdvancedSearch.OrganizationId = 0; }
                 if (AdvancedSearch.ProjectId == null)
@@ -210,7 +210,7 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = "No rights",
+                Message = No rights,
             });
         }
     }

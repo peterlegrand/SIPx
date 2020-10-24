@@ -4,18 +4,18 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public interface IPageSectionConditionProvider
+    public interface IPageSectionContentConditionProvider
     {
-        Task<string> CreatePost(PageSectionConditionCreateGet PageSectionCondition);
-        Task<string> CreatePostCheck(PageSectionConditionCreateGet PageSectionCondition);
-        Task<PageSectionConditionDeleteGet> DeleteGet(string UserId, int PageSectionConditionId);
-        bool DeletePost(int PageSectionConditionId);
-        Task<List<PageSectionConditionIndexGet>> IndexGet(string UserId, int PageSectionId);
+        Task<string> CreatePost(PageSectionContentConditionCreateGet PageSectionContentCondition);
+        Task<string> CreatePostCheck(PageSectionContentConditionCreateGet PageSectionContentCondition);
+        Task<PageSectionContentConditionDeleteGet> DeleteGet(string UserId, int PageSectionContentConditionId);
+        bool DeletePost(int PageSectionContentConditionId);
+        Task<List<PageSectionContentConditionIndexGet>> IndexGet(string UserId, int PageSectionId);
         Task<List<PageSectionLanguageIndexGet>> LanguageIndexGet(string UserId, int PageSectionId);
         Task<PageSectionLanguageIndexGet> LanguageUpdateGet(string UserId, int PageSectionLanguageId);
-        Task<PageSectionConditionUpdateGet> UpdateGet(string UserId, int PageSectionConditionId);
-        bool UpdatePost(PageSectionConditionUpdateGet PageSectionCondition);
-          Task<List<PageSectionConditionCreateGetClassifications>> CreateGetClassifications(string UserId);
+        Task<PageSectionContentConditionUpdateGet> UpdateGet(string UserId, int PageSectionContentConditionId);
+        bool UpdatePost(PageSectionContentConditionUpdateGet PageSectionContentCondition);
+          Task<List<PageSectionContentConditionCreateGetClassifications>> CreateGetClassifications(string UserId);
         Task<List<ClassificationValueList>> CreateGetClassificationValues(string UserId, int ClassificationId);
 
     }

@@ -17,7 +17,8 @@
         <e-grid-column field="TitleName" headerText="@Term.Find(x => x.InternalName.Equals("Title name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="TitleDescription" headerText="@Term.Find(x => x.InternalName.Equals("Title description")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="StatusName" headerText="@Term.Find(x => x.InternalName.Equals("Status name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column template="#Condition" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#ProcessCondition" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#ContentCondition" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
@@ -44,9 +45,16 @@
 
     </div>
 </script>
-<script id="Condition" type="text/x-template">
+<script id="ProcessCondition" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/PageSectionCondition/Index/${PageSectionId}"><img src="/images/icons/Condition.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/PageSectionProcessCondition/Index/${PageSectionId}"><img src="/images/icons/Process.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+        @* PETER TODO Change the mouse over to Condition *@
+    </div>
+</script>
+</script>
+<script id="ContentCondition" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/PageSectionContentCondition/Index/${PageSectionId}"><img src="/images/icons/Content.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
         @* PETER TODO Change the mouse over to Condition *@
     </div>
 </script>

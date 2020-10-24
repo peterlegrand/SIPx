@@ -9,7 +9,7 @@ using SIPx.Shared;
 
 namespace SIPx.MVC.Controllers
 {
-    public class PageSectionConditionController : Controller
+    public class PageSectionContentConditionController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
@@ -17,25 +17,25 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PageSectionConditionCreateGet>($"{_baseUrl}api/PageSectionCondition/Create/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionCondition/Create", token);
+            var response = await _client.GetProtectedAsync<PageSectionContentConditionCreateGet>($"{_baseUrl}api/PageSectionContentCondition/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionContentCondition/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(PageSectionConditionCreateGet PageSectionCondition)
+        public async Task<IActionResult> Create(PageSectionContentConditionCreateGet PageSectionContentCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PageSectionConditionCreateGet>($"{_baseUrl}api/PageSectionCondition/Create", PageSectionCondition, token);
+            await _client.PostProtectedAsync<PageSectionContentConditionCreateGet>($"{_baseUrl}api/PageSectionContentCondition/Create", PageSectionContentCondition, token);
 
-            return RedirectToAction("Index", new { id = PageSectionCondition.PageSectionId });
+            return RedirectToAction("Index", new { id = PageSectionContentCondition.PageSectionId });
         }
         [HttpGet]
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<PageSectionConditionIndexGet>>($"{_baseUrl}api/PageSectionCondition/Index/" +id,token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionCondition/Index", token);
+            var response = await _client.GetProtectedAsync<List<PageSectionContentConditionIndexGet>>($"{_baseUrl}api/PageSectionContentCondition/Index/" +id,token);
+           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionContentCondition/Index", token);
             ViewBag.UITerms = x;
             ViewBag.Id = id;
             return View(response);
@@ -46,37 +46,37 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PageSectionConditionUpdateGet>($"{_baseUrl}api/PageSectionCondition/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionCondition/Edit", token);
+            var response = await _client.GetProtectedAsync<PageSectionContentConditionUpdateGet>($"{_baseUrl}api/PageSectionContentCondition/Update/" + id, token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionContentCondition/Edit", token);
             ViewBag.UITerms = x;
             return View(response);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(PageSectionConditionUpdateGet PageSectionCondition)
+        public async Task<IActionResult> Edit(PageSectionContentConditionUpdateGet PageSectionContentCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PageSectionUpdateGet>($"{_baseUrl}api/PageSectionCondition/Update", PageSectionCondition, token);
+            await _client.PostProtectedAsync<PageSectionUpdateGet>($"{_baseUrl}api/PageSectionContentCondition/Update", PageSectionContentCondition, token);
 
-            return RedirectToAction("Index", new { id = PageSectionCondition.PageSectionId });
+            return RedirectToAction("Index", new { id = PageSectionContentCondition.PageSectionId });
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PageSectionConditionDeleteGet>($"{_baseUrl}api/PageSectionCondition/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionCondition/Delete", token);
+            var response = await _client.GetProtectedAsync<PageSectionContentConditionDeleteGet>($"{_baseUrl}api/PageSectionContentCondition/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionContentCondition/Delete", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(PageSectionConditionDeleteGet PageSectionCondition)
+        public async Task<IActionResult> Delete(PageSectionContentConditionDeleteGet PageSectionContentCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PageSectionConditionDeleteGet>($"{_baseUrl}api/PageSectionCondition/Delete", PageSectionCondition, token);
+            await _client.PostProtectedAsync<PageSectionContentConditionDeleteGet>($"{_baseUrl}api/PageSectionContentCondition/Delete", PageSectionContentCondition, token);
 
-            return RedirectToAction("Index", new { id = PageSectionCondition.PageSectionId });
+            return RedirectToAction("Index", new { id = PageSectionContentCondition.PageSectionId });
         }
         [HttpGet]
         public async Task<IActionResult> LanguageIndex(int id)

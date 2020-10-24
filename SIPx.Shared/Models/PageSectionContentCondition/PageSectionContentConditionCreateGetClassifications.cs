@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class PageSectionConditionCreateGetClassifications
+    public class PageSectionContentConditionCreateGetClassifications
     {
         [Key]
         public int ClassificationId { get; set; }

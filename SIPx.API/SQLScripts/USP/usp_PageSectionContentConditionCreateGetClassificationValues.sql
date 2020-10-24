@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_PageSectionConditionCreateGetClassificationValues (@UserId nvarchar(450), @classificationID int)
+CREATE PROCEDURE usp_PageSectionContentConditionCreateGetClassificationValues (@UserId nvarchar(450), @classificationID int)
 AS
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
