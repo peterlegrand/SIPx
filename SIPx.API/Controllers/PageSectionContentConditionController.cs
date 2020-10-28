@@ -13,7 +13,7 @@ using SIPx.Shared;
 using SIPx.DataAccess;
 namespace SIPx.API.Controllers
 {
-    [Route(api/[controller])]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
     public class PageSectionContentConditionController : ControllerBase
@@ -58,11 +58,11 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet(Create/{Id:int})]
+        [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var PageSectionContentConditionCreateGet = new PageSectionContentConditionCreateGet();
                 PageSectionContentConditionCreateGet.PageSectionContentConditionTypes = await _pageSectionContentConditionTypeProvider.ListExtended(CurrentUser.Id);
@@ -88,25 +88,74 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpPost(Create)]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(PageSectionContentConditionCreateGet PageSectionContentCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             PageSectionContentCondition.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
+                PageSectionContentCondition.PageSectionContentConditionDate = DateTime.Now;
+                if (PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(0, 1) == "V")
+                {
+                    PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.Classifications.Find(x => x.ClassificationId == int.Parse(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(1))).ClassificationValueId;
+                    PageSectionContentCondition.PageSectionContentConditionTypeId = 11;
 
-                //                var CheckString = await _pageSectionProvider.CreatePostCheck(PageSection);
-                //              if (CheckString.Length == 0)
+                }
+                else
                 {
                     PageSectionContentCondition.PageSectionContentConditionTypeId = int.Parse(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(1));
-                    _pageSectionContentConditionProvider.CreatePost(PageSectionContentCondition);
-                    return Ok(PageSectionContentCondition);
+                    switch (PageSectionContentCondition.PageSectionContentConditionTypeIdExtended)
+                    {
+                        case "T1":
+                            PageSectionContentCondition.PageSectionContentConditionString = PageSectionContentCondition.UserId;
+                            break;
+                        case "T3":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.OrganizationId;
+                            break;
+                        case "T4":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.ProjectId;
+                            break;
+                        case "T5":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.ContentTypeId;
+                            break;
+                        case "T6":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.ContentStatusId;
+                            break;
+                        case "T7":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.LanguageId;
+                            break;
+                        case "T8":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.SecurityLevelId;
+                            break;
+                        case "T9":
+                            PageSectionContentCondition.PageSectionContentConditionString = PageSectionContentCondition.SelectedCreatorId;
+                            break;
+                        case "T10":
+                            PageSectionContentCondition.PageSectionContentConditionString = PageSectionContentCondition.SelectedModifierId;
+                            break;
+                        case "T12":
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.CreatedFromDate;
+                            break;
+                        case "T13":
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.CreatedToDate ;
+                            break;
+                        case "T14":
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.ModifiedFromDate;
+                            break;
+                        case "T15":
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.ModifiedToDate;
+                            break;
+                    }
                 }
+                //                var CheckString = await _pageSectionProvider.CreatePostCheck(PageSection);
+                //              if (CheckString.Length == 0)
+                _pageSectionContentConditionProvider.CreatePost(PageSectionContentCondition);
+                return Ok(PageSectionContentCondition);
                 return BadRequest(new
                 {
                     IsSuccess = false,
@@ -116,37 +165,37 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpGet(Index/{Id:int})]
+        [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 188))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
             {
                 return Ok(await _pageSectionContentConditionProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpGet(Update/{Id:int})]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                //if (await _checkProvider.CheckIfRecordExists(PageSectionContentConditions, PageSectionID, Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists("PageSectionContentConditions", "PageSectionID", Id) == 0)
                 //{
                 //    return BadRequest(new
                 //    {
                 //        IsSuccess = false,
-                //        Message = No record with this ID,
+                //        Message = "No record with this ID",
                 //    });
                 //}
                 var PageSectionContentCondition = await _pageSectionContentConditionProvider.UpdateGet(CurrentUser.Id, Id);
@@ -167,16 +216,16 @@ namespace SIPx.API.Controllers
                 }
                 PageSectionContentCondition.PageSectionContentConditionId = Id;
                 if (PageSectionContentCondition.PageSectionContentConditionTypeId == 11)
-                { PageSectionContentCondition.PageSectionContentConditionTypeIdExtended = V + PageSectionContentCondition.PageSectionContentConditionInt; }
+                { PageSectionContentCondition.PageSectionContentConditionTypeIdExtended = "V" + PageSectionContentCondition.PageSectionContentConditionInt; }
                 else
-                { PageSectionContentCondition.PageSectionContentConditionTypeIdExtended = T + PageSectionContentCondition.PageSectionContentConditionTypeId; }
-                if (new[] { T1, T2, T9, T10 }.Contains(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended))
+                { PageSectionContentCondition.PageSectionContentConditionTypeIdExtended = "T" + PageSectionContentCondition.PageSectionContentConditionTypeId; }
+                if (new[] { "T1", "T2", "T9", "T10" }.Contains(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended))
                 {
                     PageSectionContentCondition.PageSectionContentConditionTypes.Find(x => x.ExtendedId == PageSectionContentCondition.PageSectionContentConditionTypeIdExtended).StringValue = PageSectionContentCondition.PageSectionContentConditionString;
                 }
                 else
                 {
-                    if (new[] { T12, T13, T13, T15 }.Contains(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended))
+                    if (new[] { "T12", "T13", "T13", "T15" }.Contains(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended))
                     {
                         PageSectionContentCondition.PageSectionContentConditionTypes.Find(x => x.ExtendedId == PageSectionContentCondition.PageSectionContentConditionTypeIdExtended).DateValue = PageSectionContentCondition.PageSectionContentConditionDate;
                     }
@@ -190,16 +239,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
         }
 
-        [HttpPost(Update)]
+        [HttpPost("Update")]
         public async Task<IActionResult> Update(PageSectionContentConditionUpdateGet PageSectionContentCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
                 PageSectionContentCondition.UserId = CurrentUser.Id;
                 //var CheckString = await _PageSectionProvider.UpdatePostCheck(PageSection);
@@ -219,23 +268,23 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
         }
 
-        [HttpGet(Delete/{Id:int})]
+        [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                //if (await _checkProvider.CheckIfRecordExists(PageSections, PageSectionID, Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists("PageSections", "PageSectionID", Id) == 0)
                 //{
                 //    return BadRequest(new
                 //    {
                 //        IsSuccess = false,
-                //        Message = No record with this ID,
+                //        Message = "No record with this ID",
                 //    });
                 //}
 
@@ -245,16 +294,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
         }
 
-        [HttpPost(Delete)]
+        [HttpPost("Delete")]
         public async Task<IActionResult> Delete(PageSectionContentConditionDeleteGet PageSectionContentCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
                 PageSectionContentCondition.CreatorId = CurrentUser.Id;
                 //var CheckString = await _PageSectionProvider.DeletePostCheck(PageSection);
@@ -273,39 +322,39 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
 
         }
 
-        //[HttpGet(LanguageIndex/{Id:int})]
+        //[HttpGet("LanguageIndex/{Id:int}")]
         //public async Task<IActionResult> LanguageIndex(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
         //    {
         //        return Ok(await _pageSectionProvider.LanguageIndexGet(CurrentUser.Id, Id));
         //    }
         //    return BadRequest(new
         //    {
         //        IsSuccess = false,
-        //        Message = No rights,
+        //        Message = "No rights",
         //    });
         //}
 
-        //[HttpGet(LanguageUpdate/{Id:int})]
+        //[HttpGet("LanguageUpdate/{Id:int}")]
         //public async Task<IActionResult> LanguageUpdate(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
         //    {
         //        return Ok(await _pageSectionProvider.LanguageUpdateGet(CurrentUser.Id, Id));
         //    }
         //    return BadRequest(new
         //    {
         //        IsSuccess = false,
-        //        Message = No rights,
+        //        Message = "No rights",
         //    });
         //}
 

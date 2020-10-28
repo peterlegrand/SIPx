@@ -19,6 +19,19 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string UserId { get; set; }
+        public int ContentTypeId { get; set; }
+        public string SelectedUserId { get; set; }
+        public string SelectedCreatorId { get; set; }
+        public string SelectedModifierId { get; set; }
+        public int OrganizationId { get; set; }
+        public int SecurityLevelId { get; set; }
+        public int ProjectId { get; set; }
+        public int ContentStatusId { get; set; }
+        public int LanguageId { get; set; }
+        public DateTime CreatedFromDate { get; set; }
+        public DateTime CreatedToDate { get; set; }
+        public DateTime ModifiedFromDate { get; set; }
+        public DateTime ModifiedToDate { get; set; }
         public List<PageSectionContentConditionTypeListExtended> PageSectionContentConditionTypes { get; set; }
         public List<UserList> Users { get; set; }
         public List<OrganizationList> Organizations { get; set; }

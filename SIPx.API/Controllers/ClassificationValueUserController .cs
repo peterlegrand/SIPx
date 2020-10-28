@@ -7,7 +7,7 @@ using SIPx.Shared;
 
 namespace SIPx.API.Controllers
 {
-    [Route(api/[controller])]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
     public class ClassificationValueUserController : ControllerBase
@@ -37,11 +37,11 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet(Create/{Id:int})]
+        [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User); ;
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ClassificationValueUserCreateGet = new ClassificationValueUserCreateGet();
                 var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
@@ -56,16 +56,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpPost(Create)]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(ClassificationValueUserCreateGet ClassificationValueUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationValueUser.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _classificationValueUserProvider.CreatePostCheck(ClassificationValueUser);
                 //if (CheckString.Length == 0)
@@ -82,22 +82,22 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpGet(Index/{Id:int})]
+        [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 50))  //PETER TODO looks like there is also a value 54
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))  //PETER TODO looks like there is also a value 54
             {
-                //if (await _checkProvider.CheckIfRecordExists(ClassificationValueUsers, ClassificationValueID, Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueID", Id) == 0)
                 //{
                 //    return BadRequest(new
                 //    {
                 //        IsSuccess = false,
-                //        Message = No record with this ID,
+                //        Message = "No record with this ID",
                 //    });
                 //}
 
@@ -106,22 +106,22 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpGet(Update/{Id:int})]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 50))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))
             {
-                if (await _checkProvider.CheckIfRecordExists(ClassificationValueUsers, ClassificationValueUserID, Id) == 0)
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueUserID", Id) == 0)
                 {
                     return BadRequest(new
                     {
                         IsSuccess = false,
-                        Message = No record with this ID,
+                        Message = "No record with this ID",
                     });
                 }
                 //PETER I UPDATED THIS IN THE Wrong controller
@@ -136,15 +136,15 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpPost(Update)]
+        [HttpPost("Update")]
         public async Task<IActionResult> Update(ClassificationValueUserUpdateGet ClassificationValueUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
                 ClassificationValueUser.UserId = CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
@@ -163,23 +163,23 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
         }
 
-        [HttpGet(Delete/{Id:int})]
+        [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                if (await _checkProvider.CheckIfRecordExists(ClassificationValueUsers, ClassificationValueUserID, Id) == 0)
+                if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueUserID", Id) == 0)
                 {
                     return BadRequest(new
                     {
                         IsSuccess = false,
-                        Message = No record with this ID,
+                        Message = "No record with this ID",
                     });
                 }
                 var x = await _classificationValueUserProvider.DeleteGet(CurrentUser.Id, Id);
@@ -188,16 +188,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
         }
 
-        [HttpPost(Delete)]
+        [HttpPost("Delete")]
         public async Task<IActionResult> Delete(ClassificationValueUserDeleteGet ClassificationValueUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
                 ClassificationValueUser.CreatorId = CurrentUser.Id;
                 //var CheckString = await _ClassificationValueUserProvider.DeletePostCheck(ClassificationValueUser);
@@ -216,7 +216,7 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
 

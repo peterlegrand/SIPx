@@ -98,23 +98,39 @@
 
             </div>
         </div>
-        @if(Model.PageSectionContentConditionTypes.Contains(Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended)))
-        {
-            if (new[] { "T1", "T2", "T9", "T10" }.Contains(Model.PageSectionContentConditionTypeIdExtended))
+        <div class="row">
+            @if (Model.PageSectionContentConditionTypes.Contains(Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended)))
             {
-                <div>text</div>
-            }
-            else
-            {
-                if (new[] { "T12", "T13", "T14", "T15" }.Contains(Model.PageSectionContentConditionTypeIdExtended))
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals(Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended).Name)).TermString
+                </div>
+                if (new[] { "T1", "T2", "T9", "T10" }.Contains(Model.PageSectionContentConditionTypeIdExtended))
+                {
+                    if (new[] { "T1", "T9", "T10" }.Contains(Model.PageSectionContentConditionTypeIdExtended))
                     {
-                    <div>date</div>
+                        <div class="col-9">
+                            <ejs-dropdownlist id="@Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended).ControlA" dataSource="@Model.Users" ejs-for="@Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended).StringValue" value="Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended).StringValue" index="2" popupHeight="220px">
+                                <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
+                            </ejs-dropdownlist>
+                        </div>
+                    }
+                    else
+                    {
+                        <ejs-textbox id="@Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended).ControlA" ejs-for="@Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended).StringValue" value="@Model.PageSectionContentConditionTypes.Find(x => x.ExtendedId == Model.PageSectionContentConditionTypeIdExtended).StringValue"></ejs-textbox>
+                    }
                 }
                 else
                 {
-                    <div>number</div>}
+                    if (new[] { "T12", "T13", "T14", "T15" }.Contains(Model.PageSectionContentConditionTypeIdExtended))
+                    {
+                        <div>date</div>
+                    }
+                    else
+                    {
+                        <div>number</div>}
+                }
             }
-        }
+        </div>
         <div class="row" id="UserCondition">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("User")).TermString

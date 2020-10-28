@@ -13,7 +13,7 @@ using SIPx.Shared;
 using SIPx.DataAccess;
 namespace SIPx.API.Controllers
 {
-    [Route(api/[controller])]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
     public class ProcessTemplateStageFieldController : ControllerBase
@@ -39,11 +39,11 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet(Index/{Id:int})]
+        [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 var StageInfo = new ProcessTemplateStageFieldIndexGet();
                 var x = await _processTemplateStageProvider.UpdateGet(CurrentUser.Id, Id);
@@ -56,14 +56,14 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
-        [HttpGet(Update/{Id:int})]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 var x = await _processTemplateStageFieldProvider.UpdateGet(CurrentUser.Id, Id);
 
@@ -81,15 +81,15 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpPost(Update)]
+        [HttpPost("Update")]
         public async Task<IActionResult> Update(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
                 ProcessTemplateStageField.UserId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
@@ -108,7 +108,7 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
         }

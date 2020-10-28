@@ -23,16 +23,16 @@ namespace SIPx.DataAccess
 
         public async Task<List<FrontContentContentTypeGroup>> ContentTypeContentTypeGroup(string UserId)
         {
-            string usp = usp_FrontContentTypeIndexGetContentGroup @UserId;
+            string usp = "usp_FrontContentTypeIndexGetContentGroup @UserId";
             var x = await _sqlDataAccess.LoadData<FrontContentContentTypeGroup, dynamic>(usp, new { UserId = UserId });
             return x;
         }
 
         public async Task<FrontContentShowContent> FrontContentShowContent(string UserId, int ContentId)
         {
-            string usp = usp_FrontContentShowContent @UserId, @ContentId;
+            string usp = "usp_FrontContentShowContent @UserId, @ContentId";
             var x = await _sqlDataAccess.LoadSingleRecord<FrontContentShowContent, dynamic>(usp, new { UserId = UserId, ContentId = ContentId });
-            string usp2 = usp_FrontContentShowContentClassificationValues @UserId, @ContentId;
+            string usp2 = "usp_FrontContentShowContentClassificationValues @UserId, @ContentId";
             var y = await _sqlDataAccess.LoadData<FrontContentShowContentClassificationValue, dynamic>(usp2, new { UserId = UserId, ContentId = ContentId });
             x.ClassificationValues = y;
             return x;
@@ -40,21 +40,21 @@ namespace SIPx.DataAccess
 
         public async Task<List<FrontContentContentType>> ContentType(string UserId, int ContentTypeGroupId)
         {
-            string usp = usp_FrontContentTypeIndexGetContent @UserId, @ContentTypeGroupId;
+            string usp = "usp_FrontContentTypeIndexGetContent @UserId, @ContentTypeGroupId";
             var x = await _sqlDataAccess.LoadData<FrontContentContentType, dynamic>(usp, new { UserId = UserId, ContentTypeGroupId = ContentTypeGroupId });
             return x;
         }
 
         public async Task<List<FrontContentContentNewClassification>> NewClassifications(string UserId, int ContentTypeId)
         {
-            string usp = usp_FrontContentNewClassifications @UserId, @ContentTypeId;
+            string usp = "usp_FrontContentNewClassifications @UserId, @ContentTypeId";
             var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassification, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
             return x;
         }
 
         public async Task<List<FrontContentContentNewClassificationValue>> NewClassificationValues(string UserId, int ClassificationId)
         {
-            string usp = usp_FrontContentNewClassificationValues @UserId, @ClassificationId;
+            string usp = "usp_FrontContentNewClassificationValues @UserId, @ClassificationId";
             var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassificationValue, dynamic>(usp, new { UserId = UserId, ClassificationId = ClassificationId });
             return x;
         }
@@ -77,7 +77,7 @@ namespace SIPx.DataAccess
                         , DateTime.Today);
                 }
             }
-            string usp = usp_FrontContentNewPost @ContentTypeId, @ContentStatusID , @LanguageID , @Title , @Description , @SecurityLevelID , @ProjectID , @OrganizationId , @CreatorID, @ClassificationValueTable ;
+            string usp = "usp_FrontContentNewPost @ContentTypeId, @ContentStatusID , @LanguageID , @Title , @Description , @SecurityLevelID , @ProjectID , @OrganizationId , @CreatorID, @ClassificationValueTable ";
             _sqlDataAccess.SaveData<dynamic>(usp, new { 
                 ContentTypeId = Content.ContentTypeId
                 , ContentStatusId = Content.ContentStatusId
@@ -88,7 +88,7 @@ namespace SIPx.DataAccess
                 , OrganizationId = Content.OrganizationId
                 , ProjectId = Content.ProjectId
                 , CreatorId = UserId
-                , ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter(udt_ContentClassificationValueInsert) });
+                , ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert") });
             return true;
         
 

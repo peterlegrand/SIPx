@@ -13,7 +13,7 @@ using SIPx.Shared;
 using SIPx.DataAccess;
 namespace SIPx.API.Controllers
 {
-    [Route(api/[controller])]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
     public class ProcessTemplateFlowConditionController : ControllerBase
@@ -51,11 +51,11 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet(Create/{Id:int})]
+        [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var ProcessTemplateFlowConditionCreateGet = new ProcessTemplateFlowConditionCreateGet();
                 var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.CreateGetSequence(CurrentUser.Id, Id);
@@ -88,16 +88,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpPost(Create)]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProcessTemplateFlowCondition.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 191))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _processTemplateFlowConditionProvider.CreatePostCheck(ProcessTemplateFlowCondition);
                 //if (CheckString.Length == 0)
@@ -114,30 +114,30 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpGet(Index/{Id:int})]
+        [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 return Ok(await _processTemplateFlowConditionProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpGet(Update/{Id:int})]
+        [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
 
                 var ProcessTemplateFlowConditionUpdateGet = await _processTemplateFlowConditionProvider.UpdateGet(CurrentUser.Id, Id);
@@ -162,14 +162,14 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
-        [HttpPost(Update)]
+        [HttpPost("Update")]
         public async Task<IActionResult> Update(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
                 ProcessTemplateFlowCondition.UserId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
@@ -188,23 +188,23 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
         }
 
-        [HttpGet(Delete/{Id:int})]
+        [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                //if (await _checkProvider.CheckIfRecordExists(ProcessTemplateFlowConditions, ProcessTemplateFlowConditionID, Id) == 0)
+                //if (await _checkProvider.CheckIfRecordExists("ProcessTemplateFlowConditions", "ProcessTemplateFlowConditionID", Id) == 0)
                 //{
                     //return BadRequest(new
                     //{
                     //    IsSuccess = false,
-                    //    Message = No record with this ID,
+                    //    Message = "No record with this ID",
                     //});
                 //}
                 var x = await _processTemplateFlowConditionProvider.DeleteGet(CurrentUser.Id, Id);
@@ -213,16 +213,16 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
         }
 
-        [HttpPost(Delete)]
+        [HttpPost("Delete")]
         public async Task<IActionResult> Delete(ProcessTemplateFlowConditionDeleteGet ProcessTemplateFlowCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 190))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
 //                ProcessTemplateFlowCondition.U = CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateFlowConditionProvider.DeletePostCheck(ProcessTemplateFlowCondition);
@@ -241,39 +241,39 @@ namespace SIPx.API.Controllers
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
 
 
         }
 
-        [HttpGet(LanguageIndex/{Id:int})]
+        [HttpGet("LanguageIndex/{Id:int}")]
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 return Ok(await _processTemplateFlowConditionProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
-        [HttpGet(LanguageUpdate/{Id:int})]
+        [HttpGet("LanguageUpdate/{Id:int}")]
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, ApplicationRight, 1))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 return Ok(await _processTemplateFlowConditionProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
                 IsSuccess = false,
-                Message = No rights,
+                Message = "No rights",
             });
         }
 
