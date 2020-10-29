@@ -142,7 +142,7 @@ namespace SIPx.API.Controllers
                             PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.CreatedFromDate;
                             break;
                         case "T13":
-                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.CreatedToDate ;
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.CreatedToDate;
                             break;
                         case "T14":
                             PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.ModifiedFromDate;
@@ -200,7 +200,6 @@ namespace SIPx.API.Controllers
                 //}
                 var PageSectionContentCondition = await _pageSectionContentConditionProvider.UpdateGet(CurrentUser.Id, Id);
                 PageSectionContentCondition.PageSectionContentConditionTypes = await _pageSectionContentConditionTypeProvider.ListExtended(CurrentUser.Id);
-
                 PageSectionContentCondition.Users = await _userProvider.List();
                 PageSectionContentCondition.Projects = await _projectProvider.List(CurrentUser.Id);
                 PageSectionContentCondition.ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
@@ -210,30 +209,83 @@ namespace SIPx.API.Controllers
                 PageSectionContentCondition.Classifications = await _pageSectionContentConditionProvider.CreateGetClassifications(CurrentUser.Id);
                 PageSectionContentCondition.UserId = CurrentUser.Id;
 
+                if (PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(0, 1) == "V")
+                {
+                    PageSectionContentCondition.Classifications.Find(x => x.ClassificationId == int.Parse(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(1))).ClassificationValueId = PageSectionContentCondition.PageSectionContentConditionInt;
+                }
+                else
+                {
+                    switch (PageSectionContentCondition.PageSectionContentConditionTypeIdExtended)
+                    {
+                        case "T1":
+                            PageSectionContentCondition.UserId = PageSectionContentCondition.PageSectionContentConditionString;
+                            break;
+                        case "T3":
+                            PageSectionContentCondition.OrganizationId = PageSectionContentCondition.PageSectionContentConditionInt;
+                            break;
+                        case "T4":
+                            PageSectionContentCondition.ProjectId = PageSectionContentCondition.PageSectionContentConditionInt;
+                            break;
+                        case "T5":
+                            PageSectionContentCondition.ContentTypeId = PageSectionContentCondition.PageSectionContentConditionInt;
+                            break;
+                        case "T6":
+                            PageSectionContentCondition.ContentStatusId = PageSectionContentCondition.PageSectionContentConditionInt;
+                            break;
+                        case "T7":
+                            PageSectionContentCondition.LanguageId = PageSectionContentCondition.PageSectionContentConditionInt;
+                            break;
+                        case "T8":
+                            PageSectionContentCondition.SecurityLevelId = PageSectionContentCondition.PageSectionContentConditionInt;
+                            break;
+                        case "T9":
+                            PageSectionContentCondition.SelectedCreatorId = PageSectionContentCondition.PageSectionContentConditionString;
+                            break;
+                        case "T10":
+                            PageSectionContentCondition.SelectedModifierId = PageSectionContentCondition.PageSectionContentConditionString;
+                            break;
+                        case "T12":
+                            PageSectionContentCondition.CreatedFromDate = PageSectionContentCondition.PageSectionContentConditionDate;
+                            break;
+                        case "T13":
+                            PageSectionContentCondition.CreatedToDate = PageSectionContentCondition.PageSectionContentConditionDate;
+                            break;
+                        case "T14":
+                            PageSectionContentCondition.ModifiedFromDate = PageSectionContentCondition.PageSectionContentConditionDate;
+                            break;
+                        case "T15":
+                            PageSectionContentCondition.ModifiedToDate = PageSectionContentCondition.PageSectionContentConditionDate;
+                            break;
+                    }
+                }
+
+
+
+
                 for (int i = 0; i < PageSectionContentCondition.Classifications.Count(); i++)
                 {
                     PageSectionContentCondition.Classifications[i].ClassificationValues = await _pageSectionContentConditionProvider.CreateGetClassificationValues(CurrentUser.Id, PageSectionContentCondition.Classifications[i].ClassificationId);
                 }
                 PageSectionContentCondition.PageSectionContentConditionId = Id;
-                if (PageSectionContentCondition.PageSectionContentConditionTypeId == 11)
-                { PageSectionContentCondition.PageSectionContentConditionTypeIdExtended = "V" + PageSectionContentCondition.PageSectionContentConditionInt; }
-                else
-                { PageSectionContentCondition.PageSectionContentConditionTypeIdExtended = "T" + PageSectionContentCondition.PageSectionContentConditionTypeId; }
-                if (new[] { "T1", "T2", "T9", "T10" }.Contains(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended))
-                {
-                    PageSectionContentCondition.PageSectionContentConditionTypes.Find(x => x.ExtendedId == PageSectionContentCondition.PageSectionContentConditionTypeIdExtended).StringValue = PageSectionContentCondition.PageSectionContentConditionString;
-                }
-                else
-                {
-                    if (new[] { "T12", "T13", "T13", "T15" }.Contains(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended))
-                    {
-                        PageSectionContentCondition.PageSectionContentConditionTypes.Find(x => x.ExtendedId == PageSectionContentCondition.PageSectionContentConditionTypeIdExtended).DateValue = PageSectionContentCondition.PageSectionContentConditionDate;
-                    }
-                    else
-                    {
-                        PageSectionContentCondition.PageSectionContentConditionTypes.Find(x => x.ExtendedId == PageSectionContentCondition.PageSectionContentConditionTypeIdExtended).IntValue = PageSectionContentCondition.PageSectionContentConditionInt;
-                    }
-                }
+                //if (PageSectionContentCondition.PageSectionContentConditionTypeId == 11)
+                //{ PageSectionContentCondition.PageSectionContentConditionTypeIdExtended = "V" + PageSectionContentCondition.PageSectionContentConditionInt; }
+                //else
+                //{ PageSectionContentCondition.PageSectionContentConditionTypeIdExtended = "T" + PageSectionContentCondition.PageSectionContentConditionTypeId; }
+                //if (new[] { "T1", "T2", "T9", "T10" }.Contains(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended))
+                //{
+                //    PageSectionContentCondition.PageSectionContentConditionTypes.Find(x => x.ExtendedId == PageSectionContentCondition.PageSectionContentConditionTypeIdExtended).StringValue = PageSectionContentCondition.PageSectionContentConditionString;
+                //}
+                //else
+                //{
+                //    if (new[] { "T12", "T13", "T13", "T15" }.Contains(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended))
+                //    {
+                //        PageSectionContentCondition.PageSectionContentConditionTypes.Find(x => x.ExtendedId == PageSectionContentCondition.PageSectionContentConditionTypeIdExtended).DateValue = PageSectionContentCondition.PageSectionContentConditionDate;
+                //    }
+                //    else
+                //    {
+                //        PageSectionContentCondition.PageSectionContentConditionTypes.Find(x => x.ExtendedId == PageSectionContentCondition.PageSectionContentConditionTypeIdExtended).IntValue = PageSectionContentCondition.PageSectionContentConditionInt;
+                //    }
+                //}
                 return Ok(PageSectionContentCondition);
             }
             return BadRequest(new
@@ -255,6 +307,65 @@ namespace SIPx.API.Controllers
                 //if (CheckString.Length == 0)
                 //{
                 PageSectionContentCondition.PageSectionContentConditionTypeId = int.Parse(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(1));
+
+
+                PageSectionContentCondition.PageSectionContentConditionDate = DateTime.Now;
+                if (PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(0, 1) == "V")
+                {
+                    PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.Classifications.Find(x => x.ClassificationId == int.Parse(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(1))).ClassificationValueId;
+                    PageSectionContentCondition.PageSectionContentConditionTypeId = 11;
+
+                }
+                else
+                {
+                    PageSectionContentCondition.PageSectionContentConditionTypeId = int.Parse(PageSectionContentCondition.PageSectionContentConditionTypeIdExtended.Substring(1));
+                    switch (PageSectionContentCondition.PageSectionContentConditionTypeIdExtended)
+                    {
+                        case "T1":
+                            PageSectionContentCondition.PageSectionContentConditionString = PageSectionContentCondition.UserId;
+                            break;
+                        case "T3":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.OrganizationId;
+                            break;
+                        case "T4":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.ProjectId;
+                            break;
+                        case "T5":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.ContentTypeId;
+                            break;
+                        case "T6":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.ContentStatusId;
+                            break;
+                        case "T7":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.LanguageId;
+                            break;
+                        case "T8":
+                            PageSectionContentCondition.PageSectionContentConditionInt = PageSectionContentCondition.SecurityLevelId;
+                            break;
+                        case "T9":
+                            PageSectionContentCondition.PageSectionContentConditionString = PageSectionContentCondition.SelectedCreatorId;
+                            break;
+                        case "T10":
+                            PageSectionContentCondition.PageSectionContentConditionString = PageSectionContentCondition.SelectedModifierId;
+                            break;
+                        case "T12":
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.CreatedFromDate;
+                            break;
+                        case "T13":
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.CreatedToDate;
+                            break;
+                        case "T14":
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.ModifiedFromDate;
+                            break;
+                        case "T15":
+                            PageSectionContentCondition.PageSectionContentConditionDate = PageSectionContentCondition.ModifiedToDate;
+                            break;
+                    }
+                }
+
+
+
+
                 _pageSectionContentConditionProvider.UpdatePost(PageSectionContentCondition);
                 return Ok(PageSectionContentCondition);
                 //}
