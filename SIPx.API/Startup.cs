@@ -160,6 +160,8 @@ namespace SIPx.API
             services.AddTransient<IPageSectionProvider, PageSectionProvider>();
             services.AddTransient<IPageSectionContentConditionProvider, PageSectionContentConditionProvider>();
             services.AddTransient<IPageSectionContentConditionTypeProvider, PageSectionContentConditionTypeProvider>();
+            services.AddTransient<IPageSectionProcessConditionProvider, PageSectionProcessConditionProvider>();
+            services.AddTransient<IPageSectionProcessConditionTypeProvider, PageSectionProcessConditionTypeProvider>();
 
             services.AddTransient<IProcessProvider, ProcessProvider>();
 

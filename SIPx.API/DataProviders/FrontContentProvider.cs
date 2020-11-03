@@ -1,5 +1,4 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using SIPx.Shared;
 using System;
 using System.Collections.Generic;
@@ -61,36 +60,47 @@ namespace SIPx.DataAccess
 
         public async Task<bool> FrontContentCreatePost(string UserId, FrontContentContentNew Content)
         {
-           
+
             DataTable ClassificationValueTable = ContentClassificationValueDataTable.CreateTable();
             var xy = new List<ContentClassificationValue>();
 
             foreach (var x in Content.Classifications)
             {
-                if(x.ClassificationValueId!=null && x.ClassificationValueId !=0)
-                { 
-                ClassificationValueTable.Rows.Add(
+                if (x.ClassificationValueId != null && x.ClassificationValueId != 0)
+                {
+                    ClassificationValueTable.Rows.Add(
 
-                x.ClassificationId
-                        , x.ClassificationValueId
-                        , UserId
-                        , DateTime.Today);
+                    x.ClassificationId
+                            , x.ClassificationValueId
+                            , UserId
+                            , DateTime.Today);
                 }
             }
             string usp = "usp_FrontContentNewPost @ContentTypeId, @ContentStatusID , @LanguageID , @Title , @Description , @SecurityLevelID , @ProjectID , @OrganizationId , @CreatorID, @ClassificationValueTable ";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { 
+            _sqlDataAccess.SaveData<dynamic>(usp, new
+            {
                 ContentTypeId = Content.ContentTypeId
-                , ContentStatusId = Content.ContentStatusId
-                , LanguageId = Content.LanguageId
-                , Title = Content.Title
-                , Description = Content.Description
-                , SecurityLevelID = Content.SecurityLevelId
-                , OrganizationId = Content.OrganizationId
-                , ProjectId = Content.ProjectId
-                , CreatorId = UserId
-                , ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert") });
+                ,
+                ContentStatusId = Content.ContentStatusId
+                ,
+                LanguageId = Content.LanguageId
+                ,
+                Title = Content.Title
+                ,
+                Description = Content.Description
+                ,
+                SecurityLevelID = Content.SecurityLevelId
+                ,
+                OrganizationId = Content.OrganizationId
+                ,
+                ProjectId = Content.ProjectId
+                ,
+                CreatorId = UserId
+                ,
+                ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert")
+            });
             return true;
-        
+
 
         }
     }

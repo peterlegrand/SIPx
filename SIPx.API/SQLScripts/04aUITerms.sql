@@ -1587,4 +1587,7 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1585, 'Specific relation to 
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1586, 'Specific relation to classification value');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1587, 'Content condition');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1588, 'Process condition');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1589, 'Page section process conditions');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1590, 'Add new page section process condition');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1591, 'Page section process condition');
 SET IDENTITY_INSERT UITerms OFF;

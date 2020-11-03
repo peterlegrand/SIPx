@@ -1,4 +1,4 @@
-create PROCEDURE usp_PageSectionContentConditionUpdateGet (@UserId nvarchar(450), @PageSectionContentConditionId int) 
+CREATE PROCEDURE usp_PageSectionContentConditionUpdateGet (@UserId nvarchar(450), @PageSectionContentConditionId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -12,11 +12,11 @@ DECLARE @PageSectionContentConditionInt int;
 SELECT @PageSectionContentConditionTypeID = PageSectionContentConditionTypeID, @PageSectionContentConditionInt = PageSectionContentConditionInt FROM PageSectionContentConditions WHERE PageSectionContentConditionID= @PageSectionContentConditionID;
 IF @PageSectionContentConditionTypeID= 11
 BEGIN
-SELECT @PageSectionContentConditionTypeIdExtended = CONCAT('T',ClassificationId) FROM Classificationvalues where ClassificationValueID = @PageSectionContentConditionInt
+SELECT @PageSectionContentConditionTypeIdExtended = CONCAT('V',ClassificationId) FROM Classificationvalues where ClassificationValueID = @PageSectionContentConditionInt
 END
 ELSE
 BEGIN
-SET @PageSectionContentConditionTypeIdExtended = concat('V',@PageSectionContentConditionTypeID )
+SET @PageSectionContentConditionTypeIdExtended = concat('T',@PageSectionContentConditionTypeID )
 End
 
 
@@ -27,9 +27,9 @@ SELECT PageSectionContentConditions.PageSectionContentConditionID
 	, ISNULL(UserPageSectionContentConditionLanguage.Description,ISNULL(DefaultPageSectionContentConditionLanguage.Description,'No description for this section')) Description
 	, ISNULL(UserPageSectionContentConditionLanguage.MenuName,ISNULL(DefaultPageSectionContentConditionLanguage.MenuName,'No menu name for this section')) MenuName
 	, ISNULL(UserPageSectionContentConditionLanguage.MouseOver,ISNULL(DefaultPageSectionContentConditionLanguage.MouseOver,'No mouse over for this section')) MouseOver
-	, ISNULL(UINameCustom.Customization ,UIName.Name) PageSectionContenConditionTypeName
+	, ISNULL(UINameCustom.Customization ,UIName.Name) PageSectionContentuuuuuuuuConditionTypeName
 	, PageSectionContentConditions.PageSectionContentConditionTypeID
-	, @PageSectionContentConditionTypeIdExtended
+	, @PageSectionContentConditionTypeIdExtended PageSectionContentConditionTypeIdExtended
 	, PageSectionContentConditions.PageSectionContentConditionInt
 	, PageSectionContentConditions.PageSectionContentConditionDate
 	, PageSectionContentConditions.PageSectionContentConditionString

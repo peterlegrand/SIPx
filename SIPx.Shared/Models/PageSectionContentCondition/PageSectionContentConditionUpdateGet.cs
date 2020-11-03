@@ -20,7 +20,6 @@ namespace SIPx.Shared
         public string Description { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public string CreatorName { get; set; }
         public int ContentTypeId { get; set; }
         public string SelectedUserId { get; set; }
         public string SelectedCreatorId { get; set; }
@@ -35,6 +34,7 @@ namespace SIPx.Shared
         public DateTime ModifiedFromDate { get; set; }
         public DateTime ModifiedToDate { get; set; }
 
+        public string CreatorName { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }

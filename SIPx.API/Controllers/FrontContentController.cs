@@ -103,7 +103,7 @@ namespace SIPx.API.Controllers
                 ContentNew.Languages = await _languageProvider.ActiveList(CurrentUser.Id);
                 ContentNew.SecurityLevels = await _securityLevelProvider.ListofUser(CurrentUser.Id);
                 ContentNew.ContentStatuses = await _contentStatusProvider.List(CurrentUser.Id);
-                ContentNew.Classifications= await _frontContentProvider.NewClassifications(CurrentUser.Id, Id);
+                ContentNew.Classifications = await _frontContentProvider.NewClassifications(CurrentUser.Id, Id);
                 ContentNew.OrganizationId = ContentNew.Organizations.First().OrganizationId;
                 foreach (var Classification in ContentNew.Classifications)
                 {
@@ -146,12 +146,12 @@ namespace SIPx.API.Controllers
                 ContentSearch.Classifications = await _classificationProvider.ClassificationsWithValues(CurrentUser.Id);
                 ContentSearch.Organizations = await _organizationProvider.List(CurrentUser.Id);
                 ContentSearch.Projects = await _projectProvider.List(CurrentUser.Id);
-                ContentSearch.ContentTypes= await _contentTypeProvider.List(CurrentUser.Id);
+                ContentSearch.ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
                 ContentSearch.ContentStatuses = await _contentStatusProvider.List(CurrentUser.Id);
                 ContentSearch.Languages = await _languageProvider.List(CurrentUser.Id);
                 ContentSearch.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
 
-                foreach(var x in ContentSearch.Classifications)
+                foreach (var x in ContentSearch.Classifications)
                 {
                     x.ClassificationValues = await _classificationValueProvider.ListPerClassification(CurrentUser.Id, x.ClassificationId);
                 }
@@ -189,9 +189,9 @@ namespace SIPx.API.Controllers
                 if (AdvancedSearch.LanguageId == null)
                 { AdvancedSearch.LanguageId = 0; }
 
-                foreach(var x in AdvancedSearch.Classifications)
+                foreach (var x in AdvancedSearch.Classifications)
                 {
-                    if(x.ClassificationValueId ==null)
+                    if (x.ClassificationValueId == null)
                     {
                         x.ClassificationValueId = 0;
                     }
