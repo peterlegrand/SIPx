@@ -124,9 +124,11 @@
                             <div class="e-panel-container">
 
                                 <div class="e-panel-content">
-                                    <ejs-grid id="@x.SubPanelId" dataSource="@x.ToDos" height="335" width="auto" rowTemplate="#ToDotemplate">
+                                    <ejs-grid id="@x.SubPanelId" dataSource="@x.Processes" height="335" width="auto" rowTemplate="#ToDotemplate">
                                         <e-grid-columns>
-                                            <e-grid-column headerText="To do" width="300" field="ProcedssId" textAlign="Left"></e-grid-column>
+                                            <e-grid-column headerText="Id" width="300" field="ProcessId" textAlign="Left"></e-grid-column>
+                                            <e-grid-column headerText="Subject" width="300" field="Subject" textAlign="Left"></e-grid-column>
+                                            <e-grid-column headerText="Template" width="300" field="ProcessTemplateName" textAlign="Left"></e-grid-column>
                                         </e-grid-columns>
                                     </ejs-grid>
                                 </div>
@@ -535,13 +537,13 @@
                     </colgroup>*@
                 <tbody>
                     <tr>
-                        <td class="font-weight-bold">${Title} </td>
+                        <td class="font-weight-bold">${Subject} </td>
                     </tr>
                     <tr>
                         <td>
-                            <a href="/FrontProcess/Edit/${ProcessId}">  ${ProcessTemplateFieldName} </a></td>
+                            <a href="/FrontProcess/Edit/${ProcessId}">  ${ProcessTemplateName} </a></td>
                         <td class="font-italic">
-                            ${ProcessTemplateStageTypeName}
+                            ${Subject}
                         </td>
                         <td class="font-italic">
                             ${ProcessTemplateName}

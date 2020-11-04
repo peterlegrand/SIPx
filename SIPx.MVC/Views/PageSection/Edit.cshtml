@@ -17,7 +17,7 @@
     <form method="post">
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString
             </div>
             <div class="col-9">
                 <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -74,6 +74,38 @@
             </div>
             <div class="col-9">
                 <ejs-textbox id="TitleDescription" ejs-for="TitleDescription" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Size X")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="SizeX" max="20" min="0" ejs-for="@Model.SizeX"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Size Y")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="SizeY" max="20" min="0" ejs-for="@Model.SizeY"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Position X")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="DashboardColumn" max="20" min="0" ejs-for="@Model.DashboardColumn"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Position Y")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="DashboardRow" max="20" min="0" ejs-for="@Model.DashboardRow"></ejs-numerictextbox>
             </div>
         </div>
         @*<div class="row">

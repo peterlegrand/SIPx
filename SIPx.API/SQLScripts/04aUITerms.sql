@@ -1590,4 +1590,5 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1588, 'Process condition');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1589, 'Page section process conditions');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1590, 'Add new page section process condition');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1591, 'Page section process condition');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1592, 'Delete page section process condition');
 SET IDENTITY_INSERT UITerms OFF;

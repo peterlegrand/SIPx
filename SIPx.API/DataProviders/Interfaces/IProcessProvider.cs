@@ -17,5 +17,7 @@ namespace SIPx.DataAccess
         Task<List<ProcessSearch>> Search(string Contains, string UserId);
         Task<List<ProcessAdvancedSearchResult>> AdvancedSearch(string UserId, ProcessAdvancedSearchPost AdvancedSearch);
         Task<List<FrontProcessProcessTemplateFlowConditions>> CreateGetInitialTemplateFlowConditionList(int ProcessTemplateFlowId);
+        Task<List<ProcessForPanel>> ProcessForPanel(string UserId, string ConditionSQLFrom, string ConditionSQLWhere, string ConditionSQLContains);
+         Task<List<ProcessForPanelCondition>> ProcessForPanelCondition(int PageSectionId);
     }
 }

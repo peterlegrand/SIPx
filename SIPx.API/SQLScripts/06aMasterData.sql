@@ -213,6 +213,7 @@ INSERT INTO PageSectionTypes (PageSectionTypeId, NameTermId, DescriptionTermId, 
 , (6,1343,1343,1343,1343)
 , (7,1344,1344,1344,1344)
 , (8,1345,1345,1345,1345)
+, (9, 272, 272, 272, 272) 
 SET IDENTITY_INSERT PageSectionTypes OFF;
 
 SET IDENTITY_INSERT ContentStatuses ON;

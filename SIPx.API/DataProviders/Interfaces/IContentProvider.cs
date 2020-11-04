@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IContentProvider
     {
         bool UpdatePostClassification(ClassificationUpdatePost Classification);
-        Task<List<ContentForPanel>> ContentForPanel(string UserId);
+        Task<List<ContentForPanel>> ContentForPanel(string UserId, string ConditionSQLFrom, string ConditionSQLWhere, string ConditionSQLContains);
         Task<ContentDeleteGet> DeleteGet(string UserId, int ContentId);
         bool DeletePost(int Id);
         Task<ClassificationIndexGet> CreateGetClassificationById(int Id, int LanguageId);
@@ -24,5 +24,6 @@ namespace SIPx.DataAccess
         Task<List<ContentSearch>> Search(string Contains, string UserId);
         Task<List<ContentAdvancedSearchResult>> AdvancedSearch(string UserId, ContentAdvancedSearchPost AdvancedSearch);
         Task<List<ContentList>> List();
+        Task<List<ContentForPanelCondition>> ContentForPanelCondition(int PageSectionId);
     }
 }

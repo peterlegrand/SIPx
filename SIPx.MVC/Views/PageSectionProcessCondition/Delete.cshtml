@@ -1,15 +1,15 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model PageSectionContentConditionDeleteGet
+@model PageSectionProcessConditionDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete page section condition")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete page section process condition")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete page section condition")).TermString
+    <img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete page section process condition")).TermString
 </h1>
 <div class="container">
     <form method="post">
@@ -20,6 +20,7 @@
             <div class="col-9">
                 <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
                 <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="PageSectionProcessConditionId" ejs-for="@Model.PageSectionProcessConditionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
 
@@ -65,15 +66,7 @@
                 @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="TitleName" ejs-for="PageSectionContentConditionTypeName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Condition")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-textbox id="TitleDescription" ejs-for="PageSectionContentConditionName" cssClass="e-outline" placeholder="Title description" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="TitleName" ejs-for="PageSectionProcessConditionTypeName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">

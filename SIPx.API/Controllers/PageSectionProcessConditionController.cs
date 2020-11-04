@@ -388,12 +388,14 @@ namespace SIPx.API.Controllers
                 //{
                 PageSectionProcessCondition.PageSectionProcessConditionTypeId = int.Parse(PageSectionProcessCondition.PageSectionProcessConditionTypeIdExtended.Substring(1));
 
-
+                if(PageSectionProcessCondition.PageSectionProcessConditionDate==null || PageSectionProcessCondition.PageSectionProcessConditionDate == DateTime.MinValue)
+                { 
                 PageSectionProcessCondition.PageSectionProcessConditionDate = DateTime.Now;
+                }
                 if (PageSectionProcessCondition.PageSectionProcessConditionTypeIdExtended.Substring(0, 1) == "V")
                 {
                     PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.Classifications.Find(x => x.ClassificationId == int.Parse(PageSectionProcessCondition.PageSectionProcessConditionTypeIdExtended.Substring(1))).ClassificationValueId;
-                    PageSectionProcessCondition.PageSectionProcessConditionTypeId = 11;
+                    PageSectionProcessCondition.PageSectionProcessConditionTypeId = 39;
 
                 }
                 else
@@ -401,6 +403,8 @@ namespace SIPx.API.Controllers
                     PageSectionProcessCondition.PageSectionProcessConditionTypeId = int.Parse(PageSectionProcessCondition.PageSectionProcessConditionTypeIdExtended.Substring(1));
                     switch (PageSectionProcessCondition.PageSectionProcessConditionTypeIdExtended)
                     {
+
+
                         case "T1":
                             PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.ProcessTemplateId;
                             break;
@@ -446,6 +450,8 @@ namespace SIPx.API.Controllers
                         case "T37":
                             PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.PersonId;
                             break;
+
+
                     }
                 }
 
