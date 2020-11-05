@@ -2,7 +2,9 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -296,7 +298,33 @@ namespace SIPx.CallAPI
             return obj;
         }
 
-        // Method to invoke a get method protected
+
+        public async Task<string> PostProtectedAsyncImage<T>(string methodUrl, FileStream model, string accessToken, string fileName)
+        {
+            HttpClient client = new HttpClient();
+
+             
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+           
+            var keyValues = new KeyValuePair<string, FileStream>("file", model);
+           
+            MultipartFormDataContent form = new MultipartFormDataContent();
+            HttpContent content = new StringContent("fileToUpload");
+            form.Add(content, "fileToUpload");
+            content = new StreamContent(model);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name = "file",
+                FileName = fileName
+            };
+            form.Add(content);
+            var response = await client.PostAsync(methodUrl, form);
+            var responseAsString = await response.Content.ReadAsStringAsync();
+
+            return responseAsString;
+        }
+
 
         /// <summary>
         /// Make a protected GET request to your web api and return a specific model

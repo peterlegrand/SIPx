@@ -1591,4 +1591,12 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1589, 'Page section process 
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1590, 'Add new page section process condition');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1591, 'Page section process condition');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1592, 'Delete page section process condition');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1593, 'Office phone');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1594, 'Mobile');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1595, 'Line');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1596, 'Whatsapp');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1597, 'Messenger');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1598, 'Email');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1599, 'ICQ');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1600, 'Home phone');
 SET IDENTITY_INSERT UITerms OFF;

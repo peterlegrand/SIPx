@@ -747,8 +747,16 @@ SET IDENTITY_INSERT PreferenceTypes OFF;
 
 SET IDENTITY_INSERT TelecomTypes ON;
 INSERT INTO TelecomTypes (TelecomTypeId, PhoneProperties, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, Active, ModifierId,ModifiedDate) VALUES 
-  (1,1, 677,677,677,677,1, @user, getdate()),
-  (2,0,678,678,678,678,1, @user, getdate())
+(4,1, 1600,1600,1600,1600,1, @user, getdate()),
+(9,1, 1593,1593,1593,1593,1, @user, getdate()),
+(3,1, 1594,1594,1594,1594,1, @user, getdate()),
+(2,0, 678,678,678,678,1, @user, getdate()),
+(5,0, 1596,1596,1596,1596,1, @user, getdate()),
+(6,0, 1597,1597,1597,1597,1, @user, getdate()),
+(7,0, 1598,1598,1598,1598,1, @user, getdate()),
+(8,0, 1599,1599,1599,1599,1, @user, getdate()),
+(1,1, 677,677,677,677,1, @user, getdate()),
+(10,0, 1595,1595,1595,1595,1, @user, getdate())
 SET IDENTITY_INSERT TelecomTypes OFF;
 
 SET IDENTITY_INSERT ProcessTemplateStageFieldStatuses ON;
