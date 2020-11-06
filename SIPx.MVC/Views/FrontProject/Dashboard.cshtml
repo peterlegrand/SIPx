@@ -6,7 +6,9 @@
 }
 <div class="row">
     <div class="col-12">
-        <h1>@Term.Find(x => x.InternalName.Equals("Project dashboard")).TermString: @Model.Name</h1>
+        <h1>
+            <img src="~/images/icons/Project.png"  width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Project dashboard")).TermString: @Model.Name
+        </h1>
     </div>
 </div>
 <div class="row">
@@ -37,7 +39,9 @@
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>@Term.Find(x => x.InternalName.Equals("Sub projects")).TermString</h2></div>
+        <div><h2>
+    <img src="~/images/icons/Project.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Sub projects")).TermString
+</h2></div>
         <ejs-grid id="SubProjects" dataSource="@Model.SubProjects" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -47,7 +51,9 @@
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>@Term.Find(x => x.InternalName.Equals("Members")).TermString</h2></div>
+        <div><h2>
+    <img src="~/images/icons/Role.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Members")).TermString
+</h2></div>
         <ejs-grid id="Members" dataSource="@Model.Members" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -61,7 +67,8 @@
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>@Term.Find(x => x.InternalName.Equals("Content")).TermString</h2></div>
+        <div><h2>
+<img src="~/images/icons/Content.png"  width="30" height="30"/>&nbsp;@Term.Find(x => x.InternalName.Equals("Content")).TermString</h2></div>
         <ejs-grid id="Contents" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -72,7 +79,9 @@
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>@Term.Find(x => x.InternalName.Equals("Processes")).TermString</h2></div>
+        <div><h2>
+    <img src="~/images/icons/Process.png"  width="30" height="30"/>&nbsp;@Term.Find(x => x.InternalName.Equals("Processes")).TermString
+</h2></div>
         <ejs-grid id="Processes" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>

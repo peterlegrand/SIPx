@@ -70,6 +70,15 @@ namespace SIPx.DataAccess
 
         //PETER the difference between this and LoadData is that it returns a single record
         //PETER DOTO maybe no need for this, and use the top only
+        public async Task<T> LoadSingleRecord<T>(string sql)
+        {
+            string connectionString = _config.GetConnectionString("DefaultConnection");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = await connection.QueryAsync<T>(sql);
+                return data.ToList().First();
+            }
+        }
         public async Task<T> LoadSingleRecord<T, U>(string sql, U parameters)
         {
             string connectionString = _config.GetConnectionString("DefaultConnection");

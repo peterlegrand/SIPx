@@ -8,10 +8,8 @@
     <title>@ViewData["Title"] - SIPx.MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <!-- Syncfusion Essential JS 2 Styles -->
     <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/fabric-dark.css" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <!-- Syncfusion Essential JS 2 Scripts -->
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -26,16 +24,14 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col-3 ">
+                <div class="col-5 ">
                     @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
-                    <h1 style="color:slategrey">
-                        <img src="~/images/su_logo.png" style="height:60px; width:90px" />
+                    <h2 style="color:slategrey">
+                        <img src="~/images/su_logo.png" style="height:45px; width:60px" />
                         Student Union 1.5
-                    </h1>
+                    </h2>
                 </div>
-            </div>
-            <div class="row">
-                <div class="offset-3 col-6" id="searchBox">
+                <div class="col-4" id="searchBox">
                     <form typeof="post" asp-controller="Search" asp-action="General">
                         <ejs-textbox width="200" id="a" name="Search"></ejs-textbox>
                         <ejs-button id="GeneralSearch" cssClass="transparent" type="submit" value="Submit" content="Search"></ejs-button>
@@ -63,14 +59,14 @@
             </div>*@
         @*</nav>*@
     </header>
-    <div class="container">
+    @*<div class="container">
         <div class="row">
             <div class="col-2">
 
 
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="container">
         <div class="row">
             <div class="col-2">

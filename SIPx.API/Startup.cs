@@ -176,6 +176,7 @@ namespace SIPx.API
             services.AddTransient<IMetaProvider, MetaProvider>();
             services.AddTransient<IMasterProvider, MasterProvider>();
             services.AddTransient<IMasterListProvider, MasterListProvider>();
+            services.AddTransient<IHomeProvider, HomeProvider>();
 
 
             services.AddTransient<SIPx.API.DataProviders.IUITermLanguageCustomizationProvider, UITermLanguageCustomizationProvider>();

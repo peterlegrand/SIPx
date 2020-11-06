@@ -1599,4 +1599,5 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1597, 'Messenger');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1598, 'Email');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1599, 'ICQ');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1600, 'Home phone');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1601, 'Public user');
 SET IDENTITY_INSERT UITerms OFF;

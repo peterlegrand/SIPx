@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.DataProviders;
 using SIPx.API.Models;
+using SIPx.DataAccess;
 
 namespace SIPx.API.Controllers
 {
@@ -11,11 +12,13 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class MVCController : ControllerBase
     {
+        private readonly IHomeProvider _homeProvider;
         private readonly UserManager<SipUser> _userManager;
         private readonly IUITermLanguageCustomizationProvider _uITermProvider;
 
-        public MVCController(UserManager<SipUser> userManager, IUITermLanguageCustomizationProvider UITermProvider)
+        public MVCController(SIPx.DataAccess.IHomeProvider homeProvider, UserManager<SipUser> userManager, IUITermLanguageCustomizationProvider UITermProvider)
         {
+            _homeProvider = homeProvider;
             _userManager = userManager;
             _uITermProvider = UITermProvider;
         }
@@ -27,8 +30,16 @@ namespace SIPx.API.Controllers
                         var CurrentUser = await _userManager.GetUserAsync(User);
             //Namecontroller = "Classification";
             //action = "Index";
-            
-            var a = _uITermProvider.IndexGet(controllerName, actionName, CurrentUser.Id);
+            string UserId;
+            if (CurrentUser == null)
+            {
+                UserId = await _homeProvider.StringSetting(4);
+            }
+            else
+            {
+                UserId = CurrentUser.Id;
+            }
+            var a = _uITermProvider.IndexGet(controllerName, actionName, UserId);
             return Ok(a);
 
 

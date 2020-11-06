@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_contentForPanel (@UserId nvarchar(450), @ContentConditionSQLFrom nvarchar(max)
+CREATE PROCEDURE usp_contentForPanel (@ContentConditionSQLFrom nvarchar(max)
 	, @ContentConditionSQLWhere nvarchar(max)
 	, @ContentConditionSQLContains nvarchar(max)) 
  

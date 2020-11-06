@@ -1,67 +1,266 @@
-﻿
+﻿@using Syncfusion.EJ2
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-    <title> - Student Union 1.5 External</title>
-
+    <script src="~/lib/jquery/jquery.min.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <script type="text/javascript" src="~/jquery/jquery.min.js"></script>
-    <script src="~/popper/popper.min.js"></script>
-    <script type="text/javascript" src="~/bootstrap/js/bootstrap.js"></script>
+    <title>@ViewData["Title"] - SIPx.MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    @*<link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/fabric-dark.css" />*@
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <script>
-        $(document).ready(function () {
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
 
-            $("#Menu").load("/Partial/Menu");
 
-        });
-    </script>
+
+
+
+
+
+
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 style="color:slategrey">
-                <img src="~/images/su_logo.png" style="height:60px; width:90px" />
-                Student Union 1.5
-            </h1>
+            <div class="row">
+                <div class="col-5 ">
+                    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
+                    <h2 style="color:slategrey">
+                        <img src="~/images/su_logo.png" style="height:45px; width:60px" />
+                        Student Union 1.5
+                    </h2>
+                </div>
+                <div class="col-4" id="searchBox">
+                    <form typeof="post" asp-controller="Search" asp-action="General">
+                        <ejs-textbox width="200" id="a" name="Search"></ejs-textbox>
+                        <ejs-button id="GeneralSearch" cssClass="transparent" type="submit" value="Submit" content="Search"></ejs-button>
+                    </form>
+                </div>
+                <div class="col-3 ">
+                    <a class="text-black-50 float-right font-weight-bold transparent" asp-area="" asp-controller="FrontAuth" asp-action="Login">Login</a>
+                </div>
+            </div>
         </div>
 
+        @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>*@
+        @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                </ul>
+            </div>*@
+        @*</nav>*@
     </header>
-    <div class="container">
-        <div class="row col-12">
+    @*<div class="container">
+        <div class="row">
+            <div class="col-2">
 
+
+            </div>
+        </div>
+    </div>*@
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+
+
+
+
+
+
+
+
+                <div id="Menu"></div>
+
+
+                @*</div>*@
+                @*</e-content-template>
+                    </ejs-sidebar>*@
+
+
+
+
+            </div>
+            <div class=" col-10">
                 @RenderBody()
+            </div>
         </div>
     </div>
-    <div class="col-12 text-right">
-        @*@if (signInManager.IsSignedIn(User))
-            {
-                <form method="post" asp-action="Logout" asp-controller="User">
-                    <button type="submit" class="nav-link btn btn-link py-0 right float-right right text-right">Logout @User.Identity.Name</button>
-                </form>
-                <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="FrontPage" asp-action="Index">Enter Student Union</a>
-            }*@
 
-
-    </div>
-
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - StudentUnion0105 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="@*border-top*@ footer text-muted">
+        <div class="container-fluid">
+            &copy; 2020 - SIPx.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-
-
-
-
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
-
+    <!-- Syncfusion Essential JS 2 ScriptManager -->
+    <ejs-scripts></ejs-scripts>
 </body>
 </html>
+@*<script>
+        function positionChange(args) {
+            //radio button change event handler
+            dockBar.position = (args.event.target.id === 'left') ? 'Left' : 'Right';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            dockBar = document.getElementById('dockSidebar').ej2_instances[0];
+            document.getElementById('toggle').onclick = function () {
+                dockBar.toggle();
+            };
+        });
+
+    </script>*@
+
+@*<style>
+            /* Content area styles */
+
+            .title {
+                text-align: center;
+                font-size: 20px;
+                padding: 15px;
+            }
+
+            .sub-title {
+                text-align: center;
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            #wrapper .sub-title .column {
+                display: inline-block;
+                padding: 10px;
+            }
+
+            #dockSidebar.e-sidebar.e-right.e-close {
+                visibility: visible;
+                transform: translateX(0%);
+            }
+
+            #dockSidebar .e-icons::before {
+                font-size: 25px;
+            }
+
+            /* dockbar icon Style */
+
+            /* #dockSidebar .home::before {
+                content: '\e102';
+            }
+
+            #dockSidebar .profile::before {
+                content: '\e10c';
+            }
+
+            #dockSidebar .info::before {
+                content: '\e11b';
+            }
+
+            #dockSidebar .settings::before {
+                content: '\e10b';
+            }
+
+            .e-sidebar .expand::before,
+            .e-sidebar.e-right.e-open .expand::before {
+                content: '\e10f';
+            }
+
+            .e-sidebar.e-open .expand::before,
+            .e-sidebar.e-right .expand::before {
+                content: '\e10e';
+            }
+        */
+            /* end of dockbar icon Style */
+
+            /*#dockSidebar.e-close .sidebar-item {
+                padding: 5px 20px;
+            }
+
+            #dockSidebar.e-dock.e-close span.e-text {
+                display: none;
+            }
+
+            #dockSidebar.e-dock.e-open span.e-text {
+                display: inline-block;
+            }
+
+            #dockSidebar li {
+                list-style-type: none;
+                cursor: pointer;
+            }
+
+            #dockSidebar ul {
+                padding: 0px;
+            }
+
+            #dockSidebar.e-sidebar ul li:hover span {
+                color: white
+            }
+
+            #dockSidebar span.e-icons {
+                color: #c0c2c5;
+                line-height: 2
+            }
+
+            .e-open .e-icons {
+                margin-right: 16px;
+            }
+
+            .e-open .e-text {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 23px;
+                font-size: 15px;
+            }
+
+            .sidebar-item {
+                text-align: center;
+                border-bottom: 1px #e5e5e58a solid;
+            }
+
+            .e-sidebar.e-open .sidebar-item {
+                text-align: left;
+                padding-left: 15px;*/
+            /*color: #c0c2c5;*/
+            /*}*/
+
+            /*#dockSidebar.e-sidebar {*/
+            /*background: #2d323e;*/
+            /*overflow: hidden;
+            }*/
+
+            /* custom generated icons styles */
+
+            /* end of custom generated icons styles */
+
+            /* end of sidebar styles */
+    </style>*@-->
+
+<script>
+    // Get the input field
+    var GeneralSearch = document.getElementById("GeneralSearch");
+
+    // Execute a function when the user releases a key on the keyboard
+    GeneralSearch.addEventListener("keyup", function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            window.location.href = "/FrontOrganization/QuickSearch?Search=" + document.getElementById("GeneralSearch").value;
+        }
+    });
+
+
+</script>

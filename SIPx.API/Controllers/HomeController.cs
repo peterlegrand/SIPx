@@ -15,8 +15,9 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class FrontController : Controller
+    public class HomeController : Controller
     {
+        private readonly IHomeProvider _homeProvider;
         private readonly IUserPreferenceProvider _userPreferenceProvider;
         private readonly IProcessProvider _processProvider;
         private readonly IFrontProcessProvider _frontProcessProvider;
@@ -25,8 +26,9 @@ namespace SIPx.API.Controllers
         private readonly IFrontProvider _frontProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontController(IUserPreferenceProvider userPreferenceProvider, IProcessProvider processProvider, IFrontProcessProvider frontProcessProvider, IContentProvider contentProvider, IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public HomeController(IHomeProvider  homeProvider, IUserPreferenceProvider userPreferenceProvider, IProcessProvider processProvider, IFrontProcessProvider frontProcessProvider, IContentProvider contentProvider, IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _homeProvider = homeProvider;
             _userPreferenceProvider = userPreferenceProvider;
             _processProvider = processProvider;
             _frontProcessProvider = frontProcessProvider;
@@ -36,20 +38,15 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index/{Id}")]
-        public async Task<IActionResult> Index(int Id)
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
         {
             
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            var CurrentUserId = await _homeProvider.StringSetting(4);
+            //if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                if (Id == 0)
-                {
-                    var PageOfUser = await _userPreferenceProvider.GetOnePreference(CurrentUser.Id, 2);
-                    Id = PageOfUser.IntPreference;
-                }
-                var dashboard = await _frontProvider.FrontIndexGetDashboard(CurrentUser.Id, Id);
-                var panels = await _frontProvider.FrontIndexPanels(Id);
+                var dashboard = await _homeProvider.HomeIndexGetDashboard();
+                var panels = await _homeProvider.HomeIndexGetPanels();
                 foreach(var panel in panels)
                 {
                     switch (panel.PageSectionTypeId)
@@ -62,10 +59,7 @@ namespace SIPx.API.Controllers
 
 
                                     " DECLARE @LanguageId int; " +
-                                    " SELECT @LanguageId = IntPreference " +
-                                    " FROM UserPreferences " +
-                                    " WHERE USerId = '" + CurrentUser.Id + "' " +
-                                    " AND UserPreferences.PreferenceTypeId = 1; " +
+                                    " select @LanguageId  =IntValue  from settings where SettingID = 1 ; " +
                                     " SELECT Contents.ContentID " +
     ", Contents.Title " +
     ", Contents.Description " +
@@ -89,7 +83,7 @@ namespace SIPx.API.Controllers
 " JOIN Persons Modifier " +
     " ON Modifier.UserId = Contents.ModifierID "
                                         ;
-                                    string ContentConditionSQLWhere = " WHERE 1=1 ";
+                                    string ContentConditionSQLWhere = " WHERE Contents.SecurityLevelId = 1 ";
                                     string ContentConditionSQLContains = "";
                                     var ContentConditions = await _contentProvider.ContentForPanelCondition(panel.PageSectionId);
                                     foreach(var ContentCondition in ContentConditions)
@@ -145,15 +139,16 @@ namespace SIPx.API.Controllers
 
                                         }
                                     }
-                                    var ContentList = await _contentProvider.ContentForPanel( ContentConditionSQLFrom, ContentConditionSQLWhere, ContentConditionSQLContains);
+                                    var ContentList = await _contentProvider.ContentForPanel(ContentConditionSQLFrom, ContentConditionSQLWhere, ContentConditionSQLContains);
                                     panel.Contents = ContentList;
                                     break;
 
                                 case 2: //Pocess (DATA TYPE) List (Type)
                                     string ProcessConditionSQLFrom = " SELECT Processes.ProcessId, ISNULL(ProcessFieldSubject.StringValue,'') As Subject, ProcessTemplateLanguages.Name ProcessTemplateName FROM Processes JOIN ProcessFields ProcessFieldSubject ON ProcessFieldSubject.ProcessId = Processes.ProcessId " +
                                         " JOIN ProcessTemplatefields ProcessTemplateFieldSubject ON  ProcessTemplateFieldSubject.ProcessTemplatefieldId = ProcessFieldSubject.ProcessTemplatefieldId  " +
-                                        " JOIN ProcessTemplates ON Processes.ProcessTemplateId =  ProcessTemplates.ProcessTemplateId  ";
-                                    string ProcessConditionSQLWhere = " WHERE 1=1 ";
+                                        " JOIN ProcessTemplates ON Processes.ProcessTemplateId =  ProcessTemplates.ProcessTemplateId  " +
+                                        " JOIN ProcessTemplateFields SecurityTemplateField ON Processes.ProcessTemplateID = SecurityTemplateField.ProcessTemplateID JOIN ProcessFields SecurityField ON Processes.ProcessID = SecurityField.ProcessID AND SecurityField.ProcessTemplateFieldID = SecurityTemplateField.ProcessTemplateFieldID ";
+                                    string ProcessConditionSQLWhere = " WHERE SecurityTemplateField.ProcessTemplateFieldTypeID = 28 AND SecurityField.IntValue = 1 ";
                                     string ProcessConditionSQLContains = "";
                                     var ProcessConditions = await _processProvider.ProcessForPanelCondition(panel.PageSectionId);
                                     foreach (var ProcessCondition in ProcessConditions)
@@ -170,7 +165,7 @@ namespace SIPx.API.Controllers
 
                                             case 3: // My calendar
                                                 ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldMyCalendar ON Processes.ProcessId = ProcessFieldMyCalendar.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldMyCalendar ON ProcessTemplateFieldMyCalendar.ProcessTemplateFieldId = ProcessFieldMyCalendar.ProcessTemplateFieldId ";
-                                                ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInPersonalCalendar = 1 AND ProcessFieldMyCalendar.StringValue = '" + CurrentUser.Id  + "' AND ProcessTemplateFieldMyCalendar.ProcessTemplatefieldTypeId = 12 ";
+                                                ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInPersonalCalendar = 1  AND ProcessTemplateFieldMyCalendar.ProcessTemplatefieldTypeId = 12 ";
                                                 break;
                                             case 4: // Personal calendar
                                                 ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInPersonalCalendar = 1 ";
@@ -205,7 +200,7 @@ namespace SIPx.API.Controllers
                                                 ProcessConditionSQLWhere += " AND ProcessFieldProject.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + "' AND (ProcessTemplateFieldProject.ProcessTemplatefieldTypeId = 16 OR ProcessTemplateFieldProject.ProcessTemplatefieldTypeId = 17) ";
                                                 break;
                                             case 14: // creator is user
-                                                ProcessConditionSQLWhere += " AND Processes.CreatorId = '" + CurrentUser.Id + "' ";
+                                          //      ProcessConditionSQLWhere += " AND Processes.CreatorId = '" + CurrentUser.Id + "' ";
                                                 break;
                                             case 15: // role
                                                 ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldRole ON Processes.ProcessId = ProcessFieldRole.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldRole ON ProcessTemplateFieldRole.ProcessTemplateFieldId = ProcessFieldRole.ProcessTemplateFieldId ";
@@ -220,7 +215,7 @@ namespace SIPx.API.Controllers
                                                 break;
                                             case 19: // UserOrganization
                                                 ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldUserOrganization ON Processes.ProcessId = ProcessFieldUserOrganization.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldUserOrganization ON ProcessTemplateFieldUserOrganization.ProcessTemplateFieldId = ProcessFieldUserOrganization.ProcessTemplateFieldId ";
-                                                ProcessConditionSQLWhere += " AND ProcessFieldUserOrganization.IntValue IN (SELECT OrganizationId FROM AspNetRoles JOIN AspNetUserRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId WHERE UserId = '" + CurrentUser.Id + "') AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 14 ";
+                                                ProcessConditionSQLWhere += " AND ProcessFieldUserOrganization.IntValue IN (SELECT OrganizationId FROM AspNetRoles JOIN AspNetUserRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId WHERE UserId = '" + CurrentUserId + "') AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 14 ";
                                                 break;
 
                                             case 20: // Specific Organization
@@ -229,7 +224,7 @@ namespace SIPx.API.Controllers
                                                 break;
                                             case 21: // UserProject
                                                 ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldUserProject ON Processes.ProcessId = ProcessFieldUserProject.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldUserProject ON ProcessTemplateFieldUserProject.ProcessTemplateFieldId = ProcessFieldUserProject.ProcessTemplateFieldId ";
-                                                ProcessConditionSQLWhere += " AND ProcessFieldUserProject.IntValue IN (SELECT ProjectId FROM AspNetRoles JOIN AspNetUserRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId WHERE UserId = '" + CurrentUser.Id + "') AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 16 ";
+                                                ProcessConditionSQLWhere += " AND ProcessFieldUserProject.IntValue IN (SELECT ProjectId FROM AspNetRoles JOIN AspNetUserRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId WHERE UserId = '" + CurrentUserId + "') AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 16 ";
                                                 break;
 
                                             case 22: // Specific project
@@ -270,7 +265,7 @@ namespace SIPx.API.Controllers
 
                                         }
                                     }
-                                    var ProcessList = await _processProvider.ProcessForPanel(CurrentUser.Id, ProcessConditionSQLFrom, ProcessConditionSQLWhere, ProcessConditionSQLContains);
+                                    var ProcessList = await _processProvider.ProcessForPanel(CurrentUserId, ProcessConditionSQLFrom, ProcessConditionSQLWhere, ProcessConditionSQLContains);
                                     panel.Processes = ProcessList;
 
                                     break;
@@ -297,20 +292,20 @@ namespace SIPx.API.Controllers
                             break;
 
                         case 4: //Personal canendar (TYPE)
-                            var PersonalCalendar = await _frontProvider.FrontIndexPersonalCalendar(CurrentUser.Id);
+                            var PersonalCalendar = await _homeProvider.HomeIndexPersonalCalendar(CurrentUserId);
                             panel.PersonalCalendars = PersonalCalendar;
                             break;
 
                         case 5: //Organization calendar (TYPE)
-                            var OrganizationCalendar = await _frontProvider.FrontIndexOrganizationCalendar(CurrentUser.Id);
+                            var OrganizationCalendar = await _homeProvider.HomeIndexOrganizationCalendar(1);
                             panel.OrganizationCalendars = OrganizationCalendar;
                             break;
                         case 6: //Project calendar (TYPE)
-                            var ProjectCalendar = await _frontProvider.FrontIndexProjectCalendar(CurrentUser.Id);
+                            var ProjectCalendar = await _homeProvider.HomeIndexProjectCalendar(1);
                             panel.ProjectCalendars = ProjectCalendar;
                             break;
                         case 7: //Platform calendar (TYPE)
-                            var EventCalendar = await _frontProvider.FrontIndexEventCalendar();
+                            var EventCalendar = await _homeProvider.HomeIndexEventCalendar();
                             panel.EventCalendars = EventCalendar;
                             break;
                         case 8: //General calendar (TYPE)

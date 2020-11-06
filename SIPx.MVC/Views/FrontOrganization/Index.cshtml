@@ -3,7 +3,7 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organizations")).TermString;
 
-    Layout = "_LayoutAdmin";
+    Layout = "_Layout";
 }
 
 <h1><img src="~/images/icons/Organizations.png" width="50" height="50" />

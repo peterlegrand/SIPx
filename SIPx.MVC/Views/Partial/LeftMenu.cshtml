@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
-    <link href="~/css/site.css" rel="stylesheet" />
+@*    <link href="~/css/site.css" rel="stylesheet" />*@
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
 
 </head>
@@ -216,7 +216,7 @@
                 </div>
             }
             @if (Menu.UserMenuTypeIDLeft == 12) //search my content
-            {<ejs-tooltip id="Tooltip2" content="Hia" position=TopCenter  showTipPointer="true">
+            {<ejs-tooltip id="Tooltip2" content="Hia" position=TopCenter showTipPointer="true">
                     <e-content-template>
                         <div class="col-10 leftMenuText">
                             <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
@@ -354,6 +354,26 @@
                 }
 
             }
+            @if (Menu.UserMenuTypeIDLeft == 23) // advanced search process
+            {<hr />
+                @if (Menu.Icon.Length != 14) //Search organization
+                {
+                    <div class="col-10 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontClassificationValue" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 leftMenuText">
+                        <a class="text-dark " asp-area="" asp-controller="FrontClassificationValue" asp-action="AdvancedSearch">
+                            @Menu.Name
+                        </a>
+                    </div>
+                }
+
+            }
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 1)
             {
                 <div class="col-2">
@@ -446,6 +466,12 @@
             {
                 <div class="col-2">
                     <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
+                </div>
+            }
+            @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 23)
+            {
+                <div class="col-2">
+                    <a class="text-dark " asp-area="" asp-controller="FrontClassificationValue" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 

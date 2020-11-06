@@ -5,7 +5,7 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add new project")).TermString;
 
-    Layout = "_LayoutAdmin";
+    Layout = "_Layout";
 }
 
 <h1>

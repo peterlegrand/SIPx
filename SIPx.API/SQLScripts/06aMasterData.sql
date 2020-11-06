@@ -196,6 +196,8 @@ SET IDENTITY_INSERT Languages OFF
 SET IDENTITY_INSERT Settings ON
 INSERT INTO Settings (SettingId, IntValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (1,41,120,120,120,120,1, @User, getdate());
 INSERT INTO Settings (SettingId, IntValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (2,1,1,1,1,1,1, @User, getdate());
+INSERT INTO Settings (SettingId, IntValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (3,1,1373,1373,1373,1373,1, @User, getdate());
+INSERT INTO Settings (SettingId, StringValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (4,@User,1601,1601,1601,1601,1, @User, getdate());
 SET IDENTITY_INSERT Settings OFF
 
 SET IDENTITY_INSERT DateLevels ON
