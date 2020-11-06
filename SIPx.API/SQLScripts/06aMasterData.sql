@@ -1168,3 +1168,21 @@ INSERT [dbo].[PageSectionProcessConditionTypes] ([PageSectionProcessConditionTyp
 INSERT [dbo].[PageSectionProcessConditionTypes] ([PageSectionProcessConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (38, 319, 319, 319, 319)
 SET IDENTITY_INSERT [dbo].[PageSectionProcessConditionTypes] OFF
 
+SET IDENTITY_INSERT [dbo].[PageSectionOrganizationConditionTypes] ON 
+INSERT [dbo].[PageSectionOrganizationConditionTypes] ([PageSectionOrganizationConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 1513, 1513, 1513, 1513)
+INSERT [dbo].[PageSectionOrganizationConditionTypes] ([PageSectionOrganizationConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 80, 80, 80, 80)
+INSERT [dbo].[PageSectionOrganizationConditionTypes] ([PageSectionOrganizationConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 121, 121, 121, 121)
+INSERT [dbo].[PageSectionOrganizationConditionTypes] ([PageSectionOrganizationConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 1165, 1165, 1165, 1165)
+INSERT [dbo].[PageSectionOrganizationConditionTypes] ([PageSectionOrganizationConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 42, 42, 42, 42)
+INSERT [dbo].[PageSectionOrganizationConditionTypes] ([PageSectionOrganizationConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (6, 1602, 1602, 1602, 1602)
+INSERT [dbo].[PageSectionOrganizationConditionTypes] ([PageSectionOrganizationConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (7, 1421, 1421, 1421, 1421)
+INSERT [dbo].[PageSectionOrganizationConditionTypes] ([PageSectionOrganizationConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (8, 1164, 1164, 1164, 1164)
+SET IDENTITY_INSERT [dbo].[PageSectionOrganizationConditionTypes] OFF
+
+SET IDENTITY_INSERT [dbo].[PageSectionProjectConditionTypes] ON 
+INSERT [dbo].[PageSectionProjectConditionTypes] ([PageSectionProjectConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 297, 297, 297, 297)
+INSERT [dbo].[PageSectionProjectConditionTypes] ([PageSectionProjectConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 626, 626, 626, 626)
+INSERT [dbo].[PageSectionProjectConditionTypes] ([PageSectionProjectConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 1513, 1513, 1513, 1513)
+INSERT [dbo].[PageSectionProjectConditionTypes] ([PageSectionProjectConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 1383, 1383, 1383, 1383)
+SET IDENTITY_INSERT [dbo].[PageSectionProjectConditionTypes] OFF
+

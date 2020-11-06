@@ -112,3 +112,9 @@ H1Header {
  #searchBox {text-align:center;
 
  }
+
+ .leftMenu {
+     padding:0px;
+     margin:0px;
+     height:24px;
+ }

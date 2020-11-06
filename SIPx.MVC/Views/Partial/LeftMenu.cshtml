@@ -11,17 +11,17 @@
 
 </head>
 <form action="/" method="post">
-    <div class="container">
+    <div class="container leftMenu">
         @foreach (var Menu in Model)
         {
-        <div class="row">
+        <div class="row  leftMenu">
 
             @if (Menu.UserMenuTypeIDLeft == 1) //Page
             {
                 <hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <ejs-tooltip id="Tooltip" target="#Test" content="Hi">
                             <e-content-template>
                                 <a class="text-dark " asp-area="" id="Test" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft">
@@ -34,7 +34,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdLeft">
                             @Menu.Name
                         </a>
@@ -45,7 +45,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="Templates">
                             @Menu.Name
                         </a>
@@ -53,7 +53,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="Templates">
                             @Menu.Name
                         </a>
@@ -64,7 +64,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="ContentType">
                             @Menu.Name
                         </a>
@@ -72,7 +72,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="ContentType">
                             @Menu.Name
                         </a>
@@ -84,7 +84,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="Create">
                             @Menu.Name
                         </a>
@@ -92,7 +92,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="Create">
                             @Menu.Name
                         </a>
@@ -104,7 +104,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontSearch" asp-action="Advanced">
                             @Menu.Name
                         </a>
@@ -112,7 +112,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontSearch" asp-action="Advanced">
                             @Menu.Name
                         </a>
@@ -125,7 +125,7 @@
                 <hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="Create">
                             @Menu.Name
                         </a>
@@ -133,7 +133,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="Create">
                             @Menu.Name
                         </a>
@@ -147,7 +147,7 @@
                 <hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontRelation" asp-action="Create">
                             @Menu.Name
                         </a>
@@ -155,7 +155,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontRelation" asp-action="Create">
                             @Menu.Name
                         </a>
@@ -168,7 +168,7 @@
                 <hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="Create">
                             @Menu.Name
                         </a>
@@ -176,7 +176,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="Create">
                             @Menu.Name
                         </a>
@@ -189,13 +189,13 @@
                 <hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
                     </div>
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
                     </div>
                 }
@@ -204,21 +204,21 @@
             @if (Menu.UserMenuTypeIDLeft == 10) //Search person
             {
                 <hr />
-                <div class="col-10 leftMenuText">
+                <div class="col-10 leftMenuText leftMenu">
                     <ejs-textbox placeholder="@Menu.MouseOver" id="@Menu.LeftControl"></ejs-textbox>
                 </div>
             }
             @if (Menu.UserMenuTypeIDLeft == 11) //Search content
             {
                 <hr />
-                <div class="col-10 leftMenuText">
+                <div class="col-10 leftMenuText leftMenu">
                     <ejs-textbox id="@Menu.LeftControl" action=""></ejs-textbox>
                 </div>
             }
             @if (Menu.UserMenuTypeIDLeft == 12) //search my content
             {<ejs-tooltip id="Tooltip2" content="Hia" position=TopCenter showTipPointer="true">
                     <e-content-template>
-                        <div class="col-10 leftMenuText">
+                        <div class="col-10 leftMenuText leftMenu">
                             <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
                         </div>
                     </e-content-template>
@@ -226,31 +226,31 @@
             }
             @if (Menu.UserMenuTypeIDLeft == 13) //Search process
             {
-                <div class="col-10 leftMenuText">
+                <div class="col-10 leftMenuText leftMenu">
                     <ejs-textbox placeholder="test" id="@Menu.LeftControl"></ejs-textbox>
                 </div>
             }
             @if (Menu.UserMenuTypeIDLeft == 14) //Search my process
             {
-                <div class="col-10 leftMenuText">
+                <div class="col-10 leftMenuText leftMenu">
                     <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
                 </div>
             }
             @if (Menu.UserMenuTypeIDLeft == 15) // search relations
             {
-                <div class="col-10 leftMenuText">
+                <div class="col-10 leftMenuText leftMenu">
                     <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
                 </div>
             }
             @if (Menu.UserMenuTypeIDLeft == 16) // search projects
             {
-                <div class="col-10 leftMenuText">
+                <div class="col-10 leftMenuText leftMenu">
                     <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
                 </div>
             }
             @if (Menu.UserMenuTypeIDLeft == 17) // search my projects
             {
-                <div class="col-10 leftMenuText">
+                <div class="col-10 leftMenuText leftMenu">
                     <ejs-textbox id="@Menu.LeftControl"></ejs-textbox>
                 </div>
             }
@@ -258,7 +258,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -266,7 +266,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -278,7 +278,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -286,7 +286,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -298,7 +298,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -306,7 +306,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -318,7 +318,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -326,7 +326,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -338,7 +338,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -346,7 +346,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -358,7 +358,7 @@
             {<hr />
                 @if (Menu.Icon.Length != 14) //Search organization
                 {
-                    <div class="col-10 leftMenuText">
+                    <div class="col-10 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontClassificationValue" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -366,7 +366,7 @@
                 }
                 else
                 {
-                    <div class="col-12 leftMenuText">
+                    <div class="col-12 leftMenuText leftMenu">
                         <a class="text-dark " asp-area="" asp-controller="FrontClassificationValue" asp-action="AdvancedSearch">
                             @Menu.Name
                         </a>
@@ -376,42 +376,42 @@
             }
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 1)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-controller="Front" asp-action="Index" asp-route-id="@Menu.UserPageIdRight"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 2)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="Templates"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 3)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="ContentType"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 4)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="Create"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 5)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontSearch" asp-action="Advanced"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 6)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="Create"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
@@ -419,14 +419,14 @@
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 7)
             {
 
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontRelation" asp-action="Create"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 8)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="Create"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
@@ -434,7 +434,7 @@
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 18)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontPerson" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
@@ -442,7 +442,7 @@
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 19)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontOrganization" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
@@ -450,27 +450,27 @@
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 20)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontProject" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 21)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontContent" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
 
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 22)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontProcess" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
             @if (Menu.Icon.Length != 14 && Menu.UserMenuTypeIDRight == 23)
             {
-                <div class="col-2">
+                <div class="col-2 leftMenu">
                     <a class="text-dark " asp-area="" asp-controller="FrontClassificationValue" asp-action="AdvancedSearch"><img src="@Menu.Icon" width="20" height="20" /></a>
                 </div>
             }
