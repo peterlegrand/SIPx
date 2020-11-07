@@ -4,23 +4,24 @@
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization search result")).TermString;
     Layout = "_Layout";
 }
-<h1>@Term.Find(x => x.InternalName.Equals("Organization search result")).TermString</h1>
+<h1><img src="~/images/icons/Organization.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Organization search result")).TermString</h1>
 <div class="container">
-    <img src="~/images/icons/Organization.png" width="50" height="50" />
-    <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+
+    <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true"  >
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#OrganizationName" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#CreatorName" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>
+</div>
     <script id="OrganizationName" type="text/x-template">
-        <div>
+        <div class="leftAlignGridColumn">
             <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${OrganizationName}</u></a>
         </div>
     </script>
     <script id="CreatorName" type="text/x-template">
-        <div>
+        <div class="leftAlignGridColumn">
             <a class="nav-link text-dark font-weight-bold" href="/FrontUser/Dashboard/${CreatorId}"><u>${CreatorName}</u></a>
         </div>
     </script>

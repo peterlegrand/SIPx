@@ -26,7 +26,18 @@
                             <div class="e-panel-container">
                                 <div class="e-panel-header">
                                     <div>
-                                        Personal calendar
+                                        @if (@x.ShowSectionTitleName)
+                                        {<div>
+                                                <h4>
+                                                    <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                </h4>
+                                            </div>
+                                        }
+                                        @if (@x.ShowSectionTitleDescription)
+                                        {<div>
+                                                @x.PageSectionTitleDescription
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <div class="e-panel-content">
@@ -49,7 +60,18 @@
                             <div class="e-panel-container">
                                 <div class="e-panel-header">
                                     <div>
-                                        Organization calendar
+                                        @if (@x.ShowSectionTitleName)
+                                        {<div>
+                                                <h4>
+                                                    <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                </h4>
+                                            </div>
+                                        }
+                                        @if (@x.ShowSectionTitleDescription)
+                                        {<div>
+                                                @x.PageSectionTitleDescription
+                                            </div>
+                                        }
                                     </div>
                                 </div><div class="e-panel-content">
                                     <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
@@ -67,7 +89,18 @@
                             <div class="e-panel-container">
                                 <div class="e-panel-header">
                                     <div>
-                                        Project calendar
+                                        @if (@x.ShowSectionTitleName)
+                                        {<div>
+                                                <h4>
+                                                    <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                </h4>
+                                            </div>
+                                        }
+                                        @if (@x.ShowSectionTitleDescription)
+                                        {<div>
+                                                @x.PageSectionTitleDescription
+                                            </div>
+                                        }
                                     </div>
                                 </div><div class="e-panel-content">
                                     <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
@@ -85,7 +118,18 @@
                             <div class="e-panel-container">
                                 <div class="e-panel-header">
                                     <div>
-                                        General calendar
+                                        @if (@x.ShowSectionTitleName)
+                                        {<div>
+                                                <h4>
+                                                    <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                </h4>
+                                            </div>
+                                        }
+                                        @if (@x.ShowSectionTitleDescription)
+                                        {<div>
+                                                @x.PageSectionTitleDescription
+                                            </div>
+                                        }
                                     </div>
                                 </div><div class="e-panel-content">
                                     <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
@@ -101,15 +145,26 @@
                     <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
                         <e-content-template>
                             <div class="e-panel-container">
-                                @*<div class="e-panel-header">
-                                        <div>
-                                            Content
-                                        </div>
-                                    </div>*@
+                                <div class="e-panel-header">
+                                    <div>
+                                        @if (@x.ShowSectionTitleName)
+                                        {<div>
+                                                <h4>
+                                                    <img src="~/images/icons/Content.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                </h4>
+                                            </div>
+                                        }
+                                        @if (@x.ShowSectionTitleDescription)
+                                        {<div>
+                                                @x.PageSectionTitleDescription
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
                                 <div class="e-panel-content">
                                     <ejs-grid id="@x.SubPanelId" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#ContentTemplate">
                                         <e-grid-columns>
-                                            <e-grid-column headerText="Content" width="300" field="ControlId" textAlign="Left"></e-grid-column>
+                                            <e-grid-column headerText="" width="300" field="ControlId" textAlign="Left"></e-grid-column>
                                         </e-grid-columns>
                                     </ejs-grid>
                                 </div>
@@ -123,6 +178,22 @@
                         <e-content-template>
                             <div class="e-panel-container">
 
+                                <div class="e-panel-header">
+                                    <div>
+                                        @if (@x.ShowSectionTitleName)
+                                        {<div>
+                                                <h4>
+                                                    <img src="~/images/icons/Process.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                </h4>
+                                            </div>
+                                        }
+                                        @if (@x.ShowSectionTitleDescription)
+                                        {<div>
+                                                @x.PageSectionTitleDescription
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
                                 <div class="e-panel-content">
                                     <ejs-grid id="@x.SubPanelId" dataSource="@x.Processes" height="335" width="auto" rowTemplate="#ToDotemplate">
                                         <e-grid-columns>
@@ -508,7 +579,7 @@
             <table class="CardTable" cellpadding="3" cellspacing="2">
                 <colgroup>
                     @*<col width="50%">
-                    <col width="50%">*@
+                        <col width="50%">*@
                 </colgroup>
                 <tbody>
                     <tr>
@@ -520,7 +591,7 @@
                     <tr>
                         <td class="font-italic">
                             <a href="/FrontUser/Dashboard/${CreatorId}">${CreatorName}</a>
-</td>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -541,7 +612,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="/FrontProcess/Edit/${ProcessId}">  ${ProcessTemplateName} </a></td>
+                            <a href="/FrontProcess/Edit/${ProcessId}">  ${ProcessTemplateName} </a>
+                        </td>
                         <td class="font-italic">
                             ${Subject}
                         </td>
@@ -560,10 +632,16 @@
 <script id="event-template" type="text/x-template">
     <div class='template-wrap' style='background:${SecondaryColor}'>
         @*<div class="subject" style='background:${PrimaryColor}'>${PersonalCalendars.Title}</div>
-        <div class="time" style='background:${PrimaryColor}'>Time: ${getTimeString(PersonalCalendars.StartTime)} - ${getTimeString(PersonalCalendars.EndTime)}</div>*@
-        <div class="image">s
+            <div class="time" style='background:${PrimaryColor}'>Time: ${getTimeString(PersonalCalendars.StartTime)} - ${getTimeString(PersonalCalendars.EndTime)}</div>*@
+        <div class="image">
+            s
         </div>
         <div class="description">b</div>
         <div class="footer" style='background:${PrimaryColor}'></div>
     </div>
 </script>
+<style>
+    .e-grid .e-gridheader .e-columnheader {
+        display: none;
+    }
+</style> 

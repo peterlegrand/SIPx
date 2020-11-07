@@ -1,18 +1,23 @@
 ﻿@model FrontClassificationValueIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification dashboard")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value dashboard")).TermString;
     Layout = "_Layout";
 }
 <div class="row">
     <div class="col-12">
-        <h1>@Term.Find(x => x.InternalName.Equals("Classification dashboard")).TermString: @Model.ClassificationValue - @Model.ClassificationName</h1>
+        <h1>
+            <img src="~/images/icons/Value.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Classification value dashboard")).TermString: @Model.ClassificationValueName - @Model.ClassificationName
+        </h1>
+        @Html.Raw(@Model.ClassificationValueDescription)
     </div>
 </div>
 
 <div class="row">
     <div class="col-6">
-        <div><h2>@Term.Find(x => x.InternalName.Equals("Users")).TermString</h2></div>
+        <div><h2>
+    <img src="~/images/icons/User.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Users")).TermString
+</h2></div>
         <ejs-grid id="Users" dataSource="@Model.Users" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -22,7 +27,9 @@
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>@Term.Find(x => x.InternalName.Equals("Roles")).TermString</h2></div>
+        <div><h2>
+    <img src="~/images/icons/Role.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Roles")).TermString
+</h2></div>
         <ejs-grid id="Members" dataSource="@Model.Roles" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -33,7 +40,9 @@
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>@Term.Find(x => x.InternalName.Equals("Content")).TermString</h2></div>
+        <div><h2>
+    <img src="~/images/icons/Content.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content")).TermString
+</h2></div>
         <ejs-grid id="Contents" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>

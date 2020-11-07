@@ -9,7 +9,7 @@ namespace SIPx.Shared
     public class ProcessAdvancedSearchResult
     {
         [Key]
-        public int ProcessID { get; set; }
+        public int ProcessId { get; set; }
         public string Subject { get; set; }
         public string ProcessTemplateName { get; set; }
         public string ProcessTemplateStageName { get; set; }

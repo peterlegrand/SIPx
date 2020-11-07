@@ -4,9 +4,9 @@
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content search result")).TermString;
     Layout = "_Layout";
 }
-<h1>@Term.Find(x => x.InternalName.Equals("Content search result")).TermString</h1>
+<h1><img src="~/images/icons/Content.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content search result")).TermString</h1>
 <div class="container">
-    <img src="~/images/icons/Content.png" width="50" height="50" />
+    
     <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
@@ -14,21 +14,21 @@
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" template="#Organization" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#Creator" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
-    </ejs-grid>
+    </ejs-grid></div>
     <script id="Title" type="text/x-template">
-        <div>
+        <div class="leftAlignGridColumn">
             <a class="nav-link text-dark font-weight-bold" href="/FrontContent/ShowContent/${ContentId}"><u>${Title}</u></a>
 
         </div>
     </script>
     <script id="Organization" type="text/x-template">
-        <div>
+        <div class="leftAlignGridColumn">
             <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${OrganizationName}</u></a>
 
         </div>
     </script>
     <script id="Creator" type="text/x-template">
-        <div>
+        <div class="leftAlignGridColumn">
             <a class="nav-link text-dark font-weight-bold" href="/FrontUser/Dashboard/${CreatorId}"><u>${CreatorName}</u></a>
 
         </div>

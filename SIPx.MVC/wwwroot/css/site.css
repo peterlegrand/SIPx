@@ -113,8 +113,11 @@ H1Header {
 
  }
 
- .leftMenu {
-     padding:0px;
-     margin:0px;
-     height:24px;
- }
+.leftMenu {
+    padding: 0px;
+    margin: 0px;
+    height: 24px;
+}
+.leftAlignGridColumn {
+    text-align: left;
+}

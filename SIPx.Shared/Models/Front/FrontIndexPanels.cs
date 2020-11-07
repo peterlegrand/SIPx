@@ -18,6 +18,10 @@ namespace SIPx.Shared
         public int DashboardColumn { get; set; }
         public string PanelId { get; set; }
         public string SubPanelId { get; set; }
+        public string PageSectionTitleName { get; set; }
+        public string PageSectionTitleDescription { get; set; }
+        public bool ShowSectionTitleName { get; set; }
+        public bool ShowSectionTitleDescription { get; set; }
 
         public List<AppointmentData> PersonalCalendars { get; set; }
         public List<AppointmentData> OrganizationCalendars { get; set; }

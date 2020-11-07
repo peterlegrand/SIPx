@@ -49,7 +49,7 @@ namespace SIPx.API.Controllers
                     Id = PageOfUser.IntPreference;
                 }
                 var dashboard = await _frontProvider.FrontIndexGetDashboard(CurrentUser.Id, Id);
-                var panels = await _frontProvider.FrontIndexPanels(Id);
+                var panels = await _frontProvider.FrontIndexPanels(CurrentUser.Id, Id);
                 foreach(var panel in panels)
                 {
                     switch (panel.PageSectionTypeId)

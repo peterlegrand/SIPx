@@ -23,6 +23,7 @@ CREATE PROCEDURE [dbo].[usp_PageSectionUpdatePost] (
 	, @ModifierId nvarchar(450)) 
 AS 
 
+BEGIN TRANSACTION
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences

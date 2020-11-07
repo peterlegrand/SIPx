@@ -1,12 +1,17 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
 @model FrontProcessView
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process")).TermString;
+    Layout = "_Layout";
+}
 
-<h1>Process</h1>
+<h1><img src="~/images/icons/Process.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Process")).TermString</h1>
 <div class="container">
     <div class="row">
         <div class="col-3">
-            Process template:
+            @Term.Find(x => x.InternalName.Equals("Process template")).TermString:
         </div>
         <div class="col-9">
             @Model.ProcessTemplateName
@@ -14,10 +19,10 @@
     </div>
     <div class="row">
         <div class="col-3">
-            Stage:
+            @Term.Find(x => x.InternalName.Equals("Stage")).TermString:
         </div>
         <div class="col-9">
-            @Model.ProcessTemplateStageName - 
+            @Model.ProcessTemplateStageName -
             @Model.ProcessTemplateStageTypeName
         </div>
     </div>

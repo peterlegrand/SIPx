@@ -4,9 +4,9 @@
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process search result")).TermString;
     Layout = "_Layout";
 }
-<h1>@Term.Find(x => x.InternalName.Equals("Process search result")).TermString</h1>
+<h1><img src="~/images/icons/Process.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Process search result")).TermString</h1>
 <div class="container">
-    <img src="~/images/icons/Process.png" width="50" height="50" />
+    
     <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
@@ -14,19 +14,19 @@
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Process template")).TermString" template="#Template" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" template="#Stage" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
-    </ejs-grid>
+    </ejs-grid></div>
     <script id="Subject" type="text/x-template">
-        <div>
+        <div class="leftAlignGridColumn">
             <a class="nav-link text-dark font-weight-bold" href="/FrontProcess/View/${ProcessId}"><u>${Subject}</u></a>
         </div>
     </script>
     <script id="Template" type="text/x-template">
-        <div>
+        <div class="leftAlignGridColumn">
             ${ProcessTemplateName}
         </div>
     </script>
     <script id="Stage" type="text/x-template">
-        <div>
+        <div class="leftAlignGridColumn">
             ${ProcessTemplateStageName}
         </div>
     </script>

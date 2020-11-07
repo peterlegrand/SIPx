@@ -19,10 +19,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<FrontIndexGetPanels>> FrontIndexPanels(int PageId)
+        public async Task<List<FrontIndexGetPanels>> FrontIndexPanels(string UserId, int PageId)
         {
-            string usp = "usp_FrontIndex_Panels @PageID";
-            var x = await _sqlDataAccess.LoadData<FrontIndexGetPanels, dynamic>(usp, new { PageId = PageId });
+            string usp = "usp_FrontIndexPanels @UserId, @PageID";
+            var x = await _sqlDataAccess.LoadData<FrontIndexGetPanels, dynamic>(usp, new { UserId = UserId, PageId = PageId });
             return x;
         }
          
