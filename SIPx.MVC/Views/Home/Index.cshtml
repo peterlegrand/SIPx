@@ -567,3 +567,16 @@
         <div class="footer" style='background:${PrimaryColor}'></div>
     </div>
 </script>
+<script type="text/javascript">
+    function languageChange() {
+        
+            event.preventDefault();
+            // Trigger the button element with a click
+        var LanguageObj = document.getElementById('LanguageDropDown').ej2_instances[0];
+        
+        window.location.href = "/Home/Index?Language=" + document.getElementById("LanguageDropDown_hidden").value;
+       // window.location.href = "/Home/Index?Language=" 
+    }
+
+
+</script>

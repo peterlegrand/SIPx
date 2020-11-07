@@ -20,6 +20,8 @@ namespace SIPx.MVC.Controllers
         {
             var response = await _client.GetAsync<FrontIndexGetDashboard>($"{_baseUrl}api/Home/Index/");
             var UITerms = await _client.GetAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Home/Index");
+            var Languages = await _client.GetAsync<List<LanguageList>>($"{_baseUrl}api/Language/ActiveDefault");
+            ViewBag.Languages = Languages;
             ViewBag.UITerms = UITerms;
             return View(response);
         }

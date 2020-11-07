@@ -63,6 +63,12 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpGet("ActiveDefault")]
+        public async Task<IActionResult> GetLanguagesActiveDefault()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+                return Ok(await _languageProvider.ActiveDefaultList());
+        }
 
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)

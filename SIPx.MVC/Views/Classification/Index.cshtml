@@ -10,18 +10,19 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString" template="#HasDropDown" textAlign="Right" type="boolean"></e-grid-column>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Values")).TermString" template="#Values" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column  headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column  template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column  template="#Languages" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column  template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString" template="#HasDropDown" textAlign="Right" type="boolean"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Levels")).TermString" template="#Levels" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Values")).TermString" template="#Values" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Roles")).TermString" template="#Roles" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Users")).TermString" template="#Users" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
+<a href="#" onclick="AddFriend()">Favorite</a>
 <a href="~/Classification/Create">@Term.Find(x => x.InternalName.Equals("Add new classification")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
@@ -29,17 +30,17 @@
     </div>
 </script>
 <script id="Name" type="text/x-template">
-    <div >
+    <div>
         ${Name}
     </div>
 </script>
 <script id="HasDropDown" type="text/x-template">
-    <div >
+    <div>
         ${HasDropDown}
     </div>
 </script>
 <script id="Levels" type="text/x-template">
-    <div >
+    <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Index/${ClassificationId}">
             <div title="Level"></div><span style="color:red">L</span>evel
         </a>
@@ -47,38 +48,47 @@
     </div>
 </script>
 <script id="Values" type="text/x-template">
-    <div >
+    <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationValue/Index/${ClassificationId}"><span style="color:red">V</span>alue</a>
 
     </div>
 </script>
 <script id="Roles" type="text/x-template">
-    <div >
+    <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationRole/Index/${ClassificationId}"><span style="color:red">R</span>ole</a>
 
     </div>
 </script>
 <script id="Users" type="text/x-template">
-    <div >
+    <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationUser/Index/${ClassificationId}"><span style="color:red">U</span>ser</a>
 
     </div>
 </script>
 <script id="Edit" type="text/x-template">
-    <div >
-        <a class="nav-link text-dark font-weight-bold" href="/Classification/Edit/${ClassificationId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/Classification/Edit/${ClassificationId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Languages" type="text/x-template">
-    <div >
-        <a class="nav-link text-dark font-weight-bold" href="/Classification/LanguageIndex/${ClassificationId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/Classification/LanguageIndex/${ClassificationId}"><img src="/images/icons/LanguageS.png" height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
-    <div >
-        <a class="nav-link text-dark font-weight-bold" href="Classification/Delete/${ClassificationId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="Classification/Delete/${ClassificationId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
 
     </div>
+</script>
+<script>
+    function AddFriend() {
+        var Favorite = {
+            controller: 'Classification',
+            action: 'Index'
+        };
+        $.post("https://localhost:44393/Favorites/Add/", Favorite);
+    }
 </script>

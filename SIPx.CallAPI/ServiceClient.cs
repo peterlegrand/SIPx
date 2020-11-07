@@ -344,9 +344,26 @@ namespace SIPx.CallAPI
             var jsonData = await response.Content.ReadAsStringAsync();
 
             T obj = JsonConvert.DeserializeObject<T>(jsonData);
-
+            
             return obj;
         }
+
+        public async Task<(T,bool)> GetProtectedAsync2<T>(string methodUrl, string accessToken)
+        {
+            HttpClient client = new HttpClient();
+
+            // Set the access token for the request 
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            // Send a request and get the response 
+            var response = await client.GetAsync(methodUrl);
+            // Read the data 
+            var jsonData = await response.Content.ReadAsStringAsync();
+                
+            T obj = JsonConvert.DeserializeObject<T>(jsonData);
+
+            return (obj, response.IsSuccessStatusCode);
+        }
+
 
         // Method to invoke the Get and return the json result without desiralizing 
         /// <summary>

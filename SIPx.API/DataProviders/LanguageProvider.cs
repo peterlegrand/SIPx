@@ -53,6 +53,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
+        public async Task<List<LanguageList>> ActiveDefaultList()
+        {
+            string usp = "usp_ActiveDefaultList";
+            var x = await _sqlDataAccess.LoadData<LanguageList>(usp);
+            return x;
+        }
 
         public async Task<List<LanguageList>> ActiveList(string UserId)
         {

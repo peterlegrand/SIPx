@@ -16,13 +16,13 @@ using SIPx.Shared;
 
 namespace SIPx.MVC.Controllers
 {
-    public class ClassificationController : Controller
+    public class ObjectLanguageController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
         private readonly IConfiguration _configuration;
         private IHostingEnvironment hostingEnv;
-        public ClassificationController(IHostingEnvironment env, IConfiguration configuration)
+        public ObjectLanguageController(IHostingEnvironment env, IConfiguration configuration)
         {
             _configuration = configuration;
             hostingEnv = env;
@@ -32,7 +32,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<ClassificationCreateGet>($"{_baseUrl}api/Classification/Create/", token);
+            var response = await _client.GetProtectedAsync2<ClassificationCreateGet>($"{_baseUrl}api/ObjectLanguage/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
             ViewBag.UITerms = UITerms;
             if(response.Item2==true)
@@ -53,8 +53,8 @@ namespace SIPx.MVC.Controllers
 
             return RedirectToAction("Index");
         }
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        [HttpGet("Index/{Id:int?}")]
+        public async Task<IActionResult> Index(int? Id = null, [FromQuery(Name = "ObjectId")] int ObjectId = 0)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<List<ClassificationIndexGet>>($"{_baseUrl}api/Classification/Index", token);

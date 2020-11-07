@@ -18,5 +18,6 @@ namespace SIPx.DataAccess
         Task<LanguageList> UserLanguageUpdateGet(string UserId);
         bool UpdatePost(LanguageUpdateGet ContentType);
         Task<LanguageUpdateGet> UpdateGet(string UserId, int LanguageId);
+        Task<List<LanguageList>> ActiveDefaultList();
     }
 }
