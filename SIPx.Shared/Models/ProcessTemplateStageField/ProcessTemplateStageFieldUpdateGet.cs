@@ -28,6 +28,6 @@ namespace SIPx.Shared
         public List<ValueUpdateTypeList> ValueUpdateTypes { get; set; }
         public List<ProcessTemplateStageFieldStatusList> ProcessTemplateStageFieldStatuses { get; set; }
 
-        public List<ProcessTemplateFieldList> ProcessTemplateFields { get; set; }
+        public List<SequenceList> ProcessTemplateFields { get; set; }
     }
 }

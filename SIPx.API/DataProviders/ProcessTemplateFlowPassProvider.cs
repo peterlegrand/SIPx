@@ -63,6 +63,13 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
+        public async Task<int> IndexGetProcessTemplateId(int ProcessTemplateFlowPassId)
+        {
+            string usp = "usp_processTemplateFlowPassIndexGetProcessTemplateId @ProcessTemplateFlowPassId";
+            var ProcessTemplateId = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp,  new { ProcessTemplateFlowPassId = ProcessTemplateFlowPassId });
+            return ProcessTemplateId;
+        }
+
         public async Task<string> CreatePost(ProcessTemplateFlowPassCreateGet ProcessTemplateFlowPass)
         {
             string usp = "usp_ProcessTemplateFlowPassCreatePost @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowPassTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @ProcessTemplateFlowPassString, @ProcessTemplateFlowPassInt, @ProcessTemplateFlowPassDate, @Name, @Description, @MenuName, @MouseOver, @UserId";

@@ -36,9 +36,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<ProcessTemplateFlowPassIndexGet>>($"{_baseUrl}api/ProcessTemplateFlowPass/Index/" + id, token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlowPass/Index", token);
+            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlowPass/Index", token);
+            var ProcessTemplateId = await _client.GetProtectedAsync<int>($"{_baseUrl}api/ProcessTemplateFlowPass/IndexGetProcessTemplateId/" + id, token);
             ViewBag.UITerms = x;
-            ViewBag.Id = id;
+            ViewBag.Id = ProcessTemplateId;
             return View(response);
             //return View();
         }

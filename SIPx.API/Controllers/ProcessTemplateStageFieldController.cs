@@ -18,6 +18,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateStageFieldController : ControllerBase
     {
+        private readonly IValueUpdateTypeProvider _valueUpdateTypeProvider;
         private readonly IProcessTemplateStageProvider _processTemplateStageProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IProcessTemplateFieldProvider _processTemplateFieldProvider;
@@ -27,8 +28,9 @@ namespace SIPx.API.Controllers
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateStageFieldController(IProcessTemplateStageProvider processTemplateStageProvider, IMasterListProvider masterListProvider, IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateStageFieldStatusProvider processTemplateStageFieldStatus, IProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateStageFieldController(IValueUpdateTypeProvider valueUpdateTypeProvider, IProcessTemplateStageProvider processTemplateStageProvider, IMasterListProvider masterListProvider, IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateStageFieldStatusProvider processTemplateStageFieldStatus, IProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _valueUpdateTypeProvider = valueUpdateTypeProvider;
             _processTemplateStageProvider = processTemplateStageProvider;
             _masterListProvider = masterListProvider;
             _processTemplateFieldProvider = processTemplateFieldProvider;
@@ -68,8 +70,8 @@ namespace SIPx.API.Controllers
                 var x = await _processTemplateStageFieldProvider.UpdateGet(CurrentUser.Id, Id);
 
                 //PETER TODO this need to be active again to fill dropdowns
-                //var status = await _processTemplateStageFieldStatus.List(CurrentUser.Id);
-                //var updateType = await _processTemplateStageFieldProvider.UpdateGetValueUpdateTypeList(CurrentUser.Id);
+                var status = await _processTemplateStageFieldStatusProvider.List(CurrentUser.Id);
+                var updateType = await _valueUpdateTypeProvider.List(CurrentUser.Id);
                 var Sequence = await _processTemplateStageFieldProvider.Sequence(CurrentUser.Id, x.ProcessTemplateId, x.ProcessTemplateStageId);
                 x.ValueUpdateTypes = await _masterListProvider.ValueUpdateTypeList(CurrentUser.Id);
                 x.ProcessTemplateStageFieldStatuses= await _masterListProvider.ProcessTemplateStageFieldStatusList(CurrentUser.Id);

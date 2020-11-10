@@ -9,8 +9,8 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldID
 	, ProcessTemplateStageFields.ProcessTemplateFieldID
 	, ProcessTemplateStageFields.ProcessTemplateID
 	, ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this field')) FieldName
-	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) StatusName
-	, ISNULL(UIUpdateTypeNameCustom.Customization,UIUpdateTypeName.Name) UpdateTypeName
+	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) ProcessTemplateStageFieldStatusName
+	, ISNULL(UIUpdateTypeNameCustom.Customization,UIUpdateTypeName.Name) ValueUpdateTypeName
 	, ProcessTemplateStageFields.DateTimeValue
 	, ProcessTemplateStageFields.IntValue
 	, ProcessTemplateStageFields.LocationValue

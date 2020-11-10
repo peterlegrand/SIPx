@@ -4,10 +4,10 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>
        )ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organizations")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create new process")).TermString;
 
     Layout = "_Layout"; }
-}  <h1><img src="~/images/icons/Process.png" width="50" height="50" />New process</h1>
+<h1><img src="~/images/icons/Process.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Create new process")).TermString</h1>
     <div class=" control-section">
         <div class="container">
             <form method="post">

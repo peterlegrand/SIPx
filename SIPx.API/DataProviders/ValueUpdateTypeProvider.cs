@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class ProcessTemplateStageFieldStatusProvider : IProcessTemplateStageFieldStatusProvider
+    public class ValueUpdateTypeProvider : IValueUpdateTypeProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
-        public ProcessTemplateStageFieldStatusProvider(ISqlDataAccess sqlDataAccess)
+        public ValueUpdateTypeProvider(ISqlDataAccess sqlDataAccess)
         {
             _sqlDataAccess = sqlDataAccess;
         }
@@ -37,12 +37,12 @@ namespace SIPx.DataAccess
         //    string usp = "usp_ProcessTemplateStageTypeLanguageUpdateGet @UserId, @ProcessTemplateStageFieldDStatusId";
         //    return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageFieldStatusUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldDStatusId = ProcessTemplateStageFieldDStatusId });
         //}
-
-        public Task<List<ProcessTemplateStageFieldStatusList>> List(string UserId)
+        public Task<List<ValueUpdateTypeList>> List(string UserId)
         {
             string usp = "usp_ProcessTemplateStageFieldStatusList @UserID";
-            return _sqlDataAccess.LoadData<ProcessTemplateStageFieldStatusList, dynamic>(usp, new { UserId = UserId });
+            return _sqlDataAccess.LoadData<ValueUpdateTypeList, dynamic>(usp, new { UserId = UserId });
 
         }
+
     }
 }

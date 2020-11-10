@@ -28,6 +28,8 @@
     <e-grid-columns>
         <e-grid-column field="ProcessTemplateStageFieldId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="FieldName" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="ProcessTemplateStageFieldStatusName" headerText="@Term.Find(x => x.InternalName.Equals("Status name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="ValueUpdateTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Value update type name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>

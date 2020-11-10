@@ -118,6 +118,20 @@ namespace SIPx.API.Controllers
             });
         }
 
+        [HttpGet("IndexGetProcessTemplateId/{Id:int}")]
+        public async Task<IActionResult> IndexGetProcessTemplateId(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            {
+                return Ok(await _processTemplateFlowPassProvider.IndexGetProcessTemplateId(Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {

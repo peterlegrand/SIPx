@@ -5,7 +5,7 @@ CREATE PROCEDURE usp_ProcessTemplateFlowPassCreatePost (
 	, @ProcessTemplateFieldId int
 	, @ProcessTemplateFieldIDRole int
 	, @ComparisonOperatorId int
-	, @ProcessTemplateFlowPassString nvarchar(max)
+	, @ProcessTemplateFlowPassestring nvarchar(max)
 	, @ProcessTemplateFlowPassInt int
 	, @ProcessTemplateFlowPassDate DateTime
 	, @Name nvarchar(50)
@@ -29,7 +29,7 @@ UPDATE ProcessTemplateFlowPasses SET Sequence = Sequence + 1
 WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId 
 	AND Sequence >= @Sequence
 
-INSERT INTO ProcessTemplateFlowPasss (
+INSERT INTO ProcessTemplateFlowPasses (
 	ProcessTemplateFlowID
 	,ProcessTemplateID
 	, Sequence
@@ -52,7 +52,7 @@ VALUES (
 	, @ProcessTemplateFieldID
 	, @ProcessTemplateFieldIDRole 
 	, @ComparisonOperatorId 
-	, @ProcessTemplateFlowPassString 
+	, @ProcessTemplateFlowPassestring 
 	, @ProcessTemplateFlowPassInt 
 	, @ProcessTemplateFlowPassDate 
 	, @UserID
