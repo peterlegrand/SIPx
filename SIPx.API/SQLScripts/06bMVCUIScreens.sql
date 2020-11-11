@@ -394,4 +394,5 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (388, 'PageSectionProcessCondition', 'Index')
 , (389, 'PageSectionProcessCondition', 'Edit')
 , (390, 'FrontProcess', 'Create')
+, (391, 'FrontProcess', 'Edit')
 SET IDENTITY_INSERT MVCUIScreens OFF;

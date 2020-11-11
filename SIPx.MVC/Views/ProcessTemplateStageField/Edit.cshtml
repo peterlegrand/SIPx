@@ -79,7 +79,19 @@
                 @Term.Find(x => x.InternalName.Equals("String value")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="StringValue" ejs-for="StringValue" cssClass="e-outline" placeholder="String value" floatLabelType="Auto"></ejs-textbox>
+                @if (new[] { 1, 2 }.Contains(Model.ProcessTemplateFieldTypeId))
+                {
+                    <ejs-textbox id="StringValue" ejs-for="StringValue" cssClass="e-outline" placeholder="String value" floatLabelType="Auto"></ejs-textbox>
+                }
+                else
+                {
+                    <ejs-richtexteditor ejs-for="StringValue" value="StringValue" id="stringvalue2" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                        <e-content-template>
+                        </e-content-template>
+                        <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                        </e-richtexteditor-toolbarsettings>
+                    </ejs-richtexteditor>
+                }
             </div>
         </div>
         <div class="row">

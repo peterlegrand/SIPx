@@ -99,17 +99,71 @@ namespace SIPx.API.Controllers
                     //TOFIX PETER
                     var newprocess = await _processProvider.CreateGet(CurrentUser.Id, Id);
                     var newProcessWithMaster = new FrontProcessNewProcessWithMaster();
+                    
                     newProcessWithMaster.ProcessTemplateId = Id;
                     newProcessWithMaster.ProcessFields = newprocess;
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 16))
+                    //for(int i = 0; i < newprocess.Count; i++)
+                    //{ 
+                    //if(newprocess[i].ValueUpdateTypeId==2 && new[] { 1, 2 }.Contains(newprocess[i].ProcessTemplateFieldTypeId))
+                    //    {
+                    //        newprocess[i].StringValue
+                    //    }
+
+                    //}
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 12)|| newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 13))
+                    {
+                        var Users = await _userProvider.List();
+                        newProcessWithMaster.Users = Users;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 14)|| newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 15))
+                    {
+                        var organizations = await _organizationProvider.List(CurrentUser.Id);
+                        newProcessWithMaster.Organizations = organizations;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 16) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 17))
                     {
                         var projects = await _projectProvider.List(CurrentUser.Id);
                         newProcessWithMaster.Projects = projects;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 12))
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 18) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 19))
                     {
-                        var Users = await _userProvider.List();
-                        newProcessWithMaster.Users = Users;
+                        var Languages = await _languageProvider.List(CurrentUser.Id);
+                        newProcessWithMaster.Languages = Languages;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 20) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 21))
+                    {
+                        var Classifications = await _classificationProvider.List(CurrentUser.Id);
+                        newProcessWithMaster.Classifications = Classifications;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 22) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 23))
+                    {
+                        var ClassificationValues = await _classificationValueProvider.List(CurrentUser.Id);
+                        newProcessWithMaster.ClassificationValues = ClassificationValues;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 24) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 25))
+                    {
+                        var Contents = await _contentProvider.List();
+                        newProcessWithMaster.Contents = Contents;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 26) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 27))
+                    {
+                        var Countries = await _masterListProvider.CountryList(CurrentUser.Id);
+                        newProcessWithMaster.Countries = Countries;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 28) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 29))
+                    {
+                        var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                        newProcessWithMaster.SecurityLevels = SecurityLevels;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 30) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 31))
+                    {
+                        var Roles = await _roleProvider.List(CurrentUser.Id);
+                        newProcessWithMaster.Roles = Roles;
+                    }
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 36) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 37))
+                    {
+                        var Persons = await _personProvider.List();
+                        newProcessWithMaster.Persons = Persons;
                     }
                     return Ok(newProcessWithMaster);// CurrentUser.LanguageId));
                 }

@@ -24,6 +24,6 @@ namespace SIPx.DataAccess
         Task<List<int>> UserRoleProjects(string UserId, string RoleId);
         Task<List<int>> UserProjects(string UserId);
         Task<List<int>> UserRoleOrganizations(string UserId, string RoleId);
-
+        Task<List<string>> RoleIdForSpecificUser(string UserId);
     }
 }

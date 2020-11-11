@@ -7170,3 +7170,5 @@ INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (146, 162
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1137, 217);
 
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1604, 217);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1605, 391);

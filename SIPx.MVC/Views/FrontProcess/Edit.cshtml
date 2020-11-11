@@ -4,7 +4,7 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>
        )ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organizations")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Edit process")).TermString;
 
     Layout = "_Layout"; }
     <h1><img src="~/images/icons/Process.png" width="50" height="50" />New process</h1>

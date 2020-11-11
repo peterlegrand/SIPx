@@ -13,6 +13,9 @@ namespace SIPx.Shared
         int ProcessTemplateStageFieldStatusId { get; set; }
         int Sequence { get; set; }
         string StringValue { get; set; }
+        string HTMLStringValue { get; set; }
+        string UserId { get; set; }
+        string RoleId { get; set; }
         int ValueUpdateTypeId { get; set; }
         int ProcessTemplateStageId { get; set; }
         string Name { get; set; }

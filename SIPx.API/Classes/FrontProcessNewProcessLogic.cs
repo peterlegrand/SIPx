@@ -227,37 +227,41 @@ namespace SIPx.API.Classes
                         var UserSecurityLevel = await _userProvider.UserSecurityLevel(CurrentUser.Id);
                         if (Condition.ComparisonOperatorId == 1)  //Comparison blank
                         {
-                            Where = Where + " 1=2 ";
+                            Where = Where + " 1=1 ";
                         }
                         if (Condition.ComparisonOperatorId == 2 && UserSecurityLevel != Condition.StageFieldIntValue) //Equal
                         {
-                            Where = Where + " 2=3 ";
+                            Where =  Where + UserSecurityLevel.ToString() + " =  " + Condition.ProcessTemplateFlowConditionInt.ToString();
                         }
-                        if (Condition.ComparisonOperatorId == 3 && UserSecurityLevel <= Condition.StageFieldIntValue) //
+                        if (Condition.ComparisonOperatorId == 3 && UserSecurityLevel <= Condition.StageFieldIntValue) // >
                         {
-                            Where = Where + " 1=4 ";
+                            Where = Where + UserSecurityLevel.ToString() + " > " + Condition.ProcessTemplateFlowConditionInt.ToString();
                         }
-                        if (Condition.ComparisonOperatorId == 4 && UserSecurityLevel >= Condition.StageFieldIntValue)
+                        if (Condition.ComparisonOperatorId == 4 && UserSecurityLevel >= Condition.StageFieldIntValue) //<
                         {
-                            Where = Where + " 1=5 ";
+                            Where = Where + UserSecurityLevel.ToString() + " <  " + Condition.ProcessTemplateFlowConditionInt.ToString();
                         }
-                        if (Condition.ComparisonOperatorId == 5 && UserSecurityLevel < Condition.StageFieldIntValue)
+                        if (Condition.ComparisonOperatorId == 5 && UserSecurityLevel < Condition.StageFieldIntValue) //>=
                         {
-                            Where = Where + " 1=6 ";
+                            Where = Where + UserSecurityLevel.ToString() + " >=  " + Condition.ProcessTemplateFlowConditionInt.ToString();
                         }
-                        if (Condition.ComparisonOperatorId == 6 && UserSecurityLevel > Condition.StageFieldIntValue)
+                        if (Condition.ComparisonOperatorId == 6 && UserSecurityLevel > Condition.StageFieldIntValue) //<=
                         {
-                            Where = Where + " 1=7 ";
+                            Where = Where + UserSecurityLevel.ToString() + " <=  " + Condition.ProcessTemplateFlowConditionInt.ToString();
                         }
-                        if (Condition.ComparisonOperatorId == 7 && UserSecurityLevel == Condition.StageFieldIntValue)
+                        if (Condition.ComparisonOperatorId == 7 && UserSecurityLevel == Condition.StageFieldIntValue) //<>
                         {
-                            Where = Where + " 1=8 ";
+                            Where = Where + UserSecurityLevel.ToString() + " <> " + Condition.ProcessTemplateFlowConditionInt.ToString();
                         }
                     }
                     if (Condition.ProcessTemplateFlowConditionTypeId == 4) // Role user
                     {
-                        var Roles = await _userProvider.UserRoles(CurrentUser.Id);
-                        if (!Roles.Contains(Condition.ProcessTemplateFlowConditionString) )
+                        var Roles = await _userProvider.RoleIdForSpecificUser(CurrentUser.Id);
+                        for(int i = 0; i < Roles.Count; i++ )
+                        {
+                            Roles[i] = Roles[i].Replace("\t", "");
+                        }
+                        if (!Roles.Contains(Condition.ProcessTemplateFlowConditionString.Replace("\t", "")) )
                         {
                             Where = Where + " 14=2 ";
                         }

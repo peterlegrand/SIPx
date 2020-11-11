@@ -88,8 +88,13 @@ namespace SIPx.DataAccess
         }
         public Task<List<string>> UserRoles(string UserId)
         {
-            string usp = "usp_UserRoles @UserId";
-            return _sqlDataAccess.LoadData<string, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_UserRoles @UserId, @UserRoleUserId";
+            return _sqlDataAccess.LoadData<string, dynamic>(usp, new { UserId = UserId, UserRoleUserId = UserId });
+        }
+        public Task<List<string>> RoleIdForSpecificUser(string UserId)
+        {
+            string usp = "usp_RoleIdForSpecificUser @UserId";
+            return _sqlDataAccess.LoadData<string, dynamic>(usp, new { UserId = UserId});
         }
         public Task<List<int>> UserOrganizations(string UserId)
         {

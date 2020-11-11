@@ -1603,4 +1603,5 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1601, 'Public user');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1602, 'My organization');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1603, 'Create new process');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1604, 'Value update type name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1605, 'Edit process');
 SET IDENTITY_INSERT UITerms OFF;

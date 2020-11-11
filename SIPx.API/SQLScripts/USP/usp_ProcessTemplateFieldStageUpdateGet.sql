@@ -22,7 +22,10 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, ProcessTemplateStageFields.ModifierID
 	, ProcessTemplateStageFields.ModifiedDate
+	, ProcessTemplateFields.ProcessTemplateFieldTypeID
 FROM ProcessTemplateStageFields 
+JOIN ProcessTemplateFields 
+	ON ProcessTemplateStageFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID 
 LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageLanguage
 	ON UserProcessTemplateStageLanguage.ProcessTemplateStageId = ProcessTemplateStageFields.ProcessTemplateStageID
 LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages JOIN Settings ON ProcessTemplateStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateStageLanguage

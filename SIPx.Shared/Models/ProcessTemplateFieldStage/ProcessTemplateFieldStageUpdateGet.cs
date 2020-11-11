@@ -24,6 +24,7 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string UserId { get; set; }
+        public int ProcessTemplateFieldTypeId { get; set; }
 
         public List<ValueUpdateTypeList> ValueUpdateTypes { get; set; }
         public List<ProcessTemplateStageFieldStatusList> ProcessTemplateStageFieldStatuses { get; set; }

@@ -39,7 +39,7 @@ namespace SIPx.MVC.Controllers
             var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateFlowPass/Index", token);
             var ProcessTemplateId = await _client.GetProtectedAsync<int>($"{_baseUrl}api/ProcessTemplateFlowPass/IndexGetProcessTemplateId/" + id, token);
             ViewBag.UITerms = x;
-            ViewBag.Id = ProcessTemplateId;
+            ViewBag.Id = id;
             return View(response);
             //return View();
         }

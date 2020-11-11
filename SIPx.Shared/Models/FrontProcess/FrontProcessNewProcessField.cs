@@ -14,6 +14,9 @@ namespace SIPx.Shared
         public int? IntValue { get; set; }
         public DateTime DateTimeValue { get; set; }
         public string StringValue { get; set; }
+        public string UserId { get; set; }
+        public string RoleId { get; set; }
+        public string HTMLStringValue { get; set; }
         public int ValueUpdateTypeId { get; set; }
         public int ProcessTemplateFieldId { get; set; }
         public int ProcessTemplateFieldTypeId { get; set; }
