@@ -152,8 +152,8 @@ namespace SIPx.API.Controllers
                                 case 2: //Pocess (DATA TYPE) List (Type)
                                     string ProcessConditionSQLFrom = " SELECT Processes.ProcessId, ISNULL(ProcessFieldSubject.StringValue,'') As Subject, ProcessTemplateLanguages.Name ProcessTemplateName FROM Processes JOIN ProcessFields ProcessFieldSubject ON ProcessFieldSubject.ProcessId = Processes.ProcessId " +
                                         " JOIN ProcessTemplatefields ProcessTemplateFieldSubject ON  ProcessTemplateFieldSubject.ProcessTemplatefieldId = ProcessFieldSubject.ProcessTemplatefieldId  " +
-                                        " JOIN ProcessTemplates ON Processes.ProcessTemplateId =  ProcessTemplates.ProcessTemplateId  ";
-                                    string ProcessConditionSQLWhere = " WHERE ProcessTemplateFieldSubject.ProcessTemplateFieldTypeId = 1 ";
+                                        " JOIN ProcessTemplates ON Processes.ProcessTemplateId =  ProcessTemplates.ProcessTemplateId JOIN ProcessTemplateStages ON Processes.ProcessTemplateStageId = ProcessTemplateStages.ProcessTemplateStageID ";
+                                    string ProcessConditionSQLWhere = " WHERE ProcessTemplateFieldSubject.ProcessTemplateFieldTypeId = 1 AND ProcessTemplateStages.InToDo = 1 ";
                                     string ProcessConditionSQLContains = "";
                                     var ProcessConditions = await _processProvider.ProcessForPanelCondition(panel.PageSectionId);
                                     foreach (var ProcessCondition in ProcessConditions)

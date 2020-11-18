@@ -1186,3 +1186,19 @@ INSERT [dbo].[PageSectionProjectConditionTypes] ([PageSectionProjectConditionTyp
 INSERT [dbo].[PageSectionProjectConditionTypes] ([PageSectionProjectConditionTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 1383, 1383, 1383, 1383)
 SET IDENTITY_INSERT [dbo].[PageSectionProjectConditionTypes] OFF
 
+SET IDENTITY_INSERT [dbo].[PropertyTypes] ON 
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 1606, 1606, 1606, 1606)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 647, 647, 647, 647)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 646, 646, 646, 646)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 1608, 1608, 1608, 1608)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 1607, 1607, 1607, 1607)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (6, 1609, 1609, 1609, 1609)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (7, 1610, 1610, 1610, 1610)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (8, 1611, 1611, 1611, 1611)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (9, 1612, 1612, 1612, 1612)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (10, 1613, 1613, 1613, 1613)
+INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (11, 1614, 1614, 1614, 1614)
+SET IDENTITY_INSERT [dbo].[PropertyTypes] OFF
+
+
+

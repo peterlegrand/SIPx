@@ -324,7 +324,8 @@ INSERT INTO OrganizationTelecomPhones(OrganizationTelecomId, CountryCode, AreaCo
 
 SET IDENTITY_INSERT Pages ON;
 INSERT INTO Pages (PageId, StatusId, ShowtitleName,  ShowTitleDescription, UserID,CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (2, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
+  (1, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
+,  (2, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
 , (3, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
 , (4, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
 , (5, 1, 1, 1, @User,  @User, @User, GETDATE(), GETDATE())
@@ -333,7 +334,8 @@ SET IDENTITY_INSERT Pages OFF;
 
 SET IDENTITY_INSERT PageLanguages ON;
 INSERT INTO PageLanguages(PageLanguageId, PageId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
-  (2, 2, 41, 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', @User, @User, GETDATE(), GETDATE())
+  (1, 1, 41, 'Search result', 'Search result', 'Search result', 'Search result', 'Search result', 'Search result', @User, @User, GETDATE(), GETDATE())
+, (2, 2, 41, 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', @User, @User, GETDATE(), GETDATE())
 , (3, 3, 41, 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', @User, @User, GETDATE(), GETDATE())
 , (4, 4, 41, 'Project stories', 'Project stories', 'Project stories', 'Project stories', 'Project stories', 'Project stories', @User, @User, GETDATE(), GETDATE())
 , (5, 5, 41, 'To do', 'To do', 'To do', 'To do', 'To do', 'To do', @User, @User, GETDATE(), GETDATE())
@@ -1157,6 +1159,19 @@ SET IDENTITY_INSERT [dbo].[UserMenus] ON
 INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconId], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 1, @User, N'Home', N'Home', 11, 1, 1, 1, @User, @User, Getdate(), Getdate())
 INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconId], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 1, 2, @User, N'To do', N'To do',1 , 4,4, 2, @User, @User, Getdate(), Getdate())
 INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconId], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 13, 13, @User, N'Search', N'Search process', 11, 11, 11, 3, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (5, 3, 3, @User, N'add content', N'add content', 1, 6, 6, 12, @User, @User, getdate(), getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (6, 2, 2, @User, N'add process', N'add process', 1, 6, 4, 15, @User, @User, getdate(), getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (7, 8, 8, @User, N'Add organization', N'Add organization', 1, 4, 4, 9, @User, @User, getdate(), getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (8, 4, 4, @User, N'add person', N'add person', 1, 6, 4, 14, @User, @User, getdate(), getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (9, 6, 6, @User, N'add project', N'add project', 2, 6, 3, 7, @User, @User, getdate(), getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (10, 7, 7, @User, N'add relation', N'add relation', 1, 1, 1, 13, @User, @User, getdate(), getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (11, 21, 21, @User, N'advanced search content', N'advanced search content', 16, 6, 6, 5, @User, @User, getdate(), getdate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (12, 22, 22, @User, N'advanced search process', N'advanced search process', 25, 4, 4, 11, @User, @User, GetDate(), GetDate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (13, 19, 19, @User, N'advanced search organization', N'advanced search organization', 37, 4, 3, 8, @User, @User, GetDate(), GetDate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (14, 18, 18, @User, N'advanced search person', N'advanced search person', 40, 6, 6, 4, @User, @User, GetDate(), GetDate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (15, 20, 20, @User, N'advanced search project', N'advanced search project', 41, 6, 6, 3, @User, @User, GetDate(), GetDate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (16, 23, 23, @User, N'advanced search classification values', N'advanced search classification values', 52, 6, 6, 2, @User, @User, GetDate(), GetDate())
+INSERT [dbo].[UserMenus] ([UserMenuID], [UserMenuTypeIDLeft], [UserMenuTypeIDRight], [UserID], [Name], [MouseOver], [IconID], [UserPageIdLeft], [UserPageIdRight], [Sequence], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (17, 1, 1, @User, N'To do new', N'To do new', 11, 5, 5, 1, @User, @User, GetDate(), GetDate())
 SET IDENTITY_INSERT [dbo].[UserMenus] OFF
 
 
@@ -1169,3 +1184,5 @@ SET IDENTITY_INSERT [dbo].[ProcessTemplateFlowPassLanguages] ON
 INSERT [dbo].[ProcessTemplateFlowPassLanguages] ([ProcessTemplateFlowPassLanguageID], [ProcessTemplateID], [ProcessTemplateFlowID], [ProcessTemplateFlowPassID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) 
 VALUES (1, 1, 1, 1, 41, N'Security level', N'Security level', N'Security level', N'Security level', @User, @User, getdate(), getdate())
 SET IDENTITY_INSERT [dbo].[ProcessTemplateFlowPassLanguages] OFF
+
+

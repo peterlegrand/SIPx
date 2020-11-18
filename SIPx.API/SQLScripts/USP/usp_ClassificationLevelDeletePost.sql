@@ -2,9 +2,10 @@ CREATE PROCEDURE [dbo].[usp_ClassificationLevelDeletePost] (
 	@ClassificationLevelId int) 
 AS 
 DECLARE @OldSequence int;
-SELECT @OldSequence = Sequence FROM ClassificationLevels WHERE ClassificationLevelId = @ClassificationLevelID;
+DECLARE @ClassificationId int;
+SELECT @OldSequence = Sequence, @ClassificationId = ClassificationId FROM ClassificationLevels WHERE ClassificationLevelId = @ClassificationLevelID;
 BEGIN TRANSACTION
-UPDATE ClassificationLevels SET Sequence = Sequence - 1 WHERE Sequence > @OldSequence 
+UPDATE ClassificationLevels SET Sequence = Sequence - 1 WHERE Sequence > @OldSequence AND @ClassificationId = ClassificationId
 DELETE FROM ClassificationLevelLanguages WHERE @ClassificationLevelId = ClassificationLevelID
 DELETE FROM ClassificationLevels WHERE @ClassificationLevelId = ClassificationLevelID
 COMMIT TRANSACTION

@@ -92,33 +92,44 @@
                     </div>
 
                 }
-                if (new[] { 1, 2 }.Contains(Model.ProcessFields[i].ProcessTemplateStageFieldStatusId))
+                if (new[] {  2 }.Contains(Model.ProcessFields[i].ProcessTemplateStageFieldStatusId))
                 {
-        <div class="row">
-            @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
-            {
-                <div class="font-weight-bold col-4">@Model.ProcessFields[i].Name</div>
-            }
-            @if (new[] { 1, 2 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId) && Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 2)
-            {
-                <div class="col-8"> @Model.ProcessFields[i].StringValue</div>
-            }
+                    <div class="row">
+                        @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div class="font-weight-bold col-4">@Model.ProcessFields[i].Name</div>
+                        }
+                        @if (new[] { 1, 2 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId) && Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 2)
+                        {
+                            <div class="col-8"> @Model.ProcessFields[i].StringValue</div>
+                        }
 
-            @if (new[] { 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId) && Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 2)
-            {
-                <div class="col-8">
-                    <div class="col-9">
-                        @Html.Raw(Model.ProcessFields[i].StringValue)
+                        @if (new[] { 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId) && Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 2)
+                        {
+                            <div class="col-8">
+                                <div class="col-9">
+                                    @Html.Raw(Model.ProcessFields[i].StringValue)
+                                </div>
+                            </div>
+                        }
+                        @if (new[] { 1, 2, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div hidden>
+                                <ejs-textbox ejs-for="@Model.ProcessFields[i].StringValue" value="@Model.ProcessFields[i].StringValue" id="@Model.ProcessFields[i].ControlId"></ejs-textbox>
+                            </div>
+                        }
                     </div>
-                </div>
-            }
-            @if (new[] { 1, 2, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
-            { 
-        <div hidden>
-            <ejs-textbox ejs-for="@Model.ProcessFields[i].StringValue" value="@Model.ProcessFields[i].StringValue" id="@Model.ProcessFields[i].ControlId"></ejs-textbox>
-        </div>
-        }
-            </div>
+                }
+                if (new[] { 1 }.Contains(Model.ProcessFields[i].ProcessTemplateStageFieldStatusId))
+                {
+                    <div class="row">
+                        @if (new[] { 1, 2, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        {
+                            <div hidden>
+                                <ejs-textbox ejs-for="@Model.ProcessFields[i].StringValue" value="@Model.ProcessFields[i].StringValue" id="@Model.ProcessFields[i].ControlId"></ejs-textbox>
+                            </div>
+                        }
+                    </div>
                 }
             }
         </form>

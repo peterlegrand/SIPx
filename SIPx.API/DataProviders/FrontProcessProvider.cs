@@ -200,6 +200,10 @@ namespace SIPx.DataAccess
 
             foreach (var x in Process.ProcessFields)
             {
+                if(x.ProcessTemplateFieldTypeId == 32)
+                { 
+                    x.StringValue = x.HTMLStringValue;
+                }
                 //if (x.ProcessTemplateFieldId != null && x.ClassificationValueId != 0)
                 //{
                 DateTime NewDate;
