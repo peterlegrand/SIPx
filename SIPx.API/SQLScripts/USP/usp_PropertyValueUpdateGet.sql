@@ -23,6 +23,7 @@ WHERE PropertyValues.PropertyValueID = @PropertyValueId
 
 SELECT PropertyValues.PropertyValueID
 	, PropertyValues.PropertyID
+	, PropertyValues.Sequence
 	, @PropertyTypeId
 	, @PropertyTypeName
 	, ISNULL(UserPropertyValueLanguage.Name,ISNULL(DefaultPropertyValueLanguage.Name,'No name for this role')) Name
