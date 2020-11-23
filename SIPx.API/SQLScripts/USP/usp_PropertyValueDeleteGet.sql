@@ -7,6 +7,7 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT PropertyValues.PropertyValueID
 	, PropertyValues.PropertyID
+	, Properties.PropertyTypeID
 	, ISNULL(CustomType.Customization,DefaultType.Name) DatePropertyTypeName
 	, ISNULL(UserPropertyValueLanguage.Name,ISNULL(DefaultPropertyValueLanguage.Name,'No name for this classification level')) Name
 	, ISNULL(UserPropertyValueLanguage.Description,ISNULL(DefaultPropertyValueLanguage.Description,'No description for this classification level')) Description

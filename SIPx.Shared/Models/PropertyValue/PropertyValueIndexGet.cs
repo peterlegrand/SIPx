@@ -17,6 +17,7 @@ namespace SIPx.Shared
         public int PropertyValueInt { get; set; }
         public DateTime PropertyValueDate { get; set; }
         public bool PropertyValueBool { get; set; }
+        public int PropertyTypeId { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

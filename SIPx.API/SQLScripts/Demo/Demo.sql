@@ -324,8 +324,8 @@ INSERT INTO OrganizationTelecomPhones(OrganizationTelecomId, CountryCode, AreaCo
 
 SET IDENTITY_INSERT Pages ON;
 INSERT INTO Pages (PageId, StatusId, ShowtitleName,  ShowTitleDescription, UserID,CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
-,  (2, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
+--  (1, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
+  (2, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
 , (3, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
 , (4, 1, 1, 1, NULL, @User, @User, GETDATE(), GETDATE())
 , (5, 1, 1, 1, @User,  @User, @User, GETDATE(), GETDATE())
@@ -334,8 +334,8 @@ SET IDENTITY_INSERT Pages OFF;
 
 SET IDENTITY_INSERT PageLanguages ON;
 INSERT INTO PageLanguages(PageLanguageId, PageId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
-  (1, 1, 41, 'Search result', 'Search result', 'Search result', 'Search result', 'Search result', 'Search result', @User, @User, GETDATE(), GETDATE())
-, (2, 2, 41, 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', @User, @User, GETDATE(), GETDATE())
+--  (1, 1, 41, 'Search result', 'Search result', 'Search result', 'Search result', 'Search result', 'Search result', @User, @User, GETDATE(), GETDATE())
+ (2, 2, 41, 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', 'Top stories', @User, @User, GETDATE(), GETDATE())
 , (3, 3, 41, 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', 'Reaserch stories', @User, @User, GETDATE(), GETDATE())
 , (4, 4, 41, 'Project stories', 'Project stories', 'Project stories', 'Project stories', 'Project stories', 'Project stories', @User, @User, GETDATE(), GETDATE())
 , (5, 5, 41, 'To do', 'To do', 'To do', 'To do', 'To do', 'To do', @User, @User, GETDATE(), GETDATE())

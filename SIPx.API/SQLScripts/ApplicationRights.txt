@@ -191,3 +191,13 @@
 191
 192
 193
+Property/Index
+Property/Create
+Property/Update
+Property/Delete
+PropertyValue/Index
+PropertyValue/Create
+PropertyValue/Update
+PropertyValue/Delete
+Classification/Index
+ClassificationValue/Index

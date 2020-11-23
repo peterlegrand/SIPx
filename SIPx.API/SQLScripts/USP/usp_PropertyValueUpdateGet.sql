@@ -24,8 +24,8 @@ WHERE PropertyValues.PropertyValueID = @PropertyValueId
 SELECT PropertyValues.PropertyValueID
 	, PropertyValues.PropertyID
 	, PropertyValues.Sequence
-	, @PropertyTypeId
-	, @PropertyTypeName
+	, @PropertyTypeId PropertyTypeId
+	, @PropertyTypeName PropertyTypeName
 	, ISNULL(UserPropertyValueLanguage.Name,ISNULL(DefaultPropertyValueLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserPropertyValueLanguage.Description,ISNULL(DefaultPropertyValueLanguage.Description,'No description for this role')) Description
 	, ISNULL(UserPropertyValueLanguage.MenuName,ISNULL(DefaultPropertyValueLanguage.MenuName,'No menu name for this role')) MenuName

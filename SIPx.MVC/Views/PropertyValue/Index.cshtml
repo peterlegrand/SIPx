@@ -1,0 +1,56 @@
+﻿@model List<PropertyValueIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Property values")).TermString;
+
+    Layout = "_LayoutAdmin";
+}
+
+<h1><img src="~/images/icons/Level.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Property values")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="PropertyValueId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column template="#Value" headerText="@Term.Find(x => x.InternalName.Equals("Value")).TermString" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a asp-controller="Property" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Back to properties")).TermString</a>
+<a asp-controller="PropertyValue" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new property value")).TermString</a>
+<script id="Value" type="text/x-template">
+    <div>
+        ${if(PropertyTypeId === 6 )}
+        ${PropertyValueDate}
+        ${/if}
+        ${if(PropertyTypeId === 7 )}
+        ${PropertyValueInt}
+        ${/if}
+        ${if(PropertyTypeId === 8 || PropertyTypeId === 10 )}
+        ${PropertyValueString}
+        ${/if}
+        ${if(PropertyTypeId === 9  || PropertyTypeId === 11 )}
+        ${Name}
+        ${/if}
+    </div>
+</script>
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/PropertyValue/Edit/${PropertyValueId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+
+    </div>
+</script>
+<script id="Languages" type="text/x-template">
+    <div>
+        ${if(PropertyTypeId === 8 || PropertyTypeId === 10 )}
+        <a class="nav-link text-dark font-weight-bold" href="/PropertyValue/LanguageIndex/${PropertyValueId}"><img src="/images/icons/LanguageS.png" height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+        ${/if}
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/PropertyValue/Delete/${PropertyValueId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+
+    </div>
+</script>

@@ -10,6 +10,7 @@ namespace SIPx.Shared
         public int PropertyValueId { get; set; }
         public int PropertyId { get; set; }
         public string PropertyTypeName { get; set; }
+        public int PropertyTypeId { get; set; }
         //        public string DefaultPageName { get; set; }
         public string PropertyValueString { get; set; }
         public int PropertyValueInt { get; set; }

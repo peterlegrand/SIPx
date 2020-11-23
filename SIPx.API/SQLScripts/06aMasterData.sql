@@ -1200,5 +1200,8 @@ INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID
 INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (11, 1614, 1614, 1614, 1614)
 SET IDENTITY_INSERT [dbo].[PropertyTypes] OFF
 
-
+SET IDENTITY_INSERT [dbo].[ClassificationLevelPropertyStatuses] ON 
+INSERT [dbo].[ClassificationLevelPropertyStatuses] ([ClassificationLevelPropertyStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 682, 682, 682, 682)
+INSERT [dbo].[ClassificationLevelPropertyStatuses] ([ClassificationLevelPropertyStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 340, 340, 340, 340)
+SET IDENTITY_INSERT [dbo].[ClassificationLevelPropertyStatuses] OFF
 

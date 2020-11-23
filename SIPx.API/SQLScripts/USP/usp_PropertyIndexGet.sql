@@ -11,6 +11,7 @@ SELECT Properties.PropertyID
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this Property')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this Property')) MouseOver
 	, ISNULL(UINameCustom.Customization ,UIName.Name) PropertyTypeName
+	, Properties.PropertyTypeId
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, Properties.CreatedDate

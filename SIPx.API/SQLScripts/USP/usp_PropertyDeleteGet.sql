@@ -23,7 +23,7 @@ LEFT JOIN (SELECT PropertyId, Name, Description, MenuName, MouseOver FROM Proper
 LEFT JOIN (SELECT PropertyId, Name, Description, MenuName, MouseOver FROM PropertyLanguages JOIN Settings ON PropertyLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultPropertyLanguage
 	ON DefaultPropertyLanguage.PropertyId = Properties.PropertyID
 JOIN PropertyTypes
-	ON PropertyTypes.PropertyTypeID = Properties.PropertyTypesID
+	ON PropertyTypes.PropertyTypeID = Properties.PropertyTypeID
 JOIN UITermLanguages DefaultStatus
 	ON DefaultStatus.UITermId = PropertyTypes.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) CustomStatus

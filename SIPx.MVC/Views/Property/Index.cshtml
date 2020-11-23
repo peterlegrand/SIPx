@@ -1,0 +1,81 @@
+﻿@model List<PropertyIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Properties")).TermString;
+
+    Layout = "_LayoutAdmin";
+}
+
+<h1><img src="~/images/icons/Property.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Properties")).TermString</h1>
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column template="#Values" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a href="#" onclick="AddFriend()">Favorite</a>
+<a href="~/Property/Create">@Term.Find(x => x.InternalName.Equals("Add new property")).TermString</a>
+<script id="Id" type="text/x-template">
+    <div>
+        ${PropertyId}
+    </div>
+</script>
+<script id="Name" type="text/x-template">
+    <div>
+        ${Name}
+    </div>
+</script>
+<script id="HasDropDown" type="text/x-template">
+    <div>
+        ${HasDropDown}
+    </div>
+</script>
+<script id="Levels" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/PropertyLevel/Index/${PropertyId}">
+            <div title="Level"></div><span style="color:red">L</span>evel
+        </a>
+
+    </div>
+</script>
+<script id="Values" type="text/x-template">
+    <div>
+        ${if(PropertyTypeId === 6 || PropertyTypeId === 7 || PropertyTypeId === 8 || PropertyTypeId === 9 || PropertyTypeId === 10 || PropertyTypeId === 11 )}
+            <a class="nav-link text-dark font-weight-bold" href="/PropertyValue/Index/${PropertyId}"><img src="/images/icons/Value.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Values")).TermString" /></a>
+        ${else}
+            No values
+        ${/if}
+    </div>
+</script>
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/Property/Edit/${PropertyId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+
+    </div>
+</script>
+<script id="Languages" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/Property/LanguageIndex/${PropertyId}"><img src="/images/icons/LanguageS.png" height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="Property/Delete/${PropertyId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+
+    </div>
+</script>
+<script>
+    function AddFriend() {
+        var Favorite = {
+            controller: 'Property',
+            action: 'Index'
+        };
+        $.post("https://localhost:44393/Favorites/Add/", Favorite);
+    }
+</script>

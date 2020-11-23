@@ -20,7 +20,7 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string UserId { get; set; }
         public int PropertyTypeId { get; set; }
-        public List<SequenceList> Properties { get; set; }
+        public List<SequenceList> PropertyValues { get; set; }
 
     }
 }

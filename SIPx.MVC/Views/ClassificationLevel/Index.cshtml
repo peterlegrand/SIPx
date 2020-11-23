@@ -18,6 +18,7 @@
         <e-grid-column field="CanLink" headerText="@Term.Find(x => x.InternalName.Equals("Can link")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="InDropDown" headerText="@Term.Find(x => x.InternalName.Equals("In dropdown")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="InMenu" headerText="@Term.Find(x => x.InternalName.Equals("In menu")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column template="#Properties" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
@@ -25,21 +26,27 @@
 </ejs-grid>
 <a asp-controller="Classification" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Back to classifications")).TermString</a>
 <a asp-controller="ClassificationLevel" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new classification level")).TermString</a>
+<script id="Properties" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevelProperty/Index/${ClassificationLevelId}"><img src="/images/icons/property.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Properties")).TermString" /></a>
+
+    </div>
+</script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Edit/${ClassificationLevelId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Edit/${ClassificationLevelId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Languages" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/LanguageIndex/${ClassificationLevelId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/LanguageIndex/${ClassificationLevelId}"><img src="/images/icons/LanguageS.png" height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Delete/${ClassificationLevelId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationLevel/Delete/${ClassificationLevelId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
 
     </div>
 </script>
