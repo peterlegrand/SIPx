@@ -403,4 +403,12 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (397, 'PropertyValue', 'Create')
 , (398, 'PropertyValue', 'Edit')
 , (399, 'PropertyValue', 'Delete')
+, (400, 'ClassificationValueProperty', 'Index')
+, (401, 'ClassificationValueProperty', 'Create')
+, (402, 'ClassificationValueProperty', 'Edit')
+, (403, 'ClassificationValueProperty', 'Delete')
+, (404, 'ClassificationLevelProperty', 'Index')
+, (405, 'ClassificationLevelProperty', 'Create')
+, (406, 'ClassificationLevelProperty', 'Edit')
+, (407, 'ClassificationLevelProperty', 'Delete')
 SET IDENTITY_INSERT MVCUIScreens OFF;

@@ -8,6 +8,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ClassificationLevelPropertyId { get; set; }
+        public int ClassificationLevelId { get; set; }
         public string ClassificationName { get; set; }
         public string ClassificationLevelName { get; set; }
         public string PropertyName { get; set; }

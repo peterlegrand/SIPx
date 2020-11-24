@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ClassificationLevelPropertyCreatePost (@UserId nvarchar(450), @ClassificationLevelId int, @PropertyId int, @ClassificationLevelPropertyStatusId int) 
+CREATE PROCEDURE usp_ClassificationLevelPropertyCreatePost (@ClassificationLevelId int, @PropertyId int, @ClassificationLevelPropertyStatusId int, @UserId nvarchar(450)) 
 AS 
 DECLARE @ClassificationId int;
 SELECT @ClassificationId = ClassificationId FROM Classificationlevels WHERE ClassificationLevelID = @ClassificationLevelId;

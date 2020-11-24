@@ -1645,4 +1645,11 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1643, 'Add new property valu
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1644, 'New property value');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1645, 'Property value');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1646, 'Delete property value');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1647, 'New classification level property');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1648, 'Classification level name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1649, 'Delete classification level property');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1650, 'Property name');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1651, 'Classification level property');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1652, 'Classification level properties');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1653, 'Add new classification level property');
 SET IDENTITY_INSERT UITerms OFF;

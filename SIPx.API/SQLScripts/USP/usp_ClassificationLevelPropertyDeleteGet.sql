@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationLevelProperties.ClassificationLevelPropertyID
+	, ClassificationLevelProperties.ClassificationLevelID
 	, ISNULL(PropertyUserLanguage.Name,ISNULL(PropertyDefaultLanguage.Name,'No name for this Property')) PropertyName
 	, ISNULL(ClassificationLevelUserLanguage.Name,ISNULL(ClassificationLevelDefaultLanguage.Name,'No description for this classification level')) ClassificationLevelName
 	, ISNULL(ClassificationUserLanguage.Name,ISNULL(ClassificationDefaultLanguage.Name,'No description for this classification')) ClassificationName

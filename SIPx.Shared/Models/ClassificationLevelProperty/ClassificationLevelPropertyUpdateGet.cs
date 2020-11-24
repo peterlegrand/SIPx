@@ -12,12 +12,16 @@ namespace SIPx.Shared
         public int ClassificationId { get; set; }
         public int PropertyId { get; set; }
         public int ClassificationLevelPropertyStatusId { get; set; }
+        public string ClassificationLevelName { get; set; }
+        public string ClassificationName { get; set; }
+        public string PropertyName { get; set; }
         public string CreatorName { get; set; }
         public string CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string UserId { get; set; }
 
         public List<ClassificationLevelPropertyStatusList> ClassificationLevelPropertyStatuses { get; set; }
 

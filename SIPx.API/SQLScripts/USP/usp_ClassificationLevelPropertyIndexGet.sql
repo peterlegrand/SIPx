@@ -10,6 +10,7 @@ SELECT ClassificationLevelProperties.ClassificationLevelPropertyID
 	, ISNULL(ClassificationLevelUserLanguage.Name,ISNULL(ClassificationLevelDefaultLanguage.Name,'No description for this classification level')) ClassificationLevelName
 	, ISNULL(ClassificationUserLanguage.Name,ISNULL(ClassificationDefaultLanguage.Name,'No description for this classification')) ClassificationName
 	, ISNULL(UINameCustom.Customization ,UIName.Name) PropertyTypeName
+	, ISNULL(UIStatusNameCustom.Customization ,UIStatusName.Name) ClassificationLevelPropertyStatusName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, Properties.CreatedDate
@@ -25,6 +26,12 @@ JOIN UITermLanguages UIName
 	ON UIName.UITermId = PropertyTypes.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = PropertyTypes.NameTermID
+JOIN ClassificationLevelPropertyStatuses
+	ON ClassificationLevelProperties.ClassificationLevelPropertyStatusId= ClassificationLevelPropertyStatuses.ClassificationLevelPropertyStatusId
+JOIN UITermLanguages UIStatusName
+	ON UIStatusName.UITermId = ClassificationLevelPropertyStatuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIStatusNameCustom
+	ON UIStatusNameCustom.UITermId = ClassificationLevelPropertyStatuses.NameTermID
 LEFT JOIN (SELECT PropertyId, Name FROM PropertyLanguages WHERE LanguageId = @LanguageID) PropertyUserLanguage
 	ON PropertyUserLanguage.PropertyID= Properties.PropertyID
 LEFT JOIN (SELECT PropertyId, Name FROM PropertyLanguages JOIN Settings ON PropertyLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) PropertyDefaultLanguage
@@ -46,8 +53,9 @@ JOIN Languages
 JOIN UITermLanguages LanguageTerm
 	ON Languages.NameTermID = LanguageTerm.UITermID
 WHERE UIName.LanguageId = @LanguageID
+	AND UIStatusName.LanguageId = @LanguageID
 	AND LanguageTerm.LanguageID = @LanguageId
-	AND ClassificationLevelProperties.ClassificationLevelPropertyID =  @ClassificationLevelId
+	AND ClassificationLevelProperties.ClassificationLevelID =  @ClassificationLevelId
 ORDER BY  ISNULL(PropertyUserLanguage.Name,ISNULL(PropertyDefaultLanguage.Name,'No name for this property')) 
 
 
