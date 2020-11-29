@@ -6,8 +6,8 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateStageTypeProvider
     {
-        Task<string> CreatePost(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType);
-        Task<string> CreatePostCheck(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType);
+        Task<string> CreatePost(ProcessTemplateStageTypeCreateGet ProcessTemplateStageType);
+        Task<string> CreatePostCheck(ProcessTemplateStageTypeCreateGet ProcessTemplateStageType);
         Task<ProcessTemplateStageTypeDeleteGet> DeleteGet(string UserId, int ProcessTemplateStageTypeId);
         bool DeletePost(int Id);
         Task<List<ProcessTemplateStageTypeIndexGet>> IndexGet(string UserId);

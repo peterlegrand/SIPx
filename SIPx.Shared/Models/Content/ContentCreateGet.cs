@@ -21,7 +21,7 @@ namespace SIPx.Shared
         public int OrganizationId { get; set; }
         public int? ProjectId { get; set; }
         public int ProcessId { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         //public List<ContentTypeList> ContentTypes { get; set; }
         //The content type is selected in the first step
         public List<ContentStatusList> ContentStatuses { get; set; }

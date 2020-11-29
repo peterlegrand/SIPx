@@ -19,7 +19,7 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string Color { get; set; }
         public int IconId { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<ContentTypeCreateGetClassification> ContentTypeClassifications { get; set; }
         public List<ContentTypeClassificationStatusList> ContentTypeClassificationStatuses { get; set; }
         public List<ContentTypeGroupList> ContentTypeGroups { get; set; }

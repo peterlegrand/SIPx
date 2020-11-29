@@ -3,6 +3,7 @@
 @model ClassificationValueCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification value")).TermString;
 
     Layout = "_LayoutAdmin";

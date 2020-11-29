@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[usp_UserPageUpdatePost] (
 	, @ModifierID nvarchar(450)) 
 
 AS 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 

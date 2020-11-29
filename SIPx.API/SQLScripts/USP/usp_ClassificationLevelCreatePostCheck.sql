@@ -1,50 +1,93 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationLevelCreatePostCheck] (
+CREATE PROCEDURE usp_ClassificationLevelCreatePostCheck (
 	@ClassificationId int
 	, @Sequence int
-	, @LanguageId int
-	, @Name nvarchar(50)
 	, @DateLevelId int
+	, @OnTheFly bit
+	, @Alphabetically bit
+	, @CanLink bit
+	, @InDropDown bit
+	, @InMenu bit
+	, @Name nvarchar(50)
+	, @Description nvarchar(max)
+	, @MenuName nvarchar(50)
+	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
-BEGIN 
-DECLARE @Error varchar(500) = '';
 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
+
+BEGIN 
+DECLARE @ErrorIdsTable TABLE (id int)
+
+IF (SELECT COUNT(*) FROM Classifications WHERE ClassificationID = @ClassificationId) =0
+BEGIN
+insert into @ErrorIdsTable values(12)
+END
 
 IF (SELECT MAX(Sequence) 
-	FROM ClassificationLevels WHERE ClassificationId = @ClassificationId) < @Sequence + 1
+	FROM ClassificationLevels WHERE ClassificationID = @ClassificationId ) < @Sequence + 1
 BEGIN
-	SET @Error = @Error + ' - sequence is bigger than current max value '
+	insert into @ErrorIdsTable values(13)
 END
 
-IF @Sequence <= 0
+
+IF  @DateLevelId NOT IN (1,2,3,4,5) 
 BEGIN
-	SET @Error = @Error + ' - sequence cannot be 0 '
+insert into @ErrorIdsTable values(14)
 END
+	
+IF @OnTheFly NOT IN (0,1) 
+BEGIN
+insert into @ErrorIdsTable values(15)
+END
+	
+IF @Alphabetically NOT IN (0,1) 
+BEGIN
+insert into @ErrorIdsTable values(16)
+END
+	
+IF @CanLink NOT IN (0,1) 
+BEGIN
+insert into @ErrorIdsTable values(17)
+END
+	
+IF @InDropDown NOT IN (0,1) 
+BEGIN
+insert into @ErrorIdsTable values(18)
+END
+
+	
+IF @InMenu NOT IN (0,1) 
+BEGIN
+insert into @ErrorIdsTable values(19)
+END
+
 
 IF  (SELECT COUNT(*) 
 	FROM ClassificationLevels 
 	JOIN ClassificationLevelLanguages 
 		ON ClassificationLevelLanguages.ClassificationLevelId = ClassificationLevels.ClassificationLevelId 
 	WHERE LanguageId = @LanguageID
-		AND ClassificationLevelLanguages.Name = @Name
-		AND ClassificationLevels.ClassificationId = @ClassificationId) >0
+		AND ClassificationLevelLanguages.Name = @Name) >0
 BEGIN
-	SET @Error = @Error + ' - This classification name for this language already exists'
-END
-IF  (SELECT COUNT(*) 
-	FROM Languages 
-	WHERE LanguageId = @LanguageId AND languages.StatusId = 1
-) =0
-BEGIN
-	SET @Error = @Error + ' - The language is not active'
-END
-IF  (SELECT COUNT(*) 
-	FROM DateLevels 
-	WHERE DateLevelId = @DateLevelId ) =0
-BEGIN
-	SET @Error = @Error + ' - The date level does not exist'
+	insert into @ErrorIdsTable values(20)
 END
 
-SELECT @Error;
+
+SELECT ErrorMessages.ErrorMessageID
+	, ISNULL(UINameCustom.Customization,UIName.Name) Name
+FROM @ErrorIdsTable Errors 
+JOIN ErrorMessages 
+	ON Errors.id = ErrorMessages.ErrorMessageID
+JOIN UITermLanguages UIName
+	ON UIName.UITermId = ErrorMessages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = ErrorMessages.NameTermID
+WHERE UIName.LanguageId = @LanguageID
 
 END

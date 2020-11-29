@@ -74,7 +74,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ProcessTemplateFieldCreatePost ProcessTemplateField)
+        public async Task<IActionResult> Create(ProcessTemplateFieldCreateGet ProcessTemplateField)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProcessTemplateField.CreatorId = CurrentUser.Id;

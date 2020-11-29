@@ -9,6 +9,6 @@
         string Name { get; set; }
         int ProcessTemplateFieldTypeId { get; set; }
         int ProcessTemplateId { get; set; }
-        string CreatorId { get; set; }
+        string UserId { get; set; }
     }
 }

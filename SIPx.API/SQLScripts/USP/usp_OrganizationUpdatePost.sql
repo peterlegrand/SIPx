@@ -15,6 +15,7 @@ FROM UserPreferences
 WHERE USerId = @ModifierId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE Organizations SET
 	ParentOrganizationId = @ParentOrganizationID

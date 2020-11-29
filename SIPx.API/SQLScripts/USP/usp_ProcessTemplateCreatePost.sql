@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateCreatePost] (
+CREATE PROCEDURE usp_ProcessTemplateCreatePost (
 	 @ProcessTemplateGroupId int
 	, @ShowInPersonalCalendar bit
 	, @ShowInOrganizationCalendar bit
@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateCreatePost] (
 	, @MouseOver nvarchar(50)
 	, @Color char(9)
 	, @IconID int
-	, @CreatorId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -25,6 +25,7 @@ FROM UserPreferences
 WHERE USerId = @CreatorId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 UPDATE ProcessTemplates SET Sequence = Sequence + 1 

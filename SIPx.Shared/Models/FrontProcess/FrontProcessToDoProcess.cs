@@ -11,6 +11,6 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProcessId { get; set; }
-        public string CreatorId { get; set; }
+        public int CreatorId { get; set; }
     }
 }

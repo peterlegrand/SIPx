@@ -1,17 +1,18 @@
-CREATE PROCEDURE [dbo].[usp_ContentTypeGroupCreatePost] (
+CREATE PROCEDURE usp_ContentTypeGroupCreatePost (
 	@Sequence int 
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @CreatorId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @CreatorId
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 UPDATE ContentTypeGroups SET Sequence = Sequence + 1 
@@ -25,9 +26,9 @@ INSERT INTO ContentTypeGroups (
 	, ModifiedDate)
 VALUES (
 	@Sequence
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 
@@ -51,9 +52,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 	COMMIT TRANSACTION

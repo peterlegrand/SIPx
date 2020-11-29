@@ -3,6 +3,7 @@
 @model FrontContentContentNew
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification")).TermString;
 
     Layout = "_Layout";
@@ -139,7 +140,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 @*<ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>*@
+                    <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>*@
                 <ejs-button id="primarybtn" content="Save" action="Submit" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="Cancel" isPrimary="false"></ejs-button>
 

@@ -9,7 +9,7 @@
         int ParentProjectId { get; set; }
         int ProjectTypeId { get; set; }
         int StatusId { get; set; }
-        string CreatorId { get; set; }
+        string UserId { get; set; }
         int SecurityLevelId { get; set; }
     }
 }

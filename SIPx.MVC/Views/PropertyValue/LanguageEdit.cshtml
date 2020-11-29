@@ -3,6 +3,7 @@
 @model ClassificationLevelLanguageIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification level language")).TermString;
 
     Layout = "_LayoutAdmin";

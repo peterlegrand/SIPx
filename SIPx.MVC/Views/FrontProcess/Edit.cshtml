@@ -2,8 +2,8 @@
 @using Newtonsoft.Json
 @model FrontProcessUpdateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>
-       )ViewBag.UITerms;
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Edit process")).TermString;
 
     Layout = "_Layout"; }

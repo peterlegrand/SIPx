@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[usp_UserMenuCreatePost] (
 	, @CreatorId nvarchar(450)) 
 
 AS 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 UPDATE UserMenus SET Sequence = Sequence + 1 

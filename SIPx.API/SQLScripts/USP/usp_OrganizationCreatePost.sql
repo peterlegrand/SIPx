@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationCreatePost] (
+CREATE PROCEDURE usp_OrganizationCreatePost (
 	@ParentOrganizationId int
 	, @StatusId int 
 	, @OrganizationTypeId int 
@@ -6,13 +6,14 @@ CREATE PROCEDURE [dbo].[usp_OrganizationCreatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @CreatorId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE UserId = @CreatorId
+WHERE UserId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 INSERT INTO Organizations (
 	ParentOrganizationID
@@ -26,9 +27,9 @@ VALUES (
 	@ParentOrganizationID
 	, @StatusID
 	, @OrganizationTypeID
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 	DECLARE @NewOrganizationId int	= scope_identity();
@@ -51,9 +52,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 	COMMIT TRANSACTION

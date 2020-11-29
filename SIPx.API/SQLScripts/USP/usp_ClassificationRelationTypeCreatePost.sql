@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationRelationTypeCreatePost] (
+CREATE PROCEDURE usp_ClassificationRelationTypeCreatePost (
 	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -12,6 +12,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO ClassificationRelationTypes (

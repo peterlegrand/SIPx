@@ -10,6 +10,6 @@
         string Name { get; set; }
         int ProcessTemplateId { get; set; }
         int ProcessTemplateStageTypeId { get; set; }
-        string CreatorId { get; set; }
+        string UserId { get; set; }
     }
 }

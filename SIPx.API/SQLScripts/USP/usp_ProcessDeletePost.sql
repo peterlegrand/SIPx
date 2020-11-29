@@ -6,6 +6,7 @@ SELECT @MultiID = ProcessMultiID FROM Processes;
 
 IF @MultiID IS NULL
 BEGIN
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 DELETE FROM ProcessMultis
 WHERE ProcessMultiID  = @MultiID

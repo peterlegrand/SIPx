@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(PersonAddressCreatePost PersonAddress)
         {
-            string usp = "usp_PersonAddressCreatePost @PersonId, @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @CreatorId ";
+            string usp = "usp_PersonAddressCreatePost @PersonId, @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);
             return CheckString;
         }
@@ -76,7 +76,7 @@ namespace SIPx.DataAccess
                 ", @CountryId" +
                 ", @ProvinceState" +
                 ", @County" +
-                ", @ModifierId";
+                ", @UserId";
             _sqlDataAccess.SaveData<PersonAddressUpdateGet>(usp, PersonAddress);
             return true;
         }

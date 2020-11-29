@@ -65,19 +65,27 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ClassificationValueCreatePost ClassificationValue)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ClassificationValue.CreatorId = CurrentUser.Id;
+            ClassificationValue.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _classificationValueProvider.CreatePostCheck(ClassificationValue);
-                if (CheckString.Length == 0)
+                //var CheckString = await _classificationValueProvider.CreatePostCheck(ClassificationValue);
+                //if (CheckString.Length == 0)
+                //{
+                if (ClassificationValue.DateFrom == Convert.ToDateTime("1/1/0001 12:00:00 AM"))
                 {
-                    await _classificationValueProvider.CreatePost(ClassificationValue);
-                    return Ok(ClassificationValue);
+                    ClassificationValue.DateFrom = null;
                 }
+                if (ClassificationValue.DateTo == Convert.ToDateTime("1/1/0001 12:00:00 AM"))
+                {
+                    ClassificationValue.DateTo = null;
+                }
+                await _classificationValueProvider.CreatePost(ClassificationValue);
+                    return Ok(ClassificationValue);
+                //}
                 return BadRequest(new
                 {
                     IsSuccess = false,
-                    Message = CheckString,
+                   // Message = CheckString,
                 });
             }
             return BadRequest(new

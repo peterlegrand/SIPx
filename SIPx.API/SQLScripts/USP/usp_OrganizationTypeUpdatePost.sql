@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationTypeUpdatePost] (
+CREATE PROCEDURE usp_OrganizationTypeUpdatePost (
 	@OrganizationTypeId int
 	, @Internal bit
 	, @LegalEntity bit

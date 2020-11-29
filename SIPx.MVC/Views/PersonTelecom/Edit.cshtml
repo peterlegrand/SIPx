@@ -3,6 +3,7 @@
 @model PersonTelecomUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person telecom")).TermString;
 
     Layout = "_LayoutAdmin";

@@ -67,7 +67,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ProcessTemplateCreateGet ProcessTemplate)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplate.CreatorId = CurrentUser.Id;
+            ProcessTemplate.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _processTemplateProvider.CreatePostCheck(ProcessTemplate);

@@ -23,7 +23,7 @@ namespace SIPx.Shared
         public int CountryId { get; set; }
         public string ProvinceState { get; set; }
         public string County { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<AddressTypeList> AddressTypes { get; set; }
         public List<CountryList> Countries { get; set; }
     }

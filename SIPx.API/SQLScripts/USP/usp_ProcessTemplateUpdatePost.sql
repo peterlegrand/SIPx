@@ -29,6 +29,7 @@ WHERE USerId = @ModifierId
 
 DECLARE @OldSequence int;
 SELECT @OldSequence = Sequence FROM ProcessTemplates  WHERE ProcessTemplateID= @ProcessTemplateID;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN

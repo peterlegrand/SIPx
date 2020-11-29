@@ -18,6 +18,7 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 DECLARE @PropertyTypeId int;
 SELECT @PropertyTypeId = PropertyTypeId FROM Properties WHERE PropertyId = @PropertyId;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE PropertyValues SET Sequence = Sequence + 1 
 WHERE PropertyId = @PropertyId 

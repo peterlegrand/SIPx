@@ -20,14 +20,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateStageCreatePost ProcessTemplateStage)
+        public async Task<string> CreatePostCheck(ProcessTemplateStageCreateGet ProcessTemplateStage)
         {
             string usp = "usp_ProcessTemplateStageCreatePostCheck @ProcessTemplateId, @ProcessTemplateTypeId, @LanguageId, @Name, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStage);
             return CheckString;
         }
 
-        public async Task<string> CreatePost(ProcessTemplateStageCreatePost ProcessTemplateStage)
+        public async Task<string> CreatePost(ProcessTemplateStageCreateGet ProcessTemplateStage)
         {
             string usp = "usp_ProcessTemplateStageCreatePost @ProcessTemplateId, @ProcessTemplateStageTypeId, @InToDo, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStage);

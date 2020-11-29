@@ -1,5 +1,6 @@
 CREATE PROCEDURE usp_ProcessTemplateStageDeletePost ( @ProcessTemplateStageId int)
 AS
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 DELETE FROM ProcessTemplateStageFields WHERE ProcessTemplateStageId = @ProcessTemplateStageId

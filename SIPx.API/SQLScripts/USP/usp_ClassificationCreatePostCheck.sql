@@ -2,50 +2,72 @@ CREATE PROCEDURE [dbo].[usp_ClassificationCreatePostCheck] (
 	@StatusId bit
 	, @HasDropDown bit
 	, @DropDownSequence int
-	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
+
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
+
 BEGIN 
-DECLARE @Error varchar(500) = '';
+
+DECLARE @ErrorIdsTable TABLE (id int)
 
 IF @StatusId NOT IN (1,2) 
 BEGIN
-	SET @Error = @Error + ' - StatusId is not correct'
+insert into @ErrorIdsTable values(1)
 END
 
 
 IF  @HasDropDown NOT IN (0,1) 
 BEGIN
-	SET @Error = @Error + ' - dropdown value must be 0 or 1'
+insert into @ErrorIdsTable values(2)
 END
 	
 IF (SELECT MAX(DropDownSequence) 
 	FROM Classifications ) < @DropDownSequence + 1
 BEGIN
-	SET @Error = @Error + ' - dropdown sequence is bigger than current max value '
+	insert into @ErrorIdsTable values(3)
+END
+
+IF @DropDownSequence < 1
+BEGIN
+	insert into @ErrorIdsTable values(4)
+
 END
 
 IF  (SELECT COUNT(*) 
-	FROM Classifications 
-	JOIN ClassificationLanguages 
-		ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId 
+	FROM ClassificationLanguages 
 	WHERE LanguageId = @LanguageID
 		AND ClassificationLanguages.Name = @Name) >0
 BEGIN
-	SET @Error = @Error + ' - This classification name for this language already exists'
+	insert into @ErrorIdsTable values(5)
 END
+
 IF  (SELECT COUNT(*) 
 	FROM Languages 
 	WHERE LanguageId = @LanguageId AND languages.StatusId = 1
 ) =0
 BEGIN
-	SET @Error = @Error + ' - The language is not active'
+	insert into @ErrorIdsTable values(6)
 END
 
-SELECT @Error;
+SELECT ErrorMessages.ErrorMessageID
+	, ISNULL(UINameCustom.Customization,UIName.Name) Name
+FROM @ErrorIdsTable Errors 
+JOIN ErrorMessages 
+	ON Errors.id = ErrorMessages.ErrorMessageID
+JOIN UITermLanguages UIName
+	ON UIName.UITermId = ErrorMessages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = ErrorMessages.NameTermID
+WHERE UIName.LanguageId = @LanguageID
 
 END

@@ -2,6 +2,7 @@ CREATE PROCEDURE usp_ProjectDeletePost ( @ProjectID int)
 AS
 IF (SELECT COUNT(*) FROM Projects  WHERE ParentProjectID = @ProjectID) =0
 BEGIN
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 DELETE FROM ProjectLanguages WHERE ProjectId = @ProjectId

@@ -50,11 +50,17 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassification, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
             return x;
         }
-
-        public async Task<List<FrontContentContentNewClassificationValue>> NewClassificationValues(string UserId, int ClassificationId)
+        public async Task<List<FrontContentContentNewClassificationLevel>> NewClassificationLevels(int ClassificationId)
         {
-            string usp = "usp_FrontContentNewClassificationValues @UserId, @ClassificationId";
-            var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassificationValue, dynamic>(usp, new { UserId = UserId, ClassificationId = ClassificationId });
+            string usp = "usp_FrontContentNewClassificationLevels @ClassificationId";
+            var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassificationLevel, dynamic>(usp, new { ClassificationId });
+            return x;
+        }
+
+        public async Task<List<FrontContentContentNewClassificationValue>> NewClassificationValues(string UserId, int ClassificationId, int Sequence, bool Alphabetical)
+        {
+            string usp = "usp_FrontContentNewClassificationValues @UserId, @ClassificationId, @Sequence, @Alphabetical ";
+            var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassificationValue, dynamic>(usp, new { UserId, ClassificationId, Sequence, Alphabetical});
             return x;
         }
 

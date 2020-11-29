@@ -12,6 +12,6 @@ namespace SIPx.Shared
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
         public string Customization { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
     }
 }

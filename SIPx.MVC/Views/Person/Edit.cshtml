@@ -3,6 +3,7 @@
 @model PersonUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person")).TermString;
 
     Layout = "_LayoutAdmin";
@@ -133,7 +134,7 @@
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="UserId" dataSource="@Model.Users" ejs-for="@Model.UserId" value="@Model.UserId" index="2" filtering="Users" popupHeight="220px">
+                <ejs-dropdownlist id="UserId" dataSource="@Model.Users" ejs-for="@Model.SelectedUserId" value="@Model.SelectedUserId" index="2" filtering="Users" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 

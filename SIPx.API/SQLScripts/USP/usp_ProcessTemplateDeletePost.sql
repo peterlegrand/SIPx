@@ -1,5 +1,6 @@
 CREATE PROCEDURE usp_ProcessTemplateDeletePost ( @ProcessTemplateId int)
 AS
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 DECLARE @Sequence int;

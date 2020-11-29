@@ -19,7 +19,7 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public int SecurityLevelId { get; set; }
         public string MouseOver { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<StatusList> Statuses { get; set; }
         public List<ProjectTypeList> ProjectTypes { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }

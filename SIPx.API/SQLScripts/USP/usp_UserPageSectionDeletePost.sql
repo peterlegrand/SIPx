@@ -1,5 +1,6 @@
 CREATE PROCEDURE usp_UserPageSectionDeletePost (@UserId nvarchar(450), @PageSectionId int)
 AS
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 DELETE FROM PageSectionLanguages 
 WHERE PageSectionID = @PageSectionID 

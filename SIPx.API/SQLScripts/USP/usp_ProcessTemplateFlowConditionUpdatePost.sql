@@ -23,6 +23,7 @@ WHERE USerId = @UserID
 DECLARE @OldSequence int;
 DECLARE @ProcessTemplateFlowId int;
 SELECT @OldSequence = Sequence, @ProcessTemplateFlowId = ProcessTemplateFlowId FROM ProcessTemplateFlowConditions WHERE ProcessTemplateFlowConditionId = @ProcessTemplateFlowConditionID;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN

@@ -8,6 +8,7 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateFlowUpdatePost] (
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

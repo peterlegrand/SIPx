@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationAddressCreatePost] (
+CREATE PROCEDURE usp_OrganizationAddressCreatePost (
 	@OrganizationId int
 	, @AddressTypeId int
 	, @AttnName nvarchar(50)
@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[usp_OrganizationAddressCreatePost] (
 	, @CountryId int
 	, @ProvinceState nvarchar(50)
 	, @County nvarchar(50)
-	, @CreatorId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 INSERT INTO OrganizationAddresses (
@@ -47,9 +47,9 @@ VALUES (
 	, @CountryID
 	, @ProvinceState 
 	, @County 
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 

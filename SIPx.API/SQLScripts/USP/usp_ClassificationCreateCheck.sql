@@ -2,13 +2,18 @@ CREATE PROCEDURE [dbo].[usp_ClassificationCreateCheck] (
 	@StatusId bit
 	, @HasDropDown bit
 	, @DropDownSequence int
-	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 BEGIN 
 DECLARE @Error varchar(500) = '';
 
@@ -30,9 +35,7 @@ BEGIN
 END
 
 IF  (SELECT COUNT(*) 
-	FROM Classifications 
-	JOIN ClassificationLanguages 
-		ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId 
+	FROM ClassificationLanguages 
 	WHERE LanguageId = @LanguageID
 		AND ClassificationLanguages.Name = @Name) >0
 BEGIN

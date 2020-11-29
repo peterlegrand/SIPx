@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationTelecomCreatePost] (
+CREATE PROCEDURE usp_OrganizationTelecomCreatePost (
 	@OrganizationId int
 	, @TelecomTypeId int
 	, @TelecomValue nvarchar(50)
@@ -9,6 +9,7 @@ CREATE PROCEDURE [dbo].[usp_OrganizationTelecomCreatePost] (
 	, @UserId nvarchar(450)) 
 AS 
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO OrganizationTelecoms (OrganizationId, TelecomTypeId, TelecomValue, CreatorId, CreatedDate, ModifierId, ModifiedDate) VALUES (

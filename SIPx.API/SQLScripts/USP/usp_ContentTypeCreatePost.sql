@@ -16,6 +16,7 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO ContentTypes (

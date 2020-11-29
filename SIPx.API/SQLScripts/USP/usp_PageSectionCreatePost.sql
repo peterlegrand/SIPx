@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PageSectionCreatePost] (
+CREATE PROCEDURE usp_PageSectionCreatePost (
 	@PageId int
 	, @PageSectionTypeId int
 	, @PageSectionDataTypeId int
@@ -28,6 +28,7 @@ FROM UserPreferences
 WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO PageSections (

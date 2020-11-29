@@ -18,6 +18,7 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @CreatorID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 UPDATE UserMenuTemplateOptions SET Sequence = Sequence + 1 

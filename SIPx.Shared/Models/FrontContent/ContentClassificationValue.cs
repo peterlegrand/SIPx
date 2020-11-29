@@ -11,7 +11,8 @@ namespace SIPx.Shared
         [Key]
         public int ClassificationId { get; set; }
         public int ClassificationValueId { get; set; }
-        public string CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string UserId { get; set; }
     }
 }

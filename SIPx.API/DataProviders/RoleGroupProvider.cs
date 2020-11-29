@@ -20,16 +20,16 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(RoleGroupCreatePost RoleGroup)
+        public async Task<string> CreatePostCheck(RoleGroupCreateGet RoleGroup)
         {
             string usp = "usp_RoleGroupCreateCheck @Sequence, @LanguageId  , @Name, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, RoleGroup);
             return CheckString;
         }
 
-        public async Task<string> CreatePost(RoleGroupCreatePost RoleGroup)
+        public async Task<string> CreatePost(RoleGroupCreateGet RoleGroup)
         {
-            string usp = "usp_RoleGroupCreatePost @Sequence , @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
+            string usp = "usp_RoleGroupCreatePost @Sequence , @Name, @Description, @MenuName, @MouseOver, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, RoleGroup);
             return String;
         }

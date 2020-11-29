@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ContentTypeGroupUpdatePost] (
+CREATE PROCEDURE usp_ContentTypeGroupUpdatePost (
 	@ContentTypeGroupId int 
 	, @Sequence int
 	, @Name nvarchar(50)
@@ -15,6 +15,7 @@ WHERE USerId = @UserId
 
 DECLARE @OldSequence int;
 SELECT @OldSequence = Sequence FROM ContentTypeGroups WHERE ContentTypeGroupId = @ContentTypeGroupID;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN

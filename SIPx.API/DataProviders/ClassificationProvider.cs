@@ -26,17 +26,17 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<string> CreatePostCheck(ClassificationCreatePost Classification)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ClassificationCreateGet Classification)
         {
-            string usp = "usp_ClassificationCreatePostCheck @StatusId  , @HasDropDown , @DropDownSequence , @LanguageId , @Name , @Description , @MenuName , @MouseOver , @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Classification);
-            return CheckString;
+            string usp = "usp_ClassificationCreatePostCheck @StatusId  , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @UserId ";
+            var ErrorMessage = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Classification);
+            return ErrorMessage;
         }
 
-        public bool CreatePost(ClassificationCreatePost Classification)
+        public bool CreatePost(ClassificationCreateGet Classification)
         {
             string usp = "usp_classificationCreatePost @StatusId, @HasDropDown, @DropDownSequence, @LanguageId, @Name, @Description, @MenuName, @MouseOver,@IconId, @Color, @UserID";
-            _sqlDataAccess.SaveData<ClassificationCreatePost>(usp, Classification);
+            _sqlDataAccess.SaveData<ClassificationCreateGet>(usp, Classification);
             return true;
         }
 

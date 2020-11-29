@@ -11,6 +11,7 @@ CREATE PROCEDURE usp_FrontContentNewPost (	@ContentTypeId int
 )
 
 AS
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 INSERT INTO Contents (
 	ContentTypeId

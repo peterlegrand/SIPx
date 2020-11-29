@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PersonAddressCreatePost] (
+CREATE PROCEDURE usp_PersonAddressCreatePost (
 	@PersonId int
 	, @AddressTypeId int
 	, @AttnName nvarchar(50)
@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[usp_PersonAddressCreatePost] (
 	, @CountryId int
 	, @ProvinceState nvarchar(50)
 	, @County nvarchar(50)
-	, @CreatorId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 INSERT INTO PersonAddresses (

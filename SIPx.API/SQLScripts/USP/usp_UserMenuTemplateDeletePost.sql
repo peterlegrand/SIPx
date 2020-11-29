@@ -1,5 +1,6 @@
 CREATE PROCEDURE usp_UserMenuTemplateDeletePost ( @UserMenuTemplateId int)
 AS
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 DELETE FROM UserMenuTemplateOptionLanguages WHERE UserMenuTemplateId = @UserMenuTemplateId

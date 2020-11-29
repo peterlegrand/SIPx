@@ -86,6 +86,7 @@ namespace SIPx.API
             services.AddTransient<IPropertyProvider, PropertyProvider>();
             services.AddTransient<IClassificationLevelPropertyProvider, ClassificationLevelPropertyProvider>();
             services.AddTransient<IClassificationLevelPropertyStatusProvider, ClassificationLevelPropertyStatusProvider>();
+            services.AddTransient<IClassificationValuePropertyProvider, ClassificationValuePropertyProvider>();
             services.AddTransient<IPropertyValueProvider, PropertyValueProvider>();
             services.AddTransient<IPropertyTypeProvider, PropertyTypeProvider>();
             services.AddTransient<IUserRoleProvider, UserRoleProvider>();

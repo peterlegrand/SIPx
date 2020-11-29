@@ -49,7 +49,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ClassificationRelationTypeUpdateGet ClassificationRelationType)
         {
-            string usp = "usp_ClassificationRelationTypeUpdatePost @ClassificationRelationTypeId, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ClassificationRelationTypeUpdatePost @ClassificationRelationTypeId, @Name, @Description, @MenuName, @MouseOver, @UserId";
             _sqlDataAccess.SaveData<ClassificationRelationTypeUpdateGet>(usp, ClassificationRelationType);
             return true;
         }

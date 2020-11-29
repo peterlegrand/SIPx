@@ -65,7 +65,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(UserMenuCreateGet UserMenu)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UserMenu.CreatorId = CurrentUser.Id;
+            UserMenu.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
@@ -116,7 +116,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(UserMenuUpdateGet UserMenu)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UserMenu.ModifierId = CurrentUser.Id;
+            UserMenu.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
@@ -162,7 +162,7 @@ namespace SIPx.API.Controllers
                 UserMenu.UserMenus = UserMenuSequences;
                 UserMenu.Icons = iconslist;
                 UserMenu.Pages = Pages;
-                UserMenu.CreatorId = CurrentUser.Id;
+                UserMenu.UserId = CurrentUser.Id;
                 return Ok(UserMenu);
 
                 //return Ok(await _userMenuProvider.UserMenuUpdateGet(CurrentUser.Id, Id));

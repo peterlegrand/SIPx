@@ -18,7 +18,7 @@ namespace SIPx.Shared
         public int UserPageRightId { get; set; }
         public int Sequence { get; set; }
         public string Icon { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
     }
 }
 

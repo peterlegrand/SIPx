@@ -15,6 +15,7 @@ CREATE PROCEDURE [dbo].[usp_UserCreatePost] (
 , @Email nvarchar(256)
 , @ModifierCreator  nvarchar(450)	)
 AS 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 DECLARE @UserId nvarchar(450);
 SELECT @UserId = Id FROM aspnetusers where Email = @Email;

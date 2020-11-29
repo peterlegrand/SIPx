@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ClassificationUpdatePostCheck (
-	@ClassificationLanguageId int
+	@ClassificationId int
 	, @StatusId int
 	, @DefaultPageId int
 	, @HasDropDown bit
@@ -10,55 +10,73 @@ CREATE PROCEDURE usp_ClassificationUpdatePostCheck (
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450))
 AS
-BEGIN
 
-DECLARE @Error varchar(500) = '';
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
+
+BEGIN
+DECLARE @ErrorIdsTable TABLE (id int)
+
+IF (SELECT COUNT(*) FROM Classifications WHERE ClassificationID = @ClassificationId) =0
+BEGIN
+insert into @ErrorIdsTable values(12)
+END
+
 
 IF @StatusId NOT IN (1,2) 
 BEGIN
-	SET @Error = @Error + ' - StatusId is not correct'
+insert into @ErrorIdsTable values(1)
 END
-
-IF  (SELECT COUNT(*) 
-	FROM ClassificationLanguages 
-	WHERE ClassificationLanguages.ClassificationLanguageId = @ClassificationLanguageID) =0
-BEGIN
-	SET @Error = @Error + ' - The classificaation language Id does not exist'
-END
-
-IF  (SELECT COUNT(*) 
-	FROM ClassificationPages JOIN ClassificationLanguages ON ClassificationPages.ClassificationId  = ClassificationLanguages.ClassificationID
-	WHERE ClassificationPages.ClassificationPageId = @DefaultPageId 
-		AND ClassificationLanguages.ClassificationLanguageID= @ClassificationLanguageID) = 0  AND @DefaultPageId IS NOT NULL 
-BEGIN
-	SET @Error = @Error + ' - The default page is not correct'
-END
+--PETER TODO Check if the default page exists
 
 IF  @HasDropDown NOT IN (0,1) 
 BEGIN
-	SET @Error = @Error + ' - dropdown value must be 0 or 1'
+insert into @ErrorIdsTable values(2)
 END
 	
 IF (SELECT MAX(DropDownSequence) 
 	FROM Classifications ) < @DropDownSequence
 BEGIN
-	SET @Error = @Error + ' - dropdown sequence is bigger than current max value '
+	insert into @ErrorIdsTable values(3)
 END
+
+IF @DropDownSequence < 1
+BEGIN
+	insert into @ErrorIdsTable values(4)
+END
+
 
 IF  (SELECT COUNT(*) 
-	FROM Classifications 
-	JOIN ClassificationLanguages 
-		ON ClassificationLanguages.ClassificationId = Classifications.ClassificationId 
-	WHERE LanguageId IN (
-		SELECT LanguageId 
-		FROM ClassificationLanguages 
-			WHERE ClassificationLanguages.ClassificationLanguageId = @ClassificationLanguageID)
-		AND ClassificationLanguageId <> @ClassificationLanguageID
-		AND ClassificationLanguages.Name = @Name) >0
+	FROM ClassificationLanguages 
+	WHERE LanguageId <> @LanguageId
+		AND ClassificationLanguages.ClassificationId = @ClassificationId) > 0
 BEGIN
-	SET @Error = @Error + ' - This classification name for this language already exists'
+	insert into @ErrorIdsTable values(5)
+--	SET @Error = @Error + ' - This classification name for this language already exists'
+END
+IF  (SELECT COUNT(*) 
+	FROM Languages 
+	WHERE LanguageId = @LanguageId AND languages.StatusId = 1
+) =0
+BEGIN
+	insert into @ErrorIdsTable values(6)
+
+--	SET @Error = @Error + ' - The language is not active'
 END
 
-SELECT @Error;
+SELECT ErrorMessages.ErrorMessageID
+	, ISNULL(UINameCustom.Customization,UIName.Name) Name
+FROM @ErrorIdsTable Errors 
+JOIN ErrorMessages 
+	ON Errors.id = ErrorMessages.ErrorMessageID
+JOIN UITermLanguages UIName
+	ON UIName.UITermId = ErrorMessages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = ErrorMessages.NameTermID
+WHERE UIName.LanguageId = @LanguageID
 
 END

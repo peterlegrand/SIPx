@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PersonRelationCreatePost] (
+CREATE PROCEDURE usp_PersonRelationCreatePost (
 	@FromPersonId int
 	, @ToPersonId int
 	, @ValidFrom DateTime

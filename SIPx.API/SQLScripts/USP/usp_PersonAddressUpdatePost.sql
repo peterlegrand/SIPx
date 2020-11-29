@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PersonAddressUpdatePost] (
+CREATE PROCEDURE usp_PersonAddressUpdatePost (
 	@PersonAddressId  int
 	, @AddressTypeId int
 	, @AttnName nvarchar(50)=''
@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[usp_PersonAddressUpdatePost] (
 	, @CountryId int
 	, @ProvinceState nvarchar(50)=''
 	, @County nvarchar(50)=''
-	, @ModifierId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 
 UPDATE PersonAddresses SET
@@ -28,7 +28,7 @@ UPDATE PersonAddresses SET
 	, CountryId = @CountryID
 	, ProvinceState = @ProvinceState 
 	, County = @County 
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = getdate()
 	WHERE PersonAddressId = @PersonAddressId 
 	

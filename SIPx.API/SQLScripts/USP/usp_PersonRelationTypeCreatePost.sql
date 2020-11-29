@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PersonRelationTypeCreatePost] (
+CREATE PROCEDURE usp_PersonRelationTypeCreatePost (
 	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[usp_PersonRelationTypeCreatePost] (
 	, @IconId int
 	, @UserId nvarchar(450)) 
 AS 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

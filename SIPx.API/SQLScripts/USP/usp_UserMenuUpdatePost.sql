@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_UserMenuUpdatePost] (
+CREATE PROCEDURE usp_UserMenuUpdatePost (
 	@UserMenuID int
 	, @Name nvarchar(50)
 	, @MouseOver nvarchar(50)
@@ -8,12 +8,13 @@ CREATE PROCEDURE [dbo].[usp_UserMenuUpdatePost] (
 	, @UserMenuTypeIDRight int
 	, @IconId Int
 	, @Sequence int
-	, @ModifierID nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 
 AS 
 
 DECLARE @OldSequence int;
 SELECT @OldSequence = Sequence FROM UserMenus WHERE UserMenuId = @UserMenuId;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
@@ -33,9 +34,9 @@ UPDATE UserMenus SET
 	, UserMenuTypeIDRight = @UserMenuTypeIDRight
 	, IconId = @IconId
 	, Sequence = @Sequence
-	, ModifierID = @ModifierID
+	, ModifierID = @UserId
 	, ModifiedDate = Getdate()
-WHERE UserID = @ModifierID
+WHERE UserID = @UserId
 	AND UserMenuID = @UserMenuID
 	COMMIT TRANSACTION
 

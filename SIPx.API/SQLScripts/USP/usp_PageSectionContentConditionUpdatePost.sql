@@ -16,6 +16,7 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE PageSectionContentConditions SET 
 	PageSectionContentConditionTypeId = @PageSectionContentConditionTypeID

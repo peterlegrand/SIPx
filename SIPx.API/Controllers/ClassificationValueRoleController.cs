@@ -62,7 +62,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ClassificationValueRoleCreateGet ClassificationValueRole)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ClassificationValueRole.CreatorId = CurrentUser.Id;
+            ClassificationValueRole.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _classificationValueRoleProvider.CreatePostCheck(ClassificationValueRole);

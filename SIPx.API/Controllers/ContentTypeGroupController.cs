@@ -66,7 +66,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ContentTypeGroupCreatePost ContentTypeGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ContentTypeGroup.CreatorId = CurrentUser.Id;
+            ContentTypeGroup.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _ContentTypeGroupProvider.ContentTypeGroupCreatePostCheck(ContentTypeGroup);

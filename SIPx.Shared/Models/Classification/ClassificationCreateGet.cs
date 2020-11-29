@@ -19,7 +19,8 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string Color { get; set; }
         public int IconId { get; set; }
-        public string CreatorId { get; set; }
+        //public string CreatorId { get; set; }
+        public string UserId { get; set; }
 
         public List<StatusList> Statuses { get; set; }
         public List<SequenceList> Sequences { get; set; }

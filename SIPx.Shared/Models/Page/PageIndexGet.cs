@@ -23,10 +23,10 @@ namespace SIPx.Shared
         public string StatusName { get; set; }
         public bool ShowTitleName { get; set; }
         public bool ShowTitleDescription { get; set; }
-        public string CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string ModifierId { get; set; }
+        public int ModifierId { get; set; }
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

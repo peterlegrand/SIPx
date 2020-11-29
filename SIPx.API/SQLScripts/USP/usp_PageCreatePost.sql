@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PageCreatePost] (
+CREATE PROCEDURE usp_PageCreatePost (
 	@ShowTitleName bit
 	, @ShowTitleDescription bit
 	, @StatusId int

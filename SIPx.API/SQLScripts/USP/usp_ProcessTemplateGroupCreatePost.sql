@@ -12,6 +12,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 UPDATE ProcessTemplateGroups SET Sequence = Sequence + 1 

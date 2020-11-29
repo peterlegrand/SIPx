@@ -20,14 +20,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
+        public async Task<string> CreatePostCheck(ProcessTemplateStageTypeCreateGet ProcessTemplateStageType)
         {
             string usp = "usp_ProcessTemplateStageTypeCreatePostCheck @LanguageId, @Name, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStageType);
             return CheckString;
         }
 
-        public async Task<string> CreatePost(ProcessTemplateStageTypeCreatePost ProcessTemplateStageType)
+        public async Task<string> CreatePost(ProcessTemplateStageTypeCreateGet ProcessTemplateStageType)
         {
             string usp = "usp_ProcessTemplateStageTypeCreatePost @Name, @Description, @MenuName, @MouseOver,@color, @IconId, @CreatorId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateStageType);
@@ -50,7 +50,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ProcessTemplateStageTypeUpdateGet ProcessTemplateStageType)
         {
-            string usp = "usp_ProcessTemplateStageTypeUpdatePost @ProcessTemplateStageTypeId, @Name, @Description, @MenuName, @MouseOver, @Color, @IconId, @ModifierId";
+            string usp = "usp_ProcessTemplateStageTypeUpdatePost @ProcessTemplateStageTypeId, @Name, @Description, @MenuName, @MouseOver, @Color, @IconId, @UserId";
             _sqlDataAccess.SaveData<ProcessTemplateStageTypeUpdateGet>(usp, ProcessTemplateStageType);
             return true;
         }

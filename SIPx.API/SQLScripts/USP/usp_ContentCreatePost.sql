@@ -12,6 +12,7 @@ CREATE PROCEDURE usp_ContentCreatePost (
 	, @ProcessId int
 	, @ClassificationValueTable AS udt_ContentClassificationValuesNew READONLY)
 AS 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 INSERT INTO Contents (
 	ParentContentID

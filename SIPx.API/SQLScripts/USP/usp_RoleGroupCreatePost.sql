@@ -12,6 +12,7 @@ FROM UserPreferences
 WHERE USerId = @CreatorId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 UPDATE RoleGroups SET Sequence = Sequence + 1 

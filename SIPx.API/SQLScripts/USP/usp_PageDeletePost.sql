@@ -1,5 +1,6 @@
 CREATE PROCEDURE usp_PageDeletePost ( @PageId int)
 AS
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 DELETE FROM PageLanguages 
 WHERE PageID  = @PageId 

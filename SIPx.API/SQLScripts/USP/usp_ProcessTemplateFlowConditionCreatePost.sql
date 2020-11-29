@@ -23,6 +23,7 @@ WHERE USerId = @UserID
 DECLARE @ProcessTemplateId int;
 
 SELECT @ProcessTemplateId  = ProcessTemplateId FROM ProcessTemplateFlows WHERE ProcessTemplateFlowId = @ProcessTemplateFlowID;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 UPDATE ProcessTemplateFlowConditions SET Sequence = Sequence + 1 

@@ -2,8 +2,8 @@
 @using Newtonsoft.Json
 @model FrontProcessNewProcessWithMaster
 @{
-    var Term = (List<UITermLanguageCustomizationList>
-       )ViewBag.UITerms;
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create new process")).TermString;
 
     Layout = "_Layout"; }

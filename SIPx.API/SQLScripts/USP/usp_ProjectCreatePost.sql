@@ -19,6 +19,7 @@ BEGIN
 SET @ParentProjectId = NULL
 END
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 INSERT INTO Projects (
 	ParentProjectID

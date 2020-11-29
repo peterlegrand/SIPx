@@ -54,7 +54,7 @@ namespace SIPx.DataAccess
                 ", @MouseOver" +
                 ", @Color" +
                 ", @IconId" +
-                ", @CreatorId";
+                ", @UserId";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplate);
             return String;
         }

@@ -22,6 +22,7 @@ WHERE USerId = @UserID
 DECLARE @ClassificationId int;
 DECLARE @OldSequence int;
 SELECT @OldSequence = Sequence, @ClassificationId = ClassificationId FROM ClassificationLevels WHERE ClassificationLevelId = @ClassificationLevelID;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN

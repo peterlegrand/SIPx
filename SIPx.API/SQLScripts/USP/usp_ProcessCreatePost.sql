@@ -9,6 +9,7 @@ SELECT @ProcessTemplateStageID = ProcessTemplateFlows.ProcessTemplateToStageID
 FROM ProcessTemplateFlows
 WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO Processes (

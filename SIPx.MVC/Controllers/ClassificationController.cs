@@ -35,13 +35,15 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ClassificationCreateGet>($"{_baseUrl}api/Classification/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
             ViewBag.UITerms = UITerms;
-            if(response.Item2==true)
-            { 
-            return View(response.Item1);
+            var x = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = x;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
             }
             else
             {
-                return RedirectToAction("Menu","Admin");
+                return RedirectToAction("Menu", "Admin");
             }
         }
 
@@ -49,8 +51,15 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(ClassificationCreateGet Classification)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationCreateGet>($"{_baseUrl}api/Classification/Create", Classification, token);
-
+            var ClassificationCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationCreateGetWithErrorMessages>($"{_baseUrl}api/Classification/Create", Classification, token);
+//            (ClassificationCreateGet, List<ErrorMessage>) tuple = await _client.PostProtectedAsync<(ClassificationCreateGet, List<ErrorMessage>)>($"{_baseUrl}api/Classification/Create", Classification, token);
+            if (ClassificationCreateGetWithErrorMessage.ErrorMessages.Count>0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ClassificationCreateGetWithErrorMessage.ErrorMessages;
+                return View(ClassificationCreateGetWithErrorMessage.CreateUpdateObject);
+            }
             return RedirectToAction("Index");
         }
         [HttpGet]

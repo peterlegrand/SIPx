@@ -7,6 +7,7 @@ FROM UserPreferences
 WHERE UserId = @CreatorId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 INSERT INTO Pages (StatusId, ShowTitleName, ShowTitleDescription, UserId, CreatorId, ModifierId, CreatedDate, ModifiedDate)
 VALUES (1,@ShowTitleName, @ShowTitleDescription, @CreatorId, @CreatorId, @CreatorId, getdate(), Getdate())

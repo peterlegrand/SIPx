@@ -21,6 +21,7 @@ WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE ClassificationValues SET 
 	 DateFrom = @DateFrom

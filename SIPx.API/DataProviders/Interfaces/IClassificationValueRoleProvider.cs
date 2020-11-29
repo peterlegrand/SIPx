@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IClassificationValueRoleProvider
     {
         Task<string> CreatePost(ClassificationValueRoleCreateGet ClassificationValueRole);
-        Task<string> CreatePostCheck(ClassificationValueRoleCreatePost ClassificationValueRole);
+        Task<string> CreatePostCheck(ClassificationValueRoleCreateGet ClassificationValueRole);
         Task<ClassificationValueRoleDeleteGet> DeleteGet(string UserId, int ClassificationValueRoleId);
         bool DeletePost(int Id);
         Task<List<ClassificationValueRoleIndexGet>> IndexGet(string UserId, int ClassificationId);

@@ -15,12 +15,13 @@ namespace SIPx.Shared
         public string ProcessTemplateName { get; set; }
         public string ProcessTemplateStageId { get; set; }
         public string ProcessTemplateStageName { get; set; }
-        public string CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string ModifierId { get; set; }
+        public int ModifierId { get; set; }
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string UserId { get; set; }
 
     }
 }

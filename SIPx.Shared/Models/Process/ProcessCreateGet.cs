@@ -14,7 +14,7 @@ namespace SIPx.Shared
         public string ProcessTemplateStageId { get; set; }
         public string ProcessTemplateStageName { get; set; }
         public int? ProcessMultiId { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<SequenceList> Sequences { get; set; }
         public List<ProcessTemplateGroupList> ProcessTemplateGroups { get; set; }
         public List<ProcessCreateGetFieldList> ProcessCreateGetFields { get; set; }

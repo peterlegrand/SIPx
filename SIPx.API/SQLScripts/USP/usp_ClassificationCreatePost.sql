@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[usp_ClassificationCreatePost] (
 	, @Color char(9)
 	, @UserId nvarchar(450)) 
 AS 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO Classifications (

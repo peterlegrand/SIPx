@@ -1,47 +1,49 @@
 CREATE PROCEDURE usp_ClassificationValueCreatePostCheck (
 	@ClassificationId int
 	, @ParentId int = NULL
-	, @LanguageId int
+	, @DateFrom datetime = NULL
+	, @DateTo datetime = NULL
 	, @Name nvarchar(50)
-	, @CreatorId nvarchar(450))
-AS
-BEGIN
+	, @UserId nvarchar(450))
+AS 
 
-DECLARE @Error varchar(500) = '';
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
 
-If @ParentId IS NOT NULL AND @ParentId <> 0
+BEGIN 
+DECLARE @ErrorIdsTable TABLE (id int)
+
+IF (SELECT COUNT(*) FROM Classifications WHERE ClassificationID = @ClassificationId) = 0
 BEGIN
-	IF  (SELECT COUNT(*) 
-	
-		FROM ClassificationValues  
-		WHERE ClassificationValueID = @ParentId
-		AND @ClassificationId = @ClassificationId) = 0 
-		BEGIN
-	SET @Error = @Error + ' - The parent value does not exist'
-	END
+insert into @ErrorIdsTable values(12)
 END
 
 
-
-
-
+IF (SELECT COUNT(*) FROM ClassificationValues WHERE ClassificationValueID = @ParentId) = 0 AND @ParentId IS NOT NULL
+BEGIN
+insert into @ErrorIdsTable values(35)
+END
 
 IF  (SELECT COUNT(*) 
-	FROM Languages 
-	WHERE LanguageId = @LanguageId AND languages.StatusId = 1
-) =0
+	FROM ClassificationValueLanguages 
+	WHERE LanguageId = @LanguageID
+		AND ClassificationValueLanguages.Name = @Name) >0
 BEGIN
-	SET @Error = @Error + ' - The language is not active'
+	insert into @ErrorIdsTable values(36)
 END
 
-
-IF  (SELECT COUNT(*) 
-	FROM AspNetUsers 
-	WHERE Id = @CreatorId) =0
-BEGIN
-	SET @Error = @Error + ' - The user does not exist '
-END
-
-SELECT @Error;
+SELECT ErrorMessages.ErrorMessageID
+	, ISNULL(UINameCustom.Customization,UIName.Name) Name
+FROM @ErrorIdsTable Errors 
+JOIN ErrorMessages 
+	ON Errors.id = ErrorMessages.ErrorMessageID
+JOIN UITermLanguages UIName
+	ON UIName.UITermId = ErrorMessages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = ErrorMessages.NameTermID
+WHERE UIName.LanguageId = @LanguageID
 
 END

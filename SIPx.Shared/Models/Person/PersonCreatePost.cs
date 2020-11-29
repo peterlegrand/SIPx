@@ -23,7 +23,7 @@ namespace SIPx.Shared
         public DateTime DeceasedDate { get; set; }
         public int DefaultOrganizationId { get; set; }
         public string UserId { get; set; }
-        public string CreatorId { get; set; }
+        public string SelectedUserId { get; set; }
 
     }
 }

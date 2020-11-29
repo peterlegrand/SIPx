@@ -17,6 +17,7 @@ WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 DECLARE @PageId int;
 SELECT @PageId = PageId FROM PageSections WHERE PageSectionId = @PageSectionId;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO PageSectionContentConditions (

@@ -1,5 +1,6 @@
 CREATE PROCEDURE usp_PersonTelecomDeletePost ( @PersonTelecomId int)
 AS
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 DELETE FROM PersonTelecomPhones 
 WHERE PersonTelecomID = @PersonTelecomId

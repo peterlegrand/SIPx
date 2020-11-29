@@ -20,6 +20,7 @@ WHERE USerId = @UserID
 
 DECLARE @OldSequence int;
 SELECT @OldSequence = DropDownSequence FROM Classifications  WHERE ClassificationID= @ClassificationID;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @DropDownSequence
 BEGIN

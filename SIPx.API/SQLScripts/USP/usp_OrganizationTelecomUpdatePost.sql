@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationTelecomUpdatePost] (
+CREATE PROCEDURE usp_OrganizationTelecomUpdatePost (
 	@OrganizationTelecomId int
 	, @TelecomValue nvarchar(50)
 	, @CountryCode nvarchar(10)
@@ -8,6 +8,7 @@ CREATE PROCEDURE [dbo].[usp_OrganizationTelecomUpdatePost] (
 	, @UserId nvarchar(450)) 
 AS 
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 DECLARE @IsPhone bit;

@@ -13,7 +13,7 @@ namespace SIPx.Shared
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTill { get; set; }
         public int PersonRelationTypeId { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
 
     }
 }

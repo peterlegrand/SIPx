@@ -17,7 +17,8 @@ namespace SIPx.Shared
         //public Guid? GuidPreference { get; set; }
         public string LocationPreference { get; set; }
         public string TypeName { get; set; }
-        public string CreatorId { get; set; }
+        public string ModifierId { get; set; }
+        public string UserId { get; set; }
         public List<LanguageList> Languages { get; set; }
         public List<PageList> Pages { get; set; }
     }

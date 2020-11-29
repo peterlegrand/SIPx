@@ -3,6 +3,7 @@
 @model ClassificationRelationTypeCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification relation type")).TermString;
 
     Layout = "_LayoutAdmin";

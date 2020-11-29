@@ -10,8 +10,8 @@ namespace SIPx.Shared
         [Key]
         public int ClassificationId { get; set; }
         public int? ParentId { get; set; }
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
         public string Location { get; set; }
         public int LanguageId { get; set; }
         public string Name { get; set; }
@@ -24,6 +24,6 @@ namespace SIPx.Shared
         public string HeaderName { get; set; }
         public string HeaderDescription { get; set; }
         public string TopicName { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
     }
 }

@@ -37,6 +37,7 @@ BEGIN
 DECLARE @PropertyId int;
 DECLARE @OldSequence int;
 SELECT @OldSequence = Sequence, @PropertyId = PropertyId FROM PropertyValues WHERE PropertyValueId = @PropertyValueID;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN

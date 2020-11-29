@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationRoleCreatePost] (
+CREATE PROCEDURE usp_ClassificationRoleCreatePost (
 	@RoleId nvarchar(450)
 	, @ClassificationId int 
 	, @ClassificationRelationTypeId int

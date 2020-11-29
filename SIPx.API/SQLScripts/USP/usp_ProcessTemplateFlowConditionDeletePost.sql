@@ -1,5 +1,6 @@
 CREATE PROCEDURE usp_ProcessTemplateFlowConditionDeletePost (@ProcessTemplateFlowConditionId int)
 AS
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 DELETE FROM ProcessTemplateFlowConditionLanguages WHERE ProcessTemplateFlowConditionId = @ProcessTemplateFlowConditionId

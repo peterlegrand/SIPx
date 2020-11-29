@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -58,31 +59,39 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ClassificationCreatePost Classification)
+        public async Task<IActionResult> Create(ClassificationCreateGet Classification)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Classification.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _classificationProvider.ClassificationCreatePostCheck(Classification);
-                //if (CheckString.Length == 0)
-                //{
-                    _classificationProvider.CreatePost(Classification);
-                    return Ok(Classification);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _classificationProvider.CreatePostCheck(Classification);
+                if(ErrorMessages.Count>0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    var ClassificationCreateGetSequences = await _classificationProvider.CreateGetSequence(CurrentUser.Id);
+                    var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                    var icons = await _masterListProvider.IconList(CurrentUser.Id);
+                    Classification.Icons = icons;
+                    var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                    Classification.LanguageId = UserLanguage.LanguageId;
+                    Classification.LanguageName = UserLanguage.Name;
+                    Classification.Statuses = Statuses;
+                    Classification.Sequences = ClassificationCreateGetSequences;
+                    Classification.Sequences.Add(new SequenceList { Sequence = ClassificationCreateGetSequences.Count + 1, Name = "Add at the end" });
+                }
+                else
+                { 
+                _classificationProvider.CreatePost(Classification);
+                }
+                ClassificationCreateGetWithErrorMessages ClassificationWithErrorMessage = new ClassificationCreateGetWithErrorMessages { CreateUpdateObject = Classification, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationWithErrorMessage);              
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationCreateGetWithErrorMessages ClassificationWithNoRights = new ClassificationCreateGetWithErrorMessages { CreateUpdateObject = Classification, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationWithNoRights);
         }
-        
+
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {

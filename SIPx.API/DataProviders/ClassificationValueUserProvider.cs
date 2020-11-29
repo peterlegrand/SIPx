@@ -19,9 +19,9 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(ClassificationValueUserCreatePost ClassificationValueUser)
+        public async Task<string> CreatePostCheck(ClassificationValueUserCreateGet ClassificationValueUser)
         {
-            string usp = "usp_ClassificationValueUserCreatePostCheck @UserId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, CreatorId";
+            string usp = "usp_ClassificationValueUserCreatePostCheck @UserOfClassificationValueId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, UserId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueUser);
             return CheckString;
         }

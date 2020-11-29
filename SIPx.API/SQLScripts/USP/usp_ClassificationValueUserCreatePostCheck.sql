@@ -1,46 +1,44 @@
-CREATE PROCEDURE [dbo].usp_ClassificationValueUserCreatePostCheck (
-	@UserId nvarchar(450)
-	, @ClassificationValueId int
-	, @ClassificationId int
+CREATE PROCEDURE usp_ClassificationValueUserCreatePostCheck (
+	@UserOfClassificationValueId nvarchar(450)
+	, @ClassificationValueId int 
 	, @ClassificationRelationTypeId int
-	, @CreatorId nvarchar(450))
+	, @UserId nvarchar(450))
 AS 
+
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 BEGIN 
-DECLARE @Error varchar(500) = '';
+DECLARE @ErrorIdsTable TABLE (id int)
 
-IF  (SELECT COUNT(*) 
-	FROM ClassificationValues 
-	WHERE ClassificationValues.ClassificationID = @ClassificationID
-		AND ClassificationValues.ClassificationValueID = @ClassificationValueID) = 0
+IF (SELECT COUNT(*) FROM ClassificationValues WHERE ClassificationValueID = @ClassificationValueId) = 0
 BEGIN
-	SET @Error = @Error + ' - This classification and value combination does not exist'
-END
-IF  (SELECT COUNT(*) 
-	FROM AspNetUsers 
-	WHERE AspNetUsers.Id = @UserId ) =0
-BEGIN
-	SET @Error = @Error + ' - The User does not exist'
-END
-
-IF  (SELECT COUNT(*) 
-	FROM AspNetUsers 
-	WHERE Id = @CreatorId ) =0
-BEGIN
-	SET @Error = @Error + ' - The user does not exist'
-END
-
-IF  (SELECT COUNT(*) 
-	FROM ClassificationValueUsers 
-	WHERE UserId = @UserId 
-		AND ClassificationValueId = @ClassificationValueId
-		AND ClassificationId = @ClassificationId
-		AND ClassificationRelationTypeId = @ClassificationRelationTypeId
-	) >0
-BEGIN
-	SET @Error = @Error + ' - This combination already exist'
+insert into @ErrorIdsTable values(35)
 END
 
 
-SELECT @Error;
+IF (SELECT COUNT(*) FROM AspNetUsers WHERE ID = @UserOfClassificationValueId) = 0
+BEGIN
+insert into @ErrorIdsTable values(29)
+END
+
+IF (SELECT COUNT(*) FROM ClassificationRelationTypes WHERE ClassificationRelationTypeId = @ClassificationRelationTypeId) = 0
+BEGIN
+insert into @ErrorIdsTable values(27)
+END
+
+SELECT ErrorMessages.ErrorMessageID
+	, ISNULL(UINameCustom.Customization,UIName.Name) Name
+FROM @ErrorIdsTable Errors 
+JOIN ErrorMessages 
+	ON Errors.id = ErrorMessages.ErrorMessageID
+JOIN UITermLanguages UIName
+	ON UIName.UITermId = ErrorMessages.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
+	ON UINameCustom.UITermId = ErrorMessages.NameTermID
+WHERE UIName.LanguageId = @LanguageID
 
 END

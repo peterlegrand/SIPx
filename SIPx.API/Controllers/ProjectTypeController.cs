@@ -64,7 +64,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ProjectTypeCreateGet ProjectType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProjectType.CreatorId = CurrentUser.Id;
+            ProjectType.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _projectTypeProvider.ProjectTypeCreatePostCheck(ProjectType);

@@ -27,7 +27,7 @@ namespace SIPx.DataAccess
 
         public bool CreatePost(UserMenuCreateGet UserMenu)
         {
-            string usp = "usp_UserMenuCreatePost @Name,  @MouseOver , @UserPageIdLeft, @UserPageIdRight , @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @IconId, @Sequence,@CreatorID";
+            string usp = "usp_UserMenuCreatePost @Name,  @MouseOver , @UserPageIdLeft, @UserPageIdRight , @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @IconId, @Sequence,@UserId";
             _sqlDataAccess.SaveData<UserMenuCreateGet>(usp, UserMenu);
             return true;
         }
@@ -48,7 +48,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(UserMenuUpdateGet UserMenu)
         {
-            string usp = "usp_UserMenuUpdatePost @UserMenuID, @Name, @MouseOver , @UserPageIdLeft, @UserPageIdRight , @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @IconId, @Sequence, @ModifierID";
+            string usp = "usp_UserMenuUpdatePost @UserMenuID, @Name, @MouseOver , @UserPageIdLeft, @UserPageIdRight , @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @IconId, @Sequence, @UserID";
             _sqlDataAccess.SaveData<UserMenuUpdateGet>(usp, UserMenu);
             return true;
         }

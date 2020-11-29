@@ -28,14 +28,14 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePostCheck(ClassificationValueCreatePost ClassificationValue)
         {
-            string usp = "usp_ClassificationValueCreatePostCheck @ClassificationId, @ParentId, @LanguageId , @Name, @CreatorID";
+            string usp = "usp_ClassificationValueCreatePostCheck @ClassificationId, @ParentId, @LanguageId , @Name, @UserId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValue);
             return CheckString;
         }
 
         public async Task<bool> CreatePost(ClassificationValueCreatePost ClassificationValue)
         {
-            string usp = "usp_ClassificationValueCreatePost @ClassificationId, @ParentId, @DateFrom, @DateTo, @Name, @Description, @MenuName, @MouseOver, @DropDownName, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @CreatorId ";
+            string usp = "usp_ClassificationValueCreatePost @ClassificationId, @ParentId, @DateFrom, @DateTo, @Name, @Description, @MenuName, @MouseOver, @DropDownName, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @UserId ";
             _sqlDataAccess.SaveData<ClassificationValueCreatePost>(usp, ClassificationValue);
             return true;
         }

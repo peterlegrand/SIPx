@@ -3,6 +3,7 @@
 @model PersonAddressUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person address")).TermString;
 
     Layout = "_LayoutAdmin";

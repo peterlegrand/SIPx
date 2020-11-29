@@ -7,8 +7,8 @@ namespace SIPx.DataAccess
     public interface IClassificationProvider
     {
         Task<List<SequenceList>> CreateGetSequence(string UserId);
-        bool CreatePost(ClassificationCreatePost Classification);
-        Task<string> CreatePostCheck(ClassificationCreatePost Classification);
+        bool CreatePost(ClassificationCreateGet Classification);
+        Task<List<ErrorMessage>> CreatePostCheck(ClassificationCreateGet Classification);
         Task<ClassificationDeleteGet> DeleteGet(string UserId, int ClassificationId);
         bool DeletePost(int Id);
         Task<List<ClassificationIndexGet>> IndexGet(string UserId);

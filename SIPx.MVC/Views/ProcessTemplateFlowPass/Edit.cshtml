@@ -3,6 +3,7 @@
 @model ProcessTemplateFlowPassUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template flow pass")).TermString;
 
     Layout = "_LayoutAdmin";

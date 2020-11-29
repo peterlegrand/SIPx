@@ -3,6 +3,7 @@
 @model ProjectUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project")).TermString;
 
     Layout = "_LayoutAdmin";

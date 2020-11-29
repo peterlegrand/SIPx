@@ -19,8 +19,9 @@ namespace SIPx.Shared
         public int SecurityLevelId { get; set; }
         public int OrganizationId { get; set; }
         public int ProjectId { get; set; }
-        public string CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string UserId { get; set; }
         public List<FrontContentContentNewClassification> Classifications { get; set; }
         public List<OrganizationList> Organizations { get; set; }
         public List<ProjectList> Projects { get; set; }

@@ -1,8 +1,8 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationValueRoleCreatePost] (
+CREATE PROCEDURE usp_ClassificationValueRoleCreatePost (
 	@RoleId nvarchar(450)
 	, @ClassificationValueId int 
 	, @ClassificationRelationTypeId int
-	, @CreatorId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @ClassificationId int
 SELECT @ClassificationId = ClassificationId FROM ClassificationValues WHERE ClassificationValueId = @ClassificationValueId;

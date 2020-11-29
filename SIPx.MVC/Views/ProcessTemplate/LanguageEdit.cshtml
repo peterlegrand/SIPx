@@ -3,6 +3,7 @@
 @model ProcessTemplateLanguageIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template language")).TermString;
 
     Layout = "_LayoutAdmin";

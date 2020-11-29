@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SIPx.Shared;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
@@ -21,5 +22,6 @@ namespace SIPx.DataAccess
         Task<bool> CheckUserRelation(int PersonRelationId);
         Task<List<int>> NewProcessGetInitialTemplateList();
         Task<int> CheckIfRecordExists(string TableName, string IDField, string Id);
+        Task<List<ErrorMessage>> NoRightsMessage(string UserId);
     }
 }

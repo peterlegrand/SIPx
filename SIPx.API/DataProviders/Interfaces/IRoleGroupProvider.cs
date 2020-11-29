@@ -6,8 +6,8 @@ namespace SIPx.DataAccess
 {
     public interface IRoleGroupProvider
     {
-        Task<string> CreatePost(RoleGroupCreatePost RoleGroup);
-        Task<string> CreatePostCheck(RoleGroupCreatePost RoleGroup);
+        Task<string> CreatePost(RoleGroupCreateGet RoleGroup);
+        Task<string> CreatePostCheck(RoleGroupCreateGet RoleGroup);
         Task<RoleGroupDeleteGet> DeleteGet(string UserId, int RoleGroupId);
         bool DeletePost(int Id);
         Task<List<RoleGroupIndexGet>> IndexGet(string UserId);

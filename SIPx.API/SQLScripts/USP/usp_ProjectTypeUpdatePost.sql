@@ -14,6 +14,7 @@ FROM UserPreferences
 WHERE USerId = @ModifierID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE ProjectTypes SET 
 	 Color = @Color

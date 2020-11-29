@@ -12,7 +12,7 @@ namespace SIPx.Shared
         public string RoleId { get; set; }
         public string RoleName { get; set; }
         public string ClaimId { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<ClaimList> Claims { get; set; }
     }
 }

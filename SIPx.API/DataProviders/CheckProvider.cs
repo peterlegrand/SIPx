@@ -100,6 +100,12 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<bool, dynamic>(usp, new { UserId = UserId });
             return x.First();
         }
+        public async Task<List<ErrorMessage>> NoRightsMessage(string UserId)
+        {
+            string usp = "usp_NoRightsMessage @UserID";
+            var x = await _sqlDataAccess.LoadData<List<ErrorMessage>, dynamic>(usp, new { UserId = UserId });
+            return x.First();
+        }
         public async Task<bool> CheckUserRelation(int PersonRelationId)
         {
             string usp = "usp_CheckUserRelation @PersonRelationID";

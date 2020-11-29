@@ -22,7 +22,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePostCheck(ProcessTemplateFlowCreatePost ProcessTemplateFlow)
         {
-            string usp = "usp_ProcessTemplateFlowCreatePostCheck @ProcessTemplateId, @ProcessTemplateFromStageId, @ProcessTemplateToStageId, @LanguageId, @Name, @CreatorId ";
+            string usp = "usp_ProcessTemplateFlowCreatePostCheck @ProcessTemplateId, @ProcessTemplateFromStageId, @ProcessTemplateToStageId, @Name, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlow);
             return CheckString;
         }

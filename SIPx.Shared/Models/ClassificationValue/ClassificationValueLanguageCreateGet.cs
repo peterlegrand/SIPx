@@ -22,7 +22,7 @@ namespace SIPx.Shared
         public string HeaderName { get; set; }
         public string HeaderDescription { get; set; }
         public string TopicName { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<LanguageList> Languages { get; set; }
     }
 }

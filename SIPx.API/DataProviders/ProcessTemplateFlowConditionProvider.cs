@@ -58,7 +58,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePostCheck(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition)
         {
-            string usp = "usp_ProcessTemplateFlowConditionCreatePostCheck @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowConditionTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @LanguageId, @Name, @CreaterId";
+            string usp = "usp_ProcessTemplateFlowConditionCreatePostCheck @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowConditionTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @Name, @CreaterId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlowCondition);
             return CheckString;
         }

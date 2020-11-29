@@ -10,6 +10,7 @@ SELECT @ProcessTemplateStageID = ProcessTemplateFlows.ProcessTemplateToStageID
 FROM ProcessTemplateFlows
 WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE Processes 
 SET ProcessTemplateStageID = @ProcessTemplateStageID

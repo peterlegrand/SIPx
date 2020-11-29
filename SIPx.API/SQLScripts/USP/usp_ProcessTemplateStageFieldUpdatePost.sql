@@ -12,6 +12,7 @@ DECLARE @StageId int;
 DECLARE @OldSequence int;
 SELECT @OldSequence = Sequence , @StageId = ProcessTemplateStageId FROM ProcessTemplateStageFields WHERE ProcessTemplateStageFieldId = @ProcessTemplateStageFieldID
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 IF @OldSequence > @Sequence

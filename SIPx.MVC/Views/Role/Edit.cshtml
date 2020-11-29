@@ -3,6 +3,7 @@
 @model RoleUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Role")).TermString;
 
     Layout = "_LayoutAdmin";

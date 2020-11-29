@@ -21,7 +21,7 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
-        public string CreatorId { get; set; }
+        public string UserId { get; set; }
         public List<StatusList> Statuses { get; set; }
     }
 }

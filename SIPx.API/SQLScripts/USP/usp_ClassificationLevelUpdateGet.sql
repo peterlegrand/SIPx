@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationLevelUpdateGet] (@UserId nvarchar(450), @ClassificationLevelId int) 
+CREATE PROCEDURE usp_ClassificationLevelUpdateGet (@UserId nvarchar(450), @ClassificationLevelId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -35,5 +35,3 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserId = ClassificationLevels.ModifierID
 WHERE ClassificationLevels.ClassificationLevelId = @ClassificationLevelID
-	
-ORDER BY ClassificationLevels.Sequence

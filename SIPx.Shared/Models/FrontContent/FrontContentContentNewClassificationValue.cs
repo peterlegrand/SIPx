@@ -10,8 +10,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ClassificationValueId { get; set; }
-        public int ClassificationID { get; set; }
-
         public string Name { get; set; }
+        public int ParentValueID { get; set; }
     }
 }

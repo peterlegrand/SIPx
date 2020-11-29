@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageTypeUpdatePost] (
+CREATE PROCEDURE usp_ProcessTemplateStageTypeUpdatePost (
 	@ProcessTemplateStageTypeId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
@@ -6,20 +6,21 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageTypeUpdatePost] (
 	, @MouseOver nvarchar(50)
 	, @Color char(9) 
 	, @IconId int 
-	, @ModifierId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @ModifierId
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 UPDATE ProcessTemplateStageTypes SET 
 	 Color = @Color
 	, IconId = @IconId
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = GETDATE()
 WHERE ProcessTemplateStageTypeId = @ProcessTemplateStageTypeID
 
@@ -28,7 +29,7 @@ UPDATE  ProcessTemplateStageTypeLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateStageTypeId = @ProcessTemplateStageTypeID
 	AND LanguageID = @LanguageID

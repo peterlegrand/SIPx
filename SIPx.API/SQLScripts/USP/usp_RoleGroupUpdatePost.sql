@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_RoleGroupUpdatePost] (
+CREATE PROCEDURE usp_RoleGroupUpdatePost (
 	@RoleGroupId int 
 	, @Sequence int
 	, @Name nvarchar(50)
@@ -15,6 +15,7 @@ WHERE USerId = @UserID
 
 DECLARE @OldSequence int;
 SELECT @OldSequence = Sequence FROM RoleGroups WHERE RoleGroupId = @RoleGroupID;
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN

@@ -107,7 +107,13 @@ namespace SIPx.API.Controllers
                 ContentNew.OrganizationId = ContentNew.Organizations.First().OrganizationId;
                 foreach (var Classification in ContentNew.Classifications)
                 {
-                    Classification.ClassificationValues = await _frontContentProvider.NewClassificationValues(CurrentUser.Id, Classification.ClassificationId);
+
+
+                    Classification.ClassificationLevels = await _frontContentProvider.NewClassificationLevels(Classification.ClassificationId);
+                    foreach(var Classificationlevel in Classification.ClassificationLevels )
+                    {
+                        Classificationlevel.ClassificationValues = await _frontContentProvider.NewClassificationValues(CurrentUser.Id, Classification.ClassificationId, Classificationlevel.Sequence, Classificationlevel.Alphabetically);
+                    }
 
                 }
                 return Ok(ContentNew);

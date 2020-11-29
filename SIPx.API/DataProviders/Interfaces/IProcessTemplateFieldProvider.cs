@@ -6,8 +6,8 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateFieldProvider
     {
-        Task<string> CreatePost(ProcessTemplateFieldCreatePost ProcessTemplateField);
-        Task<string> CreatePostCheck(ProcessTemplateFieldCreatePost ProcessTemplateField);
+        Task<string> CreatePost(ProcessTemplateFieldCreateGet ProcessTemplateField);
+        Task<string> CreatePostCheck(ProcessTemplateFieldCreateGet ProcessTemplateField);
         Task<ProcessTemplateFieldDeleteGet> DeleteGet(string UserId, int ProcessTemplateFieldId);
         bool DeletePost(int Id);
         Task<List<ProcessTemplateFieldIndexGet>> IndexGet(string UserId, int ProcessTemplateId);

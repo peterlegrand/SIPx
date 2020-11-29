@@ -23,6 +23,7 @@ BEGIN
 SET @NewSequence = 1
 END
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 INSERT INTO ProcessTemplateFields (
 	ProcessTemplateID

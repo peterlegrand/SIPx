@@ -19,6 +19,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE ClassificationLevels SET Sequence = Sequence + 1 
 WHERE ClassificationId = @ClassificationId 

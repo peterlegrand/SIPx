@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_OrganizationTypeCreatePost] (
+CREATE PROCEDURE usp_OrganizationTypeCreatePost (
 	@Internal bit
 	, @LegalEntity bit
 	, @Name nvarchar(50)
@@ -16,6 +16,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO OrganizationTypes (

@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ProjectTypeCreateGet ProjectType)
         {
-            string usp = "usp_ProjectTypeCreatePost @Name, @Description, @MenuName, @MouseOver, @Color ,@IconID, @CreatorId ";
+            string usp = "usp_ProjectTypeCreatePost @Name, @Description, @MenuName, @MouseOver, @Color ,@IconID, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);
             return String;
         }

@@ -17,7 +17,6 @@ namespace SIPx.Shared
         public int Sequence { get; set; }
         public string Name { get; set; }
         public string MouseOver { get; set; }
-        public string CreatorId { get; set; }
         public List<IconList> Icons { get; set; }
         public List<SequenceList> UserMenus { get; set; }
         public List<PageList> Pages { get; set; }

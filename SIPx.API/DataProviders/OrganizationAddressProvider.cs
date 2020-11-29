@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(OrganizationAddressCreatePost OrganizationAddress)
         {
-            string usp = "usp_OrganizationAddressCreatePost @OrganizationId, @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @CreatorId ";
+            string usp = "usp_OrganizationAddressCreatePost @OrganizationId, @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationAddress);
             return CheckString;
         }
@@ -50,7 +50,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(OrganizationAddressUpdateGet OrganizationAddress)
         {
-            string usp = "usp_OrganizationAddressUpdatePost @OrganizationAddressId , @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @ModifierId";
+            string usp = "usp_OrganizationAddressUpdatePost @OrganizationAddressId , @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @UserId";
             _sqlDataAccess.SaveData<OrganizationAddressUpdateGet>(usp, OrganizationAddress);
             return true;
         }

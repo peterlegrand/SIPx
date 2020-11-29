@@ -36,7 +36,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ContentTypeGroupCreatePost ContentTypeGroup)
         {
-            string usp = "usp_ContentTypeGroupCreatePost @Sequence, @Name, @Description, @MenuName, @MouseOver, @CreatorId ";
+            string usp = "usp_ContentTypeGroupCreatePost @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentTypeGroup);
             return String;
         }

@@ -17,7 +17,6 @@ namespace SIPx.Shared
         public string ProcessTemplateFlowConditionString { get; set; }
         public int ProcessTemplateFlowConditionInt { get; set; }
         public DateTime ProcessTemplateFlowConditionDate { get; set; }
-        public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

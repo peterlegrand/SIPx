@@ -3,14 +3,15 @@
 @model ObjectLanguageCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification language")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
-    <h1>
-        <img src="~/images/icons/Language.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification language")).TermString
-    </h1>
+<h1>
+    <img src="~/images/icons/Language.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("New classification language")).TermString
+</h1>
 <div class="container">
 
 
@@ -29,6 +30,14 @@
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 5))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
@@ -68,6 +77,14 @@
                 </ejs-dropdownlist>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 6))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 6).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
