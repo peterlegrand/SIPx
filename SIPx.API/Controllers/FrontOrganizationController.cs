@@ -160,7 +160,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                Classification.CreatorId = CurrentUser.Id;
+                Classification.UserId= CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{
@@ -213,7 +213,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                Classification.CreatorId = CurrentUser.Id;
+                Classification.UserId= CurrentUser.Id;
                 //var CheckString = await _classificationProvider.DeletePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{
@@ -367,7 +367,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Post(OrganizationCreatePost Organization)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Organization.CreatorId = CurrentUser.Id;
+            Organization.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _organizationProvider.CreatePostCheck(Organization);

@@ -19,10 +19,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public bool CreatePost(UserMenuTemplateCreatePost UserMenuTemplate)
+        public bool CreatePost(UserMenuTemplateCreateGet UserMenuTemplate)
         {
             string usp = "usp_UserMenuTemplateCreatePost @Name, @Description, @MenuName, @MouseOver, @CreatorID";
-            _sqlDataAccess.SaveData<UserMenuTemplateCreatePost>(usp, UserMenuTemplate);
+            _sqlDataAccess.SaveData<UserMenuTemplateCreateGet>(usp, UserMenuTemplate);
             return true;
         }
 
@@ -47,7 +47,7 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public async Task<string> CreatePostCheck(UserMenuTemplateCreatePost UserMenuTemplate)
+        public async Task<string> CreatePostCheck(UserMenuTemplateCreateGet UserMenuTemplate)
         {
             string usp = "usp_UserMenuTemplateCreatePostCheck @Name, @Description, @MenuName, @MouseOver, @CreatorID";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplate);

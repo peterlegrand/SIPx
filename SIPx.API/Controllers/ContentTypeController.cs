@@ -80,7 +80,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ContentTypeCreateGet ContentType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ContentType.CreatorId= CurrentUser.Id;
+            ContentType.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _contentTypeProvider.CreatePostCheck(ContentType);
@@ -209,7 +209,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ContentType.CreatorId = CurrentUser.Id;
+                ContentType.UserId= CurrentUser.Id;
                 //var CheckString = await _ContentTypeProvider.DeletePostCheck(ContentType);
                 //if (CheckString.Length == 0)
                 //{

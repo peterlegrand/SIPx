@@ -63,7 +63,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ProcessTemplateFlowCreatePost ProcessTemplateFlow)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplateFlow.CreatorId = CurrentUser.Id;
+            ProcessTemplateFlow.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _processTemplateFlowProvider.CreatePostCheck(ProcessTemplateFlow);
@@ -124,7 +124,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateFlow.ModifierId = CurrentUser.Id;
+                ProcessTemplateFlow.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{

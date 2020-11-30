@@ -214,7 +214,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationValueProperty.CreatorId = CurrentUser.Id;
+                ClassificationValueProperty.UserId= CurrentUser.Id;
                 //var CheckString = await _ClassificationValuePropertyProvider.DeletePostCheck(ClassificationValueProperty);
                 //if (CheckString.Length == 0)
                 //{

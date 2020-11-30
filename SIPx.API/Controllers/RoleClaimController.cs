@@ -62,7 +62,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(RoleClaimCreateGet RoleClaim)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            RoleClaim.CreatorId = CurrentUser.Id;
+            RoleClaim.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _RoleClaimProvider.RoleClaimCreatePostCheck(RoleClaim);

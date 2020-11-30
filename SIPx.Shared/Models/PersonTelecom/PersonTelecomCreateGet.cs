@@ -20,7 +20,6 @@ namespace SIPx.Shared
         public string AskForName { get; set; }
         public bool PhoneProperties { get; set; }
         public string UserId { get; set; }
-        public string UserId { get; set; }
         public List<TelecomTypeList> TelecomTypes { get; set; }
     }
 }

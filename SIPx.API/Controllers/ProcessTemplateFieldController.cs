@@ -77,7 +77,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ProcessTemplateFieldCreateGet ProcessTemplateField)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplateField.CreatorId = CurrentUser.Id;
+            ProcessTemplateField.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _processTemplateFieldProvider.CreatePostCheck(ProcessTemplateField);
@@ -193,7 +193,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateField.CreatorId = CurrentUser.Id;
+                ProcessTemplateField.UserId= CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateFieldProvider.DeletePostCheck(ProcessTemplateField);
                 //if (CheckString.Length == 0)
                 //{

@@ -20,7 +20,7 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(PageCreatePost Page)
+        public async Task<string> CreatePostCheck(PageCreateGet Page)
         {
             string usp = "usp_PageCreatePostCheck @LanguageID, @name, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);

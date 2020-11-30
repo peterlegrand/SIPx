@@ -72,7 +72,7 @@ namespace SIPx.DataAccess
                 ,
                 MouseOver = ContentType.MouseOver
                 ,
-                CreatorId = ContentType.CreatorId
+                UserId = ContentType.UserId
                 ,
                 Color = ContentType.Color
                 ,

@@ -124,7 +124,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                PersonRelationType.ModifierId = CurrentUser.Id;
+                PersonRelationType.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{
@@ -177,7 +177,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                PersonRelationType.CreatorId = CurrentUser.Id;
+                PersonRelationType.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonRelationTypeProvider.DeletePostCheck(PersonRelationType);
                 //if (CheckString.Length == 0)
                 //{

@@ -64,7 +64,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(OrganizationTelecomCreateGet OrganizationTelecom)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            OrganizationTelecom.CreatorId = CurrentUser.Id;
+            OrganizationTelecom.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _organizationTelecomProvider.CreatePostCheck(OrganizationTelecom);
@@ -176,7 +176,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                OrganizationTelecom.CreatorId = CurrentUser.Id;
+                OrganizationTelecom.UserId= CurrentUser.Id;
                 //var CheckString = await _OrganizationTelecomProvider.DeletePostCheck(OrganizationTelecom);
                 //if (CheckString.Length == 0)
                 //{

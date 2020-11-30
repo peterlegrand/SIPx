@@ -21,11 +21,11 @@ namespace SIPx.MVC.Controllers
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
         private readonly IConfiguration _configuration;
-        private IHostingEnvironment hostingEnv;
-        public PropertyController(IHostingEnvironment env, IConfiguration configuration)
+        private readonly IWebHostEnvironment _hostingEnv;
+        public PropertyController(IWebHostEnvironment env, IConfiguration configuration)
         {
             _configuration = configuration;
-            hostingEnv = env;
+            _hostingEnv = env;
         }
 
         [HttpGet]
@@ -100,7 +100,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
 
-            string HtmlString = string.Empty;
+//            string HtmlString = string.Empty;
             if (UploadFiles != null)
             {
                 foreach (var file in UploadFiles)
@@ -124,18 +124,16 @@ namespace SIPx.MVC.Controllers
                     //    dataFiles = target.ToArray();
                     //}
                     string filename2 = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    string filename = hostingEnv.WebRootPath + "\\images" + $@"\{filename2}";
+                    string filename = _hostingEnv.WebRootPath + "\\images" + $@"\{filename2}";
                     if (!System.IO.File.Exists(filename))
                     {
 
-                        using (FileStream fs = System.IO.File.Create(filename))
-                        {
-                            await _client.PostProtectedAsyncImage<FileStream>($"{_baseUrl}api/Image/UploadFile", fs, token, filename2);
+                        using FileStream fs = System.IO.File.Create(filename);
+                        await _client.PostProtectedAsyncImage<FileStream>($"{_baseUrl}api/Image/UploadFile", fs, token, filename2);
 
 
-                            file.CopyTo(fs);
-                            fs.Flush();
-                        }
+                        file.CopyTo(fs);
+                        fs.Flush();
                     }
                     else
                     {

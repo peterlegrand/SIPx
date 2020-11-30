@@ -113,7 +113,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ClassificationLevelUpdateGet ClassificationLevel)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ClassificationLevel.ModifierId = CurrentUser.Id;
+            ClassificationLevel.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _classificationLevelProvider.UpdatePostCheck(ClassificationLevel);
@@ -192,7 +192,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationLevel.CreatorId = CurrentUser.Id;
+                ClassificationLevel.UserId= CurrentUser.Id;
                 //var CheckString = await _ClassificationLevelProvider.DeletePostCheck(ClassificationLevel);
                 //if (CheckString.Length == 0)
                 //{

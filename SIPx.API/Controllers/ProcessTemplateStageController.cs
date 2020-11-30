@@ -47,7 +47,7 @@ namespace SIPx.API.Controllers
                 var ProcessTemplateStageCreateGet = new ProcessTemplateStageCreateGet();
                 var ProcessTemplateStageTypes = await _processTemplateStageTypeProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ProcessTemplateStageCreateGet.LanguageId = UserLanguage.LanguageId;
+                //ProcessTemplateStageCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProcessTemplateStageCreateGet.LanguageName = UserLanguage.Name;
                 ProcessTemplateStageCreateGet.ProcessTemplateStageTypes = ProcessTemplateStageTypes;
                 ProcessTemplateStageCreateGet.ProcessTemplateId = Id;
@@ -61,10 +61,10 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ProcessTemplateStageCreatePost ProcessTemplateStage)
+        public async Task<IActionResult> Create(ProcessTemplateStageCreateGet ProcessTemplateStage)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplateStage.CreatorId = CurrentUser.Id;
+            ProcessTemplateStage.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _processTemplateStageProvider.CreatePostCheck(ProcessTemplateStage);
@@ -178,7 +178,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateStage.CreatorId = CurrentUser.Id;
+                ProcessTemplateStage.UserId= CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateStageProvider.DeletePostCheck(ProcessTemplateStage);
                 //if (CheckString.Length == 0)
                 //{

@@ -6,8 +6,8 @@ namespace SIPx.DataAccess
 {
     public interface IUserMenuTemplateProvider
     {
-        bool CreatePost(UserMenuTemplateCreatePost UserMenuTemplate);
-        Task<string> CreatePostCheck(UserMenuTemplateCreatePost UserMenuTemplate);
+        bool CreatePost(UserMenuTemplateCreateGet UserMenuTemplate);
+        Task<string> CreatePostCheck(UserMenuTemplateCreateGet UserMenuTemplate);
         Task<UserMenuTemplateDeleteGet> DeleteGet(string UserId, int UserMenuTemplateId);
         bool DeletePost(int Id);
         Task<List<UserMenuTemplateIndexGet>> IndexGet(string UserId);

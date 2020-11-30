@@ -42,10 +42,10 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(UserMenuTemplateCreatePost UserMenuTemplate)
+        public async Task<IActionResult> Create(UserMenuTemplateCreateGet UserMenuTemplate)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UserMenuTemplate.CreatorId = CurrentUser.Id;
+            UserMenuTemplate.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _userMenuTemplateProvider.CreatePostCheck(UserMenuTemplate);
@@ -112,7 +112,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(UserMenuTemplateUpdateGet UserMenuTemplate)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UserMenuTemplate.CreatorId = CurrentUser.Id;
+            UserMenuTemplate.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 UserMenuTemplate.UserId = CurrentUser.Id;
@@ -166,7 +166,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                UserMenuTemplate.CreatorId = CurrentUser.Id;
+                UserMenuTemplate.UserId= CurrentUser.Id;
                 //var CheckString = await _UserMenuTemplateProvider.DeletePostCheck(UserMenuTemplate);
                 //if (CheckString.Length == 0)
                 //{

@@ -53,31 +53,31 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create(ClassificationPageCreatePost ClassificationPage)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            ClassificationPage.CreatorId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                var CheckString = await _classificationPageProvider.CreatePostCheck(ClassificationPage);
-                if (CheckString.Length == 0)
-                {
-                    _classificationPageProvider.CreatePost(ClassificationPage);
-                    return Ok(ClassificationPage);
-                }
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    Message = CheckString,
-                });
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+        //[HttpPost("Create")]
+        //public async Task<IActionResult> Create(ClassificationPageCreateGet ClassificationPage)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    ClassificationPage.UserId = CurrentUser.Id;
+        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+        //    {
+        //        var CheckString = await _classificationPageProvider.CreatePostCheck(ClassificationPage);
+        //        if (CheckString.Length == 0)
+        //        {
+        //            _classificationPageProvider.CreatePost(ClassificationPage);
+        //            return Ok(ClassificationPage);
+        //        }
+        //        return BadRequest(new
+        //        {
+        //            IsSuccess = false,
+        //            Message = CheckString,
+        //        });
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
@@ -159,7 +159,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationPage.CreatorId = CurrentUser.Id;
+                ClassificationPage.UserId= CurrentUser.Id;
                 //var CheckString = await _ClassificationPageProvider.DeletePostCheck(ClassificationPage);
                 //if (CheckString.Length == 0)
                 //{

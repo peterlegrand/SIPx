@@ -43,7 +43,7 @@ namespace SIPx.API.Controllers
                 var RoleGroupCreateGet = new RoleGroupCreateGet();
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 var Sequences = await _roleGroupProvider.CreateGetSequence(CurrentUser.Id);
-                RoleGroupCreateGet.LanguageId = UserLanguage.LanguageId;
+//                RoleGroupCreateGet.LanguageId = UserLanguage.LanguageId;
                 RoleGroupCreateGet.LanguageName = UserLanguage.Name;
                 RoleGroupCreateGet.Sequences = Sequences;
                 RoleGroupCreateGet.Sequences.Add(new SequenceList { Sequence = Sequences.Count + 1, Name = "Add at the end" });
@@ -56,10 +56,10 @@ namespace SIPx.API.Controllers
             });
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(RoleGroupCreatePost RoleGroup)
+        public async Task<IActionResult> Create(RoleGroupCreateGet RoleGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            RoleGroup.CreatorId = CurrentUser.Id;
+            RoleGroup.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _roleGroupProvider.CreatePostCheck(RoleGroup);
@@ -172,7 +172,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                RoleGroup.CreatorId = CurrentUser.Id;
+                RoleGroup.UserId= CurrentUser.Id;
                 //var CheckString = await _RoleGroupProvider.DeletePostCheck(RoleGroup);
                 //if (CheckString.Length == 0)
                 //{

@@ -79,7 +79,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(PageCreateGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Page.CreatorId = CurrentUser.Id;
+            Page.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _userPageProvider.UserPageCreatePostCheck(Page);
@@ -146,7 +146,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PageUpdateGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Page.ModifierId = CurrentUser.Id;
+            Page.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _userPageProvider.UserPageUpdatePostCheck(Page);

@@ -136,7 +136,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
 
-                Role.ModifierId = CurrentUser.Id;
+                Role.UserId= CurrentUser.Id;
 
                 var RoleToBeUpdate = await _roleManager.FindByIdAsync(Role.RoleId);
                 RoleToBeUpdate.Name = Role.Name;

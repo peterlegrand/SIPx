@@ -26,14 +26,14 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, PageId });
         }
 
-        public async Task<string> CreatePostCheck(PageSectionCreatePost PageSection)
+        public async Task<string> CreatePostCheck(PageSectionCreateGet PageSection)
         {
             string usp = "usp_UserPageSectionCreatePostCheck @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @@OneTwoColumns, @ContentTypeId, @SortById,, @Name, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
             return CheckString;
         }
 
-        public async Task<string> CreatePost(PageSectionCreatePost PageSection)
+        public async Task<string> CreatePost(PageSectionCreateGet PageSection)
         {
             string usp = "usp_UserPageSectionCreatePost @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @OneTwoColumns, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @CreatorId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);

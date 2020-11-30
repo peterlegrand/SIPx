@@ -75,10 +75,10 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(PageSectionCreatePost PageSection)
+        public async Task<IActionResult> Create(PageSectionCreateGet PageSection)
         {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-            PageSection.CreatorId = CurrentUser.Id;
+            PageSection.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 PageSection.UserId = CurrentUser.Id;
@@ -157,7 +157,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                PageSection.ModifierId = CurrentUser.Id;
+                PageSection.UserId = CurrentUser.Id;
                 //var CheckString = await _PageSectionProvider.UpdatePostCheck(PageSection);
                 //if (CheckString.Length == 0)
                 //{
@@ -211,7 +211,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                PageSection.CreatorId = CurrentUser.Id;
+                PageSection.UserId = CurrentUser.Id;
                 //var CheckString = await _PageSectionProvider.DeletePostCheck(PageSection);
                 //if (CheckString.Length == 0)
                 //{

@@ -44,7 +44,7 @@ namespace SIPx.API.Controllers
                 var ProcessTemplateGroupCreateGet = new ProcessTemplateGroupCreateGet();
                 var ProcessTemplateGroupCreateGetSequences = await _processTemplateGroupProvider.CreateGetSequence(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ProcessTemplateGroupCreateGet.LanguageId = UserLanguage.LanguageId;
+                //ProcessTemplateGroupCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProcessTemplateGroupCreateGet.LanguageName = UserLanguage.Name;
                 ProcessTemplateGroupCreateGet.Sequences = ProcessTemplateGroupCreateGetSequences;
                 ProcessTemplateGroupCreateGet.Sequences.Add(new SequenceList { Sequence = ProcessTemplateGroupCreateGetSequences.Count+1, Name = "Add at the end" });
@@ -58,10 +58,10 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ProcessTemplateGroupCreatePost ProcessTemplateGroup)
+        public async Task<IActionResult> Create(ProcessTemplateGroupCreateGet ProcessTemplateGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplateGroup.CreatorId = CurrentUser.Id;
+            ProcessTemplateGroup.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _processTemplateGroupProvider.CreatePostCheck(ProcessTemplateGroup);
@@ -122,7 +122,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateGroup.ModifierId = CurrentUser.Id;
+                ProcessTemplateGroup.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{
@@ -175,7 +175,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateGroup.CreatorId = CurrentUser.Id;
+                ProcessTemplateGroup.UserId= CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateGroupProvider.DeletePostCheck(ProcessTemplateGroup);
                 //if (CheckString.Length == 0)
                 //{

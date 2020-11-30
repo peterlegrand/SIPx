@@ -254,8 +254,8 @@ namespace SIPx.CallAPI
             string jsonData = JsonConvert.SerializeObject(model);
             HttpContent content = new StringContent(jsonData);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            var response = await client.DeleteAsync(methodUrl);
-            var responseString = await response.Content.ReadAsStringAsync();
+            await client.DeleteAsync(methodUrl);
+           // var responseString = await response.Content.ReadAsStringAsync();
 
             T obj = JsonConvert.DeserializeObject<T>(jsonData);
 
@@ -308,7 +308,7 @@ namespace SIPx.CallAPI
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
            
-            var keyValues = new KeyValuePair<string, FileStream>("file", model);
+            //var keyValues = new KeyValuePair<string, FileStream>("file", model);
            
             MultipartFormDataContent form = new MultipartFormDataContent();
             HttpContent content = new StringContent("fileToUpload");
@@ -488,8 +488,8 @@ namespace SIPx.CallAPI
             string jsonData = JsonConvert.SerializeObject(model);
             HttpContent content = new StringContent(jsonData);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            var response = await client.DeleteAsync(methodUrl);
-            var responseString = await response.Content.ReadAsStringAsync();
+             await client.DeleteAsync(methodUrl);
+            //var responseString = await response.Content.ReadAsStringAsync();
 
             T obj = JsonConvert.DeserializeObject<T>(jsonData);
 

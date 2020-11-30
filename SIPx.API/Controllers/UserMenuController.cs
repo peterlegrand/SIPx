@@ -189,7 +189,7 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var UserMenu = await _userMenuProvider.DeleteGet(CurrentUser.Id, Id);
-                UserMenu.CreatorId = CurrentUser.Id;
+                UserMenu.UserId= CurrentUser.Id;
                 return Ok(UserMenu);
 
                 //return Ok(await _userMenuProvider.UserMenuUpdateGet(CurrentUser.Id, Id));
@@ -205,7 +205,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(UserMenuDeleteGet UserMenu)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UserMenu.ModifierId = CurrentUser.Id;
+            UserMenu.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);

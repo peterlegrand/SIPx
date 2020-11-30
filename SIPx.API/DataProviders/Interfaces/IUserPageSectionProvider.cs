@@ -7,8 +7,8 @@ namespace SIPx.DataAccess
     public interface IUserPageSectionProvider
     {
         Task<List<SequenceList>> CreateGetSequence(string UserId, int PageId);
-        Task<string> CreatePost(PageSectionCreatePost PageSection);
-        Task<string> CreatePostCheck(PageSectionCreatePost PageSection);
+        Task<string> CreatePost(PageSectionCreateGet PageSection);
+        Task<string> CreatePostCheck(PageSectionCreateGet PageSection);
         Task<PageSectionDeleteGet> DeleteGet(string UserId, int UserPageSectionId);
         bool DeletePost(int Id);
         Task<List<PageSectionIndexGet>> IndexGet(string UserId, int PageId);

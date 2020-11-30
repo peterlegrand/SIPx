@@ -181,7 +181,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                PersonAddress.CreatorId = CurrentUser.Id;
+                PersonAddress.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonAddressProvider.DeletePostCheck(PersonAddress);
                 //if (CheckString.Length == 0)
                 //{

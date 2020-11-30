@@ -73,7 +73,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(PersonCreatePost Person)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            Person.CreatorId = CurrentUser.Id;
+            Person.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _personProvider.CreatePostCheck(Person);
@@ -140,7 +140,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                Person.ModifierId = CurrentUser.Id;
+                Person.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{
@@ -193,7 +193,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                Person.CreatorId = CurrentUser.Id;
+                Person.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonProvider.DeletePostCheck(Person);
                 //if (CheckString.Length == 0)
                 //{

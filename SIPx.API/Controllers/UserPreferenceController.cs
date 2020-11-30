@@ -85,7 +85,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(UserPreferenceUpdateGet UserPreference)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            UserPreference.CreatorId = CurrentUser.Id;
+            UserPreference.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 var CheckString = await _userPreferenceProvider.UpdatePostCheck(UserPreference);

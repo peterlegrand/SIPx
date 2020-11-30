@@ -101,7 +101,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ClassificationLevelPropertyUpdateGet ClassificationLevelProperty)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ClassificationLevelProperty.ModifierId = CurrentUser.Id;
+            ClassificationLevelProperty.UserId = CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _classificationLevelPropertyProvider.UpdatePostCheck(ClassificationLevelProperty);
@@ -181,7 +181,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ClassificationLevelProperty.CreatorId = CurrentUser.Id;
+                ClassificationLevelProperty.UserId= CurrentUser.Id;
                 //var CheckString = await _ClassificationLevelPropertyProvider.DeletePostCheck(ClassificationLevelProperty);
                 //if (CheckString.Length == 0)
                 //{

@@ -147,7 +147,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Classification.CreatorId = CurrentUser.Id;
+                Classification.UserId = CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{
@@ -200,7 +200,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Classification.CreatorId = CurrentUser.Id;
+                Classification.UserId= CurrentUser.Id;
                 //var CheckString = await _classificationProvider.DeletePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{

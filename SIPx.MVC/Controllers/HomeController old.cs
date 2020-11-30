@@ -19,11 +19,11 @@ namespace SIPx.MVC.Controllers
     public class HomeOldController : Controller
     {
         private readonly IConfiguration _configuration;
-        private IHostingEnvironment hostingEnv;
-        public HomeOldController(IHostingEnvironment env, IConfiguration configuration)
+        private readonly IWebHostEnvironment _hostingEnv;
+        public HomeOldController(IWebHostEnvironment env, IConfiguration configuration)
         {
             _configuration = configuration;
-            hostingEnv = env;
+            _hostingEnv = env;
 
         }
 
@@ -121,7 +121,7 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public ActionResult SaveFile(IList<IFormFile> UploadFiles)
         {
-            string HtmlString = string.Empty;
+            //string HtmlString = string.Empty;
             if (UploadFiles != null)
             {
                 foreach (var file in UploadFiles)
@@ -145,14 +145,12 @@ namespace SIPx.MVC.Controllers
                     //    dataFiles = target.ToArray();
                     //}
                     string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    filename = hostingEnv.WebRootPath + "\\files" + $@"\{filename}";
+                    filename = _hostingEnv.WebRootPath + "\\files" + $@"\{filename}";
                     if (!System.IO.File.Exists(filename))
                     {
-                        using (FileStream fs = System.IO.File.Create(filename))
-                        {
-                            file.CopyTo(fs);
-                            fs.Flush();
-                        }
+                        using FileStream fs = System.IO.File.Create(filename);
+                        file.CopyTo(fs);
+                        fs.Flush();
                     }
                     else
                     {

@@ -65,7 +65,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(ProcessTemplateStageTypeCreateGet ProcessTemplateStageType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ProcessTemplateStageType.CreatorId = CurrentUser.Id;
+            ProcessTemplateStageType.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
                 //var CheckString = await _processTemplateStageTypeProvider.CreatePostCheck(ProcessTemplateStageType);
@@ -180,7 +180,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
             {
-                ProcessTemplateStageType.CreatorId = CurrentUser.Id;
+                ProcessTemplateStageType.UserId= CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateStageTypeProvider.DeletePostCheck(ProcessTemplateStageType);
                 //if (CheckString.Length == 0)
                 //{
