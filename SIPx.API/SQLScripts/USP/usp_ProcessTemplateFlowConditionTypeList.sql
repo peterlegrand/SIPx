@@ -12,5 +12,5 @@ JOIN UITermLanguages UIName
 	ON UIName.UITermId = ProcessTemplateFlowConditionTypes.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = ProcessTemplateFlowConditionTypes.NameTermID
-WHERE UIName.LanguageId = @LanguageID
+WHERE UIName.LanguageId = @LanguageID and active = 1
 ORDER BY ISNULL(UINameCustom.Customization,UIName.Name) 

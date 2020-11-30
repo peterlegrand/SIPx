@@ -12,5 +12,5 @@ JOIN UITermLanguages UIName
 	ON UIName.UITermId = ProcessTemplateFieldTypes.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = ProcessTemplateFieldTypes.NameTermID
-WHERE UIName.LanguageId = @LanguageID
+WHERE UIName.LanguageId = @LanguageID and active = 1
 ORDER BY ISNULL(UINameCustom.Customization,UIName.Name) 

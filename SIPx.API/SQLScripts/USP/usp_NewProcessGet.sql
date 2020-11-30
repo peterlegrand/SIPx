@@ -21,6 +21,7 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
 	, ProcessTemplateFields.ProcessTemplateID
 	, ProcessTemplateStageFields.ProcessTemplateStageID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this field')) Name
+	, ISNULL(UserLanguage.MissingValueText,ISNULL(DefaultLanguage.MissingValueText,'No missing value text for this field')) MissingValueText
 	, 'ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId
 	, 'ID1ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId2
 	, 'ID2ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId3
@@ -33,9 +34,9 @@ JOIN ProcessTemplateStageFields
 		AND ProcessTemplateFlows.ProcessTemplateId = ProcessTemplateStageFields.ProcessTemplateID
 JOIN ProcessTemplateFields
 	ON ProcessTemplateStageFields.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserLanguage
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver, MissingValueText FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.ProcessTemplateFieldID= ProcessTemplateFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver, MissingValueText FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
 	ON DefaultLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
 WHERE ProcessTemplateFlows.ProcessTemplateFromStageId NOT IN (SELECT ProcessTemplateToStageId FROM ProcessTemplateFlows WHERE ProcessTemplateId = @ProcessTemplateID)
 	AND ProcessTemplateFlows.ProcessTemplateId = @ProcessTemplateId 

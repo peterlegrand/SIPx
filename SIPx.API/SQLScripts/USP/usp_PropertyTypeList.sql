@@ -15,4 +15,5 @@ JOIN UITermLanguages UIName
 LEFT JOIN (SELECT UITermID, Customization FROM UITermLanguageCustomizations  WHERE LanguageID = @LanguageID) UINameCustom
 	ON UINameCustom.UITermID = PropertyTypes.NameTermID
 WHERE UIName.LanguageID = @LanguageID
+	AND Active = 1
 END

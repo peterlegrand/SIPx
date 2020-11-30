@@ -15,6 +15,7 @@ LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustom
 	ON UserMenuTypes.NameTermId = UserLanguageName.UITermId  
 WHERE LanguageName.LanguageId =@LanguageId 
 	AND UserMenuTypes.AvailableForRight = 1
+	and active = 1
 ORDER BY  	ISNULL( UserLanguageName.Customization, LanguageName.Name) 
 	
 

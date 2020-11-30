@@ -48,7 +48,7 @@ namespace SIPx.API.Classes
                     {
                         var UserSecurityLevel = await _userProvider.UserSecurityLevel(CurrentUser.Id);
                         var ProcessSecurityLevel = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue;
-                        if(ProcessSecurityLevel == null || ProcessSecurityLevel ==0)
+                        if (ProcessSecurityLevel == null || ProcessSecurityLevel == 0)
                         { ProcessSecurityLevel = Pass.StageFieldIntValue; }
                         if (Pass.ComparisonOperatorID == 1)  //Comparison blank
                         {
@@ -195,18 +195,18 @@ namespace SIPx.API.Classes
         {
             List<NewProcessTemplateList> ProcesstemplateList = new List<NewProcessTemplateList>();
             var TemplateIdFlowIds = await _processProvider.CreateGetInitialTemplateFlowList();
-            foreach(var TemplateIdFlowId in TemplateIdFlowIds)
+            foreach (var TemplateIdFlowId in TemplateIdFlowIds)
             {
                 string From = "DECLARE @LanguageId int; SELECT @LanguageId = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeId = 1 ;" +
                     " SELECT  ProcessTemplateFlowConditions.ProcessTemplateID , ProcessTemplateGroupID, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name FROM ProcessTemplateFlowConditions" +
                     " JOIN ProcessTemplates ON ProcessTemplateFlowConditions.ProcessTemplateId = ProcessTemplates.ProcessTemplateId " +
-                    " LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserLanguage "+
+                    " LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserLanguage " +
                     "  ON UserLanguage.ProcessTemplateID = ProcessTemplateFlowConditions.ProcessTemplateID " +
                     "LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
                     "  ON DefaultLanguage.ProcessTemplateID = ProcessTemplateFlowConditions.ProcessTemplateID ";
                 string Where = " WHERE ProcessTemplateFlowId = " + TemplateIdFlowId.ProcessTemplateFlowId + " AND ";
                 var Conditions = await _processProvider.CreateGetInitialTemplateFlowConditionList(TemplateIdFlowId.ProcessTemplateFlowId);
-                foreach(var Condition in Conditions)
+                foreach (var Condition in Conditions)
                 {
                     if (Condition.ProcessTemplateFlowConditionTypeId == 1) //Creator is user
                     {
@@ -231,7 +231,7 @@ namespace SIPx.API.Classes
                         }
                         if (Condition.ComparisonOperatorId == 2 && UserSecurityLevel != Condition.StageFieldIntValue) //Equal
                         {
-                            Where =  Where + UserSecurityLevel.ToString() + " =  " + Condition.ProcessTemplateFlowConditionInt.ToString();
+                            Where = Where + UserSecurityLevel.ToString() + " =  " + Condition.ProcessTemplateFlowConditionInt.ToString();
                         }
                         if (Condition.ComparisonOperatorId == 3 && UserSecurityLevel <= Condition.StageFieldIntValue) // >
                         {
@@ -257,11 +257,11 @@ namespace SIPx.API.Classes
                     if (Condition.ProcessTemplateFlowConditionTypeId == 4) // Role user
                     {
                         var Roles = await _userProvider.RoleIdForSpecificUser(CurrentUser.Id);
-                        for(int i = 0; i < Roles.Count; i++ )
+                        for (int i = 0; i < Roles.Count; i++)
                         {
                             Roles[i] = Roles[i].Replace("\t", "");
                         }
-                        if (!Roles.Contains(Condition.ProcessTemplateFlowConditionString.Replace("\t", "")) )
+                        if (!Roles.Contains(Condition.ProcessTemplateFlowConditionString.Replace("\t", "")))
                         {
                             Where = Where + " 14=2 ";
                         }
@@ -357,19 +357,19 @@ namespace SIPx.API.Classes
                 {
                     Where = " WHERE ProcessTemplateFlowId = " + TemplateIdFlowId.ProcessTemplateFlowId;
                 }
-                    if (!ProcesstemplateList.Any(t => t.ProcessTemplateId == TemplateIdFlowId.ProcessTemplateId))
-                        {
-                        var y = await _processProvider.CreateGetTemplateList(From + Where);
-                        if(y.Count!=0)
-                        {
-                            var z = y.First();
-                            ProcesstemplateList.Add(z);
-                        } 
-                    
+                if (!ProcesstemplateList.Any(t => t.ProcessTemplateId == TemplateIdFlowId.ProcessTemplateId))
+                {
+                    var y = await _processProvider.CreateGetTemplateList(From + Where);
+                    if (y.Count != 0)
+                    {
+                        var z = y.First();
+                        ProcesstemplateList.Add(z);
+                    }
+
                 }
 
 
-                
+
             }
             return ProcesstemplateList;
         }
@@ -568,5 +568,33 @@ namespace SIPx.API.Classes
         //    return NewTemplateList;
 
         //}
-    }
+
+
+        //public async Task<List<ErrorMessage>> Check(List<FrontProcessNewProcessField> NewProcessFields)
+        //{
+        //    List<int> ErrorCodes = new List<int>();
+
+        //    foreach (var NewProcessField in NewProcessFields)
+        //    {
+        //        if (NewProcessField.ProcessTemplateStageFieldStatusId == 4)
+        //            switch (NewProcessField.ProcessTemplateFieldTypeId)
+        //            {
+        //                case 1:
+        //                    if (NewProcessField.StringValue == "" || NewProcessField.StringValue == null)
+        //                    {
+        //                        ErrorCodes.Add(1758);
+        //                    }
+        //                    break;
+        //                case 2:
+        //                    if (NewProcessField.StringValue == "" || NewProcessField.StringValue == null)
+        //                    {
+        //                        ErrorCodes.Add(1759);
+        //                    }
+        //                    break;
+
+        //            }
+        //    }
+        //    return Errors;
+        //}
+}
 }

@@ -29,6 +29,7 @@ namespace SIPx.DataAccess
             return x;
         }
 
+        //THIS might be old
         public async Task<List<NewProcessTemplateList>> NewProcessShowTemplate(string UserId)
         {
             string usp = "usp_FrontNewProcessShowTemplate @UserID";
@@ -48,34 +49,36 @@ namespace SIPx.DataAccess
 
         public async Task<bool> FrontProcessEditPost(FrontProcessUpdateGet Process, string UserId)
         {
-//            DataTable fields = new DataTable();
-//            fields.Columns.Add("ProcessFieldId", typeof(int));
-//            fields.Columns.Add("ProcessId", typeof(int));
-//            fields.Columns.Add("StringValue", typeof(string));
-//            DataColumn intvalue;
-//            intvalue = new DataColumn("IntValue", typeof(int));
-//            intvalue.AllowDBNull = true;
-//            fields.Columns.Add(intvalue);
-//            //            fields.Columns.Add("IntValue", typeof(int?));
-//            DataColumn dateTimeValue;
-//            dateTimeValue = new DataColumn("DateTimeValue", typeof(DateTime));
-//            intvalue.AllowDBNull = true;
-//            fields.Columns.Add(dateTimeValue);
-////            fields.Columns.Add("DateTimeValue", typeof(DateTime));
-//            fields.Columns.Add("ModifierId", typeof(string));
-//            fields.Columns.Add("ModifiedDate", typeof(DateTime));
-//            foreach(var x in Process.ProcessFields)
-//            {
-//                DataRow DR = fields.NewRow();
-//                    DR["ProcessFieldId"] = x.ProcessfieldId;
-//                DR["ProcessId"] = x.ProcessId;
-//                DR["StringValue"] = x.StringValue;
-//                DR["IntValue"] = x.IntValue??0;
-//                DR["DateTimeValue"] = x.DateTimeValue??DateTime.Now;
-//                DR["ModifierId"] = x.ModifierId;
-//                DR["ModifiedDate"] = x.ModifiedDate;
-//                fields.Rows.Add(DR);
-//            }
+            { //OLDSTUFF
+                //            DataTable fields = new DataTable();
+                //            fields.Columns.Add("ProcessFieldId", typeof(int));
+                //            fields.Columns.Add("ProcessId", typeof(int));
+                //            fields.Columns.Add("StringValue", typeof(string));
+                //            DataColumn intvalue;
+                //            intvalue = new DataColumn("IntValue", typeof(int));
+                //            intvalue.AllowDBNull = true;
+                //            fields.Columns.Add(intvalue);
+                //            //            fields.Columns.Add("IntValue", typeof(int?));
+                //            DataColumn dateTimeValue;
+                //            dateTimeValue = new DataColumn("DateTimeValue", typeof(DateTime));
+                //            intvalue.AllowDBNull = true;
+                //            fields.Columns.Add(dateTimeValue);
+                ////            fields.Columns.Add("DateTimeValue", typeof(DateTime));
+                //            fields.Columns.Add("ModifierId", typeof(string));
+                //            fields.Columns.Add("ModifiedDate", typeof(DateTime));
+                //            foreach(var x in Process.ProcessFields)
+                //            {
+                //                DataRow DR = fields.NewRow();
+                //                    DR["ProcessFieldId"] = x.ProcessfieldId;
+                //                DR["ProcessId"] = x.ProcessId;
+                //                DR["StringValue"] = x.StringValue;
+                //                DR["IntValue"] = x.IntValue??0;
+                //                DR["DateTimeValue"] = x.DateTimeValue??DateTime.Now;
+                //                DR["ModifierId"] = x.ModifierId;
+                //                DR["ModifiedDate"] = x.ModifiedDate;
+                //                fields.Rows.Add(DR);
+                //            }
+            }
             DataTable ProcessFieldTable = ProcessFieldDataTable.CreateTable();
             var xy = new List<ProcessFieldsToDataTable>();
 
@@ -93,23 +96,26 @@ namespace SIPx.DataAccess
             x.ModifiedDate = DateTime.Today; 
                 if (x.ModifierId== null)
                 { x.ModifierId = UserId; }
-                //var y = new ProcessFieldsToDataTable();
-                //if (Process.ProcessFields[i].StringValue == null)
-                //{ Process.ProcessFields[i].StringValue = ""; }
-                //if (Process.ProcessFields[i].IntValue== null)
-                //{ Process.ProcessFields[i].IntValue = 0; }
-                //if (Process.ProcessFields[i].DateTimeValue== null)
-                //{ Process.ProcessFields[i].DateTimeValue = DateTime.Now; }
-                //Process.ProcessFields[i].ModifiedDate = DateTime.Now;
-                //Process.ProcessFields[i].ModifierId = UserId;
-                //y.ProcessFieldId = Process.ProcessFields[i].ProcessfieldId;
-                //y.ProcessId = Process.ProcessFields[i].ProcessId;
-                //y.StringValue = Process.ProcessFields[i].StringValue;
-                //y.IntValue = Process.ProcessFields[i].IntValue ?? 0;
-                //y.DateTimeValue = Process.ProcessFields[i].DateTimeValue ?? DateTime.Now;
-                //y.ModifierId = Process.ProcessFields[i].ModifierId;
-                //y.ModifiedDate= Process.ProcessFields[i].ModifiedDate;
-                //xy.Add(y);
+
+                {
+                    //var y = new ProcessFieldsToDataTable();
+                    //if (Process.ProcessFields[i].StringValue == null)
+                    //{ Process.ProcessFields[i].StringValue = ""; }
+                    //if (Process.ProcessFields[i].IntValue== null)
+                    //{ Process.ProcessFields[i].IntValue = 0; }
+                    //if (Process.ProcessFields[i].DateTimeValue== null)
+                    //{ Process.ProcessFields[i].DateTimeValue = DateTime.Now; }
+                    //Process.ProcessFields[i].ModifiedDate = DateTime.Now;
+                    //Process.ProcessFields[i].ModifierId = UserId;
+                    //y.ProcessFieldId = Process.ProcessFields[i].ProcessfieldId;
+                    //y.ProcessId = Process.ProcessFields[i].ProcessId;
+                    //y.StringValue = Process.ProcessFields[i].StringValue;
+                    //y.IntValue = Process.ProcessFields[i].IntValue ?? 0;
+                    //y.DateTimeValue = Process.ProcessFields[i].DateTimeValue ?? DateTime.Now;
+                    //y.ModifierId = Process.ProcessFields[i].ModifierId;
+                    //y.ModifiedDate= Process.ProcessFields[i].ModifiedDate;
+                    //xy.Add(y);
+                }
                 ProcessFieldTable.Rows.Add(
 
                 x.ProcessFieldId

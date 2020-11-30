@@ -15,7 +15,7 @@ JOIN UITermLanguages UIName
 	ON UIName.UITermId = PageSectionProcessConditionTypes.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = PageSectionProcessConditionTypes.NameTermID
-WHERE UIName.LanguageId = @LanguageID AND PageSectionProcessConditionTypeID <> 11
+WHERE UIName.LanguageId = @LanguageID AND PageSectionProcessConditionTypeID <> 11 and active = 1
 
 UNION ALL
 
