@@ -47,7 +47,7 @@ namespace SIPx.DataAccess
         }
         public bool UpdatePost(RoleUpdateGet Role)
         {
-            string usp = "usp_RoleUpdatePost @RoleId, @Name , @Description , @MenuName , @MouseOver, @ModifierId ";
+            string usp = "usp_RoleUpdatePost @RoleId, @Name , @Description , @MenuName , @MouseOver, @UserId ";
             _sqlDataAccess.SaveData<RoleUpdateGet>(usp, Role);
             return true;
         } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.

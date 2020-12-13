@@ -1,4 +1,14 @@
-CREATE PROCEDURE usp_userPageCreatePost (@ShowTitleName bit, @ShowTitleDescription bit, @CreatorId nvarchar(450), @Name nvarchar(50), @Description nvarchar(max), @MenuName nvarchar(50), @MouseOver nvarchar(50), @TitleName nvarchar(50), @TitleDescription nvarchar(max))
+CREATE PROCEDURE usp_userPageCreatePost (
+	@ShowTitleName bit
+	, @ShowTitleDescription bit
+	, @UserId nvarchar(450)
+	, @Name nvarchar(50)
+	, @Description nvarchar(max)
+	, @MenuName nvarchar(50)
+	, @MouseOver nvarchar(50)
+	, @TitleName nvarchar(50)
+	, @TitleDescription nvarchar(max)
+	)
 AS
 
 DECLARE @LanguageId int;

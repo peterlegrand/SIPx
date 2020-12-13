@@ -19,9 +19,9 @@
         <div class="row">
             <div class="col-3">
             </div>    <div class="col-9">
-    <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
-    <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="LanguageId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
-</div>
+                <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="LanguageId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+            </div>
         </div>
         <div class="row">
             <div class="col-3">
@@ -30,6 +30,22 @@
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 5))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
+                </div>
+            </div>
+        }
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 104))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
@@ -41,7 +57,14 @@
                 </ejs-richtexteditor>
             </div>
         </div>
-
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 9))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 9).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
@@ -50,6 +73,14 @@
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 10))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 10).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -58,6 +89,14 @@
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 11))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 11).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
@@ -118,6 +157,14 @@
                 </ejs-dropdownlist>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 14))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 14).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>

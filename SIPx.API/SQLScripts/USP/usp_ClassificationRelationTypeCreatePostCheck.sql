@@ -20,6 +20,26 @@ IF  (SELECT COUNT(*) FROM ClassificationRelationTypeLanguages WHERE LanguageId =
 BEGIN
 	insert into @ErrorIdsTable values(26)
 END
+IF @Name ='' 
+BEGIN
+insert into @ErrorIdsTable values(104)
+END
+
+IF @Description ='' 
+BEGIN
+insert into @ErrorIdsTable values(9)
+END
+
+IF @MenuName ='' 
+BEGIN
+insert into @ErrorIdsTable values(10)
+END
+
+IF @MouseOver ='' 
+BEGIN
+insert into @ErrorIdsTable values(11)
+END
+
 
 IF  (SELECT COUNT(*) FROM Languages WHERE LanguageId = @LanguageId AND languages.StatusId = 1) =0
 BEGIN

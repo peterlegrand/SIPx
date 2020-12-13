@@ -5,17 +5,12 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification level property")).TermString;
-
 }
-
 <h1>
     <img src="~/images/icons/Property.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification level property")).TermString
 </h1>
 <div class="container">
-
-
     <form method="post">
-
         <div class="row">
             <div class="col-3">
             </div>    <div class="col-9">
@@ -62,8 +57,6 @@
                 <a asp-action="Index" asp-route-id="@Model.ClassificationLevelId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
-
-
     </form>
 </div>
 

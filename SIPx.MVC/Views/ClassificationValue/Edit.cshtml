@@ -42,6 +42,22 @@
                 <ejs-textbox value="@Model.Name" ejs-for="Name" id="Name"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 5))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
+                </div>
+            </div>
+        }
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 104))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Description")).TermString
@@ -55,7 +71,14 @@
                 </ejs-richtexteditor>
             </div>
         </div>
-
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 9))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 9).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
@@ -64,6 +87,14 @@
                 <ejs-textbox value="@Model.MenuName" ejs-for="MenuName" id="MenuName"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 10))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 10).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -72,15 +103,31 @@
                 <ejs-textbox value="@Model.MouseOver" ejs-for="MouseOver" id="MouseOver"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 11))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 11).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
-                @* PETERR TODO *@Down name 
+                @* PETERR TODO *@Down name
                 @*@Term.Find(x => x.InternalName.Equals("Dropdown name")).TermString*@
             </div>
             <div class="col-9">
                 <ejs-textbox id="DropDownName" ejs-for="DropDownName" cssClass="e-outline" placeholder="DropDownName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 123))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 123).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Page name")).TermString
@@ -89,6 +136,14 @@
                 <ejs-textbox value="@Model.PageName" ejs-for="PageName" id="PageName"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 124))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 124).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Page description")).TermString
@@ -97,6 +152,14 @@
                 <ejs-textbox value="@Model.PageDescription" ejs-for="PageDescription" id="PageDescription"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 125))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 125).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Header name")).TermString
@@ -105,6 +168,14 @@
                 <ejs-textbox value="@Model.HeaderName" ejs-for="HeaderName" id="HeaderName"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 126))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 126).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Header description")).TermString
@@ -113,6 +184,14 @@
                 <ejs-textbox value="@Model.HeaderDescription" ejs-for="HeaderDescription" id="HeaderDescription"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 127))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 127).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Topic name")).TermString
@@ -121,6 +200,16 @@
                 <ejs-textbox value="@Model.TopicName" ejs-for="TopicName" id="TopicName"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 128))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 128).Name
+                </div>
+            </div>
+        }
+        @* PETER TODO have to check that date should be hidden in certain cases *@
+        @* PETER TODO Check if date is empty etc.. *@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("From date")).TermString

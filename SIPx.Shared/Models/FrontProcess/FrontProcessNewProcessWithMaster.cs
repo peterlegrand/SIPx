@@ -25,5 +25,6 @@ namespace SIPx.Shared
         public int ProcessTemplateId { get; set; }
         public string UserId { get; set; }
         public int ProcessTemplateFlowId { get; set; }
+        public string ErrorHandlingScript { get; set; }
     }
 }

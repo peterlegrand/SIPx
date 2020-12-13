@@ -24,6 +24,26 @@ WHERE USerId = @UserID
 BEGIN 
 DECLARE @ErrorIdsTable TABLE (id int)
 
+IF @Name ='' 
+BEGIN
+insert into @ErrorIdsTable values(104)
+END
+
+IF @Description ='' 
+BEGIN
+insert into @ErrorIdsTable values(9)
+END
+
+IF @MenuName ='' 
+BEGIN
+insert into @ErrorIdsTable values(10)
+END
+
+IF @MouseOver ='' 
+BEGIN
+insert into @ErrorIdsTable values(11)
+END
+
 IF (SELECT COUNT(*) FROM Classifications WHERE ClassificationID = @ClassificationId) =0
 BEGIN
 insert into @ErrorIdsTable values(12)

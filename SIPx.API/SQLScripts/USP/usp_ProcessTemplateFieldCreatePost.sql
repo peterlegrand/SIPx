@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldCreatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
+	, @MissingValueText nvarchar(max)
 	, @CreatorId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
@@ -51,6 +52,7 @@ INSERT INTO ProcessTemplateFieldLanguages (
 	, Description
 	, MenuName
 	, MouseOver
+	, MissingValueText
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -63,6 +65,7 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
+	, @MissingValueText
 	, @CreatorId
 	, getdate()
 	, @CreatorId

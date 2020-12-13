@@ -10,6 +10,7 @@ SELECT ProcessTemplateFields.ProcessTemplateFieldID
 	, ISNULL(UserProcessTemplateFieldLanguage.Description,ISNULL(DefaultProcessTemplateFieldLanguage.Description,'No description for this role')) Description
 	, ISNULL(UserProcessTemplateFieldLanguage.MenuName,ISNULL(DefaultProcessTemplateFieldLanguage.MenuName,'No menu name for this role')) MenuName
 	, ISNULL(UserProcessTemplateFieldLanguage.MouseOver,ISNULL(DefaultProcessTemplateFieldLanguage.MouseOver,'No mouse over for this role')) MouseOver
+	, ISNULL(UserProcessTemplateFieldLanguage.MissingValueText,ISNULL(DefaultProcessTemplateFieldLanguage.MissingValueText,'No missing value text for this role')) MissingValueText
 	, ISNULL(UITypeNameCustom.Customization,UITypeName.Name) ProcessTemplateFieldTypeName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
@@ -18,9 +19,9 @@ SELECT ProcessTemplateFields.ProcessTemplateFieldID
 	, Modifier.PersonID ModifierID
 	, ProcessTemplateFields.ModifiedDate
 FROM ProcessTemplateFields 
-LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver,MissingValueText  FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage
 	ON UserProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage
+LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver,MissingValueText  FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage
 	ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
 JOIN ProcessTemplateFieldTypes 
 	ON ProcessTemplateFieldTypes.ProcessTemplateFieldTypeId = ProcessTemplateFields.ProcessTemplateFieldTypeID

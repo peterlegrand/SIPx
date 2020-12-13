@@ -17,6 +17,7 @@ namespace SIPx.Shared
         public string UserId { get; set; }
         public string RoleId { get; set; }
         public string HTMLStringValue { get; set; }
+        public string MissingValueText { get; set; }
         public int ValueUpdateTypeId { get; set; }
         public int ProcessTemplateFieldId { get; set; }
         public int ProcessTemplateFieldTypeId { get; set; }
@@ -24,7 +25,9 @@ namespace SIPx.Shared
         public int ProcessTemplateStageId { get; set; }
         public string Name { get; set; }
         public string ControlId { get; set; }
-        public string ControlId2 { get; set; }
-        public string ControlId3 { get; set; }
+        public string ControlIdProcessTemplateFieldId { get; set; }
+        public string ControlIdProcessTemplateFieldTypeId { get; set; }
+        public string ControlIdOnFocusOutFunction { get; set; }
+        public string ControlIdWarning { get; set; }
     }
 }

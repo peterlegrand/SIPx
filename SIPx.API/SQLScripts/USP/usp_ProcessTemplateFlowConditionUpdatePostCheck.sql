@@ -6,6 +6,9 @@ CREATE PROCEDURE usp_ProcessTemplateFlowConditionUpdatePostCheck (
 	, @ProcessTemplateFieldIDRole int
 	, @ComparisonOperatorId int
 	, @Name nvarchar(50)
+	, @Description nvarchar(max)
+	, @MenuName nvarchar(50)
+	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 	AS 
 
@@ -59,6 +62,29 @@ IF (SELECT COUNT(*) FROM ProcessTemplateFlowConditionComparisonOperators WHERE P
 BEGIN
 insert into @ErrorIdsTable values(89)
 END
+
+
+IF @Name ='' 
+BEGIN
+insert into @ErrorIdsTable values(104)
+END
+
+IF @Description ='' 
+BEGIN
+insert into @ErrorIdsTable values(9)
+END
+
+IF @MenuName ='' 
+BEGIN
+insert into @ErrorIdsTable values(10)
+END
+
+IF @MouseOver ='' 
+BEGIN
+insert into @ErrorIdsTable values(11)
+END
+
+
 
 SELECT ErrorMessages.ErrorMessageID
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name

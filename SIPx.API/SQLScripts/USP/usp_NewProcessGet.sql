@@ -23,8 +23,10 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this field')) Name
 	, ISNULL(UserLanguage.MissingValueText,ISNULL(DefaultLanguage.MissingValueText,'No missing value text for this field')) MissingValueText
 	, 'ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId
-	, 'ID1ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId2
-	, 'ID2ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId3
+	, 'ControlIdFieldId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlIdProcessTemplateFieldId
+	, 'ControlIdFieldTypeId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlIdProcessTemplateFieldTypeId
+	, 'ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10))) +'()' ControlIdOnFocusOutFunction
+	, 'ControlIdWarningId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlIdWarning
 	--, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this field')) Description
 	--, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.Name,'No menu name for this field')) MenuName
 	--, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this field')) MouseOver

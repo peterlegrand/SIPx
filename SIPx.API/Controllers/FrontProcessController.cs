@@ -64,11 +64,11 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
                 var ListOfProcessTemplateGroups = await _frontProcessProvider.NewProcessShowTemplateGroup(CurrentUser.Id);
-                var TemplateLogic = new FrontProcessNewProcessLogic( _userProvider, _processProvider, _frontProcessProvider);
+                var TemplateLogic = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
                 var ListOfProcessTemplates = await TemplateLogic.ReturnProcessTemplateList(CurrentUser);
 
 
-               // var  = await _frontProcessProvider.NewProcessShowTemplate(CurrentUser.Id);
+                // var  = await _frontProcessProvider.NewProcessShowTemplate(CurrentUser.Id);
                 foreach (var group in ListOfProcessTemplateGroups)
                 {
                     var ProcessTemplates = ListOfProcessTemplates.FindAll(x => x.ProcessTemplateGroupId == group.ProcessTemplateGroupId);
@@ -82,7 +82,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
-        
+
 
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
@@ -99,9 +99,23 @@ namespace SIPx.API.Controllers
                     //TOFIX PETER
                     var newprocess = await _processProvider.CreateGet(CurrentUser.Id, Id);
                     var newProcessWithMaster = new FrontProcessNewProcessWithMaster();
-                    
+
                     newProcessWithMaster.ProcessTemplateId = Id;
                     newProcessWithMaster.ProcessFields = newprocess;
+                    foreach(var y in newprocess)
+                    {
+                        if(y.ProcessTemplateStageFieldStatusId == 4)
+                        {
+                            var xd = @$"function {y.ControlIdOnFocusOutFunction.Trim()} {{var x = document.getElementById('{y.ControlId.Trim()}');console.log(x);if (x.value==='') {{ document.getElementById('{y.ControlIdWarning.Trim()}').style.display = 'block';}}else{{ document.getElementById('{y.ControlIdWarning.Trim()}').style.display = 'none';}}}}";
+                              //var xd = @$"function {y.ControlIdOnFocusOutFunction.Trim()} {{var x = document.getElementById('{y.ControlId.Trim()}');if (x.value==='') {{alert('{y.MissingValueText.Trim()}a');}}else{{alert('{y.MissingValueText.Trim()}b');}}}}";
+                            // var xe = String.Format($"function {0} {{var x = document.getElementById(\"{1}\");if (x.value===\"\") {{alert(\"{2}\");}}}}", y.ControlIdOnFocusOutFunction.Trim(), y.ControlId.Trim(), y.MissingValueText.Trim());
+                            newProcessWithMaster.ErrorHandlingScript = newProcessWithMaster.ErrorHandlingScript + xd; 
+                                //@"function " +
+                                //y.ControlIdOnFocusOutFunction + @" {var x = document.getElementById("""+ 
+                                //y.ControlId + "\");if (x.value===\"\") {alert(\"" +
+                                //y.MissingValueText + "\");}}";
+                        }
+                    }
                     //for(int i = 0; i < newprocess.Count; i++)
                     //{ 
                     //if(newprocess[i].ValueUpdateTypeId==2 && new[] { 1, 2 }.Contains(newprocess[i].ProcessTemplateFieldTypeId))
@@ -110,12 +124,12 @@ namespace SIPx.API.Controllers
                     //    }
 
                     //}
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 12)|| newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 13))
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 12) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 13))
                     {
                         var Users = await _userProvider.List();
                         newProcessWithMaster.Users = Users;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 14)|| newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 15))
+                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 14) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 15))
                     {
                         var organizations = await _organizationProvider.List(CurrentUser.Id);
                         newProcessWithMaster.Organizations = organizations;
@@ -176,6 +190,8 @@ namespace SIPx.API.Controllers
 
         }
 
+    
+
         [HttpPost("Create")]
         public async Task<IActionResult> Create(FrontProcessNewProcessWithMaster Fields)
         {
@@ -195,7 +211,7 @@ namespace SIPx.API.Controllers
                     return Ok(Fields);// CurrentUser.LanguageId));
                 }
 
-                
+
 
             }
             return BadRequest(new
@@ -233,7 +249,7 @@ namespace SIPx.API.Controllers
             if (ToDo.Any(x => x.ProcessId == Id))
             {
                 var Process = await _frontProcessProvider.FrontProcessUpdateGet(CurrentUser.Id, Id);
-                 Process.Fields = await _frontProcessProvider.FrontProcessUpdateGetFields(CurrentUser.Id, Id);
+                Process.Fields = await _frontProcessProvider.FrontProcessUpdateGetFields(CurrentUser.Id, Id);
                 Process.Classifications = await _classificationProvider.List(CurrentUser.Id);
                 Process.ClassificationValues = await _classificationValueProvider.List(CurrentUser.Id);
                 Process.Contents = await _contentProvider.List();
@@ -241,7 +257,7 @@ namespace SIPx.API.Controllers
                 Process.Organizations = await _organizationProvider.List(CurrentUser.Id);
                 Process.Persons = await _personProvider.List();
                 Process.Projects = await _projectProvider.List(CurrentUser.Id);
-                Process.Countries= await _masterListProvider.CountryList(CurrentUser.Id);
+                Process.Countries = await _masterListProvider.CountryList(CurrentUser.Id);
                 Process.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 //Process.Users = await _userManager.List();
                 for (int i = 0; i < Process.Fields.Count; i++)
@@ -265,7 +281,7 @@ namespace SIPx.API.Controllers
                         if (Process.Fields[i].DateTimeValue == null)
                         {
                             Process.Fields[i].DateTimeValue = Process.Fields[i].DefaultDateTimeValue;
-                        } 
+                        }
                     }
                     //User
                     if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 12 || x.ProcessTemplateFieldTypeId == 13))
@@ -335,7 +351,7 @@ namespace SIPx.API.Controllers
                     Process.ProcessTemplateFlowId = Pass;
 
                 }
-                    _frontProcessProvider.FrontProcessEditPost(Process, CurrentUser.Id);
+                _frontProcessProvider.FrontProcessEditPost(Process, CurrentUser.Id);
                 return Ok(Process);
             }
             return BadRequest(new
@@ -429,7 +445,15 @@ namespace SIPx.API.Controllers
             });
         }
 
-        
 
+
+    }
+    public class JavaScriptResult : ContentResult
+    {
+        public JavaScriptResult(string script)
+        {
+            this.Content = script;
+            this.ContentType = "application/javascript";
+        }
     }
 }

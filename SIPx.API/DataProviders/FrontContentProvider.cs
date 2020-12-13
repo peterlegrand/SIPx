@@ -82,7 +82,7 @@ namespace SIPx.DataAccess
                             , DateTime.Today);
                 }
             }
-            string usp = "usp_FrontContentNewPost @ContentTypeId, @ContentStatusID , @LanguageID , @Title , @Description , @SecurityLevelID , @ProjectID , @OrganizationId , @CreatorID, @ClassificationValueTable ";
+            string usp = "usp_FrontContentNewPost @ContentTypeId, @ContentStatusID , @LanguageID , @Title , @Description , @SecurityLevelID , @ProjectID , @OrganizationId , @UserID, @ClassificationValueTable ";
             _sqlDataAccess.SaveData<dynamic>(usp, new
             {
                 ContentTypeId = Content.ContentTypeId
@@ -101,7 +101,7 @@ namespace SIPx.DataAccess
                 ,
                 ProjectId = Content.ProjectId
                 ,
-                CreatorId = UserId
+                UserId = UserId
                 ,
                 ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert")
             });

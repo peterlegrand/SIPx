@@ -39,6 +39,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync<FrontProcessNewProcessWithMaster>($"{_baseUrl}api/FrontProcess/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/Create", token);
             ViewBag.UITerms = UITerms;
+      //      response.ErrorHandlingScript = response.ErrorHandlingScript.Replace(@"\", "");
+            ViewBag.ErrorHandlingScript = response.ErrorHandlingScript;
             return View(response);
 
         }

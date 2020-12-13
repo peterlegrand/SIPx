@@ -58,7 +58,7 @@ namespace SIPx.MVC.Controllers
                 var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = ClassificationCreateGetWithErrorMessage.ErrorMessages;
-                return View(ClassificationCreateGetWithErrorMessage.CreateUpdateObject);
+                return View(ClassificationCreateGetWithErrorMessage.Classification);
             }
             return RedirectToAction("Index");
         }

@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class ClassificationCreateGetWithErrorMessages
     {
         [Key]
-        public ClassificationCreateGet CreateUpdateObject { get; set; }
+        public ClassificationCreateGet Classification { get; set; }
         public List<ErrorMessage> ErrorMessages { get; set; }
     }
 }

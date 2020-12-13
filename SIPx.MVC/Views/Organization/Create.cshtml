@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col-3">
-                
+
             </div>    <div class="col-9">
                 <ejs-numerictextbox id="ParentOrganizationId" ejs-for="ParentOrganizationId" cssClass="e-outline" placeholder="ParentOrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
@@ -30,6 +30,22 @@
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 5))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
+                </div>
+            </div>
+        }
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 104))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">

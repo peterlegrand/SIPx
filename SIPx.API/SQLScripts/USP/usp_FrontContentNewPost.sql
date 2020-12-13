@@ -1,4 +1,5 @@
-CREATE PROCEDURE usp_FrontContentNewPost (	@ContentTypeId int
+CREATE PROCEDURE usp_FrontContentNewPost (	
+	@ContentTypeId int
 	, @ContentStatusID int
 	, @LanguageID int
 	, @Title nvarchar(50)
@@ -6,7 +7,7 @@ CREATE PROCEDURE usp_FrontContentNewPost (	@ContentTypeId int
 	, @SecurityLevelID int
 	, @ProjectID int
 	, @OrganizationID int
-	, @CreatorID nvarchar(450)
+	, @UserID nvarchar(450)
 	, @ClassificationValueTable AS udt_ContentClassificationValueInsert READONLY
 )
 

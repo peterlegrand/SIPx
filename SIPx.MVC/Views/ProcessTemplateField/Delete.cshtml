@@ -61,6 +61,14 @@
         </div>
         <div class="row">
             <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Missing text value")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MissingValueText" ejs-for="MissingValueText" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Field type")).TermString
             </div>
             <div class="col-9">

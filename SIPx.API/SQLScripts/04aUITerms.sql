@@ -1756,5 +1756,24 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1754, 'The right menu page d
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1755, 'The left menu type does not exist');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1756, 'The right menu type does not exist');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1757, 'The user menu does not exist');
-
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1758, 'Missing value text');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1759, 'Name cannot be blank');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1760, 'Content type classification does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1761, 'Content type classification status does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1762, 'Title cannot be blank');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1763, 'Security level must be equal or smaller than the user security level');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1764, 'The classification value for the classification does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1765, 'Cannot select more than 1 value for each classification');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1766, 'Process template flow pass type does not exit');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1767, 'Process template flow pass comparison operator does not exit');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1768, 'The process template field stage does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1769, 'The process template stage field status does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1770, 'The value update type does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1771, 'The process does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1772, 'The process field is not part of the process');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1773, 'The property type does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1774, 'The claim does not exist');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1775, 'First name cannot be blank');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1776, 'Last name cannot be blank');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1777, 'Email cannot be blank');
 SET IDENTITY_INSERT UITerms OFF;

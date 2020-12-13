@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[usp_ProcessTemplateFieldUpdatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
+	, @MissingValueText nvarchar(max)
 	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
@@ -25,6 +26,7 @@ UPDATE  ProcessTemplateFieldLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
+	, MissingValueText = @MissingValueText
 	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ProcessTemplateFieldID= @ProcessTemplateFieldID

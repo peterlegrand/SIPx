@@ -20,6 +20,26 @@ BEGIN
 
 DECLARE @ErrorIdsTable TABLE (id int)
 
+IF @Name ='' 
+BEGIN
+insert into @ErrorIdsTable values(104)
+END
+
+IF @Description ='' 
+BEGIN
+insert into @ErrorIdsTable values(9)
+END
+
+IF @MenuName ='' 
+BEGIN
+insert into @ErrorIdsTable values(10)
+END
+
+IF @MouseOver ='' 
+BEGIN
+insert into @ErrorIdsTable values(11)
+END
+
 IF @StatusId NOT IN (1,2) 
 BEGIN
 insert into @ErrorIdsTable values(1)

@@ -84,11 +84,11 @@ namespace SIPx.API.Controllers
                 { 
                 _classificationProvider.CreatePost(Classification);
                 }
-                ClassificationCreateGetWithErrorMessages ClassificationWithErrorMessage = new ClassificationCreateGetWithErrorMessages { CreateUpdateObject = Classification, ErrorMessages = ErrorMessages };
+                ClassificationCreateGetWithErrorMessages ClassificationWithErrorMessage = new ClassificationCreateGetWithErrorMessages { Classification = Classification, ErrorMessages = ErrorMessages };
                 return Ok(ClassificationWithErrorMessage);              
             }
             ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
-            ClassificationCreateGetWithErrorMessages ClassificationWithNoRights = new ClassificationCreateGetWithErrorMessages { CreateUpdateObject = Classification, ErrorMessages = ErrorMessages };
+            ClassificationCreateGetWithErrorMessages ClassificationWithNoRights = new ClassificationCreateGetWithErrorMessages { Classification = Classification, ErrorMessages = ErrorMessages };
             return Ok(ClassificationWithNoRights);
         }
 

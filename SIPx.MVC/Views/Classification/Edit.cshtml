@@ -31,6 +31,22 @@
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 5))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
+                </div>
+            </div>
+        }
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 104))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
@@ -53,128 +69,186 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+        </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 9))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 9).Name
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 10))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 10).Name
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 11))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 11).Name
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="HasDropDown" label="Dropdown" ejs-for="HasDropDown" checked="@Model.HasDropDown"></ejs-checkbox>
+            </div>
+        </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 2))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 2).Name
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Dropdown sequence")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.DropDownSequences" ejs-for="@Model.DropDownSequence" value="@Model.DropDownSequence" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 3))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 3).Name
+                </div>
+            </div>
+        }
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 4))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 4).Name
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Default page")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="DefaultPage" dataSource="@Model.DefaultPages" ejs-for="@Model.DefaultPageId" value="@Model.DefaultPageId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
 
             </div>
-                    </div>
+        </div>
+        @* PETER TODO need to do error message on default page. *@
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Status" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 1))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 1).Name
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Icon")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 8))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 8).Name
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Color")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-colorpicker id='color-picker' ejs-for="Color" value="Color"></ejs-colorpicker>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatorName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatedDate
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ModifierName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
+            </div>
+        </div>
 
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-checkbox id="HasDropDown" label="Dropdown" ejs-for="HasDropDown" checked="@Model.HasDropDown"></ejs-checkbox>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-3">
-                            @* PETER TODO *@
-                            @*@Term.Find(x => x.InternalName.Equals("Dropdown sequence")).TermString*@
-                            DROPDOWN SEQUENCe
-                        </div>
-                        <div class="col-9">
-                            <ejs-dropdownlist id="Sequence" dataSource="@Model.DropDownSequences" ejs-for="@Model.DropDownSequence" value="@Model.DropDownSequence" popupHeight="220px">
-                                <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
-                            </ejs-dropdownlist>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Default page")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-dropdownlist id="DefaultPage" dataSource="@Model.DefaultPages" ejs-for="@Model.DefaultPageId" value="@Model.DefaultPageId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
-                                <e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>
-                            </ejs-dropdownlist>
-
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Status")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-dropdownlist id="Status" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" popupHeight="220px">
-                                <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
-                            </ejs-dropdownlist>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Icon")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
-                                <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
-                            </ejs-dropdownlist>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Color")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-colorpicker id='color-picker' ejs-for="Color" value="Color"></ejs-colorpicker>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3 offset-3">
-                            <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                            <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Creator")).TermString
-                        </div>
-                        <div class="col-9">
-                            @Model.CreatorName
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-                        </div>
-                        <div class="col-9">
-                            @Model.CreatedDate
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-                        </div>
-                        <div class="col-9">
-                            @Model.ModifierName
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-                        </div>
-                        <div class="col-9">
-                            <div>@Model.ModifiedDate</div>
-                        </div>
-                    </div>
-
-</form>
+    </form>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>

@@ -38,6 +38,14 @@
                 </div>
             </div>
         }
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 104))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
@@ -73,7 +81,6 @@
                 </div>
             </div>
         }
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -90,7 +97,6 @@
                 </div>
             </div>
         }
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString

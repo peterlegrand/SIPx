@@ -51,6 +51,26 @@ BEGIN
 insert into @ErrorIdsTable values(43)
 END
 
+IF @Name ='' 
+BEGIN
+insert into @ErrorIdsTable values(104)
+END
+
+IF @Description ='' 
+BEGIN
+insert into @ErrorIdsTable values(9)
+END
+
+IF @MenuName ='' 
+BEGIN
+insert into @ErrorIdsTable values(10)
+END
+
+IF @MouseOver ='' 
+BEGIN
+insert into @ErrorIdsTable values(11)
+END
+
 --PETER TODO Add a check for process template which includes if primary content is a field for that.
 SELECT ErrorMessages.ErrorMessageID
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name

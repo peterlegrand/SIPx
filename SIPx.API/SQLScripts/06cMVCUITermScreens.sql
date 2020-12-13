@@ -7440,3 +7440,10 @@ INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (21, 404)
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 406);
 
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (341, 390);
+
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1758, 170);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1758, 172);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (1758, 171);

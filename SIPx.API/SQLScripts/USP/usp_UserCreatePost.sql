@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_UserCreatePost] (
+CREATE PROCEDURE usp_UserCreatePost (
 	@Salutation nvarchar(50)
 , @FirstName nvarchar(50)
 , @MiddleName nvarchar(50)

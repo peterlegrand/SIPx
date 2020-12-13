@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_RoleClaimCreatePost] ( @RoleId  nvarchar(450), @ClaimId int) 
+CREATE PROCEDURE usp_RoleClaimCreatePost ( @RoleId  nvarchar(450), @ClaimId int) 
 AS 
 DECLARE @ClaimType nvarchar(max);
 DECLARE @ClaimValue nvarchar(max);

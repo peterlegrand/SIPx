@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PropertyCreatePost] (
+CREATE PROCEDURE usp_PropertyCreatePost (
 	@PropertyTypeId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)

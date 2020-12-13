@@ -29,7 +29,7 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(PageCreateGet Page)
         {
-            string usp = "usp_UserPageCreatePost @ShowTitleName , @ShowTitleDescription , @CreatorId , @Name , @Description , @MenuName , @MouseOver , @TitleName , @TitleDescription ";
+            string usp = "usp_UserPageCreatePost @ShowTitleName , @ShowTitleDescription , @UserId , @Name , @Description , @MenuName , @MouseOver , @TitleName , @TitleDescription ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
             return CheckString;
         }
