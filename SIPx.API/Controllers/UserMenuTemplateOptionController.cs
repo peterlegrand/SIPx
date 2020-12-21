@@ -19,10 +19,17 @@ namespace SIPx.API.Controllers
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
-        private readonly IUserMenuProvider _userMenuProvider;
+        private readonly IFrontUserMenuProvider _frontUserMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuTemplateOptionController(IUserMenuTypeProvider userMenuTypeProvider, IMasterListProvider masterListProvider, IUserMenuTemplateOptionProvider userMenuTemplateOptionProvider, IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public UserMenuTemplateOptionController(IUserMenuTypeProvider userMenuTypeProvider
+            , IMasterListProvider masterListProvider
+            , IUserMenuTemplateOptionProvider userMenuTemplateOptionProvider
+            , IPageProvider pageProvider
+            , IMasterProvider masterProvider
+            , ICheckProvider checkProvider
+            , IClaimCheck claimCheck, IFrontUserMenuProvider frontUserMenuProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _userMenuTypeProvider = userMenuTypeProvider;
             _masterListProvider = masterListProvider;
@@ -31,7 +38,7 @@ namespace SIPx.API.Controllers
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
-            _userMenuProvider = userMenuProvider;
+            _frontUserMenuProvider = frontUserMenuProvider;
             _userManager = userManager;
         }
 

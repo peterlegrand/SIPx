@@ -19,194 +19,299 @@
         <e-dashboardlayout-panels>
             @foreach (var x in Model.Panels)
             {
-                @if (x.PageSectionTypeId == 4)
+                switch (x.PageSectionTypeId)
                 {
-                    <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
-                        <e-content-template>
-                            <div class="e-panel-container">
-                                <div class="e-panel-header">
-                                    <div>
-                                        @if (@x.ShowSectionTitleName)
-                                        {<div>
-                                                <h4>
-                                                    <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
-                                                </h4>
+                    case 1: //List
+                        switch (x.PageSectionDataTypeId)
+                        {
+                            case 1: //Content
+                                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                                    <e-content-template>
+                                        <div class="e-panel-container">
+                                            <div class="e-panel-header">
+                                                <div>
+                                                    @if (@x.ShowSectionTitleName)
+                                                    {<div>
+                                                            <h4>
+                                                                <img src="~/images/icons/Content.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                            </h4>
+                                                        </div>
+                                                    }
+                                                    @if (@x.ShowSectionTitleDescription)
+                                                    {<div>
+                                                            @x.PageSectionTitleDescription
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
-                                        }
-                                        @if (@x.ShowSectionTitleDescription)
-                                        {<div>
-                                                @x.PageSectionTitleDescription
+                                            <div class="e-panel-content">
+                                                <ejs-grid id="@x.SubPanelId" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#ContentTemplate">
+                                                    <e-grid-columns>
+                                                        <e-grid-column headerText="" width="300" field="ControlId" textAlign="Left"></e-grid-column>
+                                                    </e-grid-columns>
+                                                </ejs-grid>
                                             </div>
-                                        }
-                                    </div>
-                                </div>
-                                <div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
-                                        <e-schedule-eventsettings dataSource="@x.PersonalCalendars"></e-schedule-eventsettings>
-                                        <e-schedule-views>
-                                            <e-schedule-view option="Month" eventTemplate="#event-template"></e-schedule-view>
-                                            <e-schedule-view option="TimelineWeek" eventTemplate="#timeline-event-template"></e-schedule-view>
-                                        </e-schedule-views>
-                                    </ejs-schedule>
-                                </div>
-                            </div>
-                        </e-content-template>
-                    </e-dashboardlayout-panel>
-                }
-                @if (x.PageSectionTypeId == 5)
-                {
-                    <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
-                        <e-content-template>
-                            <div class="e-panel-container">
-                                <div class="e-panel-header">
-                                    <div>
-                                        @if (@x.ShowSectionTitleName)
-                                        {<div>
-                                                <h4>
-                                                    <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
-                                                </h4>
-                                            </div>
-                                        }
-                                        @if (@x.ShowSectionTitleDescription)
-                                        {<div>
-                                                @x.PageSectionTitleDescription
-                                            </div>
-                                        }
-                                    </div>
-                                </div><div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
-                                        <e-schedule-eventsettings dataSource="@x.OrganizationCalendars"></e-schedule-eventsettings>
-                                    </ejs-schedule>
-                                </div>
-                            </div>
-                        </e-content-template>
-                    </e-dashboardlayout-panel>
-                }
-                @if (x.PageSectionTypeId == 6)
-                {
-                    <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
-                        <e-content-template>
-                            <div class="e-panel-container">
-                                <div class="e-panel-header">
-                                    <div>
-                                        @if (@x.ShowSectionTitleName)
-                                        {<div>
-                                                <h4>
-                                                    <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
-                                                </h4>
-                                            </div>
-                                        }
-                                        @if (@x.ShowSectionTitleDescription)
-                                        {<div>
-                                                @x.PageSectionTitleDescription
-                                            </div>
-                                        }
-                                    </div>
-                                </div><div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
-                                        <e-schedule-eventsettings dataSource="@x.ProjectCalendars"></e-schedule-eventsettings>
-                                    </ejs-schedule>
-                                </div>
-                            </div>
-                        </e-content-template>
-                    </e-dashboardlayout-panel>
-                }
-                @if (x.PageSectionTypeId == 7)
-                {
-                    <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
-                        <e-content-template>
-                            <div class="e-panel-container">
-                                <div class="e-panel-header">
-                                    <div>
-                                        @if (@x.ShowSectionTitleName)
-                                        {<div>
-                                                <h4>
-                                                    <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
-                                                </h4>
-                                            </div>
-                                        }
-                                        @if (@x.ShowSectionTitleDescription)
-                                        {<div>
-                                                @x.PageSectionTitleDescription
-                                            </div>
-                                        }
-                                    </div>
-                                </div><div class="e-panel-content">
-                                    <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
-                                        <e-schedule-eventsettings dataSource="@x.EventCalendars"></e-schedule-eventsettings>
-                                    </ejs-schedule>
-                                </div>
-                            </div>
-                        </e-content-template>
-                    </e-dashboardlayout-panel>
-                }
-                @if (x.PageSectionTypeId == 1 && x.PageSectionDataTypeId == 1)
-                {
-                    <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
-                        <e-content-template>
-                            <div class="e-panel-container">
-                                <div class="e-panel-header">
-                                    <div>
-                                        @if (@x.ShowSectionTitleName)
-                                        {<div>
-                                                <h4>
-                                                    <img src="~/images/icons/Content.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
-                                                </h4>
-                                            </div>
-                                        }
-                                        @if (@x.ShowSectionTitleDescription)
-                                        {<div>
-                                                @x.PageSectionTitleDescription
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                                <div class="e-panel-content">
-                                    <ejs-grid id="@x.SubPanelId" dataSource="@x.Contents" height="335" width="auto" rowTemplate="#ContentTemplate">
-                                        <e-grid-columns>
-                                            <e-grid-column headerText="" width="300" field="ControlId" textAlign="Left"></e-grid-column>
-                                        </e-grid-columns>
-                                    </ejs-grid>
-                                </div>
-                            </div>
-                        </e-content-template>
-                    </e-dashboardlayout-panel>
-                }
-                @if (x.PageSectionTypeId == 1 && x.PageSectionDataTypeId == 2)
-                {
-                    <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
-                        <e-content-template>
-                            <div class="e-panel-container">
+                                        </div>
+                                    </e-content-template>
+                                </e-dashboardlayout-panel>
+                                break;
+                            case 2: //Process
+                                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                                    <e-content-template>
+                                        <div class="e-panel-container">
 
-                                <div class="e-panel-header">
-                                    <div>
-                                        @if (@x.ShowSectionTitleName)
-                                        {<div>
-                                                <h4>
-                                                    <img src="~/images/icons/Process.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
-                                                </h4>
+                                            <div class="e-panel-header">
+                                                <div>
+                                                    @if (@x.ShowSectionTitleName)
+                                                    {<div>
+                                                            <h4>
+                                                                <img src="~/images/icons/Process.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                            </h4>
+                                                        </div>
+                                                    }
+                                                    @if (@x.ShowSectionTitleDescription)
+                                                    {<div>
+                                                            @x.PageSectionTitleDescription
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
-                                        }
-                                        @if (@x.ShowSectionTitleDescription)
-                                        {<div>
-                                                @x.PageSectionTitleDescription
+                                            <div class="e-panel-content">
+                                                <ejs-grid id="@x.SubPanelId" dataSource="@x.Processes" height="335" width="auto" rowTemplate="#ToDotemplate">
+                                                    <e-grid-columns>
+                                                        <e-grid-column headerText="Id" width="300" field="ProcessId" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Subject" width="300" field="Subject" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Template" width="300" field="ProcessTemplateName" textAlign="Left"></e-grid-column>
+                                                    </e-grid-columns>
+                                                </ejs-grid>
                                             </div>
-                                        }
+                                        </div>
+                                    </e-content-template>
+                                </e-dashboardlayout-panel>
+                                break;
+
+                            case 3: //Organization
+                                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                                    <e-content-template>
+                                        <div class="e-panel-container">
+
+                                            <div class="e-panel-content">
+                                                <ejs-grid id="@x.SubPanelId" dataSource="@x.Organizations" height="335" width="auto" >
+                                                    <e-grid-columns>
+                                                        <e-grid-column headerText="Id" width="300" field="OrganizationId" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Name" width="300" field="Name" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Type" width="300" field="OrganizationTypeName" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Status" width="300" field="StatusName" textAlign="Left"></e-grid-column>
+                                                    </e-grid-columns>
+                                                </ejs-grid>
+                                            </div>
+                                        </div>
+                                    </e-content-template>
+                                </e-dashboardlayout-panel>
+
+                                break;
+                            case 4: //Person
+                                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                                    <e-content-template>
+                                        <div class="e-panel-container">
+
+                                            <div class="e-panel-content">
+                                                <ejs-grid id="@x.SubPanelId" dataSource="@x.Persons" height="335" width="auto" rowTemplate="#ToDotemplate">
+                                                    <e-grid-columns>
+                                                        <e-grid-column headerText="Id" width="300" field="PersonId" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="First name" width="300" field="FirstName" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Last name" width="300" field="LastName" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Default organization" width="300" field="DefaultOrganization" textAlign="Left"></e-grid-column>
+                                                    </e-grid-columns>
+                                                </ejs-grid>
+                                            </div>
+                                        </div>
+                                    </e-content-template>
+                                </e-dashboardlayout-panel>
+
+                                break;
+
+                            case 5: //Project
+                                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                                    <e-content-template>
+                                        <div class="e-panel-container">
+
+                                            <div class="e-panel-content">
+                                                <ejs-grid id="@x.SubPanelId" dataSource="@x.Projects" height="335" width="auto" rowTemplate="#ToDotemplate">
+                                                    <e-grid-columns>
+                                                        <e-grid-column headerText="Id" width="300" field="ProjectId" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Name" width="300" field="ProjectName" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Type" width="300" field="ProjectTypeName" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Status" width="300" field="ProjectStatusName" textAlign="Left"></e-grid-column>
+                                                    </e-grid-columns>
+                                                </ejs-grid>
+                                            </div>
+                                        </div>
+                                    </e-content-template>
+                                </e-dashboardlayout-panel>
+
+                                break;
+
+                            case 6: //Favorites
+
+                                break;
+
+                            case 7: //Classificiation value
+
+                                <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                                    <e-content-template>
+                                        <div class="e-panel-container">
+
+                                            <div class="e-panel-content">
+                                                <ejs-grid id="@x.SubPanelId" dataSource="@x.ClassificationValues" height="335" width="auto" rowTemplate="#ToDotemplate">
+                                                    <e-grid-columns>
+                                                        <e-grid-column headerText="Id" width="300" field="ClassificationValueId" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Value" width="300" field="ClassificationValueName" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Classification" width="300" field="ClassificationName" textAlign="Left"></e-grid-column>
+                                                    </e-grid-columns>
+                                                </ejs-grid>
+                                            </div>
+                                        </div>
+                                    </e-content-template>
+                                </e-dashboardlayout-panel>
+                                break;
+
+                        }
+                        break;
+                    case 2: //Index
+
+                        break;
+                    case 3: //Chat
+
+                        break;
+                    case 4: //Personal calendar
+                        <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                            <e-content-template>
+                                <div class="e-panel-container">
+                                    <div class="e-panel-header">
+                                        <div>
+                                            @if (x.ShowSectionTitleName)
+                                            {<div>
+                                                    <h4>
+                                                        <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                    </h4>
+                                                </div>
+                                            }
+                                            @if (x.ShowSectionTitleDescription)
+                                            {<div>
+                                                    @x.PageSectionTitleDescription
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="e-panel-content">
+                                        <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
+                                            <e-schedule-eventsettings dataSource="@x.PersonalCalendars"></e-schedule-eventsettings>
+                                            <e-schedule-views>
+                                                <e-schedule-view option="Month" eventTemplate="#event-template"></e-schedule-view>
+                                                <e-schedule-view option="TimelineWeek" eventTemplate="#timeline-event-template"></e-schedule-view>
+                                            </e-schedule-views>
+                                        </ejs-schedule>
                                     </div>
                                 </div>
-                                <div class="e-panel-content">
-                                    <ejs-grid id="@x.SubPanelId" dataSource="@x.Processes" height="335" width="auto" rowTemplate="#ToDotemplate">
-                                        <e-grid-columns>
-                                            <e-grid-column headerText="Id" width="300" field="ProcessId" textAlign="Left"></e-grid-column>
-                                            <e-grid-column headerText="Subject" width="300" field="Subject" textAlign="Left"></e-grid-column>
-                                            <e-grid-column headerText="Template" width="300" field="ProcessTemplateName" textAlign="Left"></e-grid-column>
-                                        </e-grid-columns>
-                                    </ejs-grid>
+                            </e-content-template>
+                        </e-dashboardlayout-panel>
+                        break;
+                    case 5: //Organization calendar
+                        <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                            <e-content-template>
+                                <div class="e-panel-container">
+                                    <div class="e-panel-header">
+                                        <div>
+                                            @if (x.ShowSectionTitleName)
+                                            {<div>
+                                                    <h4>
+                                                        <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                    </h4>
+                                                </div>
+                                            }
+                                            @if (x.ShowSectionTitleDescription)
+                                            {<div>
+                                                    @x.PageSectionTitleDescription
+                                                </div>
+                                            }
+                                        </div>
+                                    </div><div class="e-panel-content">
+                                        <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
+                                            <e-schedule-eventsettings dataSource="@x.OrganizationCalendars"></e-schedule-eventsettings>
+                                        </ejs-schedule>
+                                    </div>
                                 </div>
-                            </div>
-                        </e-content-template>
-                    </e-dashboardlayout-panel>
+                            </e-content-template>
+                        </e-dashboardlayout-panel>
+
+                        break;
+                    case 6: //Project calendar
+                        <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                            <e-content-template>
+                                <div class="e-panel-container">
+                                    <div class="e-panel-header">
+                                        <div>
+                                            @if (x.ShowSectionTitleName)
+                                            {<div>
+                                                    <h4>
+                                                        <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                    </h4>
+                                                </div>
+                                            }
+                                            @if (@x.ShowSectionTitleDescription)
+                                            {<div>
+                                                    @x.PageSectionTitleDescription
+                                                </div>
+                                            }
+                                        </div>
+                                    </div><div class="e-panel-content">
+                                        <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
+                                            <e-schedule-eventsettings dataSource="@x.ProjectCalendars"></e-schedule-eventsettings>
+                                        </ejs-schedule>
+                                    </div>
+                                </div>
+                            </e-content-template>
+                        </e-dashboardlayout-panel>
+                        break;
+                    case 7: //platform calendar
+                        <e-dashboardlayout-panel id="@x.PanelId" minSizeX="@x.SizeX" sizeX="@x.SizeX" minSizeY="@x.SizeY" sizeY="@x.SizeY" row="@x.DashboardRow" col="@x.DashboardColumn">
+                            <e-content-template>
+                                <div class="e-panel-container">
+                                    <div class="e-panel-header">
+                                        <div>
+                                            @if (x.ShowSectionTitleName)
+                                            {<div>
+                                                    <h4>
+                                                        <img src="~/images/icons/Calendar.png" width="20" height="20" /> &nbsp; @x.PageSectionTitleName
+                                                    </h4>
+                                                </div>
+                                            }
+                                            @if (@x.ShowSectionTitleDescription)
+                                            {<div>
+                                                    @x.PageSectionTitleDescription
+                                                </div>
+                                            }
+                                        </div>
+                                    </div><div class="e-panel-content">
+                                        <ejs-schedule id="@x.SubPanelId" selectedDate="new DateTime(2020, 8, 10)" currentView="Month">
+                                            <e-schedule-eventsettings dataSource="@x.EventCalendars"></e-schedule-eventsettings>
+                                        </ejs-schedule>
+                                    </div>
+                                </div>
+                            </e-content-template>
+                        </e-dashboardlayout-panel>
+                        break;
+                    case 8: //General calendar
+
+                        break;
+                    case 9: //Todo
+
+                        break;
                 }
+            }
+
+          
             }
         </e-dashboardlayout-panels>
     </ejs-dashboardlayout>

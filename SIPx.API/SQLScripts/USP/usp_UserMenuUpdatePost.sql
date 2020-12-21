@@ -18,11 +18,11 @@ SET XACT_ABORT ON;
 BEGIN TRANSACTION
 IF @OldSequence > @Sequence
 BEGIN
-UPDATE UserMenus SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND UserID = @ModifierID 
+UPDATE UserMenus SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence AND UserID = @UserId 
 END
 ELSE
 BEGIN
-UPDATE UserMenus SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND UserID = @ModifierID
+UPDATE UserMenus SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence AND UserID = @UserId
 END
 
 UPDATE UserMenus SET

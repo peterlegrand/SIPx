@@ -117,5 +117,17 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId, ClassificationId = ClassificationId });
             return x;
         }
+        public async Task<List<ClassificationValueForPanel>> Panel(string UserId, string ClassificationValueConditionSQLFrom, string ClassificationValueConditionSQLWhere, string ClassificationValueConditionSQLContains)
+        {
+            string usp = "usp_ClassificationValueForPanel @UserId, @ClassificationValueConditionSQLFrom, @ClassificationValueConditionSQLWhere,@ClassificationValueConditionSQLContains ";
+            var x = await _sqlDataAccess.LoadData<ClassificationValueForPanel, dynamic>(usp, new { UserId = UserId, ClassificationValueConditionSQLFrom = ClassificationValueConditionSQLFrom, ClassificationValueConditionSQLWhere = ClassificationValueConditionSQLWhere, ClassificationValueConditionSQLContains = ClassificationValueConditionSQLContains });
+            return x;
+        }
+        public async Task<List<ClassificationValueForPanelCondition>> PanelCondition(int PageSectionId)
+        {
+            string usp = "usp_ClassificationValueForPanelCondition @PageSectionId";
+            var x = await _sqlDataAccess.LoadData<ClassificationValueForPanelCondition, dynamic>(usp, new { PageSectionId = PageSectionId });
+            return x;
+        }
     }
 }

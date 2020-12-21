@@ -101,13 +101,13 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ProcessAdvancedSearchResult, dynamic>(usp,  AdvancedSearch );
         }
 
-        public async Task<List<ProcessForPanel>> ProcessForPanel(string UserId, string ProcessConditionSQLFrom, string ProcessConditionSQLWhere, string ProcessConditionSQLContains)
+        public async Task<List<ProcessForPanel>> Panel(string UserId, string ProcessConditionSQLFrom, string ProcessConditionSQLWhere, string ProcessConditionSQLContains)
         {
             string usp = "usp_ProcessForPanel @UserId, @ProcessConditionSQLFrom, @ProcessConditionSQLWhere,@ProcessConditionSQLContains ";
             var x = await _sqlDataAccess.LoadData<ProcessForPanel, dynamic>(usp, new { UserId = UserId, ProcessConditionSQLFrom = ProcessConditionSQLFrom, ProcessConditionSQLWhere = ProcessConditionSQLWhere, ProcessConditionSQLContains = ProcessConditionSQLContains });
             return x;
         }
-        public async Task<List<ProcessForPanelCondition>> ProcessForPanelCondition(int PageSectionId)
+        public async Task<List<ProcessForPanelCondition>> PanelCondition(int PageSectionId)
         {
             string usp = "usp_ProcessForPanelCondition @PageSectionId";
             var x = await _sqlDataAccess.LoadData<ProcessForPanelCondition, dynamic>(usp, new { PageSectionId = PageSectionId });

@@ -20,9 +20,9 @@ VALUES (
 	, @ClassificationValueID
 	, @ClassificationID
 	, @ClassificationRelationTypeID
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 

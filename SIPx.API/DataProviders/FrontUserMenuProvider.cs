@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class UserMenuProvider : IUserMenuProvider
+    public class FrontUserMenuProvider : IFrontUserMenuProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
-        public UserMenuProvider(ISqlDataAccess sqlDataAccess)
+        public FrontUserMenuProvider(ISqlDataAccess sqlDataAccess)
         {
             _sqlDataAccess = sqlDataAccess;
         }

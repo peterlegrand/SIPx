@@ -20,5 +20,7 @@ namespace SIPx.DataAccess
         Task<List<ProjectSearch>> Search(string Contains, string UserId);
         Task<List<ProjectAdvancedSearchResult>> AdvancedSearch(ProjectAdvancedSearchPost AdvancedSearch);
         Task<List<int>> ProjectIDsPerUser(string UserId);
+        Task<List<ProjectForPanel>> Panel(string UserId, string ConditionSQLFrom, string ConditionSQLWhere, string ConditionSQLContains);
+        Task<List<ProjectForPanelCondition>> PanelCondition(int PageSectionId);
     }
 }

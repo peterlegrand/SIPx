@@ -97,5 +97,17 @@ namespace SIPx.DataAccess
         }
         //
 
+        public async Task<List<PersonForPanel>> Panel(string UserId, string PersonConditionSQLFrom, string PersonConditionSQLWhere, string PersonConditionSQLContains)
+        {
+            string usp = "usp_PersonForPanel @UserId, @PersonConditionSQLFrom, @PersonConditionSQLWhere,@PersonConditionSQLContains ";
+            var x = await _sqlDataAccess.LoadData<PersonForPanel, dynamic>(usp, new { UserId = UserId, PersonConditionSQLFrom = PersonConditionSQLFrom, PersonConditionSQLWhere = PersonConditionSQLWhere, PersonConditionSQLContains = PersonConditionSQLContains });
+            return x;
+        }
+        public async Task<List<PersonForPanelCondition>> PanelCondition(int PageSectionId)
+        {
+            string usp = "usp_PersonForPanelCondition @PageSectionId";
+            var x = await _sqlDataAccess.LoadData<PersonForPanelCondition, dynamic>(usp, new { PageSectionId = PageSectionId });
+            return x;
+        }
     }
 }

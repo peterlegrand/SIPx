@@ -21,5 +21,7 @@ namespace SIPx.DataAccess
 //        Task<string> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch);
         Task<List<ClassificationValueList>> List(string UserId);
         Task<List<ClassificationValueList>> ListPerClassification(string UserId, int ClassificationId);
+        Task<List<ClassificationValueForPanel>> Panel(string UserId, string ConditionSQLFrom, string ConditionSQLWhere, string ConditionSQLContains);
+        Task<List<ClassificationValueForPanelCondition>> PanelCondition(int PageSectionId);
     }
 }

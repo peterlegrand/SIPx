@@ -1,0 +1,9 @@
+CREATE PROCEDURE usp_OrganizationForPanelCondition (@PageSectionId int)
+AS
+SELECT PageSectionOrganizationConditionId
+	, PageSectionOrganizationConditionTypeId 
+	,PageSectionOrganizationConditionInt
+	,PageSectionOrganizationConditionString
+	,PageSectionOrganizationConditionDate
+FROM PageSectionOrganizationConditions 
+WHERE pagesectionid = @PageSectionId

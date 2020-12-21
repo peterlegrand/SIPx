@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public interface IUserPageProvider
+    public interface IFrontUserPageProvider
     {
         Task<string> CreatePost(PageCreateGet Page);
         Task<string> CreatePostCheck(PageCreatePost Page);

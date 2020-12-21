@@ -1,0 +1,9 @@
+CREATE PROCEDURE usp_ClassificationValueForPanelCondition (@PageSectionId int)
+AS
+SELECT PageSectionClassificationValueConditionId
+	, PageSectionClassificationValueConditionTypeId 
+	,PageSectionClassificationValueConditionInt
+	,PageSectionClassificationValueConditionString
+	,PageSectionClassificationValueConditionDate
+FROM PageSectionClassificationValueConditions 
+WHERE pagesectionid = @PageSectionId

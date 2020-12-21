@@ -47,9 +47,9 @@ VALUES (
 	, @CountryID
 	, @ProvinceState 
 	, @County 
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 

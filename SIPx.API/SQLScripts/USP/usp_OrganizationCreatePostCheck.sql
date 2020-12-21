@@ -1,6 +1,5 @@
-CREATE PROCEDURE usp_OrganizationUpdatePostCheck (
-	@OrganizationId int
-	, @ParentOrganizationId int
+CREATE PROCEDURE usp_OrganizationCreatePostCheck (
+	 @ParentOrganizationId int
 	, @StatusId int 
 	, @OrganizationTypeId int 
 	, @Name nvarchar(50)
@@ -20,7 +19,7 @@ WHERE USerId = @UserID
 BEGIN 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF (SELECT COUNT(*) FROM Organizations WHERE OrganizationId = @ParentOrganizationId) = 0 OR @OrganizationId IS NULL
+IF (SELECT COUNT(*) FROM Organizations WHERE OrganizationId = @ParentOrganizationId) = 0 OR @ParentOrganizationId IS NULL
 BEGIN
 insert into @ErrorIdsTable values(48)
 END
@@ -40,13 +39,7 @@ BEGIN
 insert into @ErrorIdsTable values(52)
 END
 
-IF  (SELECT COUNT(*) 
-	FROM OrganizationLanguages 
-	WHERE LanguageId = @LanguageID
-		AND OrganizationLanguages.Name = @Name AND Organization <> @OrganizationId) >0
-BEGIN
-	insert into @ErrorIdsTable values(53)
-END
+
 
 --PETER TODO Add a check for process template which includes if primary content is a field for that.
 SELECT ErrorMessages.ErrorMessageID

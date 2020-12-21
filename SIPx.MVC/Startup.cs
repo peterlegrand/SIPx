@@ -33,7 +33,7 @@ namespace SIPx.MVC
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzAzOTc2QDMxMzgyZTMyMmUzMFZua1RVazkvK3JZdlRLejVIK3JWTjI0b3E0UFNVUGlQa0JuTkV6S1VwR2M9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzY2NjkzQDMxMzgyZTMzMmUzMGVHUjRaVENXU0U0US9UN3NIeis2Qy9nM2crTUZ0UDZ4em43WVVaREt2Yjg9");
             //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("zAzOTc2QDMxMzgyZTMyMmUzMFZua1RVazkvK3JZdlRLejVIK3JWTjI0b3E0UFNVUGlQa0JuTkV6S1VwR2M9");
             if (env.IsDevelopment())
             {

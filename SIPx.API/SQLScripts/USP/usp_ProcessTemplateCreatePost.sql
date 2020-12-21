@@ -22,7 +22,7 @@ AS
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @CreatorId
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SET XACT_ABORT ON;
@@ -66,9 +66,9 @@ VALUES (
 	, @HideEverywhere
 	, @Color 
 	, @IconID 
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 
@@ -92,9 +92,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 	COMMIT TRANSACTION

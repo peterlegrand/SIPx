@@ -17,23 +17,23 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class UserPreferenceController : ControllerBase
+    public class FrontUserPreferenceController : ControllerBase
     {
-        private readonly IUserPreferenceProvider _userPreferenceProvider;
+        private readonly IFrontUserPreferenceProvider _frontUserPreferenceProvider;
         private readonly ILanguageProvider _LanguageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IPageProvider _pageProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserPreferenceController(IUserPreferenceProvider userPreferenceProvider
+        public FrontUserPreferenceController(IFrontUserPreferenceProvider frontUserPreferenceProvider
             , ILanguageProvider LanguageProvider
             , IMasterProvider masterProvider
             , IPageProvider pageProvider
             , IClaimCheck claimCheck
             , UserManager<SipUser> userManager)
         {
-            _userPreferenceProvider = userPreferenceProvider;
+            _frontUserPreferenceProvider = frontUserPreferenceProvider;
             _LanguageProvider = LanguageProvider;
             _masterProvider = masterProvider;
             _pageProvider = pageProvider;
@@ -46,7 +46,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                return Ok(await _userPreferenceProvider.IndexGet(CurrentUser.Id, CurrentUser.Id));
+                return Ok(await _frontUserPreferenceProvider.IndexGet(CurrentUser.Id, CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -61,7 +61,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
             {
-                var x = await _userPreferenceProvider.UpdateGet(CurrentUser.Id, Id);
+                var x = await _frontUserPreferenceProvider.UpdateGet(CurrentUser.Id, Id);
 
                 switch (x.PreferenceTypeId)
                 {
@@ -88,10 +88,10 @@ namespace SIPx.API.Controllers
             UserPreference.UserId= CurrentUser.Id;
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                var CheckString = await _userPreferenceProvider.UpdatePostCheck(UserPreference);
+                var CheckString = await _frontUserPreferenceProvider.UpdatePostCheck(UserPreference);
                 if (CheckString.Length == 0)
                 {
-                    _userPreferenceProvider.UpdatePost(UserPreference);
+                    _frontUserPreferenceProvider.UpdatePost(UserPreference);
                     return Ok(UserPreference);
                 }
                 return BadRequest(new

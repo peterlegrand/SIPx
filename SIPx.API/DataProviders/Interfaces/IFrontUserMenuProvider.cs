@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public interface IUserMenuProvider
+    public interface IFrontUserMenuProvider
     {
         Task<List<SequenceList>> CreateGetSequence(string UserId);
         Task<UserMenuDeleteGet> DeleteGet(string UserID, int UserMenuID);

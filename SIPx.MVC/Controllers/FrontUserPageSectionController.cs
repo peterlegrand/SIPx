@@ -9,7 +9,7 @@ using SIPx.Shared;
 
 namespace SIPx.MVC.Controllers
 {
-    public class UserPageSectionController : Controller
+    public class FrontUserPageSectionController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();

@@ -114,6 +114,18 @@ namespace SIPx.DataAccess
             string usp = "usp_ProjectAdvancedSearch @UserId, @Contains, @ParentProjectId, @ProjectTypeId, @SecurityLevelId, @StatusId, @PersonId ";
             return _sqlDataAccess.LoadData<ProjectAdvancedSearchResult, dynamic>(usp, AdvancedSearch );
         }
-       
+
+        public async Task<List<ProjectForPanel>> Panel(string UserId, string ProjectConditionSQLFrom, string ProjectConditionSQLWhere, string ProjectConditionSQLContains)
+        {
+            string usp = "usp_ProjectForPanel @UserId, @ProjectConditionSQLFrom, @ProjectConditionSQLWhere,@ProjectConditionSQLContains ";
+            var x = await _sqlDataAccess.LoadData<ProjectForPanel, dynamic>(usp, new { UserId = UserId, ProjectConditionSQLFrom = ProjectConditionSQLFrom, ProjectConditionSQLWhere = ProjectConditionSQLWhere, ProjectConditionSQLContains = ProjectConditionSQLContains });
+            return x;
+        }
+        public async Task<List<ProjectForPanelCondition>> PanelCondition(int PageSectionId)
+        {
+            string usp = "usp_ProjectForPanelCondition @PageSectionId";
+            var x = await _sqlDataAccess.LoadData<ProjectForPanelCondition, dynamic>(usp, new { PageSectionId = PageSectionId });
+            return x;
+        }
     }
 }

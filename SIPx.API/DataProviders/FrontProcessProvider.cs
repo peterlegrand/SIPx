@@ -261,10 +261,10 @@ namespace SIPx.DataAccess
 
 
         }
-        public async Task<List<FrontProcessToDo>> FrontProcessToDo(string SQLStatement)
+        public async Task<List<ToDoIndexGet>> FrontProcessToDo(string SQLStatement)
         {
             string usp = "usp_FrontProcessToDo @SQLStatement";
-            var x = await _sqlDataAccess.LoadData<FrontProcessToDo, dynamic>(usp, new { SQLStatement = SQLStatement });
+            var x = await _sqlDataAccess.LoadData<ToDoIndexGet, dynamic>(usp, new { SQLStatement = SQLStatement });
             return x;
         }
         public async Task<FrontProcessUpdateGet> FrontProcessUpdateGet(string UserId, int ProcessId)

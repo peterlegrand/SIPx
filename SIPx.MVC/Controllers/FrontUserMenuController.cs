@@ -11,7 +11,7 @@ using SIPx.Shared;
 
 namespace SIPx.MVC.Controllers
 {
-    public class UserMenuController : Controller
+    public class FrontUserMenuController : Controller
     {
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();

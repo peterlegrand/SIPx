@@ -25,7 +25,7 @@ SELECT ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
 	, 'ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlId
 	, 'ControlIdFieldId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlIdProcessTemplateFieldId
 	, 'ControlIdFieldTypeId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlIdProcessTemplateFieldTypeId
-	, 'ControlId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10))) +'()' ControlIdOnFocusOutFunction
+	, 'ControlIdFunction' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10))) +'()' ControlIdOnFocusOutFunction
 	, 'ControlIdWarningId' + trim(cast(ProcessTemplateFields.ProcessTemplateFieldID as varchar(10)))  ControlIdWarning
 	--, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this field')) Description
 	--, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.Name,'No menu name for this field')) MenuName

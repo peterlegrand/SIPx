@@ -60,13 +60,13 @@ namespace SIPx.DataAccess
             return x[0];
         }
 
-        public async Task<List<ContentForPanel>> ContentForPanel(string ContentConditionSQLFrom, string ContentConditionSQLWhere, string ContentConditionSQLContains)
+        public async Task<List<ContentForPanel>> Panel(string ContentConditionSQLFrom, string ContentConditionSQLWhere, string ContentConditionSQLContains)
         {
             string usp = "usp_ContentForPanel @ContentConditionSQLFrom, @ContentConditionSQLWhere, @ContentConditionSQLContains ";
             var x = await _sqlDataAccess.LoadData<ContentForPanel, dynamic>(usp, new { ContentConditionSQLFrom = ContentConditionSQLFrom, ContentConditionSQLWhere = ContentConditionSQLWhere, ContentConditionSQLContains = ContentConditionSQLContains });
             return x;
         }
-        public async Task<List<ContentForPanelCondition>> ContentForPanelCondition(int PageSectionId)
+        public async Task<List<ContentForPanelCondition>> PanelCondition(int PageSectionId)
         {
             string usp = "usp_ContentForPanelCondition @PageSectionId";
             var x = await _sqlDataAccess.LoadData<ContentForPanelCondition, dynamic>(usp, new { PageSectionId = PageSectionId });

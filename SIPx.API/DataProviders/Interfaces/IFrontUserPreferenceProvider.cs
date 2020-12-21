@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.API.DataProviders
 {
-    public interface IUserPreferenceProvider
+    public interface IFrontUserPreferenceProvider
     {
         Task<List<UserPreferenceIndexGet>> IndexGet(string UserId, string SelectedUserId);
         Task<UserPreferenceUpdateGet> UpdateGet(string UserId, int UserPreferenceId);

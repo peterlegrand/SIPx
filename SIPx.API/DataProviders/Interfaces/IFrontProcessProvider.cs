@@ -20,7 +20,7 @@ namespace SIPx.DataAccess
         Task<List<FrontProcessToDoFlowCondition>> FrontProcessToDoConditions(int ProcessTemplateFlowId);
         Task<List<FrontProcessToDoProcess>> FrontProcessToDoProcesses(int ProcessTemplateFlowId);
         Task<List<FrontProcessToDoProcessField>> FrontProcessToDoProcessFields(int ProcessId);
-        Task<List<FrontProcessToDo>> FrontProcessToDo(string SQLStatement);
+        Task<List<ToDoIndexGet>> FrontProcessToDo(string SQLStatement);
         Task<FrontProcessUpdateGet> FrontProcessUpdateGet(string UserId, int ProcessId);
         Task<List<FrontProcessUpdateGetField>> FrontProcessUpdateGetFields(string UserId, int ProcessId);
         Task<List<int>> FrontProcessUpdateReturnFlows(int ProcessTemplateStageId);

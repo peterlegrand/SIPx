@@ -197,9 +197,9 @@ namespace SIPx.API.Classes
             return 0;
         }
 
-        public async Task<List<FrontProcessToDo>> ReturnProcessList(SipUser CurrentUser)
+        public async Task<List<ToDoIndexGet>> ReturnProcessList(SipUser CurrentUser)
         {
-            List<Shared.FrontProcessToDo> ToDoList = new List<Shared.FrontProcessToDo>();
+            List<ToDoIndexGet> ToDoList = new List<ToDoIndexGet>();
             var FlowList = await _frontProcessProvider.FrontProcessToDoFlows();
             foreach (var Flow in FlowList)
             {
@@ -207,13 +207,29 @@ namespace SIPx.API.Classes
                 foreach (var Process in Processes)
                 {
                     string From = "DECLARE @LanguageId int; SELECT @LanguageId = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeId = 1 ;" +
-                        " SELECT Processes.ProcessID, ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this process template')) ProcessTemplateName, ProcessFields.StringValue Subject, ISNULL(UserProcessTemplateStageLanguage.Name,ISNULL(DefaultProcessTemplateStageLanguage.Name,'No description for this process template stage')) ProcesstemplateStage, Creator.FirstName + ' ' + Creator.LastName CreatorName, Creator.PersonID CreatorID, Processes.CreatedDate, Modifier.FirstName + ' ' + Modifier.LastName ModifierName, Modifier.PersonID ModifierId, Processes.ModifiedDate " +
+                        " SELECT Processes.ProcessID " +
+                        " , ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this process template')) ProcessTemplateName " +
+                        " , ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this process template field')) ProcessTemplateFieldName " +
+                        " , ISNULL(UserProcessTemplateStageTypeLanguage.Name,ISNULL(DefaultProcessTemplateStageTypeLanguage.Name,'No description for this process template stage type')) ProcesstemplateStageTypeName" +
+                        " , ISNULL(UserProcessTemplateStageLanguage.Name,ISNULL(DefaultProcessTemplateStageLanguage.Name,'No description for this process template stage')) ProcesstemplateStageName" +
+                        " , ProcessFields.StringValue Subject " +
+                        " , Creator.FirstName + ' ' + Creator.LastName CreatorName, Creator.PersonID CreatorID, Processes.CreatedDate, Modifier.FirstName + ' ' + Modifier.LastName ModifierName, Modifier.PersonID ModifierId, Processes.ModifiedDate " +
                         " FROM Processes JOIN ProcessFields ON ProcessFields.ProcessId = Processes.ProcessID " +
                         " JOIN ProcessTemplateFields ON ProcessTemplateFields.ProcessTemplateFieldId = ProcessFields.ProcessTemplateFieldID " +
                         " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateLanguage ON UserProcessTemplateLanguage.ProcessTemplateId = Processes.ProcessTemplateID " +
                         " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateLanguage ON DefaultProcessTemplateLanguage.ProcessTemplateId = Processes.ProcessTemplateID " +
+
+                        " LEFT JOIN (SELECT ProcessTemplateFieldId, Name FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage ON UserProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID " +
+                        " LEFT JOIN (SELECT ProcessTemplateFieldId, Name FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID " +
+
                         " LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageLanguage ON UserProcessTemplateStageLanguage.ProcessTemplateStageId = Processes.ProcessTemplateStageID " +
                         " LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages JOIN Settings ON ProcessTemplateStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateStageLanguage ON DefaultProcessTemplateStageLanguage.ProcessTemplateStageId = Processes.ProcessTemplateStageID " +
+
+                        " JOIN ProcessTemplateStages ON Processes.ProcessTemplateStageId = ProcessTemplateStages.ProcessTemplateStageId " +
+
+                        " LEFT JOIN (SELECT ProcessTemplateStageTypeId, Name FROM ProcessTemplateStageTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageTypeLanguage ON UserProcessTemplateStageTypeLanguage.ProcessTemplateStageTypeId = ProcessTemplateStages.ProcessTemplateStageTypeID " +
+                        " LEFT JOIN (SELECT ProcessTemplateStageTypeId, Name FROM ProcessTemplateStageTypeLanguages JOIN Settings ON ProcessTemplateStageTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateStageTypeLanguage ON DefaultProcessTemplateStageTypeLanguage.ProcessTemplateStageTypeId = ProcessTemplateStages.ProcessTemplateStageTypeID " +
+
                         " JOIN Persons Creator ON Creator.UserId = Processes.CreatorID " +
                         " JOIN Persons Modifier ON Modifier.UserId = Processes.ModifierID ";
                     string Where = " WHERE ProcessTemplateFields.ProcessTemplateFieldTypeId = 1 AND Processes.ProcessId = " + Process.ProcessId + " AND ";

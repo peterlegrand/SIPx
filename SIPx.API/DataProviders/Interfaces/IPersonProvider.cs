@@ -19,5 +19,7 @@ namespace SIPx.DataAccess
         //List<PersonAdvancedSearchResult>
         Task<List<UserList>> CreateGetUsers();
         Task<List<UserList>> EditGetUsers(int PersonId);
+        Task<List<PersonForPanel>> Panel(string UserId, string ConditionSQLFrom, string ConditionSQLWhere, string ConditionSQLContains);
+        Task<List<PersonForPanelCondition>> PanelCondition(int PageSectionId);
     }
 }

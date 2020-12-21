@@ -20,5 +20,7 @@ namespace SIPx.DataAccess
         Task<List<OrganizationAdvancedSearchResult>> AdvancedSearch(OrganizationAdvancedSearchPost AdvancedSearch);
         Task<List<int>> OrganizationIDsPerUser(string UserId);
         Task<int> MainOrganizationIDPerUser(string UserId);
+        Task<List<OrganizationForPanel>> Panel(string UserId, string ConditionSQLFrom, string ConditionSQLWhere, string ConditionSQLContains);
+        Task<List<OrganizationForPanelCondition>> PanelCondition(int PageSectionId);
     }
 }

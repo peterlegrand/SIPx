@@ -16,15 +16,6 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient _client = new ServiceClient();
 
         [HttpGet]
-        public async Task<IActionResult> Dashboard(int Id)
-        {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<FrontClassificationValueIndexGet>($"{_baseUrl}api/FrontClassificationValue/Dashboard/"+Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontClassificationValue/Dashboard", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
-        [HttpGet]
         public async Task<IActionResult> AdvancedSearch()
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
@@ -42,7 +33,14 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View("SearchResult", result);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> Dashboard(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync<FrontClassificationValueIndexGet>($"{_baseUrl}api/FrontClassificationValue/Dashboard/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontClassificationValue/Dashboard", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
     }
-
 }

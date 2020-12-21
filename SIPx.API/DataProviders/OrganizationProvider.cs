@@ -20,9 +20,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+        //PETER TODO this is not matching with the sp
         public async Task<string> CreatePostCheck(OrganizationCreatePost Organization)
         {
-            string usp = "usp_OrganizationCreatePostCheck @ParentOrganizationId, @StatusId, @LanguageID, @name, @UserId ";
+            string usp = "usp_OrganizationCreatePostCheck @ParentOrganizationId, @StatusId, @name, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Organization);
             return CheckString;
         }
@@ -117,6 +118,18 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_MainOrganizationIDPerUser @UserId";
             return _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, UserId );
+        }
+        public async Task<List<OrganizationForPanel>> Panel(string UserId, string OrganizationConditionSQLFrom, string OrganizationConditionSQLWhere, string OrganizationConditionSQLContains)
+        {
+            string usp = "usp_OrganizationForPanel @UserId, @OrganizationConditionSQLFrom, @OrganizationConditionSQLWhere,@OrganizationConditionSQLContains ";
+            var x = await _sqlDataAccess.LoadData<OrganizationForPanel, dynamic>(usp, new { UserId = UserId, OrganizationConditionSQLFrom = OrganizationConditionSQLFrom, OrganizationConditionSQLWhere = OrganizationConditionSQLWhere, OrganizationConditionSQLContains = OrganizationConditionSQLContains });
+            return x;
+        }
+        public async Task<List<OrganizationForPanelCondition>> PanelCondition(int PageSectionId)
+        {
+            string usp = "usp_OrganizationForPanelCondition @PageSectionId";
+            var x = await _sqlDataAccess.LoadData<OrganizationForPanelCondition, dynamic>(usp, new { PageSectionId = PageSectionId });
+            return x;
         }
 
     }

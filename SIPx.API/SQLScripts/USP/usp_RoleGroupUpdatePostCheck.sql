@@ -49,5 +49,3 @@ JOIN UITermLanguages UIName
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = ErrorMessages.NameTermID
 WHERE UIName.LanguageId = @LanguageID
-
-END

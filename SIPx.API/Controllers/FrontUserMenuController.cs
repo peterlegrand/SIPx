@@ -10,7 +10,7 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class UserMenuController : ControllerBase
+    public class FrontUserMenuController : ControllerBase
     {
         private readonly IUserMenuTypeProvider _userMenuTypeProvider;
         private readonly IUserProvider _userProvider;
@@ -19,10 +19,18 @@ namespace SIPx.API.Controllers
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
-        private readonly IUserMenuProvider _userMenuProvider;
+        private readonly IFrontUserMenuProvider _frontUserMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserMenuController(IUserMenuTypeProvider userMenuTypeProvider,  IUserProvider userProvider, IMasterListProvider masterListProvider,  IPageProvider pageProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IUserMenuProvider userMenuProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontUserMenuController(IUserMenuTypeProvider userMenuTypeProvider
+            ,  IUserProvider userProvider
+            , IMasterListProvider masterListProvider
+            ,  IPageProvider pageProvider
+            , IMasterProvider masterProvider
+            , ICheckProvider checkProvider
+            , IClaimCheck claimCheck
+            , IFrontUserMenuProvider frontUserMenuProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _userMenuTypeProvider = userMenuTypeProvider;
             _userProvider = userProvider;
@@ -31,7 +39,7 @@ namespace SIPx.API.Controllers
             _masterProvider = masterProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
-            _userMenuProvider = userMenuProvider;
+            _frontUserMenuProvider = frontUserMenuProvider;
             _userManager = userManager;
         }
 
@@ -44,7 +52,7 @@ namespace SIPx.API.Controllers
                 var UserMenuCreateGet = new UserMenuCreateGet();
                 var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.ListForMenu(CurrentUser.Id);
-                var UserMenuCreateGetSequences = await _userMenuProvider.CreateGetSequence(CurrentUser.Id);
+                var UserMenuCreateGetSequences = await _frontUserMenuProvider.CreateGetSequence(CurrentUser.Id);
                 UserMenuCreateGet.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
                 UserMenuCreateGet.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
                 UserMenuCreateGetSequences.Add(new SequenceList { Sequence = UserMenuCreateGetSequences.Count, Name = "Add at the end" });
@@ -71,7 +79,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
                 //if (CheckString.Length == 0)
                 //{
-                _userMenuProvider.CreatePost(UserMenu);
+                _frontUserMenuProvider.CreatePost(UserMenu);
                 return Ok(UserMenu);
                 //}
                 return BadRequest(new
@@ -103,7 +111,7 @@ namespace SIPx.API.Controllers
                 //}
 
 
-                return Ok(await _userMenuProvider.IndexGet(CurrentUser.Id));
+                return Ok(await _frontUserMenuProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -122,7 +130,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
                 //if (CheckString.Length == 0)
                 //{
-                _userMenuProvider.UpdatePost(UserMenu);
+                _frontUserMenuProvider.UpdatePost(UserMenu);
                 return Ok(UserMenu);
                 //}
                 return BadRequest(new
@@ -152,10 +160,10 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var UserMenu = await _userMenuProvider.UpdateGet(Id);
+                var UserMenu = await _frontUserMenuProvider.UpdateGet(Id);
                 var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
                 var Pages = await _pageProvider.ListForMenu(CurrentUser.Id);
-                var UserMenuSequences = await _userMenuProvider.CreateGetSequence(CurrentUser.Id);
+                var UserMenuSequences = await _frontUserMenuProvider.CreateGetSequence(CurrentUser.Id);
                 UserMenu.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
                 UserMenu.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
                 UserMenuSequences.Add(new SequenceList { Sequence = UserMenuSequences.Count, Name = "Add at the end" });
@@ -188,7 +196,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var UserMenu = await _userMenuProvider.DeleteGet(CurrentUser.Id, Id);
+                var UserMenu = await _frontUserMenuProvider.DeleteGet(CurrentUser.Id, Id);
                 UserMenu.UserId= CurrentUser.Id;
                 return Ok(UserMenu);
 
@@ -211,7 +219,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userMenuProvider.UserMenuCreatePostCheck(UserMenu);
                 //if (CheckString.Length == 0)
                 //{
-                _userMenuProvider.DeletePost(UserMenu);
+                _frontUserMenuProvider.DeletePost(UserMenu);
                 return Ok(UserMenu);
                 //}
                 return BadRequest(new

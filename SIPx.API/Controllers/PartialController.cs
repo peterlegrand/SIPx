@@ -14,13 +14,15 @@ namespace SIPx.API.Controllers
     public class PartialController : Controller
     {
         private readonly IPartialProvider _partialProvider;
-        private readonly IUserMenuProvider _userMenuProvider;
+        private readonly IFrontUserMenuProvider _frontUserMenuProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PartialController(IPartialProvider partialProvider, IUserMenuProvider userMenuProvider, UserManager<SipUser> userManager)
+        public PartialController(IPartialProvider partialProvider
+            , IFrontUserMenuProvider frontUserMenuProvider
+            , UserManager<SipUser> userManager)
         {
             _partialProvider = partialProvider;
-            _userMenuProvider = userMenuProvider;
+            _frontUserMenuProvider = frontUserMenuProvider;
             _userManager = userManager;
         }
 

@@ -33,6 +33,14 @@ namespace SIPx.MVC.Controllers
             //   ViewBag.UITerms = UITerms;
             return View(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> ContentNew(FrontContentContentNew Content)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            await _client.PostProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew", Content, token);
+
+            return RedirectToAction("Index", "Front");
+        }
         [HttpGet]
         public async Task<IActionResult> ShowContent(int Id)
         {
@@ -41,14 +49,6 @@ namespace SIPx.MVC.Controllers
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ShowContent", token);
             ViewBag.UITerms = UITerms;
             return View(response);
-        }
-        [HttpPost]
-        public async Task<IActionResult> ContentNew(FrontContentContentNew Content)
-        {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew", Content, token);
-
-            return RedirectToAction("Index", "Front");
         }
         [HttpGet]
         public async Task<IActionResult> AdvancedSearch()

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public interface IUserPageSectionProvider
+    public interface IFrontUserPageSectionProvider
     {
         Task<List<SequenceList>> CreateGetSequence(string UserId, int PageId);
         Task<string> CreatePost(PageSectionCreateGet PageSection);

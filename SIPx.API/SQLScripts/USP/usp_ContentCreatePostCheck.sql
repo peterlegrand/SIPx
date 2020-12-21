@@ -46,11 +46,11 @@ BEGIN
 	insert into @ErrorIdsTable values(6)
 END
 
-
-IF (SELECT COUNT(*) FROM ClassificationRelationTypes WHERE ClassificationRelationTypeId = @ClassificationRelationTypeId) = 0
-BEGIN
-insert into @ErrorIdsTable values(27)
-END
+--PETER TODO check this. Even though the sp is not used.
+--IF (SELECT COUNT(*) FROM ClassificationRelationTypes WHERE ClassificationRelationTypeId = @ClassificationRelationTypeId) = 0
+--BEGIN
+--insert into @ErrorIdsTable values(27)
+--END
 
 SELECT ErrorMessages.ErrorMessageID
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name

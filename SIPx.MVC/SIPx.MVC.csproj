@@ -24,4 +24,8 @@
     <ProjectReference Include="..\SIPx.Shared\SIPx.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\FrontUser\" />
+  </ItemGroup>
+
 </Project>

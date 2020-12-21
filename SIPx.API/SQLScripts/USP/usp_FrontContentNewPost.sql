@@ -38,15 +38,15 @@ INSERT INTO Contents (
 	, @ProjectID
 	, @OrganizationID
 	,1
-	, @CreatorID
+	, @UserID
 	, getdate()
-	, @CreatorID
+	, @UserID
 	, getdate()
 	)
 
 DECLARE @NewContentId int	= scope_identity();
 
 INSERT ContentClassificationValues (ContentId, ClassificationID, ClassificationValueID, CreatorID, CreatedDate, ModifierID, ModifiedDate)
-SELECT @NewContentId, ClassificationId, ClassificationValueId, CreatorId, getdate(), CreatorId, Getdate() FROM @ClassificationValueTable
+SELECT @NewContentId, ClassificationId, ClassificationValueId, @UserID, getdate(), @UserID, Getdate() FROM @ClassificationValueTable
 
 COMMIT TRANSACTION

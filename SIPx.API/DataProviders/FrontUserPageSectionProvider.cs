@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class UserPageSectionProvider : IUserPageSectionProvider
+    public class FrontUserPageSectionProvider : IFrontUserPageSectionProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
-        public UserPageSectionProvider(ISqlDataAccess sqlDataAccess)
+        public FrontUserPageSectionProvider(ISqlDataAccess sqlDataAccess)
         {
             _sqlDataAccess = sqlDataAccess;
         }

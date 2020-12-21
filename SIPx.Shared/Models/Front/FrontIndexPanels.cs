@@ -30,5 +30,9 @@ namespace SIPx.Shared
         public List<ToDoIndexGet> ToDos { get; set; }
         public List<ContentForPanel> Contents { get; set; }
         public List<ProcessForPanel> Processes { get; set; }
+        public List<OrganizationForPanel> Organizations { get; set; }
+        public List<PersonForPanel> Persons { get; set; }
+        public List<ProjectForPanel> Projects { get; set; }
+        public List<ClassificationValueForPanel> ClassificationValues { get; set; }
     }
 }

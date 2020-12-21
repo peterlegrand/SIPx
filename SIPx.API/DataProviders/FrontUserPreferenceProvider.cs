@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SIPx.API.DataProviders
 {
-    public class UserPreferenceProvider : IUserPreferenceProvider
+    public class FrontUserPreferenceProvider : IFrontUserPreferenceProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
-        public UserPreferenceProvider(ISqlDataAccess sqlDataAccess)
+        public FrontUserPreferenceProvider(ISqlDataAccess sqlDataAccess)
         {
             _sqlDataAccess = sqlDataAccess;
         }

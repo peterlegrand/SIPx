@@ -254,10 +254,16 @@ INSERT INTO ContentTypeGroupLanguages(ContentTypeGroupLanguageId, ContentTypeGro
 SET IDENTITY_INSERT ContentTypeGroupLanguages OFF;
 
 SET IDENTITY_INSERT ContentTypes ON;
-INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId, Color, IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
- , (2, 1, 1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
- , (3, 2, 1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId
+ , IsRelationBasedOwnership  ,IsProjectBasedOwnership  ,IsOrganizationBasedOwnership  ,IsFreeOwnership  ,IsRelationBasedEdit  ,IsRelationBasedEditSelectable  ,IsOrganizationBasedEdit  
+ , IsOrganizationBasedEditSelectable  ,IsOrganizationBasedEditSub  ,IsProjectBasedEdit  ,IsProjectBasedEditSelectable  ,IsProjectBasedEditSub  ,IsFreeEdit  ,IsFreeEditSelectable  
+ , IsRelationBasedRead  ,IsRelationBasedReadSelectable  ,IsOrganizationBasedRead  ,IsOrganizationBasedReadSelectable  ,IsOrganizationBasedReadSub  ,IsProjectBasedRead  
+ , IsProjectBasedReadSelectable  ,IsProjectBasedReadSub  ,IsFreeRead  ,IsFreeReadSelectable  
+ , IsOrganizationBasedEditParent, IsProjectBasedEditParent, IsOrganizationBasedReadParent, IsProjectBasedReadParent
+, Color, IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1,     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
+ , (2, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+ , (3, 2, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypes OFF;
 
 SET IDENTITY_INSERT ContentTypeLanguages ON;
@@ -525,65 +531,65 @@ INSERT INTO ProcessTemplateFields (ProcessTemplateFieldId, ProcessTemplateId, Pr
 SET IDENTITY_INSERT ProcessTemplateFields OFF;
 
 SET IDENTITY_INSERT ProcessTemplateFieldLanguages ON;
-INSERT INTO ProcessTemplateFieldLanguages (ProcessTemplateFieldLanguageId, ProcessTemplateId, ProcessTemplateFieldId, LanguageId , Name, Description, MenuName, MouseOver
-, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-(1,1,1,41, 'Subject', 'Game assignment', 'Game assignment', 'Game assignment', @User, @User, GETDATE(), GETDATE())
-,(2,1,2,41, 'Assign', 'Research assignment', 'Research assignment', 'Research assignment', @User, @User, GETDATE(), GETDATE())
-,(3,1,3,41, 'Assignment', 'Assignment', 'Assignment', 'Assignment', @User, @User, GETDATE(), GETDATE())
-,(4,1,4,41, 'Game', 'Game', 'Game', 'Game', @User, @User, GETDATE(), GETDATE())
-,(5,1,5,41, 'Student text', 'Student text', 'Student text', 'Student text', @User, @User, GETDATE(), GETDATE())
-,(6,1,6,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
-,(7,1,7,41, 'Result', 'Result', 'Result', 'Result', @User, @User, GETDATE(), GETDATE())
-,(8,1,8,41, 'Passed', 'Passed', 'Passed', 'Passed', @User, @User, GETDATE(), GETDATE())
-,(9,1,9,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
-,(10,1,10,41, 'Date assigned', 'Date assigned', 'Date assigned', 'Date assigned', @User, @User, GETDATE(), GETDATE())
-,(11,1,11,41, 'Date sumitted', 'Date sumitted', 'Date sumitted', 'Date sumitted', @User, @User, GETDATE(), GETDATE())
-,(12,1,12,41, 'Date passed', 'Date passed', 'Date passed', 'Date passed', @User, @User, GETDATE(), GETDATE())
-,(13,2,13,41, 'Subject', 'Game assignment', 'Game assignment', 'Game assignment', @User, @User, GETDATE(), GETDATE())
-,(14,2,14,41, 'Assign', 'Research assignment', 'Research assignment', 'Research assignment', @User, @User, GETDATE(), GETDATE())
-,(15,2,15,41, 'Assignment', 'Assignment', 'Assignment', 'Assignment', @User, @User, GETDATE(), GETDATE())
-,(16,2,16,41, 'Student text', 'Student text', 'Student text', 'Student text', @User, @User, GETDATE(), GETDATE())
-,(17,2,17,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
-,(18,2,18,41, 'Result', 'Result', 'Result', 'Result', @User, @User, GETDATE(), GETDATE())
-,(19,2,19,41, 'Passed', 'Passed', 'Passed', 'Passed', @User, @User, GETDATE(), GETDATE())
-,(20,2,20,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
-,(21,2,21,41, 'Date assigned', 'Date assigned', 'Date assigned', 'Date assigned', @User, @User, GETDATE(), GETDATE())
-,(22,2,22,41, 'Date sumitted', 'Date sumitted', 'Date sumitted', 'Date sumitted', @User, @User, GETDATE(), GETDATE())
-,(23,2,23,41, 'Date passed', 'Date passed', 'Date passed', 'Date passed', @User, @User, GETDATE(), GETDATE())
-,(24,3,24,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
-,(25,3,25,41, 'Student comment', 'Student comment', 'Student comment', 'Student comment', @User, @User, GETDATE(), GETDATE())
-,(26,3,26,41, 'Content', 'Content', 'Content', 'Content', @User, @User, GETDATE(), GETDATE())
-,(27,3,27,41, 'Area', 'Area', 'Area', 'Area', @User, @User, GETDATE(), GETDATE())
-,(28,3,28,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
-,(29,3,29,41, 'Approver comment', 'Approver comment', 'Approver comment', 'Approver comment', @User, @User, GETDATE(), GETDATE())
-,(30,3,30,41, 'Approve', 'Approve', 'Approve', 'Approve', @User, @User, GETDATE(), GETDATE())
-,(31,3,31,41, 'Reject', 'Reject', 'Reject', 'Reject', @User, @User, GETDATE(), GETDATE())
-,(32,1,32,41, 'Player', 'Player', 'Player', 'Player', @User, @User, GETDATE(), GETDATE())
-,(33,2,33,41, 'Student', 'Student', 'Student', 'Student', @User, @User, GETDATE(), GETDATE())
-,(34,1,34,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level', @User, @User, GETDATE(), GETDATE())
-,(35,1,35,41, 'Role of approver', 'Role of approver', 'Role of approver', 'Role of approver', @User, @User, GETDATE(), GETDATE())
-,(36,2,36,41, 'Role of approver', 'Role of approver', 'Role of approver', 'Role of approver', @User, @User, GETDATE(), GETDATE())
-,(37,2,37,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level', @User, @User, GETDATE(), GETDATE())
-,(38,3,38,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level', @User, @User, GETDATE(), GETDATE())
-,(39,4,39,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
-,(40,4,40,41, 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
-,(41,4,41,41, 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
-,(42,4,42,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
-,(43,4,43,41, 'User', 'User', 'User', 'User', @User, @User, GETDATE(), GETDATE())
-,(44,5,44,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
-,(45,5,45,41, 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
-,(46,5,46,41, 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
-,(47,5,47,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
-,(48,5,48,41, 'Organization', 'Organization', 'Organization', 'Organization', @User, @User, GETDATE(), GETDATE())
-,(49,6,49,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
-,(50,6,50,41, 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
-,(51,6,51,41, 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
-,(52,6,52,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
-,(53,6,53,41, 'Project', 'Project', 'Project', 'Project', @User, @User, GETDATE(), GETDATE())
-,(54,7,54,41, 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
-,(55,7,55,41, 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
-,(56,7,56,41, 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
-,(57,7,57,41, 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+INSERT INTO ProcessTemplateFieldLanguages (ProcessTemplateFieldLanguageId, ProcessTemplateId, ProcessTemplateFieldId, LanguageId , Name, Description, MenuName, MouseOver, MissingValueText
+, CreatorId, ModifierId, ModifiedDate, CreatedDate ) VALUES 
+(1,1,1,41, 'Subject', 'Game assignment', 'Game assignment', 'Game assignment', 'Game assignment missing', @User, @User, GETDATE(), GETDATE())
+,(2,1,2,41, 'Assign', 'Research assignment', 'Research assignment', 'Research assignment', 'Research assignment missing', @User, @User, GETDATE(), GETDATE())
+,(3,1,3,41, 'Assignment', 'Assignment', 'Assignment', 'Assignment', 'Assignment missing', @User, @User, GETDATE(), GETDATE())
+,(4,1,4,41, 'Game', 'Game', 'Game', 'Game','Game', @User, @User, GETDATE(), GETDATE())
+,(5,1,5,41, 'Student text', 'Student text', 'Student text', 'Student text','Student text', @User, @User, GETDATE(), GETDATE())
+,(6,1,6,41, 'Submit', 'Submit', 'Submit', 'Submit','Submit', @User, @User, GETDATE(), GETDATE())
+,(7,1,7,41, 'Result', 'Result', 'Result', 'Result','Result', @User, @User, GETDATE(), GETDATE())
+,(8,1,8,41, 'Passed', 'Passed', 'Passed', 'Passed','Passed', @User, @User, GETDATE(), GETDATE())
+,(9,1,9,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
+,(10,1,10,41, 'Date assigned', 'Date assigned', 'Date assigned', 'Date assigned', 'Date assigned', @User, @User, GETDATE(), GETDATE())
+,(11,1,11,41, 'Date sumitted', 'Date sumitted', 'Date sumitted', 'Date sumitted', 'Date sumitted', @User, @User, GETDATE(), GETDATE())
+,(12,1,12,41, 'Date passed', 'Date passed', 'Date passed', 'Date passed', 'Date passed', @User, @User, GETDATE(), GETDATE())
+,(13,2,13,41, 'Subject', 'Game assignment', 'Game assignment', 'Game assignment','Game assignment', @User, @User, GETDATE(), GETDATE())
+,(14,2,14,41, 'Assign', 'Research assignment', 'Research assignment', 'Research assignment', 'Research assignment', @User, @User, GETDATE(), GETDATE())
+,(15,2,15,41, 'Assignment', 'Assignment', 'Assignment', 'Assignment', 'Assignment', @User, @User, GETDATE(), GETDATE())
+,(16,2,16,41, 'Student text', 'Student text', 'Student text', 'Student text', 'Student text', @User, @User, GETDATE(), GETDATE())
+,(17,2,17,41, 'Submit', 'Submit', 'Submit', 'Submit','Submit', @User, @User, GETDATE(), GETDATE())
+,(18,2,18,41, 'Result', 'Result', 'Result', 'Result','Result', @User, @User, GETDATE(), GETDATE())
+,(19,2,19,41, 'Passed', 'Passed', 'Passed', 'Passed', 'Passed', @User, @User, GETDATE(), GETDATE())
+,(20,2,20,41, 'Rejected', 'Rejected', 'Rejected', 'Rejected', 'Rejected', @User, @User, GETDATE(), GETDATE())
+,(21,2,21,41, 'Date assigned', 'Date assigned', 'Date assigned', 'Date assigned','Date assigned', @User, @User, GETDATE(), GETDATE())
+,(22,2,22,41, 'Date sumitted', 'Date sumitted', 'Date sumitted', 'Date sumitted','Date sumitted', @User, @User, GETDATE(), GETDATE())
+,(23,2,23,41, 'Date passed', 'Date passed', 'Date passed', 'Date passed', 'Date passed', @User, @User, GETDATE(), GETDATE())
+,(24,3,24,41, 'Subject', 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+,(25,3,25,41, 'Student comment', 'Student comment', 'Student comment', 'Student comment',  'Student comment', @User, @User, GETDATE(), GETDATE())
+,(26,3,26,41, 'Content', 'Content', 'Content', 'Content','Content', @User, @User, GETDATE(), GETDATE())
+,(27,3,27,41, 'Area', 'Area', 'Area', 'Area','Area', @User, @User, GETDATE(), GETDATE())
+,(28,3,28,41, 'Submit', 'Submit', 'Submit', 'Submit','Submit', @User, @User, GETDATE(), GETDATE())
+,(29,3,29,41, 'Approver comment', 'Approver comment', 'Approver comment', 'Approver comment','Approver comment', @User, @User, GETDATE(), GETDATE())
+,(30,3,30,41, 'Approve', 'Approve', 'Approve', 'Approve','Approve', @User, @User, GETDATE(), GETDATE())
+,(31,3,31,41, 'Reject', 'Reject', 'Reject', 'Reject','Reject', @User, @User, GETDATE(), GETDATE())
+,(32,1,32,41, 'Player', 'Player', 'Player', 'Player', 'Player', @User, @User, GETDATE(), GETDATE())
+,(33,2,33,41, 'Student', 'Student', 'Student', 'Student','Student', @User, @User, GETDATE(), GETDATE())
+,(34,1,34,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level','Minimum security level', @User, @User, GETDATE(), GETDATE())
+,(35,1,35,41, 'Role of approver', 'Role of approver', 'Role of approver', 'Role of approver','Role of approver', @User, @User, GETDATE(), GETDATE())
+,(36,2,36,41, 'Role of approver', 'Role of approver', 'Role of approver', 'Role of approver','Role of approver', @User, @User, GETDATE(), GETDATE())
+,(37,2,37,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level','Minimum security level', @User, @User, GETDATE(), GETDATE())
+,(38,3,38,41, 'Minimum security level', 'Minimum security level', 'Minimum security level', 'Minimum security level','Minimum security level', @User, @User, GETDATE(), GETDATE())
+,(39,4,39,41, 'Submit', 'Submit', 'Submit', 'Submit','Submit', @User, @User, GETDATE(), GETDATE())
+,(40,4,40,41, 'From date time', 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
+,(41,4,41,41, 'To date time', 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
+,(42,4,42,41, 'Subject', 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+,(43,4,43,41, 'User', 'User', 'User', 'User', 'User', @User, @User, GETDATE(), GETDATE())
+,(44,5,44,41, 'Submit', 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(45,5,45,41, 'From date time', 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
+,(46,5,46,41, 'To date time', 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
+,(47,5,47,41, 'Subject', 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+,(48,5,48,41, 'Organization', 'Organization', 'Organization', 'Organization', 'Organization', @User, @User, GETDATE(), GETDATE())
+,(49,6,49,41, 'Submit', 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(50,6,50,41, 'From date time', 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
+,(51,6,51,41, 'To date time', 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
+,(52,6,52,41, 'Subject', 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
+,(53,6,53,41, 'Project', 'Project', 'Project', 'Project', 'Project', @User, @User, GETDATE(), GETDATE())
+,(54,7,54,41, 'Submit', 'Submit', 'Submit', 'Submit', 'Submit', @User, @User, GETDATE(), GETDATE())
+,(55,7,55,41, 'From date time', 'From date time', 'From date time', 'From date time', 'From date time', @User, @User, GETDATE(), GETDATE())
+,(56,7,56,41, 'To date time', 'To date time', 'To date time', 'To date time', 'To date time', @User, @User, GETDATE(), GETDATE())
+,(57,7,57,41, 'Subject', 'Subject', 'Subject', 'Subject', 'Subject', @User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT ProcessTemplateFieldLanguages OFF;
 
@@ -854,9 +860,9 @@ INSERT INTO ProcessTemplateFlowConditionLanguages (ProcessTemplateFlowConditionL
 SET IDENTITY_INSERT ProcessTemplateFlowConditionLanguages OFF;
 
 SET IDENTITY_INSERT PersonRelationTypes ON;
-INSERT INTO PersonRelationTypes (PersonRelationTypeId, SeePersonal, Color,IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-( 1,0,'#008000ff', 1,@User, @User, GETDATE(), GETDATE())
-,( 2,0, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+INSERT INTO PersonRelationTypes (PersonRelationTypeId, SeePersonal, CanAssignOwnershipFromTo, CanAssignOwnershipToFrom,CanAssignEditFromTo, CanAssignEditToFrom, CanAssignReadFromTo, CanAssignReadToFrom, Color,IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+( 1,0,1,1,1,1,1,1,'#008000ff', 1,@User, @User, GETDATE(), GETDATE())
+,( 2,0,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
 ;
 SET IDENTITY_INSERT PersonRelationTypes OFF;
 
@@ -1122,11 +1128,14 @@ SET IDENTITY_INSERT ProcessFields OFF;
 
 SET IDENTITY_INSERT Contents ON;
 INSERT INTO Contents (
-ContentId, ContentTypeId, ContentStatusId, LanguageId, Title, Description, SecurityLevelId, OrganizationId, CreatorId, ModifierId, ModifiedDate, CreatedDate, ProcessID) 
+ContentId, ContentTypeId, ContentStatusId, LanguageId, Title, Description, SecurityLevelId, OrganizationId
+, IsOrganizationBasedEdit, IsOrganizationBasedEditSub, IsOrganizationBasedEditParent, IsOrganizationBasedRead, IsOrganizationBasedReadSub, IsOrganizationBasedReadParent
+, IsProjectBasedEdit, IsProjectBasedEditSub, IsProjectBasedEditParent, IsProjectBasedRead, IsProjectBasedReadSub, IsProjectBasedReadParent
+, CreatorId, ModifierId, ModifiedDate, CreatedDate, ProcessID) 
 VALUES 
-  (1,1,2,41,'Research of Tropics on butterflies','This is a story about butterflies in my backgarden', 1,1, @User, @User, GETDATE(), GETDATE(),9)
-, (2,2,4,41,'Growing passion fruits in Silt soil','They are the most delicious passion fruits', 1,1, @User, @User, GETDATE(), GETDATE(),10)
-, (3,1,3,41,'Arctic and strawberries','They really grow well especially if you keep the lights on', 1,1, @User, @User, GETDATE(), GETDATE(),11)
+  (1,1,2,41,'Research of Tropics on butterflies','This is a story about butterflies in my backgarden', 1,1, 1,1, 1,1, 1,1, 1,1, 1,1,1,1,  @User, @User, GETDATE(), GETDATE(),9)
+, (2,2,4,41,'Growing passion fruits in Silt soil','They are the most delicious passion fruits', 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),10)
+, (3,1,3,41,'Arctic and strawberries','They really grow well especially if you keep the lights on', 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),11)
 
 SET IDENTITY_INSERT Contents OFF;
 

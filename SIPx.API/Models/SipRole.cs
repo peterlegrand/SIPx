@@ -12,5 +12,11 @@ namespace SIPx.API.Models
         public int RoleGroupId { get; set; }
         public int? OrganizationId { get; set; }
         public int? ProjectId { get; set; }
+        public bool CanAssignContentOwnership { get; set; }
+        public bool CanReceiveContentOwnership { get; set; }
+        public bool CanAssignContentRead { get; set; }
+        public bool CanReceiveContentRead { get; set; }
+        public bool CanAssignContentEdit { get; set; }
+        public bool CanReceiveContentEdit { get; set; }
     }
 }

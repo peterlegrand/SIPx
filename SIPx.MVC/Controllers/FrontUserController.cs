@@ -15,15 +15,6 @@ namespace SIPx.MVC.Controllers
         private readonly string _baseUrl = "https://localhost:44393/";
         readonly ServiceClient _client = new ServiceClient();
 
-        [HttpGet]
-        public async Task<IActionResult> Dashboard(int Id)
-        {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<FrontUserIndexGet>($"{_baseUrl}api/FrontUser/Index/"+Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUser/Dashboard", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
 
         //public async Task<IActionResult> Create()
         //{

@@ -16,31 +16,21 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient _client = new ServiceClient();
 
         [HttpGet]
-        public async Task<IActionResult> Dashboard(int Id)
+        public async Task<IActionResult> Create()
         {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<FrontProjectIndexGet>($"{_baseUrl}api/FrontProject/Index/"+Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/Dashboard", token);
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync<ProjectCreateGet>($"{_baseUrl}api/Project/Create/", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Project/Create", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
-   
-    [HttpGet]
-    public async Task<IActionResult> Create()
-    {
-        var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-        var response = await _client.GetProtectedAsync<ProjectCreateGet>($"{_baseUrl}api/Project/Create/", token);
-        var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Project/Create", token);
-        ViewBag.UITerms = UITerms;
-        return View(response);
-    }
-    [HttpPost]
-    public async Task<IActionResult> Create(ProjectCreateGet Project)
-    {
-        var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-        await _client.PostProtectedAsync<ProjectCreateGet>($"{_baseUrl}api/Project/Create", Project, token);
+        [HttpPost]
+        public async Task<IActionResult> Create(ProjectCreateGet Project)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            await _client.PostProtectedAsync<ProjectCreateGet>($"{_baseUrl}api/Project/Create", Project, token);
 
-        return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> AdvancedSearch()
@@ -59,6 +49,15 @@ namespace SIPx.MVC.Controllers
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/SearchResult", token);
             ViewBag.UITerms = UITerms;
             return View("SearchResult", result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Dashboard(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync<FrontProjectIndexGet>($"{_baseUrl}api/FrontProject/Index/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/Dashboard", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
         }
     }
 

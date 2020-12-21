@@ -16,15 +16,6 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient _client = new ServiceClient();
 
         [HttpGet]
-        public async Task<IActionResult> Dashboard(int Id)
-        {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<FrontOrganizationIndexGet>($"{_baseUrl}api/FrontOrganization/Index/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontOrganization/Dashboard", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-        }
-        [HttpGet]
         public async Task<IActionResult> AdvancedSearch()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
@@ -42,7 +33,15 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = UITerms;
             return View("SearchResult", result);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> Dashboard(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync<FrontOrganizationIndexGet>($"{_baseUrl}api/FrontOrganization/Index/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontOrganization/Dashboard", token);
+            ViewBag.UITerms = UITerms;
+            return View(response);
+        }
         public async Task<IActionResult> Create()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
@@ -62,8 +61,10 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> QuickSearch([FromQuery(Name = "Search")] string Search)
         {
-            var SearchData = new FrontOrganizationAdvancedSearchGet();
-            SearchData.OrganizationName = Search;
+            var SearchData = new FrontOrganizationAdvancedSearchGet
+            {
+                OrganizationName = Search
+            };
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var result = await _client.PostProtectedAsync<FrontOrganizationAdvancedSearchGet>($"{_baseUrl}api/FrontOrganization/AdvancedSearch", SearchData, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontOrganization/SearchResult", token);

@@ -16,9 +16,9 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class UserPageController : ControllerBase
+    public class FrontUserPageController : ControllerBase
     {
-        private readonly IUserPageProvider _userPageProvider;
+        private readonly IFrontUserPageProvider _frontUserPageProvider;
         private readonly IProjectProvider _projectProvider;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly IUserProvider _userProvider;
@@ -30,9 +30,19 @@ namespace SIPx.API.Controllers
         private readonly IPageProvider _pageProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public UserPageController(IUserPageProvider userPageProvider, IProjectProvider projectProvider, IOrganizationProvider organizationProvider, IUserProvider userProvider, IClassificationProvider classificationProvider, IMasterListProvider masterListProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IPageProvider PageProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontUserPageController(IFrontUserPageProvider frontUserPageProvider
+            , IProjectProvider projectProvider
+            , IOrganizationProvider organizationProvider
+            , IUserProvider userProvider
+            , IClassificationProvider classificationProvider
+            , IMasterListProvider masterListProvider
+            , IMasterProvider masterProvider
+            , ICheckProvider checkProvider
+            , IClaimCheck claimCheck
+            , IPageProvider PageProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
-            _userPageProvider = userPageProvider;
+            _frontUserPageProvider = frontUserPageProvider;
             _projectProvider = projectProvider;
             _organizationProvider = organizationProvider;
             _userProvider = userProvider;
@@ -85,7 +95,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userPageProvider.UserPageCreatePostCheck(Page);
                 //if (CheckString.Length == 0)
                 //{
-                _userPageProvider.CreatePost(Page);
+                _frontUserPageProvider.CreatePost(Page);
                 return Ok(Page);
                 //}
                 return BadRequest(new
@@ -107,7 +117,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
             {
-                return Ok(await _userPageProvider.IndexGet(CurrentUser.Id));
+                return Ok(await _frontUserPageProvider.IndexGet(CurrentUser.Id));
             }
             return BadRequest(new
             {
@@ -130,7 +140,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _userPageProvider.UpdateGet(CurrentUser.Id, Id);
+                var x = await _frontUserPageProvider.UpdateGet(CurrentUser.Id, Id);
 
                 return Ok(x);
             }
@@ -152,7 +162,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _userPageProvider.UserPageUpdatePostCheck(Page);
                 //if (CheckString.Length == 0)
                 //{
-                    _userPageProvider.UpdatePost(Page);
+                _frontUserPageProvider.UpdatePost(Page);
                     return Ok(Page);
                 //}
                 //return BadRequest(new
@@ -182,7 +192,7 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _userPageProvider.DeleteGet(CurrentUser.Id, Id);
+                var x = await _frontUserPageProvider.DeleteGet(CurrentUser.Id, Id);
 
                 return Ok(x);
             }

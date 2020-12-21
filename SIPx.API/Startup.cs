@@ -136,7 +136,8 @@ namespace SIPx.API
 
             services.AddTransient<IRoleGroupProvider, RoleGroupProvider>();
 
-            services.AddTransient<IUserPageProvider, UserPageProvider>();
+            services.AddTransient<IFrontUserPageProvider, FrontUserPageProvider>();
+            services.AddTransient<IFrontUserPageSectionProvider, FrontUserPageSectionProvider>();
             services.AddTransient<IPartialProvider, PartialProvider>();
             services.AddTransient<IContentProvider, ContentProvider>();
             services.AddTransient<IContentStatusProvider, ContentStatusProvider>();
@@ -152,12 +153,12 @@ namespace SIPx.API
             services.AddTransient<ILanguageProvider, LanguageProvider>();
 
             services.AddTransient<IRoleProvider, RoleProvider>();
-            services.AddTransient<IUserMenuProvider, UserMenuProvider>();
+            services.AddTransient<IFrontUserMenuProvider, FrontUserMenuProvider>();
             services.AddTransient<IUserMenuTemplateProvider, UserMenuTemplateProvider>();
             services.AddTransient<IUserProvider, UserProvider>();
             services.AddTransient<IPersonRelationTypeProvider, PersonRelationTypeProvider>();
             services.AddTransient<IUserMenuTemplateOptionProvider, UserMenuTemplateOptionProvider>();
-            services.AddTransient<IUserPreferenceProvider, UserPreferenceProvider>();
+            services.AddTransient<IFrontUserPreferenceProvider, FrontUserPreferenceProvider>();
 
             services.AddTransient<IProjectProvider, ProjectProvider>();
             services.AddTransient<IProjectTypeProvider, ProjectTypeProvider>();
