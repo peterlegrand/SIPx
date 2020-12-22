@@ -8,7 +8,7 @@ namespace SIPx.DataAccess
     {
         Task<List<SequenceList>> CreateGetSequence(string UserId);
         Task<string> CreatePost(ProcessTemplateGroupCreateGet ProcessTemplateGroup);
-        Task<string> CreatePostCheck(ProcessTemplateGroupCreateGet ProcessTemplateGroup);
+        Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateGroupCreateGet ProcessTemplateGroup);
         Task<ProcessTemplateGroupDeleteGet> DeleteGet(string UserId, int ProcessTemplateGroupId);
         bool DeletePost(int Id);
         Task<List<ProcessTemplateGroupIndexGet>> IndexGet(string UserId);
@@ -16,6 +16,7 @@ namespace SIPx.DataAccess
         Task<ProcessTemplateGroupLanguageIndexGet> LanguageUpdateGet(string UserId, int ProcessTemplateGroupLanguageId);
         Task<List<ProcessTemplateGroupList>> List(string UserId);
         Task<ProcessTemplateGroupUpdateGet> UpdateGet(string UserId, int ProcessTemplateGroupId);
+        Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateGroupUpdateGet ProcessTemplateGroup);
         bool UpdatePost(ProcessTemplateGroupUpdateGet ProcessTemplateGroup);
         Task<List<SequenceList>>UpdateGetSequence(string UserId);
     }

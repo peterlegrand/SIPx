@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(ProjectTypeCreatePost ProjectType)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProjectTypeCreateGet ProjectType)
         {
             string usp = "usp_ProjectTypeCreatePostCheck @LanguageId, @Name, @UserId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectType);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ProjectTypeCreateGet ProjectType)
@@ -47,6 +47,14 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProjectTypeUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
         }
+
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProjectTypeUpdateGet ProjectType)
+        {
+            string usp = "usp_ProjectTypeUpdatePostCheck @ProjectTypeId,  @Name, @Description, @MenuName, @MouseOver, @Color, @IconId,@ModifierId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectType);
+            return ErrorMessages;
+        }
+
 
         public bool UpdatePost(ProjectTypeUpdateGet ProjectType)
         {

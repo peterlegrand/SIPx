@@ -13,13 +13,14 @@ namespace SIPx.DataAccess
         Task<List<ProcessTemplateFieldList>> UpdateGetFieldRoleList(string UserId, int ProcessTemplateFlowPassId);
         Task<List<SequenceList>> UpdateGetSequence(string UserId, int ProcessTemplateFlowPassId);
         Task<string> CreatePost(ProcessTemplateFlowPassCreateGet ProcessTemplateFlowPass);
-        Task<string> CreatePostCheck(ProcessTemplateFlowPassCreatePost ProcessTemplateFlowPass);
+        Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateFlowPassCreateGet ProcessTemplateFlowPass);
         Task<ProcessTemplateFlowPassDeleteGet> DeleteGet(string UserId, int ProcessTemplateFlowPassId);
         bool DeletePost(int ProcessTemplateFlowPassId);
         Task<List<ProcessTemplateFlowPassIndexGet>> IndexGet(string UserId, int ProcessTemplateFlowId);
         Task<List<ProcessTemplateFlowPassLanguageIndexGet>> LanguageIndexGet(string UserId, int ProcessTemplateFlowPassId);
         Task<ProcessTemplateFlowPassLanguageIndexGet> LanguageUpdateGet(string UserId, int ProcessTemplateFlowPassLanguageId);
         Task<ProcessTemplateFlowPassUpdateGet> UpdateGet(string UserId, int ProcessTemplateFlowPassId);
+        Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateFlowPassUpdateGet ProcessTemplateFlowPass);
         bool UpdatePost(ProcessTemplateFlowPassUpdateGet ProcessTemplateFlowPass);
         Task<int> IndexGetProcessTemplateId(int ProcessTemplateFlowPassId);
     }

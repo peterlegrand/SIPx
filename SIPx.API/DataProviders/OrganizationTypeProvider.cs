@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(OrganizationTypeCreatePost OrganizationType)
+        public async Task<List<ErrorMessage>> CreatePostCheck(OrganizationTypeCreateGet OrganizationType)
         {
             string usp = "usp_OrganizationTypeCreatePostCheck @LanguageId, @Name, @UserId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationType);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationType);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(OrganizationTypeCreatePost OrganizationType)
@@ -47,7 +47,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<OrganizationTypeUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationTypeId = OrganizationTypeId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(OrganizationTypeUpdateGet OrganizationType)
+        {
+            string usp = "usp_OrganizationTypeUpdatePostCheck @LanguageId, @Name, @UserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationType);
+            return ErrorMessages;
+        }
         public bool UpdatePost(OrganizationTypeUpdateGet OrganizationType)
         {
             string usp = "usp_OrganizationTypeUpdatePost @OrganizationTypeId,  @Internal, @LegalEntity, @Name, @Description, @MenuName, @MouseOver,  @ModifierId";

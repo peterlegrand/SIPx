@@ -54,6 +54,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PageSectionUpdateGet, dynamic>(usp, new { UserId = UserId, PageSectionId = PageSectionId });
 
         }
+        public async Task<string> UpdatePostCheck(PageSectionUpdateGet PageSection)
+        {
+            string usp = "usp_PageSectionUpdatePostCheck @PageSectionId, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @SizeX, @SizeY, @DashboardRow, @DashboardColumn, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @Name, @Description, @MenuName , @MouseOver, @TitleName, @TitleDescription , @ModifierId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
+            return CheckString;
+        }
 
         public bool UpdatePost(PageSectionUpdateGet PageSection)
         {

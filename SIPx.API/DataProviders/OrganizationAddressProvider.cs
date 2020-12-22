@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(OrganizationAddressCreatePost OrganizationAddress)
+        public async Task<List<ErrorMessage>> CreatePostCheck(OrganizationAddressCreateGet OrganizationAddress)
         {
             string usp = "usp_OrganizationAddressCreatePostCheck @OrganizationId, @AddressTypeId  , @CountryId, @UserId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationAddress);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationAddress);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(OrganizationAddressCreatePost OrganizationAddress)
@@ -48,6 +48,12 @@ namespace SIPx.DataAccess
 
         }
 
+        public async Task<List<ErrorMessage>> UpdatePostCheck(OrganizationAddressUpdateGet OrganizationAddress)
+        {
+            string usp = "usp_OrganizationAddressUpdatePostCheck @OrganizationAddressId , @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationAddress);
+            return ErrorMessages;
+        }
         public bool UpdatePost(OrganizationAddressUpdateGet OrganizationAddress)
         {
             string usp = "usp_OrganizationAddressUpdatePost @OrganizationAddressId , @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @UserId";

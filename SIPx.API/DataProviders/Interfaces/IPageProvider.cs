@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IPageProvider
     {
         Task<string> CreatePost(PageCreateGet Page);
-        Task<string> CreatePostCheck(PageCreateGet Page);
+        Task<List<ErrorMessage>> CreatePostCheck(PageCreateGet Page);
         Task<PageDeleteGet> DeleteGet(string UserId, int PageId);
         bool DeletePost(int Id);
         Task<List<PageIndexGet>> IndexGet(string UserId);
@@ -17,5 +17,6 @@ namespace SIPx.DataAccess
         Task<List<PageList>> ListForMenuTemplate(string UserId);
         Task<PageUpdateGet> UpdateGet(string UserId, int PageId);
         bool UpdatePost(PageUpdateGet Page);
+        Task<List<ErrorMessage>> UpdatePostCheck(PageUpdateGet Page);
     }
 }

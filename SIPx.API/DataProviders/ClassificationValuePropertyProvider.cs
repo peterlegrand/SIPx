@@ -42,12 +42,12 @@ namespace SIPx.DataAccess
             return CheckString;
         }
 
-        //public async Task<string> CreatePostCheck(ClassificationValuePropertyCreateGet ClassificationValueProperty)
-        //{
-        //    string usp = "usp_ClassificationValuePropertyCreatePostCheck @ClassificationValueId, @PropertyId, @PropertyInt, @PropertyBool, @PropertyDate, @PropertyString, @PropertyValueId, @UserId ";
-        //     _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueProperty);
-        //    return true;
-        //}
+        public async Task<List<ErrorMessage>> CreatePostCheck(ClassificationValuePropertyCreateGet ClassificationValueProperty)
+        {
+            string usp = "usp_ClassificationValuePropertyCreatePostCheck @ClassificationValueId, @PropertyId, @PropertyInt, @PropertyBool, @PropertyDate, @PropertyString, @PropertyValueId, @UserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationValueProperty);
+            return ErrorMessages;
+        }
 
         public bool CreatePost(ClassificationValuePropertyCreateGet ClassificationValueProperty)
         {
@@ -75,6 +75,13 @@ namespace SIPx.DataAccess
         //    return _sqlDataAccess.LoadSingleRecord<ClassificationValuePropertyCreateGetClassificationName, dynamic>(usp, new { UserId, ClassificationValueId });
         //}
 
+
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationValuePropertyUpdateGet ClassificationValueProperty)
+        {
+            string usp = "usp_ClassificationValuePropertyUpdatePostCheck @ClassificationValuePropertyId, @PropertyInt, @PropertyBool, @PropertyDate, @PropertyString, @PropertyValueId, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationValueProperty);
+            return ErrorMessages;
+        }
         public bool UpdatePost(ClassificationValuePropertyUpdateGet ClassificationValueProperty)
         {
             string usp = "usp_ClassificationValuePropertyUpdatePost @ClassificationValuePropertyId, @PropertyInt, @PropertyBool, @PropertyDate, @PropertyString, @PropertyValueId, @UserId";

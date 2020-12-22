@@ -17,10 +17,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PersonRelationTypeCreateGet>($"{_baseUrl}api/PersonRelationType/Create/", token);
+            var response = await _client.GetProtectedAsync2<PersonRelationTypeCreateGet>($"{_baseUrl}api/PersonRelationType/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Create", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var x = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = x;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Create(PersonRelationTypeCreateGet PersonRelationType)

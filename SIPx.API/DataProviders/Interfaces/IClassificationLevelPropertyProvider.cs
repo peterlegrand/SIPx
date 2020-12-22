@@ -14,5 +14,7 @@ namespace SIPx.DataAccess
         Task<List<ClassificationLevelPropertyIndexGet>> IndexGet(string UserId, int ClassificationLevelId);
         Task<ClassificationLevelPropertyUpdateGet> UpdateGet(string UserId, int ClassificationLevelPropertyId);
         bool UpdatePost(ClassificationLevelPropertyUpdateGet ClassificationLevelProperty);
+        Task<List<ErrorMessage>> CreatePostCheck(ClassificationLevelPropertyCreateGet ClassificationLevelProperty);
+        Task<List<ErrorMessage>> UpdatePostCheck(ClassificationLevelPropertyUpdateGet ClassificationLevelProperty);
     }
 }

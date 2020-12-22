@@ -19,14 +19,20 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
+        public async Task<List<ErrorMessage>> CreatePostCheck(PersonRelationTypeCreateGet PersonRelationType)
+        {
+            string usp = "usp_PersonRelationTypeCreatePostCheck @Name, @Description , @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom, @SeePersonal, @Color, @IconId, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonRelationType);
+            return ErrorMessages;
+        }
 
-        public async Task<string> CreatePost(PersonRelationTypeCreatePost PersonRelationType)
+        public async Task<string> CreatePost(PersonRelationTypeCreateGet PersonRelationType)
         {
             string usp = "usp_PersonRelationTypeCreatePost @Name, @Description , @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom, @SeePersonal, @Color, @IconId, @UserId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonRelationType);
             return CheckString;
         }
-
+        //PETER TODO PostCheck
         public Task<List<PersonRelationTypeIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_PersonRelationTypeIndexGet @UserID";
@@ -40,7 +46,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PersonRelationTypeUpdateGet, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PersonRelationTypeUpdateGet PersonRelationType)
+        {
+            string usp = "usp_PersonRelationTypeUpdatePostCheck @PersonRelationTypeId, @Name, @Description, @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom,@SeePersonal, @Color, @IconId, @ModifierId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonRelationType);
+            return ErrorMessages;
+        }
         public bool UpdatePost(PersonRelationTypeUpdateGet PersonRelationType)
         {
             string usp = "usp_PersonRelationTypeUpdatePost @PersonRelationTypeId, @Name, @Description, @MenuName, @MouseOver, @FromIsAnXOfTo, @ToIsAnXOfFrom,@SeePersonal, @Color, @IconId, @ModifierId";

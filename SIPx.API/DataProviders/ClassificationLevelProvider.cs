@@ -25,11 +25,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ClassificationId });
         }
 
-        public async Task<string> CreatePostCheck(ClassificationLevelCreatePost ClassificationLevel)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ClassificationLevelCreateGet ClassificationLevel)
         {
             string usp = "usp_ClassificationLevelCreatePostCheck @ClassificationId  , @Sequence , @LanguageId , @Name, @DateLevelId, @UserId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationLevel);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationLevel);
+            return ErrorMessages;
         }
 
         public bool CreatePost(ClassificationLevelCreatePost ClassificationLevel)
@@ -52,7 +52,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationLevelUpdateGet, dynamic>(usp, new { UserId, ClassificationLevelId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationLevelUpdateGet ClassificationLevel)
+        {
+            string usp = "usp_ClassificationLevelUpdatePostCheck @ClassificationLevelId, @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @ModifierID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationLevel);
+            return ErrorMessages;
+        }
         public bool UpdatePost(ClassificationLevelUpdateGet ClassificationLevel)
         {
             string usp = "usp_classificationLevelUpdatePost @ClassificationLevelId, @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @ModifierID";

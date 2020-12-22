@@ -146,6 +146,86 @@
         }
 
         <div class="row">
+            <div class="offset-3 col-9">
+                <table>
+                    <tr>
+                        <th colspan="2" style="width:50%;"></th>
+                        <th style="width:25%;">@Term.Find(x => x.InternalName.Equals("Ownership")).TermString</th>
+                        <th style="width:25%;">@Term.Find(x => x.InternalName.Equals("Edit")).TermString</th>
+                        <th style="width:25%;">@Term.Find(x => x.InternalName.Equals("Read")).TermString</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@Term.Find(x => x.InternalName.Equals("Any")).TermString</td>
+                        <td><ejs-checkbox id="IsFreeOwnership" ejs-for="@Model.IsFreeOwnership"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsFreeEdit" ejs-for="@Model.IsFreeEdit"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsFreeRead" ejs-for="@Model.IsFreeRead"></ejs-checkbox></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="width:5%;"></td>
+                        <td style="width:20%;">@Term.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
+                        <td></td>
+                        <td><ejs-checkbox id="IsFreeEditSelectable" ejs-for="@Model.IsFreeEditSelectable"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsFreeReadSelectable" ejs-for="@Model.IsFreeReadSelectable"></ejs-checkbox></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@Term.Find(x => x.InternalName.Equals("Organization based")).TermString</td>
+                        <td><ejs-checkbox id="IsOrganizationBasedOwnership" ejs-for="@Model.IsOrganizationBasedOwnership"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsOrganizationBasedEdit" ejs-for="@Model.IsOrganizationBasedEdit"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsOrganizationBasedRead" ejs-for="@Model.IsOrganizationBasedRead"></ejs-checkbox></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Term.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
+                        <td></td>
+                        <td><ejs-checkbox id="IsOrganizationBasedEditSelectable" ejs-for="@Model.IsOrganizationBasedEditSelectable"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsOrganizationBasedReadSelectable" ejs-for="@Model.IsOrganizationBasedReadSelectable"></ejs-checkbox></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Term.Find(x => x.InternalName.Equals("Incl. subs")).TermString</td>
+                        <td></td>
+                        <td><ejs-checkbox id="IsOrganizationBasedEditSub" ejs-for="@Model.IsOrganizationBasedEditSub"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsOrganizationBasedReadSub" ejs-for="@Model.IsOrganizationBasedReadSub"></ejs-checkbox></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Term.Find(x => x.InternalName.Equals("Incl. parents")).TermString</td>
+                        <td></td>
+                        <td><ejs-checkbox id="IsOrganizationBasedEditParent" ejs-for="@Model.IsOrganizationBasedEditParent"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsOrganizationBasedReadParent" ejs-for="@Model.IsOrganizationBasedReadParent"></ejs-checkbox></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@Term.Find(x => x.InternalName.Equals("Project based")).TermString</td>
+                        <td><ejs-checkbox id="IsProjectBasedOwnership" ejs-for="@Model.IsProjectBasedOwnership"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsProjectBasedEdit" ejs-for="@Model.IsProjectBasedEdit"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsProjectBasedRead" ejs-for="@Model.IsProjectBasedRead"></ejs-checkbox></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Term.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
+                        <td></td>
+                        <td><ejs-checkbox id="IsProjectBasedEditSelectable" ejs-for="@Model.IsProjectBasedEditSelectable"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsProjectBasedReadSelectable" ejs-for="@Model.IsProjectBasedReadSelectable"></ejs-checkbox></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Term.Find(x => x.InternalName.Equals("Incl. subs")).TermString</td>
+                        <td></td>
+                        <td><ejs-checkbox id="IsProjectBasedEditSub" ejs-for="@Model.IsProjectBasedEditSub"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsProjectBasedReadSub" ejs-for="@Model.IsProjectBasedReadSub"></ejs-checkbox></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Term.Find(x => x.InternalName.Equals("Incl. parents")).TermString</td>
+                        <td></td>
+                        <td><ejs-checkbox id="IsProjectBasedEditParent" ejs-for="@Model.IsProjectBasedEditParent"></ejs-checkbox></td>
+                        <td><ejs-checkbox id="IsProjectBasedReadParent" ejs-for="@Model.IsProjectBasedReadParent"></ejs-checkbox></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Icon")).TermString
             </div>

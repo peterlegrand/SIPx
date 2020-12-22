@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IPageSectionContentConditionProvider
     {
         Task<string> CreatePost(PageSectionContentConditionCreateGet PageSectionContentCondition);
-        Task<string> CreatePostCheck(PageSectionContentConditionCreateGet PageSectionContentCondition);
+        Task<List<ErrorMessage>> CreatePostCheck(PageSectionContentConditionCreateGet PageSectionContentCondition);
         Task<PageSectionContentConditionDeleteGet> DeleteGet(string UserId, int PageSectionContentConditionId);
         bool DeletePost(int PageSectionContentConditionId);
         Task<List<PageSectionContentConditionIndexGet>> IndexGet(string UserId, int PageSectionId);
@@ -17,6 +17,7 @@ namespace SIPx.DataAccess
         bool UpdatePost(PageSectionContentConditionUpdateGet PageSectionContentCondition);
           Task<List<PageSectionContentConditionCreateGetClassifications>> CreateGetClassifications(string UserId);
         Task<List<ClassificationValueList>> CreateGetClassificationValues(string UserId, int ClassificationId);
+        Task<List<ErrorMessage>> UpdatePostCheck(PageSectionContentConditionUpdateGet PageSectionContentCondition);
 
     }
 }

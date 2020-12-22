@@ -6,7 +6,8 @@ namespace SIPx.DataAccess
 {
     public interface IPersonRelationTypeProvider
     {
-        Task<string> CreatePost(PersonRelationTypeCreatePost PersonRelationType);
+        Task<List<ErrorMessage>> CreatePostCheck(PersonRelationTypeCreateGet PersonRelationType);
+        Task<string> CreatePost(PersonRelationTypeCreateGet PersonRelationType);
         Task<PersonRelationTypeDeleteGet> DeleteGet(string UserId, int PersonRelationTypeId);
         bool DeletePost(int Id);
         Task<List<PersonRelationTypeIndexGet>> IndexGet(string UserId);
@@ -14,6 +15,7 @@ namespace SIPx.DataAccess
         //Task<PersonRelationTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int PersonRelationTypeLanguageId);
         Task<List<PersonRelationTypeList>> List(string UserId);
         Task<PersonRelationTypeUpdateGet> UpdateGet(string UserId, int PersonRelationTypeId);
+        Task<List<ErrorMessage>> UpdatePostCheck(PersonRelationTypeUpdateGet PersonRelationType);
         bool UpdatePost(PersonRelationTypeUpdateGet PersonRelationType);
     }
 }

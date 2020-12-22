@@ -6,8 +6,8 @@ namespace SIPx.DataAccess
 {
     public interface IProcessTemplateFlowProvider
     {
-        Task<string> CreatePost(ProcessTemplateFlowCreatePost ProcessTemplateFlow);
-        Task<string> CreatePostCheck(ProcessTemplateFlowCreatePost ProcessTemplateFlow);
+        Task<string> CreatePost(ProcessTemplateFlowCreateGet ProcessTemplateFlow);
+        Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateFlowCreateGet ProcessTemplateFlow);
         Task<ProcessTemplateFlowDeleteGet> DeleteGet(string UserId, int ProcessTemplateFlowId);
         bool DeletePost(int Id);
         Task<List<ProcessTemplateFlowIndexGet>> IndexGet(string UserId, int ProcessTemplateId);
@@ -15,6 +15,7 @@ namespace SIPx.DataAccess
         Task<ProcessTemplateFlowLanguageIndexGet> LanguageUpdateGet(string UserId, int ProcessTemplateFlowLanguageId);
         Task<ProcessTemplateFlowUpdateGet> UpdateGet(string UserId, int ProcessTemplateFlowId);
         Task<List<ProcessTemplateStageList>> UpdateGetStageList(string UserId, int ProcessTemplateFlowId);
+        Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateFlowUpdateGet ProcessTemplateFlow);
         bool UpdatePost(ProcessTemplateFlowUpdateGet ProcessTemplateFlow);
     }
 }

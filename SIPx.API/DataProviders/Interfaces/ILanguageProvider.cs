@@ -16,7 +16,8 @@ namespace SIPx.DataAccess
         Task<List<UITermLanguage>> UITermLanguageIndexGet(string UserId);
         Task<UITermLanguage> UITermLanguageUpdateGet(string UserId, int UITermLanguageId);
         Task<LanguageList> UserLanguageUpdateGet(string UserId);
-        bool UpdatePost(LanguageUpdateGet ContentType);
+        Task<List<ErrorMessage>> UpdatePostCheck(LanguageUpdateGet Language);
+            bool UpdatePost(LanguageUpdateGet Language);
         Task<LanguageUpdateGet> UpdateGet(string UserId, int LanguageId);
         Task<List<LanguageList>> ActiveDefaultList();
     }

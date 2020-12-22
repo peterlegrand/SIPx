@@ -20,14 +20,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateFlowCreatePost ProcessTemplateFlow)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateFlowCreateGet ProcessTemplateFlow)
         {
             string usp = "usp_ProcessTemplateFlowCreatePostCheck @ProcessTemplateId, @ProcessTemplateFromStageId, @ProcessTemplateToStageId, @Name, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlow);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateFlow);
+            return ErrorMessages;
         }
 
-        public async Task<string> CreatePost(ProcessTemplateFlowCreatePost ProcessTemplateFlow)
+        public async Task<string> CreatePost(ProcessTemplateFlowCreateGet ProcessTemplateFlow)
         {
             string usp = "usp_ProcessTemplateFlowCreatePost @ProcessTemplateId, @ProcessTemplateFromStageId, @ProcessTemplateToStageId, @Name, @Description, @MenuName, @MouseOver, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlow);
@@ -53,6 +53,12 @@ namespace SIPx.DataAccess
             string usp = "usp_ProcessTemplateFlowUpdateGetStageList @UserId, @ProcessTemplateFlowId";
             return _sqlDataAccess.LoadData<ProcessTemplateStageList, dynamic>(usp, new { UserId = UserId, ProcessTemplateFlowId = ProcessTemplateFlowId });
 
+        }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateFlowUpdateGet ProcessTemplateFlow)
+        {
+            string usp = "usp_ProcessTemplateFlowUpdatePostCheck @ProcessTemplateFlowId , @ProcessTemplateFromStageId ,@ProcessTemplateToStageId, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateFlow);
+            return ErrorMessages;
         }
 
         public bool UpdatePost(ProcessTemplateFlowUpdateGet ProcessTemplateFlow)

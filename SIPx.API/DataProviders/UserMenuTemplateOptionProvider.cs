@@ -19,6 +19,7 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+
         public bool CreatePost(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
         {
             string usp = "usp_UserMenuTemplateOptionCreatePost @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @UserPageIdLeft , @UserPageIdRight ,@UserMenuTypeIDLeft, @UserMenuTypeIDRight, @IconId , @Sequence , @CreatorId ";
@@ -32,11 +33,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, UserMenuTemplateId });
         }
 
-        public async Task<string> CreatePostCheck(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
+        public async Task<List<ErrorMessage>> CreatePostCheck(UserMenuTemplateOptionCreateGet UserMenuTemplateOption)
         {
             string usp = "usp_UserMenuTemplateOptionCreatePostCheck @UserMenuTemplateId, @Name , @Description , @MenuName , @MouseOver , @UserPageIdLeft , @UserPageIdRight , @Icon , @Sequence , @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplateOption);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, UserMenuTemplateOption);
+            return ErrorMessages;
         }
 
         public bool CreatePost(UserMenuTemplateOptionCreatePost UserMenuTemplateOption)
@@ -59,7 +60,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<UserMenuTemplateOptionUpdateGet, dynamic>(usp, new { UserId, UserMenuTemplateOptionId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(UserMenuTemplateOptionUpdateGet UserMenuTemplateOption)
+        {
+            string usp = "usp_UserMenuTemplateOptionUpdatePostCheck @UserMenuTemplateOptionId, @IconId, @UserPageIdLeft, @UserPageIdRight, @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, UserMenuTemplateOption);
+            return ErrorMessages;
+        }
         public bool UpdatePost(UserMenuTemplateOptionUpdateGet UserMenuTemplateOption)
         {
             string usp = "usp_UserMenuTemplateOptionUpdatePost @UserMenuTemplateOptionId, @IconId, @UserPageIdLeft, @UserPageIdRight, @UserMenuTypeIDLeft, @UserMenuTypeIDRight, @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserID";

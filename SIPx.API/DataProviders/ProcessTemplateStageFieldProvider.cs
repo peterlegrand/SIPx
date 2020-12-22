@@ -33,7 +33,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageFieldUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldID = ProcessTemplateStageFieldID });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
+        {
+            string usp = "usp_ProcessTemplateStageFieldUpdatePostCheck @ProcessTemplateStageFieldId, @ProcessTemplateStageFieldStatusId, @ValueUpdateTypeId,@Sequence, @StringValue, @IntValue, @DateTimeValue, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateStageField);
+            return ErrorMessages;
+        }
         public bool UpdatePost(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
         {
             string usp = "usp_ProcessTemplateStageFieldUpdatePost @ProcessTemplateStageFieldId, @ProcessTemplateStageFieldStatusId, @ValueUpdateTypeId,@Sequence, @StringValue, @IntValue, @DateTimeValue, @UserId";

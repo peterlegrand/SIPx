@@ -27,11 +27,11 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<string> CreatePostCheck(ContentTypeGroupCreatePost ContentTypeGroup)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ContentTypeGroupCreateGet ContentTypeGroup)
         {
             string usp = "usp_ContentTypeGroupCreateCheck @Sequence  , @LanguageId , @Name ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentTypeGroup);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ContentTypeGroup);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ContentTypeGroupCreatePost ContentTypeGroup)
@@ -55,6 +55,12 @@ namespace SIPx.DataAccess
 
         }
 
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ContentTypeGroupUpdateGet ContentTypeGroup)
+        {
+            string usp = "usp_ContentTypeGroupUpdatePostCheck @ContentTypeGroupId, @Sequence , @Name, @Description, @MenuName, @MouseOver, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ContentTypeGroup);
+            return ErrorMessages;
+        }
         public bool UpdatePost(ContentTypeGroupUpdateGet ContentTypeGroup)
         {
             string usp = "usp_ContentTypeGroupUpdatePost @ContentTypeGroupId, @Sequence , @Name, @Description, @MenuName, @MouseOver, @UserId";

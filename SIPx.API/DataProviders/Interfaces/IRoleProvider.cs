@@ -16,5 +16,7 @@ namespace SIPx.DataAccess
         Task<RoleUpdateGet> UpdateGet(string UserId, string RoleId);
         bool UpdatePost(RoleUpdateGet Role);
         bool CreatePost(RoleCreateGet Role);
+        Task<List<ErrorMessage>> CreatePostCheck(RoleCreateGet Role);
+        Task<List<ErrorMessage>> UpdatePostCheck(RoleUpdateGet Role);
     }
 }

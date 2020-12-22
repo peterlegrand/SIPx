@@ -17,18 +17,38 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(int Id, int ParentId = 0)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            ClassificationValueCreateGet response = new ClassificationValueCreateGet();
+            //ClassificationValueCreateGet response = new ClassificationValueCreateGet();
+            //Tuple< ClassificationValueCreateGet,bool> tupleResponse = new Tuple <ClassificationValueCreateGet, bool>(response,true);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValue/Create", token);
+            ViewBag.UITerms = UITerms;
+            var x = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = x;
+
             if (ParentId == 0)
             {
-                response = await _client.GetProtectedAsync<ClassificationValueCreateGet>($"{_baseUrl}api/ClassificationValue/Create/" + Id, token);
+                var Response = await _client.GetProtectedAsync2<ClassificationValueCreateGet>($"{_baseUrl}api/ClassificationValue/Create/" + Id, token);
+                if (Response.Item2 == true)
+                {
+                    return View(Response.Item1);
+                }
+                else
+                {
+                    return RedirectToAction("Menu", "Admin");
+                }
             }
             else
             {
-                response = await _client.GetProtectedAsync<ClassificationValueCreateGet>($"{_baseUrl}api/ClassificationValue/Create/" + Id + "?ParentId=" + ParentId, token);
+                var Response = await _client.GetProtectedAsync2<ClassificationValueCreateGet>($"{_baseUrl}api/ClassificationValue/Create/" + Id + "?ParentId=" + ParentId, token);
+                if (Response.Item2 == true)
+                {
+                    return View(Response.Item1);
+                }
+                else
+                {
+                    return RedirectToAction("Menu", "Admin");
+                }
             }
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValue/Create", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
+
         }
         [HttpPost]
         public async Task<IActionResult> Create(ClassificationValueCreateGet ClassificationValue)

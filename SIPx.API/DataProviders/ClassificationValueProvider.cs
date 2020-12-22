@@ -26,17 +26,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<string> CreatePostCheck(ClassificationValueCreatePost ClassificationValue)
+        public async Task<List<SequenceList>> CreatePostCheck(ClassificationValueCreateGet ClassificationValue)
         {
             string usp = "usp_ClassificationValueCreatePostCheck @ClassificationId, @ParentId, @LanguageId , @Name, @UserId";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValue);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, ClassificationValue);
+            return ErrorMessages;
         }
 
-        public async Task<bool> CreatePost(ClassificationValueCreatePost ClassificationValue)
+        public async Task<bool> CreatePost(ClassificationValueCreateGet ClassificationValue)
         {
             string usp = "usp_ClassificationValueCreatePost @ClassificationId, @ParentId, @DateFrom, @DateTo, @Name, @Description, @MenuName, @MouseOver, @DropDownName, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @UserId ";
-            _sqlDataAccess.SaveData<ClassificationValueCreatePost>(usp, ClassificationValue);
+            _sqlDataAccess.SaveData<ClassificationValueCreateGet>(usp, ClassificationValue);
             return true;
         }
 
@@ -53,6 +53,13 @@ namespace SIPx.DataAccess
             string usp = "usp_ClassificationValueUpdateGet @UserId, @ClassificationValueID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueUpdateGet, dynamic>(usp, new { UserId, ClassificationValueId });
 
+        }
+
+        public async Task<List<SequenceList>> UpdatePostCheck(ClassificationValueUpdateGet ClassificationValue)
+        {
+            string usp = "usp_ClassificationValueUpdatePostCheck @ClassificationValueId, @DateFrom, @DateTo, @Name, @Description, @MenuName, @MouseOver, @DropDownName, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, ClassificationValue);
+            return ErrorMessages;
         }
 
         public bool UpdatePost(ClassificationValueUpdateGet ClassificationValue)

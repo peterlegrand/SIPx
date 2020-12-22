@@ -20,6 +20,12 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+        public async Task<List<ErrorMessage>> CreatePostCheck(UserCreateGet CreateUser)
+        {
+            string usp = "usp_UserCreatePostCheck @Salutation , @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DefaultOrganizationId, @Email, @ModifierCreator ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, CreateUser);
+            return ErrorMessages;
+        }
         public bool CreatePost(UserCreateGet CreateUser)
         {
             string usp = "usp_UserCreatePost @Salutation , @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DefaultOrganizationId, @Email, @ModifierCreator ";
@@ -48,6 +54,12 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_UserUpdatePostGetUserId @SelectedPersonId";
             return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { SelectedPersonId = SelectedPersonId });
+        }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(UserUpdateGet UpdateUser)
+        {
+            string usp = "usp_UserUpdatePostCheck @PersonId , @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId , @BirthDate, @DefaultOrganizationId , @UserModifierId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, UpdateUser);
+            return ErrorMessages;
         }
         public bool UpdatePost(UserUpdateGet UpdateUser)
         {

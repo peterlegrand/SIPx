@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(PersonAddressCreatePost PersonAddress)
+        public async Task<List<ErrorMessage>> CreatePostCheck(PersonAddressCreateGet PersonAddress)
         {
             string usp = "usp_PersonAddressCreateCheck @PersonId, @AddressTypeId  , @CountryId, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonAddress);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(PersonAddressCreatePost PersonAddress)
@@ -48,22 +48,29 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PersonAddressUpdateGet, dynamic>(usp, new { UserId = UserId, PersonAddressId = PersonAddressId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PersonAddressUpdateGet PersonAddress)
+        {
+            string usp = "usp_PersonAddressUpdateCheck @PersonId, @AddressTypeId  , @CountryId, @CreatorId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonAddress);
+            return ErrorMessages;
+        }
         public bool UpdatePost(PersonAddressUpdateGet PersonAddress)
         {
-            PersonAddress.Address1 = PersonAddress.Address1 ?? "";
-            PersonAddress.Address2 = PersonAddress.Address2 ?? "";
-            PersonAddress.HouseNumber = PersonAddress.HouseNumber ?? "";
-            PersonAddress.HouseNumberExt = PersonAddress.HouseNumberExt ?? "";
-            PersonAddress.AttnName = PersonAddress.AttnName ?? "";
-            PersonAddress.City = PersonAddress.City ?? "";
-            PersonAddress.County = PersonAddress.County ?? "";
-            PersonAddress.PostalCode = PersonAddress.PostalCode ?? "";
-            PersonAddress.PostalCodeExt = PersonAddress.PostalCodeExt ?? "";
-            PersonAddress.ProvinceState = PersonAddress.ProvinceState ?? "";
+            //Added default value in property
+            //PersonAddress.Address1 = PersonAddress.Address1 ?? "";
+            //PersonAddress.Address2 = PersonAddress.Address2 ?? "";
+            //PersonAddress.HouseNumber = PersonAddress.HouseNumber ?? "";
+            //PersonAddress.HouseNumberExt = PersonAddress.HouseNumberExt ?? "";
+            //PersonAddress.AttnName = PersonAddress.AttnName ?? "";
+            //PersonAddress.City = PersonAddress.City ?? "";
+            //PersonAddress.County = PersonAddress.County ?? "";
+            //PersonAddress.PostalCode = PersonAddress.PostalCode ?? "";
+            //PersonAddress.PostalCodeExt = PersonAddress.PostalCodeExt ?? "";
+            //PersonAddress.ProvinceState = PersonAddress.ProvinceState ?? "";
             
             string usp = "usp_PersonAddressUpdatePost " +
-                "@PersonAddressId " +
+                "@AttnName " +
+                ", @PersonAddressId " +
                 ", @AddressTypeId" +
                 ", @AttnName" +
                 ", @Address1" +

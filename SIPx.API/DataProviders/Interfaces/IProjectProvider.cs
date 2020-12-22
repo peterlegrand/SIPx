@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IProjectProvider
     {
         Task<string> CreatePost(ProjectCreateGet Project);
-        Task<string> CreatePostCheck(ProjectCreateGet Project);
+        Task<List<ErrorMessage>> CreatePostCheck(ProjectCreateGet Project);
         Task<ProjectDeleteGet> DeleteGet(string UserId, int ProjectId);
         bool DeletePost(int Id);
         Task<List<ProjectIndexGet>> IndexGet(string UserId);
@@ -16,6 +16,7 @@ namespace SIPx.DataAccess
         Task<List<ProjectList>> List(string UserId);
         Task<ProjectUpdateGet> UpdateGet(string UserId, int ProjectId);
         Task<List<ProjectList>> ListofUser(string UserId);
+        Task<List<ErrorMessage>> UpdatePostCheck(ProjectUpdateGet Project);
         bool UpdatePost(ProjectUpdateGet Project);
         Task<List<ProjectSearch>> Search(string Contains, string UserId);
         Task<List<ProjectAdvancedSearchResult>> AdvancedSearch(ProjectAdvancedSearchPost AdvancedSearch);

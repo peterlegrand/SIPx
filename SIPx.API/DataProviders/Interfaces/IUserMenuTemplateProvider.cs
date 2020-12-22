@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IUserMenuTemplateProvider
     {
         bool CreatePost(UserMenuTemplateCreateGet UserMenuTemplate);
-        Task<string> CreatePostCheck(UserMenuTemplateCreateGet UserMenuTemplate);
+        Task<List<ErrorMessage>> CreatePostCheck(UserMenuTemplateCreateGet UserMenuTemplate);
         Task<UserMenuTemplateDeleteGet> DeleteGet(string UserId, int UserMenuTemplateId);
         bool DeletePost(int Id);
         Task<List<UserMenuTemplateIndexGet>> IndexGet(string UserId);
@@ -15,7 +15,7 @@ namespace SIPx.DataAccess
         Task<UserMenuTemplateLanguageIndexGet> LanguageUpdateGet(string UserId, int UserMenuTemplateLanguageId);
         Task<UserMenuTemplateUpdateGet> UpdateGet(string UserId, int UserMenuTemplateID);
         bool UpdatePost(UserMenuTemplateUpdateGet UserMenuTemplate);
-        Task<string> UpdatePostCheck(UserMenuTemplateUpdateGet UserMenuTemplate);
         bool UpdatePut(UserMenuTemplateUpdateGet UserMenuTemplate);
+        Task<List<ErrorMessage>> UpdatePostCheck(UserMenuTemplateUpdateGet UserMenuTemplate);
     }
 }

@@ -25,11 +25,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ProcessTemplateList, dynamic>(usp, new { UserId = UserId});
         }
 
-        public async Task<string> CreatePostCheck(ContentTypeCreatePost ContentType)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ContentTypeCreateGet ContentType)
         {
             string usp = "usp_ContentTypeCreateCheck @ContentTypeGroupId, @ProcessTemplateId  ,@SecurityLevelId,  @LanguageId , @Name ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentType);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ContentType);
+            return ErrorMessages;
         }
         //PETER Probably this doesn't work as the table as parameter needs to be inserted
         //see sp name of update or create without post
@@ -98,12 +98,18 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ContentTypeUpdateGet, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
 
         }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ContentTypeUpdateGet ContentType)
+        {
+            string usp = "usp_ContentTypeUpdatePostCheck @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @Color, @IconId, @ContentTypeClassificationTable";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ContentType);
+            return ErrorMessages;
+        }
 
         public bool UpdatePost(ContentTypeUpdateGet ContentType)
         {
             string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @Color, @IconId, @ContentTypeClassificationTable";
-            //_sqlDataAccess.SaveData<ContentTypeUpdateGet>(usp, ContentType);
-            //return true;
+            _sqlDataAccess.SaveData<ContentTypeUpdateGet>(usp, ContentType);
+            return true;
 
 
 

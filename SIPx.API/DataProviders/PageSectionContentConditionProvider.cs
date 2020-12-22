@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(PageSectionContentConditionCreateGet PageSectionContentCondition)
+        public async Task<List<ErrorMessage>> CreatePostCheck(PageSectionContentConditionCreateGet PageSectionContentCondition)
         {
             string usp = "usp_PageSectionCreateConditionPostCheck @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @@OneTwoColumns, @ContentTypeId, @SortById, @LanguageId, @Name, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSectionContentCondition);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PageSectionContentCondition);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(PageSectionContentConditionCreateGet PageSectionContentCondition)
@@ -59,7 +59,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PageSectionContentConditionUpdateGet, dynamic>(usp, new { UserId = UserId, PageSectionContentConditionId = PageSectionContentConditionId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PageSectionContentConditionUpdateGet PageSectionContentCondition)
+        {
+            string usp = "usp_PageSectionUpdateConditionPostCheck @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @@OneTwoColumns, @ContentTypeId, @SortById, @LanguageId, @Name, @CreatorId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PageSectionContentCondition);
+            return ErrorMessages;
+        }
         public bool UpdatePost(PageSectionContentConditionUpdateGet PageSectionContentCondition)
         {
             string usp = "usp_PageSectionContentConditionUpdatePost @PageSectionContentConditionId, @PageSectionContentConditionTypeId, @PageSectionContentConditionInt, @PageSectionContentConditionDate, @PageSectionContentConditionString, @Name, @Description, @MenuName , @MouseOver, @UserId ";

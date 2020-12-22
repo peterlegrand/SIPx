@@ -26,7 +26,7 @@ SELECT
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Modifier.PersonId ModifierID
 	, Contents.ModifiedDate
-
+	, CASE WHEN Contents.OwnerId = @UserId THEN 1 ELSE 0 END AS IsOwner
 FROM Contents
 LEFT JOIN Contents ParentContent
 	ON ParentContent.ContentID = Contents.ParentContentID

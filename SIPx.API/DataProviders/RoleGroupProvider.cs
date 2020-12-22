@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(RoleGroupCreateGet RoleGroup)
+        public async Task<List<ErrorMessage>> CreatePostCheck(RoleGroupCreateGet RoleGroup)
         {
             string usp = "usp_RoleGroupCreateCheck @Sequence, @LanguageId  , @Name, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, RoleGroup);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, RoleGroup);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(RoleGroupCreateGet RoleGroup)
@@ -46,6 +46,12 @@ namespace SIPx.DataAccess
             string usp = "usp_RoleGroupUpdateGet @UserId, @RoleGroupID";
             return _sqlDataAccess.LoadSingleRecord<RoleGroupUpdateGet, dynamic>(usp, new { UserId = UserId, RoleGroupId = RoleGroupId });
 
+        }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(RoleGroupUpdateGet RoleGroup)
+        {
+            string usp = "usp_RoleGroupUpdatePostCheck @RoleGroupId, @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, RoleGroup);
+            return ErrorMessages;
         }
 
         public bool UpdatePost(RoleGroupUpdateGet RoleGroup)

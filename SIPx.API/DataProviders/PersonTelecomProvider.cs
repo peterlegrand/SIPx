@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(PersonTelecomCreateGet PersonTelecom)
+        public async Task<List<ErrorMessage>> CreatePostCheck(PersonTelecomCreateGet PersonTelecom)
         {
             string usp = "usp_PersonTelecomCreateCheck @PersonId  , @TelecomTypeId, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonTelecom);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonTelecom);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(PersonTelecomCreateGet PersonTelecom)
@@ -45,6 +45,12 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_PersonTelecomUpdateGet @UserId, @PersonTelecomID";
             return _sqlDataAccess.LoadSingleRecord<PersonTelecomUpdateGet, dynamic>(usp, new { UserId = UserId, PersonTelecomId = PersonTelecomId });
+        }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PersonTelecomUpdateGet PersonTelecom)
+        {
+            string usp = "usp_PersonTelecomUpdatePostCheck @PersonTelecomId  , @TelecomValue,@CountryCode, @AreaCode, @ExtensionCode,@AskForName, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonTelecom);
+            return ErrorMessages;
         }
 
         public bool UpdatePost(PersonTelecomUpdateGet PersonTelecom)

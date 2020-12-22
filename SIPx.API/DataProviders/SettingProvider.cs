@@ -32,7 +32,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<SettingUpdateGet, dynamic>(usp, new { UserId = UserId, SettingId = SettingId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(SettingUpdateGet Setting)
+        {
+            string usp = "usp_SettingUpdatePostCheck @SettingId, @IntValue, @StringValue, @DateTimeValue, @ModifierId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Setting);
+            return ErrorMessages;
+        }
         public bool UpdatePost(SettingUpdateGet Setting)
         {
             if (Setting.StringValue == null) { Setting.StringValue = ""; }

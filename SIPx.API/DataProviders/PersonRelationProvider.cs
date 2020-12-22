@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(PersonRelationCreatePost PersonRelation)
+        public async Task<List<ErrorMessage>> CreatePostCheck(PersonRelationCreateGet PersonRelation)
         {
             string usp = "usp_PersonRelationCreatePostCheck @FromPersonId, @ToPersonId, @ValidFrom, @ValidTill, @PersonRelationTypeId, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonRelation);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonRelation);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(PersonRelationCreatePost PersonRelation)
@@ -47,7 +47,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PersonRelationUpdateGet, dynamic>(usp, new { UserId = UserId, PersonRelationId = PersonRelationId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PersonRelationUpdateGet PersonRelation)
+        {
+            string usp = "usp_PersonRelationUpdatePostCheck @FromPersonId, @ToPersonId, @ValidFrom, @ValidTill, @PersonRelationTypeId, @CreatorId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonRelation);
+            return ErrorMessages;
+        }
         public bool UpdatePost(PersonRelationUpdateGet PersonRelation)
         {
             string usp = "usp_PersonRelationUpdatePost @PersonRelationId ,  @FromPersonId, @ToPersonId, @ValidFrom, @ValidTill, @PersonRelationTypeId, @ModifierId";

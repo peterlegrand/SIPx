@@ -18,7 +18,7 @@ namespace SIPx.DataAccess
         Task<List<ClassificationList>> List(string UserId);
         Task<ClassificationUpdateGet> UpdateGet(string UserId, int ClassificationId);
         bool UpdatePost(ClassificationUpdateGet Classification);
-        Task<string> UpdatePostCheck(ClassificationUpdateGet Classification);
+        Task<List<ErrorMessage>> UpdatePostCheck(ClassificationUpdateGet Classification);
         Task<List<ContentAdvancedSearchPostClassification>> ClassificationsWithValues(string UserId);
     }
 }

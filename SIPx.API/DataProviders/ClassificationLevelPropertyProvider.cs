@@ -31,12 +31,12 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        //public async Task<string> CreatePostCheck(ClassificationLevelPropertyCreatePost ClassificationLevelProperty)
-        //{
-        //    string usp = "usp_ClassificationLevelPropertyCreatePostCheck @ClassificationId  , @Sequence , @LanguageId , @Name, @DateLevelPropertyId, @UserId ";
-        //    var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationLevelProperty);
-        //    return CheckString;
-        //}
+        public async Task<List<ErrorMessage>> CreatePostCheck(ClassificationLevelPropertyCreateGet ClassificationLevelProperty)
+        {
+            string usp = "usp_ClassificationLevelPropertyCreatePostCheck @ClassificationId  , @Sequence , @LanguageId , @Name, @DateLevelPropertyId, @UserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationLevelProperty);
+            return ErrorMessages;
+        }
 
         public bool CreatePost(ClassificationLevelPropertyCreateGet ClassificationLevelProperty)
         {
@@ -59,6 +59,12 @@ namespace SIPx.DataAccess
 
         }
 
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationLevelPropertyUpdateGet ClassificationLevelProperty)
+        {
+            string usp = "usp_classificationLevelPropertyUpdatePostCheck @UserId, @ClassificationLevelPropertyId, @ClassificationLevelPropertyStatusId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationLevelProperty);
+            return ErrorMessages;
+        }
         public bool UpdatePost(ClassificationLevelPropertyUpdateGet ClassificationLevelProperty)
         {
             string usp = "usp_classificationLevelPropertyUpdatePost @UserId, @ClassificationLevelPropertyId, @ClassificationLevelPropertyStatusId";

@@ -7,6 +7,34 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeCreatePost] (
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)
+	, @IsRelationBasedOwnership bit
+	, @IsProjectBasedOwnership  bit
+	, @IsOrganizationBasedOwnership bit 
+	, @IsFreeOwnership  bit
+	, @IsRelationBasedEdit  bit
+	, @IsRelationBasedEditSelectable  bit
+	, @IsOrganizationBasedEdit  bit
+	, @IsOrganizationBasedEditSelectable  bit
+	, @IsOrganizationBasedEditSub  bit
+	, @IsOrganizationBasedEditParent  bit
+	, @IsProjectBasedEdit  bit
+	, @IsProjectBasedEditSelectable  bit
+	, @IsProjectBasedEditSub  bit
+	, @IsProjectBasedEditParent  bit
+	, @IsFreeEdit  bit
+	, @IsFreeEditSelectable  bit
+	, @IsRelationBasedRead  bit
+	, @IsRelationBasedReadSelectable  bit
+	, @IsOrganizationBasedRead  bit
+	, @IsOrganizationBasedReadSelectable  bit
+	, @IsOrganizationBasedReadSub  bit
+	, @IsOrganizationBasedReadParent  bit
+	, @IsProjectBasedRead  bit
+	, @IsProjectBasedReadSelectable  bit
+	, @IsProjectBasedReadSub  bit
+	, @IsProjectBasedReadParent  bit
+	, @IsFreeRead  bit
+	, @IsFreeReadSelectable  bit
 	, @Color char(9)
 	, @IconID int
 	, @ContentTypeClassificationTable AS udt_ContentTypeClassificationNew READONLY)
@@ -23,6 +51,34 @@ INSERT INTO ContentTypes (
 	ContentTypeGroupID
 	, ProcessTemplateID
 	, SecurityLevelID
+	, IsRelationBasedOwnership
+    , IsProjectBasedOwnership 
+	, IsOrganizationBasedOwnership 
+	, IsFreeOwnership 
+	, IsRelationBasedEdit 
+	, IsRelationBasedEditSelectable 
+	, IsOrganizationBasedEdit 
+	, IsOrganizationBasedEditSelectable 
+	, IsOrganizationBasedEditSub 
+	, IsOrganizationBasedEditParent 
+	, IsProjectBasedEdit 
+	, IsProjectBasedEditSelectable 
+	, IsProjectBasedEditSub 
+	, IsProjectBasedEditParent 
+	, IsFreeEdit 
+	, IsFreeEditSelectable 
+	, IsRelationBasedRead 
+	, IsRelationBasedReadSelectable 
+	, IsOrganizationBasedRead 
+	, IsOrganizationBasedReadSelectable 
+	, IsOrganizationBasedReadSub 
+	, IsOrganizationBasedReadParent 
+	, IsProjectBasedRead 
+	, IsProjectBasedReadSelectable 
+	, IsProjectBasedReadSub 
+	, IsProjectBasedReadParent 
+	, IsFreeRead 
+	, IsFreeReadSelectable 
 	, Color 
 	, IconID 
 	, CreatorID
@@ -33,6 +89,34 @@ VALUES (
 	@ContentTypeGroupID
 	, @ProcessTemplateID
 	, @SecurityLevelID
+	, @IsRelationBasedOwnership
+    , @IsProjectBasedOwnership 
+	, @IsOrganizationBasedOwnership 
+	, @IsFreeOwnership 
+	, @IsRelationBasedEdit 
+	, @IsRelationBasedEditSelectable 
+	, @IsOrganizationBasedEdit 
+	, @IsOrganizationBasedEditSelectable 
+	, @IsOrganizationBasedEditSub 
+	, @IsOrganizationBasedEditParent 
+	, @IsProjectBasedEdit 
+	, @IsProjectBasedEditSelectable 
+	, @IsProjectBasedEditSub 
+	, @IsProjectBasedEditParent 
+	, @IsFreeEdit 
+	, @IsFreeEditSelectable 
+	, @IsRelationBasedRead 
+	, @IsRelationBasedReadSelectable 
+	, @IsOrganizationBasedRead 
+	, @IsOrganizationBasedReadSelectable 
+	, @IsOrganizationBasedReadSub 
+	, @IsOrganizationBasedReadParent 
+	, @IsProjectBasedRead 
+	, @IsProjectBasedReadSelectable 
+	, @IsProjectBasedReadSub 
+	, @IsProjectBasedReadParent 
+	, @IsFreeRead 
+	, @IsFreeReadSelectable 
 	, @Color 
 	, @IconID 
 	, @UserID

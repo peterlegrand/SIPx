@@ -14,6 +14,34 @@ SELECT ContentTypes.ContentTypeID
 	, Contenttypes.ContentTypeGroupID
 	, contenttypes.SecurityLevelID
 	, ISNULL(ContentTypes.ProcessTemplateId,0) ProcessTemplateId
+	, IsRelationBasedOwnership
+    , IsProjectBasedOwnership 
+	, IsOrganizationBasedOwnership 
+	, IsFreeOwnership 
+	, IsRelationBasedEdit 
+	, IsRelationBasedEditSelectable 
+	, IsOrganizationBasedEdit 
+	, IsOrganizationBasedEditSelectable 
+	, IsOrganizationBasedEditSub 
+	, IsOrganizationBasedEditParent 
+	, IsProjectBasedEdit 
+	, IsProjectBasedEditSelectable 
+	, IsProjectBasedEditSub 
+	, IsProjectBasedEditParent 
+	, IsFreeEdit 
+	, IsFreeEditSelectable 
+	, IsRelationBasedRead 
+	, IsRelationBasedReadSelectable 
+	, IsOrganizationBasedRead 
+	, IsOrganizationBasedReadSelectable 
+	, IsOrganizationBasedReadSub 
+	, IsOrganizationBasedReadParent 
+	, IsProjectBasedRead 
+	, IsProjectBasedReadSelectable 
+	, IsProjectBasedReadSub 
+	, IsProjectBasedReadParent 
+	, IsFreeRead 
+	, IsFreeReadSelectable 
 	, Contenttypes.Color
 	, Contenttypes.IconID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName

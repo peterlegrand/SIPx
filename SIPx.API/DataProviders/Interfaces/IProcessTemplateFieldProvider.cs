@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IProcessTemplateFieldProvider
     {
         Task<string> CreatePost(ProcessTemplateFieldCreateGet ProcessTemplateField);
-        Task<string> CreatePostCheck(ProcessTemplateFieldCreateGet ProcessTemplateField);
+        Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateFieldCreateGet ProcessTemplateField);
         Task<ProcessTemplateFieldDeleteGet> DeleteGet(string UserId, int ProcessTemplateFieldId);
         bool DeletePost(int Id);
         Task<List<ProcessTemplateFieldIndexGet>> IndexGet(string UserId, int ProcessTemplateId);
@@ -17,6 +17,7 @@ namespace SIPx.DataAccess
         Task<ProcessTemplateFieldUpdateGet> UpdateGet(string UserId, int ProcessTemplateFieldId);
         Task<List<ProcessTemplateFieldList>> UpdateGetFieldList(string UserId, int ProcessTemplateStageFieldId);
         Task<List<ProcessTemplateFieldList>> UpdateGetSequence(string UserId, int ProcessTemplateFieldId);
+        Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateFieldUpdateGet ProcessTemplateField);
         bool UpdatePost(ProcessTemplateFieldUpdateGet ProcessTemplateField);
     }
 }

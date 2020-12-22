@@ -32,11 +32,18 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<LanguageUpdateGet, dynamic>(usp, new { UserId = UserId, LanguageId = LanguageId });
 
         }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(LanguageUpdateGet Language)
+        {
 
-        public bool UpdatePost(LanguageUpdateGet ContentType)
+            string usp = "usp_LanguageUpdatePostCheck @LanguageId, @StatusId, @ModifierID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Language);
+            return ErrorMessages;
+        }
+
+        public bool UpdatePost(LanguageUpdateGet Language)
         {
             string usp = "usp_LanguageUpdatePost @LanguageId, @StatusId, @ModifierID";
-            _sqlDataAccess.SaveData<LanguageUpdateGet>(usp, ContentType);
+            _sqlDataAccess.SaveData<LanguageUpdateGet>(usp, Language);
             return true;
         }
 

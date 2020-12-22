@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateFieldCreateGet ProcessTemplateField)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateFieldCreateGet ProcessTemplateField)
         {
             string usp = "usp_ProcessTemplateFieldCreatePostCheck @ProcessTemplateId, @ProcessTemplateFieldTypeId, @Name, @CreaterId";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateField);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateField);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ProcessTemplateFieldCreateGet ProcessTemplateField)
@@ -61,7 +61,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldId = ProcessTemplateStageFieldId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateFieldUpdateGet ProcessTemplateField)
+        {
+            string usp = "usp_ProcessTemplateFieldUpdatePostCheck @ProcessTemplateFieldId , @ProcessTemplateFieldTypeId , @Name, @Description, @MenuName, @MouseOver, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateField);
+            return ErrorMessages;
+        }
         public bool UpdatePost(ProcessTemplateFieldUpdateGet ProcessTemplateField)
         {
             string usp = "usp_ProcessTemplateFieldUpdatePost @ProcessTemplateFieldId , @ProcessTemplateFieldTypeId , @Name, @Description, @MenuName, @MouseOver, @UserId";

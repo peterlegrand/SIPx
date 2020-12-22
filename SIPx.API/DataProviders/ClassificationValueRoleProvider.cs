@@ -19,11 +19,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(ClassificationValueRoleCreateGet ClassificationValueRole)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ClassificationValueRoleCreateGet ClassificationValueRole)
         {
             string usp = "usp_ClassificationValueRoleCreatePostCheck @RoleId, @ClassificationValueId, @ClassificationId , @ClassificationRelationTypeId, @UserId";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ClassificationValueRole);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationValueRole);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ClassificationValueRoleCreateGet ClassificationValueRole)
@@ -49,6 +49,13 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_ClassificationValueRoleCreateGetClassificationName @UserId, @ClassificationValueID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationValueRoleCreateGetClassificationName, dynamic>(usp, new { UserId, ClassificationValueId });
+        }
+
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationValueRoleUpdateGet ClassificationValueRole)
+        {
+            string usp = "usp_ClassificationValueRoleUpdatePostCheck @ClassificationValueRoleId, @RoleId, @ClassificationRelationTypeId, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationValueRole);
+            return ErrorMessages;
         }
 
         public bool UpdatePost(ClassificationValueRoleUpdateGet ClassificationValueRole)

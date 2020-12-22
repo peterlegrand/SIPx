@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<string> CreatePostCheck(PageCreateGet Page)
+        public async Task<List<ErrorMessage>> CreatePostCheck(PageCreateGet Page)
         {
             string usp = "usp_PageCreatePostCheck @LanguageID, @name, @UserId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Page);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(PageCreateGet Page)
@@ -52,7 +52,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PageUpdateGet, dynamic>(usp, new { UserId = UserId, PageId = PageId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PageUpdateGet Page)
+        {
+            string usp = "usp_PageUpdatePostCheck @LanguageID, @name, @UserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Page);
+            return ErrorMessages;
+        }
         public bool UpdatePost(PageUpdateGet Page)
         {
             string usp = "usp_PageUpdatePost @PageId " +

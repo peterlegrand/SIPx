@@ -1776,4 +1776,11 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(1774, 'The claim does not ex
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1775, 'First name cannot be blank');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1776, 'Last name cannot be blank');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(1777, 'Email cannot be blank');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1778, 'Selectable');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1779, 'Incl. subs');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1780, 'Incl. parents');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1781, 'Organization based');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1782, 'Project based');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1783, 'Ownership');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(1784, 'Read');
 SET IDENTITY_INSERT UITerms OFF;

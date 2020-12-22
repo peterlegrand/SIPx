@@ -21,11 +21,11 @@ namespace SIPx.DataAccess
         }
 
         //PETER TODO this is not matching with the sp
-        public async Task<string> CreatePostCheck(OrganizationCreatePost Organization)
+        public async Task<List<ErrorMessage>> CreatePostCheck(OrganizationCreateGet Organization)
         {
             string usp = "usp_OrganizationCreatePostCheck @ParentOrganizationId, @StatusId, @name, @UserId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Organization);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Organization);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(OrganizationCreatePost Organization)
@@ -48,6 +48,13 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<OrganizationUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
 
         }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(OrganizationUpdateGet Organization)
+        {
+            string usp = "usp_OrganizationUpdatePostCheck @OrganizationId , @ParentOrganizationId, @StatusId, @OrganizationTypeID, @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Organization);
+            return ErrorMessages;
+        }
+
 
         public bool UpdatePost(OrganizationUpdateGet Organization)
         {

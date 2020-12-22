@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IOrganizationProvider
     {
         Task<string> CreatePost(OrganizationCreatePost Organization);
-        Task<string> CreatePostCheck(OrganizationCreatePost Organization);
+        Task<List<ErrorMessage>> CreatePostCheck(OrganizationCreateGet Organization);
         Task<OrganizationDeleteGet> DeleteGet(string UserId, int OrganizationId);
         bool DeletePost(int Id);
         Task<List<OrganizationIndexGet>> IndexGet(string UserId);
@@ -15,6 +15,7 @@ namespace SIPx.DataAccess
         //Task<OrganizationLanguageUpdateGet> LanguageUpdateGet(string UserId, int OrganizationLanguageId);
         Task<List<OrganizationList>> List(string UserId);
         Task<OrganizationUpdateGet> UpdateGet(string UserId, int OrganizationId);
+        Task<List<ErrorMessage>> UpdatePostCheck(OrganizationUpdateGet Organization);
         bool UpdatePost(OrganizationUpdateGet Organization);
         Task<List<OrganizationList>> ListofUser(string UserId); Task<List<OrganizationSearch>> Search(string Contains, string UserId);
         Task<List<OrganizationAdvancedSearchResult>> AdvancedSearch(OrganizationAdvancedSearchPost AdvancedSearch);

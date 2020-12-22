@@ -26,11 +26,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateGroupCreateGet ProcessTemplateGroup)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateGroupCreateGet ProcessTemplateGroup)
         {
             string usp = "usp_ProcessTemplateGroupCreatePostCheck @Sequence, @Name, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateGroup);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateGroup);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ProcessTemplateGroupCreateGet ProcessTemplateGroup)
@@ -53,7 +53,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateGroupUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateGroupId = ProcessTemplateGroupId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateGroupUpdateGet ProcessTemplateGroup)
+        {
+            string usp = "usp_ProcessTemplateGroupUpdatePostCheck @ProcessTemplateGroupId, @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateGroup);
+            return ErrorMessages;
+        }
         public bool UpdatePost(ProcessTemplateGroupUpdateGet ProcessTemplateGroup)
         {
             string usp = "usp_ProcessTemplateGroupUpdatePost @ProcessTemplateGroupId, @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserId";

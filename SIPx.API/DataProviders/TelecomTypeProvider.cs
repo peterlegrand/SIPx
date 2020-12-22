@@ -32,7 +32,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<TelecomTypeUpdateGet, dynamic>(usp, new { UserId = UserId, TelecomTypeId = TelecomTypeId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(TelecomTypeUpdateGet TelecomType)
+        {
+            string usp = "usp_TelecomTypeUpdatePostCheck @TelecomTypeId, @StatusId, @ModifierId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, TelecomType);
+            return ErrorMessages;
+        }
         public bool UpdatePost(TelecomTypeUpdateGet TelecomType)
         {
             string usp = "usp_TelecomTypeUpdatePost @TelecomTypeId, @StatusId, @ModifierId";

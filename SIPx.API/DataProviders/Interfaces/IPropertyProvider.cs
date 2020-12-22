@@ -8,7 +8,7 @@ namespace SIPx.DataAccess
     {
         Task<List<SequenceList>> CreateGetSequence(string UserId);
         bool CreatePost(PropertyCreateGet Property);
-        Task<string> CreatePostCheck(PropertyCreateGet Property);
+        Task<List<ErrorMessage>> CreatePostCheck(PropertyCreateGet Property);
         Task<PropertyDeleteGet> DeleteGet(string UserId, int PropertyId);
         bool DeletePost(int PropertyId);
         Task<List<PropertyIndexGet>> IndexGet(string UserId);

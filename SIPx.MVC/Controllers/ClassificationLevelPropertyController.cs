@@ -23,10 +23,19 @@ namespace SIPx.MVC.Controllers
             if(token == null)
             { return RedirectToAction("Login","FrontAuth");            
                     }
-            var response = await _client.GetProtectedAsync<ClassificationLevelPropertyCreateGet>($"{_baseUrl}api/ClassificationLevelProperty/Create/" + Id, token);
+            var response = await _client.GetProtectedAsync2<ClassificationLevelPropertyCreateGet>($"{_baseUrl}api/ClassificationLevelProperty/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Create", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var x = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = x;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]

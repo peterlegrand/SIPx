@@ -47,11 +47,17 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public async Task<string> CreatePostCheck(UserMenuTemplateCreateGet UserMenuTemplate)
+        public async Task<List<ErrorMessage>> CreatePostCheck(UserMenuTemplateCreateGet UserMenuTemplate)
         {
             string usp = "usp_UserMenuTemplateCreatePostCheck @Name, @Description, @MenuName, @MouseOver, @CreatorID";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplate);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, UserMenuTemplate);
+            return ErrorMessages;
+        }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(UserMenuTemplateUpdateGet UserMenuTemplate)
+        {
+            string usp = "usp_UserMenuTemplateUpdatePost @UserId, @UserMenuTemplateID, @Name, @Description, @MenuName, @MouseOver";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, UserMenuTemplate);
+            return ErrorMessages;
         }
 
         public async Task<List<UserMenuTemplateLanguageIndexGet>> LanguageIndexGet(string UserId, int UserMenuTemplateId)
@@ -76,12 +82,7 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public async Task<string> UpdatePostCheck(UserMenuTemplateUpdateGet UserMenuTemplate)
-        {
-            string usp = "usp_UserMenuTemplateUpdatePostCheck @UserId, @UserMenuTemplateID, @Name, @Description, @MenuName, @MouseOver";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, UserMenuTemplate);
-            return CheckString;
-        }
+ 
 
         public Task<UserMenuTemplateDeleteGet> DeleteGet(string UserId, int UserMenuTemplateId)
         {

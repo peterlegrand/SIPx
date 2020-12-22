@@ -26,11 +26,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId });
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateCreateGet ProcessTemplate)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateCreateGet ProcessTemplate)
         {
             string usp = "usp_ProcessTemplateCreatePostCheck @ProcessTemplateGroupId, @Sequence, @LanguageId, @Name, @CreatorId";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplate);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplate);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ProcessTemplateCreateGet ProcessTemplate)
@@ -72,7 +72,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateId = ProcessTemplateId });
 
         }
-
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateUpdateGet ProcessTemplate)
+        {
+            string usp = "usp_ProcessTemplateUpdatePostCheck @ProcessTemplateId, @ProcessTemplateGroupId, @ShowInPersonalCalendar, @ShowInOrganizationCalendar, @ShowInProjectCalendar, @ShowInEventCalendar, @ProcessMultiMax, @Sequence, @IsPersonal, @ShowInNew, @ShowInSearch, @ShowInReports, @HideEverywhere, @Color , @IconId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplate);
+            return ErrorMessages;
+        }
         public bool UpdatePost(ProcessTemplateUpdateGet ProcessTemplate)
         {
             string usp = "usp_ProcessTemplateUpdatePost @ProcessTemplateId, @ProcessTemplateGroupId, @ShowInPersonalCalendar, @ShowInOrganizationCalendar, @ShowInProjectCalendar, @ShowInEventCalendar, @ProcessMultiMax, @Sequence, @IsPersonal, @ShowInNew, @ShowInSearch, @ShowInReports, @HideEverywhere, @Color , @IconId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";

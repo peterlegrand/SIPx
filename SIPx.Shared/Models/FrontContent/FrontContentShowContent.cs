@@ -20,6 +20,7 @@ namespace SIPx.Shared
         public string ProjectName { get; set; }
         public int ProjectId { get; set; }
         public int OrganizationId { get; set; }
+        public bool IsOwner { get; set; }
         public string ContentTypeName { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }

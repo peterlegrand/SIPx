@@ -56,11 +56,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId, ProcessTemplateFlowConditionId });
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateFlowConditionCreatePost ProcessTemplateFlowCondition)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition)
         {
             string usp = "usp_ProcessTemplateFlowConditionCreatePostCheck @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowConditionTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @Name, @CreaterId";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlowCondition);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateFlowCondition);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition)
@@ -83,7 +83,14 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateFlowConditionUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateFlowConditionId = ProcessTemplateFlowConditionId });
 
         }
-      
+
+
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition)
+        {
+            string usp = "usp_ProcessTemplateFlowConditionUpdatePostCheck @ProcessTemplateFlowConditionId , @Sequence ,@ProcessTemplateFlowConditionTypeID, @ProcessTemplateFieldID, @ProcessTemplateFieldIDRole, @ComparisonOperatorID, @ProcessTemplateFlowConditionString, @ProcessTemplateFlowConditionInt, @ProcessTemplateFlowConditionDate, @Name, @Description, @MenuName, @MouseOver, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateFlowCondition);
+            return ErrorMessages;
+        }
 
         public bool UpdatePost(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition)
         {

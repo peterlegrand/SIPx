@@ -32,9 +32,15 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ClaimList, dynamic>(usp, new { UserId, RoleId });
 
         }
+        public async Task<List<ErrorMessage>> CreatePostCheck(RoleClaimCreateGet RoleClaim)
+        {
+            string usp = "usp_RoleClaimCreatePostCheck @RoleId, @ClaimId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, RoleClaim);
+            return ErrorMessages;
+        }
 
-
-        public  bool CreatePost(RoleClaimCreateGet RoleClaim)
+        //PETER TODO PostCheck
+        public bool CreatePost(RoleClaimCreateGet RoleClaim)
         {
             string usp = "usp_RoleClaimCreatePost @RoleId, @ClaimId";
             _sqlDataAccess.SaveData<RoleClaimCreateGet>(usp, RoleClaim);

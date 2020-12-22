@@ -60,6 +60,13 @@ namespace SIPx.DataAccess
 
         }
 
+        public async Task<string> UpdatePostCheck(PageSectionProcessConditionUpdateGet PageSectionProcessCondition)
+        {
+            string usp = "usp_PageSectionProcessConditionUpdatePostCheck @PageSectionProcessConditionId, @PageSectionProcessConditionTypeId, @PageSectionProcessConditionInt, @PageSectionProcessConditionDate, @PageSectionProcessConditionString, @Name, @Description, @MenuName , @MouseOver, @UserId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSectionProcessCondition);
+            return CheckString;
+        }
+
         public bool UpdatePost(PageSectionProcessConditionUpdateGet PageSectionProcessCondition)
         {
             string usp = "usp_PageSectionProcessConditionUpdatePost @PageSectionProcessConditionId, @PageSectionProcessConditionTypeId, @PageSectionProcessConditionInt, @PageSectionProcessConditionDate, @PageSectionProcessConditionString, @Name, @Description, @MenuName , @MouseOver, @UserId ";

@@ -6,6 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IRoleClaimProvider
     {
+        Task<List<ErrorMessage>> CreatePostCheck(RoleClaimCreateGet RoleClaim);
         bool CreatePost(RoleClaimCreateGet RoleClaim);
         Task<RoleClaimDeleteGet> DeleteGet(string UserId, int RoleClaimId);
         bool DeletePost(int RoleClaimId);

@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IPersonProvider
     {
         Task<string> CreatePost(PersonCreatePost Person);
-        Task<string> CreatePostCheck(PersonCreatePost Person);
+        Task<List<ErrorMessage>> CreatePostCheck(PersonCreateGet Person);
         Task<PersonDeleteGet> DeleteGet(string UserId, int PersonId);
         bool DeletePost(int Id);
         Task<List<PersonIndexGet>> IndexGet(string UserId);
@@ -21,5 +21,6 @@ namespace SIPx.DataAccess
         Task<List<UserList>> EditGetUsers(int PersonId);
         Task<List<PersonForPanel>> Panel(string UserId, string ConditionSQLFrom, string ConditionSQLWhere, string ConditionSQLContains);
         Task<List<PersonForPanelCondition>> PanelCondition(int PageSectionId);
+        Task<List<ErrorMessage>> UpdatePostCheck(PersonUpdateGet Person);
     }
 }

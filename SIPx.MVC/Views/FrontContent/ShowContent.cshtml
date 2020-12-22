@@ -3,7 +3,7 @@
 @model FrontContentShowContent
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content")).TermString+" "+Model.Title;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content")).TermString + " " + Model.Title;
 
     Layout = "_Layout";
 }
@@ -12,7 +12,18 @@
         <div class="col-12">
             <h1><img src="~/images/icons/Content.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content")).TermString: @Model.Title</h1>
         </div>
-    </div>    <div class="row">
+    </div>
+    @if (Model.IsOwner)
+    {
+        <div class="row">
+            <div class="col-12">
+                <a asp-controller="FrontContent" action="Rights" asp-all-route-id="@Model.ContentId">
+                    <img src="~/images/icons/User.png" width="20" height="20" />
+                </a>
+            </div>
+        </div>
+    }
+    <div class="row">
         <div class="col-12">
             @Html.Raw(@Model.Description)
         </div>

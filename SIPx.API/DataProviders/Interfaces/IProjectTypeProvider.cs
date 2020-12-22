@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IProjectTypeProvider
     {
         Task<string> CreatePost(ProjectTypeCreateGet ProjectType);
-        Task<string> CreatePostCheck(ProjectTypeCreatePost ProjectType);
+        Task<List<ErrorMessage>> CreatePostCheck(ProjectTypeCreateGet ProjectType);
         Task<ProjectTypeDeleteGet> DeleteGet(string UserId, int ProjectTypeId);
         bool DeletePost(int Id);
         Task<List<ProjectTypeIndexGet>> IndexGet(string UserId);
@@ -15,6 +15,7 @@ namespace SIPx.DataAccess
         Task<ProjectTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ProjectTypeLanguageId);
         Task<List<ProjectTypeList>> List(string UserId);
         Task<ProjectTypeUpdateGet> UpdateGet(string UserId, int ProjectTypeId);
+        Task<List<ErrorMessage>> UpdatePostCheck(ProjectTypeUpdateGet ProjectType);
         bool UpdatePost(ProjectTypeUpdateGet ProjectType);
     }
 }

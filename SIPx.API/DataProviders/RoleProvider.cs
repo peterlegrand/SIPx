@@ -19,6 +19,15 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
+
+        //PETER TODO PostCheck
+
+        public async Task<List<ErrorMessage>> CreatePostCheck(RoleCreateGet Role)
+        {
+            string usp = "usp_RoleCreatePostCheck @RoleId, @Name, @Description, @MenuName, @MouseOver, @UserID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Role);
+            return ErrorMessages;
+        }
         public bool CreatePost(RoleCreateGet Role)
         {
             string usp = "usp_RoleCreatePost @RoleId, @Name, @Description, @MenuName, @MouseOver, @UserID";
@@ -44,6 +53,12 @@ namespace SIPx.DataAccess
             string usp = "usp_roleUpdateGet @UserId, @RoleID";
             return _sqlDataAccess.LoadSingleRecord<RoleUpdateGet, dynamic>(usp, new { UserId = UserId, roleId = RoleId });
 
+        }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(RoleUpdateGet Role)
+        {
+            string usp = "usp_RoleUpdatePostCheck @RoleId, @Name , @Description , @MenuName , @MouseOver, @UserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Role);
+            return ErrorMessages;
         }
         public bool UpdatePost(RoleUpdateGet Role)
         {

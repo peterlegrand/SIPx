@@ -32,11 +32,11 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<string> CreatePostCheck(PropertyValueCreateGet PropertyValue)
+        public async Task<List<ErrorMessage>> CreatePostCheck(PropertyValueCreateGet PropertyValue)
         {
             string usp = "usp_PropertyCreatePostCheck @PropertyTypeId, @Name , @Description , @MenuName , @MouseOver , @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PropertyValue);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PropertyValue);
+            return ErrorMessages;
         }
 
         public bool CreatePost(PropertyValueCreateGet PropertyValue)

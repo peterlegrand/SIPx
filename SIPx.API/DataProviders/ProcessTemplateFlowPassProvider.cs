@@ -23,15 +23,15 @@ namespace SIPx.DataAccess
         public async Task<List<SequenceList>> CreateGetSequence(string UserId, int ProcessTemplateFlowId)
         {
             string usp = "usp_ProcessTemplateFlowPassCreateGetSequence @UserID, @ProcessTemplateFlowId";
-            var Passs = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
-            Passs.Add(new SequenceList { Sequence = Passs.Count + 1, Name = "At the end" });
-            return Passs;
+            var Passes = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowId });
+            Passes.Add(new SequenceList { Sequence = Passes.Count + 1, Name = "At the end" });
+            return Passes;
         }
         public async Task<List<SequenceList>> UpdateGetSequence(string UserId, int ProcessTemplateFlowPassId)
         {
             string usp = "usp_ProcessTemplateFlowPassUpdateGetSequence @UserID, @ProcessTemplateFlowPassId";
-            var Passs = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowPassId });
-            return Passs;
+            var Passes = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, ProcessTemplateFlowPassId });
+            return Passes;
         }
 
         public Task<List<ProcessTemplateFieldList>> CreateGetFieldList(string UserId, int ProcessTemplateFlowId)
@@ -56,11 +56,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ProcessTemplateFieldList, dynamic>(usp, new { UserId, ProcessTemplateFlowPassId });
         }
 
-        public async Task<string> CreatePostCheck(ProcessTemplateFlowPassCreatePost ProcessTemplateFlowPass)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateFlowPassCreateGet ProcessTemplateFlowPass)
         {
             string usp = "usp_ProcessTemplateFlowPassCreatePostCheck @ProcessTemplateFlowId, @Sequence, @ProcessTemplateFlowPassTypeId, @ProcessTemplateFieldId, @ProcessTemplateFieldIDRole, @ComparisonOperatorId, @LanguageId, @Name, @CreaterId";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProcessTemplateFlowPass);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateFlowPass);
+            return ErrorMessages;
         }
 
         public async Task<int> IndexGetProcessTemplateId(int ProcessTemplateFlowPassId)
@@ -90,7 +90,14 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProcessTemplateFlowPassUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateFlowPassId = ProcessTemplateFlowPassId });
 
         }
-      
+
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateFlowPassUpdateGet ProcessTemplateFlowPass)
+        {
+            string usp = "usp_ProcessTemplateFlowPassUpdatePostCheck @ProcessTemplateFlowPassId , @Sequence ,@ProcessTemplateFlowPassTypeID, @ProcessTemplateFieldID, @ProcessTemplateFieldIDRole, @ComparisonOperatorID, @ProcessTemplateFlowPassString, @ProcessTemplateFlowPassInt, @ProcessTemplateFlowPassDate, @Name, @Description, @MenuName, @MouseOver, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplateFlowPass);
+            return ErrorMessages;
+        }
+
 
         public bool UpdatePost(ProcessTemplateFlowPassUpdateGet ProcessTemplateFlowPass)
         {

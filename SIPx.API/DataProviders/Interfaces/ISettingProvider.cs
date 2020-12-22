@@ -9,5 +9,6 @@ namespace SIPx.DataAccess
         Task<List<SettingIndexGet>> IndexGet(string UserId);
         Task<SettingUpdateGet> UpdateGet(string UserId, int SettingId);
         bool UpdatePost(SettingUpdateGet Setting);
+        Task<List<ErrorMessage>> UpdatePostCheck(SettingUpdateGet Setting);
     }
 }

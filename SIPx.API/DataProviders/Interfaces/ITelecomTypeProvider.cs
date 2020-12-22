@@ -10,5 +10,6 @@ namespace SIPx.DataAccess
         Task<TelecomTypeUpdateGet> UpdateGet(string UserId, int TelecomTypeId);
         Task<List<TelecomTypeList>> List(string UserId);
         bool UpdatePost(TelecomTypeUpdateGet TelecomType);
+        Task<List<ErrorMessage>> UpdatePostCheck(TelecomTypeUpdateGet TelecomType);
     }
 }

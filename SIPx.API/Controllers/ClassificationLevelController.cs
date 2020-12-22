@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -63,14 +64,21 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationLevel.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
             {
-                //var CheckString = await _classificationLevelProvider.CreatePostCheck(ClassificationLevel);
-                //if (CheckString.Length == 0)
-                //{
-                _classificationLevelProvider.CreatePost(ClassificationLevel);
+                ErrorMessages = await _classificationLevelProvider.CreatePostCheck(ClassificationLevel);
+                if (ErrorMessages.Count > 0)
+                {
+                    //var CheckString = await _classificationLevelProvider.CreatePostCheck(ClassificationLevel);
+                    //if (CheckString.Length == 0)
+                    //{
+                    //PETER TODO this has to be filled, see classification or createget
+                }
+                else { 
+                    _classificationLevelProvider.CreatePost(ClassificationLevel);
                 return Ok(ClassificationLevel);
-                //}
+                }
                 return BadRequest(new
                 {
                     IsSuccess = false,
@@ -90,16 +98,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
             {
-                //if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationID", Id) == 0)
-                //{
-                //    return BadRequest(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "No record with this ID",
-                //    });
-                //}
-
-
+                
                 return Ok(await _classificationLevelProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
