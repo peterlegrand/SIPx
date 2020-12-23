@@ -526,205 +526,568 @@ INSERT INTO ClaimGroups (ClaimGroupId, Sequence, NameTermId, DescriptionTermId, 
 ,(9, 9, 950, 950, 950, 950)
 ,(10, 10, 641, 641, 641, 641)
 ,(11, 11, 227, 227, 227, 227)
-,(12, 12, 234, 234, 234, 234);
+,(12, 12, 234, 234, 234, 234)
+,(13, 13, 1785, 1785, 1785, 1785)
+,(14, 14, 1786, 1786, 1786, 1786)
+,(15, 15, 1601, 1601, 1601, 1601);
 SET IDENTITY_INSERT ClaimGroups OFF;
 
 SET IDENTITY_INSERT Claims ON;
-INSERT INTO Claims (	ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(1, 10, 'ApplicationRight', '1',951, 951, 951, 951)
-,(2, 10, 'ApplicationRight', '2',952, 952, 952, 952)
-,(3, 10, 'ApplicationRight', '3',953, 953, 953, 953)
-,(4, 10, 'ApplicationRight', '4',954, 954, 954, 954)
-,(5, 10, 'ApplicationRight', '5',955, 955, 955, 955)
-,(6, 10, 'ApplicationRight', '6',956, 956, 956, 956)
-,(7, 10, 'ApplicationRight', '7',957, 957, 957, 957)
-,(8, 10, 'ApplicationRight', '8',958, 958, 958, 958)
-,(9, 10, 'ApplicationRight', '9',959, 959, 959, 959)
-,(10, 10, 'ApplicationRight', '10',960, 960, 960, 960)
-,(11, 10, 'ApplicationRight', '11',961, 961, 961, 961)
-,(12, 10, 'ApplicationRight', '12',962, 962, 962, 962)
-,(13, 10, 'ApplicationRight', '13',963, 963, 963, 963)
-,(14, 10, 'ApplicationRight', '14',964, 964, 964, 964)
-,(15, 10, 'ApplicationRight', '15',965, 965, 965, 965)
-,(16, 10, 'ApplicationRight', '16',966, 966, 966, 966)
-,(17, 10, 'ApplicationRight', '17',967, 967, 967, 967)
-,(18, 10, 'ApplicationRight', '18',968, 968, 968, 968)
-,(19, 10, 'ApplicationRight', '19',969, 969, 969, 969)
-,(20, 10, 'ApplicationRight', '20',970, 970, 970, 970)
-,(21, 10, 'ApplicationRight', '21',971, 971, 971, 971)
-,(22, 10, 'ApplicationRight', '22',972, 972, 972, 972)
-,(23, 10, 'ApplicationRight', '23',973, 973, 973, 973)
-,(24, 10, 'ApplicationRight', '24',974, 974, 974, 974)
-,(25, 10, 'ApplicationRight', '25',975, 975, 975, 975)
-,(26, 10, 'ApplicationRight', '26',976, 976, 976, 976)
-,(27, 10, 'ApplicationRight', '27',977, 977, 977, 977)
-,(28, 10, 'ApplicationRight', '28',978, 978, 978, 978)
-,(29, 10, 'ApplicationRight', '29',979, 979, 979, 979)
-,(30, 10, 'ApplicationRight', '30',980, 980, 980, 980)
-,(31, 10, 'ApplicationRight', '31',981, 981, 981, 981)
-,(32, 10, 'ApplicationRight', '32',982, 982, 982, 982)
-,(33, 10, 'ApplicationRight', '33',983, 983, 983, 983)
-,(34, 10, 'ApplicationRight', '34',984, 984, 984, 984)
-,(35, 10, 'ApplicationRight', '35',985, 985, 985, 985)
-,(36, 10, 'ApplicationRight', '36',986, 986, 986, 986)
-,(37, 10, 'ApplicationRight', '37',987, 987, 987, 987)
-,(38, 10, 'ApplicationRight', '38',988, 988, 988, 988)
-,(39, 10, 'ApplicationRight', '39',989, 989, 989, 989)
-,(40, 10, 'ApplicationRight', '40',990, 990, 990, 990)
-,(41, 10, 'ApplicationRight', '41',991, 991, 991, 991)
-,(42, 10, 'ApplicationRight', '42',992, 992, 992, 992)
-,(43, 10, 'ApplicationRight', '43',993, 993, 993, 993)
-,(44, 10, 'ApplicationRight', '44',994, 994, 994, 994)
-,(45, 10, 'ApplicationRight', '45',995, 995, 995, 995)
-,(46, 10, 'ApplicationRight', '46',996, 996, 996, 996)
-,(47, 10, 'ApplicationRight', '47',997, 997, 997, 997)
-,(48, 10, 'ApplicationRight', '48',998, 998, 998, 998)
-,(49, 10, 'ApplicationRight', '49',999, 999, 999, 999)
-,(50, 10, 'ApplicationRight', '50',1000, 1000, 1000, 1000)
-,(51, 10, 'ApplicationRight', '51',1001, 1001, 1001, 1001)
-,(52, 10, 'ApplicationRight', '52',1002, 1002, 1002, 1002)
-,(53, 10, 'ApplicationRight', '53',1003, 1003, 1003, 1003)
-,(54, 10, 'ApplicationRight', '54',1004, 1004, 1004, 1004)
-,(55, 10, 'ApplicationRight', '55',1005, 1005, 1005, 1005)
-,(56, 10, 'ApplicationRight', '56',1006, 1006, 1006, 1006)
-,(57, 1, 'ApplicationRight', '57',1007, 1007, 1007, 1007)
-,(58, 1, 'ApplicationRight', '58',1008, 1008, 1008, 1008)
-,(59, 1, 'ApplicationRight', '59',1009, 1009, 1009, 1009)
-,(60, 1, 'ApplicationRight', '60',1010, 1010, 1010, 1010)
-,(61, 1, 'ApplicationRight', '61',1011, 1011, 1011, 1011)
-,(62, 1, 'ApplicationRight', '62',1012, 1012, 1012, 1012)
-,(63, 1, 'ApplicationRight', '63',1013, 1013, 1013, 1013)
-,(64, 1, 'ApplicationRight', '64',1014, 1014, 1014, 1014)
-,(65, 1, 'ApplicationRight', '65',1015, 1015, 1015, 1015)
-,(66, 1, 'ApplicationRight', '66',1016, 1016, 1016, 1016)
-,(67, 1, 'ApplicationRight', '67',1017, 1017, 1017, 1017)
-,(68, 1, 'ApplicationRight', '68',1018, 1018, 1018, 1018)
-,(69, 1, 'ApplicationRight', '69',1019, 1019, 1019, 1019)
-,(70, 1, 'ApplicationRight', '70',1020, 1020, 1020, 1020)
-,(71, 1, 'ApplicationRight', '71',1021, 1021, 1021, 1021)
-,(72, 1, 'ApplicationRight', '72',1022, 1022, 1022, 1022)
-,(73, 1, 'ApplicationRight', '73',1023, 1023, 1023, 1023)
-,(74, 1, 'ApplicationRight', '74',1024, 1024, 1024, 1024)
-,(75, 1, 'ApplicationRight', '75',1025, 1025, 1025, 1025)
-,(76, 1, 'ApplicationRight', '76',1026, 1026, 1026, 1026)
-,(77, 1, 'ApplicationRight', '77',1027, 1027, 1027, 1027)
-,(78, 1, 'ApplicationRight', '78',1028, 1028, 1028, 1028)
-,(79, 1, 'ApplicationRight', '79',1029, 1029, 1029, 1029)
-,(80, 1, 'ApplicationRight', '80',1030, 1030, 1030, 1030)
-,(81, 1, 'ApplicationRight', '81',1031, 1031, 1031, 1031)
-,(82, 1, 'ApplicationRight', '82',1032, 1032, 1032, 1032)
-,(83, 1, 'ApplicationRight', '83',1033, 1033, 1033, 1033)
-,(84, 1, 'ApplicationRight', '84',1034, 1034, 1034, 1034)
-,(85, 2, 'ApplicationRight', '85',1035, 1035, 1035, 1035)
-,(86, 2, 'ApplicationRight', '86',1036, 1036, 1036, 1036)
-,(87, 2, 'ApplicationRight', '87',1037, 1037, 1037, 1037)
-,(88, 2, 'ApplicationRight', '88',1038, 1038, 1038, 1038)
-,(89, 2, 'ApplicationRight', '89',1039, 1039, 1039, 1039)
-,(90, 2, 'ApplicationRight', '90',1040, 1040, 1040, 1040)
-,(91, 2, 'ApplicationRight', '91',1041, 1041, 1041, 1041)
-,(92, 2, 'ApplicationRight', '92',1042, 1042, 1042, 1042)
-,(93, 2, 'ApplicationRight', '93',1043, 1043, 1043, 1043)
-,(94, 2, 'ApplicationRight', '94',1044, 1044, 1044, 1044)
-,(95, 2, 'ApplicationRight', '95',1045, 1045, 1045, 1045)
-,(96, 2, 'ApplicationRight', '96',1046, 1046, 1046, 1046)
-,(97, 2, 'ApplicationRight', '97',1047, 1047, 1047, 1047)
-,(98, 2, 'ApplicationRight', '98',1048, 1048, 1048, 1048)
-,(99, 2, 'ApplicationRight', '99',1049, 1049, 1049, 1049)
-,(100, 2, 'ApplicationRight', '100',1050, 1050, 1050, 1050)
-,(101, 2, 'ApplicationRight', '101',1051, 1051, 1051, 1051)
-,(102, 9, 'ApplicationRight', '102',1052, 1052, 1052, 1052)
-,(103, 3, 'ApplicationRight', '103',1053, 1053, 1053, 1053)
-,(104, 7, 'ApplicationRight', '104',1054, 1054, 1054, 1054)
-,(105, 7, 'ApplicationRight', '105',1055, 1055, 1055, 1055)
-,(106, 7, 'ApplicationRight', '106',1056, 1056, 1056, 1056)
-,(107, 7, 'ApplicationRight', '107',1057, 1057, 1057, 1057)
-,(108, 7, 'ApplicationRight', '108',1058, 1058, 1058, 1058)
-,(109, 7, 'ApplicationRight', '109',1059, 1059, 1059, 1059)
-,(110, 7, 'ApplicationRight', '110',1060, 1060, 1060, 1060)
-,(111, 7, 'ApplicationRight', '111',1061, 1061, 1061, 1061)
-,(112, 7, 'ApplicationRight', '112',1062, 1062, 1062, 1062)
-,(113, 7, 'ApplicationRight', '113',1063, 1063, 1063, 1063)
-,(114, 7, 'ApplicationRight', '114',1064, 1064, 1064, 1064)
-,(115, 7, 'ApplicationRight', '115',1065, 1065, 1065, 1065)
-,(116, 7, 'ApplicationRight', '116',1066, 1066, 1066, 1066)
-,(117, 7, 'ApplicationRight', '117',1067, 1067, 1067, 1067)
-,(118, 7, 'ApplicationRight', '118',1068, 1068, 1068, 1068)
-,(119, 7, 'ApplicationRight', '119',1069, 1069, 1069, 1069)
-,(120, 7, 'ApplicationRight', '120',1070, 1070, 1070, 1070)
-,(121, 7, 'ApplicationRight', '121',1071, 1071, 1071, 1071)
-,(122, 7, 'ApplicationRight', '122',1072, 1072, 1072, 1072)
-,(123, 7, 'ApplicationRight', '123',1073, 1073, 1073, 1073)
-,(124, 7, 'ApplicationRight', '124',1074, 1074, 1074, 1074)
-,(125, 7, 'ApplicationRight', '125',1075, 1075, 1075, 1075)
-,(126, 7, 'ApplicationRight', '126',1076, 1076, 1076, 1076)
-,(127, 7, 'ApplicationRight', '127',1077, 1077, 1077, 1077)
-,(128, 7, 'ApplicationRight', '128',1078, 1078, 1078, 1078)
-,(129, 7, 'ApplicationRight', '129',1079, 1079, 1079, 1079)
-,(130, 7, 'ApplicationRight', '130',1080, 1080, 1080, 1080)
-,(131, 7, 'ApplicationRight', '131',1081, 1081, 1081, 1081)
-,(132, 7, 'ApplicationRight', '132',1082, 1082, 1082, 1082)
-,(133, 7, 'ApplicationRight', '133',1083, 1083, 1083, 1083)
-,(134, 7, 'ApplicationRight', '134',1084, 1084, 1084, 1084)
-,(135, 7, 'ApplicationRight', '135',1085, 1085, 1085, 1085)
-,(136, 7, 'ApplicationRight', '136',1086, 1086, 1086, 1086)
-,(137, 7, 'ApplicationRight', '137',1087, 1087, 1087, 1087)
-,(138, 9, 'ApplicationRight', '138',1088, 1088, 1088, 1088)
-,(139, 9, 'ApplicationRight', '139',1089, 1089, 1089, 1089)
-,(140, 9, 'ApplicationRight', '140',1090, 1090, 1090, 1090)
-,(141, 9, 'ApplicationRight', '141',1091, 1091, 1091, 1091)
-,(142, 4, 'ApplicationRight', '142',1092, 1092, 1092, 1092)
-,(143, 4, 'ApplicationRight', '143',1093, 1093, 1093, 1093)
-,(144, 4, 'ApplicationRight', '144',1094, 1094, 1094, 1094)
-,(145, 4, 'ApplicationRight', '145',1095, 1095, 1095, 1095)
-,(146, 4, 'ApplicationRight', '146',1096, 1096, 1096, 1096)
-,(147, 4, 'ApplicationRight', '147',1097, 1097, 1097, 1097)
-,(148, 4, 'ApplicationRight', '148',1098, 1098, 1098, 1098)
-,(149, 4, 'ApplicationRight', '149',1099, 1099, 1099, 1099)
-,(150, 4, 'ApplicationRight', '150',1100, 1100, 1100, 1100)
-,(151, 4, 'ApplicationRight', '151',1101, 1101, 1101, 1101)
-,(152, 4, 'ApplicationRight', '152',1102, 1102, 1102, 1102)
-,(153, 4, 'ApplicationRight', '153',1103, 1103, 1103, 1103)
-,(154, 4, 'ApplicationRight', '154',1104, 1104, 1104, 1104)
-,(155, 4, 'ApplicationRight', '155',1105, 1105, 1105, 1105)
-,(156, 4, 'ApplicationRight', '156',1106, 1106, 1106, 1106)
-,(157, 6, 'ApplicationRight', '157',1107, 1107, 1107, 1107)
-,(158, 6, 'ApplicationRight', '158',1108, 1108, 1108, 1108)
-,(159, 6, 'ApplicationRight', '159',1109, 1109, 1109, 1109)
-,(160, 6, 'ApplicationRight', '160',1110, 1110, 1110, 1110)
-,(161, 6, 'ApplicationRight', '161',1111, 1111, 1111, 1111)
-,(162, 6, 'ApplicationRight', '162',1112, 1112, 1112, 1112)
-,(163, 6, 'ApplicationRight', '163',1113, 1113, 1113, 1113)
-,(164, 6, 'ApplicationRight', '164',1114, 1114, 1114, 1114)
-,(165, 6, 'ApplicationRight', '165',1115, 1115, 1115, 1115)
-,(166, 6, 'ApplicationRight', '166',1116, 1116, 1116, 1116)
-,(167, 6, 'ApplicationRight', '167',1117, 1117, 1117, 1117)
-,(168, 8, 'ApplicationRight', '168',1118, 1118, 1118, 1118)
-,(169, 8, 'ApplicationRight', '169',1119, 1119, 1119, 1119)
-,(170, 8, 'ApplicationRight', '170',1120, 1120, 1120, 1120)
-,(171, 8, 'ApplicationRight', '171',1121, 1121, 1121, 1121)
-,(172, 8, 'ApplicationRight', '172',1122, 1122, 1122, 1122)
-,(173, 8, 'ApplicationRight', '173',1123, 1123, 1123, 1123)
-,(174, 8, 'ApplicationRight', '174',1124, 1124, 1124, 1124)
-,(175, 8, 'ApplicationRight', '175',1125, 1125, 1125, 1125)
-,(176, 8, 'ApplicationRight', '176',1126, 1126, 1126, 1126)
-,(177, 7, 'ApplicationRight', '177',1127, 1127, 1127, 1127)
-,(178, 7, 'ApplicationRight', '178',1128, 1128, 1128, 1128)
-,(179, 7, 'ApplicationRight', '179',1129, 1129, 1129, 1129)
-,(180, 7, 'ApplicationRight', '180',1130, 1130, 1130, 1130)
-,(181, 11, 'ApplicationRight', '181',935, 935, 935, 935)
-,(182, 11, 'ApplicationRight', '182',936, 936, 936, 936)
-,(183, 11, 'ApplicationRight', '183',937, 937, 937, 937)
-,(184, 11, 'ApplicationRight', '184',938, 938, 938, 938)
-,(185, 12, 'ApplicationRight', '185',939, 939, 939, 939)
-,(186, 12, 'ApplicationRight', '186',940, 940, 940, 940)
-,(187, 12, 'ApplicationRight', '187',941, 941, 941, 941)
-,(188, 12, 'ApplicationRight', '188',642, 642, 642, 642)
-,(189, 10, 'ApplicationRight', '189',66, 66, 66, 66)
-,(190, 10, 'ApplicationRight', '190',643, 643, 643, 643)
-,(191, 10, 'ApplicationRight', '191',644, 644, 644, 644)
-,(192, 10, 'ApplicationRight', '192',174, 174, 174, 174)
-,(193, 10, 'ApplicationRight', '193',1131, 1131, 1131, 1131)
-;
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(1, 9, 'ApplicationRight', 'Admin\Index',1787,1787,1787,1787);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(2, 9, 'ApplicationRight', 'Admin\Menu',1788,1788,1788,1788);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(3, 10, 'ApplicationRight', 'Classification\Create',1789,1789,1789,1789);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(4, 10, 'ApplicationRight', 'Classification\Delete',1790,1790,1790,1790);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(5, 10, 'ApplicationRight', 'Classification\Update',1791,1791,1791,1791);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(6, 10, 'ApplicationRight', 'Classification\Index',1792,1792,1792,1792);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(7, 10, 'ApplicationRight', 'Classification\LanguageCreate',1793,1793,1793,1793);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(8, 10, 'ApplicationRight', 'Classification\LanguageEdit',1794,1794,1794,1794);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(9, 10, 'ApplicationRight', 'Classification\LanguageIndex',1795,1795,1795,1795);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(10, 10, 'ApplicationRight', 'ClassificationLevel\Create',1796,1796,1796,1796);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(11, 10, 'ApplicationRight', 'ClassificationLevel\Delete',1797,1797,1797,1797);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(12, 10, 'ApplicationRight', 'ClassificationLevel\Update',1798,1798,1798,1798);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(13, 10, 'ApplicationRight', 'ClassificationLevel\Index',1799,1799,1799,1799);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(14, 10, 'ApplicationRight', 'ClassificationLevel\LanguageCreate',1800,1800,1800,1800);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(15, 10, 'ApplicationRight', 'ClassificationLevel\LanguageEdit',1801,1801,1801,1801);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(16, 10, 'ApplicationRight', 'ClassificationLevel\LanguageIndex',1802,1802,1802,1802);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(17, 10, 'ApplicationRight', 'ClassificationLevelProperty\Create',1803,1803,1803,1803);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(18, 10, 'ApplicationRight', 'ClassificationLevelProperty\Delete',1804,1804,1804,1804);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(19, 10, 'ApplicationRight', 'ClassificationLevelProperty\Update',1805,1805,1805,1805);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(20, 10, 'ApplicationRight', 'ClassificationLevelProperty\Index',1806,1806,1806,1806);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(21, 10, 'ApplicationRight', 'ClassificationLevelProperty\LanguageCreate',1807,1807,1807,1807);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(22, 10, 'ApplicationRight', 'ClassificationLevelProperty\LanguageEdit',1808,1808,1808,1808);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(23, 10, 'ApplicationRight', 'ClassificationLevelProperty\LanguageIndex',1809,1809,1809,1809);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(24, 10, 'ApplicationRight', 'ClassificationRelationType\Create',1810,1810,1810,1810);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(25, 10, 'ApplicationRight', 'ClassificationRelationType\Delete',1811,1811,1811,1811);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(26, 10, 'ApplicationRight', 'ClassificationRelationType\Update',1812,1812,1812,1812);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(27, 10, 'ApplicationRight', 'ClassificationRelationType\Index',1813,1813,1813,1813);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(28, 10, 'ApplicationRight', 'ClassificationRelationType\LanguageCreate',1814,1814,1814,1814);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(29, 10, 'ApplicationRight', 'ClassificationRelationType\LanguageEdit',1815,1815,1815,1815);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(30, 10, 'ApplicationRight', 'ClassificationRelationType\LanguageIndex',1816,1816,1816,1816);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(31, 10, 'ApplicationRight', 'ClassificationRole\Create',1817,1817,1817,1817);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(32, 10, 'ApplicationRight', 'ClassificationRole\Delete',1818,1818,1818,1818);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(33, 10, 'ApplicationRight', 'ClassificationRole\Update',1819,1819,1819,1819);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(34, 10, 'ApplicationRight', 'ClassificationRole\Index',1820,1820,1820,1820);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(35, 10, 'ApplicationRight', 'ClassificationUser\Create',1821,1821,1821,1821);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(36, 10, 'ApplicationRight', 'ClassificationUser\Delete',1822,1822,1822,1822);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(37, 10, 'ApplicationRight', 'ClassificationUser\Update',1823,1823,1823,1823);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(38, 10, 'ApplicationRight', 'ClassificationUser\Index',1824,1824,1824,1824);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(39, 10, 'ApplicationRight', 'ClassificationValue\Create',1825,1825,1825,1825);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(40, 10, 'ApplicationRight', 'ClassificationValue\Delete',1826,1826,1826,1826);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(41, 10, 'ApplicationRight', 'ClassificationValue\Update',1827,1827,1827,1827);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(42, 10, 'ApplicationRight', 'ClassificationValue\Index',1828,1828,1828,1828);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(43, 10, 'ApplicationRight', 'ClassificationValue\LanguageCreate',1829,1829,1829,1829);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(44, 10, 'ApplicationRight', 'ClassificationValue\LanguageEdit',1830,1830,1830,1830);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(45, 10, 'ApplicationRight', 'ClassificationValue\LanguageIndex',1831,1831,1831,1831);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(46, 10, 'ApplicationRight', 'ClassificationValueRole\Create',1832,1832,1832,1832);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(47, 10, 'ApplicationRight', 'ClassificationValueRole\Delete',1833,1833,1833,1833);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(48, 10, 'ApplicationRight', 'ClassificationValueRole\Update',1834,1834,1834,1834);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(49, 10, 'ApplicationRight', 'ClassificationValueRole\Index',1835,1835,1835,1835);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(50, 10, 'ApplicationRight', 'ClassificationValueUser\Create',1836,1836,1836,1836);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(51, 10, 'ApplicationRight', 'ClassificationValueUser\Delete',1837,1837,1837,1837);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(52, 10, 'ApplicationRight', 'ClassificationValueUser\Update',1838,1838,1838,1838);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(53, 10, 'ApplicationRight', 'ClassificationValueUser\Index',1839,1839,1839,1839);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(54, 2, 'ApplicationRight', 'ContentType\Create',1840,1840,1840,1840);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(55, 2, 'ApplicationRight', 'ContentType\Delete',1841,1841,1841,1841);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(56, 2, 'ApplicationRight', 'ContentType\Update',1842,1842,1842,1842);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(57, 2, 'ApplicationRight', 'ContentType\Index',1843,1843,1843,1843);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(58, 2, 'ApplicationRight', 'ContentTypeGroup\Create',1844,1844,1844,1844);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(59, 2, 'ApplicationRight', 'ContentTypeGroup\Delete',1845,1845,1845,1845);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(60, 2, 'ApplicationRight', 'ContentTypeGroup\Update',1846,1846,1846,1846);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(61, 2, 'ApplicationRight', 'ContentTypeGroup\Index',1847,1847,1847,1847);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(62, 14, 'ApplicationRight', 'Front\Index',1848,1848,1848,1848);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(63, 15, 'ApplicationRight', 'FrontAuth\Login',1849,1849,1849,1849);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(64, 14, 'ApplicationRight', 'FrontClassificationValue\AdvancedSearch',1850,1850,1850,1850);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(65, 14, 'ApplicationRight', 'FrontClassificationValue\Dashboard',1851,1851,1851,1851);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(66, 14, 'ApplicationRight', 'FrontClassificationValue\SearchResult',1852,1852,1852,1852);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(67, 14, 'ApplicationRight', 'FrontContent\AdvancedSearch',1853,1853,1853,1853);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(68, 14, 'ApplicationRight', 'FrontContent\ContentNew',1854,1854,1854,1854);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(69, 14, 'ApplicationRight', 'FrontContent\ContentType',1855,1855,1855,1855);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(70, 14, 'ApplicationRight', 'FrontContent\SearchResult',1856,1856,1856,1856);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(71, 14, 'ApplicationRight', 'FrontContent\ShowContent',1857,1857,1857,1857);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(72, 14, 'ApplicationRight', 'FrontOrganization\AdvancedSearch',1858,1858,1858,1858);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(73, 14, 'ApplicationRight', 'FrontOrganization\Create',1859,1859,1859,1859);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(74, 14, 'ApplicationRight', 'FrontOrganization\Dashboard',1860,1860,1860,1860);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(75, 14, 'ApplicationRight', 'FrontOrganization\Index',1861,1861,1861,1861);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(76, 14, 'ApplicationRight', 'FrontOrganization\SearchResult',1862,1862,1862,1862);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(77, 14, 'ApplicationRight', 'FrontPerson\AdvancedSearch',1863,1863,1863,1863);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(78, 14, 'ApplicationRight', 'FrontPerson\SearchResult',1864,1864,1864,1864);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(79, 14, 'ApplicationRight', 'FrontProcess\AdvancedSearch',1865,1865,1865,1865);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(80, 14, 'ApplicationRight', 'FrontProcess\Create',1866,1866,1866,1866);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(81, 14, 'ApplicationRight', 'FrontProcess\Update',1867,1867,1867,1867);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(82, 14, 'ApplicationRight', 'FrontProcess\SearchResult',1868,1868,1868,1868);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(83, 14, 'ApplicationRight', 'FrontProcess\Templates',1869,1869,1869,1869);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(84, 14, 'ApplicationRight', 'FrontProcess\ToDo',1870,1870,1870,1870);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(85, 14, 'ApplicationRight', 'FrontProcess\View',1871,1871,1871,1871);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(86, 14, 'ApplicationRight', 'FrontProject\AdvancedSearch',1872,1872,1872,1872);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(87, 14, 'ApplicationRight', 'FrontProject\Create',1873,1873,1873,1873);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(88, 14, 'ApplicationRight', 'FrontProject\Dashboard',1874,1874,1874,1874);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(89, 14, 'ApplicationRight', 'FrontProject\Index',1875,1875,1875,1875);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(90, 14, 'ApplicationRight', 'FrontProject\SearchResult',1876,1876,1876,1876);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(91, 14, 'ApplicationRight', 'FrontUser\Dashboard',1877,1877,1877,1877);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(92, 15, 'ApplicationRight', 'Home\Index',1878,1878,1878,1878);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(93, 15, 'ApplicationRight', 'Home\Privacy',1879,1879,1879,1879);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(94, 9, 'ApplicationRight', 'Language\Update',1880,1880,1880,1880);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(95, 9, 'ApplicationRight', 'Language\Index',1881,1881,1881,1881);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(96, 4, 'ApplicationRight', 'Organization\Create',1882,1882,1882,1882);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(97, 4, 'ApplicationRight', 'Organization\Delete',1883,1883,1883,1883);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(98, 4, 'ApplicationRight', 'Organization\Update',1884,1884,1884,1884);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(99, 4, 'ApplicationRight', 'Organization\Index',1885,1885,1885,1885);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(100, 4, 'ApplicationRight', 'Organization\LanguageEdit',1886,1886,1886,1886);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(101, 4, 'ApplicationRight', 'Organization\LanguageIndex',1887,1887,1887,1887);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(102, 4, 'ApplicationRight', 'OrganizationAddress\Create',1888,1888,1888,1888);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(103, 4, 'ApplicationRight', 'OrganizationAddress\Delete',1889,1889,1889,1889);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(104, 4, 'ApplicationRight', 'OrganizationAddress\Update',1890,1890,1890,1890);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(105, 4, 'ApplicationRight', 'OrganizationAddress\Index',1891,1891,1891,1891);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(106, 4, 'ApplicationRight', 'OrganizationTelecom\Create',1892,1892,1892,1892);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(107, 4, 'ApplicationRight', 'OrganizationTelecom\Delete',1893,1893,1893,1893);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(108, 4, 'ApplicationRight', 'OrganizationTelecom\Update',1894,1894,1894,1894);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(109, 4, 'ApplicationRight', 'OrganizationTelecom\Index',1895,1895,1895,1895);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(110, 4, 'ApplicationRight', 'OrganizationType\Create',1896,1896,1896,1896);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(111, 4, 'ApplicationRight', 'OrganizationType\Delete',1897,1897,1897,1897);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(112, 4, 'ApplicationRight', 'OrganizationType\Update',1898,1898,1898,1898);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(113, 4, 'ApplicationRight', 'OrganizationType\Index',1899,1899,1899,1899);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(114, 4, 'ApplicationRight', 'OrganizationType\LanguageEdit',1900,1900,1900,1900);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(115, 4, 'ApplicationRight', 'OrganizationType\LanguageIndex',1901,1901,1901,1901);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(116, 6, 'ApplicationRight', 'Page\Create',1902,1902,1902,1902);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(117, 6, 'ApplicationRight', 'Page\Delete',1903,1903,1903,1903);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(118, 6, 'ApplicationRight', 'Page\Update',1904,1904,1904,1904);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(119, 6, 'ApplicationRight', 'Page\Index',1905,1905,1905,1905);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(120, 6, 'ApplicationRight', 'Page\LanguageEdit',1906,1906,1906,1906);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(121, 6, 'ApplicationRight', 'Page\LanguageIndex',1907,1907,1907,1907);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(122, 6, 'ApplicationRight', 'PageSection\Create',1908,1908,1908,1908);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(123, 6, 'ApplicationRight', 'PageSection\Delete',1909,1909,1909,1909);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(124, 6, 'ApplicationRight', 'PageSection\Update',1910,1910,1910,1910);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(125, 6, 'ApplicationRight', 'PageSection\Index',1911,1911,1911,1911);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(126, 6, 'ApplicationRight', 'PageSection\LanguageEdit',1912,1912,1912,1912);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(127, 6, 'ApplicationRight', 'PageSection\LanguageIndex',1913,1913,1913,1913);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(128, 6, 'ApplicationRight', 'PageSectionContentCondition\Create',1914,1914,1914,1914);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(129, 6, 'ApplicationRight', 'PageSectionContentCondition\Delete',1915,1915,1915,1915);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(130, 6, 'ApplicationRight', 'PageSectionContentCondition\Update',1916,1916,1916,1916);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(131, 6, 'ApplicationRight', 'PageSectionContentCondition\Index',1917,1917,1917,1917);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(132, 6, 'ApplicationRight', 'PageSectionProcessCondition\Create',1918,1918,1918,1918);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(133, 6, 'ApplicationRight', 'PageSectionProcessCondition\Delete',1919,1919,1919,1919);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(134, 6, 'ApplicationRight', 'PageSectionProcessCondition\Update',1920,1920,1920,1920);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(135, 6, 'ApplicationRight', 'PageSectionProcessCondition\Index',1921,1921,1921,1921);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(136, 14, 'ApplicationRight', 'Partial\LeftMenu',1922,1922,1922,1922);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(137, 8, 'ApplicationRight', 'Person\AdvancedSearch',1923,1923,1923,1923);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(138, 8, 'ApplicationRight', 'Person\Create',1924,1924,1924,1924);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(139, 8, 'ApplicationRight', 'Person\Delete',1925,1925,1925,1925);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(140, 8, 'ApplicationRight', 'Person\Update',1926,1926,1926,1926);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(141, 8, 'ApplicationRight', 'Person\Index',1927,1927,1927,1927);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(142, 8, 'ApplicationRight', 'PersonAddress\Create',1928,1928,1928,1928);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(143, 8, 'ApplicationRight', 'PersonAddress\Delete',1929,1929,1929,1929);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(144, 8, 'ApplicationRight', 'PersonAddress\Update',1930,1930,1930,1930);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(145, 8, 'ApplicationRight', 'PersonAddress\Index',1931,1931,1931,1931);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(146, 8, 'ApplicationRight', 'PersonRelation\Create',1932,1932,1932,1932);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(147, 8, 'ApplicationRight', 'PersonRelation\Delete',1933,1933,1933,1933);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(148, 8, 'ApplicationRight', 'PersonRelation\Update',1934,1934,1934,1934);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(149, 8, 'ApplicationRight', 'PersonRelation\Index',1935,1935,1935,1935);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(150, 8, 'ApplicationRight', 'PersonRelationType\Create',1936,1936,1936,1936);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(151, 8, 'ApplicationRight', 'PersonRelationType\Delete',1937,1937,1937,1937);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(152, 8, 'ApplicationRight', 'PersonRelationType\Update',1938,1938,1938,1938);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(153, 8, 'ApplicationRight', 'PersonRelationType\Index',1939,1939,1939,1939);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(154, 8, 'ApplicationRight', 'PersonTelecom\Create',1940,1940,1940,1940);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(155, 8, 'ApplicationRight', 'PersonTelecom\Delete',1941,1941,1941,1941);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(156, 8, 'ApplicationRight', 'PersonTelecom\Update',1942,1942,1942,1942);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(157, 8, 'ApplicationRight', 'PersonTelecom\Index',1943,1943,1943,1943);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(158, 7, 'ApplicationRight', 'ProcessTemplate\Create',1944,1944,1944,1944);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(159, 7, 'ApplicationRight', 'ProcessTemplate\Delete',1945,1945,1945,1945);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(160, 7, 'ApplicationRight', 'ProcessTemplate\Update',1946,1946,1946,1946);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(161, 7, 'ApplicationRight', 'ProcessTemplate\Index',1947,1947,1947,1947);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(162, 7, 'ApplicationRight', 'ProcessTemplate\LanguageEdit',1948,1948,1948,1948);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(163, 7, 'ApplicationRight', 'ProcessTemplate\LanguageIndex',1949,1949,1949,1949);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(164, 7, 'ApplicationRight', 'ProcessTemplateField\Create',1950,1950,1950,1950);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(165, 7, 'ApplicationRight', 'ProcessTemplateField\Delete',1951,1951,1951,1951);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(166, 7, 'ApplicationRight', 'ProcessTemplateField\Update',1952,1952,1952,1952);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(167, 7, 'ApplicationRight', 'ProcessTemplateField\Index',1953,1953,1953,1953);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(168, 7, 'ApplicationRight', 'ProcessTemplateField\LanguageEdit',1954,1954,1954,1954);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(169, 7, 'ApplicationRight', 'ProcessTemplateField\LanguageIndex',1955,1955,1955,1955);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(170, 7, 'ApplicationRight', 'ProcessTemplateFieldStage\Update',1956,1956,1956,1956);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(171, 7, 'ApplicationRight', 'ProcessTemplateFieldStage\Index',1957,1957,1957,1957);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(172, 7, 'ApplicationRight', 'ProcessTemplateFlow\Create',1958,1958,1958,1958);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(173, 7, 'ApplicationRight', 'ProcessTemplateFlow\Delete',1959,1959,1959,1959);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(174, 7, 'ApplicationRight', 'ProcessTemplateFlow\Update',1960,1960,1960,1960);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(175, 7, 'ApplicationRight', 'ProcessTemplateFlow\Index',1961,1961,1961,1961);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(176, 7, 'ApplicationRight', 'ProcessTemplateFlow\LanguageEdit',1962,1962,1962,1962);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(177, 7, 'ApplicationRight', 'ProcessTemplateFlow\LanguageIndex',1963,1963,1963,1963);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(178, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\Create',1964,1964,1964,1964);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(179, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\Delete',1965,1965,1965,1965);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(180, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\Update',1966,1966,1966,1966);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(181, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\Index',1967,1967,1967,1967);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(182, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\LanguageEdit',1968,1968,1968,1968);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(183, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\LanguageIndex',1969,1969,1969,1969);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(184, 7, 'ApplicationRight', 'ProcessTemplateFlowPass\Create',1970,1970,1970,1970);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(185, 7, 'ApplicationRight', 'ProcessTemplateFlowPass\Delete',1971,1971,1971,1971);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(186, 7, 'ApplicationRight', 'ProcessTemplateFlowPass\Update',1972,1972,1972,1972);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(187, 7, 'ApplicationRight', 'ProcessTemplateFlowPass\Index',1973,1973,1973,1973);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(188, 7, 'ApplicationRight', 'ProcessTemplateGroup\Create',1974,1974,1974,1974);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(189, 7, 'ApplicationRight', 'ProcessTemplateGroup\Delete',1975,1975,1975,1975);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(190, 7, 'ApplicationRight', 'ProcessTemplateGroup\Update',1976,1976,1976,1976);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(191, 7, 'ApplicationRight', 'ProcessTemplateGroup\Index',1977,1977,1977,1977);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(192, 7, 'ApplicationRight', 'ProcessTemplateGroup\LanguageEdit',1978,1978,1978,1978);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(193, 7, 'ApplicationRight', 'ProcessTemplateGroup\LanguageIndex',1979,1979,1979,1979);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(194, 7, 'ApplicationRight', 'ProcessTemplateStage\Create',1980,1980,1980,1980);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(195, 7, 'ApplicationRight', 'ProcessTemplateStage\Delete',1981,1981,1981,1981);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(196, 7, 'ApplicationRight', 'ProcessTemplateStage\Update',1982,1982,1982,1982);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(197, 7, 'ApplicationRight', 'ProcessTemplateStage\Index',1983,1983,1983,1983);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(198, 7, 'ApplicationRight', 'ProcessTemplateStage\LanguageEdit',1984,1984,1984,1984);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(199, 7, 'ApplicationRight', 'ProcessTemplateStage\LanguageIndex',1985,1985,1985,1985);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(200, 7, 'ApplicationRight', 'ProcessTemplateStageField\Update',1986,1986,1986,1986);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(201, 7, 'ApplicationRight', 'ProcessTemplateStageField\Index',1987,1987,1987,1987);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(202, 7, 'ApplicationRight', 'ProcessTemplateStageType\Create',1988,1988,1988,1988);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(203, 7, 'ApplicationRight', 'ProcessTemplateStageType\Delete',1989,1989,1989,1989);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(204, 7, 'ApplicationRight', 'ProcessTemplateStageType\Update',1990,1990,1990,1990);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(205, 7, 'ApplicationRight', 'ProcessTemplateStageType\Index',1991,1991,1991,1991);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(206, 7, 'ApplicationRight', 'ProcessTemplateStageType\LanguageEdit',1992,1992,1992,1992);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(207, 7, 'ApplicationRight', 'ProcessTemplateStageType\LanguageIndex',1993,1993,1993,1993);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(208, 5, 'ApplicationRight', 'Project\Create',1994,1994,1994,1994);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(209, 5, 'ApplicationRight', 'Project\Delete',1995,1995,1995,1995);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(210, 5, 'ApplicationRight', 'Project\Update',1996,1996,1996,1996);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(211, 5, 'ApplicationRight', 'Project\Index',1997,1997,1997,1997);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(212, 5, 'ApplicationRight', 'Project\LanguageEdit',1998,1998,1998,1998);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(213, 5, 'ApplicationRight', 'Project\LanguageIndex',1999,1999,1999,1999);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(214, 5, 'ApplicationRight', 'ProjectType\Create',2000,2000,2000,2000);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(215, 5, 'ApplicationRight', 'ProjectType\Delete',2001,2001,2001,2001);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(216, 5, 'ApplicationRight', 'ProjectType\Update',2002,2002,2002,2002);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(217, 5, 'ApplicationRight', 'ProjectType\Index',2003,2003,2003,2003);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(218, 5, 'ApplicationRight', 'ProjectType\LanguageEdit',2004,2004,2004,2004);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(219, 5, 'ApplicationRight', 'ProjectType\LanguageIndex',2005,2005,2005,2005);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(220, 10, 'ApplicationRight', 'Property\Create',2006,2006,2006,2006);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(221, 10, 'ApplicationRight', 'Property\Delete',2007,2007,2007,2007);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(222, 10, 'ApplicationRight', 'Property\Update',2008,2008,2008,2008);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(223, 10, 'ApplicationRight', 'Property\Index',2009,2009,2009,2009);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(224, 10, 'ApplicationRight', 'Property\LanguageCreate',2010,2010,2010,2010);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(225, 10, 'ApplicationRight', 'Property\LanguageEdit',2011,2011,2011,2011);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(226, 10, 'ApplicationRight', 'Property\LanguageIndex',2012,2012,2012,2012);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(227, 10, 'ApplicationRight', 'PropertyValue\Create',2013,2013,2013,2013);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(228, 10, 'ApplicationRight', 'PropertyValue\Delete',2014,2014,2014,2014);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(229, 10, 'ApplicationRight', 'PropertyValue\Update',2015,2015,2015,2015);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(230, 10, 'ApplicationRight', 'PropertyValue\Index',2016,2016,2016,2016);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(231, 10, 'ApplicationRight', 'PropertyValue\LanguageCreate',2017,2017,2017,2017);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(232, 10, 'ApplicationRight', 'PropertyValue\LanguageEdit',2018,2018,2018,2018);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(233, 10, 'ApplicationRight', 'PropertyValue\LanguageIndex',2019,2019,2019,2019);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(234, 1, 'ApplicationRight', 'Role\Create',2020,2020,2020,2020);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(235, 1, 'ApplicationRight', 'Role\Delete',2021,2021,2021,2021);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(236, 1, 'ApplicationRight', 'Role\Update',2022,2022,2022,2022);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(237, 1, 'ApplicationRight', 'Role\Index',2023,2023,2023,2023);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(238, 1, 'ApplicationRight', 'RoleClaim\Create',2024,2024,2024,2024);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(239, 1, 'ApplicationRight', 'RoleClaim\Delete',2025,2025,2025,2025);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(240, 1, 'ApplicationRight', 'RoleClaim\Index',2026,2026,2026,2026);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(241, 1, 'ApplicationRight', 'RoleGroup\Create',2027,2027,2027,2027);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(242, 1, 'ApplicationRight', 'RoleGroup\Delete',2028,2028,2028,2028);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(243, 1, 'ApplicationRight', 'RoleGroup\Update',2029,2029,2029,2029);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(244, 1, 'ApplicationRight', 'RoleGroup\Index',2030,2030,2030,2030);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(245, 1, 'ApplicationRight', 'RoleGroup\LanguageEdit',2031,2031,2031,2031);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(246, 1, 'ApplicationRight', 'RoleGroup\LanguageIndex',2032,2032,2032,2032);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(247, 15, 'ApplicationRight', 'Search\General',2033,2033,2033,2033);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(248, 9, 'ApplicationRight', 'Setting\Update',2034,2034,2034,2034);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(249, 9, 'ApplicationRight', 'Setting\Index',2035,2035,2035,2035);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(250, 9, 'ApplicationRight', 'UITerm\Index',2036,2036,2036,2036);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(251, 9, 'ApplicationRight', 'UITerm\LanguageIndex',2037,2037,2037,2037);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(252, 1, 'ApplicationRight', 'User\Create',2038,2038,2038,2038);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(253, 1, 'ApplicationRight', 'User\Delete',2039,2039,2039,2039);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(254, 1, 'ApplicationRight', 'User\Update',2040,2040,2040,2040);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(255, 1, 'ApplicationRight', 'User\Index',2041,2041,2041,2041);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(256, 14, 'ApplicationRight', 'UserMenu\Create',2042,2042,2042,2042);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(257, 14, 'ApplicationRight', 'UserMenu\Delete',2043,2043,2043,2043);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(258, 14, 'ApplicationRight', 'UserMenu\Update',2044,2044,2044,2044);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(259, 14, 'ApplicationRight', 'UserMenu\Index',2045,2045,2045,2045);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(260, 1, 'ApplicationRight', 'UserMenuTemplate\Create',2046,2046,2046,2046);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(261, 1, 'ApplicationRight', 'UserMenuTemplate\Delete',2047,2047,2047,2047);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(262, 1, 'ApplicationRight', 'UserMenuTemplate\Update',2048,2048,2048,2048);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(263, 1, 'ApplicationRight', 'UserMenuTemplate\Index',2049,2049,2049,2049);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(264, 1, 'ApplicationRight', 'UserMenuTemplateOption\Create',2050,2050,2050,2050);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(265, 1, 'ApplicationRight', 'UserMenuTemplateOption\Delete',2051,2051,2051,2051);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(266, 1, 'ApplicationRight', 'UserMenuTemplateOption\Update',2052,2052,2052,2052);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(267, 1, 'ApplicationRight', 'UserMenuTemplateOption\Index',2053,2053,2053,2053);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(268, 14, 'ApplicationRight', 'UserPage\Create',2054,2054,2054,2054);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(269, 14, 'ApplicationRight', 'UserPage\Delete',2055,2055,2055,2055);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(270, 14, 'ApplicationRight', 'UserPage\Update',2056,2056,2056,2056);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(271, 14, 'ApplicationRight', 'UserPage\Index',2057,2057,2057,2057);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(272, 14, 'ApplicationRight', 'UserPageSection\Create',2058,2058,2058,2058);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(273, 14, 'ApplicationRight', 'UserPageSection\Delete',2059,2059,2059,2059);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(274, 14, 'ApplicationRight', 'UserPageSection\Update',2060,2060,2060,2060);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(275, 14, 'ApplicationRight', 'UserPageSection\Index',2061,2061,2061,2061);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(276, 14, 'ApplicationRight', 'UserPreference\Update',2062,2062,2062,2062);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(277, 14, 'ApplicationRight', 'UserPreference\Index',2063,2063,2063,2063);
+
 SET IDENTITY_INSERT Claims OFF;
 
 SET IDENTITY_INSERT ProcessTemplateFieldTypes ON
