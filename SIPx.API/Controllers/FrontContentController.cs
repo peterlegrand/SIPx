@@ -30,7 +30,19 @@ namespace SIPx.API.Controllers
         private readonly IFrontProvider _frontProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontContentController(IClassificationProvider classificationProvider, IClassificationValueProvider classificationValueProvider, IContentTypeProvider contentTypeProvider, ILanguageProvider languageProvider, IContentStatusProvider contentStatusProvider, ISecurityLevelProvider securityLevelProvider, IOrganizationProvider organizationProvider, IProjectProvider projectProvider, IFrontContentProvider frontContentProvider, IContentProvider contentProvider, IClaimCheck claimCheck, IFrontProvider frontProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontContentController(IClassificationProvider classificationProvider
+            , IClassificationValueProvider classificationValueProvider
+            , IContentTypeProvider contentTypeProvider
+            , ILanguageProvider languageProvider
+            , IContentStatusProvider contentStatusProvider
+            , ISecurityLevelProvider securityLevelProvider
+            , IOrganizationProvider organizationProvider
+            , IProjectProvider projectProvider
+            , IFrontContentProvider frontContentProvider
+            , IContentProvider contentProvider
+            , IClaimCheck claimCheck
+            , IFrontProvider frontProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _classificationProvider = classificationProvider;
             _classificationValueProvider = classificationValueProvider;

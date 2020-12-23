@@ -22,8 +22,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<UserMenuTemplateCreateGet>($"{_baseUrl}api/UserMenuTemplate/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -37,7 +37,15 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(UserMenuTemplateCreateGet UserMenuTemplate)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<UserMenuTemplateCreateGet>($"{_baseUrl}api/UserMenuTemplate/Create", UserMenuTemplate, token);
+            var UserMenuTemplateCreateGetWithErrorMessage = await _client.PostProtectedAsync<UserMenuTemplateCreateGetWithErrorMessages>($"{_baseUrl}api/UserMenuTemplate/Create", UserMenuTemplate, token);
+            if (UserMenuTemplateCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = UserMenuTemplateCreateGetWithErrorMessage.ErrorMessages;
+                return View(UserMenuTemplateCreateGetWithErrorMessage.UserMenuTemplate);
+            }
+
 
             return RedirectToAction("Index");
         }
@@ -46,25 +54,50 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<UserMenuTemplateIndexGet>>($"{_baseUrl}api/UserMenuTemplate/Index", token);
+            var response = await _client.GetProtectedAsync2<List<UserMenuTemplateIndexGet>>($"{_baseUrl}api/UserMenuTemplate/Index", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Index", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<UserMenuTemplateUpdateGet>($"{_baseUrl}api/UserMenuTemplate/Update/" + id, token);
+            var response = await _client.GetProtectedAsync2<UserMenuTemplateUpdateGet>($"{_baseUrl}api/UserMenuTemplate/Update/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Edit", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(UserMenuTemplateUpdateGet UserMenuTemplate)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<UserMenuTemplateUpdateGet>($"{_baseUrl}api/UserMenuTemplate/Update", UserMenuTemplate, token);
+            var UserMenuTemplateUpdateGetWithErrorMessage = await _client.PostProtectedAsync<UserMenuTemplateUpdateGetWithErrorMessages>($"{_baseUrl}api/UserMenuTemplate/Update", UserMenuTemplate, token);
+            if (UserMenuTemplateUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = UserMenuTemplateUpdateGetWithErrorMessage.ErrorMessages;
+                return View(UserMenuTemplateUpdateGetWithErrorMessage.UserMenuTemplate);
+            }
 
             return RedirectToAction("Index");
         }
@@ -73,10 +106,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<UserMenuTemplateDeleteGet>($"{_baseUrl}api/UserMenuTemplate/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<UserMenuTemplateDeleteGet>($"{_baseUrl}api/UserMenuTemplate/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]
@@ -92,31 +134,58 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<UserMenuTemplateLanguageIndexGet>>($"{_baseUrl}api/UserMenuTemplate/LanguageIndex/" + id, token);
+            var response = await _client.GetProtectedAsync2<List<UserMenuTemplateLanguageIndexGet>>($"{_baseUrl}api/UserMenuTemplate/LanguageIndex/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/LanguageIndex", token);
-            ViewBag.UITerms = UITerms;
             ViewBag.Id = id;
-            return View(response);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
 
         }
         [HttpGet]
         public async Task<IActionResult> LanguageEdit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<UserMenuTemplateLanguageIndexGet>($"{_baseUrl}api/UserMenuTemplate/LanguageUpdate/" + id, token);
+            var response = await _client.GetProtectedAsync2<UserMenuTemplateLanguageIndexGet>($"{_baseUrl}api/UserMenuTemplate/LanguageUpdate/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/LanguageEdit", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> LanguageCreate(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ObjectLanguageCreateGet>($"{_baseUrl}api/UserMenuTemplate/LanguageCreate/" + id, token);
+            var response = await _client.GetProtectedAsync2<ObjectLanguageCreateGet>($"{_baseUrl}api/UserMenuTemplate/LanguageCreate/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/LanguageCreate", token);
-            ViewBag.UITerms = UITerms;
             response.ObjectId = id;
-            return View(response);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> LanguageCreate(ObjectLanguageCreateGet UserMenuTemplateLanguage)

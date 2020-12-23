@@ -20,8 +20,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ProcessTemplateGroupCreateGet>($"{_baseUrl}api/ProcessTemplateGroup/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -35,7 +35,15 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(ProcessTemplateGroupCreateGet ProcessTemplateGroup)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ProcessTemplateGroupCreateGet>($"{_baseUrl}api/ProcessTemplateGroup/Create", ProcessTemplateGroup, token);
+            var ProcessTemplateGroupCreateGetWithErrorMessage = await _client.PostProtectedAsync<ProcessTemplateGroupCreateGetWithErrorMessages>($"{_baseUrl}api/ProcessTemplateGroup/Create", ProcessTemplateGroup, token);
+            if (ProcessTemplateGroupCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ProcessTemplateGroupCreateGetWithErrorMessage.ErrorMessages;
+                return View(ProcessTemplateGroupCreateGetWithErrorMessage.ProcessTemplateGroup);
+            }
+
 
             return RedirectToAction("Index");
         }
@@ -43,27 +51,51 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<ProcessTemplateGroupIndexGet>>($"{_baseUrl}api/ProcessTemplateGroup/Index",token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/Index", token);
-            ViewBag.UITerms = x;
-            return View(response);
-            //return View();
+            var response = await _client.GetProtectedAsync2<List<ProcessTemplateGroupIndexGet>>($"{_baseUrl}api/ProcessTemplateGroup/Index",token);
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/Index", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ProcessTemplateGroupUpdateGet>($"{_baseUrl}api/ProcessTemplateGroup/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<ProcessTemplateGroupUpdateGet>($"{_baseUrl}api/ProcessTemplateGroup/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(ProcessTemplateGroupUpdateGet ProcessTemplateGroup)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ProcessTemplateGroupUpdateGet>($"{_baseUrl}api/ProcessTemplateGroup/Update", ProcessTemplateGroup, token);
+            var ProcessTemplateGroupUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ProcessTemplateGroupUpdateGetWithErrorMessages>($"{_baseUrl}api/ProcessTemplateGroup/Update", ProcessTemplateGroup, token);
+            if (ProcessTemplateGroupUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ProcessTemplateGroupUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ProcessTemplateGroupUpdateGetWithErrorMessage.ProcessTemplateGroup);
+            }
 
             return RedirectToAction("Index");
         }
@@ -72,10 +104,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ProcessTemplateGroupDeleteGet>($"{_baseUrl}api/ProcessTemplateGroup/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<ProcessTemplateGroupDeleteGet>($"{_baseUrl}api/ProcessTemplateGroup/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]
@@ -92,8 +133,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<ProcessTemplateGroupLanguageIndexGet>>($"{_baseUrl}api/ProcessTemplateGroup/LanguageIndex/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/LanguageIndex", token);
-            ViewBag.UITerms = x;
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/LanguageIndex", token);
+            ViewBag.UITerms = UITerms;
             return View(response);
             //return View();
         }
@@ -102,8 +143,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<ProcessTemplateGroupLanguageIndexGet>($"{_baseUrl}api/ProcessTemplateGroup/LanguageUpdate/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/LanguageEdit", token);
-            ViewBag.UITerms = x;
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateGroup/LanguageEdit", token);
+            ViewBag.UITerms = UITerms;
             return View(response);
         }
 

@@ -21,8 +21,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ContentTypeCreateGet>($"{_baseUrl}api/ContentType/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -36,7 +36,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(ContentTypeCreateGet ContentType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ContentTypeCreateGet>($"{_baseUrl}api/ContentType/Create", ContentType, token);
+            var ContentTypeCreateGetWithErrorMessage = await _client.PostProtectedAsync<ContentTypeCreateGetWithErrorMessages>($"{_baseUrl}api/ContentType/Create", ContentType, token);
+            if (ContentTypeCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ContentTypeCreateGetWithErrorMessage.ErrorMessages;
+                return View(ContentTypeCreateGetWithErrorMessage.ContentType);
+            }
 
             return RedirectToAction("Index");
         }
@@ -44,27 +51,51 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<ContentTypeIndexGet>>($"{_baseUrl}api/ContentType/Index", token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Index", token);
-            ViewBag.UITerms = x;
-            return View(response);
-            //return View();
+            var response = await _client.GetProtectedAsync2<List<ContentTypeIndexGet>>($"{_baseUrl}api/ContentType/Index", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Index", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ContentTypeUpdateGet>($"{_baseUrl}api/ContentType/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<ContentTypeUpdateGet>($"{_baseUrl}api/ContentType/Update/" + id, token);
+            var Terms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Edit", token);
+            ViewBag.UITerms = Terms;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(ContentTypeUpdateGet ContentType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ContentTypeUpdateGet>($"{_baseUrl}api/ContentType/Update", ContentType, token);
+            var ContentTypeUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ContentTypeUpdateGetWithErrorMessages>($"{_baseUrl}api/ContentType/Update", ContentType, token);
+            if (ContentTypeUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ContentTypeUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ContentTypeUpdateGetWithErrorMessage.ContentType);
+            }
 
             return RedirectToAction("Index");
         }
@@ -73,10 +104,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ContentTypeDeleteGet>($"{_baseUrl}api/ContentType/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<ContentTypeDeleteGet>($"{_baseUrl}api/ContentType/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]

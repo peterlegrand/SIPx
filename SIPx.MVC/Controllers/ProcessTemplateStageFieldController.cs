@@ -37,16 +37,32 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ProcessTemplateStageFieldUpdateGet>($"{_baseUrl}api/ProcessTemplateStageField/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateStageField/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<ProcessTemplateStageFieldUpdateGet>($"{_baseUrl}api/ProcessTemplateStageField/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateStageField/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ProcessTemplateStageFieldUpdateGet>($"{_baseUrl}api/ProcessTemplateStageField/Update", ProcessTemplateStageField, token);
+            var ProcessTemplateStageFieldUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ProcessTemplateStageFieldUpdateGetWithErrorMessages>($"{_baseUrl}api/ProcessTemplateStageField/Update", ProcessTemplateStageField, token);
+            if (ProcessTemplateStageFieldUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateStageField/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ProcessTemplateStageFieldUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ProcessTemplateStageFieldUpdateGetWithErrorMessage.ProcessTemplateStageField);
+            }
 
             return RedirectToAction("Index", new { id = ProcessTemplateStageField.ProcessTemplateStageId });
         }

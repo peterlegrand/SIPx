@@ -26,8 +26,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<PropertyValueCreateGet>($"{_baseUrl}api/PropertyValue/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -41,11 +41,16 @@ namespace SIPx.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PropertyValueCreateGet PropertyValue)
         {
-            var token = HttpContext.Session.GetString("Token");
-            if(token == null)
-            { return RedirectToAction("Login","FrontAuth");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
+            var PropertyValueCreateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyValueCreateGetWithErrorMessages>($"{_baseUrl}api/PropertyValue/Create", PropertyValue, token);
+            if (PropertyValueCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = PropertyValueCreateGetWithErrorMessage.ErrorMessages;
+                return View(PropertyValueCreateGetWithErrorMessage.PropertyValue);
             }
-            await _client.PostProtectedAsync<PropertyValueCreateGet>($"{_baseUrl}api/PropertyValue/Create", PropertyValue, token);
+
 
             return RedirectToAction("Index", new { id = PropertyValue.PropertyId });
         }
@@ -57,12 +62,20 @@ namespace SIPx.MVC.Controllers
             if(token == null)
             { return RedirectToAction("Login","FrontAuth");
             }
-            var response = await _client.GetProtectedAsync<List<PropertyValueIndexGet>>($"{_baseUrl}api/PropertyValue/Index/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Index", token);
-            ViewBag.UITerms = x;
-            ViewBag.Id = id;
-            return View(response);
-            //return View();
+            var response = await _client.GetProtectedAsync2<List<PropertyValueIndexGet>>($"{_baseUrl}api/PropertyValue/Index/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Index", token);
+           ViewBag.Id = id;
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpGet]
@@ -72,20 +85,33 @@ namespace SIPx.MVC.Controllers
             if(token == null)
             { return RedirectToAction("Login","FrontAuth");
             }
-            var response = await _client.GetProtectedAsync<PropertyValueUpdateGet>($"{_baseUrl}api/PropertyValue/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<PropertyValueUpdateGet>($"{_baseUrl}api/PropertyValue/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(PropertyValueUpdateGet PropertyValue)
         {
-            var token = HttpContext.Session.GetString("Token");
-            if(token == null)
-            { return RedirectToAction("Login","FrontAuth");
+            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
+            var PropertyValueUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyValueUpdateGetWithErrorMessages>($"{_baseUrl}api/PropertyValue/Update", PropertyValue, token);
+            if (PropertyValueUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = PropertyValueUpdateGetWithErrorMessage.ErrorMessages;
+                return View(PropertyValueUpdateGetWithErrorMessage.PropertyValue);
             }
-            await _client.PostProtectedAsync<PropertyValueUpdateGet>($"{_baseUrl}api/PropertyValue/Update", PropertyValue, token);
 
             return RedirectToAction("Index", new { id = PropertyValue.PropertyId });
         }
@@ -97,10 +123,19 @@ namespace SIPx.MVC.Controllers
             if(token == null)
             { return RedirectToAction("Login","FrontAuth");
             }
-            var response = await _client.GetProtectedAsync<PropertyValueDeleteGet>($"{_baseUrl}api/PropertyValue/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<PropertyValueDeleteGet>($"{_baseUrl}api/PropertyValue/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]
@@ -124,8 +159,8 @@ namespace SIPx.MVC.Controllers
         //    { return RedirectToAction("Login","FrontAuth");
         //    }
         //    var response = await _client.GetProtectedAsync<List<PropertyValueLanguageIndexGet>>($"{_baseUrl}api/PropertyValue/LanguageIndex/" + id, token);
-        //    var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/LanguageIndex", token);
-        //    ViewBag.UITerms = x;
+        //    var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/LanguageIndex", token);
+        //    ViewBag.UITerms = UITerms;
         //    return View(response);
         //    //return View();
         //}
@@ -138,8 +173,8 @@ namespace SIPx.MVC.Controllers
         //    { return RedirectToAction("Login","FrontAuth");
         //    }
         //    var response = await _client.GetProtectedAsync<PropertyValueLanguageIndexGet>($"{_baseUrl}api/PropertyValue/LanguageUpdate/" + id, token);
-        //    var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/LanguageEdit", token);
-        //    ViewBag.UITerms = x;
+        //    var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/LanguageEdit", token);
+        //    ViewBag.UITerms = UITerms;
         //    return View(response);
         //}
     }

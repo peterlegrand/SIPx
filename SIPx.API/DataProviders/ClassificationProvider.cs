@@ -56,7 +56,7 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationUpdateGet Classification)
         {
-            string usp = "usp_ClassificationUpdatePostCheck @classificationLanguageId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @UserId ";
+            string usp = "usp_ClassificationUpdatePostCheck @classificationId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @UserId ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Classification);
             return ErrorMessages;
         }

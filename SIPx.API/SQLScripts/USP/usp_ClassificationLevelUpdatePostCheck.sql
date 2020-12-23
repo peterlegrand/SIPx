@@ -25,7 +25,7 @@ SELECT @ClassificationId = ClassificationId FROM Classificationlevels WHERE Clas
 BEGIN 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF @Name ='' 
+IF @Name ='' OR @Name IS NULL
 BEGIN
 insert into @ErrorIdsTable values(104)
 END

@@ -20,8 +20,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ClassificationRelationTypeCreateGet>($"{_baseUrl}api/ClassificationRelationType/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -35,7 +35,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(ClassificationRelationTypeCreateGet ClassificationRelationType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationRelationTypeCreateGet>($"{_baseUrl}api/ClassificationRelationType/Create", ClassificationRelationType, token);
+            var ClassificationRelationTypeCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationRelationTypeCreateGetWithErrorMessages>($"{_baseUrl}api/ClassificationRelationType/Create", ClassificationRelationType, token);
+            if (ClassificationRelationTypeCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ClassificationRelationTypeCreateGetWithErrorMessage.ErrorMessages;
+                return View(ClassificationRelationTypeCreateGetWithErrorMessage.ClassificationRelationType);
+            }
 
             return RedirectToAction("Index");
         }
@@ -43,26 +50,50 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<ClassificationRelationTypeIndexGet>>($"{_baseUrl}api/ClassificationRelationType/Index",token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Index", token);
-            ViewBag.UITerms = x;
-            return View(response);
-            //return View();
+            var response = await _client.GetProtectedAsync2<List<ClassificationRelationTypeIndexGet>>($"{_baseUrl}api/ClassificationRelationType/Index",token);
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Index", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ClassificationRelationTypeUpdateGet>($"{_baseUrl}api/ClassificationRelationType/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<ClassificationRelationTypeUpdateGet>($"{_baseUrl}api/ClassificationRelationType/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(ClassificationRelationTypeUpdateGet ClassificationRelationType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationRelationTypeUpdateGet>($"{_baseUrl}api/ClassificationRelationType/Update", ClassificationRelationType, token);
+            var ClassificationRelationTypeUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationRelationTypeUpdateGetWithErrorMessages>($"{_baseUrl}api/ClassificationRelationType/Update", ClassificationRelationType, token);
+            if (ClassificationRelationTypeUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ClassificationRelationTypeUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ClassificationRelationTypeUpdateGetWithErrorMessage.ClassificationRelationType);
+            }
 
             return RedirectToAction("Index");
         }
@@ -70,10 +101,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ClassificationRelationTypeDeleteGet>($"{_baseUrl}api/ClassificationRelationType/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<ClassificationRelationTypeDeleteGet>($"{_baseUrl}api/ClassificationRelationType/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]
@@ -91,8 +131,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<ClassificationRelationTypeLanguageIndexGet>>($"{_baseUrl}api/ClassificationRelation/LanguageIndex/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelation/LanguageIndex", token);
-            ViewBag.UITerms = x;
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelation/LanguageIndex", token);
+            ViewBag.UITerms = UITerms;
             return View(response);
             //return View();
         }
@@ -101,8 +141,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<ClassificationRelationTypeLanguageIndexGet>($"{_baseUrl}api/ClassificationRelation/LanguageUpdate/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelation/LanguageEdit", token);
-            ViewBag.UITerms = x;
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelation/LanguageEdit", token);
+            ViewBag.UITerms = UITerms;
             return View(response);
         }
     }

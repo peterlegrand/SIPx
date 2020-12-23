@@ -20,8 +20,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ClassificationRoleCreateGet>($"{_baseUrl}api/ClassificationRole/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -35,34 +35,65 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(ClassificationRoleCreateGet ClassificationRole)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationRoleCreateGet>($"{_baseUrl}api/ClassificationRole/Create", ClassificationRole, token);
+            var ClassificationRoleCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationRoleCreateGetWithErrorMessages>($"{_baseUrl}api/ClassificationRole/Create", ClassificationRole, token);
 
+            if (ClassificationRoleCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ClassificationRoleCreateGetWithErrorMessage.ErrorMessages;
+                return View(ClassificationRoleCreateGetWithErrorMessage.ClassificationRole);
+            }
             return RedirectToAction("Index", new { id = ClassificationRole.ClassificationId });
         }
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<ClassificationRoleIndexGet>>($"{_baseUrl}api/ClassificationRole/Index/" + id,token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Index", token);
-            ViewBag.UITerms = x;
+            var response = await _client.GetProtectedAsync2<List<ClassificationRoleIndexGet>>($"{_baseUrl}api/ClassificationRole/Index/" + id,token);
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Index", token);
             ViewBag.Id = id;
-            return View(response);
-            //return View();
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ClassificationRoleUpdateGet>($"{_baseUrl}api/ClassificationRole/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<ClassificationRoleUpdateGet>($"{_baseUrl}api/ClassificationRole/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(ClassificationRoleUpdateGet ClassificationRole)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationRoleUpdateGet>($"{_baseUrl}api/ClassificationRole/Update", ClassificationRole, token);
+            var ClassificationRoleUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationRoleUpdateGetWithErrorMessages>($"{_baseUrl}api/ClassificationRole/Update", ClassificationRole, token);
+            if (ClassificationRoleUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ClassificationRoleUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ClassificationRoleUpdateGetWithErrorMessage.ClassificationRole);
+            }
 
             return RedirectToAction("Index", new { id = ClassificationRole.ClassificationId });
         }
@@ -70,10 +101,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ClassificationRoleDeleteGet>($"{_baseUrl}api/ClassificationRole/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<ClassificationRoleDeleteGet>($"{_baseUrl}api/ClassificationRole/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]

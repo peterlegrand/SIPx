@@ -20,8 +20,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<PersonTelecomCreateGet>($"{_baseUrl}api/PersonTelecom/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -35,35 +35,67 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(PersonTelecomCreateGet PersonTelecom)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PersonTelecomCreateGet>($"{_baseUrl}api/PersonTelecom/Create", PersonTelecom, token);
+            var PersonTelecomCreateGetWithErrorMessage = await _client.PostProtectedAsync<PersonTelecomCreateGetWithErrorMessages>($"{_baseUrl}api/PersonTelecom/Create", PersonTelecom, token);
+            if (PersonTelecomCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = PersonTelecomCreateGetWithErrorMessage.ErrorMessages;
+                return View(PersonTelecomCreateGetWithErrorMessage.PersonTelecom);
+            }
+
 
             return RedirectToAction("Index", new { id = PersonTelecom.PersonId });
         }
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<PersonTelecomIndexGet>>($"{_baseUrl}api/PersonTelecom/Index/" + id,token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Index", token);
-            ViewBag.UITerms = x;
+            var response = await _client.GetProtectedAsync2<List<PersonTelecomIndexGet>>($"{_baseUrl}api/PersonTelecom/Index/" + id,token);
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Index", token);
             ViewBag.Id = id;
-            return View(response);
-            //return View();
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PersonTelecomUpdateGet>($"{_baseUrl}api/PersonTelecom/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<PersonTelecomUpdateGet>($"{_baseUrl}api/PersonTelecom/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(PersonTelecomUpdateGet PersonTelecom)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PersonTelecomUpdateGet>($"{_baseUrl}api/PersonTelecom/Update", PersonTelecom, token);
+            var PersonTelecomUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PersonTelecomUpdateGetWithErrorMessages>($"{_baseUrl}api/PersonTelecom/Update", PersonTelecom, token);
+            if (PersonTelecomUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = PersonTelecomUpdateGetWithErrorMessage.ErrorMessages;
+                return View(PersonTelecomUpdateGetWithErrorMessage.PersonTelecom);
+            }
 
             return RedirectToAction("Index", new { id = PersonTelecom.PersonId });
         }
@@ -72,10 +104,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PersonTelecomDeleteGet>($"{_baseUrl}api/PersonTelecom/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<PersonTelecomDeleteGet>($"{_baseUrl}api/PersonTelecom/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonTelecom/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]

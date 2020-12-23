@@ -108,7 +108,34 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ContentTypeUpdateGet ContentType)
         {
-            string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @Color, @IconId, @ContentTypeClassificationTable";
+            string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @IsRelationBasedOwnership " +
+   " , @IsProjectBasedOwnership " +
+   " , @IsOrganizationBasedOwnership " +
+   " , @IsFreeOwnership " +
+   " , @IsRelationBasedEdit " +
+   " , @IsRelationBasedEditSelectable " +
+   " , @IsOrganizationBasedEdit " +
+   " , @IsOrganizationBasedEditSelectable " +
+   " , @IsOrganizationBasedEditSub " +
+   " , @IsOrganizationBasedEditParent " +
+   " , @IsProjectBasedEdit " +
+   " , @IsProjectBasedEditSelectable " +
+   " , @IsProjectBasedEditSub " +
+   " , @IsProjectBasedEditParent " +
+   " , @IsFreeEdit " +
+   " , @IsFreeEditSelectable " +
+   " , @IsRelationBasedRead " +
+   " , @IsRelationBasedReadSelectable " +
+   " , @IsOrganizationBasedRead " +
+   " , @IsOrganizationBasedReadSelectable " +
+   " , @IsOrganizationBasedReadSub " +
+   " , @IsOrganizationBasedReadParent " +
+   " , @IsProjectBasedRead " +
+   " , @IsProjectBasedReadSelectable " +
+   " , @IsProjectBasedReadSub " +
+   " , @IsProjectBasedReadParent " +
+   " , @IsFreeRead " + 
+   " , @IsFreeReadSelectable, @Color, @IconId, @ContentTypeClassificationTable";
             _sqlDataAccess.SaveData<ContentTypeUpdateGet>(usp, ContentType);
             return true;
 

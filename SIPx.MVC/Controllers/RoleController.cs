@@ -20,8 +20,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<RoleCreateGet>($"{_baseUrl}api/Role/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -35,7 +35,15 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(RoleCreateGet Role)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<RoleCreateGet>($"{_baseUrl}api/Role/Create", Role, token);
+            var RoleCreateGetWithErrorMessage = await _client.PostProtectedAsync<RoleCreateGetWithErrorMessages>($"{_baseUrl}api/Role/Create", Role, token);
+            if (RoleCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = RoleCreateGetWithErrorMessage.ErrorMessages;
+                return View(RoleCreateGetWithErrorMessage.Role);
+            }
+
 
             return RedirectToAction("Index");
         }
@@ -43,27 +51,51 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<RoleIndexGet>>($"{_baseUrl}api/Role/Index",token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Index", token);
-            ViewBag.UITerms = x;
-            return View(response);
-            //return View();
+            var response = await _client.GetProtectedAsync2<List<RoleIndexGet>>($"{_baseUrl}api/Role/Index",token);
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Index", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<RoleUpdateGet>($"{_baseUrl}api/Role/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<RoleUpdateGet>($"{_baseUrl}api/Role/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(RoleUpdateGet Role)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<RoleUpdateGet>($"{_baseUrl}api/Role/Update", Role, token);
+            var RoleUpdateGetWithErrorMessage = await _client.PostProtectedAsync<RoleUpdateGetWithErrorMessages>($"{_baseUrl}api/Role/Update", Role, token);
+            if (RoleUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = RoleUpdateGetWithErrorMessage.ErrorMessages;
+                return View(RoleUpdateGetWithErrorMessage.Role);
+            }
 
             return RedirectToAction("Index");
         }
@@ -72,10 +104,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<RoleDeleteGet>($"{_baseUrl}api/Role/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<RoleDeleteGet>($"{_baseUrl}api/Role/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Role/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]

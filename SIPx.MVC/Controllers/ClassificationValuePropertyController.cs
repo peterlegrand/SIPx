@@ -20,8 +20,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ClassificationValuePropertyCreateGet>($"{_baseUrl}api/ClassificationValueProperty/CreateProperty/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/CreateProperty", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -44,7 +44,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(ClassificationValuePropertyCreateGet ClassificationValueProperty)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            await _client.PostProtectedAsync<ClassificationValuePropertyCreateGet>($"{_baseUrl}api/ClassificationValueProperty/Create", ClassificationValueProperty, token);
+           var ClassificationValuePropertyCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationValuePropertyCreateGetWithErrorMessages>($"{_baseUrl}api/ClassificationValueProperty/Create", ClassificationValueProperty, token);
+            if (ClassificationValuePropertyCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ClassificationValuePropertyCreateGetWithErrorMessage.ErrorMessages;
+                return View(ClassificationValuePropertyCreateGetWithErrorMessage.ClassificationValueProperty);
+            }
 
             return RedirectToAction("Index", new { id = ClassificationValueProperty.ClassificationId });
         }
@@ -52,27 +59,51 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<ClassificationValuePropertyIndexGet>>($"{_baseUrl}api/ClassificationValueProperty/Index/" + id,token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Index", token);
-            ViewBag.UITerms = x;
+            var response = await _client.GetProtectedAsync2<List<ClassificationValuePropertyIndexGet>>($"{_baseUrl}api/ClassificationValueProperty/Index/" + id,token);
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Index", token);
             ViewBag.Id = id;
-            return View(response);
-            //return View();
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ClassificationValuePropertyUpdateGet>($"{_baseUrl}api/ClassificationValueProperty/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<ClassificationValuePropertyUpdateGet>($"{_baseUrl}api/ClassificationValueProperty/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(ClassificationValuePropertyUpdateGet ClassificationValueProperty)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationValuePropertyUpdateGet>($"{_baseUrl}api/ClassificationValueProperty/Update", ClassificationValueProperty, token);
+            var ClassificationValuePropertyUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationValuePropertyUpdateGetWithErrorMessages>($"{_baseUrl}api/ClassificationValueProperty/Update", ClassificationValueProperty, token);
+            if (ClassificationValuePropertyUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ClassificationValuePropertyUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ClassificationValuePropertyUpdateGetWithErrorMessage.ClassificationValueProperty);
+            }
 
             return RedirectToAction("Index", new { id = ClassificationValueProperty.ClassificationValueId });
         }
@@ -80,10 +111,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ClassificationValuePropertyDeleteGet>($"{_baseUrl}api/ClassificationValueProperty/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<ClassificationValuePropertyDeleteGet>($"{_baseUrl}api/ClassificationValueProperty/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]

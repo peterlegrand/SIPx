@@ -20,8 +20,8 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<SettingIndexGet>>($"{_baseUrl}api/Setting/Index",token);
             
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Setting/Index", token);
-            ViewBag.UITerms = x;
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Setting/Index", token);
+            ViewBag.UITerms = UITerms;
             return View(response);
             //return View();
         }
@@ -30,17 +30,32 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<SettingUpdateGet>($"{_baseUrl}api/Setting/Update/" + id, token);
-           
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Setting/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<SettingUpdateGet>($"{_baseUrl}api/Setting/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Setting/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(SettingUpdateGet Setting)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<SettingUpdateGet>($"{_baseUrl}api/Setting/Update", Setting, token);
+            var SettingUpdateGetWithErrorMessage = await _client.PostProtectedAsync<SettingUpdateGetWithErrorMessages>($"{_baseUrl}api/Setting/Update", Setting, token);
+            if (SettingUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Setting/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = SettingUpdateGetWithErrorMessage.ErrorMessages;
+                return View(SettingUpdateGetWithErrorMessage.Setting);
+            }
 
             return RedirectToAction("Index");
         }

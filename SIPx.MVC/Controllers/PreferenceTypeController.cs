@@ -17,8 +17,8 @@ namespace SIPx.MVC.Controllers
         //{
         //    var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
         //    var response = await _client.GetProtectedAsync<List<PreferenceTypeUpdateGet>>($"{_baseUrl}api/PreferenceType/Index",token);
-        //   var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PreferenceType/Index", token);
-        //    ViewBag.UITerms = x;
+        //   var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PreferenceType/Index", token);
+        //    ViewBag.UITerms = UITerms;
         //    return View(response);
         //    //return View();
         //}
@@ -28,8 +28,8 @@ namespace SIPx.MVC.Controllers
         //{
         //    var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
         //    var response = await _client.GetProtectedAsync<PreferenceTypeUpdateGet>($"{_baseUrl}api/PreferenceType/Update/" + id, token);
-        //    var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PreferenceType/Edit", token);
-        //    ViewBag.UITerms = x;
+        //    var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PreferenceType/Edit", token);
+        //    ViewBag.UITerms = UITerms;
         //    return View(response);
         //}
     }

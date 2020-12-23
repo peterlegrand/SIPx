@@ -20,8 +20,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<PageSectionProcessConditionCreateGet>($"{_baseUrl}api/PageSectionProcessCondition/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -36,6 +36,14 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<PageSectionProcessConditionCreateGet>($"{_baseUrl}api/PageSectionProcessCondition/Create", PageSectionProcessCondition, token);
+            var PageSectionProcessConditionCreateGetWithErrorMessage = await _client.PostProtectedAsync<PageSectionProcessConditionCreateGetWithErrorMessages>($"{_baseUrl}api/PageSectionProcessCondition/Create", PageSectionProcessCondition, token);
+            if (PageSectionProcessConditionCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = PageSectionProcessConditionCreateGetWithErrorMessage.ErrorMessages;
+                return View(PageSectionProcessConditionCreateGetWithErrorMessage.PageSectionProcessCondition);
+            }
 
             return RedirectToAction("Index", new { id = PageSectionProcessCondition.PageSectionId });
         }
@@ -43,28 +51,52 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<PageSectionProcessConditionIndexGet>>($"{_baseUrl}api/PageSectionProcessCondition/Index/" +id,token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Index", token);
-            ViewBag.UITerms = x;
+            var response = await _client.GetProtectedAsync2<List<PageSectionProcessConditionIndexGet>>($"{_baseUrl}api/PageSectionProcessCondition/Index/" +id,token);
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Index", token);
             ViewBag.Id = id;
-            return View(response);
-            //return View();
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PageSectionProcessConditionUpdateGet>($"{_baseUrl}api/PageSectionProcessCondition/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<PageSectionProcessConditionUpdateGet>($"{_baseUrl}api/PageSectionProcessCondition/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(PageSectionProcessConditionUpdateGet PageSectionProcessCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PageSectionUpdateGet>($"{_baseUrl}api/PageSectionProcessCondition/Update", PageSectionProcessCondition, token);
+            var PageSectionProcessConditionUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PageSectionProcessConditionUpdateGetWithErrorMessages>($"{_baseUrl}api/PageSectionProcessCondition/Update", PageSectionProcessCondition, token);
+            if (PageSectionProcessConditionUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = PageSectionProcessConditionUpdateGetWithErrorMessage.ErrorMessages;
+                return View(PageSectionProcessConditionUpdateGetWithErrorMessage.PageSectionProcessCondition);
+            }
 
             return RedirectToAction("Index", new { id = PageSectionProcessCondition.PageSectionId });
         }
@@ -73,10 +105,19 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PageSectionProcessConditionDeleteGet>($"{_baseUrl}api/PageSectionProcessCondition/Delete/" + id, token);
+            var response = await _client.GetProtectedAsync2<PageSectionProcessConditionDeleteGet>($"{_baseUrl}api/PageSectionProcessCondition/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Delete", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
 
         [HttpPost]
@@ -92,8 +133,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<PageSectionLanguageIndexGet>>($"{_baseUrl}api/PageSection/LanguageIndex/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageIndex", token);
-            ViewBag.UITerms = x;
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageIndex", token);
+            ViewBag.UITerms = UITerms;
             return View(response);
             //return View();
         }
@@ -102,8 +143,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<PageSectionLanguageIndexGet>($"{_baseUrl}api/PageSection/LanguageUpdate/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageEdit", token);
-            ViewBag.UITerms = x;
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageEdit", token);
+            ViewBag.UITerms = UITerms;
             return View(response);
         }
 

@@ -35,8 +35,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ClassificationCreateGet>($"{_baseUrl}api/Classification/Create/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
             ViewBag.UITerms = UITerms;
-            var x = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = x;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -52,7 +52,6 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var ClassificationCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationCreateGetWithErrorMessages>($"{_baseUrl}api/Classification/Create", Classification, token);
-//            (ClassificationCreateGet, List<ErrorMessage>) tuple = await _client.PostProtectedAsync<(ClassificationCreateGet, List<ErrorMessage>)>($"{_baseUrl}api/Classification/Create", Classification, token);
             if (ClassificationCreateGetWithErrorMessage.ErrorMessages.Count>0)
             {
                 var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Create", token);
@@ -86,6 +85,8 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ClassificationUpdateGet>($"{_baseUrl}api/Classification/Update/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Edit", token);
             ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
             var tool = new
             {
                 tooltipText = "Multiple Image upload",
@@ -113,24 +114,7 @@ namespace SIPx.MVC.Controllers
             {
                 foreach (var file in UploadFiles)
                 {
-                    //Below is the code for Saving the image to Azure Blob Storage
-                    //string blobstorageconnection = _configuration.GetValue<string>("blobstorage");
-                    //byte[] dataFiles;
-                    //CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
-                    //CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
-                    //CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference("filescontainers");
-
-                    //BlobContainerPermissions permissions = new BlobContainerPermissions
-                    //{
-                    //    PublicAccess = BlobContainerPublicAccessType.Blob
-                    //};
-                    //string systemFileName = file.FileName;
-                    //cloudBlobContainer.SetPermissionsAsync(permissions);
-                    //using (var target = new MemoryStream())
-                    //{
-                    //    file.CopyTo(target);
-                    //    dataFiles = target.ToArray();
-                    //}
+                   
                     string filename2 = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     string filename = _hostingEnv.WebRootPath + "\\images" + $@"\{filename2}";
                     if (!System.IO.File.Exists(filename))
@@ -158,8 +142,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(ClassificationUpdateGet Classification)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationUpdateGet>($"{_baseUrl}api/Classification/Update", Classification, token);
-
+            var ClassificationUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationUpdateGetWithErrorMessages>($"{_baseUrl}api/Classification/Update", Classification, token);
+            if (ClassificationUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ClassificationUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ClassificationUpdateGetWithErrorMessage.Classification);
+            }
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -169,7 +159,9 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync2<ClassificationDeleteGet>($"{_baseUrl}api/Classification/Delete/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Classification/Delete", token);
             ViewBag.UITerms = UITerms;
-            if(response.Item2 == true)
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
             {
                 return View(response.Item1);
             }

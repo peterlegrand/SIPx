@@ -17,26 +17,50 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<ContentTypeClassificationUpdateGet>>($"{_baseUrl}api/ContentTypeClassification/Index",token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentTypeClassification/Index", token);
-            ViewBag.UITerms = x;
-            return View(response);
-            //return View();
+            var response = await _client.GetProtectedAsync2<List<ContentTypeClassificationUpdateGet>>($"{_baseUrl}api/ContentTypeClassification/Index",token);
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentTypeClassification/Index", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<ContentTypeClassificationUpdateGet>($"{_baseUrl}api/ContentTypeClassification/Update/" + id, token);
-            var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentTypeClassification/Edit", token);
-            ViewBag.UITerms = x;
-            return View(response);
+            var response = await _client.GetProtectedAsync2<ContentTypeClassificationUpdateGet>($"{_baseUrl}api/ContentTypeClassification/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentTypeClassification/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(ContentTypeClassificationUpdateGet ContentTypeClassification)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ContentTypeClassificationUpdateGet>($"{_baseUrl}api/ContentTypeClassification/Update", ContentTypeClassification, token);
+            var ContentTypeClassificationUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ContentTypeClassificationUpdateGetWithErrorMessages>($"{_baseUrl}api/ContentTypeClassification/Update", ContentTypeClassification, token);
+            if (ContentTypeClassificationUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentTypeClassification/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ContentTypeClassificationUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ContentTypeClassificationUpdateGetWithErrorMessage.ContentTypeClassification);
+            }
 
             return RedirectToAction("Index", new { id = ContentTypeClassification.ContentTypeId });
         }

@@ -18,8 +18,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<UserRoleUpdateGet>>($"{_baseUrl}api/UserRole/Index",token);
-           var x = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserRole/Index", token);
-            ViewBag.UITerms = x;
+           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserRole/Index", token);
+            ViewBag.UITerms = UITerms;
             return View(response);
         }
     }

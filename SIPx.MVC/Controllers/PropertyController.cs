@@ -49,7 +49,15 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(PropertyCreateGet Property)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PropertyCreateGet>($"{_baseUrl}api/Property/Create", Property, token);
+            var PropertyCreateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyCreateGetWithErrorMessages>($"{_baseUrl}api/Property/Create", Property, token);
+            if (PropertyCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = PropertyCreateGetWithErrorMessage.ErrorMessages;
+                return View(PropertyCreateGetWithErrorMessage.Property);
+            }
+
 
             return RedirectToAction("Index");
         }
@@ -150,7 +158,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(PropertyUpdateGet Property)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PropertyUpdateGet>($"{_baseUrl}api/Property/Update", Property, token);
+            var PropertyUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyUpdateGetWithErrorMessages>($"{_baseUrl}api/Property/Update", Property, token);
+            if (PropertyUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = PropertyUpdateGetWithErrorMessage.ErrorMessages;
+                return View(PropertyUpdateGetWithErrorMessage.Property);
+            }
 
             return RedirectToAction("Index");
         }

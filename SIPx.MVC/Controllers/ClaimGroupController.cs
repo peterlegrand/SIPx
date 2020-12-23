@@ -18,7 +18,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<List<ClaimGroupUpdateGet>>($"{_baseUrl}api/ClaimGroup",token);
            var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClaimGroup/Index", token);
-            ViewBag.UITerms = x;
+            ViewBag.UITerms = UITerms;
             return View(response);
             //return View();
         }
@@ -29,7 +29,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await client.GetProtectedAsync<ClaimGroupUpdateGet>($"{_baseUrl}api/ClaimGroup/Update/" + id, token);
             var x = await client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClaimGroup/Edit", token);
-            ViewBag.UITerms = x;
+            ViewBag.UITerms = UITerms;
             return View(response);
         }
     }
