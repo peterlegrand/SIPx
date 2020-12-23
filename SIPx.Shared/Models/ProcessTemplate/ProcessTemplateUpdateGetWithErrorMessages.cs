@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ProcessTemplateGetWithErrorMessages
+    public class ProcessTemplateUpdateGetWithErrorMessages
     {
         [Key]
         public ProcessTemplateUpdateGet ProcessTemplate { get; set; }

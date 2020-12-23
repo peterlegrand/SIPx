@@ -26,10 +26,10 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<List<SequenceList>> CreatePostCheck(ClassificationValueCreateGet ClassificationValue)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ClassificationValueCreateGet ClassificationValue)
         {
             string usp = "usp_ClassificationValueCreatePostCheck @ClassificationId, @ParentId, @LanguageId , @Name, @UserId";
-            var ErrorMessages = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, ClassificationValue);
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationValue);
             return ErrorMessages;
         }
 
@@ -55,10 +55,10 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<List<SequenceList>> UpdatePostCheck(ClassificationValueUpdateGet ClassificationValue)
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationValueUpdateGet ClassificationValue)
         {
             string usp = "usp_ClassificationValueUpdatePostCheck @ClassificationValueId, @DateFrom, @DateTo, @Name, @Description, @MenuName, @MouseOver, @DropDownName, @PageName, @PageDescription, @HeaderName, @HeaderDescription, @TopicName, @UserId";
-            var ErrorMessages = await _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, ClassificationValue);
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationValue);
             return ErrorMessages;
         }
 

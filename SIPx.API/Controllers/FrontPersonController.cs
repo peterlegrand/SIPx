@@ -45,7 +45,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> AdvancedSearch()
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        var PersonAdvancedSearch = new FrontPersonAdvancedSearchGet();
         //        PersonAdvancedSearch = await _frontPersonProvider.FrontPersonAdvancedSearchGet(CurrentUser.Id);
@@ -64,7 +64,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> AdvancedSearch(FrontPersonAdvancedSearchGet SearchData)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        SearchData.UserId= CurrentUser.Id;
         //        //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
@@ -92,7 +92,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> AdvancedSearch()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var PersonSearch = new PersonAdvancedSearchPost();
                 PersonSearch.Classifications = await _classificationProvider.List(CurrentUser.Id);
@@ -116,7 +116,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             AdvancedSearch.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //var CheckString = await _personProvider.CreatePostCheck(Person);
                 //if (CheckString.Length == 0)

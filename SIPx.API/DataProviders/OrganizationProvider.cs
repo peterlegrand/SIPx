@@ -28,7 +28,7 @@ namespace SIPx.DataAccess
             return ErrorMessages;
         }
 
-        public async Task<string> CreatePost(OrganizationCreatePost Organization)
+        public async Task<string> CreatePost(OrganizationCreateGet Organization)
         {
             string usp = "usp_OrganizationCreatePost @ParentOrganizationId, @StatusId, @OrganizationTypeID, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Organization);

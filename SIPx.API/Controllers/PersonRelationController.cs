@@ -35,19 +35,27 @@ namespace SIPx.API.Controllers
             _claimCheck = claimCheck;
             _userManager = userManager;
         }
-
+        private async Task<PersonRelationCreateGet> CreateAddDropDownBoxes(PersonRelationCreateGet PersonRelation, string UserId)
+        {
+            var PersonRelationTypes = await _personRelationTypeProvider.List(UserId);
+            var Persons = await _personProvider.List();
+            PersonRelation.PersonRelationTypes = PersonRelationTypes;
+            PersonRelation.Persons = Persons;
+            return PersonRelation;
+        }
+        private async Task<PersonRelationUpdateGet> UpdateAddDropDownBoxes(PersonRelationUpdateGet PersonRelation, string UserId)
+        {
+            return PersonRelation;
+        }
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var PersonRelationCreateGet = new PersonRelationCreateGet();
-                var PersonRelationTypes = await _personRelationTypeProvider.List(CurrentUser.Id);
-                var Persons = await _personProvider.List();
-                PersonRelationCreateGet.PersonRelationTypes = PersonRelationTypes;
-                PersonRelationCreateGet.Persons = Persons;
-                return Ok(PersonRelationCreateGet);
+                var PersonRelation = new PersonRelationCreateGet();
+                PersonRelation = await CreateAddDropDownBoxes(PersonRelation, CurrentUser.Id);
+                return Ok(PersonRelation);
             }
             return BadRequest(new
             {
@@ -57,36 +65,35 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(PersonRelationCreatePost PersonRelation)
+        public async Task<IActionResult> Create(PersonRelationCreateGet PersonRelation)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             PersonRelation.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var CheckString = await _personRelationProvider.CreatePostCheck(PersonRelation);
-                if (CheckString.Length == 0)
+                ErrorMessages = await _personRelationProvider.CreatePostCheck(PersonRelation);
+                if (ErrorMessages.Count > 0)
+                {
+                    PersonRelation = await CreateAddDropDownBoxes(PersonRelation, CurrentUser.Id);
+                }
+                else
                 {
                     _personRelationProvider.CreatePost(PersonRelation);
-                    return Ok(PersonRelation);
                 }
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    Message = CheckString,
-                });
+                PersonRelationCreateGetWithErrorMessages PersonRelationWithErrorMessage = new PersonRelationCreateGetWithErrorMessages { PersonRelation = PersonRelation, ErrorMessages = ErrorMessages };
+                return Ok(PersonRelationWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PersonRelationCreateGetWithErrorMessages PersonRelationWithNoRights = new PersonRelationCreateGetWithErrorMessages { PersonRelation = PersonRelation, ErrorMessages = ErrorMessages };
+            return Ok(PersonRelationWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //Need to go back to this page from from and to
                 return Ok(await _personRelationProvider.IndexGet(CurrentUser.Id, Id));
@@ -102,7 +109,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _personRelationProvider.UpdateGet(CurrentUser.Id, Id));
             }
@@ -117,27 +124,25 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PersonRelationUpdateGet PersonRelation)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                PersonRelation.UserId= CurrentUser.Id;
-                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
-                //if (CheckString.Length == 0)
-                //{
-                _personRelationProvider.UpdatePost(PersonRelation);
-                return Ok(PersonRelation);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _personRelationProvider.UpdatePostCheck(PersonRelation);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    PersonRelation = await UpdateAddDropDownBoxes(PersonRelation, CurrentUser.Id);
+                }
+                else
+                {
+                    _personRelationProvider.UpdatePost(PersonRelation);
+                }
+                PersonRelationUpdateGetWithErrorMessages PersonRelationWithErrorMessage = new PersonRelationUpdateGetWithErrorMessages { PersonRelation = PersonRelation, ErrorMessages = ErrorMessages };
+                return Ok(PersonRelationWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PersonRelationUpdateGetWithErrorMessages PersonRelationWithNoRights = new PersonRelationUpdateGetWithErrorMessages { PersonRelation = PersonRelation, ErrorMessages = ErrorMessages };
+            return Ok(PersonRelationWithNoRights);
+       
 
         }
 
@@ -145,7 +150,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("PersonRelations", "PersonRelationID", Id) == 0)
                 {
@@ -170,7 +175,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(PersonRelationDeleteGet PersonRelation)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 PersonRelation.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonRelationProvider.DeletePostCheck(PersonRelation);

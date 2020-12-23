@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IClassificationRelationTypeProvider
     {
-        bool CreatePost(ClassificationRelationTypeCreatePost ClassificationRelationType);
+        bool CreatePost(ClassificationRelationTypeCreateGet ClassificationRelationType);
         Task<List<ErrorMessage>> CreatePostCheck(ClassificationRelationTypeCreateGet ClassificationRelationType);
         Task<ClassificationRelationTypeDeleteGet> DeleteGet(string UserId, int ClassificationRelationTypeId);
         bool DeletePost(int Id);

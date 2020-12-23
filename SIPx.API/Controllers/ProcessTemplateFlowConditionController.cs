@@ -50,40 +50,62 @@ namespace SIPx.API.Controllers
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
         }
+        private async Task<ProcessTemplateFlowConditionCreateGet> CreateAddDropDownBoxes(ProcessTemplateFlowConditionCreateGet ProcessTemplateFlowCondition, string UserId, int ProcessTemplateFlowId)
+        {
+            var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.CreateGetSequence(UserId, ProcessTemplateFlowId);
+            var ProcessTemplateFlowConditionTypes = await _processTemplateFlowConditionTypeProvider.List(UserId);
+            var ProcessTemplateFields = await _processTemplateFlowConditionProvider.CreateGetFieldList(UserId, ProcessTemplateFlowId);
+            var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.CreateGetFieldRoleList(UserId, ProcessTemplateFlowId);
+            var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            var SecurityLevels = await _securityLevelProvider.List(UserId);
+            var Roles = await _roleProvider.List(UserId);
+            var Organizations = await _organizationProvider.List(UserId);
+            var Projects = await _projectProvider.List(UserId);
+            var Users = await _userProvider.List();
+            ProcessTemplateFlowCondition.LanguageId = UserLanguage.LanguageId;
+            ProcessTemplateFlowCondition.LanguageName = UserLanguage.Name;
+            ProcessTemplateFlowCondition.Sequences = ProcessTemplateFlowConditionCreateGetSequences;
+            ProcessTemplateFlowCondition.ProcessTemplateFlowConditionTypes = ProcessTemplateFlowConditionTypes;
+            ProcessTemplateFlowCondition.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
+            ProcessTemplateFlowCondition.ProcessTemplateFields = ProcessTemplateFields;
+            ProcessTemplateFlowCondition.ComparisonOperators = ComparisonOperators;
+            ProcessTemplateFlowCondition.ProcessTemplateFlowId = ProcessTemplateFlowId;
+            ProcessTemplateFlowCondition.UserId = UserId;
+            ProcessTemplateFlowCondition.SecurityLevels = SecurityLevels;
+            ProcessTemplateFlowCondition.Roles = Roles;
+            ProcessTemplateFlowCondition.Organizations = Organizations;
+            ProcessTemplateFlowCondition.Projects = Projects;
+            ProcessTemplateFlowCondition.Users = Users;
+            return ProcessTemplateFlowCondition;
+        }
+
+        private async Task<ProcessTemplateFlowConditionUpdateGet> UpdateAddDropDownBoxes(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition, string UserId, int ProcessTemplateFlowConditionId)
+        {
+            var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.UpdateGetSequence(UserId, ProcessTemplateFlowConditionId);
+            var ProcessTemplateFlowConditionTypes = await _processTemplateFlowConditionTypeProvider.List(UserId);
+            var ProcessTemplateFields = await _processTemplateFlowConditionProvider.UpdateGetFieldList(UserId, ProcessTemplateFlowConditionId);
+            var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.UpdateGetFieldRoleList(UserId, ProcessTemplateFlowConditionId);
+            var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            ProcessTemplateFlowCondition.Sequences = ProcessTemplateFlowConditionCreateGetSequences;
+            ProcessTemplateFlowCondition.ProcessTemplateFlowConditionTypes = ProcessTemplateFlowConditionTypes;
+            ProcessTemplateFlowCondition.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
+            ProcessTemplateFlowCondition.ProcessTemplateFields = ProcessTemplateFields;
+            ProcessTemplateFlowCondition.ComparisonOperators = ComparisonOperators;
+            
+            return ProcessTemplateFlowCondition;
+        }
 
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ProcessTemplateFlowConditionCreateGet = new ProcessTemplateFlowConditionCreateGet();
-                var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.CreateGetSequence(CurrentUser.Id, Id);
-                var ProcessTemplateFlowConditionTypes = await _processTemplateFlowConditionTypeProvider.List(CurrentUser.Id);
-                var ProcessTemplateFields = await _processTemplateFlowConditionProvider.CreateGetFieldList(CurrentUser.Id, Id);
-                var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.CreateGetFieldRoleList(CurrentUser.Id, Id);
-                var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
-                var Roles = await _roleProvider.List(CurrentUser.Id);
-                var Organizations = await _organizationProvider.List(CurrentUser.Id);
-                var Projects = await _projectProvider.List(CurrentUser.Id);
-                var Users = await _userProvider.List();
-                ProcessTemplateFlowConditionCreateGet.LanguageId = UserLanguage.LanguageId;
-                ProcessTemplateFlowConditionCreateGet.LanguageName = UserLanguage.Name;
-                ProcessTemplateFlowConditionCreateGet.Sequences = ProcessTemplateFlowConditionCreateGetSequences;
-                ProcessTemplateFlowConditionCreateGet.ProcessTemplateFlowConditionTypes = ProcessTemplateFlowConditionTypes;
-                ProcessTemplateFlowConditionCreateGet.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
-                ProcessTemplateFlowConditionCreateGet.ProcessTemplateFields = ProcessTemplateFields;
-                ProcessTemplateFlowConditionCreateGet.ComparisonOperators = ComparisonOperators;
-                ProcessTemplateFlowConditionCreateGet.ProcessTemplateFlowId = Id;
-                ProcessTemplateFlowConditionCreateGet.UserId = CurrentUser.Id;
-                ProcessTemplateFlowConditionCreateGet.SecurityLevels = SecurityLevels;
-                ProcessTemplateFlowConditionCreateGet.Roles = Roles;
-                ProcessTemplateFlowConditionCreateGet.Organizations = Organizations;
-                ProcessTemplateFlowConditionCreateGet.Projects = Projects;
-                ProcessTemplateFlowConditionCreateGet.Users = Users;
-                return Ok(ProcessTemplateFlowConditionCreateGet);
+                var ProcessTemplateFlowCondition = new ProcessTemplateFlowConditionCreateGet();
+                ProcessTemplateFlowCondition = await CreateAddDropDownBoxes(ProcessTemplateFlowCondition, CurrentUser.Id, Id);
+                return Ok(ProcessTemplateFlowCondition);
             }
             return BadRequest(new
             {
@@ -97,32 +119,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProcessTemplateFlowCondition.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _processTemplateFlowConditionProvider.CreatePostCheck(ProcessTemplateFlowCondition);
-                //if (CheckString.Length == 0)
-                //{
-                    _processTemplateFlowConditionProvider.CreatePost(ProcessTemplateFlowCondition);
-                    return Ok(ProcessTemplateFlowCondition);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateFlowConditionProvider.CreatePostCheck(ProcessTemplateFlowCondition);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ProcessTemplateFlowCondition = await CreateAddDropDownBoxes(ProcessTemplateFlowCondition, CurrentUser.Id, ProcessTemplateFlowCondition.ProcessTemplateFlowId);
+                }
+                else
+                {
+                    _processTemplateFlowConditionProvider.CreatePost(ProcessTemplateFlowCondition);
+                }
+                ProcessTemplateFlowConditionCreateGetWithErrorMessages ProcessTemplateFlowConditionWithErrorMessage = new ProcessTemplateFlowConditionCreateGetWithErrorMessages { ProcessTemplateFlowCondition = ProcessTemplateFlowCondition, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateFlowConditionWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateFlowConditionCreateGetWithErrorMessages ProcessTemplateFlowConditionWithNoRights = new ProcessTemplateFlowConditionCreateGetWithErrorMessages { ProcessTemplateFlowCondition = ProcessTemplateFlowCondition, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateFlowConditionWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowConditionProvider.IndexGet(CurrentUser.Id, Id));
             }
@@ -137,27 +158,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-
-                var ProcessTemplateFlowConditionUpdateGet = await _processTemplateFlowConditionProvider.UpdateGet(CurrentUser.Id, Id);
-                var ProcessTemplateFlowConditionCreateGetSequences = await _processTemplateFlowConditionProvider.UpdateGetSequence(CurrentUser.Id, Id);
-                var ProcessTemplateFlowConditionTypes = await _processTemplateFlowConditionTypeProvider.List(CurrentUser.Id);
-                var ProcessTemplateFields = await _processTemplateFlowConditionProvider.UpdateGetFieldList(CurrentUser.Id, Id);
-                var ProcessTemplateFieldRoles = await _processTemplateFlowConditionProvider.UpdateGetFieldRoleList(CurrentUser.Id, Id);
-                var ComparisonOperators = await _processTemplateFlowConditionComparisonOperatorProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                //ProcessTemplateFlowConditionUpdateGet.LanguageId = UserLanguage.LanguageId;
-                //ProcessTemplateFlowConditionUpdateGet.LanguageName = UserLanguage.Name;
-                ProcessTemplateFlowConditionUpdateGet.Sequences = ProcessTemplateFlowConditionCreateGetSequences;
-                ProcessTemplateFlowConditionUpdateGet.ProcessTemplateFlowConditionTypes = ProcessTemplateFlowConditionTypes;
-                ProcessTemplateFlowConditionUpdateGet.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
-                ProcessTemplateFlowConditionUpdateGet.ProcessTemplateFields = ProcessTemplateFields;
-                ProcessTemplateFlowConditionUpdateGet.ComparisonOperators = ComparisonOperators;
-                //ProcessTemplateFlowConditionUpdateGet.ProcessTemplateFlowId = Id;
-
-
-                return Ok(ProcessTemplateFlowConditionUpdateGet);
+var ProcessTemplateFlowCondition = await _processTemplateFlowConditionProvider.UpdateGet(CurrentUser.Id, Id);
+                ProcessTemplateFlowCondition = await UpdateAddDropDownBoxes(ProcessTemplateFlowCondition, CurrentUser.Id, Id);
+                return Ok(ProcessTemplateFlowCondition);
             }
             return BadRequest(new
             {
@@ -169,27 +174,24 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ProcessTemplateFlowConditionUpdateGet ProcessTemplateFlowCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ProcessTemplateFlowCondition.UserId = CurrentUser.Id;
-                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
-                //if (CheckString.Length == 0)
-                //{
-                _processTemplateFlowConditionProvider.UpdatePost(ProcessTemplateFlowCondition);
-                return Ok(ProcessTemplateFlowCondition);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateFlowConditionProvider.UpdatePostCheck(ProcessTemplateFlowCondition);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ProcessTemplateFlowCondition = await UpdateAddDropDownBoxes(ProcessTemplateFlowCondition, CurrentUser.Id, ProcessTemplateFlowCondition.ProcessTemplateFlowConditionId);
+                }
+                else
+                {
+                    _processTemplateFlowConditionProvider.UpdatePost(ProcessTemplateFlowCondition);
+                }
+                ProcessTemplateFlowConditionUpdateGetWithErrorMessages ProcessTemplateFlowConditionWithErrorMessage = new ProcessTemplateFlowConditionUpdateGetWithErrorMessages { ProcessTemplateFlowCondition = ProcessTemplateFlowCondition, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateFlowConditionWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateFlowConditionUpdateGetWithErrorMessages ProcessTemplateFlowConditionWithNoRights = new ProcessTemplateFlowConditionUpdateGetWithErrorMessages { ProcessTemplateFlowCondition = ProcessTemplateFlowCondition, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateFlowConditionWithNoRights);
 
         }
 
@@ -197,7 +199,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("ProcessTemplateFlowConditions", "ProcessTemplateFlowConditionID", Id) == 0)
                 //{
@@ -222,7 +224,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ProcessTemplateFlowConditionDeleteGet ProcessTemplateFlowCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 //                ProcessTemplateFlowCondition.U = CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateFlowConditionProvider.DeletePostCheck(ProcessTemplateFlowCondition);
@@ -251,7 +253,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowConditionProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -266,7 +268,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowConditionProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }

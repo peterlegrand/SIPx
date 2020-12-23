@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IContentTypeGroupProvider
     {
-        Task<string> CreatePost(ContentTypeGroupCreatePost ContentTypeGroup);
+        Task<string> CreatePost(ContentTypeGroupCreateGet ContentTypeGroup);
         Task<List<ErrorMessage>> CreatePostCheck(ContentTypeGroupCreateGet ContentTypeGroup);
         Task<ContentTypeGroupDeleteGet> DeleteGet(string UserId, int ContentTypeGroupId);
         bool DeletePost(int Id);

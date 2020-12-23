@@ -31,7 +31,7 @@ namespace SIPx.API.Controllers
 
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //TOFIX PETER
                 return Ok(await _contentProvider.IndexGet(CurrentUser.Id));// CurrentUser.LanguageId));
@@ -50,7 +50,7 @@ namespace SIPx.API.Controllers
 
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //TOFIX PETER
                 return Ok(await _contentTypeProvider.List(CurrentUser.Id));// CurrentUser.LanguageId));
@@ -69,7 +69,7 @@ namespace SIPx.API.Controllers
 
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //TOFIX PETER
                 var Set = new ContentCreateListSet();

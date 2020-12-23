@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -41,25 +42,44 @@ namespace SIPx.API.Controllers
             _frontUserMenuProvider = frontUserMenuProvider;
             _userManager = userManager;
         }
+        private async Task<UserMenuTemplateOptionCreateGet> CreateAddDropDownBoxes(UserMenuTemplateOptionCreateGet UserMenuTemplateOption, string UserId, int UserMenuTemplateId)
+        {
+            var iconslist = await _masterListProvider.IconList(UserId);
+            var Pages = await _pageProvider.ListForMenuTemplate(UserId);
+            var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.CreateGetSequence(UserId, UserMenuTemplateId);
+            UserMenuTemplateOption.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(UserId);
+            UserMenuTemplateOption.UserMenuTypesRight = await _userMenuTypeProvider.RightList(UserId);
+            UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = "Add at the end" });
+            UserMenuTemplateOption.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
+            UserMenuTemplateOption.Icons = iconslist;
+            UserMenuTemplateOption.Pages = Pages;
+            UserMenuTemplateOption.UserMenuTemplateId = UserMenuTemplateId;
+            return UserMenuTemplateOption;
+        }
+
+        private async Task<UserMenuTemplateOptionUpdateGet> UpdateAddDropDownBoxes(UserMenuTemplateOptionUpdateGet UserMenuTemplateOption, string UserId, int UserMenuTemplateOptionId)
+        {
+            var iconslist = await _masterListProvider.IconList(UserId);
+            var Pages = await _pageProvider.ListForMenuTemplate(UserId);
+            var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.CreateGetSequence(UserId, UserMenuTemplateOptionId);
+            UserMenuTemplateOption.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(UserId);
+            UserMenuTemplateOption.UserMenuTypesRight = await _userMenuTypeProvider.RightList(UserId);
+            UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = "Add at the end" });
+            UserMenuTemplateOption.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
+            UserMenuTemplateOption.Icons = iconslist;
+            UserMenuTemplateOption.Pages = Pages;
+            return UserMenuTemplateOption;
+        }
 
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var UserMenuTemplateOptionCreateGet = new UserMenuTemplateOptionCreateGet();
-                var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
-                var Pages = await _pageProvider.ListForMenuTemplate(CurrentUser.Id);
-                var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.CreateGetSequence(CurrentUser.Id, Id);
-                UserMenuTemplateOptionCreateGet.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
-                UserMenuTemplateOptionCreateGet.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
-                UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = "Add at the end" });
-                UserMenuTemplateOptionCreateGet.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
-                UserMenuTemplateOptionCreateGet.Icons = iconslist;
-                UserMenuTemplateOptionCreateGet.Pages = Pages;
-                UserMenuTemplateOptionCreateGet.UserMenuTemplateId = Id;
-                return Ok(UserMenuTemplateOptionCreateGet);
+                var UserMenuTemplateOption = new UserMenuTemplateOptionCreateGet();
+                UserMenuTemplateOption = await CreateAddDropDownBoxes(UserMenuTemplateOption, CurrentUser.Id, Id);
+                return Ok(UserMenuTemplateOption);
             }
             return BadRequest(new
             {
@@ -73,42 +93,33 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             UserMenuTemplateOption.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _userMenuTemplateOptionProvider.CreatePostCheck(UserMenuTemplateOption);
-                //if (CheckString.Length == 0)
-                //{
-                    _userMenuTemplateOptionProvider.CreatePost(UserMenuTemplateOption);
-                    return Ok(UserMenuTemplateOption);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _userMenuTemplateOptionProvider.CreatePostCheck(UserMenuTemplateOption);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    UserMenuTemplateOption = await CreateAddDropDownBoxes(UserMenuTemplateOption, CurrentUser.Id, UserMenuTemplateOption.UserMenuTemplateId);
+                }
+                else
+                {
+                    _userMenuTemplateOptionProvider.CreatePost(UserMenuTemplateOption);
+                }
+                UserMenuTemplateOptionCreateGetWithErrorMessages UserMenuTemplateOptionWithErrorMessage = new UserMenuTemplateOptionCreateGetWithErrorMessages { UserMenuTemplateOption = UserMenuTemplateOption, ErrorMessages = ErrorMessages };
+                return Ok(UserMenuTemplateOptionWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            UserMenuTemplateOptionCreateGetWithErrorMessages UserMenuTemplateOptionWithNoRights = new UserMenuTemplateOptionCreateGetWithErrorMessages { UserMenuTemplateOption = UserMenuTemplateOption, ErrorMessages = ErrorMessages };
+            return Ok(UserMenuTemplateOptionWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "ClassificationID", Id) == 0)
-                //{
-                //    return BadRequest(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "No record with this ID",
-                //    });
-                //}
-
+               
 
                 return Ok(await _userMenuTemplateOptionProvider.IndexGet(CurrentUser.Id, Id));
             }
@@ -123,27 +134,12 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
-                //{
-                //    return BadRequest(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "No record with this ID",
-                //    });
-                //}
+            
 
                 var UserMenuTemplateOption = await _userMenuTemplateOptionProvider.UpdateGet(CurrentUser.Id, Id);
-                var iconslist = await _masterListProvider.IconList(CurrentUser.Id);
-                var Pages = await _pageProvider.ListForMenuTemplate(CurrentUser.Id);
-                var UserMenuTemplateOptionCreateGetSequences = await _userMenuTemplateOptionProvider.CreateGetSequence(CurrentUser.Id, Id);
-                UserMenuTemplateOption.UserMenuTypesLeft = await _userMenuTypeProvider.LeftList(CurrentUser.Id);
-                UserMenuTemplateOption.UserMenuTypesRight = await _userMenuTypeProvider.RightList(CurrentUser.Id);
-                UserMenuTemplateOptionCreateGetSequences.Add(new SequenceList { Sequence = UserMenuTemplateOptionCreateGetSequences.Count, Name = "Add at the end" });
-                UserMenuTemplateOption.UserMenuTemplateOptions = UserMenuTemplateOptionCreateGetSequences;
-                UserMenuTemplateOption.Icons = iconslist;
-                UserMenuTemplateOption.Pages = Pages;
+                UserMenuTemplateOption = await UpdateAddDropDownBoxes(UserMenuTemplateOption, CurrentUser.Id, Id);
                 return Ok(UserMenuTemplateOption);
             }
             return BadRequest(new
@@ -158,34 +154,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             UserMenuTemplateOption.UserId= CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-
-                UserMenuTemplateOption.UserId = CurrentUser.Id;
-                //var CheckString = await _userMenuTemplateOptionProvider.UpdatePostCheck(UserMenuTemplateOption);
-                //if (CheckString.Length == 0)
+                ErrorMessages = await _userMenuTemplateOptionProvider.UpdatePostCheck(UserMenuTemplateOption);
+                if (ErrorMessages.Count > 0)
+                {
+                    UserMenuTemplateOption = await UpdateAddDropDownBoxes(UserMenuTemplateOption, CurrentUser.Id, UserMenuTemplateOption.UserMenuTemplateOptionId);
+                }
+                else
                 {
                     _userMenuTemplateOptionProvider.UpdatePost(UserMenuTemplateOption);
-                    return Ok(UserMenuTemplateOption);
                 }
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                UserMenuTemplateOptionUpdateGetWithErrorMessages UserMenuTemplateOptionWithErrorMessage = new UserMenuTemplateOptionUpdateGetWithErrorMessages { UserMenuTemplateOption = UserMenuTemplateOption, ErrorMessages = ErrorMessages };
+                return Ok(UserMenuTemplateOptionWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            UserMenuTemplateOptionUpdateGetWithErrorMessages UserMenuTemplateOptionWithNoRights = new UserMenuTemplateOptionUpdateGetWithErrorMessages { UserMenuTemplateOption = UserMenuTemplateOption, ErrorMessages = ErrorMessages };
+            return Ok(UserMenuTemplateOptionWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptions", "UserMenuTemplateOptionID", Id) == 0)
                 //{
@@ -210,7 +203,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(UserMenuTemplateOptionDeleteGet UserMenuTemplateOption)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 UserMenuTemplateOption.UserId= CurrentUser.Id;
                 //var CheckString = await _UserMenuTemplateOptionProvider.DeletePostCheck(UserMenuTemplateOption);
@@ -239,7 +232,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptionLanguages", "UserMenuTemplateOptionID", Id) == 0)
                 //{
@@ -264,7 +257,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateOptionLanguages", "UserMenuTemplateOptionLanguageID", Id) == 0)
                 {

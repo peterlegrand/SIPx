@@ -46,10 +46,10 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<List<SequenceList>> Sequence(string UserId, int ProcessTemplateId, int ProcessTemplateStageId)
+        public Task<List<SequenceList>> Sequence(string UserId, int ProcessTemplateStageId)
         {
-            string usp = "usp_ProcessTemplateStageFieldUpdateGetSequence @UserId, @ProcessTemplateId, @ProcessTemplateStageId ";
-            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId = UserId, ProcessTemplateId = ProcessTemplateId , ProcessTemplateStageId = ProcessTemplateStageId });
+            string usp = "usp_ProcessTemplateStageFieldUpdateGetSequence @UserId, @ProcessTemplateStageId ";
+            return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageId = ProcessTemplateStageId });
 
         }
     }

@@ -95,8 +95,9 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
+                //PETER TODO add security with message like missing in contentcondition
                 var PageSectionProcessConditionCreateGet = new PageSectionProcessConditionCreateGet();
                 PageSectionProcessConditionCreateGet.PageSectionProcessConditionTypes = await _pageSectionProcessConditionTypeProvider.ListExtended(CurrentUser.Id);
                 PageSectionProcessConditionCreateGet.ProcessTemplates = await _processTemplateProvider.List(CurrentUser.Id);
@@ -141,7 +142,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             PageSectionProcessCondition.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 PageSectionProcessCondition.PageSectionProcessConditionDate = DateTime.Now;
                 if (PageSectionProcessCondition.PageSectionProcessConditionTypeIdExtended.Substring(0, 1) == "V")
@@ -223,7 +224,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _pageSectionProcessConditionProvider.IndexGet(CurrentUser.Id, Id));
             }
@@ -238,7 +239,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("PageSectionProcessConditions", "PageSectionID", Id) == 0)
                 //{
@@ -380,7 +381,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PageSectionProcessConditionUpdateGet PageSectionProcessCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 PageSectionProcessCondition.UserId = CurrentUser.Id;
                 //var CheckString = await _PageSectionProvider.UpdatePostCheck(PageSection);
@@ -480,7 +481,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("PageSections", "PageSectionID", Id) == 0)
                 //{
@@ -506,7 +507,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(PageSectionProcessConditionDeleteGet PageSectionProcessCondition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 PageSectionProcessCondition.UserId= CurrentUser.Id;
                 //var CheckString = await _PageSectionProvider.DeletePostCheck(PageSection);
@@ -535,7 +536,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageIndex(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _pageSectionProvider.LanguageIndexGet(CurrentUser.Id, Id));
         //    }
@@ -550,7 +551,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageUpdate(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _pageSectionProvider.LanguageUpdateGet(CurrentUser.Id, Id));
         //    }

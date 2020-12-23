@@ -5,10 +5,10 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ClassificationValueCreateGetWithErrorMessages
+    public class ProcessTemplateStageFieldUpdateGetWithErrorMessages
     {
         [Key]
-        public ClassificationValueCreateGet ClassificationValue { get; set; }
+        public ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField { get; set; }
         public List<ErrorMessage> ErrorMessages { get; set; }
     }
 }

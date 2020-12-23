@@ -39,26 +39,42 @@ namespace SIPx.API.Controllers
             _projectProvider = ProjectProvider;
             _userManager = userManager;
         }
+        private async Task<ProjectCreateGet> CreateAddDropDownBoxes(ProjectCreateGet Project, string UserId, int? ParentId = null)
+        {
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var ProjectTypes = await _projectTypeProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            var SecurityLevels = await _securityLevelProvider.List(UserId);
+            Project.LanguageId = UserLanguage.LanguageId;
+            Project.LanguageName = UserLanguage.Name;
+            Project.ProjectTypes = ProjectTypes;
+            Project.Statuses = Statuses;
+            Project.ParentProjectId = ParentId;
+            Project.SecurityLevels = SecurityLevels;
+            return Project;
+        }
 
+        private async Task<ProjectUpdateGet> UpdateAddDropDownBoxes(ProjectUpdateGet Project, string UserId)
+        {
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var ProjectTypes = await _projectTypeProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            var SecurityLevels = await _securityLevelProvider.List(UserId);
+            Project.ProjectTypes = ProjectTypes;
+            Project.Statuses = Statuses;
+            Project.SecurityLevels = SecurityLevels;
+            return Project;
+        }
 
         [HttpGet("Create/{Id:int?}")]
         public async Task<IActionResult> Create(int? Id=null)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ProjectCreateGet = new ProjectCreateGet();
-                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var ProjectTypes = await _projectTypeProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
-                ProjectCreateGet.LanguageId = UserLanguage.LanguageId;
-                ProjectCreateGet.LanguageName = UserLanguage.Name;
-                ProjectCreateGet.ProjectTypes = ProjectTypes;
-                ProjectCreateGet.Statuses = Statuses;
-                ProjectCreateGet.ParentProjectId = Id;
-                ProjectCreateGet.SecurityLevels = SecurityLevels;
-                return Ok(ProjectCreateGet);
+                var Project = new ProjectCreateGet();
+                Project = await CreateAddDropDownBoxes(Project, CurrentUser.Id, Id);
+                return Ok(Project);
             }
             return BadRequest(new
             {
@@ -72,32 +88,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Project.UserId= CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _projectProvider.CreatePostCheck(Project);
-                //if (CheckString.Length == 0)
-                //{
-                    _projectProvider.CreatePost(Project);
-                    return Ok(Project);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _projectProvider.CreatePostCheck(Project);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    Project = await CreateAddDropDownBoxes(Project, CurrentUser.Id);
+                }
+                else
+                {
+                    _projectProvider.CreatePost(Project);
+                }
+                ProjectCreateGetWithErrorMessages ProjectWithErrorMessage = new ProjectCreateGetWithErrorMessages { Project = Project, ErrorMessages = ErrorMessages };
+                return Ok(ProjectWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProjectCreateGetWithErrorMessages ProjectWithNoRights = new ProjectCreateGetWithErrorMessages { Project = Project, ErrorMessages = ErrorMessages };
+            return Ok(ProjectWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _projectProvider.IndexGet(CurrentUser.Id));
             }
@@ -112,18 +127,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
                 var Project = await _projectProvider.UpdateGet(CurrentUser.Id, Id);
-                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var ProjectTypes = await _projectTypeProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
-                Project.ProjectTypes = ProjectTypes;
-                Project.Statuses = Statuses;
-             //   Project.ParentProjectId = Id;
-                Project.SecurityLevels = SecurityLevels;
+                Project = await UpdateAddDropDownBoxes(Project, CurrentUser.Id);
                 return Ok(Project);
             }
             return BadRequest(new
@@ -137,35 +145,31 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ProjectUpdateGet Project)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Project.UserId = CurrentUser.Id;
-                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
-                //if (CheckString.Length == 0)
-                //{
-                _projectProvider.UpdatePost(Project);
-                return Ok(Project);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _projectProvider.UpdatePostCheck(Project);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    Project = await UpdateAddDropDownBoxes(Project, CurrentUser.Id);
+                }
+                else
+                {
+                    _projectProvider.UpdatePost(Project);
+                }
+                ProjectUpdateGetWithErrorMessages ProjectWithErrorMessage = new ProjectUpdateGetWithErrorMessages { Project = Project, ErrorMessages = ErrorMessages };
+                return Ok(ProjectWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProjectUpdateGetWithErrorMessages ProjectWithNoRights = new ProjectUpdateGetWithErrorMessages { Project = Project, ErrorMessages = ErrorMessages };
+            return Ok(ProjectWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("Projects", "ProjectID", Id) == 0)
                 {
@@ -190,7 +194,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ProjectDeleteGet Project)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 Project.UserId= CurrentUser.Id;
                 //var CheckString = await _ProjectProvider.DeletePostCheck(Project);
@@ -219,7 +223,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _projectProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -234,7 +238,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _projectProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }

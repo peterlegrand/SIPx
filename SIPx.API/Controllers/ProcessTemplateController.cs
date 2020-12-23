@@ -36,25 +36,42 @@ namespace SIPx.API.Controllers
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
         }
+        private async Task<ProcessTemplateCreateGet> CreateAddDropDownBoxes(ProcessTemplateCreateGet ProcessTemplate, string UserId)
+        {
+            var Sequences = await _processTemplateProvider.CreateGetSequence(UserId);
+            var Icons = await _masterListProvider.IconList(UserId);
+            var ProcessTemplateGroups = await _processTemplateGroupProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            ProcessTemplate.LanguageId = UserLanguage.LanguageId;
+            ProcessTemplate.LanguageName = UserLanguage.Name;
+            ProcessTemplate.Icons = Icons;
+            ProcessTemplate.ProcessTemplates = Sequences;
+            ProcessTemplate.ProcessTemplates.Add(new SequenceList { Sequence = Sequences.Count + 1, Name = "Add at the end" });
+            ProcessTemplate.ProcessTemplateGroups = ProcessTemplateGroups;
+            return ProcessTemplate;
+        }
+
+        private async Task<ProcessTemplateUpdateGet> UpdateAddDropDownBoxes(ProcessTemplateUpdateGet ProcessTemplate, string UserId)
+        {
+            var icons = await _masterListProvider.IconList(UserId);
+
+            var Sequences = await _processTemplateProvider.CreateGetSequence(UserId);
+            var ProcessTemplateGroups = await _processTemplateGroupProvider.List(UserId);
+            ProcessTemplate.Icons = icons;
+            ProcessTemplate.Sequences = Sequences;
+            ProcessTemplate.ProcessTemplateGroups = ProcessTemplateGroups;
+            return ProcessTemplate;
+        }
 
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ProcessTemplateCreateGet = new ProcessTemplateCreateGet();
-                var Sequences = await _processTemplateProvider.CreateGetSequence(CurrentUser.Id);
-                var Icons = await _masterListProvider.IconList(CurrentUser.Id);
-                var ProcessTemplateGroups = await _processTemplateGroupProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ProcessTemplateCreateGet.LanguageId = UserLanguage.LanguageId;
-                ProcessTemplateCreateGet.LanguageName = UserLanguage.Name;
-                ProcessTemplateCreateGet.Icons = Icons;
-                ProcessTemplateCreateGet.ProcessTemplates = Sequences;
-                ProcessTemplateCreateGet.ProcessTemplates.Add(new SequenceList { Sequence = Sequences.Count + 1, Name = "Add at the end" });
-                ProcessTemplateCreateGet.ProcessTemplateGroups = ProcessTemplateGroups;
-                return Ok(ProcessTemplateCreateGet);
+                var ProcessTemplate = new ProcessTemplateCreateGet();
+                ProcessTemplate = await CreateAddDropDownBoxes(ProcessTemplate, CurrentUser.Id);
+                return Ok(ProcessTemplate);
             }
             return BadRequest(new
             {
@@ -68,32 +85,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProcessTemplate.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _processTemplateProvider.CreatePostCheck(ProcessTemplate);
-                //if (CheckString.Length == 0)
-                //{
-                    _processTemplateProvider.CreatePost(ProcessTemplate);
-                    return Ok(ProcessTemplate);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateProvider.CreatePostCheck(ProcessTemplate);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ProcessTemplate = await CreateAddDropDownBoxes(ProcessTemplate, CurrentUser.Id);
+                }
+                else
+                {
+                    _processTemplateProvider.CreatePost(ProcessTemplate);
+                }
+                ProcessTemplateCreateGetWithErrorMessages ProcessTemplateWithErrorMessage = new ProcessTemplateCreateGetWithErrorMessages { ProcessTemplate = ProcessTemplate, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateCreateGetWithErrorMessages ProcessTemplateWithNoRights = new ProcessTemplateCreateGetWithErrorMessages { ProcessTemplate = ProcessTemplate, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateProvider.IndexGet(CurrentUser.Id));
             }
@@ -108,18 +124,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var x = await _processTemplateProvider.UpdateGet(CurrentUser.Id, Id);
-                var icons = await _masterListProvider.IconList(CurrentUser.Id);
-
-
-                var Sequences = await _processTemplateProvider.CreateGetSequence(CurrentUser.Id);
-                var ProcessTemplateGroups = await _processTemplateGroupProvider.List(CurrentUser.Id);
-                x.Icons = icons;
-                x.Sequences = Sequences;
-                x.ProcessTemplateGroups = ProcessTemplateGroups;
-                return Ok(x);
+                var ProcessTemplate = await _processTemplateProvider.UpdateGet(CurrentUser.Id, Id);
+                ProcessTemplate = await UpdateAddDropDownBoxes(ProcessTemplate, CurrentUser.Id);
+                return Ok(ProcessTemplate);
             }
             return BadRequest(new
             {
@@ -132,35 +141,31 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ProcessTemplateUpdateGet ProcessTemplate)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ProcessTemplate.UserId= CurrentUser.Id;
-                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
-                //if (CheckString.Length == 0)
-                //{
-                _processTemplateProvider.UpdatePost(ProcessTemplate);
-                return Ok(ProcessTemplate);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateProvider.UpdatePostCheck(ProcessTemplate);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ProcessTemplate = await UpdateAddDropDownBoxes(ProcessTemplate, CurrentUser.Id);
+                }
+                else
+                {
+                    _processTemplateProvider.UpdatePost(ProcessTemplate);
+                }
+                ProcessTemplateUpdateGetWithErrorMessages ProcessTemplateWithErrorMessage = new ProcessTemplateUpdateGetWithErrorMessages { ProcessTemplate = ProcessTemplate, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateUpdateGetWithErrorMessages ProcessTemplateWithNoRights = new ProcessTemplateUpdateGetWithErrorMessages { ProcessTemplate = ProcessTemplate, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ProcessTemplates", "ProcessTemplateID", Id) == 0)
                 {
@@ -185,7 +190,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ProcessTemplateDeleteGet ProcessTemplate)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 ProcessTemplate.UserId= CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateProvider.DeletePostCheck(ProcessTemplate);
@@ -214,7 +219,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -229,7 +234,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }

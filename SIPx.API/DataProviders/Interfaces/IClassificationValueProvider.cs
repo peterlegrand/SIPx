@@ -7,12 +7,12 @@ namespace SIPx.DataAccess
     public interface IClassificationValueProvider
     {
         Task<bool> CreatePost(ClassificationValueCreateGet ClassificationValue);
-        Task<List<SequenceList>> CreatePostCheck(ClassificationValueCreateGet ClassificationValue);
+        Task<List<ErrorMessage>> CreatePostCheck(ClassificationValueCreateGet ClassificationValue);
         Task<List<ClassificationValueIndexGet>> IndexGet(string UserId, int ClassificationId);
         Task<List<ClassificationValueLanguageIndexGet>> LanguageIndexGet(string UserId, int ClassificationValueId);
         Task<ClassificationValueLanguageIndexGet> LanguageUpdateGet(string UserId, int ClassificationValueLanguageId);
         Task<ClassificationValueUpdateGet> UpdateGet(string UserId, int ClassificationValueId);
-        Task<List<SequenceList>> UpdatePostCheck(ClassificationValueUpdateGet ClassificationValue);
+        Task<List<ErrorMessage>> UpdatePostCheck(ClassificationValueUpdateGet ClassificationValue);
         bool UpdatePost(ClassificationValueUpdateGet ClassificationValue);
         bool DeletePost(int Id);
         Task<ClassificationValueDeleteGet> DeleteGet(string UserId, int ClassificationValueId);

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -34,42 +35,27 @@ namespace SIPx.API.Controllers
             _classificationProvider = classificationProvider;
             _userManager = userManager;
         }
-
-        [HttpGet("CreateProperty/{Id:int}")]
-        public async Task<IActionResult> CreateProperty(int Id)
+        private async Task<ClassificationValuePropertyCreateGet> CreateAddDropDownBoxes(ClassificationValuePropertyCreateGet ClassificationValueProperty, string UserId, int ClassificationValueId)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                var ClassificationValuePropertyCreateGet = new ClassificationValuePropertyCreateGet();
-                var Properties = await _classificationValuePropertyProvider.CreateGetProperties(CurrentUser.Id,Id);
-                ClassificationValuePropertyCreateGet.Properties = Properties;
-                ClassificationValuePropertyCreateGet.ClassificationValueId = Id;
-                return Ok(ClassificationValuePropertyCreateGet);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            var Properties = await _classificationValuePropertyProvider.CreateGetProperties(UserId, ClassificationValueId);
+            ClassificationValueProperty.Properties = Properties;
+            ClassificationValueProperty.ClassificationValueId = ClassificationValueId;
+            return ClassificationValueProperty;
         }
-
-        [HttpPost("CreateProperty")]
-        public async Task<IActionResult> CreateProperty(ClassificationValuePropertyCreateGet ClassificationValueProperty)
+        private async Task<ClassificationValuePropertyUpdateGet> UpdateAddDropDownBoxes(ClassificationValuePropertyUpdateGet ClassificationValueProperty, string UserId)
+        {
+            var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(UserId);
+            return ClassificationValueProperty;
+        }
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _classificationValuePropertyProvider.CreatePostCheck(ClassificationValueProperty);
-                //if (CheckString.Length == 0)
-                //{
+                var ClassificationValueProperty = new ClassificationValuePropertyCreateGet();
+                ClassificationValueProperty = await CreateAddDropDownBoxes(ClassificationValueProperty, CurrentUser.Id, Id);
                 return Ok(ClassificationValueProperty);
-                //}
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
             }
             return BadRequest(new
             {
@@ -77,37 +63,63 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
         [HttpPost("Create")]
         public async Task<IActionResult> Create(ClassificationValuePropertyCreateGet ClassificationValueProperty)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            //ClassificationValueProperty.CreatorId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _classificationValuePropertyProvider.CreatePostCheck(ClassificationValueProperty);
-                //if (CheckString.Length == 0)
-                //{
-                _classificationValuePropertyProvider.CreatePost(ClassificationValueProperty);
-                return Ok(ClassificationValueProperty);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _classificationValuePropertyProvider.CreatePostCheck(ClassificationValueProperty);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ClassificationValueProperty = await CreateAddDropDownBoxes(ClassificationValueProperty, CurrentUser.Id, ClassificationValueProperty.ClassificationValueId);
+                }
+                else
+                {
+                    _classificationValuePropertyProvider.CreatePost(ClassificationValueProperty);
+                }
+                ClassificationValuePropertyCreateGetWithErrorMessages ClassificationValuePropertyWithErrorMessage = new ClassificationValuePropertyCreateGetWithErrorMessages { ClassificationValueProperty = ClassificationValueProperty, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationValuePropertyWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationValuePropertyCreateGetWithErrorMessages ClassificationValuePropertyWithNoRights = new ClassificationValuePropertyCreateGetWithErrorMessages { ClassificationValueProperty = ClassificationValueProperty, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationValuePropertyWithNoRights);
         }
+
+        //PETER I think this should not be here and the above need to be renamed to create.
+        //[HttpPost("Create")]
+        //public async Task<IActionResult> Create(ClassificationValuePropertyCreateGet ClassificationValueProperty)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //    //ClassificationValueProperty.CreatorId = CurrentUser.Id;
+        //                if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+        //    {
+        //        //var CheckString = await _classificationValuePropertyProvider.CreatePostCheck(ClassificationValueProperty);
+        //        //if (CheckString.Length == 0)
+        //        //{
+        //        _classificationValuePropertyProvider.CreatePost(ClassificationValueProperty);
+        //        return Ok(ClassificationValueProperty);
+        //        //}
+        //        return BadRequest(new
+        //        {
+        //            IsSuccess = false,
+        //            //Message = CheckString,
+        //        });
+        //    }
+        //    return BadRequest(new
+        //    {
+        //        IsSuccess = false,
+        //        Message = "No rights",
+        //    });
+        //}
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "46"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("ClassificationValuePropertys", "ClassificationValueID", Id) == 0)
                 //{
@@ -131,7 +143,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "46"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationValuePropertys", "ClassificationValuePropertyID", Id) == 0)
                 {
@@ -142,10 +154,7 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var ClassificationValueProperty = await _classificationValuePropertyProvider.UpdateGet(CurrentUser.Id, Id);
-                var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
-                //ClassificationValueProperty.ClassificationRelationTypes = ClassificationRelationTypes;
-                //ClassificationValueProperty.Roles = await _roleProvider.List(CurrentUser.Id);
-
+                ClassificationValueProperty = await UpdateAddDropDownBoxes(ClassificationValueProperty, CurrentUser.Id); 
                 return Ok(ClassificationValueProperty);
             }
             return BadRequest(new
@@ -159,35 +168,31 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ClassificationValuePropertyUpdateGet ClassificationValueProperty)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ClassificationValueProperty.UserId = CurrentUser.Id;
-                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
-                //if (CheckString.Length == 0)
-                //{
-                _classificationValuePropertyProvider.UpdatePost(ClassificationValueProperty);
-                return Ok(ClassificationValueProperty);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _classificationValuePropertyProvider.UpdatePostCheck(ClassificationValueProperty);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ClassificationValueProperty = await UpdateAddDropDownBoxes(ClassificationValueProperty, CurrentUser.Id);
+                }
+                else
+                {
+                    _classificationValuePropertyProvider.UpdatePost(ClassificationValueProperty);
+                }
+                ClassificationValuePropertyUpdateGetWithErrorMessages ClassificationValuePropertyWithErrorMessage = new ClassificationValuePropertyUpdateGetWithErrorMessages { ClassificationValueProperty = ClassificationValueProperty, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationValuePropertyWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationValuePropertyUpdateGetWithErrorMessages ClassificationValuePropertyWithNoRights = new ClassificationValuePropertyUpdateGetWithErrorMessages { ClassificationValueProperty = ClassificationValueProperty, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationValuePropertyWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationValuePropertys", "ClassificationValuePropertyID", Id) == 0)
                 {
@@ -212,7 +217,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ClassificationValuePropertyDeleteGet ClassificationValueProperty)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 ClassificationValueProperty.UserId= CurrentUser.Id;
                 //var CheckString = await _ClassificationValuePropertyProvider.DeletePostCheck(ClassificationValueProperty);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,19 +27,32 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
+        private async Task<PropertyValueCreateGet> CreateAddDropDownBoxes(PropertyValueCreateGet PropertyValue, string UserId, int PropertyId)
+        {
+            var PropertyValueCreateGetSequences = await _propertyValueProvider.CreateGetSequence(UserId, PropertyId);
+            PropertyValueCreateGetSequences.Add(new SequenceList { Sequence = PropertyValueCreateGetSequences.Count + 1, Name = "Add at the end" });
+            PropertyValue.PropertyValues = PropertyValueCreateGetSequences;
+            PropertyValue.PropertyId = PropertyId;
+            PropertyValue.PropertyTypeId = await _propertyValueProvider.CreateGetType(UserId, PropertyId);
+
+            return PropertyValue;
+        }
+
+        private async Task<PropertyValueUpdateGet> UpdateAddDropDownBoxes(PropertyValueUpdateGet PropertyValue, string UserId)
+        {
+            PropertyValue.PropertyValues = await _propertyValueProvider.CreateGetSequence(UserId, PropertyValue.PropertyId);
+
+            return PropertyValue;
+        }
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var PropertyValueCreateGet = new PropertyValueCreateGet();
-                var PropertyValueCreateGetSequences = await _propertyValueProvider.CreateGetSequence(CurrentUser.Id, Id);
-                PropertyValueCreateGetSequences.Add(new SequenceList { Sequence = PropertyValueCreateGetSequences.Count + 1, Name = "Add at the end" });
-                PropertyValueCreateGet.PropertyValues = PropertyValueCreateGetSequences;
-                PropertyValueCreateGet.PropertyId = Id;
-                PropertyValueCreateGet.PropertyTypeId = await _propertyValueProvider.CreateGetType(CurrentUser.Id, Id);
-                return Ok(PropertyValueCreateGet);
+                var PropertyValue = new PropertyValueCreateGet();
+                PropertyValue = await CreateAddDropDownBoxes(PropertyValue, CurrentUser.Id, Id);
+                return Ok(PropertyValue);
             }
             return BadRequest(new
             {
@@ -52,36 +66,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             PropertyValue.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _PropertyValueProvider.CreatePostCheck(PropertyValue);
-                //if (CheckString.Length == 0)
-                //{
-
-                var PropertyTypeId = await _propertyValueProvider.CreateGetType(CurrentUser.Id, PropertyValue.PropertyId);
-                if(PropertyTypeId != 6)
-                { PropertyValue.PropertyValueDate = DateTime.Now; }
-                _propertyValueProvider.CreatePost(PropertyValue);
-                return Ok(PropertyValue);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _propertyValueProvider.CreatePostCheck(PropertyValue);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    PropertyValue = await CreateAddDropDownBoxes(PropertyValue, CurrentUser.Id, PropertyValue.PropertyId);
+                }
+                else
+                {
+                    _propertyValueProvider.CreatePost(PropertyValue);
+                }
+                PropertyValueCreateGetWithErrorMessages PropertyValueWithErrorMessage = new PropertyValueCreateGetWithErrorMessages { PropertyValue = PropertyValue, ErrorMessages = ErrorMessages };
+                return Ok(PropertyValueWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PropertyValueCreateGetWithErrorMessages PropertyValueWithNoRights = new PropertyValueCreateGetWithErrorMessages { PropertyValue = PropertyValue, ErrorMessages = ErrorMessages };
+            return Ok(PropertyValueWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("PropertyValues", "ClassificationID", Id) == 0)
                 //{
@@ -103,37 +112,11 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpPost("Update")]
-        public async Task<IActionResult> Update(PropertyValueUpdateGet PropertyValue)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            PropertyValue.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
-            {
-                //var CheckString = await _PropertyValueProvider.UpdatePostCheck(PropertyValue);
-                //if (CheckString.Length == 0)
-                //{
-                    _propertyValueProvider.UpdatePost(PropertyValue);
-                    return Ok(PropertyValue);
-                //}
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
-
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("PropertyValues", "PropertyValueID", Id) == 0)
                 {
@@ -144,7 +127,7 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var PropertyValue = await _propertyValueProvider.UpdateGet(CurrentUser.Id, Id);
-                PropertyValue.PropertyValues = await _propertyValueProvider.CreateGetSequence(CurrentUser.Id, PropertyValue.PropertyId);
+                PropertyValue = await UpdateAddDropDownBoxes(PropertyValue, CurrentUser.Id);
                 return Ok(PropertyValue);
             }
             return BadRequest(new
@@ -153,12 +136,37 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(PropertyValueUpdateGet PropertyValue)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            PropertyValue.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                ErrorMessages = await _propertyValueProvider.UpdatePostCheck(PropertyValue);
+                if (ErrorMessages.Count > 0)
+                {
+                    PropertyValue = await UpdateAddDropDownBoxes(PropertyValue, CurrentUser.Id);
+                }
+                else
+                {
+                    _propertyValueProvider.UpdatePost(PropertyValue);
+                }
+                PropertyValueUpdateGetWithErrorMessages PropertyValueWithErrorMessage = new PropertyValueUpdateGetWithErrorMessages { PropertyValue = PropertyValue, ErrorMessages = ErrorMessages };
+                return Ok(PropertyValueWithErrorMessage);
+            }
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PropertyValueUpdateGetWithErrorMessages PropertyValueWithNoRights = new PropertyValueUpdateGetWithErrorMessages { PropertyValue = PropertyValue, ErrorMessages = ErrorMessages };
+            return Ok(PropertyValueWithNoRights);
+        }
+
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("PropertyValues", "PropertyValueID", Id) == 0)
                 {
@@ -183,7 +191,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(PropertyValueDeleteGet PropertyValue)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //var CheckString = await _PropertyValueProvider.DeletePostCheck(PropertyValue);
                 //if (CheckString.Length == 0)
@@ -210,7 +218,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageIndex(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
+        //                if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        if (await _checkProvider.CheckIfRecordExists("PropertyValueLanguages", "PropertyValueID", Id) == 0)
         //        {
@@ -235,7 +243,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageUpdate(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
+        //                if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        if (await _checkProvider.CheckIfRecordExists("PropertyValueLanguages", "PropertyValueLanguageID", Id) == 0)
         //        {

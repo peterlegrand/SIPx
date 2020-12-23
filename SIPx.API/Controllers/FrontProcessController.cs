@@ -61,7 +61,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Template()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var ListOfProcessTemplateGroups = await _frontProcessProvider.NewProcessShowTemplateGroup(CurrentUser.Id);
                 var TemplateLogic = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
@@ -90,7 +90,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             var testifallowed = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
                 List<NewProcessTemplateList> x = await testifallowed.ReturnProcessTemplateList(CurrentUser);
 
@@ -198,7 +198,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             var testifallowed = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
             Fields.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
 
                 //Check if the template is allowed to be created
@@ -226,7 +226,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> ToDo()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var ToDoLogic = new FrontProcessToDoLogic(_projectProvider, _organizationProvider, _userRoleProvider, _roleProvider, _userProvider, _processProvider, _frontProcessProvider);
                 var ToDo = await ToDoLogic.ReturnProcessList(CurrentUser);
@@ -341,7 +341,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(FrontProcessUpdateGet Process)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
                 var testifallowed = new FrontProcessToDoLogic(_projectProvider, _organizationProvider, _userRoleProvider, _roleProvider, _userProvider, _processProvider, _frontProcessProvider);
@@ -365,7 +365,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> ViewGet(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationID", Id) == 0)
                 //{
@@ -390,7 +390,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> AdvancedSearch()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var ProcessSearch = new ProcessAdvancedSearchPost();
                 ProcessSearch.SelectedUsers = await _userProvider.List();
@@ -418,7 +418,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             AdvancedSearch.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //var CheckString = await _ProcessProvider.CreatePostCheck(Process);
                 //if (CheckString.Length == 0)

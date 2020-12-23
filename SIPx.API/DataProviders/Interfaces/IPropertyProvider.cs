@@ -15,6 +15,6 @@ namespace SIPx.DataAccess
         Task<List<PropertyList>> List(string UserId);
         Task<PropertyUpdateGet> UpdateGet(string UserId, int PropertyId);
         bool UpdatePost(PropertyUpdateGet Property);
-        Task<string> UpdatePostCheck(PropertyUpdateGet Property);
+        Task<List<ErrorMessage>> UpdatePostCheck(PropertyUpdateGet Property);
     }
 }

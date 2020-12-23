@@ -74,7 +74,7 @@ namespace SIPx.API.Controllers
             var PublicUser = await _userManager.FindByIdAsync(PublicUserId);
             var FrontPanels = new FrontPanels(_classificationValueProvider, _contentProvider, _processProvider, _organizationProvider, _personProvider, _projectProvider);
             
-            //if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+            //            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var dashboard = await _homeProvider.HomeIndexGetDashboard();
                 var panels = await _homeProvider.HomeIndexGetPanels();

@@ -36,12 +36,12 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
             _checkProvider = checkProvider;
         }
-
+        //PETER TODO error message 
         //[HttpGet("NewProcess")]
         //public async Task<IActionResult> Get()
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+        //                if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
         //    {
 
         //        string SQLWhere = " WHERE 1=1 ";
@@ -238,7 +238,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> ToDo()
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+        //                if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
         //    {
 
         //        string SQLWhere = " WHERE 1=1 ";
@@ -462,7 +462,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             var testifallowed = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
                 List<NewProcessTemplateList> x = await testifallowed.ReturnProcessTemplateList(CurrentUser);
 
@@ -485,7 +485,7 @@ namespace SIPx.API.Controllers
             var testifallowed = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
             DataTable ProcessFields = NewProcessField.CreateTable();
 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "186"))  //11
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
                 List<NewProcessTemplateList> x = await testifallowed.ReturnProcessTemplateList(CurrentUser);
                 if (x.Exists(x => x.ProcessTemplateId == ProcessesFromAPI.ProcessTemplateId))
@@ -771,7 +771,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("Processs", "ProcessID", Id) == 0)
                 {
@@ -796,7 +796,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ProcessDeleteGet Process)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 Process.UserId= CurrentUser.Id;
                 //var CheckString = await _ProcessProvider.DeletePostCheck(Process);

@@ -27,7 +27,7 @@ namespace SIPx.DataAccess
             return ErrorMessages;
         }
 
-        public async Task<string> CreatePost(PersonAddressCreatePost PersonAddress)
+        public async Task<string> CreatePost(PersonAddressCreateGet PersonAddress)
         {
             string usp = "usp_PersonAddressCreatePost @PersonId, @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonAddress);

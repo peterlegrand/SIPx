@@ -33,21 +33,26 @@ namespace SIPx.API.Controllers
             _personRelationTypeProvider = personRelationTypeProvider;
             _userManager = userManager;
         }
+        private async Task<PersonRelationTypeCreateGet> CreateAddDropDownBoxes(PersonRelationTypeCreateGet PersonRelationType, string UserId)
+        {
 
+            var icons = await _masterListProvider.IconList(UserId);
+            PersonRelationType.Icons = icons;
+            return PersonRelationType;
+        }
+        private async Task<PersonRelationTypeUpdateGet> UpdateAddDropDownBoxes(PersonRelationTypeUpdateGet PersonRelationType, string UserId)
+        {
+            return PersonRelationType;
+        }
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var PersonRelationTypeCreateGet = new PersonRelationTypeCreateGet();
-                var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                PersonRelationTypeCreateGet.Icons = icons;
-
-                //var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                //ProcessTemplateStageTypeCreateGet.LanguageId = UserLanguage.LanguageId;
-                //ProcessTemplateStageTypeCreateGet.LanguageName = UserLanguage.Name;
-                return Ok(PersonRelationTypeCreateGet);
+                var PersonRelationType = new PersonRelationTypeCreateGet();
+                PersonRelationType = await CreateAddDropDownBoxes(PersonRelationType, CurrentUser.Id);
+                return Ok(PersonRelationType);
             }
             return BadRequest(new
             {
@@ -57,36 +62,35 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(PersonRelationTypeCreatePost PersonRelationType)
+        public async Task<IActionResult> Create(PersonRelationTypeCreateGet PersonRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             PersonRelationType.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _personRelationTypeProvider.CreatePostCheck(PersonRelationType);
-                //if (CheckString.Length == 0)
+                ErrorMessages = await _personRelationTypeProvider.CreatePostCheck(PersonRelationType);
+                if (ErrorMessages.Count > 0)
+                {
+                    PersonRelationType = await CreateAddDropDownBoxes(PersonRelationType, CurrentUser.Id);
+                }
+                else
                 {
                     _personRelationTypeProvider.CreatePost(PersonRelationType);
-                    return Ok(PersonRelationType);
                 }
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                PersonRelationTypeCreateGetWithErrorMessages PersonRelationTypeWithErrorMessage = new PersonRelationTypeCreateGetWithErrorMessages { PersonRelationType = PersonRelationType, ErrorMessages = ErrorMessages };
+                return Ok(PersonRelationTypeWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PersonRelationTypeCreateGetWithErrorMessages PersonRelationTypeWithNoRights = new PersonRelationTypeCreateGetWithErrorMessages { PersonRelationType = PersonRelationType, ErrorMessages = ErrorMessages };
+            return Ok(PersonRelationTypeWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var Type = await _personRelationTypeProvider.IndexGet(CurrentUser.Id);
                 return Ok(Type);
@@ -103,7 +107,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var x = await _personRelationTypeProvider.UpdateGet(CurrentUser.Id, Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
@@ -122,7 +126,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PersonRelationTypeUpdateGet PersonRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 PersonRelationType.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
@@ -150,7 +154,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("PersonRelationTypes", "PersonRelationTypeID", Id) == 0)
                 {
@@ -175,7 +179,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(PersonRelationTypeDeleteGet PersonRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 PersonRelationType.UserId= CurrentUser.Id;
                 //var CheckString = await _PersonRelationTypeProvider.DeletePostCheck(PersonRelationType);
@@ -204,7 +208,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageIndex(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _personRelationTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
         //    }
@@ -219,7 +223,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageUpdate(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _personRelationTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
         //    }

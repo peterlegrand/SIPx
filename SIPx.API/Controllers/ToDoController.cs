@@ -42,7 +42,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> Index()
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+        //                if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
         //    {
 
         //        string SQLWhere = " WHERE 1=1 ";
@@ -266,7 +266,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             var testifallowed = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "5"))  //11
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
                 List<NewProcessTemplateList> x = await testifallowed.ReturnProcessTemplateList(CurrentUser);
 
@@ -289,7 +289,7 @@ namespace SIPx.API.Controllers
             var testifallowed = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
             DataTable ProcessFields = NewProcessField.CreateTable();
 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "186"))  //11
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
                 List<NewProcessTemplateList> x = await testifallowed.ReturnProcessTemplateList(CurrentUser);
                 if (x.Exists(x => x.ProcessTemplateId == ProcessesFromAPI.ProcessTemplateId))

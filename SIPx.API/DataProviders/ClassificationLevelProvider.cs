@@ -32,10 +32,10 @@ namespace SIPx.DataAccess
             return ErrorMessages;
         }
 
-        public bool CreatePost(ClassificationLevelCreatePost ClassificationLevel)
+        public bool CreatePost(ClassificationLevelCreateGet ClassificationLevel)
         {
             string usp = "usp_classificationLevelCreatePost @ClassificationId, @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID";
-            _sqlDataAccess.SaveData<ClassificationLevelCreatePost>(usp, ClassificationLevel);
+            _sqlDataAccess.SaveData<ClassificationLevelCreateGet>(usp, ClassificationLevel);
             return true;
         }
 

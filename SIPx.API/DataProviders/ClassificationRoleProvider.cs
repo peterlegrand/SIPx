@@ -26,10 +26,10 @@ namespace SIPx.DataAccess
             return ErrorMessages;
         }
 
-        public bool CreatePost(ClassificationRoleCreatePost ClassificationRole)
+        public bool CreatePost(ClassificationRoleCreateGet ClassificationRole)
         {
             string usp = "usp_ClassificationRoleCreatePost @RoleId, @ClassificationId, @ClassificationRelationTypeId, @UserID";
-            _sqlDataAccess.SaveData<ClassificationRoleCreatePost>(usp, ClassificationRole);
+            _sqlDataAccess.SaveData<ClassificationRoleCreateGet>(usp, ClassificationRole);
             return true;
         }
 

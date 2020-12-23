@@ -33,21 +33,30 @@ namespace SIPx.API.Controllers
             _roleGroupProvider = roleGroupProvider;
             _userManager = userManager;
         }
+        private async Task<RoleGroupCreateGet> CreateAddDropDownBoxes(RoleGroupCreateGet RoleGroup, string UserId)
+        {
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            var Sequences = await _roleGroupProvider.CreateGetSequence(UserId);
+            RoleGroup.LanguageName = UserLanguage.Name;
+            RoleGroup.Sequences = Sequences;
+            RoleGroup.Sequences.Add(new SequenceList { Sequence = Sequences.Count + 1, Name = "Add at the end" });
+            return RoleGroup;
+        }
 
+        private async Task<RoleGroupUpdateGet> UpdateAddDropDownBoxes(RoleGroupUpdateGet RoleGroup, string UserId)
+        {
+            RoleGroup.Sequences = await _roleGroupProvider.CreateGetSequence(UserId);
+            return RoleGroup;
+        }
         [HttpGet("Create")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var RoleGroupCreateGet = new RoleGroupCreateGet();
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                var Sequences = await _roleGroupProvider.CreateGetSequence(CurrentUser.Id);
-//                RoleGroupCreateGet.LanguageId = UserLanguage.LanguageId;
-                RoleGroupCreateGet.LanguageName = UserLanguage.Name;
-                RoleGroupCreateGet.Sequences = Sequences;
-                RoleGroupCreateGet.Sequences.Add(new SequenceList { Sequence = Sequences.Count + 1, Name = "Add at the end" });
-                return Ok(RoleGroupCreateGet);
+                var RoleGroup = new RoleGroupCreateGet();
+                RoleGroup = await CreateAddDropDownBoxes(RoleGroup, CurrentUser.Id);
+                return Ok(RoleGroup);
             }
             return BadRequest(new
             {
@@ -60,32 +69,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             RoleGroup.UserId= CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _roleGroupProvider.CreatePostCheck(RoleGroup);
-                //if (CheckString.Length == 0)
-                //{
-                    _roleGroupProvider.CreatePost(RoleGroup);
-                    return Ok(RoleGroup);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _roleGroupProvider.CreatePostCheck(RoleGroup);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    RoleGroup = await CreateAddDropDownBoxes(RoleGroup, CurrentUser.Id);
+                }
+                else
+                {
+                    _roleGroupProvider.CreatePost(RoleGroup);
+                }
+                RoleGroupCreateGetWithErrorMessages RoleGroupWithErrorMessage = new RoleGroupCreateGetWithErrorMessages { RoleGroup = RoleGroup, ErrorMessages = ErrorMessages };
+                return Ok(RoleGroupWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            RoleGroupCreateGetWithErrorMessages RoleGroupWithNoRights = new RoleGroupCreateGetWithErrorMessages { RoleGroup = RoleGroup, ErrorMessages = ErrorMessages };
+            return Ok(RoleGroupWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _roleGroupProvider.IndexGet(CurrentUser.Id));
             }
@@ -100,10 +108,10 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var RoleGroup = await _roleGroupProvider.UpdateGet(CurrentUser.Id, Id);
-                RoleGroup.Sequences = await _roleGroupProvider.CreateGetSequence(CurrentUser.Id);
+                RoleGroup = await UpdateAddDropDownBoxes(RoleGroup, CurrentUser.Id);
                 return Ok(RoleGroup);
             }
             return BadRequest(new
@@ -117,27 +125,24 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(RoleGroupUpdateGet RoleGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                RoleGroup.UserId = CurrentUser.Id;
-                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
-                //if (CheckString.Length == 0)
-                //{
-                _roleGroupProvider.UpdatePost(RoleGroup);
-                return Ok(RoleGroup);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _roleGroupProvider.UpdatePostCheck(RoleGroup);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    RoleGroup = await UpdateAddDropDownBoxes(RoleGroup, CurrentUser.Id);
+                }
+                else
+                {
+                    _roleGroupProvider.UpdatePost(RoleGroup);
+                }
+                RoleGroupUpdateGetWithErrorMessages RoleGroupWithErrorMessage = new RoleGroupUpdateGetWithErrorMessages { RoleGroup = RoleGroup, ErrorMessages = ErrorMessages };
+                return Ok(RoleGroupWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            RoleGroupUpdateGetWithErrorMessages RoleGroupWithNoRights = new RoleGroupUpdateGetWithErrorMessages { RoleGroup = RoleGroup, ErrorMessages = ErrorMessages };
+            return Ok(RoleGroupWithNoRights);
 
         }
 
@@ -145,7 +150,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("RoleGroups", "RoleGroupID", Id) == 0)
                 {
@@ -170,7 +175,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(RoleGroupDeleteGet RoleGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 RoleGroup.UserId= CurrentUser.Id;
                 //var CheckString = await _RoleGroupProvider.DeletePostCheck(RoleGroup);
@@ -199,7 +204,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _roleGroupProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -215,7 +220,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _roleGroupProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }

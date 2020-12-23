@@ -43,7 +43,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
            
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 string fName = file.FileName;
                 string path = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot\\images\\" + file.FileName);
@@ -66,7 +66,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ClassificationUpdateGet Classification)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 Classification.UserId= CurrentUser.Id;
                 //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);

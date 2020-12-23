@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -27,17 +28,27 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
+        private async Task<ClassificationLevelPropertyCreateGet> CreateAddDropDownBoxes(ClassificationLevelPropertyCreateGet ClassificationLevelProperty, string UserId)
+        {
+            var Properties = await _classificationLevelPropertyProvider.CreateGetPropertyList(UserId, ClassificationLevelProperty.ClassificationLevelId);
+            ClassificationLevelProperty.Properties = Properties;
+            ClassificationLevelProperty.ClassificationLevelPropertyStatuses = await _classificationLevelPropertyStatusProvider.List(UserId);
+            return ClassificationLevelProperty;
+        }
+        private async Task<ClassificationLevelPropertyUpdateGet> UpdateAddDropDownBoxes(ClassificationLevelPropertyUpdateGet ClassificationLevelProperty, string UserId)
+        {
+            ClassificationLevelProperty.ClassificationLevelPropertyStatuses = await _classificationLevelPropertyStatusProvider.List(UserId);
+            return ClassificationLevelProperty;
+        }
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ClassificationLevelPropertyCreateGet = await _classificationLevelPropertyProvider.CreateGet(CurrentUser.Id, Id);
-                var Properties = await _classificationLevelPropertyProvider.CreateGetPropertyList(CurrentUser.Id, Id);
-                ClassificationLevelPropertyCreateGet.Properties = Properties;
-                ClassificationLevelPropertyCreateGet.ClassificationLevelPropertyStatuses = await _classificationLevelPropertyStatusProvider.List(CurrentUser.Id);
-                return Ok(ClassificationLevelPropertyCreateGet);
+                var ClassificationLevelProperty = await _classificationLevelPropertyProvider.CreateGet(CurrentUser.Id, Id);
+                ClassificationLevelProperty = await CreateAddDropDownBoxes(ClassificationLevelProperty, CurrentUser.Id);
+                return Ok(ClassificationLevelProperty);
             }
             return BadRequest(new
             {
@@ -51,32 +62,32 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationLevelProperty.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _classificationLevelPropertyProvider.CreatePostCheck(ClassificationLevelProperty);
-                //if (CheckString.Length == 0)
-                //{
-                _classificationLevelPropertyProvider.CreatePost(ClassificationLevelProperty);
-                return Ok(ClassificationLevelProperty);
-                //}
-                return BadRequest(new
+
+                ErrorMessages = await _classificationLevelPropertyProvider.CreatePostCheck(ClassificationLevelProperty);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ClassificationLevelProperty = await CreateAddDropDownBoxes(ClassificationLevelProperty, CurrentUser.Id);
+                }
+                else
+                {
+                    _classificationLevelPropertyProvider.CreatePost(ClassificationLevelProperty);
+                }
+                ClassificationLevelPropertyCreateGetWithErrorMessages ClassificationLevelPropertyWithErrorMessage = new ClassificationLevelPropertyCreateGetWithErrorMessages { ClassificationLevelProperty = ClassificationLevelProperty, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationLevelPropertyWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationLevelPropertyCreateGetWithErrorMessages ClassificationLevelPropertyWithNoRights = new ClassificationLevelPropertyCreateGetWithErrorMessages { ClassificationLevelProperty = ClassificationLevelProperty, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationLevelPropertyWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("ClassificationLevelPropertys", "ClassificationID", Id) == 0)
                 //{
@@ -102,33 +113,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationLevelProperty.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _classificationLevelPropertyProvider.UpdatePostCheck(ClassificationLevelProperty);
-                //if (CheckString.Length == 0)
-                //{
-                ClassificationLevelProperty.UserId = CurrentUser.Id;
-                    _classificationLevelPropertyProvider.UpdatePost(ClassificationLevelProperty);
-                    return Ok(ClassificationLevelProperty);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _classificationLevelPropertyProvider.UpdatePostCheck(ClassificationLevelProperty);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ClassificationLevelProperty = await UpdateAddDropDownBoxes(ClassificationLevelProperty, CurrentUser.Id);
+                }
+                else
+                {
+                    _classificationLevelPropertyProvider.UpdatePost(ClassificationLevelProperty);
+                }
+                ClassificationLevelPropertyUpdateGetWithErrorMessages ClassificationLevelPropertyWithErrorMessage = new ClassificationLevelPropertyUpdateGetWithErrorMessages { ClassificationLevelProperty = ClassificationLevelProperty, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationLevelPropertyWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationLevelPropertyUpdateGetWithErrorMessages ClassificationLevelPropertyWithNoRights = new ClassificationLevelPropertyUpdateGetWithErrorMessages { ClassificationLevelProperty = ClassificationLevelProperty, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationLevelPropertyWithNoRights);
         }
 
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationLevelProperties", "ClassificationLevelPropertyID", Id) == 0)
                 {
@@ -138,10 +147,10 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var classificationLevelProperty = await _classificationLevelPropertyProvider.UpdateGet(CurrentUser.Id, Id);
-                classificationLevelProperty.ClassificationLevelPropertyStatuses = await _classificationLevelPropertyStatusProvider.List(CurrentUser.Id);
+                var ClassificationLevelProperty = await _classificationLevelPropertyProvider.UpdateGet(CurrentUser.Id, Id);
+                ClassificationLevelProperty = await UpdateAddDropDownBoxes(ClassificationLevelProperty, CurrentUser.Id);
 
-                return Ok(classificationLevelProperty);
+                return Ok(ClassificationLevelProperty);
             }
             return BadRequest(new
             {
@@ -154,7 +163,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationLevelProperties", "ClassificationLevelPropertyID", Id) == 0)
                 {
@@ -179,7 +188,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ClassificationLevelPropertyDeleteGet ClassificationLevelProperty)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 ClassificationLevelProperty.UserId= CurrentUser.Id;
                 //var CheckString = await _ClassificationLevelPropertyProvider.DeletePostCheck(ClassificationLevelProperty);
@@ -203,53 +212,5 @@ namespace SIPx.API.Controllers
 
         }
 
-        //[HttpGet("LanguageIndex/{Id:int}")]
-        //public async Task<IActionResult> LanguageIndex(int Id)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
-        //    {
-        //        if (await _checkProvider.CheckIfRecordExists("ClassificationLevelPropertyLanguages", "ClassificationLevelPropertyID", Id) == 0)
-        //        {
-        //            return BadRequest(new
-        //            {
-        //                IsSuccess = false,
-        //                Message = "No record with this ID",
-        //            });
-        //        }
-
-
-        //        return Ok(await _classificationLevelPropertyProvider.LanguageIndexGet(CurrentUser.Id, Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
-
-        //[HttpGet("LanguageUpdate/{Id:int}")]
-        //public async Task<IActionResult> LanguageUpdate(int Id)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
-        //    {
-        //        if (await _checkProvider.CheckIfRecordExists("ClassificationLevelPropertyLanguages", "ClassificationLevelPropertyLanguageID", Id) == 0)
-        //        {
-        //            return BadRequest(new
-        //            {
-        //                IsSuccess = false,
-        //                Message = "No record with this ID",
-        //            });
-        //        }
-
-        //        return Ok(await _classificationLevelPropertyProvider.LanguageUpdateGet(CurrentUser.Id, Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
     }
 }

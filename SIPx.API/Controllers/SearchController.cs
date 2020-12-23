@@ -45,7 +45,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Global(string Contains)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //var CheckString = await _personProvider.CreatePostCheck(Person);
                 //if (CheckString.Length == 0)

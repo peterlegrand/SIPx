@@ -37,23 +37,34 @@ namespace SIPx.API.Controllers
             _claimCheck = claimCheck;
             _userManager = userManager;
         }
+        private async Task<ContentTypeGroupCreateGet> CreateAddDropDownBoxes(ContentTypeGroupCreateGet ContentTypeGroup, string UserId)
+        {
+            var ContentTypeGroupCreateGetSequences = await _contentTypeGroupProvider.CreateGetSequence(UserId);
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var icons = await _masterListProvider.IconList(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            ContentTypeGroup.LanguageId = UserLanguage.LanguageId;
+            ContentTypeGroup.LanguageName = UserLanguage.Name;
+            ContentTypeGroup.Sequences = ContentTypeGroupCreateGetSequences;
+            ContentTypeGroup.Sequences.Add(new SequenceList { Sequence = ContentTypeGroupCreateGetSequences.Count + 1, Name = "Add at the end" });
+            return ContentTypeGroup;
+        }
+        private async Task<ContentTypeGroupUpdateGet> UpdateAddDropDownBoxes(ContentTypeGroupUpdateGet ContentTypeGroup, string UserId)
+        {
+            ContentTypeGroup.Sequences = await _contentTypeGroupProvider.CreateGetSequence(UserId);
 
-        [HttpGet("Create")]
+            return ContentTypeGroup;
+        }
+ 
+            [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ContentTypeGroupCreateGet = new ContentTypeGroupCreateGet();
-                var ContentTypeGroupCreateGetSequences = await _contentTypeGroupProvider.CreateGetSequence(CurrentUser.Id);
-                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ContentTypeGroupCreateGet.LanguageId = UserLanguage.LanguageId;
-                ContentTypeGroupCreateGet.LanguageName = UserLanguage.Name;
-                ContentTypeGroupCreateGet.Sequences = ContentTypeGroupCreateGetSequences;
-                ContentTypeGroupCreateGet.Sequences.Add(new SequenceList { Sequence = ContentTypeGroupCreateGetSequences.Count+1, Name = "Add at the end" });
-                return Ok(ContentTypeGroupCreateGet);
+                var ContentTypeGroup = new ContentTypeGroupCreateGet();
+                ContentTypeGroup = await CreateAddDropDownBoxes(ContentTypeGroup, CurrentUser.Id);
+                return Ok(ContentTypeGroup);
             }
             return BadRequest(new
             {
@@ -63,36 +74,35 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ContentTypeGroupCreatePost ContentTypeGroup)
+        public async Task<IActionResult> Create(ContentTypeGroupCreateGet ContentTypeGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ContentTypeGroup.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _ContentTypeGroupProvider.ContentTypeGroupCreatePostCheck(ContentTypeGroup);
-                //if (CheckString.Length == 0)
-                //{
-                _contentTypeGroupProvider.CreatePost(ContentTypeGroup);
-                return Ok(ContentTypeGroup);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _contentTypeGroupProvider.CreatePostCheck(ContentTypeGroup);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ContentTypeGroup = await CreateAddDropDownBoxes(ContentTypeGroup, CurrentUser.Id);
+                }
+                else
+                {
+                    _contentTypeGroupProvider.CreatePost(ContentTypeGroup);
+                }
+                ContentTypeGroupCreateGetWithErrorMessages ContentTypeGroupWithErrorMessage = new ContentTypeGroupCreateGetWithErrorMessages { ContentTypeGroup = ContentTypeGroup, ErrorMessages = ErrorMessages };
+                return Ok(ContentTypeGroupWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ContentTypeGroupCreateGetWithErrorMessages ContentTypeGroupWithNoRights = new ContentTypeGroupCreateGetWithErrorMessages { ContentTypeGroup = ContentTypeGroup, ErrorMessages = ErrorMessages };
+            return Ok(ContentTypeGroupWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _contentTypeGroupProvider.IndexGet(CurrentUser.Id));
             }
@@ -107,11 +117,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ContentGroupType = await _contentTypeGroupProvider.UpdateGet(CurrentUser.Id, Id);
-                ContentGroupType.Sequences = await _contentTypeGroupProvider.CreateGetSequence(CurrentUser.Id);
-                return Ok(ContentGroupType);
+                var ContentTypeGroup = await _contentTypeGroupProvider.UpdateGet(CurrentUser.Id, Id);
+                ContentTypeGroup = await UpdateAddDropDownBoxes(ContentTypeGroup, CurrentUser.Id);
+                return Ok(ContentTypeGroup);
             }
             return BadRequest(new
             {
@@ -124,35 +134,31 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ContentTypeGroupUpdateGet ContentTypeGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ContentTypeGroup.UserId = CurrentUser.Id;
-                //var CheckString = await _ContentTypeGroupProvider.UpdatePostCheck(ContentTypeGroup);
-                //if (CheckString.Length == 0)
-                //{
-                _contentTypeGroupProvider.UpdatePost(ContentTypeGroup);
-                return Ok(ContentTypeGroup);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _contentTypeGroupProvider.UpdatePostCheck(ContentTypeGroup);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ContentTypeGroup = await UpdateAddDropDownBoxes(ContentTypeGroup, CurrentUser.Id);
+                }
+                else
+                {
+                    _contentTypeGroupProvider.UpdatePost(ContentTypeGroup);
+                }
+                ContentTypeGroupUpdateGetWithErrorMessages ContentTypeGroupWithErrorMessage = new ContentTypeGroupUpdateGetWithErrorMessages {  ContentTypeGroup = ContentTypeGroup, ErrorMessages = ErrorMessages };
+                return Ok(ContentTypeGroupWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ContentTypeGroupUpdateGetWithErrorMessages ContentTypeGroupWithNoRights = new ContentTypeGroupUpdateGetWithErrorMessages { ContentTypeGroup = ContentTypeGroup, ErrorMessages = ErrorMessages };
+            return Ok(ContentTypeGroupWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ContentTypes", "ContentTypeID", Id) == 0)
                 {
@@ -177,7 +183,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ContentTypeGroupDeleteGet ContentTypeGroup)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 //                ContentType.CreatorId = CurrentUser.Id;
                 //var CheckString = await _ContentTypeProvider.DeletePostCheck(ContentType);
@@ -206,7 +212,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> ContentTypeGroupLanguageIndexGet(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _contentTypeGroupProvider.LanguageIndexGet(CurrentUser.Id, Id));
         //    }
@@ -221,7 +227,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> ContentTypeGroupLanguageUpdateGet(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _contentTypeGroupProvider.LanguageUpdateGet(CurrentUser.Id, Id));
         //    }

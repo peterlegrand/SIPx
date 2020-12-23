@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -30,6 +31,18 @@ namespace SIPx.API.Controllers
             _claimCheck = claimCheck;
             _userManager = userManager;
         }
+        private async Task<PropertyCreateGet> CreateAddDropDownBoxes(PropertyCreateGet Property, string UserId)
+        {
+            Property.PropertyTypes = await _propertyTypeProvider.List(UserId);
+
+            return Property;
+        }
+
+        private async Task<PropertyUpdateGet> UpdateAddDropDownBoxes(PropertyUpdateGet Property, string UserId)
+        {
+            Property.PropertyTypes = await _propertyTypeProvider.List(UserId);
+            return Property;
+        }
 
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
@@ -37,9 +50,9 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var PropertyCreateGet = new PropertyCreateGet();
-                PropertyCreateGet.PropertyTypes = await _propertyTypeProvider.List(CurrentUser.Id);
-                return Ok(PropertyCreateGet);
+                var Property = new PropertyCreateGet();
+                Property = await CreateAddDropDownBoxes(Property, CurrentUser.Id);
+                return Ok(Property);
             }
             return BadRequest(new
             {
@@ -53,25 +66,24 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Property.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _classificationProvider.ClassificationCreatePostCheck(Classification);
-                //if (CheckString.Length == 0)
-                //{
-                    _propertyProvider.CreatePost(Property);
-                    return Ok(Property);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _propertyProvider.CreatePostCheck(Property);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    Property = await CreateAddDropDownBoxes(Property, CurrentUser.Id);
+                }
+                else
+                {
+                    _propertyProvider.CreatePost(Property);
+                }
+                PropertyCreateGetWithErrorMessages PropertyWithErrorMessage = new PropertyCreateGetWithErrorMessages { Property = Property, ErrorMessages = ErrorMessages };
+                return Ok(PropertyWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PropertyCreateGetWithErrorMessages PropertyWithNoRights = new PropertyCreateGetWithErrorMessages { Property = Property, ErrorMessages = ErrorMessages };
+            return Ok(PropertyWithNoRights);
         }
         
         [HttpGet("Index")]
@@ -105,8 +117,7 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var Property = await _propertyProvider.UpdateGet(CurrentUser.Id, Id);
-
-                Property.PropertyTypes = await _propertyTypeProvider.List(CurrentUser.Id);
+                Property = await UpdateAddDropDownBoxes(Property, CurrentUser.Id);
                 return Ok(Property);
             }
             return BadRequest(new
@@ -121,29 +132,25 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PropertyUpdateGet Property)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Property.UserId = CurrentUser.Id;
-                Property.PropertyTypes = await _propertyTypeProvider.List(CurrentUser.Id);
-
-                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
-                //if (CheckString.Length == 0)
-                //{
-                _propertyProvider.UpdatePost(Property);
-                    return Ok(Property);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _propertyProvider.UpdatePostCheck(Property);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    Property = await UpdateAddDropDownBoxes(Property, CurrentUser.Id);
+                }
+                else
+                {
+                    _propertyProvider.UpdatePost(Property);
+                }
+                PropertyUpdateGetWithErrorMessages PropertyWithErrorMessage = new PropertyUpdateGetWithErrorMessages { Property = Property, ErrorMessages = ErrorMessages };
+                return Ok(PropertyWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PropertyUpdateGetWithErrorMessages PropertyWithNoRights = new PropertyUpdateGetWithErrorMessages { Property = Property, ErrorMessages = ErrorMessages };
+            return Ok(PropertyWithNoRights);
+        
 
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -24,15 +25,24 @@ namespace SIPx.API.Controllers
             _claimCheck = claimCheck;
             _userManager = userManager;
         }
+        private async Task<UserMenuTemplateCreateGet> CreateAddDropDownBoxes(UserMenuTemplateCreateGet UserMenuTemplate, string UserId)
+        {
+            return UserMenuTemplate;
+        }
+
+        private async Task<UserMenuTemplateUpdateGet> UpdateAddDropDownBoxes(UserMenuTemplateUpdateGet UserMenuTemplate, string UserId)
+        {
+            return UserMenuTemplate;
+        }
 
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var UserMenuTemplateCreateGet = new UserMenuTemplateCreatePost();
-                return Ok(UserMenuTemplateCreateGet);
+                var UserMenuTemplate = new UserMenuTemplateCreatePost();
+                return Ok(UserMenuTemplate);
             }
             return BadRequest(new
             {
@@ -46,32 +56,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             UserMenuTemplate.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _userMenuTemplateProvider.CreatePostCheck(UserMenuTemplate);
-                //if (CheckString.Length == 0)
-                //{
-                    _userMenuTemplateProvider.CreatePost(UserMenuTemplate);
-                    return Ok(UserMenuTemplate);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _userMenuTemplateProvider.CreatePostCheck(UserMenuTemplate);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    UserMenuTemplate = await CreateAddDropDownBoxes(UserMenuTemplate, CurrentUser.Id);
+                }
+                else
+                {
+                    _userMenuTemplateProvider.CreatePost(UserMenuTemplate);
+                }
+                UserMenuTemplateCreateGetWithErrorMessages UserMenuTemplateWithErrorMessage = new UserMenuTemplateCreateGetWithErrorMessages { UserMenuTemplate = UserMenuTemplate, ErrorMessages = ErrorMessages };
+                return Ok(UserMenuTemplateWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            UserMenuTemplateCreateGetWithErrorMessages UserMenuTemplateWithNoRights = new UserMenuTemplateCreateGetWithErrorMessages { UserMenuTemplate = UserMenuTemplate, ErrorMessages = ErrorMessages };
+            return Ok(UserMenuTemplateWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _userMenuTemplateProvider.IndexGet(CurrentUser.Id));
             }
@@ -86,19 +95,12 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
-                //{
-                //    return BadRequest(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "No record with this ID",
-                //    });
-                //}
-                var x = await _userMenuTemplateProvider.UpdateGet(CurrentUser.Id, Id);
+              
+                var UserMenuTemplate = await _userMenuTemplateProvider.UpdateGet(CurrentUser.Id, Id);
 
-                return Ok(x);
+                return Ok(UserMenuTemplate);
             }
             return BadRequest(new
             {
@@ -113,33 +115,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             UserMenuTemplate.UserId= CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                UserMenuTemplate.UserId = CurrentUser.Id;
-                //var CheckString = await _userMenuTemplateProvider.UpdatePostCheck(UserMenuTemplate);
-                //if (CheckString.Length == 0)
-                //{
-                    _userMenuTemplateProvider.UpdatePost(UserMenuTemplate);
-                    return Ok(UserMenuTemplate);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _userMenuTemplateProvider.UpdatePostCheck(UserMenuTemplate);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    UserMenuTemplate = await UpdateAddDropDownBoxes(UserMenuTemplate, CurrentUser.Id);
+                }
+                else
+                {
+                    _userMenuTemplateProvider.UpdatePost(UserMenuTemplate);
+                }
+                UserMenuTemplateUpdateGetWithErrorMessages UserMenuTemplateWithErrorMessage = new UserMenuTemplateUpdateGetWithErrorMessages { UserMenuTemplate = UserMenuTemplate, ErrorMessages = ErrorMessages };
+                return Ok(UserMenuTemplateWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            UserMenuTemplateUpdateGetWithErrorMessages UserMenuTemplateWithNoRights = new UserMenuTemplateUpdateGetWithErrorMessages { UserMenuTemplate = UserMenuTemplate, ErrorMessages = ErrorMessages };
+            return Ok(UserMenuTemplateWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("UserMenuTemplates", "UserMenuTemplateID", Id) == 0)
                 //{
@@ -164,7 +164,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(UserMenuTemplateDeleteGet UserMenuTemplate)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 UserMenuTemplate.UserId= CurrentUser.Id;
                 //var CheckString = await _UserMenuTemplateProvider.DeletePostCheck(UserMenuTemplate);
@@ -202,7 +202,7 @@ namespace SIPx.API.Controllers
             }
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _userMenuTemplateProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }
@@ -217,7 +217,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "193"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("UserMenuTemplateLanguages", "UserMenuTemplateID", Id) == 0)
                 {

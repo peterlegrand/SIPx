@@ -37,23 +37,33 @@ namespace SIPx.API.Controllers
             _organizationProvider = organizationProvider;
             _userManager = userManager;
         }
-
+        private async Task<OrganizationCreateGet> CreateAddDropDownBoxes(OrganizationCreateGet Organization, string UserId, int? ParentId = null)
+        {
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var OrganizationTypes = await _organizationTypeProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            Organization.LanguageId = UserLanguage.LanguageId;
+            Organization.LanguageName = UserLanguage.Name;
+            Organization.OrganizationTypes = OrganizationTypes;
+            Organization.Statuses = Statuses;
+            Organization.ParentOrganizationId = ParentId;
+            return Organization;
+        }
+        private async Task<OrganizationUpdateGet> UpdateAddDropDownBoxes(OrganizationUpdateGet Organization, string UserId)
+        {
+            Organization.Statuses = await _masterListProvider.StatusList(UserId);
+            Organization.OrganizationTypes = await _organizationTypeProvider.List(UserId);
+            return Organization;
+        }
         [HttpGet("Create/{Id:int?}")]
         public async Task<IActionResult> Create(int? Id =null)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var OrganizationCreateGet = new OrganizationCreateGet();
-                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var OrganizationTypes = await _organizationTypeProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                OrganizationCreateGet.LanguageId = UserLanguage.LanguageId;
-                OrganizationCreateGet.LanguageName = UserLanguage.Name;
-                OrganizationCreateGet.OrganizationTypes = OrganizationTypes;
-                OrganizationCreateGet.Statuses = Statuses;
-                OrganizationCreateGet.ParentOrganizationId = Id;
-                return Ok(OrganizationCreateGet);
+                var Organization = new OrganizationCreateGet();
+                Organization = await CreateAddDropDownBoxes(Organization, CurrentUser.Id, Id);
+                return Ok(Organization);
             }
             return BadRequest(new
             {
@@ -63,42 +73,35 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(OrganizationCreatePost Organization)
+        public async Task<IActionResult> Create(OrganizationCreateGet Organization)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Organization.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                if(Organization.ParentOrganizationId == 0)
-                { Organization.ParentOrganizationId = null; }
-                //var CheckString = await _organizationProvider.CreatePostCheck(Organization);
-                //if (CheckString.Length == 0)
-                //{
-                //if(Organization.ParentOrganizationId==null)
-                //{
-                //    Organization.ParentOrganizationId = 0;
-                //}
-                    _organizationProvider.CreatePost(Organization);
-                    return Ok(Organization);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _organizationProvider.CreatePostCheck(Organization);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    Organization = await CreateAddDropDownBoxes(Organization, CurrentUser.Id);
+                }
+                else
+                {
+                    _organizationProvider.CreatePost(Organization);
+                }
+                OrganizationCreateGetWithErrorMessages OrganizationWithErrorMessage = new OrganizationCreateGetWithErrorMessages { Organization = Organization, ErrorMessages = ErrorMessages };
+                return Ok(OrganizationWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            OrganizationCreateGetWithErrorMessages OrganizationWithNoRights = new OrganizationCreateGetWithErrorMessages { Organization = Organization, ErrorMessages = ErrorMessages };
+            return Ok(OrganizationWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _organizationProvider.IndexGet(CurrentUser.Id));
             }
@@ -113,11 +116,10 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var Organization = await _organizationProvider.UpdateGet(CurrentUser.Id, Id);
-                Organization.Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                Organization.OrganizationTypes = await _organizationTypeProvider.List(CurrentUser.Id);
+                Organization = await UpdateAddDropDownBoxes(Organization, CurrentUser.Id);
                 return Ok(Organization);
             }
             return BadRequest(new
@@ -131,27 +133,24 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(OrganizationUpdateGet Organization)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Organization.UserId= CurrentUser.Id;
-                //var CheckString = await _OrganizationProvider.UpdatePostCheck(Organization);
-                //if (CheckString.Length == 0)
-                //{
-                _organizationProvider.UpdatePost(Organization);
-                return Ok(Organization);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _organizationProvider.UpdatePostCheck(Organization);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    Organization = await UpdateAddDropDownBoxes(Organization, CurrentUser.Id);
+                }
+                else
+                {
+                    _organizationProvider.UpdatePost(Organization);
+                }
+                OrganizationUpdateGetWithErrorMessages OrganizationWithErrorMessage = new OrganizationUpdateGetWithErrorMessages { Organization = Organization, ErrorMessages = ErrorMessages };
+                return Ok(OrganizationWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            OrganizationUpdateGetWithErrorMessages OrganizationWithNoRights = new OrganizationUpdateGetWithErrorMessages { Organization = Organization, ErrorMessages = ErrorMessages };
+            return Ok(OrganizationWithNoRights);
 
         }
 
@@ -159,7 +158,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("Organizations", "OrganizationID", Id) == 0)
                 {
@@ -184,7 +183,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(OrganizationDeleteGet Organization)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 Organization.UserId= CurrentUser.Id;
                 //var CheckString = await _OrganizationProvider.DeletePostCheck(Organization);
@@ -213,7 +212,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _organizationProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -228,7 +227,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageUpdate(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _organizationProvider.LanguageUpdateGet(CurrentUser.Id, Id));
         //    }
@@ -243,7 +242,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             AdvancedSearch.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //var CheckString = await _OrganizationProvider.CreatePostCheck(Organization);
                 //if (CheckString.Length == 0)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class OrganizationUserCreateGetWithErrorMessages
+    public class OrganizationCreateGetWithErrorMessages
     {
         [Key]
         public OrganizationCreateGet Organization { get; set; }

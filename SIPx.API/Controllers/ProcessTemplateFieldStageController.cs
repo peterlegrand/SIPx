@@ -40,12 +40,19 @@ namespace SIPx.API.Controllers
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
         }
+        private async Task<ProcessTemplateFieldStageUpdateGet> UpdateAddDropDownBoxes(ProcessTemplateFieldStageUpdateGet ProcessTemplateFieldStage, string UserId)
+        {
+            ProcessTemplateFieldStage.ValueUpdateTypes = await _masterListProvider.ValueUpdateTypeList(UserId);
+            ProcessTemplateFieldStage.ProcessTemplateStageFieldStatuses = await _masterListProvider.ProcessTemplateStageFieldStatusList(UserId);
+
+            return ProcessTemplateFieldStage;
+        }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
                 var FieldInfo = new ProcessTemplateFieldStageIndexGet();
@@ -70,12 +77,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var x = await _processTemplateFieldStageProvider.UpdateGet(CurrentUser.Id, Id);
-                x.ValueUpdateTypes = await _masterListProvider.ValueUpdateTypeList(CurrentUser.Id);
-                x.ProcessTemplateStageFieldStatuses = await _masterListProvider.ProcessTemplateStageFieldStatusList(CurrentUser.Id);
-                return Ok(x);
+                var ProcessTemplateFieldStage = await _processTemplateFieldStageProvider.UpdateGet(CurrentUser.Id, Id);
+                ProcessTemplateFieldStage = await UpdateAddDropDownBoxes(ProcessTemplateFieldStage, CurrentUser.Id);
+                    return Ok(ProcessTemplateFieldStage);
             }
             return BadRequest(new
             {
@@ -88,7 +94,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ProcessTemplateFieldStageUpdateGet ProcessTemplateFieldStage)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 ProcessTemplateFieldStage.ModifierId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);

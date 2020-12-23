@@ -18,6 +18,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProcessTemplateStageFieldController : ControllerBase
     {
+        private readonly ICheckProvider _checkProvider;
         private readonly IValueUpdateTypeProvider _valueUpdateTypeProvider;
         private readonly IProcessTemplateStageProvider _processTemplateStageProvider;
         private readonly IMasterListProvider _masterListProvider;
@@ -28,8 +29,9 @@ namespace SIPx.API.Controllers
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateStageFieldController(IValueUpdateTypeProvider valueUpdateTypeProvider, IProcessTemplateStageProvider processTemplateStageProvider, IMasterListProvider masterListProvider, IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateStageFieldStatusProvider processTemplateStageFieldStatus, IProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateStageFieldController(ICheckProvider checkProvider, IValueUpdateTypeProvider valueUpdateTypeProvider, IProcessTemplateStageProvider processTemplateStageProvider, IMasterListProvider masterListProvider, IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateStageFieldStatusProvider processTemplateStageFieldStatus, IProcessTemplateStageFieldProvider processTemplateStageFieldProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _checkProvider = checkProvider;
             _valueUpdateTypeProvider = valueUpdateTypeProvider;
             _processTemplateStageProvider = processTemplateStageProvider;
             _masterListProvider = masterListProvider;
@@ -40,12 +42,22 @@ namespace SIPx.API.Controllers
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
         }
-
+        private async Task<ProcessTemplateStageFieldUpdateGet> UpdateAddDropDownBoxes(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField, string UserId)
+        {
+            var status = await _processTemplateStageFieldStatusProvider.List(UserId);
+            var updateType = await _valueUpdateTypeProvider.List(UserId);
+            var Sequence = await _processTemplateStageFieldProvider.Sequence(UserId, ProcessTemplateStageField.ProcessTemplateStageId);
+            ProcessTemplateStageField.ValueUpdateTypes = await _masterListProvider.ValueUpdateTypeList(UserId);
+            ProcessTemplateStageField.ProcessTemplateStageFieldStatuses = await _masterListProvider.ProcessTemplateStageFieldStatusList(UserId);
+         
+            ProcessTemplateStageField.ProcessTemplateFields = Sequence;
+            return ProcessTemplateStageField;
+        }
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var StageInfo = new ProcessTemplateStageFieldIndexGet();
                 var x = await _processTemplateStageProvider.UpdateGet(CurrentUser.Id, Id);
@@ -65,20 +77,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var x = await _processTemplateStageFieldProvider.UpdateGet(CurrentUser.Id, Id);
-
-                //PETER TODO this need to be active again to fill dropdowns
-                var status = await _processTemplateStageFieldStatusProvider.List(CurrentUser.Id);
-                var updateType = await _valueUpdateTypeProvider.List(CurrentUser.Id);
-                var Sequence = await _processTemplateStageFieldProvider.Sequence(CurrentUser.Id, x.ProcessTemplateId, x.ProcessTemplateStageId);
-                x.ValueUpdateTypes = await _masterListProvider.ValueUpdateTypeList(CurrentUser.Id);
-                x.ProcessTemplateStageFieldStatuses= await _masterListProvider.ProcessTemplateStageFieldStatusList(CurrentUser.Id);
-                //x.ProcessTemplateStageFieldStatuses = status;
-                //x.ValueUpdateTypes = updateType;
-                x.ProcessTemplateFields = Sequence;
-                return Ok(x);
+                var ProcessTemplateStageField = await _processTemplateStageFieldProvider.UpdateGet(CurrentUser.Id, Id);
+                ProcessTemplateStageField = await UpdateAddDropDownBoxes(ProcessTemplateStageField, CurrentUser.Id);
+                return Ok(ProcessTemplateStageField);
             }
             return BadRequest(new
             {
@@ -91,28 +94,24 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ProcessTemplateStageField.UserId = CurrentUser.Id;
-                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
-                //if (CheckString.Length == 0)
-                //{
-                _processTemplateStageFieldProvider.UpdatePost(ProcessTemplateStageField);
-                return Ok(ProcessTemplateStageField);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateStageFieldProvider.UpdatePostCheck(ProcessTemplateStageField);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ProcessTemplateStageField = await UpdateAddDropDownBoxes(ProcessTemplateStageField, CurrentUser.Id);
+                }
+                else
+                {
+                    _processTemplateStageFieldProvider.UpdatePost(ProcessTemplateStageField);
+                }
+                ProcessTemplateStageFieldUpdateGetWithErrorMessages ProcessTemplateStageFieldWithErrorMessage = new ProcessTemplateStageFieldUpdateGetWithErrorMessages { ProcessTemplateStageField = ProcessTemplateStageField, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateStageFieldWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateStageFieldUpdateGetWithErrorMessages ProcessTemplateStageFieldWithNoRights = new ProcessTemplateStageFieldUpdateGetWithErrorMessages { ProcessTemplateStageField = ProcessTemplateStageField, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateStageFieldWithNoRights);
         }
     }
 }

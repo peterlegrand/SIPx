@@ -47,28 +47,56 @@ namespace SIPx.API.Controllers
             _claimCheck = claimCheck;
             _userManager = userManager;
         }
+
+        private async Task<ContentTypeCreateGet> CreateAddDropDownBoxes(ContentTypeCreateGet ContentType, string UserId)
+        {
+            var ContentTypeGroups = await _contentTypeGroupProvider.List(UserId);
+            var ProcessTemplates = await _contentTypeProvider.CreateGetProcessTemplates(UserId);
+            var SecurityLevels = await _securityLevelProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            var Icons = await _masterListProvider.IconList(UserId);
+            var ContentTypeClassificationStatuses = await _contentTypeClassificationStatusProvider.List(UserId);
+            var ContentTypeClassifications = await _contentTypeClassificationProvider.CreateGetClassifications(UserId);
+
+            ContentType.ContentTypeGroups = ContentTypeGroups;
+            ContentType.Icons = Icons;
+            ContentType.SecurityLevels = SecurityLevels;
+            ContentType.ProcessTemplates = ProcessTemplates;
+            ContentType.ContentTypeClassificationStatuses = ContentTypeClassificationStatuses;
+            ContentType.ContentTypeClassifications = ContentTypeClassifications;
+            return ContentType;
+        }
+        private async Task<ContentTypeUpdateGet> UpdateAddDropDownBoxes(ContentTypeUpdateGet ContentType, string UserId)
+        {
+            var icons = await _masterListProvider.IconList(UserId);
+            var ContentTypeGroups = await _contentTypeGroupProvider.List(UserId);
+            var SecurityLevels = await _securityLevelProvider.List(UserId);
+            var ProcessTemplates = await _processTemplateProvider.List(UserId);
+
+            var ContentTypeClassifications = await _contentTypeClassificationProvider.UpdateGetClassifications(UserId, ContentType.ContentTypeId);
+
+
+            var ContentTypeClassificationStatuses = await _contentTypeClassificationStatusProvider.List(UserId);
+            ContentType.ContentTypeClassificationStatuses = ContentTypeClassificationStatuses;
+            ContentType.ContentTypeGroups = ContentTypeGroups;
+            ContentType.ContentTypeClassifications = ContentTypeClassifications;
+
+            ContentType.SecurityLevels = SecurityLevels;
+            ContentType.ProcessTemplates = ProcessTemplates;
+            ContentType.Icons = icons;
+
+            return ContentType;
+        }
+
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ContentTypeCreateGet = new ContentTypeCreateGet();
-                var ContentTypeGroups = await _contentTypeGroupProvider.List(CurrentUser.Id);
-                var ProcessTemplates = await _contentTypeProvider.CreateGetProcessTemplates(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                var Icons = await _masterListProvider.IconList(CurrentUser.Id);
-                var ContentTypeClassificationStatuses = await _contentTypeClassificationStatusProvider.List(CurrentUser.Id);
-                var ContentTypeClassifications = await _contentTypeClassificationProvider.CreateGetClassifications(CurrentUser.Id);
-   
-                    ContentTypeCreateGet.ContentTypeGroups = ContentTypeGroups;
-                ContentTypeCreateGet.Icons = Icons;
-                ContentTypeCreateGet.SecurityLevels = SecurityLevels;
-                ContentTypeCreateGet.ProcessTemplates = ProcessTemplates;
-                ContentTypeCreateGet.ContentTypeClassificationStatuses = ContentTypeClassificationStatuses;
-                ContentTypeCreateGet.ContentTypeClassifications = ContentTypeClassifications;
-                return Ok(ContentTypeCreateGet);
+                var ContentType = new ContentTypeCreateGet();
+                ContentType = await CreateAddDropDownBoxes(ContentType, CurrentUser.Id);
+                return Ok(ContentType);
             }
             return BadRequest(new
             {
@@ -81,32 +109,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ContentType.UserId= CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _contentTypeProvider.CreatePostCheck(ContentType);
-                //if (CheckString.Length == 0)
-                //{
-                    _contentTypeProvider.CreatePost(ContentType);
-                    return Ok(ContentType);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _contentTypeProvider.CreatePostCheck(ContentType);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ContentType = await CreateAddDropDownBoxes(ContentType, CurrentUser.Id);
+                }
+                else
+                {
+                    _contentTypeProvider.CreatePost(ContentType);
+                }
+                ContentTypeCreateGetWithErrorMessages ContentTypeWithErrorMessage = new ContentTypeCreateGetWithErrorMessages { ContentType = ContentType, ErrorMessages = ErrorMessages };
+                return Ok(ContentTypeWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ContentTypeCreateGetWithErrorMessages ContentTypeWithNoRights = new ContentTypeCreateGetWithErrorMessages { ContentType = ContentType, ErrorMessages = ErrorMessages };
+            return Ok(ContentTypeWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _contentTypeProvider.IndexGet(CurrentUser.Id));
             }
@@ -121,27 +148,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var x = await _contentTypeProvider.UpdateGet(CurrentUser.Id, Id);
-                var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                var ContentTypeGroups = await _contentTypeGroupProvider.List(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
-                var ProcessTemplates = await _processTemplateProvider.List(CurrentUser.Id);
-
-                var ContentTypeClassifications = await _contentTypeClassificationProvider.UpdateGetClassifications(CurrentUser.Id, Id);
-
-
-                var ContentTypeClassificationStatuses = await _contentTypeClassificationStatusProvider.List(CurrentUser.Id);
-                x.ContentTypeClassificationStatuses = ContentTypeClassificationStatuses;
-                x.ContentTypeGroups = ContentTypeGroups;
-                x.ContentTypeClassifications= ContentTypeClassifications;
-
-                x.SecurityLevels = SecurityLevels;
-                x.ProcessTemplates = ProcessTemplates;
-                x.Icons = icons;
-
-                return Ok(x);
+                var ContentType = await _contentTypeProvider.UpdateGet(CurrentUser.Id, Id);
+                ContentType =await UpdateAddDropDownBoxes(ContentType, CurrentUser.Id);
+                return Ok(ContentType);
             }
             return BadRequest(new
             {
@@ -154,35 +165,31 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ContentTypeUpdateGet ContentType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ContentType.UserId = CurrentUser.Id;
-                //var CheckString = await _ContentTypeProvider.UpdatePostCheck(ContentType);
-                //if (CheckString.Length == 0)
-                //{
-                _contentTypeProvider.UpdatePost(ContentType);
-                return Ok(ContentType);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _contentTypeProvider.UpdatePostCheck(ContentType);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ContentType = await UpdateAddDropDownBoxes(ContentType, CurrentUser.Id);
+                }
+                else
+                {
+                    _contentTypeProvider.UpdatePost(ContentType);
+                }
+                ContentTypeUpdateGetWithErrorMessages ContentTypeWithErrorMessage = new ContentTypeUpdateGetWithErrorMessages { ContentType = ContentType, ErrorMessages = ErrorMessages };
+                return Ok(ContentTypeWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ContentTypeUpdateGetWithErrorMessages ContentTypeWithNoRights = new ContentTypeUpdateGetWithErrorMessages { ContentType = ContentType, ErrorMessages = ErrorMessages };
+            return Ok(ContentTypeWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ContentTypes", "ContentTypeID", Id) == 0)
                 {
@@ -207,7 +214,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ContentTypeDeleteGet ContentType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 ContentType.UserId= CurrentUser.Id;
                 //var CheckString = await _ContentTypeProvider.DeletePostCheck(ContentType);
@@ -236,7 +243,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageIndex(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _contentTypeProvider.LanguageIndexGet(CurrentUser.Id, Id));
         //    }
@@ -251,7 +258,7 @@ namespace SIPx.API.Controllers
         //public async Task<IActionResult> LanguageUpdate(int Id)
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
         //    {
         //        return Ok(await _contentTypeProvider.LanguageUpdateGet(CurrentUser.Id, Id));
         //    }

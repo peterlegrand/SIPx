@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -28,18 +29,28 @@ namespace SIPx.API.Controllers
             _classificationProvider = classificationProvider;
             _userManager = userManager;
         }
+        private async Task<ClassificationRelationTypeUpdateGet> UpdateAddDropDownBoxes(ClassificationRelationTypeUpdateGet ClassificationRelationType, string UserId)
+        {
+            //PETER At the moment not used as there is nothing to load on update
+            return ClassificationRelationType;
+        }
+        private async Task<ClassificationRelationTypeCreateGet> CreateAddDropDownBoxes(ClassificationRelationTypeCreateGet ClassificationRelationType, string UserId)
+        {
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            ClassificationRelationType.LanguageId = UserLanguage.LanguageId;
+            ClassificationRelationType.LanguageName = UserLanguage.Name;
+            return ClassificationRelationType;
+        }
 
         [HttpGet("Create")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ClassificationRelationTypeCreateGet = new ClassificationRelationTypeCreateGet();
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ClassificationRelationTypeCreateGet.LanguageId = UserLanguage.LanguageId;
-                ClassificationRelationTypeCreateGet.LanguageName = UserLanguage.Name;
-                return Ok(ClassificationRelationTypeCreateGet);
+                var ClassificationRelationType = new ClassificationRelationTypeCreateGet();
+                ClassificationRelationType = await CreateAddDropDownBoxes(ClassificationRelationType, CurrentUser.Id);
+                return Ok(ClassificationRelationType);
             }
             return BadRequest(new
             {
@@ -49,36 +60,35 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ClassificationRelationTypeCreatePost ClassificationRelationType)
+        public async Task<IActionResult> Create(ClassificationRelationTypeCreateGet ClassificationRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationRelationType.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var CheckString = await _classificationRelationTypeProvider.CreatePostCheck(ClassificationRelationType);
-                if (CheckString.Length == 0)
+                ErrorMessages = await _classificationRelationTypeProvider.CreatePostCheck(ClassificationRelationType);
+                if (ErrorMessages.Count > 0)
+                {
+                    ClassificationRelationType = await CreateAddDropDownBoxes(ClassificationRelationType, CurrentUser.Id);
+                }
+                else
                 {
                     _classificationRelationTypeProvider.CreatePost(ClassificationRelationType);
-                    return Ok(ClassificationRelationType);
                 }
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-                    Message = CheckString,
-                });
+                ClassificationRelationTypeCreateGetWithErrorMessages ClassificationRelationTypeWithErrorMessage = new ClassificationRelationTypeCreateGetWithErrorMessages { ClassificationRelationType = ClassificationRelationType, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationRelationTypeWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationRelationTypeCreateGetWithErrorMessages ClassificationRelationTypeWithNoRights = new ClassificationRelationTypeCreateGetWithErrorMessages { ClassificationRelationType = ClassificationRelationType, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationRelationTypeWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index() //int Id) PETER CHECK it had this Id but I think no need
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "30"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypes", "ClassificationRelationTypeID", Id) == 0)
                 //{
@@ -102,7 +112,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "30"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypes", "ClassificationRelationTypeID", Id) == 0)
                 {
@@ -126,27 +136,24 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ClassificationRelationTypeUpdateGet ClassificationRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ClassificationRelationType.UserId = CurrentUser.Id;
-                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
-                //if (CheckString.Length == 0)
-                //{
-                _classificationRelationTypeProvider.UpdatePost(ClassificationRelationType);
-                return Ok(ClassificationRelationType);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _classificationRelationTypeProvider.UpdatePostCheck(ClassificationRelationType);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ClassificationRelationType = await UpdateAddDropDownBoxes(ClassificationRelationType, CurrentUser.Id);
+                }
+                else
+                {
+                    _classificationRelationTypeProvider.UpdatePost(ClassificationRelationType);
+                }
+                ClassificationRelationTypeUpdateGetWithErrorMessages ClassificationRelationTypeWithErrorMessage = new ClassificationRelationTypeUpdateGetWithErrorMessages { ClassificationRelationType = ClassificationRelationType, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationRelationTypeWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationRelationTypeUpdateGetWithErrorMessages ClassificationRelationTypeWithNoRights = new ClassificationRelationTypeUpdateGetWithErrorMessages { ClassificationRelationType = ClassificationRelationType, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationRelationTypeWithNoRights);
 
         }
 
@@ -154,7 +161,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypes", "ClassificationRelationTypeID", Id) == 0)
                 {
@@ -179,7 +186,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ClassificationRelationTypeDeleteGet ClassificationRelationType)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 ClassificationRelationType.UserId= CurrentUser.Id;
                 //var CheckString = await _ClassificationRelationTypeProvider.DeletePostCheck(ClassificationRelationType);
@@ -206,7 +213,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "34"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypeLanguages", "ClassificationRelationTypeID", Id) == 0)
                 {
@@ -230,7 +237,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "34"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationRelationTypeLanguages", "ClassificationRelationTypeLanguageID", Id) == 0)
                 {

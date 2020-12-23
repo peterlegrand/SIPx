@@ -60,11 +60,11 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<string> UpdatePostCheck(PropertyUpdateGet Property)
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PropertyValueUpdateGet PropertyValue)
         {
             string usp = "usp_PropertyUpdatePostCheck @PropertyLanguageId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @UserId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Property);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PropertyValue);
+            return ErrorMessages;
         }
 
         public bool UpdatePost(PropertyValueUpdateGet PropertyValue)

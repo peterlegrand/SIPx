@@ -42,30 +42,44 @@ namespace SIPx.API.Controllers
             _pageProvider = pageProvider;
             _userManager = userManager;
         }
-        
+        private async Task<PageSectionCreateGet> CreateAddDropDownBoxes(PageSectionCreateGet PageSection, string UserId, int PageId)
+        {
+            var PageSectionTypes = await _pageSectionTypeProvider.List(UserId);
+            var PageSectionDataTypes = await _pageSectionDataTypeProvider.List(UserId);
+            var ContentTypes = await _contentTypeProvider.List(UserId);
+            var SortBys = await _masterListProvider.SortByList(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            PageSection.LanguageId = UserLanguage.LanguageId;
+            PageSection.LanguageName = UserLanguage.Name;
+            PageSection.PageSectionDataTypes = PageSectionDataTypes;
+            PageSection.PageSectionTypes = PageSectionTypes;
+            PageSection.ContentTypes = ContentTypes;
+            PageSection.SortBys = SortBys;
+            PageSection.PageId = PageId;
+            return PageSection;
+        }
+        private async Task<PageSectionUpdateGet> UpdateAddDropDownBoxes(PageSectionUpdateGet PageSection, string UserId)
+        {
+            var PageSectionTypes = await _pageSectionTypeProvider.List(UserId);
+            var PageSectionDataTypes = await _pageSectionDataTypeProvider.List(UserId);
+            var ContentTypes = await _contentTypeProvider.List(UserId);
+            var SortBys = await _masterListProvider.SortByList(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            PageSection.PageSectionDataTypes = PageSectionDataTypes;
+            PageSection.PageSectionTypes = PageSectionTypes;
+            PageSection.ContentTypes = ContentTypes;
+            PageSection.SortBys = SortBys;
+            return PageSection;
+        }
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var PageSectionCreateGet = new PageSectionCreateGet();
-              //  var PageSectionCreateGetSequences = await _pageSectionProvider.CreateGetSequence(CurrentUser.Id, Id);
-                var PageSectionTypes = await _pageSectionTypeProvider.List(CurrentUser.Id);
-                var PageSectionDataTypes = await _pageSectionDataTypeProvider.List(CurrentUser.Id);
-                var ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
-                var SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                PageSectionCreateGet.LanguageId = UserLanguage.LanguageId;
-                PageSectionCreateGet.LanguageName = UserLanguage.Name;
-                PageSectionCreateGet.PageSectionDataTypes = PageSectionDataTypes;
-                PageSectionCreateGet.PageSectionTypes = PageSectionTypes;
-                PageSectionCreateGet.ContentTypes = ContentTypes;
-                PageSectionCreateGet.SortBys= SortBys;
-
-                //                PageSectionCreateGet.Sequences = PageSectionCreateGetSequences;
-                PageSectionCreateGet.PageId = Id;
-                return Ok(PageSectionCreateGet);
+                var PageSection = new PageSectionCreateGet();
+                PageSection = await CreateAddDropDownBoxes(PageSection, CurrentUser.Id, Id);
+                return Ok(PageSection);
             }
             return BadRequest(new
             {
@@ -79,33 +93,31 @@ namespace SIPx.API.Controllers
         {
                 var CurrentUser = await _userManager.GetUserAsync(User);
             PageSection.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                PageSection.UserId = CurrentUser.Id;
-//                var CheckString = await _pageSectionProvider.CreatePostCheck(PageSection);
-  //              if (CheckString.Length == 0)
+                ErrorMessages = await _pageSectionProvider.CreatePostCheck(PageSection);
+                if (ErrorMessages.Count > 0)
+                {
+                    PageSection = await CreateAddDropDownBoxes(PageSection, CurrentUser.Id, PageSection.PageId);
+                }
+                else
                 {
                     _pageSectionProvider.CreatePost(PageSection);
-                    return Ok(PageSection);
                 }
-                return BadRequest(new
-                {
-                    IsSuccess = false,
-    //                Message = CheckString,
-                });
+                PageSectionCreateGetWithErrorMessages PageSectionWithErrorMessage = new PageSectionCreateGetWithErrorMessages { PageSection = PageSection, ErrorMessages = ErrorMessages };
+                return Ok(PageSectionWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PageSectionCreateGetWithErrorMessages PageSectionWithNoRights = new PageSectionCreateGetWithErrorMessages { PageSection = PageSection, ErrorMessages = ErrorMessages };
+            return Ok(PageSectionWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _pageSectionProvider.IndexGet(CurrentUser.Id, Id));
             }
@@ -120,7 +132,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("PageSections", "PageSectionID", Id) == 0)
                 {
@@ -131,15 +143,7 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var PageSection = await _pageSectionProvider.UpdateGet(CurrentUser.Id, Id);
-                var PageSectionTypes = await _pageSectionTypeProvider.List(CurrentUser.Id);
-                var PageSectionDataTypes = await _pageSectionDataTypeProvider.List(CurrentUser.Id);
-                var ContentTypes = await _contentTypeProvider.List(CurrentUser.Id);
-                var SortBys = await _masterListProvider.SortByList(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                PageSection.PageSectionDataTypes = PageSectionDataTypes;
-                PageSection.PageSectionTypes = PageSectionTypes;
-                PageSection.ContentTypes = ContentTypes;
-                PageSection.SortBys = SortBys;
+                PageSection = await UpdateAddDropDownBoxes(PageSection, CurrentUser.Id);
 
                 return Ok(PageSection);
             }
@@ -155,35 +159,31 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PageSectionUpdateGet PageSection)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                PageSection.UserId = CurrentUser.Id;
-                //var CheckString = await _PageSectionProvider.UpdatePostCheck(PageSection);
-                //if (CheckString.Length == 0)
-                //{
-                _pageSectionProvider.UpdatePost(PageSection);
-                return Ok(PageSection);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _pageSectionProvider.UpdatePostCheck(PageSection);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    PageSection = await UpdateAddDropDownBoxes(PageSection, CurrentUser.Id);
+                }
+                else
+                {
+                    _pageSectionProvider.UpdatePost(PageSection);
+                }
+                PageSectionUpdateGetWithErrorMessages PageSectionWithErrorMessage = new PageSectionUpdateGetWithErrorMessages { PageSection = PageSection, ErrorMessages = ErrorMessages };
+                return Ok(PageSectionWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PageSectionUpdateGetWithErrorMessages PageSectionWithNoRights = new PageSectionUpdateGetWithErrorMessages { PageSection = PageSection, ErrorMessages = ErrorMessages };
+            return Ok(PageSectionWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("PageSections", "PageSectionID", Id) == 0)
                 {
@@ -209,7 +209,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(PageSectionDeleteGet PageSection)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 PageSection.UserId = CurrentUser.Id;
                 //var CheckString = await _PageSectionProvider.DeletePostCheck(PageSection);
@@ -238,7 +238,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _pageSectionProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -253,7 +253,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _pageSectionProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }

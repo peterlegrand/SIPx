@@ -36,21 +36,34 @@ namespace SIPx.API.Controllers
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
         }
+        private async Task<ProcessTemplateFlowCreateGet> CreateAddDropDownBoxes(ProcessTemplateFlowCreateGet ProcessTemplateFlow, string UserId, int ProcessTemplateId)
+        {
+            var ProcessTemplateStages = await _processTemplateStageProvider.List(UserId, ProcessTemplateId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            ProcessTemplateFlow.LanguageId = UserLanguage.LanguageId;
+            ProcessTemplateFlow.LanguageName = UserLanguage.Name;
+            ProcessTemplateFlow.ProcessTemplateStages = ProcessTemplateStages;
+            ProcessTemplateFlow.ProcessTemplateId = ProcessTemplateId;
+            return ProcessTemplateFlow;
+        }
+
+        private async Task<ProcessTemplateFlowUpdateGet> UpdateAddDropDownBoxes(ProcessTemplateFlowUpdateGet ProcessTemplateFlow, string UserId, int ProcessTemplateFlowId)
+        {
+
+            var Stages = await _processTemplateFlowProvider.UpdateGetStageList(UserId, ProcessTemplateFlowId);
+            ProcessTemplateFlow.ProcessTemplateStages = Stages;
+            return ProcessTemplateFlow;
+        }
 
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ProcessTemplateFlowCreateGet = new ProcessTemplateFlowCreateGet();
-                var ProcessTemplateStages = await _processTemplateStageProvider.List(CurrentUser.Id, Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ProcessTemplateFlowCreateGet.LanguageId = UserLanguage.LanguageId;
-                ProcessTemplateFlowCreateGet.LanguageName = UserLanguage.Name;
-                ProcessTemplateFlowCreateGet.ProcessTemplateStages = ProcessTemplateStages;
-                ProcessTemplateFlowCreateGet.ProcessTemplateId = Id;
-                return Ok(ProcessTemplateFlowCreateGet);
+                var ProcessTemplateFlow = new ProcessTemplateFlowCreateGet();
+                ProcessTemplateFlow = await CreateAddDropDownBoxes(ProcessTemplateFlow, CurrentUser.Id, Id);
+                return Ok(ProcessTemplateFlow);
             }
             return BadRequest(new
             {
@@ -60,37 +73,35 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ProcessTemplateFlowCreatePost ProcessTemplateFlow)
+        public async Task<IActionResult> Create(ProcessTemplateFlowCreateGet ProcessTemplateFlow)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProcessTemplateFlow.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _processTemplateFlowProvider.CreatePostCheck(ProcessTemplateFlow);
-                //if (CheckString.Length == 0)
-                //{
-                ProcessTemplateFlow.UserId = CurrentUser.Id;
-                    _processTemplateFlowProvider.CreatePost(ProcessTemplateFlow);
-                    return Ok(ProcessTemplateFlow);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateFlowProvider.CreatePostCheck(ProcessTemplateFlow);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ProcessTemplateFlow = await CreateAddDropDownBoxes(ProcessTemplateFlow, CurrentUser.Id, ProcessTemplateFlow.ProcessTemplateId);
+                }
+                else
+                {
+                    _processTemplateFlowProvider.CreatePost(ProcessTemplateFlow);
+                }
+                ProcessTemplateFlowCreateGetWithErrorMessages ProcessTemplateFlowWithErrorMessage = new ProcessTemplateFlowCreateGetWithErrorMessages { ProcessTemplateFlow = ProcessTemplateFlow, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateFlowWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateFlowCreateGetWithErrorMessages ProcessTemplateFlowWithNoRights = new ProcessTemplateFlowCreateGetWithErrorMessages { ProcessTemplateFlow = ProcessTemplateFlow, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateFlowWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User); 
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowProvider.IndexGet(CurrentUser.Id, Id));
             }
@@ -105,12 +116,11 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var x = await _processTemplateFlowProvider.UpdateGet(CurrentUser.Id, Id);
-                var y = await _processTemplateFlowProvider.UpdateGetStageList(CurrentUser.Id, Id);
-                x.ProcessTemplateStages = y;
-                return Ok(x);
+                var ProcessTemplateFlow = await _processTemplateFlowProvider.UpdateGet(CurrentUser.Id, Id);
+                ProcessTemplateFlow = await UpdateAddDropDownBoxes(ProcessTemplateFlow, CurrentUser.Id, Id);
+                return Ok(ProcessTemplateFlow);
             }
             return BadRequest(new
             {
@@ -122,27 +132,24 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ProcessTemplateFlowUpdateGet ProcessTemplateFlow)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ProcessTemplateFlow.UserId= CurrentUser.Id;
-                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
-                //if (CheckString.Length == 0)
-                //{
-                _processTemplateFlowProvider.UpdatePost(ProcessTemplateFlow);
-                return Ok(ProcessTemplateFlow);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateFlowProvider.UpdatePostCheck(ProcessTemplateFlow);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ProcessTemplateFlow = await UpdateAddDropDownBoxes(ProcessTemplateFlow, CurrentUser.Id,ProcessTemplateFlow.ProcessTemplateFlowId);
+                }
+                else
+                {
+                    _processTemplateFlowProvider.UpdatePost(ProcessTemplateFlow);
+                }
+                ProcessTemplateFlowUpdateGetWithErrorMessages ProcessTemplateFlowWithErrorMessage = new ProcessTemplateFlowUpdateGetWithErrorMessages { ProcessTemplateFlow = ProcessTemplateFlow, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateFlowWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateFlowUpdateGetWithErrorMessages ProcessTemplateFlowWithNoRights = new ProcessTemplateFlowUpdateGetWithErrorMessages { ProcessTemplateFlow = ProcessTemplateFlow, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateFlowWithNoRights);
 
         }
 
@@ -150,7 +157,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ProcessTemplateFlows", "ProcessTemplateFlowID", Id) == 0)
                 {
@@ -175,7 +182,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ProcessTemplateFlowDeleteGet ProcessTemplateFlow)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                // ProcessTemplateFlow.CreatorId = CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateFlowProvider.DeletePostCheck(ProcessTemplateFlow);
@@ -204,7 +211,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -219,7 +226,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }

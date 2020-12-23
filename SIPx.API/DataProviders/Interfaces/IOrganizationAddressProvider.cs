@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IOrganizationAddressProvider
     {
-        Task<string> CreatePost(OrganizationAddressCreatePost OrganizationAddress);
+        Task<string> CreatePost(OrganizationAddressCreateGet OrganizationAddress);
         Task<List<ErrorMessage>> CreatePostCheck(OrganizationAddressCreateGet OrganizationAddress);
         Task<OrganizationAddressDeleteGet> DeleteGet(string UserId, int OrganizationAddressId);
         bool DeletePost(int Id);

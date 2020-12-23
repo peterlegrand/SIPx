@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class OrganizationTelecomUpdateGetWithErrorMessages
     {
         [Key]
-        public OrganizationTelecomUpdateGet OrganizationTelecomUser { get; set; }
+        public OrganizationTelecomUpdateGet OrganizationTelecom { get; set; }
         public List<ErrorMessage> ErrorMessages { get; set; }
     }
 }

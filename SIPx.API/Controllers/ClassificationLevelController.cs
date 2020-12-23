@@ -18,7 +18,7 @@ namespace SIPx.API.Controllers
         private readonly IClassificationLevelProvider _classificationLevelProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly ICheckProvider _checkProvider;
-        private  IClaimCheck _claimCheck;
+        private IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
@@ -34,23 +34,36 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
+        private async Task<ClassificationLevelCreateGet> CreateAddDropDownBoxes(ClassificationLevelCreateGet ClassificationLevel, string UserId, int ClassificationId)
+        {
+            var ClassificationLevelCreateGetSequences = await _classificationLevelProvider.CreateGetSequence(UserId, ClassificationId);
+            var DateLevels = await _dateLevelProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            ClassificationLevelCreateGetSequences.Add(new SequenceList { Sequence = ClassificationLevelCreateGetSequences.Count + 1, Name = "Add at the end" });
+            ClassificationLevel.LanguageId = UserLanguage.LanguageId;
+            ClassificationLevel.LanguageName = UserLanguage.Name;
+            ClassificationLevel.DateLevels = DateLevels;
+            ClassificationLevel.Sequences = ClassificationLevelCreateGetSequences;
+            ClassificationLevel.ClassificationId = ClassificationId;
+            return ClassificationLevel;
+        }
+
+        private async Task<ClassificationLevelUpdateGet> UpdateAddDropDownBoxes(ClassificationLevelUpdateGet ClassificationLevel, string UserId)
+        {
+            ClassificationLevel.DateLevels = await _dateLevelProvider.List(UserId);
+            ClassificationLevel.Sequences = await _classificationLevelProvider.CreateGetSequence(UserId, ClassificationLevel.ClassificationId);
+            return ClassificationLevel;
+        }
+
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ClassificationLevelCreateGet = new ClassificationLevelCreateGet();
-                var ClassificationLevelCreateGetSequences = await _classificationLevelProvider.CreateGetSequence(CurrentUser.Id, Id);
-                var DateLevels = await _dateLevelProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ClassificationLevelCreateGetSequences.Add(new SequenceList { Sequence = ClassificationLevelCreateGetSequences.Count + 1, Name = "Add at the end" });
-                ClassificationLevelCreateGet.LanguageId = UserLanguage.LanguageId;
-                ClassificationLevelCreateGet.LanguageName = UserLanguage.Name;
-                ClassificationLevelCreateGet.DateLevels = DateLevels;
-                ClassificationLevelCreateGet.Sequences = ClassificationLevelCreateGetSequences;
-                ClassificationLevelCreateGet.ClassificationId = Id;
-                return Ok(ClassificationLevelCreateGet);
+                var ClassificationLevel = new ClassificationLevelCreateGet();
+                ClassificationLevel = await CreateAddDropDownBoxes(ClassificationLevel, CurrentUser.Id, Id);
+                return Ok(ClassificationLevel);
             }
             return BadRequest(new
             {
@@ -60,45 +73,37 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ClassificationLevelCreatePost ClassificationLevel)
+        public async Task<IActionResult> Create(ClassificationLevelCreateGet ClassificationLevel)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationLevel.UserId = CurrentUser.Id;
             var ErrorMessages = new List<ErrorMessage>();
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 ErrorMessages = await _classificationLevelProvider.CreatePostCheck(ClassificationLevel);
                 if (ErrorMessages.Count > 0)
                 {
-                    //var CheckString = await _classificationLevelProvider.CreatePostCheck(ClassificationLevel);
-                    //if (CheckString.Length == 0)
-                    //{
-                    //PETER TODO this has to be filled, see classification or createget
+                    ClassificationLevel = await CreateAddDropDownBoxes(ClassificationLevel, CurrentUser.Id, ClassificationLevel.ClassificationId);
                 }
-                else { 
-                    _classificationLevelProvider.CreatePost(ClassificationLevel);
-                return Ok(ClassificationLevel);
-                }
-                return BadRequest(new
+                else
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    _classificationLevelProvider.CreatePost(ClassificationLevel);
+                }
+                ClassificationLevelCreateGetWithErrorMessages ClassificationLevelWithErrorMessage = new ClassificationLevelCreateGetWithErrorMessages { ClassificationLevel = ClassificationLevel, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationLevelWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationLevelCreateGetWithErrorMessages ClassificationLevelWithNoRights = new ClassificationLevelCreateGetWithErrorMessages { ClassificationLevel = ClassificationLevel, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationLevelWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                
+
                 return Ok(await _classificationLevelProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
@@ -112,33 +117,32 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ClassificationLevelUpdateGet ClassificationLevel)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            ClassificationLevel.UserId= CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            ClassificationLevel.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _classificationLevelProvider.UpdatePostCheck(ClassificationLevel);
-                //if (CheckString.Length == 0)
-                //{
-                    _classificationLevelProvider.UpdatePost(ClassificationLevel);
-                    return Ok(ClassificationLevel);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _classificationLevelProvider.UpdatePostCheck(ClassificationLevel);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ClassificationLevel = await UpdateAddDropDownBoxes(ClassificationLevel, CurrentUser.Id);
+                }
+                else
+                {
+                    _classificationLevelProvider.UpdatePost(ClassificationLevel);
+                }
+                ClassificationLevelUpdateGetWithErrorMessages ClassificationLevelWithErrorMessage = new ClassificationLevelUpdateGetWithErrorMessages { ClassificationLevel = ClassificationLevel, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationLevelWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationLevelUpdateGetWithErrorMessages ClassificationLevelWithNoRights = new ClassificationLevelUpdateGetWithErrorMessages { ClassificationLevel = ClassificationLevel, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationLevelWithNoRights);
         }
 
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "2"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationLevelID", Id) == 0)
                 {
@@ -148,10 +152,9 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var classificationLevel = await _classificationLevelProvider.UpdateGet(CurrentUser.Id, Id);
-                classificationLevel.DateLevels = await _dateLevelProvider.List(CurrentUser.Id);
-                classificationLevel.Sequences = await _classificationLevelProvider.CreateGetSequence(CurrentUser.Id, classificationLevel.ClassificationId);
-                return Ok(classificationLevel);
+                var ClassificationLevel = await _classificationLevelProvider.UpdateGet(CurrentUser.Id, Id);
+                ClassificationLevel = await UpdateAddDropDownBoxes(ClassificationLevel, CurrentUser.Id);
+                return Ok(ClassificationLevel);
             }
             return BadRequest(new
             {
@@ -164,7 +167,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationLevels", "ClassificationLevelID", Id) == 0)
                 {
@@ -189,9 +192,9 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ClassificationLevelDeleteGet ClassificationLevel)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ClassificationLevel.UserId= CurrentUser.Id;
+                ClassificationLevel.UserId = CurrentUser.Id;
                 //var CheckString = await _ClassificationLevelProvider.DeletePostCheck(ClassificationLevel);
                 //if (CheckString.Length == 0)
                 //{
@@ -217,7 +220,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationLevelLanguages", "ClassificationLevelID", Id) == 0)
                 {
@@ -242,7 +245,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "16"))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationLevelLanguages", "ClassificationLevelLanguageID", Id) == 0)
                 {

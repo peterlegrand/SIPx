@@ -33,7 +33,7 @@ namespace SIPx.API.Controllers
         private readonly IProcessTemplateProvider _processTemplateProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProcessTemplateFlowPassController(IOrganizationProvider organizationProvider, IProjectProvider projectProvider, IUserProvider userProvider , IRoleProvider roleProvider, ISecurityLevelProvider securityLevelProvider, ICheckProvider checkProvider, IProcessTemplateFlowPassComparisonOperatorProvider processTemplateFlowPassComparisonOperatorProvider , IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateFlowPassTypeProvider processTemplateFlowPassTypeProvider, IProcessTemplateFlowPassProvider processTemplateFlowPassProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProcessTemplateFlowPassController(IOrganizationProvider organizationProvider, IProjectProvider projectProvider, IUserProvider userProvider, IRoleProvider roleProvider, ISecurityLevelProvider securityLevelProvider, ICheckProvider checkProvider, IProcessTemplateFlowPassComparisonOperatorProvider processTemplateFlowPassComparisonOperatorProvider, IProcessTemplateFieldProvider processTemplateFieldProvider, IProcessTemplateFlowPassTypeProvider processTemplateFlowPassTypeProvider, IProcessTemplateFlowPassProvider processTemplateFlowPassProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProcessTemplateProvider processTemplateProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _organizationProvider = organizationProvider;
             _projectProvider = projectProvider;
@@ -50,40 +50,62 @@ namespace SIPx.API.Controllers
             _processTemplateProvider = processTemplateProvider;
             _userManager = userManager;
         }
+        private async Task<ProcessTemplateFlowPassCreateGet> CreateAddDropDownBoxes(ProcessTemplateFlowPassCreateGet ProcessTemplateFlowPass, string UserId, int ProcessTemplateFlowId)
+        {
+            var ProcessTemplateFlowPassCreateGetSequences = await _processTemplateFlowPassProvider.CreateGetSequence(UserId, ProcessTemplateFlowId);
+            var ProcessTemplateFlowPassTypes = await _processTemplateFlowPassTypeProvider.List(UserId);
+            var ProcessTemplateFields = await _processTemplateFlowPassProvider.CreateGetFieldList(UserId, ProcessTemplateFlowId);
+            var ProcessTemplateFieldRoles = await _processTemplateFlowPassProvider.CreateGetFieldRoleList(UserId, ProcessTemplateFlowId);
+            var ComparisonOperators = await _processTemplateFlowPassComparisonOperatorProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            var SecurityLevels = await _securityLevelProvider.List(UserId);
+            var Roles = await _roleProvider.List(UserId);
+            var Organizations = await _organizationProvider.List(UserId);
+            var Projects = await _projectProvider.List(UserId);
+            var Users = await _userProvider.List();
+            ProcessTemplateFlowPass.LanguageId = UserLanguage.LanguageId;
+            ProcessTemplateFlowPass.LanguageName = UserLanguage.Name;
+            ProcessTemplateFlowPass.Sequences = ProcessTemplateFlowPassCreateGetSequences;
+            ProcessTemplateFlowPass.ProcessTemplateFlowPassTypes = ProcessTemplateFlowPassTypes;
+            ProcessTemplateFlowPass.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
+            ProcessTemplateFlowPass.ProcessTemplateFields = ProcessTemplateFields;
+            ProcessTemplateFlowPass.ComparisonOperators = ComparisonOperators;
+            ProcessTemplateFlowPass.ProcessTemplateFlowId = ProcessTemplateFlowId;
+            ProcessTemplateFlowPass.UserId = UserId;
+            ProcessTemplateFlowPass.SecurityLevels = SecurityLevels;
+            ProcessTemplateFlowPass.Roles = Roles;
+            ProcessTemplateFlowPass.Organizations = Organizations;
+            ProcessTemplateFlowPass.Projects = Projects;
+            ProcessTemplateFlowPass.Users = Users;
 
+            return ProcessTemplateFlowPass;
+        }
+
+        private async Task<ProcessTemplateFlowPassUpdateGet> UpdateAddDropDownBoxes(ProcessTemplateFlowPassUpdateGet ProcessTemplateFlowPass, string UserId, int ProcessTemplateFlowPassId)
+        {
+            var ProcessTemplateFlowPassCreateGetSequences = await _processTemplateFlowPassProvider.UpdateGetSequence(UserId, ProcessTemplateFlowPassId);
+            var ProcessTemplateFlowPassTypes = await _processTemplateFlowPassTypeProvider.List(UserId);
+            var ProcessTemplateFields = await _processTemplateFlowPassProvider.UpdateGetFieldList(UserId, ProcessTemplateFlowPassId);
+            var ProcessTemplateFieldRoles = await _processTemplateFlowPassProvider.UpdateGetFieldRoleList(UserId, ProcessTemplateFlowPassId);
+            var ComparisonOperators = await _processTemplateFlowPassComparisonOperatorProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+           ProcessTemplateFlowPass.Sequences = ProcessTemplateFlowPassCreateGetSequences;
+            ProcessTemplateFlowPass.ProcessTemplateFlowPassTypes = ProcessTemplateFlowPassTypes;
+            ProcessTemplateFlowPass.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
+            ProcessTemplateFlowPass.ProcessTemplateFields = ProcessTemplateFields;
+            ProcessTemplateFlowPass.ComparisonOperators = ComparisonOperators;
+           
+            return ProcessTemplateFlowPass;
+        }
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ProcessTemplateFlowPassCreateGet = new ProcessTemplateFlowPassCreateGet();
-                var ProcessTemplateFlowPassCreateGetSequences = await _processTemplateFlowPassProvider.CreateGetSequence(CurrentUser.Id, Id);
-                var ProcessTemplateFlowPassTypes = await _processTemplateFlowPassTypeProvider.List(CurrentUser.Id);
-                var ProcessTemplateFields = await _processTemplateFlowPassProvider.CreateGetFieldList(CurrentUser.Id, Id);
-                var ProcessTemplateFieldRoles = await _processTemplateFlowPassProvider.CreateGetFieldRoleList(CurrentUser.Id, Id);
-                var ComparisonOperators = await _processTemplateFlowPassComparisonOperatorProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
-                var Roles = await _roleProvider.List(CurrentUser.Id);
-                var Organizations = await _organizationProvider.List(CurrentUser.Id);
-                var Projects = await _projectProvider.List(CurrentUser.Id);
-                var Users = await _userProvider.List();
-                ProcessTemplateFlowPassCreateGet.LanguageId = UserLanguage.LanguageId;
-                ProcessTemplateFlowPassCreateGet.LanguageName = UserLanguage.Name;
-                ProcessTemplateFlowPassCreateGet.Sequences = ProcessTemplateFlowPassCreateGetSequences;
-                ProcessTemplateFlowPassCreateGet.ProcessTemplateFlowPassTypes = ProcessTemplateFlowPassTypes;
-                ProcessTemplateFlowPassCreateGet.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
-                ProcessTemplateFlowPassCreateGet.ProcessTemplateFields = ProcessTemplateFields;
-                ProcessTemplateFlowPassCreateGet.ComparisonOperators = ComparisonOperators;
-                ProcessTemplateFlowPassCreateGet.ProcessTemplateFlowId = Id;
-                ProcessTemplateFlowPassCreateGet.UserId = CurrentUser.Id;
-                ProcessTemplateFlowPassCreateGet.SecurityLevels = SecurityLevels;
-                ProcessTemplateFlowPassCreateGet.Roles = Roles;
-                ProcessTemplateFlowPassCreateGet.Organizations = Organizations;
-                ProcessTemplateFlowPassCreateGet.Projects = Projects;
-                ProcessTemplateFlowPassCreateGet.Users = Users;
-                return Ok(ProcessTemplateFlowPassCreateGet);
+                var ProcessTemplateFlowPass = new ProcessTemplateFlowPassCreateGet();
+                ProcessTemplateFlowPass = await CreateAddDropDownBoxes(ProcessTemplateFlowPass, CurrentUser.Id, Id);
+                return Ok(ProcessTemplateFlowPass);
             }
             return BadRequest(new
             {
@@ -97,32 +119,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ProcessTemplateFlowPass.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _processTemplateFlowPassProvider.CreatePostCheck(ProcessTemplateFlowPass);
-                //if (CheckString.Length == 0)
-                //{
-                    _processTemplateFlowPassProvider.CreatePost(ProcessTemplateFlowPass);
-                    return Ok(ProcessTemplateFlowPass);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateFlowPassProvider.CreatePostCheck(ProcessTemplateFlowPass);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    ProcessTemplateFlowPass = await CreateAddDropDownBoxes(ProcessTemplateFlowPass, CurrentUser.Id, ProcessTemplateFlowPass.ProcessTemplateFlowId);
+                }
+                else
+                {
+                    _processTemplateFlowPassProvider.CreatePost(ProcessTemplateFlowPass);
+                }
+                ProcessTemplateFlowPassCreateGetWithErrorMessages ProcessTemplateFlowPassWithErrorMessage = new ProcessTemplateFlowPassCreateGetWithErrorMessages { ProcessTemplateFlowPass = ProcessTemplateFlowPass, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateFlowPassWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateFlowPassCreateGetWithErrorMessages ProcessTemplateFlowPassWithNoRights = new ProcessTemplateFlowPassCreateGetWithErrorMessages { ProcessTemplateFlowPass = ProcessTemplateFlowPass, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateFlowPassWithNoRights);
         }
 
         [HttpGet("IndexGetProcessTemplateId/{Id:int}")]
         public async Task<IActionResult> IndexGetProcessTemplateId(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowPassProvider.IndexGetProcessTemplateId(Id));
             }
@@ -136,7 +157,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowPassProvider.IndexGet(CurrentUser.Id, Id));
             }
@@ -151,27 +172,13 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
-                var ProcessTemplateFlowPassUpdateGet = await _processTemplateFlowPassProvider.UpdateGet(CurrentUser.Id, Id);
-                var ProcessTemplateFlowPassCreateGetSequences = await _processTemplateFlowPassProvider.UpdateGetSequence(CurrentUser.Id, Id);
-                var ProcessTemplateFlowPassTypes = await _processTemplateFlowPassTypeProvider.List(CurrentUser.Id);
-                var ProcessTemplateFields = await _processTemplateFlowPassProvider.UpdateGetFieldList(CurrentUser.Id, Id);
-                var ProcessTemplateFieldRoles = await _processTemplateFlowPassProvider.UpdateGetFieldRoleList(CurrentUser.Id, Id);
-                var ComparisonOperators = await _processTemplateFlowPassComparisonOperatorProvider.List(CurrentUser.Id);
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                //ProcessTemplateFlowPassUpdateGet.LanguageId = UserLanguage.LanguageId;
-                //ProcessTemplateFlowPassUpdateGet.LanguageName = UserLanguage.Name;
-                ProcessTemplateFlowPassUpdateGet.Sequences = ProcessTemplateFlowPassCreateGetSequences;
-                ProcessTemplateFlowPassUpdateGet.ProcessTemplateFlowPassTypes = ProcessTemplateFlowPassTypes;
-                ProcessTemplateFlowPassUpdateGet.ProcessTemplateFieldRoles = ProcessTemplateFieldRoles;
-                ProcessTemplateFlowPassUpdateGet.ProcessTemplateFields = ProcessTemplateFields;
-                ProcessTemplateFlowPassUpdateGet.ComparisonOperators = ComparisonOperators;
-                //ProcessTemplateFlowPassUpdateGet.ProcessTemplateFlowId = Id;
+                var ProcessTemplateFlowPass= await _processTemplateFlowPassProvider.UpdateGet(CurrentUser.Id, Id);
+                ProcessTemplateFlowPass = await UpdateAddDropDownBoxes(ProcessTemplateFlowPass, CurrentUser.Id, Id);
 
-
-                return Ok(ProcessTemplateFlowPassUpdateGet);
+                return Ok(ProcessTemplateFlowPass);
             }
             return BadRequest(new
             {
@@ -183,27 +190,24 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ProcessTemplateFlowPassUpdateGet ProcessTemplateFlowPass)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ProcessTemplateFlowPass.UserId = CurrentUser.Id;
-                //var CheckString = await _PersonProvider.UpdatePostCheck(Person);
-                //if (CheckString.Length == 0)
-                //{
-                _processTemplateFlowPassProvider.UpdatePost(ProcessTemplateFlowPass);
-                return Ok(ProcessTemplateFlowPass);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _processTemplateFlowPassProvider.UpdatePostCheck(ProcessTemplateFlowPass);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ProcessTemplateFlowPass = await UpdateAddDropDownBoxes(ProcessTemplateFlowPass, CurrentUser.Id, ProcessTemplateFlowPass.ProcessTemplateFlowPassId);
+                }
+                else
+                {
+                    _processTemplateFlowPassProvider.UpdatePost(ProcessTemplateFlowPass);
+                }
+                ProcessTemplateFlowPassUpdateGetWithErrorMessages ProcessTemplateFlowPassWithErrorMessage = new ProcessTemplateFlowPassUpdateGetWithErrorMessages { ProcessTemplateFlowPass = ProcessTemplateFlowPass, ErrorMessages = ErrorMessages };
+                return Ok(ProcessTemplateFlowPassWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProcessTemplateFlowPassUpdateGetWithErrorMessages ProcessTemplateFlowPassWithNoRights = new ProcessTemplateFlowPassUpdateGetWithErrorMessages { ProcessTemplateFlowPass = ProcessTemplateFlowPass, ErrorMessages = ErrorMessages };
+            return Ok(ProcessTemplateFlowPassWithNoRights);
 
         }
 
@@ -211,15 +215,15 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("ProcessTemplateFlowPasss", "ProcessTemplateFlowPassID", Id) == 0)
                 //{
-                    //return BadRequest(new
-                    //{
-                    //    IsSuccess = false,
-                    //    Message = "No record with this ID",
-                    //});
+                //return BadRequest(new
+                //{
+                //    IsSuccess = false,
+                //    Message = "No record with this ID",
+                //});
                 //}
                 var x = await _processTemplateFlowPassProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
@@ -236,9 +240,9 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ProcessTemplateFlowPassDeleteGet ProcessTemplateFlowPass)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-//                ProcessTemplateFlowPass.U = CurrentUser.Id;
+                //                ProcessTemplateFlowPass.U = CurrentUser.Id;
                 //var CheckString = await _ProcessTemplateFlowPassProvider.DeletePostCheck(ProcessTemplateFlowPass);
                 //if (CheckString.Length == 0)
                 //{
@@ -265,7 +269,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowPassProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -280,7 +284,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _processTemplateFlowPassProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Models;
@@ -36,21 +37,33 @@ namespace SIPx.API.Controllers
             _classificationProvider = classificationProvider;
             _userManager = userManager;
         }
+        private async Task<ClassificationValueUserCreateGet> CreateAddDropDownBoxes(ClassificationValueUserCreateGet ClassificationValueUser, string UserId, int ClassificationValueId)
+        {
+            var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(UserId);
+            ClassificationValueUser.ClassificationRelationTypes = ClassificationRelationTypes;
+            var ClassificationValue = await _classificationValueRoleProvider.ClassificationValueRoleCreateGetClassificationName(UserId, ClassificationValueId);
+            ClassificationValueUser.ClassificationId = ClassificationValue.ClassificationId;
+            ClassificationValueUser.ClassificationValueName = ClassificationValue.ClassificationValueName;
+            ClassificationValueUser.Users = await _userProvider.List();
+            ClassificationValueUser.ClassificationValueId = ClassificationValueId;
+            return ClassificationValueUser;
+        }
+        private async Task<ClassificationValueUserUpdateGet> UpdateAddDropDownBoxes(ClassificationValueUserUpdateGet ClassificationValueUser, string UserId, int ClassificationValueId)
+        {
+            var RelationTypeList = await _classificationRelationTypeProvider.List(UserId);
+            var UserList = await _userProvider.List();
+            ClassificationValueUser.ClassificationRelationTypes = RelationTypeList;
+            ClassificationValueUser.Users = UserList;
+            return ClassificationValueUser;
+        }
 
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User); ;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var ClassificationValueUserCreateGet = new ClassificationValueUserCreateGet();
-                var ClassificationRelationTypes = await _classificationRelationTypeProvider.List(CurrentUser.Id);
-                ClassificationValueUserCreateGet.ClassificationRelationTypes = ClassificationRelationTypes;
-                var x = await _classificationValueRoleProvider.ClassificationValueRoleCreateGetClassificationName(CurrentUser.Id, Id);
-                ClassificationValueUserCreateGet.ClassificationId = x.ClassificationId;
-                ClassificationValueUserCreateGet.ClassificationValueName = x.ClassificationValueName;
-                ClassificationValueUserCreateGet.Users = await _userProvider.List();
-                ClassificationValueUserCreateGet.ClassificationValueId = Id;
                 return Ok(ClassificationValueUserCreateGet);
             }
             return BadRequest(new
@@ -65,7 +78,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             ClassificationValueUser.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //var CheckString = await _classificationValueUserProvider.CreatePostCheck(ClassificationValueUser);
                 //if (CheckString.Length == 0)
@@ -90,7 +103,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))  //PETER TODO looks like there is also a value 54
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //PETER TODO looks like there is also a value 54
             {
                 //if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueID", Id) == 0)
                 //{
@@ -114,7 +127,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "50"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueUserID", Id) == 0)
                 {
@@ -126,10 +139,7 @@ namespace SIPx.API.Controllers
                 }
                 //PETER I UPDATED THIS IN THE Wrong controller
                 var ClassificationValueUser = await _classificationValueUserProvider.UpdateGet(CurrentUser.Id, Id);
-                var RelationTypeList = await _classificationRelationTypeProvider.List(CurrentUser.Id);
-                var UserList = await _userProvider.List();
-                ClassificationValueUser.ClassificationRelationTypes = RelationTypeList;
-                ClassificationValueUser.Users = UserList;
+                ClassificationValueUser = await UpdateAddDropDownBoxes(ClassificationValueUser, CurrentUser.Id, ClassificationValueUser.ClassificationValueId);
                 return Ok(ClassificationValueUser);
 //                return Ok(await _classificationProvider.UpdateGet(CurrentUser.Id, Id));
             }
@@ -144,35 +154,31 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ClassificationValueUserUpdateGet ClassificationValueUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ClassificationValueUser.UserId = CurrentUser.Id;
-                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
-                //if (CheckString.Length == 0)
-                //{
-                _classificationValueUserProvider.UpdatePost(ClassificationValueUser);
-                return Ok(ClassificationValueUser);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _classificationValueUserProvider.UpdatePostCheck(ClassificationValueUser);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    ClassificationValueUser = await UpdateAddDropDownBoxes(ClassificationValueUser, CurrentUser.Id, ClassificationValueUser.ClassificationValueId);
+                }
+                else
+                {
+                    _classificationValueUserProvider.UpdatePost(ClassificationValueUser);
+                }
+                ClassificationValueUserUpdateGetWithErrorMessages ClassificationValueUserWithErrorMessage = new ClassificationValueUserUpdateGetWithErrorMessages { ClassificationValueUser = ClassificationValueUser, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationValueUserWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationValueUserUpdateGetWithErrorMessages ClassificationValueUserWithNoRights = new ClassificationValueUserUpdateGetWithErrorMessages { ClassificationValueUser = ClassificationValueUser, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationValueUserWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueUserID", Id) == 0)
                 {
@@ -197,7 +203,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(ClassificationValueUserDeleteGet ClassificationValueUser)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 ClassificationValueUser.UserId= CurrentUser.Id;
                 //var CheckString = await _ClassificationValueUserProvider.DeletePostCheck(ClassificationValueUser);

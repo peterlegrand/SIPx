@@ -10,6 +10,6 @@ namespace SIPx.DataAccess
         Task<ProcessTemplateStageFieldUpdateGet> UpdateGet(string UserId, int ProcessTemplateStageFieldID);
         Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField);
         bool UpdatePost(ProcessTemplateStageFieldUpdateGet ProcessTemplateStageField);
-        Task<List<SequenceList>> Sequence(string UserId, int ProcessTemplateId, int ProcessTemplateStageId);
+        Task<List<SequenceList>> Sequence(string UserId, int ProcessTemplateStageId);
     }
 }

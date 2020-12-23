@@ -42,30 +42,49 @@ namespace SIPx.API.Controllers
             _pageProvider = PageProvider;
             _userManager = userManager;
         }
-        
+        private async Task<PageCreateGet> CreateAddDropDownBoxes(PageCreateGet Page, string UserId)
+        {
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var Projects = await _projectProvider.List(UserId);
+            var Organizations = await _organizationProvider.List(UserId);
+            var Classifications = await _classificationProvider.List(UserId);
+            var Users = await _userProvider.List();
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            Page.LanguageId = UserLanguage.LanguageId;
+            Page.LanguageName = UserLanguage.Name;
+            Page.Statuses = Statuses;
+            Page.Projects = Projects;
+            Page.Organizations = Organizations;
+            Page.Classifications = Classifications;
+            Page.Users = Users;
+            Page.StatusId = 1;
+            return Page;
+        }
+        private async Task<PageUpdateGet> UpdateAddDropDownBoxes(PageUpdateGet Page, string UserId)
+        {
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var Projects = await _projectProvider.List(UserId);
+            var Organizations = await _organizationProvider.List(UserId);
+            var Classifications = await _classificationProvider.List(UserId);
+            var Users = await _userProvider.List();
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+
+            Page.Statuses = Statuses;
+            Page.Projects = Projects;
+            Page.Organizations = Organizations;
+            Page.Classifications = Classifications;
+            Page.Users = Users;
+            return Page;
+        }
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var PageCreateGet = new PageCreateGet();
-                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var Projects = await _projectProvider.List(CurrentUser.Id);
-                var Organizations = await _organizationProvider.List(CurrentUser.Id);
-                var Classifications = await _classificationProvider.List(CurrentUser.Id);
-                var Users = await _userProvider.List();
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                PageCreateGet.LanguageId = UserLanguage.LanguageId;
-                PageCreateGet.LanguageName = UserLanguage.Name;
-                PageCreateGet.Statuses = Statuses;
-                PageCreateGet.Projects = Projects;
-                PageCreateGet.Organizations = Organizations;
-                PageCreateGet.Classifications = Classifications;
-                PageCreateGet.Users = Users;
-                PageCreateGet.StatusId = 1;
-
-                return Ok(PageCreateGet);
+                var Page = new PageCreateGet();
+                Page =await CreateAddDropDownBoxes(Page, CurrentUser.Id);
+                return Ok(Page);
             }
             return BadRequest(new
             {
@@ -79,36 +98,31 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Page.UserId = CurrentUser.Id;
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "191"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //var CheckString = await _pageProvider.CreatePostCheck(Page);
-                //if (CheckString.Length == 0)
-                //{
-                Page.SelectedUserId = CurrentUser.Id;
-                if (Page.OrganizationId == null) { Page.OrganizationId = 0; }
-                if (Page.ProjectId== null) { Page.ProjectId= 0; }
-                if (Page.UserId == null) { Page.UserId= ""; }
-                _pageProvider.CreatePost(Page);
-                    return Ok(Page);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _pageProvider.CreatePostCheck(Page);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
+                    Page = await CreateAddDropDownBoxes(Page, CurrentUser.Id);
+                }
+                else
+                {
+                    _pageProvider.CreatePost(Page);
+                }
+                PageCreateGetWithErrorMessages PageWithErrorMessage = new PageCreateGetWithErrorMessages { Page = Page, ErrorMessages = ErrorMessages };
+                return Ok(PageWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PageCreateGetWithErrorMessages PageWithNoRights = new PageCreateGetWithErrorMessages { Page = Page, ErrorMessages = ErrorMessages };
+            return Ok(PageWithNoRights);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "188"))
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _pageProvider.IndexGet(CurrentUser.Id));
             }
@@ -123,31 +137,12 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                //if (await _checkProvider.CheckIfRecordExists("Pages", "PageID", Id) == 0)
-                //{
-                //    return BadRequest(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "No record with this ID",
-                //    });
-                //}
-                var PageUpdateGet = await _pageProvider.UpdateGet(CurrentUser.Id, Id);
-                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var Projects = await _projectProvider.List(CurrentUser.Id);
-                var Organizations = await _organizationProvider.List(CurrentUser.Id);
-                var Classifications = await _classificationProvider.List(CurrentUser.Id);
-                var Users = await _userProvider.List();
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                //PageUpdateGet.LanguageId = UserLanguage.LanguageId;
-                //PageUpdateGet.LanguageName = UserLanguage.Name;
-                PageUpdateGet.Statuses = Statuses;
-                PageUpdateGet.Projects = Projects;
-                PageUpdateGet.Organizations = Organizations;
-                PageUpdateGet.Classifications = Classifications;
-                PageUpdateGet.Users = Users;
-                return Ok(PageUpdateGet);
+               
+                var Page  = await _pageProvider.UpdateGet(CurrentUser.Id, Id);
+                Page = await UpdateAddDropDownBoxes(Page, CurrentUser.Id);
+                return Ok(Page);
             }
             return BadRequest(new
             {
@@ -161,28 +156,24 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PageUpdateGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Page.UserId= CurrentUser.Id;
-                //var CheckString = await _PageProvider.UpdatePostCheck(Page);
-                //if (CheckString.Length == 0)
-                //{
-                _pageProvider.UpdatePost(Page);
-                return Ok(Page);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _pageProvider.UpdatePostCheck(Page);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    Page = await UpdateAddDropDownBoxes(Page, CurrentUser.Id);
+                }
+                else
+                {
+                    _pageProvider.UpdatePost(Page);
+                }
+                PageUpdateGetWithErrorMessages PageWithErrorMessage = new PageUpdateGetWithErrorMessages { Page = Page, ErrorMessages = ErrorMessages };
+                return Ok(PageWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            PageUpdateGetWithErrorMessages PageWithNoRights = new PageUpdateGetWithErrorMessages { Page = Page, ErrorMessages = ErrorMessages };
+            return Ok(PageWithNoRights);
         }
 
 
@@ -190,7 +181,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("Pages", "PageID", Id) == 0)
                 {
@@ -214,7 +205,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(PageDeleteGet Page)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "190"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 Page.UserId= CurrentUser.Id;
                 //var CheckString = await _PageProvider.DeletePostCheck(Page);
@@ -243,7 +234,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageIndex(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _pageProvider.LanguageIndexGet(CurrentUser.Id, Id));
             }
@@ -258,7 +249,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> LanguageUpdate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _pageProvider.LanguageUpdateGet(CurrentUser.Id, Id));
             }

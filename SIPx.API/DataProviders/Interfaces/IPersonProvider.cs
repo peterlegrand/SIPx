@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IPersonProvider
     {
-        Task<string> CreatePost(PersonCreatePost Person);
+        Task<string> CreatePost(PersonCreateGet Person);
         Task<List<ErrorMessage>> CreatePostCheck(PersonCreateGet Person);
         Task<PersonDeleteGet> DeleteGet(string UserId, int PersonId);
         bool DeletePost(int Id);

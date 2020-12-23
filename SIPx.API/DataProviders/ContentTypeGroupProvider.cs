@@ -34,7 +34,7 @@ namespace SIPx.DataAccess
             return ErrorMessages;
         }
 
-        public async Task<string> CreatePost(ContentTypeGroupCreatePost ContentTypeGroup)
+        public async Task<string> CreatePost(ContentTypeGroupCreateGet ContentTypeGroup)
         {
             string usp = "usp_ContentTypeGroupCreatePost @Sequence, @Name, @Description, @MenuName, @MouseOver, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentTypeGroup);

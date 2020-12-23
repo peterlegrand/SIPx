@@ -27,11 +27,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<SequenceList, dynamic>(usp, new { UserId, PageId });
         }
 
-        public async Task<string> CreatePostCheck(PageSectionCreateGet PageSection)
+        public async Task<List<ErrorMessage>> CreatePostCheck(PageSectionCreateGet PageSection)
         {
             string usp = "usp_PageSectionCreatePostCheck @PageId, @Sequence, @PageSectionTypeId, @PageSectionDataTypeId, @@OneTwoColumns, @ContentTypeId, @SortById, @LanguageId, @Name, @CreatorId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PageSection);
+            return ErrorMessages;
         }
 
         public async Task<string> CreatePost(PageSectionCreateGet PageSection)
@@ -54,11 +54,11 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<PageSectionUpdateGet, dynamic>(usp, new { UserId = UserId, PageSectionId = PageSectionId });
 
         }
-        public async Task<string> UpdatePostCheck(PageSectionUpdateGet PageSection)
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PageSectionUpdateGet PageSection)
         {
             string usp = "usp_PageSectionUpdatePostCheck @PageSectionId, @PageSectionTypeId, @PageSectionDataTypeId, @ShowSectionTitleName, @ShowSectionTitleDescription, @ShowContentTypeTitleName, @ShowContentTypeTitleDescription, @SizeX, @SizeY, @DashboardRow, @DashboardColumn, @ContentTypeId, @SortById, @MaxContent, @HasPaging, @Name, @Description, @MenuName , @MouseOver, @TitleName, @TitleDescription , @ModifierId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSection);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PageSection);
+            return ErrorMessages;
         }
 
         public bool UpdatePost(PageSectionUpdateGet PageSection)

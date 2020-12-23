@@ -1,10 +1,12 @@
-CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageFieldUpdateGetSequence] (@UserId nvarchar(450), @ProcessTemplateId int, @ProcessTemplateStageId int) 
+CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageFieldUpdateGetSequence] (@UserId nvarchar(450), @ProcessTemplateStageId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+DECLARE @ProcessTemplateID int;
+SELECT @ProcessTemplateID = ProcessTemplateID FROM ProcessTemplateStages WHERE ProcessTemplateStageId = @ProcessTemplateStageId ; 
 SELECT ProcessTemplateStageFields.Sequence
 	, ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this role')) Name
 FROM ProcessTemplateFields 

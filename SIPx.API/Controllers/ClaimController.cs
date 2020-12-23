@@ -28,36 +28,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        //[HttpGet("Index")]
-        //public async Task<IActionResult> GetClaims()
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-        //    {
-        //        return Ok(await _peopleProvider.ClaimIndexGet(CurrentUser.Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
-
-        //PETER I think we don't need this.
-        //[HttpGet("Update/{Id:int}")]
-        //public async Task<IActionResult> GetClaim(int Id)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //    if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
-        //    {
-        //        return Ok(await _peopleProvider.ClaimUpdateGet(CurrentUser.Id, Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
+       
 
 
     }

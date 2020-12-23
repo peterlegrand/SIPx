@@ -32,24 +32,46 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
+        private async Task<ClassificationCreateGet> CreateAddDropDownBoxes(ClassificationCreateGet Classification, string UserId)
+        {
+            var ClassificationCreateGetSequences = await _classificationProvider.CreateGetSequence(UserId);
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var icons = await _masterListProvider.IconList(UserId); 
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            Classification.LanguageId = UserLanguage.LanguageId;
+            Classification.LanguageName = UserLanguage.Name;
+            Classification.Icons = icons;
+            Classification.Statuses = Statuses;
+            Classification.Sequences = ClassificationCreateGetSequences;
+            Classification.Sequences.Add(new SequenceList { Sequence = ClassificationCreateGetSequences.Count + 1, Name = "Add at the end" });
+            return Classification;
+        }
+
+        private async Task<ClassificationUpdateGet> UpdateAddDropDownBoxes(ClassificationUpdateGet Classification, string UserId)
+        {
+            //PETER TODO check if pages is still relevant here. I think it is in some way
+            var Pages = await _classificationPageProvider.List(UserId,Classification.ClassificationId);
+            var Sequences = await _classificationProvider.CreateGetSequence(UserId);
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var icons = await _masterListProvider.IconList(UserId);
+            Classification.Icons = icons;
+
+            Classification.DropDownSequences = Sequences;
+            Classification.DefaultPages = Pages;
+            Classification.Statuses = Statuses;
+            return Classification;
+        }
+
+
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ClassificationCreateGet = new ClassificationCreateGet();
-                var ClassificationCreateGetSequences = await _classificationProvider.CreateGetSequence(CurrentUser.Id);
-                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var icons =await _masterListProvider.IconList(CurrentUser.Id);
-                ClassificationCreateGet.Icons = icons;
-                var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                ClassificationCreateGet.LanguageId = UserLanguage.LanguageId;
-                ClassificationCreateGet.LanguageName = UserLanguage.Name;
-                ClassificationCreateGet.Statuses = Statuses;
-                ClassificationCreateGet.Sequences = ClassificationCreateGetSequences;
-                ClassificationCreateGet.Sequences.Add(new SequenceList { Sequence = ClassificationCreateGetSequences.Count + 1, Name = "Add at the end" });
-                return Ok(ClassificationCreateGet);
+                var Classification = new ClassificationCreateGet();
+                Classification = await CreateAddDropDownBoxes(Classification, CurrentUser.Id);
+                return Ok(Classification);
             }
             return BadRequest(new
             {
@@ -69,17 +91,7 @@ namespace SIPx.API.Controllers
                 ErrorMessages = await _classificationProvider.CreatePostCheck(Classification);
                 if(ErrorMessages.Count>0)
                 {
-                    var ClassificationCreateGetSequences = await _classificationProvider.CreateGetSequence(CurrentUser.Id);
-                    var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                    var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                    Classification.Icons = icons;
-                    var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
-                    Classification.LanguageId = UserLanguage.LanguageId;
-                    Classification.LanguageName = UserLanguage.Name;
-                    Classification.Statuses = Statuses;
-                    Classification.Sequences = ClassificationCreateGetSequences;
-                    Classification.Sequences.Add(new SequenceList { Sequence = ClassificationCreateGetSequences.Count + 1, Name = "Add at the end" });
-                }
+                    Classification = await CreateAddDropDownBoxes(Classification, CurrentUser.Id);     }
                 else
                 { 
                 _classificationProvider.CreatePost(Classification);
@@ -115,23 +127,16 @@ namespace SIPx.API.Controllers
             {
                 if (await _checkProvider.CheckIfRecordExists("Classifications", "ClassificationID", Id) == 0)
                 {
+                    //PETER TODO see if this is the best way
                     return BadRequest(new
                     {
                         IsSuccess = false,
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _classificationProvider.UpdateGet(CurrentUser.Id, Id);
-                var y = await _classificationPageProvider.List(CurrentUser.Id, Id);
-                var u = await _classificationProvider.CreateGetSequence(CurrentUser.Id);
-                var z = await _masterListProvider.StatusList(CurrentUser.Id);
-                var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                x.Icons = icons;
-
-                x.DropDownSequences = u;
-                x.DefaultPages = y;
-                x.Statuses = z;
-                return Ok(x);
+                var Classification = await _classificationProvider.UpdateGet(CurrentUser.Id, Id);
+                Classification = await UpdateAddDropDownBoxes(Classification, CurrentUser.Id);
+                return Ok(Classification);
             }
             return BadRequest(new
             {
@@ -145,28 +150,25 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(ClassificationUpdateGet Classification)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            Classification.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Classification.UserId = CurrentUser.Id;
-                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
-                //if (CheckString.Length == 0)
-                //{
-                    _classificationProvider.UpdatePost(Classification);
-                    return Ok(Classification);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _classificationProvider.UpdatePostCheck(Classification);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    Classification = await UpdateAddDropDownBoxes(Classification, CurrentUser.Id);
+                }
+                else
+                {
+                    _classificationProvider.UpdatePost(Classification);
+                }
+                ClassificationUpdateGetWithErrorMessages ClassificationWithErrorMessage = new ClassificationUpdateGetWithErrorMessages { Classification = Classification, ErrorMessages = ErrorMessages };
+                return Ok(ClassificationWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ClassificationUpdateGetWithErrorMessages ClassificationWithNoRights = new ClassificationUpdateGetWithErrorMessages { Classification = Classification, ErrorMessages = ErrorMessages };
+            return Ok(ClassificationWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]

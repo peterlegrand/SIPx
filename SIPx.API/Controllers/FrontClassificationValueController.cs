@@ -34,7 +34,7 @@ namespace SIPx.API.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "1"))
+                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
                 var ClassificationValue = await _frontClassificationValueProvider.Dashboard(CurrentUser.Id, Id);
