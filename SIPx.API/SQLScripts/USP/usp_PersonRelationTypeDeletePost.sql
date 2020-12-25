@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_PersonRelationTypeDeletePost ( @PersonRelationTypeId int)
+CREATE PROCEDURE usp_PersonRelationTypeDeletePost ( @UserId nvarchar(450), @PersonRelationTypeId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

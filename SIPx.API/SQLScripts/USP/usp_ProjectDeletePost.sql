@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ProjectDeletePost ( @ProjectID int)
+CREATE PROCEDURE usp_ProjectDeletePost (@UserId nvarchar(450),  @ProjectID int)
 AS
 IF (SELECT COUNT(*) FROM Projects  WHERE ParentProjectID = @ProjectID) =0
 BEGIN

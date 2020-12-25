@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_OrganizationDeletePost ( @OrganizationId int)
+CREATE PROCEDURE usp_OrganizationDeletePost ( @UserId nvarchar(450), @OrganizationId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

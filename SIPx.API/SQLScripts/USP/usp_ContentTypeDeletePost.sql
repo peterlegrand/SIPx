@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ContentTypeDeletePost ( @ContentTypeId int)
+CREATE PROCEDURE usp_ContentTypeDeletePost ( @UserId nvarchar(450), @ContentTypeId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

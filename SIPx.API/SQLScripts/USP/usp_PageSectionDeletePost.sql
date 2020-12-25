@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_PageSectionDeletePost ( @PageSectionId int)
+CREATE PROCEDURE usp_PageSectionDeletePost ( @UserId nvarchar(450), @PageSectionId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

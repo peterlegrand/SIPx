@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationValuePropertyDeletePost] (
+CREATE PROCEDURE [dbo].[usp_ClassificationValuePropertyDeletePost] (@UserId nvarchar(450), 
 	@ClassificationValuePropertyId int) 
 AS 
 SET XACT_ABORT ON;

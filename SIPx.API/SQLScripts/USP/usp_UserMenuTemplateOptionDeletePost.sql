@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_UserMenuTemplateOptionDeletePost ( @UserMenuTemplateOptionId int)
+CREATE PROCEDURE usp_UserMenuTemplateOptionDeletePost (@UserId nvarchar(450),  @UserMenuTemplateOptionId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

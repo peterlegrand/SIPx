@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ProjectTypeDeletePost ( @ProjectTypeId int)
+CREATE PROCEDURE usp_ProjectTypeDeletePost ( @UserId nvarchar(450), @ProjectTypeId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

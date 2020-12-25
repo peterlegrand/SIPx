@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ProcessTemplateGroupDeletePost (@ProcessTemplateGroupId int)
+CREATE PROCEDURE usp_ProcessTemplateGroupDeletePost @UserId nvarchar(450), @ProcessTemplateGroupId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

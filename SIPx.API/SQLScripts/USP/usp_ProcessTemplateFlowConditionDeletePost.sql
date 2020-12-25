@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ProcessTemplateFlowConditionDeletePost (@ProcessTemplateFlowConditionId int)
+CREATE PROCEDURE usp_ProcessTemplateFlowConditionDeletePost (@UserId nvarchar(450), @ProcessTemplateFlowConditionId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

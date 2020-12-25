@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ProcessDeletePost ( @ProcessId int)
+CREATE PROCEDURE usp_ProcessDeletePost ( @UserId nvarchar(450), @ProcessId int)
 AS
 DECLARE @MultiID int;
 

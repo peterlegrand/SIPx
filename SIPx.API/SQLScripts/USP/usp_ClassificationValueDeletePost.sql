@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ClassificationValueDeletePost ( @ClassificationValueId int)
+CREATE PROCEDURE usp_ClassificationValueDeletePost ( @UserId nvarchar(450), @ClassificationValueId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

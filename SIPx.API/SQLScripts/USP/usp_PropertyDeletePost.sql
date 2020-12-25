@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_PropertyDeletePost (
+CREATE PROCEDURE usp_PropertyDeletePost (@UserId nvarchar(450), 
 	@PropertyId int) 
 AS 
 SET XACT_ABORT ON;

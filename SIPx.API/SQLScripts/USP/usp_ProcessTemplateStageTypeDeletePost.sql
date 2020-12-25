@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateStageTypeDeletePost] (
-	@ProcessTemplateStageTypeId int) 
+	@UserId nvarchar(450), @ProcessTemplateStageTypeId int) 
 AS 
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

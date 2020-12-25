@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ClassificationLevelDeletePost] (
+CREATE PROCEDURE [dbo].[usp_ClassificationLevelDeletePost] (@UserId nvarchar(450), 
 	@ClassificationLevelId int) 
 AS 
 DECLARE @OldSequence int;

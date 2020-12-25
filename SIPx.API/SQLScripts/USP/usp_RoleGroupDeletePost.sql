@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_RoleGroupDeletePost ( @RoleGroupId int)
+CREATE PROCEDURE usp_RoleGroupDeletePost (@UserId nvarchar(450),  @RoleGroupId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

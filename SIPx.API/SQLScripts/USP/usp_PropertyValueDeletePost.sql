@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_PropertyValueDeletePost] (
+CREATE PROCEDURE [dbo].[usp_PropertyValueDeletePost] (@UserId nvarchar(450), 
 	@PropertyValueId int) 
 AS 
 DECLARE @OldSequence int;

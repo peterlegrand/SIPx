@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ClassificationRelationTypeDeletePost (@ClassificationRelationTypeId int)
+CREATE PROCEDURE usp_ClassificationRelationTypeDeletePost (@UserId nvarchar(450), @ClassificationRelationTypeId int)
 AS
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
