@@ -62,7 +62,7 @@ namespace SIPx.DataAccess
 
         public bool DeletePost(UserMenuDeleteGet UserMenu)
         {
-            string usp = "usp_UserMenuDeletePost @UserMenuID";
+            string usp = "usp_UserMenuDeletePost @UserId, @UserMenuID";
             _sqlDataAccess.SaveData<UserMenuDeleteGet>(usp, UserMenu);
             return true;
         }

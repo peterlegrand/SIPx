@@ -36,52 +36,52 @@ BEGIN
 insert into @ErrorIdsTable values(35)
 END
 
-IF @Name ='' 
+IF @Name ='' OR @Name IS NULL
 BEGIN
 insert into @ErrorIdsTable values(104)
 END
 
-IF @Description ='' 
+IF @Description =''  OR @Description IS NULL
 BEGIN
 insert into @ErrorIdsTable values(9)
 END
 
-IF @MenuName ='' 
+IF @MenuName =''  OR @MenuName IS NULL
 BEGIN
 insert into @ErrorIdsTable values(10)
 END
 
-IF @MouseOver ='' 
+IF @MouseOver =''  OR @MouseOver IS NULL
 BEGIN
 insert into @ErrorIdsTable values(11)
 END
 
-IF @DropDownName ='' 
+IF @DropDownName ='' OR @DropDownName IS NULL
 BEGIN
 insert into @ErrorIdsTable values(123)
 END
 
-IF @PageName ='' 
+IF @PageName ='' OR @PageName IS NULL
 BEGIN
 insert into @ErrorIdsTable values(124)
 END
 
-IF @PageDescription ='' 
+IF @PageDescription ='' OR @PageDescription IS NULL
 BEGIN
 insert into @ErrorIdsTable values(125)
 END
 
-IF @HeaderName ='' 
+IF @HeaderName ='' OR @HeaderName IS NULL
 BEGIN
 insert into @ErrorIdsTable values(126)
 END
 
-IF @HeaderDescription ='' 
+IF @HeaderDescription ='' OR @HeaderDescription IS NULL
 BEGIN
 insert into @ErrorIdsTable values(127)
 END
 
-IF @TopicName ='' 
+IF @TopicName ='' OR @TopicName IS NULL
 BEGIN
 insert into @ErrorIdsTable values(128)
 END

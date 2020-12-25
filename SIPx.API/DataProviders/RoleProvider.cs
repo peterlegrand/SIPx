@@ -72,10 +72,10 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(string RoleId)
+        public bool DeletePost(string UserId, string RoleId)
         {
-            string usp = "usp_RoleDeletePost @RoleId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { RoleId = RoleId });
+            string usp = "usp_RoleDeletePost @UserId, @RoleId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
             return true;
         }
 

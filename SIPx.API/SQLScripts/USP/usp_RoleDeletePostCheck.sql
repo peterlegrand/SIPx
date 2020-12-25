@@ -1,12 +1,6 @@
-CREATE PROCEDURE usp_PropertyCreatePostCheck (
-	@PropertyTypeId int
-	, @Name nvarchar(50)
-	, @Description nvarchar(max)
-	, @MenuName nvarchar(50)
-	, @MouseOver nvarchar(50)
-	, @UserId nvarchar(450)) 
+CREATE PROCEDURE usp_RoleDeletePostCheck (
+	@UserId nvarchar(450), @RoleId nvarchar(450)) 
 AS 
-
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
@@ -18,32 +12,12 @@ BEGIN
 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF @Name ='' OR @Name IS NULL
-BEGIN
-insert into @ErrorIdsTable values(104)
-END
-
-IF @Description =''  OR @Description IS NULL
-BEGIN
-insert into @ErrorIdsTable values(9)
-END
-
-IF @MenuName =''  OR @MenuName IS NULL
-BEGIN
-insert into @ErrorIdsTable values(10)
-END
-
-IF @MouseOver =''  OR @MouseOver IS NULL
-BEGIN
-insert into @ErrorIdsTable values(11)
-END
-
-
 IF  (SELECT COUNT(*) 
-	FROM PropertyTypes 
-	WHERE PropertyTypeId = @PropertyTypeID) = 0
+	FROM AspNetUserRoles 
+	WHERE @RoleId = RoleId
+	) >0
 BEGIN
-	insert into @ErrorIdsTable values(118)
+	insert into @ErrorIdsTable values(130)
 END
 
 

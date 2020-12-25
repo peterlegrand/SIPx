@@ -24,22 +24,22 @@ WHERE USerId = @UserID
 BEGIN 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF @Name =''  OR @Name IS NULL
+IF @Name ='' OR @Name IS NULL
 BEGIN
 insert into @ErrorIdsTable values(104)
 END
 
-IF @Description ='' 
+IF @Description =''  OR @Description IS NULL
 BEGIN
 insert into @ErrorIdsTable values(9)
 END
 
-IF @MenuName ='' 
+IF @MenuName =''  OR @MenuName IS NULL
 BEGIN
 insert into @ErrorIdsTable values(10)
 END
 
-IF @MouseOver ='' 
+IF @MouseOver =''  OR @MouseOver IS NULL
 BEGIN
 insert into @ErrorIdsTable values(11)
 END

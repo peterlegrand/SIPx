@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_UserDeletePost (
-	@SelectedPersonId int
+	@UserId nvarchar(450), @SelectedPersonId int
 	 )
 AS
 DELETE 
