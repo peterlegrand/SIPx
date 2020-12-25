@@ -77,11 +77,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ProcessId)
+        public bool DeletePost(string UserId, int ProcessId)
         {
-            string usp = "usp_ProcessDeletePost @ProcessId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ProcessId = ProcessId });
+            string usp = "usp_ProcessDeletePost @UserId, @ProcessID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProcessId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ProcessId)
+        {
+            string usp = "usp_ProcessDeletePostCheck @UserId, @ProcessID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ProcessId });
+            return ErrorMessages;
         }
 
         public Task<List<ProcessSearch>> Search(string Contains, string UserId)
@@ -99,7 +105,7 @@ namespace SIPx.DataAccess
         public Task<List<ProcessAdvancedSearchResult>> AdvancedSearch(string UserId, ProcessAdvancedSearchPost AdvancedSearch)
         {
             string usp = "usp_ProcessAdvancedSearch @UserId, @Contains, @Number, @DateFrom, @DateTo, @SelectedUserId, @OrganizationId, @ProjectId, @LanguageId, @ClassificationId, @ClassificationValueId, @ContentId, @CountryId, @SecurityLevelId, @RoleId, @PersonId, @ProcessTemplateStageTypeId ";
-            return _sqlDataAccess.LoadData<ProcessAdvancedSearchResult, dynamic>(usp,  AdvancedSearch );
+            return _sqlDataAccess.LoadData<ProcessAdvancedSearchResult, dynamic>(usp, AdvancedSearch);
         }
 
         public async Task<List<ProcessForPanel>> Panel(string UserId, string ProcessConditionSQLFrom, string ProcessConditionSQLWhere, string ProcessConditionSQLContains)

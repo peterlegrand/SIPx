@@ -73,11 +73,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ProcessTemplateGroupId)
+        public bool DeletePost(string UserId, int ProcessTemplateGroupId)
         {
-            string usp = "usp_ProcessTemplateGroupDeletePost @ProcessTemplateGroupId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ProcessTemplateGroupId = ProcessTemplateGroupId });
+            string usp = "usp_ProcessTemplateGroupDeletePost @UserId, @ProcessTemplateGroupID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProcessTemplateGroupId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ProcessTemplateGroupId)
+        {
+            string usp = "usp_ProcessTemplateGroupDeletePostCheck @UserId, @ProcessTemplateGroupID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ProcessTemplateGroupId });
+            return ErrorMessages;
         }
 
         public Task<List<ProcessTemplateGroupLanguageIndexGet>> LanguageIndexGet(string UserId, int ProcessTemplateGroupId)

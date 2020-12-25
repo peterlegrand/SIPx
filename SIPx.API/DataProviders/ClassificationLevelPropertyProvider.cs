@@ -79,26 +79,22 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ClassificationLevelPropertyId)
+        public bool DeletePost(string UserId, int ClassificationLevelPropertyId)
         {
-            string usp = "usp_ClassificationLevelPropertyDeletePost @ClassificationLevelPropertyId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationLevelPropertyId = ClassificationLevelPropertyId });
+            string usp = "usp_ClassificationLevelPropertyDeletePost @UserId, @ClassificationLevelPropertyID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ClassificationLevelPropertyId });
             return true;
         }
 
-        //public async Task<List<ClassificationLevelPropertyLanguageIndexGet>> LanguageIndexGet(string UserId, int ClassificationLevelPropertyId)
-        //{
-        //    string usp = "usp_ClassificationLevelPropertyLanguageIndex @UserId, @ClassificationLevelPropertyID";
-        //    var x = await _sqlDataAccess.LoadData<ClassificationLevelPropertyLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationLevelPropertyId });
-        //    return x;
-        //}
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ClassificationLevelPropertyId)
+        {
+            string usp = "usp_ClassificationLevelPropertyDeletePostCheck @UserId, @ClassificationLevelPropertyID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ClassificationLevelPropertyId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ClassificationLevelPropertyId });
+            return ErrorMessages;
+        }
 
-        //public Task<ClassificationLevelPropertyLanguageIndexGet> LanguageUpdateGet(string UserId, int ClassificationLevelPropertyLanguageId)
-        //{
-        //    string usp = "usp_ClassificationLevelPropertyLanguageUpdateGet @UserId, @ClassificationLevelPropertyLanguageID";
-        //    return _sqlDataAccess.LoadSingleRecord<ClassificationLevelPropertyLanguageIndexGet, dynamic>(usp, new { UserId, ClassificationLevelPropertyLanguageId });
 
-        //}
 
     }
 }

@@ -223,7 +223,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ClassificationValuePropertyProvider.DeletePostCheck(ClassificationValueProperty);
                 //if (CheckString.Length == 0)
                 //{
-                _classificationValuePropertyProvider.DeletePost(ClassificationValueProperty.ClassificationValuePropertyId);
+                _classificationValuePropertyProvider.DeletePost(CurrentUser.Id, ClassificationValueProperty.ClassificationValuePropertyId);
                 return Ok(ClassificationValueProperty);
                 //}
                 return BadRequest(new

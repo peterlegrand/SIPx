@@ -82,7 +82,7 @@ namespace SIPx.DataAccess
             return true;
         }
 
- 
+
 
         public Task<UserMenuTemplateDeleteGet> DeleteGet(string UserId, int UserMenuTemplateId)
         {
@@ -91,11 +91,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int UserMenuTemplateId)
+        public bool DeletePost(string UserId, int UserMenuTemplateId)
         {
-            string usp = "usp_UserMenuTemplateDeletePost @UserMenuTemplateId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { UserMenuTemplateId = UserMenuTemplateId });
+            string usp = "usp_UserMenuTemplateDeletePost @UserId, @UserMenuTemplateID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, UserMenuTemplateId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int UserMenuTemplateId)
+        {
+            string usp = "usp_UserMenuTemplateDeletePostCheck @UserId, @UserMenuTemplateID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, UserMenuTemplateId });
+            return ErrorMessages;
         }
 
     }

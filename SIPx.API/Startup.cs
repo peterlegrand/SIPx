@@ -126,8 +126,8 @@ namespace SIPx.API
             services.AddTransient<IProcessTemplateFlowConditionComparisonOperatorProvider, ProcessTemplateFlowConditionComparisonOperatorProvider>();
             services.AddTransient<IClassificationUserProvider, ClassificationUserProvider>();
             services.AddTransient<IClassificationRoleProvider, ClassificationRoleProvider>();
-            services.AddTransient<IClassificationPageProvider, ClassificationPageProvider>();
-            services.AddTransient<IClassificationPageSectionProvider, ClassificationPageSectionProvider>();
+            //services.AddTransient<IClassificationPageProvider, ClassificationPageProvider>();
+            //services.AddTransient<IClassificationPageSectionProvider, ClassificationPageSectionProvider>();
             services.AddTransient<IClassificationRelationTypeProvider, ClassificationRelationTypeProvider>();
             services.AddTransient<IClassificationProvider, ClassificationProvider>();
             services.AddTransient<IClassificationValueProvider, ClassificationValueProvider>();

@@ -60,11 +60,11 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<string> UpdatePostCheck(PageSectionProcessConditionUpdateGet PageSectionProcessCondition)
+        public async Task<List<ErrorMessage>> UpdatePostCheck(PageSectionProcessConditionUpdateGet PageSectionProcessCondition)
         {
             string usp = "usp_PageSectionProcessConditionUpdatePostCheck @PageSectionProcessConditionId, @PageSectionProcessConditionTypeId, @PageSectionProcessConditionInt, @PageSectionProcessConditionDate, @PageSectionProcessConditionString, @Name, @Description, @MenuName , @MouseOver, @UserId ";
-            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PageSectionProcessCondition);
-            return CheckString;
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PageSectionProcessCondition);
+            return ErrorMessages;
         }
 
         public bool UpdatePost(PageSectionProcessConditionUpdateGet PageSectionProcessCondition)
@@ -95,11 +95,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int PageSectionProcessConditionId)
+        public bool DeletePost(string UserId, int PageSectionProcessConditionId)
         {
-            string usp = "usp_PageSectionProcessConditionDeletePost @PageSectionProcessConditionId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PageSectionProcessConditionId = PageSectionProcessConditionId });
+            string usp = "usp_PageSectionProcessConditionDeletePost @UserId, @PageSectionProcessConditionID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PageSectionProcessConditionId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PageSectionProcessConditionId)
+        {
+            string usp = "usp_PageSectionProcessConditionDeletePostCheck @UserId, @PageSectionProcessConditionID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PageSectionProcessConditionId });
+            return ErrorMessages;
+
         }
 
     }

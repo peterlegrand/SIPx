@@ -301,7 +301,7 @@ namespace SIPx.API.Controllers
 
                 var UserId = await _userProvider.usp_UserUpdatePostGetUserId(UserToBeDeleted.PersonId);
                 var identityUser = await _userManager.FindByIdAsync(UserId);
-                _userProvider.DeletePost(UserToBeDeleted.PersonId);
+                _userProvider.DeletePost(CurrentUser.Id, UserToBeDeleted.PersonId);
                 _userManager.DeleteAsync(identityUser);
 
                 return Ok(UserToBeDeleted);

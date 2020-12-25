@@ -66,11 +66,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int PersonId)
+        public bool DeletePost(string UserId, int PersonId)
         {
-            string usp = "usp_PersonDeletePost @PersonId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PersonId = PersonId });
+            string usp = "usp_PersonDeletePost @UserId, @PersonID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PersonId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PersonId)
+        {
+            string usp = "usp_PersonDeletePostCheck @UserId, @PersonID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PersonId });
+            return ErrorMessages;
         }
 
         public Task<List<PersonList>> List()
@@ -86,7 +93,7 @@ namespace SIPx.DataAccess
         public Task<List<UserList>> EditGetUsers(int PersonId)
         {
             string usp = "usp_PersonCreateGetUsers @PersonId";
-            return _sqlDataAccess.LoadData<UserList,dynamic>(usp, new { PersonId });
+            return _sqlDataAccess.LoadData<UserList, dynamic>(usp, new { PersonId });
         }
         public Task<List<PersonSearch>> Search(string Contains, string UserId)
         {
@@ -97,7 +104,7 @@ namespace SIPx.DataAccess
         public async Task<List<PersonAdvancedSearchResult>> AdvancedSearch(string UserId, PersonAdvancedSearchPost AdvancedSearch)
         {
             string usp = "usp_PersonAdvancedSearch @UserId, @Contains, @Age, @BirthDate, @MainOrganizationId, @IsUser, @RoleId, @OrganizationId, @ProjectId, @CountryId, @ProvinceState, @County, @City, @ClassificationId, @ClassificationValueId ";
-            var x = await _sqlDataAccess.LoadData<PersonAdvancedSearchResult, dynamic>(usp,  AdvancedSearch );
+            var x = await _sqlDataAccess.LoadData<PersonAdvancedSearchResult, dynamic>(usp, AdvancedSearch);
             return x;
         }
         //

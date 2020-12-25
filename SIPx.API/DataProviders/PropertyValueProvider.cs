@@ -72,18 +72,24 @@ namespace SIPx.DataAccess
             string usp = "usp_PropertyValueUpdatePost @PropertyValueId, @Sequence, @PropertyValueInt,@PropertyValueString,@PropertyValueBool,@PropertyValueDate, @Name , @Description , @MenuName , @MouseOver , @UserId ";
             _sqlDataAccess.SaveData<PropertyValueUpdateGet>(usp, PropertyValue);
             return true;
-        } 
+        }
         public Task<PropertyValueDeleteGet> DeleteGet(string UserId, int PropertyValueId)
         {
             string usp = "usp_PropertyValueDeleteGet @UserId, @PropertyID";
             return _sqlDataAccess.LoadSingleRecord<PropertyValueDeleteGet, dynamic>(usp, new { UserId, PropertyValueId });
 
         }
-        public bool DeletePost(int PropertyValueId)
+        public bool DeletePost(string UserId, int PropertyValueId)
         {
-            string usp = "usp_PropertyValueDeletePost @PropertyValueId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PropertyValueId = PropertyValueId });
+            string usp = "usp_PropertyValueDeletePost @UserId, @PropertyID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PropertyValueId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PropertyValueId)
+        {
+            string usp = "usp_PropertyValueDeletePostCheck @UserId, @PropertyID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PropertyValueId });
+            return ErrorMessages;
         }
 
         public async Task<List<PropertyList>> List(string UserId)

@@ -14,7 +14,6 @@ namespace SIPx.API.Controllers
     public class FrontUserController : ControllerBase
     {
         private readonly IFrontUserProvider _frontUserProvider;
-        private readonly IClassificationPageProvider _classificationPageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly ICheckProvider _checkProvider;
@@ -22,10 +21,15 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontUserController( IFrontUserProvider frontUserProvider, IClassificationPageProvider classificationPageProvider, IMasterProvider masterProvider, IMasterListProvider masterListProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontUserController( IFrontUserProvider frontUserProvider
+            , IMasterProvider masterProvider
+            , IMasterListProvider masterListProvider
+            , ICheckProvider checkProvider
+            , IClaimCheck claimCheck
+            , IClassificationProvider classificationProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _frontUserProvider = frontUserProvider;
-            _classificationPageProvider = classificationPageProvider;
             _masterProvider = masterProvider;
             _masterListProvider = masterListProvider;
             _checkProvider = checkProvider;
@@ -82,14 +86,12 @@ namespace SIPx.API.Controllers
                     });
                 }
                 var x = await _classificationProvider.UpdateGet(CurrentUser.Id, Id);
-                var y = await _classificationPageProvider.List(CurrentUser.Id, Id);
                 var u = await _classificationProvider.CreateGetSequence(CurrentUser.Id);
                 var z = await _masterListProvider.StatusList(CurrentUser.Id);
                 var icons = await _masterListProvider.IconList(CurrentUser.Id);
                 x.Icons = icons;
 
                 x.DropDownSequences = u;
-                x.DefaultPages = y;
                 x.Statuses = z;
                 return Ok(x);
             }
@@ -164,7 +166,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _classificationProvider.DeletePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{
-                _classificationProvider.DeletePost(Classification.ClassificationId);
+                _classificationProvider.DeletePost(CurrentUser.Id, Classification.ClassificationId);
                 return Ok(Classification);
                 //}
                 return BadRequest(new

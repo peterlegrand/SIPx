@@ -70,11 +70,19 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ProjectTypeId)
+        public bool DeletePost(string UserId, int ProjectTypeId)
         {
-            string usp = "usp_ProjectTypeDeletePost @ProjectTypeId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ProjectTypeId = ProjectTypeId });
+            string usp = "usp_ProjectTypeDeletePost @UserId, @ProjectTypeID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProjectTypeId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ProjectTypeId)
+        {
+            string usp = "usp_ProjectTypeDeletePostCheck @UserId, @ProjectTypeID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProjectTypeId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ProjectTypeId });
+            return ErrorMessages;
         }
 
         public Task<List<ProjectTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ProjectTypeId)

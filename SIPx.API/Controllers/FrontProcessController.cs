@@ -36,7 +36,23 @@ namespace SIPx.API.Controllers
         private readonly IProcessProvider _processProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontProcessController(IUserRoleProvider userRoleProvider, IProcessTemplateStageTypeProvider processTemplateStageTypeProvider, IPersonProvider personProvider, IRoleProvider roleProvider, ISecurityLevelProvider securityLevelProvider, IClassificationValueProvider classificationValueProvider, IClassificationProvider classificationProvider, IContentProvider contentProvider, ILanguageProvider languageProvider, IMasterListProvider masterListProvider, IOrganizationProvider organizationProvider, IUserProvider userProvider, IProjectProvider projectProvider, IClaimCheck claimCheck, IFrontProcessProvider frontProcessProvider, IProcessProvider processProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontProcessController(IUserRoleProvider userRoleProvider
+            , IProcessTemplateStageTypeProvider processTemplateStageTypeProvider
+            , IPersonProvider personProvider
+            , IRoleProvider roleProvider
+            , ISecurityLevelProvider securityLevelProvider
+            , IClassificationValueProvider classificationValueProvider
+            , IClassificationProvider classificationProvider
+            , IContentProvider contentProvider
+            , ILanguageProvider languageProvider
+            , IMasterListProvider masterListProvider
+            , IOrganizationProvider organizationProvider
+            , IUserProvider userProvider
+            , IProjectProvider projectProvider
+            , IClaimCheck claimCheck
+            , IFrontProcessProvider frontProcessProvider
+            , IProcessProvider processProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _userRoleProvider = userRoleProvider;
             _processTemplateStageTypeProvider = processTemplateStageTypeProvider;

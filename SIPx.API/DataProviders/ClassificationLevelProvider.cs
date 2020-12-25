@@ -72,11 +72,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ClassificationLevelId)
+        public bool DeletePost(string UserId, int ClassificationLevelId)
         {
-            string usp = "usp_ClassificationLevelDeletePost @ClassificationLevelId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationLevelId = ClassificationLevelId });
+            string usp = "usp_ClassificationLevelDeletePost @UserId, @ClassificationLevelID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ClassificationLevelId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ClassificationLevelId)
+        {
+            string usp = "usp_ClassificationLevelDeletePostCheck @UserId, @ClassificationLevelID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ClassificationLevelId });
+            return ErrorMessages;
         }
 
         public async Task<List<ClassificationLevelLanguageIndexGet>> LanguageIndexGet(string UserId, int ClassificationLevelId)

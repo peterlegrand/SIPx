@@ -67,11 +67,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int OrganizationTypeId)
+        public bool DeletePost(string UserId, int OrganizationTypeId)
         {
-            string usp = "usp_OrganizationTypeDeletePost @OrganizationTypeId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { OrganizationTypeId = OrganizationTypeId });
+            string usp = "usp_OrganizationTypeDeletePost @UserId, @OrganizationTypeID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, OrganizationTypeId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int OrganizationTypeId)
+        {
+            string usp = "usp_OrganizationTypeDeletePostCheck @UserId, @OrganizationTypeID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, OrganizationTypeId });
+            return ErrorMessages;
         }
 
         public Task<List<OrganizationTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int OrganizationTypeId)
@@ -81,12 +87,7 @@ namespace SIPx.DataAccess
 
         }
 
-        //public Task<OrganizationTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int OrganizationTypeLanguageId)
-        //{
-        //    string usp = "usp_OrganizationTypeLanguageUpdateGet @UserId, @OrganizationTypeLanguageID";
-        //    return _sqlDataAccess.LoadSingleRecord<OrganizationTypeLanguage, dynamic>(usp, new { UserId = UserId, OrganizationTypeLanguageId = OrganizationTypeLanguageId });
 
-        //}
 
         public async Task<List<OrganizationTypeList>> List(string UserId)
         {

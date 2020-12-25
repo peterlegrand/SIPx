@@ -230,7 +230,7 @@ var ProcessTemplateFlowCondition = await _processTemplateFlowConditionProvider.U
                 //var CheckString = await _ProcessTemplateFlowConditionProvider.DeletePostCheck(ProcessTemplateFlowCondition);
                 //if (CheckString.Length == 0)
                 //{
-                _processTemplateFlowConditionProvider.DeletePost(ProcessTemplateFlowCondition.ProcessTemplateFlowConditionId);
+                _processTemplateFlowConditionProvider.DeletePost(CurrentUser.Id, ProcessTemplateFlowCondition.ProcessTemplateFlowConditionId);
                 return Ok(ProcessTemplateFlowCondition);
                 //}
                 return BadRequest(new

@@ -67,11 +67,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int PersonRelationId)
+        public bool DeletePost(string UserId, int PersonRelationId)
         {
-            string usp = "usp_PersonRelationDeletePost @PersonRelationId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PersonRelationId = PersonRelationId });
+            string usp = "usp_PersonRelationDeletePost @UserId, @PersonRelationID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PersonRelationId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PersonRelationId)
+        {
+            string usp = "usp_PersonRelationDeletePostCheck @UserId, @PersonRelationID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PersonRelationId });
+            return ErrorMessages;
         }
 
     }

@@ -74,11 +74,17 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationDeleteGet, dynamic>(usp, new { UserId, ClassificationId });
 
         }
-        public bool DeletePost(int classificationId)
+        public bool DeletePost(string UserId, int ClassificationId)
         {
-            string usp = "usp_ClassificationDeletePost @ClassificationId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationId = classificationId });
+            string usp = "usp_ClassificationDeletePost @UserId, @classificationID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ClassificationId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ClassificationId)
+        {
+            string usp = "usp_ClassificationDeletePostCheck @UserId, @classificationID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ClassificationId });
+            return ErrorMessages;
         }
 
         public Task<List<LanguageList>> LangugageCreateGetLanguageList(string UserId, int ClassificationId)

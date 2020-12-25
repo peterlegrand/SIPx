@@ -31,10 +31,10 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_PageCreatePost @ShowTitleName , @ShowTitleDescription , @StatusId, @Name, @Description , @MenuName , @MouseOver , @TitleName , @TitleDescription , @UserId,@OrganizationId, @ProjectId,@ClassificationId, @SelectedUserId ";
 
-            
 
 
-//            string usp = "usp_PageCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @UserId";
+
+            //            string usp = "usp_PageCreatePost @LanguageId, @Name, @Description, @MenuName, @MouseOver, @TitleName, @TitleDescription, @UserId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Page);
             return CheckString;
         }
@@ -87,11 +87,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int PageId)
+        public bool DeletePost(string UserId, int PageId)
         {
-            string usp = "usp_PageDeletePost @PageId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PageId = PageId });
+            string usp = "usp_PageDeletePost @UserId, @PageID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PageId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PageId)
+        {
+            string usp = "usp_PageDeletePostCheck @UserId, @PageID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PageId });
+            return ErrorMessages;
         }
 
         public async Task<List<PageLanguageIndexGet>> LanguageIndexGet(string UserId, int PageId)

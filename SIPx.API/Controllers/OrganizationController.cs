@@ -189,7 +189,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _OrganizationProvider.DeletePostCheck(Organization);
                 //if (CheckString.Length == 0)
                 //{
-                _organizationProvider.DeletePost(Organization.OrganizationId);
+                _organizationProvider.DeletePost(CurrentUser.Id, Organization.OrganizationId);
                 return Ok(Organization);
                 //}
                 return BadRequest(new

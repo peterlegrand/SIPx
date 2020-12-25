@@ -186,7 +186,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _PersonTelecomProvider.DeletePostCheck(PersonTelecom);
                 //if (CheckString.Length == 0)
                 //{
-                _personTelecomProvider.DeletePost(PersonTelecom.PersonTelecomId);
+                _personTelecomProvider.DeletePost(CurrentUser.Id, PersonTelecom.PersonTelecomId);
                 return Ok(PersonTelecom);
                 //}
                 return BadRequest(new

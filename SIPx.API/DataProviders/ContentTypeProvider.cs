@@ -20,11 +20,11 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-       
+
         public Task<List<ProcessTemplateList>> CreateGetProcessTemplates(string UserId)
         {
             string usp = "usp_ContentTypeCreateGetProcessTemplates @UserId";
-            return _sqlDataAccess.LoadData<ProcessTemplateList, dynamic>(usp, new { UserId = UserId});
+            return _sqlDataAccess.LoadData<ProcessTemplateList, dynamic>(usp, new { UserId = UserId });
         }
 
         public async Task<List<ErrorMessage>> CreatePostCheck(ContentTypeCreateGet ContentType)
@@ -158,7 +158,7 @@ namespace SIPx.DataAccess
         //    var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentType);
         //    return String;
         //}
-        public async Task<bool> CreatePost( ContentTypeCreateGet ContentType)
+        public async Task<bool> CreatePost(ContentTypeCreateGet ContentType)
         {
 
             DataTable ClassificationTable = ContentTypeClassificationValueDataTable.CreateTable();
@@ -169,7 +169,7 @@ namespace SIPx.DataAccess
                 ClassificationTable.Rows.Add(
                 ContentTypeClassification.ClassificationId
                 , ContentTypeClassification.ContentTypeClassificationStatusId);
-              
+
             }
             string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
    " , @IsRelationBasedOwnership " +
@@ -205,44 +205,82 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<dynamic>(usp, new
             {
                 ContentTypeGroupId = ContentType.ContentTypeGroupId
-                , ProcessTemplateId = ContentType.@ProcessTemplateId
-                , SecurityLevelId = ContentType.SecurityLevelId
-                , Name = ContentType.Name
-                , Description = ContentType.Description
-                , MenuName = ContentType.MenuName
-                , MouseOver = ContentType.MouseOver
-                , UserId = ContentType.UserId
-                , IsRelationBasedOwnership = ContentType.IsRelationBasedOwnership
-                , IsProjectBasedOwnership = ContentType.IsProjectBasedOwnership
-                , IsOrganizationBasedOwnership = ContentType.IsOrganizationBasedOwnership
-                , IsFreeOwnership = ContentType.IsFreeOwnership
-                , IsRelationBasedEdit = ContentType.IsRelationBasedEdit
-                , IsRelationBasedEditSelectable = ContentType.IsRelationBasedEditSelectable
-                , IsOrganizationBasedEdit = ContentType.IsOrganizationBasedEdit
-                , IsOrganizationBasedEditSelectable = ContentType.IsOrganizationBasedEditSelectable
-                , IsOrganizationBasedEditSub = ContentType.IsOrganizationBasedEditSub
-                , IsOrganizationBasedEditParent = ContentType.IsOrganizationBasedEditParent
-                , IsProjectBasedEdit = ContentType.IsProjectBasedEdit
-                , IsProjectBasedEditSelectable = ContentType.IsProjectBasedEditSelectable
-                , IsProjectBasedEditSub = ContentType.IsProjectBasedEditSub
-                , IsProjectBasedEditParent = ContentType.IsProjectBasedEditParent
-                , IsFreeEdit = ContentType.IsFreeEdit
-                , IsFreeEditSelectable = ContentType.IsFreeEditSelectable
-                , IsRelationBasedRead = ContentType.IsRelationBasedRead
-                , IsRelationBasedReadSelectable = ContentType.IsRelationBasedReadSelectable
-                , IsOrganizationBasedRead = ContentType.IsOrganizationBasedRead
-                , IsOrganizationBasedReadSelectable = ContentType.IsOrganizationBasedReadSelectable
-                , IsOrganizationBasedReadSub = ContentType.IsOrganizationBasedReadSub
-                , IsOrganizationBasedReadParent = ContentType.IsOrganizationBasedReadParent
-                , IsProjectBasedRead = ContentType.IsProjectBasedRead
-                , IsProjectBasedReadSelectable = ContentType.IsProjectBasedReadSelectable
-                , IsProjectBasedReadSub = ContentType.IsProjectBasedReadSub
-                , IsProjectBasedReadParent = ContentType.IsProjectBasedReadParent
-                , IsFreeRead = ContentType.IsFreeRead
-                , IsFreeReadSelectable = ContentType.IsFreeReadSelectable
-                , Color = ContentType.Color
-                , IconId = ContentType.IconId
-                , ContentTypeClassificationTable = ClassificationTable.AsTableValuedParameter("udt_ContentTypeClassificationNew")
+                ,
+                ProcessTemplateId = ContentType.@ProcessTemplateId
+                ,
+                SecurityLevelId = ContentType.SecurityLevelId
+                ,
+                Name = ContentType.Name
+                ,
+                Description = ContentType.Description
+                ,
+                MenuName = ContentType.MenuName
+                ,
+                MouseOver = ContentType.MouseOver
+                ,
+                UserId = ContentType.UserId
+                ,
+                IsRelationBasedOwnership = ContentType.IsRelationBasedOwnership
+                ,
+                IsProjectBasedOwnership = ContentType.IsProjectBasedOwnership
+                ,
+                IsOrganizationBasedOwnership = ContentType.IsOrganizationBasedOwnership
+                ,
+                IsFreeOwnership = ContentType.IsFreeOwnership
+                ,
+                IsRelationBasedEdit = ContentType.IsRelationBasedEdit
+                ,
+                IsRelationBasedEditSelectable = ContentType.IsRelationBasedEditSelectable
+                ,
+                IsOrganizationBasedEdit = ContentType.IsOrganizationBasedEdit
+                ,
+                IsOrganizationBasedEditSelectable = ContentType.IsOrganizationBasedEditSelectable
+                ,
+                IsOrganizationBasedEditSub = ContentType.IsOrganizationBasedEditSub
+                ,
+                IsOrganizationBasedEditParent = ContentType.IsOrganizationBasedEditParent
+                ,
+                IsProjectBasedEdit = ContentType.IsProjectBasedEdit
+                ,
+                IsProjectBasedEditSelectable = ContentType.IsProjectBasedEditSelectable
+                ,
+                IsProjectBasedEditSub = ContentType.IsProjectBasedEditSub
+                ,
+                IsProjectBasedEditParent = ContentType.IsProjectBasedEditParent
+                ,
+                IsFreeEdit = ContentType.IsFreeEdit
+                ,
+                IsFreeEditSelectable = ContentType.IsFreeEditSelectable
+                ,
+                IsRelationBasedRead = ContentType.IsRelationBasedRead
+                ,
+                IsRelationBasedReadSelectable = ContentType.IsRelationBasedReadSelectable
+                ,
+                IsOrganizationBasedRead = ContentType.IsOrganizationBasedRead
+                ,
+                IsOrganizationBasedReadSelectable = ContentType.IsOrganizationBasedReadSelectable
+                ,
+                IsOrganizationBasedReadSub = ContentType.IsOrganizationBasedReadSub
+                ,
+                IsOrganizationBasedReadParent = ContentType.IsOrganizationBasedReadParent
+                ,
+                IsProjectBasedRead = ContentType.IsProjectBasedRead
+                ,
+                IsProjectBasedReadSelectable = ContentType.IsProjectBasedReadSelectable
+                ,
+                IsProjectBasedReadSub = ContentType.IsProjectBasedReadSub
+                ,
+                IsProjectBasedReadParent = ContentType.IsProjectBasedReadParent
+                ,
+                IsFreeRead = ContentType.IsFreeRead
+                ,
+                IsFreeReadSelectable = ContentType.IsFreeReadSelectable
+                ,
+                Color = ContentType.Color
+                ,
+                IconId = ContentType.IconId
+                ,
+                ContentTypeClassificationTable = ClassificationTable.AsTableValuedParameter("udt_ContentTypeClassificationNew")
             });
             return true;
         }
@@ -255,14 +293,14 @@ namespace SIPx.DataAccess
         }
 
         public Task<ContentTypeUpdateGet> UpdateGet(string UserId, int ContentTypeId)
-            {
+        {
             string usp = "usp_ContentTypeUpdateGet @UserId, @ContentTypeID";
             return _sqlDataAccess.LoadSingleRecord<ContentTypeUpdateGet, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
 
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(ContentTypeUpdateGet ContentType)
         {
-            string usp = "usp_ContentTypeUpdatePostCheck @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId "+
+            string usp = "usp_ContentTypeUpdatePostCheck @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId " +
              " , @IsRelationBasedOwnership " +
              " , @IsProjectBasedOwnership " +
              " , @IsOrganizationBasedOwnership " +
@@ -291,8 +329,8 @@ namespace SIPx.DataAccess
              " , @IsProjectBasedReadParent " +
              " , @IsFreeRead " +
              " , @IsFreeReadSelectable, @Color, @IconId, @ContentTypeClassificationTable";
-        //    _sqlDataAccess.SaveData<ContentTypeUpdateGet>(usp, ContentType);
-         //   return true;
+            //    _sqlDataAccess.SaveData<ContentTypeUpdateGet>(usp, ContentType);
+            //   return true;
 
 
 
@@ -310,7 +348,7 @@ namespace SIPx.DataAccess
                 //}
             }
             //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
-            var ErrorMessages = await _sqlDataAccess.LoadData< ErrorMessage, dynamic>(usp, new
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new
             {
                 ContentTypeId = ContentType.ContentTypeId
                 ,
@@ -423,7 +461,7 @@ namespace SIPx.DataAccess
    " , @IsProjectBasedReadSelectable " +
    " , @IsProjectBasedReadSub " +
    " , @IsProjectBasedReadParent " +
-   " , @IsFreeRead " + 
+   " , @IsFreeRead " +
    " , @IsFreeReadSelectable, @Color, @IconId, @ContentTypeClassificationTable";
             //_sqlDataAccess.SaveData<ContentTypeUpdateGet>(usp, ContentType);
             //return true;
@@ -443,7 +481,7 @@ namespace SIPx.DataAccess
                         , x.ContentTypeClassificationStatusId);
                 //}
             }
-        //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
+            //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
             _sqlDataAccess.SaveData<dynamic>(usp, new
             {
                 ContentTypeId = ContentType.ContentTypeId
@@ -536,26 +574,20 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ContentTypeId)
+        public bool DeletePost(string UserId, int ContentTypeId)
         {
-            string usp = "usp_ContentTypeDeletePost @ContentTypeId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentTypeId = ContentTypeId });
+            string usp = "usp_ContentTypeDeletePost @UserId, @ContentTypeID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ContentTypeId });
             return true;
         }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ContentTypeId)
+        {
+            string usp = "usp_ContentTypeDeletePostCheck @UserId, @ContentTypeID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ContentTypeId });
+            return ErrorMessages;
+        }
 
-        //public async Task<List<ContentTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ContentTypeId)
-        //{
-        //    string usp = "usp_ContentTypeLanguageIndexGet @UserId, @ContentTypeID";
-        //    var x = await _sqlDataAccess.LoadData<ContentTypeLanguage, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
-        //    return x;
-        //}
 
-        //public Task<ContentTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ContentTypeLanguageId)
-        //{
-        //    string usp = "usp_ContentTypeLanguageUpdateGet @ContentTypeLanguageID";
-        //    return _sqlDataAccess.LoadSingleRecord<ContentTypeLanguageLanguageUpdateGet, dynamic>(usp, new { ContentTypeLanguageId = ContentTypeLanguageId });
-
-        //}
 
         public Task<List<ContentTypeList>> List(string UserId)
         {

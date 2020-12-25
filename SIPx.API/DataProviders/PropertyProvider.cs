@@ -66,18 +66,25 @@ namespace SIPx.DataAccess
             string usp = "usp_PropertyUpdatePost @PropertyId, @PropertyTypeId, @Name , @Description , @MenuName , @MouseOver , @UserId ";
             _sqlDataAccess.SaveData<PropertyUpdateGet>(usp, Property);
             return true;
-        } 
+        }
         public Task<PropertyDeleteGet> DeleteGet(string UserId, int PropertyId)
         {
             string usp = "usp_PropertyDeleteGet @UserId, @PropertyID";
             return _sqlDataAccess.LoadSingleRecord<PropertyDeleteGet, dynamic>(usp, new { UserId, PropertyId });
 
         }
-        public bool DeletePost(int PropertyId)
+        public bool DeletePost(string UserId, int PropertyId)
         {
-            string usp = "usp_PropertyDeletePost @PropertyId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PropertyId = PropertyId });
+            string usp = "usp_PropertyDeletePost @UserId, @PropertyID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PropertyId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PropertyId)
+        {
+            string usp = "usp_PropertyDeletePostCheck @UserId, @PropertyID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PropertyId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PropertyId });
+            return ErrorMessages;
         }
 
         public async Task<List<PropertyList>> List(string UserId)

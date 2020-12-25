@@ -209,7 +209,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _UserMenuTemplateOptionProvider.DeletePostCheck(UserMenuTemplateOption);
                 //if (CheckString.Length == 0)
                 //{
-                _userMenuTemplateOptionProvider.DeletePost(UserMenuTemplateOption.UserMenuTemplateOptionId);
+                _userMenuTemplateOptionProvider.DeletePost(CurrentUser.Id, UserMenuTemplateOption.UserMenuTemplateOptionId);
                 return Ok(UserMenuTemplateOption);
                 //}
                 return BadRequest(new

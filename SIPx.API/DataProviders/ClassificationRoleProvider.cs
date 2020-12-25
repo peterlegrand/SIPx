@@ -48,7 +48,7 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationRoleUpdateGet ClassificationRole)
         {
-              string usp = "usp_ClassificationRoleUpdatePostCheck @RoleId, @ClassificationRoleId, @ClassificationRelationTypeId, @UserID";
+            string usp = "usp_ClassificationRoleUpdatePostCheck @RoleId, @ClassificationRoleId, @ClassificationRelationTypeId, @UserID";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationRole);
             return ErrorMessages;
         }
@@ -67,11 +67,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ClassificationRoleId)
+        public bool DeletePost(string UserId, int ClassificationRoleId)
         {
-            string usp = "usp_ClassificationRoleDeletePost @ClassificationRoleId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationRoleId = ClassificationRoleId });
+            string usp = "usp_ClassificationRoleDeletePost @UserId, @ClassificationRoleID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ClassificationRoleId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ClassificationRoleId)
+        {
+            string usp = "usp_ClassificationRoleDeletePostCheck @UserId, @ClassificationRoleID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ClassificationRoleId });
+            return ErrorMessages;
         }
 
     }

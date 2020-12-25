@@ -67,7 +67,7 @@ namespace SIPx.DataAccess
             //PersonAddress.PostalCode = PersonAddress.PostalCode ?? "";
             //PersonAddress.PostalCodeExt = PersonAddress.PostalCodeExt ?? "";
             //PersonAddress.ProvinceState = PersonAddress.ProvinceState ?? "";
-            
+
             string usp = "usp_PersonAddressUpdatePost " +
                 "@AttnName " +
                 ", @PersonAddressId " +
@@ -95,11 +95,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int PersonAddressId)
+        public bool DeletePost(string UserId, int PersonAddressId)
         {
-            string usp = "usp_PersonAddressDeletePost @PersonAddressId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PersonAddressId = PersonAddressId });
+            string usp = "usp_PersonAddressDeletePost @UserId, @PersonAddressID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PersonAddressId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PersonAddressId)
+        {
+            string usp = "usp_PersonAddressDeletePostCheck @UserId, @PersonAddressID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PersonAddressId });
+            return ErrorMessages;
         }
 
     }

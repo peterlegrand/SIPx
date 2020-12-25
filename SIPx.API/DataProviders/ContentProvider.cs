@@ -117,11 +117,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ContentId)
+        public bool DeletePost(string UserId, int ContentId)
         {
-            string usp = "usp_ContentDeletePost @ContentId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentId = ContentId });
+            string usp = "usp_ContentDeletePost @UserId, @ContentID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ContentId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ContentId)
+        {
+            string usp = "usp_ContentDeletePostCheck @UserId, @ContentID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ContentId });
+            return ErrorMessages;
         }
         public Task<List<ContentSearch>> Search(string Contains, string UserId)
         {
@@ -145,7 +151,7 @@ namespace SIPx.DataAccess
                     x.ClassificationValueId);
                 }
             }
-            var result = await _sqlDataAccess.LoadData<ContentAdvancedSearchResult,dynamic>(usp, new { UserId = AdvancedSearch.UserId, Contains = AdvancedSearch.Contains , OrganizationId = AdvancedSearch.OrganizationId , ProjectId = AdvancedSearch.ProjectId, ContentTypeId = AdvancedSearch.ContentTypeId, ContentStatusId = AdvancedSearch.ContentStatusId , LanguageId= AdvancedSearch.LanguageId , ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentAdvancedSearchClassificationValues") });
+            var result = await _sqlDataAccess.LoadData<ContentAdvancedSearchResult, dynamic>(usp, new { UserId = AdvancedSearch.UserId, Contains = AdvancedSearch.Contains, OrganizationId = AdvancedSearch.OrganizationId, ProjectId = AdvancedSearch.ProjectId, ContentTypeId = AdvancedSearch.ContentTypeId, ContentStatusId = AdvancedSearch.ContentStatusId, LanguageId = AdvancedSearch.LanguageId, ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentAdvancedSearchClassificationValues") });
             return result;
 
 

@@ -58,19 +58,25 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<ClassificationRelationTypeUpdateGet>(usp, ClassificationRelationType);
             return true;
         }
-        
+
         public Task<ClassificationRelationTypeDeleteGet> DeleteGet(string UserId, int ClassificationRelationTypeId)
         {
             string usp = "usp_ClassificationRelationTypeDeleteGet @UserId, @ClassificationRelationTypeID";
             return _sqlDataAccess.LoadSingleRecord<ClassificationRelationTypeDeleteGet, dynamic>(usp, new { UserId, ClassificationRelationTypeId });
 
         }
-        
-        public bool DeletePost(int ClassificationRelationTypeId)
+
+        public bool DeletePost(string UserId, int ClassificationRelationTypeId)
         {
-            string usp = "usp_ClassificationRelationTypeDeletePost @ClassificationRelationTypeId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationRelationTypeId = ClassificationRelationTypeId });
+            string usp = "usp_ClassificationRelationTypeDeletePost @UserId, @ClassificationRelationTypeID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ClassificationRelationTypeId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ClassificationRelationTypeId)
+        {
+            string usp = "usp_ClassificationRelationTypeDeletePostCheck @UserId, @ClassificationRelationTypeID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ClassificationRelationTypeId });
+            return ErrorMessages;
         }
 
         public Task<List<ClassificationRelationTypeLanguageUpdateGet>> LanguageIndexGet(string UserId, int ClassificationRelationTypeId)

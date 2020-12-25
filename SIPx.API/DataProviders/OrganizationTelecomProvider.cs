@@ -68,11 +68,12 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int OrganizationTelecomId)
+        public async Task<List<ErrorMessage>> DeletePost(string UserId, int OrganizationTelecomId)
         {
-            string usp = "usp_OrganizationTelecomDeletePost @OrganizationTelecomId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { OrganizationTelecomId = OrganizationTelecomId });
-            return true;
+            string usp = "usp_OrganizationTelecomDeletePost @UserId, @OrganizationTelecomID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, OrganizationTelecomId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, OrganizationTelecomId });
+            return ErrorMessages;
         }
 
     }

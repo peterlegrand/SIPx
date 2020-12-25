@@ -69,11 +69,6 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ClassificationValuePropertyUpdateGet, dynamic>(usp, new { UserId, ClassificationValuePropertyId });
         }
 
-        //public Task<ClassificationValuePropertyCreateGetClassificationName> ClassificationValuePropertyCreateGetClassificationName(string UserId, int ClassificationValueId)
-        //{
-        //    string usp = "usp_ClassificationValuePropertyCreateGetClassificationName @UserId, @ClassificationValueID";
-        //    return _sqlDataAccess.LoadSingleRecord<ClassificationValuePropertyCreateGetClassificationName, dynamic>(usp, new { UserId, ClassificationValueId });
-        //}
 
 
         public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationValuePropertyUpdateGet ClassificationValueProperty)
@@ -96,11 +91,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ClassificationValuePropertyId)
+        public bool DeletePost(string UserId, int ClassificationValuePropertyId)
         {
-            string usp = "usp_ClassificationValuePropertyDeletePost @ClassificationValuePropertyId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationValuePropertyId = ClassificationValuePropertyId });
+            string usp = "usp_ClassificationValuePropertyDeletePost @UserId, @ClassificationValuePropertyID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ClassificationValuePropertyId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ClassificationValuePropertyId)
+        {
+            string usp = "usp_ClassificationValuePropertyDeletePostCheck @UserId, @ClassificationValuePropertyID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ClassificationValuePropertyId });
+            return ErrorMessages;
         }
 
     }

@@ -27,7 +27,12 @@ namespace SIPx.API.Controllers
         private readonly Microsoft.AspNetCore.Identity.UserManager<SipUser> _userManager;
         private readonly ICheckProvider _checkProvider;
 
-        public ToDoController(IUserProvider userProvider, IFrontProcessProvider frontProcessProvider, IClaimCheck claimCheck, IProcessProvider ProcessProvider, Microsoft.AspNetCore.Identity.UserManager<SipUser> userManager, ICheckProvider checkProvider)
+        public ToDoController(IUserProvider userProvider
+            , IFrontProcessProvider frontProcessProvider
+            , IClaimCheck claimCheck
+            , IProcessProvider ProcessProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SipUser> userManager
+            , ICheckProvider checkProvider)
         {
             _userProvider = userProvider;
             _frontProcessProvider = frontProcessProvider;

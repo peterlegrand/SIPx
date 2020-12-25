@@ -16,7 +16,6 @@ namespace SIPx.API.Controllers
     public class ImageController : ControllerBase
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly IClassificationPageProvider _classificationPageProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly ICheckProvider _checkProvider;
@@ -24,10 +23,15 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ImageController(IHostingEnvironment hostingEnvironment, IClassificationPageProvider classificationPageProvider, IMasterProvider masterProvider, IMasterListProvider masterListProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ImageController(IHostingEnvironment hostingEnvironment
+            , IMasterProvider masterProvider
+            , IMasterListProvider masterListProvider
+            , ICheckProvider checkProvider
+            , IClaimCheck claimCheck
+            , IClassificationProvider classificationProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _hostingEnvironment = hostingEnvironment;
-            _classificationPageProvider = classificationPageProvider;
             _masterProvider = masterProvider;
             _masterListProvider = masterListProvider;
             _checkProvider = checkProvider;

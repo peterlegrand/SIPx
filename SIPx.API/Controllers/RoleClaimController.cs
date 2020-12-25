@@ -181,7 +181,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _RoleClaimProvider.DeletePostCheck(RoleClaim);
                 //if (CheckString.Length == 0)
                 //{
-                _roleClaimProvider.DeletePost(RoleClaim.RoleClaimId);
+                _roleClaimProvider.DeletePost(CurrentUser.Id, RoleClaim.RoleClaimId);
                 return Ok(RoleClaim);
                 //}
                 return BadRequest(new

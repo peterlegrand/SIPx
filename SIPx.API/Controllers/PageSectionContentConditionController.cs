@@ -451,7 +451,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _PageSectionProvider.DeletePostCheck(PageSection);
                 //if (CheckString.Length == 0)
                 //{
-                _pageSectionContentConditionProvider.DeletePost(PageSectionContentCondition.PageSectionContentConditionId);
+                _pageSectionContentConditionProvider.DeletePost(CurrentUser.Id, PageSectionContentCondition.PageSectionContentConditionId);
                 return Ok(PageSectionContentCondition);
                 //}
                 return BadRequest(new

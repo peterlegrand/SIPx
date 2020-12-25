@@ -196,7 +196,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ProcessTemplateProvider.DeletePostCheck(ProcessTemplate);
                 //if (CheckString.Length == 0)
                 //{
-                _processTemplateProvider.DeletePost(ProcessTemplate.ProcessTemplateId);
+                _processTemplateProvider.DeletePost(CurrentUser.Id, ProcessTemplate.ProcessTemplateId);
                 return Ok(ProcessTemplate);
                 //}
                 return BadRequest(new

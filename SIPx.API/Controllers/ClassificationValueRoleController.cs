@@ -204,7 +204,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ClassificationValueRoleProvider.DeletePostCheck(ClassificationValueRole);
                 //if (CheckString.Length == 0)
                 //{
-                _classificationValueRoleProvider.DeletePost(ClassificationValueRole.ClassificationValueRoleId);
+                _classificationValueRoleProvider.DeletePost(CurrentUser.Id, ClassificationValueRole.ClassificationValueRoleId);
                 return Ok(ClassificationValueRole);
                 //}
                 return BadRequest(new

@@ -198,7 +198,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ClassificationLevelProvider.DeletePostCheck(ClassificationLevel);
                 //if (CheckString.Length == 0)
                 //{
-                _classificationLevelProvider.DeletePost(ClassificationLevel.ClassificationLevelId);
+                _classificationLevelProvider.DeletePost(CurrentUser.Id, ClassificationLevel.ClassificationLevelId);
                 return Ok(ClassificationLevel);
                 //}
                 return BadRequest(new

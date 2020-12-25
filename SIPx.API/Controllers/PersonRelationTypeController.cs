@@ -25,7 +25,11 @@ namespace SIPx.API.Controllers
         private readonly IPersonRelationTypeProvider _personRelationTypeProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public PersonRelationTypeController(  ICheckProvider checkProvider, IMasterListProvider masterListProvider, IClaimCheck claimCheck, IPersonRelationTypeProvider personRelationTypeProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public PersonRelationTypeController(  ICheckProvider checkProvider
+            , IMasterListProvider masterListProvider
+            , IClaimCheck claimCheck
+            , IPersonRelationTypeProvider personRelationTypeProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _checkProvider = checkProvider;
             _masterListProvider = masterListProvider;
@@ -185,7 +189,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _PersonRelationTypeProvider.DeletePostCheck(PersonRelationType);
                 //if (CheckString.Length == 0)
                 //{
-                _personRelationTypeProvider.DeletePost(PersonRelationType.PersonRelationTypeId);
+                _personRelationTypeProvider.DeletePost(CurrentUser.Id, PersonRelationType.PersonRelationTypeId);
                 return Ok(PersonRelationType);
                 //}
                 return BadRequest(new

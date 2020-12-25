@@ -221,7 +221,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ContentTypeProvider.DeletePostCheck(ContentType);
                 //if (CheckString.Length == 0)
                 //{
-                _contentTypeProvider.DeletePost(ContentType.ContentTypeId);
+                _contentTypeProvider.DeletePost(CurrentUser.Id, ContentType.ContentTypeId);
                 return Ok(ContentType);
                 //}
                 return BadRequest(new

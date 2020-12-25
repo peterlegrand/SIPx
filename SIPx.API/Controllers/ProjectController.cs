@@ -200,7 +200,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ProjectProvider.DeletePostCheck(Project);
                 //if (CheckString.Length == 0)
                 //{
-                _projectProvider.DeletePost(Project.ProjectId);
+                _projectProvider.DeletePost(CurrentUser.Id, Project.ProjectId);
                 return Ok(Project);
                 //}
                 return BadRequest(new

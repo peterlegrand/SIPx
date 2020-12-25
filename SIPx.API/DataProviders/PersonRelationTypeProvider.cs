@@ -60,31 +60,27 @@ namespace SIPx.DataAccess
 
         public Task<PersonRelationTypeDeleteGet> DeleteGet(string UserId, int PersonRelationTypeId)
         {
-            string usp = "usp_PersonRelationTypeDeleteGet @UserId, @PersonRelationTypeID";
+            string usp = "usp_PersonRelationTypeDeleteGet string UserId, int PersonRelationTypeId";
             return _sqlDataAccess.LoadSingleRecord<PersonRelationTypeDeleteGet, dynamic>(usp, new { UserId, PersonRelationTypeId });
 
         }
 
-        public bool DeletePost(int PersonRelationTypeId)
+        public bool DeletePost(string UserId, int PersonRelationTypeId)
         {
-            string usp = "usp_PersonRelationTypeDeletePost @PersonRelationTypeId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PersonRelationTypeId = PersonRelationTypeId });
+            string usp = "usp_PersonRelationTypeDeletePost string UserId, int PersonRelationTypeId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PersonRelationTypeId });
             return true;
         }
 
-        //public Task<List<PersonRelationTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int PersonRelationTypeId)
-        //{
-        //    string usp = "usp_PersonRelationTypeLanguageIndexGet @UserId, @PersonRelationTypeID";
-        //    return _sqlDataAccess.LoadData<PersonRelationTypeLanguage, dynamic>(usp, new { UserId = UserId, PersonRelationTypeId = PersonRelationTypeId });
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PersonRelationTypeId)
+        {
+            string usp = "usp_PersonRelationTypeDeletePostCheck string UserId, int PersonRelationTypeId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PersonRelationTypeId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PersonRelationTypeId });
+            return ErrorMessages;
+        }
 
-        //}
 
-        //public Task<PersonRelationTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int PersonRelationTypeLanguageId)
-        //{
-        //    string usp = "usp_PersonRelationTypeLanguageUpdateGet @UserId, @PersonRelationTypeLanguageID";
-        //    return _sqlDataAccess.LoadSingleRecord<PersonRelationTypeLanguage, dynamic>(usp, new { UserId = UserId, PersonRelationTypeLanguageId = PersonRelationTypeLanguageId });
-
-        //}
 
         public Task<List<PersonRelationTypeList>> List(string UserId)
         {

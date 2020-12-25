@@ -20,24 +20,7 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        //public Task<List<ProcessTemplateStageFieldStatus>> IndexGet(string UserId)
-        //{
-        //    string usp = "usp_ProcessTemplateStageFieldStatusIndexGet @UserID";
-        //    return _sqlDataAccess.LoadData<ProcessTemplateStageFieldStatus, dynamic>(usp, new { UserId = UserId });
-
-        //}
-        //public Task<ProcessTemplateStageFieldStatus> ProcessTemplateStageFieldStatuIndexGet(string UserId, int ProcessTemplateStageFieldStatusId)
-        //{
-        //    string usp = "usp_ProcessTemplateStageFieldStatus @UserId, @ProcessTemplateStageFieldStatusID";
-        //    return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageFieldStatus, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldStatusId = ProcessTemplateStageFieldStatusId });
-
-        //}
-        //public Task<ProcessTemplateStageFieldStatusUpdateGet> UpdateGet(string UserId, int ProcessTemplateStageFieldDStatusId)
-        //{
-        //    string usp = "usp_ProcessTemplateStageTypeLanguageUpdateGet @UserId, @ProcessTemplateStageFieldDStatusId";
-        //    return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageFieldStatusUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldDStatusId = ProcessTemplateStageFieldDStatusId });
-        //}
-
+   
         public Task<List<ProcessTemplateStageFieldStatusList>> List(string UserId)
         {
             string usp = "usp_ProcessTemplateStageFieldStatusList @UserID";

@@ -73,11 +73,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ProjectId)
+        public bool DeletePost(string UserId, int ProjectId)
         {
-            string usp = "usp_ProjectDeletePost @ProjectId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ProjectId = ProjectId });
+            string usp = "usp_ProjectDeletePost @UserId, @ProjectID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProjectId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ProjectId)
+        {
+            string usp = "usp_ProjectDeletePostCheck @UserId, @ProjectID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProjectId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ProjectId });
+            return ErrorMessages;
         }
 
         public async Task<List<ProjectLanguageIndexGet>> LanguageIndexGet(string UserId, int ProjectId)
@@ -108,16 +115,16 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public Task<List<ProjectSearch>>Search(string Contains, string UserId)
+        public Task<List<ProjectSearch>> Search(string Contains, string UserId)
         {
             string usp = "usp_ProjectSearch @Contains, @UserId";
             return _sqlDataAccess.LoadData<ProjectSearch, dynamic>(usp, new { Contains, UserId });
 
         }
-        public Task<List<ProjectAdvancedSearchResult>> AdvancedSearch( ProjectAdvancedSearchPost AdvancedSearch)
+        public Task<List<ProjectAdvancedSearchResult>> AdvancedSearch(ProjectAdvancedSearchPost AdvancedSearch)
         {
             string usp = "usp_ProjectAdvancedSearch @UserId, @Contains, @ParentProjectId, @ProjectTypeId, @SecurityLevelId, @StatusId, @PersonId ";
-            return _sqlDataAccess.LoadData<ProjectAdvancedSearchResult, dynamic>(usp, AdvancedSearch );
+            return _sqlDataAccess.LoadData<ProjectAdvancedSearchResult, dynamic>(usp, AdvancedSearch);
         }
 
         public async Task<List<ProjectForPanel>> Panel(string UserId, string ProjectConditionSQLFrom, string ProjectConditionSQLWhere, string ProjectConditionSQLContains)

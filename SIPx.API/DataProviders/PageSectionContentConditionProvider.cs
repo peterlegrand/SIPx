@@ -49,11 +49,11 @@ namespace SIPx.DataAccess
         public async Task<List<ClassificationValueList>> CreateGetClassificationValues(string UserId, int ClassificationId)
         {
             string usp = "usp_PageSectionContentConditionCreateGetClassificationValues @UserID, @ClassificationId";
-            var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId, ClassificationId= ClassificationId });
+            var x = await _sqlDataAccess.LoadData<ClassificationValueList, dynamic>(usp, new { UserId = UserId, ClassificationId = ClassificationId });
             return x;
         }
 
-        public  Task<PageSectionContentConditionUpdateGet> UpdateGet(string UserId, int PageSectionContentConditionId)
+        public Task<PageSectionContentConditionUpdateGet> UpdateGet(string UserId, int PageSectionContentConditionId)
         {
             string usp = "usp_PageSectionContentConditionUpdateGet @UserId, @PageSectionContentConditionID";
             return _sqlDataAccess.LoadSingleRecord<PageSectionContentConditionUpdateGet, dynamic>(usp, new { UserId = UserId, PageSectionContentConditionId = PageSectionContentConditionId });
@@ -93,11 +93,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int PageSectionContentConditionId)
+        public bool DeletePost(string UserId, int PageSectionContentConditionId)
         {
-            string usp = "usp_PageSectionContentConditionDeletePost @PageSectionContentConditionId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { PageSectionContentConditionId = PageSectionContentConditionId });
+            string usp = "usp_PageSectionContentConditionDeletePost @UserId, @PageSectionContentConditionID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, PageSectionContentConditionId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PageSectionContentConditionId)
+        {
+            string usp = "usp_PageSectionContentConditionDeletePostCheck @UserId, @PageSectionContentConditionID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, PageSectionContentConditionId });
+            return ErrorMessages;
         }
 
     }

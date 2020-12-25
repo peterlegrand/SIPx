@@ -203,7 +203,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ClassificationValueProvider.DeletePostCheck(ClassificationValue);
                 //if (CheckString.Length == 0)
                 //{
-                _classificationValueProvider.DeletePost(ClassificationValue.ClassificationValueId);
+                _classificationValueProvider.DeletePost(CurrentUser.Id, ClassificationValue.ClassificationValueId);
                 return Ok(ClassificationValue);
                 //}
                 return BadRequest(new

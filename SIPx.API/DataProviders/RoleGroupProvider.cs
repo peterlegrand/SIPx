@@ -68,11 +68,17 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int RoleGroupId)
+        public bool DeletePost(string UserId, int RoleGroupId)
         {
-            string usp = "usp_RoleGroupDeletePost @RoleGroupId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { RoleGroupId = RoleGroupId });
+            string usp = "usp_RoleGroupDeletePost @UserId, @RoleGroupID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, RoleGroupId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int RoleGroupId)
+        {
+            string usp = "usp_RoleGroupDeletePostCheck @UserId, @RoleGroupID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, RoleGroupId });
+            return ErrorMessages;
         }
 
         public Task<List<RoleGroupLanguageIndexGet>> LanguageIndexGet(string UserId, int RoleGroupId)

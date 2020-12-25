@@ -49,7 +49,7 @@ namespace SIPx.DataAccess
         public Task<List<RoleClaimIndexGet>> IndexGet(string UserId, string RoleId)
         {
             string usp = "usp_RoleClaimIndexGet @UserID, @RoleId";
-            return _sqlDataAccess.LoadData<RoleClaimIndexGet, dynamic>(usp, new { UserId = UserId , RoleId = RoleId });
+            return _sqlDataAccess.LoadData<RoleClaimIndexGet, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
 
         }
 
@@ -61,11 +61,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(string UserId,int RoleClaimId)
+        public bool DeletePost(string UserId, int RoleClaimId)
         {
             string usp = "usp_RoleClaimDeletePost @UserId, @RoleClaimId";
             _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, RoleClaimId });
             return true;
+        }
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int RoleClaimId)
+        {
+            string usp = "usp_RoleClaimDeletePostCheck @UserId, @RoleClaimId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, RoleClaimId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, RoleClaimId });
+            return ErrorMessages;
         }
 
     }

@@ -181,7 +181,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _RoleGroupProvider.DeletePostCheck(RoleGroup);
                 //if (CheckString.Length == 0)
                 //{
-                _roleGroupProvider.DeletePost(RoleGroup.RoleGroupId);
+                _roleGroupProvider.DeletePost(CurrentUser.Id, RoleGroup.RoleGroupId);
                 return Ok(RoleGroup);
                 //}
                 return BadRequest(new

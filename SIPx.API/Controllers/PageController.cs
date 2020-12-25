@@ -211,7 +211,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _PageProvider.DeletePostCheck(Page);
                 //if (CheckString.Length == 0)
                 //{
-                _pageProvider.DeletePost(Page.PageId);
+                _pageProvider.DeletePost(CurrentUser.Id, Page.PageId);
                 return Ok(Page);
                 //}
                 return BadRequest(new

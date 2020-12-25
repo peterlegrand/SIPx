@@ -75,11 +75,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ContentTypeGroupId)
+        public bool DeletePost(string UserId, int ContentTypeGroupId)
         {
-            string usp = "usp_ContentTypeGroupDeletePost @ContentTypeGroupId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentTypeGroupId = ContentTypeGroupId });
+            string usp = "usp_ContentTypeGroupDeletePost @UserId, @ContentTypeGroupID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ContentTypeGroupId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ContentTypeGroupId)
+        {
+            string usp = "usp_ContentTypeGroupDeletePostCheck @UserId, @ContentTypeGroupID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ContentTypeGroupId });
+            return ErrorMessages;
         }
 
         public Task<List<ContentTypeGroupList>> List(string UserId)

@@ -194,7 +194,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _RoleProvider.DeletePostCheck(Role);
                 //if (CheckString.Length == 0)
                 //{
-                _roleProvider.DeletePost(Role.RoleId);
+                _roleProvider.DeletePost(CurrentUser.Id, Role.RoleId);
                 var x = await _roleManager.FindByIdAsync(Role.RoleId);
                 _roleManager.DeleteAsync(x);
                 return Ok(Role);

@@ -20,19 +20,6 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        //public Task<List<ProcessTemplateFlowPassComparisonOperator>> IndexGet(string UserId)
-        //{
-        //    string usp = "usp_ProcessTemplateFlowPassComparisonOperatorIndexGet @UserID";
-        //    return _sqlDataAccess.LoadData<ProcessTemplateFlowPassComparisonOperator, dynamic>(usp, new { UserId = UserId });
-
-        //}
-        //public Task<ProcessTemplateFlowPassComparisonOperator> ProcessTemplateFlowPassComparisonOperatorUpdateGet(string UserId, int ProcessTemplateFlowPassComparisonOperatorId)
-        //{
-        //    string usp = "usp_ProcessTemplateFlowPassComparisonOperatorUpdateGet @UserId, @ProcessTemplateFlowPassComparisonOperatorID";
-        //    return _sqlDataAccess.LoadSingleRecord<ProcessTemplateFlowPassComparisonOperator, dynamic>(usp, new { UserId = UserId, ProcessTemplateFlowPassComparisonOperatorId = ProcessTemplateFlowPassComparisonOperatorId });
-
-        //}
-
         public Task<List<ProcessTemplateFlowPassComparisonOperatorList>> List(string UserId)
         {
             string usp = "usp_ProcessTemplateFlowPassComparisonOperatorList @UserId";

@@ -66,7 +66,7 @@ namespace SIPx.DataAccess
         public async Task<int> IndexGetProcessTemplateId(int ProcessTemplateFlowPassId)
         {
             string usp = "usp_processTemplateFlowPassIndexGetProcessTemplateId @ProcessTemplateFlowPassId";
-            var ProcessTemplateId = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp,  new { ProcessTemplateFlowPassId = ProcessTemplateFlowPassId });
+            var ProcessTemplateId = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { ProcessTemplateFlowPassId = ProcessTemplateFlowPassId });
             return ProcessTemplateId;
         }
 
@@ -113,11 +113,19 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ProcessTemplateFlowPassId)
+        public bool DeletePost(string UserId, int ProcessTemplateFlowPassId)
         {
-            string usp = "usp_ProcessTemplateFlowPassDeletePost @ProcessTemplateFlowPassId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ProcessTemplateFlowPassId = ProcessTemplateFlowPassId });
+            string usp = "usp_ProcessTemplateFlowPassDeletePost @UserId, @ProcessTemplateFlowPassID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProcessTemplateFlowPassId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ProcessTemplateFlowPassId)
+        {
+            string usp = "usp_ProcessTemplateFlowPassDeletePostCheck @UserId, @ProcessTemplateFlowPassID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProcessTemplateFlowPassId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ProcessTemplateFlowPassId });
+            return ErrorMessages;
         }
 
         public Task<List<ProcessTemplateFlowPassLanguageIndexGet>> LanguageIndexGet(string UserId, int ProcessTemplateFlowPassId)

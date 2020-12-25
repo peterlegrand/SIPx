@@ -196,7 +196,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _PropertyValueProvider.DeletePostCheck(PropertyValue);
                 //if (CheckString.Length == 0)
                 //{
-                _propertyValueProvider.DeletePost(PropertyValue.PropertyValueId);
+                _propertyValueProvider.DeletePost(CurrentUser.Id, PropertyValue.PropertyValueId);
                 return Ok(PropertyValue);
                 //}
                 return BadRequest(new

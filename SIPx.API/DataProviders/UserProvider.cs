@@ -87,6 +87,13 @@ namespace SIPx.DataAccess
             return true;
         }
 
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int SelectedPersonId)
+        {
+            string usp = "usp_UserDeletePostCheck @UserId, @SelectedPersonId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, SelectedPersonId });
+            return ErrorMessages;
+        }
+
         public Task<List<UserList>> List()
         {
             string usp = "usp_UserList";
@@ -106,7 +113,7 @@ namespace SIPx.DataAccess
         public Task<List<string>> RoleIdForSpecificUser(string UserId)
         {
             string usp = "usp_RoleIdForSpecificUser @UserId";
-            return _sqlDataAccess.LoadData<string, dynamic>(usp, new { UserId = UserId});
+            return _sqlDataAccess.LoadData<string, dynamic>(usp, new { UserId = UserId });
         }
         public Task<List<int>> UserOrganizations(string UserId)
         {

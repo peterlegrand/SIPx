@@ -90,11 +90,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int ClassificationValueId)
+        public bool DeletePost(string UserId, int ClassificationValueId)
         {
-            string usp = "usp_ClassificationValueDeletePost @ClassificationValueId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ClassificationValueId = ClassificationValueId });
+            string usp = "usp_ClassificationValueDeletePost @UserId, @ClassificationValueID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ClassificationValueId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ClassificationValueId)
+        {
+            string usp = "usp_ClassificationValueDeletePostCheck @UserId, @ClassificationValueID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ClassificationValueId });
+            return ErrorMessages;
         }
 
         public Task<List<ClassificationValueSearch>> Search(string Contains, string UserId)
@@ -103,13 +110,13 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ClassificationValueSearch, dynamic>(usp, new { Contains, UserId });
 
         }
-       public Task<List<ClassificationValueAdvancedSearchResult>> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch)
-    //    public async Task<string> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch)
+        public Task<List<ClassificationValueAdvancedSearchResult>> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch)
+        //    public async Task<string> AdvancedSearch(string UserId, ClassificationValueAdvancedSearchPost AdvancedSearch)
         {
             string usp = "usp_ClassificationValueAdvancedSearch @UserId, @Contains, @ClassificationId, @DateLevelId, @DateFrom, @DateTo, @PersonId";
-//            var x = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, AdvancedSearch);
-  //          return x;
-      return _sqlDataAccess.LoadData<ClassificationValueAdvancedSearchResult, dynamic>(usp, AdvancedSearch);
+            //            var x = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, AdvancedSearch);
+            //          return x;
+            return _sqlDataAccess.LoadData<ClassificationValueAdvancedSearchResult, dynamic>(usp, AdvancedSearch);
         }
 
         public async Task<List<ClassificationValueList>> List(string UserId)

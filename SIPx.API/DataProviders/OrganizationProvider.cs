@@ -69,11 +69,18 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int OrganizationId)
+        public bool DeletePost(string UserId, int OrganizationId)
         {
-            string usp = "usp_OrganizationDeletePost @OrganizationId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { OrganizationId = OrganizationId });
+            string usp = "usp_OrganizationDeletePost @UserId, @OrganizationID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, OrganizationId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int OrganizationId)
+        {
+            string usp = "usp_OrganizationDeletePostCheck @UserId, @OrganizationID";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, OrganizationId });
+            return ErrorMessages;
         }
 
         public async Task<List<OrganizationLanguageIndexGet>> LanguageIndexGet(string UserId, int OrganizationId)
@@ -112,7 +119,7 @@ namespace SIPx.DataAccess
         public Task<List<OrganizationAdvancedSearchResult>> AdvancedSearch(OrganizationAdvancedSearchPost AdvancedSearch)
         {
             string usp = "usp_OrganizationAdvancedSearch @UserId, @Contains, @ParentOrganizationId, @OrganizationTypeId, @StatusId, @PersonId ";
-            return _sqlDataAccess.LoadData<OrganizationAdvancedSearchResult, dynamic>(usp, AdvancedSearch );
+            return _sqlDataAccess.LoadData<OrganizationAdvancedSearchResult, dynamic>(usp, AdvancedSearch);
         }
         public async Task<List<int>> OrganizationIDsPerUser(string UserId)
         {
@@ -123,7 +130,7 @@ namespace SIPx.DataAccess
         public Task<int> MainOrganizationIDPerUser(string UserId)
         {
             string usp = "usp_MainOrganizationIDPerUser @UserId";
-            return _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, UserId );
+            return _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, UserId);
         }
         public async Task<List<OrganizationForPanel>> Panel(string UserId, string OrganizationConditionSQLFrom, string OrganizationConditionSQLWhere, string OrganizationConditionSQLContains)
         {

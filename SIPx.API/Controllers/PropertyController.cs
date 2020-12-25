@@ -188,7 +188,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _classificationProvider.DeletePostCheck(Classification);
                 //if (CheckString.Length == 0)
                 //{
-                _propertyProvider.DeletePost(Property.PropertyId);
+                _propertyProvider.DeletePost(CurrentUser.Id, Property.PropertyId);
                 return Ok(Property);
                 //}
                 return BadRequest(new

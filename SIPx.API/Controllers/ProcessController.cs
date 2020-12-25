@@ -27,7 +27,12 @@ namespace SIPx.API.Controllers
         private readonly Microsoft.AspNetCore.Identity.UserManager<SipUser> _userManager;
         private readonly ICheckProvider _checkProvider;
 
-        public ProcessController(IUserProvider userProvider, IFrontProcessProvider frontProcessProvider, IClaimCheck claimCheck, IProcessProvider ProcessProvider, Microsoft.AspNetCore.Identity.UserManager<SipUser> userManager, ICheckProvider checkProvider)
+        public ProcessController(IUserProvider userProvider
+            , IFrontProcessProvider frontProcessProvider
+            , IClaimCheck claimCheck
+            , IProcessProvider ProcessProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SipUser> userManager
+            , ICheckProvider checkProvider)
         {
             _userProvider = userProvider;
             _frontProcessProvider = frontProcessProvider;
@@ -385,7 +390,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ProcessProvider.DeletePostCheck(Process);
                 //if (CheckString.Length == 0)
                 //{
-                _processProvider.DeletePost(Process.ProcessId);
+                _processProvider.DeletePost(CurrentUser.Id, Process.ProcessId);
                 return Ok(Process);
                 //}
                 return BadRequest(new

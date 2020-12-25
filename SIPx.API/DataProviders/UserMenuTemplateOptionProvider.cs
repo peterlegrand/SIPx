@@ -80,11 +80,19 @@ namespace SIPx.DataAccess
 
         }
 
-        public bool DeletePost(int UserMenuTemplateOptionId)
+        public bool DeletePost(string UserId, int UserMenuTemplateOptionId)
         {
-            string usp = "usp_UserMenuTemplateOptionDeletePost @UserMenuTemplateOptionId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { UserMenuTemplateOptionId = UserMenuTemplateOptionId });
+            string usp = "usp_UserMenuTemplateOptionDeletePost @UserId, @UserMenuTemplateOptionID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, UserMenuTemplateOptionId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int UserMenuTemplateOptionId)
+        {
+            string usp = "usp_UserMenuTemplateOptionDeletePostCheck @UserId, @UserMenuTemplateOptionID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, UserMenuTemplateOptionId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, UserMenuTemplateOptionId });
+            return ErrorMessages;
         }
 
         public async Task<List<UserMenuTemplateOptionLanguageIndexGet>> LanguageIndexGet(string UserId, int UserMenuTemplateOptionId)

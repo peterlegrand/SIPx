@@ -29,7 +29,15 @@ namespace SIPx.API.Controllers
         private readonly IClaimCheck _claimCheck;
         private readonly UserManager<SipUser> _userManager;
 
-        public SearchController(ISearchProvider searchProvider, IClassificationValueProvider classificationValueProvider, IContentProvider contentProvider, IOrganizationProvider organizationProvider, IPersonProvider personProvider, IProcessProvider processProvider, IProjectProvider projectProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public SearchController(ISearchProvider searchProvider
+            , IClassificationValueProvider classificationValueProvider
+            , IContentProvider contentProvider
+            , IOrganizationProvider organizationProvider
+            , IPersonProvider personProvider
+            , IProcessProvider processProvider
+            , IProjectProvider projectProvider
+            , IClaimCheck claimCheck
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _searchProvider = searchProvider;
             _classificationValueProvider = classificationValueProvider;

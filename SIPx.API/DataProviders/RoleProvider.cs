@@ -64,7 +64,7 @@ namespace SIPx.DataAccess
             string usp = "usp_RoleUpdatePost @RoleId, @Name , @Description , @MenuName , @MouseOver, @UserId ";
             _sqlDataAccess.SaveData<RoleUpdateGet>(usp, Role);
             return true;
-        } 
+        }
         public Task<RoleDeleteGet> DeleteGet(string UserId, string RoleId)
         {
             string usp = "usp_RoleDeleteGet @UserId, @RoleID";
@@ -77,6 +77,13 @@ namespace SIPx.DataAccess
             string usp = "usp_RoleDeletePost @UserId, @RoleId";
             _sqlDataAccess.SaveData<dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
             return true;
+        }
+
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, string RoleId)
+        {
+            string usp = "usp_RoleDeletePostCheck @UserId, @RoleId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId = UserId, RoleId = RoleId });
+            return ErrorMessages;
         }
 
         public Task<List<RoleLanguageIndexGet>> LanguageIndexGet(string UserId, string RoleId)

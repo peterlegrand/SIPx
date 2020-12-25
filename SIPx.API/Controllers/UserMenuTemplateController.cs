@@ -170,7 +170,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _UserMenuTemplateProvider.DeletePostCheck(UserMenuTemplate);
                 //if (CheckString.Length == 0)
                 //{
-                _userMenuTemplateProvider.DeletePost(UserMenuTemplate.UserMenuTemplateId);
+                _userMenuTemplateProvider.DeletePost(CurrentUser.Id, UserMenuTemplate.UserMenuTemplateId);
                 return Ok(UserMenuTemplate);
                 //}
                 return BadRequest(new

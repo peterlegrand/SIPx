@@ -192,7 +192,7 @@ namespace SIPx.API.Controllers
                 //var CheckString = await _ClassificationRelationTypeProvider.DeletePostCheck(ClassificationRelationType);
                 //if (CheckString.Length == 0)
                 //{
-                _classificationRelationTypeProvider.DeletePost(ClassificationRelationType.ClassificationRelationTypeId);
+                _classificationRelationTypeProvider.DeletePost(CurrentUser.Id, ClassificationRelationType.ClassificationRelationTypeId);
                 return Ok(ClassificationRelationType);
                 //}
                 return BadRequest(new
