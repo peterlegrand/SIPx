@@ -20,7 +20,6 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        //PETER TODO PostCheck
 
         public async Task<List<ErrorMessage>> CreatePostCheck(RoleCreateGet Role)
         {
@@ -65,8 +64,7 @@ namespace SIPx.DataAccess
             string usp = "usp_RoleUpdatePost @RoleId, @Name , @Description , @MenuName , @MouseOver, @UserId ";
             _sqlDataAccess.SaveData<RoleUpdateGet>(usp, Role);
             return true;
-        } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.
-
+        } 
         public Task<RoleDeleteGet> DeleteGet(string UserId, string RoleId)
         {
             string usp = "usp_RoleDeleteGet @UserId, @RoleID";

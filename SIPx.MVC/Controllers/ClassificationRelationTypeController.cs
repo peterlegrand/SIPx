@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
             var ClassificationRelationTypeCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationRelationTypeCreateGetWithErrorMessages>($"{_baseUrl}api/ClassificationRelationType/Create", ClassificationRelationType, token);
             if (ClassificationRelationTypeCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRelationType/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = ClassificationRelationTypeCreateGetWithErrorMessage.ErrorMessages;
                 return View(ClassificationRelationTypeCreateGetWithErrorMessage.ClassificationRelationType);

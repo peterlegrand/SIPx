@@ -210,19 +210,3 @@
         }
     }
 </script>
-@*
-    PETER TODO 
-    <script type="text/javascript">
-    function FilterDefault(e) {
-                var query = new ej.data.Query();
-                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Defaults)), query);
-            }
-</script>
-<script type="text/javascript">
-    function FilterStatus(e) {
-                var query = new ej.data.Query();
-                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Defaults)), query);
-            }
-</script>*@

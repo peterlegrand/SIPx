@@ -16,6 +16,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontContentController : Controller
     {
+        private readonly ICheckProvider _checkProvider;
         private readonly IClassificationProvider _classificationProvider;
         private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IContentTypeProvider _contentTypeProvider;
@@ -30,7 +31,7 @@ namespace SIPx.API.Controllers
         private readonly IFrontProvider _frontProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontContentController(IClassificationProvider classificationProvider
+        public FrontContentController(ICheckProvider checkProvider, IClassificationProvider classificationProvider
             , IClassificationValueProvider classificationValueProvider
             , IContentTypeProvider contentTypeProvider
             , ILanguageProvider languageProvider
@@ -44,6 +45,7 @@ namespace SIPx.API.Controllers
             , IFrontProvider frontProvider
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _checkProvider = checkProvider;
             _classificationProvider = classificationProvider;
             _classificationValueProvider = classificationValueProvider;
             _contentTypeProvider = contentTypeProvider;
@@ -59,6 +61,17 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
+
+        private async Task<FrontContentRightsEditUserCreateGet> FrontContentRightsEditUserCreateAddDropDownBoxes(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser)
+        {
+            FrontContentRightsEditUser.SelectedUsers = await _frontContentProvider.RightsUpdateGetEditUsers(FrontContentRightsEditUser);
+            return FrontContentRightsEditUser;
+        }
+        private async Task<FrontContentRightsReadUserCreateGet> FrontContentRightsReadUserCreateAddDropDownBoxes(FrontContentRightsReadUserCreateGet FrontContentRightsReadUser)
+        {
+            FrontContentRightsReadUser.SelectedUsers = await _frontContentProvider.RightsUpdateGetReadUsers(FrontContentRightsReadUser);
+            return FrontContentRightsReadUser;
+        }
         [HttpGet("ContentType")]
         public async Task<IActionResult> ContentType()
         {
@@ -231,5 +244,161 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+        [HttpGet("RightsUpdate/{Id:int}")]
+        public async Task<IActionResult> RightsUpdate(int Id)
+        {
+
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+
+                var FrontContentShowContent = await _frontContentProvider.RightsUpdateGet( Id);
+                FrontContentShowContent.Owners = await _frontContentProvider.RightsUpdateGetOwners(CurrentUser.Id, FrontContentShowContent.IsRelationBasedOwnership, FrontContentShowContent.IsProjectBasedOwnership, FrontContentShowContent.IsOrganizationBasedOwnership, FrontContentShowContent.IsFreeOwnership);
+                return Ok(FrontContentShowContent);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("RightsUpdate")]
+        public async Task<IActionResult> RightsUpdate(FrontContentRightsUpdateGet FrontContentRights)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            FrontContentRights.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                ErrorMessages = await _frontContentProvider.RightsUpdatePostCheck(FrontContentRights);
+                if (ErrorMessages.Count == 0)
+                {
+                    _frontContentProvider.RightsUpdatePost(FrontContentRights);
+                }
+                FrontContentRightsUpdateGetWithErrorMessages FrontContentRightsUpdateGetWithErrorMessage = new FrontContentRightsUpdateGetWithErrorMessages { FrontContentRights = FrontContentRights, ErrorMessages = ErrorMessages };
+                return Ok(FrontContentRightsUpdateGetWithErrorMessage);
+            }
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            FrontContentRightsUpdateGetWithErrorMessages FrontContentRightsUpdateGetWithNoRights = new FrontContentRightsUpdateGetWithErrorMessages { FrontContentRights = FrontContentRights, ErrorMessages = ErrorMessages };
+            return Ok(FrontContentRightsUpdateGetWithNoRights);
+        }
+
+        [HttpGet("RightsEditUserCreate/{Id:int}")]
+        public async Task<IActionResult> RightsEditUserCreate(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                var FrontContentRightsEditUser = new FrontContentRightsEditUserCreateGet();
+                FrontContentRightsEditUser.UserId = CurrentUser.Id;
+                FrontContentRightsEditUser.ContentId= Id;
+
+                FrontContentRightsEditUser = await FrontContentRightsEditUserCreateAddDropDownBoxes(FrontContentRightsEditUser);
+                return Ok(FrontContentRightsEditUser);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("RightsEditUserCreate")]
+        public async Task<IActionResult> RightsEditUserCreate(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            FrontContentRightsEditUser.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                ErrorMessages = await _frontContentProvider.RightsEditUserCreatePostCheck(FrontContentRightsEditUser);
+                if (ErrorMessages.Count > 0)
+                {
+                    FrontContentRightsEditUser = await FrontContentRightsEditUserCreateAddDropDownBoxes(FrontContentRightsEditUser);
+                }
+                else
+                {
+                    _frontContentProvider.RightsEditUserCreatePost(FrontContentRightsEditUser);
+                }
+                FrontContentRightsEditUserCreateGetWithErrorMessages FrontContentRightsEditUserWithErrorMessage = new FrontContentRightsEditUserCreateGetWithErrorMessages { FrontContentRightsEditUser = FrontContentRightsEditUser, ErrorMessages = ErrorMessages };
+                return Ok(FrontContentRightsEditUserWithErrorMessage);
+            }
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            FrontContentRightsEditUserCreateGetWithErrorMessages FrontContentRightsEditUserWithNoRights = new FrontContentRightsEditUserCreateGetWithErrorMessages { FrontContentRightsEditUser = FrontContentRightsEditUser, ErrorMessages = ErrorMessages };
+            return Ok(FrontContentRightsEditUserWithNoRights);
+        }
+
+        [HttpGet("RightsEditUserIndex/{Id:int}")]
+        public async Task<IActionResult> RightsEditUserIndex(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                return Ok(await _frontContentProvider.RightsEditUserIndexGet(CurrentUser.Id, Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
+        [HttpGet("RightsEditUserDelete/{Id:int}")]
+        public async Task<IActionResult> RightsEditUserDelete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                if (await _checkProvider.CheckIfRecordExists("ContentUserEdit", "ContentUserEditId", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _frontContentProvider.RightsEditUserDeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
+        [HttpPost("RightsEditUserDelete")]
+        public async Task<IActionResult> RightsEditUserDelete(FrontContentRightsEditUserDeleteGet FrontContentRightsEditUser)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                FrontContentRightsEditUser.UserId = CurrentUser.Id;
+                //var CheckString = await _FrontContentRightsEditUserProvider.DeletePostCheck(FrontContentRightsEditUser);
+                //if (CheckString.Length == 0)
+                //{
+                _frontContentProvider.RightsEditUserDeletePost(FrontContentRightsEditUser.ContentUserEditId);
+                return Ok(FrontContentRightsEditUser);
+                //}
+                return BadRequest(new
+                {
+                    IsSuccess = false,
+                    //Message = CheckString,
+                });
+
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+
+        }
+
     }
 }

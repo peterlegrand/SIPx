@@ -32,7 +32,7 @@ namespace SIPx.MVC.Controllers
             }
             //return View();
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {

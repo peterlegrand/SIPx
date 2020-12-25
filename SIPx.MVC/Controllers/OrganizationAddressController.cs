@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
             var OrganizationAddressCreateGetWithErrorMessage =await _client.PostProtectedAsync<OrganizationAddressCreateGetWithErrorMessages>($"{_baseUrl}api/OrganizationAddress/Create", OrganizationAddress, token);
             if (OrganizationAddressCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationAddress/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/OrganizationAddress/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = OrganizationAddressCreateGetWithErrorMessage.ErrorMessages;
                 return View(OrganizationAddressCreateGetWithErrorMessage.OrganizationAddress);

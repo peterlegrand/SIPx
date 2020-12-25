@@ -17,10 +17,8 @@
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/ClassificationValue/Index">@Term.Find(x => x.InternalName.Equals("Back to classification values")).TermString</a>
-@* PETER TODO replace link line *@
-<a asp-controller="ClassificationValueRole" asp-action="Create" asp-route-id="@ViewBag.Id">"New</a>
-@*<a asp-controller="ClassificationValueRole" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new classification value role")).TermString</a>*@
+<a asp-controller="ClassificationValue" asp-action="Index" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Back to classification values")).TermString</a>
+<a asp-controller="ClassificationValueRole" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new classification value role")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueRole/Edit/${ClassificationValueRoleId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>

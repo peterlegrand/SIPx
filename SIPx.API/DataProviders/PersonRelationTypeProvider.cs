@@ -32,7 +32,6 @@ namespace SIPx.DataAccess
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonRelationType);
             return CheckString;
         }
-        //PETER TODO PostCheck
         public Task<List<PersonRelationTypeIndexGet>> IndexGet(string UserId)
         {
             string usp = "usp_PersonRelationTypeIndexGet @UserID";

@@ -31,7 +31,7 @@ namespace SIPx.MVC.Controllers
                 return RedirectToAction("Menu", "Admin");
             }
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -75,7 +75,7 @@ namespace SIPx.MVC.Controllers
             var UserCreateGetWithErrorMessage = await _client.PostProtectedAsync<UserCreateGetWithErrorMessages>($"{_baseUrl}api/User/Create", User, token);
             if (UserCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = UserCreateGetWithErrorMessage.ErrorMessages;
                 return View(UserCreateGetWithErrorMessage.User);

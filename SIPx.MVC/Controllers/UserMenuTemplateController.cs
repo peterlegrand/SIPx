@@ -40,7 +40,7 @@ namespace SIPx.MVC.Controllers
             var UserMenuTemplateCreateGetWithErrorMessage = await _client.PostProtectedAsync<UserMenuTemplateCreateGetWithErrorMessages>($"{_baseUrl}api/UserMenuTemplate/Create", UserMenuTemplate, token);
             if (UserMenuTemplateCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = UserMenuTemplateCreateGetWithErrorMessage.ErrorMessages;
                 return View(UserMenuTemplateCreateGetWithErrorMessage.UserMenuTemplate);
@@ -174,7 +174,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<ObjectLanguageCreateGet>($"{_baseUrl}api/UserMenuTemplate/LanguageCreate/" + id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplate/LanguageCreate", token);
-            response.ObjectId = id;
+//            response.ObjectId = id;
             ViewBag.UITerms = UITerms;
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;

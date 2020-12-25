@@ -39,7 +39,6 @@ namespace SIPx.DataAccess
             return ErrorMessages;
         }
 
-        //PETER TODO PostCheck
         public bool CreatePost(RoleClaimCreateGet RoleClaim)
         {
             string usp = "usp_RoleClaimCreatePost @RoleId, @ClaimId";

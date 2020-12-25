@@ -175,6 +175,7 @@ namespace SIPx.API.Controllers
                 }
                 else
                 {
+                    ContentType.UserId = CurrentUser.Id;
                     _contentTypeProvider.UpdatePost(ContentType);
                 }
                 ContentTypeUpdateGetWithErrorMessages ContentTypeWithErrorMessage = new ContentTypeUpdateGetWithErrorMessages { ContentType = ContentType, ErrorMessages = ErrorMessages };

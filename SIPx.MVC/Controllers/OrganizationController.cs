@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
             var OrganizationCreateGetWithErrorMessage = await _client.PostProtectedAsync<OrganizationCreateGetWithErrorMessages>($"{_baseUrl}api/Organization/Create", Organization, token);
             if (OrganizationCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Organization/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Organization/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = OrganizationCreateGetWithErrorMessage.ErrorMessages;
                 return View(OrganizationCreateGetWithErrorMessage.Organization);
@@ -63,7 +63,7 @@ namespace SIPx.MVC.Controllers
                 return RedirectToAction("Menu", "Admin");
             }
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {

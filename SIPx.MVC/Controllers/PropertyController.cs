@@ -52,7 +52,7 @@ namespace SIPx.MVC.Controllers
             var PropertyCreateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyCreateGetWithErrorMessages>($"{_baseUrl}api/Property/Create", Property, token);
             if (PropertyCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = PropertyCreateGetWithErrorMessage.ErrorMessages;
                 return View(PropertyCreateGetWithErrorMessage.Property);

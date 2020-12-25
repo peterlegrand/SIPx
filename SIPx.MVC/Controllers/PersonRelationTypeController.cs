@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
             var PersonRelationTypeCreateGetWithErrorMessage = await _client.PostProtectedAsync<PersonRelationTypeCreateGetWithErrorMessages>($"{_baseUrl}api/PersonRelationType/Create", PersonRelationType, token);
             if (PersonRelationTypeCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonRelationType/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = PersonRelationTypeCreateGetWithErrorMessage.ErrorMessages;
                 return View(PersonRelationTypeCreateGetWithErrorMessage.PersonRelationType);
@@ -65,7 +65,7 @@ namespace SIPx.MVC.Controllers
                 return RedirectToAction("Menu", "Admin");
             }
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -88,13 +88,13 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(PersonRelationTypeUpdateGet PersonRelationType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var ClassificationLevelPropertyUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationLevelPropertyUpdateGetWithErrorMessages>($"{_baseUrl}api/ClassificationLevelProperty/Update", ClassificationLevelProperty, token);
-            if (ClassificationLevelPropertyUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            var PersonRelationTypeUpdateGetWithErrorMessages = await _client.PostProtectedAsync<PersonRelationTypeUpdateGetWithErrorMessages>($"{_baseUrl}api/ClassificationLevelProperty/Update", PersonRelationType, token);
+            if (PersonRelationTypeUpdateGetWithErrorMessages.ErrorMessages.Count > 0)
             {
                 var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Edit", token);
                 ViewBag.UITerms = UITerms;
-                ViewBag.ErrorMessages = ClassificationLevelPropertyUpdateGetWithErrorMessage.ErrorMessages;
-                return View(ClassificationLevelPropertyUpdateGetWithErrorMessage.ClassificationLevelProperty);
+                ViewBag.ErrorMessages = PersonRelationTypeUpdateGetWithErrorMessages.ErrorMessages;
+                return View(PersonRelationTypeUpdateGetWithErrorMessages.PersonRelationType);
             }
 
             return RedirectToAction("Index");

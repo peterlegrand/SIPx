@@ -39,7 +39,7 @@ namespace SIPx.MVC.Controllers
 
             if (ClassificationRoleCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationRole/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = ClassificationRoleCreateGetWithErrorMessage.ErrorMessages;
                 return View(ClassificationRoleCreateGetWithErrorMessage.ClassificationRole);

@@ -103,17 +103,8 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //PETER TODO looks like there is also a value 54
+                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  
             {
-                //if (await _checkProvider.CheckIfRecordExists("ClassificationValueUsers", "ClassificationValueID", Id) == 0)
-                //{
-                //    return BadRequest(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "No record with this ID",
-                //    });
-                //}
-
                 return Ok(await _classificationValueUserProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new

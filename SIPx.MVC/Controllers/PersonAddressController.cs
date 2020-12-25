@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
             var PersonAddressCreateGetWithErrorMessage = await _client.PostProtectedAsync<PersonAddressCreateGetWithErrorMessages>($"{_baseUrl}api/PersonAddress/Create", PersonAddress, token);
             if (PersonAddressCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = PersonAddressCreateGetWithErrorMessage.ErrorMessages;
                 return View(PersonAddressCreateGetWithErrorMessage.PersonAddress);
@@ -67,7 +67,7 @@ namespace SIPx.MVC.Controllers
                 return RedirectToAction("Menu", "Admin");
             }
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {

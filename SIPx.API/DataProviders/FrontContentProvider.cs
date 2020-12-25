@@ -109,5 +109,109 @@ namespace SIPx.DataAccess
 
 
         }
+        public async Task<FrontContentRightsUpdateGet> RightsUpdateGet(int ContentId)
+        {
+            string usp = "usp_FrontContentRightsUpdateGet @ContentId";
+            var UpdateGetRights = await _sqlDataAccess.LoadSingleRecord<FrontContentRightsUpdateGet, dynamic>(usp, new { ContentId = ContentId });
+            return UpdateGetRights;
+        }
+        public async Task<List<ErrorMessage>> RightsUpdatePostCheck(FrontContentRightsUpdateGet FrontContentRights)
+        {
+            string usp = "usp_FrontContentRightsUpdatePostCheck @ContentId  " +
+    " , @IsRelationBasedEdit "  +
+    " , @IsRelationBasedRead " +
+    " , @IsProjectBasedEdit  " +
+    " , @IsProjectBasedEditSub  " +
+    " , @IsProjectBasedEditParent  " +
+    " , @IsOrganizationBasedEdit  " +
+    " , @IsOrganizationBasedEditSub  " +
+    " , @IsOrganizationBasedEditParent  " +
+    " , @IsProjectBasedRead  " +
+    " , @IsProjectBasedReadSub  " +
+    " , @IsProjectBasedReadParent  " +
+    " , @IsOrganizationBasedRead  " +
+    " , @IsOrganizationBasedReadSub  " +
+    " , @IsOrganizationBasedReadParent  " + 
+    " , @OwnerId  " +
+    " , @UserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, FrontContentRights);
+            return ErrorMessages;
+        }
+
+        public bool RightsUpdatePost(FrontContentRightsUpdateGet FrontContentRights)
+        {
+            string usp = "usp_FrontContentRightsUpdatePost @ContentId  " +
+   " , @IsRelationBasedEdit " +
+   " , @IsRelationBasedRead " +
+   " , @IsProjectBasedEdit  " +
+   " , @IsProjectBasedEditSub  " +
+   " , @IsProjectBasedEditParent  " +
+   " , @IsOrganizationBasedEdit  " +
+   " , @IsOrganizationBasedEditSub  " +
+   " , @IsOrganizationBasedEditParent  " +
+   " , @IsProjectBasedRead  " +
+   " , @IsProjectBasedReadSub  " +
+   " , @IsProjectBasedReadParent  " +
+   " , @IsOrganizationBasedRead  " +
+   " , @IsOrganizationBasedReadSub  " +
+   " , @IsOrganizationBasedReadParent  " +
+   " , @OwnerId  " +
+   " , @UserId ";
+            _sqlDataAccess.SaveData<FrontContentRightsUpdateGet>(usp, FrontContentRights);
+            return true;
+        }
+        public async Task<List<UserList>> RightsUpdateGetOwners(string UserId, bool IsRelationBasedOwnership ,bool IsProjectBasedOwnership  , bool IsOrganizationBasedOwnership , bool IsFreeOwnership )
+        {
+            string usp = "usp_FrontContentRightsUpdateGetOwners @UserId, @IsRelationBasedOwnership , @IsProjectBasedOwnership , @IsOrganizationBasedOwnership , @IsFreeOwnership ";
+            var x = await _sqlDataAccess.LoadData<UserList, dynamic>(usp, new { UserId = UserId, IsRelationBasedOwnership = IsRelationBasedOwnership, IsProjectBasedOwnership = IsProjectBasedOwnership, IsOrganizationBasedOwnership = IsOrganizationBasedOwnership, IsFreeOwnership = IsFreeOwnership });
+            return x;
+        }
+
+        public async Task<List<ErrorMessage>> RightsEditUserCreatePostCheck(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser)
+        {
+            string usp = "usp_FrontContentRightsEditUserCreatePostCheck @UserId, @ContentId, @SelectedUserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, FrontContentRightsEditUser);
+            return ErrorMessages;
+        }
+
+        public async Task<string> RightsEditUserCreatePost(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser)
+        {
+            string usp = "usp_FrontContentRightsEditUserCreatePost @UserId, @ContentId, @SelectedUserId";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, FrontContentRightsEditUser);
+            return String;
+        }
+
+        public Task<List<FrontContentRightsEditUserIndexGet>> RightsEditUserIndexGet(string UserId, int ContentId)
+        {
+            string usp = "usp_FrontContentRightsEditUserIndexGet @UserId, @ContentID";
+            return _sqlDataAccess.LoadData<FrontContentRightsEditUserIndexGet, dynamic>(usp, new { UserId = UserId, ContentId = ContentId});
+
+        }
+
+        public Task<FrontContentRightsEditUserDeleteGet> RightsEditUserDeleteGet(string UserId, int ContentUserEditId)
+        {
+            string usp = "usp_FrontContentRightsEditUserDeleteGet @UserId, @ContentUserEditId";
+            return _sqlDataAccess.LoadSingleRecord<FrontContentRightsEditUserDeleteGet, dynamic>(usp, new { UserId, ContentUserEditId });
+
+        }
+
+        public bool RightsEditUserDeletePost(int ContentUserEditId)
+        {
+            string usp = "usp_FrontContentRightsEditUserDeletePost @ContentUserEditId";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentUserEditId = ContentUserEditId });
+            return true;
+        }
+        public async Task<List<UserList>> RightsUpdateGetEditUsers(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser )
+        {
+            string usp = "usp_FrontContentRightsUpdateGetEditUsers @UserId, @ContentId ";
+            var x = await _sqlDataAccess.LoadData<UserList, dynamic>(usp, FrontContentRightsEditUser);
+            return x;
+        }
+        public async Task<List<UserList>> RightsUpdateGetReadUsers( FrontContentRightsReadUserCreateGet FrontContentRightsReadUser )
+        {
+            string usp = "usp_FrontContentRightsUpdateGetReadUsers @SelectedId, @ContentId ";
+            var x = await _sqlDataAccess.LoadData<UserList, dynamic>(usp, FrontContentRightsReadUser);
+            return x;
+        }
     }
 }

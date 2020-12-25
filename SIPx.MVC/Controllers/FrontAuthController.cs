@@ -13,12 +13,12 @@ namespace SIPx.MVC.Controllers
 {
     public class FrontAuthController : Controller
     {
-        public IActionResult Index()
-        {
-            //PETER TODO Delete this including view
-            ViewBag.SessionV = HttpContext.Session.GetString("Token");
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    //PETER TODO Delete this including view
+        //    ViewBag.Session = HttpContext.Session.GetString("Token");
+        //    return View();
+        //}
         [HttpGet]
         public IActionResult Login()
         {

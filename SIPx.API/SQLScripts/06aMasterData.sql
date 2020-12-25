@@ -1087,6 +1087,20 @@ INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, D
 (276, 14, 'ApplicationRight', 'UserPreference\Update',2062,2062,2062,2062);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
 (277, 14, 'ApplicationRight', 'UserPreference\Index',2063,2063,2063,2063);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(278, 14, 'ApplicationRight', 'FrontContent\RightsUpdate',130,130,130,130);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(279, 14, 'ApplicationRight', 'FrontContent\RightsEditUserCreate',130,130,130,130);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(280, 14, 'ApplicationRight', 'FrontContent\RightsEditUserIndex',130,130,130,130);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(281, 14, 'ApplicationRight', 'FrontContent\RightsEditUserDelete',130,130,130,130);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(282, 14, 'ApplicationRight', 'FrontContent\RightsReadUserCreate',130,130,130,130);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(283, 14, 'ApplicationRight', 'FrontContent\RightsReadUserIndex',130,130,130,130);
+INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+(284, 14, 'ApplicationRight', 'FrontContent\RightsReadUserDelete',130,130,130,130);
 
 SET IDENTITY_INSERT Claims OFF;
 

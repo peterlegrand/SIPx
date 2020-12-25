@@ -96,8 +96,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @* PETER TODO Change to Field role *@
-                @Term.Find(x => x.InternalName.Equals("Process template field")).TermString
+                @Term.Find(x => x.InternalName.Equals("Process template field role")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ProcessTemplateFieldIdRole" dataSource="@Model.ProcessTemplateFieldRoles" ejs-for="@Model.ProcessTemplateFieldIdRole" value="@Model.ProcessTemplateFieldIdRole" index="2" popupHeight="220px">

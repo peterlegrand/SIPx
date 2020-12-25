@@ -33,7 +33,6 @@
 
         <div class="row">
             <div class="col-3">
-                @* PETER TODO Change name to Right group *@
                 @Term.Find(x => x.InternalName.Equals("Right")).TermString
             </div>
             <div class="col-9">
@@ -42,8 +41,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @* PETER TODO Change name to Right group *@
-                @Term.Find(x => x.InternalName.Equals("Right")).TermString
+                @Term.Find(x => x.InternalName.Equals("Right group")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="ClaimGroupName" ejs-for="ClaimGroupName" cssClass="e-outline" placeholder="ClaimGroupName" floatLabelType="Auto"></ejs-textbox>
@@ -163,19 +161,3 @@
         }
     }
 </script>
-@*
-        PETER TODO
-        <script type="text/javascript">
-        function FilterDefaultPage(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>
-    <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>*@

@@ -14,7 +14,7 @@
         <e-grid-column field="ProcessTemplateFlowId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Conditions")).TermString" template="#Condition" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Conditions")).TermString" template="#Pass" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Passes")).TermString" template="#Pass" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Language" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>

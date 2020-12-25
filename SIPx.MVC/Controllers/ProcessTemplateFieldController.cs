@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
             var ProcessTemplateFieldCreateGetWithErrorMessage = await _client.PostProtectedAsync<ProcessTemplateFieldCreateGetWithErrorMessages>($"{_baseUrl}api/ProcessTemplateField/Create", ProcessTemplateField, token);
             if (ProcessTemplateFieldCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = ProcessTemplateFieldCreateGetWithErrorMessage.ErrorMessages;
                 return View(ProcessTemplateFieldCreateGetWithErrorMessage.ProcessTemplateField);
@@ -66,7 +66,7 @@ namespace SIPx.MVC.Controllers
                 return RedirectToAction("Menu", "Admin");
             }
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {

@@ -4,14 +4,13 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Name")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add process template flow")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    @* PETER TODO Create process template flow BOTH LINES*@
-<img src="~/images/icons/Flow.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Name")).TermString
+<img src="~/images/icons/Flow.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add process template flow")).TermString
 </h1>
 <div class="container">
     <form method="post">

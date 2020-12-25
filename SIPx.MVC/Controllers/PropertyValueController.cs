@@ -13,7 +13,6 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
 
-        //PETER TODO put base url somewhere central
         readonly ServiceClient _client = new ServiceClient();
 
         [HttpGet]
@@ -45,7 +44,7 @@ namespace SIPx.MVC.Controllers
             var PropertyValueCreateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyValueCreateGetWithErrorMessages>($"{_baseUrl}api/PropertyValue/Create", PropertyValue, token);
             if (PropertyValueCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PropertyValue/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = PropertyValueCreateGetWithErrorMessage.ErrorMessages;
                 return View(PropertyValueCreateGetWithErrorMessage.PropertyValue);

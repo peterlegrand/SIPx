@@ -69,6 +69,120 @@ namespace SIPx.MVC.Controllers
             return View("SearchResult", result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> RightsEdit(int id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync2<FrontContentRightsUpdateGet>($"{_baseUrl}api/FrontContent/RightsUpdate/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEdit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> RightsEdit(FrontContentRightsUpdateGet RightsEdit)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var FrontContentRightsUpdateGetWithErrorMessage = await _client.PostProtectedAsync<FrontContentRightsUpdateGetWithErrorMessages>($"{_baseUrl}api/FrontContent/RightsUpdate", RightsEdit, token);
+            if (FrontContentRightsUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEdit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = FrontContentRightsUpdateGetWithErrorMessage.ErrorMessages;
+                return View(FrontContentRightsUpdateGetWithErrorMessage.FrontContentRights);
+            }
 
+
+            return RedirectToAction("ShowContent", new { id = RightsEdit.ContentId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RightsEditUserCreate(int Id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync2<FrontContentRightsEditUserCreateGet>($"{_baseUrl}api/FrontContent/RightsEditUserCreate/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserCreate", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> RightsEditUserCreate(FrontContentRightsEditUserCreateGet RightsEditUser)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var FrontContentRightsEditUserCreateGetWithErrorMessage = await _client.PostProtectedAsync<FrontContentRightsEditUserCreateGetWithErrorMessages>($"{_baseUrl}api/FrontContent/RightsEditUserCreate", RightsEditUser, token);
+            if (FrontContentRightsEditUserCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserCreate", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = FrontContentRightsEditUserCreateGetWithErrorMessage.ErrorMessages;
+                return View(FrontContentRightsEditUserCreateGetWithErrorMessage.FrontContentRightsEditUser);
+            }
+
+
+            return RedirectToAction("RightsEditUserIndex", new { id = RightsEditUser.ContentId });
+        }
+        [HttpGet]
+        public async Task<IActionResult> RightsEditUserIndex(int id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync2<List<FrontContentRightsEditUserIndexGet>>($"{_baseUrl}api/FrontContent/RightsEditUserIndex/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserIndex", token);
+            ViewBag.Id = id;
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> RightsEditUserDelete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync2<FrontContentRightsEditUserDeleteGet>($"{_baseUrl}api/FrontContent/RightsEditUserDelete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserDelete", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RightsEditUserDelete(FrontContentRightsEditUserDeleteGet RightsEditUser)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            await _client.PostProtectedAsync<FrontContentRightsEditUserDeleteGet>($"{_baseUrl}api/FrontContent/RightsEditUserDelete", RightsEditUser, token);
+
+            return RedirectToAction("RightsEditUserIndex", new { id = RightsEditUser.ContentId });
+        }
     }
 }

@@ -38,9 +38,7 @@ namespace SIPx.MVC.Controllers
            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPageSection/Index", token);
             ViewBag.UITerms = UITerms;
             return View(response);
-            //return View();
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {

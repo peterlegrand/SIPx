@@ -14,5 +14,17 @@ namespace SIPx.DataAccess
         Task<List<FrontContentContentNewClassificationValue>> NewClassificationValues(string UserId, int ClassificationId, int Sequence, bool Alphabetical);
         Task<bool> FrontContentCreatePost(string UserId, FrontContentContentNew Content);
         Task<FrontContentShowContent> FrontContentShowContent(string UserId, int ContentId);
+        Task<FrontContentRightsUpdateGet> RightsUpdateGet(int ContentId);
+        Task<List<ErrorMessage>> RightsUpdatePostCheck(FrontContentRightsUpdateGet FrontContentRights);
+        bool RightsUpdatePost(FrontContentRightsUpdateGet FrontContentRights);
+        Task<List<UserList>> RightsUpdateGetOwners(string UserId, bool IsRelationBasedOwnership, bool IsProjectBasedOwnership, bool IsOrganizationBasedOwnership, bool IsFreeOwnership);
+        Task<List<ErrorMessage>> RightsEditUserCreatePostCheck(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser);
+        Task<string> RightsEditUserCreatePost(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser);
+        Task<List<FrontContentRightsEditUserIndexGet>> RightsEditUserIndexGet(string UserId, int ContentId);
+        Task<FrontContentRightsEditUserDeleteGet> RightsEditUserDeleteGet(string UserId, int FrontContentRightsEditUserId);
+        bool RightsEditUserDeletePost(int FrontContentRightsEditUserId);
+        Task<List<UserList>> RightsUpdateGetEditUsers(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser);
+        Task<List<UserList>> RightsUpdateGetReadUsers(FrontContentRightsReadUserCreateGet FrontContentRightsReadUser);
+
     }
 }

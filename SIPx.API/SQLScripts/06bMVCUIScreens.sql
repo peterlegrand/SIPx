@@ -411,4 +411,11 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (405, 'ClassificationLevelProperty', 'Create')
 , (406, 'ClassificationLevelProperty', 'Edit')
 , (407, 'ClassificationLevelProperty', 'Delete')
+, (408, 'FrontContent', 'RightsEdit')
+, (409, 'FrontContent', 'RightsEditUserCreate')
+, (410, 'FrontContent', 'RightsEditUserDelete')
+, (411, 'FrontContent', 'RightsEditUserIndex')
+, (412, 'FrontContent', 'RightsReadUserCreate')
+, (413, 'FrontContent', 'RightsReadUserDelete')
+, (414, 'FrontContent', 'RightsReadUserIndex')
 SET IDENTITY_INSERT MVCUIScreens OFF;

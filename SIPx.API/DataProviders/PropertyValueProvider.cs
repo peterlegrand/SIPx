@@ -62,7 +62,7 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> UpdatePostCheck(PropertyValueUpdateGet PropertyValue)
         {
-            string usp = "usp_PropertyUpdatePostCheck @PropertyLanguageId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver , @UserId ";
+            string usp = "usp_PropertyValueUpdatePostCheck @PropertyValueId, @Sequence, @PropertyValueInt,@PropertyValueString,@PropertyValueBool,@PropertyValueDate, @Name , @Description , @MenuName , @MouseOver , @UserId ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PropertyValue);
             return ErrorMessages;
         }
@@ -72,8 +72,7 @@ namespace SIPx.DataAccess
             string usp = "usp_PropertyValueUpdatePost @PropertyValueId, @Sequence, @PropertyValueInt,@PropertyValueString,@PropertyValueBool,@PropertyValueDate, @Name , @Description , @MenuName , @MouseOver , @UserId ";
             _sqlDataAccess.SaveData<PropertyValueUpdateGet>(usp, PropertyValue);
             return true;
-        } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.
-
+        } 
         public Task<PropertyValueDeleteGet> DeleteGet(string UserId, int PropertyValueId)
         {
             string usp = "usp_PropertyValueDeleteGet @UserId, @PropertyID";
@@ -87,36 +86,11 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        //public Task<List<LanguageList>> LangugageCreateGetLanguageList(string UserId, int PropertyId)
-        //{
-        //    string usp = "[usp_PropertyLangugageCreateGetLanguageList] @UserID, @PropertyId";
-        //    return _sqlDataAccess.LoadData<LanguageList, dynamic>(usp, new { UserId, PropertyId });
-        //}
-
-        //public async Task<List<PropertyLanguageIndexGet>> LanguageIndexGet(string UserId, int PropertyId)
-        //{
-        //    string usp = "usp_PropertyLanguageIndexGet @UserId, @PropertyID";
-        //    var x = await _sqlDataAccess.LoadData<PropertyLanguageIndexGet, dynamic>(usp, new { UserId, PropertyId });
-        //    return x;
-        //}
-
-        //public Task<PropertyLanguageIndexGet> LanguageUpdateGet(string UserId, int PropertyLanguageId)
-        //{
-        //    string usp = "usp_PropertyLanguageUpdateGet @UserId, @PropertyLanguageID";
-        //    return _sqlDataAccess.LoadSingleRecord<PropertyLanguageIndexGet, dynamic>(usp, new { UserId, PropertyLanguageId });
-
-        //}
         public async Task<List<PropertyList>> List(string UserId)
         {
             string usp = "usp_PropertyList @UserID";
             var x = await _sqlDataAccess.LoadData<PropertyList, dynamic>(usp, new { UserId = UserId });
             return x;
         }
-        //public async Task<List<ContentAdvancedSearchPostProperty>> PropertiesWithValues(string UserId)
-        //{
-        //    string usp = "usp_PropertiesWithValues @UserID";
-        //    var x = await _sqlDataAccess.LoadData<ContentAdvancedSearchPostProperty, dynamic>(usp, new { UserId = UserId });
-        //    return x;
-        //}
     }
 }

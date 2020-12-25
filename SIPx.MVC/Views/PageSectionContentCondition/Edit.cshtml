@@ -4,13 +4,12 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section condition")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section content condition")).TermString;
 
     Layout = "_LayoutAdmin";
 }
-@* PETER TODO uncomment *@
 <h1>
-    @*<img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section condition")).TermString*@
+    <img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section content condition")).TermString
 </h1>
 <div class="container">
 

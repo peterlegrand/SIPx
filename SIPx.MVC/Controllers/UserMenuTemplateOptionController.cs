@@ -40,7 +40,7 @@ namespace SIPx.MVC.Controllers
             var UserMenuTemplateOptionCreateGetWithErrorMessage = await _client.PostProtectedAsync<UserMenuTemplateOptionCreateGetWithErrorMessages>($"{_baseUrl}api/UserMenuTemplateOption/Create", UserMenuTemplateOption, token);
             if (UserMenuTemplateOptionCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplateOption/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenuTemplateOption/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = UserMenuTemplateOptionCreateGetWithErrorMessage.ErrorMessages;
                 return View(UserMenuTemplateOptionCreateGetWithErrorMessage.UserMenuTemplateOption);

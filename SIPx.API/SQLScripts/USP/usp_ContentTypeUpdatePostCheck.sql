@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ContentTypeUpdatePostCheck (
- @ContentTypeId int
+	 @ContentTypeId int
 	, @ContentTypeGroupId int
 	, @ProcessTemplateId int
 	, @SecurityLevelId int
@@ -8,6 +8,34 @@ CREATE PROCEDURE usp_ContentTypeUpdatePostCheck (
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)
+	, @IsRelationBasedOwnership bit
+	, @IsProjectBasedOwnership  bit
+	, @IsOrganizationBasedOwnership bit 
+	, @IsFreeOwnership  bit
+	, @IsRelationBasedEdit  bit
+	, @IsRelationBasedEditSelectable  bit
+	, @IsOrganizationBasedEdit  bit
+	, @IsOrganizationBasedEditSelectable  bit
+	, @IsOrganizationBasedEditSub  bit
+	, @IsOrganizationBasedEditParent  bit
+	, @IsProjectBasedEdit  bit
+	, @IsProjectBasedEditSelectable  bit
+	, @IsProjectBasedEditSub  bit
+	, @IsProjectBasedEditParent  bit
+	, @IsFreeEdit  bit
+	, @IsFreeEditSelectable  bit
+	, @IsRelationBasedRead  bit
+	, @IsRelationBasedReadSelectable  bit
+	, @IsOrganizationBasedRead  bit
+	, @IsOrganizationBasedReadSelectable  bit
+	, @IsOrganizationBasedReadSub  bit
+	, @IsOrganizationBasedReadParent  bit
+	, @IsProjectBasedRead  bit
+	, @IsProjectBasedReadSelectable  bit
+	, @IsProjectBasedReadSub  bit
+	, @IsProjectBasedReadParent  bit
+	, @IsFreeRead  bit
+	, @IsFreeReadSelectable  bit
 	, @Color char(9)
 	, @IconID int
 	, @ContentTypeClassificationTable AS udt_ContentTypeClassificationNew READONLY)

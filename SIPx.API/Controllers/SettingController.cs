@@ -57,14 +57,14 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var x = await _settingProvider.UpdateGet(CurrentUser.Id, Id);
+                var Setting = await _settingProvider.UpdateGet(CurrentUser.Id, Id);
 
-                if (x.TypeId == 1)
+                if (Setting.TypeId == 1)
                 {
                     var LanguageList = await _languageProvider.List(CurrentUser.Id);
-                    x.Languages = LanguageList;
+                    Setting.Languages = LanguageList;
                 }
-                return Ok(x);
+                return Ok(Setting);
             }
             return BadRequest(new
             {

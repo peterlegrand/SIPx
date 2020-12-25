@@ -77,7 +77,7 @@
         @for (int i = 0; i < Model.Classifications.Count; i++)
         {<div class="row">
              <div class="col-3">
-                 @*@Term.Find(x => x.InternalName.Equals("Suffix")).TermString*@ @Model.Classifications[i].Name
+                 @Model.Classifications[i].Name
                  <ejs-numerictextbox id="@Model.Classifications[i].NumberId" ejs-for="@Model.Classifications[i].ClassificationId"></ejs-numerictextbox>
              </div>    <div class="col-9">
                     <ejs-dropdownlist id="@Model.Classifications[i].DropDownId" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.Classifications[i].ClassificationValueId" value="@Model.Classifications[i].ClassificationValueId" index="2" popupHeight="220px">

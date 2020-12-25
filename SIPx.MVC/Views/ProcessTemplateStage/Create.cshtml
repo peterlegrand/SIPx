@@ -54,8 +54,7 @@
         </div>        
         <div class="row">
             <div class="col-3">
-                @* PETER TODO change this to Stage type *@
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Stage type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ProcessTemplateStageTypeId" dataSource="@Model.ProcessTemplateStageTypes" ejs-for="@Model.ProcessTemplateStageTypeId" value="@Model.ProcessTemplateStageTypeId" index="2" filtering="ProcessTemplateStageTypeId" popupHeight="220px">
@@ -184,19 +183,3 @@
         }
     }
 </script>
-@*
-        PETER TODO
-        <script type="text/javascript">
-        function FilterDefaultPage(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>
-    <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
-    </script>*@

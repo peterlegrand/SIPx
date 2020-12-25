@@ -57,6 +57,7 @@ namespace SIPx.DataAccess
             return x;
         }
         //PETER TODO PostCheck added
+
         public async Task<bool> CreatePost(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields)
         {
             await _sqlDataAccess.SaveData2<dynamic>(SQLString, new { User = UserId, ProcessTemplateId = TemplateId, ProcessTemplateStageId = StageId, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
@@ -113,6 +114,5 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<ProcessForPanelCondition, dynamic>(usp, new { PageSectionId = PageSectionId });
             return x;
         }
-        //PETER TODO for create and update should add check
     }
 }

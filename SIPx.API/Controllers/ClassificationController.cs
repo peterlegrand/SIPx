@@ -49,8 +49,6 @@ namespace SIPx.API.Controllers
 
         private async Task<ClassificationUpdateGet> UpdateAddDropDownBoxes(ClassificationUpdateGet Classification, string UserId)
         {
-            //PETER TODO check if pages is still relevant here. I think it is in some way
-            //var Pages = await _classificationPageProvider.List(UserId,Classification.ClassificationId);
             Classification = await _classificationProvider.UpdateGet(UserId, Classification.ClassificationId);
             var Sequences = await _classificationProvider.CreateGetSequence(UserId);
             var Statuses = await _masterListProvider.StatusList(UserId);

@@ -40,20 +40,7 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
               await _client.PostProtectedAsync<FrontProcessNewProcessWithMaster>($"{_baseUrl}api/FrontProcess/Create", Fields, token);
-            //if()
-            //            var response = await _client.GetProtectedAsync<NewProcessWithMaster>($"{_baseUrl}api/FrontProcess/New/" , token);
-            //          var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/New", token);
-            //        ViewBag.UITerms = UITerms;
-            //      return View(response);
-            
-            //PETER TODO if an error from API
-            //if(x.ProcessTemplateId == 0)
-            //{ return View(Fields);
-            //}
             return RedirectToAction("Templates");
-
-            //PETER TODO Add the button pressed to the pass
-
         }
         [HttpGet]
         public async Task<IActionResult> ToDo()

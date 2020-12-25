@@ -67,10 +67,9 @@
                 <ejs-textbox id="TypeName" ejs-for="TypeName" cssClass="e-outline" placeholder="TypeName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @* PETER TODO change this to Stage type *@
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("In to do")).TermString
+                @Term.Find(x => x.InternalName.Equals("Stage type")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox id="IsEndStage" label="Is end stage" ejs-for="IsEndStage" checked="@Model.IsEndStage"></ejs-checkbox>

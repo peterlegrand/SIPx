@@ -11,8 +11,7 @@ namespace SIPx.Shared
         public int PersonId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //PETER TODO CHange this to DefaultOrganizationName
-        public string DefaultOrganization { get; set; }
+        public string DefaultOrganizationName { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

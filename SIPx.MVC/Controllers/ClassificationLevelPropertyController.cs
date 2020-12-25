@@ -13,7 +13,6 @@ namespace SIPx.MVC.Controllers
     {
         private readonly string _baseUrl = "https://localhost:44393/";
 
-        //PETER TODO put base url somewhere central
         readonly ServiceClient _client = new ServiceClient();
 
         [HttpGet]
@@ -42,7 +41,7 @@ namespace SIPx.MVC.Controllers
             var ClassificationLevelPropertyCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationLevelPropertyCreateGetWithErrorMessages>($"{_baseUrl}api/ClassificationLevelProperty/Create", ClassificationLevelProperty, token);
             if (ClassificationLevelPropertyCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = ClassificationLevelPropertyCreateGetWithErrorMessage.ErrorMessages;
                 return View(ClassificationLevelPropertyCreateGetWithErrorMessage.ClassificationLevelProperty);

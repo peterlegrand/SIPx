@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ContentTypeCreatePostCheck (
-@ContentTypeGroupId int 
+	@ContentTypeGroupId int 
 	, @ProcessTemplateId int
 	, @SecurityLevelId int
 	, @Name nvarchar(50)
@@ -7,6 +7,34 @@ CREATE PROCEDURE usp_ContentTypeCreatePostCheck (
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)
+	, @IsRelationBasedOwnership bit
+	, @IsProjectBasedOwnership  bit
+	, @IsOrganizationBasedOwnership bit 
+	, @IsFreeOwnership  bit
+	, @IsRelationBasedEdit  bit
+	, @IsRelationBasedEditSelectable  bit
+	, @IsOrganizationBasedEdit  bit
+	, @IsOrganizationBasedEditSelectable  bit
+	, @IsOrganizationBasedEditSub  bit
+	, @IsOrganizationBasedEditParent  bit
+	, @IsProjectBasedEdit  bit
+	, @IsProjectBasedEditSelectable  bit
+	, @IsProjectBasedEditSub  bit
+	, @IsProjectBasedEditParent  bit
+	, @IsFreeEdit  bit
+	, @IsFreeEditSelectable  bit
+	, @IsRelationBasedRead  bit
+	, @IsRelationBasedReadSelectable  bit
+	, @IsOrganizationBasedRead  bit
+	, @IsOrganizationBasedReadSelectable  bit
+	, @IsOrganizationBasedReadSub  bit
+	, @IsOrganizationBasedReadParent  bit
+	, @IsProjectBasedRead  bit
+	, @IsProjectBasedReadSelectable  bit
+	, @IsProjectBasedReadSub  bit
+	, @IsProjectBasedReadParent  bit
+	, @IsFreeRead  bit
+	, @IsFreeReadSelectable  bit
 	, @Color char(9)
 	, @IconID int
 	, @ContentTypeClassificationTable AS udt_ContentTypeClassificationNew READONLY)
@@ -18,7 +46,6 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
-
 BEGIN 
 DECLARE @ErrorIdsTable TABLE (id int)
 
@@ -28,7 +55,7 @@ insert into @ErrorIdsTable values(44)
 END
 
 
-IF (SELECT COUNT(*) FROM @ContentTypeClassificationTable WHERE ClassificationId NOT IN (Select ClassificationId FROM Classifications) ) = 0
+IF (SELECT COUNT(*) FROM @ContentTypeClassificationTable WHERE ClassificationId NOT IN (Select ClassificationId FROM Classifications) ) > 0
 BEGIN
 insert into @ErrorIdsTable values(47)
 END

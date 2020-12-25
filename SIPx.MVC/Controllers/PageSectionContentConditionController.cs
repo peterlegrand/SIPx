@@ -38,7 +38,7 @@ namespace SIPx.MVC.Controllers
               var PageSectionContentConditionCreateGetWithErrorMessage = await _client.PostProtectedAsync<PageSectionContentConditionCreateGetWithErrorMessages>($"{_baseUrl}api/PageSectionContentCondition/Create", PageSectionContentCondition, token);
             if (PageSectionContentConditionCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionContentCondition/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionContentCondition/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = PageSectionContentConditionCreateGetWithErrorMessage.ErrorMessages;
                 return View(PageSectionContentConditionCreateGetWithErrorMessage.PageSectionContentCondition);
@@ -65,7 +65,7 @@ namespace SIPx.MVC.Controllers
                 return RedirectToAction("Menu", "Admin");
             }
         }
-        //PETER TODO Check for objectViewGet to be replaced by editget
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -88,7 +88,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(PageSectionContentConditionUpdateGet PageSectionContentCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            PageSectionContentCondition
+            var ContentTypeUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ContentTypeUpdateGetWithErrorMessages>($"{_baseUrl}api/ContentType/Update", PageSectionContentCondition, token);
+            if (ContentTypeUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ContentType/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = ContentTypeUpdateGetWithErrorMessage.ErrorMessages;
+                return View(ContentTypeUpdateGetWithErrorMessage.ContentType);
+            }
 
             return RedirectToAction("Index", new { id = PageSectionContentCondition.PageSectionId });
         }

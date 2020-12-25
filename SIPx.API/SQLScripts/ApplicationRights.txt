@@ -87,6 +87,13 @@ FrontContent\ContentNew
 FrontContent\ContentType
 FrontContent\SearchResult
 FrontContent\ShowContent
+FrontContent\RightsUpdate
+FrontContent\RightsEditUserCreate
+FrontContent\RightsEditUserIndex
+FrontContent\RightsEditUserDelete
+FrontContent\RightsReadUserCreate
+FrontContent\RightsReadUserIndex
+FrontContent\RightsReadUserDelete
 FrontOrganization\AdvancedSearch - Copy
 FrontOrganization\AdvancedSearch
 FrontOrganization\Create

@@ -47,7 +47,7 @@ namespace SIPx.MVC.Controllers
            var ClassificationValuePropertyCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationValuePropertyCreateGetWithErrorMessages>($"{_baseUrl}api/ClassificationValueProperty/Create", ClassificationValueProperty, token);
             if (ClassificationValuePropertyCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationValueProperty/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = ClassificationValuePropertyCreateGetWithErrorMessage.ErrorMessages;
                 return View(ClassificationValuePropertyCreateGetWithErrorMessage.ClassificationValueProperty);

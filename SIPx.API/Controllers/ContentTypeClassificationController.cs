@@ -56,7 +56,6 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(int Id)
         {
 
-            //PETER TODO check if it need userrights
             var CurrentUser = await _userManager.GetUserAsync(User);
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
@@ -69,36 +68,5 @@ namespace SIPx.API.Controllers
             });
         }
 
-        //[HttpGet("ContentTypeClassificationStatuses")]
-        //public async Task<IActionResult> GetContentTypeClassificationStatuses()
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
-        //    {
-        //        return Ok(await _contentMasterProvider.ContentTypeClassificationStatusIndexGet(CurrentUser.Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
-
-        //[HttpGet("ContentTypeClassificationStatus/{Id:int}")]
-        //public async Task<IActionResult> GetContentTypeClassificationStatus(int Id)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
-        //    {
-        //        return Ok(await _contentMasterProvider.ContentTypeClassificationStatusUpdateGet(CurrentUser.Id, Id));
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-        //}
-
-      
     }
 }
