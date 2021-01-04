@@ -47,6 +47,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<OrganizationUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
 
         }
+        public Task<string> GetOrganizationName(string UserId, int OrganizationId)
+        {
+            string usp = "usp_GetOrganizationName @UserId, @OrganizationID";
+            return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+
+        }
         public async Task<List<ErrorMessage>> UpdatePostCheck(OrganizationUpdateGet Organization)
         {
             string usp = "usp_OrganizationUpdatePostCheck @OrganizationId , @ParentOrganizationId, @StatusId, @OrganizationTypeID, @Name, @Description, @MenuName, @MouseOver, @ModifierId";

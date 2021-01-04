@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_FrontClassificationValueIndexGet (@CurrentUserId nvarchar(450), @ClassificationValueId int) 
+CREATE PROCEDURE usp_FrontClassificationValueDashboard (@CurrentUserId nvarchar(450), @ClassificationValueId int) 
 AS 
 BEGIN
 DECLARE @LanguageId int;

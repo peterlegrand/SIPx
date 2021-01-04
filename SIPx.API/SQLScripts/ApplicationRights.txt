@@ -313,3 +313,4 @@ UserPageSection\Update
 UserPageSection\Index
 UserPreference\Update
 UserPreference\Index
+FrontOrganization\Edit

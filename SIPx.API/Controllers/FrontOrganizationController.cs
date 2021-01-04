@@ -47,18 +47,18 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> Index(int Id)
+        [HttpGet("Dashboard/{Id:int}")]
+        public async Task<IActionResult> Dashboard(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var Organization = new FrontOrganizationIndexGet();
-                Organization =  await _frontOrganizationProvider.IndexGet(CurrentUser.Id, Id);
-                var subOrganization = await _frontOrganizationProvider.IndexGetSubOrganization(CurrentUser.Id, Id);
-                var Content = await _frontOrganizationProvider.IndexGetContent(CurrentUser.Id, Id);
-                var Process = await _frontOrganizationProvider.IndexGetProcess(CurrentUser.Id, Id);
-                var Member = await _frontOrganizationProvider.IndexGetMember(CurrentUser.Id, Id);
+                var Organization = new FrontOrganizationDashboard();
+                Organization =  await _frontOrganizationProvider.Dashboard(CurrentUser.Id, Id);
+                var subOrganization = await _frontOrganizationProvider.DashboardSubOrganization(CurrentUser.Id, Id);
+                var Content = await _frontOrganizationProvider.DashboardContent(CurrentUser.Id, Id);
+                var Process = await _frontOrganizationProvider.DashboardProcess(CurrentUser.Id, Id);
+                var Member = await _frontOrganizationProvider.DashboardMember(CurrentUser.Id, Id);
                 Organization.SubOrganizations = subOrganization;
                 Organization.Contents = Content;
                 Organization.Processes= Process;
@@ -352,10 +352,27 @@ namespace SIPx.API.Controllers
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var OrganizationCreateGet = new OrganizationCreateGet();
+                string ParentOrganizationName = "No parent";
+                if (Id != 0)
+                {
+                    ParentOrganizationName = await _organizationProvider.GetOrganizationName(CurrentUser.Id, Id);
+                }
+//PETER TODO                Have to do something with "No parent"
                 var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
-                var OrganizationTypes = await _organizationTypeProvider.List(CurrentUser.Id);
+                var OrganizationTypes = await _organizationTypeProvider.ListExternal(CurrentUser.Id);
+                if(OrganizationTypes.Count==0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No types",
+                    });
+                    //PETER TODO the receiving API should do something with this instead of redirecting
+
+                }
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
                 OrganizationCreateGet.LanguageId = UserLanguage.LanguageId;
+                OrganizationCreateGet.ParentOrganizationName = ParentOrganizationName;
                 OrganizationCreateGet.LanguageName = UserLanguage.Name;
                 OrganizationCreateGet.OrganizationTypes = OrganizationTypes;
                 OrganizationCreateGet.Statuses = Statuses;

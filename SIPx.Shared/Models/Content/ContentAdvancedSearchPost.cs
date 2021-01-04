@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class ContentAdvancedSearchPost
     {
         [Key]
-        public string UserId { get; set; }
+        public string UserId { get; set; } 
         public string Contains { get; set; }
         public int OrganizationId { get; set; }
         public int ProjectId { get; set; }

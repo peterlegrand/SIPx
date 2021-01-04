@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontOrganizationIndexGetSubOrganization
+    public class FrontOrganizationDashboardSubOrganization
     {
         [Key]
         public int OrganizationId { get; set; }

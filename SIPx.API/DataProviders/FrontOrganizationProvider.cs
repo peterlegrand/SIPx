@@ -19,38 +19,38 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<FrontOrganizationIndexGet> IndexGet(string UserId, int OrganizationId)
+        public async Task<FrontOrganizationDashboard> Dashboard(string UserId, int OrganizationId)
         {
-            string usp = "usp_FrontOrganizationIndexGet @UserId  , @OrganizationId";
-            var Organization = await _sqlDataAccess.LoadSingleRecord<FrontOrganizationIndexGet, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            string usp = "usp_FrontOrganizationDashboard @UserId  , @OrganizationId";
+            var Organization = await _sqlDataAccess.LoadSingleRecord<FrontOrganizationDashboard, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return Organization;
         }
 
-        public async Task<List<FrontOrganizationIndexGetSubOrganization>> IndexGetSubOrganization(string UserId, int OrganizationId)
+        public async Task<List<FrontOrganizationDashboardSubOrganization>> DashboardSubOrganization(string UserId, int OrganizationId)
         {
-            string usp = "usp_FrontOrganizationIndexGetSubOrganization @UserId, @OrganizationId";
-            var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetSubOrganization, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            string usp = "usp_FrontOrganizationDashboardSubOrganization @UserId, @OrganizationId";
+            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardSubOrganization, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
 
-        public async Task<List<FrontOrganizationIndexGetMember>> IndexGetMember(string UserId, int OrganizationId)
+        public async Task<List<FrontOrganizationDashboardMember>> DashboardMember(string UserId, int OrganizationId)
         {
-            string usp = "usp_FrontOrganizationIndexGetMember @UserId, @OrganizationId";
-            var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetMember, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            string usp = "usp_FrontOrganizationDashboardMember @UserId, @OrganizationId";
+            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardMember, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
 
-        public async Task<List<FrontOrganizationIndexGetContent>> IndexGetContent(string UserId, int OrganizationId)
+        public async Task<List<FrontOrganizationDashboardContent>> DashboardContent(string UserId, int OrganizationId)
         {
-            string usp = "usp_FrontOrganizationIndexGetContent @UserId, @OrganizationId";
-            var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetContent, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            string usp = "usp_FrontOrganizationDashboardContent @UserId, @OrganizationId";
+            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardContent, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
 
-        public async Task<List<FrontOrganizationIndexGetProcess>> IndexGetProcess(string UserId, int OrganizationId)
+        public async Task<List<FrontOrganizationDashboardProcess>> DashboardProcess(string UserId, int OrganizationId)
         {
-            string usp = "usp_FrontOrganizationIndexGetProcess @UserId, @OrganizationId";
-            var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetProcess, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            string usp = "usp_FrontOrganizationDashboardProcess @UserId, @OrganizationId";
+            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardProcess, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
 

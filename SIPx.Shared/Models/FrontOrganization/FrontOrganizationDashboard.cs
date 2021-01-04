@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontOrganizationIndexGet
+    public class FrontOrganizationDashboard
     {
         [Key]
         public int OrganizationId { get; set; }
@@ -19,7 +19,8 @@ namespace SIPx.Shared
         public string OrganizationTypeName { get; set; }
         public int SecurityLevelId { get; set; }
         public string SecurityLevelName { get; set; }
-
+        public bool CanEdit { get; set; }
+        public bool CanCreate { get; set; }
         public int CreatorId { get; set; }
         public string CreatorName { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -27,10 +28,10 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<FrontOrganizationIndexGetSubOrganization> SubOrganizations { get; set; }
-        public List<FrontOrganizationIndexGetMember> Members { get; set; }
-        public List<FrontOrganizationIndexGetContent> Contents { get; set; }
-        public List<FrontOrganizationIndexGetProcess> Processes { get; set; }
+        public List<FrontOrganizationDashboardSubOrganization> SubOrganizations { get; set; }
+        public List<FrontOrganizationDashboardMember> Members { get; set; }
+        public List<FrontOrganizationDashboardContent> Contents { get; set; }
+        public List<FrontOrganizationDashboardProcess> Processes { get; set; }
         public JObject SubOrganizationTree { get; set; }
     }
 }

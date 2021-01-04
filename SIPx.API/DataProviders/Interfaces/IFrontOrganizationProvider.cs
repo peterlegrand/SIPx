@@ -6,11 +6,11 @@ namespace SIPx.DataAccess
 {
     public interface IFrontOrganizationProvider
     {
-        Task<FrontOrganizationIndexGet> IndexGet(string UserId, int OrganizationId);
-        Task<List<FrontOrganizationIndexGetContent>> IndexGetContent(string UserId, int OrganizationId);
-        Task<List<FrontOrganizationIndexGetMember>> IndexGetMember(string UserId, int OrganizationId);
-        Task<List<FrontOrganizationIndexGetProcess>> IndexGetProcess(string UserId, int OrganizationId);
-        Task<List<FrontOrganizationIndexGetSubOrganization>> IndexGetSubOrganization(string UserId, int OrganizationId);
+        Task<FrontOrganizationDashboard> Dashboard(string UserId, int OrganizationId);
+        Task<List<FrontOrganizationDashboardContent>> DashboardContent(string UserId, int OrganizationId);
+        Task<List<FrontOrganizationDashboardMember>> DashboardMember(string UserId, int OrganizationId);
+        Task<List<FrontOrganizationDashboardProcess>> DashboardProcess(string UserId, int OrganizationId);
+        Task<List<FrontOrganizationDashboardSubOrganization>> DashboardSubOrganization(string UserId, int OrganizationId);
         Task<string> IndexGetSubOrganizationTree(string UserId, int OrganizationId);
         Task<FrontOrganizationAdvancedSearchGet> FrontOrganizationAdvancedSearchGet(string UserId);
         Task<List<OrganizationList>> FrontOrganizationAdvancedSearchPost(FrontOrganizationAdvancedSearchGet SearchData);

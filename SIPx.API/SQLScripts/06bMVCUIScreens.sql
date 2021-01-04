@@ -340,7 +340,7 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (334, 'FrontOrganization', 'Create')
 , (335, 'FrontOrganization', 'Dashboard')
 , (336, 'FrontOrganization', 'Index')
-, (337, 'FrontUser', 'Dashboard')
+, (337, 'FrontPerson', 'Dashboard')
 , (338, 'FrontContent', 'ShowContent')
 , (339, 'FrontClassificationDashboard', 'Dashboard')
 , (340, 'FrontPerson', 'AdvancedSearch')

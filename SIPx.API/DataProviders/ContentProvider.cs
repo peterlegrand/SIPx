@@ -136,7 +136,7 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ContentAdvancedSearchResult>> AdvancedSearch(string UserId, ContentAdvancedSearchPost AdvancedSearch)
         {
-            string usp = "usp_ContentAdvancedSearch @UserId, @Contains, @OrganizationId, @ProjectId, @ContentTypeId, @ContentStatusId, @LanguageId, @ClassificationValueTable";
+            string usp = "usp_ContentAdvancedSearch @UserId, @Contains, @OrganizationId, @ProjectId, @ContentTypeId, @ContentStatusId, @SecurityLevelId, @LanguageId, @ClassificationValueTable";
             //System.Data.DataTable ClassificationValueTable = ContentAdvancedSearchClassificationValueDataTable.CreateTable();
             System.Data.DataTable ClassificationValueTable = new System.Data.DataTable();
             ClassificationValueTable.Columns.Add("ClassificationValueId", typeof(Int32));
@@ -151,7 +151,7 @@ namespace SIPx.DataAccess
                     x.ClassificationValueId);
                 }
             }
-            var result = await _sqlDataAccess.LoadData<ContentAdvancedSearchResult, dynamic>(usp, new { UserId = AdvancedSearch.UserId, Contains = AdvancedSearch.Contains, OrganizationId = AdvancedSearch.OrganizationId, ProjectId = AdvancedSearch.ProjectId, ContentTypeId = AdvancedSearch.ContentTypeId, ContentStatusId = AdvancedSearch.ContentStatusId, LanguageId = AdvancedSearch.LanguageId, ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentAdvancedSearchClassificationValues") });
+            var result = await _sqlDataAccess.LoadData<ContentAdvancedSearchResult, dynamic>(usp, new { UserId = AdvancedSearch.UserId, Contains = AdvancedSearch.Contains, OrganizationId = AdvancedSearch.OrganizationId, ProjectId = AdvancedSearch.ProjectId, ContentTypeId = AdvancedSearch.ContentTypeId, ContentStatusId = AdvancedSearch.ContentStatusId, SecurityLevelId = AdvancedSearch.SecurityLevelId, LanguageId = AdvancedSearch.LanguageId, ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentAdvancedSearchClassificationValues") });
             return result;
 
 

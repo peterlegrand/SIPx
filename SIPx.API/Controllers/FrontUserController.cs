@@ -38,38 +38,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> Index(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
-            {
-                var User = new FrontUserIndexGet();
-                User =  await _frontUserProvider.IndexGet(CurrentUser.Id, Id);
-                var Address = await _frontUserProvider.IndexGetAddress(CurrentUser.Id, Id);
-                var Telecom = await _frontUserProvider.IndexGetTelecom(CurrentUser.Id, Id);
-                var Project = await _frontUserProvider.IndexGetProject(CurrentUser.Id, Id);
-                var Organization = await _frontUserProvider.IndexGetOrganization(CurrentUser.Id, Id);
-                var Content = await _frontUserProvider.IndexGetContent(CurrentUser.Id, Id);
-                var Process = await _frontUserProvider.IndexGetProcess(CurrentUser.Id, Id);
-//Relations                var Member = await _frontUserProvider.IndexGetMember(CurrentUser.Id, Id);
-                User.Addresses= Address;
-                User.Telecoms = Telecom;
-                User.Projects= Project;
-                User.Organizations = Organization;
-                User.Processes= Process;
-                User.Contents = Content;
-                //      var x= await _frontUserProvider.IndexGetSubUserTree(CurrentUser.Id, Id);
-                //    User.SubUserTree = JObject.Parse(x);
-
-                return Ok(User);
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+      
 
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)

@@ -5,6 +5,7 @@ CREATE PROCEDURE usp_ContentAdvancedSearch(
 	, @ProjectId int
 	, @ContentTypeId int
 	, @ContentStatusId int
+	, @SecurityLevelId int
 	, @LanguageId int
 	, @ClassificationValueTable AS udt_ContentAdvancedSearchClassificationValues READONLY)
 AS
@@ -46,7 +47,7 @@ SET @WHERE = ' WHERE 1=1 '
 
 IF @Contains IS NOT NULL AND @Contains <> ''
 BEGIN
-SET @FROM = @FROM+ ' AND Contains(Contents.Fulltext, ''' + trim(@Contains)  + ''')' 
+SET @WHERE = @WHERE + ' AND Contains(Contents.Fulltext, ''' + trim(@Contains)  + ''')' 
 END
 
 
@@ -58,6 +59,11 @@ END
 IF @ProjectId IS NOT NULL AND @ProjectId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND ProjectId  = ' + trim(cast(@ProjectId  as varchar(10))) 
+END
+
+IF @SecurityLevelId IS NOT NULL AND @SecurityLevelId <> 0
+BEGIN
+SET @WHERE = @WHERE + ' AND SecurityLevelId  <= ' + trim(cast(@SecurityLevelId  as varchar(10))) 
 END
 
 IF @ContentTypeId IS NOT NULL AND @ContentTypeId <> 0

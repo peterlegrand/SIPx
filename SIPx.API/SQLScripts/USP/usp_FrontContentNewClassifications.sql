@@ -9,6 +9,8 @@ WHERE USerId = @UserID
 SELECT 
 	ContentTypeClassifications.ClassificationID
 , ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this content type')) ClassificationName
+, 'ControlA' + cast(ContentTypeClassifications.ClassificationID as varchar(5)) ControlA
+, 'ControlB' + cast(ContentTypeClassifications.ClassificationID as varchar(5)) ControlB
 , 'ControlButton' + cast(ContentTypeClassifications.ClassificationID as varchar(5)) ControlButton
 , 'ControlDialog' + cast(ContentTypeClassifications.ClassificationID  as varchar(5)) ControlDialog
 , '#ControlButton' + cast(ContentTypeClassifications.ClassificationID  as varchar(5)) ControlTarget

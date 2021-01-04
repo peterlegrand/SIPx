@@ -97,14 +97,14 @@ END
 IF @RoleId IS NOT NULL AND @RoleId <> ''
 BEGIN
 SET @FROM = @FROM + ' JOIN AspNetUserRoles Roles ON Persons.UserId = Roles.UserID ' 
-SET @WHERE = @WHERE + ' AND Roles.RoleId =''' +trim(cast(  @RoleId as varchar(10))) + ''''  
+SET @WHERE = @WHERE + ' AND Roles.RoleId =''' +trim(cast(  @RoleId as varchar(450))) + ''''  
 END
 
 
 
 IF @OrganizationId IS NOT NULL AND @OrganizationId <> 0
 BEGIN
-SET @FROM = @FROM + ' JOIN AspNetUserRoles OrganizationRoles ON Persons.UserId = AspNetUserRoles.UserID ' + 
+SET @FROM = @FROM + ' JOIN AspNetUserRoles OrganizationRoles ON Persons.UserId = OrganizationRoles.UserID ' + 
 	' JOIN AspNetRoleClaims Organizations ON Organizations.RoleId = OrganizationRoles.RoleID '
 SET @WHERE = @WHERE + ' AND Organizations.ClaimType =''OrganizationRight'' AND Organizations.ClaimValue = CAST( ' + trim(cast( @OrganizationId  as varchar(10)))+ ' AS VARCHAR(5)) '  
 END
@@ -114,7 +114,7 @@ END
 
 IF @ProjectId IS NOT NULL AND @ProjectId <> 0
 BEGIN
-SET @FROM = @FROM + ' JOIN AspNetUserRoles ProjectRoles ON Persons.UserId = AspNetUserRoles.UserID ' + 
+SET @FROM = @FROM + ' JOIN AspNetUserRoles ProjectRoles ON Persons.UserId = ProjectRoles.UserID ' + 
 	' JOIN AspNetRoleClaims Projects ON Projects.RoleId = ProjectRoles.RoleID '
 SET @WHERE = @WHERE + ' AND Projects.ClaimType =''ProjectRight'' AND Projects.ClaimValue = CAST( ' + trim(cast( @ProjectId  as varchar(10)))+ ' AS VARCHAR(5)) '  
 END
@@ -160,5 +160,5 @@ END
 
 SET @statement = TRIM(@FROM) + ' ' + TRIM(@WHERE)
 
---select @statement
-EXECUTE sp_executesql @statement
+select @statement
+--EXECUTE sp_executesql @statement

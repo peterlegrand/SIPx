@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontClassificationValueIndexGetContent
+    public class FrontClassificationValueDashboardContent
     {
         [Key]
         public int ContentId { get; set; }

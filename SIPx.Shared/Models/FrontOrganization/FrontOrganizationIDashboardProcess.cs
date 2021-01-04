@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontOrganizationIndexGetProcess
+    public class FrontOrganizationDashboardProcess
     {
         [Key]
         public int ProcessId { get; set; }

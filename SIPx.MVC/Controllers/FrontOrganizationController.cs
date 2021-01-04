@@ -37,18 +37,29 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Dashboard(int Id)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            var response = await _client.GetProtectedAsync<FrontOrganizationIndexGet>($"{_baseUrl}api/FrontOrganization/Index/" + Id, token);
+            var response = await _client.GetProtectedAsync<FrontOrganizationDashboard>($"{_baseUrl}api/FrontOrganization/Dashboard/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontOrganization/Dashboard", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }
-        public async Task<IActionResult> Create()
+        [HttpGet]
+        public async Task<IActionResult> Create(int Id=0)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<OrganizationCreateGet>($"{_baseUrl}api/Organization/Create/", token);
+            var response = await _client.GetProtectedAsync2<OrganizationCreateGet>($"{_baseUrl}api/FrontOrganization/Create/"+Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontOrganization/Create", token);
             ViewBag.UITerms = UITerms;
-            return View(response);
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+                //PETER TODO This might need to be redirected somewhere else like home
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Create(OrganizationCreateGet Organization)
@@ -56,7 +67,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<OrganizationCreateGet>($"{_baseUrl}api/Organization/Create", Organization, token);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("AdvancedSearch");
         }
         [HttpGet]
         public async Task<IActionResult> QuickSearch([FromQuery(Name = "Search")] string Search)

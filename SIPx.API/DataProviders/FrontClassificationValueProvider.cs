@@ -21,17 +21,20 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<FrontClassificationValueIndexGet> Dashboard(string CurrentUserId, int ClassificationValueId)
+        public async Task<FrontClassificationValueDashboard> Dashboard(string CurrentUserId, int ClassificationValueId)
         {
-            string uspBase = "usp_FrontClassificationValueIndexGet @CurrentUserId, @ClassificationValueId";
-            var Base = await _sqlDataAccess.LoadSingleRecord<FrontClassificationValueIndexGet, dynamic>(uspBase, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
-            string uspUsers = "usp_FrontClassificationValueIndexGetUsers @CurrentUserId, @ClassificationValueId";
-            var Users = await _sqlDataAccess.LoadData<FrontClassificationValueIndexGetUser, dynamic>(uspUsers, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
-            string uspRoles = "usp_FrontClassificationValueIndexGetRoles @CurrentUserId, @ClassificationValueId";
-            var Roles = await _sqlDataAccess.LoadData<FrontClassificationValueIndexGetRole, dynamic>(uspRoles, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
-            string uspContent = "usp_FrontClassificationValueIndexGetContent @CurrentUserId, @ClassificationValueId";
-            var Content = await _sqlDataAccess.LoadData<FrontClassificationValueIndexGetContent, dynamic>(uspContent, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
+            string uspBase = "usp_FrontClassificationValueDashboard @CurrentUserId, @ClassificationValueId";
+            var Base = await _sqlDataAccess.LoadSingleRecord<FrontClassificationValueDashboard, dynamic>(uspBase, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
+            string uspUsers = "usp_FrontClassificationValueDashboardUsers @CurrentUserId, @ClassificationValueId";
+            var Users = await _sqlDataAccess.LoadData<FrontClassificationValueDashboardUser, dynamic>(uspUsers, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
+            string uspRoles = "usp_FrontClassificationValueDashboardRoles @CurrentUserId, @ClassificationValueId";
+            var Roles = await _sqlDataAccess.LoadData<FrontClassificationValueDashboardRole, dynamic>(uspRoles, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
+            string uspContent = "usp_FrontClassificationValueDashboardContent @CurrentUserId, @ClassificationValueId";
+            var Content = await _sqlDataAccess.LoadData<FrontClassificationValueDashboardContent, dynamic>(uspContent, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
+            string uspProcess = "usp_FrontClassificationValueDashboardProcess @CurrentUserId, @ClassificationValueId";
+            var Process = await _sqlDataAccess.LoadData<FrontClassificationValueDashboardProcess, dynamic>(uspProcess, new { CurrentUserId = CurrentUserId, ClassificationValueId = ClassificationValueId });
             Base.Contents = Content;
+            Base.Processes = Process;
             Base.Users = Users;
             Base.Roles = Roles;
             return Base;

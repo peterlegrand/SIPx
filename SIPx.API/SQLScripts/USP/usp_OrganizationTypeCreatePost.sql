@@ -3,10 +3,10 @@ CREATE PROCEDURE usp_OrganizationTypeCreatePost (
 	, @LegalEntity bit
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
-	, @Color nchar(9)
-	, @IconId int
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
+	, @Color nchar(9)
+	, @IconId int
 	, @UserId nvarchar(450)) 
 AS 
 

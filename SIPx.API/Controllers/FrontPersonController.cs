@@ -14,6 +14,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontPersonController : ControllerBase
     {
+        private readonly IFrontUserProvider _frontUserProvider;
         private readonly IPersonProvider _personProvider;
         private readonly IRoleProvider _roleProvider;
         private readonly IMasterListProvider _masterListProvider;
@@ -26,8 +27,20 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontPersonController(IPersonProvider personProvider, IRoleProvider roleProvider, IMasterListProvider masterListProvider, IProjectProvider projectProvider,  IOrganizationProvider organizationProvider, IClassificationValueProvider classificationValueProvider, IFrontPersonProvider frontPersonProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public FrontPersonController(IFrontUserProvider frontUserProvider
+            , IPersonProvider personProvider
+            , IRoleProvider roleProvider
+            , IMasterListProvider masterListProvider
+            , IProjectProvider projectProvider
+            ,  IOrganizationProvider organizationProvider
+            , IClassificationValueProvider classificationValueProvider
+            , IFrontPersonProvider frontPersonProvider
+            , ICheckProvider checkProvider
+            , IClaimCheck claimCheck
+            , IClassificationProvider classificationProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _frontUserProvider = frontUserProvider;
             _personProvider = personProvider;
             _roleProvider = roleProvider;
             _masterListProvider = masterListProvider;
@@ -41,53 +54,7 @@ namespace SIPx.API.Controllers
             _userManager = userManager;
         }
 
-        //[HttpGet("AdvancedSearch")]
-        //public async Task<IActionResult> AdvancedSearch()
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
-        //    {
-        //        var PersonAdvancedSearch = new FrontPersonAdvancedSearchGet();
-        //        PersonAdvancedSearch = await _frontPersonProvider.FrontPersonAdvancedSearchGet(CurrentUser.Id);
-        //        PersonAdvancedSearch.ToAge = 120;
-        //        return Ok(PersonAdvancedSearch);
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-
-        //}
-
-        //[HttpPost("AdvancedSearch")]
-        //public async Task<IActionResult> AdvancedSearch(FrontPersonAdvancedSearchGet SearchData)
-        //{
-        //    var CurrentUser = await _userManager.GetUserAsync(User);
-        //               if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
-        //    {
-        //        SearchData.UserId= CurrentUser.Id;
-        //        //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
-        //        //if (CheckString.Length == 0)
-        //        //{
-        //       var SearchResult = await _frontPersonProvider.FrontPersonAdvancedSearchPost(SearchData);
-        //        SearchData.SearchResult = SearchResult;
-        //        return Ok(SearchData);
-        //        //}
-        //        return BadRequest(new
-        //        {
-        //            IsSuccess = false,
-        //            //Message = CheckString,
-        //        });
-
-        //    }
-        //    return BadRequest(new
-        //    {
-        //        IsSuccess = false,
-        //        Message = "No rights",
-        //    });
-
-        //}
+    
         [HttpGet("AdvancedSearch")]
         public async Task<IActionResult> AdvancedSearch()
         {
@@ -159,6 +126,38 @@ namespace SIPx.API.Controllers
                     IsSuccess = false,
                     //Message = CheckString,
                 });
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("Dashboard/{Id:int}")]
+        public async Task<IActionResult> Dashboard(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                var User = new FrontUserIndexGet();
+                User = await _frontUserProvider.IndexGet(CurrentUser.Id, Id);
+                var Address = await _frontUserProvider.IndexGetAddress(CurrentUser.Id, Id);
+                var Telecom = await _frontUserProvider.IndexGetTelecom(CurrentUser.Id, Id);
+                var Project = await _frontUserProvider.IndexGetProject(CurrentUser.Id, Id);
+                var Organization = await _frontUserProvider.IndexGetOrganization(CurrentUser.Id, Id);
+                var Content = await _frontUserProvider.IndexGetContent(CurrentUser.Id, Id);
+                var Process = await _frontUserProvider.IndexGetProcess(CurrentUser.Id, Id);
+                //Relations                var Member = await _frontUserProvider.IndexGetMember(CurrentUser.Id, Id);
+                User.Addresses = Address;
+                User.Telecoms = Telecom;
+                User.Projects = Project;
+                User.Organizations = Organization;
+                User.Processes = Process;
+                User.Contents = Content;
+                //      var x= await _frontUserProvider.IndexGetSubUserTree(CurrentUser.Id, Id);
+                //    User.SubUserTree = JObject.Parse(x);
+
+                return Ok(User);
             }
             return BadRequest(new
             {

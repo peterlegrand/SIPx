@@ -52,8 +52,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Dashboard(int Id)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            var response = await _client.GetProtectedAsync<FrontUserIndexGet>($"{_baseUrl}api/FrontUser/Index/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUser/Dashboard", token);
+            var response = await _client.GetProtectedAsync<FrontUserIndexGet>($"{_baseUrl}api/FrontPerson/Dashboard/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/Dashboard", token);
             ViewBag.UITerms = UITerms;
             return View(response);
         }

@@ -8,8 +8,8 @@ WHERE USerId = @UserID
 SELECT * FROM (SELECT Concat('T',PageSectionProcessConditionTypes.PageSectionProcessConditionTypeId) ExtendedId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, Concat('ControlT',PageSectionProcessConditionTypes.PageSectionProcessConditionTypeId) ControlA
-	, Concat('$("#ControlT',PageSectionProcessConditionTypes.PageSectionProcessConditionTypeId,'").hide();') ControlHide
-	, Concat('$("#ControlT',PageSectionProcessConditionTypes.PageSectionProcessConditionTypeId,'").show();') ControlShow
+	, Concat( CHAR(36) ,'("#ControlT',PageSectionProcessConditionTypes.PageSectionProcessConditionTypeId,'").hide();') ControlHide
+	, Concat(CHAR(36) ,'("#ControlT',PageSectionProcessConditionTypes.PageSectionProcessConditionTypeId,'").show();') ControlShow
 FROM PageSectionProcessConditionTypes
 JOIN UITermLanguages UIName
 	ON UIName.UITermId = PageSectionProcessConditionTypes.NameTermID
@@ -22,8 +22,8 @@ UNION ALL
 SELECT CONCAT('V',Classifications.ClassificationID)
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
 	, CONCAT('ControlV',Classifications.ClassificationID)
-	, CONCAT('$("#ControlV',Classifications.ClassificationID,'").hide();') 
-	, CONCAT('$("#ControlV',Classifications.ClassificationID,'").show();') 
+	, CONCAT(CHAR(36) ,'("#ControlV',Classifications.ClassificationID,'").hide();') 
+	, CONCAT(CHAR(36) ,'("#ControlV',Classifications.ClassificationID,'").show();') 
 FROM Classifications 
 LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver, ClassificationLanguageID FROM ClassificationLanguages WHERE LanguageId = @LanguageID) UserLanguage
 	ON UserLanguage.ClassificationID= Classifications.ClassificationID

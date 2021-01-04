@@ -15,7 +15,19 @@
 <div class="container">
  
     <form method="post">
+        <div class="row">
+            <div class="col-3">
 
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="ParentOrganizationId" ejs-for="ParentOrganizationId" cssClass="e-outline" placeholder="ParentOrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>  <div class="row">
+            <div class="col-3">
+
+            </div>    <div class="col-9">
+                @Model.ParentOrganizationName
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -34,8 +46,7 @@
                 </ejs-richtexteditor>
             </div>
         </div>
-
-        <div class="row">
+    <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
@@ -43,7 +54,6 @@
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -52,11 +62,33 @@
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="StatusId" dataSource="@Model.Statuses" ejs-for="StatusId" value="@Model.StatusId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="OrganizationTypeId" dataSource="@Model.OrganizationTypes" ejs-for="OrganizationTypeId" value="@Model.OrganizationTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="OrganizationTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+
+            </div>
+        </div>
+
 
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                 <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
             </div>
         </div>
 

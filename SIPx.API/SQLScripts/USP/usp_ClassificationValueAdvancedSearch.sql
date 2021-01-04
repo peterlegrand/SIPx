@@ -55,7 +55,7 @@ SET @WHERE = ' WHERE ClassificationValueUserLanguage.ClassificationValueID IS NO
 
 IF @ClassificationId IS NOT NULL AND @ClassificationId <> 0
 BEGIN
-SET @WHERE = @WHERE + ' AND ClassificationId = ' + TRIM(CAST(@ClassificationId AS varchar(10)))
+SET @WHERE = @WHERE + ' AND ClassificationValues.ClassificationId = ' + TRIM(CAST(@ClassificationId AS varchar(10)))
 END
 
 IF @DateLevelId =2 --date

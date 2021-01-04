@@ -5,6 +5,6 @@ namespace SIPx.DataAccess
 {
     public interface IFrontClassificationValueProvider
     {
-        Task<FrontClassificationValueIndexGet> Dashboard(string UserId, int ClassificationValueId);
+        Task<FrontClassificationValueDashboard> Dashboard(string UserId, int ClassificationValueId);
     }
 }

@@ -56,9 +56,9 @@
 
             }
             <div> @Model.SecurityLevelName</div>
-            <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.CreatorId"> @Model.CreatorName</a></div>
+            <div> <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.CreatorId"> @Model.CreatorName</a></div>
             <div> @Model.CreatedDate</div>
-            <div> <a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.ModifierId"> @Model.ModifierName</a></div>
+            <div> <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.ModifierId"> @Model.ModifierName</a></div>
             <div> @Model.ModifiedDate</div>
         </div>
     </div>

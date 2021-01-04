@@ -1,4 +1,4 @@
-﻿@model FrontClassificationValueIndexGet
+﻿@model FrontClassificationValueDashboard
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value dashboard")).TermString;
@@ -15,34 +15,41 @@
 
 <div class="row">
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/User.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Users")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/User.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Users")).TermString
+            </h2>
+        </div>
         <ejs-grid id="Users" dataSource="@Model.Users" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
                 <e-grid-column field="FirstName" headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" textAlign="Right" type="text" template="#UserTemplate"></e-grid-column>
-                <e-grid-column field="LastName" headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" textAlign="Right" type="text" ></e-grid-column>
+                <e-grid-column field="LastName" headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/Role.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Roles")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/Role.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Roles")).TermString
+            </h2>
+        </div>
         <ejs-grid id="Members" dataSource="@Model.Roles" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Role")).TermString" field="Name" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Role")).TermString" field="RoleName" textAlign="Right" type="text" template="#RoleTemplate"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Role")).TermString" field="ClassificationRelationTypeName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/Content.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/Content.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content")).TermString
+            </h2>
+        </div>
         <ejs-grid id="Contents" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -52,17 +59,20 @@
             </e-grid-columns>
         </ejs-grid>
     </div>
-    @*<div class="col-6">
-        <div><h2>Processes</h2></div>
+
+    <div class="col-6">
+        <div>
+            <h2>
+                <img src="~/images/icons/Process.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Processes")).TermString
+            </h2>
+        </div>
         <ejs-grid id="Processes" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="" field="Subject" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="" field="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" field="Title" textAlign="Right" type="text" template="#ProcessTemplate"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
-    </div>*@
+    </div>
 </div>
 <script id="UserTemplate" type="text/x-template">
     <div>
@@ -73,6 +83,18 @@
 <script id="ContentTemplate" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/FrontContent/ShowContent/${ContentId}"><u>${Title}</u></a>
+
+    </div>
+</script>
+<script id="RoleTemplate" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontRole/Dashboard/${RoleId}"><u>${RoleName}</u></a>
+
+    </div>
+</script>
+<script id="ProcessTemplate" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontProcess/View/${ProcessId}"><u>${SubjectName}</u></a>
 
     </div>
 </script>

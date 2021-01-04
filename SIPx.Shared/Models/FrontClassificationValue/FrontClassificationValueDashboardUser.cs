@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontClassificationValueIndexGetUser
+    public class FrontClassificationValueDashboardUser
     {
         [Key]
         public int ClassificationValueUserId { get; set; }

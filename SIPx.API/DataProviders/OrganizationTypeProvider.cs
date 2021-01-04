@@ -22,14 +22,14 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(OrganizationTypeCreateGet OrganizationType)
         {
-            string usp = "usp_OrganizationTypeCreatePostCheck @LanguageId, @Name, @UserId ";
+            string usp = "usp_OrganizationTypeCreatePostCheck @Internal, @LegalEntity, @Name, @Description,  @MenuName, @MouseOver,@Color, @IconId, @UserId ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationType);
             return ErrorMessages;
         }
 
         public async Task<string> CreatePost(OrganizationTypeCreateGet OrganizationType)
         {
-            string usp = "usp_OrganizationTypeCreatePost @Internal, @LegalEntity, @Name, @Description, @Color, @IconId, @MenuName, @MouseOver, @UserId ";
+            string usp = "usp_OrganizationTypeCreatePost @Internal, @LegalEntity, @Name, @Description,  @MenuName, @MouseOver,@Color, @IconId, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationType);
             return String;
         }
@@ -92,6 +92,12 @@ namespace SIPx.DataAccess
         public async Task<List<OrganizationTypeList>> List(string UserId)
         {
             string usp = "usp_OrganizationTypeList @UserID";
+            var x = await _sqlDataAccess.LoadData<OrganizationTypeList, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+        public async Task<List<OrganizationTypeList>> ListExternal(string UserId)
+        {
+            string usp = "usp_OrganizationTypeListExternal @UserID";
             var x = await _sqlDataAccess.LoadData<OrganizationTypeList, dynamic>(usp, new { UserId = UserId });
             return x;
         }

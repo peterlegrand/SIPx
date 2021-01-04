@@ -377,8 +377,8 @@ namespace SIPx.API.Controllers
             });
         }
 
-        [HttpGet("ViewGet/{Id:int}")]
-        public async Task<IActionResult> ViewGet(int Id)
+        [HttpGet("View/{Id:int}")]
+        public async Task<IActionResult> View(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))

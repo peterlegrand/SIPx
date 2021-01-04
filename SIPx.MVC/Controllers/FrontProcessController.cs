@@ -71,12 +71,23 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> View(int Id)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            var response = await _client.GetProtectedAsync<FrontProcessView>($"{_baseUrl}api/FrontProcess/ViewGet/" + Id, token);
+            var response = await _client.GetProtectedAsync2<FrontProcessView>($"{_baseUrl}api/FrontProcess/View/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProcess/View", token);
-            ViewBag.UITerms = UITerms;
-            return View(response);
-
+            ViewBag.UITerms = UITerms; 
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Menu", "Admin");
+                //PETER TODO This might need to be redirected somewhere else like home
+            }
         }
+
+    
         [HttpGet]
         public async Task<IActionResult> AdvancedSearch()
         {
