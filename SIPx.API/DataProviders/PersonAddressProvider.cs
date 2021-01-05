@@ -22,7 +22,7 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(PersonAddressCreateGet PersonAddress)
         {
-            string usp = "usp_PersonAddressCreateCheck @PersonId, @AddressTypeId  , @CountryId, @CreatorId ";
+            string usp = "usp_PersonAddressCreatePostCheck @PersonId, @AddressTypeId, @AttnName, @Address1, @Address2, @HouseNumber, @HouseNumberExt, @City, @PostalCode, @PostalCodeExt, @CountryId, @ProvinceState, @County, @UserId ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonAddress);
             return ErrorMessages;
         }

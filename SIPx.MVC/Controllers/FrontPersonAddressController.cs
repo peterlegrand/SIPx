@@ -17,8 +17,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PersonAddressCreateGet>($"{_baseUrl}api/PersonAddress/Create/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Create", token);
+            var response = await _client.GetProtectedAsync2<PersonAddressCreateGet>($"{_baseUrl}api/FrontPersonAddress/Create/" + Id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonAddress/Create", token);
             ViewBag.UITerms = UITerms;
             var ErrorMessages = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessages;
@@ -28,52 +28,30 @@ namespace SIPx.MVC.Controllers
             }
             else
             {
-                return RedirectToAction("Menu", "Admin");
+                return RedirectToAction("Index", "Front");
             }
         }
         [HttpPost]
         public async Task<IActionResult> Create(PersonAddressCreateGet PersonAddress)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var PersonAddressCreateGetWithErrorMessage = await _client.PostProtectedAsync<PersonAddressCreateGetWithErrorMessages>($"{_baseUrl}api/PersonAddress/Create", PersonAddress, token);
+            var PersonAddressCreateGetWithErrorMessage = await _client.PostProtectedAsync<PersonAddressCreateGetWithErrorMessages>($"{_baseUrl}api/FrontPersonAddress/Create", PersonAddress, token);
             if (PersonAddressCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Create", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonAddress/Create", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = PersonAddressCreateGetWithErrorMessage.ErrorMessages;
                 return View(PersonAddressCreateGetWithErrorMessage.PersonAddress);
             }
-
-
-
-            return RedirectToAction("Dashboard", new { id = PersonAddress.PersonId });
-        }
-        [HttpGet]
-        public async Task<IActionResult> View(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<List<PersonAddressIndexGet>>($"{_baseUrl}api/PersonAddress/Index/"+id,token);
-           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Index", token);
-            ViewBag.Id = id;
-            ViewBag.UITerms = UITerms;
-            var ErrorMessage = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = ErrorMessage;
-            if (response.Item2 == true)
-            {
-                return View(response.Item1);
-            }
-            else
-            {
-                return RedirectToAction("Menu", "Admin");
-            }
+            return RedirectToAction("Dashboard","FrontPerson", new { id = PersonAddress.PersonId });
         }
         
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PersonAddressUpdateGet>($"{_baseUrl}api/PersonAddress/Update/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Edit", token);
+            var response = await _client.GetProtectedAsync2<PersonAddressUpdateGet>($"{_baseUrl}api/FrontPersonAddress/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonAddress/Edit", token);
             ViewBag.UITerms = UITerms;
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
@@ -83,31 +61,31 @@ namespace SIPx.MVC.Controllers
             }
             else
             {
-                return RedirectToAction("Menu", "Admin");
+                return RedirectToAction("Index", "Front");
             }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(PersonAddressUpdateGet PersonAddress)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var PersonAddressUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PersonAddressUpdateGetWithErrorMessages>($"{_baseUrl}api/PersonAddress/Update", PersonAddress, token);
+            var PersonAddressUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PersonAddressUpdateGetWithErrorMessages>($"{_baseUrl}api/FrontPersonAddress/Update", PersonAddress, token);
             if (PersonAddressUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Edit", token);
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonAddress/Edit", token);
                 ViewBag.UITerms = UITerms;
                 ViewBag.ErrorMessages = PersonAddressUpdateGetWithErrorMessage.ErrorMessages;
                 return View(PersonAddressUpdateGetWithErrorMessage.PersonAddress);
             }
 
-            return RedirectToAction("Index", new { id = PersonAddress.PersonId });
+            return RedirectToAction("Dashboard", "FrontPerson", new { id = PersonAddress.PersonId });
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> View(int id)
         {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PersonAddressDeleteGet>($"{_baseUrl}api/PersonAddress/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PersonAddress/Delete", token);
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync2<PersonAddressDeleteGet>($"{_baseUrl}api/FrontPersonAddress/View/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonAddress/View", token);
             ViewBag.UITerms = UITerms;
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
@@ -117,7 +95,25 @@ namespace SIPx.MVC.Controllers
             }
             else
             {
-                return RedirectToAction("Menu", "Admin");
+                return RedirectToAction("Index", "Front");
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync2<PersonAddressDeleteGet>($"{_baseUrl}api/FrontPersonAddress/Delete/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonAddress/Delete", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Front");
             }
         }
 
@@ -125,9 +121,9 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(PersonAddressDeleteGet PersonAddress)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PersonAddressDeleteGet>($"{_baseUrl}api/PersonAddress/Delete", PersonAddress, token);
+            await _client.PostProtectedAsync<PersonAddressDeleteGet>($"{_baseUrl}api/FrontPersonAddress/Delete", PersonAddress, token);
 
-            return RedirectToAction("Dashboard", new { id = PersonAddress.PersonId });
+            return RedirectToAction("Dashboard", "FrontPerson", new { id = PersonAddress.PersonId });
         }
 
 

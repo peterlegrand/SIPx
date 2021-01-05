@@ -1,6 +1,11 @@
 CREATE PROCEDURE usp_PersonTelecomCreatePostCheck (
 	@PersonId int
 	, @TelecomTypeId int
+	, @TelecomValue nvarchar(50)
+	, @CountryCode nvarchar(10)
+	, @AreaCode nvarchar(10)
+	, @ExtensionCode nvarchar(10)
+	, @AskForName nvarchar(50)
 	, @UserId nvarchar(450)) 
 	AS 
 
