@@ -198,8 +198,9 @@ namespace SIPx.API.Classes
             foreach (var TemplateIdFlowId in TemplateIdFlowIds)
             {
                 string From = "DECLARE @LanguageId int; SELECT @LanguageId = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeId = 1 ;" +
-                    " SELECT  ProcessTemplateFlowConditions.ProcessTemplateID , ProcessTemplateGroupID, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name FROM ProcessTemplateFlowConditions" +
+                    " SELECT  ProcessTemplateFlowConditions.ProcessTemplateID , ProcessTemplateGroupID, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name, TRIM(Icons.FileName) FileName FROM ProcessTemplateFlowConditions" +
                     " JOIN ProcessTemplates ON ProcessTemplateFlowConditions.ProcessTemplateId = ProcessTemplates.ProcessTemplateId " +
+                    " JOIN Icons ON ICons.IconId = ProcessTemplates.IconId " +
                     " LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserLanguage " +
                     "  ON UserLanguage.ProcessTemplateID = ProcessTemplateFlowConditions.ProcessTemplateID " +
                     "LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
@@ -359,10 +360,11 @@ namespace SIPx.API.Classes
                 }
                 if (!ProcesstemplateList.Any(t => t.ProcessTemplateId == TemplateIdFlowId.ProcessTemplateId))
                 {
-                    var y = await _processProvider.CreateGetTemplateList(From + Where);
+                    var y = await _frontProcessProvider.CreateGetTemplateList(From + Where);
                     if (y.Count != 0)
                     {
                         var z = y.First();
+                        z.FileName = "/images/icons/" + z.FileName;
                         ProcesstemplateList.Add(z);
                     }
 

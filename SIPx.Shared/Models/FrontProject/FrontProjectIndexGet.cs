@@ -19,6 +19,8 @@ namespace SIPx.Shared
         public string ProjectTypeName { get; set; }
         public int SecurityLevelId { get; set; }
         public string SecurityLevelName { get; set; }
+        public bool CanEdit { get; set; }
+        public bool CanCreate { get; set; }
 
         public int CreatorId { get; set; }
         public string CreatorName { get; set; }

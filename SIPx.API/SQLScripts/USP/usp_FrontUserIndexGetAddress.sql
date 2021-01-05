@@ -9,21 +9,21 @@ WHERE USerId = @CurrentUserID
 SELECT PersonAddressID
 	, ISNULL( UserAddressTypeName.Customization, AddressTypeName.Name) AddressTypeName
 	, ISNULL( UserCountryName.Customization, CountryName.Name) CountryName
-	, AttnName
-	, Address1
-	, Address2
-	, HouseNumber
-	, HouseNumberExt
-	, City
-	, PostalCode
-	, PostalCodeExt
-	, ProvinceState
-	, County
+	, ISNULL( AttnName,'') AttnName
+	, ISNULL( Address1,'') Address1
+	, ISNULL( Address2,'') Address2
+	, ISNULL( HouseNumber,'') HouseNumber
+	, ISNULL( HouseNumberExt,'') HouseNumberExt
+	, ISNULL( City,'') City
+	, ISNULL( PostalCode,'') PostalCode
+	, ISNULL( PostalCodeExt,'') PostalCodeExt
+	, ISNULL( ProvinceState,'') ProvinceState
+	, ISNULL( County,'') County
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, PersonAddresses.CreatorID
+	, Creator.PersonID CreatorID
 	, PersonAddresses.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, PersonAddresses.ModifierID
+	, Modifier.PersonID ModifierID
 	, PersonAddresses.ModifiedDate
 FROM PersonAddresses
 JOIN AddressTypes

@@ -1,15 +1,26 @@
 CREATE PROCEDURE usp_PersonCreatePostCheck (
-	@GenderId int
+	@Salutation nvarchar(50)
+	, @FirstName nvarchar(50)
+	, @MiddleName nvarchar(50)
+	, @LastName nvarchar(50)
+	, @PersonalTitle nvarchar(50)
+	, @Suffix nvarchar(50)
+	, @NickName nvarchar(50)
+	, @FirstNameLocal nvarchar(50)
+	, @MiddleNameLocal nvarchar(50)
+	, @LastNameLocal nvarchar(50)
+	, @GenderId int
+	, @Birthdate DateTime 
 	, @DefaultOrganizationId int
-	, @UserId nvarchar(450) =''
-	, @ModifierCreator nvarchar(450)
-)	AS 
+	, @SelectedUserId nvarchar(450) =''
+	, @UserId nvarchar(450)) 
+	AS 
 
 --PETER TODO What is unique about a person?
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @ModifierCreator
+WHERE USerId = UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 BEGIN
@@ -26,7 +37,7 @@ BEGIN
 insert into @ErrorIdsTable values(49)
 END
 
-IF (SELECT COUNT(*) FROM AspNetUsers WHERE Id = @UserId) = 0 
+IF (SELECT COUNT(*) FROM AspNetUsers WHERE Id = @SelectedUserId) = 0 
 BEGIN
 insert into @ErrorIdsTable values(58)
 END

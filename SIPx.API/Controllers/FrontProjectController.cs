@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -92,15 +93,16 @@ namespace SIPx.API.Controllers
                         Message = "No record with this ID",
                     });
                 }
-                var x = await _classificationProvider.UpdateGet(CurrentUser.Id, Id);
-                var u = await _classificationProvider.CreateGetSequence(CurrentUser.Id);
-                var z = await _masterListProvider.StatusList(CurrentUser.Id);
-                var icons = await _masterListProvider.IconList(CurrentUser.Id);
-                x.Icons = icons;
+                var Project = await _projectProvider.UpdateGet(CurrentUser.Id, Id);
+//                var u = await _classificationProvider.CreateGetSequence(CurrentUser.Id);
+                var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
+                var projectTypes = await _projectTypeProvider.List(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
+                Project.Statuses = Statuses;
+                Project.ProjectTypes = projectTypes;
 
-                x.DropDownSequences = u;
-                x.Statuses = z;
-                return Ok(x);
+                Project.SecurityLevels = SecurityLevels;
+                return Ok(Project);
             }
             return BadRequest(new
             {
@@ -109,33 +111,40 @@ namespace SIPx.API.Controllers
             });
 
         }
+        private async Task<ProjectUpdateGet> UpdateAddDropDownBoxes(ProjectUpdateGet Project, string UserId)
+        {
+            var Statuses = await _masterListProvider.StatusList(UserId);
+            var ProjectTypes = await _projectTypeProvider.List(UserId);
+            var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
+            var SecurityLevels = await _securityLevelProvider.List(UserId);
+            Project.ProjectTypes = ProjectTypes;
+            Project.Statuses = Statuses;
+            Project.SecurityLevels = SecurityLevels;
+            return Project;
+        }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update(ClassificationUpdateGet Classification)
+        public async Task<IActionResult> Update(ProjectUpdateGet Project)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Classification.UserId= CurrentUser.Id;
-                //var CheckString = await _classificationProvider.UpdatePostCheck(Classification);
-                //if (CheckString.Length == 0)
-                //{
-                    _classificationProvider.UpdatePost(Classification);
-                    return Ok(Classification);
-                //}
-                return BadRequest(new
+                ErrorMessages = await _projectProvider.UpdatePostCheck(Project);
+                if (ErrorMessages.Count > 0)
                 {
-                    IsSuccess = false,
-                    //Message = CheckString,
-                });
-
+                    Project = await UpdateAddDropDownBoxes(Project, CurrentUser.Id);
+                }
+                else
+                {
+                    _projectProvider.UpdatePost(Project);
+                }
+                ProjectUpdateGetWithErrorMessages ProjectWithErrorMessage = new ProjectUpdateGetWithErrorMessages { Project = Project, ErrorMessages = ErrorMessages };
+                return Ok(ProjectWithErrorMessage);
             }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            ProjectUpdateGetWithErrorMessages ProjectWithNoRights = new ProjectUpdateGetWithErrorMessages { Project = Project, ErrorMessages = ErrorMessages };
+            return Ok(ProjectWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
@@ -305,11 +314,13 @@ namespace SIPx.API.Controllers
                 var Statuses = await _masterListProvider.StatusList(CurrentUser.Id);
                 var ProjectTypes = await _projectTypeProvider.List(CurrentUser.Id);
                 var UserLanguage = await _masterProvider.UserLanguageUpdateGet(CurrentUser.Id);
+                var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 ProjectCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProjectCreateGet.LanguageName = UserLanguage.Name;
                 ProjectCreateGet.ProjectTypes = ProjectTypes;
                 ProjectCreateGet.Statuses = Statuses;
-                if(Id == null)
+                ProjectCreateGet.SecurityLevels= SecurityLevels;
+                if (Id == null)
                 {
                     Id = 0;
                 }
@@ -324,7 +335,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Post(ProjectCreateGet Project)
+        public async Task<IActionResult> Create(ProjectCreateGet Project)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             Project.UserId= CurrentUser.Id;
@@ -340,6 +351,8 @@ namespace SIPx.API.Controllers
                 {
                     IsSuccess = false,
                     Message = CheckString,
+
+                    //PETER TODO Not sure if the issue is here. But need to check if all is filled in well and then give feedback to front mvc
                 });
             }
             return BadRequest(new
@@ -399,5 +412,7 @@ namespace SIPx.API.Controllers
                 Message = "No rights",
             });
         }
+
+
     }
 }

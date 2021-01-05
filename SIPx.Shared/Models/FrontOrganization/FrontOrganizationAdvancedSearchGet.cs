@@ -9,10 +9,12 @@ namespace SIPx.Shared
     public class FrontOrganizationAdvancedSearchGet
     {
         public string UserId { get; set; }
+        public string Contains { get; set; }
         public string OrganizationName { get; set; }
-        public int OrganizationParentId { get; set; }
+        public int ParentOrganizationId { get; set; }
+        public int PersonId{ get; set; }
         public string OrganizationParentName { get; set; }
-        public int OrganizationStatusId { get; set; }
+        public int StatusId { get; set; }
         public string OrganizationStatusName { get; set; }
         public int OrganizationTypeId { get; set; }
         public string OrganizationTypeName { get; set; }

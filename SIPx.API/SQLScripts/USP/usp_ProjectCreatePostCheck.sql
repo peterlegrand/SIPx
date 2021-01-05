@@ -1,7 +1,12 @@
 CREATE PROCEDURE [dbo].[usp_ProjectCreatePostCheck] (
-	@ParentProjectId int
-	, @ProjectTypeId int 
+	@ProjectTypeId int
+	, @ParentProjectId int =NULL
+	, @StatusId int 
+	, @SecurityLevelId int
 	, @Name nvarchar(50)
+	, @Description nvarchar(max)
+	, @MenuName nvarchar(50)
+	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
 
@@ -15,7 +20,7 @@ WHERE USerId = @UserID
 BEGIN 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF (SELECT COUNT(*) FROM Projects WHERE ProjectId = @ParentProjectId) = 0 OR @ParentProjectId IS NULL
+IF (SELECT COUNT(*) FROM Projects WHERE ProjectId = @ParentProjectId) = 0 AND @ParentProjectId IS NOT NULL AND @ParentProjectId <> 0
 BEGIN
 insert into @ErrorIdsTable values(57)
 END

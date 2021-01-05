@@ -72,7 +72,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="StatusId" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
@@ -86,6 +86,17 @@
                 </ejs-dropdownlist>
             </div>
         </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Security level")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.SecurityLevelId" value="@Model.SecurityLevelId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="SecurityLevelId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+
 
         <div class="row">
             <div class="col-3 offset-3">

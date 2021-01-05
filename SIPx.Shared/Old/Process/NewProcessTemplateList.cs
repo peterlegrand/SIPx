@@ -11,5 +11,6 @@ namespace SIPx.Shared
         [Key]
         public int ProcessTemplateGroupId { get; set; }
         public string Name { get; set; }
+        public string FileName { get; set; }
     }
 }

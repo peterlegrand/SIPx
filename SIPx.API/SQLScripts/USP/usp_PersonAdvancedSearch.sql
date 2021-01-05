@@ -64,13 +64,15 @@ END
 
 IF @Age IS NOT NULL AND @Age <> 0
 BEGIN
-SET @WHERE = @WHERE + ' AND datediff(year,persons.Birthdate,getdate()) = ' +trim(cast(  @age  as varchar(10)))
+SET @WHERE = @WHERE + ' AND datediff(year,persons.Birthdate,getdate()) <= ' +trim(cast(  @age  as varchar(10))) 
++ ' AND datediff(year,persons.Birthdate,getdate()) + 1 > ' +trim(cast(  @age  as varchar(10)))
 END
 
 
 IF @Birthdate IS NOT NULL AND @Birthdate <> '1-1-1'
 BEGIN
-SET @WHERE = @WHERE + ' AND persons.Birthdate = ''' + trim(cast( @Birthdate  as varchar(28))) + ''''
+SET @WHERE = @WHERE + ' AND Month(persons.Birthdate) = ' + trim(cast( month(@Birthdate ) as varchar(28))) + 
+	' AND Day(persons.Birthdate) = ' + trim(cast( day(@Birthdate ) as varchar(28)))
 END
 
 
@@ -148,17 +150,17 @@ END
 IF @ClassificationId IS NOT NULL AND @ClassificationId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND ( Persons.UserId IN (SELECT UserID FROM ClassificationUsers WHERE ClassificationId =' +trim(cast( @ClassificationId  as varchar(10)))+ ') OR ' +
-	'Persons.UserId IN (SELECT UserID FROM ClassificationRoles JOIN AspNetUserRoles ON ClassificationRoles.RoleID = AspNetUserRoles.RoleID WHERE ClassificationId =' + @ClassificationId + ')) '
+	'Persons.UserId IN (SELECT UserID FROM ClassificationRoles JOIN AspNetUserRoles ON ClassificationRoles.RoleID = AspNetUserRoles.RoleID WHERE ClassificationId =' + trim(cast( @ClassificationId  as varchar(10))) + ')) '
 END
 
 
 IF @ClassificationValueId IS NOT NULL AND @ClassificationValueId <> 0
 BEGIN
 SET @WHERE = @WHERE + ' AND ( Persons.UserId IN (SELECT UserID FROM ClassificationValueUsers WHERE ClassificationValueId =' +trim(cast( @ClassificationValueId  as varchar(10)))+ ') OR ' +
-	'Persons.UserId IN (SELECT UserID FROM ClassificationValueRoles JOIN AspNetUserRoles ON ClassificationValueRoles.RoleID = AspNetUserRoles.RoleID WHERE ClassificationValueId =' + @ClassificationValueId + ')) '
+	'Persons.UserId IN (SELECT UserID FROM ClassificationValueRoles JOIN AspNetUserRoles ON ClassificationValueRoles.RoleID = AspNetUserRoles.RoleID WHERE ClassificationValueId =' + trim(cast( @ClassificationValueId  as varchar(10))) + ')) '
 END
 
 SET @statement = TRIM(@FROM) + ' ' + TRIM(@WHERE)
 
-select @statement
---EXECUTE sp_executesql @statement
+--select @statement
+EXECUTE sp_executesql @statement

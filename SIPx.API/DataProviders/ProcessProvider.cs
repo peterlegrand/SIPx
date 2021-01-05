@@ -64,12 +64,6 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public async Task<List<NewProcessTemplateList>> CreateGetTemplateList(string SQLString)
-        {
-            var x = await _sqlDataAccess.LoadData<NewProcessTemplateList>(SQLString);
-            return x;
-        }
-
         public Task<ProcessDeleteGet> DeleteGet(string UserId, int ProcessId)
         {
             string usp = "usp_ProcessDeleteGet @UserId, @ProcessID";

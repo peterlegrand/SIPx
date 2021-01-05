@@ -21,35 +21,35 @@ namespace SIPx.DataAccess
 
         public async Task<FrontProjectIndexGet> IndexGet(string UserId, int ProjectId)
         {
-            string usp = "usp_FrontProjectIndexGet @UserId  , @ProjectId";
+            string usp = "usp_FrontProjectDashboard @UserId  , @ProjectId";
             var Project = await _sqlDataAccess.LoadSingleRecord<FrontProjectIndexGet, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return Project;
         }
 
         public async Task<List<FrontOrganizationIndexGetSubProject>> IndexGetSubProject(string UserId, int ProjectId)
         {
-            string usp = "usp_FrontProjectIndexGetSubProject @UserId, @ProjectId";
+            string usp = "usp_FrontProjectDashboardSubProject @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<FrontOrganizationIndexGetSubProject, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }
 
         public async Task<List<FrontProjectIndexGetMember>> IndexGetMember(string UserId, int ProjectId)
         {
-            string usp = "usp_FrontProjectIndexGetMember @UserId, @ProjectId";
+            string usp = "usp_FrontProjectDashboardMember @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<FrontProjectIndexGetMember, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }
 
         public async Task<List<FrontProjectIndexGetContent>> IndexGetContent(string UserId, int ProjectId)
         {
-            string usp = "usp_FrontProjectIndexGetContent @UserId, @ProjectId";
+            string usp = "usp_FrontProjectDashboardContent @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<FrontProjectIndexGetContent, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }
 
         public async Task<List<FrontProjectIndexGetProcess>> IndexGetProcess(string UserId, int ProjectId)
         {
-            string usp = "usp_FrontProjectIndexGetProcess @UserId, @ProjectId";
+            string usp = "usp_FrontProjectDashboardProcess @UserId, @ProjectId";
             var x = await _sqlDataAccess.LoadData<FrontProjectIndexGetProcess, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
             return x;
         }

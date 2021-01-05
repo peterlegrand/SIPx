@@ -12,8 +12,8 @@ CREATE PROCEDURE usp_PersonCreatePost (
 	, @GenderId int
 	, @Birthdate DateTime 
 	, @DefaultOrganizationId int
-	, @UserId nvarchar(450) =''
-	, @ModifierCreator nvarchar(450)) 
+	, @SelectedUserId nvarchar(450) =''
+	, @UserId nvarchar(450)) 
 AS 
 INSERT INTO Persons (
 	Salutation 
@@ -49,9 +49,9 @@ VALUES (
 	, @GenderId 
 	, @Birthdate 
 	, @DefaultOrganizationId 
+	, @SelectedUserId 
 	, @UserId 
-	, @ModifierCreator 
 	, getdate()
-	, @ModifierCreator 
+	, @UserId
 	, getdate())
 

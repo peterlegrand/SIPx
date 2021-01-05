@@ -1,4 +1,4 @@
-﻿@model FrontUserIndexGet
+﻿@model FrontPersonDashboard
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User dashboard")).TermString;
@@ -9,6 +9,15 @@
         <h1>
             <img src="~/images/icons/User.png" height="50" width="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("User dashboard")).TermString: @Model.FirstName
         </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        @if (!Model.IsUser)
+        {
+            <a asp-action="Edit" asp-route-id="@Model.PersonId">
+                <img src="~/images/icons/Edit.png" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" width="20" height="20" />&nbsp;
+            </a>}
     </div>
 </div>
 <div class="row">
@@ -52,44 +61,67 @@
         <div>&nbsp;@Model.BirthDate</div>
         <div>&nbsp;@Model.SecurityLevelName</div>
         <div>&nbsp;@Model.OrganizationName</div>
-        <div>&nbsp;<a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.CreatorId">@Model.CreatorName</a></div>
+        <div>&nbsp;<a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.CreatorId">@Model.CreatorName</a></div>
         <div>&nbsp;@Model.CreatedDate</div>
-        <div>&nbsp;<a asp-controller="FrontUser" asp-action="Dashboard" asp-route-id="@Model.ModifierId">@Model.ModifierName</a></div>
+        <div>&nbsp;<a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.ModifierId">@Model.ModifierName</a></div>
         <div>&nbsp;@Model.ModifiedDate</div>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/Address.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Addresses")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/Address.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Addresses")).TermString
+            </h2>
+        </div>
+        @if (!Model.IsUser)
+        {
+            <div class="col-12">
+                <a asp-controller="FrontPersonAddress" asp-action="Create" asp-route-id="@Model.PersonId">
+                    <img src="~/images/icons/Edit.png" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
+                </a>
+            </div>
+        }
         <ejs-grid id="Address" dataSource="@Model.Addresses" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
                 <e-grid-column field="AddressTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Address type")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column template="#Address1Column" field="Address1" headerText="@Term.Find(x => x.InternalName.Equals("Address 1")).TermString" textAlign="Right" type="text"></e-grid-column>
                 <e-grid-column field="CountryName" headerText="@Term.Find(x => x.InternalName.Equals("Country")).TermString" textAlign="Right" type="text"></e-grid-column>
                 <e-grid-column field="City" headerText="@Term.Find(x => x.InternalName.Equals("City")).TermString" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/Telecom.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Telecom")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/Telecom.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Telecom")).TermString
+            </h2>
+        </div>
+        @if (!Model.IsUser)
+        {
+            <div class="col-12">
+                <a asp-controller="FrontPersonTelecom" asp-action="Create" asp-route-id="@Model.PersonId">
+                    <img src="~/images/icons/Edit.png" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
+                </a>
+            </div>
+        }
         <ejs-grid id="Telecom" dataSource="@Model.Telecoms" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
                 <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Type")).TermString" field="TelecomTypeName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Telecom value")).TermString" field="TelecomValue" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column template="#TelecomValueColumn"  headerText="@Term.Find(x => x.InternalName.Equals("Telecom value")).TermString" field="TelecomValue" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/Organization.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Organizations")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/Organization.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Organizations")).TermString
+            </h2>
+        </div>
         <ejs-grid id="Organization" dataSource="@Model.Organizations" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -99,9 +131,11 @@
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/Project.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Projects")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/Project.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Projects")).TermString
+            </h2>
+        </div>
         <ejs-grid id="Project" dataSource="@Model.Projects" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -114,9 +148,11 @@
 
 <div class="row">
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/Process.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Processes")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/Process.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Processes")).TermString
+            </h2>
+        </div>
         <ejs-grid id="Process" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -127,9 +163,11 @@
         </ejs-grid>
     </div>
     <div class="col-6">
-        <div><h2>
-    <img src="~/images/icons/Content.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content")).TermString
-</h2></div>
+        <div>
+            <h2>
+                <img src="~/images/icons/Content.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content")).TermString
+            </h2>
+        </div>
         <ejs-grid id="Content" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
@@ -154,6 +192,18 @@
 <script id="ContentPanel" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/FrontContent/ShowContent/${ContentId}"><u>${Title}</u></a>
+
+    </div>
+</script>
+<script id="Address1Column" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontPersonAddress/View/${PersonAddressID}"><u>${Address1}</u></a>
+
+    </div>
+</script>
+<script id="TelecomValueColumn" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontPersonTelecom/View/${PersonTelecomID}"><u>${TelecomValue}</u></a>
 
     </div>
 </script>

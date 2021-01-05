@@ -7,7 +7,7 @@
 
 <h1>
     <img src="~/images/icons/Todo.png" width="50" height="50" />
-    @*@Term.Find(x => x.InternalName.Equals("Persons")).TermString*@
+    @Term.Find(x => x.InternalName.Equals("To do")).TermString
 </h1>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>

@@ -6,10 +6,11 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontUserIndexGet
+    public class FrontPersonDashboard
     {
         [Key]
         public string Id { get; set; }
+        public bool IsUser { get; set; }
         public int PersonId { get; set; }
         public int SecurityLevelId { get; set; }
         public string Salutation { get; set; }

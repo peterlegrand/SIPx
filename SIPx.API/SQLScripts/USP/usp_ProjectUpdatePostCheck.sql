@@ -1,8 +1,12 @@
 CREATE PROCEDURE usp_ProjectUpdatePostCheck (
 	@ProjectId int
-	, @ParentProjectId int
-	, @ProjectTypeId int 
+	, @ProjectTypeId int
+	, @StatusId int 
+	, @SecurityLevelId int
 	, @Name nvarchar(50)
+	, @Description nvarchar(max)
+	, @MenuName nvarchar(50)
+	, @MouseOver nvarchar(50)
 	, @UserId nvarchar(450)) 
 AS 
 
@@ -21,10 +25,6 @@ BEGIN
 insert into @ErrorIdsTable values(57)
 END
 
-IF (SELECT COUNT(*) FROM Projects WHERE ProjectId = @ParentProjectId) = 0 OR @ParentProjectId IS NULL
-BEGIN
-insert into @ErrorIdsTable values(57)
-END
 
 IF (SELECT COUNT(*) FROM ProjectTypes WHERE ProjectTypeId= @ProjectTypeId) = 0
 BEGIN

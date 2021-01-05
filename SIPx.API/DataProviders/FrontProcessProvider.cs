@@ -29,6 +29,13 @@ namespace SIPx.DataAccess
             return x;
         }
 
+        public async Task<List<NewProcessTemplateList>> CreateGetTemplateList(string SQLString)
+        {
+            var x = await _sqlDataAccess.LoadData<NewProcessTemplateList>(SQLString);
+            return x;
+        }
+
+
         //THIS might be old
         public async Task<List<NewProcessTemplateList>> NewProcessShowTemplate(string UserId)
         {

@@ -7,12 +7,12 @@ CREATE PROCEDURE [dbo].[usp_ProjectCreatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @CreatorId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @CreatorId
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 IF @ParentProjectId = 0
 BEGIN
@@ -35,9 +35,9 @@ VALUES (
 	, @ProjectTypeID
 	, @StatusID
 	, @SecurityLevelId
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 	DECLARE @NewProjectId int	= scope_identity();
@@ -60,9 +60,9 @@ VALUES (
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 	COMMIT TRANSACTION

@@ -22,14 +22,14 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(ProjectCreateGet Project)
         {
-            string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, LanguageId, @Name, @CreatorId";
+            string usp = "usp_ProjectCreatePostCheck @ProjectTypeId, @ParentProjectId, @StatusId, @SecurityLevelId, @Name, @Description, @MenuName, @MouseOver, @UserId";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Project);
             return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ProjectCreateGet Project)
         {
-            string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, @SecurityLevelId, @Name, @Description, @MenuName, @MouseOver, @CreatorId";
+            string usp = "usp_ProjectCreatePost @ProjectTypeId, @ParentProjectId, @StatusId, @SecurityLevelId, @Name, @Description, @MenuName, @MouseOver, @UserId";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Project);
             return CheckString;
         }

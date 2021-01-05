@@ -11,7 +11,6 @@ namespace SIPx.DataAccess
         Task<List<FrontProcessNewProcessField>> CreateGet(string UserId, int ProcessTemplateId);
         Task<List<FrontProcessProcessTemplateFlowConditions>> CreateGetInitialTemplateFlowConditionList(int ProcessTemplateFlowId);
         Task<List<FrontProcessTemplateIdFlowId>> CreateGetInitialTemplateFlowList();
-        Task<List<NewProcessTemplateList>> CreateGetTemplateList(string SQLString);
         Task<bool> CreatePost(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields);
         Task<ProcessDeleteGet> DeleteGet(string UserId, int ProcessId);
         bool DeletePost(string UserId, int ProcessId);

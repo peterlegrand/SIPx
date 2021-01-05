@@ -10,8 +10,7 @@ WHERE USerId = @CurrentUserID
 
 
 SELECT
-	AspNetUsers.SecurityLevelID
-	, Persons.PersonId
+	Persons.PersonId
 	, Persons.Salutation
 	, Persons.FirstName
 	, Persons.MiddleName
@@ -25,30 +24,36 @@ SELECT
 	, Persons.FirstName
 	, ISNULL( UserGenderName.Customization, GenderName.Name) GenderName
 	, Persons.BirthDate
-	, ISNULL( UserSecurityLevelName.Customization, SecurityLevelName.Name) SecurityLevelName
+	, ISNULL( Users.SecurityLevelName, 'No user') SecurityLevelName 
 	, ISNULL(UserOrganizationLanguage.Name,ISNULL(DefaultOrganizationLanguage.Name,'No name for this organization')) OrganizationName
-	, AspNetUsers.SecurityLevelID
+	, ISNULL(Users.SecurityLevelID,0) SecurityLeveLId
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, Persons.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Modifier.PersonID ModifierID
 	, Persons.ModifiedDate
-FROM   AspNetUsers
-JOIN Persons
-	ON AspNetUsers.Id = Persons.UserID
+FROM Persons 
+LEFT JOIN (
+	SELECT AspNetUsers.Id
+	, AspNetUsers.SecurityLevelID
+	, ISNULL( UserSecurityLevelName.Customization, SecurityLevelName.Name) SecurityLevelName
+	FROM AspNetUsers
+	JOIN SecurityLevels
+		ON SecurityLevels.SecurityLevelId = AspNetUsers.SecurityLevelID
+	JOIN UITermLanguages SecurityLevelName
+		ON SecurityLevels.NameTermId = SecurityLevelName.UITermId  
+	LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserSecurityLevelName
+		ON SecurityLevels.NameTermId = UserSecurityLevelName.UITermId  
+	WHERE SecurityLevelName.LanguageId = @LanguageID) AS Users
+
+	ON Users.Id = Persons.UserID
 JOIN Genders
 	ON Persons.GenderID = Genders.GenderId
 JOIN UITermLanguages GenderName
 	ON Genders.NameTermId = GenderName.UITermId  
 LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserGenderName
 	ON Genders.NameTermId = UserGenderName.UITermId  
-JOIN SecurityLevels
-	ON SecurityLevels.SecurityLevelId = AspNetUsers.SecurityLevelID
-JOIN UITermLanguages SecurityLevelName
-	ON SecurityLevels.NameTermId = SecurityLevelName.UITermId  
-LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserSecurityLevelName
-	ON SecurityLevels.NameTermId = UserSecurityLevelName.UITermId  
 LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserOrganizationLanguage
 	ON UserOrganizationLanguage.OrganizationID= Persons.DefaultOrganizationID
 LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultOrganizationLanguage
@@ -59,5 +64,4 @@ JOIN Persons Modifier
 	ON Modifier.UserId = Persons.ModifierID
 WHERE  Persons.PersonId = @SelectedPersonId
 	AND GenderName.LanguageId = @LanguageID
-	AND SecurityLevelName.LanguageId = @LanguageID
 END;

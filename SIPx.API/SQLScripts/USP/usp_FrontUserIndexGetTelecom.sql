@@ -14,10 +14,10 @@ SELECT PersonTelecoms.PersonTelecomID
 	, ISNULL(PersonTelecomPhones.ExtensionCode,'') ExtensionCode
 	, ISNULL(PersonTelecomPhones.AskForName,'') AskForName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
-	, PersonTelecoms.CreatorID
+	, Creator.PersonID CreatorID
 	, PersonTelecoms.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
-	, PersonTelecoms.ModifierID
+	, Modifier.PersonID ModifierID
 	, PersonTelecoms.ModifiedDate
 FROM PersonTelecoms
 JOIN PersonTelecomPhones

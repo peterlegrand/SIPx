@@ -22,14 +22,14 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(PersonCreateGet Person)
         {
-            string usp = "usp_PersonCreateCheck @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId , @CreatorId";
+            string usp = "usp_PersonCreatePostCheck @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DefaultOrganizationId, @SelectedUserId, @UserId ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Person);
             return ErrorMessages;
         }
 
         public async Task<string> CreatePost(PersonCreateGet Person)
         {
-            string usp = "usp_PersonCreatePost @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DefaultOrganizationId, @UserId, @CreatorId ";
+            string usp = "usp_PersonCreatePost @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DefaultOrganizationId, @SelectedUserId, @UserId ";
             var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Person);
             return CheckString;
         }
@@ -48,13 +48,13 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(PersonUpdateGet Person)
         {
-            string usp = "usp_PersonUpdateCheck @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId , @CreatorId";
+            string usp = "usp_PersonUpdatePostCheck @PersonId , @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId, @SelectedUserId";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Person);
             return ErrorMessages;
         }
         public bool UpdatePost(PersonUpdateGet Person)
         {
-            string usp = "usp_PersonUpdatePost @PersonId , @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId, @ModifierId";
+            string usp = "usp_PersonUpdatePost @PersonId , @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId, @SelectedUserId";
             _sqlDataAccess.SaveData<PersonUpdateGet>(usp, Person);
             return true;
         }

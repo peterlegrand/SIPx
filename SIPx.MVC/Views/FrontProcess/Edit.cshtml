@@ -7,7 +7,7 @@
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Edit process")).TermString;
 
     Layout = "_Layout"; }
-    <h1><img src="~/images/icons/Process.png" width="50" height="50" />New process</h1>
+<h1><img src="~/images/icons/Process.png" width="50" height="50" />&nbsp @Term.Find(x => x.InternalName.Equals("Edit process")).TermString -&nbsp @Model.TemplateName</h1>
     <div class=" control-section">
         <div class="container">
             <form method="post">
@@ -15,7 +15,6 @@
                     <ejs-numerictextbox id="ProcessId" ejs-for="@Model.ProcessId"></ejs-numerictextbox>
                     <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId"></ejs-numerictextbox>
                 </p>
-                <h1>@Model.TemplateName</h1>
                 @Model.CreatorName
                 @Model.CreatedDate
                 @*  @Html.EditorForModel()*@

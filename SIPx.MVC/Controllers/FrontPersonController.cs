@@ -52,10 +52,81 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Dashboard(int Id)
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-            var response = await _client.GetProtectedAsync<FrontUserIndexGet>($"{_baseUrl}api/FrontPerson/Dashboard/" + Id, token);
+            var response = await _client.GetProtectedAsync<FrontPersonDashboard>($"{_baseUrl}api/FrontPerson/Dashboard/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/Dashboard", token);
             ViewBag.UITerms = UITerms;
             return View(response);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync2<FrontPersonUpdateGet>($"{_baseUrl}api/FrontPerson/Update/" + id, token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/Edit", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessage = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessage;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Front");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(FrontPersonUpdateGet Person)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var FrontPersonUpdateGetWithErrorMessage = await _client.PostProtectedAsync<FrontPersonUpdateGetWithErrorMessages>($"{_baseUrl}api/FrontPerson/Update", Person, token);
+            if (FrontPersonUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/Edit", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = FrontPersonUpdateGetWithErrorMessage.ErrorMessages;
+                return View(FrontPersonUpdateGetWithErrorMessage.Person);
+            }
+
+            return RedirectToAction("Index", "Front");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+            var response = await _client.GetProtectedAsync2<FrontPersonCreateGet>($"{_baseUrl}api/FrontPerson/Create/", token);
+            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/Create", token);
+            ViewBag.UITerms = UITerms;
+            var ErrorMessages = new List<ErrorMessage>();
+            ViewBag.ErrorMessages = ErrorMessages;
+            if (response.Item2 == true)
+            {
+                return View(response.Item1);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Front");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(FrontPersonCreateGet Person)
+        {
+            var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
+
+            var FrontPersonCreateGetWithErrorMessage = await _client.PostProtectedAsync<FrontPersonCreateGetWithErrorMessages>($"{_baseUrl}api/FrontPerson/Create", Person, token);
+            if (FrontPersonCreateGetWithErrorMessage.ErrorMessages.Count > 0)
+            {
+                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPerson/Create", token);
+                ViewBag.UITerms = UITerms;
+                ViewBag.ErrorMessages = FrontPersonCreateGetWithErrorMessage.ErrorMessages;
+                return View(FrontPersonCreateGetWithErrorMessage.Person);
+            }
+
+
+            return RedirectToAction("Index", "Front");
+
         }
     }
 

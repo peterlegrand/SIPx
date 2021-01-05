@@ -54,5 +54,45 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontPersonSearchResult, dynamic>(usp, SearchData);
             return x;
         }
+
+        public async Task<List<ErrorMessage>> CreatePostCheck(FrontPersonCreateGet Person)
+        {
+            string usp = "usp_FrontPersonCreatePostCheck @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DefaultOrganizationId, @UserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Person);
+            return ErrorMessages;
+        }
+
+        public async Task<string> CreatePost(FrontPersonCreateGet Person)
+        {
+            string usp = "usp_FrontPersonCreatePost @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DefaultOrganizationId, @UserId ";
+            var CheckString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, Person);
+            return CheckString;
+        }
+
+        public async Task<int> UpdateGetCheckIfNonUser(int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonUpdateGetCheckIfNotUser @SelectedPersonId ";
+            var CheckInt = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { SelectedPersonId });
+            return CheckInt;
+        }
+
+
+        public Task<FrontPersonUpdateGet> UpdateGet(string UserId, int PersonId)
+        {
+            string usp = "usp_PersonUpdateGet @UserId, @PersonID";
+            return _sqlDataAccess.LoadSingleRecord<FrontPersonUpdateGet, dynamic>(usp, new { UserId = UserId, PersonId = PersonId });
+        }
+        public async Task<List<ErrorMessage>> UpdatePostCheck(FrontPersonUpdateGet Person)
+        {
+            string usp = "usp_FrontPersonUpdatePostCheck @PersonId , @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Person);
+            return ErrorMessages;
+        }
+        public bool UpdatePost(FrontPersonUpdateGet Person)
+        {
+            string usp = "usp_FrontPersonUpdatePost @PersonId , @Salutation, @FirstName, @MiddleName, @LastName, @PersonalTitle, @Suffix, @NickName, @FirstNameLocal, @MiddleNameLocal, @LastNameLocal, @GenderId, @Birthdate, @DeceasedDate, @DefaultOrganizationId, @UserId ";
+            _sqlDataAccess.SaveData<FrontPersonUpdateGet>(usp, Person);
+            return true;
+        }
     }
 }

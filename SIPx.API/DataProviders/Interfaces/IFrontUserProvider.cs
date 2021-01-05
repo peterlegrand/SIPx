@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IFrontUserProvider
     {
-        Task<FrontUserIndexGet> IndexGet(string CurrentUserId, int SelectedPersonId);
+        Task<FrontPersonDashboard> IndexGet(string CurrentUserId, int SelectedPersonId);
         Task<List<FrontUserIndexGetAddress>> IndexGetAddress(string CurrentUserId, int SelectedPersonId);
         Task<List<FrontUserIndexGetContent>> IndexGetContent(string CurrentUserId, int SelectedPersonId);
         Task<List<FrontUserIndexGetOrganization>> IndexGetOrganization(string CurrentUserId, int SelectedPersonId);

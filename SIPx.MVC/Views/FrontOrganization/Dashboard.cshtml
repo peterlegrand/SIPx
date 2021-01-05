@@ -43,6 +43,15 @@
         <div> @Term.Find(x => x.InternalName.Equals("Modified date")).TermString:</div>
     </div>
     <div class="col-3">
+        @if (Model.ParentOrganizationId == null)
+        {
+            <div> @Term.Find(x => x.InternalName.Equals("No parent")).TermString</div>
+
+        }
+        else
+        {
+            <div><a asp-route-id="@Model.ParentOrganizationId"> @Model.ParentOrganizationName</a></div>
+        }
         <div> @Model.ParentOrganizationName</div>
         <div> @Model.StatusName</div>
         <div> @Model.OrganizationTypeName</div>

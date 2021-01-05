@@ -71,9 +71,9 @@ END
 
 IF @PersonId IS NOT NULL AND @PersonId <>0
 BEGIN
-SET @WHERE = @WHERE + ' AND CAST(Organizations.OrganizationId as varchar(10) IN (SELECT ClaimValue FROM AspRoleClaims JOIN AspUserRoles ON AspRoleClaims.RoleId = AspUserRoles.RoleId JOIN Persons ON AspUserRoles.UserId = Persons.UserId WHERE PersonId = ' + trim(cast(@PersonId as varchar(10)))  + ' AND AspRoleClaims.ClaimType = ''OrganizationRight'')' 
+SET @WHERE = @WHERE + ' AND CAST(Organizations.OrganizationId as varchar(10)) IN (SELECT ClaimValue FROM AspNetRoleClaims JOIN AspNetUserRoles ON AspNetRoleClaims.RoleId = AspNetUserRoles.RoleId JOIN Persons ON AspNetUserRoles.UserId = Persons.UserId WHERE PersonId = ' + trim(cast(@PersonId as varchar(10)))  + ' AND AspNetRoleClaims.ClaimType = ''OrganizationRight'')' 
 END
 
 SET @statement = TRIM(@FROM) + ' ' + TRIM(@WHERE)
 --SELECT @statement
-EXECUTE sp_executesql @statement
+exec sp_executesql @statement

@@ -15,7 +15,7 @@ CREATE PROCEDURE [dbo].[usp_PersonUpdatePost] (
 	, @DeceasedDate DateTime
 	, @DefaultOrganizationId int
 	, @UserId nvarchar(450)
-	, @Modifier nvarchar(450)) 
+	, @SelectedUserId nvarchar(450)) 
 AS 
 UPDATE Persons SET
 	Salutation = @Salutation 
@@ -32,7 +32,7 @@ UPDATE Persons SET
 	, Birthdate = @Birthdate 
 	, DeceasedDate = @DeceasedDate 
 	, DefaultOrganizationId = @DefaultOrganizationId 
-	, UserId = @UserId 
-	, ModifierId = @Modifier
+	, UserId = @SelectedUserId 
+	, ModifierId = @UserId
 	, ModifiedDate = Getdate()
 WHERE PersonID = @PersonId

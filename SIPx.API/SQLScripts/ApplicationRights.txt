@@ -313,4 +313,16 @@ UserPageSection\Update
 UserPageSection\Index
 UserPreference\Update
 UserPreference\Index
-FrontOrganization\Edit
+FrontOrganization\Update
+FrontPerson\Update
+FrontPersonAddress\Update
+FrontPersonAddress\View
+FrontPersonAddress\Create
+FrontPersonAddress\Delete
+FrontPersonTelecom\Update
+FrontPersonTelecom\View
+FrontPersonTelecom\Create
+FrontPersonTelecom\Delete
+FrontPerson\Create
+FrontProject\Create
+FrontProject\Edit

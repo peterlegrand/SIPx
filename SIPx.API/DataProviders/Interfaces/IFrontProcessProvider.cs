@@ -24,5 +24,6 @@ namespace SIPx.DataAccess
         Task<FrontProcessUpdateGet> FrontProcessUpdateGet(string UserId, int ProcessId);
         Task<List<FrontProcessUpdateGetField>> FrontProcessUpdateGetFields(string UserId, int ProcessId);
         Task<List<int>> FrontProcessUpdateReturnFlows(int ProcessTemplateStageId);
+        Task<List<NewProcessTemplateList>> CreateGetTemplateList(string SQLString);
     }
 }

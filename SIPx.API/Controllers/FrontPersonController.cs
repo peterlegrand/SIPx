@@ -6,6 +6,7 @@ using SIPx.API.Models;
 using SIPx.DataAccess;
 using SIPx.Shared;
 using System;
+using System.Collections.Generic;
 
 namespace SIPx.API.Controllers
 {
@@ -15,6 +16,7 @@ namespace SIPx.API.Controllers
     public class FrontPersonController : ControllerBase
     {
         private readonly IFrontUserProvider _frontUserProvider;
+        private readonly IGenderProvider _genderProvider;
         private readonly IPersonProvider _personProvider;
         private readonly IRoleProvider _roleProvider;
         private readonly IMasterListProvider _masterListProvider;
@@ -28,6 +30,7 @@ namespace SIPx.API.Controllers
         private readonly UserManager<SipUser> _userManager;
 
         public FrontPersonController(IFrontUserProvider frontUserProvider
+            , IGenderProvider genderProvider
             , IPersonProvider personProvider
             , IRoleProvider roleProvider
             , IMasterListProvider masterListProvider
@@ -41,6 +44,7 @@ namespace SIPx.API.Controllers
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _frontUserProvider = frontUserProvider;
+            _genderProvider = genderProvider;
             _personProvider = personProvider;
             _roleProvider = roleProvider;
             _masterListProvider = masterListProvider;
@@ -139,7 +143,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var User = new FrontUserIndexGet();
+                var User = new FrontPersonDashboard();
                 User = await _frontUserProvider.IndexGet(CurrentUser.Id, Id);
                 var Address = await _frontUserProvider.IndexGetAddress(CurrentUser.Id, Id);
                 var Telecom = await _frontUserProvider.IndexGetTelecom(CurrentUser.Id, Id);
@@ -164,6 +168,110 @@ namespace SIPx.API.Controllers
                 IsSuccess = false,
                 Message = "No rights",
             });
+        }
+
+        private async Task<FrontPersonCreateGet> CreateAddDropDownBoxes(FrontPersonCreateGet Person, string UserId)
+        {
+            var Genders = await _genderProvider.List(UserId);
+            var Organizations = await _organizationProvider.List(UserId);
+            Person.Genders = Genders;
+            Person.Organizations = Organizations;
+            return Person;
+        }
+        private async Task<FrontPersonUpdateGet> UpdateAddDropDownBoxes(FrontPersonUpdateGet Person, string UserId)
+        {
+
+            var Gender = await _genderProvider.List(UserId);
+            var Organization = await _organizationProvider.List(UserId);
+
+            Person.Genders = Gender;
+            Person.Organizations = Organization;
+            return Person;
+        }
+
+        [HttpGet("Create")]
+        public async Task<IActionResult> Create()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                var Person = new FrontPersonCreateGet();
+                Person = await CreateAddDropDownBoxes(Person, CurrentUser.Id);
+                return Ok(Person);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create(FrontPersonCreateGet Person)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            Person.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                ErrorMessages = await _frontPersonProvider.CreatePostCheck(Person);
+                if (ErrorMessages.Count > 0)
+                {
+                    Person = await CreateAddDropDownBoxes(Person, CurrentUser.Id);
+                }
+                else
+                {
+                    _frontPersonProvider.CreatePost(Person);
+                }
+                FrontPersonCreateGetWithErrorMessages PersonWithErrorMessage = new FrontPersonCreateGetWithErrorMessages { Person = Person, ErrorMessages = ErrorMessages };
+                return Ok(PersonWithErrorMessage);
+            }
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            FrontPersonCreateGetWithErrorMessages PersonWithNoRights = new FrontPersonCreateGetWithErrorMessages { Person = Person, ErrorMessages = ErrorMessages };
+            return Ok(PersonWithNoRights);
+        }
+        [HttpGet("Update/{Id:int}")]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var INonsUserCount = await _frontPersonProvider.UpdateGetCheckIfNonUser(Id);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()) && INonsUserCount == 1)
+            {
+
+                var Person = await _frontPersonProvider.UpdateGet(CurrentUser.Id, Id);
+                Person = await UpdateAddDropDownBoxes(Person, CurrentUser.Id);
+                return Ok(Person);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(FrontPersonUpdateGet Person)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            Person.UserId = CurrentUser.Id;
+            var ErrorMessages = new List<ErrorMessage>();
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                ErrorMessages = await _frontPersonProvider.UpdatePostCheck(Person);
+                if (ErrorMessages.Count > 0)
+                {
+                    Person = await UpdateAddDropDownBoxes(Person, CurrentUser.Id);
+                }
+                else
+                {
+                    _frontPersonProvider.UpdatePost(Person);
+                }
+                FrontPersonUpdateGetWithErrorMessages FrontPersonWithErrorMessage = new FrontPersonUpdateGetWithErrorMessages { Person = Person, ErrorMessages = ErrorMessages };
+                return Ok(FrontPersonWithErrorMessage);
+            }
+            ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
+            FrontPersonUpdateGetWithErrorMessages FrontPersonWithNoRights = new FrontPersonUpdateGetWithErrorMessages { Person = Person, ErrorMessages = ErrorMessages };
+            return Ok(FrontPersonWithNoRights);
         }
     }
 }
