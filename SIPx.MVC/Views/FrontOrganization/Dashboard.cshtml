@@ -65,6 +65,54 @@
     <div class="col-6">
         <div>
             <h2>
+                <img src="~/images/icons/Address.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Addresses")).TermString
+            </h2>
+        </div>
+        @if (!Model.CanEdit)
+        {
+            <div class="col-12">
+                <a asp-controller="FrontPersonAddress" asp-action="Create" asp-route-id="@Model.OrganizationId">
+                    <img src="~/images/icons/Add.png" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
+                </a>
+            </div>
+        }
+        <ejs-grid id="Address" dataSource="@Model.Addresses" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column field="AddressTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Address type")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column template="#Address1Column" field="Address1" headerText="@Term.Find(x => x.InternalName.Equals("Address 1")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="CountryName" headerText="@Term.Find(x => x.InternalName.Equals("Country")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="City" headerText="@Term.Find(x => x.InternalName.Equals("City")).TermString" textAlign="Right" type="text"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+    <div class="col-6">
+        <div>
+            <h2>
+                <img src="~/images/icons/Telecom.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Telecom")).TermString
+            </h2>
+        </div>
+        @if (!Model.CanEdit)
+        {
+            <div class="col-12">
+                <a asp-controller="FrontPersonTelecom" asp-action="Create" asp-route-id="@Model.OrganizationId">
+                    <img src="~/images/icons/Add.png" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
+                </a>
+            </div>
+        }
+        <ejs-grid id="Telecom" dataSource="@Model.Telecoms" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Type")).TermString" field="TelecomTypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column template="#TelecomValueColumn" headerText="@Term.Find(x => x.InternalName.Equals("Telecom value")).TermString" field="TelecomValue" textAlign="Right" type="text"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div>
+            <h2>
                 <img src="~/images/icons/Organization.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Sub organizations")).TermString
             </h2>
         </div>

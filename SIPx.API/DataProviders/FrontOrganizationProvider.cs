@@ -25,6 +25,19 @@ namespace SIPx.DataAccess
             var Organization = await _sqlDataAccess.LoadSingleRecord<FrontOrganizationDashboard, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return Organization;
         }
+        public async Task<List<FrontOrganizationDashboardAddress>> DashboardAddress(string CurrentUserId, int SelectedOrganizationId)
+        {
+            string usp = "usp_FrontOrganizationDashboardAddress @CurrentUserId  , @SelectedOrganizationId";
+            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardAddress, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedOrganizationId = SelectedOrganizationId });
+            return x;
+        }
+
+        public async Task<List<FrontOrganizationDashboardTelecom>> DashboardTelecom(string CurrentUserId, int SelectedOrganizationId)
+        {
+            string usp = "usp_FrontOrganizationDashboardTelecom @CurrentUserId  , @SelectedOrganizationId";
+            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardTelecom, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedOrganizationId = SelectedOrganizationId });
+            return x;
+        }
 
         public async Task<List<FrontOrganizationDashboardSubOrganization>> DashboardSubOrganization(string UserId, int OrganizationId)
         {

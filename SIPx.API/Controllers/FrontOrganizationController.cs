@@ -13,6 +13,8 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontOrganizationController : ControllerBase
     {
+        private readonly IOrganizationAddressProvider _organizationAddressProvider;
+        private readonly IOrganizationTelecomProvider _organizationTelecomProvider;
         private readonly IPersonProvider _personProvider;
         private readonly IOrganizationTypeProvider _organizationTypeProvider;
         private readonly IOrganizationProvider _organizationProvider;
@@ -24,7 +26,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontOrganizationController (IPersonProvider personProvider
+        public FrontOrganizationController (IOrganizationAddressProvider organizationAddressProvider
+            , IOrganizationTelecomProvider organizationTelecomProvider
+            , IPersonProvider personProvider
             , IOrganizationTypeProvider organizationTypeProvider
             , IOrganizationProvider organizationProvider
             , IFrontOrganizationProvider frontOrganizationProvider
@@ -35,6 +39,8 @@ namespace SIPx.API.Controllers
             , IClassificationProvider classificationProvider
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _organizationAddressProvider = organizationAddressProvider;
+            _organizationTelecomProvider = organizationTelecomProvider;
             _personProvider = personProvider;
             _organizationTypeProvider = organizationTypeProvider;
             _organizationProvider = organizationProvider;
@@ -59,12 +65,16 @@ namespace SIPx.API.Controllers
                 var Content = await _frontOrganizationProvider.DashboardContent(CurrentUser.Id, Id);
                 var Process = await _frontOrganizationProvider.DashboardProcess(CurrentUser.Id, Id);
                 var Member = await _frontOrganizationProvider.DashboardMember(CurrentUser.Id, Id);
+                var Address = await _frontOrganizationProvider.DashboardAddress(CurrentUser.Id, Id);
+                var Telecom = await _frontOrganizationProvider.DashboardTelecom(CurrentUser.Id, Id);
                 Organization.SubOrganizations = subOrganization;
                 Organization.Contents = Content;
                 Organization.Processes= Process;
                 Organization.Members = Member;
-              //      var x= await _frontOrganizationProvider.IndexGetSubOrganizationTree(CurrentUser.Id, Id);
-            //    Organization.SubOrganizationTree = JObject.Parse(x);
+                Organization.Addresses= Address;
+                Organization.Telecoms = Telecom;
+                //      var x= await _frontOrganizationProvider.IndexGetSubOrganizationTree(CurrentUser.Id, Id);
+                //    Organization.SubOrganizationTree = JObject.Parse(x);
 
                 return Ok(Organization);
             }

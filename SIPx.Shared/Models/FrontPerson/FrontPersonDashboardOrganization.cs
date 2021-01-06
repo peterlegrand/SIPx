@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontUserIndexGetOrganization
+    public class FrontPersonDashboardOrganization
     {
         [Key]
         public string RoleId { get; set; }

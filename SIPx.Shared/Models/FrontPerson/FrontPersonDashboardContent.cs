@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontUserIndexGetContent
+    public class FrontPersonDashboardContent
     {
         [Key]
         public int ContentId { get; set; }

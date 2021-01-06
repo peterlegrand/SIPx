@@ -34,11 +34,11 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<FrontUserIndexGetAddress> Addresses { get; set; }
-        public List<FrontUserIndexGetTelecom> Telecoms { get; set; }
-        public List<FrontUserIndexGetOrganization> Organizations { get; set; }
-        public List<FrontUserIndexGetProject> Projects { get; set; }
-        public List<FrontUserIndexGetContent> Contents { get; set; }
-        public List<FrontUserIndexGetProcess> Processes { get; set; }
+        public List<FrontPersonDashboardAddress> Addresses { get; set; }
+        public List<FrontPersonDashboardTelecom> Telecoms { get; set; }
+        public List<FrontPersonDashboardOrganization> Organizations { get; set; }
+        public List<FrontPersonDashboardProject> Projects { get; set; }
+        public List<FrontPersonDashboardContent> Contents { get; set; }
+        public List<FrontPersonDashboardProcess> Processes { get; set; }
     }
 }

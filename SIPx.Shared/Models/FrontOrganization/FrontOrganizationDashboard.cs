@@ -27,6 +27,8 @@ namespace SIPx.Shared
         public int ModifierId { get; set; }
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public List<FrontOrganizationDashboardAddress> Addresses { get; set; }
+        public List<FrontOrganizationDashboardTelecom> Telecoms { get; set; }
 
         public List<FrontOrganizationDashboardSubOrganization> SubOrganizations { get; set; }
         public List<FrontOrganizationDashboardMember> Members { get; set; }

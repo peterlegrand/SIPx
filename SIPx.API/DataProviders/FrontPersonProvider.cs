@@ -94,5 +94,56 @@ namespace SIPx.DataAccess
             _sqlDataAccess.SaveData<FrontPersonUpdateGet>(usp, Person);
             return true;
         }
+        public async Task<FrontPersonDashboard> Dashboard(string CurrentUserId, int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonDashboard @CurrentUserId  , @SelectedPersonId";
+            var User = await _sqlDataAccess.LoadSingleRecord<FrontPersonDashboard, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            return User;
+        }
+
+        public async Task<List<FrontPersonDashboardAddress>> DashboardAddress(string CurrentUserId, int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonDashboardAddress @CurrentUserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardAddress, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            return x;
+        }
+
+        public async Task<List<FrontPersonDashboardTelecom>> DashboardTelecom(string CurrentUserId, int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonDashboardTelecom @CurrentUserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardTelecom, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            return x;
+        }
+
+        public async Task<List<FrontPersonDashboardOrganization>> DashboardOrganization(string CurrentUserId, int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonDashboardOrganization @CurrentUserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardOrganization, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            return x;
+        }
+
+        public async Task<List<FrontPersonDashboardProject>> DashboardProject(string CurrentUserId, int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonDashboardProject @CurrentUserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardProject, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            return x;
+        }
+
+        public async Task<List<FrontPersonDashboardContent>> DashboardContent(string CurrentUserId, int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonDashboardContent  @CurrentUserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardContent, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            return x;
+        }
+
+        public async Task<List<FrontPersonDashboardProcess>> DashboardProcess(string CurrentUserId, int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonDashboardProcess  @CurrentUserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardProcess, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            return x;
+        }
+
+
+
     }
 }

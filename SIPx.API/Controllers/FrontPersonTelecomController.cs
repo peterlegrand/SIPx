@@ -59,6 +59,8 @@ namespace SIPx.API.Controllers
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var PersonTelecom = new PersonTelecomCreateGet();
+                PersonTelecom.TelecomTypes = await _telecomTypeProvider.List(CurrentUser.Id);
+                PersonTelecom.PersonId = Id;
                 return Ok(PersonTelecom);
             }
             return BadRequest(new
@@ -151,11 +153,36 @@ namespace SIPx.API.Controllers
 
         }
 
+        [HttpGet("View/{Id:int}")]
+        public async Task<IActionResult> View(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                if (await _checkProvider.CheckIfRecordExists("PersonTelecoms", "PersonTelecomID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _personTelecomProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
+
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("PersonTelecoms", "PersonTelecomID", Id) == 0)
                 {

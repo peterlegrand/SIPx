@@ -15,7 +15,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontPersonController : ControllerBase
     {
-        private readonly IFrontUserProvider _frontUserProvider;
+//        private readonly IFrontUserProvider _frontUserProvider;
         private readonly IGenderProvider _genderProvider;
         private readonly IPersonProvider _personProvider;
         private readonly IRoleProvider _roleProvider;
@@ -29,8 +29,9 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontPersonController(IFrontUserProvider frontUserProvider
-            , IGenderProvider genderProvider
+        public FrontPersonController(
+            //IFrontUserProvider frontUserProvider
+             IGenderProvider genderProvider
             , IPersonProvider personProvider
             , IRoleProvider roleProvider
             , IMasterListProvider masterListProvider
@@ -43,7 +44,7 @@ namespace SIPx.API.Controllers
             , IClassificationProvider classificationProvider
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
-            _frontUserProvider = frontUserProvider;
+  //          _frontUserProvider = frontUserProvider;
             _genderProvider = genderProvider;
             _personProvider = personProvider;
             _roleProvider = roleProvider;
@@ -144,13 +145,13 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var User = new FrontPersonDashboard();
-                User = await _frontUserProvider.IndexGet(CurrentUser.Id, Id);
-                var Address = await _frontUserProvider.IndexGetAddress(CurrentUser.Id, Id);
-                var Telecom = await _frontUserProvider.IndexGetTelecom(CurrentUser.Id, Id);
-                var Project = await _frontUserProvider.IndexGetProject(CurrentUser.Id, Id);
-                var Organization = await _frontUserProvider.IndexGetOrganization(CurrentUser.Id, Id);
-                var Content = await _frontUserProvider.IndexGetContent(CurrentUser.Id, Id);
-                var Process = await _frontUserProvider.IndexGetProcess(CurrentUser.Id, Id);
+                User = await _frontPersonProvider.Dashboard(CurrentUser.Id, Id);
+                var Address = await _frontPersonProvider.DashboardAddress(CurrentUser.Id, Id);
+                var Telecom = await _frontPersonProvider.DashboardTelecom(CurrentUser.Id, Id);
+                var Project = await _frontPersonProvider.DashboardProject(CurrentUser.Id, Id);
+                var Organization = await _frontPersonProvider.DashboardOrganization(CurrentUser.Id, Id);
+                var Content = await _frontPersonProvider.DashboardContent(CurrentUser.Id, Id);
+                var Process = await _frontPersonProvider.DashboardProcess(CurrentUser.Id, Id);
                 //Relations                var Member = await _frontUserProvider.IndexGetMember(CurrentUser.Id, Id);
                 User.Addresses = Address;
                 User.Telecoms = Telecom;

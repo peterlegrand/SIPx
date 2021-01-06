@@ -94,7 +94,7 @@ namespace SIPx.API
             services.AddTransient<IRoleClaimProvider, RoleClaimProvider>();
             services.AddTransient<IFrontPersonProvider, FrontPersonProvider>();
             services.AddTransient<IFrontClassificationValueProvider, FrontClassificationValueProvider>();
-            services.AddTransient<IFrontUserProvider, FrontUserProvider>();
+//            services.AddTransient<IFrontUserProvider, FrontUserProvider>();
             services.AddTransient<IFrontProjectProvider, FrontProjectProvider>();
             services.AddTransient<IFrontOrganizationProvider, FrontOrganizationProvider>();
             services.AddTransient<IFrontContentProvider, FrontContentProvider>();

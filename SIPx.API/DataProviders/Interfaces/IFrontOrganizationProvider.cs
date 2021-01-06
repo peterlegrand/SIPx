@@ -14,5 +14,7 @@ namespace SIPx.DataAccess
         Task<string> IndexGetSubOrganizationTree(string UserId, int OrganizationId);
         Task<FrontOrganizationAdvancedSearchGet> FrontOrganizationAdvancedSearchGet(string UserId);
         Task<List<OrganizationList>> FrontOrganizationAdvancedSearchPost(FrontOrganizationAdvancedSearchGet SearchData);
+        Task<List<FrontOrganizationDashboardAddress>> DashboardAddress(string CurrentUserId, int SelectedOrganizationId);
+        Task<List<FrontOrganizationDashboardTelecom>> DashboardTelecom(string CurrentUserId, int SelectedOrganizationId);
     }
 }

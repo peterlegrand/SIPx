@@ -5,10 +5,10 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontUserIndexGetTelecom
+    public class FrontOrganizationDashboardTelecom
     {
         [Key]
-        public int PersonTelecomID { get; set; }
+        public int OrganizationTelecomID { get; set; }
         public string TelecomValue { get; set; }
         public string TelecomTypeName { get; set; }
         public string CountryCode { get; set; }
