@@ -26,7 +26,12 @@ SELECT OrganizationAddresses.OrganizationAddressId
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Modifier.PersonID ModifierID
 	, OrganizationAddresses.ModifiedDate
+	, OrganizationTypes.Internal InternalOrganizationNormalUserCannotDelete
 FROM OrganizationAddresses
+JOIN Organizations
+	ON OrganizationAddresses.OrganizationId = Organizations.OrganizationID
+JOIN OrganizationTypes 
+	ON Organizations.OrganizationTypeID = OrganizationTypes.OrganizationTypeID
 JOIN AddressTypes
 	ON OrganizationAddresses.AddressTypeId = AddressTypes.AddressTypeID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIAddressTypeNameCustom

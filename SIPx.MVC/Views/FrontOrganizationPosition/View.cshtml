@@ -1,0 +1,198 @@
+﻿@using Syncfusion.EJ2
+@using Newtonsoft.Json
+@model OrganizationPositionDeleteGet
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization position")).TermString;
+
+    Layout = "_LayoutAdmin";
+}
+
+<h1>
+    <img src="~/images/icons/Position.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Organization position")).TermString
+</h1>
+@if(!Model.InternalOrganizationNormalUserCannotDelete)
+{ 
+<a asp-route-id="@Model.OrganizationPersonId" asp-action="Edit"><img src="~/images/icons/Edit.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+<a asp-route-id="@Model.OrganizationPersonId" asp-action="Delete"><img src="~/images/icons/Delete.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+<a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId"><img src="~/images/icons/Back.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Back to organization")).TermString" /></a>
+}
+<div class="container">
+    <form method="post">
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+            </div>
+            <div class="col-9">
+                @Model.OrganizationPersonId
+                @Model.OrganizationId
+                @Model.PersonId
+                @Model.PositionId
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Organization")).TermString
+            </div>    <div class="col-9">
+                @Model.OrganizationName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Position")).TermString
+            </div>    <div class="col-9">
+                @Model.PositionName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("First name")).TermString
+            </div>    <div class="col-9">
+                @Model.FirstName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Last name")).TermString
+            </div>    <div class="col-9">
+                @Model.LastName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+            </div>
+            <div class="col-9">
+                <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.CreatorId">@Model.CreatorName</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatedDate
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.ModifierId">@Model.ModifierName</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/css/css.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+<style>
+    .e-code-mirror::before {
+        content: '\e345';
+    }
+
+    .e-html-preview::before {
+        content: '\e350';
+    }
+
+    .CodeMirror-linenumber,
+    .CodeMirror-gutters {
+        display: none;
+    }
+
+    .sb-header {
+        z-index: 100;
+    }
+
+    .sb-content.e-view.hide-header {
+        top: 0 !important;
+    }
+
+    .sb-header.e-view.hide-header {
+        display: none;
+    }
+
+    .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #F4F5F7;
+    }
+
+    .highcontrast .e-richtexteditor .e-rte-content .e-content pre {
+        padding: 10px;
+        background: #303030;
+    }
+</style>
+<script type="text/javascript">
+    var rteObj, myCodeMirror, textArea;
+    function created() {
+        rteObj = this;
+        textArea = rteObj.contentModule.getEditPanel();
+    }
+    function mirrorConversion(e) {
+        var id = rteObj.getID() + 'mirror-view';
+        var mirrorView = rteObj.element.querySelector('#' + id);
+        var charCount = rteObj.element.querySelector('.e-rte-character-count');
+        if (e.targetItem === 'Preview') {
+            textArea.style.display = 'block';
+            mirrorView.style.display = 'none';
+            textArea.innerHTML = myCodeMirror.getValue();
+            charCount.style.display = 'block';
+        }
+        else {
+            if (!mirrorView) {
+                mirrorView = ej.base.createElement('div', { className: 'e-content' });
+                mirrorView.id = id;
+                textArea.parentNode.appendChild(mirrorView);
+            }
+            else {
+                mirrorView.innerHTML = '';
+            }
+            textArea.style.display = 'none';
+            mirrorView.style.display = 'block';
+            renderCodeMirror(mirrorView, defaultRTE.value);
+            charCount.style.display = 'none';
+        }
+    }
+    function renderCodeMirror(mirrorView, content) {
+        myCodeMirror = CodeMirror(mirrorView, {
+            value: content,
+            lineNumbers: true,
+            mode: 'text/html',
+            lineWrapping: true,
+        });
+    }
+    function handleFullScreen(e) {
+        var sbCntEle = document.querySelector('.sb-content.e-view');
+        var sbHdrEle = document.querySelector('.sb-header.e-view');
+        if (e.targetItem === 'Maximize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.addClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+        else if (e.targetItem === 'Minimize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.removeClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+    }
+    function actionCompleteHandler(e) {
+        if (e.targetItem && (e.targetItem === 'SourceCode' || e.targetItem === 'Preview')) {
+            this.sourceCodeModule.getPanel().style.display = 'none';
+            mirrorConversion(e);
+        }
+        else {
+            setTimeout(function () { rteObj.toolbarModule.refreshToolbarOverflow(); }, 400);
+        }
+    }
+</script>

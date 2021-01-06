@@ -24,6 +24,7 @@ namespace SIPx.Shared
         public int ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string UserId { get; set; }
+        public bool InternalOrganizationNormalUserCannotDelete { get; set; }
 
         public List<TelecomTypeList> TelecomTypes { get; set; }
     }

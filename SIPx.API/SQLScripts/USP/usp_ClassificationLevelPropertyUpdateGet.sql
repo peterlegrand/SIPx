@@ -8,7 +8,7 @@ WHERE USerId = @UserID
 SELECT ClassificationLevelProperties.ClassificationLevelPropertyID
 	, ClassificationLevelProperties.ClassificationLevelID
 	, ClassificationLevelProperties.ClassificationID
-	, ClassificationLevelProperties.ClassificationLevelPropertyStatusId
+	, ClassificationLevelProperties.PropertyStatusId
 	, ClassificationLevelProperties.PropertyID
 	, ISNULL(PropertyUserLanguage.Name,ISNULL(PropertyDefaultLanguage.Name,'No name for this Property')) PropertyName
 	, ISNULL(ClassificationLevelUserLanguage.Name,ISNULL(ClassificationLevelDefaultLanguage.Name,'No description for this classification level')) ClassificationLevelName

@@ -36,7 +36,7 @@ SELECT
 	, ISNULL( UserGenderName.Customization, GenderName.Name) GenderName
 	, Persons.BirthDate
 	, ISNULL( Users.SecurityLevelName, 'No user') SecurityLevelName 
-	, ISNULL(UserProjectLanguage.Name,ISNULL(DefaultProjectLanguage.Name,'No name for this Project')) ProjectName
+	, ISNULL(UserOrganizationLanguage.Name,ISNULL(DefaultOrganizationLanguage.Name,'No name for this Organization')) OrganizationName
 	, ISNULL(Users.SecurityLevelID,0) SecurityLeveLId
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
@@ -65,10 +65,10 @@ JOIN UITermLanguages GenderName
 	ON Genders.NameTermId = GenderName.UITermId  
 LEFT JOIN (SELECT * FROM UITermLanguageCustomizations WHERE UITermLanguageCustomizations.LanguageId = @LanguageID)  UserGenderName
 	ON Genders.NameTermId = UserGenderName.UITermId  
-LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserProjectLanguage
-	ON UserProjectLanguage.ProjectID= Persons.DefaultProjectID
-LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProjectLanguage
-	ON DefaultProjectLanguage.ProjectId = Persons.DefaultProjectID
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID FROM OrganizationLanguages WHERE LanguageId = @LanguageID) UserOrganizationLanguage
+	ON UserOrganizationLanguage.OrganizationID= Persons.DefaultOrganizationID
+LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultOrganizationLanguage
+	ON DefaultOrganizationLanguage.OrganizationId = Persons.DefaultOrganizationID
 JOIN Persons Creator
 	ON Creator.UserId = Persons.CreatorID
 JOIN Persons Modifier

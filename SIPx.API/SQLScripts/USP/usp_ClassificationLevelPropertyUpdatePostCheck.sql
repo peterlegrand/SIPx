@@ -1,7 +1,7 @@
 CREATE PROCEDURE usp_ClassificationLevelPropertyUpdatePostCheck (
 	@UserID nvarchar(450)
 	, @ClassificationLevelPropertyId int
-	, @ClassificationLevelPropertyStatusId int) 
+	, @PropertyStatusId int) 
 	
 AS 
 
@@ -19,7 +19,7 @@ BEGIN
 insert into @ErrorIdsTable values(25)
 END
 
-IF (SELECT COUNT(*) FROM ClassificationLevelPropertyStatuses WHERE ClassificationLevelPropertyStatusId = @ClassificationLevelPropertyStatusId) = 0
+IF (SELECT COUNT(*) FROM PropertyStatuses WHERE PropertyStatusId = @PropertyStatusId) = 0
 BEGIN
 insert into @ErrorIdsTable values(23)
 END

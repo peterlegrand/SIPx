@@ -13,7 +13,7 @@ CREATE PROCEDURE usp_FrontPersonUpdatePostCheck (
 	, @GenderId int
 	, @Birthdate DateTime
 	, @DeceasedDate DateTime
-	, @DefaultProjectId int
+	, @DefaultOrganizationId int
 	, @UserId nvarchar(450))
 	AS 
 
@@ -38,7 +38,7 @@ BEGIN
 insert into @ErrorIdsTable values(77)
 END
 
-IF (SELECT COUNT(*) FROM Projects WHERE ProjectId = @DefaultProjectId) = 0 
+IF (SELECT COUNT(*) FROM Projects WHERE ProjectId = @DefaultOrganizationId) = 0 
 BEGIN
 insert into @ErrorIdsTable values(49)
 END

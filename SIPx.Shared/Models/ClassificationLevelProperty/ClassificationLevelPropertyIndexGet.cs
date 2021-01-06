@@ -11,7 +11,7 @@ namespace SIPx.Shared
         public string ClassificationLevelName { get; set; }
         public string PropertyName { get; set; }
         public string PropertyTypeName { get; set; }
-        public string ClassificationLevelPropertyStatusName { get; set; }
+        public string PropertyStatusName { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

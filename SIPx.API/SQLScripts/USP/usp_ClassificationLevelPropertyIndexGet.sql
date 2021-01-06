@@ -26,12 +26,12 @@ JOIN UITermLanguages UIName
 	ON UIName.UITermId = PropertyTypes.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = PropertyTypes.NameTermID
-JOIN ClassificationLevelPropertyStatuses
-	ON ClassificationLevelProperties.ClassificationLevelPropertyStatusId= ClassificationLevelPropertyStatuses.ClassificationLevelPropertyStatusId
+JOIN PropertyStatuses
+	ON ClassificationLevelProperties.PropertyStatusId= PropertyStatuses.PropertyStatusId
 JOIN UITermLanguages UIStatusName
-	ON UIStatusName.UITermId = ClassificationLevelPropertyStatuses.NameTermID
+	ON UIStatusName.UITermId = PropertyStatuses.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIStatusNameCustom
-	ON UIStatusNameCustom.UITermId = ClassificationLevelPropertyStatuses.NameTermID
+	ON UIStatusNameCustom.UITermId = PropertyStatuses.NameTermID
 LEFT JOIN (SELECT PropertyId, Name FROM PropertyLanguages WHERE LanguageId = @LanguageID) PropertyUserLanguage
 	ON PropertyUserLanguage.PropertyID= Properties.PropertyID
 LEFT JOIN (SELECT PropertyId, Name FROM PropertyLanguages JOIN Settings ON PropertyLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) PropertyDefaultLanguage

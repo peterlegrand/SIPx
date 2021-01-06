@@ -115,7 +115,9 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                return Ok(await _organizationTelecomProvider.UpdateGet(CurrentUser.Id, Id));
+                OrganizationTelecomUpdateGet OrganizationTelecom = await _organizationTelecomProvider.UpdateGet(CurrentUser.Id, Id);
+                    OrganizationTelecom = await UpdateAddDropDownBoxes(OrganizationTelecom, CurrentUser.Id);
+                return Ok(OrganizationTelecom);
             }
             return BadRequest(new
             {
@@ -128,6 +130,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(OrganizationTelecomUpdateGet OrganizationTelecom)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            OrganizationTelecom.UserId = CurrentUser.Id;
             var ErrorMessages = new List<ErrorMessage>();
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
@@ -148,11 +151,35 @@ namespace SIPx.API.Controllers
             return Ok(OrganizationTelecomWithNoRights);
         }
 
+        [HttpGet("View/{Id:int}")]
+        public async Task<IActionResult> View(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                if (await _checkProvider.CheckIfRecordExists("OrganizationTelecoms", "OrganizationTelecomID", Id) == 0)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No record with this ID",
+                    });
+                }
+                var x = await _organizationTelecomProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+
+        }
         [HttpGet("Delete/{Id:int}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (await _checkProvider.CheckIfRecordExists("OrganizationTelecoms", "OrganizationTelecomID", Id) == 0)
                 {

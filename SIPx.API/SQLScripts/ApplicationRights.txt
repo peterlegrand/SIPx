@@ -94,18 +94,15 @@ FrontContent\RightsEditUserDelete
 FrontContent\RightsReadUserCreate
 FrontContent\RightsReadUserIndex
 FrontContent\RightsReadUserDelete
-FrontOrganization\AdvancedSearch - Copy
 FrontOrganization\AdvancedSearch
 FrontOrganization\Create
 FrontOrganization\Dashboard
 FrontOrganization\Index
 FrontOrganization\SearchResult
 FrontPerson\AdvancedSearch
-FrontPerson\SearchResult - Copy
 FrontPerson\SearchResult
 FrontProcess\AdvancedSearch
 FrontProcess\Create
-FrontProcess\Update - Copy
 FrontProcess\Update
 FrontProcess\SearchResult
 FrontProcess\Templates
@@ -326,3 +323,16 @@ FrontPersonTelecom\Delete
 FrontPerson\Create
 FrontProject\Create
 FrontProject\Edit
+FrontOrganizationTelecom\View
+FrontOrganizationTelecom\Update
+FrontOrganizationTelecom\Create
+FrontOrganizationTelecom\Delete
+FrontOrganizationAddress\View
+FrontOrganizationAddress\Update
+FrontOrganizationAddress\Create
+FrontOrganizationAddress\Delete
+Position\Index
+Position\Create
+Position\Delete
+Position\Update
+FrontPerson\Dashboard

@@ -60,6 +60,7 @@ namespace SIPx.API.Controllers
             {
                 var PersonTelecom = new PersonTelecomCreateGet();
                 PersonTelecom.TelecomTypes = await _telecomTypeProvider.List(CurrentUser.Id);
+                PersonTelecom = await CreateAddDropDownBoxes(PersonTelecom, CurrentUser.Id, PersonTelecom.PersonId);
                 PersonTelecom.PersonId = Id;
                 return Ok(PersonTelecom);
             }
@@ -101,7 +102,9 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                return Ok(await _personTelecomProvider.IndexGet(CurrentUser.Id, Id));
+                PersonTelecomUpdateGet PersonTelecom = await _personTelecomProvider.UpdateGet(CurrentUser.Id, Id);
+                PersonTelecom = await UpdateAddDropDownBoxes(PersonTelecom, CurrentUser.Id);
+                return Ok(PersonTelecom);
             }
             return BadRequest(new
             {
@@ -129,7 +132,8 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PersonTelecomUpdateGet PersonTelecom)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            PersonTelecom.UserId = CurrentUser.Id;
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 PersonTelecom.UserId = CurrentUser.Id;
                 //var CheckString = await _PersonProvider.UpdatePostCheck(Person);

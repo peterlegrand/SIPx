@@ -1,13 +1,13 @@
 CREATE PROCEDURE usp_ClassificationLevelPropertyCreatePost (
 	@ClassificationLevelId int
 	, @PropertyId int
-	, @ClassificationLevelPropertyStatusId int
+	, @PropertyStatusId int
 	, @UserId nvarchar(450)) 
 AS 
 DECLARE @ClassificationId int;
 SELECT @ClassificationId = ClassificationId FROM Classificationlevels WHERE ClassificationLevelID = @ClassificationLevelId;
-INSERT ClassificationLevelProperties (ClassificationLevelId , ClassificationId, PropertyId , ClassificationLevelPropertyStatusId, CreatorID, ModifierID, CreatedDate, ModifiedDate)
-VALUES (@ClassificationLevelId , @ClassificationId, @PropertyId , @ClassificationLevelPropertyStatusId, @UserId, @UserId, Getdate(), Getdate())
+INSERT ClassificationLevelProperties (ClassificationLevelId , ClassificationId, PropertyId , PropertyStatusId, CreatorID, ModifierID, CreatedDate, ModifiedDate)
+VALUES (@ClassificationLevelId , @ClassificationId, @PropertyId , @PropertyStatusId, @UserId, @UserId, Getdate(), Getdate())
 
 --DECLARE @Sequence int;
 --SELECT @Sequence = Sequence FROM Classificationlevels where classificationlevels.ClassificationLevelID = @ClassificationLevelId;

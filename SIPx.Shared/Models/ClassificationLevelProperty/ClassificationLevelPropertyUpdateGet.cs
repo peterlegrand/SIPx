@@ -11,7 +11,7 @@ namespace SIPx.Shared
         public int ClassificationLevelId { get; set; }
         public int ClassificationId { get; set; }
         public int PropertyId { get; set; }
-        public int ClassificationLevelPropertyStatusId { get; set; }
+        public int PropertyStatusId { get; set; }
         public string ClassificationLevelName { get; set; }
         public string ClassificationName { get; set; }
         public string PropertyName { get; set; }
@@ -23,7 +23,7 @@ namespace SIPx.Shared
         public DateTime ModifiedDate { get; set; }
         public string UserId { get; set; }
 
-        public List<ClassificationLevelPropertyStatusList> ClassificationLevelPropertyStatuses { get; set; }
+        public List<PropertyStatusList> PropertyStatuses { get; set; }
 
     }
 }

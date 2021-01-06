@@ -13,15 +13,15 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ClassificationLevelPropertyController : ControllerBase
     {
-        private readonly IClassificationLevelPropertyStatusProvider _classificationLevelPropertyStatusProvider;
+        private readonly IPropertyStatusProvider _propertyStatusProvider;
         private readonly IClassificationLevelPropertyProvider _classificationLevelPropertyProvider;
         private readonly ICheckProvider _checkProvider;
         private  IClaimCheck _claimCheck;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationLevelPropertyController(IClassificationLevelPropertyStatusProvider classificationLevelPropertyStatusProvider, IClassificationLevelPropertyProvider classificationLevelPropertyProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationLevelPropertyController(IPropertyStatusProvider propertyStatusProvider, IClassificationLevelPropertyProvider classificationLevelPropertyProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
-            _classificationLevelPropertyStatusProvider = classificationLevelPropertyStatusProvider;
+            _propertyStatusProvider = propertyStatusProvider;
             _classificationLevelPropertyProvider = classificationLevelPropertyProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
@@ -32,12 +32,12 @@ namespace SIPx.API.Controllers
         {
             var Properties = await _classificationLevelPropertyProvider.CreateGetPropertyList(UserId, ClassificationLevelProperty.ClassificationLevelId);
             ClassificationLevelProperty.Properties = Properties;
-            ClassificationLevelProperty.ClassificationLevelPropertyStatuses = await _classificationLevelPropertyStatusProvider.List(UserId);
+            ClassificationLevelProperty.PropertyStatuses = await _propertyStatusProvider.List(UserId);
             return ClassificationLevelProperty;
         }
         private async Task<ClassificationLevelPropertyUpdateGet> UpdateAddDropDownBoxes(ClassificationLevelPropertyUpdateGet ClassificationLevelProperty, string UserId)
         {
-            ClassificationLevelProperty.ClassificationLevelPropertyStatuses = await _classificationLevelPropertyStatusProvider.List(UserId);
+            ClassificationLevelProperty.PropertyStatuses = await _propertyStatusProvider.List(UserId);
             return ClassificationLevelProperty;
         }
         [HttpGet("Create/{Id:int}")]

@@ -97,20 +97,7 @@ namespace SIPx.API.Controllers
             return Ok(OrganizationAddressWithNoRights);
         }
         //PETER TODO Have to check if the address update create delete is not of an user person/Organization internal
-        [HttpGet("Index/{Id:int}")]
-        public async Task<IActionResult> Index(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
-            {
-                return Ok(await _organizationAddressProvider.IndexGet(CurrentUser.Id, Id));
-            }
-            return BadRequest(new
-            {
-                IsSuccess = false,
-                Message = "No rights",
-            });
-        }
+
 
         [HttpGet("Update/{Id:int}")]
         public async Task<IActionResult> Update(int Id)
@@ -134,6 +121,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(OrganizationAddressUpdateGet OrganizationAddress)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            OrganizationAddress.UserId = CurrentUser.Id;
             var ErrorMessages = new List<ErrorMessage>();
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
@@ -158,7 +146,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //if (await _checkProvider.CheckIfRecordExists("OrganizationAddresss", "OrganizationAddressID", Id) == 0)
                 //{
@@ -168,6 +156,23 @@ namespace SIPx.API.Controllers
                 //        Message = "No record with this ID",
                 //    });
                 //}
+                var x = await _organizationAddressProvider.DeleteGet(CurrentUser.Id, Id);
+                return Ok(x);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+            //PETER TODO for both telecom address person and organization need to check if it is a user (person) and if it is internal (organization) then cannot delete from front.
+        }
+
+        [HttpGet("View/{Id:int}")]
+        public async Task<IActionResult> View(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
                 var x = await _organizationAddressProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }

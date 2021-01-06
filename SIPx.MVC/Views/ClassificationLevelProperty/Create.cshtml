@@ -46,8 +46,8 @@
                 @Term.Find(x => x.InternalName.Equals("Status")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ClassificationLevelPropertyStatusId" dataSource="@Model.ClassificationLevelPropertyStatuses" ejs-for="@Model.ClassificationLevelPropertyStatusId" value="@Model.ClassificationLevelPropertyStatusId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ClassificationLevelPropertyStatusId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="PropertyStatusId" dataSource="@Model.PropertyStatuses" ejs-for="@Model.PropertyStatusId" value="@Model.PropertyStatusId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="PropertyStatusId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
@@ -164,10 +164,10 @@
     }
 </script>
 <script type="text/javascript">
-    function ClassificationLevelPropertyStatusId(e) {
+    function PropertyStatusId(e) {
                 var query = new ej.data.Query();
                 query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ClassificationLevelPropertyStatuses)), query);
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.PropertyStatuses)), query);
             }
 </script>
 <script type="text/javascript">

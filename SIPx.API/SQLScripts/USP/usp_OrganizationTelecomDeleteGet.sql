@@ -19,7 +19,12 @@ SELECT OrganizationTelecoms.OrganizationTelecomID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Modifier.PersonID ModifierID
 	, OrganizationTelecoms.ModifiedDate
+	, Organizationtypes.Internal InternalOrganizationNormalUserCannotDelete
 FROM OrganizationTelecoms
+JOIN Organizations
+	ON OrganizationTelecoms.OrganizationId = Organizations.OrganizationID
+JOIN OrganizationTypes 
+	ON Organizations.OrganizationTypeID = OrganizationTypes.OrganizationTypeID
 JOIN TelecomTypes
 	ON OrganizationTelecoms.TelecomTypeId = TelecomTypes.TelecomTypeID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UITelecomTypeNameCustom

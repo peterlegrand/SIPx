@@ -23,6 +23,7 @@ namespace SIPx.Shared
         public string ProvinceState { get; set; }
         public string County { get; set; }
         public string CreatorName { get; set; }
+        public bool InternalOrganizationNormalUserCannotDelete { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierName { get; set; }

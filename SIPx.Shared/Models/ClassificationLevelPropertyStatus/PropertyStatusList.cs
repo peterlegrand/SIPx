@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SIPx.Shared
 {
-    public class ClassificationLevelPropertyStatusList
+    public class PropertyStatusList
     {
         [Key]
-        public int ClassificationLevelPropertyStatusId { get; set; }
+        public int PropertyStatusId { get; set; }
         public string Name { get; set; }
     }
 }

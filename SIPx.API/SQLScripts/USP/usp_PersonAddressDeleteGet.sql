@@ -5,6 +5,21 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+
+
+DECLARE @IsUser bit;
+DECLARE @SelectedUserId nvarchar(450);
+SELECT @SelectedUserId = UserId FROM Persons WHERE PersonId IN (Select PersonID FROM PersonAddresses WHERE PersonAddressID = @PersonAddressId);
+IF @SelectedUserId IS NULL
+BEGIN
+SET @IsUser = 0
+END
+ELSE
+BEGIN
+SET @IsUser = 1
+END
+
+
 SELECT PersonAddresses.PersonAddressId 
 	, PersonAddresses.PersonID
 	, ISNULL(UIAddressTypeNameCustom.Customization,UIAddressTypeName.Name) AddressTypeName
@@ -26,6 +41,7 @@ SELECT PersonAddresses.PersonAddressId
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Modifier.PersonID ModifierID
 	, PersonAddresses.ModifiedDate
+	, @IsUser IsUserNormalUserCannotDelete
 FROM PersonAddresses
 JOIN AddressTypes
 	ON PersonAddresses.AddressTypeId = AddressTypes.AddressTypeID

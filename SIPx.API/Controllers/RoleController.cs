@@ -95,7 +95,7 @@ namespace SIPx.API.Controllers
         }
 
         [HttpGet("Index")]
-        public async Task<IActionResult> RoleIndexGet()
+        public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))

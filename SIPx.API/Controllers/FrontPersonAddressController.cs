@@ -121,6 +121,7 @@ namespace SIPx.API.Controllers
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var PersonAddress = await _personAddressProvider.UpdateGet(CurrentUser.Id, Id);
+                PersonAddress = await UpdateAddDropDownBoxes(PersonAddress, CurrentUser.Id);
                 return Ok(PersonAddress);
             }
             return BadRequest(new
@@ -134,6 +135,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Update(PersonAddressUpdateGet PersonAddress)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            PersonAddress.UserId = CurrentUser.Id;
             var ErrorMessages = new List<ErrorMessage>();
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {

@@ -44,35 +44,17 @@ namespace SIPx.MVC.Controllers
                 return View(OrganizationAddressCreateGetWithErrorMessage.OrganizationAddress);
             }
 
-            return RedirectToAction("Index", new { id = OrganizationAddress.OrganizationId });
+            return RedirectToAction("Dashboard", "FrontOrganization", new { id = OrganizationAddress.OrganizationId });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Index(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<List<OrganizationAddressIndexGet>>($"{_baseUrl}api/FrontOrganizationAddress/Index/" +id,token);
-           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontOrganizationAddress/Index", token);
-            ViewBag.Id = id;
-            ViewBag.UITerms = UITerms;
-            var ErrorMessage = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = ErrorMessage;
-            if (response.Item2 == true)
-            {
-                return View(response.Item1);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Front");
-            }
-        }
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<OrganizationAddressUpdateGet>($"{_baseUrl}api/FrontOrganizationAddress/Update/" + id, token);
-            var CountryList = await _client.GetProtectedAsync<List<CountryList>>($"{_baseUrl}api/Country/List", token);
-            response.Item1.Countries = CountryList;
+          //  var CountryList = await _client.GetProtectedAsync<List<CountryList>>($"{_baseUrl}api/Country/List", token);
+            //response.Item1.Countries = CountryList;
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontOrganizationAddress/Edit", token);
             ViewBag.UITerms = UITerms;
             var ErrorMessage = new List<ErrorMessage>();
@@ -99,7 +81,7 @@ namespace SIPx.MVC.Controllers
                 return View(OrganizationAddressUpdateGetWithErrorMessage.OrganizationAddress);
             }
 
-            return RedirectToAction("Index", new { id = OrganizationAddress.OrganizationId });
+            return RedirectToAction("Dashboard", "FrontOrganization", new { id = OrganizationAddress.OrganizationId });
         }
 
         [HttpGet]
@@ -146,7 +128,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             await _client.PostProtectedAsync<OrganizationAddressDeleteGet>($"{_baseUrl}api/FrontOrganizationAddress/Delete", OrganizationAddress, token);
 
-            return RedirectToAction("Index", new { id = OrganizationAddress.OrganizationId });
+            return RedirectToAction("Dashboard","FrontOrganization", new { id = OrganizationAddress.OrganizationId });
         }
 
 

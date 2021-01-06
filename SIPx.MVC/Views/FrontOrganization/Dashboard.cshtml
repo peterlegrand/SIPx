@@ -68,10 +68,10 @@
                 <img src="~/images/icons/Address.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Addresses")).TermString
             </h2>
         </div>
-        @if (!Model.CanEdit)
+        @if (Model.CanEdit)
         {
             <div class="col-12">
-                <a asp-controller="FrontPersonAddress" asp-action="Create" asp-route-id="@Model.OrganizationId">
+                <a asp-controller="FrontOrganizationAddress" asp-action="Create" asp-route-id="@Model.OrganizationId">
                     <img src="~/images/icons/Add.png" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
                 </a>
             </div>
@@ -92,10 +92,10 @@
                 <img src="~/images/icons/Telecom.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Telecom")).TermString
             </h2>
         </div>
-        @if (!Model.CanEdit)
+        @if (Model.CanEdit)
         {
             <div class="col-12">
-                <a asp-controller="FrontPersonTelecom" asp-action="Create" asp-route-id="@Model.OrganizationId">
+                <a asp-controller="FrontOrganizationTelecom" asp-action="Create" asp-route-id="@Model.OrganizationId">
                     <img src="~/images/icons/Add.png" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
                 </a>
             </div>
@@ -203,6 +203,18 @@
 <script id="Member" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/FrontPerson/Dashboard/${PersonId}"><u>${FirstName}</u></a>
+
+    </div>
+</script>
+<script id="Address1Column" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontOrganizationAddress/View/${OrganizationAddressID}"><u>${Address1}</u></a>
+
+    </div>
+</script>
+<script id="TelecomValueColumn" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontOrganizationTelecom/View/${OrganizationTelecomID}"><u>${TelecomValue}</u></a>
 
     </div>
 </script>

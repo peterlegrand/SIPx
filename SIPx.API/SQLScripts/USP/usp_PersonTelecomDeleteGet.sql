@@ -5,6 +5,19 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+
+DECLARE @IsUser bit;
+DECLARE @SelectedUserId nvarchar(450);
+SELECT @SelectedUserId = UserId FROM Persons WHERE PersonId IN (Select PersonID FROM PersonTelecoms WHERE PersonTelecomID = @PersonTelecomId);
+IF @SelectedUserId IS NULL
+BEGIN
+SET @IsUser = 0
+END
+ELSE
+BEGIN
+SET @IsUser = 1
+END
+
 SELECT PersonTelecoms.PersonTelecomID
 	, PersonTelecoms.PersonID
 	, ISNULL(UITelecomTypeNameCustom.Customization,UITelecomTypeName.Name) AddressTypeName
@@ -19,6 +32,7 @@ SELECT PersonTelecoms.PersonTelecomID
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Modifier.PersonID ModifierID
 	, PersonTelecoms.ModifiedDate
+	, @IsUser IsUserNormalUserCannotDelete
 FROM PersonTelecoms
 JOIN TelecomTypes
 	ON PersonTelecoms.TelecomTypeId = TelecomTypes.TelecomTypeID

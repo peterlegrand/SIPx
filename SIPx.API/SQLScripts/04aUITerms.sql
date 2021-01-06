@@ -2168,4 +2168,9 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(2166, 'Cannot delete user. T
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2167, 'Cannot delete user. There are content user edit rights related to this user.');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2168, 'Cannot delete user. There are content user read rights related to this user.');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2169, 'Back to person');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2170, 'Positions');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2171, 'Add new position');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2172, 'New position');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2173, 'Position');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2174, 'Delete position');
 SET IDENTITY_INSERT UITerms OFF;

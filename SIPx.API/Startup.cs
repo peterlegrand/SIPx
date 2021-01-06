@@ -83,9 +83,10 @@ namespace SIPx.API
             services.AddTransient<IProcessTemplateFlowPassTypeProvider, ProcessTemplateFlowPassTypeProvider>();
             services.AddTransient<IProcessTemplateFlowPassProvider, ProcessTemplateFlowPassProvider>();
 
+            services.AddTransient<IPositionProvider, PositionProvider>();
             services.AddTransient<IPropertyProvider, PropertyProvider>();
             services.AddTransient<IClassificationLevelPropertyProvider, ClassificationLevelPropertyProvider>();
-            services.AddTransient<IClassificationLevelPropertyStatusProvider, ClassificationLevelPropertyStatusProvider>();
+            services.AddTransient<IPropertyStatusProvider, PropertyStatusProvider>();
             services.AddTransient<IClassificationValuePropertyProvider, ClassificationValuePropertyProvider>();
             services.AddTransient<IPropertyValueProvider, PropertyValueProvider>();
             services.AddTransient<IPropertyTypeProvider, PropertyTypeProvider>();

@@ -1,8 +1,17 @@
 CREATE PROCEDURE usp_PersonAddressUpdatePostCheck (
-	@PersonAddressId int
-	, @PersonId int
+	 @PersonAddressId  int
 	, @AddressTypeId int
+	, @AttnName nvarchar(50)=''
+	, @Address1 nvarchar(100)=''
+	, @Address2 nvarchar(100)=''
+	, @HouseNumber nvarchar(20)=''
+	, @HouseNumberExt nvarchar(20)=''
+	, @City nvarchar(50)=''
+	, @PostalCode nvarchar(50)=''
+	, @PostalCodeExt nvarchar(50)=''
 	, @CountryId int
+	, @ProvinceState nvarchar(50)=''
+	, @County nvarchar(50)=''
 	, @UserId nvarchar(450)) 
 AS 
 
@@ -18,10 +27,7 @@ BEGIN
 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF (SELECT COUNT(*) FROM Persons WHERE PersonId = @PersonId) = 0 
-BEGIN
-insert into @ErrorIdsTable values(76)
-END
+
 
 IF (SELECT COUNT(*) FROM AddressTypes WHERE AddressTypeId = @AddressTypeId) = 0 
 BEGIN

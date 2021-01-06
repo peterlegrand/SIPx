@@ -50,27 +50,28 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(PersonAddressUpdateGet PersonAddress)
         {
-            string usp = "usp_PersonAddressUpdateCheck @PersonId, @AddressTypeId  , @CountryId, @CreatorId ";
+            string usp = "usp_PersonAddressUpdatePostCheck " +
+                " @PersonAddressId " +
+                ", @AddressTypeId" +
+                ", @AttnName" +
+                ", @Address1" +
+                ", @Address2" +
+                ", @HouseNumber" +
+                ", @HouseNumberExt" +
+                ", @City" +
+                ", @PostalCode" +
+                ", @PostalCodeExt" +
+                ", @CountryId" +
+                ", @ProvinceState" +
+                ", @County" +
+                ", @UserId";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonAddress);
             return ErrorMessages;
         }
         public bool UpdatePost(PersonAddressUpdateGet PersonAddress)
         {
-            //Added default value in property
-            //PersonAddress.Address1 = PersonAddress.Address1 ?? "";
-            //PersonAddress.Address2 = PersonAddress.Address2 ?? "";
-            //PersonAddress.HouseNumber = PersonAddress.HouseNumber ?? "";
-            //PersonAddress.HouseNumberExt = PersonAddress.HouseNumberExt ?? "";
-            //PersonAddress.AttnName = PersonAddress.AttnName ?? "";
-            //PersonAddress.City = PersonAddress.City ?? "";
-            //PersonAddress.County = PersonAddress.County ?? "";
-            //PersonAddress.PostalCode = PersonAddress.PostalCode ?? "";
-            //PersonAddress.PostalCodeExt = PersonAddress.PostalCodeExt ?? "";
-            //PersonAddress.ProvinceState = PersonAddress.ProvinceState ?? "";
-
             string usp = "usp_PersonAddressUpdatePost " +
-                "@AttnName " +
-                ", @PersonAddressId " +
+                " @PersonAddressId " +
                 ", @AddressTypeId" +
                 ", @AttnName" +
                 ", @Address1" +
