@@ -8669,3 +8669,11 @@ INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2173, 81
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2173, 129);
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2170, 446);
 INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2, 444);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (51, 337);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2170, 337);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (51, 335);
+
+INSERT INTO [dbo].[MVCUITermScreens]([UITermID],[MVCUIScreenID])VALUES (2170, 335);

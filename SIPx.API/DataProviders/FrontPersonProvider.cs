@@ -115,10 +115,16 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<List<FrontPersonDashboardOrganization>> DashboardOrganization(string CurrentUserId, int SelectedPersonId)
+        public async Task<List<FrontPersonDashboardOrganizationRole>> DashboardOrganizationRole(string CurrentUserId, int SelectedPersonId)
         {
-            string usp = "usp_FrontPersonDashboardOrganization @CurrentUserId  , @SelectedPersonId";
-            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardOrganization, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            string usp = "usp_FrontPersonDashboardOrganizationRole @CurrentUserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardOrganizationRole, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            return x;
+        }
+        public async Task<List<FrontPersonDashboardOrganizationPosition>> DashboardOrganizationPosition(string CurrentUserId, int SelectedPersonId)
+        {
+            string usp = "usp_FrontPersonDashboardOrganizationPosition @CurrentUserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardOrganizationPosition, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
             return x;
         }
 

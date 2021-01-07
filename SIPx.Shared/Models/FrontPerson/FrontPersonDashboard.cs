@@ -36,7 +36,8 @@ namespace SIPx.Shared
 
         public List<FrontPersonDashboardAddress> Addresses { get; set; }
         public List<FrontPersonDashboardTelecom> Telecoms { get; set; }
-        public List<FrontPersonDashboardOrganization> Organizations { get; set; }
+        public List<FrontPersonDashboardOrganizationRole> OrganizationRoles { get; set; }
+        public List<FrontPersonDashboardOrganizationPosition> OrganizationPositions { get; set; }
         public List<FrontPersonDashboardProject> Projects { get; set; }
         public List<FrontPersonDashboardContent> Contents { get; set; }
         public List<FrontPersonDashboardProcess> Processes { get; set; }

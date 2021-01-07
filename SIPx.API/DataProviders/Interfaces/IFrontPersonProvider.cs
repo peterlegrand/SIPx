@@ -11,7 +11,8 @@ namespace SIPx.DataAccess
         Task<FrontPersonDashboard> Dashboard(string CurrentUserId, int SelectedPersonId);
         Task<List<FrontPersonDashboardAddress>> DashboardAddress(string CurrentUserId, int SelectedPersonId);
         Task<List<FrontPersonDashboardContent>> DashboardContent(string CurrentUserId, int SelectedPersonId);
-        Task<List<FrontPersonDashboardOrganization>> DashboardOrganization(string CurrentUserId, int SelectedPersonId);
+        Task<List<FrontPersonDashboardOrganizationPosition>> DashboardOrganizationPosition(string CurrentUserId, int SelectedPersonId);
+        Task<List<FrontPersonDashboardOrganizationRole>> DashboardOrganizationRole(string CurrentUserId, int SelectedPersonId);
         Task<List<FrontPersonDashboardProcess>> DashboardProcess(string CurrentUserId, int SelectedPersonId);
         Task<List<FrontPersonDashboardProject>> DashboardProject(string CurrentUserId, int SelectedPersonId);
         Task<List<FrontPersonDashboardTelecom>> DashboardTelecom(string CurrentUserId, int SelectedPersonId);

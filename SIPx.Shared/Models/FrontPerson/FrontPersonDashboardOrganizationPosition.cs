@@ -5,11 +5,12 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FrontPersonDashboardOrganization
+    public class FrontPersonDashboardOrganizationPosition
     {
         [Key]
-        public string RoleId { get; set; }
-        public string RoleName { get; set; }
+        public int OrganizationPersonId { get; set; }
+        public int PositionId { get; set; }
+        public string PositionName { get; set; }
         public int OrganizationId { get; set; }
         public string OrganizationName { get; set; }
 
