@@ -46,10 +46,17 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<List<FrontOrganizationDashboardMember>> DashboardMember(string UserId, int OrganizationId)
+        public async Task<List<FrontOrganizationDashboardPersonRole>> DashboardPersonRoles(string UserId, int OrganizationId)
         {
-            string usp = "usp_FrontOrganizationDashboardMember @UserId, @OrganizationId";
-            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardMember, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            string usp = "usp_FrontOrganizationDashboardPersonRole @UserId, @OrganizationId";
+            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardPersonRole, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+            return x;
+        }
+
+        public async Task<List<FrontOrganizationDashboardPersonPosition>> DashboardPersonPositions(string UserId, int OrganizationId)
+        {
+            string usp = "usp_FrontOrganizationDashboardPersonPosition @UserId, @OrganizationId";
+            var x = await _sqlDataAccess.LoadData<FrontOrganizationDashboardPersonPosition, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
             return x;
         }
 
@@ -80,11 +87,11 @@ namespace SIPx.DataAccess
 
             string ParentOrganizationsUsp = "usp_OrganizationListParentOrganizations @UserId";
             AdvancedOrganizationSearch.ParentOrganizations = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(ParentOrganizationsUsp, new { UserId = UserId });
-            AdvancedOrganizationSearch.ParentOrganizations.Insert(0, new OrganizationList {OrganizationId= 0, Name= "Select a parent organization" });
+            AdvancedOrganizationSearch.ParentOrganizations.Insert(0, new OrganizationList { OrganizationId = 0, Name = "Select a parent organization" });
 
             string StatusesUsp = "usp_StatusList @UserId";
             AdvancedOrganizationSearch.Statuses = await _sqlDataAccess.LoadData<StatusList, dynamic>(StatusesUsp, new { UserId = UserId });
-            AdvancedOrganizationSearch.Statuses.Insert(0,new StatusList { StatusId = 0, Name = "Select a status" });
+            AdvancedOrganizationSearch.Statuses.Insert(0, new StatusList { StatusId = 0, Name = "Select a status" });
 
 
             string OrganizationTypesUsp = "usp_OrganizationTypeList @UserId";
@@ -101,7 +108,7 @@ namespace SIPx.DataAccess
         public async Task<List<OrganizationList>> FrontOrganizationAdvancedSearchPost(FrontOrganizationAdvancedSearchGet SearchData)
         {
             string usp = "usp_FrontOrganizationAdvancedSearchPost @UserId, @OrganizationName, @OrganizationParentId, @OrganizationStatusId, @OrganizationTypeId , @CountryId, @OrganizationProvinceState , @OrganizationCity , @LegalEntity, @Internal, @IAmMemberOfOrganization ";
-            var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, SearchData );
+            var x = await _sqlDataAccess.LoadData<OrganizationList, dynamic>(usp, SearchData);
             return x;
         }
     }

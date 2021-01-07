@@ -1,18 +1,21 @@
-CREATE PROCEDURE usp_FrontPersonDashboardOrganizationPosition (@UserId nvarchar(450), @SelectedPersonId int) 
+CREATE PROCEDURE usp_FrontOrganizationDashboardPersonPosition (@UserId nvarchar(450), @OrganizationId int) 
 AS 
 BEGIN
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @UserId
+WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
-SELECT OrganizationPersons.OrganizationPersonID
+select OrganizationPersons.OrganizationPersonID
 	, OrganizationPersons.PersonId
 	, OrganizationPersons.PositionID
 	, Organizations.OrganizationID
+	, Persons.FirstName
+	, Persons.LastName
 	, ISNULL(UserPositionLanguage.Name,ISNULL(DefaultPositionLanguage.Name,'No name for this Position')) PositionName
 	, ISNULL(UserOrganizationLanguage.Name,ISNULL(DefaultOrganizationLanguage.Name,'No name for this Organization')) OrganizationName
+
 FROM OrganizationPersons
 JOIN Positions
 	ON Positions.PositionID = OrganizationPersons.PositionID
@@ -29,6 +32,7 @@ LEFT JOIN (SELECT PositionId, Name, Description, MenuName, MouseOver, PositionLa
 	ON DefaultPositionLanguage.PositionId = Positions.PositionID
 LEFT JOIN (SELECT PositionId, Name, Description, MenuName, MouseOver, PositionLanguageID FROM PositionLanguages WHERE LanguageId = @LanguageID) UserPositionLanguage
 	ON UserPositionLanguage.PositionID= Positions.PositionID
+WHERE @OrganizationId = Organizations.OrganizationId
+END;
 
-WHERE @SelectedPersonId = Persons.PersonID
-	end;
+--PETER TODO ORder by

@@ -127,14 +127,14 @@
     <div class="col-6">
         <div>
             <h2>
-                <img src="~/images/icons/Role.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Members")).TermString
+                <img src="~/images/icons/Role.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Roles")).TermString
             </h2>
         </div>
-        <ejs-grid id="Members" dataSource="@Model.Members" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+        <ejs-grid id="PersonRoles" dataSource="@Model.PersonRoles" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
                 <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Role")).TermString" field="RoleName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" field="FirstName" textAlign="Right" type="text" template="#Member"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" field="FirstName" textAlign="Right" type="text" template="#PersonRoleColumn"></e-grid-column>
                 <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" field="LastName" textAlign="Right" type="text"></e-grid-column>
                 <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" field="OrganizationName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
@@ -176,6 +176,26 @@
         </ejs-grid>
     </div>
 </div>
+<div class="row">
+    <div class="col-6">
+        <div>
+            <h2>
+                <img src="~/images/icons/Position.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Position")).TermString
+            </h2>
+        </div>
+        <ejs-grid id="PersonPositions" dataSource="@Model.PersonRoles" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Position")).TermString" field="PositionName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" field="FirstName" textAlign="Right" type="text" template="#PersonPositionColumn"></e-grid-column>
+                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" field="LastName" textAlign="Right" type="text"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+        <ejs-treeview id="listdata">
+            <e-treeview-fields dataSource="@Model.SubOrganizationTree" id="Name" parentId="Name" text="Name" hasChildren="SubOrganizations" expanded="expanded"></e-treeview-fields>
+        </ejs-treeview>
+    </div>
+</div>
 <script id="OrganizationName" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${OrganizationName}</u></a>
@@ -200,7 +220,13 @@
 
     </div>
 </script>
-<script id="Member" type="text/x-template">
+<script id="PersonRoleColumn" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/FrontPerson/Dashboard/${PersonId}"><u>${FirstName}</u></a>
+
+    </div>
+</script>
+<script id="PersonPositionColumn" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/FrontPerson/Dashboard/${PersonId}"><u>${FirstName}</u></a>
 

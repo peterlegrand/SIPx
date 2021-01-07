@@ -31,7 +31,8 @@ namespace SIPx.Shared
         public List<FrontOrganizationDashboardTelecom> Telecoms { get; set; }
 
         public List<FrontOrganizationDashboardSubOrganization> SubOrganizations { get; set; }
-        public List<FrontOrganizationDashboardMember> Members { get; set; }
+        public List<FrontOrganizationDashboardPersonRole> PersonRoles { get; set; }
+        public List<FrontOrganizationDashboardPersonPosition> PersonPositions { get; set; }
         public List<FrontOrganizationDashboardContent> Contents { get; set; }
         public List<FrontOrganizationDashboardProcess> Processes { get; set; }
         public JObject SubOrganizationTree { get; set; }

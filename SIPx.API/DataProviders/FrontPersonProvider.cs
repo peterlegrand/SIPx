@@ -121,10 +121,10 @@ namespace SIPx.DataAccess
             var x = await _sqlDataAccess.LoadData<FrontPersonDashboardOrganizationRole, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
             return x;
         }
-        public async Task<List<FrontPersonDashboardOrganizationPosition>> DashboardOrganizationPosition(string CurrentUserId, int SelectedPersonId)
+        public async Task<List<FrontPersonDashboardOrganizationPosition>> DashboardOrganizationPosition(string UserId, int SelectedPersonId)
         {
-            string usp = "usp_FrontPersonDashboardOrganizationPosition @CurrentUserId  , @SelectedPersonId";
-            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardOrganizationPosition, dynamic>(usp, new { CurrentUserId = CurrentUserId, SelectedPersonId = SelectedPersonId });
+            string usp = "usp_FrontPersonDashboardOrganizationPosition @UserId  , @SelectedPersonId";
+            var x = await _sqlDataAccess.LoadData<FrontPersonDashboardOrganizationPosition, dynamic>(usp, new { UserId = UserId, SelectedPersonId = SelectedPersonId });
             return x;
         }
 

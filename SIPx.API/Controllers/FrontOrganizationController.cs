@@ -64,13 +64,15 @@ namespace SIPx.API.Controllers
                 var subOrganization = await _frontOrganizationProvider.DashboardSubOrganization(CurrentUser.Id, Id);
                 var Content = await _frontOrganizationProvider.DashboardContent(CurrentUser.Id, Id);
                 var Process = await _frontOrganizationProvider.DashboardProcess(CurrentUser.Id, Id);
-                var Member = await _frontOrganizationProvider.DashboardMember(CurrentUser.Id, Id);
+                var PersonRoles = await _frontOrganizationProvider.DashboardPersonRoles(CurrentUser.Id, Id);
+                var PersonPositions = await _frontOrganizationProvider.DashboardPersonPositions(CurrentUser.Id, Id);
                 var Address = await _frontOrganizationProvider.DashboardAddress(CurrentUser.Id, Id);
                 var Telecom = await _frontOrganizationProvider.DashboardTelecom(CurrentUser.Id, Id);
                 Organization.SubOrganizations = subOrganization;
                 Organization.Contents = Content;
                 Organization.Processes= Process;
-                Organization.Members = Member;
+                Organization.PersonRoles = PersonRoles;
+                Organization.PersonPositions = PersonPositions;
                 Organization.Addresses= Address;
                 Organization.Telecoms = Telecom;
                 //      var x= await _frontOrganizationProvider.IndexGetSubOrganizationTree(CurrentUser.Id, Id);
