@@ -5,15 +5,14 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class OrganizationPositionDeleteGet
+    public class PersonPositionDeleteGet
     {
         [Key]
         public int OrganizationPersonId { get; set; }
-        public int PersonId { get; set; }
         public int OrganizationId { get; set; }
+        public int PersonId { get; set; }
         public int PositionId { get; set; }
         public string OrganizationName { get; set; }
-        public string PersonName { get; set; }
         public string PositionName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,6 +23,6 @@ namespace SIPx.Shared
         public string ModifierName { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string UserId { get; set; }
-        public bool InternalOrganizationNormalUserCannotDelete { get; set; }
+        public bool UserNormalUserCannotDelete { get; set; }
     }
 }

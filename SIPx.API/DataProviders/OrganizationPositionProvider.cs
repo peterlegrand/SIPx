@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class OrganizationPositionProvider 
+    public class OrganizationPositionProvider : IOrganizationPositionProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
@@ -20,6 +20,13 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
+
+        public Task<string> CreateGet(string UserId, int OrganizationId)
+        {
+            string usp = "usp_OrganizationPositionCreateGet @UserId, @OrganizationID";
+            return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { UserId = UserId, OrganizationId = OrganizationId });
+
+        }
         public async Task<List<ErrorMessage>> CreatePostCheck(OrganizationPositionCreateGet OrganizationPosition)
         {
             string usp = "usp_OrganizationPositionCreatePostCheck @OrganizationId, @PersonId, @PositionId, @UserId ";
@@ -41,10 +48,10 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public Task<OrganizationPositionUpdateGet> UpdateGet(string UserId, int OrganizationPositionId)
+        public Task<OrganizationPositionUpdateGet> UpdateGet(string UserId, int OrganizationPersonID)
         {
             string usp = "usp_OrganizationPositionUpdateGet @UserId, @OrganizationPersonID";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationPositionUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationPositionId = OrganizationPositionId });
+            return _sqlDataAccess.LoadSingleRecord<OrganizationPositionUpdateGet, dynamic>(usp, new { UserId = UserId, OrganizationPersonID = OrganizationPersonID });
 
         }
 
@@ -61,31 +68,31 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public Task<OrganizationPositionDeleteGet> DeleteGet(string UserId, int OrganizationPositionId)
+        public Task<OrganizationPositionDeleteGet> DeleteGet(string UserId, int OrganizationPersonId)
         {
             string usp = "usp_OrganizationPositionDeleteGet @UserId, @OrganizationPersonId";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationPositionDeleteGet, dynamic>(usp, new { UserId, OrganizationPositionId });
+            return _sqlDataAccess.LoadSingleRecord<OrganizationPositionDeleteGet, dynamic>(usp, new { UserId, OrganizationPersonId });
 
         }
 
-        public Task<OrganizationPositionDeleteGet> ViewGet(string UserId, int OrganizationPositionId)
+        public Task<OrganizationPositionDeleteGet> ViewGet(string UserId, int OrganizationPersonId)
         {
             string usp = "usp_OrganizationPositionDeleteGet @UserId, @OrganizationPersonId";
-            return _sqlDataAccess.LoadSingleRecord<OrganizationPositionDeleteGet, dynamic>(usp, new { UserId, OrganizationPositionId });
+            return _sqlDataAccess.LoadSingleRecord<OrganizationPositionDeleteGet, dynamic>(usp, new { UserId, OrganizationPersonId });
 
         }
 
-        public bool DeletePost(string UserId, int OrganizationPositionId)
+        public bool DeletePost(string UserId, int OrganizationPersonId)
         {
             string usp = "usp_OrganizationPositionDeletePost @UserId, @OrganizationPersonId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, OrganizationPositionId });
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, OrganizationPersonId });
             return true;
         }
 
-        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int OrganizationPositionId)
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int OrganizationPersonId)
         {
             string usp = "usp_OrganizationPositionDeletePostCheck @UserId, @OrganizationPersonId";
-            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, OrganizationPositionId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, OrganizationPersonId });
             return ErrorMessages;
         }
 

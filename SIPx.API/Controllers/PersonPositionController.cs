@@ -17,56 +17,58 @@ namespace SIPx.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class OrganizationPositionController : ControllerBase
+    public class PersonPositionController : ControllerBase
     {
+        private readonly IPersonPositionProvider _personPositionProvider;
         private readonly IPersonProvider _personProvider;
         private readonly IPositionProvider _positionProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IMasterListProvider _masterListProvider;
-        private readonly IOrganizationPositionProvider _organizationPositionProvider;
+        private readonly IPersonPositionProvider _PersonPositionProvider;
         private readonly IMasterProvider _masterProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IOrganizationProvider _organizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public OrganizationPositionController(IPersonProvider personProvider, IPositionProvider positionProvider
+        public PersonPositionController(IPersonPositionProvider personPositionProvider, IPersonProvider personProvider, IPositionProvider positionProvider
             , ICheckProvider checkProvider
             , IMasterListProvider masterListProvider
-            , IOrganizationPositionProvider organizationPositionProvider
+            , IPersonPositionProvider PersonPositionProvider
             , IMasterProvider masterProvider
             , IClaimCheck claimCheck
             , IOrganizationProvider organizationProvider
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _personPositionProvider = personPositionProvider;
             _personProvider = personProvider;
             _positionProvider = positionProvider;
             _checkProvider = checkProvider;
             _masterListProvider = masterListProvider;
-            _organizationPositionProvider = organizationPositionProvider;
+            _PersonPositionProvider = PersonPositionProvider;
             _masterProvider = masterProvider;
             _claimCheck = claimCheck;
             _organizationProvider = organizationProvider;
             _userManager = userManager;
         }
-        private async Task<OrganizationPositionCreateGet> CreateAddDropDownBoxes(OrganizationPositionCreateGet OrganizationPosition, string UserId, int OrganizationId)
+        private async Task<PersonPositionCreateGet> CreateAddDropDownBoxes(PersonPositionCreateGet PersonPosition, string UserId, int PersonId)
         {
             var Positions = await _positionProvider.List(UserId);
-            var Persons = await _personProvider.List();
+            var Organizations = await _organizationProvider.List(UserId);
             //PETER TODO --Should exclude maybe some persons and positions
-            OrganizationPosition.Positions = Positions;
-            OrganizationPosition.Persons = Persons;
-            OrganizationPosition.OrganizationId = OrganizationId;
-            return OrganizationPosition;
+            PersonPosition.Positions = Positions;
+            PersonPosition.Organizations = Organizations;
+            PersonPosition.PersonId = PersonId;
+            return PersonPosition;
         }
-        private async Task<OrganizationPositionUpdateGet> UpdateAddDropDownBoxes(OrganizationPositionUpdateGet OrganizationPosition, string UserId)
+        private async Task<PersonPositionUpdateGet> UpdateAddDropDownBoxes(PersonPositionUpdateGet PersonPosition, string UserId)
         {
 
             var Positions = await _positionProvider.List(UserId);
-            var Persons = await _personProvider.List();
+            var Organizations = await _organizationProvider.List(UserId);
             //PETER TODO --Should exclude maybe some persons and positions
-            OrganizationPosition.Positions = Positions;
-            OrganizationPosition.Persons = Persons;
-            return OrganizationPosition;
+            PersonPosition.Positions = Positions;
+            PersonPosition.Organizations = Organizations;
+            return PersonPosition;
         }
         [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
@@ -74,10 +76,10 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var OrganizationPosition = new OrganizationPositionCreateGet();
-                OrganizationPosition.OrganizationName = await _organizationPositionProvider.CreateGet(CurrentUser.Id, Id);
-                OrganizationPosition = await CreateAddDropDownBoxes(OrganizationPosition, CurrentUser.Id, Id);
-                return Ok(OrganizationPosition);
+                var PersonPosition = new PersonPositionCreateGet();
+                PersonPosition = await _personPositionProvider.CreateGet(CurrentUser.Id, Id);
+                PersonPosition = await CreateAddDropDownBoxes(PersonPosition, CurrentUser.Id, Id);
+                return Ok(PersonPosition);
             }
             return BadRequest(new
             {
@@ -87,28 +89,28 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(OrganizationPositionCreateGet OrganizationPosition)
+        public async Task<IActionResult> Create(PersonPositionCreateGet PersonPosition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            OrganizationPosition.UserId = CurrentUser.Id;
+            PersonPosition.UserId = CurrentUser.Id;
             var ErrorMessages = new List<ErrorMessage>();
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ErrorMessages = await _organizationPositionProvider.CreatePostCheck(OrganizationPosition);
+                ErrorMessages = await _PersonPositionProvider.CreatePostCheck(PersonPosition);
                 if (ErrorMessages.Count > 0)
                 {
-                    OrganizationPosition = await CreateAddDropDownBoxes(OrganizationPosition, CurrentUser.Id, OrganizationPosition.OrganizationId);
+                    PersonPosition = await CreateAddDropDownBoxes(PersonPosition, CurrentUser.Id, PersonPosition.PersonId);
                 }
                 else
                 {
-                    _organizationPositionProvider.CreatePost(OrganizationPosition);
+                    _PersonPositionProvider.CreatePost(PersonPosition);
                 }
-                OrganizationPositionCreateGetWithErrorMessages OrganizationPositionWithErrorMessage = new OrganizationPositionCreateGetWithErrorMessages { OrganizationPosition = OrganizationPosition, ErrorMessages = ErrorMessages };
-                return Ok(OrganizationPositionWithErrorMessage);
+                PersonPositionCreateGetWithErrorMessages PersonPositionWithErrorMessage = new PersonPositionCreateGetWithErrorMessages { PersonPosition = PersonPosition, ErrorMessages = ErrorMessages };
+                return Ok(PersonPositionWithErrorMessage);
             }
             ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
-            OrganizationPositionCreateGetWithErrorMessages OrganizationPositionWithNoRights = new OrganizationPositionCreateGetWithErrorMessages { OrganizationPosition = OrganizationPosition, ErrorMessages = ErrorMessages };
-            return Ok(OrganizationPositionWithNoRights);
+            PersonPositionCreateGetWithErrorMessages PersonPositionWithNoRights = new PersonPositionCreateGetWithErrorMessages { PersonPosition = PersonPosition, ErrorMessages = ErrorMessages };
+            return Ok(PersonPositionWithNoRights);
         }
 
         [HttpGet("Index/{Id:int}")]
@@ -117,7 +119,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                return Ok(await _organizationPositionProvider.IndexGet(CurrentUser.Id, Id));
+                return Ok(await _PersonPositionProvider.IndexGet(CurrentUser.Id, Id));
             }
             return BadRequest(new
             {
@@ -133,9 +135,9 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
-                var OrganizationPosition = await _organizationPositionProvider.UpdateGet(CurrentUser.Id, Id);
-                OrganizationPosition = await UpdateAddDropDownBoxes(OrganizationPosition, CurrentUser.Id);
-                return Ok(OrganizationPosition);
+                var PersonPosition = await _PersonPositionProvider.UpdateGet(CurrentUser.Id, Id);
+                PersonPosition = await UpdateAddDropDownBoxes(PersonPosition, CurrentUser.Id);
+                return Ok(PersonPosition);
             }
             return BadRequest(new
             {
@@ -145,28 +147,28 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update(OrganizationPositionUpdateGet OrganizationPosition)
+        public async Task<IActionResult> Update(PersonPositionUpdateGet PersonPosition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            OrganizationPosition.UserId = CurrentUser.Id;
+            PersonPosition.UserId = CurrentUser.Id;
             var ErrorMessages = new List<ErrorMessage>();
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                ErrorMessages = await _organizationPositionProvider.UpdatePostCheck(OrganizationPosition);
+                ErrorMessages = await _PersonPositionProvider.UpdatePostCheck(PersonPosition);
                 if (ErrorMessages.Count > 0)
                 {
-                    OrganizationPosition = await UpdateAddDropDownBoxes(OrganizationPosition, CurrentUser.Id);
+                    PersonPosition = await UpdateAddDropDownBoxes(PersonPosition, CurrentUser.Id);
                 }
                 else
                 {
-                    _organizationPositionProvider.UpdatePost(OrganizationPosition);
+                    _PersonPositionProvider.UpdatePost(PersonPosition);
                 }
-                OrganizationPositionUpdateGetWithErrorMessages OrganizationPositionWithErrorMessage = new OrganizationPositionUpdateGetWithErrorMessages { OrganizationPosition = OrganizationPosition, ErrorMessages = ErrorMessages };
-                return Ok(OrganizationPositionWithErrorMessage);
+                PersonPositionUpdateGetWithErrorMessages PersonPositionWithErrorMessage = new PersonPositionUpdateGetWithErrorMessages { PersonPosition = PersonPosition, ErrorMessages = ErrorMessages };
+                return Ok(PersonPositionWithErrorMessage);
             }
             ErrorMessages = await _checkProvider.NoRightsMessage(CurrentUser.Id);
-            OrganizationPositionUpdateGetWithErrorMessages OrganizationPositionWithNoRights = new OrganizationPositionUpdateGetWithErrorMessages { OrganizationPosition = OrganizationPosition, ErrorMessages = ErrorMessages };
-            return Ok(OrganizationPositionWithNoRights);
+            PersonPositionUpdateGetWithErrorMessages PersonPositionWithNoRights = new PersonPositionUpdateGetWithErrorMessages { PersonPosition = PersonPosition, ErrorMessages = ErrorMessages };
+            return Ok(PersonPositionWithNoRights);
         }
 
         [HttpGet("Delete/{Id:int}")]
@@ -175,7 +177,7 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var x = await _organizationPositionProvider.DeleteGet(CurrentUser.Id, Id);
+                var x = await _PersonPositionProvider.DeleteGet(CurrentUser.Id, Id);
                 return Ok(x);
             }
             return BadRequest(new
@@ -187,17 +189,17 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Delete")]
-        public async Task<IActionResult> Delete(OrganizationPositionDeleteGet OrganizationPosition)
+        public async Task<IActionResult> Delete(PersonPositionDeleteGet PersonPosition)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                OrganizationPosition.UserId = CurrentUser.Id;
-                //var CheckString = await _OrganizationPositionProvider.DeletePostCheck(OrganizationPosition);
+                PersonPosition.UserId = CurrentUser.Id;
+                //var CheckString = await _PersonPositionProvider.DeletePostCheck(PersonPosition);
                 //if (CheckString.Length == 0)
                 //{
-                _organizationPositionProvider.DeletePost(CurrentUser.Id, OrganizationPosition.OrganizationPersonId);
-                return Ok(OrganizationPosition);
+                _PersonPositionProvider.DeletePost(CurrentUser.Id, PersonPosition.OrganizationPersonId);
+                return Ok(PersonPosition);
                 //}
                 return BadRequest(new
                 {

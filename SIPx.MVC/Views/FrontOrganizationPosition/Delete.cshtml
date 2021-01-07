@@ -19,7 +19,7 @@
             </div>
             <div class="col-9">
                 <ejs-numerictextbox id="OrganizationId" ejs-for="@Model.OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="OrganizationPositionId" ejs-for="@Model.OrganizationPositionId" cssClass="e-outline" placeholder="OrganizationPositionId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="OrganizationPersonId" ejs-for="@Model.OrganizationPersonId" cssClass="e-outline" placeholder="OrganizationPersonId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -49,13 +49,7 @@
             </div>    <div class="col-9">
                 @Model.LastName
             </div>
-        </div>        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("County")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="County" ejs-for="County" cssClass="e-outline" placeholder="County" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
+        </div>        
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Creator")).TermString

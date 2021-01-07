@@ -9,11 +9,11 @@ namespace SIPx.Shared
     public class OrganizationPositionIndexGet
     {
         [Key]
-        public int OrganizationPersonID { get; set; }
+        public int OrganizationPersonId { get; set; }
         public int OrganizationId { get; set; }
         public int PersonId { get; set; }
         public int PositionId { get; set; }
-        public int OrganizationName { get; set; }
+        public string OrganizationName { get; set; }
         public string PositionName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

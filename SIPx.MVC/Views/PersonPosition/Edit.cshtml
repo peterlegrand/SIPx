@@ -4,13 +4,13 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person position")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Position for organization")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Position.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Person position")).TermString
+    <img src="~/images/icons/Position.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Position for organization")).TermString
 </h1>
 <div class="container">
 
@@ -21,14 +21,21 @@
             </div>
             <div class="col-9">
                 <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PersonPositionId" ejs-for="@Model.PersonPositionId" cssClass="e-outline" placeholder="PersonPositionId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="OrganizationPersonId" ejs-for="@Model.OrganizationPersonId" cssClass="e-outline" placeholder="OrganizationPersonId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Person")).TermString
+                @Term.Find(x => x.InternalName.Equals("First name")).TermString
             </div>    <div class="col-9">
-                @Model.PersonName
+                @Model.FirstName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Last name")).TermString
+            </div>    <div class="col-9">
+                @Model.LastName
             </div>
         </div>
         <div class="row">

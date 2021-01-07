@@ -19,14 +19,7 @@
             </div>
             <div class="col-9">
                 <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PersonPositionId" ejs-for="@Model.PersonPositionId" cssClass="e-outline" placeholder="PersonPositionId" floatLabelType="Auto"></ejs-numerictextbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Organization")).TermString
-            </div>    <div class="col-9">
-                @Model.PersonName
+                <ejs-numerictextbox id="OrganizationPersonId" ejs-for="@Model.OrganizationPersonId" cssClass="e-outline" placeholder="OrganizationPersonId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">

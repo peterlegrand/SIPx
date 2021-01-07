@@ -16,6 +16,7 @@
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Addresses")).TermString" template="#Address" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Telecom")).TermString" template="#Telecom" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Position")).TermString" template="#Position" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Language" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
@@ -32,6 +33,12 @@
 <script id="Telecom" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/OrganizationTelecom/Index/${OrganizationId}"><span style="color:red">T</span>elecom</a>
+
+    </div>
+</script>
+<script id="Position" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/OrganizationPosition/Index/${OrganizationId}"><span style="color:red">P</span>osition</a>
 
     </div>
 </script>
