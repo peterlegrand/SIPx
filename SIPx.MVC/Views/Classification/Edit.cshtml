@@ -154,16 +154,24 @@
             </div>
         }
         @*<div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Default page")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-dropdownlist id="DefaultPage" dataSource="@Model.DefaultPages" ejs-for="@Model.DefaultPageId" value="@Model.DefaultPageId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Default page")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="DefaultPage" dataSource="@Model.DefaultPages" ejs-for="@Model.DefaultPageId" value="@Model.DefaultPageId" index="2" filtering="FilterDefaultPage" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ClassificationPageId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
 
-                </div>
-            </div>*@
+            </div>
+        </div>*@
+        @*<ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+            <e-content-template>
+            </e-content-template>
+            <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+            </e-richtexteditor-toolbarsettings>
+        </ejs-richtexteditor>*@
+
+        <textarea asp-for="@Model.Description" class="form-control ckeditor" id="descriptionx" name="Description"></textarea>
         @* PETER TODO need to do error message on default page. *@
         <div class="row">
             <div class="col-3">
@@ -369,50 +377,64 @@
                     e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
                 }
 </script>
-  <script>
-        var defaultRTE, ranges, selection = new ej.richtexteditor.NodeSelection();
-        var defaultDialog;
+<script>
+    var defaultRTE, ranges, selection = new ej.richtexteditor.NodeSelection();
+    var defaultDialog;
 
-        function onCreate() {
-            defaultRTE = this;
-            var customBtn = defaultRTE.element.querySelector('#custom_tbar');
+    function onCreate() {
+        defaultRTE = this;
+        var customBtn = defaultRTE.element.querySelector('#custom_tbar');
 
-            // Initialization of Dialog
-            var dialog = new ej.popups.Dialog({
-                header: 'Select Multiple Image file to upload',
-                target: document.getElementById('rteSection'),
-                showCloseIcon: false,
-                isModal: true,
-                created: function () {
-                    defaultDialog = this;
-                },
-                visible: false,
-                height: 'auto',
-                showCloseIcon: true
-            });
-            // Render initialized Dialog
-            dialog.appendTo('#customTbarDialog');
+        // Initialization of Dialog
+        var dialog = new ej.popups.Dialog({
+            header: 'Select Multiple Image file to upload',
+            target: document.getElementById('rteSection'),
+            showCloseIcon: false,
+            isModal: true,
+            created: function () {
+                defaultDialog = this;
+            },
+            visible: false,
+            height: 'auto',
+            showCloseIcon: true
+        });
+        // Render initialized Dialog
+        dialog.appendTo('#customTbarDialog');
 
+        customBtn.onclick = function (e) {
+            dialog.element.style.display = '';
+            ranges = selection.getRange(document);
+            dialog.width = defaultRTE.element.offsetWidth * 0.5;
+            dialog.dataBind();
+            dialog.show();
             customBtn.onclick = function (e) {
+                defaultRTE.focusIn();
                 dialog.element.style.display = '';
                 ranges = selection.getRange(document);
                 dialog.width = defaultRTE.element.offsetWidth * 0.5;
                 dialog.dataBind();
                 dialog.show();
-                customBtn.onclick = function (e) {
-                    defaultRTE.focusIn();
-                    dialog.element.style.display = '';
-                    ranges = selection.getRange(document);
-                    dialog.width = defaultRTE.element.offsetWidth * 0.5;
-                    dialog.dataBind();
-                    dialog.show();
-                };
             };
-        }
+        };
+    }
 
-        function onSuccess(args) {
-            //Replace the image saved URL location here
-            defaultRTE.executeCommand('insertImage', { url: '/images/' + args.file.name });
-            defaultDialog.hide();
+    function onSuccess(args) {
+        //Replace the image saved URL location here
+        defaultRTE.executeCommand('insertImage', { url: '/images/' + args.file.name });
+        defaultDialog.hide();
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        if (CKEDITOR.instances['descriptionx']) {
+            CKEDITOR.instances['descriptionx'].destroy();
         }
-    </script>
+        CKEDITOR.replace('descriptionx', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['descriptionx'].getData()
+            console.log(ckValue);
+        });
+    });
+</script>
