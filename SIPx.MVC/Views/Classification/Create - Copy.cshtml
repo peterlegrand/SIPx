@@ -1,29 +1,28 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationUpdateGet
+@model ClassificationCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classification.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification")).TermString
+    <img src="~/images/icons/Classification.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("New classification")).TermString
 </h1>
 <div class="container">
 
+
     <form method="post">
+
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
-            </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>    <div class="col-9">
+                <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -50,12 +49,14 @@
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
-                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
-                    <e-content-template>
-                    </e-content-template>
-                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
-                    </e-richtexteditor-toolbarsettings>
-                </ejs-richtexteditor>
+                @*<ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                        <e-content-template>
+                        </e-content-template>
+                        <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                        </e-richtexteditor-toolbarsettings>
+                    </ejs-richtexteditor>*@
+
+                <textarea asp-for="@Model.Description" class="form-control ckeditor" id="descriptionx" name="Description"></textarea>
             </div>
         </div>
         @if (ErrorMessages.Exists(x => x.ErrorMessageId == 9))
@@ -119,7 +120,7 @@
                 @Term.Find(x => x.InternalName.Equals("Dropdown sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.DropDownSequences" ejs-for="@Model.DropDownSequence" value="@Model.DropDownSequence" popupHeight="220px">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.DropDownSequence" value="@Model.DropDownSequence" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -140,14 +141,12 @@
                 </div>
             </div>
         }
-
-        @* PETER TODO need to do error message on default page. *@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Status")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Status" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" popupHeight="220px">
+                <ejs-dropdownlist id="Status" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="1" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="StatusId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -165,7 +164,7 @@
                 @Term.Find(x => x.InternalName.Equals("Icon")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
+                <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="1" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -192,38 +191,7 @@
                 <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatorName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatedDate
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-            </div>
-            <div class="col-9">
-                @Model.ModifierName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-            </div>
-            <div class="col-9">
-                <div>@Model.ModifiedDate</div>
-            </div>
-        </div>
+
 
     </form>
 </div>
@@ -268,7 +236,6 @@
         background: #303030;
     }
 </style>
-
 <script type="text/javascript">
     var rteObj, myCodeMirror, textArea;
     function created() {
@@ -333,77 +300,73 @@
     }
 </script>
 <script type="text/javascript">
-        function FilterDefaultPage(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
-                }
+    function Sequence(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Sequences)), query);
+            }
 </script>
 <script type="text/javascript">
-        function FilterStatus(e) {
-                    var query = new ej.data.Query();
-                    query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.DefaultPages)), query);
+    function Status(e) {
+                var query = new ej.data.Query();
+                query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Statuses)), query);
+            }
+</script>
+
+
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        height: 500,
+        width: 800,
+        plugins: "image", // add the image plugin
+        toolbar: 'image', // add the image button to the toolbar
+        images_upload_handler: function (blobInfo, success, failure) {
+
+            // Create a JSON payload containing the file name and file bytes and serialize it to a string
+            var data = JSON.stringify({ fileBytes: blobInfo.base64(), fileName: blobInfo.blob().name });
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/images',
+                data: data,
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (result) {
+                    success(result.imageUrl);
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    failure(err.message);
                 }
-</script>
-<script>
-    var defaultRTE, ranges, selection = new ej.richtexteditor.NodeSelection();
-    var defaultDialog;
-
-    function onCreate() {
-        defaultRTE = this;
-        var customBtn = defaultRTE.element.querySelector('#custom_tbar');
-
-        // Initialization of Dialog
-        var dialog = new ej.popups.Dialog({
-            header: 'Select Multiple Image file to upload',
-            target: document.getElementById('rteSection'),
-            showCloseIcon: false,
-            isModal: true,
-            created: function () {
-                defaultDialog = this;
-            },
-            visible: false,
-            height: 'auto',
-            showCloseIcon: true
-        });
-        // Render initialized Dialog
-        dialog.appendTo('#customTbarDialog');
-
-        customBtn.onclick = function (e) {
-            dialog.element.style.display = '';
-            ranges = selection.getRange(document);
-            dialog.width = defaultRTE.element.offsetWidth * 0.5;
-            dialog.dataBind();
-            dialog.show();
-            customBtn.onclick = function (e) {
-                defaultRTE.focusIn();
-                dialog.element.style.display = '';
-                ranges = selection.getRange(document);
-                dialog.width = defaultRTE.element.offsetWidth * 0.5;
-                dialog.dataBind();
-                dialog.show();
-            };
-        };
-    }
-
-    function onSuccess(args) {
-        //Replace the image saved URL location here
-        defaultRTE.executeCommand('insertImage', { url: '/images/' + args.file.name });
-        defaultDialog.hide();
-    }
-</script>
-<script>
-    $(document).ready(function () {
-        if (CKEDITOR.instances['descriptionx']) {
-            CKEDITOR.instances['descriptionx'].destroy();
+            });
         }
-        CKEDITOR.replace('descriptionx', {
-            fullPage: false, uiColor: '#efe8ce'
-        });
-        $('#getVal').on('click', function (e) {
-            let ckValue = CKEDITOR.instances['descriptionx'].getData()
-            console.log(ckValue);
-        });
     });
 </script>
+@*<script>
+
+    (function ($) {
+        //"use strict";
+        $(document).ready(function () {
+            tinymce.init({
+                selector: 'textarea'
+            });
+
+        });
+    })(this.jQuery);
+    //$(document).ready(function () {
+    //    if (CKEDITOR.instances['descriptionx']) {
+    //        CKEDITOR.instances['descriptionx'].destroy();
+    //    }
+    //    CKEDITOR.replace('descriptionx', {
+    //        fullPage: false, uiColor: '#efe8ce'
+    //    });
+    //    $('#getVal').on('click', function (e) {
+    //        let ckValue = CKEDITOR.instances['descriptionx'].getData()
+    //        console.log(ckValue);
+    //    });
+    //});
+</script>
+    
+    //PIPO*@

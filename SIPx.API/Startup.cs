@@ -76,6 +76,7 @@ namespace SIPx.API
 
 
             services.AddTransient<ISearchProvider, SearchProvider>();
+            services.AddTransient<IFavoriteProvider, FavoriteProvider>();
             services.AddTransient<IProcessTemplateFlowConditionProvider, ProcessTemplateFlowConditionProvider>();
             services.AddTransient<IProcessTemplateFlowConditionTypeProvider, ProcessTemplateFlowConditionTypeProvider>();
 

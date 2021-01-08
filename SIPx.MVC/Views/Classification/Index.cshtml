@@ -22,8 +22,10 @@
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="#" onclick="AddFriend()">Favorite</a>
-<a href="~/Classification/Create">@Term.Find(x => x.InternalName.Equals("Add new classification")).TermString</a>
+<a href="#" id="Favorites">
+    <img id="OldImgId" src="~/images/icons/Favorites.png" width="20" height="20" />
+</a>
+<a asp-action="Create">@Term.Find(x => x.InternalName.Equals("Add new classification")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
         ${ClassificationId}
@@ -89,6 +91,54 @@
             controller: 'Classification',
             action: 'Index'
         };
-        $.post("https://localhost:44393/Favorites/Add/", Favorite);
+        $.post("https://localhost:44393/Favorite/Add/", Favorite);
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#Favorite").click(
+            var Favorite = {
+            controller: 'Classification',
+            action: 'Index'
+        };
+        $.post("https://localhost:44393/Favorite/Add/", Favorite);
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var Favorite = {
+            controller: 'Classification',
+            action: 'Index'
+        };
+        $.post("https://localhost:44393/Favorite/Add/", Favorite);
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#Favorites").click(function () {
+            var Favorite = {
+                controller: 'Classification',
+                action: 'Index'
+            };
+            $.post("/Favorite/Add/",
+                Favorite
+                //,
+                //              document.getElementById("Favorites").textContent = 'Added');
+               
+                , function () {
+                    var OldImg = document.getElementById("OldImgId");
+                    OldImg.remove();
+                        var img = document.createElement("img");
+                    img.src = "/images/icons/AddedFavorites.png";
+                    img.height = "20";
+                    img.width = "20";
+                        var src = document.getElementById("Favorites");
+                    src.appendChild(img);
+                }
+
+                //
+            )
+        });
+    });
+
 </script>
