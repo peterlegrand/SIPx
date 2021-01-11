@@ -18,8 +18,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<PersonTelecomCreateGet>($"{_baseUrl}api/FrontPersonTelecom/Create/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Create", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Create", token);
+            
             var ErrorMessages = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
@@ -38,8 +40,10 @@ namespace SIPx.MVC.Controllers
             var PersonTelecomCreateGetWithErrorMessage = await _client.PostProtectedAsync<PersonTelecomCreateGetWithErrorMessages>($"{_baseUrl}api/FrontPersonTelecom/Create", PersonTelecom, token);
             if (PersonTelecomCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Create", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Create", token);
+                
                 ViewBag.ErrorMessages = PersonTelecomCreateGetWithErrorMessage.ErrorMessages;
                 return View(PersonTelecomCreateGetWithErrorMessage.PersonTelecom);
             }
@@ -51,9 +55,11 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<List<PersonTelecomIndexGet>>($"{_baseUrl}api/FrontPersonTelecom/Index/" + id,token);
-           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Index", token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Index", token);
             ViewBag.Id = id;
-            ViewBag.UITerms = UITerms;
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -71,8 +77,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<PersonTelecomUpdateGet>($"{_baseUrl}api/FrontPersonTelecom/Update/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Edit", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Edit", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -91,8 +99,10 @@ namespace SIPx.MVC.Controllers
             var PersonTelecomUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PersonTelecomUpdateGetWithErrorMessages>($"{_baseUrl}api/FrontPersonTelecom/Update", PersonTelecom, token);
             if (PersonTelecomUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Edit", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Edit", token);
+                
                 ViewBag.ErrorMessages = PersonTelecomUpdateGetWithErrorMessage.ErrorMessages;
                 return View(PersonTelecomUpdateGetWithErrorMessage.PersonTelecom);
             }
@@ -105,8 +115,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<PersonTelecomDeleteGet>($"{_baseUrl}api/FrontPersonTelecom/View/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/View", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/View", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -123,8 +135,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<PersonTelecomDeleteGet>($"{_baseUrl}api/FrontPersonTelecom/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Delete", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontPersonTelecom/Delete", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)

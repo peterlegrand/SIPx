@@ -18,8 +18,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<ProcessTemplateFieldCreateGet>($"{_baseUrl}api/ProcessTemplateField/Create/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Create", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Create", token);
+            
             var ErrorMessages = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
@@ -38,8 +40,10 @@ namespace SIPx.MVC.Controllers
             var ProcessTemplateFieldCreateGetWithErrorMessage = await _client.PostProtectedAsync<ProcessTemplateFieldCreateGetWithErrorMessages>($"{_baseUrl}api/ProcessTemplateField/Create", ProcessTemplateField, token);
             if (ProcessTemplateFieldCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Create", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Create", token);
+                
                 ViewBag.ErrorMessages = ProcessTemplateFieldCreateGetWithErrorMessage.ErrorMessages;
                 return View(ProcessTemplateFieldCreateGetWithErrorMessage.ProcessTemplateField);
             }
@@ -52,9 +56,11 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<List<ProcessTemplateFieldIndexGet>>($"{_baseUrl}api/ProcessTemplateField/Index/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Index", token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Index", token);
             ViewBag.Id = id;
-            ViewBag.UITerms = UITerms;
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -72,8 +78,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<ProcessTemplateFieldUpdateGet>($"{_baseUrl}api/ProcessTemplateField/Update/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Edit", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Edit", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -92,8 +100,10 @@ namespace SIPx.MVC.Controllers
             var ProcessTemplateFieldUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ProcessTemplateFieldUpdateGetWithErrorMessages>($"{_baseUrl}api/ProcessTemplateField/Update", ProcessTemplateField, token);
             if (ProcessTemplateFieldUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Edit", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Edit", token);
+                
                 ViewBag.ErrorMessages = ProcessTemplateFieldUpdateGetWithErrorMessage.ErrorMessages;
                 return View(ProcessTemplateFieldUpdateGetWithErrorMessage.ProcessTemplateField);
             }
@@ -106,8 +116,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<ProcessTemplateFieldDeleteGet>($"{_baseUrl}api/ProcessTemplateField/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Delete", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/Delete", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -132,8 +144,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<ProcessTemplateFieldLanguageIndexGet>>($"{_baseUrl}api/ProcessTemplateField/LanguageIndex/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/LanguageIndex", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/LanguageIndex", token);
+            
             return View(response);
             //return View();
         }
@@ -143,8 +157,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<ProcessTemplateFieldLanguageIndexGet>($"{_baseUrl}api/ProcessTemplateField/LanguageUpdate/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/LanguageEdit", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ProcessTemplateField/LanguageEdit", token);
+            
             return View(response);
         }
 

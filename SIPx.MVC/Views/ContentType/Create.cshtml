@@ -12,6 +12,9 @@
 <h1>
     <img src="~/images/icons/Type.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New content type")).TermString
 </h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 
 
 <div class="container">
@@ -153,7 +156,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td  style="width:5%;"></td>
+                        <td style="width:5%;"></td>
                         <td style="width:20%;">@Term.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
                         <td></td>
                         <td><ejs-checkbox id="IsFreeEditSelectable" ejs-for="@Model.IsFreeEditSelectable"></ejs-checkbox></td>

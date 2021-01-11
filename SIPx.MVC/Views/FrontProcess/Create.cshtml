@@ -11,7 +11,10 @@
         @
     </script>*@
 
-<h1><img src="~/images/icons/Process.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Create new process")).TermString</h1>
+<h1><img src="~/images/icons/Process.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Create new process")).TermString</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class=" control-section">
     <div class="container">
         <form method="post">
@@ -119,7 +122,7 @@
                                 @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
                                 {
                                     <div>@Term.Find(x => x.InternalName.Equals("Required")).TermString</div>
-                                    <div class="bg-danger"  style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
+                                    <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
                         }
@@ -258,7 +261,8 @@
 </style>
 <script type="text/javascript">
     @Html.Raw(ViewBag.ErrorHandlingScript)
-    </script><script type="text/javascript">
+</script>
+<script type="text/javascript">
     var rteObj, myCodeMirror, textArea;
     function created() {
         rteObj = this;

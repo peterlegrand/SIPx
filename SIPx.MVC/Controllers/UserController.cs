@@ -18,8 +18,9 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<List<UserIndexGet>>($"{_baseUrl}api/User/Index",token);
-           var Terms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Index", token);
-            ViewBag.UITerms = Terms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Index", token);
             var ErrorMessages = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
@@ -37,8 +38,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<UserUpdateGet>($"{_baseUrl}api/User/Update/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Edit", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Edit", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -55,8 +58,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<UserCreateGet>($"{_baseUrl}api/User/Create/", token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Create", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Create", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -75,8 +80,10 @@ namespace SIPx.MVC.Controllers
             var UserCreateGetWithErrorMessage = await _client.PostProtectedAsync<UserCreateGetWithErrorMessages>($"{_baseUrl}api/User/Create", User, token);
             if (UserCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Create", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Create", token);
+                
                 ViewBag.ErrorMessages = UserCreateGetWithErrorMessage.ErrorMessages;
                 return View(UserCreateGetWithErrorMessage.User);
             }
@@ -91,8 +98,10 @@ namespace SIPx.MVC.Controllers
             var UserUpdateGetWithErrorMessage = await _client.PostProtectedAsync<UserUpdateGetWithErrorMessages>($"{_baseUrl}api/User/Update", User, token);
             if (UserUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Edit", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Edit", token);
+                
                 ViewBag.ErrorMessages = UserUpdateGetWithErrorMessage.ErrorMessages;
                 return View(UserUpdateGetWithErrorMessage.User);
             }
@@ -105,8 +114,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<UserDeleteGet>($"{_baseUrl}api/User/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Delete", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/User/Delete", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)

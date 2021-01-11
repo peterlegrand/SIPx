@@ -10,6 +10,9 @@
 <h1>
     <img src="~/images/icons/Person.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Person advanced search")).TermString
 </h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <div class="container">
 
     <form method="post">
@@ -47,21 +50,21 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Is user")).TermString
             </div>    <div class="col-9">
-    <div class="radio-control">
-        <div class="row">
-            <ejs-radiobutton id="IsUserNo" label="No" name="IsUser" value="0"></ejs-radiobutton>
-        </div>
-        <div class="row">
-            <ejs-radiobutton id="IsUserYes" label="Yes" name="IsUser" value="1"></ejs-radiobutton>
-        </div>
-        <div class="row">
-            <ejs-radiobutton id="IsUserAll" label="All" name="IsUser" value="2" checked="true"></ejs-radiobutton>
-        </div>
-    </div>
+                <div class="radio-control">
+                    <div class="row">
+                        <ejs-radiobutton id="IsUserNo" label="No" name="IsUser" value="0"></ejs-radiobutton>
+                    </div>
+                    <div class="row">
+                        <ejs-radiobutton id="IsUserYes" label="Yes" name="IsUser" value="1"></ejs-radiobutton>
+                    </div>
+                    <div class="row">
+                        <ejs-radiobutton id="IsUserAll" label="All" name="IsUser" value="2" checked="true"></ejs-radiobutton>
+                    </div>
+                </div>
 
-@*    <ejs-checkbox id="IsUser" ejs-for="IsUser" cssClass="e-outline" placeholder="IsUser" floatLabelType="Auto"></ejs-checkbox>*@
-</div>
-</div>
+                @*    <ejs-checkbox id="IsUser" ejs-for="IsUser" cssClass="e-outline" placeholder="IsUser" floatLabelType="Auto"></ejs-checkbox>*@
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Role")).TermString
@@ -114,7 +117,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Classification")).TermString
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="ClassificationId" dataSource="@Model.Classifications" ejs-for="@Model.ClassificationId" value="@Model.ClassificationId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ClassificationId"></e-dropdownlist-fields>
@@ -123,7 +126,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification value")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Classification value")).TermString
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="ClassificationValueId" dataSource="@Model.ClassificationValues" ejs-for="@Model.ClassificationValueId" value="@Model.ClassificationId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>

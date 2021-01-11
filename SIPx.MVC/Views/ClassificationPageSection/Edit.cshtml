@@ -11,6 +11,9 @@
 <h1>
     <img src="~/images/icons/Classifications.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification page section")).TermString
 </h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <div class="container">
 
     <form method="post">
@@ -355,13 +358,15 @@
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
                     e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.SortBys)), query);
                 }
-</script><script type="text/javascript">
+</script>
+<script type="text/javascript">
     function ContentTypes(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
                     e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ContentTypes)), query);
                 }
-</script><script type="text/javascript">
+</script>
+<script type="text/javascript">
     function Sequences(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;

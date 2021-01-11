@@ -5,11 +5,11 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class FavoritesAdd
+    public class MVCFavoriteGroupAdd
     {
         [Key]
-        public string controller { get; set; }
-        public string action { get; set; }
         public string UserId { get; set; }
+        public string Name { get; set; }
+        public int Sequence { get; set; }
     }
 }

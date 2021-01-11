@@ -11,7 +11,10 @@
 
 <h1>
     <img src="~/images/icons/Spotlight.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add process template stage")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
     <form method="post">
 
@@ -19,9 +22,9 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-    <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
-</div>
+                <ejs-numerictextbox id="ProcessTemplateId" ejs-for="ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+            </div>
         </div>
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
@@ -51,7 +54,7 @@
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
-        </div>        
+        </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Stage type")).TermString

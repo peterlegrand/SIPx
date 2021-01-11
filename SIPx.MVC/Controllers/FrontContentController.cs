@@ -20,8 +20,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<FrontContentContentTypeGroup>>($"{_baseUrl}api/FrontContent/ContentType", token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
+            
             return View(response);
         }
         [HttpGet]
@@ -29,13 +31,17 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew/" + Id, token);
-            //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
-            //   ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ContentType", token);
+          
             return View(response);
         }
         [HttpPost]
         public async Task<IActionResult> ContentNew(FrontContentContentNew Content)
         {
+
+            //PETER TODO other similar methods have different structure
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             await _client.PostProtectedAsync<FrontContentContentNew>($"{_baseUrl}api/FrontContent/ContentNew", Content, token);
 
@@ -46,8 +52,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<FrontContentShowContent>($"{_baseUrl}api/FrontContent/ShowContent/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ShowContent", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/ShowContent", token);
+            
             return View(response);
         }
         [HttpGet]
@@ -55,8 +63,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync<ContentAdvancedSearchPost>($"{_baseUrl}api/FrontContent/AdvancedSearch/", token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/AdvancedSearch", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/AdvancedSearch", token);
+            
             return View(response);
         }
         [HttpPost]
@@ -65,7 +75,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var result = await _client.PostProtectedAsync<List<ContentAdvancedSearchResult>>($"{_baseUrl}api/FrontContent/AdvancedSearch", SearchData, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/SearchResult", token);
-            ViewBag.UITerms = UITerms;
+            
             return View("SearchResult", result);
         }
 
@@ -74,8 +84,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<FrontContentRightsUpdateGet>($"{_baseUrl}api/FrontContent/RightsUpdate/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEdit", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEdit", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -94,8 +106,10 @@ namespace SIPx.MVC.Controllers
             var FrontContentRightsUpdateGetWithErrorMessage = await _client.PostProtectedAsync<FrontContentRightsUpdateGetWithErrorMessages>($"{_baseUrl}api/FrontContent/RightsUpdate", RightsEdit, token);
             if (FrontContentRightsUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEdit", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEdit", token);
+                
                 ViewBag.ErrorMessages = FrontContentRightsUpdateGetWithErrorMessage.ErrorMessages;
                 return View(FrontContentRightsUpdateGetWithErrorMessage.FrontContentRights);
             }
@@ -110,7 +124,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<FrontContentRightsEditUserCreateGet>($"{_baseUrl}api/FrontContent/RightsEditUserCreate/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserCreate", token);
-            ViewBag.UITerms = UITerms;
+            
             var ErrorMessages = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
@@ -129,8 +143,10 @@ namespace SIPx.MVC.Controllers
             var FrontContentRightsEditUserCreateGetWithErrorMessage = await _client.PostProtectedAsync<FrontContentRightsEditUserCreateGetWithErrorMessages>($"{_baseUrl}api/FrontContent/RightsEditUserCreate", RightsEditUser, token);
             if (FrontContentRightsEditUserCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserCreate", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserCreate", token);
+                
                 ViewBag.ErrorMessages = FrontContentRightsEditUserCreateGetWithErrorMessage.ErrorMessages;
                 return View(FrontContentRightsEditUserCreateGetWithErrorMessage.FrontContentRightsEditUser);
             }
@@ -143,9 +159,11 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<List<FrontContentRightsEditUserIndexGet>>($"{_baseUrl}api/FrontContent/RightsEditUserIndex/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserIndex", token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserIndex", token);
             ViewBag.Id = id;
-            ViewBag.UITerms = UITerms;
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -162,8 +180,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<FrontContentRightsEditUserDeleteGet>($"{_baseUrl}api/FrontContent/RightsEditUserDelete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserDelete", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontContent/RightsEditUserDelete", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)

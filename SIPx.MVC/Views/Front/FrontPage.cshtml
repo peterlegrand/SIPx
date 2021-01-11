@@ -1,5 +1,6 @@
 ﻿@*@model WebApplication.Controllers.HomeController.spacingModel*@
 
+@*//PETER TODO This doesn't have terms'*@
 <div>
     <form method="post">
         <!--  Button element declaration -->
@@ -10,7 +11,7 @@
 </div>
 <div style="padding-top: 15px;">
     <!--  DashboardLayout element declaration -->
-    <ejs-dashboardlayout id="dashboard_default" columns="5" created="onCreated" enablePersistence="true" >
+    <ejs-dashboardlayout id="dashboard_default" columns="5" created="onCreated" enablePersistence="true">
         <e-dashboardlayout-panels>
             <e-dashboardlayout-panel sizeX="1" sizeY="1" row="0" col="0" content="<div class='content'>0</div>">
             </e-dashboardlayout-panel>
@@ -32,24 +33,24 @@
 </div>
 
 <script>
-   //document.addEventListener('DOMContentLoaded', function () {
-   //     // Create instances for dashboardlayout element
-   //     var dashboard = document.getElementById('dashboard_default').ej2_instances[0];
-   //     // Save the current panels
-   //     document.getElementById('save').onclick = function (e) {
-   //         onCreated();
-           
-   //     };
-   //     // Restore the initial panels
-   //     document.getElementById('restore').onclick = function (e) {
-   //         dashboard.panels = restoreModel;
-   //     };
-   // });
+    //document.addEventListener('DOMContentLoaded', function () {
+    //     // Create instances for dashboardlayout element
+    //     var dashboard = document.getElementById('dashboard_default').ej2_instances[0];
+    //     // Save the current panels
+    //     document.getElementById('save').onclick = function (e) {
+    //         onCreated();
+
+    //     };
+    //     // Restore the initial panels
+    //     document.getElementById('restore').onclick = function (e) {
+    //         dashboard.panels = restoreModel;
+    //     };
+    // });
     document.addEventListener('DOMContentLoaded', function () {
         // Create instances for dashboardlayout element
         var dashboard = document.getElementById('dashboard_default').ej2_instances[0];
         // Save the current panels
-            onCreated();
+        onCreated();
 
         // Restore the initial panels
         document.getElementById('restore').onclick = function (e) {
@@ -63,35 +64,35 @@
             var val = localStorage.getItem(key);
             //alert(val);
             if (key == 'DashboardLayoutdashboard_default') {
-            $.ajax({
-                type: "Post",
-                url: "ReadDataFromLocalStorage.aspx/Insert",
-                data: val,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    var mes = data.d;
-                    //alert(mes);
-                    $("#result").append(mes + "<br/>");
-                },
-                error: function (err) {
-                    alert(err);
-                }
-            })
+                $.ajax({
+                    type: "Post",
+                    url: "ReadDataFromLocalStorage.aspx/Insert",
+                    data: val,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        var mes = data.d;
+                        //alert(mes);
+                        $("#result").append(mes + "<br/>");
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                })
             }
         }
-    
+
     };
 
     function onCreated() {
-            var dashboard = document.getElementById('dashboard_default').ej2_instances[0];
-            restoreModel = dashboard.serialize();
-            restoreModel[0].content = '<div class="content">0</div>';
-            restoreModel[1].content = '<div class="content">1</div>';
-            restoreModel[2].content = '<div class="content">2</div>';
-            restoreModel[3].content = '<div class="content">3</div>';
-            restoreModel[4].content = '<div class="content">4</div>';
-            restoreModel[5].content = '<div class="content">5</div>';
+        var dashboard = document.getElementById('dashboard_default').ej2_instances[0];
+        restoreModel = dashboard.serialize();
+        restoreModel[0].content = '<div class="content">0</div>';
+        restoreModel[1].content = '<div class="content">1</div>';
+        restoreModel[2].content = '<div class="content">2</div>';
+        restoreModel[3].content = '<div class="content">3</div>';
+        restoreModel[4].content = '<div class="content">4</div>';
+        restoreModel[5].content = '<div class="content">5</div>';
         restoreModel[6].content = '<div class="content">6</div>';
         console.log(localStorage.getItem('storageArrObj'));
     }

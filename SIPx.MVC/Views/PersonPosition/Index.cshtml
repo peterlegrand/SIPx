@@ -6,7 +6,10 @@
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Position.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Positions")).TermString</h1>
+<h1><img src="~/images/icons/Position.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Positions")).TermString</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -17,7 +20,7 @@
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a asp-controller="Person" asp-action="Index" >@Term.Find(x => x.InternalName.Equals("Back to persons")).TermString</a>
+<a asp-controller="Person" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Back to persons")).TermString</a>
 <a asp-controller="PersonPosition" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add new organization")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>

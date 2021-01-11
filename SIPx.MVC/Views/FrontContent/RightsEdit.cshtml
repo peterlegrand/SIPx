@@ -12,13 +12,16 @@
 <h1>
     <img src="~/images/icons/Content.png" width="50" height="50" /> @Term.Find(x => x.InternalName.Equals("Edit content rights")).TermString
 </h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <div class="container">
 
     <form method="post">
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Content id")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Content id")).TermString
             </div>
             <div class="col-9">
                 <ejs-numerictextbox id="ContentId" ejs-for="@Model.ContentId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
@@ -27,7 +30,7 @@
         @if (Model.IsFreeOwnership || Model.IsProjectBasedOwnership || Model.IsOrganizationBasedOwnership || Model.IsRelationBasedOwnership) { }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Owner")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Owner")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Ownership" dataSource="@Model.Owners" ejs-for="@Model.OwnerId" value="@Model.OwnerId" index="2" popupHeight="220px">
@@ -39,7 +42,7 @@
         <div class="row">
             <div class="col-3">
                 @*                @Term.Find(x => x.InternalName.Equals("Name")).TermString*@
-                @Term.Find(x => x.InternalName.Equals("Free edit")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Free edit")).TermString
             </div>
             @if (Model.IsFreeEditSelectable)
             {
@@ -60,7 +63,7 @@
         <div class="row">
             @if (Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project edit")).TermString 
+                    @Term.Find(x => x.InternalName.Equals("Project edit")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedEdit" ejs-for="@Model.IsProjectBasedEdit" value="@Model.IsProjectBasedEdit"></ejs-checkbox>
@@ -69,7 +72,7 @@
             @if (!Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
                     @*                @Term.Find(x => x.InternalName.Equals("Name")).TermString*@
-                    @Term.Find(x => x.InternalName.Equals("Project edit")).TermString 
+                    @Term.Find(x => x.InternalName.Equals("Project edit")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedEdit" ejs-for="@Model.IsProjectBasedEdit" value="@Model.IsProjectBasedEdit"></ejs-checkbox>
@@ -78,7 +81,7 @@
             @if (Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
                     @*                @Term.Find(x => x.InternalName.Equals("Name")).TermString*@
-                    @Term.Find(x => x.InternalName.Equals("Project read")).TermString 
+                    @Term.Find(x => x.InternalName.Equals("Project read")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedRead" ejs-for="@Model.IsProjectBasedRead" value="@Model.IsProjectBasedRead"></ejs-checkbox>
@@ -86,7 +89,7 @@
             }
             @if (!Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project read")).TermString 
+                    @Term.Find(x => x.InternalName.Equals("Project read")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedRead" ejs-for="@Model.IsProjectBasedRead" value="@Model.IsProjectBasedRead"></ejs-checkbox>
@@ -96,7 +99,7 @@
         <div class="row">
             @if (Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project edit sub")).TermString 
+                    @Term.Find(x => x.InternalName.Equals("Project edit sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedEditSub" ejs-for="@Model.IsProjectBasedEditSub" value="@Model.IsProjectBasedEditSub"></ejs-checkbox>
@@ -104,7 +107,7 @@
             }
             @if (!Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project edit sub")).TermString 
+                    @Term.Find(x => x.InternalName.Equals("Project edit sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedEditSub" ejs-for="@Model.IsProjectBasedEditSub" value="@Model.IsProjectBasedEditSub"></ejs-checkbox>
@@ -112,7 +115,7 @@
             }
             @if (Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project read sub")).TermString 
+                    @Term.Find(x => x.InternalName.Equals("Project read sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedReadSub" ejs-for="@Model.IsProjectBasedReadSub" value="@Model.IsProjectBasedReadSub"></ejs-checkbox>
@@ -120,7 +123,7 @@
             }
             @if (!Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project read sub")).TermString 
+                    @Term.Find(x => x.InternalName.Equals("Project read sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedReadSub" ejs-for="@Model.IsProjectBasedReadSub" value="@Model.IsProjectBasedReadSub"></ejs-checkbox>
@@ -269,7 +272,7 @@
             @if (Model.DefaultIsRelationBasedEdit)
             {
                 <div class="col-3">
-                                    @Term.Find(x => x.InternalName.Equals("Relation edit")).TermString
+                    @Term.Find(x => x.InternalName.Equals("Relation edit")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsRelationBasedEdit" ejs-for="@Model.IsRelationBasedEdit" value="@Model.IsRelationBasedEdit"></ejs-checkbox>
@@ -277,9 +280,9 @@
             }
             @if (Model.DefaultIsRelationBasedRead)
             {
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Relation read")).TermString
-        </div>
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Relation read")).TermString
+                </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsRelationBasedRead" ejs-for="@Model.IsRelationBasedRead" value="@Model.IsRelationBasedRead"></ejs-checkbox>
                 </div>
@@ -291,7 +294,7 @@
                 @if (Model.IsProjectBasedEditSelectable || Model.IsProjectBasedEditSelectable || Model.IsRelationBasedEditSelectable)
                 {
                     <div class="col-3">
-                                        @Term.Find(x => x.InternalName.Equals("Select edit users")).TermString
+                        @Term.Find(x => x.InternalName.Equals("Select edit users")).TermString
                     </div>
                     <div class="col-3">
                         <a asp-controller="FrontContent" asp-action="RightsEditUserIndex" asp-route-id="@Model.ContentId"><img src="~/images/icons/Group.png" width="20" height="20" /></a>
@@ -305,8 +308,8 @@
                 }
                 @if (Model.IsProjectBasedReadSelectable || Model.IsProjectBasedReadSelectable || Model.IsRelationBasedReadSelectable)
                 {<div class="col-3">
-    @Term.Find(x => x.InternalName.Equals("Select read users")).TermString
-</div>
+                        @Term.Find(x => x.InternalName.Equals("Select read users")).TermString
+                    </div>
                     <div class="col-3">
                         <a asp-controller="FrontContent" asp-action="RightsReadUsers" asp-route-id="@Model.ContentId"><img src="~/images/icons/Group.png" width="20" height="20" /></a>
                     </div>
@@ -324,7 +327,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                    <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
 
             </div>
         </div>

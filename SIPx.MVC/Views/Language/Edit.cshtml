@@ -11,13 +11,16 @@
 
 <h1>
     <img src="~/images/icons/Language.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Language")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
     <form method="post">
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString
             </div>
             <div class="col-9">
                 <ejs-numerictextbox id="LanguageId" ejs-for="@Model.LanguageId" cssClass="e-outline" placeholder="LanguageId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -33,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Foreign name")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Foreign name")).TermString
             </div>
             <div class="col-9">
                 @Model.ForeignName

@@ -5,9 +5,13 @@
     Layout = "_Layout";
 }
 
-<h1><img src="~/images/icons/Todo.png" width="50" height="50" />
+<h1>
+    <img src="~/images/icons/Todo.png" width="50" height="50" />
     @*@Term.Find(x => x.InternalName.Equals("Persons")).TermString*@
-    </h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>

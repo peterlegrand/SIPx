@@ -10,7 +10,10 @@
 
 <h1>
     <img src="~/images/icons/Property.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete property")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
     <form method="post">
@@ -62,7 +65,7 @@
                 @Term.Find(x => x.InternalName.Equals("Type")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="Type" ejs-for="PropertyTypeName" cssClass="e-outline"  floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="Type" ejs-for="PropertyTypeName" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">

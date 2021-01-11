@@ -11,20 +11,23 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
 </script>
 <script>
-        $(document).ready(function () {
-            $('#ProcessTemplateFlowPassTypeId_hidden').on('change', function () {
-                if (this.value == '3') {
-                    $("#SecurityLevel").show();
-                }
-                else {
-                    $("#SecurityLevel").hide();
-                }
-            });
+    $(document).ready(function () {
+        $('#ProcessTemplateFlowPassTypeId_hidden').on('change', function () {
+            if (this.value == '3') {
+                $("#SecurityLevel").show();
+            }
+            else {
+                $("#SecurityLevel").hide();
+            }
+        });
     });
 </script>
 <h1>
     <img src="~/images/icons/Pass.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add process template flow pass")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
     <form method="post">
 
@@ -97,8 +100,8 @@
         </div>
         <div class="row" id="SecurityLevel">
             <div class="col-3">
-    Security level            
-    @*@Term.Find(x => x.InternalName.Equals("Pass type")).TermString*@
+                Security level
+                @*@Term.Find(x => x.InternalName.Equals("Pass type")).TermString*@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="SecurityLevel1" dataSource="@Model.SecurityLevels" ejs-for="@Model.ProcessTemplateFlowPassInt" value="@Model.ProcessTemplateFlowPassInt" index="2" popupHeight="220px">

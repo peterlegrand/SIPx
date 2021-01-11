@@ -5,9 +5,12 @@
     Layout = "_Layout";
 }
 <h1><img src="~/images/icons/Organization.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Organization search result")).TermString</h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <div class="container">
 
-    <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true"  >
+    <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#OrganizationName" textAlign="Center" type="string"></e-grid-column>
@@ -15,13 +18,13 @@
         </e-grid-columns>
     </ejs-grid>
 </div>
-    <script id="OrganizationName" type="text/x-template">
-        <div class="leftAlignGridColumn">
-            <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${OrganizationName}</u></a>
-        </div>
-    </script>
-    <script id="CreatorName" type="text/x-template">
-        <div class="leftAlignGridColumn">
-            <a class="nav-link text-dark font-weight-bold" href="/FrontUser/Dashboard/${CreatorId}"><u>${CreatorName}</u></a>
-        </div>
-    </script>
+<script id="OrganizationName" type="text/x-template">
+    <div class="leftAlignGridColumn">
+        <a class="nav-link text-dark font-weight-bold" href="/FrontOrganization/Dashboard/${OrganizationId}"><u>${OrganizationName}</u></a>
+    </div>
+</script>
+<script id="CreatorName" type="text/x-template">
+    <div class="leftAlignGridColumn">
+        <a class="nav-link text-dark font-weight-bold" href="/FrontUser/Dashboard/${CreatorId}"><u>${CreatorName}</u></a>
+    </div>
+</script>

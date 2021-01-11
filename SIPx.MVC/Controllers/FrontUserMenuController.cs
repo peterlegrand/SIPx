@@ -19,16 +19,18 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<UserMenuCreateGet>($"{_baseUrl}api/UserMenu/Create/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenu/Create", token);
-            ViewBag.UITerms = UITerms;
+            var response = await _client.GetProtectedAsync<UserMenuCreateGet>($"{_baseUrl}api/FrontUserMenu/Create/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUserMenu/Create", token);
+            
             return View(response);
         }
         [HttpPost]
         public async Task<IActionResult> Create(UserMenuCreateGet UserMenu)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<UserMenuCreateGet>($"{_baseUrl}api/UserMenu/Create", UserMenu, token);
+            await _client.PostProtectedAsync<UserMenuCreateGet>($"{_baseUrl}api/FrontUserMenu/Create", UserMenu, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
@@ -38,9 +40,11 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<UserMenuIndexGet>>($"{_baseUrl}api/UserMenu/Index", token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenu/Index", token);
-            ViewBag.UITerms = UITerms;
+            var response = await _client.GetProtectedAsync<List<UserMenuIndexGet>>($"{_baseUrl}api/FrontUserMenu/Index", token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUserMenu/Index", token);
+            
             ViewBag.Id = id;
             return View(response);
         }
@@ -48,16 +52,18 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<UserMenuUpdateGet>($"{_baseUrl}api/UserMenu/Update/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenu/Edit", token);
-            ViewBag.UITerms = UITerms;
+            var response = await _client.GetProtectedAsync<UserMenuUpdateGet>($"{_baseUrl}api/FrontUserMenu/Update/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUserMenu/Edit", token);
+            
             return View(response);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(UserMenuUpdateGet UserMenu)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<UserMenuUpdateGet>($"{_baseUrl}api/UserMenu/Update", UserMenu, token);
+            await _client.PostProtectedAsync<UserMenuUpdateGet>($"{_baseUrl}api/FrontUserMenu/Update", UserMenu, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");
@@ -66,16 +72,18 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/UserMenu/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserMenu/Delete", token);
-            ViewBag.UITerms = UITerms;
+            var response = await _client.GetProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/FrontUserMenu/Delete/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUserMenu/Delete", token);
+            
             return View(response);
         }
         [HttpPost]
         public async Task<IActionResult> Delete(UserMenuDeleteGet UserMenu)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/UserMenu/Delete", UserMenu, token);
+            await _client.PostProtectedAsync<UserMenuDeleteGet>($"{_baseUrl}api/FrontUserMenu/Delete", UserMenu, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index");

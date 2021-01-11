@@ -5,8 +5,11 @@
     Layout = "_Layout";
 }
 <h1><img src="~/images/icons/Person.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Person search result")).TermString</h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <div class="container">
-    
+
     <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
@@ -14,20 +17,21 @@
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Middle name")).TermString" template="#MiddleName" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" template="#LastName" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
-    </ejs-grid></div>
-    <script id="FirstName" type="text/x-template">
-        <div class="leftAlignGridColumn">
-            <a class="nav-link text-dark font-weight-bold" href="/FrontPerson/Dashboard/${PersonId}"><u>${FirstName}</u></a>
+    </ejs-grid>
+</div>
+<script id="FirstName" type="text/x-template">
+    <div class="leftAlignGridColumn">
+        <a class="nav-link text-dark font-weight-bold" href="/FrontPerson/Dashboard/${PersonId}"><u>${FirstName}</u></a>
 
-        </div>
-    </script>
-    <script id="MiddleName" type="text/x-template">
-        <div class="leftAlignGridColumn">
-            ${MiddleName}
-        </div>
-    </script>
-    <script id="LastName" type="text/x-template">
-        <div class="leftAlignGridColumn">
-            ${LastName}
-        </div>
-    </script>
+    </div>
+</script>
+<script id="MiddleName" type="text/x-template">
+    <div class="leftAlignGridColumn">
+        ${MiddleName}
+    </div>
+</script>
+<script id="LastName" type="text/x-template">
+    <div class="leftAlignGridColumn">
+        ${LastName}
+    </div>
+</script>

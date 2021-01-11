@@ -1,4 +1,10 @@
 ﻿@using Syncfusion.EJ2
+@{var Favorites = ViewBag.Favorites;
+    var UITermLayout = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    string Image = "/images/icons/" + (string)ViewData["Image"];
+
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +22,7 @@
 
     @*    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>*@
     @*<script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>*@
-    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    @*<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>*@
 
 
 </head>
@@ -42,6 +48,15 @@
                         </li>
                     </ul>
                 </div>*@
+
+
+            @{ if (Favorites != null)
+                {
+                    <ejs-menu id="menu" items="Favorites"></ejs-menu>
+                } }
+
+
+
         </div>
         @*</nav>*@
 
@@ -69,6 +84,12 @@
                 <a href="https://localhost:44393/Swagger/">Swagger</a>
             </div>
             <div class="col-10">
+                <h1>
+                    <img src="@Image" width="50" height="50" />&nbsp;@ViewData["Title"]
+                </h1>
+                <a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@UITermLayout.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+                </a>
                 @RenderBody()
             </div>
         </div>
@@ -84,6 +105,137 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
     <!-- Syncfusion Essential JS 2 ScriptManager -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@UITermLayout.Find(x => x.InternalName.Equals("Add favorite")).TermString</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3">
+                                @UITermLayout.Find(x => x.InternalName.Equals("Name")).TermString
+                            </div>
+                            <div class="col-9">
+                                <ejs-textbox id="FavoriteName" value="@ViewData["Title"]" cssClass="e-outline" placeholder="@UITermLayout.Find(x => x.InternalName.Equals("Name")).TermString" floatLabelType="Auto"></ejs-textbox>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                @UITermLayout.Find(x => x.InternalName.Equals("Group")).TermString
+                            </div>
+                            <div class="col-9">
+                                <ejs-dropdownlist id="FavoriteGroupId" dataSource="@ViewData["FavoriteGroup"]" value="0" popupHeight="220px">
+                                    <e-dropdownlist-fields text="Name" value="MVCFavoriteGroupId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button href="#" id="Favorites">@UITermLayout.Find(x => x.InternalName.Equals("Add")).TermString</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@ViewData["Add favorite"]</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3">
+                                    @ViewData["Name"]
+                                </div>
+                                <div class="col-9">
+                                    <ejs-textbox id="FavoriteName" value="@ViewData[" Title"]" cssClass="e-outline" placeholder="@ViewData["Title"]" floatLabelType="Auto"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3">
+                                    @ViewData["Group"]
+                                </div>
+                                <div class="col-9">
+                                    <ejs-dropdownlist id="FavoriteGroupId" dataSource="@ViewData["FavoriteGroup"]" value="0" popupHeight="220px">
+                                        <e-dropdownlist-fields text="Name" value="MVCFavoriteGroupId"></e-dropdownlist-fields>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button href="#" id="Favorites">@ViewData["Add"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
     <ejs-scripts></ejs-scripts>
 </body>
 </html>
+<style>
+
+        .shortcut {
+            float: right;
+            margin-top: 9px;
+            padding-left: 30px;
+            height: 100px;
+        }
+
+        .e-data {
+            border: 1px solid rgba(0, 0, 0, 0.87);
+            padding: 8px;
+        }
+
+        .e-border {
+            border: black;
+            border-radius: 2px;
+            background-color: #fafafa;
+        }
+
+        /*  PETER TODO, this was initially added for the favorite menu but got some troubles for the grids. The rest of the styles are ok.
+        .e-table::before {
+            content: '\e705';
+        }
+    */
+        .e-row {
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        button {
+            margin: 25px 5px 20px 20px;
+        }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("#Favorites").click(function () {
+            var Favorite = {
+                controller: 'Classification',
+                action: 'Create',
+                name: document.getElementById("FavoriteName").value,
+                MVCFavoriteGroupId: document.getElementById("FavoriteGroupId_hidden").value
+            };
+            $.post("/Favorite/Add/",
+                Favorite
+                , function () { $("#exampleModal").modal('hide'); });
+        });
+    });
+
+</script>

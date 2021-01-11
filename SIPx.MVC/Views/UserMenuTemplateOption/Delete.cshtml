@@ -10,7 +10,10 @@
 
 <h1>
     <img src="~/images/icons/Option.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete user menu template option")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
 
@@ -20,12 +23,12 @@
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
             </div>
             <div class="col-9">
-               <ejs-numerictextbox id="UserMenuTemplateOptionId" ejs-for="@Model.UserMenuTemplateOptionId" cssClass="e-outline" placeholder="UserMenuTemplateOptionId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="UserMenuTemplateOptionId" ejs-for="@Model.UserMenuTemplateOptionId" cssClass="e-outline" placeholder="UserMenuTemplateOptionId" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
 
 
-           <div class="row">
+        <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">

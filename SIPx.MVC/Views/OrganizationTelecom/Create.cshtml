@@ -13,7 +13,7 @@
 <script>
     $(document).ready(function () {
         $('#TelecomTypeId_hidden').on('change', function () {
-            if (this.value.substring(0,7)  == 'CONCAT1') {
+            if (this.value.substring(0, 7) == 'CONCAT1') {
                 $("#PhoneProperties").show();
             }
             else {
@@ -24,7 +24,10 @@
 </script>
 <h1>
     <img src="~/images/icons/Telecom.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add organization telecom")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
     <form method="post">

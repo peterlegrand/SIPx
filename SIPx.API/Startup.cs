@@ -76,7 +76,8 @@ namespace SIPx.API
 
 
             services.AddTransient<ISearchProvider, SearchProvider>();
-            services.AddTransient<IFavoriteProvider, FavoriteProvider>();
+            services.AddTransient<IFrontUserFavoriteProvider, FrontUserFavoriteProvider>();
+            services.AddTransient<IFrontUserFavoriteGroupProvider, FrontUserFavoriteGroupProvider>();
             services.AddTransient<IProcessTemplateFlowConditionProvider, ProcessTemplateFlowConditionProvider>();
             services.AddTransient<IProcessTemplateFlowConditionTypeProvider, ProcessTemplateFlowConditionTypeProvider>();
 
@@ -85,6 +86,7 @@ namespace SIPx.API
             services.AddTransient<IProcessTemplateFlowPassProvider, ProcessTemplateFlowPassProvider>();
 
             services.AddTransient<IOrganizationPositionProvider, OrganizationPositionProvider>();
+            services.AddTransient<IMVCFavoriteProvider, MVCFavoriteProvider>();
             services.AddTransient<IPersonPositionProvider, PersonPositionProvider>();
             services.AddTransient<IPositionProvider, PositionProvider>();
             services.AddTransient<IPropertyProvider, PropertyProvider>();

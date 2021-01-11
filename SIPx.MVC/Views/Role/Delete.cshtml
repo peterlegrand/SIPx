@@ -10,7 +10,10 @@
 
 <h1>
     <img src="~/images/icons/Role.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete role")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
     <form method="post">
         <div class="row">
@@ -67,45 +70,45 @@
         </div>
 
         @*<div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                </div>
+                <div class="col-9">
+                    @Model.CreatorName
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                </div>
+                <div class="col-9">
+                    @Model.CreatedDate
+                </div>
             </div>
-            <div class="col-9">
-                @Model.CreatorName
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                </div>
+                <div class="col-9">
+                    @Model.ModifierName
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatedDate
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-            </div>
-            <div class="col-9">
-                @Model.ModifierName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-            </div>
-            <div class="col-9">
-                <div>@Model.ModifiedDate</div>
-            </div>
-        </div>*@
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                </div>
+                <div class="col-9">
+                    <div>@Model.ModifiedDate</div>
+                </div>
+            </div>*@
 
         <div class="row">
             <div class="col-3 offset-3">

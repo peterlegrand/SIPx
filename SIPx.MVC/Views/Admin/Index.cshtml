@@ -1,11 +1,11 @@
 ﻿@model List<ClassificationIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-
 }
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Admin dashboard")).TermString;
+    ViewData["Image"] = "Setting.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
-
-<h1><img src="~/images/icons/Setting.png" width="50" height="50" />Admin dashboard</h1>
+</script>

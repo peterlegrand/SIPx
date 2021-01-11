@@ -9,7 +9,10 @@
 
 <h1>
     <img src="~/images/icons/Process.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Process advanced search")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
     <form method="post">
@@ -45,14 +48,14 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>    <div class="col-9">
-                <ejs-dropdownlist id="SelectedUserId" dataSource="@Model.SelectedUsers" ejs-for="@Model.SelectedUserId" value="@Model.SelectedUserId" >
+                <ejs-dropdownlist id="SelectedUserId" dataSource="@Model.SelectedUsers" ejs-for="@Model.SelectedUserId" value="@Model.SelectedUserId">
                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Organization")).TermString 
+                @Term.Find(x => x.InternalName.Equals("Organization")).TermString
             </div>    <div class="col-9">
                 <ejs-dropdownlist id="OrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.OrganizationId" value="@Model.OrganizationId" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="OrganizationId"></e-dropdownlist-fields>

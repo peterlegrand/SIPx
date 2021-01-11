@@ -5,7 +5,10 @@
 
 }
 
-<h1><img src="~/images/icons/UserPreference.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User preferences")).TermString</h1>
+<h1><img src="~/images/icons/UserPreference.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("User preferences")).TermString</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -16,8 +19,9 @@
     </e-grid-columns>
 </ejs-grid>
 
-<a asp-controller="UserMenu" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User menu")).TermString</a>
-<a asp-controller="UserPage" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User pages")).TermString</a>
+<a asp-controller="FrontUserMenu" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User menu")).TermString</a>
+<a asp-controller="FrontUserPage" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User pages")).TermString</a>
+<a asp-controller="FrontUserFavorite" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Favorites")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
         ${UserPreferenceId}

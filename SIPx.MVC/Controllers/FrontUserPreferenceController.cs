@@ -17,9 +17,11 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<UserPreferenceIndexGet>>($"{_baseUrl}api/UserPreference/Index/" ,token);
-           var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPreference/Index", token);
-            ViewBag.UITerms = UITerms;
+            var response = await _client.GetProtectedAsync<List<UserPreferenceIndexGet>>($"{_baseUrl}api/FrontUserPreference/Index/" ,token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUserPreference/Index", token);
+            
             return View(response);
         }
 
@@ -27,16 +29,18 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<UserPreferenceUpdateGet>($"{_baseUrl}api/UserPreference/Update/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/UserPreference/Edit", token);
-            ViewBag.UITerms = UITerms;
+            var response = await _client.GetProtectedAsync<UserPreferenceUpdateGet>($"{_baseUrl}api/FrontUserPreference/Update/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontUserPreference/Edit", token);
+            
             return View(response);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(UserPreferenceUpdateGet UserPreference)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<UserPreferenceUpdateGet>($"{_baseUrl}api/UserPreference/Update", UserPreference, token);
+            await _client.PostProtectedAsync<UserPreferenceUpdateGet>($"{_baseUrl}api/FrontUserPreference/Update", UserPreference, token);
 
             return RedirectToAction("Index");
         }

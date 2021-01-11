@@ -8,13 +8,16 @@
 <h1>
     <img src="~/images/icons/Todo.png" width="50" height="50" />
     @Term.Find(x => x.InternalName.Equals("To do")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
         <e-grid-column field="ProcessId" headerText="ProcessId" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="ProcessTemplateName" headerText="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
-        <e-grid-column field="Subject" headerText="Subject" textAlign="Right" type="text" template="#Subject" ></e-grid-column>
+        <e-grid-column field="Subject" headerText="Subject" textAlign="Right" type="text" template="#Subject"></e-grid-column>
         <e-grid-column field="ProcessTemplateStageTypeName" headerText="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
         <e-grid-column field="CreatorName" headerText="CreatorName" textAlign="Right" type="text"></e-grid-column>
     </e-grid-columns>

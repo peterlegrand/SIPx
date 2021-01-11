@@ -10,7 +10,10 @@
 }
 <h1>
     <img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Page section content condition")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
 
@@ -68,28 +71,28 @@
             </div>
             <div class="col-9">
                 @*<ejs-dropdownlist id="PageSectionContentConditionTypeIdExtended" dataSource="@Model.PageSectionContentConditionTypes" ejs-for="@Model.PageSectionContentConditionTypeIdExtended" value="@Model.PageSectionContentConditionTypeIdExtended" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ExtendedId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>*@
-@Model.PageSectionContentConditionTypeName
+                        <e-dropdownlist-fields text="Name" value="ExtendedId"></e-dropdownlist-fields>
+                    </ejs-dropdownlist>*@
+                @Model.PageSectionContentConditionTypeName
             </div>
         </div>
         <div class="row">
             @if (Model.PageSectionContentConditionTypeIdExtended.Substring(0, 1) == "V")
             {
-            @for (int i = 0; i < Model.Classifications.Count; i++)
-                        {
-                            if (Model.Classifications[i].ClassificationId == int.Parse(Model.PageSectionContentConditionTypeIdExtended.Substring(1)))
+                @for (int i = 0; i < Model.Classifications.Count; i++)
+                {
+                    if (Model.Classifications[i].ClassificationId == int.Parse(Model.PageSectionContentConditionTypeIdExtended.Substring(1)))
 
-                            {<div class="col-3">
-                                    @Model.Classifications[i].ClassificationName
-                                </div>
-                                <div class="col-9">
-                                    <ejs-dropdownlist id="@Model.Classifications[i].ControlA" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.Classifications[i].ClassificationValueId" value="@Model.Classifications[i].ClassificationValueId" index="2" popupHeight="220px">
-                                        <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
-                                    </ejs-dropdownlist>
-                                </div>
-                            }
-                        }
+                    {<div class="col-3">
+                            @Model.Classifications[i].ClassificationName
+                        </div>
+                        <div class="col-9">
+                            <ejs-dropdownlist id="@Model.Classifications[i].ControlA" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.Classifications[i].ClassificationValueId" value="@Model.Classifications[i].ClassificationValueId" index="2" popupHeight="220px">
+                                <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
+                            </ejs-dropdownlist>
+                        </div>
+                    }
+                }
             }
         </div>
         @if (Model.PageSectionContentConditionTypeIdExtended == "T1")
@@ -273,7 +276,7 @@
 
                 </div>
             </div>
-        }   @*<div id="ClassificationValueCondition">
+        } @*<div id="ClassificationValueCondition">
                 @for (int i = 0; i < Model.Classifications.Count; i++)
                 {
                     <div class="row values" id="@Model.Classifications[i].ControlA">
@@ -289,46 +292,46 @@
                     </div>
                 }
             </div>*@
-            <div class="row">
-                <div class="col-3 offset-3">
-                    <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                    <a asp-action="Index" asp-route-id="@Model.PageSectionId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
-                </div>
+        <div class="row">
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.PageSectionId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Creator")).TermString
-                </div>
-                <div class="col-9">
-                    @Model.CreatorName
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-                </div>
-                <div class="col-9">
-                    @Model.CreatedDate
-                </div>
+            <div class="col-9">
+                @Model.CreatorName
             </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-                </div>
-                <div class="col-9">
-                    @Model.ModifierName
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-                </div>
-                <div class="col-9">
-                    <div>@Model.ModifiedDate</div>
-                </div>
+            <div class="col-9">
+                @Model.CreatedDate
             </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ModifierName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
+            </div>
+        </div>
 
-        </form>
+    </form>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>

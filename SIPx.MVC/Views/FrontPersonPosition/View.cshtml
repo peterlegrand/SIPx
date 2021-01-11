@@ -11,11 +11,14 @@
 <h1>
     <img src="~/images/icons/Position.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Position in organization")).TermString
 </h1>
-@if(!Model.UserNormalUserCannotDelete)
-{ 
-<a asp-route-id="@Model.OrganizationPersonId" asp-action="Edit"><img src="~/images/icons/Edit.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
-<a asp-route-id="@Model.OrganizationPersonId" asp-action="Delete"><img src="~/images/icons/Delete.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
-<a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.PersonId"><img src="~/images/icons/Back.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Back to Person")).TermString" /></a>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+@if (!Model.UserNormalUserCannotDelete)
+{
+    <a asp-route-id="@Model.OrganizationPersonId" asp-action="Edit"><img src="~/images/icons/Edit.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+    <a asp-route-id="@Model.OrganizationPersonId" asp-action="Delete"><img src="~/images/icons/Delete.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+    <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.PersonId"><img src="~/images/icons/Back.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Back to Person")).TermString" /></a>
 }
 <div class="container">
     <form method="post">

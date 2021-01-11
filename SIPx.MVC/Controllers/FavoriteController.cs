@@ -30,14 +30,14 @@ namespace SIPx.MVC.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> Add(FavoritesAdd Favorite)
+        public async Task<IActionResult> Add(MVCFavoriteAdd Favorite)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            Favorite = await _client.PostProtectedAsync<FavoritesAdd>($"{_baseUrl}api/Favorite/Add", Favorite, token);
+            Favorite = await _client.PostProtectedAsync<MVCFavoriteAdd>($"{_baseUrl}api/MVCFavorite/Add", Favorite, token);
             //if (ClassificationCreateGetWithErrorMessage.ErrorMessages.Count>0)
             //{
 //                var UITerms = await _client.GetProtectedAsync<List<FavoritesAdd>>($"{_baseUrl}api/MVC/Favorite/Add", token);
-            //ViewBag.UITerms = UITerms;
+            //
             //ViewBag.ErrorMessages = ClassificationCreateGetWithErrorMessage.ErrorMessages;
             //return View(ClassificationCreateGetWithErrorMessage.Classification);
             return Ok(Favorite);

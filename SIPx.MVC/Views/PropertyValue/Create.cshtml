@@ -10,7 +10,10 @@
 
 <h1>
     <img src="~/images/icons/Level.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New property value")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
 
@@ -61,61 +64,61 @@
             </div>
         }
         @if (Model.PropertyTypeId == 10 || Model.PropertyTypeId == 11)
-            {
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-dropdownlist id="Sequence" dataSource="@Model.PropertyValues" ejs-for="@Model.Sequence" value="@Model.Sequence" popupHeight="220px">
-                            <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
-                        </ejs-dropdownlist>
-                    </div>
-                </div>
-            }
-            @if (Model.PropertyTypeId == 8 || Model.PropertyTypeId == 10)
-            {
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Text")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-textbox id="PropertyValueString" ejs-for="@Model.PropertyValueString" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-            }
-            @if (Model.PropertyTypeId == 7)
-            {
-
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Number")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-numerictextbox ejs-for="@Model.PropertyValueInt" value="@Model.PropertyValueInt" id="PropertyValueInt"></ejs-numerictextbox>
-                    </div>
-                </div>
-            }
-            @if (Model.PropertyTypeId == 6)
-            {
-                <div class="row">
-                    <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Date")).TermString
-                    </div>
-                    <div class="col-9">
-                        <ejs-datepicker ejs-for="@Model.PropertyValueDate" value="@Model.PropertyValueDate" id="PropertyValueDate"></ejs-datepicker>
-                    </div>
-                </div>
-            }
+        {
             <div class="row">
-                <div class="col-3 offset-3">
-                    <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                    <a asp-action="Index" asp-route-id="@Model.PropertyId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-dropdownlist id="Sequence" dataSource="@Model.PropertyValues" ejs-for="@Model.Sequence" value="@Model.Sequence" popupHeight="220px">
+                        <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                    </ejs-dropdownlist>
                 </div>
             </div>
+        }
+        @if (Model.PropertyTypeId == 8 || Model.PropertyTypeId == 10)
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Text")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-textbox id="PropertyValueString" ejs-for="@Model.PropertyValueString" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+                </div>
+            </div>
+        }
+        @if (Model.PropertyTypeId == 7)
+        {
+
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Number")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox ejs-for="@Model.PropertyValueInt" value="@Model.PropertyValueInt" id="PropertyValueInt"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
+        @if (Model.PropertyTypeId == 6)
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Date")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-datepicker ejs-for="@Model.PropertyValueDate" value="@Model.PropertyValueDate" id="PropertyValueDate"></ejs-datepicker>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.PropertyId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+            </div>
+        </div>
 
 
-        </form>
+    </form>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>

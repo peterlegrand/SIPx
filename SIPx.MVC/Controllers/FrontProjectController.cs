@@ -21,7 +21,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<ProjectCreateGet>($"{_baseUrl}api/FrontProject/Create/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/Create", token);
-            ViewBag.UITerms = UITerms; var ErrorMessage = new List<ErrorMessage>();
+             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
             {
@@ -47,7 +47,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync<ProjectAdvancedSearchPost>($"{_baseUrl}api/FrontProject/AdvancedSearch/", token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/AdvancedSearch", token);
-            ViewBag.UITerms = UITerms;
+            
             return View(response);
         }
         [HttpPost]
@@ -56,7 +56,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var result = await _client.PostProtectedAsync<List<ProjectAdvancedSearchResult>>($"{_baseUrl}api/FrontProject/AdvancedSearch", SearchData, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/SearchResult", token);
-            ViewBag.UITerms = UITerms;
+            
             return View("SearchResult", result);
         }
         [HttpGet]
@@ -65,7 +65,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync<FrontProjectIndexGet>($"{_baseUrl}api/FrontProject/Index/" + Id, token);
             var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/Dashboard", token);
-            ViewBag.UITerms = UITerms;
+            
             return View(response);
         }
 
@@ -74,8 +74,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var response = await _client.GetProtectedAsync2<ProjectUpdateGet>($"{_baseUrl}api/FrontProject/Update/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/Edit", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/Edit", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -94,8 +96,10 @@ namespace SIPx.MVC.Controllers
             var ProjectUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ProjectUpdateGetWithErrorMessages>($"{_baseUrl}api/FrontProject/Update", Project, token);
             if (ProjectUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/Edit", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/FrontProject/Edit", token);
+                
                 ViewBag.ErrorMessages = ProjectUpdateGetWithErrorMessage.ErrorMessages;
                 return View(ProjectUpdateGetWithErrorMessage.Project);
             }

@@ -53,7 +53,7 @@
             if (this.value.substring(0, 1) == 'V') {
                 $(res).show();
             }
-            if (this.value == 'T1' ) {
+            if (this.value == 'T1') {
                 $("#UserCondition").show();
             }
             if (this.value == 'T2') {
@@ -96,12 +96,15 @@
                 $("#ModifiedToDateCondition").show();
             }
         });
-        
+
     });
 </script>
 <h1>
     <img src="~/images/icons/Condition.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add page section condition")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
 
@@ -219,7 +222,7 @@
         <div id="ClassificationValueCondition">
             @for (int i = 0; i < Model.Classifications.Count; i++)
             {
-                <div class="row values" id="@Model.Classifications[i].ControlA" >
+                <div class="row values" id="@Model.Classifications[i].ControlA">
                     <div class="col-3">
 
                     </div>

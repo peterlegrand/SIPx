@@ -8,6 +8,9 @@
 @if (Model.ShowTitleName)
 {
     <h1><img src="~/images/icons/SU.png" width="50" height="50" />@Model.TitleName</h1>
+    <a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+        <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+    </a>
 }
 @if (Model.ShowTitleDescription)
 {
@@ -96,7 +99,7 @@
                                         <div class="e-panel-container">
 
                                             <div class="e-panel-content">
-                                                <ejs-grid id="@x.SubPanelId" dataSource="@x.Organizations" height="335" width="auto" >
+                                                <ejs-grid id="@x.SubPanelId" dataSource="@x.Organizations" height="335" width="auto">
                                                     <e-grid-columns>
                                                         <e-grid-column headerText="Id" width="300" field="OrganizationId" textAlign="Left"></e-grid-column>
                                                         <e-grid-column headerText="Name" width="300" field="Name" textAlign="Left"></e-grid-column>
@@ -311,7 +314,7 @@
                 }
             }
 
-          
+
             }
         </e-dashboardlayout-panels>
     </ejs-dashboardlayout>

@@ -5,23 +5,27 @@
     Layout = "_Layout";
 }
 <h1><img src="~/images/icons/Value.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Classification value search result")).TermString</h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <div class="container">
-    
+
     <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Classification value")).TermString" template="#ClassificationValueName" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Classification")).TermString" template="#ClassificationName" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
-    </ejs-grid></div>
-    <script id="ClassificationValueName" type="text/x-template">
-        <div class="leftAlignGridColumn">
-            <a class="nav-link text-dark font-weight-bold" href="/FrontClassificationValue/Dashboard/${ClassificationValueId}"><u>${ClassificationValueName}</u></a>
+    </ejs-grid>
+</div>
+<script id="ClassificationValueName" type="text/x-template">
+    <div class="leftAlignGridColumn">
+        <a class="nav-link text-dark font-weight-bold" href="/FrontClassificationValue/Dashboard/${ClassificationValueId}"><u>${ClassificationValueName}</u></a>
 
-        </div>
-    </script>
-    <script id="ClassificationName" type="text/x-template">
-        <div class="leftAlignGridColumn">
-            ${ClassificationName}
-        </div>
-    </script>
+    </div>
+</script>
+<script id="ClassificationName" type="text/x-template">
+    <div class="leftAlignGridColumn">
+        ${ClassificationName}
+    </div>
+</script>

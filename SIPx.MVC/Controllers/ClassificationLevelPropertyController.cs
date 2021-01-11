@@ -20,8 +20,9 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<ClassificationLevelPropertyCreateGet>($"{_baseUrl}api/ClassificationLevelProperty/Create/" + Id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Create", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Create", token);
             var ErrorMessages = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
@@ -41,8 +42,9 @@ namespace SIPx.MVC.Controllers
             var ClassificationLevelPropertyCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationLevelPropertyCreateGetWithErrorMessages>($"{_baseUrl}api/ClassificationLevelProperty/Create", ClassificationLevelProperty, token);
             if (ClassificationLevelPropertyCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Create", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevel/Create", token);
                 ViewBag.ErrorMessages = ClassificationLevelPropertyCreateGetWithErrorMessage.ErrorMessages;
                 return View(ClassificationLevelPropertyCreateGetWithErrorMessage.ClassificationLevelProperty);
             }
@@ -54,9 +56,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<List<ClassificationLevelPropertyIndexGet>>($"{_baseUrl}api/ClassificationLevelProperty/Index/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Index", token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Index", token);
             ViewBag.Id = id;
-            ViewBag.UITerms = UITerms;
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -74,8 +77,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<ClassificationLevelPropertyUpdateGet>($"{_baseUrl}api/ClassificationLevelProperty/Update/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Edit", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Edit", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -95,8 +100,10 @@ namespace SIPx.MVC.Controllers
             var ClassificationLevelPropertyUpdateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationLevelPropertyUpdateGetWithErrorMessages>($"{_baseUrl}api/ClassificationLevelProperty/Update", ClassificationLevelProperty, token);
             if (ClassificationLevelPropertyUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Edit", token);
-                ViewBag.UITerms = UITerms;
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Edit", token);
+                
                 ViewBag.ErrorMessages = ClassificationLevelPropertyUpdateGetWithErrorMessage.ErrorMessages;
                 return View(ClassificationLevelPropertyUpdateGetWithErrorMessage.ClassificationLevelProperty);
             }
@@ -109,8 +116,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<ClassificationLevelPropertyDeleteGet>($"{_baseUrl}api/ClassificationLevelProperty/Delete/" + id, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Delete", token);
-            ViewBag.UITerms = UITerms;
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/Delete", token);
+            
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -136,31 +145,5 @@ namespace SIPx.MVC.Controllers
             return RedirectToAction("Index", new { id = ClassificationLevelProperty.ClassificationLevelId });
         }
 
-    //    [HttpGet]
-    //    public async Task<IActionResult> LanguageIndex(int id)
-    //    {
-    //        var token = HttpContext.Session.GetString("Token");
-    //        if(token == null)
-    //        { return RedirectToAction("Login","FrontAuth");
-    //        }
-    //        var response = await _client.GetProtectedAsync<List<ClassificationLevelPropertyLanguageIndexGet>>($"{_baseUrl}api/ClassificationLevelProperty/LanguageIndex/" + id, token);
-    //        var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/LanguageIndex", token);
-    //        ViewBag.UITerms = UITerms;
-    //        return View(response);
-    //        //return View();
-    //    }
-
-    //    [HttpGet]
-    //    public async Task<IActionResult> LanguageEdit(int id)
-    //    {
-    //        var token = HttpContext.Session.GetString("Token");
-    //        if(token == null)
-    //        { return RedirectToAction("Login","FrontAuth");
-    //        }
-    //        var response = await _client.GetProtectedAsync<ClassificationLevelPropertyLanguageIndexGet>($"{_baseUrl}api/ClassificationLevelProperty/LanguageUpdate/" + id, token);
-    //        var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/ClassificationLevelProperty/LanguageEdit", token);
-    //        ViewBag.UITerms = UITerms;
-    //        return View(response);
-    //    }
     }
 }

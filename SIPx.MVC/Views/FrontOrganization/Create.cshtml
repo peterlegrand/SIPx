@@ -12,8 +12,11 @@
 <h1>
     <img src="~/images/icons/Organization.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add new organization")).TermString
 </h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <div class="container">
- 
+
     <form method="post">
         <div class="row">
             <div class="col-3">
@@ -46,7 +49,7 @@
                 </ejs-richtexteditor>
             </div>
         </div>
-    <div class="row">
+        <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>

@@ -11,6 +11,9 @@
 <h1>
     <img src="~/images/icons/User.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete edit user")).TermString
 </h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <div class="container">
     <form method="post">
         <div class="row">
@@ -32,7 +35,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-@* PETER TODO Change user to Default organization *@
+                @* PETER TODO Change user to Default organization *@
                 @Term.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">

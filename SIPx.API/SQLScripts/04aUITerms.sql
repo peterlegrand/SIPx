@@ -2181,4 +2181,17 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(2179, 'Organization position
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2180, 'Organization positions');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2181, 'Add new organization position');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2182, 'Position for organization');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2183, 'Manage favorites');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2184, 'Favorites');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2185, 'Delete favorite');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2186, 'Favorite');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2187, 'Add new group');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2188, 'Add favorite');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2189, 'Root');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2190, 'Admin dashboard');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2191, 'Admin menu');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2192, 'Organization type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2193, 'Person relation type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2194, 'User menu template');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2195, 'UI term customization');
 SET IDENTITY_INSERT UITerms OFF;

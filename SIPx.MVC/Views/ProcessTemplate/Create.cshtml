@@ -11,7 +11,10 @@
 
 <h1>
     <img src="~/images/icons/Template.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Create process template")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
     <form method="post">
         <div class="row">
@@ -95,7 +98,7 @@
                 @Term.Find(x => x.InternalName.Equals("Process template group")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateGroupId" dataSource="@Model.ProcessTemplateGroups" ejs-for="@Model.ProcessTemplateGroupId"  popupHeight="220px">
+                <ejs-dropdownlist id="ProcessTemplateGroupId" dataSource="@Model.ProcessTemplateGroups" ejs-for="@Model.ProcessTemplateGroupId" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="ProcessTemplateGroupId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -271,7 +274,7 @@
     }
 </script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
         function Sequence(e) {
                 var query = new ej.data.Query();
                 query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;

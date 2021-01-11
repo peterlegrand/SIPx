@@ -30,6 +30,13 @@ namespace SIPx.API.DataProviders
             var x = _sqlDataAccess.LoadData2<UITermLanguageCustomizationList>(usp, parameters);
             return x;
         }
+        public async Task<string> OneTerm(string InternalName, string UserId)
+        {
+            string usp = "usp_MVCUITermLanguageCustomizationOneTerm @InternalName, @UserId";
+            // List<SqlParameter> parameters = new List<SqlParameter> {new SqlParameter ("@Controller" , Controller),
+            var TermString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { InternalName , UserId });
+            return TermString;
+        }
 
     }
 }

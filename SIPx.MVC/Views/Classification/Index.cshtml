@@ -1,12 +1,16 @@
-﻿@model List<ClassificationIndexGet>
+﻿@using Syncfusion.EJ2
+@model List<ClassificationIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
-
+    //    var defaultanimation = new Syncfusion.EJ2.Popups.DialogAnimationSettings { Effect = Syncfusion.EJ2.Popups.DialogEffect.None };
     Layout = "_LayoutAdmin";
 }
 
 <h1><img src="~/images/icons/Classification.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classifications")).TermString</h1>
+<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
@@ -22,9 +26,6 @@
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="#" id="Favorites">
-    <img id="OldImgId" src="~/images/icons/Favorites.png" width="20" height="20" />
-</a>
 <a asp-action="Create">@Term.Find(x => x.InternalName.Equals("Add new classification")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
@@ -85,59 +86,93 @@
 
     </div>
 </script>
-<script>
-    function AddFriend() {
-        var Favorite = {
-            controller: 'Classification',
-            action: 'Index'
-        };
-        $.post("https://localhost:44393/Favorite/Add/", Favorite);
-    }
-</script>
-<script>
-    $(document).ready(function () {
-        $("#Favorite").click(
+@*<script>
+        function AddFriend() {
             var Favorite = {
-            controller: 'Classification',
-            action: 'Index'
-        };
-        $.post("https://localhost:44393/Favorite/Add/", Favorite);
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        var Favorite = {
-            controller: 'Classification',
-            action: 'Index'
-        };
-        $.post("https://localhost:44393/Favorite/Add/", Favorite);
-    });
-</script>
+                controller: 'Classification',
+                action: 'Index'
+            };
+            $.post("https://localhost:44393/Favorite/Add/", Favorite);
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#Favorite").click(
+                var Favorite = {
+                controller: 'Classification',
+                action: 'Index'
+            };
+            $.post("https://localhost:44393/Favorite/Add/", Favorite);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var Favorite = {
+                controller: 'Classification',
+                action: 'Index'
+            };
+            $.post("https://localhost:44393/Favorite/Add/", Favorite);
+        });
+    </script>*@
 <script>
     $(document).ready(function () {
         $("#Favorites").click(function () {
             var Favorite = {
                 controller: 'Classification',
-                action: 'Index'
+                action: 'Index',
+                Name: 'Classifications'
             };
             $.post("/Favorite/Add/",
                 Favorite
                 //,
                 //              document.getElementById("Favorites").textContent = 'Added');
-               
+
                 , function () {
                     var OldImg = document.getElementById("OldImgId");
                     OldImg.remove();
-                        var img = document.createElement("img");
+                    var img = document.createElement("img");
                     img.src = "/images/icons/AddedFavorites.png";
                     img.height = "20";
                     img.width = "20";
-                        var src = document.getElementById("Favorites");
+                    var src = document.getElementById("Favorites");
                     src.appendChild(img);
                 }
 
                 //
             )
+        });
+    });
+
+</script>
+<script>
+    var btnElement = document.getElementById("normalbtn");
+    btnElement.addEventListener('click', function () {
+        var dialogObj = document.getElementById("default_dialog");
+        dialogObj.ej2_instances[0].show();
+    });
+    function dialogClose() {
+        btnElement.style.display = "block";
+    }
+    function dialogOpen() {
+        btnElement.style.display = "none";
+    }
+    function dlgButtonClick() {
+        window.open('https://www.syncfusion.com/company/about-us');
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#Favorites").click(function () {
+            var Favorite = {
+                controller: 'Classification',
+                action: 'Index',
+                name: document.getElementById("FavoriteName").value,
+                MVCFavoriteGroupId: document.getElementById("FavoriteGroupId_hidden").value
+            };
+            $.post("/Favorite/Add/",
+                Favorite
+                , function () { $("#exampleModal").modal('hide'); });
         });
     });
 

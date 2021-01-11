@@ -11,7 +11,10 @@
 
 <h1>
     <img src="~/images/icons/Property.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Property")).TermString
-</h1>
+</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
 
     <form method="post">
@@ -56,77 +59,77 @@
 
 
             </div>
-                    </div>
+        </div>
 
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
 
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Type")).TermString
-                        </div>
-                        <div class="col-9">
-                            <ejs-dropdownlist id="PropertyTypeId" dataSource="@Model.PropertyTypes" ejs-for="@Model.PropertyTypeId" value="@Model.PropertyTypeId" index="2"  popupHeight="220px">
-                                <e-dropdownlist-fields text="Name" value="PropertyTypeId"></e-dropdownlist-fields>
-                            </ejs-dropdownlist>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="PropertyTypeId" dataSource="@Model.PropertyTypes" ejs-for="@Model.PropertyTypeId" value="@Model.PropertyTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="PropertyTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
 
-                        </div>
-                    </div>
+            </div>
+        </div>
 
-                    <div class="row">
-                        <div class="col-3 offset-3">
-                            <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                            <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Creator")).TermString
-                        </div>
-                        <div class="col-9">
-                            @Model.CreatorName
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-                        </div>
-                        <div class="col-9">
-                            @Model.CreatedDate
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-                        </div>
-                        <div class="col-9">
-                            @Model.ModifierName
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-                        </div>
-                        <div class="col-9">
-                            <div>@Model.ModifiedDate</div>
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-3 offset-3">
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatorName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatedDate
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ModifierName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
+            </div>
+        </div>
 
-</form>
+    </form>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>

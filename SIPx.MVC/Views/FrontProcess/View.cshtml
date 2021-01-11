@@ -7,7 +7,10 @@
     Layout = "_Layout";
 }
 
-<h1><img src="~/images/icons/Process.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Process")).TermString</h1>
+<h1><img src="~/images/icons/Process.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Process")).TermString</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+</a>
+
 <div class="container">
     <div class="row">
         <div class="col-3">
