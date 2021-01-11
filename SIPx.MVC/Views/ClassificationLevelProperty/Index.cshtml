@@ -2,14 +2,12 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification level properties")).TermString;
+    ViewData["Image"] = "Property.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }
 
-<h1><img src="~/images/icons/Property.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Classification level properties")).TermString</h1>
-<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-</a>
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>

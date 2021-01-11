@@ -4,6 +4,8 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification page")).TermString;
+    ViewData["Image"] = "Property.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }

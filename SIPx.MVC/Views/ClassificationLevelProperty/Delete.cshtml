@@ -4,13 +4,13 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete classification level property")).TermString;
+    ViewData["Image"] = "Property.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }
 
-<h1>
-    <img src="~/images/icons/Property.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Delete classification level property")).TermString
-</h1>
+
 <div class="container">
 
     <form method="post">

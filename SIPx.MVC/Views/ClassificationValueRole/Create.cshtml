@@ -5,16 +5,12 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification value role")).TermString;
+    ViewData["Image"] = "Role.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }
 
-<h1>
-    <img src="~/images/icons/Role.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("New classification value role")).TermString
-</h1>
-<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-</a>
 <div class="container">
 
 
