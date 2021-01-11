@@ -2,12 +2,10 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value search result")).TermString;
+    ViewData["Image"] = "Value.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_Layout";
 }
-<h1><img src="~/images/icons/Value.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Classification value search result")).TermString</h1>
-<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-</a>
 <div class="container">
 
     <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">

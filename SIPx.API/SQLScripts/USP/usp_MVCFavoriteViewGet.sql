@@ -1,4 +1,4 @@
-ALTER PROCEDURE usp_MVCFavoriteViewGet (@UserID nvarchar(450) , @MVCFavoriteGroupId int = null)
+CREATE PROCEDURE usp_MVCFavoriteViewGet (@UserID nvarchar(450) , @MVCFavoriteGroupId int = null)
 AS
 SELECT 
 	Name

@@ -4,16 +4,10 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Position in organization")).TermString;
-
+    ViewData["Image"] = "Position.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
-
-<h1>
-    <img src="~/images/icons/Position.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Position in organization")).TermString
-</h1>
-<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-</a>
 @if (!Model.UserNormalUserCannotDelete)
 {
     <a asp-route-id="@Model.OrganizationPersonId" asp-action="Edit"><img src="~/images/icons/Edit.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>

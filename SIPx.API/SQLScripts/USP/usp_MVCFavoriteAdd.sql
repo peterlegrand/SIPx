@@ -2,7 +2,7 @@ CREATE PROCEDURE usp_MVCFavoriteAdd (
 	@UserID nvarchar(450)
 	, @Controller nvarchar(450)
 	, @Action nvarchar(450) 
-	, @RouteId nvarchar(450) = null 
+	, @RouteId int = null 
 	, @Name nvarchar(50)
 	, @Sequence int = null
 	, @MVCFavoriteGroupId int = null

@@ -4,15 +4,10 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content advanced search")).TermString;
+    ViewData["Image"] = "Content.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_Layout";
 }
-
-<h1>
-    <img src="~/images/icons/Content.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content advanced search")).TermString
-</h1>
-<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-</a>
 <div class="container">
 
     <form method="post">

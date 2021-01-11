@@ -5,7 +5,8 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add person telecom")).TermString;
-
+    ViewData["Image"] = "Telecom.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
@@ -22,15 +23,7 @@
         });
     });
 </script>
-
-<h1>
-    <img src="~/images/icons/Telecom.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Add person telecom")).TermString
-</h1>
-<a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-</a>
 <div class="container">
-
     <form method="post">
         <div class="row">
             <div class="col-3">

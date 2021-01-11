@@ -1,17 +1,11 @@
 ﻿@model List<NewProcessShowTemplateGroup>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
-
-}
-@{
     ViewData["Title"] = "Home Page";
+    ViewData["Image"] = "Process.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_Layout";
 }
-<h1><img src="~/images/icons/Process.png" width="50" height="50" />Process templates</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-</a>
-
 <div class=" control-section">
     @foreach (var x in Model)
     {
