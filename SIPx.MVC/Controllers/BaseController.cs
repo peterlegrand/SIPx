@@ -54,7 +54,7 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(BaseLanguageCreateGet BaseLanguage)
+        public async Task<IActionResult> LanguageCreate(BaseLanguageCreateGet BaseLanguage)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var BaseLanguageCreateGetWithErrorMessage = await _client.PostProtectedAsync<BaseLanguageCreateGetWithErrorMessages>($"{_baseUrl}api/{BaseLanguage.BaseType}Language/ Create", BaseLanguage, token);
@@ -70,7 +70,7 @@ namespace SIPx.MVC.Controllers
             return RedirectToAction("Index", BaseLanguage.BaseId);
         }
         [HttpGet]
-        public async Task<IActionResult> Index(int Id, string BaseType)
+        public async Task<IActionResult> LanguageIndex(int Id, string BaseType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<List<BaseLanguageIndexGet>>($"{_baseUrl}api/{BaseType}Language/Index", token);
@@ -90,7 +90,7 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int Id, string BaseType)
+        public async Task<IActionResult> LanguageEdit(int Id, string BaseType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<BaseLanguageUpdateGet>($"{_baseUrl}api/{BaseType}Language/Update/" + Id, token);
@@ -104,7 +104,7 @@ namespace SIPx.MVC.Controllers
                 tooltipText = "Multiple Image upload",
                 template = "<button type='button' class='e-tbar-btn e-btn' tabindex='-1' id='custom_tbar'  style='width:100%'><div class='e-tbar-btn-text rtecustomtool' style='font-weight: 500;'>Multiple upload</div></button>" 
             };
-
+            //PETER TODO This view stuff need to be reviewed. Above and below
             ViewBag.items = new object[] { "Bold", "Italic", "Underline","Formats", "Alignments", "OrderedList", "UnorderedList",
                  "Image", "|", tool, "SourceCode", "Undo", "Redo" };
             if (response.Item2 == true)
@@ -119,7 +119,7 @@ namespace SIPx.MVC.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(BaseLanguageUpdateGet BaseLanguage)
+        public async Task<IActionResult> LanguageEdit(BaseLanguageUpdateGet BaseLanguage)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var BaseLanguageUpdateGetWithErrorMessage = await _client.PostProtectedAsync<BaseLanguageUpdateGetWithErrorMessages>($"{_baseUrl}api/{BaseLanguage.BaseType}Language/Update", BaseLanguage, token);
@@ -134,7 +134,7 @@ namespace SIPx.MVC.Controllers
             return RedirectToAction("Index", BaseLanguage.BaseId);
         }
         [HttpGet]
-        public async Task<IActionResult> Delete(int Id, string BaseType)
+        public async Task<IActionResult> LanguageDelete(int Id, string BaseType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<BaseLanguageDeleteGet>($"{_baseUrl}api/{BaseType}Language/Delete/" + Id, token);
@@ -154,7 +154,7 @@ namespace SIPx.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(BaseLanguageDeleteGet BaseLanguage)
+        public async Task<IActionResult> LanguageDelete(BaseLanguageDeleteGet BaseLanguage)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             await _client.PostProtectedAsync<BaseLanguageDeleteGet>($"{_baseUrl}api/{BaseLanguage.BaseType}Language/Delete", BaseLanguage, token);

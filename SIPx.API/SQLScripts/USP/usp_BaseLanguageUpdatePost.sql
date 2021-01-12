@@ -16,7 +16,7 @@ SET @statement = 'UPDATE '
 @Description + ''', MouseOver =''' + 
 @MouseOver+ ''', MenuName =''' + 
 @MenuName+ ''',ModifierId = ''' + 
-@UserId+ ''',ModifiedDate = Getdate() WHERE ' + @BaseType + 'LanguageId = ' +CAST(@BaseLanguageId as varchar(10))
+@UserId+ ''', ModifiedDate = Getdate() WHERE ' + @BaseType + 'LanguageId = ' +CAST(@BaseLanguageId as varchar(10))
 
 EXECUTE sp_executesql @statement
 end

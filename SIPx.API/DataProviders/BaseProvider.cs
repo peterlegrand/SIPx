@@ -44,7 +44,7 @@ namespace SIPx.DataAccess
         public async Task<List<BaseLanguageIndexGet>> IndexGet(string BaseType, int BaseId, string UserId)
         {
             string usp = "usp_BaseLanguageIndexGet @BaseType, @BaseId, @UserID";
-            List<BaseLanguageIndexGet> x = await _sqlDataAccess.LoadData<BaseLanguageIndexGet, dynamic>(usp, new {BaseType, BaseId, UserId });
+            List<BaseLanguageIndexGet> x = await _sqlDataAccess.LoadData<BaseLanguageIndexGet, dynamic>(usp, new { BaseType, BaseId, UserId });
             return x;
         }
 

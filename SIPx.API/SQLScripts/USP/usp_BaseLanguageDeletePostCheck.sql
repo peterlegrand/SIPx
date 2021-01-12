@@ -1,10 +1,6 @@
-CREATE PROCEDURE usp_BaseLanguageUpdatePostCheck (
+CREATE PROCEDURE usp_BaseLanguageDeletePostCheck (
 	@BaseType varchar(50)
 	, @BaseLanguageId int
-	, @Name nvarchar(50)
-	, @Description nvarchar(max)
-	, @MouseOver nvarchar(50)
-	, @MenuName nvarchar(50)
 	, @UserId nvarchar(450))
 AS
 DECLARE @LanguageId int;
@@ -22,7 +18,7 @@ SET @statement = 'SELECT @Count = COUNT(*)  FROM '
 EXECUTE sp_executesql @statement, N'@Count int output', @Count output 
 
 DECLARE @ErrorIdsTable TABLE (id int)
-IF @Count =0
+IF @Count = 0
 BEGIN
 insert into @ErrorIdsTable values(124)
 END
