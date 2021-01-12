@@ -30,7 +30,7 @@
 <a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@ViewBag.Id" asp-route-ParentId="0">@Term.Find(x => x.InternalName.Equals("Add new classification value")).TermString</a>
 <script id="Values" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueProperty/Index/${ClassificationValueId}"><img src="/images/icons/property.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Properties")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ClassificationValueProperty/Index/${ClassificationValueId}"><img src="/images/icons/Property.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Properties")).TermString" /></a>
 
     </div>
 </script>

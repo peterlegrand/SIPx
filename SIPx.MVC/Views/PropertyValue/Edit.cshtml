@@ -5,18 +5,10 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Property value")).TermString;
-
+    ViewData["Image"] = "Value.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
-
-<h1>
-    <img src="~/images/icons/Level.png" width="50" height="50" />@Term.Find(x => x.InternalName.Equals("Property value")).TermString
-</h1><a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-</a>
-
-
-
 <form method="post">
     <div class="row">
         <div class="col-3">
@@ -27,7 +19,6 @@
             <ejs-numerictextbox id="PropertyValueId" ejs-for="@Model.PropertyValueId" cssClass="e-outline" placeholder="PropertyValueId" floatLabelType="Auto"></ejs-numerictextbox>
         </div>
     </div>
-
     @if (Model.PropertyTypeId == 11)
     {
         <div class="row">
