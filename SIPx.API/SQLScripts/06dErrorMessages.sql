@@ -120,3 +120,5 @@ INSERT INTO ErrorMessages (NameTermId, DescriptionTermId, MenuNameTermId, MouseO
 INSERT INTO ErrorMessages (NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId) VALUES(1775,1775,1775,1775);
 INSERT INTO ErrorMessages (NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId) VALUES(1776,1776,1776,1776);
 INSERT INTO ErrorMessages (NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId) VALUES(1777,1777,1777,1777);
+INSERT INTO ErrorMessages (NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId) VALUES(2196,2196,2196,2196);
+INSERT INTO ErrorMessages (NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId) VALUES(2197,2197,2197,2197);

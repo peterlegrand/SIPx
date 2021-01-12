@@ -7,7 +7,7 @@ namespace SIPx.DataAccess
     public interface IMasterProvider
     {
         bool PostObjectLanguage(ObjectLanguageCreatePost ObjectLanguage);
-        Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int Id);
+        Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int BaseId);
         Task<List<UITerm>> UITermIndexGet(string UserId);
         Task<List<UITermLanguageCustomization>> UITermLanguageCustomizationIndexGet(string UserId);
         Task<UITermLanguageCustomization> UITermLanguageCustomizationUpdateGet(string UserId, int UITermLanguageCustomizationId);

@@ -68,10 +68,10 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int Id)
+        public async Task<bool> PostObjectLanguageCheck(string TableName, int LanguageId, int BaseId)
         {
-            string usp = "usp_LanguageOnLanguageObject @TableName, @LanguageId, @Id";
-            var x = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { TableName = TableName, LanguageId = LanguageId, Id = Id });
+            string usp = "usp_LanguageOnLanguageObject @TableName, @LanguageId, @BaseId";
+            var x = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { TableName = TableName, LanguageId = LanguageId, BaseId = BaseId });
             if (x > 0)
                 return (false);
             return (true);

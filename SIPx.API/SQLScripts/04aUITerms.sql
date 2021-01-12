@@ -2194,4 +2194,6 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(2192, 'Organization type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2193, 'Person relation type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2194, 'User menu template');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2195, 'UI term customization');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2196, 'The language is already used');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2197, 'This language master data does not exist');
 SET IDENTITY_INSERT UITerms OFF;
