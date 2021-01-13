@@ -10,6 +10,7 @@ namespace SIPx.Shared
         [Key]
         public int BaseId { get; set; }
         public string BaseType { get; set; }
+        public string UITermTitle { get; set; }
         public int? BaseParentId { get; set; }
         public int LanguageId { get; set; }
         public string Name { get; set; }

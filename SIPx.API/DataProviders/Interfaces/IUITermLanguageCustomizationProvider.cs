@@ -8,5 +8,6 @@ namespace SIPx.API.DataProviders
     {
         List<UITermLanguageCustomizationList> IndexGet(string Controller, string Action, string UserId);
         Task<string> OneTerm(string InternalName, string UserId);
+        Task<string> TableNameToOneTerm(string TableName, string UserId, bool IsPlural, string Prefix, string Suffix)
     }
 }

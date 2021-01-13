@@ -34,7 +34,13 @@ namespace SIPx.API.DataProviders
         {
             string usp = "usp_MVCUITermLanguageCustomizationOneTerm @InternalName, @UserId";
             // List<SqlParameter> parameters = new List<SqlParameter> {new SqlParameter ("@Controller" , Controller),
-            var TermString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { InternalName , UserId });
+            var TermString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { InternalName, UserId });
+            return TermString;
+        }
+        public async Task<string> TableNameToOneTerm(string TableName, string UserId, bool IsPlural, string Prefix, string Suffix)
+        {
+            string usp = "usp_MVCUITermLanguageCustomizationTableNameToOneTerm @TableName, @UserId, @IsPlural, @Prefix, @Suffix";
+            var TermString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { TableName, UserId, IsPlural, Prefix, Suffix });
             return TermString;
         }
 

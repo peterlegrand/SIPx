@@ -12,6 +12,7 @@ namespace SIPx.Shared
         public int BaseId { get; set; }
         public string LanguageName { get; set; }
         public string BaseType { get; set; }
+        public string UITermTitle { get; set; }
         public int LanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

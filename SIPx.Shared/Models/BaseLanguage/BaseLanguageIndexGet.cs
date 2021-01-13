@@ -5,13 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace SIPx.Shared { 
-    public class BaseLanguageIndexGet
+    public class BaseLanguageIndexGetGrid
     {
         [Key]
         public int BaseLanguageId { get; set; }
-        public int BaseId { get; set; }
         public int LanguageId { get; set; }
-//        public string ObjectType { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string MenuName { get; set; }

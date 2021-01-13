@@ -1,10 +1,12 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationLanguageIndexGet
+@model BaseLanguageIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("ClassificationLanguage")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals(Model.UITermTitle)).TermString;
+    ViewData["Image"] = $"{Model.BaseType}.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }

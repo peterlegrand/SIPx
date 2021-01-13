@@ -1,0 +1,14 @@
+﻿INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('bit');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('char');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('date');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('datetime');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('datetime2');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('datetimeoffset');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('geography');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('geometry');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('hierarchyid');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('int');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('nchar');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('nvarchar');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('uniqueidentifier');
+INSERT INTO DataDictionaryColumnTypes (ColumnTypeName) VALUES('varchar');

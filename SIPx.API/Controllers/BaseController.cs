@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SIPx.API.DataProviders;
 using SIPx.API.Models;
 using SIPx.DataAccess;
 using SIPx.Shared;
@@ -17,18 +18,21 @@ namespace SIPx.API.Controllers
         private readonly ICheckProvider _checkProvider;
         private readonly IClaimCheck _claimCheck;
         private readonly IMasterProvider _masterProvider;
+        private readonly IUITermLanguageCustomizationProvider _iUITermLanguageCustomizationProvider;
         private readonly UserManager<SipUser> _userManager;
 
         public BaseController(  IBaseProvider baseProvider
             , ICheckProvider checkProvider
             , IClaimCheck claimCheck
             , IMasterProvider masterProvider
+            , IUITermLanguageCustomizationProvider iUITermLanguageCustomizationProvider
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _baseProvider = baseProvider;
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _masterProvider = masterProvider;
+            _iUITermLanguageCustomizationProvider = iUITermLanguageCustomizationProvider;
             _userManager = userManager;
         }
 
@@ -36,6 +40,8 @@ namespace SIPx.API.Controllers
         {
             var LanguageList = await _baseProvider.CreateGetLanguages(BaseLanguage.BaseId,BaseLanguage.BaseType, UserId);
             BaseLanguage.Languages= LanguageList;
+            BaseLanguage.UITermTitle = await _iUITermLanguageCustomizationProvider.TableNameToOneTerm(BaseLanguage.BaseType, UserId, false, "New","");
+            var UITerm = await _iUITermLanguageCustomizationProvider.OneTerm(BaseLanguage.BaseType, UserId);
             return BaseLanguage;
         }
 

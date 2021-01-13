@@ -465,4 +465,8 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (458, 'Admin', 'Menu')
 , (459, 'Admin', 'Index')
 , (460, 'Front', 'Index')
+, (461, 'Base', 'LanguageIndex')
+, (462, 'Base', 'LanguageCreate')
+, (463, 'Base', 'LanguageEdit')
+, (464, 'Base', 'LanguageDelete')
 SET IDENTITY_INSERT MVCUIScreens OFF;

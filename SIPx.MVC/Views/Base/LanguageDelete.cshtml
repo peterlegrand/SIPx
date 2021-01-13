@@ -1,26 +1,23 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ClassificationLevelDeleteGet
+@model BaseLanguageDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete classification level")).TermString;
-    ViewData["Image"] = "Level.png";
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals(Model.UITermTitle)).TermString;
+    ViewData["Image"] = $"{Model.BaseType}.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
-
     Layout = "_LayoutAdmin";
 }
-
-
 <div class="container">
-
     <form method="post">
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="BaseId" ejs-for="@Model.BaseId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="BaseLanguageId" ejs-for="@Model.BaseLanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-textbox id="BaseType" ejs-for="BaseType" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
