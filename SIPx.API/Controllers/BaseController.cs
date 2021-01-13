@@ -40,7 +40,8 @@ namespace SIPx.API.Controllers
         {
             var LanguageList = await _baseProvider.CreateGetLanguages(BaseLanguage.BaseId,BaseLanguage.BaseType, UserId);
             BaseLanguage.Languages= LanguageList;
-            BaseLanguage.UITermTitle = await _iUITermLanguageCustomizationProvider.TableNameToOneTerm(BaseLanguage.BaseType, UserId, false, "New","");
+            string BaseTableName = await _baseProvider.BaseTypeToTable(BaseLanguage.BaseType);
+            BaseLanguage.UITermTitle = await _iUITermLanguageCustomizationProvider.TableNameToOneTerm(BaseTableName, UserId, false, "New","");
             var UITerm = await _iUITermLanguageCustomizationProvider.OneTerm(BaseLanguage.BaseType, UserId);
             return BaseLanguage;
         }
@@ -49,6 +50,9 @@ namespace SIPx.API.Controllers
         {
             var LanguageList = await _baseProvider.CreateGetLanguages(BaseLanguage.BaseLanguageId, BaseLanguage.BaseType, UserId);
             BaseLanguage.Languages = LanguageList;
+            var BaseTableName = await _baseProvider.BaseTypeToTable(BaseLanguage.BaseType);
+            BaseLanguage.UITermTitle = await _iUITermLanguageCustomizationProvider.TableNameToOneTerm(BaseTableName, UserId, false, "", "");
+            var UITerm = await _iUITermLanguageCustomizationProvider.OneTerm(BaseLanguage.BaseType, UserId);
             return BaseLanguage;
         }
 
@@ -109,17 +113,25 @@ namespace SIPx.API.Controllers
                 , "ApplicationRight"
                 , BaseType + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                if (await _checkProvider.CheckIfRecordExists($"{BaseType}+Languages", BaseType, Id) == 0)
-//PETER TODO WHY this check, should return empty list. No error
-                {
-                    return BadRequest(new
-                    {
-                        IsSuccess = false,
-                        Message = "No record with this ID",
-                    });
-                }
-
-                return Ok(await _baseProvider.IndexGet(BaseType, Id, CurrentUser.Id));
+                //PETER TODO WHY this check, should return empty list. No error
+                //if (await _checkProvider.CheckIfRecordExists($"{BaseType}Languages", $"{BaseType}LanguaId", Id) == 0)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        IsSuccess = false,
+                //        Message = "No record with this ID",
+                //    });
+                //}
+                BaseLanguageIndexGet BaseLanguageIndex = new BaseLanguageIndexGet();
+                BaseLanguageIndex.BaseId = Id;
+                BaseLanguageIndex.BaseType = BaseType;
+                var x = new Dictionary<string,string>{ { "BaseType", BaseType }, { "Id",Id.ToString()} };
+                BaseLanguageIndex.AllRouteData = x;
+                BaseLanguageIndex.BaseLanguageIndexGetGrids = await _baseProvider.IndexGet(BaseType, Id, CurrentUser.Id);
+                string BaseTableName = await _baseProvider.BaseTypeToTable(BaseType);
+                BaseLanguageIndex.UITermTitle = await _iUITermLanguageCustomizationProvider.TableNameToOneTerm(BaseTableName, CurrentUser.Id, true, "", "");
+                BaseLanguageIndex.UITermBack = await _iUITermLanguageCustomizationProvider.ParentTableNameToOneTerm(BaseTableName, CurrentUser.Id, true, "Back to", "");
+                return Ok(BaseLanguageIndex);
             }
             return BadRequest(new
             {
@@ -136,7 +148,7 @@ namespace SIPx.API.Controllers
                 , "ApplicationRight"
                 , BaseType + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                if (await _checkProvider.CheckIfRecordExists($"{BaseType}+Languages", BaseType, Id) == 0)
+                if (await _checkProvider.CheckIfRecordExists($"{BaseType}Languages", $"{BaseType}LanguageId", Id) == 0)
                 //PETER TODO WHY this check, should return empty list. No error
                 {
                     return BadRequest(new
@@ -146,7 +158,11 @@ namespace SIPx.API.Controllers
                     });
                 }
 
-                return Ok(await _baseProvider.UpdateGet(BaseType, Id, CurrentUser.Id));
+                var BaseLanguage  = await _baseProvider.UpdateGet(BaseType, Id, CurrentUser.Id);
+                BaseLanguage.BaseType = BaseType;
+                BaseLanguage.BaseLanguageId = Id; 
+                BaseLanguage = await UpdateAddDropDownBoxes(BaseLanguage, CurrentUser.Id);
+                return Ok(BaseLanguage);
             }
             return BadRequest(new
             {

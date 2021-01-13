@@ -8,7 +8,7 @@ CREATE PROCEDURE usp_BaseLanguageUpdatePost (
 	, @UserId nvarchar(450))
 AS
 BEGIN
-DECLARE @statement NVARCHAR(200);
+DECLARE @statement NVARCHAR(max);
 SET @statement = 'UPDATE ' 
 + @BaseType 
 + 'Languages SET Name = '''+

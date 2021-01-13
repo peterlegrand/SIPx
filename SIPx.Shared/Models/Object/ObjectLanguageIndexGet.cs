@@ -12,6 +12,7 @@ namespace SIPx.Shared {
         public string BaseType { get; set; }
         public string UITermTitle { get; set; }
         public string UITermBack { get; set; }
+        public Dictionary<string,string> AllRouteData { get; set; }
         public List<BaseLanguageIndexGetGrid> BaseLanguageIndexGetGrids { get; set; }
     }
 }

@@ -12,8 +12,9 @@ WHERE USerId = @UserID
 BEGIN
 DECLARE @statement NVARCHAR(max);
 SET @statement = 'SELECT ' +
-@BaseType + 'LanguageId  '+
+@BaseType + 'LanguageId BaseLanguageId '+
 ', ' + @BaseType + 'Languages.Name ' +
+', ' + @BaseType + 'Languages.LanguageId ' +
 ', ' + @BaseType + 'Languages.Description ' +
 ', ' + @BaseType + 'Languages.MouseOver ' +
 ', ' + @BaseType + 'Languages.MenuName ' +

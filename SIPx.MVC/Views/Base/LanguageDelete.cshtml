@@ -19,16 +19,7 @@
                 <ejs-numerictextbox id="BaseLanguageId" ejs-for="@Model.BaseLanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
                 <ejs-textbox id="BaseType" ejs-for="BaseType" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
-            </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
-            </div>
-        </div>
-        <div class="row">
+        </div>        <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
@@ -62,56 +53,6 @@
             </div>
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Date level")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-textbox id="DateLevelName" ejs-for="DateLevelName" cssClass="e-outline" placeholder="DateLevelName" floatLabelType="Auto"></ejs-textbox>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("On the fly")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="OnTheFly" label="OnTheFly" ejs-for="OnTheFly" checked="@Model.OnTheFly"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Alphabetically")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="Alphabetically" label="Alphabetically" ejs-for="Alphabetically" checked="@Model.Alphabetically"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Can link")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="CanLink" label="CanLink" ejs-for="CanLink" checked="@Model.CanLink"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("In dropdown")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="InDropDown" label="InDropDown" ejs-for="InDropDown" checked="@Model.InDropDown"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("In menu")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="InMenu" label="InMenu" ejs-for="InMenu" checked="@Model.InMenu"></ejs-checkbox>
             </div>
         </div>
         <div class="row">
@@ -150,7 +91,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ClassificationId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <a asp-action="Index" asp-route-id="@Model.BaseId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
     </form>

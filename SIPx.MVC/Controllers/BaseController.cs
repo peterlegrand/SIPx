@@ -36,11 +36,11 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
 
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseType}Language/Create", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseType}/LanguageCreate", token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
 
-            var response = await _client.GetProtectedAsync2<BaseLanguageCreateGet>($"{_baseUrl}api/{BaseType}Language/Create/", token);
+            var response = await _client.GetProtectedAsync2<BaseLanguageCreateGet>($"{_baseUrl}api/Base/LanguageCreate/{Id}?BaseType={BaseType}", token);
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -57,25 +57,26 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageCreate(BaseLanguageCreateGet BaseLanguage)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var BaseLanguageCreateGetWithErrorMessage = await _client.PostProtectedAsync<BaseLanguageCreateGetWithErrorMessages>($"{_baseUrl}api/{BaseLanguage.BaseType}Language/ Create", BaseLanguage, token);
+            var BaseLanguageCreateGetWithErrorMessage = await _client.PostProtectedAsync<BaseLanguageCreateGetWithErrorMessages>($"{_baseUrl}api/Base/LanguageCreate?BaseType={BaseLanguage.BaseType}", BaseLanguage, token);
             if (BaseLanguageCreateGetWithErrorMessage.ErrorMessages.Count>0)
             {
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseLanguage}Language/Create", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseLanguage}/LanguageCreate", token);
                 ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
                 ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
 
                 ViewBag.ErrorMessages = BaseLanguageCreateGetWithErrorMessage.ErrorMessages;
                 return View(BaseLanguageCreateGetWithErrorMessage.BaseLanguage);
             }
-            return RedirectToAction("Index", BaseLanguage.BaseId);
+            var RouteValues = new Dictionary<string, string> { { "BaseType", BaseLanguage.BaseType }, { "Id", BaseLanguage.BaseId.ToString() } };
+            return RedirectToAction("LanguageIndex", "Base",RouteValues);
         }
         [HttpGet]
         public async Task<IActionResult> LanguageIndex(int Id, string BaseType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<List<BaseLanguageIndexGet>>($"{_baseUrl}api/{BaseType}Language/Index", token);
+            var response = await _client.GetProtectedAsync2<BaseLanguageIndexGet>($"{_baseUrl}api/Base/LanguageIndex/{Id}?BaseType={BaseType}", token);
 
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseType}Language/Index", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseType}/LanguageIndex", token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
 
@@ -93,8 +94,8 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageEdit(int Id, string BaseType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<BaseLanguageUpdateGet>($"{_baseUrl}api/{BaseType}Language/Update/" + Id, token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseType}Language/Edit", token);
+            var response = await _client.GetProtectedAsync2<BaseLanguageUpdateGet>($"{_baseUrl}api/Base/LanguageUpdate/{Id}?BaseType={BaseType}", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseType}/LanguageEdit", token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
             var ErrorMessage = new List<ErrorMessage>();
@@ -122,23 +123,25 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageEdit(BaseLanguageUpdateGet BaseLanguage)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var BaseLanguageUpdateGetWithErrorMessage = await _client.PostProtectedAsync<BaseLanguageUpdateGetWithErrorMessages>($"{_baseUrl}api/{BaseLanguage.BaseType}Language/Update", BaseLanguage, token);
+            var BaseLanguageUpdateGetWithErrorMessage = await _client.PostProtectedAsync<BaseLanguageUpdateGetWithErrorMessages>($"{_baseUrl}api/Base/LanguageUpdate?BaseType={BaseLanguage.BaseType}", BaseLanguage, token);
             if (BaseLanguageUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseLanguage.BaseType}Language/Edit", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseLanguage.BaseType}/LanguageEdit", token);
                 ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
                 ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
                 ViewBag.ErrorMessages = BaseLanguageUpdateGetWithErrorMessage.ErrorMessages;
                 return View(BaseLanguageUpdateGetWithErrorMessage.BaseLanguage);
             }
-            return RedirectToAction("Index", BaseLanguage.BaseId);
+            var RouteValues = new Dictionary<string, string> { { "BaseType", BaseLanguage.BaseType }, { "Id", BaseLanguage.BaseId.ToString() } };
+            return RedirectToAction("LanguageIndex", "Base", RouteValues);
+
         }
         [HttpGet]
         public async Task<IActionResult> LanguageDelete(int Id, string BaseType)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<BaseLanguageDeleteGet>($"{_baseUrl}api/{BaseType}Language/Delete/" + Id, token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseType}Language/Delete", token);
+            var response = await _client.GetProtectedAsync2<BaseLanguageDeleteGet>($"{_baseUrl}api/{BaseType}/LanguageDelete/" + Id, token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/{BaseType}/LanguageDelete", token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
             var ErrorMessage = new List<ErrorMessage>();
@@ -157,7 +160,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageDelete(BaseLanguageDeleteGet BaseLanguage)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<BaseLanguageDeleteGet>($"{_baseUrl}api/{BaseLanguage.BaseType}Language/Delete", BaseLanguage, token);
+            await _client.PostProtectedAsync<BaseLanguageDeleteGet>($"{_baseUrl}api/{BaseLanguage.BaseType}/LanguageDelete", BaseLanguage, token);
 
             //return RedirectToAction("Index", new { id = UserMenu.UserMenuTemplateId });
             return RedirectToAction("Index",BaseLanguage.BaseId);

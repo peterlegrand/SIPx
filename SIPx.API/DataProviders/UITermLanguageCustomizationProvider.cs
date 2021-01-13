@@ -43,6 +43,12 @@ namespace SIPx.API.DataProviders
             var TermString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { TableName, UserId, IsPlural, Prefix, Suffix });
             return TermString;
         }
+        public async Task<string> ParentTableNameToOneTerm(string ChildTableName, string UserId, bool IsPlural, string Prefix, string Suffix)
+        {
+            string usp = "usp_MVCUITermLanguageCustomizationParentTableNameToOneTerm @ChildTableName, @UserId, @IsPlural, @Prefix, @Suffix";
+            var TermString = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { ChildTableName, UserId, IsPlural, Prefix, Suffix });
+            return TermString;
+        }
 
     }
 }

@@ -41,10 +41,10 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public async Task<List<BaseLanguageIndexGet>> IndexGet(string BaseType, int BaseId, string UserId)
+        public async Task<List<BaseLanguageIndexGetGrid>> IndexGet(string BaseType, int BaseId, string UserId)
         {
             string usp = "usp_BaseLanguageIndexGet @BaseType, @BaseId, @UserID";
-            List<BaseLanguageIndexGet> x = await _sqlDataAccess.LoadData<BaseLanguageIndexGet, dynamic>(usp, new { BaseType, BaseId, UserId });
+            List<BaseLanguageIndexGetGrid> x = await _sqlDataAccess.LoadData<BaseLanguageIndexGetGrid, dynamic>(usp, new { BaseType, BaseId, UserId });
             return x;
         }
 
@@ -72,6 +72,12 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_BaseLanguageDeleteGet @BaseType, @BaseLanguageID, @UserId";
             return _sqlDataAccess.LoadSingleRecord<BaseLanguageDeleteGet, dynamic>(usp, new { BaseType, BaseLanguageId, UserId });
+
+        }
+        public Task<string> BaseTypeToTable(string BaseType)
+        {
+            string usp = "usp_BaseTypeToTable @BaseType";
+            return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { BaseType});
 
         }
         public bool DeletePost(string UserId, int BaseId)
