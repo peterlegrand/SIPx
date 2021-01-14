@@ -1,53 +1,58 @@
 ﻿@using Syncfusion.EJ2
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="~/lib/jquery/jquery.min.js"></script>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SIPx.MVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
-    <link href="~/css/site.css" rel="stylesheet" />
-    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
-    <script>
-        $(document).ready(function () {
+@{var Favorites = ViewBag.Favorites;
+    var UITermLayout = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    string Image = "/images/icons/" + (string)ViewData["Image"];
+}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <script src="~/lib/jquery/jquery.min.js"></script>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - SIPx.MVC</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
+        <link href="~/css/site.css" rel="stylesheet" />
+        <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+        <script>
+            $(document).ready(function () {
 
-            $("#Menu").load("/Partial/LeftMenu");
-            //$("#TopMenu").load("/Partial/TopMenu");
+                $("#Menu").load("/Partial/LeftMenu");
+                //$("#TopMenu").load("/Partial/TopMenu");
 
-        });
-    </script>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-5 ">
-                    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
-                    <h2 style="color:slategrey">
-                        <img src="~/images/su_logo.png" style="height:45px; width:60px" />
-                        Student Union 1.5
-                    </h2>
-                </div>
-                <div class="col-4" id="searchBox">
-                    <form typeof="post" asp-controller="Search" asp-action="General">
-                        <ejs-textbox width="200" id="a" name="Search"></ejs-textbox>
-                        <ejs-button id="GeneralSearch" cssClass="transparent" type="submit" value="Submit" content="Search"></ejs-button>
-                    </form>
-                </div>
-                <div class="col-3 ">
-                    <a class="text-black-50 float-right font-weight-bold transparent" asp-controller="FrontUserPreference" asp-action="Index">&nbsp;&nbsp;User preference&nbsp;</a>&nbsp;&nbsp;
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-5 ">
+                        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
+                        <h2 style="color:slategrey">
+                            <img src="~/images/su_logo.png" style="height:45px; width:60px" />
+                            Student Union 1.5
+                        </h2>
+                    </div>
+                    <div class="col-4" id="searchBox">
+                        <form typeof="post" asp-controller="Search" asp-action="General">
+                            <ejs-textbox width="200" id="a" name="Search"></ejs-textbox>
+                            <ejs-button id="GeneralSearch" cssClass="transparent" type="submit" value="Submit" content="Search"></ejs-button>
+                        </form>
+                    </div>
+                    <div class="col-3 ">
+                        <a class="text-black-50 float-right font-weight-bold transparent" asp-controller="FrontUserPreference" asp-action="Index">&nbsp;&nbsp;User preference&nbsp;</a>&nbsp;&nbsp;
+                    </div>
                 </div>
             </div>
-        </div>
 
-        @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+
+            @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>*@
-        @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -57,56 +62,111 @@
                     </li>
                 </ul>
             </div>*@
-        @*</nav>*@
-    </header>
-    @*<div class="container">
-        <div class="row">
-            <div class="col-2">
+            @*</nav>*@
+        </header>
+        @*<div class="container">
+            <div class="row">
+                <div class="col-2">
 
 
+                </div>
+            </div>
+        </div>*@
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@UITermLayout.Find(x => x.InternalName.Equals("Add favorite")).TermString</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3">
+                                    @UITermLayout.Find(x => x.InternalName.Equals("Name")).TermString
+                                </div>
+                                <div class="col-9">
+                                    <ejs-textbox id="FavoriteName" value="@ViewData["Title"]" cssClass="e-outline" placeholder="@UITermLayout.Find(x => x.InternalName.Equals("Name")).TermString" floatLabelType="Auto"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3">
+                                    @UITermLayout.Find(x => x.InternalName.Equals("Group")).TermString
+                                </div>
+                                <div class="col-1">
+                                    <ejs-radiobutton id="ExistingFavoriteGroup" name="FavoriteGroup" checked="true" cssClass="e-small"></ejs-radiobutton>
+                                </div>
+                                <div class="col-8">
+                                    <ejs-dropdownlist id="FavoriteGroupId" dataSource="@ViewData["FavoriteGroup"]" value="0" popupHeight="220px">
+                                        <e-dropdownlist-fields text="Name" value="MVCFavoriteGroupId"></e-dropdownlist-fields>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3">
+                                    @UITermLayout.Find(x => x.InternalName.Equals("New group")).TermString
+                                </div>
+                                <div class="col-1">
+                                    <ejs-radiobutton id="NewFavoriteGroup" name="FavoriteGroup" checked="false" cssClass="e-small"></ejs-radiobutton>
+                                </div>
+                                <div class="col-8">
+                                    <ejs-textbox id="NewGroup" cssClass="e-outline" floatLabelType="Auto" width="100%" class="col-8"></ejs-textbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button href="#" id="Favorites">@UITermLayout.Find(x => x.InternalName.Equals("Add")).TermString</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>*@
-    <div class="container">
-        <div class="row">
-            <div class="col-2 leftMenu">
-                <a class="nav-link text-dark font-weight-bold leftMenuHeader" asp-controller="Admin" asp-action="Index">Admin</a>
-                @*<ejs-sidebar id="dockSidebar" width="220px" dockSize="72px" enableDock="true">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-2 leftMenu">
+                    <a class="nav-link text-dark font-weight-bold leftMenuHeader" asp-controller="Admin" asp-action="Index">Admin</a>
+                    @*<ejs-sidebar id="dockSidebar" width="220px" dockSize="72px" enableDock="true">
                     <e-content-template>*@
-                @*<div class="dock">*@
-                @*<div class="sidebar-item" id="toggle">
+                    @*<div class="dock">*@
+                    @*<div class="sidebar-item" id="toggle">
                         <span class="e-icons expand"></span>
                         <span class="e-text" title="menu">Menu</span>
                     </div>*@
-                <div id="Menu"></div>
+                    <div id="Menu"></div>
 
-                @*<a href="https://localhost:44393/CreateDB/">Create DB</a>*@
-                @*</div>*@
-                @*</e-content-template>
+                    @*<a href="https://localhost:44393/CreateDB/">Create DB</a>*@
+                    @*</div>*@
+                    @*</e-content-template>
                     </ejs-sidebar>*@
 
 
 
 
-            </div>
-            <div class=" col-10">
-                @RenderBody()
+                </div>
+                <div class=" col-10">
+                    @RenderBody()
+                </div>
             </div>
         </div>
-    </div>
 
-    <footer class="@*border-top*@ footer text-muted">
-        <div class="container-fluid">
-            &copy; 2020 - SIPx.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-    <!-- Syncfusion Essential JS 2 ScriptManager -->
-    <ejs-scripts></ejs-scripts>
-</body>
+        <footer class="@*border-top*@ footer text-muted">
+            <div class="container-fluid">
+                &copy; 2020 - SIPx.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+        <!-- Syncfusion Essential JS 2 ScriptManager -->
+        <ejs-scripts></ejs-scripts>
+    </body>
 </html>
 @*<script>
         function positionChange(args) {

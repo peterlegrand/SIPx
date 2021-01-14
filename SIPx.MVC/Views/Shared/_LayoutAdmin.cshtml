@@ -130,10 +130,25 @@
                             <div class="col-3">
                                 @UITermLayout.Find(x => x.InternalName.Equals("Group")).TermString
                             </div>
-                            <div class="col-9">
+                            <div class="col-1">
+                                <ejs-radiobutton id="ExistingFavoriteGroup" name="FavoriteGroup" checked="true" cssClass="e-small"></ejs-radiobutton>
+                            </div>
+                            <div class="col-8">
                                 <ejs-dropdownlist id="FavoriteGroupId" dataSource="@ViewData["FavoriteGroup"]" value="0" popupHeight="220px">
                                     <e-dropdownlist-fields text="Name" value="MVCFavoriteGroupId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                @UITermLayout.Find(x => x.InternalName.Equals("New group")).TermString
+                            </div>
+                            <div class="col-1">
+                                <ejs-radiobutton id="NewFavoriteGroup" name="FavoriteGroup" checked="false" cssClass="e-small"></ejs-radiobutton>
+                            </div>
+                            <div class="col-8">
+                                <ejs-textbox id="NewGroup" cssClass="e-outline" floatLabelType="Auto" width="100%" class="col-8"></ejs-textbox>
                             </div>
                         </div>
                     </div>
@@ -223,7 +238,7 @@
         }
 </style>
 
-<script>
+@*<script>
     $(document).ready(function () {
         $("#Favorites").click(function () {
             var Favorite = {
@@ -238,4 +253,4 @@
         });
     });
 
-</script>
+</script>*@

@@ -24,6 +24,7 @@
             </div>
         }
         else
+        {
             <div class="row">
                 <div class="col-3">
                     @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
@@ -32,7 +33,6 @@
                     <ejs-numerictextbox id="PersonRelationTypeId" ejs-for="@Model.PersonRelationTypeId" cssClass="e-outline" placeholder="PersonRelationTypeId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
-        {
         }
 
         <div class="row">

@@ -2496,4 +2496,5 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(2494, 'User menu types');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2495, 'User preference type groups');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2496, 'User preference types');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2497, 'Value update types');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2498, 'New group');
 SET IDENTITY_INSERT UITerms OFF;
