@@ -11,13 +11,26 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="ParentId" ejs-for="ParentProjectId" cssClass="e-outline" placeholder="ParentProjectId " floatLabelType="Auto"></ejs-numerictextbox>
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="ParentId" ejs-for="ParentProjectId" cssClass="e-outline" placeholder="ParentProjectId " floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>}
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="ParentId" ejs-for="ParentProjectId" cssClass="e-outline" placeholder="ParentProjectId " floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>        <div class="row">
+            }
+        <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Parent")).TermString
             </div>    <div class="col-9">
@@ -45,24 +58,24 @@
                     </e-richtexteditor-toolbarsettings>
                 </ejs-richtexteditor>
                 @*<div class="row  e-rte-custom-tbar-section">
-                        <div class="control-wrapper" id="rteSection">
-                            <div class="control-section">
-                                <ejs-richtexteditor id="customtool" created="onCreate">
-                                    <e-richtexteditor-toolbarsettings items="ViewBag.items"></e-richtexteditor-toolbarsettings>
-                                    <e-content-template>
+                    <div class="control-wrapper" id="rteSection">
+                        <div class="control-section">
+                            <ejs-richtexteditor id="customtool" created="onCreate">
+                                <e-richtexteditor-toolbarsettings items="ViewBag.items"></e-richtexteditor-toolbarsettings>
+                                <e-content-template>
 
-                                    </e-content-template>
-                                </ejs-richtexteditor>
-                            </div>
-                            <div id="customTbarDialog" style="display: none">
-                                <div id="file-uploader">
-                                    <ejs-uploader id="UploadFiles" success="onSuccess" allowedExtensions=".png, .jpeg, .jpg">
-                                        <e-uploader-asyncsettings saveUrl="@Url.Content("~/Home/SaveFile")" removeUrl="https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove"></e-uploader-asyncsettings>
-                                    </ejs-uploader>
-                                </div>
+                                </e-content-template>
+                            </ejs-richtexteditor>
+                        </div>
+                        <div id="customTbarDialog" style="display: none">
+                            <div id="file-uploader">
+                                <ejs-uploader id="UploadFiles" success="onSuccess" allowedExtensions=".png, .jpeg, .jpg">
+                                    <e-uploader-asyncsettings saveUrl="@Url.Content("~/Home/SaveFile")" removeUrl="https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove"></e-uploader-asyncsettings>
+                                </ejs-uploader>
                             </div>
                         </div>
-                    </div>*@
+                    </div>
+                </div>*@
             </div>
 
         </div>

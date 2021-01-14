@@ -10,21 +10,36 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="RoleClaimId" ejs-for="@Model.RoleClaimId" cssClass="e-outline" placeholder="RoleClaimId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-textbox id="RoleId" ejs-for="@Model.RoleId" cssClass="e-outline" placeholder="RoleId" floatLabelType="Auto"></ejs-textbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="RoleClaimId" ejs-for="@Model.RoleClaimId" cssClass="e-outline" placeholder="RoleClaimId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-textbox id="RoleId" ejs-for="@Model.RoleId" cssClass="e-outline" placeholder="RoleId" floatLabelType="Auto"></ejs-textbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="RoleClaimId" ejs-for="@Model.RoleClaimId" cssClass="e-outline" placeholder="RoleClaimId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-textbox id="RoleId" ejs-for="@Model.RoleId" cssClass="e-outline" placeholder="RoleId" floatLabelType="Auto"></ejs-textbox>
+                </div>
             </div>
-        </div>
+        }
 
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Role")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="RoleName" ejs-for="RoleName" cssClass="e-outline" placeholder="RoleName" floatLabelType="Auto"></ejs-textbox>
+@Model.RoleName
             </div>
         </div>
 
@@ -33,7 +48,7 @@
                 @Term.Find(x => x.InternalName.Equals("Right")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ClaimName" ejs-for="ClaimName" cssClass="e-outline" placeholder="ClaimName" floatLabelType="Auto"></ejs-textbox>
+   @Model.ClaimName
             </div>
         </div>
         <div class="row">
@@ -41,7 +56,7 @@
                 @Term.Find(x => x.InternalName.Equals("Right group")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ClaimGroupName" ejs-for="ClaimGroupName" cssClass="e-outline" placeholder="ClaimGroupName" floatLabelType="Auto"></ejs-textbox>
+@Model.ClaimGroupName
             </div>
         </div>
 

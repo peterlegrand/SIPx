@@ -11,17 +11,35 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="PageSectionContentConditionTypeId" ejs-for="@Model.PageSectionContentConditionTypeId" cssClass="e-outline" placeholder="PageSectionContentConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-textbox id="PageSectionContentConditionTypeIdExtended" ejs-for="@Model.PageSectionContentConditionTypeIdExtended" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+                    <ejs-numerictextbox id="PageSectionContentConditionId" ejs-for="@Model.PageSectionContentConditionId" cssClass="e-outline" placeholder="PageSectionContentConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="PageSectionContentConditionTypeId" ejs-for="@Model.PageSectionContentConditionTypeId" cssClass="e-outline" placeholder="PageSectionContentConditionId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-textbox id="PageSectionContentConditionTypeIdExtended" ejs-for="@Model.PageSectionContentConditionTypeIdExtended" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
-                <ejs-numerictextbox id="PageSectionContentConditionId" ejs-for="@Model.PageSectionContentConditionId" cssClass="e-outline" placeholder="PageSectionContentConditionId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="PageSectionContentConditionTypeId" ejs-for="@Model.PageSectionContentConditionTypeId" cssClass="e-outline" placeholder="PageSectionContentConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-textbox id="PageSectionContentConditionTypeIdExtended" ejs-for="@Model.PageSectionContentConditionTypeIdExtended" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+                    <ejs-numerictextbox id="PageSectionContentConditionId" ejs-for="@Model.PageSectionContentConditionId" cssClass="e-outline" placeholder="PageSectionContentConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -64,8 +82,8 @@
             </div>
             <div class="col-9">
                 @*<ejs-dropdownlist id="PageSectionContentConditionTypeIdExtended" dataSource="@Model.PageSectionContentConditionTypes" ejs-for="@Model.PageSectionContentConditionTypeIdExtended" value="@Model.PageSectionContentConditionTypeIdExtended" index="2" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ExtendedId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>*@
+                    <e-dropdownlist-fields text="Name" value="ExtendedId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>*@
                 @Model.PageSectionContentConditionTypeName
             </div>
         </div>
@@ -270,21 +288,21 @@
                 </div>
             </div>
         } @*<div id="ClassificationValueCondition">
-                @for (int i = 0; i < Model.Classifications.Count; i++)
-                {
-                    <div class="row values" id="@Model.Classifications[i].ControlA">
-                        <div class="col-3">
+            @for (int i = 0; i < Model.Classifications.Count; i++)
+            {
+                <div class="row values" id="@Model.Classifications[i].ControlA">
+                    <div class="col-3">
 
-                        </div>
-                        <div class="col-9">
-                            <ejs-dropdownlist id="@Model.Classifications[i].ControlB" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
-                                <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
-                            </ejs-dropdownlist>
-
-                        </div>
                     </div>
-                }
-            </div>*@
+                    <div class="col-9">
+                        <ejs-dropdownlist id="@Model.Classifications[i].ControlB" dataSource="@Model.Classifications[i].ClassificationValues" ejs-for="@Model.PageSectionContentConditionInt" value="@Model.PageSectionContentConditionInt" index="2" popupHeight="220px">
+                            <e-dropdownlist-fields text="Name" value="ClassificationValueId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+
+                    </div>
+                </div>
+            }
+        </div>*@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>

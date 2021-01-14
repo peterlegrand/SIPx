@@ -10,32 +10,44 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PageSectionProcessConditionId" ejs-for="@Model.PageSectionProcessConditionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PageSectionProcessConditionId" ejs-for="@Model.PageSectionProcessConditionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PageSectionProcessConditionId" ejs-for="@Model.PageSectionProcessConditionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+@Model.Name
             </div>
         </div>
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
-                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
-                    <e-content-template>
-                    </e-content-template>
-                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
-                    </e-richtexteditor-toolbarsettings>
-                </ejs-richtexteditor>
+@Html.Raw(Model.Description)
             </div>
         </div>
 
@@ -44,7 +56,7 @@
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
+@Model.MenuName
             </div>
         </div>
 
@@ -53,7 +65,7 @@
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+@Model.MouseOver
             </div>
         </div>
         <div class="row">
@@ -61,7 +73,7 @@
                 @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="TitleName" ejs-for="PageSectionProcessConditionTypeName" cssClass="e-outline" placeholder="Title name" floatLabelType="Auto"></ejs-textbox>
+@Model.PageSectionProcessConditionTypeName
             </div>
         </div>
         <div class="row">

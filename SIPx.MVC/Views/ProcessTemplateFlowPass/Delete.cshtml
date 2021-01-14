@@ -10,32 +10,42 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTemplateFlowPassId" ejs-for="@Model.ProcessTemplateFlowPassId" cssClass="e-outline" placeholder="ProcessTemplateFlowPassId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="ProcessTemplateFlowPassId" ejs-for="@Model.ProcessTemplateFlowPassId" cssClass="e-outline" placeholder="ProcessTemplateFlowPassId" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTemplateFlowPassId" ejs-for="@Model.ProcessTemplateFlowPassId" cssClass="e-outline" placeholder="ProcessTemplateFlowPassId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
 
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+@Model.Name
             </div>
         </div>
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
-                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
-                    <e-content-template>
-                    </e-content-template>
-                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
-                    </e-richtexteditor-toolbarsettings>
-                </ejs-richtexteditor>
+@Html.Raw(Model.Description)
             </div>
         </div>
 
@@ -44,7 +54,7 @@
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
+@Model.MenuName
             </div>
         </div>
 
@@ -53,7 +63,7 @@
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+@Model.MouseOver
             </div>
         </div>
         <div class="row">
@@ -61,7 +71,7 @@
                 @Term.Find(x => x.InternalName.Equals("Process template flow pass type")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ProcessTemplateFlowPassTypeName" ejs-for="ProcessTemplateFlowPassTypeName" cssClass="e-outline" placeholder="ProcessTemplateFlowPassTypeName" floatLabelType="Auto"></ejs-textbox>
+@Model.ProcessTemplateFlowPassTypeName
             </div>
         </div>
         <div class="row">
@@ -69,7 +79,7 @@
                 @Term.Find(x => x.InternalName.Equals("Process template field")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ProcessTemplateFieldName" ejs-for="ProcessTemplateFieldName" cssClass="e-outline" placeholder="ProcessTemplateFieldName" floatLabelType="Auto"></ejs-textbox>
+@Model.ProcessTemplateFieldName
             </div>
         </div>
         <div class="row">
@@ -77,7 +87,7 @@
                 @Term.Find(x => x.InternalName.Equals("Process template field role")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ProcessTemplateFieldNameRole" ejs-for="ProcessTemplateFieldNameRole" cssClass="e-outline" placeholder="ProcessTemplateFieldNameRole" floatLabelType="Auto"></ejs-textbox>
+@Model.ProcessTemplateFieldNameRole
             </div>
         </div>
         <div class="row">
@@ -85,7 +95,7 @@
                 @Term.Find(x => x.InternalName.Equals("Comparison operator")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ComparisonOperatorName" ejs-for="Symbol" cssClass="e-outline" placeholder="ComparisonOperatorName" floatLabelType="Auto"></ejs-textbox>
+@Model.Symbol
             </div>
         </div>
         <div class="row">
@@ -93,7 +103,7 @@
                 @Term.Find(x => x.InternalName.Equals("String value")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ProcessTemplateFlowPassString" ejs-for="ProcessTemplateFlowPassString" cssClass="e-outline" placeholder="String value" floatLabelType="Auto"></ejs-textbox>
+@Model.ProcessTemplateFlowPassString
             </div>
         </div>
         <div class="row">
@@ -101,7 +111,7 @@
                 @Term.Find(x => x.InternalName.Equals("Int value")).TermString
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="ProcessTemplateFlowPassInt" ejs-for="ProcessTemplateFlowPassInt" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-numerictextbox>
+@Model.ProcessTemplateFlowPassInt
             </div>
         </div>
         <div class="row">
@@ -109,7 +119,7 @@
                 @Term.Find(x => x.InternalName.Equals("Date time value")).TermString
             </div>
             <div class="col-9">
-                <ejs-datepicker id="ProcessTemplateFlowPassDate" ejs-for="ProcessTemplateFlowPassDate" cssClass="e-outline" placeholder="Date time value" floatLabelType="Auto"></ejs-datepicker>
+@Model.ProcessTemplateFlowPassDate
             </div>
         </div>
         <div class="row">

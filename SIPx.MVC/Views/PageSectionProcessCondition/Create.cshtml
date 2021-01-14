@@ -112,12 +112,25 @@
 </script>
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="PageSectionId" ejs-for="PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="PageSectionId" ejs-for="PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="PageSectionId" ejs-for="PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
+
 
         <div class="row">
             <div class="col-3">

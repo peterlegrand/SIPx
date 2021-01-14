@@ -11,12 +11,31 @@
 }
 <div class="container">
     <form method="post">
-
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    ID
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    ID
+                </div> 
+                <div class="col-9">
+                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-                <ejs-numerictextbox id="ProcessTemplateId" ejs-for="ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>

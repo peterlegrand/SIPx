@@ -10,22 +10,38 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PersonRelationId" ejs-for="@Model.PersonRelationId" cssClass="e-outline" placeholder="PersonRelationId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PersonRelationId" ejs-for="@Model.PersonRelationId" cssClass="e-outline" placeholder="PersonRelationId" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PersonRelationId" ejs-for="@Model.PersonRelationId" cssClass="e-outline" placeholder="PersonRelationId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+
 
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Relation type")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="PersonRelationTypeName" ejs-for="PersonRelationTypeName" cssClass="e-outline" placeholder="PersonRelationTypeName" floatLabelType="Auto"></ejs-textbox>
+@Model.PersonRelationTypeName
             </div>
         </div>
         <div class="row">
@@ -33,7 +49,7 @@
                 @Term.Find(x => x.InternalName.Equals("To first name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="FromPersonFirstName" ejs-for="FromPersonFirstName" cssClass="e-outline" placeholder="ToPersonName" floatLabelType="Auto"></ejs-textbox>
+                HERE A REF IS missing PETER TODO
             </div>
         </div>
         <div class="row">
@@ -41,7 +57,7 @@
                 @Term.Find(x => x.InternalName.Equals("To last name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="FromPersonLastName" ejs-for="FromPersonLastName" cssClass="e-outline" placeholder="FromPersonLastName" floatLabelType="Auto"></ejs-textbox>
+                HERE A REF IS missing PETER TODO
             </div>
         </div>
         <div class="row">
@@ -49,7 +65,7 @@
                 @Term.Find(x => x.InternalName.Equals("From first name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="FromPersonFirstName" ejs-for="FromPersonFirstName" cssClass="e-outline" placeholder="ToPersonName" floatLabelType="Auto"></ejs-textbox>
+                @Model.FromPersonFirstName
             </div>
         </div>
         <div class="row">
@@ -57,7 +73,7 @@
                 @Term.Find(x => x.InternalName.Equals("From last name")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="FromPersonLastName" ejs-for="FromPersonLastName" cssClass="e-outline" placeholder="ToPersonName" floatLabelType="Auto"></ejs-textbox>
+                @Model.FromPersonLastName
             </div>
         </div>
         <div class="row">

@@ -13,13 +13,24 @@
 
 
     <form method="post">
-
-        <div class="row">
-            <div class="col-3">
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="PropertyId" ejs-for="PropertyId" cssClass="e-outline" placeholder="PropertyId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="PropertyId" ejs-for="PropertyId" cssClass="e-outline" placeholder="PropertyId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="PropertyId" ejs-for="PropertyId" cssClass="e-outline" placeholder="PropertyId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
         @if (Model.PropertyTypeId == 11)
         {
             <div class="row">

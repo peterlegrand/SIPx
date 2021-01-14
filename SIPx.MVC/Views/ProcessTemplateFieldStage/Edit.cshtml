@@ -11,15 +11,30 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ProcessTemplateFieldId" ejs-for="@Model.ProcessTemplateFieldId" cssClass="e-outline" placeholder="ProcessTemplateFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTemplateStageFieldId" ejs-for="@Model.ProcessTemplateStageFieldId" cssClass="e-outline" placeholder="ProcessTemplateStageFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="ProcessTemplateFieldId" ejs-for="@Model.ProcessTemplateFieldId" cssClass="e-outline" placeholder="ProcessTemplateFieldId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="ProcessTemplateStageFieldId" ejs-for="@Model.ProcessTemplateStageFieldId" cssClass="e-outline" placeholder="ProcessTemplateStageFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ProcessTemplateFieldId" ejs-for="@Model.ProcessTemplateFieldId" cssClass="e-outline" placeholder="ProcessTemplateFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTemplateStageFieldId" ejs-for="@Model.ProcessTemplateStageFieldId" cssClass="e-outline" placeholder="ProcessTemplateStageFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
 
 
         <div class="row">
@@ -51,16 +66,16 @@
             </div>
         </div>
         @*<div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-dropdownlist id="Sequence" dataSource="@Model.ProcessTemplateFields" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.ProcessTemplateFields" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
 
-                </div>
-            </div>*@
+            </div>
+        </div>*@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Value update type")).TermString
