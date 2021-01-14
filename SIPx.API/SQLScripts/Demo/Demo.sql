@@ -260,17 +260,17 @@ INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId
  , IsRelationBasedRead  ,IsRelationBasedReadSelectable  ,IsOrganizationBasedRead  ,IsOrganizationBasedReadSelectable  ,IsOrganizationBasedReadSub  ,IsProjectBasedRead  
  , IsProjectBasedReadSelectable  ,IsProjectBasedReadSub  ,IsFreeRead  ,IsFreeReadSelectable  
  , IsOrganizationBasedEditParent, IsProjectBasedEditParent, IsOrganizationBasedReadParent, IsProjectBasedReadParent
-, Color, IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1,     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
- , (2, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
- , (3, 2, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+, CanRate, Color, IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1,     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
+ , (2, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+ , (3, 2, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypes OFF;
 
 SET IDENTITY_INSERT ContentTypeLanguages ON;
-INSERT INTO ContentTypeLanguages(ContentTypeLanguageId, ContentTypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
-(1, 1, 41, 'Climate knowledge', 'Climate knowledge', 'Climate knowledge', 'Climate knowledge', @User, @User, GETDATE(), GETDATE())
-, (2, 2, 41, 'Soil knowledge', 'Soil knowledge', 'Soil knowledge', 'Soil knowledge', @User, @User, GETDATE(), GETDATE())
-, (3, 3, 41, 'General assignment', 'General assignment', 'General assignment', 'General assignment', @User, @User, GETDATE(), GETDATE())
+INSERT INTO ContentTypeLanguages(ContentTypeLanguageId, ContentTypeId, LanguageId, Name, Description, MenuName, MouseOver, RatingLabel, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
+(1, 1, 41, 'Climate knowledge', 'Climate knowledge', 'Climate knowledge', 'Climate knowledge','Rate research', @User, @User, GETDATE(), GETDATE())
+, (2, 2, 41, 'Soil knowledge', 'Soil knowledge', 'Soil knowledge', 'Soil knowledge', 'Rate knowledge contribution', @User, @User, GETDATE(), GETDATE())
+, (3, 3, 41, 'General assignment', 'General assignment', 'General assignment', 'General assignment', 'Rate assignment', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypeLanguages OFF;
 
 SET IDENTITY_INSERT ContentTypeClassifications ON;
