@@ -12,22 +12,41 @@
 }
 
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div>
-        <div class="col-9">@Model.BaseId</div>
-    </div><div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString
-        </div><div class="col-9">@Model.BaseLanguageId</div>
-        <ejs-numerictextbox id="BaseLanguageId" ejs-for="BaseLanguageId"></ejs-numerictextbox>
-        <ejs-textbox id="BaseType" ejs-for="BaseType" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
-
-    </div>
-
-
     <form method="post">
+        @if (ViewBag.Env == "Production")
+        {
+            <div class="row" hidden>
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">@Model.BaseId</div>
+            </div>
+            <div class="row" hidden>
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div><div class="col-9">@Model.BaseLanguageId</div>
+                <ejs-numerictextbox id="BaseLanguageId" ejs-for="BaseLanguageId"></ejs-numerictextbox>
+                <ejs-textbox id="BaseType" ejs-for="BaseType" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">@Model.BaseId</div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div><div class="col-9">@Model.BaseLanguageId</div>
+                <ejs-numerictextbox id="BaseLanguageId" ejs-for="BaseLanguageId"></ejs-numerictextbox>
+                <ejs-textbox id="BaseType" ejs-for="BaseType" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+
+            </div>
+        }
 
         <div class="row">
             <div class="col-3">

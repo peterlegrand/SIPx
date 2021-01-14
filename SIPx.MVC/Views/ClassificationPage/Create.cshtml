@@ -17,17 +17,27 @@
     <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
 </a>
 <div class="container">
-
-
     <form method="post">
-
-        <div class="row">
-            <div class="col-3">
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
-                <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString

@@ -16,17 +16,35 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    @Model.OrganizationPersonId
+                    @Model.PersonId
+                    @Model.PersonId
+                    @Model.PositionId
+                </div>
             </div>
-            <div class="col-9">
-                @Model.OrganizationPersonId
-                @Model.PersonId
-                @Model.PersonId
-                @Model.PositionId
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    @Model.OrganizationPersonId
+                    @Model.PersonId
+                    @Model.PersonId
+                    @Model.PositionId
+                </div>
             </div>
-        </div>
+        }
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Position")).TermString

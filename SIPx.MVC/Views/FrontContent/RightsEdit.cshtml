@@ -14,14 +14,28 @@
 
     <form method="post">
 
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Content id")).TermString
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Content id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ContentId" ejs-for="@Model.ContentId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="ContentId" ejs-for="@Model.ContentId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Content id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ContentId" ejs-for="@Model.ContentId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
         @if (Model.IsFreeOwnership || Model.IsProjectBasedOwnership || Model.IsOrganizationBasedOwnership || Model.IsRelationBasedOwnership) { }
         <div class="row">
             <div class="col-3">

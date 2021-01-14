@@ -13,15 +13,31 @@
 
 
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PageSectionId" ejs-for="@Model.PageSectionId" cssClass="e-outline" placeholder="PageSectionId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -107,16 +123,16 @@
             </div>
         </div>
         @*<div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.Sequence" value="@Model.Sequence" index="2" filtering="Sequences" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
 
-                </div>
-            </div>*@
+            </div>
+        </div>*@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Page section type")).TermString
@@ -172,13 +188,13 @@
             </div>
         </div>
         @*<div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("One two columns")).TermString
-                </div>
-                <div class="col-9">
-                    <ejs-numerictextbox id="OneTwoColumns" label="OneTwoColumns" ejs-for="OneTwoColumns"></ejs-numerictextbox>
-                </div>
-            </div>*@
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("One two columns")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="OneTwoColumns" label="OneTwoColumns" ejs-for="OneTwoColumns"></ejs-numerictextbox>
+            </div>
+        </div>*@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Content type")).TermString

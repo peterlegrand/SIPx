@@ -14,34 +14,51 @@
 <div class="container">
 
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ClassificationLevelPropertyId" ejs-for="@Model.ClassificationLevelPropertyId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="ClassificationLevelPropertyId" ejs-for="@Model.ClassificationLevelPropertyId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {<div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ClassificationLevelPropertyId" ejs-for="@Model.ClassificationLevelPropertyId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Classification name")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="ClassificationName" ejs-for="ClassificationName" cssClass="e-outline" placeholder="ClassificationName" floatLabelType="Auto"></ejs-textbox>
+                @Model.ClassificationName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Classification level name")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="ClassificationLevelName" ejs-for="ClassificationLevelName" cssClass="e-outline" placeholder="ClassificationLevelName" floatLabelType="Auto"></ejs-textbox>
+                @Model.ClassificationLevelName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Property name")).TermString
-            </div>    <div class="col-9">
-                <ejs-textbox id="PropertyName" ejs-for="PropertyName" cssClass="e-outline" placeholder="PropertyName" floatLabelType="Auto"></ejs-textbox>
+            </div>
+            <div class="col-9">
+                @Model.PropertyName
             </div>
         </div>
         <div class="row">

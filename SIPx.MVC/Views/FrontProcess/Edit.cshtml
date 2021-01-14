@@ -12,10 +12,20 @@
 <div class=" control-section">
     <div class="container">
         <form method="post">
-            <p hidden>
-                <ejs-numerictextbox id="ProcessId" ejs-for="@Model.ProcessId"></ejs-numerictextbox>
-                <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId"></ejs-numerictextbox>
-            </p>
+            @if (ViewBag.Env == "Production")
+            {
+                <p>
+                    <ejs-numerictextbox id="ProcessId" ejs-for="@Model.ProcessId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId"></ejs-numerictextbox>
+                </p>
+            }
+            else
+            {
+                <p hidden>
+                    <ejs-numerictextbox id="ProcessId" ejs-for="@Model.ProcessId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId"></ejs-numerictextbox>
+                </p>
+            }
             @Model.CreatorName
             @Model.CreatedDate
             @*  @Html.EditorForModel()*@
@@ -489,21 +499,21 @@
                         </div>
                     }
                     @*@if (new[] { 12 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
-                        {
-                            <div class="col-8">
-                                <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@Model.Fields[i].StringValue" id="@Model.Fields[i].Control6">
-                                    <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                            </div>
-                        }
-                        @if (new[] { 16 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
-                        {
-                            <div class="col-8">
-                                <ejs-dropdownlist dataSource="@Model.Projects" ejs-for="@Model.Fields[i].IntValue" id="@Model.Fields[i].Control6">
-                                    <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                            </div>
-                        }*@
+                {
+                    <div class="col-8">
+                        <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@Model.Fields[i].StringValue" id="@Model.Fields[i].Control6">
+                            <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                    </div>
+                }
+                @if (new[] { 16 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                {
+                    <div class="col-8">
+                        <ejs-dropdownlist dataSource="@Model.Projects" ejs-for="@Model.Fields[i].IntValue" id="@Model.Fields[i].Control6">
+                            <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                    </div>
+                }*@
                     @if (new[] { 32 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
                     {
                         <div class="col-8">

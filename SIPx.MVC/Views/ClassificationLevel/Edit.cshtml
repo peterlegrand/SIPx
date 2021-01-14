@@ -13,15 +13,30 @@
 
 
 <form method="post">
-    <div class="row">
-        <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+    @if (ViewBag.Env == "Production")
+    {
+        <div hidden class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="ClassificationLevelId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
         </div>
-        <div class="col-9">
-            <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
-            <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="ClassificationLevelId" floatLabelType="Auto"></ejs-numerictextbox>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ClassificationLevelId" ejs-for="@Model.ClassificationLevelId" cssClass="e-outline" placeholder="ClassificationLevelId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
         </div>
-    </div>
+    }
 
     <div class="row">
         <div class="col-3">

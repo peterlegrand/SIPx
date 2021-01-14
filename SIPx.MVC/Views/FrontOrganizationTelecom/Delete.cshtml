@@ -10,20 +10,36 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString 
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="OrganizationId" ejs-for="@Model.OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="OrganizationTelecomId" ejs-for="@Model.OrganizationTelecomId" cssClass="e-outline" placeholder="OrganizationTelecomId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="OrganizationId" ejs-for="@Model.OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="OrganizationTelecomId" ejs-for="@Model.OrganizationTelecomId" cssClass="e-outline" placeholder="OrganizationTelecomId" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString 
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="OrganizationId" ejs-for="@Model.OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="OrganizationTelecomId" ejs-for="@Model.OrganizationTelecomId" cssClass="e-outline" placeholder="OrganizationTelecomId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Telecom value")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="TelecomValue" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+   @Model.TelecomValue
             </div>
         </div>
         @if (Model.PhoneProperties)
@@ -33,7 +49,7 @@
                     @Term.Find(x => x.InternalName.Equals("Country code")).TermString
                 </div>
                 <div class="col-9">
-                    <ejs-textbox id="CountryCode" ejs-for="CountryCode" cssClass="e-outline" placeholder="Country code" floatLabelType="Auto"></ejs-textbox>
+                   @Model.CountryCode
                 </div>
             </div>
 
@@ -42,7 +58,7 @@
                     @Term.Find(x => x.InternalName.Equals("Area code")).TermString
                 </div>
                 <div class="col-9">
-                    <ejs-textbox id="AreaCode" ejs-for="AreaCode" cssClass="e-outline" placeholder="Area code" floatLabelType="Auto"></ejs-textbox>
+@Model.AreaCode
                 </div>
             </div>
             <div class="row">
@@ -50,7 +66,7 @@
                     @Term.Find(x => x.InternalName.Equals("Extension code")).TermString
                 </div>
                 <div class="col-9">
-                    <ejs-textbox id="ExtensionCode" ejs-for="ExtensionCode" cssClass="e-outline" placeholder="Extension code" floatLabelType="Auto"></ejs-textbox>
+               @Model.ExtensionCode
                 </div>
             </div>
             <div class="row">
@@ -58,7 +74,7 @@
                     @Term.Find(x => x.InternalName.Equals("Ask for")).TermString
                 </div>
                 <div class="col-9">
-                    <ejs-textbox id="AskForName" ejs-for="AskForName" cssClass="e-outline" placeholder="Ask for" floatLabelType="Auto"></ejs-textbox>
+                   @Model.AskForName
                 </div>
             </div>
         }

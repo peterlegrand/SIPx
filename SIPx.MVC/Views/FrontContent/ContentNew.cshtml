@@ -14,21 +14,35 @@
 <div class="container">
 
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                 @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ContentTypeId" ejs-for="@Model.ContentTypeId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="ContentTypeId" ejs-for="@Model.ContentTypeId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ContentTypeId" ejs-for="@Model.ContentTypeId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
 
 
         <div class="row">
             <div class="col-3">
-                                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-                   @Model.ContentTypeName
+                @Model.ContentTypeName
             </div>
         </div>
 
@@ -137,7 +151,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 @*<ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                    <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>*@
+                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>*@
                 <ejs-button id="primarybtn" content="Save" action="Submit" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="Cancel" isPrimary="false"></ejs-button>
 

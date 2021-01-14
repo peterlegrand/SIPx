@@ -12,9 +12,19 @@
 <div class=" control-section">
     <div class="container">
         <form method="post">
-            <p hidden>
-                <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId"></ejs-numerictextbox>
-            </p>
+            @if (ViewBag.Env == "Production")
+            {
+                <p hidden>
+                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId"></ejs-numerictextbox>
+                </p>
+            }
+            else
+            {
+                <p>
+                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId"></ejs-numerictextbox>
+                </p>
+            }
+
             @*  @Html.EditorForModel()*@
             @for (int i = 0; i < Model.ProcessFields.Count; i++)
             {
@@ -164,9 +174,9 @@
                 }
             }
             @*<ejs-textbox id="TestText" onfocusout="myFunction()"></ejs-textbox>
-                <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@Model.ProcessTemplateFlowId" id="frutje">
-                    <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>*@
+        <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@Model.ProcessTemplateFlowId" id="frutje">
+            <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
+        </ejs-dropdownlist>*@
 
         </form>
     </div>

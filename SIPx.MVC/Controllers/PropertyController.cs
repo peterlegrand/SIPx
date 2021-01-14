@@ -18,7 +18,7 @@ namespace SIPx.MVC.Controllers
 {
     public class PropertyController : Controller
     {
-        private readonly string _baseUrl = "https://localhost:44393/";
+
         readonly ServiceClient _client = new ServiceClient();
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _hostingEnv;
@@ -32,12 +32,13 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PropertyCreateGet>($"{_baseUrl}api/Property/Create/", token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Create", token);
-            
-            if(response.Item2==true)
+            var response = await _client.GetProtectedAsync2<PropertyCreateGet>($"{_configuration["APIUrl"]}api/Property/Create/", token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Property/Create", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
+            if (response.Item2==true)
             { 
             return View(response.Item1);
             }
@@ -51,13 +52,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(PropertyCreateGet Property)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var PropertyCreateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyCreateGetWithErrorMessages>($"{_baseUrl}api/Property/Create", Property, token);
+            var PropertyCreateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyCreateGetWithErrorMessages>($"{_configuration["APIUrl"]}api/Property/Create", Property, token);
             if (PropertyCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Create", token);
-                
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Property/Create", token);
+                ViewBag.Env = _hostingEnv.EnvironmentName;
+
                 ViewBag.ErrorMessages = PropertyCreateGetWithErrorMessage.ErrorMessages;
                 return View(PropertyCreateGetWithErrorMessage.Property);
             }
@@ -69,11 +71,12 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<List<PropertyIndexGet>>($"{_baseUrl}api/Property/Index", token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Index", token);
-            
+            var response = await _client.GetProtectedAsync2<List<PropertyIndexGet>>($"{_configuration["APIUrl"]}api/Property/Index", token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Property/Index", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -88,11 +91,12 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PropertyUpdateGet>($"{_baseUrl}api/Property/Update/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Edit", token);
-            
+            var response = await _client.GetProtectedAsync2<PropertyUpdateGet>($"{_configuration["APIUrl"]}api/Property/Update/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Property/Edit", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
             var tool = new
             {
                 tooltipText = "Multiple Image upload",
@@ -145,7 +149,7 @@ namespace SIPx.MVC.Controllers
                     {
 
                         using FileStream fs = System.IO.File.Create(filename);
-                        await _client.PostProtectedAsyncImage<FileStream>($"{_baseUrl}api/Image/UploadFile", fs, token, filename2);
+                        await _client.PostProtectedAsyncImage<FileStream>($"{_configuration["APIUrl"]}api/Image/UploadFile", fs, token, filename2);
 
 
                         file.CopyTo(fs);
@@ -166,13 +170,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(PropertyUpdateGet Property)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var PropertyUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyUpdateGetWithErrorMessages>($"{_baseUrl}api/Property/Update", Property, token);
+            var PropertyUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PropertyUpdateGetWithErrorMessages>($"{_configuration["APIUrl"]}api/Property/Update", Property, token);
             if (PropertyUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Edit", token);
-                
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Property/Edit", token);
+                ViewBag.Env = _hostingEnv.EnvironmentName;
+
                 ViewBag.ErrorMessages = PropertyUpdateGetWithErrorMessage.ErrorMessages;
                 return View(PropertyUpdateGetWithErrorMessage.Property);
             }
@@ -183,12 +188,13 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PropertyDeleteGet>($"{_baseUrl}api/Property/Delete/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/Property/Delete", token);
-            
-            if(response.Item2 == true)
+            var response = await _client.GetProtectedAsync2<PropertyDeleteGet>($"{_configuration["APIUrl"]}api/Property/Delete/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Property/Delete", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
+            if (response.Item2 == true)
             {
                 return View(response.Item1);
             }
@@ -202,7 +208,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(PropertyDeleteGet Page)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PropertyDeleteGet>($"{_baseUrl}api/Property/Delete", Page, token);
+            await _client.PostProtectedAsync<PropertyDeleteGet>($"{_configuration["APIUrl"]}api/Property/Delete", Page, token);
 
             return RedirectToAction("Index");
         }

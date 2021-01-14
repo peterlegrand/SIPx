@@ -10,26 +10,40 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="Id" ejs-for="UserMenuId" enabled="false" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="Id" ejs-for="UserMenuId" enabled="false" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="Id" ejs-for="UserMenuId" enabled="false" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-                <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" enabled="false" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
-            </div>
+    @Model.Name
+</div>
         </div>
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MouseOver" ejs-for="MouseOver" enabled="false" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
+                @Model.MouseOver
             </div>
         </div>
         <div class="row">
@@ -37,7 +51,7 @@
                 @Term.Find(x => x.InternalName.Equals("Left menu type")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="MenuTypeNameLeft" ejs-for="UserMenuTypeNameLeft" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+                @Model.UserMenuTypeNameLeft
             </div>
         </div>
         <div class="row">
@@ -45,7 +59,7 @@
                 @Term.Find(x => x.InternalName.Equals("Right menu type")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="UserMenuTypeNameRight" ejs-for="UserMenuTypeNameRight" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+                @Model.UserMenuTypeNameRight
             </div>
         </div>
         <div class="row">
@@ -53,7 +67,7 @@
                 @Term.Find(x => x.InternalName.Equals("Left menu page")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="UserPageNameLeft" ejs-for="UserPageNameLeft" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+                @Model.UserPageNameLeft
             </div>
         </div>
         <div class="row">
@@ -61,7 +75,7 @@
                 @Term.Find(x => x.InternalName.Equals("Right menu page")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="UserPageNameRight" ejs-for="UserPageNameRight" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+                @Model.UserPageNameRight
             </div>
         </div>
 
@@ -72,7 +86,7 @@
             </div>
             <div class="col-9">
                 <div class="col-9">
-                    <ejs-textbox id="IconName" ejs-for="IconName" enabled="false" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+                    @Model.IconName
                 </div>
             </div>
         </div>
@@ -85,7 +99,7 @@
             </div>
             <div class="col-9">
                 <div class="col-9">
-                    <ejs-textbox id="CreatorName" ejs-for="CreatorName" enabled="false" cssClass="e-outline" placeholder="" floatLabelType="Auto"></ejs-textbox>
+                    @Model.CreatorName
                 </div>
             </div>
         </div>
@@ -96,7 +110,7 @@
             </div>
             <div class="col-9">
                 <div class="col-9">
-                    <ejs-textbox id="CreatedDate" ejs-for="CreatedDate" enabled="false" cssClass="e-outline" placeholder="" floatLabelType="Auto"></ejs-textbox>
+                    @Model.CreatedDate 
                 </div>
             </div>
         </div>
@@ -107,7 +121,7 @@
             </div>
             <div class="col-9">
                 <div class="col-9">
-                    <ejs-textbox id="ModifierName" ejs-for="ModifierName" enabled="false" cssClass="e-outline" placeholder="" floatLabelType="Auto"></ejs-textbox>
+                    @Model.ModifierName
                 </div>
             </div>
         </div>
@@ -118,7 +132,7 @@
             </div>
             <div class="col-9">
                 <div class="col-9">
-                    <ejs-textbox id="ModifiedDate" ejs-for="ModifiedDate" enabled="false" cssClass="e-outline" placeholder="" floatLabelType="Auto"></ejs-textbox>
+                    @Model.ModifiedDate
                 </div>
             </div>
         </div>

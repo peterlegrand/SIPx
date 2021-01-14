@@ -11,15 +11,31 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
-                <ejs-numerictextbox id="ClassificationValueId" ejs-for="ClassificationValueId" cssClass="e-outline" placeholder="ClassificationValueId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PropertyId" ejs-for="PropertyId" cssClass="e-outline" placeholder="PropertyId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
-                <ejs-numerictextbox id="PropertyTypeId" ejs-for="PropertyTypeId" cssClass="e-outline" placeholder="PropertyTypeId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ClassificationValueId" ejs-for="ClassificationValueId" cssClass="e-outline" placeholder="ClassificationValueId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PropertyId" ejs-for="PropertyId" cssClass="e-outline" placeholder="PropertyId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PropertyTypeId" ejs-for="PropertyTypeId" cssClass="e-outline" placeholder="PropertyTypeId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                </div>    <div class="col-9">
+                    <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ClassificationValueId" ejs-for="ClassificationValueId" cssClass="e-outline" placeholder="ClassificationValueId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PropertyId" ejs-for="PropertyId" cssClass="e-outline" placeholder="PropertyId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PropertyTypeId" ejs-for="PropertyTypeId" cssClass="e-outline" placeholder="PropertyTypeId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
+
         @if (Model.PropertyTypeId == 1)
         {
             <div class="row">

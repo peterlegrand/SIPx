@@ -11,15 +11,31 @@
 }
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Id")).TermString
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="OrganizationId" ejs-for="@Model.OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="OrganizationPersonId" ejs-for="@Model.OrganizationPersonId" cssClass="e-outline" placeholder="OrganizationPersonId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-numerictextbox id="OrganizationId" ejs-for="@Model.OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
-                <ejs-numerictextbox id="OrganizationPersonId" ejs-for="@Model.OrganizationPersonId" cssClass="e-outline" placeholder="OrganizationPersonId" floatLabelType="Auto"></ejs-numerictextbox>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="OrganizationId" ejs-for="@Model.OrganizationId" cssClass="e-outline" placeholder="OrganizationId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="OrganizationPersonId" ejs-for="@Model.OrganizationPersonId" cssClass="e-outline" placeholder="OrganizationPersonId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Organization")).TermString

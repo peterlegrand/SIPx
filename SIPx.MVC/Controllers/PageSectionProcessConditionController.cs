@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SIPx.CallAPI;
 using SIPx.Shared;
 
@@ -11,17 +13,25 @@ namespace SIPx.MVC.Controllers
 {
     public class PageSectionProcessConditionController : Controller
     {
-        private readonly string _baseUrl = "https://localhost:44393/";
+
         readonly ServiceClient _client = new ServiceClient();
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _hostingEnv;
+        public PageSectionProcessConditionController(IWebHostEnvironment env, IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _hostingEnv = env;
+        }
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PageSectionProcessConditionCreateGet>($"{_baseUrl}api/PageSectionProcessCondition/Create/" + Id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Create", token);
-            
+            var response = await _client.GetProtectedAsync2<PageSectionProcessConditionCreateGet>($"{_configuration["APIUrl"]}api/PageSectionProcessCondition/Create/" + Id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/PageSectionProcessCondition/Create", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
             var ErrorMessages = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
@@ -37,14 +47,15 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create(PageSectionProcessConditionCreateGet PageSectionProcessCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PageSectionProcessConditionCreateGet>($"{_baseUrl}api/PageSectionProcessCondition/Create", PageSectionProcessCondition, token);
-            var PageSectionProcessConditionCreateGetWithErrorMessage = await _client.PostProtectedAsync<PageSectionProcessConditionCreateGetWithErrorMessages>($"{_baseUrl}api/PageSectionProcessCondition/Create", PageSectionProcessCondition, token);
+            await _client.PostProtectedAsync<PageSectionProcessConditionCreateGet>($"{_configuration["APIUrl"]}api/PageSectionProcessCondition/Create", PageSectionProcessCondition, token);
+            var PageSectionProcessConditionCreateGetWithErrorMessage = await _client.PostProtectedAsync<PageSectionProcessConditionCreateGetWithErrorMessages>($"{_configuration["APIUrl"]}api/PageSectionProcessCondition/Create", PageSectionProcessCondition, token);
             if (PageSectionProcessConditionCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Create", token);
-                
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/PageSectionProcessCondition/Create", token);
+                ViewBag.Env = _hostingEnv.EnvironmentName;
+
                 ViewBag.ErrorMessages = PageSectionProcessConditionCreateGetWithErrorMessage.ErrorMessages;
                 return View(PageSectionProcessConditionCreateGetWithErrorMessage.PageSectionProcessCondition);
             }
@@ -55,12 +66,13 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<List<PageSectionProcessConditionIndexGet>>($"{_baseUrl}api/PageSectionProcessCondition/Index/" +id,token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Index", token);
+            var response = await _client.GetProtectedAsync2<List<PageSectionProcessConditionIndexGet>>($"{_configuration["APIUrl"]}api/PageSectionProcessCondition/Index/" +id,token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/PageSectionProcessCondition/Index", token);
             ViewBag.Id = id;
-            
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -77,11 +89,12 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PageSectionProcessConditionUpdateGet>($"{_baseUrl}api/PageSectionProcessCondition/Update/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Edit", token);
-            
+            var response = await _client.GetProtectedAsync2<PageSectionProcessConditionUpdateGet>($"{_configuration["APIUrl"]}api/PageSectionProcessCondition/Update/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/PageSectionProcessCondition/Edit", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -97,13 +110,14 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Edit(PageSectionProcessConditionUpdateGet PageSectionProcessCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var PageSectionProcessConditionUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PageSectionProcessConditionUpdateGetWithErrorMessages>($"{_baseUrl}api/PageSectionProcessCondition/Update", PageSectionProcessCondition, token);
+            var PageSectionProcessConditionUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PageSectionProcessConditionUpdateGetWithErrorMessages>($"{_configuration["APIUrl"]}api/PageSectionProcessCondition/Update", PageSectionProcessCondition, token);
             if (PageSectionProcessConditionUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Edit", token);
-                
+                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/PageSectionProcessCondition/Edit", token);
+                ViewBag.Env = _hostingEnv.EnvironmentName;
+
                 ViewBag.ErrorMessages = PageSectionProcessConditionUpdateGetWithErrorMessage.ErrorMessages;
                 return View(PageSectionProcessConditionUpdateGetWithErrorMessage.PageSectionProcessCondition);
             }
@@ -115,11 +129,12 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync2<PageSectionProcessConditionDeleteGet>($"{_baseUrl}api/PageSectionProcessCondition/Delete/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSectionProcessCondition/Delete", token);
-            
+            var response = await _client.GetProtectedAsync2<PageSectionProcessConditionDeleteGet>($"{_configuration["APIUrl"]}api/PageSectionProcessCondition/Delete/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/PageSectionProcessCondition/Delete", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
             var ErrorMessage = new List<ErrorMessage>();
             ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
@@ -136,7 +151,7 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Delete(PageSectionProcessConditionDeleteGet PageSectionProcessCondition)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<PageSectionProcessConditionDeleteGet>($"{_baseUrl}api/PageSectionProcessCondition/Delete", PageSectionProcessCondition, token);
+            await _client.PostProtectedAsync<PageSectionProcessConditionDeleteGet>($"{_configuration["APIUrl"]}api/PageSectionProcessCondition/Delete", PageSectionProcessCondition, token);
 
             return RedirectToAction("Index", new { id = PageSectionProcessCondition.PageSectionId });
         }
@@ -144,11 +159,12 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageIndex(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<List<PageSectionLanguageIndexGet>>($"{_baseUrl}api/PageSection/LanguageIndex/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageIndex", token);
-            
+            var response = await _client.GetProtectedAsync<List<PageSectionLanguageIndexGet>>($"{_configuration["APIUrl"]}api/PageSection/LanguageIndex/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/PageSection/LanguageIndex", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
             return View(response);
             //return View();
         }
@@ -156,11 +172,12 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> LanguageEdit(int id)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            var response = await _client.GetProtectedAsync<PageSectionLanguageIndexGet>($"{_baseUrl}api/PageSection/LanguageUpdate/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_baseUrl}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_baseUrl}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_baseUrl}api/MVC/PageSection/LanguageEdit", token);
-            
+            var response = await _client.GetProtectedAsync<PageSectionLanguageIndexGet>($"{_configuration["APIUrl"]}api/PageSection/LanguageUpdate/" + id, token);
+            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/PageSection/LanguageEdit", token);
+            ViewBag.Env = _hostingEnv.EnvironmentName;
+
             return View(response);
         }
 

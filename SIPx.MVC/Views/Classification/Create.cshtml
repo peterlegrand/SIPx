@@ -9,15 +9,26 @@
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
-
 <div class="container">
     <form method="post">
-        <div class="row">
-            <div class="col-3">
-            </div>    <div class="col-9">
-                <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                </div> <div class="col-9">
+                    <ejs-numerictextbox  id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                </div> <div class="col-9">
+                    <ejs-numerictextbox id="Language" ejs-for="LanguageId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -185,7 +196,7 @@
             </div>
         </div>
     </form>
-    
+
 
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>

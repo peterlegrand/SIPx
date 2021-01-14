@@ -18,7 +18,7 @@ namespace SIPx.MVC.Controllers
 {
     public class FavoriteController : Controller
     {
-        private readonly string _baseUrl = "https://localhost:44393/";
+
         readonly ServiceClient _client = new ServiceClient();
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _hostingEnv;
@@ -33,10 +33,10 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Add(MVCFavoriteAdd Favorite)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            Favorite = await _client.PostProtectedAsync<MVCFavoriteAdd>($"{_baseUrl}api/MVCFavorite/Add", Favorite, token);
+            Favorite = await _client.PostProtectedAsync<MVCFavoriteAdd>($"{_configuration["APIUrl"]}api/MVCFavorite/Add", Favorite, token);
             //if (ClassificationCreateGetWithErrorMessage.ErrorMessages.Count>0)
             //{
-//                var UITerms = await _client.GetProtectedAsync<List<FavoritesAdd>>($"{_baseUrl}api/MVC/Favorite/Add", token);
+//                var UITerms = await _client.GetProtectedAsync<List<FavoritesAdd>>($"{_configuration["APIUrl"]}api/MVC/Favorite/Add", token);
             //
             //ViewBag.ErrorMessages = ClassificationCreateGetWithErrorMessage.ErrorMessages;
             //return View(ClassificationCreateGetWithErrorMessage.Classification);
