@@ -44,32 +44,33 @@
             <div> @Model.ContentId</div>
             <div> @Model.ParentContentTitle</div>
             <div> @Model.ContentStatusName</div>
-            <div> @Model.ContentTypeName</div>
-            <div> <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId"> @Model.OrganizationName</a></div>
-            @if (Model.ProjectId != 0)
-            {
-                <div> <a asp-controller="FrontProject" asp-action="Dashboard" asp-route-id="@Model.ProjectId"> @Model.ProjectName</a></div>
+            <div>
+                <a asp-controller="FrontContentType" asp-action="Dashboard" asp-route-id="@Model.ContentTypeId"> <div> @Model.ContentTypeName</div></a>
+                <div> <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId"> @Model.OrganizationName</a></div>
+                @if (Model.ProjectId != 0)
+                {
+                    <div> <a asp-controller="FrontProject" asp-action="Dashboard" asp-route-id="@Model.ProjectId"> @Model.ProjectName</a></div>
 
-            }
-            <div> @Model.SecurityLevelName</div>
-            <div> <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.CreatorId"> @Model.CreatorName</a></div>
-            <div> @Model.CreatedDate</div>
-            <div> <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.ModifierId"> @Model.ModifierName</a></div>
-            <div> @Model.ModifiedDate</div>
+                }
+                <div> @Model.SecurityLevelName</div>
+                <div> <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.CreatorId"> @Model.CreatorName</a></div>
+                <div> @Model.CreatedDate</div>
+                <div> <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.ModifierId"> @Model.ModifierName</a></div>
+                <div> @Model.ModifiedDate</div>
+            </div>
         </div>
+        @foreach (var x in Model.ClassificationValues)
+        {
+
+            <div class="row">
+                <div class="col-2">
+                    <div> @x.ClassificationName </div>
+                </div>
+                <div class="col-3">
+                    <div> <a asp-controller="FrontClassificationValue" asp-action="Dashboard" asp-route-id="@x.ClassificationValueId"> @x.ClassificationValueName</a></div>
+                </div>
+            </div>
+
+        }
+
     </div>
-    @foreach (var x in Model.ClassificationValues)
-    {
-
-        <div class="row">
-            <div class="col-2">
-                <div> @x.ClassificationName </div>
-            </div>
-            <div class="col-3">
-                <div> <a asp-controller="FrontClassificationValue" asp-action="Dashboard" asp-route-id="@x.ClassificationValueId"> @x.ClassificationValueName</a></div>
-            </div>
-        </div>
-
-    }
-
-</div>

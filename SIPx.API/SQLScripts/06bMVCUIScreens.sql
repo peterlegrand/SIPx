@@ -469,4 +469,8 @@ INSERT INTO [dbo].[MVCUIScreens](MVCUIScreenId, [Controller],[Action])VALUES
 , (462, 'Base', 'LanguageCreate')
 , (463, 'Base', 'LanguageEdit')
 , (464, 'Base', 'LanguageDelete')
+, (465, 'ClassificationValueProperty', 'CreateProperty')
+, (466, 'FrontContent', 'ContentNew')
+, (467, 'FrontContent', 'ContentType')
+, (468, 'FrontProcss', 'Templates')
 SET IDENTITY_INSERT MVCUIScreens OFF;

@@ -5,6 +5,11 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+SET XACT_ABORT ON;
+BEGIN TRANSACTION
+
+INSERT INTO ReadLogClassificationCUD (RecordId , UserId, ReadLogDate, ScreenId)  VALUES( @ClassificationId, @UserId, Getdate(), 3)
+
 SELECT Classifications.ClassificationID
 	, Classifications.StatusId 
 	, Classifications.DefaultPageID
@@ -32,3 +37,7 @@ JOIN Persons Modifier
 	ON Modifier.UserId = Classifications.ModifierID
 WHERE ClassificationLanguages.LanguageId = @LanguageID
 	AND Classifications.ClassificationId = @ClassificationID
+
+	COMMIT TRANSACTION
+
+

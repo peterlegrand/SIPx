@@ -2,9 +2,7 @@
 @{var Favorites = ViewBag.Favorites;
     var UITermLayout = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     string Image = "/images/icons/" + (string)ViewData["Image"];
-
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,21 +12,12 @@
     <title>@ViewData["Title"] - SIPx.MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <!-- Syncfusion Essential JS 2 Styles -->
     <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <!-- Syncfusion Essential JS 2 Scripts -->
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
-
-    @*    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>*@
-    @*<script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>*@
-    @*<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>*@
-
-
 </head>
 <body>
     <header>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
         <div class="container">
             <h1 style="color:slategrey">
                 <img src="~/images/su_logo.png" style="height:60px; width:90px" />
@@ -58,7 +47,6 @@
 
 
         </div>
-        @*</nav>*@
 
     </header>
     <div class="container">
@@ -66,18 +54,6 @@
             <div class="col-2">
                 <a class="nav-link text-dark font-weight-bold" asp-controller="Front" asp-action="Index">Frontend</a>
                 <a class="nav-link text-dark font-weight-bold" asp-controller="Admin" asp-action="Menu" asp-route-id="1">Admin menu</a>
-                @*<a class="nav-link text-dark font-weight-bold" asp-controller="Classification" asp-action="Index">Classifications</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="ClassificationRelationType" asp-action="Index">Classification relation types</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Organization" asp-action="Index">Organizations</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="OrganizationType" asp-action="Index">Organization types</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Page" asp-action="Index">Pages</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Person" asp-action="Index">Persons</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="ProcessTemplate" asp-action="Index">Process templates</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="ProcessTemplateGroup" asp-action="Index">Process template groups</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Project" asp-action="Index">Projects</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="RoleGroup" asp-action="Index">Role groups</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="UserMenuTemplate" asp-action="Index">User template menus</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Setting" asp-action="Index">Settings</a>*@
 
                 <a href="https://localhost:44393/Meta/">Meta</a>
                 <a href="https://localhost:44393/CreateDB/">Create DB</a>
@@ -89,12 +65,6 @@
                 </h1>
                 <a data-toggle="modal" data-target="#favoriteModal" style="cursor: pointer">
                     <img src="~/images/icons/Favorites.png" width="20" height="20" title="@UITermLayout.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
-                </a>
-                <a data-toggle="modal" data-target="#readLogModal" style="cursor: pointer">
-                    <img src="~/images/icons/ReadLog.png" width="20" height="20" title="@UITermLayout.Find(x => x.InternalName.Equals("Read log")).TermString" />
-                </a>
-                <a data-toggle="modal" data-target="#changeLogModal" style="cursor: pointer">
-                    <img src="~/images/icons/ChangeLog.png" width="20" height="20" title="@UITermLayout.Find(x => x.InternalName.Equals("Change log")).TermString" />
                 </a>
                 @RenderBody()
             </div>
@@ -112,7 +82,7 @@
     @RenderSection("Scripts", required: false)
     <!-- Syncfusion Essential JS 2 ScriptManager -->
 
-    <div class="modal fade" id="favoriteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -166,38 +136,46 @@
         </div>
     </div>
 
-    <div class="modal fade" id="readLogModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@UITermLayout.Find(x => x.InternalName.Equals("Read log")).TermString</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <ejs-grid id="ReadLogGrid" dataSource="@ViewBag.ReadLogView" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
-                                    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
-                                    <e-grid-columns>
-                                        <e-grid-column field="ReadLogId" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column field="UserName" headerText="@UITermLayout.Find(x => x.InternalName.Equals("User name")).TermString" textAlign="Right" type="number"></e-grid-column>
-                                        @*<e-grid-column id="columnReadLog" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Id")).TermString" template="#TemplateReadLog" textAlign="Right" type="string"></e-grid-column>*@
-                                        @*<e-grid-column headerText="@UITermLayout.Find(x => x.InternalName.Equals("User name")).TermString" template="#ReadLogUserName" textAlign="Right" type="string"></e-grid-column>*@
-                                        <e-grid-column field="ReadLogDate" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Date")).TermString" textAlign="Right" type="boolean"></e-grid-column>
-                                    </e-grid-columns>
-                                </ejs-grid>
+
+
+    @*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@ViewData["Add favorite"]</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3">
+                                    @ViewData["Name"]
+                                </div>
+                                <div class="col-9">
+                                    <ejs-textbox id="FavoriteName" value="@ViewData[" Title"]" cssClass="e-outline" placeholder="@ViewData["Title"]" floatLabelType="Auto"></ejs-textbox>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3">
+                                    @ViewData["Group"]
+                                </div>
+                                <div class="col-9">
+                                    <ejs-dropdownlist id="FavoriteGroupId" dataSource="@ViewData["FavoriteGroup"]" value="0" popupHeight="220px">
+                                        <e-dropdownlist-fields text="Name" value="MVCFavoriteGroupId"></e-dropdownlist-fields>
+                                    </ejs-dropdownlist>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button href="#" id="Favorites">@ViewData["Add"]</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-
+        </div>*@
     <ejs-scripts></ejs-scripts>
 </body>
 </html>
@@ -236,9 +214,19 @@
     }
 </style>
 
-@*<script id="TemplateReadLog" type="text/x-template">
-    <div>
-                    <div title="Level"></div><span style="color:red">L</span>evel
+@*<script>
+        $(document).ready(function () {
+            $("#Favorites").click(function () {
+                var Favorite = {
+                    controller: 'Classification',
+                    action: 'Create',
+                    name: document.getElementById("FavoriteName").value,
+                    MVCFavoriteGroupId: document.getElementById("FavoriteGroupId_hidden").value
+                };
+                $.post("/Favorite/Add/",
+                    Favorite
+                    , function () { $("#favoriteModal").modal('hide'); });
+            });
+        });
 
-    </div>
-</script>*@
+    </script>*@

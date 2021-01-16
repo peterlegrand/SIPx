@@ -13,6 +13,6 @@
             };
             $.post("/Favorite/Add/",
                 Favorite
-                , function () { $("#exampleModal").modal('hide'); });
+                , function () { $("#favoriteModal").modal('hide'); });
         });
     });

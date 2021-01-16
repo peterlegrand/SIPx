@@ -1603,3 +1603,17 @@ INSERT [dbo].[PropertyStatuses] ([PropertyStatusID], [NameTermID], [DescriptionT
 INSERT [dbo].[PropertyStatuses] ([PropertyStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 340, 340, 340, 340)
 SET IDENTITY_INSERT [dbo].[PropertyStatuses] OFF
 
+USE [sip]
+
+SET IDENTITY_INSERT [dbo].[ChangeTypes] ON 
+INSERT [dbo].[ChangeTypes] ([ChangeTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 1134, 1134, 1134, 1134)
+INSERT [dbo].[ChangeTypes] ([ChangeTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 24, 24, 24, 24)
+INSERT [dbo].[ChangeTypes] ([ChangeTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 21, 21, 21, 21)
+SET IDENTITY_INSERT [dbo].[ChangeTypes] OFF
+
+SET IDENTITY_INSERT [dbo].[RightTypes] ON 
+INSERT [dbo].[RightTypes] ([RightTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 1784, 1784, 1784, 1784)
+INSERT [dbo].[RightTypes] ([RightTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 24, 24, 24, 24)
+INSERT [dbo].[RightTypes] ([RightTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 1783, 1783, 1783, 1783)
+SET IDENTITY_INSERT [dbo].[RightTypes] OFF
+

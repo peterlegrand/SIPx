@@ -2497,4 +2497,6 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(2495, 'User preference type 
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2496, 'User preference types');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2497, 'Value update types');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(2498, 'New group');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2499, 'Read log');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(2500, 'Change log');
 SET IDENTITY_INSERT UITerms OFF;

@@ -76,6 +76,7 @@ namespace SIPx.API
 
 
             services.AddTransient<ISearchProvider, SearchProvider>();
+            services.AddTransient<ILogProvider, LogProvider>();
             services.AddTransient<IBaseProvider, BaseProvider>();
             services.AddTransient<IFrontUserFavoriteProvider, FrontUserFavoriteProvider>();
             services.AddTransient<IFrontUserFavoriteGroupProvider, FrontUserFavoriteGroupProvider>();
