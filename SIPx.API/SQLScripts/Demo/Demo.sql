@@ -254,16 +254,16 @@ INSERT INTO ContentTypeGroupLanguages(ContentTypeGroupLanguageId, ContentTypeGro
 SET IDENTITY_INSERT ContentTypeGroupLanguages OFF;
 
 SET IDENTITY_INSERT ContentTypes ON;
-INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId
+INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId, IsClaimOwnership
  , IsRelationBasedOwnership  ,IsProjectBasedOwnership  ,IsOrganizationBasedOwnership  ,IsFreeOwnership  ,IsRelationBasedEdit  ,IsRelationBasedEditSelectable  ,IsOrganizationBasedEdit  
  , IsOrganizationBasedEditSelectable  ,IsOrganizationBasedEditSub  ,IsProjectBasedEdit  ,IsProjectBasedEditSelectable  ,IsProjectBasedEditSub  ,IsFreeEdit  ,IsFreeEditSelectable  
  , IsRelationBasedRead  ,IsRelationBasedReadSelectable  ,IsOrganizationBasedRead  ,IsOrganizationBasedReadSelectable  ,IsOrganizationBasedReadSub  ,IsProjectBasedRead  
  , IsProjectBasedReadSelectable  ,IsProjectBasedReadSub  ,IsFreeRead  ,IsFreeReadSelectable  
  , IsOrganizationBasedEditParent, IsProjectBasedEditParent, IsOrganizationBasedReadParent, IsProjectBasedReadParent
 , CanRate, Color, IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1,     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
- , (2, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
- , (3, 2, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+  (1, 1, 1,1,     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
+ , (2, 1, 1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+ , (3, 2, 1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypes OFF;
 
 SET IDENTITY_INSERT ContentTypeLanguages ON;

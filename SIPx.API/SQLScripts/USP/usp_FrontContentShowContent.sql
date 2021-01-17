@@ -35,10 +35,10 @@ LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLang
 	ON UserProjectLanguage.ProjectID= Contents.ProjectID
 LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProjectLanguage
 	ON DefaultProjectLanguage.ProjectId = Contents.ProjectID
-LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserProjectLanguage
-	ON UserProjectLanguage.ProjectID= Contents.ProjectID
-LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProjectLanguage
-	ON DefaultProjectLanguage.ProjectId = Contents.ProjectID
+--LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserProjectLanguage
+--	ON UserProjectLanguage.ProjectID= Contents.ProjectID
+--LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID FROM ProjectLanguages JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProjectLanguage
+--	ON DefaultProjectLanguage.ProjectId = Contents.ProjectID
 LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages WHERE LanguageId = @LanguageID) UserContentTypeLanguage
 	ON UserContentTypeLanguage.ContentTypeID= Contents.ContentTypeID
 LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages JOIN Settings ON ContentTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultContentTypeLanguage

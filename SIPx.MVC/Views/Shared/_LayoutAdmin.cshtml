@@ -237,8 +237,25 @@
 </style>
 
 @*<script id="TemplateReadLog" type="text/x-template">
-    <div>
-                    <div title="Level"></div><span style="color:red">L</span>evel
+        <div>
+                        <div title="Level"></div><span style="color:red">L</span>evel
 
-    </div>
-</script>*@
+        </div>
+    </script>*@
+<script>
+
+    document.getElementById("NewGroup").addEventListener("focus", isNewGroup);
+    document.getElementById("NewGroup").addEventListener("blur", isNewGroup2);
+    document.getElementById("FavoriteGroupId").addEventListener("focus", isExistingGroup);
+    document.getElementById("FavoriteGroupId_hidden").addEventListener("focus", isExistingGroup);
+    document.getElementById("DropDownListId_hidden").addEventListener("focus", isExistingGroup);
+    function isNewGroup() {
+        document.getElementById("NewFavoriteGroup").checked = true;
+    }
+    function isNewGroup2() {
+        window.alert(document.activeElement.id);
+    }
+    function isExistingGroup() {
+        document.getElementById("ExistingFavoriteGroup").checked = true;
+    }
+</script>

@@ -5,6 +5,14 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+
+DECLARE @ScreenId int;
+SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'Classification' AND Action = 'Index';
+SET XACT_ABORT ON;
+BEGIN TRANSACTION
+
+INSERT INTO ReadLogClassificationList (UserId, ReadLogDate, MVCUIScreenID)  VALUES( @UserId, Getdate(), @ScreenId)
+
 SELECT Classifications.ClassificationID
 	, ISNULL(UserLanguage.ClassificationLanguageID,ISNULL(DefaultLanguage.ClassificationLanguageID,0)) ClassificationLanguageID
 	, @LanguageId LanguageId
@@ -52,3 +60,5 @@ WHERE UIName.LanguageId = @LanguageID
 ORDER BY  ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) 
 
 
+
+	COMMIT TRANSACTION

@@ -5,10 +5,14 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+
+DECLARE @ScreenId int;
+SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'Classification' AND Action = 'Create';
+
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
-INSERT INTO ReadLogClassificationCUD (RecordId , UserId, ReadLogDate, ScreenId)  VALUES( @ClassificationId, @UserId, Getdate(), 3)
+INSERT INTO ReadLogClassificationCUD (RecordId , UserId, ReadLogDate, MVCUIScreenID)  VALUES( @ClassificationId, @UserId, Getdate(), @ScreenId)
 
 SELECT Classifications.ClassificationID
 	, Classifications.StatusId 
