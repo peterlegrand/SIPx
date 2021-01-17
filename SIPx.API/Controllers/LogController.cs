@@ -42,7 +42,7 @@ namespace SIPx.API.Controllers
         //}
 
         [HttpPost("ReadLogView")]
-        public async Task<IActionResult> ReadLogView(ReadLogParameters ReadLogParameters)
+        public async Task<IActionResult> ReadLogView(LogParameters ReadLogParameters)
         {
             var ReadLogView = await _logProvider.ReadLogGet(ReadLogParameters);
 

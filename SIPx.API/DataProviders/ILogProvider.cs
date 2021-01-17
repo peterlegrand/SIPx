@@ -6,6 +6,6 @@ namespace SIPx.DataAccess
 {
     public interface ILogProvider
     {
-        Task<List<ReadLogGet>> ReadLogGet(ReadLogParameters ReadLogParameters);
+        Task<List<ReadLogGet>> ReadLogGet(LogParameters ReadLogParameters);
     }
 }

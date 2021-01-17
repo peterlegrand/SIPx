@@ -63,7 +63,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ClassificationUpdateGet Classification)
         {
-            string usp = "usp_ClassificationUpdatePost @classificationId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver ,@Color, @IconId, @CreatorId ";
+            string usp = "usp_ClassificationUpdatePost @classificationId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver ,@Color, @IconId, @UserId ";
             _sqlDataAccess.SaveData<ClassificationUpdateGet>(usp, Classification);
             return true;
         } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.

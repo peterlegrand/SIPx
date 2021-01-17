@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/SIPx.MVC",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:61853",
       "sslPort": 44358

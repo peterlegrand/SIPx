@@ -12,7 +12,6 @@ BEGIN
 SET @Statement = 'select ReadLog'+
 	trim(@ControllerName)+'CUD.ReadLogId, AspNetUsers.UserName, ReadLog'+
 	TRIM(@ControllerName)+'CUD.ReadLogDate FROM ReadLog'+TRIM(@ControllerName)+'CUD ' +
-	' , UserMenuTemplateOptions.UserMenuTemplateOptionId ' +
 	' JOIN MVCUIScreens ON ReadLog'+TRIM(@ControllerName)+
 	'CUD.MVCUIScreenID = MVCUIScreens.MVCUIScreenID JOIN AspNetUsers ON AspNetUsers.Id = ReadLog'+
 	TRIM(@ControllerName)+'CUD.UserId ' +

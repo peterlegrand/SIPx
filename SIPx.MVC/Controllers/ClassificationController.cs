@@ -74,7 +74,7 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<List<ClassificationIndexGet>>($"{_configuration["APIUrl"]}api/Classification/Index", token);
 
-            var x = new ReadLogParameters() { ActionName = "Index", ControllerName = "Classification", IsIntRecordId = true, IntRecordId = 0, StringRecordId = "" };
+            var x = new LogParameters() { ActionName = "Index", ControllerName = "Classification", IsIntRecordId = true, IntRecordId = 0, StringRecordId = "" };
             ViewBag.ReadLogView = await _client.PostProtectedAsync<List<ReadLogGet>>($"{_configuration["APIUrl"]}api/Log/ReadLogView", x, token);
             ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Classification/Index", token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
@@ -97,8 +97,9 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<ClassificationUpdateGet>($"{_configuration["APIUrl"]}api/Classification/Update/" + id, token);
             ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Classification/Edit", token);
-            var x = new ReadLogParameters() { ActionName = "Edit", ControllerName = "Classification", IsIntRecordId = true, IntRecordId = id, StringRecordId = "" };
+            var x = new LogParameters() { ActionName = "Edit", ControllerName = "Classification", IsIntRecordId = true, IntRecordId = id, StringRecordId = "" };
             ViewBag.ReadLogView = await _client.PostProtectedAsync<List<ReadLogGet>>($"{_configuration["APIUrl"]}api/Log/ReadLogView" ,x, token);
+            ViewBag.ChangeLogView = await _client.PostProtectedAsync<List<ChangeLogGet>>($"{_configuration["APIUrl"]}api/Log/ChangeLogView", x, token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
             ViewBag.Env = _hostingEnv.EnvironmentName;

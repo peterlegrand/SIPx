@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SIPx.Shared
 {
-    public class ReadLogParameters
+    public class LogParameters
     {
         public string ControllerName { get; set; }
         public string ActionName { get; set; }

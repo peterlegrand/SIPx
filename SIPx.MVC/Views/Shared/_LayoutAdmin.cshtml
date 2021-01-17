@@ -198,6 +198,36 @@
     </div>
 
 
+    <div class="modal fade" id="changeLogModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@UITermLayout.Find(x => x.InternalName.Equals("Change log")).TermString</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <ejs-grid id="ChangeLogGrid" dataSource="@ViewBag.ReadLogView" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+                                    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+                                    <e-grid-columns>
+                                        <e-grid-column field="ChangeLogId" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column field="UserName" headerText="@UITermLayout.Find(x => x.InternalName.Equals("User name")).TermString" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column field="ReadLogDate" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Date")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+                                    </e-grid-columns>
+                                </ejs-grid>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <ejs-scripts></ejs-scripts>
 </body>
 </html>

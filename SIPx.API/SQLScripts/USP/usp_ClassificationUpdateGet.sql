@@ -12,7 +12,7 @@ SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'Classific
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
-INSERT INTO ReadLogClassificationCUD (RecordId , UserId, ReadLogDate, MVCUIScreenID)  VALUES( @ClassificationId, @UserId, Getdate(), @ScreenId)
+INSERT INTO ChangeLogClassificationCUD (RecordId , UserId, ChangeLogDate, MVCUIScreenID)  VALUES( @ClassificationId, @UserId, Getdate(), @ScreenId)
 
 SELECT Classifications.ClassificationID
 	, Classifications.StatusId 

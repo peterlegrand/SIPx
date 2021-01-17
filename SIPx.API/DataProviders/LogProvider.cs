@@ -18,11 +18,17 @@ namespace SIPx.DataAccess
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public async Task<List<ReadLogGet>> ReadLogGet(ReadLogParameters ReadLogParameters)
+        public async Task<List<ReadLogGet>> ReadLogGet(LogParameters ReadLogParameters)
         {
             string usp = "usp_readlogGrid @ControllerName, @ActionName, @IsIntRecordId, @stringRecordId, @IntRecordId ";
             var ReadLog = await _sqlDataAccess.LoadData<ReadLogGet, dynamic>(usp, ReadLogParameters);
             return ReadLog;
+        }
+        public async Task<List<ChangeLogGet>> ChangeLogGet(LogParameters ChangeLogParameters)
+        {
+            string usp = "usp_changelogGrid @ControllerName, @ActionName, @IsIntRecordId, @stringRecordId, @IntRecordId ";
+            var ChangeLog = await _sqlDataAccess.LoadData<ChangeLogGet, dynamic>(usp, ChangeLogParameters);
+            return ChangeLog;
         }
 
 
