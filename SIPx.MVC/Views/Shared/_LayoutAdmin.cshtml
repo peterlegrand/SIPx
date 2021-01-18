@@ -211,7 +211,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <ejs-grid id="ChangeLogGrid" dataSource="@ViewBag.ReadLogView" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+                                <ejs-grid id="ChangeLogGrid" dataSource="@ViewBag.ChangeLogView" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
                                         <e-grid-column field="ChangeLogId" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>

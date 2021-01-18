@@ -39,16 +39,17 @@ SET @Statement = 'SELECT ' +
 	' ON ChangeLogClassifications.UserId = Persons.UserID ' +
 ' JOIN UITermLanguages ColumnLanguage ' +
 	' ON ColumnLanguage.UITermID = DataDictionaryColumns.NameTermID ' +
-' LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) ColumnLanguageCustom ' +
+' LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = ' +cast(@LanguageID as varchar(10))+') ColumnLanguageCustom ' +
 	' ON ColumnLanguageCustom.UITermId = DataDictionaryColumns.NameTermID ' +
 ' JOIN UITermLanguages ChangeTypeLanguage ' +
 	' ON ChangeTypeLanguage.UITermID = ChangeTypes.NameTermID ' +
-' LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) ChangeTypeLanguageCustom ' +
+' LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = ' +cast(@LanguageID as varchar(10))+') ChangeTypeLanguageCustom ' +
 	' ON ChangeTypeLanguageCustom.UITermId = ChangeTypes.NameTermID ' +
-' WHERE ChangeTypeLanguage.LanguageId = @LanguageID ' +
-	' AND ChangeLogClassifications.RecordId =@IntRecordId ' +
+' WHERE ChangeTypeLanguage.LanguageId = ' +cast(@LanguageID as varchar(10))+' ' +
+	' AND ColumnLanguage.LanguageId =' +cast(@LanguageID  as varchar(10))+' ' +
+	' AND ChangeLogClassifications.RecordId =' +cast(@IntRecordId  as varchar(10))+' ' +
 ' ORDER BY ChangeLogClassifications.ChangeLogDate	'
-END
+
 --select @statement
 EXECUTE sp_executesql @statement
 end

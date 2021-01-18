@@ -52,7 +52,6 @@ ClassificationUser\Update
 ClassificationUser\Index
 ClassificationValue\Create
 ClassificationValue\Delete
-ClassificationValue\Update old
 ClassificationValue\Update
 ClassificationValue\Index
 ClassificationValue\LanguageCreate
@@ -114,7 +113,6 @@ FrontProject\Dashboard
 FrontProject\Index
 FrontProject\SearchResult
 FrontUser\Dashboard
-Home\Index old
 Home\Index
 Home\Privacy
 Language\Update
@@ -160,7 +158,6 @@ PageSectionProcessCondition\Delete
 PageSectionProcessCondition\Update
 PageSectionProcessCondition\Index
 Partial\LeftMenu
-Person\AdvancedSearch - Old
 Person\AdvancedSearch
 Person\Create
 Person\Delete
@@ -277,7 +274,6 @@ Setting\Index
 Shared\Error
 Shared\_Layout
 Shared\_LayoutAdmin
-Shared\_LayoutExternal Old
 Shared\_LayoutExternal
 Shared\_LayoutPartial
 Shared\_ValidationScriptsPartial

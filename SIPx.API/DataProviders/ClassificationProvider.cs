@@ -61,10 +61,10 @@ namespace SIPx.DataAccess
             return ErrorMessages;
         }
 
-        public bool UpdatePost(ClassificationUpdateGet Classification)
+        public async Task<bool> UpdatePost(ClassificationUpdateGet Classification)
         {
             string usp = "usp_ClassificationUpdatePost @classificationId, @StatusId , @DefaultPageId , @HasDropDown , @DropDownSequence , @Name , @Description , @MenuName , @MouseOver ,@Color, @IconId, @UserId ";
-            _sqlDataAccess.SaveData<ClassificationUpdateGet>(usp, Classification);
+            await _sqlDataAccess.SaveData<ClassificationUpdateGet>(usp, Classification);
             return true;
         } //PETER TODO In the stored procedure the check on hasdropdown is not yet ok.
 

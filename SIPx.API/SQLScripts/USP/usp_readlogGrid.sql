@@ -37,7 +37,7 @@ SET @Statement = 'select ReadLog'+
 	TRIM(@ControllerName)+'List.UserId ' +
 ' WHERE MVCUIScreens.Controller = '''+TRIM(@ControllerName)+''' AND MVCUIScreens.Action = '''+TRIM(@ActionName)+ ''' ' 
 END
---select @statement
-EXECUTE sp_executesql @statement
+select @statement
+--EXECUTE sp_executesql @statement
 end
 

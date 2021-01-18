@@ -158,7 +158,7 @@ namespace SIPx.API.Controllers
                 }
                 else
                 {
-                    _classificationProvider.UpdatePost(Classification);
+                   await _classificationProvider.UpdatePost(Classification);
                 }
                 ClassificationUpdateGetWithErrorMessages ClassificationWithErrorMessage = new ClassificationUpdateGetWithErrorMessages { Classification = Classification, ErrorMessages = ErrorMessages };
                 return Ok(ClassificationWithErrorMessage);

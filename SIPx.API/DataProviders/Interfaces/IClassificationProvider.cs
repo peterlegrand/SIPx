@@ -19,7 +19,7 @@ namespace SIPx.DataAccess
         Task<List<LanguageList>> LangugageCreateGetLanguageList(string UserId, int ClassificationId);
         Task<List<ClassificationList>> List(string UserId);
         Task<ClassificationUpdateGet> UpdateGet(string UserId, int ClassificationId);
-        bool UpdatePost(ClassificationUpdateGet Classification);
+        Task<bool> UpdatePost(ClassificationUpdateGet Classification);
         Task<List<ErrorMessage>> UpdatePostCheck(ClassificationUpdateGet Classification);
     }
 }
