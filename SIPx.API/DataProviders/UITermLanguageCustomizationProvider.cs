@@ -25,7 +25,7 @@ namespace SIPx.API.DataProviders
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@Controller", Controller);
             parameters.Add("@Action", Action);
-            parameters.Add("@UserId", UserId);
+            parameters.Add("@UserId", UserId); 
 
             var x = _sqlDataAccess.LoadData2<UITermLanguageCustomizationList>(usp, parameters);
             return x;
