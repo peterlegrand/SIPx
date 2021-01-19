@@ -5,14 +5,9 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
-
-DECLARE @ScreenId int;
-SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'Classification' AND Action = 'Create';
-
-SET XACT_ABORT ON;
+	SET XACT_ABORT ON;
 BEGIN TRANSACTION
-
-INSERT INTO ChangeLogClassificationCUD (RecordId , UserId, ChangeLogDate, MVCUIScreenID)  VALUES( @ClassificationId, @UserId, Getdate(), @ScreenId)
+exec usp_readlogWrite 'Classification', 'Edit',1,'',@ClassificationId,@UserId
 
 SELECT Classifications.ClassificationID
 	, Classifications.StatusId 

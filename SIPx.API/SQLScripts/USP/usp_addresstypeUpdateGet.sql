@@ -5,6 +5,18 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
+
+DECLARE @ScreenId int;
+DECLARE @ScreenLanguageId int;
+SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'AddressType' AND Action = 'Update';
+SELECT @ScreenLanguageId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'AddressType' AND Action = 'LanguageUpdate';
+DECLARE @RecordLanguageId int;
+SELECT @RecordLanguageId = AddressTypeLanguageId FROM AddressTypeLanguages WHERE AddressTypeID = @AddressTypeId and LanguageID = @LanguageId
+SET XACT_ABORT ON;
+BEGIN TRANSACTION
+INSERT INTO ReadLogAddressTypeCUD (RecordId , UserId, ReadLogDate, MVCUIScreenID)  VALUES( @AddressTypeId, @UserId, Getdate(), @ScreenId)
+INSERT INTO ReadLogAddressTypeLanguageCUD (RecordId , UserId, ReadLogDate, MVCUIScreenID)  VALUES( @RecordLanguageId, @UserId, Getdate(), @ScreenLanguageId)
+
 SELECT AddressTypes.AddressTypeId 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
@@ -38,5 +50,4 @@ WHERE UIName.LanguageId = @LanguageID
 	AND UIMouseOver.LanguageId = @LanguageID
 	AND AddressTypes.AddressTypeId = @AddressTypeID
 
-
-
+COMMIT TRANSACTION

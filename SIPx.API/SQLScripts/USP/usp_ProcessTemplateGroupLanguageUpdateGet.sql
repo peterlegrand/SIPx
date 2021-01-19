@@ -6,6 +6,12 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+DECLARE @ScreenId int;
+SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'ProcessTemplateGroupLanguage' AND Action = 'LanguageUpdate';
+SET XACT_ABORT ON;
+BEGIN TRANSACTION
+INSERT INTO ReadLogProcessTemplateGroupLanguageCUD (RecordId , UserId, ReadLogDate, MVCUIScreenID)  VALUES( @ProcessTemplateGroupLanguageId, @UserId, Getdate(), @ScreenId)
+
 SELECT ProcessTemplateGroupLanguages.ProcessTemplateGroupLanguageID
 	, ProcessTemplateGroupLanguages.LanguageID
 	, ProcessTemplateGroupLanguages.Name
@@ -34,3 +40,4 @@ JOIN Persons Modifier
 	ON Modifier.UserId = ProcessTemplateGroupLanguages.ModifierID
 WHERE ProcessTemplateGroupLanguages.ProcessTemplateGroupLanguageId = @ProcessTemplateGroupLanguageID
 	AND UILanguageName.LanguageId = @LanguageID
+COMMIT TRANSACTION

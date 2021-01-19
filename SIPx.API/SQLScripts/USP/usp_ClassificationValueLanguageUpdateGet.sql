@@ -6,6 +6,13 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+DECLARE @ScreenId int;
+SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'ClassificationValueLanguage' AND Action = 'LanguageUpdate';
+SET XACT_ABORT ON;
+BEGIN TRANSACTION
+INSERT INTO ReadLogClassificationValueLanguageCUD (RecordId , UserId, ReadLogDate, MVCUIScreenID)  VALUES( @ClassificationValueLanguageId, @UserId, Getdate(), @ScreenId)
+
+
 SELECT ClassificationValueLanguages.ClassificationValueLanguageID
 	, ClassificationValueLanguages.ClassificationID
 	, ClassificationValueLanguages.ClassificationValueID
@@ -53,3 +60,4 @@ ORDER BY ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name)
 
 
 
+COMMIT TRANSACTION

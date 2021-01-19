@@ -6,6 +6,12 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+DECLARE @ScreenId int;
+SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'OrganizationLanguage' AND Action = 'LanguageUpdate';
+SET XACT_ABORT ON;
+BEGIN TRANSACTION
+INSERT INTO ReadLogOrganizationLanguageCUD (RecordId , UserId, ReadLogDate, MVCUIScreenID)  VALUES( @OrganizationLanguageId, @UserId, Getdate(), @ScreenId)
+
 SELECT Organizations.OrganizationId 
 	, OrganizationLanguages.OrganizationLanguageID
 	, OrganizationLanguages.LanguageID
@@ -36,4 +42,4 @@ JOIN Persons Modifier
 WHERE OrganizationLanguages.OrganizationLanguageId = @OrganizationLanguageID
 	AND UILanguageName.LanguageId = @LanguageID
 
-
+COMMIT TRANSACTION

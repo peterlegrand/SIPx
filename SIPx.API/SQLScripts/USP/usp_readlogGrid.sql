@@ -3,9 +3,17 @@ CREATE PROCEDURE usp_readlogGrid (
 	, @ActionName varchar(50)
 	, @IsIntRecordId bit
 	, @stringRecordId nvarchar(450)
-	, @IntRecordId int)
+	, @IntRecordId int
+	, @UserId nvarchar(450))
 AS
 BEGIN
+
+DECLARE @LanguageId int;
+SELECT @LanguageId = IntPreference
+FROM UserPreferences
+WHERE USerId = @UserID
+	AND UserPreferences.PreferenceTypeId = 1 ;
+
 DECLARE @Statement nvarchar(max);
 IF (@IsIntRecordId = 1 AND @IntRecordId <> 0) OR (@IsIntRecordId = 0)
 BEGIN

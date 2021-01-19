@@ -6,6 +6,13 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
+DECLARE @ScreenId int;
+SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'ClassificationRelationType' AND Action = 'LanguageUpdate';
+SET XACT_ABORT ON;
+BEGIN TRANSACTION
+INSERT INTO ReadLogClassificationRelationTypeLanguageCUD (RecordId , UserId, ReadLogDate, MVCUIScreenID)  VALUES( @ClassificationRelationTypeLanguageId, @UserId, Getdate(), @ScreenId)
+
+
 SELECT ClassificationRelationTypes.ClassificationRelationTypeId 
 	, ClassificationRelationTypeLanguages.ClassificationRelationTypeLanguageID
 	, ClassificationRelationTypeLanguages.LanguageID
