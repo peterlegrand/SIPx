@@ -1,4 +1,4 @@
-ALTER PROCEDURE usp_readlogWrite (
+CREATE PROCEDURE usp_readlogWrite (
 	@ControllerName varchar(50)
 	, @ActionName varchar(50)
 	, @IsIntRecordId bit

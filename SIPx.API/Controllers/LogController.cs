@@ -44,6 +44,10 @@ namespace SIPx.API.Controllers
         [HttpPost("ReadLogView")]
         public async Task<IActionResult> ReadLogView(LogParameters ReadLogParameters)
         {
+
+
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            ReadLogParameters.UserId = CurrentUser.Id;
             var ReadLogView = await _logProvider.ReadLogGet(ReadLogParameters);
 
                 return Ok(ReadLogView);

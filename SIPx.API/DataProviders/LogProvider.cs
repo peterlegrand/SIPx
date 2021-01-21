@@ -20,7 +20,7 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ReadLogGet>> ReadLogGet(LogParameters ReadLogParameters)
         {
-            string usp = "usp_readlogGrid @ControllerName, @ActionName, @IsIntRecordId, @stringRecordId, @IntRecordId ";
+            string usp = "usp_readlogGrid @ControllerName, @ActionName, @IsIntRecordId, @stringRecordId, @IntRecordId,@UserId ";
             var ReadLog = await _sqlDataAccess.LoadData<ReadLogGet, dynamic>(usp, ReadLogParameters);
             return ReadLog;
         }

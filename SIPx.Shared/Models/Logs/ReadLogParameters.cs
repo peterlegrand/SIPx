@@ -13,5 +13,6 @@ namespace SIPx.Shared
         public bool IsIntRecordId { get; set; }
         public string StringRecordId { get; set; }
         public int IntRecordId { get; set; }
-        }
+        public string UserId { get; set; }
+    }
 }

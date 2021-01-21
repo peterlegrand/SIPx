@@ -10,10 +10,11 @@ namespace SIPx.Shared
     {
         [Key]
         public int ReadLogId { get; set; }
-        public int ColumnId { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
         public int PersonId { get; set; }
         public DateTime ReadLogDate { get; set; }
+        public string ScreenName { get; set; }
+        public string TableName { get; set; }
     }
 }

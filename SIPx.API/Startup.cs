@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SIPx.API.Classes;
 using SIPx.API.DataProviders;
 using SIPx.API.Models;
 using SIPx.API.Services;
@@ -69,11 +70,14 @@ namespace SIPx.API
                 };
 
             });
+            services.AddMvc(options =>
+            {
+                options.InputFormatters.Insert(0, new BinaryInputFormatter());
+            });
 
             services.AddControllers();
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
-
 
             services.AddTransient<ISearchProvider, SearchProvider>();
             services.AddTransient<ILogProvider, LogProvider>();
