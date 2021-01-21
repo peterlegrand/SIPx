@@ -3844,4 +3844,6 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(3842, 'User menu template op
 INSERT INTO UITerms (UITermId, InternalName) VALUES(3843, 'User menu template option language delete');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(3844, 'User menu template option language edit');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(3845, 'User menu template option language index');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(3846, 'Front process templates');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(3847, 'New content');
 SET IDENTITY_INSERT UITerms OFF;

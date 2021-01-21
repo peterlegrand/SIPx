@@ -4,7 +4,7 @@
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New content")).TermString;
     ViewData["Image"] = "Content.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
 
@@ -57,12 +57,16 @@
         <div class="row">
             @*   <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>*@
             <div class="col-9">
-                <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
-                    <e-content-template>
-                    </e-content-template>
-                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
-                    </e-richtexteditor-toolbarsettings>
-                </ejs-richtexteditor>
+
+                <div class="input-group">
+                    <textarea class="editor" name="Description"></textarea>
+                </div>
+                @*<ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
+                        <e-content-template>
+                        </e-content-template>
+                        <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
+                        </e-richtexteditor-toolbarsettings>
+                    </ejs-richtexteditor>*@
             </div>
         </div>
 
@@ -151,7 +155,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 @*<ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>*@
+                    <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>*@
                 <ejs-button id="primarybtn" content="Save" action="Submit" isPrimary="true"></ejs-button>
                 <ejs-button id="cancelbtn" content="Cancel" isPrimary="false"></ejs-button>
 
@@ -278,3 +282,37 @@
                 e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Organizations)), query);
             }
 </script>
+@section Scripts {
+    <script src="https://cdn.tiny.cloud/1/svu6dnfyewblchl3t3fki9nw85tzj1r1h9vwbpbg42mnv4ez/tinymce/5/tinymce.min.js"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea.editor',
+            height: 500,
+            width: 800,
+            plugins: "image", // add the image plugin
+            toolbar: 'image', // add the image button to the toolbar
+            images_upload_handler: function (blobInfo, success, failure) {
+
+                // Create a JSON payload containing the file name and file bytes and serialize it to a string
+                var data = JSON.stringify({ fileBytes: blobInfo.base64(), fileName: blobInfo.blob().name });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Image',
+                    //                        url: 'https://localhost:44393/api/Image',
+                    data: data,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (result) {
+                        success(result.imageUrl);
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        failure(err.message);
+                    }
+                });
+            }
+        });
+    </script>
+}

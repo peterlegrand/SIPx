@@ -1,7 +1,7 @@
 ﻿@model List<FrontContentContentTypeGroup>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content type")).TermString;
     ViewData["Image"] = "Content.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
 

@@ -876,6 +876,6 @@ INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogReco
 INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (466, N'FrontContent', N'ContentNew', 0, 0, 3523, 3523, 3523, 3523)
 
 INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (467, N'FrontContent', N'ContentType', 0, 0, 3524, 3524, 3524, 3524)
-
+INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (468, N'FrontProcess', N'Templates', 0, 0, 7691, 7691, 7691, 7691);
 SET IDENTITY_INSERT [dbo].[MVCUIScreens] OFF
 

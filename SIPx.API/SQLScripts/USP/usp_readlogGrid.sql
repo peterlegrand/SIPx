@@ -17,8 +17,8 @@ WHERE USerId = @UserID
 
 --FROM 
 
-
-
+DECLARE @IsLogRecordGrid  bit;
+SELECT @IsLogRecordGrid = IsLogRecordGrid FROM MVCUIScreens WHERE Controller = @ControllerName AND Action = @ActionName
 
 DECLARE ReadLogTable_Cursor CURSOR FOR 
 select DataDictionaryTables.TableName from MVCUIScreens 
@@ -37,8 +37,15 @@ OPEN ReadLogTable_Cursor
 FETCH NEXT FROM ReadLogTable_Cursor INTO @ReadLogTableName
 
 WHILE @@FETCH_STATUS = 0  
+--BEGIN FETCH
 BEGIN  
+
+IF @IsLogRecordGrid = 1
+--BEGIN RecordGrid
+BEGIN
+
 IF @Statement =''
+--BEGIN FIRST STATEMENT
 BEGIN
 SET @Statement ='SELECT '+TRIM(@ReadLogTableName)+'.ReadLogID, '+TRIM(@ReadLogTableName)+'.UserId, AspNetUsers.UserName, Persons.PersonId, '+TRIM(@ReadLogTableName)+'.ReadLogDate, '+
 'ISNULL(CustomScreen.Customization,DefaultScreen.Name) ScreenName,ISNULL(CustomTable.Customization,DefaultTable.Name) TableName '+
@@ -66,10 +73,13 @@ SET @Statement ='SELECT '+TRIM(@ReadLogTableName)+'.ReadLogID, '+TRIM(@ReadLogTa
 	' AND DefaultTable.LanguageId = '  + CAST(@LanguageID as varchar(10)) +
 	' AND '+TRIM(@ReadLogTableName)+'.RecordId = '  + CAST(@IntRecordId as varchar(10))  
 
+--END FIRST STATEMENT
 END
 ELSE
+--BEGIN NEXT STATEMENT
 BEGIN
-SET @Statement =@Statement + ' UNION ALL SELECT '+TRIM(@ReadLogTableName)+'.ReadLogID, '+TRIM(@ReadLogTableName)+'.UserId, AspNetUsers.UserName, Persons.PersonId, '+TRIM(@ReadLogTableName)+'.ReadLogDate, '+
+--PETER TODO Now the record is filtered on the same record id. This should be on parent record id and languageid as it is the language table
+SET @Statement =@Statement + ' UNION ALL; SELECT '+TRIM(@ReadLogTableName)+'.ReadLogID, '+TRIM(@ReadLogTableName)+'.UserId, AspNetUsers.UserName, Persons.PersonId, '+TRIM(@ReadLogTableName)+'.ReadLogDate, '+
 'ISNULL(CustomScreen.Customization,DefaultScreen.Name) ScreenName,ISNULL(CustomTable.Customization,DefaultTable.Name) TableName '+
 ' FROM ' +
 	@ReadLogTableName + 
@@ -94,9 +104,63 @@ SET @Statement =@Statement + ' UNION ALL SELECT '+TRIM(@ReadLogTableName)+'.Read
 ' WHERE DefaultScreen.LanguageId = '  + CAST(@LanguageID as varchar(10)) +
 	' AND DefaultTable.LanguageId = '  + CAST(@LanguageID as varchar(10)) +
 	' AND '+TRIM(@ReadLogTableName)+'.RecordId = '  + CAST(@IntRecordId as varchar(10))  
+--END NEXT STATEMENT
+END
+--END RecordGrid
+END
+ELSE
+--BEGIN NORecordGrid
+BEGIN
+IF @Statement =''
+--BEGIN FIRST STATEMENT
+BEGIN
+SET @Statement =
+' SELECT ' +
+	' '+TRIM(@ReadLogTableName)+'.ReadLogID ' +
+	' , '+TRIM(@ReadLogTableName)+'.UserId ' +
+	' , AspNetUsers.UserName ' +
+	' , Persons.PersonId ' +
+	' , '+TRIM(@ReadLogTableName)+'.ReadLogDate ' +
+	' , ISNULL(CustomScreen.Customization,DefaultScreen.Name) ScreenName,''No table'' TableName   ' +
+' FROM '+TRIM(@ReadLogTableName)+'  ' +
+' JOIN AspNetUsers   ' +
+	' ON '+TRIM(@ReadLogTableName)+'.UserId = AspNetUsers.Id  ' +
+' JOIN Persons   ' +
+	' ON Persons.UserId = AspNetUsers.ID   ' +
+' JOIN MVCUIScreens   ' +
+	' ON MVCUIScreens.MVCUIScreenID = '+TRIM(@ReadLogTableName)+'.MVCUIScreenID   ' +
+' JOIN UITermLanguages DefaultScreen   ' +
+	' ON DefaultScreen.UITermId = MVCUIScreens.NameTermID   ' +
+' LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = 41) CustomScreen  ' +
+	' ON CustomScreen.UITermId = MVCUIScreens.NameTermID   ' +
+' WHERE DefaultScreen.LanguageId = 41  ' 
 
 END
+ELSE
+BEGIN
+SET @Statement =
+' UNION ALL; SELECT ' +
+	' '+TRIM(@ReadLogTableName)+'.ReadLogID ' +
+	' , '+TRIM(@ReadLogTableName)+'.UserId ' +
+	' , AspNetUsers.UserName ' +
+	' , Persons.PersonId ' +
+	' , '+TRIM(@ReadLogTableName)+'.ReadLogDate ' +
+	' , ISNULL(CustomScreen.Customization,DefaultScreen.Name) ScreenName,''No table'' TableName   ' +
+' FROM '+TRIM(@ReadLogTableName)+'  ' +
+' JOIN AspNetUsers   ' +
+	' ON '+TRIM(@ReadLogTableName)+'.UserId = AspNetUsers.Id  ' +
+' JOIN Persons   ' +
+	' ON Persons.UserId = AspNetUsers.ID   ' +
+' JOIN MVCUIScreens   ' +
+	' ON MVCUIScreens.MVCUIScreenID = '+TRIM(@ReadLogTableName)+'.MVCUIScreenID   ' +
+' JOIN UITermLanguages DefaultScreen   ' +
+	' ON DefaultScreen.UITermId = MVCUIScreens.NameTermID   ' +
+' LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = 41) CustomScreen  ' +
+	' ON CustomScreen.UITermId = MVCUIScreens.NameTermID   ' +
+' WHERE DefaultScreen.LanguageId = 41  ' 
 
+END
+END
 FETCH NEXT FROM ReadLogTable_Cursor INTO @ReadLogTableName
 END 
 
@@ -105,12 +169,3 @@ DEALLOCATE ReadLogTable_Cursor
 
 --SELECT @Statement
 EXECUTE sp_executesql @statement
-
-
-
---	JOIN UITermLanguages DefaultTableName
---	ON DefaultTableName.UITermId = DataDictionaryTables.NameTermID
---LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) CustomTableName
---	ON CustomTableName.UITermId = DataDictionaryTables.NameTermID
-
-	--AND DefaultTableName.LanguageId = @LanguageID

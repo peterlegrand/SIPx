@@ -43,7 +43,7 @@ namespace SIPx.MVC.Controllers
             var response = await _client.GetProtectedAsync<FrontContentContentNew>($"{_configuration["APIUrl"]}api/FrontContent/ContentNew/" + Id, token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/FrontContent/ContentType", token);
+            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/FrontContent/ContentNew", token);
             ViewBag.Env = _hostingEnv.EnvironmentName;
 
             return View(response);
