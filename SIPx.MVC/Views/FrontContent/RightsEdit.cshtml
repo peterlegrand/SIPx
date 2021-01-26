@@ -55,14 +55,31 @@
             </div>
             @if (Model.IsFreeEditSelectable)
             {
-                <div class="col-9">
+                <div class="col-3">
                     <ejs-checkbox id="IsFreeEdit" ejs-for="@Model.IsFreeEdit" value="@Model.IsFreeEdit"></ejs-checkbox>
                 </div>
             }
             else
             {
-                <div class="col-9">
+                <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsFreeEdit" ejs-for="@Model.IsFreeEdit" value="@Model.IsFreeEdit"></ejs-checkbox>
+                </div>
+
+            }
+            <div class="col-3">
+                @*                @Term.Find(x => x.InternalName.Equals("Name")).TermString*@
+                @Term.Find(x => x.InternalName.Equals("Free edit")).TermString
+            </div>
+            @if (Model.IsFreeReadSelectable)
+            {
+                <div class="col-3">
+                    <ejs-checkbox id="IsFreeRead" ejs-for="@Model.IsFreeRead" value="@Model.IsFreeRead"></ejs-checkbox>
+                </div>
+            }
+            else
+            {
+                <div class="col-3">
+                    <ejs-checkbox disabled="true" id="IsFreeRead" ejs-for="@Model.IsFreeRead" value="@Model.IsFreeRead"></ejs-checkbox>
                 </div>
 
             }

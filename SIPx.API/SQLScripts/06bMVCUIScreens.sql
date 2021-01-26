@@ -877,5 +877,9 @@ INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogReco
 
 INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (467, N'FrontContent', N'ContentType', 0, 0, 3524, 3524, 3524, 3524)
 INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (468, N'FrontProcess', N'Templates', 0, 0, 7691, 7691, 7691, 7691);
+INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (469, N'MVCUIScreen', N'Index', 0, 0, 3862, 3862, 3862, 3862);
+INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (470, N'MetaContent', N'Index', 0, 0, 3866, 3866, 3866, 3866);
+INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (471, N'MetaContent', N'Create', 0, 0, 3868, 3868, 3868, 3868);
+INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (472, N'MetaContent', N'Delete', 1, 0, 3877, 3877, 3877, 3877);
 SET IDENTITY_INSERT [dbo].[MVCUIScreens] OFF
 

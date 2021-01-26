@@ -80,6 +80,8 @@ namespace SIPx.API
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
             services.AddTransient<ISearchProvider, SearchProvider>();
+            services.AddTransient<IMVCUIScreenProvider, MVCUIScreenProvider>();
+            services.AddTransient<IMetaContentProvider, MetaContentProvider>();
             services.AddTransient<ILogProvider, LogProvider>();
             services.AddTransient<IBaseProvider, BaseProvider>();
             services.AddTransient<IFrontUserFavoriteProvider, FrontUserFavoriteProvider>();

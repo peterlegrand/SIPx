@@ -114,6 +114,35 @@ namespace SIPx.API.Controllers
             });
         }
 
+        [HttpGet("ShowContentRights/{Id:int}")]
+        public async Task<IActionResult> ShowContentRights(int Id)
+        {
+
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+
+                var FrontContentShowContentRights = await _frontContentProvider.ShowContentRightsGet( Id);
+                if(FrontContentShowContentRights.OwnerId ==CurrentUser.Id)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No rights",
+                    });
+
+                }
+
+                return Ok(FrontContentShowContentRights);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+
+
         [HttpGet("ContentNew/{Id:int}")]
         public async Task<IActionResult> ContentNew(int Id)
         {
@@ -157,9 +186,10 @@ namespace SIPx.API.Controllers
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 Content.UserId= CurrentUser.Id;
-                _frontContentProvider.FrontContentCreatePost(CurrentUser.Id, Content);
+               var NewId = await _frontContentProvider.FrontContentCreatePost(CurrentUser.Id, Content);
+                Content.NewId = NewId;
                 return Ok(Content);
-            }
+            } 
             return BadRequest(new
             {
                 IsSuccess = false,
@@ -253,9 +283,19 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
-                var FrontContentShowContent = await _frontContentProvider.RightsUpdateGet( Id);
-                FrontContentShowContent.Owners = await _frontContentProvider.RightsUpdateGetOwners(CurrentUser.Id, FrontContentShowContent.IsRelationBasedOwnership, FrontContentShowContent.IsProjectBasedOwnership, FrontContentShowContent.IsOrganizationBasedOwnership, FrontContentShowContent.IsFreeOwnership);
-                return Ok(FrontContentShowContent);
+                var FrontContentShowContentRights = await _frontContentProvider.RightsUpdateGet( Id);
+                if (FrontContentShowContentRights.OwnerId != CurrentUser.Id)
+                {
+                    return BadRequest(new
+                    {
+                        IsSuccess = false,
+                        Message = "No rights",
+                    });
+
+                }
+
+                FrontContentShowContentRights.Owners = await _frontContentProvider.RightsUpdateGetOwners(CurrentUser.Id, FrontContentShowContentRights.IsRelationBasedOwnership, FrontContentShowContentRights.IsProjectBasedOwnership, FrontContentShowContentRights.IsOrganizationBasedOwnership, FrontContentShowContentRights.IsFreeOwnership);
+                return Ok(FrontContentShowContentRights);
             }
             return BadRequest(new
             {

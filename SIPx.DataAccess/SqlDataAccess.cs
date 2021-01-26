@@ -94,6 +94,7 @@ namespace SIPx.DataAccess
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var data = await connection.ExecuteAsync(sql, parameters);
+                
             }
         }
 
@@ -113,7 +114,18 @@ namespace SIPx.DataAccess
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
 
-                var data = await connection.ExecuteAsync(sql, parameters,commandType : CommandType.StoredProcedure);
+                var data = await connection.ExecuteAsync(sql, parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public async Task<int> SaveData3(string sql, DynamicParameters parameters)
+        {
+            string connectionString = _config.GetConnectionString("DefaultConnection");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+
+                var data = await connection.ExecuteAsync(sql, parameters, commandType: CommandType.StoredProcedure);
+                var b = parameters.Get<int>("@NewId");
+                return b;
             }
         }
 

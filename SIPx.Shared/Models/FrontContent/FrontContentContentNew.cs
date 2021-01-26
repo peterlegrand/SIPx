@@ -10,6 +10,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ContentTypeId { get; set; }
+        public int NewId { get; set; }
         public int ContentStatusId { get; set; }
         public int LanguageId { get; set; }
 

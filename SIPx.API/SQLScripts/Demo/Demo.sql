@@ -1131,15 +1131,15 @@ INSERT INTO Contents (
 ContentId, ContentTypeId, ContentStatusId, LanguageId, Title, Description, SecurityLevelId, OrganizationId
 , IsRelationBasedRead, IsRelationBasedEdit, IsOrganizationBasedEdit, IsOrganizationBasedEditSub, IsOrganizationBasedEditParent, 
 IsOrganizationBasedRead, IsOrganizationBasedReadSub, IsOrganizationBasedReadParent
-, IsProjectBasedEdit, IsProjectBasedEditSub, IsProjectBasedEditParent, IsProjectBasedRead, IsProjectBasedReadSub, IsProjectBasedReadParent
+, IsProjectBasedEdit, IsProjectBasedEditSub, IsProjectBasedEditParent, IsProjectBasedRead, IsProjectBasedReadSub, IsProjectBasedReadParent, IsFreeEdit, IsFreeRead
 , CreatorId, ModifierId, ModifiedDate, CreatedDate, ProcessID, OwnerId) 
 VALUES 
   (1,1,2,41,'Research of Tropics on butterflies','This is a story about butterflies in my backgarden', 1,1, 
   1,1, 1,1, 1,
   1, 1,1, 
   1,1,1,1,1,1,  @User, @User, GETDATE(), GETDATE(),9, @User)
-, (2,2,4,41,'Growing passion fruits in Silt soil','They are the most delicious passion fruits'       , 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),10, @User)
-, (3,1,3,41,'Arctic and strawberries','They really grow well especially if you keep the lights on'   , 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),11, @User)
+, (2,2,4,41,'Growing passion fruits in Silt soil','They are the most delicious passion fruits'       , 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),10, @User)
+, (3,1,3,41,'Arctic and strawberries','They really grow well especially if you keep the lights on'   , 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),11, @User)
 
 SET IDENTITY_INSERT Contents OFF;
 

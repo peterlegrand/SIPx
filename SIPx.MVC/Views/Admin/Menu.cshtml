@@ -84,7 +84,7 @@
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Setting.png" width="20" height="20" /></div>
         <div class="col-5"><a asp-controller="Setting" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Setting")).TermString</a></div>
-        <div class="col-1 menuIcon"></div>
-        <div class="col-5"></div>
+        <div class="col-1 menuIcon"><img src="/images/icons/screen.png" width="20" height="20" /></div>
+        <div class="col-5"><a asp-controller="MVCUIScreen" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Screens")).TermString</a></div>
     </div>
 </div>

@@ -18,5 +18,7 @@ namespace SIPx.DataAccess
         Task PopulateDataMaster(string sql);
         Task<List<T>> LoadData2<T, U>(string sql, U parameters);
         Task<List<T>> LoadData4<T, U>(string sql, U parameters);
-        Task<T> LoadSingleRecord<T>(string sql);    }
+        Task<T> LoadSingleRecord<T>(string sql);
+        Task<int> SaveData3(string sql, DynamicParameters parameters);
+            }
 }

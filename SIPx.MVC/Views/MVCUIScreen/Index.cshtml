@@ -1,0 +1,112 @@
+﻿@using Syncfusion.EJ2
+@model List<MVCUIScreenIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Screens")).TermString;
+
+    ViewData["Image"] = "screen.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    Layout = "_LayoutAdmin";
+}
+
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Screen name")).TermString" template="#TableName" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Action")).TermString" template="#Action" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Controller")).TermString" template="#Controller" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Meta content")).TermString" template="#MetaContent" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<script id="Id" type="text/x-template">
+    <div>
+        ${MVCUIScreenId}
+    </div>
+</script>
+<script id="Action" type="text/x-template">
+    <div>
+        ${Action}
+    </div>
+</script>
+<script id="Controller" type="text/x-template">
+    <div>
+        ${Controller}
+    </div>
+</script>
+<script id="TableName" type="text/x-template">
+    <div>
+        ${ScreenName}
+    </div>
+</script>
+<script id="MetaContent" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/MetaContent/Index/${MVCUIScreenId}?MetaTypeId=1">
+            <div title="Level"></div><span style="color:red">M</span>eta content
+        </a>
+
+    </div>
+</script>
+<script>
+    $(document).ready(function () {
+        $("#Favorites").click(function () {
+            var Favorite = {
+                controller: 'Classification',
+                action: 'Index',
+                Name: 'Classifications'
+            };
+            $.post("/Favorite/Add/",
+                Favorite
+                //,
+                //              document.getElementById("Favorites").textContent = 'Added');
+
+                , function () {
+                    var OldImg = document.getElementById("OldImgId");
+                    OldImg.remove();
+                    var img = document.createElement("img");
+                    img.src = "/images/icons/AddedFavorites.png";
+                    img.height = "20";
+                    img.width = "20";
+                    var src = document.getElementById("Favorites");
+                    src.appendChild(img);
+                }
+
+                //
+            )
+        });
+    });
+
+</script>
+<script>
+    var btnElement = document.getElementById("normalbtn");
+    btnElement.addEventListener('click', function () {
+        var dialogObj = document.getElementById("default_dialog");
+        dialogObj.ej2_instances[0].show();
+    });
+    function dialogClose() {
+        btnElement.style.display = "block";
+    }
+    function dialogOpen() {
+        btnElement.style.display = "none";
+    }
+    function dlgButtonClick() {
+        window.open('https://www.syncfusion.com/company/about-us');
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#Favorites").click(function () {
+            var Favorite = {
+                controller: 'Classification',
+                action: 'Index',
+                name: document.getElementById("FavoriteName").value,
+                MVCFavoriteGroupId: document.getElementById("FavoriteGroupId_hidden").value
+            };
+            $.post("/Favorite/Add/",
+                Favorite
+                , function () { $("#favoriteModal").modal('hide'); });
+        });
+    });
+
+</script>

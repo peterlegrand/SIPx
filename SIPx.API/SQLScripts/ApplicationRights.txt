@@ -354,3 +354,7 @@ FrontUserFavorite\Delete
 FrontUserFavoriteGroup\Update
 FrontUserFavoriteGroup\Create
 FrontUserFavoriteGroup\Delete
+MVCUIScreen\Index
+MetaContent\Index
+MetaContent\Create
+MetaContent\Delete

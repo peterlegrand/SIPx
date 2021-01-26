@@ -1617,3 +1617,24 @@ INSERT [dbo].[RightTypes] ([RightTypeID], [NameTermID], [DescriptionTermID], [Me
 INSERT [dbo].[RightTypes] ([RightTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 1783, 1783, 1783, 1783)
 SET IDENTITY_INSERT [dbo].[RightTypes] OFF
 
+SET IDENTITY_INSERT [dbo].[MetaContentTypes] ON 
+ 
+INSERT [dbo].[MetaContentTypes] ([MetaContentTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 3848, 3848, 3848, 3848)
+INSERT [dbo].[MetaContentTypes] ([MetaContentTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 3849, 3849, 3849, 3849)
+INSERT [dbo].[MetaContentTypes] ([MetaContentTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 3850, 3850, 3850, 3850)
+INSERT [dbo].[MetaContentTypes] ([MetaContentTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 3851, 3851, 3851, 3851)
+SET IDENTITY_INSERT [dbo].[MetaContentTypes] OFF
+ 
+ SET IDENTITY_INSERT [dbo].[MetaTypes] ON 
+INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 3852, 3852, 3852, 3852)
+INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 3853, 3853, 3853, 3853)
+INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 3854, 3854, 3854, 3854)
+INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 3855, 3855, 3855, 3855)
+INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 3856, 3856, 3856, 3856)
+INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (6, 3857, 3857, 3857, 3857)
+INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (7, 3858, 3858, 3858, 3858)
+INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (8, 3859, 3859, 3859, 3859)
+SET IDENTITY_INSERT [dbo].[MetaTypes] OFF
+
+
+

@@ -32,6 +32,9 @@ SELECT
 	, Contenttypes.IsProjectBasedReadSelectable
 	, Contenttypes.IsOrganizationBasedReadSelectable
 	, Contenttypes.IsFreeReadSelectable
+
+	, Contents.IsFreeEdit
+	, Contents.IsFreeRead
 	, Contents.IsRelationBasedEdit
 	, Contents.IsRelationBasedRead
 	, Contents.IsProjectBasedEdit

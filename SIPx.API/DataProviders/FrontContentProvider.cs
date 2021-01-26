@@ -64,7 +64,7 @@ namespace SIPx.DataAccess
             return x;
         }
 
-        public async Task<bool> FrontContentCreatePost(string UserId, FrontContentContentNew Content)
+        public async Task<int> FrontContentCreatePost(string UserId, FrontContentContentNew Content)
         {
 
             DataTable ClassificationValueTable = ContentClassificationValueDataTable.CreateTable();
@@ -82,30 +82,48 @@ namespace SIPx.DataAccess
                             , DateTime.Today);
                 }
             }
-            string usp = "usp_FrontContentNewPost @ContentTypeId, @ContentStatusID , @LanguageID , @Title , @Description , @SecurityLevelID , @ProjectID , @OrganizationId , @UserID, @ClassificationValueTable ";
-            _sqlDataAccess.SaveData<dynamic>(usp, new
-            {
-                ContentTypeId = Content.ContentTypeId
-                ,
-                ContentStatusId = Content.ContentStatusId
-                ,
-                LanguageId = Content.LanguageId
-                ,
-                Title = Content.Title
-                ,
-                Description = Content.Description
-                ,
-                SecurityLevelID = Content.SecurityLevelId
-                ,
-                OrganizationId = Content.OrganizationId
-                ,
-                ProjectId = Content.ProjectId
-                ,
-                UserId = UserId
-                ,
-                ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert")
-            });
-            return true;
+            var p = new DynamicParameters();
+            p.Add("@ContentTypeId", Content.ContentTypeId);
+            p.Add("@ContentStatusId", Content.ContentStatusId);
+            p.Add("@LanguageId", Content.LanguageId);
+            p.Add("@Title", Content.Title);
+            p.Add("@Description", Content.Description);
+            p.Add("@SecurityLevelID", Content.SecurityLevelId);
+            p.Add("@OrganizationId", Content.OrganizationId);
+            p.Add("@ProjectId", Content.ProjectId);
+            p.Add("@UserId", Content.UserId);
+            p.Add("@ClassificationValueTable", ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert"));
+            p.Add("@NewId", dbType: DbType.Int32,
+      direction: ParameterDirection.Output);
+
+
+//            string usp = "usp_FrontContentNewPost @ContentTypeId, @ContentStatusID , @LanguageID , @Title , @Description , @SecurityLevelID , @ProjectID , @OrganizationId , @UserID, @NewContentId, @ClassificationValueTable ";
+            string usp = "usp_FrontContentNewPost";
+            var NewId = await _sqlDataAccess.SaveData3(usp, p);
+
+            //_sqlDataAccess.SaveData<dynamic>(usp, new
+            //{
+            //    ContentTypeId = Content.ContentTypeId
+            //    ,
+            //    ContentStatusId = Content.ContentStatusId
+            //    ,
+            //    LanguageId = Content.LanguageId
+            //    ,
+            //    Title = Content.Title
+            //    ,
+            //    Description = Content.Description
+            //    ,
+            //    SecurityLevelID = Content.SecurityLevelId
+            //    ,
+            //    OrganizationId = Content.OrganizationId
+            //    ,
+            //    ProjectId = Content.ProjectId
+            //    ,
+            //    UserId = UserId
+            //    ,
+            //    ClassificationValueTable = ClassificationValueTable.AsTableValuedParameter("udt_ContentClassificationValueInsert")
+            //});
+            return NewId;
 
 
         }
@@ -195,10 +213,17 @@ namespace SIPx.DataAccess
 
         }
 
+        public Task<FrontContentShowContentRights> ShowContentRightsGet(int ContentId)
+        {
+            string usp = "usp_FrontContentShowContentRightsGet  @ContentId";
+            return _sqlDataAccess.LoadSingleRecord<FrontContentShowContentRights, dynamic>(usp, new { ContentId });
+
+        }
+
         public bool RightsEditUserDeletePost(int ContentUserEditId)
         {
             string usp = "usp_FrontContentRightsEditUserDeletePost @ContentUserEditId";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentUserEditId = ContentUserEditId });
+            _sqlDataAccess.SaveData<dynamic>(usp, new { ContentUserEditId = ContentUserEditId }); 
             return true;
         }
         public async Task<List<UserList>> RightsUpdateGetEditUsers(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser )

@@ -12,7 +12,7 @@ namespace SIPx.DataAccess
 
         Task<List<FrontContentContentNewClassificationLevel>> NewClassificationLevels(int ClassificationId);
         Task<List<FrontContentContentNewClassificationValue>> NewClassificationValues(string UserId, int ClassificationId, int Sequence, bool Alphabetical);
-        Task<bool> FrontContentCreatePost(string UserId, FrontContentContentNew Content);
+        Task<int> FrontContentCreatePost(string UserId, FrontContentContentNew Content);
         Task<FrontContentShowContent> FrontContentShowContent(string UserId, int ContentId);
         Task<FrontContentRightsUpdateGet> RightsUpdateGet(int ContentId);
         Task<List<ErrorMessage>> RightsUpdatePostCheck(FrontContentRightsUpdateGet FrontContentRights);
@@ -25,6 +25,7 @@ namespace SIPx.DataAccess
         bool RightsEditUserDeletePost(int FrontContentRightsEditUserId);
         Task<List<UserList>> RightsUpdateGetEditUsers(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser);
         Task<List<UserList>> RightsUpdateGetReadUsers(FrontContentRightsReadUserCreateGet FrontContentRightsReadUser);
+        Task<FrontContentShowContentRights> ShowContentRightsGet(int ContentId);
 
     }
 }
