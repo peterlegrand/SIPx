@@ -11,40 +11,40 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class ProjectTypeProvider : IProjectTypeProvider
+    public class ProjectTypeMatrixProvider 
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
-        public ProjectTypeProvider(ISqlDataAccess sqlDataAccess)
+        public ProjectTypeMatrixProvider(ISqlDataAccess sqlDataAccess)
         {
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<ErrorMessage>> CreatePostCheck(ProjectTypeCreateGet ProjectType)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProjectTypeMatrixFromCreateGet ProjectTypeMatrix)
         {
-            string usp = "usp_ProjectTypeCreatePostCheck @Name, @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @Color , @IconID , @UserId  ";
-            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectType);
+            string usp = "usp_ProjectTypeMatrixCreatePostCheck @Name , @Description , @MenuName , @MouseOver , @FromProjectTypeId, @ToProjectTypeId, @ProjectMatrixTypeId, @UserId  ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectTypeMatrix);
             return ErrorMessages;
         }
 
-        public async Task<string> CreatePost(ProjectTypeCreateGet ProjectType)
+        public async Task<string> CreatePost(ProjectTypeMatrixFromCreateGet ProjectTypeMatrix)
         {
-            string usp = "usp_ProjectTypeCreatePost @Name, @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @Color , @IconID , @UserId  ";
-            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);
+            string usp = "usp_ProjectTypeMatrixCreatePost @Name , @Description , @MenuName , @MouseOver , @FromProjectTypeId, @ToProjectTypeId, @ProjectMatrixTypeId, @UserId  ";
+            var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectTypeMatrix);
             return String;
         }
 
-        public Task<List<ProjectTypeIndexGet>> IndexGet(string UserId)
+        public Task<List<ProjectTypeMatrixIndexGet>> IndexGet(string UserId, int ProjectTypeId)
         {
-            string usp = "usp_ProjectTypeIndexGet @UserID";
-            return _sqlDataAccess.LoadData<ProjectTypeIndexGet, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_ProjectTypeMatrixIndexGet @UserID, @ProjectTypeId ";
+            return _sqlDataAccess.LoadData<ProjectTypeMatrixIndexGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
         }
 
-        public Task<ProjectTypeUpdateGet> UpdateGet(string UserId, int ProjectTypeId)
+        public Task<ProjectTypeMatrixUpdateGet> UpdateGet(string UserId, int ProjectTypeMatrixId)
         {
-            string usp = "usp_ProjectTypeUpdateGet @UserId, @ProjectTypeID";
-            return _sqlDataAccess.LoadSingleRecord<ProjectTypeUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
+            string usp = "usp_ProjectTypeMatrixUpdateGet @UserId, @ProjectTypeMatrixId ";
+            return _sqlDataAccess.LoadSingleRecord<ProjectTypeMatrixUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeMatrixId = ProjectTypeMatrixId });
 
         }
 

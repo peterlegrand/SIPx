@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model OrganizationTypeUpdateGet
+@model PersonTypeUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization type")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person type")).TermString;
     ViewData["Image"] = "Type.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -18,7 +18,7 @@
                     @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="OrganizationTypeId" ejs-for="@Model.OrganizationTypeId" cssClass="e-outline" placeholder="OrganizationTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PersonTypeId" ejs-for="@Model.PersonTypeId" cssClass="e-outline" placeholder="PersonTypeId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -29,7 +29,7 @@
                     @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="OrganizationTypeId" ejs-for="@Model.OrganizationTypeId" cssClass="e-outline" placeholder="OrganizationTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="PersonTypeId" ejs-for="@Model.PersonTypeId" cssClass="e-outline" placeholder="PersonTypeId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -94,23 +94,7 @@
                 </ejs-dropdownlist>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Legal entity")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="LegalEntity" ejs-for="LegalEntity"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Internal")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-checkbox id="Internal" ejs-for="Internal"></ejs-checkbox>
-            </div>
-        </div>
-        <div class="row">
+           <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Icon")).TermString
             </div>

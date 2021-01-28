@@ -11,19 +11,12 @@
     <e-grid-columns>
         <e-grid-column field="ProjectTypeId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column template="#Matrix" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/ProjectType/Create">@Term.Find(x => x.InternalName.Equals("Add new project type")).TermString</a>
-<script id="Matrix" type="text/x-template">
-    <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProjectTypeMatrix/Index/${ProjectTypeId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Matrix")).TermString" /></a>
-
-    </div>
-</script>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ProjectType/Edit/${ProjectTypeId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>

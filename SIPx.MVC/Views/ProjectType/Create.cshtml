@@ -51,6 +51,30 @@
         </div>
         <div class="row">
             <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Code prefix")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="CodePrefix" ejs-for="CodePrefix" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Code suffix")).TermString
+            </div>    <div class="col-9">
+                <ejs-textbox id="CodeSuffix" ejs-for="CodeSuffix" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Code type")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.CodeTypes" ejs-for="@Model.CodeTypeId" value="@Model.CodeTypeId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="CodeTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Icon")).TermString
             </div>
             <div class="col-9">
