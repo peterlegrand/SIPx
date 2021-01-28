@@ -7,6 +7,9 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationLevels.ClassificationLevelID
 	, ClassificationLevels.ClassificationID
+	, ClassificationLevels.CodePrefix
+	, ClassificationLevels.CodeSuffix
+	, ClassificationLevels.CodeTypeId
 	, ISNULL(CustomDateLevel.Customization,DefaultDateLevel.Name) DateLevelName
 	, ClassificationLevels.OnTheFly
 	, ClassificationLevels.Alphabetically

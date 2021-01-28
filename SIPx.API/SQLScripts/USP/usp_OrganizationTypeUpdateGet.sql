@@ -6,6 +6,9 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT OrganizationTypes.OrganizationTypeID
+	, OrganizationTypes.CodePrefix
+	, OrganizationTypes.CodeSuffix
+	, OrganizationTypes.CodeTypeId
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this organization type')) Name
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this organization type')) Description
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.Name,'No menu name for this organization type')) MenuName

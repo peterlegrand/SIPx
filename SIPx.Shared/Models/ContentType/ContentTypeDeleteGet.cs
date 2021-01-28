@@ -9,6 +9,9 @@ namespace SIPx.Shared
     {
         [Key]
         public int ContentTypeId { get; set; }
+        public string CodePrefix { get; set; }
+        public string CodeSuffix { get; set; }
+        public int CodeTypeId { get; set; }
         public string ContentTypeGroupName { get; set; }
         public string ProcessTemplateName { get; set; }
         public string SecurityLevelName { get; set; }

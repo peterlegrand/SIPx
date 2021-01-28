@@ -28,7 +28,26 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(ProcessTemplateCreateGet ProcessTemplate)
         {
-            string usp = "usp_ProcessTemplateCreatePostCheck @ProcessTemplateGroupId, @Sequence, @LanguageId, @Name, @CreatorId";
+            string usp = "usp_ProcessTemplateCreatePostCheck" +
+                " @ProcessTemplateGroupId , @CodePrefix , @CodeSuffix , @CodeTypeId " +
+                ", @ShowInOrganizationCalendar " +
+                ", @ShowInProjectCalendar " +
+                ", @ShowInPersonalCalendar" +
+                ", @ShowInEventCalendar" +
+                ", @ProcessMultiMax" +
+                ", @Sequence" +
+                ", @IsPersonal" +
+                ", @ShowInNew" +
+                ", @ShowInSearch" +
+                ", @ShowInReports" +
+                ", @HideEverywhere" +
+                ", @Name" +
+                ", @Description" +
+                ", @MenuName" +
+                ", @MouseOver" +
+                ", @Color" +
+                ", @IconId" +
+                ", @UserId";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplate);
             return ErrorMessages;
         }
@@ -36,7 +55,7 @@ namespace SIPx.DataAccess
         public async Task<string> CreatePost(ProcessTemplateCreateGet ProcessTemplate)
         {
             string usp = "usp_ProcessTemplateCreatePost" +
-                " @ProcessTemplateGroupId" +
+                " @ProcessTemplateGroupId , @CodePrefix , @CodeSuffix , @CodeTypeId " +
                 ", @ShowInOrganizationCalendar " +
                 ", @ShowInProjectCalendar " +
                 ", @ShowInPersonalCalendar" +
@@ -74,13 +93,13 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(ProcessTemplateUpdateGet ProcessTemplate)
         {
-            string usp = "usp_ProcessTemplateUpdatePostCheck @ProcessTemplateId, @ProcessTemplateGroupId, @ShowInPersonalCalendar, @ShowInOrganizationCalendar, @ShowInProjectCalendar, @ShowInEventCalendar, @ProcessMultiMax, @Sequence, @IsPersonal, @ShowInNew, @ShowInSearch, @ShowInReports, @HideEverywhere, @Color , @IconId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ProcessTemplateUpdatePostCheck @ProcessTemplateId , @CodePrefix , @CodeSuffix , @CodeTypeId , @ProcessTemplateGroupId, @ShowInPersonalCalendar, @ShowInOrganizationCalendar, @ShowInProjectCalendar, @ShowInEventCalendar, @ProcessMultiMax, @Sequence, @IsPersonal, @ShowInNew, @ShowInSearch, @ShowInReports, @HideEverywhere, @Color , @IconId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProcessTemplate);
             return ErrorMessages;
         }
         public bool UpdatePost(ProcessTemplateUpdateGet ProcessTemplate)
         {
-            string usp = "usp_ProcessTemplateUpdatePost @ProcessTemplateId, @ProcessTemplateGroupId, @ShowInPersonalCalendar, @ShowInOrganizationCalendar, @ShowInProjectCalendar, @ShowInEventCalendar, @ProcessMultiMax, @Sequence, @IsPersonal, @ShowInNew, @ShowInSearch, @ShowInReports, @HideEverywhere, @Color , @IconId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
+            string usp = "usp_ProcessTemplateUpdatePost @ProcessTemplateId, @CodePrefix , @CodeSuffix , @CodeTypeId , @ProcessTemplateGroupId, @ShowInPersonalCalendar, @ShowInOrganizationCalendar, @ShowInProjectCalendar, @ShowInEventCalendar, @ProcessMultiMax, @Sequence, @IsPersonal, @ShowInNew, @ShowInSearch, @ShowInReports, @HideEverywhere, @Color , @IconId , @Name, @Description, @MenuName, @MouseOver, @ModifierId";
             _sqlDataAccess.SaveData<ProcessTemplateUpdateGet>(usp, ProcessTemplate);
             return true;
         }

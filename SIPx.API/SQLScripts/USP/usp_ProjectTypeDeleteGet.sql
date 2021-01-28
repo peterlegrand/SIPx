@@ -6,6 +6,9 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProjectTypes.ProjectTypeID
+	, ProjectTypes.CodePrefix
+	, ProjectTypes.CodeSuffix
+	, ProjectTypes.CodeTypeId
 	, ISNULL(UserLanguage.ProjectTypeLanguageID,ISNULL(DefaultLanguage.ProjectTypeLanguageID,0)) ProjectTypeLanguageID
 	, @LanguageId LanguageId
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this ProjectType')) Name

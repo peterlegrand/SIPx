@@ -3,9 +3,12 @@ CREATE PROCEDURE [dbo].[usp_ProjectTypeCreatePost] (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @Color char(9)
 	, @IconID int
-	, @CreatorId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 SET XACT_ABORT ON;
 BEGIN TRANSACTION

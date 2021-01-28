@@ -1,17 +1,20 @@
-CREATE PROCEDURE [dbo].[usp_ProjectTypeUpdatePost] (
+CREATE PROCEDURE usp_ProjectTypeUpdatePost (
 	@ProjectTypeId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @Color char(9) 
 	, @IconId int 
-	, @ModifierId nvarchar(450)) 
+	, @UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @ModifierID
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 SET XACT_ABORT ON;
@@ -19,7 +22,7 @@ BEGIN TRANSACTION
 UPDATE ProjectTypes SET 
 	 Color = @Color
 	, IconId = @IconId
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = GETDATE()
 WHERE ProjectTypeId = @ProjectTypeID
 
@@ -28,7 +31,7 @@ UPDATE  ProjectTypeLanguages SET
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
-	, ModifierId = @ModifierId
+	, ModifierId = @UserId
 	, ModifiedDate = getdate()
 WHERE ProjectTypeId = @ProjectTypeID
 	AND LanguageID = @LanguageID

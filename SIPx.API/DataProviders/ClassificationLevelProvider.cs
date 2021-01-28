@@ -27,14 +27,14 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(ClassificationLevelCreateGet ClassificationLevel)
         {
-            string usp = "usp_ClassificationLevelCreatePostCheck @ClassificationId, @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID ";
+            string usp = "usp_ClassificationLevelCreatePostCheck @ClassificationId,@CodePrefix , @CodeSuffix , @CodeTypeId , @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationLevel);
             return ErrorMessages;
         }
 
         public bool CreatePost(ClassificationLevelCreateGet ClassificationLevel)
         {
-            string usp = "usp_classificationLevelCreatePost @ClassificationId, @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID";
+            string usp = "usp_classificationLevelCreatePost @ClassificationId,@CodePrefix , @CodeSuffix , @CodeTypeId , @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID";
             _sqlDataAccess.SaveData<ClassificationLevelCreateGet>(usp, ClassificationLevel);
             return true;
         }
@@ -54,13 +54,13 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(ClassificationLevelUpdateGet ClassificationLevel)
         {
-            string usp = "usp_ClassificationLevelUpdatePostCheck @ClassificationLevelId, @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID";
+            string usp = "usp_ClassificationLevelUpdatePostCheck @ClassificationLevelId, @CodePrefix , @CodeSuffix , @CodeTypeId ,@Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ClassificationLevel);
             return ErrorMessages;
         }
         public bool UpdatePost(ClassificationLevelUpdateGet ClassificationLevel)
         {
-            string usp = "usp_classificationLevelUpdatePost @ClassificationLevelId, @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID";
+            string usp = "usp_classificationLevelUpdatePost @ClassificationLevelId,@CodePrefix , @CodeSuffix , @CodeTypeId , @Sequence, @DateLevelId, @OnTheFly, @Alphabetically, @CanLink, @InDropDown, @InMenu,  @Name, @Description, @MenuName, @MouseOver, @UserID";
             _sqlDataAccess.SaveData<ClassificationLevelUpdateGet>(usp, ClassificationLevel);
             return true;
         }

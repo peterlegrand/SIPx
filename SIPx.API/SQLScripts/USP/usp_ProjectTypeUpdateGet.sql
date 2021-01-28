@@ -6,6 +6,9 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProjectTypes.ProjectTypeID
+	, ProjectTypes.CodePrefix
+	, ProjectTypes.CodeSuffix
+	, ProjectTypes.CodeTypeId
 	, ISNULL(UserProjectTypeLanguage.Name,ISNULL(DefaultProjectTypeLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserProjectTypeLanguage.Description,ISNULL(DefaultProjectTypeLanguage.Description,'No description for this role')) Description
 	, ISNULL(UserProjectTypeLanguage.MenuName,ISNULL(DefaultProjectTypeLanguage.MenuName,'No menu name for this role')) MenuName

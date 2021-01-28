@@ -1,5 +1,9 @@
 CREATE PROCEDURE usp_OrganizationCreatePost (
 	@ParentOrganizationId int
+	, @CodePrefix nvarchar(25)
+	, @CodeInt Int
+	, @CodeSuffix nvarchar(25)
+	, @Code nvarchar(50)
 	, @StatusId int 
 	, @OrganizationTypeId int 
 	, @Name nvarchar(50)
@@ -17,6 +21,10 @@ SET XACT_ABORT ON;
 BEGIN TRANSACTION
 INSERT INTO Organizations (
 	ParentOrganizationID
+	, CodePrefix 
+	, CodeInt 
+	, CodeSuffix 
+	, Code 
 	, StatusID
 	, OrganizationTypeID
 	, CreatorID
@@ -25,6 +33,10 @@ INSERT INTO Organizations (
 	, ModifiedDate)
 VALUES (
 	@ParentOrganizationID
+	, @CodePrefix 
+	, @CodeInt
+	, @CodeSuffix 
+	, @Code 
 	, @StatusID
 	, @OrganizationTypeID
 	, @UserId

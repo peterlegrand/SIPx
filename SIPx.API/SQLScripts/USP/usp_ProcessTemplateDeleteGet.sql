@@ -6,6 +6,9 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProcessTemplates.ProcessTemplateID
+	, ProcessTemplates.CodePrefix
+	, ProcessTemplates.CodeSuffix
+	, ProcessTemplates.CodeTypeId
 	, ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this ')) Name
 	, ISNULL(UserProcessTemplateLanguage.Description,ISNULL(DefaultProcessTemplateLanguage.Description,'No description for this ')) Description
 	, ISNULL(UserProcessTemplateLanguage.MenuName,ISNULL(DefaultProcessTemplateLanguage.MenuName,'No menu name for this ')) MenuName

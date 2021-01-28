@@ -1,5 +1,9 @@
 CREATE PROCEDURE usp_OrganizationCreatePostCheck (
 	 @ParentOrganizationId int
+	, @CodePrefix nvarchar(25)
+	, @CodeInt Int
+	, @CodeSuffix nvarchar(25)
+	, @Code nvarchar(50)
 	, @StatusId int 
 	, @OrganizationTypeId int 
 	, @Name nvarchar(50)

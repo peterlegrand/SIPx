@@ -6,6 +6,9 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ContentTypes.ContentTypeID
+	, ContentTypes.CodePrefix
+	, ContentTypes.CodeSuffix
+	, ContentTypes.CodeTypeId
 	, @LanguageId LanguageId
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this content type')) Name
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this content type')) Description

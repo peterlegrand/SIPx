@@ -1,5 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeCreatePost] (
 	@ContentTypeGroupId int 
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @ProcessTemplateId int
 	, @SecurityLevelId int
 	, @Name nvarchar(50)
@@ -49,6 +52,9 @@ BEGIN TRANSACTION
 
 INSERT INTO ContentTypes (
 	ContentTypeGroupID
+	, CodePrefix 
+	, CodeSuffix 
+	, CodeTypeId 
 	, ProcessTemplateID
 	, SecurityLevelID
 	, IsRelationBasedOwnership
@@ -87,6 +93,9 @@ INSERT INTO ContentTypes (
 	, ModifiedDate)
 VALUES (
 	@ContentTypeGroupID
+	, @CodePrefix 
+	, @CodeSuffix 
+	, @CodeTypeId 
 	, @ProcessTemplateID
 	, @SecurityLevelID
 	, @IsRelationBasedOwnership

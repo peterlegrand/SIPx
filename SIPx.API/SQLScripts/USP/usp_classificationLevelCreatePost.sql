@@ -1,5 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_classificationLevelCreatePost] (
 	@ClassificationId int
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @Sequence int
 	, @DateLevelId int
 	, @OnTheFly bit
@@ -27,6 +30,9 @@ WHERE ClassificationId = @ClassificationId
 
 INSERT INTO ClassificationLevels (
 	ClassificationId 
+	, CodePrefix 
+	, CodeSuffix 
+	, CodeTypeId 
 	, Sequence 
 	, DateLevelId 
 	, OnTheFly 
@@ -39,7 +45,10 @@ INSERT INTO ClassificationLevels (
 	, ModifierID
 	, ModifiedDate) 
 VALUES (
-	@ClassificationId 
+	@ClassificationId
+	, @CodePrefix 
+	, @CodeSuffix 
+	, @CodeTypeId 
 	, @Sequence 
 	, @DateLevelId 
 	, @OnTheFly 

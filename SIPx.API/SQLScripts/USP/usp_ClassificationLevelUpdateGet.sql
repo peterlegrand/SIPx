@@ -7,6 +7,9 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ClassificationLevels.ClassificationLevelID
 	, ClassificationLevels.ClassificationID
+	, ClassificationLevels.CodePrefix
+	, ClassificationLevels.CodeSuffix
+	, ClassificationLevels.CodeTypeId
 	, ISNULL(UserClassificationLevelLanguage.ClassificationLevelLanguageId,ISNULL(DefaultClassificationLevelLanguage.ClassificationLevelLanguageId,0)) ClassificationLevelLanguageId
 	, ISNULL(UserClassificationLevelLanguage.Name,ISNULL(DefaultClassificationLevelLanguage.Name,'No name for this role')) Name
 	, ISNULL(UserClassificationLevelLanguage.Description,ISNULL(DefaultClassificationLevelLanguage.Description,'No description for this role')) Description

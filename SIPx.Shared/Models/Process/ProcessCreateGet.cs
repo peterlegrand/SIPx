@@ -10,6 +10,10 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProcessTemplateId { get; set; }
+        public string CodePrefix { get; set; }
+        public int CodeInt { get; set; }
+        public string CodeSuffix { get; set; }
+        public string Code { get; set; }
         public string ProcessTemplateName { get; set; }
         public string ProcessTemplateStageId { get; set; }
         public string ProcessTemplateStageName { get; set; }

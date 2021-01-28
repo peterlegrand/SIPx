@@ -7,7 +7,10 @@ namespace SIPx.Shared
 {
     public class PersonCreateGet
     {
-        [Key]
+        public string CodePrefix { get; set; }
+        public int CodeInt { get; set; }
+        public string CodeSuffix { get; set; }
+        public string Code { get; set; }
         public string Salutation { get; set; }
 
         //[Required(ErrorMessage = "Choose first name")]

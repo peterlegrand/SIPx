@@ -1,6 +1,9 @@
 CREATE PROCEDURE usp_OrganizationTypeCreatePost (
 	@Internal bit
 	, @LegalEntity bit
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -22,6 +25,9 @@ BEGIN TRANSACTION
 INSERT INTO OrganizationTypes (
 	Internal
 	, LegalEntity
+	, CodePrefix 
+	, CodeSuffix 
+	, CodeTypeId 
 	, Color
 	, IconId
 	, CreatorID
@@ -31,6 +37,9 @@ INSERT INTO OrganizationTypes (
 VALUES (
 	@Internal
 	, @LegalEntity
+	, @CodePrefix 
+	, @CodeSuffix 
+	, @CodeTypeId 
 	, @Color
 	, @IconId
 	, @UserID

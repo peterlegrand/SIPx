@@ -9,6 +9,10 @@ namespace SIPx.Shared
     {
         [Key]
         public int? ParentProjectId { get; set; }
+        public string CodePrefix { get; set; }
+        public int CodeInt { get; set; }
+        public string CodeSuffix { get; set; }
+        public string Code { get; set; }
         public string ProjectParentName { get; set; }
         public int StatusId { get; set; }
         public int ProjectTypeId { get; set; }

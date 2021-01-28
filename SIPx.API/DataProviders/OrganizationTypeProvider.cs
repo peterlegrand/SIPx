@@ -22,14 +22,14 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(OrganizationTypeCreateGet OrganizationType)
         {
-            string usp = "usp_OrganizationTypeCreatePostCheck @Internal, @LegalEntity, @Name, @Description,  @MenuName, @MouseOver,@Color, @IconId, @UserId ";
+            string usp = "usp_OrganizationTypeCreatePostCheck @Internal, @LegalEntity,@CodePrefix , @CodeSuffix , @CodeTypeId ,  @Name, @Description,  @MenuName, @MouseOver,@Color, @IconId, @UserId ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationType);
             return ErrorMessages;
         }
 
         public async Task<string> CreatePost(OrganizationTypeCreateGet OrganizationType)
         {
-            string usp = "usp_OrganizationTypeCreatePost @Internal, @LegalEntity, @Name, @Description,  @MenuName, @MouseOver,@Color, @IconId, @UserId ";
+            string usp = "usp_OrganizationTypeCreatePost @Internal, @LegalEntity,@CodePrefix , @CodeSuffix , @CodeTypeId ,  @Name, @Description,  @MenuName, @MouseOver,@Color, @IconId, @UserId ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationType);
             return String;
         }
@@ -49,13 +49,13 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(OrganizationTypeUpdateGet OrganizationType)
         {
-            string usp = "usp_OrganizationTypeUpdatePostCheck @LanguageId, @Name, @UserId ";
+            string usp = "usp_OrganizationTypeUpdatePostCheck @OrganizationTypeId,  @Internal, @LegalEntity,@CodePrefix , @CodeSuffix , @CodeTypeId ,  @Name, @Description, @MenuName, @MouseOver,  @ModifierId";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationType);
             return ErrorMessages;
         }
         public bool UpdatePost(OrganizationTypeUpdateGet OrganizationType)
         {
-            string usp = "usp_OrganizationTypeUpdatePost @OrganizationTypeId,  @Internal, @LegalEntity, @Name, @Description, @MenuName, @MouseOver,  @ModifierId";
+            string usp = "usp_OrganizationTypeUpdatePost @OrganizationTypeId,  @Internal, @LegalEntity,@CodePrefix , @CodeSuffix , @CodeTypeId ,  @Name, @Description, @MenuName, @MouseOver,  @ModifierId";
             _sqlDataAccess.SaveData<OrganizationTypeUpdateGet>(usp, OrganizationType);
             return true;
         }

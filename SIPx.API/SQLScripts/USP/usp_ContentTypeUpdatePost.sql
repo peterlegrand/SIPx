@@ -1,5 +1,8 @@
 CREATE PROCEDURE usp_ContentTypeUpdatePost (
 	 @ContentTypeId int
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @ContentTypeGroupId int
 	, @ProcessTemplateId int
 	, @SecurityLevelId int
@@ -51,6 +54,9 @@ SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE ContentTypes SET 
 	ContentTypeGroupID= @ContentTypeGroupID
+	, CodePrefix =@CodePrefix 
+	, CodeSuffix =@CodeSuffix 
+	, CodeTypeId =@CodeTypeId 
 	, ProcessTemplateId = @ProcessTemplateID
 	, SecurityLevelId = @SecurityLevelID
 	, IsRelationBasedOwnership = @IsRelationBasedOwnership 

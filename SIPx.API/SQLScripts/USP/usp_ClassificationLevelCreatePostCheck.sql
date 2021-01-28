@@ -1,5 +1,8 @@
 CREATE PROCEDURE usp_ClassificationLevelCreatePostCheck (
 	@ClassificationId int
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @Sequence int
 	, @DateLevelId int
 	, @OnTheFly bit

@@ -1,5 +1,12 @@
 CREATE PROCEDURE usp_ProjectTypeCreatePostCheck (
-		 @Name nvarchar(50)
+	 @Name nvarchar(50)
+	, @Description nvarchar(max)
+	, @MenuName nvarchar(50)
+	, @MouseOver nvarchar(50)
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
+	, @Color char(9)
 	, @IconID int
 	, @UserId nvarchar(450)) 
 AS 

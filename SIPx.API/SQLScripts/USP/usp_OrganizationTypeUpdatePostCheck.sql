@@ -1,5 +1,8 @@
 CREATE PROCEDURE usp_OrganizationTypeUpdatePostCheck (
 		@OrganizationTypeId int
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @Name nvarchar(50)
 	, @IconId int
 	, @UserId nvarchar(450)) 

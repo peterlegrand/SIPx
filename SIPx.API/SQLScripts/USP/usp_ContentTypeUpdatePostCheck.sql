@@ -1,5 +1,8 @@
 CREATE PROCEDURE usp_ContentTypeUpdatePostCheck (
 	 @ContentTypeId int
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @ContentTypeGroupId int
 	, @ProcessTemplateId int
 	, @SecurityLevelId int

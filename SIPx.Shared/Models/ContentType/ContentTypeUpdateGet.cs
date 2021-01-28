@@ -11,7 +11,10 @@ namespace SIPx.Shared
         public int ContentTypeId { get; set; }
         public int ContentTypeGroupId { get; set; }
         public int ProcessTemplateId { get; set; }
-        public int ContentTypeLanguageId { get; set; }
+        public string CodePrefix { get; set; }
+        public string CodeSuffix { get; set; }
+        public int CodeTypeId { get; set; }
+        //public int ContentTypeLanguageId { get; set; }
         public int SecurityLevelId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

@@ -1,5 +1,8 @@
 CREATE PROCEDURE usp_ProcessTemplateCreatePostCheck (
 	 @ProcessTemplateGroupId int
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @ShowInPersonalCalendar bit
 	, @ShowInOrganizationCalendar bit
 	, @ShowInProjectCalendar bit

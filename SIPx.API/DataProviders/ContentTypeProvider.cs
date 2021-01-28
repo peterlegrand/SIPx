@@ -39,7 +39,7 @@ namespace SIPx.DataAccess
                 , ContentTypeClassification.ObjectTypeClassificationStatusId);
 
             }
-            string usp = "usp_ContentTypeCreatePostCheck @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
+            string usp = "usp_ContentTypeCreatePostCheck @ContentTypeGroupId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
  " , @IsRelationBasedOwnership " +
            " , @IsProjectBasedOwnership " +
            " , @IsOrganizationBasedOwnership " +
@@ -171,7 +171,7 @@ namespace SIPx.DataAccess
                 , ContentTypeClassification.ObjectTypeClassificationStatusId);
 
             }
-            string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
+            string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
    " , @IsRelationBasedOwnership " +
              " , @IsProjectBasedOwnership " +
              " , @IsOrganizationBasedOwnership " +
@@ -300,7 +300,7 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(ContentTypeUpdateGet ContentType)
         {
-            string usp = "usp_ContentTypeUpdatePostCheck @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId " +
+            string usp = "usp_ContentTypeUpdatePostCheck @ContentTypeId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId " +
              " , @IsRelationBasedOwnership " +
              " , @IsProjectBasedOwnership " +
              " , @IsOrganizationBasedOwnership " +
@@ -435,7 +435,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ContentTypeUpdateGet ContentType)
         {
-            string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @IsRelationBasedOwnership " +
+            string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @CodePrefix , @CodeSuffix , @CodeTypeId ,  @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @IsRelationBasedOwnership " +
    " , @IsProjectBasedOwnership " +
    " , @IsOrganizationBasedOwnership " +
    " , @IsFreeOwnership " +

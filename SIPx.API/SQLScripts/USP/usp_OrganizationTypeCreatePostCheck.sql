@@ -1,6 +1,9 @@
 CREATE PROCEDURE usp_OrganizationTypeCreatePostCheck (
 		@Internal bit
 	, @LegalEntity bit
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)

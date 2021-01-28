@@ -9,6 +9,10 @@ namespace SIPx.Shared
     {
         [Key]
         public int OrganizationTypeId { get; set; }
+        public string CodePrefix { get; set; }
+        public int CodeInt { get; set; }
+        public string CodeSuffix { get; set; }
+        public string Code { get; set; }
         public int? ParentOrganizationId { get; set; }
         public string ParentOrganizationName { get; set; }
         public int StatusId { get; set; }

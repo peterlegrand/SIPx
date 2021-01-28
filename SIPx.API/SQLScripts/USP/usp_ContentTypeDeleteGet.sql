@@ -6,6 +6,9 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ContentTypes.ContentTypeID
+	, ContentTypes.CodePrefix
+	, ContentTypes.CodeSuffix
+	, ContentTypes.CodeTypeId
 	, @LanguageId LanguageId
 	, ContentTypeGroups.Sequence
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName

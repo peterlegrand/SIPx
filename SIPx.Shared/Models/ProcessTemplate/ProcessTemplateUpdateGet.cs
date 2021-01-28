@@ -9,6 +9,9 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProcessTemplateId { get; set; }
+        public string CodePrefix { get; set; }
+        public string CodeSuffix { get; set; }
+        public int CodeTypeId { get; set; }
         public int ProcessTemplateGroupId { get; set; }
         public int ProcessTemplateLanguageId { get; set; }
         public bool ShowInPersonalCalendar { get; set; }

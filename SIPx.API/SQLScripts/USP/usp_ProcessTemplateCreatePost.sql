@@ -1,5 +1,8 @@
 CREATE PROCEDURE usp_ProcessTemplateCreatePost (
 	 @ProcessTemplateGroupId int
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @ShowInPersonalCalendar bit
 	, @ShowInOrganizationCalendar bit
 	, @ShowInProjectCalendar bit
@@ -34,6 +37,9 @@ WHERE ProcessTemplateGroupId = @ProcessTemplateGroupID
 
 INSERT INTO ProcessTemplates (
 	ProcessTemplateGroupID
+	, CodePrefix 
+	, CodeSuffix 
+	, CodeTypeId 
 	, ShowInPersonalCalendar
 	, ShowInOrganizationCalendar
 	, ShowInProjectCalendar
@@ -53,6 +59,9 @@ INSERT INTO ProcessTemplates (
 	, ModifiedDate)
 VALUES (
 	@ProcessTemplateGroupID
+	, @CodePrefix 
+	, @CodeSuffix 
+	, @CodeTypeId 
 	, @ShowInPersonalCalendar
 	, @ShowInOrganizationCalendar
 	, @ShowInProjectCalendar

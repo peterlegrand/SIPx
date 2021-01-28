@@ -9,6 +9,9 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProjectTypeId { get; set; }
+        public string CodePrefix { get; set; }
+        public string CodeSuffix { get; set; }
+        public int CodeTypeId { get; set; }
         public int ProjectTypeLanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

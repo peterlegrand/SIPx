@@ -1,5 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_ProcessTemplateUpdatePost] (
 	@ProcessTemplateId int
+	, @CodePrefix nvarchar(25)
+	, @CodeSuffix nvarchar(25)
+	, @CodeTypeId int
 	, @ProcessTemplateGroupId int
 	, @ShowInPersonalCalendar bit
 	, @ShowInOrganizationCalendar bit
@@ -42,6 +45,9 @@ END
 
 UPDATE ProcessTemplates SET 
 		ProcessTemplateGroupId  = @ProcessTemplateGroupId 
+	, CodePrefix =@CodePrefix 
+	, CodeSuffix =@CodeSuffix 
+	, CodeTypeId =@CodeTypeId 
 	, ShowInPersonalCalendar = @ShowInPersonalCalendar 
 	, ShowInOrganizationCalendar = @ShowInOrganizationCalendar 
 	, ShowInProjectCalendar  = @ShowInProjectCalendar 
