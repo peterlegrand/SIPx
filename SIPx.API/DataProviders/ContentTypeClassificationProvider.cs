@@ -48,7 +48,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ContentTypeClassificationUpdateGet ContentTypeClassification)
         {
-            string usp = "usp_ContentTypeClassificationUpdatePost @ContentTypeClassificationId, @ContentTypeClassificationStatusId, @UserId";
+            string usp = "usp_ContentTypeClassificationUpdatePost @ContentTypeClassificationId, @ObjectTypeClassificationStatusId, @UserId";
             _sqlDataAccess.SaveData<ContentTypeClassificationUpdateGet>(usp, ContentTypeClassification);
             return true;
         }

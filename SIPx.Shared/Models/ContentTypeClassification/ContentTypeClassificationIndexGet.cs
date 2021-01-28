@@ -13,7 +13,7 @@ namespace SIPx.Shared
         public int ClassificationId { get; set; }
         public string ContentTypeName { get; set; }
         public string ClassificationName { get; set; }
-        public int ContentTypeClassificationStatusId { get; set; }
+        public int ObjectTypeClassificationStatusId { get; set; }
         public string ContentTypeClassificationStatusName { get; set; }
         public string ModifierId { get; set; }
         public string ModifierName { get; set; }

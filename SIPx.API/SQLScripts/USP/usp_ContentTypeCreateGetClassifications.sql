@@ -6,7 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT Classifications.ClassificationId
-	, 1 ContentTypeClassificationStatusId
+	, 1 ObjectTypeClassificationStatusId
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this classification')) MouseOver
 	, concat( 'ControlA' , Classifications.ClassificationID) ControlA

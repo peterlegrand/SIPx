@@ -16,7 +16,7 @@ LEFT JOIN (SELECT ClassificationId, Name FROM ClassificationLanguages WHERE Lang
 LEFT JOIN (SELECT ClassificationId, Name FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationLanguage
 	ON DefaultClassificationLanguage.ClassificationId = ContentTypeClassifications.ClassificationID
 JOIN ContentTypeClassificationStatuses
-	ON ContentTypeClassifications.ContentTypeClassificationStatusId = ContentTypeClassificationStatuses.ContentTypeClassificationStatusID
+	ON ContentTypeClassifications.ObjectTypeClassificationStatusId = ObjectTypeClassificationStatuses.ObjectTypeClassificationStatusID
 JOIN UITermLanguages UIName
 	ON UIName.UITermId = ContentTypeClassificationStatuses.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom

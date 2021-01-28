@@ -97,7 +97,7 @@ UPDATE  ContentTypeLanguages SET
 WHERE ContentTypeID= @ContentTypeID	
 	AND LanguageID = @LanguageID
 
-UPDATE ContentTypeClassifications SET ContentTypeClassifications.ContentTypeClassificationStatusId = UDT.ContentTypeClassificationStatusID , ModifierId = @UserId, ModifiedDate = getdate()
+UPDATE ContentTypeClassifications SET ContentTypeClassifications.ObjectTypeClassificationStatusId = UDT.ObjectTypeClassificationStatusId , ModifierId = @UserId, ModifiedDate = getdate()
 FROM  ContentTypeClassifications JOIN @ContentTypeClassificationTable UDT ON UDT.ClassificationId = ContentTypeClassifications.ClassificationID 
 WHERE ContentTypeClassifications.ContentTypeID = @ContentTypeId
 

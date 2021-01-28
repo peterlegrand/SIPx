@@ -10,7 +10,7 @@ namespace SIPx.DataAccess
         //Task<ContentStatus> ContentStatusUpdateGet(string UserId, int ContentStatusId);
         //Task<List<ContentTypeClassification>> ContentTypeClassificationIndexGet(string UserId, int ContentTypeId);
         //Task<List<ContentTypeClassificationStatus>> ContentTypeClassificationStatusIndexGet(string UserId);
-        //Task<ContentTypeClassificationStatus> ContentTypeClassificationStatusUpdateGet(string UserId, int ContentTypeClassificationStatusId);
+        //Task<ContentTypeClassificationStatus> ContentTypeClassificationStatusUpdateGet(string UserId, int ObjectTypeClassificationStatusId);
         //Task<ContentTypeClassification> ContentTypeClassificationUpdateGet(string UserId, int ContentTypeClassificationId);
         //Task<string> ContentTypeCreatePost(ContentTypeCreatePost ContentType);
         //Task<string> ContentTypeCreatePostCheck(ContentTypeCreatePost ContentType);

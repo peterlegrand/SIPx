@@ -29,10 +29,10 @@ namespace SIPx.DataAccess
 
         //PETER This is a uiterms table
 
-        //public Task<ContentTypeClassificationStatus> ContentTypeClassificationStatusUpdateGet(string UserId, int ContentTypeClassificationStatusId)
+        //public Task<ContentTypeClassificationStatus> ContentTypeClassificationStatusUpdateGet(string UserId, int ObjectTypeClassificationStatusId)
         //{
-        //    string usp = "usp_ContentTypeClassificationStatusUpdateGet @UserId, @ContentTypeClassificationStatusID";
-        //    return _sqlDataAccess.LoadSingleRecord<ContentTypeClassificationStatus, dynamic>(usp, new { UserId = UserId, ContentTypeClassificationStatusId = ContentTypeClassificationStatusId });
+        //    string usp = "usp_ContentTypeClassificationStatusUpdateGet @UserId, @ObjectTypeClassificationStatusId";
+        //    return _sqlDataAccess.LoadSingleRecord<ContentTypeClassificationStatus, dynamic>(usp, new { UserId = UserId, ObjectTypeClassificationStatusId = ObjectTypeClassificationStatusId });
 
         //}
         public async Task<List<ContentTypeClassificationStatusList>> List(string UserId)

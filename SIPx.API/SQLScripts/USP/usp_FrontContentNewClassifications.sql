@@ -23,6 +23,6 @@ LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver, Clas
 LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver, ClassificationLanguageID FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
 	ON DefaultLanguage.ClassificationId = ContentTypeClassifications.ClassificationID
 	
-WHERE ContentTypeClassifications.ContentTypeClassificationStatusID IN (2,3)
+WHERE ContentTypeClassifications.ObjectTypeClassificationStatusId IN (2,3)
 	AND ContentTypeID = @ContentTypeId
 ORDER BY Classifications.DropDownSequence

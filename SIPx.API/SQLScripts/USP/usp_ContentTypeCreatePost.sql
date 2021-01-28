@@ -150,8 +150,8 @@ VALUES (
 	, @UserID
 	, getdate())
 
-INSERT INTO ContentTypeClassifications ( ContentTypeId, ClassificationId, ContentTypeClassificationStatusId, ModifierId, ModifiedDate)
-SELECT @NewContentTypeId, ClassificationId, ContentTypeClassificationStatusId, @UserId, getdate() FROM @ContentTypeClassificationTable
+INSERT INTO ContentTypeClassifications ( ContentTypeId, ClassificationId, ObjectTypeClassificationStatusId, ModifierId, ModifiedDate)
+SELECT @NewContentTypeId, ClassificationId, ObjectTypeClassificationStatusId, @UserId, getdate() FROM @ContentTypeClassificationTable
 
 
 	COMMIT TRANSACTION

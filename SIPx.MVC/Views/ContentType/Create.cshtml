@@ -127,8 +127,8 @@
                     <ejs-numerictextbox id="@Model.ContentTypeClassifications[i].ControlA" ejs-for="@Model.ContentTypeClassifications[i].ClassificationId" cssClass="e-outline" placeholder="ID" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
                 </div>
                 <div class="col-9">
-                    <ejs-dropdownlist id="@Model.ContentTypeClassifications[i].ControlB" dataSource="@Model.ContentTypeClassificationStatuses" ejs-for="@Model.ContentTypeClassifications[i].ContentTypeClassificationStatusId" value="@Model.ContentTypeClassifications[i].ContentTypeClassificationStatusId" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ContentTypeClassificationStatusId"></e-dropdownlist-fields>
+                    <ejs-dropdownlist id="@Model.ContentTypeClassifications[i].ControlB" dataSource="@Model.ContentTypeClassificationStatuses" ejs-for="@Model.ContentTypeClassifications[i].ObjectTypeClassificationStatusId" value="@Model.ContentTypeClassifications[i].ObjectTypeClassificationStatusId" popupHeight="220px">
+                        <e-dropdownlist-fields text="Name" value="ObjectTypeClassificationStatusId"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
                 </div>
             </div>

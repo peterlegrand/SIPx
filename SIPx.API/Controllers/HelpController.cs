@@ -28,14 +28,14 @@ namespace SIPx.API.Controllers
         }
 
 
-        [HttpGet("Show/{Id:int}")]
-        public async Task<IActionResult> Delete(int Id)
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-                var x = await _classificationProvider.DeleteGet(CurrentUser.Id, Id);
-                return Ok(x);
+        //[HttpGet("Show/{Id:int}")]
+        //public async Task<IActionResult> Delete(int Id)
+        //{
+        //    var CurrentUser = await _userManager.GetUserAsync(User);
+        //        var x = await _classificationProvider.DeleteGet(CurrentUser.Id, Id);
+        //        return Ok(x);
 
-        }
+        //}
 
 
     }

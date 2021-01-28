@@ -1,6 +1,6 @@
 CREATE PROCEDURE usp_ContentTypeClassificationUpdatePostCheck (
 	@ContentTypeClassificationId int
-	, @ContentTypeClassificationStatusId int
+	, @ObjectTypeClassificationStatusId int
 	, @UserId nvarchar(450)
 ) 
 	
@@ -20,7 +20,7 @@ BEGIN
 insert into @ErrorIdsTable values(105)
 END
 
-IF (SELECT COUNT(*) FROM ContentTypeClassificationStatuses WHERE ContentTypeClassificationStatusId = @ContentTypeClassificationStatusId) = 0
+IF (SELECT COUNT(*) FROM ContentTypeClassificationStatuses WHERE ObjectTypeClassificationStatusId = @ObjectTypeClassificationStatusId) = 0
 BEGIN
 insert into @ErrorIdsTable values(106)
 END

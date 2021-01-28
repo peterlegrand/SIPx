@@ -5,7 +5,7 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
-SELECT ContentTypeClassificationStatuses.ContentTypeClassificationStatusId 
+SELECT ObjectTypeClassificationStatuses.ObjectTypeClassificationStatusID 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
 	, ISNULL(UIMenuNameCustom.Customization,UIMenuName.Name) MenuName

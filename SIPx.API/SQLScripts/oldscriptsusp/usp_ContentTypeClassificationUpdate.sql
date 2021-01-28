@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeClassificationUpdate] (
 	@ContentTypeClassificationId int
-	, @ContentTypeClassificationStatusId int
+	, @ObjectTypeClassificationStatusId int
 	, @UserId nvarchar(450)) 
 AS 
 UPDATE ContentTypeClassifications SET 
-	ContentTypeClassificationStatusId = @ContentTypeClassificationStatusID
+	ObjectTypeClassificationStatusId = @ObjectTypeClassificationStatusId
 	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()
 WHERE ContentTypeClassificationID= @ContentTypeClassificationID

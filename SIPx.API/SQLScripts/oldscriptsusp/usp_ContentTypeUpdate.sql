@@ -31,7 +31,7 @@ UPDATE  ContentTypeLanguages SET
 WHERE ContentTypeLanguageID= @ContentTypeLanguageID
 
 UPDATE ContentTypeClassifications SET 
-ContentTypeClassifications.ContentTypeClassificationStatusId = UpdateData.ContentTypeClassificationStatusID
+ContentTypeClassifications.ObjectTypeClassificationStatusId = UpdateData.ObjectTypeClassificationStatusId
 FROM ContentTypeClassifications
 INNER JOIN
 @ContentTypeClassificationTable UpdateData

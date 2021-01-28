@@ -9,7 +9,7 @@ namespace SIPx.Shared
     //public class ContentTypeClassificationStatus
     //{
     //    [Key]
-    //    public int ContentTypeClassificationStatusId { get; set; }
+    //    public int ObjectTypeClassificationStatusId { get; set; }
     //    public string Name { get; set; }
     //    public string Description { get; set; }
     //    public string MenuName { get; set; }

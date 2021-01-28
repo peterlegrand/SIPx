@@ -193,12 +193,47 @@ INSERT INTO Languages (LanguageId, ForeignName, ISO6391, ISO6392, StatusId, Name
 , (184,N'isiZulu', 'zu', 'zul', 2, 876, @User, getdate())
 SET IDENTITY_INSERT Languages OFF
 
-SET IDENTITY_INSERT Settings ON
-INSERT INTO Settings (SettingId, IntValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (1,41,120,120,120,120,1, @User, getdate());
-INSERT INTO Settings (SettingId, IntValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (2,1,1,1,1,1,1, @User, getdate());
-INSERT INTO Settings (SettingId, IntValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (3,1,1373,1373,1373,1373,1, @User, getdate());
-INSERT INTO Settings (SettingId, StringValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermId, TypeID, ModifierId, ModifiedDate) VALUES (4,@User,1601,1601,1601,1601,1, @User, getdate());
-SET IDENTITY_INSERT Settings OFF
+
+
+
+
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (1, 41, NULL, NULL, NULL, NULL, 120, 120, 120, 120, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (2, 1, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (3, 1, NULL, NULL, NULL, NULL, 1373, 1373, 1373, 1373, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (4, NULL, @User, NULL, NULL, NULL, 1601, 1601, 1601, 1601, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (5, NULL, NULL, NULL, NULL, 0, 3883, 3883, 3883, 3883, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (6, NULL, NULL, NULL, NULL, 1, 3884, 3884, 3884, 3884, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (7, NULL, NULL, NULL, NULL, 0, 3885, 3885, 3885, 3885, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (8, NULL, NULL, NULL, NULL, 0, 3886, 3886, 3886, 3886, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (9, NULL, NULL, NULL, NULL, 0, 3887, 3887, 3887, 3887, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (10, NULL, NULL, NULL, NULL, 0, 3888, 3888, 3888, 3888, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (11, NULL, NULL, NULL, NULL, 0, 3889, 3889, 3889, 3889, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (12, NULL, NULL, NULL, NULL, 0, 3890, 3890, 3890, 3890, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (13, NULL, N'-', NULL, NULL, NULL, 3891, 3891, 3891, 3891, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (14, 2, NULL, NULL, NULL, NULL, 3892, 3892, 3892, 3892, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (15, 2, NULL, NULL, NULL, NULL, 3893, 3893, 3893, 3893, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (16, 2, NULL, NULL, NULL, NULL, 3894, 3894, 3894, 3894, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (17, 2, NULL, NULL, NULL, NULL, 3895, 3895, 3895, 3895, 1, @User, getdate())
+
+INSERT [dbo].[Settings] ([SettingID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [BoolValue], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], [TypeID], [ModifierID], [ModifiedDate]) VALUES (18, 2, NULL, NULL, NULL, NULL, 3896, 3896, 3896, 3896, 1, @User, getdate())
+
 
 SET IDENTITY_INSERT DateLevels ON
 INSERT INTO DateLevels (DateLevelId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES (1, 328, 328, 328, 328),
@@ -225,13 +260,6 @@ INSERT INTO ContentStatuses (ContentStatusId, NameTermId, DescriptionTermId, Men
 , (3,337,337,337,337)
 , (4,338,338,338,338)
 SET IDENTITY_INSERT ContentStatuses OFF;
-
-SET IDENTITY_INSERT ContentTypeClassificationStatuses ON;
-INSERT INTO ContentTypeClassificationStatuses (ContentTypeClassificationStatusId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-  (1,339,339,339,339)
-, (2,340,340,340,340)
-, (3,341,341,341,341)
-SET IDENTITY_INSERT ContentTypeClassificationStatuses OFF;
 
 SET IDENTITY_INSERT SortBys ON;
 INSERT INTO SortBys (SortById, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
@@ -1138,11 +1166,6 @@ INSERT INTO TelecomTypes (TelecomTypeId, PhoneProperties, NameTermId, Descriptio
 (10,0, 1595,1595,1595,1595,1, @user, getdate())
 SET IDENTITY_INSERT TelecomTypes OFF;
 
-SET IDENTITY_INSERT ProcessTemplateStageFieldStatuses ON;
-INSERT INTO ProcessTemplateStageFieldStatuses (ProcessTemplateStageFieldStatusId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(1,679,679,679,679), (2,680,680,680,680),(3,681,681,681,681),(4,682,682,682,682);
-SET IDENTITY_INSERT ProcessTemplateStageFieldStatuses OFF;
-
 SET IDENTITY_INSERT RoleGroupLanguages ON;
 INSERT INTO RoleGroupLanguages (RoleGroupLanguageId, RoleGroupId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
 VALUES(1,1,41,'Admin','Admin','Admin','Admin',@User,@User,getdate(),getdate());
@@ -1637,4 +1660,49 @@ INSERT [dbo].[MetaTypes] ([MetaTypeID], [NameTermID], [DescriptionTermID], [Menu
 SET IDENTITY_INSERT [dbo].[MetaTypes] OFF
 
 
+
+
+SET IDENTITY_INSERT [dbo].[ExplanationTypes] ON 
+
+INSERT [dbo].[ExplanationTypes] ([ExplanationTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 3882, 3882, 3882, 3882)
+
+SET IDENTITY_INSERT [dbo].[ExplanationTypes] OFF
+
+SET IDENTITY_INSERT [dbo].[ObjectTypeClassificationStatuses] ON 
+
+INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 339, 339, 339, 339)
+
+INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 340, 340, 340, 340)
+
+INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 341, 341, 341, 341)
+
+SET IDENTITY_INSERT [dbo].[ObjectTypeClassificationStatuses] OFF
+
+SET IDENTITY_INSERT [dbo].[ProcessTemplateStageFieldStatuses] ON 
+
+INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 679, 679, 679, 679)
+
+INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 680, 680, 680, 680)
+
+INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 681, 681, 681, 681)
+
+INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 682, 682, 682, 682)
+
+INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 3879, 3879, 3879, 3879)
+
+INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (6, 3880, 3880, 3880, 3880)
+
+INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (7, 3881, 3881, 3881, 3881)
+
+SET IDENTITY_INSERT [dbo].[ProcessTemplateStageFieldStatuses] OFF
+
+SET IDENTITY_INSERT [dbo].[CodeTypes] ON 
+
+INSERT [dbo].[CodeTypes] ([CodeTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 3897, 3897, 3897, 3897)
+
+INSERT [dbo].[CodeTypes] ([CodeTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 3898, 3898, 3898, 3898)
+
+INSERT [dbo].[CodeTypes] ([CodeTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 3899, 3899, 3899, 3899)
+
+SET IDENTITY_INSERT [dbo].[CodeTypes] OFF
 

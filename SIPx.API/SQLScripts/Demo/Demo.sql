@@ -44,11 +44,11 @@ SET IDENTITY_INSERT ClassificationRoles OFF;
 
 
 SET IDENTITY_INSERT ClassificationLevels ON;
-INSERT INTO ClassificationLevels (ClassificationLevelId, ClassificationId, Sequence, DateLevelId, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, 1, 0, 0, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
-, (2, 1, 2, 1, 0, 0, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
-, (3, 2, 1, 1, 0, 0, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
-, (4, 3, 1, 1, 0, 0, 1, 1, 1, @User, @User, GETDATE(), GETDATE())
+INSERT INTO ClassificationLevels (ClassificationLevelId, ClassificationId, Sequence, DateLevelId, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CodeTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1, 1, 0, 0, 1, 1, 1,2, @User, @User, GETDATE(), GETDATE())
+, (2, 1, 2, 1, 0, 0, 1, 1, 1,2, @User, @User, GETDATE(), GETDATE())
+, (3, 2, 1, 1, 0, 0, 1, 1, 1,2, @User, @User, GETDATE(), GETDATE())
+, (4, 3, 1, 1, 0, 0, 1, 1, 1,2, @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ClassificationLevels OFF;
 
 SET IDENTITY_INSERT ClassificationLevelLanguages ON;
@@ -260,10 +260,10 @@ INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId, Is
  , IsRelationBasedRead  ,IsRelationBasedReadSelectable  ,IsOrganizationBasedRead  ,IsOrganizationBasedReadSelectable  ,IsOrganizationBasedReadSub  ,IsProjectBasedRead  
  , IsProjectBasedReadSelectable  ,IsProjectBasedReadSub  ,IsFreeRead  ,IsFreeReadSelectable  
  , IsOrganizationBasedEditParent, IsProjectBasedEditParent, IsOrganizationBasedReadParent, IsProjectBasedReadParent
-, CanRate, Color, IconID, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1,1,     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1, '#008000ff',1, @User, @User, GETDATE(), GETDATE())
- , (2, 1, 1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
- , (3, 2, 1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
+, CanRate, Color, IconID, CodeTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+  (1, 1, 1,1,     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1, '#008000ff',1,2, @User, @User, GETDATE(), GETDATE())
+ , (2, 1, 1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,2,@User, @User, GETDATE(), GETDATE())
+ , (3, 2, 1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,2,@User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypes OFF;
 
 SET IDENTITY_INSERT ContentTypeLanguages ON;
@@ -274,7 +274,7 @@ INSERT INTO ContentTypeLanguages(ContentTypeLanguageId, ContentTypeId, LanguageI
 SET IDENTITY_INSERT ContentTypeLanguages OFF;
 
 SET IDENTITY_INSERT ContentTypeClassifications ON;
-INSERT INTO ContentTypeClassifications ( ContentTypeClassificationId, ContentTypeId, ClassificationId, ContentTypeClassificationStatusId, ModifierId, ModifiedDate) VALUES 
+INSERT INTO ContentTypeClassifications ( ContentTypeClassificationId, ContentTypeId, ClassificationId, ObjectTypeClassificationStatusId, ModifierId, ModifiedDate) VALUES 
  (1, 1, 1, 3, @User, GETDATE())
 , (2, 1, 2, 2, @User, GETDATE())
 , (3, 1, 3, 2, @User, GETDATE())
@@ -286,31 +286,127 @@ INSERT INTO ContentTypeClassifications ( ContentTypeClassificationId, ContentTyp
 , (9, 3, 3, 2, @User, GETDATE())
 SET IDENTITY_INSERT ContentTypeClassifications OFF;
 
-SET IDENTITY_INSERT OrganizationTypes ON;
-INSERT INTO OrganizationTypes (OrganizationTypeId, Internal, LegalEntity, Color,IconId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1,1,1,'#008000ff', 1,@User, @User, GETDATE(), GETDATE())
-, (2,1,0, '#008000ff',1,@User, @User, GETDATE(), GETDATE())
-SET IDENTITY_INSERT OrganizationTypes OFF;
+SET IDENTITY_INSERT [dbo].[OrganizationTypes] ON 
 
-SET IDENTITY_INSERT OrganizationTypeLanguages ON;
-INSERT INTO OrganizationTypeLanguages(OrganizationTypeLanguageId, OrganizationTypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-(1, 1, 41, 'Legal entity', 'Legal entity', 'Legal entity', 'Legal entity', @User, @User, GETDATE(), GETDATE())
-, (2, 2, 41, 'Internal entity', 'Internal entity', 'Internal entity', 'Internal entity', @User, @User, GETDATE(), GETDATE())
-SET IDENTITY_INSERT OrganizationTypeLanguages OFF;
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 1, 0, N'b', N'b', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 1, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (5, 1, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (6, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (7, 1, 0, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (8, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (9, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (10, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (11, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (12, 0, 0, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (13, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (14, 1, 0, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (15, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypes] ([OrganizationTypeID], [Internal], [LegalEntity], [CodePrefix], [CodeSuffix], [CodeTypeId], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (16, 0, 1, N'a', N'a', 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+
+SET IDENTITY_INSERT [dbo].[OrganizationTypes] OFF
+
+SET IDENTITY_INSERT [dbo].[OrganizationTypeLanguages] ON 
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 41, N'Legal entity', N'Legal entity', N'Legal entity', N'Legal entity', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 2, 41, N'Internal entity', N'Internal entity', N'Internal entity', N'Internal entity', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 3, 41, N'Primary School', N'Primary School', N'Primary School', N'Primary School', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 4, 41, N'Publication', N'Publication', N'Publication', N'Publication', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (5, 5, 41, N'School District', N'School District', N'School District', N'School District', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (6, 6, 41, N'State Jurisdiction', N'State Jurisdiction', N'State Jurisdiction', N'State Jurisdiction', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (7, 7, 41, N'Library', N'Library', N'Library', N'Library', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (8, 8, 41, N'Archive', N'Archive', N'Archive', N'Archive', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (9, 9, 41, N'Museum', N'Museum', N'Museum', N'Museum', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (10, 10, 41, N'TV Network', N'TV Network', N'TV Network', N'TV Network', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (11, 11, 41, N'Forensics Lab', N'Forensics Lab', N'Forensics Lab', N'Forensics Lab', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (12, 12, 41, N'Agricultural Division', N'Agricultural Division', N'Agricultural Division', N'Agricultural Division', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (13, 13, 41, N'Publisher', N'Publisher', N'Publisher', N'Publisher', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (14, 14, 41, N'Facilities Management Team', N'Facilities Management Team', N'Facilities Management Team', N'Facilities Management Team', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (15, 15, 41, N'State Department of Education', N'State Department of Education', N'State Department of Education', N'State Department of Education', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationTypeLanguages] ([OrganizationTypeLanguageID], [OrganizationTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (16, 16, 41, N'Federal Department of Education', N'Federal Department of Education', N'Federal Department of Education', N'Federal Department of Education', @User, @User, getdate(), getdate())
+
+SET IDENTITY_INSERT [dbo].[OrganizationTypeLanguages] OFF
 
 
-SET IDENTITY_INSERT Organizations ON;
-INSERT INTO Organizations (OrganizationId, StatusId, OrganizationTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1, @User, @User, GETDATE(), GETDATE())
-INSERT INTO Organizations (OrganizationId, ParentOrganizationId, StatusId, OrganizationTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (2, 1, 1, 2, @User, @User, GETDATE(), GETDATE())
- SET IDENTITY_INSERT Organizations OFF;
+SET IDENTITY_INSERT [dbo].[Organizations] ON 
 
-SET IDENTITY_INSERT OrganizationLanguages ON;
-INSERT INTO OrganizationLanguages(OrganizationLanguageId, OrganizationId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
-(1, 1, 41, 'Chulalongkorn University', 'Chulalongkorn University', 'Chulalongkorn University', 'Chulalongkorn University', @User, @User, GETDATE(), GETDATE())
-, (2, 2, 41, 'Medical faculty', 'Medical faculty', 'Medical faculty', 'Medical faculty', @User, @User, GETDATE(), GETDATE())
-SET IDENTITY_INSERT OrganizationLanguages OFF;
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, NULL, 1, 16, NULL, NULL, NULL, NULL, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 1, 1, 15, NULL, NULL, NULL, NULL, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 1, 1, 15, N'', NULL, NULL, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 2, 1, 5, NULL, NULL, NULL, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (5, 2, 1, 5, NULL, NULL, NULL, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (6, 4, 1, 22, NULL, NULL, NULL, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (7, 4, 1, 19, NULL, NULL, NULL, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (8, 4, 1, 19, NULL, NULL, NULL, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (10, 4, 1, 21, NULL, NULL, NULL, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Organizations] ([OrganizationID], [ParentOrganizationID], [StatusID], [OrganizationTypeID], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (11, 4, 1, 21, NULL, NULL, NULL, NULL, @User, @User, GetDate(), GetDate())
+
+SET IDENTITY_INSERT [dbo].[Organizations] OFF
+
+SET IDENTITY_INSERT [dbo].[OrganizationLanguages] ON 
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 41, N'US Department of Education', N'US Department of Education', N'US Department of Education', N'US Department of Education', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (2, 2, 41, N'New Jersey Department of Education', N'New Jersey Department of Education', N'New Jersey Department of Education', N'New Jersey Department of Education', @User, @User, getdate(), getdate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (3, 3, 41, N'New York State Education Department', N'New York State Education Department', N'New York State Education Department', N'New York State Education Department', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (4, 4, 41, N'Newark Public Schools', N'Newark Public Schools', N'Newark Public Schools', N'Newark Public Schools', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (5, 5, 41, N'Absecon Public School District', N'Absecon Public School District', N'Absecon Public School District', N'Absecon Public School District', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (6, 6, 41, N'Early Childhood Center - Centra', N'Early Childhood Center - Centra', N'Early Childhood Center - Centra', N'Early Childhood Center - Centra', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (7, 7, 41, N'Abington Avenue School', N'Abington Avenue School', N'Abington Avenue School', N'Abington Avenue School', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (8, 8, 41, N'Alexander Street School', N'Alexander Street School', N'Alexander Street School', N'Alexander Street School', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (9, 10, 41, N'Newark Arts High School', N'Newark Arts High School', N'Newark Arts High School', N'Newark Arts High School', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[OrganizationLanguages] ([OrganizationLanguageID], [OrganizationID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorId], [ModifierId], [ModifiedDate], [CreatedDate]) VALUES (10, 11, 41, N'American History High School', N'American History High School', N'American History High School', N'American History High School', @User, @User, GetDate(), GetDate())
+
+SET IDENTITY_INSERT [dbo].[OrganizationLanguages] OFF
+
 
 
 
@@ -385,19 +481,59 @@ INSERT INTO PageSectionLanguages(PageSectionLanguageId,  PageId, PageSectionId, 
 , (18, 6, 18, 41, 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', 'Personal calendar', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT PageSectionLanguages OFF;
 
-SET IDENTITY_INSERT Persons ON;
-INSERT INTO Persons( PersonId, Salutation, FirstName, MiddleName, LastName, PersonalTitle, Suffix, NickName
-, FirstNameLocal, MiddleNameLocal, LastNameLocal, GenderId, BirthDate, DefaultOrganizationID
-, CreatorId, ModifierId, CreatedDate, ModifiedDate)
-VALUES
-(1,'Mr', 'Dirk','', 'Gently','','','Dirk', 'Dirk','', 'Gently',1,'1942-01-01',1, @User, @User, GETDATE(), GETDATE())
-INSERT INTO Persons( PersonId, Salutation, FirstName, MiddleName, LastName, PersonalTitle, Suffix, NickName
-, FirstNameLocal, MiddleNameLocal, LastNameLocal, GenderId, BirthDate, DefaultOrganizationID
-, CreatorId, ModifierId, CreatedDate, ModifiedDate, UserID)
-VALUES
-(2,'Mr', 'Peter','', 'le Grand','','','Peter', 'Peter','', 'le Grand',1,'1942-01-01',1, @User, @User, GETDATE(), GETDATE(), @User)
-, (3,'Mr', 'Ford','', 'Prefect','','','Ford', 'Ford','', 'Prefect',1,'2050-01-01',1, @User, @User, GETDATE(), GETDATE(), @User2)
-SET IDENTITY_INSERT Persons OFF;
+SET IDENTITY_INSERT [dbo].[PersonTypes] ON 
+
+INSERT [dbo].[PersonTypes] ([PersonTypeID], [CodePrefix], [CodeSuffix], [CodeTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, N'a', N'a', 2, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[PersonTypes] ([PersonTypeID], [CodePrefix], [CodeSuffix], [CodeTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, N'b', N'b', 2, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[PersonTypes] ([PersonTypeID], [CodePrefix], [CodeSuffix], [CodeTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, N'c', N'c', 2, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[PersonTypes] ([PersonTypeID], [CodePrefix], [CodeSuffix], [CodeTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, N'd', N'd', 2, @User, @User, GetDate(), GetDate())
+
+SET IDENTITY_INSERT [dbo].[PersonTypes] OFF
+
+SET IDENTITY_INSERT [dbo].[PersonTypeLanguages] ON 
+
+INSERT [dbo].[PersonTypeLanguages] ([PersonTypeLanguageID], [PersonTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 41, N'School staff', N'School staff', N'School staff', N'School staff', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[PersonTypeLanguages] ([PersonTypeLanguageID], [PersonTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 2, 41, N'Student', N'Student', N'Student', N'Student', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[PersonTypeLanguages] ([PersonTypeLanguageID], [PersonTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 3, 41, N'Parent', N'Parent', N'Parent', N'Parent', @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[PersonTypeLanguages] ([PersonTypeLanguageID], [PersonTypeID], [LanguageID], [Name], [Description], [MouseOver], [MenuName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 4, 41, N'Admin', N'Admin', N'Admin', N'Admin', @User, @User, GetDate(), GetDate())
+
+SET IDENTITY_INSERT [dbo].[PersonTypeLanguages] OFF
+
+
+
+SET IDENTITY_INSERT [dbo].[Persons] ON 
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (1, 1, N'a', 1, N'a', N'a1a', N'Mr', N'Dirk', N'', N'Gently', N'', N'', N'Dirk', N'Dirk', N'', N'Gently', 1, CAST(N'1942-01-01' AS Date), NULL, 1, NULL, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (2, 4, N'd', 1, N'd', N'd1d', N'Mr', N'Peter', N'', N'le Grand', N'', N'', N'Peter', N'Peter', N'', N'le Grand', 1, CAST(N'1942-01-01' AS Date), NULL, 1, @User, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (3, 2, N'b', 1, N'b', N'b1b', N'Mr', N'Ford', N'', N'Prefect', N'', N'', N'Ford', N'Ford', N'', N'Prefect', 1, CAST(N'2050-01-01' AS Date), NULL, 1, @User2, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (4, 2, N'b', 2, N'b', N'b2b', N'Mr', N'Scott', N' ', N'Mayo', N' ', N' ', N'Scott', N'Scott', N' ', N'Mayo', 1, CAST(N'2014-04-04' AS Date), NULL, 10, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (5, 2, N'b', 3, N'b', N'b3b', N'Mr', N'Efrain', N' ', N'Rodriguez', N' ', N' ', N'Efrain', N'Efrain', N' ', N'Rodriguez', 1, CAST(N'2016-03-04' AS Date), NULL, 8, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (6, 2, N'b', 4, N'b', N'b4b', N'Mr', N'Canelo', N'Hernandez', N'de la Hoya', N' ', N'II', N'Canelo', N'Canelo', N'Hernandez', N'de la Hoya', 1, CAST(N'2017-08-05' AS Date), NULL, 6, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (7, 2, N'b', 5, N'b', N'b5b', N'Ms', N'Lourdes', N'Ellen', N'Anzalone', N' ', N' ', N'Lourdes', N'Lourdes', N'Ellen', N'Anzalone', 2, CAST(N'2005-11-08' AS Date), NULL, 7, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (8, 2, N'b', 6, N'b', N'b6b', N'Ms', N'Helena', N'Teresa', N'Smith', N' ', N' ', N'Helena', N'Helena', N'Teresa', N'Smith', 2, CAST(N'2011-04-06' AS Date), NULL, 7, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (9, 3, N'c', 1, N'c', N'c1c', N'Mrs', N'Melody', N' ', N'Suarez', N' ', N' ', N'Melody', N'Melody', N' ', N'Suarez', 2, CAST(N'1980-01-04' AS Date), NULL, 8, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (10, 3, N'c', 2, N'c', N'c2c', N'Mr', N'Henry', N' ', N'Smith', N' ', N' ', N'Henry', N'Henry', N' ', N'Smith', 1, CAST(N'1983-01-01' AS Date), NULL, 7, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (11, 3, N'c', 3, N'c', N'c3c', N'Mrs', N'Ethel', N' ', N'Miram', N'Doctor', N' ', N'Ethel', N'Ethel', N' ', N'Miram', 2, CAST(N'1982-04-05' AS Date), NULL, 8, NULL, @User, @User, GetDate(), GetDate())
+
+INSERT [dbo].[Persons] ([PersonID], [PersonTypeId], [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Salutation], [FirstName], [MiddleName], [LastName], [PersonalTitle], [Suffix], [NickName], [FirstNameLocal], [MiddleNameLocal], [LastNameLocal], [GenderID], [BirthDate], [DeceasedDate], [DefaultOrganizationID], [UserID], [CreatorID], [ModifierID], [CreatedDate], [ModifiedDate]) VALUES (12, 2, N'b', 7, N'b', N'b7b', N'Mr', N'Charlie', N'Edward', N'Champles', N' ', N' ', N'Charlie', N'Charlie', N'Edward', N'Champles', 1, CAST(N'2009-01-21' AS Date), NULL, 9, NULL, @User, @User, GetDate(), GetDate())
+
+SET IDENTITY_INSERT [dbo].[Persons] OFF
 
 SET IDENTITY_INSERT PersonAddresses ON;
 INSERT INTO PersonAddresses( PersonAddressId, PersonId, AddressTypeId, AttnName, Address1, Address2, HouseNumber, HouseNumberExt
@@ -429,28 +565,28 @@ SET IDENTITY_INSERT ProcessTemplateGroupLanguages OFF;
 SET IDENTITY_INSERT ProcessTemplates ON;
 INSERT INTO ProcessTemplates (ProcessTemplateId, ProcessTemplateGroupId, ShowInPersonalCalendar, ShowInOrganizationCalendar, ShowInProjectCalendar, ShowInEventCalendar
 , ProcessMultiMax, Sequence, IsPersonal, ShowInNew, ShowInSearch, ShowInReports, HideEverywhere, Color, IconID
-, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
+, CodeTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
 (1,1,0,0,0,0
 ,10,1,0,1,1,1,0, '#008000ff',1
-, @User, @User, GETDATE(), GETDATE())
+,2, @User, @User, GETDATE(), GETDATE())
 ,(2,1,0,0,0,0
 ,15,2,0,1,1,1,0, '#008000ff',1
-, @User, @User, GETDATE(), GETDATE())
+,2, @User, @User, GETDATE(), GETDATE())
 ,(3,2,0,0,0,0
 ,15,1,0,1,1,1,0, '#008000ff',1
-, @User, @User, GETDATE(), GETDATE())
+,2, @User, @User, GETDATE(), GETDATE())
 ,(4,2,1,0,0,0
 ,15,1,0,1,1,1,0, '#008000ff',1
-, @User, @User, GETDATE(), GETDATE())
+,2, @User, @User, GETDATE(), GETDATE())
 ,(5,2,0,1,0,0
 ,15,1,0,1,1,1,0, '#008000ff',1
-, @User, @User, GETDATE(), GETDATE())
+,2, @User, @User, GETDATE(), GETDATE())
 ,(6,2,0,0,1,0
 ,15,1,0,1,1,1,0, '#008000ff',1
-, @User, @User, GETDATE(), GETDATE())
+,2, @User, @User, GETDATE(), GETDATE())
 ,(7,2,0,0,0,1
 ,15,1,0,1,1,1,0, '#008000ff',1
-, @User, @User, GETDATE(), GETDATE());
+,2, @User, @User, GETDATE(), GETDATE());
 SET IDENTITY_INSERT ProcessTemplates OFF;
 
 SET IDENTITY_INSERT ProcessTemplateLanguages ON;
@@ -789,8 +925,8 @@ ProcessTemplateFlowLanguageId,ProcessTemplateId, ProcessTemplateFlowId, Language
 SET IDENTITY_INSERT  ProcessTemplateFlowLanguages  OFF;
 
 SET IDENTITY_INSERT [dbo].[ProjectTypes] ON 
-INSERT [dbo].[ProjectTypes] ([ProjectTypeID], Color,IconID, [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1,'#008000ff',1, @User, @User, Getdate(), Getdate())
-INSERT [dbo].[ProjectTypes] ([ProjectTypeID], Color,IconID, [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2,'#008000ff',1, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[ProjectTypes] ([ProjectTypeID], HasAnyChildProject, HasAnyMatrixProject, Color,IconID, CodeTypeId, [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1,1,1,'#008000ff',1,2, @User, @User, Getdate(), Getdate())
+INSERT [dbo].[ProjectTypes] ([ProjectTypeID], Color,IconID, CodeTypeId, [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2,1,1,'#008000ff',1,2, @User, @User, Getdate(), Getdate())
 SET IDENTITY_INSERT [dbo].[ProjectTypes] OFF
 
 SET IDENTITY_INSERT [dbo].[Projects] ON 
@@ -1125,7 +1261,6 @@ ProcessFieldId, ProcessTemplateId, ProcessId, ProcessTemplateFieldID
 ;
 
 SET IDENTITY_INSERT ProcessFields OFF;
-
 SET IDENTITY_INSERT Contents ON;
 INSERT INTO Contents (
 ContentId, ContentTypeId, ContentStatusId, LanguageId, Title, Description, SecurityLevelId, OrganizationId
@@ -1137,9 +1272,16 @@ VALUES
   (1,1,2,41,'Research of Tropics on butterflies','This is a story about butterflies in my backgarden', 1,1, 
   1,1, 1,1, 1,
   1, 1,1, 
-  1,1,1,1,1,1,  @User, @User, GETDATE(), GETDATE(),9, @User)
-, (2,2,4,41,'Growing passion fruits in Silt soil','They are the most delicious passion fruits'       , 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),10, @User)
-, (3,1,3,41,'Arctic and strawberries','They really grow well especially if you keep the lights on'   , 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),11, @User)
+  1,1,1,1,1,1,1,1,  @User, @User, GETDATE(), GETDATE(),9, @User)
+, (2,2,4,41,'Growing passion fruits in Silt soil','They are the most delicious passion fruits'       , 1,1,
+1,1, 1,1, 1,
+1, 1,1,
+1,1, 1,1, 1,1,1,1, 
+@User, @User, GETDATE(), GETDATE(),10, @User)
+, (3,1,3,41,'Arctic and strawberries','They really grow well especially if you keep the lights on'   , 1,1, 
+1,1, 1,1, 1,
+1, 1,1,
+1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),11, @User)
 
 SET IDENTITY_INSERT Contents OFF;
 

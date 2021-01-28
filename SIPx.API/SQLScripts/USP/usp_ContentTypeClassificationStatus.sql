@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[usp_ContentTypeClassificationStatus] (@UserId nvarchar(450), @ContentTypeClassificationStatusId int) 
+CREATE PROCEDURE [dbo].[usp_ContentTypeClassificationStatus] (@UserId nvarchar(450), @ObjectTypeClassificationStatusId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
-SELECT ContentTypeClassificationStatuses.ContentTypeClassificationStatusId 
+SELECT ObjectTypeClassificationStatuses.ObjectTypeClassificationStatusID 
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 	, ISNULL(UIDescriptionCustom.Customization,UIDescription.Name) Description
 	, ISNULL(UIMenuNameCustom.Customization,UIMenuName.Name) MenuName
@@ -31,4 +31,4 @@ WHERE UIName.LanguageId = @LanguageID
 	AND UIDescription.LanguageId = @LanguageID
 	AND UIMenuName.LanguageId = @LanguageID
 	AND UIMouseOver.LanguageId = @LanguageID
-	AND ContentTypeClassificationStatuses.ContentTypeClassificationStatusId = @ContentTypeClassificationStatusID
+	AND ObjectTypeClassificationStatuses.ObjectTypeClassificationStatusID = @ObjectTypeClassificationStatusId

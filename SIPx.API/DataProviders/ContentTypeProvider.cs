@@ -36,7 +36,7 @@ namespace SIPx.DataAccess
             {
                 ClassificationTable.Rows.Add(
                 ContentTypeClassification.ClassificationId
-                , ContentTypeClassification.ContentTypeClassificationStatusId);
+                , ContentTypeClassification.ObjectTypeClassificationStatusId);
 
             }
             string usp = "usp_ContentTypeCreatePostCheck @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
@@ -168,7 +168,7 @@ namespace SIPx.DataAccess
             {
                 ClassificationTable.Rows.Add(
                 ContentTypeClassification.ClassificationId
-                , ContentTypeClassification.ContentTypeClassificationStatusId);
+                , ContentTypeClassification.ObjectTypeClassificationStatusId);
 
             }
             string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
@@ -344,7 +344,7 @@ namespace SIPx.DataAccess
                 ClassificationTable.Rows.Add(
 
                 x.ClassificationId
-                        , x.ContentTypeClassificationStatusId);
+                        , x.ObjectTypeClassificationStatusId);
                 //}
             }
             //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
@@ -478,7 +478,7 @@ namespace SIPx.DataAccess
                 ClassificationTable.Rows.Add(
 
                 x.ClassificationId
-                        , x.ContentTypeClassificationStatusId);
+                        , x.ObjectTypeClassificationStatusId);
                 //}
             }
             //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";

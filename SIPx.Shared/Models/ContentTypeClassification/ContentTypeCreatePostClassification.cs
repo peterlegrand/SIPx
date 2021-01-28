@@ -9,6 +9,6 @@ namespace SIPx.Shared
     {
         [Key]
         public int ClassificationId { get; set; }
-        public int ContentTypeClassificationStatusId { get; set; }
+        public int ObjectTypeClassificationStatusId { get; set; }
     }
 }

@@ -21,6 +21,6 @@ LEFT JOIN (SELECT ClassificationId, Name FROM ClassificationLanguages WHERE Lang
 LEFT JOIN (SELECT ClassificationId, Name FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
 	ON DefaultLanguage.ClassificationId = ContentTypeClassifications.ClassificationID
 WHERE ContentTypeClassifications.ContentTypeId = @ContentTypeID
-	AND ContentTypeClassifications.ContentTypeClassificationStatusId <> 1
+	AND ContentTypeClassifications.ObjectTypeClassificationStatusId <> 1
 ORDER BY ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification'))
 
