@@ -1,18 +1,41 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProjectTypeMatrixCreateFromGet
+@model ProjectMatrixTypeUpdateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("From this project type to project type")).TermString;
-    ViewData["Image"] = "Type.png";
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project matrix type")).TermString;
+
+    ViewData["Image"] = "ProjectMatrixType.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
+
 <div class="container">
 
     <form method="post">
-
+        @if (ViewBag.Env == "Production")
+        {
+            <div hidden class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ProjectMatrixTypeId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ProjectMatrixTypeId" ejs-for="@Model.ProjectMatrixTypeId" cssClass="e-outline" placeholder="ProjectMatrixTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div  class="row">
+                <div class="col-3">
+                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ProjectMatrixTypeId
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="ProjectMatrixTypeId" ejs-for="@Model.ProjectMatrixTypeId" cssClass="e-outline" placeholder="ProjectMatrixTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
@@ -20,6 +43,22 @@
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 5))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
+                </div>
+            </div>
+        }
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 104))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
@@ -31,7 +70,14 @@
                 </ejs-richtexteditor>
             </div>
         </div>
-
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 9))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 9).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
@@ -40,7 +86,14 @@
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 10))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 10).Name
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
@@ -49,46 +102,54 @@
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Project type")).TermString
+        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 11))
+        {
+            <div class="row">
+                <div class="offset-3 col-9 alert-danger">
+                    @ErrorMessages.Find(x => x.ErrorMessageId == 11).Name
+                </div>
             </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.ProjectTypes" ejs-for="@Model.ToProject" value="@Model.CodeTypeId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="CodeTypeId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Icon")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="IconId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Color")).TermString
-            </div>
-            <div class="col-9">
-                <ejs-colorpicker id='color-picker' ejs-for="Color" value="Color"></ejs-colorpicker>
-            </div>
-        </div>
-
-
+        }
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
                 <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatorName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+            </div>
+            <div class="col-9">
+                @Model.CreatedDate
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ModifierName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+            </div>
+            <div class="col-9">
+                <div>@Model.ModifiedDate</div>
+            </div>
+        </div>
     </form>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/css/css.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.js" type="text/javascript"></script>
@@ -129,6 +190,7 @@
         background: #303030;
     }
 </style>
+
 <script type="text/javascript">
     var rteObj, myCodeMirror, textArea;
     function created() {
@@ -192,4 +254,64 @@
         }
     }
 </script>
+<script>
+    var defaultRTE, ranges, selection = new ej.richtexteditor.NodeSelection();
+    var defaultDialog;
 
+    function onCreate() {
+        defaultRTE = this;
+        var customBtn = defaultRTE.element.querySelector('#custom_tbar');
+
+        // Initialization of Dialog
+        var dialog = new ej.popups.Dialog({
+            header: 'Select Multiple Image file to upload',
+            target: document.getElementById('rteSection'),
+            showCloseIcon: false,
+            isModal: true,
+            created: function () {
+                defaultDialog = this;
+            },
+            visible: false,
+            height: 'auto',
+            showCloseIcon: true
+        });
+        // Render initialized Dialog
+        dialog.appendTo('#customTbarDialog');
+
+        customBtn.onclick = function (e) {
+            dialog.element.style.display = '';
+            ranges = selection.getRange(document);
+            dialog.width = defaultRTE.element.offsetWidth * 0.5;
+            dialog.dataBind();
+            dialog.show();
+            customBtn.onclick = function (e) {
+                defaultRTE.focusIn();
+                dialog.element.style.display = '';
+                ranges = selection.getRange(document);
+                dialog.width = defaultRTE.element.offsetWidth * 0.5;
+                dialog.dataBind();
+                dialog.show();
+            };
+        };
+    }
+
+    function onSuccess(args) {
+        //Replace the image saved URL location here
+        defaultRTE.executeCommand('insertImage', { url: '/images/' + args.file.name });
+        defaultDialog.hide();
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        if (CKEDITOR.instances['descriptionx']) {
+            CKEDITOR.instances['descriptionx'].destroy();
+        }
+        CKEDITOR.replace('descriptionx', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['descriptionx'].getData()
+            console.log(ckValue);
+        });
+    });
+</script>

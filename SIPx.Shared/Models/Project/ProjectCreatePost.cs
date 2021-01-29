@@ -13,10 +13,6 @@ namespace SIPx.Shared
         public int CodeInt { get; set; }
         public string CodeSuffix { get; set; }
         public string Code { get; set; }
-        public string CodePrefix { get; set; }
-        public int CodeInt { get; set; }
-        public string CodeSuffix { get; set; }
-        public string Code { get; set; }
         public int ProjectTypeId { get; set; }
         public int StatusId { get; set; }
         public int SecurityLevelId { get; set; }

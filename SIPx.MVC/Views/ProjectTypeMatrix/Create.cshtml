@@ -1,51 +1,17 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProjectTypeMatrixUpdateGet
+@model ProjectTypeMatrixCreateGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project type relation (matrix)")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add project type relation (matrix)")).TermString;
     ViewData["Image"] = "Type.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
+
     <form method="post">
-        @if (ViewBag.Env == "Production")
-        {<div hidden class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
-                </div>
-                <div class="col-9">
-                    if(Model.IsFrom)
-                    {
-                    <ejs-numerictextbox id="FromProjectTypeId" ejs-for="@Model.FromProjectTypeId" cssClass="e-outline" placeholder="FromProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
-                    }
-                    else
-                    {
-                    <ejs-numerictextbox id="ToProjectTypeId" ejs-for="@Model.ToProjectTypeId" cssClass="e-outline" placeholder="ToProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
-                    }
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="row">
-                <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
-                </div>
-                <div class="col-9">
-                    if(Model.IsFrom)
-                    {
-                    <ejs-numerictextbox id="FromProjectTypeId" ejs-for="@Model.FromProjectTypeId" cssClass="e-outline" placeholder="FromProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
-                    }
-                    else
-                    {
-                    <ejs-numerictextbox id="ToProjectTypeId" ejs-for="@Model.ToProjectTypeId" cssClass="e-outline" placeholder="ToProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
-                    }
-                </div>
-            </div>
-        }
 
         <div class="row">
             <div class="col-3">
@@ -110,11 +76,11 @@
                 @if (Model.IsFrom)
                 {
                     <div>@Term.Find(x => x.InternalName.Equals("To project type")).TermString</div>
-                                                    }
+                }
                 else
                 {
                     <div>@Term.Find(x => x.InternalName.Equals("From project type")).TermString</div>
-                                            }
+                }
             </div>
             <div class="col-9">
                 @if (Model.IsFrom)
@@ -131,7 +97,6 @@
                 }
             </div>
         </div>
-
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Project matrix type")).TermString
@@ -143,42 +108,11 @@
             </div>
         </div>
  
+
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
                 <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatorName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
-            </div>
-            <div class="col-9">
-                @Model.CreatedDate
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
-            </div>
-            <div class="col-9">
-                @Model.ModifierName
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
-            </div>
-            <div class="col-9">
-                <div>@Model.ModifiedDate</div>
             </div>
         </div>
 
@@ -288,3 +222,4 @@
         }
     }
 </script>
+

@@ -87,4 +87,8 @@
         <div class="col-1 menuIcon"><img src="/images/icons/screen.png" width="20" height="20" /></div>
         <div class="col-5"><a asp-controller="MVCUIScreen" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Screens")).TermString</a></div>
     </div>
+    <div class="row">
+        <div class="col-1 menuIcon"><img src="/images/icons/matrix.png" width="20" height="20" /></div>
+        <div class="col-5"><a asp-controller="ProjectMatrixType" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Project matrix type")).TermString</a></div>
+    </div>
 </div>

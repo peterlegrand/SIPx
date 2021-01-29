@@ -36,5 +36,6 @@ namespace SIPx.Shared
         public List<SequenceList> ProcessTemplates { get; set; }
         public List<ProcessTemplateGroupList> ProcessTemplateGroups{ get; set; }
         public List<IconList> Icons { get; set; }
+        public List<CodeTypeList> CodeTypes { get; set; }
     }
 }

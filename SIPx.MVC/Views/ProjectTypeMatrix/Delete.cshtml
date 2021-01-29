@@ -1,9 +1,9 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProjectTypeDeleteGet
+@model ProjectTypeMatrixDeleteGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete project type")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete project type relation (matrix)")).TermString;
     ViewData["Image"] = "Type.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -17,7 +17,10 @@
                     @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProjectTypeId" ejs-for="@Model.ProjectTypeId" cssClass="e-outline" placeholder="ProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProjectTypeMatrixId" ejs-for="@Model.ProjectTypeMatrixId" cssClass="e-outline" placeholder="ProjectTypeMatrixId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="FromProjectTypeId" ejs-for="@Model.FromProjectTypeId" cssClass="e-outline" placeholder="FromProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ToProjectTypeId" ejs-for="@Model.ToProjectTypeId" cssClass="e-outline" placeholder="ToProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-checkbox id="IsFrom" ejs-for="@Model.IsFrom"></ejs-checkbox>
                 </div>
             </div>
         }
@@ -28,7 +31,10 @@
                     @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProjectTypeId" ejs-for="@Model.ProjectTypeId" cssClass="e-outline" placeholder="ProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProjectTypeMatrixId" ejs-for="@Model.ProjectTypeMatrixId" cssClass="e-outline" placeholder="ProjectTypeMatrixId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="FromProjectTypeId" ejs-for="@Model.FromProjectTypeId" cssClass="e-outline" placeholder="FromProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ToProjectTypeId" ejs-for="@Model.ToProjectTypeId" cssClass="e-outline" placeholder="ToProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-checkbox id="IsFrom" ejs-for="@Model.IsFrom"></ejs-checkbox>
                 </div>
             </div>
         }
@@ -37,13 +43,13 @@
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
-@Model.Name
+                @Model.Name
             </div>
         </div>
         <div class="row">
             <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
-@Html.Raw(Model.Description)
+                @Html.Raw(Model.Description)
             </div>
         </div>
 
@@ -52,7 +58,7 @@
                 @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
-@Model.MenuName
+                @Model.MenuName
             </div>
         </div>
 
@@ -61,7 +67,31 @@
                 @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
-@Model.MouseOver
+                @Model.MouseOver
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("From project type")).TermString
+            </div>
+            <div class="col-9">
+                @Model.FromProjectTypeName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("To project type")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ToProjectTypeName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Project matrix type")).TermString
+            </div>
+            <div class="col-9">
+                @Model.ProjectMatrixTypeName
             </div>
         </div>
         <div class="row">

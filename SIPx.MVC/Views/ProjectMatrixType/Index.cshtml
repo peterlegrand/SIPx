@@ -1,0 +1,149 @@
+﻿@using Syncfusion.EJ2
+@model List<ProjectMatrixTypeIndexGet>
+@{
+    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project matrix types")).TermString;
+
+    ViewData["Image"] = "ProjectMatrixType.png";
+    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    Layout = "_LayoutAdmin";
+}
+
+<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a asp-action="Create">@Term.Find(x => x.InternalName.Equals("Add new project matrix type")).TermString</a>
+<script id="Id" type="text/x-template">
+    <div>
+        ${ProjectMatrixTypeId}
+    </div>
+</script>
+<script id="Name" type="text/x-template">
+    <div>
+        ${Name}
+    </div>
+</script>
+<script id="Levels" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ProjectMatrixType/Index/${ProjectMatrixTypeId}">
+            <div title="Level"></div><span style="color:red">L</span>evel
+        </a>
+
+    </div>
+</script>
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ProjectMatrixType/Edit/${ProjectMatrixTypeId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+
+    </div>
+</script>
+<script id="Languages" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/Base/LanguageIndex/${ProjectMatrixTypeId}?BaseType=ProjectMatrixType"><img src="/images/icons/LanguageS.png" height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="ProjectMatrixType/Delete/${ProjectMatrixTypeId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+
+    </div>
+</script>
+@*<script>
+        function AddFriend() {
+            var Favorite = {
+                controller: 'ProjectMatrixType',
+                action: 'Index'
+            };
+            $.post("https://localhost:44393/Favorite/Add/", Favorite);
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#Favorite").click(
+                var Favorite = {
+                controller: 'ProjectMatrixType',
+                action: 'Index'
+            };
+            $.post("https://localhost:44393/Favorite/Add/", Favorite);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var Favorite = {
+                controller: 'ProjectMatrixType',
+                action: 'Index'
+            };
+            $.post("https://localhost:44393/Favorite/Add/", Favorite);
+        });
+    </script>*@
+<script>
+    $(document).ready(function () {
+        $("#Favorites").click(function () {
+            var Favorite = {
+                controller: 'ProjectMatrixType',
+                action: 'Index',
+                Name: 'ProjectMatrixTypes'
+            };
+            $.post("/Favorite/Add/",
+                Favorite
+                //,
+                //              document.getElementById("Favorites").textContent = 'Added');
+
+                , function () {
+                    var OldImg = document.getElementById("OldImgId");
+                    OldImg.remove();
+                    var img = document.createElement("img");
+                    img.src = "/images/icons/AddedFavorites.png";
+                    img.height = "20";
+                    img.width = "20";
+                    var src = document.getElementById("Favorites");
+                    src.appendChild(img);
+                }
+
+                //
+            )
+        });
+    });
+
+</script>
+<script>
+    var btnElement = document.getElementById("normalbtn");
+    btnElement.addEventListener('click', function () {
+        var dialogObj = document.getElementById("default_dialog");
+        dialogObj.ej2_instances[0].show();
+    });
+    function dialogClose() {
+        btnElement.style.display = "block";
+    }
+    function dialogOpen() {
+        btnElement.style.display = "none";
+    }
+    function dlgButtonClick() {
+        window.open('https://www.syncfusion.com/company/about-us');
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#Favorites").click(function () {
+            var Favorite = {
+                controller: 'ProjectMatrixType',
+                action: 'Index',
+                name: document.getElementById("FavoriteName").value,
+                MVCFavoriteGroupId: document.getElementById("FavoriteGroupId_hidden").value
+            };
+            $.post("/Favorite/Add/",
+                Favorite
+                , function () { $("#favoriteModal").modal('hide'); });
+        });
+    });
+
+</script>

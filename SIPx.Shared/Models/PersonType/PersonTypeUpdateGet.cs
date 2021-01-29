@@ -10,9 +10,8 @@ namespace SIPx.Shared
         [Key]
         public int PersonTypeId { get; set; }
         public string CodePrefix { get; set; }
-        public int CodeInt { get; set; }
+        public int CodeTypeId { get; set; }
         public string CodeSuffix { get; set; }
-        public string Code { get; set; }
         public int PersonTypeLanguageId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -27,6 +26,7 @@ namespace SIPx.Shared
         public int ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public List<IconList> Icons { get; set; }
+        public List<CodeTypeList> CodeTypes { get; set; }
         public string UserId { get; set; }
     }
 }

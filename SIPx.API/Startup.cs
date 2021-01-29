@@ -90,6 +90,11 @@ namespace SIPx.API
             services.AddTransient<IProcessTemplateFlowConditionTypeProvider, ProcessTemplateFlowConditionTypeProvider>();
 
             services.AddTransient<IProcessTemplateFlowPassComparisonOperatorProvider, ProcessTemplateFlowPassComparisonOperatorProvider>();
+
+            services.AddTransient<IProjectMatrixTypeProvider, ProjectMatrixTypeProvider>();
+            services.AddTransient<IProjectTypeMatrixProvider, ProjectTypeMatrixProvider>();
+
+
             services.AddTransient<IProcessTemplateFlowPassTypeProvider, ProcessTemplateFlowPassTypeProvider>();
             services.AddTransient<IProcessTemplateFlowPassProvider, ProcessTemplateFlowPassProvider>();
 

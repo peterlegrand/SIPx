@@ -22,5 +22,7 @@ namespace SIPx.Shared
         public int IconId { get; set; }
         public string UserId { get; set; }
         public List<IconList> Icons { get; set; }
+        public List<CodeTypeList> CodeTypes { get; set; }
+
     }
 }

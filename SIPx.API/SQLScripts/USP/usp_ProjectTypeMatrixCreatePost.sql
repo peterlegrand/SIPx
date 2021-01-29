@@ -23,11 +23,15 @@ INSERT INTO ProjectTypeMatrixes (
 	, ProjectMatrixTypeId
 	, CreatorID
 	, CreatedDate
+	, ModifierId
+	, ModifiedDate
 )
 VALUES (
 	@FromProjectTypeId
 	, @ToProjectTypeId 
 	, @ProjectMatrixTypeId
+	, @UserId
+	, getdate()
 	, @UserId
 	, getdate()
 )

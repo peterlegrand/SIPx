@@ -18,6 +18,9 @@ SELECT ProjectTypeMatrixes.ProjectTypeMatrixID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, ProjectTypeMatrixes.CreatedDate
+	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
+	, Modifier.PersonID ModifierID
+	, ProjectTypeMatrixes.ModifiedDate
 FROM ProjectTypeMatrixes 
 LEFT JOIN (SELECT ProjectTypeId, Name, Description, MenuName, MouseOver FROM ProjectTypeLanguages WHERE LanguageId = @LanguageID) UserProjectTypeLanguage
 	ON UserProjectTypeLanguage.ProjectTypeId = ProjectTypeMatrixes.ProjectTypeMatrixID
@@ -37,4 +40,6 @@ LEFT JOIN (SELECT ProjectTypeId, Name FROM ProjectTypeLanguages JOIN Settings ON
 
 JOIN Persons Creator
 	ON Creator.UserId = ProjectTypeMatrixes.CreatorID
+JOIN Persons Modifier
+	ON Modifier.UserId = ProjectTypeMatrixes.ModifierID
 WHERE ProjectTypeMatrixes.ProjectTypeMatrixId = @ProjectTypeMatrixID

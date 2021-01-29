@@ -1,7 +1,7 @@
 ﻿@model List<ProjectTypeIndexGet>
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project types")).TermString;
+    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project type relations (matrix)")).TermString;
     ViewData["Image"] = "Type.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -9,14 +9,17 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ProjectTypeId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProjectTypeMatrixId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="FromProjectTypeName" headerText="@Term.Find(x => x.InternalName.Equals("From project type")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="ToProjectTypeName" headerText="@Term.Find(x => x.InternalName.Equals("To project type")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="ProjectMatrixTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Project matrix type")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/ProjectType/Create">@Term.Find(x => x.InternalName.Equals("Add new project type")).TermString</a>
+<a href="~/ProjectType/Create">@Term.Find(x => x.InternalName.Equals("Add new project type relation")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ProjectType/Edit/${ProjectTypeId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>

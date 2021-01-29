@@ -34,6 +34,7 @@ namespace SIPx.Shared
 
         public List<DateLevelList> DateLevels { get; set; }
         public List<SequenceList> Sequences { get; set; }
+        public List<CodeTypeList> CodeTypes { get; set; }
 
     }
 }

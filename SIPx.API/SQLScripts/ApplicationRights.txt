@@ -358,3 +358,11 @@ MVCUIScreen\Index
 MetaContent\Index
 MetaContent\Create
 MetaContent\Delete
+ProjectMatrixType\Index
+ProjectMatrixType\Create
+ProjectMatrixType\Update
+ProjectMatrixType\Delete
+ProjectTypeMatrix\Index
+ProjectTypeMatrix\Create
+ProjectTypeMatrix\Update
+ProjectTypeMatrix\Delete

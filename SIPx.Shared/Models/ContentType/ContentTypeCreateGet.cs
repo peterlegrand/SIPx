@@ -57,6 +57,7 @@ namespace SIPx.Shared
         public List<ProcessTemplateList> ProcessTemplates { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<IconList> Icons { get; set; }
-         
+        public List<CodeTypeList> CodeTypes { get; set; }
+
     }
 }

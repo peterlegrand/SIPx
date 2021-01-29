@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class ProjectTypeMatrixProvider 
+    public class ProjectTypeMatrixProvider : IProjectTypeMatrixProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
@@ -20,14 +20,14 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<List<ErrorMessage>> CreatePostCheck(ProjectTypeMatrixFromCreateGet ProjectTypeMatrix)
+        public async Task<List<ErrorMessage>> CreatePostCheck(ProjectTypeMatrixCreateGet ProjectTypeMatrix)
         {
             string usp = "usp_ProjectTypeMatrixCreatePostCheck @Name , @Description , @MenuName , @MouseOver , @FromProjectTypeId, @ToProjectTypeId, @ProjectMatrixTypeId, @UserId  ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectTypeMatrix);
             return ErrorMessages;
         }
 
-        public async Task<string> CreatePost(ProjectTypeMatrixFromCreateGet ProjectTypeMatrix)
+        public async Task<string> CreatePost(ProjectTypeMatrixCreateGet ProjectTypeMatrix)
         {
             string usp = "usp_ProjectTypeMatrixCreatePost @Name , @Description , @MenuName , @MouseOver , @FromProjectTypeId, @ToProjectTypeId, @ProjectMatrixTypeId, @UserId  ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectTypeMatrix);
@@ -48,63 +48,63 @@ namespace SIPx.DataAccess
 
         }
 
-        public async Task<List<ErrorMessage>> UpdatePostCheck(ProjectTypeUpdateGet ProjectType)
+        public async Task<List<ErrorMessage>> UpdatePostCheck(ProjectTypeMatrixUpdateGet ProjectTypeMatrix)
         {
-            string usp = "usp_ProjectTypeUpdatePostCheck @ProjectTypeId , @Name , @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @Color , @IconId , @UserId ";
-            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectType);
+            string usp = "usp_ProjectTypeMatrixUpdatePostCheck @ProjectTypeMatrixId , @FromProjectTypeId , @ToProjectTypeId , @ProjectMatrixTypeId , @Name , @Description , @MenuName , @MouseOver , @IsFrom , @UserId ";
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectTypeMatrix);
             return ErrorMessages;
         }
 
 
-        public bool UpdatePost(ProjectTypeUpdateGet ProjectType)
+        public bool UpdatePost(ProjectTypeMatrixUpdateGet ProjectTypeMatrix)
         {
-            string usp = "usp_ProjectTypeUpdatePost @ProjectTypeId , @Name , @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @Color , @IconId , @UserId ";
-            _sqlDataAccess.SaveData<ProjectTypeUpdateGet>(usp, ProjectType);
+            string usp = "usp_ProjectTypeMatrixUpdatePost @ProjectTypeMatrixId , @FromProjectTypeId , @ToProjectTypeId , @ProjectMatrixTypeId , @Name , @Description , @MenuName , @MouseOver , @IsFrom , @UserId ";
+            _sqlDataAccess.SaveData<ProjectTypeMatrixUpdateGet>(usp, ProjectTypeMatrix);
             return true;
         }
 
-        public Task<ProjectTypeDeleteGet> DeleteGet(string UserId, int ProjectTypeId)
+        public Task<ProjectTypeMatrixDeleteGet> DeleteGet(string UserId, int ProjectTypeMatrixId)
         {
-            string usp = "usp_ProjectTypeDeleteGet @UserId, @ProjectTypeID";
-            return _sqlDataAccess.LoadSingleRecord<ProjectTypeDeleteGet, dynamic>(usp, new { UserId, ProjectTypeId });
+            string usp = "usp_ProjectTypeDeleteGet @UserId, @ProjectTypeMatrixID";
+            return _sqlDataAccess.LoadSingleRecord<ProjectTypeMatrixDeleteGet, dynamic>(usp, new { UserId, ProjectTypeMatrixId });
 
         }
 
-        public bool DeletePost(string UserId, int ProjectTypeId)
+        public bool DeletePost(string UserId, int ProjectTypeMatrixId)
         {
-            string usp = "usp_ProjectTypeDeletePost @UserId, @ProjectTypeID";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProjectTypeId });
+            string usp = "usp_ProjectTypeMatrixDeletePost @UserId, @ProjectTypeMatrixID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProjectTypeMatrixId });
             return true;
         }
 
-        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ProjectTypeId)
+        public async Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ProjectTypeMatrixId)
         {
-            string usp = "usp_ProjectTypeDeletePostCheck @UserId, @ProjectTypeID";
-            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProjectTypeId });
-            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ProjectTypeId });
+            string usp = "usp_ProjectTypeMatrixDeletePostCheck @UserId, @ProjectTypeID";
+            _sqlDataAccess.SaveData<dynamic>(usp, new { UserId, ProjectTypeMatrixId });
+            var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new { UserId, ProjectTypeMatrixId });
             return ErrorMessages;
         }
 
-        public Task<List<ProjectTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ProjectTypeId)
-        {
-            string usp = "usp_ProjectTypeLanguageIndexGet @UserId, @ProjectTypeID";
-            return _sqlDataAccess.LoadData<ProjectTypeLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
+        //public Task<List<ProjectTypeLanguageIndexGet>> LanguageIndexGet(string UserId, int ProjectTypeId)
+        //{
+        //    string usp = "usp_ProjectTypeLanguageIndexGet @UserId, @ProjectTypeID";
+        //    return _sqlDataAccess.LoadData<ProjectTypeLanguageIndexGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
-        }
+        //}
 
-        public Task<ProjectTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ProjectTypeLanguageId)
-        {
-            string usp = "usp_ProjectTypeLanguageUpdateGet @UserId, @ProjectTypeLanguageID";
-            return _sqlDataAccess.LoadSingleRecord<ProjectTypeLanguageUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeLanguageId = ProjectTypeLanguageId });
+        //public Task<ProjectTypeLanguageUpdateGet> LanguageUpdateGet(string UserId, int ProjectTypeLanguageId)
+        //{
+        //    string usp = "usp_ProjectTypeLanguageUpdateGet @UserId, @ProjectTypeLanguageID";
+        //    return _sqlDataAccess.LoadSingleRecord<ProjectTypeLanguageUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeLanguageId = ProjectTypeLanguageId });
 
-        }
+        //}
 
-        public async Task<List<ProjectTypeList>> List(string UserId)
-        {
-            string usp = "usp_ProjectTypeList @UserID";
-            var x = await _sqlDataAccess.LoadData<ProjectTypeList, dynamic>(usp, new { UserId = UserId });
-            return x;
-        }
+        //public async Task<List<ProjectTypeList>> List(string UserId)
+        //{
+        //    string usp = "usp_ProjectTypeList @UserID";
+        //    var x = await _sqlDataAccess.LoadData<ProjectTypeList, dynamic>(usp, new { UserId = UserId });
+        //    return x;
+        //}
 
     }
 }
