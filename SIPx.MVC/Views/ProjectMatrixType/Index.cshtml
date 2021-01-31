@@ -4,7 +4,7 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project matrix types")).TermString;
 
-    ViewData["Image"] = "ProjectMatrixType.png";
+    ViewData["Image"] = "matrix.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
