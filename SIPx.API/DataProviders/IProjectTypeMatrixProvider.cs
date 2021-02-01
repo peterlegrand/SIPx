@@ -11,7 +11,7 @@ namespace SIPx.DataAccess
         Task<ProjectTypeMatrixDeleteGet> DeleteGet(string UserId, int ProjectTypeMatrixId);
         bool DeletePost(string UserId, int ProjectTypeMatrixId);
         Task<List<ErrorMessage>> DeletePostCheck(string UserId, int ProjectTypeMatrixId);
-        Task<List<ProjectTypeMatrixIndexGet>> IndexGet(string UserId, int ProjectTypeId);
+        Task<List<ProjectTypeMatrixIndexGetGrid>> IndexGet(string UserId, int ProjectTypeId);
         Task<ProjectTypeMatrixUpdateGet> UpdateGet(string UserId, int ProjectTypeMatrixId);
         bool UpdatePost(ProjectTypeMatrixUpdateGet ProjectTypeMatrix);
         Task<List<ErrorMessage>> UpdatePostCheck(ProjectTypeMatrixUpdateGet ProjectTypeMatrix);

@@ -1,40 +1,57 @@
-CREATE PROCEDURE usp_ProjectTypeMatrixCreatePostCheck (
+CREATE PROCEDURE usp_ProjectMatrixTypeCreatePostCheck (
 	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @FromProjectTypeId int
-	, @ToProjectTypeId int
-	, @ProjectMatrixTypeId int
 	, @UserId nvarchar(450)) 
 AS 
 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @UserId
+WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
-BEGIN
+BEGIN 
 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF (SELECT COUNT(*) FROM ProjectTypes WHERE ProjectTypeId = @FromProjectTypeId) = 0 
+IF @Name ='' OR @Name IS NULL
 BEGIN
-insert into @ErrorIdsTable values(200)
+insert into @ErrorIdsTable values(104)
 END
 
-IF (SELECT COUNT(*) FROM ProjectTypes WHERE ProjectTypeId = @ToProjectTypeId) = 0 
+IF @Description =''  OR @Description IS NULL
 BEGIN
-insert into @ErrorIdsTable values(201)
+insert into @ErrorIdsTable values(9)
+END
+
+IF @MenuName =''  OR @MenuName IS NULL
+BEGIN
+insert into @ErrorIdsTable values(10)
+END
+
+IF @MouseOver =''  OR @MouseOver IS NULL
+BEGIN
+insert into @ErrorIdsTable values(11)
 END
 
 
-IF (SELECT COUNT(*) FROM ProjectMatrixTypes WHERE ProjectMatrixTypeId = @ProjectMatrixTypeId) = 0 
+IF  (SELECT COUNT(*) 
+	FROM ProjectMatrixTypeLanguages 
+	WHERE LanguageId = @LanguageID
+		AND ProjectMatrixTypeLanguages.Name = @Name) >0
 BEGIN
-insert into @ErrorIdsTable values(202)
+	insert into @ErrorIdsTable values(125)
 END
 
+IF  (SELECT COUNT(*) 
+	FROM Languages 
+	WHERE LanguageId = @LanguageId AND languages.StatusId = 1
+) =0
+BEGIN
+	insert into @ErrorIdsTable values(6)
+END
 
 SELECT ErrorMessages.ErrorMessageID
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name

@@ -113,6 +113,7 @@ namespace SIPx.API.Controllers
             var ErrorMessages = new List<ErrorMessage>();
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
+                ProjectMatrixType.UserId = CurrentUser.Id;
                 ErrorMessages = await _projectMatrixTypeProvider.UpdatePostCheck(ProjectMatrixType);
                 if (ErrorMessages.Count > 0)
                 {

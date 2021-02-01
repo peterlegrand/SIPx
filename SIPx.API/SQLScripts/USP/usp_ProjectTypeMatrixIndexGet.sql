@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ProjectTypeMatrixes.ProjectTypeMatrixID
+	, ProjectTypeMatrixes.ToProjectTypeId ProjectTypeId
 	, ISNULL(UserLanguage.ProjectTypeMatrixLanguageID,ISNULL(DefaultLanguage.ProjectTypeMatrixLanguageID,0)) ProjectTypeLanguageID
 	, @LanguageId LanguageId
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this project type matrix')) Name
@@ -16,7 +17,7 @@ SELECT ProjectTypeMatrixes.ProjectTypeMatrixID
 	, ISNULL(UserTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this Project matrix type')) ProjectMatrixTypeName
 	, 'To' Direction
 
-	, ISNULL(UserToLanguage.Name,ISNULL(DefaultToLanguage.Name,'No name for this TO project type')) ToProjectTypeName
+	, ISNULL(UserToLanguage.Name,ISNULL(DefaultToLanguage.Name,'No name for this TO project type')) ProjectTypeName
 
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
@@ -51,6 +52,7 @@ WHERE ProjectTypeMatrixes.FromProjectTypeId = @ProjectTypeId
 UNION ALL
 
 SELECT ProjectTypeMatrixes.ProjectTypeMatrixID
+	, ProjectTypeMatrixes.FromProjectTypeId ProjectTypeId
 	, ISNULL(UserLanguage.ProjectTypeMatrixLanguageID,ISNULL(DefaultLanguage.ProjectTypeMatrixLanguageID,0)) ProjectTypeLanguageID
 	, @LanguageId LanguageId
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this project type matrix')) Name
@@ -60,7 +62,7 @@ SELECT ProjectTypeMatrixes.ProjectTypeMatrixID
 
 	, ISNULL(UserTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this Project matrix type')) ProjectMatrixTypeName
 	, 'From' Direction
-	, ISNULL(UserFromLanguage.Name,ISNULL(DefaultFromLanguage.Name,'No name for this TO project type')) FromProjectTypeName
+	, ISNULL(UserFromLanguage.Name,ISNULL(DefaultFromLanguage.Name,'No name for this TO project type')) ProjectTypeName
 
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID

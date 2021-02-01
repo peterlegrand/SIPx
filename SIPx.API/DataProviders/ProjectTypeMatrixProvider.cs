@@ -29,15 +29,15 @@ namespace SIPx.DataAccess
 
         public async Task<string> CreatePost(ProjectTypeMatrixCreateGet ProjectTypeMatrix)
         {
-            string usp = "usp_ProjectTypeMatrixCreatePost @Name , @Description , @MenuName , @MouseOver , @FromProjectTypeId, @ToProjectTypeId, @ProjectMatrixTypeId, @UserId  ";
+            string usp = "usp_ProjectTypeMatrixCreatePost @Name , @Description , @MenuName , @MouseOver ,@From1To2, @FromProjectTypeId, @ToProjectTypeId, @ProjectMatrixTypeId, @UserId  ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectTypeMatrix);
             return String;
         }
 
-        public Task<List<ProjectTypeMatrixIndexGet>> IndexGet(string UserId, int ProjectTypeId)
+        public Task<List<ProjectTypeMatrixIndexGetGrid>> IndexGet(string UserId, int ProjectTypeId)
         {
             string usp = "usp_ProjectTypeMatrixIndexGet @UserID, @ProjectTypeId ";
-            return _sqlDataAccess.LoadData<ProjectTypeMatrixIndexGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
+            return _sqlDataAccess.LoadData<ProjectTypeMatrixIndexGetGrid, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
         }
 

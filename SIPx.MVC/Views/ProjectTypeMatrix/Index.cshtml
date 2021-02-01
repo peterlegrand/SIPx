@@ -1,25 +1,63 @@
-﻿@model List<ProjectTypeIndexGet>
+﻿@model ProjectTypeMatrixIndexGet
 @{
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project type relations (matrix)")).TermString;
-    ViewData["Image"] = "Type.png";
+    ViewData["Image"] = "matrix.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
-<ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
-    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
-    <e-grid-columns>
-        <e-grid-column field="ProjectTypeMatrixId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="FromProjectTypeName" headerText="@Term.Find(x => x.InternalName.Equals("From project type")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="ToProjectTypeName" headerText="@Term.Find(x => x.InternalName.Equals("To project type")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="ProjectMatrixTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Project matrix type")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
-    </e-grid-columns>
-</ejs-grid>
-<a href="~/ProjectType/Create">@Term.Find(x => x.InternalName.Equals("Add new project type relation")).TermString</a>
+<div class="container">
+    @if (ViewBag.Env == "Production")
+    {
+        <div hidden class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString 
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="ProjectTypeId" ejs-for="@Model.ProjectTypeId" cssClass="e-outline" placeholder="ProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-3">
+                @Term.Find(x => x.InternalName.Equals("Id")).TermString 
+            </div>
+            <div class="col-9">
+                <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProjectTypeId" cssClass="e-outline" placeholder="ProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-3">
+            @Term.Find(x => x.InternalName.Equals("Project type")).TermString 
+        </div>
+        <div class="col-9">
+            @Model.ProjectTypeName
+        </div>
+    </div>
+    <div  class="row">
+        <div class="col-12">
+            <ejs-grid id="Grid" dataSource="@Model.Matrix" allowPaging="true" allowSorting="true" allowResizing="true">
+                <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+                <e-grid-columns>
+                    <e-grid-column field="ProjectTypeMatrixId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+                    <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+                    <e-grid-column field="Direction" headerText="@Term.Find(x => x.InternalName.Equals("Direction")).TermString" textAlign="Right" type="string"></e-grid-column>
+                    <e-grid-column field="ProjectTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Project type")).TermString" textAlign="Right" type="string"></e-grid-column>
+                    <e-grid-column field="ProjectMatrixTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Project matrix type")).TermString" textAlign="Right" type="string"></e-grid-column>
+                    <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
+                    <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
+                    <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
+                </e-grid-columns>
+            </ejs-grid>
+            <a asp-action="Create" asp-route-id="@Model.ProjectTypeId">@Term.Find(x => x.InternalName.Equals("Add new project type relation")).TermString</a>
+        </div>
+    </div>
+
+</div>
+
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/ProjectType/Edit/${ProjectTypeId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>

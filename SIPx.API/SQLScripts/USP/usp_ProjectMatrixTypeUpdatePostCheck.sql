@@ -1,39 +1,43 @@
-CREATE PROCEDURE usp_ProjectTypeMatrixCreatePostCheck (
-	 @Name nvarchar(50)
+CREATE PROCEDURE usp_ProjectMatrixTypeUpdatePostCheck (
+	@ProjectMatrixTypeId int
+	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @FromProjectTypeId int
-	, @ToProjectTypeId int
-	, @ProjectMatrixTypeId int
 	, @UserId nvarchar(450)) 
-AS 
+AS
 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @UserId
+WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
-BEGIN
 
+BEGIN
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF (SELECT COUNT(*) FROM ProjectTypes WHERE ProjectTypeId = @FromProjectTypeId) = 0 
+IF @Name ='' OR @Name IS NULL
 BEGIN
-insert into @ErrorIdsTable values(200)
+insert into @ErrorIdsTable values(104)
 END
 
-IF (SELECT COUNT(*) FROM ProjectTypes WHERE ProjectTypeId = @ToProjectTypeId) = 0 
+IF @Description =''  OR @Description IS NULL
 BEGIN
-insert into @ErrorIdsTable values(201)
+insert into @ErrorIdsTable values(9)
 END
 
-
-IF (SELECT COUNT(*) FROM ProjectMatrixTypes WHERE ProjectMatrixTypeId = @ProjectMatrixTypeId) = 0 
+IF @MenuName =''  OR @MenuName IS NULL
 BEGIN
-insert into @ErrorIdsTable values(202)
+insert into @ErrorIdsTable values(10)
 END
+
+IF @MouseOver =''  OR @MouseOver IS NULL
+BEGIN
+insert into @ErrorIdsTable values(11)
+END
+
+--	SET @Error = @Error + ' - The language is not active'
 
 
 SELECT ErrorMessages.ErrorMessageID

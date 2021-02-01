@@ -3,10 +3,10 @@ CREATE PROCEDURE usp_ProjectTypeMatrixCreatePost (
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
+	, @From1To2 int
 	, @FromProjectTypeId int
 	, @ToProjectTypeId int
 	, @ProjectMatrixTypeId int
-	, @IsFrom bit
 	, @UserId nvarchar(450)) 
 AS 
 SET XACT_ABORT ON;
@@ -16,7 +16,8 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
-
+IF @From1To2 = 1
+BEGIN
 INSERT INTO ProjectTypeMatrixes (
 	FromProjectTypeId
 	, ToProjectTypeId 
@@ -35,7 +36,28 @@ VALUES (
 	, @UserId
 	, getdate()
 )
-
+END
+ELSE
+BEGIN
+INSERT INTO ProjectTypeMatrixes (
+	FromProjectTypeId
+	, ToProjectTypeId 
+	, ProjectMatrixTypeId
+	, CreatorID
+	, CreatedDate
+	, ModifierId
+	, ModifiedDate
+)
+VALUES (
+	@ToProjectTypeId 
+	, @FromProjectTypeId
+	, @ProjectMatrixTypeId
+	, @UserId
+	, getdate()
+	, @UserId
+	, getdate()
+)
+END
 
 DECLARE @NewProjectTypeMatrixId int	= scope_identity();
 

@@ -47,6 +47,12 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadSingleRecord<ProjectTypeUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
 
         }
+        public Task<string> ReturnName(string UserId, int ProjectTypeId)
+        {
+            string usp = "usp_ProjectTypeReturnName @UserId, @ProjectTypeID";
+            return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { UserId = UserId, ProjectTypeId = ProjectTypeId });
+
+        }
 
         public async Task<List<ErrorMessage>> UpdatePostCheck(ProjectTypeUpdateGet ProjectType)
         {

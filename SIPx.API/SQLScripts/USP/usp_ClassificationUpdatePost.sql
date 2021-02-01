@@ -30,6 +30,8 @@ DECLARE  @MouseOverOld nvarchar(50)
 DECLARE  @ColorOld char(9) 
 DECLARE  @IconIdOld int 
 
+SELECT @NameOld = Name , @DescriptionOld = Description, @MenuNameOld = MenuName, @MouseOverOld = MouseOver
+FROM ClassificationLanguages WHERE ClassificationID = @ClassificationId AND LanguageID = @LanguageId
 SELECT @StatusIdOld = StatusId , @DefaultPageIdOld = DefaultPageID , @HasDropDownOld = HasDropDown , @DropDownSequenceOld = DropDownSequence, @ColorOld = Color , @IconIdOld = IconID
 FROM Classifications WHERE ClassificationID = @ClassificationId
 
@@ -63,52 +65,62 @@ BEGIN TRANSACTION
 --fill change log
 IF @StatusId <> @StatusIdOld
 BEGIN
-INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,CAST(@StatusIdOld as varchar(10)),CAST(@StatusId as varchar(10)),GETDATE())
+INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@StatusIdColumnId,2,@ClassificationId,@UserId,CAST(@StatusIdOld as varchar(10)),CAST(@StatusId as varchar(10)),GETDATE())
 END
 
 IF @DefaultPageId <> @DefaultPageIdOld
 BEGIN
-INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,CAST(@DefaultPageIdOld as varchar(10)),CAST(@DefaultPageId as varchar(10)),GETDATE())
+INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@DefaultPageIdColumnId,2,@ClassificationId,@UserId,CAST(@DefaultPageIdOld as varchar(10)),CAST(@DefaultPageId as varchar(10)),GETDATE())
 END
 
 IF @HasDropDown <> @HasDropDownOld
 BEGIN
-INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,CAST(@HasDropDownOld as varchar(10)),CAST(@HasDropDown as varchar(10)),GETDATE())
+INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@HasDropDownColumnId,2,@ClassificationId,@UserId,CAST(@HasDropDownOld as varchar(10)),CAST(@HasDropDown as varchar(10)),GETDATE())
 END
 
 IF @DropDownSequenceOld <> @DropDownSequence
 BEGIN
-INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,CAST(@DropDownSequenceOld as varchar(10)),CAST(@DropDownSequence as varchar(10)),GETDATE())
+INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@DropDownSequenceColumnId,2,@ClassificationId,@UserId,CAST(@DropDownSequenceOld as varchar(10)),CAST(@DropDownSequence as varchar(10)),GETDATE())
 END
 
 IF @NameOld <> @Name
 BEGIN
-INSERT ChangeLogClassificationLanguages (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,@NameOld,@Name,GETDATE())
+INSERT ChangeLogClassificationLanguages (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@NameColumnId,2,@ClassificationId,@UserId,@NameOld,@Name,GETDATE())
 END
 
 IF @DescriptionOld <> @Description
 BEGIN
-INSERT ChangeLogClassificationLanguages (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,@DescriptionOld,@Description,GETDATE())
+INSERT ChangeLogClassificationLanguages (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@DescriptionColumnId,2,@ClassificationId,@UserId,@DescriptionOld,@Description,GETDATE())
 END
 
 IF @MenuNameOld <> @MenuName
 BEGIN
-INSERT ChangeLogClassificationLanguages (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,@MenuNameOld,@MenuName,GETDATE())
+INSERT ChangeLogClassificationLanguages (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@MenuNameColumnId,2,@ClassificationId,@UserId,@MenuNameOld,@MenuName,GETDATE())
 END
 
 IF @MouseOverOld <> @MouseOver
 BEGIN
-INSERT ChangeLogClassificationLanguages (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,@MouseOverOld,@MouseOver,GETDATE())
+INSERT ChangeLogClassificationLanguages (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@MouseOverColumnId,2,@ClassificationId,@UserId,@MouseOverOld,@MouseOver,GETDATE())
 END
 
 IF @ColorOld <> @Color
 BEGIN
-INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,@ColorOld,@Color,GETDATE())
+INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@ColorColumnId,2,@ClassificationId,@UserId,@ColorOld,@Color,GETDATE())
 END
 
 IF @IconIdOld <> @IconId
 BEGIN
-INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) VALUES(@ColorColumnId,2,@ClassificationId,@UserId,CAST(@IconIdOld as varchar(10)),CAST(@IconId as varchar(10)),GETDATE())
+INSERT ChangeLogClassifications (ColumnId, ChangeTypeId, RecordId, UserId, OldValue, NewValue, ChangeLogDate) 
+VALUES(@IconIdColumnId,2,@ClassificationId,@UserId,CAST(@IconIdOld as varchar(10)),CAST(@IconId as varchar(10)),GETDATE())
 END
 
 --END Change log

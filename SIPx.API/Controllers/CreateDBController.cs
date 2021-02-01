@@ -96,7 +96,7 @@ namespace SIPx.API.Controllers
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
-            await _userManager.CreateAsync(identityUser, "Pipo!9165");
+            await _userManager.CreateAsync(identityUser, "Sip!2021");
 
             var identityUser2 = new SipUser
             {
@@ -109,7 +109,7 @@ namespace SIPx.API.Controllers
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
-            await _userManager.CreateAsync(identityUser2, "Pipo!9165");
+            await _userManager.CreateAsync(identityUser2, "Sip!2021");
 
             using (StreamReader sr = new StreamReader("SQLScripts\\05MasterData.sql", System.Text.Encoding.UTF8))
             {

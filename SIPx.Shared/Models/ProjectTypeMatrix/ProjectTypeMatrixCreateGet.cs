@@ -15,9 +15,10 @@ namespace SIPx.Shared
         public string FromProjectTypeName { get; set; }
         public int ToProjectTypeId { get; set; }
         public string ToProjectTypeName { get; set; }
+        public int From1To2 { get; set; }
         public int ProjectMatrixTypeId { get; set; }
         public string UserId { get; set; }
-        public bool IsFrom { get; set; }
+//        public bool IsFrom { get; set; }
         public List<ProjectTypeList> ProjectTypes { get; set; }
         public List<ProjectMatrixTypeList> ProjectMatrixTypes { get; set; }
     }

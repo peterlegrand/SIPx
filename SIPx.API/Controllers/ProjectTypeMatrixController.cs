@@ -60,14 +60,15 @@ namespace SIPx.API.Controllers
             return ProjectTypeMatrix;
         }
 
-        [HttpGet("Create")]
-        public async Task<IActionResult> Create(int Id, [FromQuery(Name = "IsFrom")] bool IsFrom = true)
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
                     if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var ProjectTypeMatrix = new ProjectTypeMatrixCreateGet();
-                ProjectTypeMatrix.IsFrom = IsFrom;
+                ProjectTypeMatrix.FromProjectTypeId = Id;
+                ProjectTypeMatrix.FromProjectTypeName = await _projectTypeProvider.ReturnName(CurrentUser.Id, Id);
                 ProjectTypeMatrix = await CreateAddDropDownBoxes(ProjectTypeMatrix, CurrentUser.Id);
                 return Ok(ProjectTypeMatrix);
             }
@@ -109,7 +110,11 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                return Ok(await _projectTypeMatrixProvider.IndexGet(CurrentUser.Id, Id));
+                var ProjectType = new ProjectTypeMatrixIndexGet();
+                ProjectType.ProjectTypeId = Id;
+                ProjectType.ProjectTypeName = await _projectTypeProvider.ReturnName(CurrentUser.Id, Id);
+                ProjectType.Matrix = await _projectTypeMatrixProvider.IndexGet(CurrentUser.Id, Id);
+                return Ok(ProjectType);
             }
             return BadRequest(new
             {

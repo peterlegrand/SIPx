@@ -5,13 +5,32 @@
     var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add project type relation (matrix)")).TermString;
-    ViewData["Image"] = "Type.png";
+    ViewData["Image"] = "matrix.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
 
     <form method="post">
+        @if (ViewBag.Env == "Production")
+        {<div hidden class="row">
+                <div class="col-3">
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="FromProjectTypeId" ejs-for="@Model.FromProjectTypeId" cssClass="e-outline" placeholder="FromProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-3">
+                </div>
+                <div class="col-9">
+                    <ejs-numerictextbox id="FromProjectTypeId" ejs-for="@Model.FromProjectTypeId" cssClass="e-outline" placeholder="FromProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                </div>
+            </div>
+        }
 
         <div class="row">
             <div class="col-3">
@@ -51,50 +70,29 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @if (Model.IsFrom)
-                {
-                    <div>Term.Find(x => x.InternalName.Equals("From project type")).TermString</div>
-                }
-                else
-                {
-                    <div>Term.Find(x => x.InternalName.Equals("To project type")).TermString</div>
-                }
+                @Term.Find(x => x.InternalName.Equals("Direction")).TermString
             </div>
             <div class="col-9">
-                @if (Model.IsFrom)
-                {
-                    @Model.FromProjectTypeName
-                }
-                else
-                {
-                    @Model.ToProjectTypeName
-                }
+                <ejs-radiobutton checked="true" ejs-for="@Model.From1To2" value="1" id="FromTo" label="@Term.Find(x => x.InternalName.Equals("From A to B")).TermString" name="Direction" checked="true"></ejs-radiobutton>
+                <ejs-radiobutton id="ToFrom"  ejs-for="@Model.From1To2" value="2"  label="@Term.Find(x => x.InternalName.Equals("From B to A")).TermString" name="Direction" ></ejs-radiobutton>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @if (Model.IsFrom)
-                {
-                    <div>@Term.Find(x => x.InternalName.Equals("To project type")).TermString</div>
-                }
-                else
-                {
-                    <div>@Term.Find(x => x.InternalName.Equals("From project type")).TermString</div>
-                }
+                <div>@Term.Find(x => x.InternalName.Equals("Project type A")).TermString</div>
             </div>
             <div class="col-9">
-                @if (Model.IsFrom)
-                {
-                    <ejs-dropdownlist id="ToProjectTypeId" dataSource="@Model.ProjectTypes" ejs-for="@Model.ToProjectTypeId" value="@Model.ToProjectTypeId" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ProjectTypeId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-                }
-                else
-                {
-                    <ejs-dropdownlist id="FromProjectTypeId" dataSource="@Model.ProjectTypes" ejs-for="@Model.FromProjectTypeId" value="@Model.FromProjectTypeId" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ProjectTypeId"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-                }
+                @Model.FromProjectTypeName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div>@Term.Find(x => x.InternalName.Equals("Project type B")).TermString</div>
+            </div>
+            <div class="col-9">
+                <ejs-dropdownlist id="ToProjectTypeId" dataSource="@Model.ProjectTypes" ejs-for="@Model.ToProjectTypeId" value="@Model.ToProjectTypeId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProjectTypeId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
             </div>
         </div>
         <div class="row">
@@ -107,7 +105,7 @@
                 </ejs-dropdownlist>
             </div>
         </div>
- 
+
 
         <div class="row">
             <div class="col-3 offset-3">

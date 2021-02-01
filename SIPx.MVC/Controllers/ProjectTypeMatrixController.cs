@@ -37,7 +37,7 @@ namespace SIPx.MVC.Controllers
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
             ViewBag.Env = _hostingEnv.EnvironmentName;
-            ViewBag.ErrorMessages = new List<ErrorMessage>(); ;
+            ViewBag.ErrorMessages = new List<ErrorMessage>(); 
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -66,14 +66,7 @@ namespace SIPx.MVC.Controllers
                 ViewBag.Env = _hostingEnv.EnvironmentName;
                 return View(ProjectTypeMatrixCreateGetWithErrorMessage.ProjectTypeMatrix);
             }
-            if (ProjectTypeMatrix.IsFrom)
-            {
                 return RedirectToAction("Index", new { id = ProjectTypeMatrix.FromProjectTypeId });
-            }
-            else
-            {
-                return RedirectToAction("Index", new { id = ProjectTypeMatrix.ToProjectTypeId });
-            }
         }
 
         [HttpGet]
@@ -83,7 +76,7 @@ namespace SIPx.MVC.Controllers
             if(token == null)
             { return RedirectToAction("Login","FrontAuth");
             }
-            var response = await _client.GetProtectedAsync2<List<ProjectTypeMatrixIndexGet>>($"{_configuration["APIUrl"]}api/ProjectTypeMatrix/Index/" + id, token);
+            var response = await _client.GetProtectedAsync2<ProjectTypeMatrixIndexGet>($"{_configuration["APIUrl"]}api/ProjectTypeMatrix/Index/" + id, token);
             ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/ProjectTypeMatrix/Index", token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);

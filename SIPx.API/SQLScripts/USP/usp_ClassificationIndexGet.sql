@@ -11,7 +11,7 @@ SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'Classific
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
-INSERT INTO ChangeLogClassificationList (UserId, ChangeLogDate, MVCUIScreenID)  VALUES( @UserId, Getdate(), @ScreenId)
+INSERT INTO ReadLogClassificationList (UserId, ReadLogDate, MVCUIScreenID)  VALUES( @UserId, Getdate(), @ScreenId)
 
 SELECT Classifications.ClassificationID
 	, ISNULL(UserLanguage.ClassificationLanguageID,ISNULL(DefaultLanguage.ClassificationLanguageID,0)) ClassificationLanguageID
