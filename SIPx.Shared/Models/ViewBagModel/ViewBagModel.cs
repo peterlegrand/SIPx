@@ -14,6 +14,7 @@ namespace SIPx.Shared
         public string MVCUIScreenId { get; set; }
         public List<ErrorMessage> ErrorMessages { get; set; }
         public List<ReadLogGet> ReadLogGetGrid { get; set; }
+        public List<ChangeLogGet> ChangeLogGetGrid { get; set; }
 
     }
 }

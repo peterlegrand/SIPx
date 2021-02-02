@@ -23,10 +23,12 @@ namespace SIPx.MVC.Classes
             ViewBagSet.MVCUIScreenId = await _client.GetProtectedAsync<string>($"{configuration["APIUrl"]}api/MVCUIScreen/ScreenId?Controller={Controller}&Action={Action}", token);
             var ErrorMessage = new List<ErrorMessage>();
             var ReadLogGetGrid = new List<ReadLogGet>();
-            var x = new LogParameters() { ActionName = Action, ControllerName = Controller, IsIntRecordId = IsReadLogIntRecord, IntRecordId = ReadLogIntRecord, StringRecordId = ReadLogStringRecord };
-            var Readlog = await _client.PostProtectedAsync<List<ReadLogGet>>($"{configuration["APIUrl"]}api/Log/ReadLogView", x, token);
-
+            var ChangeLogGetGrid = new List<ChangeLogGet>();
+            var ReadLogParameters = new LogParameters() { ActionName = Action, ControllerName = Controller, IsIntRecordId = IsReadLogIntRecord, IntRecordId = ReadLogIntRecord, StringRecordId = ReadLogStringRecord };
+            ReadLogGetGrid = await _client.PostProtectedAsync<List<ReadLogGet>>($"{configuration["APIUrl"]}api/Log/ReadLogView", ReadLogParameters, token);
+            ChangeLogGetGrid= await _client.PostProtectedAsync<List<ChangeLogGet>>($"{configuration["APIUrl"]}api/Log/ChangeLogView", ReadLogParameters, token);
             ViewBagSet.ReadLogGetGrid = ReadLogGetGrid;
+            ViewBagSet.ChangeLogGetGrid = ChangeLogGetGrid;
             ViewBagSet.ErrorMessages = ErrorMessage;
             return (ViewBagSet);
         }
