@@ -92,6 +92,8 @@ namespace SIPx.API.Controllers
                 var MetaContent = new MetaContentIndexGet();
                 MetaContent.MetaRecordId = Id;
                 MetaContent.MetaTypeId = MetaTypeId;
+                MetaContent.HasDeleteRights = await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "MetaContent\\Delete");
+                MetaContent.HasCreateRights = await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", "MetaContent\\Create");
                 MetaContent.MetaContentList = await _metaContentProvider.IndexGet(CurrentUser.Id, Id, MetaTypeId);
                 var x = new Dictionary<string, string> { { "MetaTypeId", MetaTypeId.ToString() }, { "Id", Id.ToString() } };
                 MetaContent.AllRouteData = x;

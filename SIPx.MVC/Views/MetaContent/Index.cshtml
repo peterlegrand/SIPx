@@ -15,16 +15,21 @@
         <e-grid-column field="Title" headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="LanguageName" headerText="@Term.Find(x => x.InternalName.Equals("Language")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="MetaContentTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Meta content type")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        @if (Model.HasDeleteRights)
+        {
+            <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        }
     </e-grid-columns>
 </ejs-grid>
-@if(Model.MetaTypeId==1)
-{ 
-<a asp-controller="MVCUIScreen" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Back to screens")).TermString</a>
+@if (Model.MetaTypeId == 1)
+{
+    <a asp-controller="MVCUIScreen" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Back to screens")).TermString</a>
 }
-<a asp-controller="MetaContent" asp-action="Create" asp-all-route-data="@Model.AllRouteData">@Term.Find(x => x.InternalName.Equals("Add meta content")).TermString</a>
-<script id="Delete" type="text/x-template">
+@if (Model.HasCreateRights)
+{
+    <a asp-controller="MetaContent" asp-action="Create" asp-all-route-data="@Model.AllRouteData">@Term.Find(x => x.InternalName.Equals("Add meta content")).TermString</a>
+}<script id="Delete" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/MetaContent/Delete/${MetaContentId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
     </div>
-</script>
+    </script>

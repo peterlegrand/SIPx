@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIPx.Shared
 {
-    public class MetaContentIndexGetList
+    public class MetaContentIndexGetGrid
     {
         [Key]
         public int MetaContentId { get; set; }

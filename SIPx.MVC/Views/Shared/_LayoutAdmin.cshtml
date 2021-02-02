@@ -1,6 +1,7 @@
 ﻿@using Syncfusion.EJ2
-@{var Favorites = ViewBag.Favorites;
-    var UITermLayout = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+@{    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    var Favorites = AllStuff.Favorites;
+    var AllStuff.UITerms = AllStuff.UITerms;
     string Image = "/images/icons/" + (string)ViewData["Image"];
 
 }
@@ -66,34 +67,44 @@
                 <a class="nav-link text-dark font-weight-bold" asp-controller="Front" asp-action="Index">Frontend</a>
                 <a class="nav-link text-dark font-weight-bold" asp-controller="Admin" asp-action="Menu" asp-route-id="1">Admin menu</a>
                 @*<a class="nav-link text-dark font-weight-bold" asp-controller="Classification" asp-action="Index">Classifications</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="ClassificationRelationType" asp-action="Index">Classification relation types</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Organization" asp-action="Index">Organizations</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="OrganizationType" asp-action="Index">Organization types</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Page" asp-action="Index">Pages</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Person" asp-action="Index">Persons</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="ProcessTemplate" asp-action="Index">Process templates</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="ProcessTemplateGroup" asp-action="Index">Process template groups</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Project" asp-action="Index">Projects</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="RoleGroup" asp-action="Index">Role groups</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="UserMenuTemplate" asp-action="Index">User template menus</a>
-                    <a class="nav-link text-dark font-weight-bold" asp-controller="Setting" asp-action="Index">Settings</a>*@
+            <a class="nav-link text-dark font-weight-bold" asp-controller="ClassificationRelationType" asp-action="Index">Classification relation types</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="Organization" asp-action="Index">Organizations</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="OrganizationType" asp-action="Index">Organization types</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="Page" asp-action="Index">Pages</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="Person" asp-action="Index">Persons</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="ProcessTemplate" asp-action="Index">Process templates</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="ProcessTemplateGroup" asp-action="Index">Process template groups</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="Project" asp-action="Index">Projects</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="RoleGroup" asp-action="Index">Role groups</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="UserMenuTemplate" asp-action="Index">User template menus</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="Setting" asp-action="Index">Settings</a>*@
 
                 <a href="https://localhost:44393/Meta/">Meta</a>
                 <a href="https://localhost:44393/CreateDB/">Create DB</a>
                 <a href="https://localhost:44393/Swagger/">Swagger</a>
             </div>
+            @{
+                var parms = new Dictionary<string, string>
+                {
+                { "MetaTypeId", "1" },
+                { "Id", (string)ViewData["ScreenId"]}
+            };
+            }
             <div class="col-10">
                 <h1>
                     <img src="@Image" width="50" height="50" />&nbsp;@ViewData["Title"]
                 </h1>
                 <a data-toggle="modal" data-target="#favoriteModal" style="cursor: pointer">
-                    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@UITermLayout.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+                    <img src="~/images/icons/Favorites.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
                 </a>
                 <a data-toggle="modal" data-target="#readLogModal" style="cursor: pointer">
-                    <img src="~/images/icons/ReadLog.png" width="20" height="20" title="@UITermLayout.Find(x => x.InternalName.Equals("Read log")).TermString" />
+                    <img src="~/images/icons/ReadLog.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Read log")).TermString" />
                 </a>
                 <a data-toggle="modal" data-target="#changeLogModal" style="cursor: pointer">
-                    <img src="~/images/icons/ChangeLog.png" width="20" height="20" title="@UITermLayout.Find(x => x.InternalName.Equals("Change log")).TermString" />
+                    <img src="~/images/icons/ChangeLog.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Change log")).TermString" />
+                </a>
+                <a asp-controller="MetaContent" asp-action="Index" asp-all-route-data="parms">
+                    <img src="~/images/icons/meta.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Meta content")).TermString" />
                 </a>
                 @RenderBody()
             </div>
@@ -115,7 +126,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@UITermLayout.Find(x => x.InternalName.Equals("Add favorite")).TermString</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add favorite")).TermString</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -124,16 +135,16 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-3">
-                                @UITermLayout.Find(x => x.InternalName.Equals("Name")).TermString
+                                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
                             </div>
                             <div class="col-9">
-                                <ejs-textbox id="FavoriteName" value="@ViewData["Title"]" cssClass="e-outline" placeholder="@UITermLayout.Find(x => x.InternalName.Equals("Name")).TermString" floatLabelType="Auto"></ejs-textbox>
+                                <ejs-textbox id="FavoriteName" value="@ViewData["Title"]" cssClass="e-outline" placeholder="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" floatLabelType="Auto"></ejs-textbox>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-3">
-                                @UITermLayout.Find(x => x.InternalName.Equals("Group")).TermString
+                                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Group")).TermString
                             </div>
                             <div class="col-1">
                                 <ejs-radiobutton id="ExistingFavoriteGroup" name="FavoriteGroup" checked="true" cssClass="e-small"></ejs-radiobutton>
@@ -147,7 +158,7 @@
 
                         <div class="row">
                             <div class="col-3">
-                                @UITermLayout.Find(x => x.InternalName.Equals("New group")).TermString
+                                @AllStuff.UITerms.Find(x => x.InternalName.Equals("New group")).TermString
                             </div>
                             <div class="col-1">
                                 <ejs-radiobutton id="NewFavoriteGroup" name="FavoriteGroup" checked="false" cssClass="e-small"></ejs-radiobutton>
@@ -159,7 +170,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button href="#" id="Favorites">@UITermLayout.Find(x => x.InternalName.Equals("Add")).TermString</button>
+                    <button href="#" id="Favorites">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add")).TermString</button>
                 </div>
             </div>
         </div>
@@ -169,7 +180,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@UITermLayout.Find(x => x.InternalName.Equals("Read log")).TermString</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Read log")).TermString</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -181,11 +192,11 @@
                                 <ejs-grid id="ReadLogGrid" dataSource="@ViewBag.ReadLogView" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
-                                        <e-grid-column field="ReadLogId" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column field="UserName" headerText="@UITermLayout.Find(x => x.InternalName.Equals("User name")).TermString" textAlign="Right" type="number"></e-grid-column>
-                                        @*<e-grid-column id="columnReadLog" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Id")).TermString" template="#TemplateReadLog" textAlign="Right" type="string"></e-grid-column>*@
-                                        @*<e-grid-column headerText="@UITermLayout.Find(x => x.InternalName.Equals("User name")).TermString" template="#ReadLogUserName" textAlign="Right" type="string"></e-grid-column>*@
-                                        <e-grid-column field="ReadLogDate" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Date")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column field="ReadLogId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column field="UserName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("User name")).TermString" textAlign="Right" type="number"></e-grid-column>
+                                        @*<e-grid-column id="columnReadLog" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#TemplateReadLog" textAlign="Right" type="string"></e-grid-column>*@
+                                        @*<e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("User name")).TermString" template="#ReadLogUserName" textAlign="Right" type="string"></e-grid-column>*@
+                                        <e-grid-column field="ReadLogDate" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Date")).TermString" textAlign="Right" type="boolean"></e-grid-column>
                                     </e-grid-columns>
                                 </ejs-grid>
                             </div>
@@ -201,7 +212,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@UITermLayout.Find(x => x.InternalName.Equals("Change log")).TermString</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Change log")).TermString</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -213,9 +224,9 @@
                                 <ejs-grid id="ChangeLogGrid" dataSource="@ViewBag.ChangeLogView" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
-                                        <e-grid-column field="ChangeLogId" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column field="UserName" headerText="@UITermLayout.Find(x => x.InternalName.Equals("User name")).TermString" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column field="ReadLogDate" headerText="@UITermLayout.Find(x => x.InternalName.Equals("Date")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column field="ChangeLogId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column field="UserName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("User name")).TermString" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column field="ReadLogDate" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Date")).TermString" textAlign="Right" type="boolean"></e-grid-column>
                                     </e-grid-columns>
                                 </ejs-grid>
                             </div>

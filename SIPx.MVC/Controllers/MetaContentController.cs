@@ -102,8 +102,8 @@ namespace SIPx.MVC.Controllers
             if(token == null)
             { return RedirectToAction("Login","FrontAuth");
             }
-            var response = await _client.GetProtectedAsync2<ClassificationLevelDeleteGet>($"{_configuration["APIUrl"]}api/ClassificationLevel/Delete/" + id, token);
-            ViewBag.UITerms  = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/ClassificationLevel/Delete", token);
+            var response = await _client.GetProtectedAsync2<MetaContentDeleteGet>($"{_configuration["APIUrl"]}api/MetaContent/Delete/" + id, token);
+            ViewBag.UITerms  = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/MetaContent/Delete", token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
             ViewBag.Env = _hostingEnv.EnvironmentName;
@@ -118,11 +118,11 @@ namespace SIPx.MVC.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(ClassificationLevelDeleteGet ClassificationLevel)
+        public async Task<IActionResult> Delete(MetaContentDeleteGet MetaContent)
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
-            await _client.PostProtectedAsync<ClassificationLevelDeleteGet>($"{_configuration["APIUrl"]}api/ClassificationLevel/Delete", ClassificationLevel, token);
-            return RedirectToAction("Index", new { id = ClassificationLevel.ClassificationId });
+            await _client.PostProtectedAsync<MetaContentDeleteGet>($"{_configuration["APIUrl"]}api/MetaContent/Delete", MetaContent, token);
+            return RedirectToAction("Index", new { id = MetaContent.MetaContentId, MetaTypeId = MetaContent.MetaTypeId });
         }
     }
 }

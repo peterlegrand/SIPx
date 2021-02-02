@@ -13,6 +13,6 @@ namespace SIPx.DataAccess
         Task<MetaContentDeleteGet> DeleteGet(string UserId, int MetaContentId);
         bool DeletePost(string UserId, int MetaContentId);
         Task<List<ErrorMessage>> DeletePostCheck(string UserId, int MetaContentId);
-        Task<List<MetaContentIndexGetList>> IndexGet(string UserId, int MetaRecordId, int MetaTypeId);
+        Task<List<MetaContentIndexGetGrid>> IndexGet(string UserId, int MetaRecordId, int MetaTypeId);
     }
 }

@@ -45,10 +45,10 @@ namespace SIPx.DataAccess
             return true;
         }
 
-        public async Task<List<MetaContentIndexGetList>> IndexGet(string UserId, int MetaRecordId, int MetaTypeId)
+        public async Task<List<MetaContentIndexGetGrid>> IndexGet(string UserId, int MetaRecordId, int MetaTypeId)
         {
             string usp = "usp_MetaContentIndexGet @UserId, @MetaRecordId, @MetaTypeID";
-            var x = await _sqlDataAccess.LoadData<MetaContentIndexGetList, dynamic>(usp, new { UserId, MetaRecordId, MetaTypeId });
+            var x = await _sqlDataAccess.LoadData<MetaContentIndexGetGrid, dynamic>(usp, new { UserId, MetaRecordId, MetaTypeId });
             return x;
         }
 

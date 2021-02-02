@@ -1,17 +1,15 @@
-CREATE PROCEDURE usp_MVCUIScreenContentIndexGet (@UserId nvarchar(450), @MVCUIScreenId int ) 
-AS 
+CREATE PROCEDURE usp_MVCUIScrenContentDeleteGet (@UserId nvarchar(450),@MetaContentId int)
+AS
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
-DECLARE @ScreenId int;
-SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'MetaContent' AND Action = 'Index';
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
+exec usp_readlogWrite 'MetaContent', 'Edit',1,'',@MetaContentId,@UserId
 
-INSERT INTO ReadLogMetaContentList (UserId, ReadLogDate, MVCUIScreenID)  VALUES( @UserId, Getdate(), @ScreenId)
 
 SELECT MetaContents.MetaContentID
 	, Contents.Title
@@ -39,9 +37,7 @@ LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHE
 JOIN Persons Creator
 	ON Creator.UserId = MetaContents.CreatorID
 WHERE UIName.LanguageId = @LanguageID
-	AND MetaContents.MetaRecordId = @MVCUIScreenId
 	AND MetaContents.MetaTypeId = 1
-ORDER BY  	, ISNULL(UINameCustom.Customization ,UIName.Name) 
-	, ISNULL(UIContentLanguageNameCustom.Customization ,UIContentLanguageName.Name) 
+	AND MetaContents.MetaContentId = @MetaContentId
 
 COMMIT TRANSACTION

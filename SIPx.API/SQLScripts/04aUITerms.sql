@@ -4063,4 +4063,8 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(4061, 'Project type A');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4062, 'Project type B');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4063, 'From A to B');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4064, 'From B to A');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4065, 'Change log meta content');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4066, 'Read log meta content: Create, Update, Delete');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4067, 'Read log meta content list');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4068, 'Change log meta contents');
 SET IDENTITY_INSERT UITerms OFF;

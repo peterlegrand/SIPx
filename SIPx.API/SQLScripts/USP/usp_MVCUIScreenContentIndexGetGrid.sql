@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_MVCUIScreenContentIndexGet (@UserId nvarchar(450), @MVCUIScreenId int ) 
+CREATE PROCEDURE usp_MVCUIScreenContentIndexGetGrid (@UserId nvarchar(450), @MVCUIScreenId int ) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

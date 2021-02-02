@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SIPx.CallAPI;
+using SIPx.MVC.Classes;
 using SIPx.Shared;
 
 
@@ -22,6 +23,7 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient _client = new ServiceClient();
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _hostingEnv;
+        readonly LoadViewBagModel _loadViewBagModel = new LoadViewBagModel();
         public ClassificationController(IWebHostEnvironment env, IConfiguration configuration)
         {
             _configuration = configuration;
@@ -32,15 +34,16 @@ namespace SIPx.MVC.Controllers
         public async Task<IActionResult> Create()
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
-
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Classification/Create", token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.Env = _hostingEnv.EnvironmentName;
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Classification/Create", token);
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.Env = _hostingEnv.EnvironmentName;
+            //ViewBag.MVCUIScreenId = await _client.GetProtectedAsync<string>($"{_configuration["APIUrl"]}api/MVCUIScreen/ScreenId?Controller={this.ControllerContext.RouteData.Values["controller"].ToString() }&Action={this.ControllerContext.RouteData.Values["Action"].ToString()}", token);
 
             var response = await _client.GetProtectedAsync2<ClassificationCreateGet>($"{_configuration["APIUrl"]}api/Classification/Create/", token);
-            var ErrorMessage = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = ErrorMessage;
+            //var ErrorMessage = new List<ErrorMessage>();
+            //ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -58,12 +61,16 @@ namespace SIPx.MVC.Controllers
             var ClassificationCreateGetWithErrorMessage = await _client.PostProtectedAsync<ClassificationCreateGetWithErrorMessages>($"{_configuration["APIUrl"]}api/Classification/Create", Classification, token);
             if (ClassificationCreateGetWithErrorMessage.ErrorMessages.Count>0)
             {
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Classification/Create", token);
-                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-                ViewBag.Env = _hostingEnv.EnvironmentName;
+                var AllStuff =  await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+                AllStuff.ErrorMessages = ClassificationCreateGetWithErrorMessage.ErrorMessages;
+                ViewBag.AllStuff = AllStuff;
 
-                ViewBag.ErrorMessages = ClassificationCreateGetWithErrorMessage.ErrorMessages;
+                //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Classification/Create", token);
+                //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+                //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+                //ViewBag.Env = _hostingEnv.EnvironmentName;
+
+                //ViewBag.ErrorMessages = ClassificationCreateGetWithErrorMessage.ErrorMessages;
                 return View(ClassificationCreateGetWithErrorMessage.Classification);
             }
             return RedirectToAction("Index");
@@ -79,6 +86,7 @@ namespace SIPx.MVC.Controllers
             ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Classification/Index", token);
             ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
             ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            ViewBag.MVCUIScreenId = await _client.GetProtectedAsync<string>($"{_configuration["APIUrl"]}api/MVCUIScreen/ScreenId?Controller={this.ControllerContext.RouteData.Values["controller"].ToString() }&Action={this.ControllerContext.RouteData.Values["Action"].ToString()}", token);
             ViewBag.Env = _hostingEnv.EnvironmentName;
 
             if (response.Item2 == true)

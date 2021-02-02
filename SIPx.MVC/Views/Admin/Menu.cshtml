@@ -5,6 +5,7 @@
 @{
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Admin menu")).TermString;
+    ViewData["ScreenId"] = ViewBag.MVCUIScreenId;
     ViewData["Image"] = "Setting.png";
     Layout = "_LayoutAdmin";
 }

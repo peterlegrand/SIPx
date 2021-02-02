@@ -11,7 +11,9 @@ namespace SIPx.Shared
         [Key]
         public int MetaRecordId { get; set; }
         public int MetaTypeId { get; set; }
-        public List<MetaContentIndexGetList> MetaContentList { get; set; }
+        public bool HasCreateRights { get; set; }
+        public bool HasDeleteRights { get; set; }
+        public List<MetaContentIndexGetGrid> MetaContentList { get; set; }
         public Dictionary<string, string> AllRouteData { get; set; }
 
     }

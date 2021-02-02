@@ -25,5 +25,11 @@ namespace SIPx.DataAccess
             List<MVCUIScreenIndexGet> x = await _sqlDataAccess.LoadData<MVCUIScreenIndexGet, dynamic>(usp, new { UserId });
             return x;
         }
+        public async Task<string> GetScreenId(string Controller, string Action)
+        {
+            string usp = "usp_MVCUIScreenGetScreenId @Controller, @Action";
+            int x = await _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { Controller, Action});
+            return x.ToString();
+        }
     }
 }

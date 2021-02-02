@@ -34,9 +34,23 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString()+"\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 return Ok(await _mVCUIScreenProvider.IndexGet(CurrentUser.Id));
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("ScreenId")]
+        public async Task<IActionResult> ScreenId([FromQuery(Name = "Controller")] string Controller = "", [FromQuery(Name = "Action")] string Action= "")
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                return Ok(await _mVCUIScreenProvider.GetScreenId(Controller, Action));
             }
             return BadRequest(new
             {
