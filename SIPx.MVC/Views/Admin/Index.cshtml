@@ -1,10 +1,12 @@
 ﻿@{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+
+   // var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
 }
 @{
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Admin dashboard")).TermString;
+    ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("Admin dashboard")).TermString;
     ViewData["Image"] = "Setting.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
-    ViewData["ScreenId"] = ViewBag.MVCUIScreenId;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
+    ViewData["ScreenId"] = AllStuff.MVCUIScreenId;
     Layout = "_LayoutAdmin";
 }

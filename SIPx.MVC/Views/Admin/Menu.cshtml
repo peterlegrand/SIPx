@@ -1,10 +1,10 @@
 ﻿@model List<ClassificationIndexGet>
-@{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+@{ var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+
 }
 @{
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Admin menu")).TermString;
+    ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("Admin menu")).TermString;
     ViewData["ScreenId"] = ViewBag.MVCUIScreenId;
     ViewData["Image"] = "Setting.png";
     Layout = "_LayoutAdmin";
@@ -12,84 +12,84 @@
 <div class="container">
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Classification.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Classification" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Classification")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Classification" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Type.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="ContentType" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Content type")).TermString</a></div>
+        <div class="col-5"><a asp-controller="ContentType" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Relation.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="ClassificationRelationType" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Classification relation type")).TermString</a></div>
+        <div class="col-5"><a asp-controller="ClassificationRelationType" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification relation type")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Group.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="ContentTypeGroup" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Content type group")).TermString</a></div>
+        <div class="col-5"><a asp-controller="ContentTypeGroup" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type group")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Property.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Property" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Property")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Property" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Property")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Position.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Position" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Position")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Position" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Position")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Organization.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Organization" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Organization")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Organization" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Type.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="OrganizationType" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Organization type")).TermString</a></div>
+        <div class="col-5"><a asp-controller="OrganizationType" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization type")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Person.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Person" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Person")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Person" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Person")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Type.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="PersonRelationType" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Person relation type")).TermString</a></div>
+        <div class="col-5"><a asp-controller="PersonRelationType" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Person relation type")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Page.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Page" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Page")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Page" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Page")).TermString</a></div>
         <div class="col-1 menuIcon"></div>
         <div class="col-5"></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Type.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="ProjectType" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Project type")).TermString</a></div>
+        <div class="col-5"><a asp-controller="ProjectType" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Project type")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Project.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Project" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Project")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Project" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Project")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Template.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="ProcessTemplate" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Process template")).TermString</a></div>
+        <div class="col-5"><a asp-controller="ProcessTemplate" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Group.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="ProcessTemplateGroup" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Process template group")).TermString</a></div>
+        <div class="col-5"><a asp-controller="ProcessTemplateGroup" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template group")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Type.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="ProcessTemplateStageType" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Process template stage type")).TermString</a></div>
+        <div class="col-5"><a asp-controller="ProcessTemplateStageType" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template stage type")).TermString</a></div>
         <div class="col-1 menuIcon"></div>
         <div class="col-5"></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Role.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Role" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Role")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Role" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Role")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Group.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="RoleGroup" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Role group")).TermString</a></div>
+        <div class="col-5"><a asp-controller="RoleGroup" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Role group")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/User.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="User" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User")).TermString</a></div>
+        <div class="col-5"><a asp-controller="User" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("User")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/Menu.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="UserMenuTemplate" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User menu template")).TermString</a></div>
+        <div class="col-5"><a asp-controller="UserMenuTemplate" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("User menu template")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Language.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Language" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Language")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Language" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Language")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/UITerm.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="UITerm" asp-action="Index">@Term.Find(x => x.InternalName.Equals("UI term customization")).TermString</a></div>
+        <div class="col-5"><a asp-controller="UITerm" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("UI term customization")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/Setting.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="Setting" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Setting")).TermString</a></div>
+        <div class="col-5"><a asp-controller="Setting" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Setting")).TermString</a></div>
         <div class="col-1 menuIcon"><img src="/images/icons/screen.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="MVCUIScreen" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Screens")).TermString</a></div>
+        <div class="col-5"><a asp-controller="MVCUIScreen" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Screens")).TermString</a></div>
     </div>
     <div class="row">
         <div class="col-1 menuIcon"><img src="/images/icons/matrix.png" width="20" height="20" /></div>
-        <div class="col-5"><a asp-controller="ProjectMatrixType" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Project matrix type")).TermString</a></div>
+        <div class="col-5"><a asp-controller="ProjectMatrixType" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Project matrix type")).TermString</a></div>
     </div>
 </div>

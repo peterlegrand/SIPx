@@ -4072,4 +4072,18 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(4070, 'Has any matrix projec
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4071, 'Project - Project type');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4072, 'Optional (multiple allowed)');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4073, 'Required (multiple allowed)');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4074, 'Attachment type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4075, 'Change log project type classification');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4076, 'Content attachment');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4077, 'Content attachment version');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4078, 'Version status');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4079, 'Version status language');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4080, 'Read log project type classification: Create, Update, Delete');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4081, 'Read log project type classification list');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4082, 'Attachment types');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4083, 'Change log project type classifications');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4084, 'Content attachments');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4085, 'Content attachment versions');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4086, 'Version statuses');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4087, 'Version status languages');
 SET IDENTITY_INSERT UITerms OFF;

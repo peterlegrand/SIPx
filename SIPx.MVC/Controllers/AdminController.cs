@@ -32,11 +32,12 @@ namespace SIPx.MVC.Controllers
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
 
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Admin/Index", token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.MVCUIScreenId = await _client.GetProtectedAsync<string>($"{_configuration["APIUrl"]}api/MVCUIScreen/ScreenId?Controller={this.ControllerContext.RouteData.Values["controller"].ToString() }&Action={this.ControllerContext.RouteData.Values["Action"].ToString()}", token);
-            ViewBag.Env = _hostingEnv.EnvironmentName;
+
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Admin/Index", token);
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.MVCUIScreenId = await _client.GetProtectedAsync<string>($"{_configuration["APIUrl"]}api/MVCUIScreen/ScreenId?Controller={this.ControllerContext.RouteData.Values["controller"].ToString() }&Action={this.ControllerContext.RouteData.Values["Action"].ToString()}", token);
+            //ViewBag.Env = _hostingEnv.EnvironmentName;
             return View();
         }
 
@@ -45,11 +46,11 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Admin/Menu", token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.MVCUIScreenId = await _client.GetProtectedAsync<string>($"{_configuration["APIUrl"]}api/MVCUIScreen/ScreenId?Controller={this.ControllerContext.RouteData.Values["controller"].ToString() }&Action={this.ControllerContext.RouteData.Values["Action"].ToString()}", token);
-            ViewBag.Env = _hostingEnv.EnvironmentName;
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Admin/Menu", token);
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.MVCUIScreenId = await _client.GetProtectedAsync<string>($"{_configuration["APIUrl"]}api/MVCUIScreen/ScreenId?Controller={this.ControllerContext.RouteData.Values["controller"].ToString() }&Action={this.ControllerContext.RouteData.Values["Action"].ToString()}", token);
+            //ViewBag.Env = _hostingEnv.EnvironmentName;
             return View();
         }
     }
