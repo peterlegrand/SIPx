@@ -99,7 +99,7 @@ namespace SIPx.API.Controllers
                 var projectTypes = await _projectTypeProvider.List(CurrentUser.Id);
                 var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 Project.Statuses = Statuses;
-                Project.ProjectTypes = projectTypes;
+          //      Project.ProjectTypes = projectTypes;
 
                 Project.SecurityLevels = SecurityLevels;
                 return Ok(Project);
@@ -117,7 +117,7 @@ namespace SIPx.API.Controllers
             var ProjectTypes = await _projectTypeProvider.List(UserId);
             var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
             var SecurityLevels = await _securityLevelProvider.List(UserId);
-            Project.ProjectTypes = ProjectTypes;
+         //   Project.ProjectTypes = ProjectTypes;
             Project.Statuses = Statuses;
             Project.SecurityLevels = SecurityLevels;
             return Project;
@@ -317,7 +317,7 @@ namespace SIPx.API.Controllers
                 var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 ProjectCreateGet.LanguageId = UserLanguage.LanguageId;
                 ProjectCreateGet.LanguageName = UserLanguage.Name;
-                ProjectCreateGet.ProjectTypes = ProjectTypes;
+             //   ProjectCreateGet.ProjectTypes = ProjectTypes;
                 ProjectCreateGet.Statuses = Statuses;
                 ProjectCreateGet.SecurityLevels= SecurityLevels;
                 if (Id == null)

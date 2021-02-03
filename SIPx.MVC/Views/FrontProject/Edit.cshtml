@@ -17,9 +17,10 @@
                 <div class="col-3">
                     @Term.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>    <div class="col-9">
-                    <ejs-numerictextbox id="ProjectId" ejs-for="ProjectId" cssClass="e-outline" placeholder="ProjectId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ParentProjectId" ejs-for="ParentProjectId" cssClass="e-outline" placeholder="ParentProjectId" floatLabelType="Auto"></ejs-numerictextbox>
-                </div>
+    <ejs-numerictextbox id="ProjectId" ejs-for="ProjectId" cssClass="e-outline" placeholder="ProjectId" floatLabelType="Auto"></ejs-numerictextbox>
+    <ejs-numerictextbox id="ProjectTypeId" ejs-for="ProjectTypeId" cssClass="e-outline" placeholder="ProjectTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+    <ejs-numerictextbox id="ParentProjectId" ejs-for="ParentProjectId" cssClass="e-outline" placeholder="ParentProjectId" floatLabelType="Auto"></ejs-numerictextbox>
+</div>
             </div>}
         else
         {
@@ -89,7 +90,7 @@
                 </ejs-dropdownlist>
             </div>
         </div>
-        <div class="row">
+        @*<div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Type")).TermString
             </div>
@@ -98,7 +99,7 @@
                     <e-dropdownlist-fields text="Name" value="ProjectTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
-        </div>
+        </div>*@
         <div class="row">
             <div class="col-3">
                 @Term.Find(x => x.InternalName.Equals("Security level")).TermString

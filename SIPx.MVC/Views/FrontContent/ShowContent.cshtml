@@ -2,10 +2,11 @@
 @using Newtonsoft.Json
 @model FrontContentShowContent
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content")).TermString + " " + Model.Title;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+ //   var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("Content")).TermString + " " + Model.Title;
     ViewData["Image"] = "Content.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <div class="container">
@@ -27,18 +28,18 @@
     <div class="row">
 
         <div class="col-2">
-            <div> @Term.Find(x => x.InternalName.Equals("Id")).TermString: </div>
-            <div> @Term.Find(x => x.InternalName.Equals("Parent content")).TermString:</div>
-            <div> @Term.Find(x => x.InternalName.Equals("Status")).TermString:</div>
-            <div> @Term.Find(x => x.InternalName.Equals("Type")).TermString:</div>
-            <div> @Term.Find(x => x.InternalName.Equals("Organization")).TermString:</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString: </div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Parent content")).TermString:</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Status")).TermString:</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Type")).TermString:</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString:</div>
             @if (Model.ProjectId != 0)
-            {<div> @Term.Find(x => x.InternalName.Equals("Project")).TermString:</div>}
-            <div> @Term.Find(x => x.InternalName.Equals("Security level")).TermString:</div>
-            <div> @Term.Find(x => x.InternalName.Equals("Creator")).TermString</div>
-            <div> @Term.Find(x => x.InternalName.Equals("Created date")).TermString</div>
-            <div> @Term.Find(x => x.InternalName.Equals("Modifier")).TermString</div>
-            <div> @Term.Find(x => x.InternalName.Equals("Modified date")).TermString</div>
+            {<div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project")).TermString:</div>}
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Security level")).TermString:</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString</div>
         </div>
         <div class="col-3">
             <div> @Model.ContentId</div>
@@ -61,7 +62,6 @@
         </div>
         @foreach (var x in Model.ClassificationValues)
         {
-
             <div class="row">
                 <div class="col-2">
                     <div> @x.ClassificationName </div>
@@ -70,7 +70,5 @@
                     <div> <a asp-controller="FrontClassificationValue" asp-action="Dashboard" asp-route-id="@x.ClassificationValueId"> @x.ClassificationValueName</a></div>
                 </div>
             </div>
-
         }
-
     </div>

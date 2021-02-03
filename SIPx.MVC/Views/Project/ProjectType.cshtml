@@ -1,0 +1,25 @@
+﻿@model List<ProjectProjectType>
+@{
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    //    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("Project type")).TermString;
+    ViewData["Image"] = "Project.png";
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
+
+    Layout = "_LayoutAdmin";
+}<div>
+    @foreach (var ProjectType in Model)
+    {
+
+
+        var parms = new Dictionary<string, string>
+    {
+                { "ParentProjectId", ProjectType.ParentProjectId.ToString() },
+                { "Id", ProjectType.ProjectTypeId.ToString()}
+            };
+
+        <a asp-action="Create" asp-all-route-data="parms">@ProjectType.ProjectTypeName</a>
+        <br />
+
+    }
+</div>

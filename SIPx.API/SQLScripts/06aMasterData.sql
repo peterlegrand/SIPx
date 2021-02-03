@@ -1675,6 +1675,8 @@ INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatus
 INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 340, 340, 340, 340)
 
 INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 341, 341, 341, 341)
+INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 4072, 4072, 4072, 4072)
+INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 4073, 4073, 4073, 4073)
 
 SET IDENTITY_INSERT [dbo].[ObjectTypeClassificationStatuses] OFF
 

@@ -26,6 +26,7 @@ namespace SIPx.DataAccess
         Task<List<UserList>> RightsUpdateGetEditUsers(FrontContentRightsEditUserCreateGet FrontContentRightsEditUser);
         Task<List<UserList>> RightsUpdateGetReadUsers(FrontContentRightsReadUserCreateGet FrontContentRightsReadUser);
         Task<FrontContentShowContentRights> ShowContentRightsGet(int ContentId);
+        Task<FrontContentContentNew> ContentNewGetContentType(int ContentTypeId);
 
     }
 }

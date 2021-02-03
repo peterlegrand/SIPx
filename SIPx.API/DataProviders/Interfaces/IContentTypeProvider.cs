@@ -17,5 +17,6 @@ namespace SIPx.DataAccess
         Task<ContentTypeUpdateGet> UpdateGet(string UserId, int ContentTypeId);
         bool UpdatePost(ContentTypeUpdateGet ContentType);
         Task<List<ErrorMessage>> UpdatePostCheck(ContentTypeUpdateGet ContentType);
+        Task<string> ReturnName(string UserId, int ContentTypeId);
     }
 }

@@ -13,7 +13,8 @@ namespace SIPx.Shared
         public int CodeInt { get; set; }
         public string CodeSuffix { get; set; }
         public string Code { get; set; }
-        public string ProjectParentName { get; set; }
+        public string ParentProjectName { get; set; }
+        public string ProjectTypeName { get; set; }
         public int StatusId { get; set; }
         public int ProjectTypeId { get; set; }
         public int LanguageId { get; set; }
@@ -23,9 +24,10 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public int SecurityLevelId { get; set; }
         public string MouseOver { get; set; }
+        public int CodeTypeId { get; set; }
         public string UserId { get; set; }
         public List<StatusList> Statuses { get; set; }
-        public List<ProjectTypeList> ProjectTypes { get; set; }
+     //   public List<ProjectTypeList> ProjectTypes { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }
     }
 }

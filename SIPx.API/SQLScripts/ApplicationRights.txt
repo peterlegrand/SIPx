@@ -367,3 +367,4 @@ ProjectTypeMatrix\Create
 ProjectTypeMatrix\Update
 ProjectTypeMatrix\Delete
 MVCUIScreen\ScreenId
+Project\ProjectType

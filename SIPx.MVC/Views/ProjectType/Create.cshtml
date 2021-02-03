@@ -2,11 +2,12 @@
 @using Newtonsoft.Json
 @model ProjectTypeCreateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create project type")).TermString;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    //    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var ErrorMessages = @AllStuff.ErrorMessages;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Create project type")).TermString;
     ViewData["Image"] = "Type.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = @AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -15,13 +16,13 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
-            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-3">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
                 <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
                     <e-content-template>
@@ -34,7 +35,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
@@ -43,7 +44,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
@@ -51,21 +52,21 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Code prefix")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Code prefix")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="CodePrefix" ejs-for="CodePrefix" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Code suffix")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Code suffix")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="CodeSuffix" ejs-for="CodeSuffix" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Code type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Code type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Sequence" dataSource="@Model.CodeTypes" ejs-for="@Model.CodeTypeId" value="@Model.CodeTypeId" popupHeight="220px">
@@ -75,7 +76,23 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Icon")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Has any child project")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="HasAnyChildProject" ejs-for="HasAnyChildProject" checked="@Model.HasAnyChildProject"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Has any matrix project")).TermString
+            </div>
+            <div class="col-9">
+                <ejs-checkbox id="HasAnyMatrixProject" ejs-for="HasAnyMatrixProject" checked="@Model.HasAnyMatrixProject"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Icon")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
@@ -85,7 +102,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Color")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Color")).TermString
             </div>
             <div class="col-9">
                 <ejs-colorpicker id='color-picker' ejs-for="Color" value="Color"></ejs-colorpicker>
@@ -95,8 +112,8 @@
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

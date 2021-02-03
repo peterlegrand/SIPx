@@ -26,6 +26,12 @@ namespace SIPx.DataAccess
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, Project);
             return ErrorMessages;
         }
+        public Task<string> ReturnName(string UserId, int ProjectId)
+        {
+            string usp = "usp_ProjectReturnName @UserId, @ProjectID";
+            return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { UserId = UserId, ProjectId = ProjectId });
+
+        }
 
         public async Task<string> CreatePost(ProjectCreateGet Project)
         {
@@ -38,6 +44,13 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_ProjectIndexGet @UserID";
             var x = await _sqlDataAccess.LoadData<ProjectIndexGet, dynamic>(usp, new { UserId = UserId });
+            return x;
+        }
+
+        public async Task<List<ProjectProjectType>> ProjectTypes(string UserId, int? ParentProjectId)
+        {
+            string usp = "usp_ProjectProjectTypeGet @UserID, @ParentProjectId";
+            var x = await _sqlDataAccess.LoadData<ProjectProjectType, dynamic>(usp, new { UserId = UserId , ParentProjectId  = ParentProjectId });
             return x;
         }
 

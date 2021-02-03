@@ -1,5 +1,5 @@
-CREATE PROCEDURE usp_ProjectTypeUpdatePost (
-	@ProjectTypeId int
+CREATE PROCEDURE usp_ContentTypeUpdatePost (
+	@ContentTypeId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -7,6 +7,8 @@ CREATE PROCEDURE usp_ProjectTypeUpdatePost (
 	, @CodePrefix nvarchar(25)
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
+	, @HasAnyChildContentType bit
+	, @HasAnyMatrixContentType bit
 	, @Color char(9) 
 	, @IconId int 
 	, @UserId nvarchar(450)) 
@@ -19,21 +21,23 @@ WHERE USerId = @UserId
 
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
-UPDATE ProjectTypes SET 
+UPDATE ContentTypes SET 
 	 Color = @Color
 	, IconId = @IconId
+	, HasAnyChildContentType = @HasAnyChildContentType 
+	, HasAnyMatrixContentType =@HasAnyMatrixContentType 
 	, ModifierId = @UserId
 	, ModifiedDate = GETDATE()
-WHERE ProjectTypeId = @ProjectTypeID
+WHERE ContentTypeId = @ContentTypeID
 
-UPDATE  ProjectTypeLanguages SET 
+UPDATE  ContentTypeLanguages SET 
 	Name = @Name
 	, Description = @Description
 	, MenuName = @MenuName
 	, MouseOver = @MouseOver
 	, ModifierId = @UserId
 	, ModifiedDate = getdate()
-WHERE ProjectTypeId = @ProjectTypeID
+WHERE ContentTypeId = @ContentTypeID
 	AND LanguageID = @LanguageID
 
 COMMIT TRANSACTION

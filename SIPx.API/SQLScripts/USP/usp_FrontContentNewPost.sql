@@ -7,45 +7,62 @@ CREATE PROCEDURE usp_FrontContentNewPost (
 	, @SecurityLevelID int
 	, @ProjectID int
 	, @OrganizationID int
+	, @IsRelationBasedEdit bit
+	, @IsRelationBasedRead bit
+	, @IsFreeEdit bit
+	, @IsFreeRead bit
+	, @IsOrganizationBasedEdit bit
+	, @IsOrganizationBasedEditParent bit
+	, @IsOrganizationBasedEditSub bit
+	, @IsOrganizationBasedRead bit
+	, @IsOrganizationBasedReadParent bit
+	, @IsOrganizationBasedReadSub bit
+	
+	, @IsProjectBasedEdit bit
+	, @IsProjectBasedEditParent bit
+	, @IsProjectBasedEditSub bit
+	, @IsProjectBasedRead bit
+	, @IsProjectBasedReadParent bit
+	, @IsProjectBasedReadSub bit
 	, @UserID nvarchar(450)
 	, @NewId int OUTPUT
 	, @ClassificationValueTable AS udt_ContentClassificationValueInsert READONLY
 )
 
 AS
-DECLARE @IsRelationBasedEdit bit 
-, @IsRelationBasedRead bit 
-, @IsOrganizationBasedEdit bit 
-, @IsOrganizationBasedEditSub bit 
-, @IsOrganizationBasedEditParent bit 
-, @IsOrganizationBasedRead bit 
-, @IsOrganizationBasedReadSub bit 
-, @IsOrganizationBasedReadParent bit 
-, @IsProjectBasedEdit bit 
-, @IsProjectBasedEditSub bit 
-, @IsProjectBasedEditParent bit 
-, @IsProjectBasedRead bit 
-, @IsProjectBasedReadSub bit 
-, @IsProjectBasedReadParent bit 
+--DECLARE @IsRelationBasedEdit bit 
+--, @IsRelationBasedRead bit 
+--, @IsOrganizationBasedEdit bit 
+--, @IsOrganizationBasedEditSub bit 
+--, @IsOrganizationBasedEditParent bit 
+--, @IsOrganizationBasedRead bit 
+--, @IsOrganizationBasedReadSub bit 
+--, @IsOrganizationBasedReadParent bit 
+--, @IsProjectBasedEdit bit 
+--, @IsProjectBasedEditSub bit 
+--, @IsProjectBasedEditParent bit 
+--, @IsProjectBasedRead bit 
+--, @IsProjectBasedReadSub bit 
+--, @IsProjectBasedReadParent bit 
 
 
-select 
- @IsRelationBasedEdit = IsRelationBasedEdit 
- , @IsRelationBasedRead = IsRelationBasedRead 
- , @IsOrganizationBasedEdit = IsOrganizationBasedEdit
- , @IsOrganizationBasedEditSub = IsOrganizationBasedEditSub
- , @IsOrganizationBasedEditParent = IsOrganizationBasedEditParent 
- , @IsOrganizationBasedRead = IsOrganizationBasedRead 
- , @IsOrganizationBasedReadSub = IsOrganizationBasedReadSub 
- , @IsOrganizationBasedReadParent = IsOrganizationBasedReadParent 
- , @IsProjectBasedEdit =  IsProjectBasedEdit 
- , @IsProjectBasedEditSub  = IsProjectBasedEditSub 
- , @IsProjectBasedEditParent = IsProjectBasedEditParent 
- , @IsProjectBasedRead = IsProjectBasedRead
- , @IsProjectBasedReadSub = IsProjectBasedReadSub 
-	, @IsProjectBasedReadParent  = IsProjectBasedReadParent
-from contenttypes
-WHERE ContentTypeId = @contentTypeId
+--select 
+-- @IsRelationBasedEdit = IsRelationBasedEdit 
+-- , @IsRelationBasedRead = IsRelationBasedRead 
+-- , @IsOrganizationBasedEdit = IsOrganizationBasedEdit
+-- , @IsOrganizationBasedEditSub = IsOrganizationBasedEditSub
+-- , @IsOrganizationBasedEditParent = IsOrganizationBasedEditParent 
+-- , @IsOrganizationBasedRead = IsOrganizationBasedRead 
+-- , @IsOrganizationBasedReadSub = IsOrganizationBasedReadSub 
+-- , @IsOrganizationBasedReadParent = IsOrganizationBasedReadParent 
+-- , @IsProjectBasedEdit =  IsProjectBasedEdit 
+-- , @IsProjectBasedEditSub  = IsProjectBasedEditSub 
+-- , @IsProjectBasedEditParent = IsProjectBasedEditParent 
+-- , @IsProjectBasedRead = IsProjectBasedRead
+-- , @IsProjectBasedReadSub = IsProjectBasedReadSub 
+--	, @IsProjectBasedReadParent  = IsProjectBasedReadParent
+--from contenttypes
+--WHERE ContentTypeId = @contentTypeId
 
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
@@ -64,6 +81,8 @@ INSERT INTO Contents (
 	, ModifierID
 	, ModifiedDate
 	, ownerId
+	, IsFreeEdit
+	, IsFreeRead
 	,  IsRelationBasedEdit   
 ,  IsRelationBasedRead   
 ,  IsOrganizationBasedEdit   
@@ -94,7 +113,9 @@ INSERT INTO Contents (
 	, @UserID
 	, getdate()
 	, @UserID
-	, @IsRelationBasedEdit   
+		, @IsFreeEdit
+	, @IsFreeRead
+, @IsRelationBasedEdit   
 , @IsRelationBasedRead   
 , @IsOrganizationBasedEdit   
 , @IsOrganizationBasedEditSub   

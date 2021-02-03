@@ -22,14 +22,14 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(ProjectTypeCreateGet ProjectType)
         {
-            string usp = "usp_ProjectTypeCreatePostCheck @Name, @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @Color , @IconID , @UserId  ";
+            string usp = "usp_ProjectTypeCreatePostCheck @Name, @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @HasAnyChildProject, @HasAnyMatrixProject, @Color , @IconID , @UserId  ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectType);
             return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ProjectTypeCreateGet ProjectType)
         {
-            string usp = "usp_ProjectTypeCreatePost @Name, @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @Color , @IconID , @UserId  ";
+            string usp = "usp_ProjectTypeCreatePost @Name, @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId ,@HasAnyChildProject, @HasAnyMatrixProject, @Color , @IconID , @UserId  ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ProjectType);
             return String;
         }
@@ -56,7 +56,7 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> UpdatePostCheck(ProjectTypeUpdateGet ProjectType)
         {
-            string usp = "usp_ProjectTypeUpdatePostCheck @ProjectTypeId , @Name , @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @Color , @IconId , @UserId ";
+            string usp = "usp_ProjectTypeUpdatePostCheck @ProjectTypeId , @Name , @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId ,@HasAnyChildProject, @HasAnyMatrixProject, @Color , @IconId , @UserId ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, ProjectType);
             return ErrorMessages;
         }
@@ -64,7 +64,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ProjectTypeUpdateGet ProjectType)
         {
-            string usp = "usp_ProjectTypeUpdatePost @ProjectTypeId , @Name , @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId , @Color , @IconId , @UserId ";
+            string usp = "usp_ProjectTypeUpdatePost @ProjectTypeId , @Name , @Description , @MenuName , @MouseOver , @CodePrefix , @CodeSuffix , @CodeTypeId ,@HasAnyChildProject, @HasAnyMatrixProject, @Color , @IconId , @UserId ";
             _sqlDataAccess.SaveData<ProjectTypeUpdateGet>(usp, ProjectType);
             return true;
         }
@@ -102,6 +102,12 @@ namespace SIPx.DataAccess
         {
             string usp = "usp_ProjectTypeLanguageUpdateGet @UserId, @ProjectTypeLanguageID";
             return _sqlDataAccess.LoadSingleRecord<ProjectTypeLanguageUpdateGet, dynamic>(usp, new { UserId = UserId, ProjectTypeLanguageId = ProjectTypeLanguageId });
+
+        }
+        public Task<int> ReturnCodeTypeId(int ProjectTypeId)
+        {
+            string usp = "usp_ProjectTypeReturnCodeTypeId @ProjectTypeID";
+            return _sqlDataAccess.LoadSingleRecord<int, dynamic>(usp, new { ProjectTypeId });
 
         }
 

@@ -16,6 +16,7 @@ namespace SIPx.Shared
         public int ProjectLanguageId { get; set; }
         public int? ParentProjectId { get; set; }
         public string ParentProjectName { get; set; }
+        public string ProjectTypeName { get; set; }
         public int ProjectTypeId { get; set; }
         public int SecurityLevelId { get; set; }
         public int StatusId { get; set; }
@@ -30,8 +31,9 @@ namespace SIPx.Shared
         public int ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string UserId { get; set; }
+        public int CodeTypeId { get; set; }
 
-        public List<ProjectTypeList> ProjectTypes { get; set; }
+        //public List<ProjectTypeList> ProjectTypes { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<StatusList> Statuses { get; set; }
     }

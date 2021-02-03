@@ -587,7 +587,12 @@ namespace SIPx.DataAccess
             return ErrorMessages;
         }
 
+        public Task<string> ReturnName(string UserId, int ContentTypeId)
+        {
+            string usp = "usp_ContentTypeReturnName @UserId, @ContentTypeID";
+            return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
 
+        }
 
         public Task<List<ContentTypeList>> List(string UserId)
         {

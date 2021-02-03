@@ -2,9 +2,10 @@
 @using Newtonsoft.Json
 @model FrontContentContentNew
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    //var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New content")).TermString;
+    ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("New content")).TermString;
     ViewData["Image"] = "Content.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
 
@@ -18,7 +19,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ContentTypeId" ejs-for="@Model.ContentTypeId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
@@ -29,7 +30,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ContentTypeId" ejs-for="@Model.ContentTypeId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
@@ -40,7 +41,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
                 @Model.ContentTypeName
             </div>
@@ -56,7 +57,7 @@
         </div>
         <div class="row">
             @*   <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>*@
-            <div class="col-9">
+            <div class="offset-3 col-9">
 
                 <div class="input-group">
                     <textarea class="editor" name="Description"></textarea>
@@ -137,7 +138,7 @@
 
             <div class="row">
                 <div class="col-3">
-                    @Model.Classifications[i].ControlB
+                    @Model.Classifications[i].ClassificationName
                     <ejs-numerictextbox id="@Model.Classifications[i].ControlB" ejs-for="@Model.Classifications[i].ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
                     @*                @Term.Find(x => x.InternalName.Equals("Default page")).TermString*@
                     @Model.Classifications[i].ClassificationName
@@ -152,6 +153,165 @@
             </div>
 
         }
+        <div class="row">
+            <div class="offset-3 col-9">
+                <table>
+                    <tr>
+                        <th colspan="2" style="width:50%;"></th>
+                        <th style="width:25%;">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString</th>
+                        <th style="width:25%;">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Read")).TermString</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Any")).TermString</td>
+                        @if (Model.IsFreeEditSelectable)
+                        {
+                            <td><ejs-checkbox id="IsFreeEdit" ejs-for="@Model.IsFreeEdit"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsFreeEdit" ejs-for="@Model.IsFreeEdit"></ejs-checkbox></td>
+
+                        }
+                        @if (Model.IsFreeReadSelectable)
+                        {
+                            <td><ejs-checkbox id="IsFreeRead" ejs-for="@Model.IsFreeRead"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsFreeRead" ejs-for="@Model.IsFreeRead"></ejs-checkbox></td>
+                        }
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization based")).TermString</td>
+                        @if (Model.IsOrganizationBasedEditSelectable)
+                        {
+                            <td><ejs-checkbox id="IsOrganizationBasedEdit" ejs-for="@Model.IsOrganizationBasedEdit"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsOrganizationBasedEdit" ejs-for="@Model.IsOrganizationBasedEdit"></ejs-checkbox></td>
+                        }
+                        @if (Model.IsOrganizationBasedReadSelectable)
+                        {
+                            <td><ejs-checkbox id="IsOrganizationBasedRead" ejs-for="@Model.IsOrganizationBasedRead"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsOrganizationBasedRead" ejs-for="@Model.IsOrganizationBasedRead"></ejs-checkbox></td>
+                        }
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Incl. subs")).TermString</td>
+                        @if (Model.IsOrganizationBasedEditSelectable)
+                        {
+                            <td><ejs-checkbox id="IsOrganizationBasedEditSub" ejs-for="@Model.IsOrganizationBasedEditSub"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsOrganizationBasedEditSub" ejs-for="@Model.IsOrganizationBasedEditSub"></ejs-checkbox></td>
+
+                        }
+                        @if (Model.IsOrganizationBasedReadSelectable)
+                        {
+                            <td><ejs-checkbox id="IsOrganizationBasedReadSub" ejs-for="@Model.IsOrganizationBasedReadSub"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsOrganizationBasedReadSub" ejs-for="@Model.IsOrganizationBasedReadSub"></ejs-checkbox></td>
+                        }
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Incl. parents")).TermString</td>
+                        @if (Model.IsOrganizationBasedEditSelectable)
+                        {
+                            <td><ejs-checkbox id="IsOrganizationBasedEditParent" ejs-for="@Model.IsOrganizationBasedEditParent"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsOrganizationBasedEditParent" ejs-for="@Model.IsOrganizationBasedEditParent"></ejs-checkbox></td>
+
+                        }
+                        @if (Model.IsOrganizationBasedReadSelectable)
+                        {
+                            <td><ejs-checkbox id="IsOrganizationBasedReadParent" ejs-for="@Model.IsOrganizationBasedReadParent"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsOrganizationBasedReadParent" ejs-for="@Model.IsOrganizationBasedReadParent"></ejs-checkbox></td>
+                        }
+                    </tr>
+                    <tr>
+                        <td colspan="2">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Project based")).TermString</td>
+                        @if (Model.IsProjectBasedEditSelectable)
+                        {
+                            <td><ejs-checkbox id="IsProjectBasedEdit" ejs-for="@Model.IsProjectBasedEdit"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsProjectBasedEdit" ejs-for="@Model.IsProjectBasedEdit"></ejs-checkbox></td>
+
+                        }
+                        @if (Model.IsProjectBasedReadSelectable)
+                        {
+                            <td><ejs-checkbox id="IsProjectBasedRead" ejs-for="@Model.IsProjectBasedRead"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsProjectBasedRead" ejs-for="@Model.IsProjectBasedRead"></ejs-checkbox></td>
+                        }
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Incl. subs")).TermString</td>
+                        @if (Model.IsProjectBasedEditSelectable)
+                        {
+                            <td><ejs-checkbox id="IsProjectBasedEditSub" ejs-for="@Model.IsProjectBasedEditSub"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsProjectBasedEditSub" ejs-for="@Model.IsProjectBasedEditSub"></ejs-checkbox></td>
+
+                        }
+                        @if (Model.IsProjectBasedReadSelectable)
+                        {
+                            <td><ejs-checkbox id="IsProjectBasedReadSub" ejs-for="@Model.IsProjectBasedReadSub"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsProjectBasedReadSub" ejs-for="@Model.IsProjectBasedReadSub"></ejs-checkbox></td>
+                        }
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Incl. parents")).TermString</td>
+                        @if (Model.IsProjectBasedEditSelectable)
+                        {
+                            <td><ejs-checkbox id="IsProjectBasedEditParent" ejs-for="@Model.IsProjectBasedEditParent"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsProjectBasedEditParent" ejs-for="@Model.IsProjectBasedEditParent"></ejs-checkbox></td>
+
+                        }
+                        @if (Model.IsProjectBasedReadSelectable)
+                        {
+                            <td><ejs-checkbox id="IsProjectBasedReadParent" ejs-for="@Model.IsProjectBasedReadParent"></ejs-checkbox></td>
+                        }
+                        else
+                        {
+                            <td><ejs-checkbox disabled="true" id="IsProjectBasedReadParent" ejs-for="@Model.IsProjectBasedReadParent"></ejs-checkbox></td>
+                        }
+                    </tr>
+                </table>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3 offset-3">
                 @*<ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
@@ -312,7 +472,7 @@
                         failure(err.message);
                     }
                 });
-            } 
+            }
         });
     </script>
 }

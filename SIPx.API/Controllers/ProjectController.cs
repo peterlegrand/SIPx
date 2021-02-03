@@ -39,41 +39,61 @@ namespace SIPx.API.Controllers
             _projectProvider = ProjectProvider;
             _userManager = userManager;
         }
-        private async Task<ProjectCreateGet> CreateAddDropDownBoxes(ProjectCreateGet Project, string UserId, int? ParentId = null)
+        private async Task<ProjectCreateGet> CreateAddDropDownBoxes(ProjectCreateGet Project, string UserId, int ParentId = 0)
         {
             var Statuses = await _masterListProvider.StatusList(UserId);
-            var ProjectTypes = await _projectTypeProvider.List(UserId);
             var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
             var SecurityLevels = await _securityLevelProvider.List(UserId);
             Project.LanguageId = UserLanguage.LanguageId;
             Project.LanguageName = UserLanguage.Name;
-            Project.ProjectTypes = ProjectTypes;
             Project.Statuses = Statuses;
-            Project.ParentProjectId = ParentId;
             Project.SecurityLevels = SecurityLevels;
+            Project.CodeTypeId = await _projectTypeProvider.ReturnCodeTypeId(Project.ProjectTypeId);
+            Project.ProjectTypeName = await _projectTypeProvider.ReturnName(UserId, Project.ProjectTypeId);
+            Project.ParentProjectName = await _projectProvider.ReturnName(UserId, ParentId);
+
             return Project;
         }
 
         private async Task<ProjectUpdateGet> UpdateAddDropDownBoxes(ProjectUpdateGet Project, string UserId)
         {
             var Statuses = await _masterListProvider.StatusList(UserId);
-            var ProjectTypes = await _projectTypeProvider.List(UserId);
             var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
             var SecurityLevels = await _securityLevelProvider.List(UserId);
-            Project.ProjectTypes = ProjectTypes;
             Project.Statuses = Statuses;
             Project.SecurityLevels = SecurityLevels;
+            Project.CodeTypeId = await _projectTypeProvider.ReturnCodeTypeId(Project.ProjectTypeId);
+            Project.ProjectTypeName= await _projectTypeProvider.ReturnName(UserId, Project.ProjectTypeId);
             return Project;
         }
+        [HttpGet("ProjectType/{Id:int?}")]
+        public async Task<IActionResult> ProjectType(int? Id = null)
+        {
 
-        [HttpGet("Create/{Id:int?}")]
-        public async Task<IActionResult> Create(int? Id=null)
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            {
+
+                var ProjectTypes = await _projectProvider.ProjectTypes(CurrentUser.Id, Id);
+
+                return Ok(ProjectTypes);
+            }
+            return BadRequest(new
+            {
+                IsSuccess = false,
+                Message = "No rights",
+            });
+        }
+        [HttpGet("Create/{Id:int}")]
+        public async Task<IActionResult> Create(int Id, [FromQuery(Name = "ParentProjectId")] int ParentProjectId = 0 )
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
                     if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var Project = new ProjectCreateGet();
-                Project = await CreateAddDropDownBoxes(Project, CurrentUser.Id, Id);
+                Project.ParentProjectId = ParentProjectId;
+                Project.ProjectTypeId = Id;
+                Project = await CreateAddDropDownBoxes(Project, CurrentUser.Id, ParentProjectId);
                 return Ok(Project);
             }
             return BadRequest(new

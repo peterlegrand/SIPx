@@ -14,6 +14,8 @@ namespace SIPx.Shared
         public string CodePrefix { get; set; }
         public string CodeSuffix { get; set; }
         public int CodeTypeId { get; set; }
+        public bool HasAnyChildProject { get; set; }
+        public bool HasAnyMatrixProject { get; set; }
         public string Color { get; set; }
         public int IconId { get; set; }
         public string UserId { get; set; }

@@ -2,11 +2,12 @@
 @using Newtonsoft.Json
 @model ContentTypeCreateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    var Term = AllStuff.UITerms;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New content type")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("New content type")).TermString;
     ViewData["Image"] = "Type.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }
@@ -17,7 +18,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
@@ -39,7 +40,7 @@
             </div>
         }
         <div class="row">
-            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-3">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
                 <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
                     <e-content-template>
@@ -59,7 +60,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
@@ -75,7 +76,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
@@ -91,21 +92,21 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Code prefix")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Code prefix")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="CodePrefix" ejs-for="CodePrefix" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Code suffix")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Code suffix")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="CodeSuffix" ejs-for="CodeSuffix" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Code type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Code type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Sequence" dataSource="@Model.CodeTypes" ejs-for="@Model.CodeTypeId" value="@Model.CodeTypeId" popupHeight="220px">
@@ -115,7 +116,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Content type group")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type group")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ContentTypeGroupId" dataSource="@Model.ContentTypeGroups" ejs-for="@Model.ContentTypeGroupId" value="@Model.ContentTypeGroupId" popupHeight="220px">
@@ -125,7 +126,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Process template")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ProcessTemplateId" dataSource="@Model.ProcessTemplates" ejs-for="@Model.ProcessTemplateId" value="@Model.ProcessTemplateId" popupHeight="220px">
@@ -135,7 +136,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Security level")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Security level")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.SecurityLevelId" value="@Model.SecurityLevelId" popupHeight="220px">
@@ -163,12 +164,12 @@
                 <table>
                     <tr>
                         <th colspan="2" style="width:50%;"></th>
-                        <th style="width:25%;">@Term.Find(x => x.InternalName.Equals("Ownership")).TermString</th>
-                        <th style="width:25%;">@Term.Find(x => x.InternalName.Equals("Edit")).TermString</th>
-                        <th style="width:25%;">@Term.Find(x => x.InternalName.Equals("Read")).TermString</th>
+                        <th style="width:25%;">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Ownership")).TermString</th>
+                        <th style="width:25%;">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString</th>
+                        <th style="width:25%;">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Read")).TermString</th>
                     </tr>
                     <tr>
-                        <td colspan="2">@Term.Find(x => x.InternalName.Equals("Any")).TermString</td>
+                        <td colspan="2">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Any")).TermString</td>
                         <td><ejs-checkbox id="IsFreeOwnership" ejs-for="@Model.IsFreeOwnership"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsFreeEdit" ejs-for="@Model.IsFreeEdit"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsFreeRead" ejs-for="@Model.IsFreeRead"></ejs-checkbox></td>
@@ -176,61 +177,61 @@
                     </tr>
                     <tr>
                         <td style="width:5%;"></td>
-                        <td style="width:20%;">@Term.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
+                        <td style="width:20%;">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
                         <td></td>
                         <td><ejs-checkbox id="IsFreeEditSelectable" ejs-for="@Model.IsFreeEditSelectable"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsFreeReadSelectable" ejs-for="@Model.IsFreeReadSelectable"></ejs-checkbox></td>
                     </tr>
                     <tr>
-                        <td colspan="2">@Term.Find(x => x.InternalName.Equals("Organization based")).TermString</td>
+                        <td colspan="2">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization based")).TermString</td>
                         <td><ejs-checkbox id="IsOrganizationBasedOwnership" ejs-for="@Model.IsOrganizationBasedOwnership"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsOrganizationBasedEdit" ejs-for="@Model.IsOrganizationBasedEdit"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsOrganizationBasedRead" ejs-for="@Model.IsOrganizationBasedRead"></ejs-checkbox></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>@Term.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
                         <td></td>
                         <td><ejs-checkbox id="IsOrganizationBasedEditSelectable" ejs-for="@Model.IsOrganizationBasedEditSelectable"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsOrganizationBasedReadSelectable" ejs-for="@Model.IsOrganizationBasedReadSelectable"></ejs-checkbox></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>@Term.Find(x => x.InternalName.Equals("Incl. subs")).TermString</td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Incl. subs")).TermString</td>
                         <td></td>
                         <td><ejs-checkbox id="IsOrganizationBasedEditSub" ejs-for="@Model.IsOrganizationBasedEditSub"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsOrganizationBasedReadSub" ejs-for="@Model.IsOrganizationBasedReadSub"></ejs-checkbox></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>@Term.Find(x => x.InternalName.Equals("Incl. parents")).TermString</td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Incl. parents")).TermString</td>
                         <td></td>
                         <td><ejs-checkbox id="IsOrganizationBasedEditParent" ejs-for="@Model.IsOrganizationBasedEditParent"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsOrganizationBasedReadParent" ejs-for="@Model.IsOrganizationBasedReadParent"></ejs-checkbox></td>
                     </tr>
                     <tr>
-                        <td colspan="2">@Term.Find(x => x.InternalName.Equals("Project based")).TermString</td>
+                        <td colspan="2">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Project based")).TermString</td>
                         <td><ejs-checkbox id="IsProjectBasedOwnership" ejs-for="@Model.IsProjectBasedOwnership"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsProjectBasedEdit" ejs-for="@Model.IsProjectBasedEdit"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsProjectBasedRead" ejs-for="@Model.IsProjectBasedRead"></ejs-checkbox></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>@Term.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Selectable")).TermString</td>
                         <td></td>
                         <td><ejs-checkbox id="IsProjectBasedEditSelectable" ejs-for="@Model.IsProjectBasedEditSelectable"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsProjectBasedReadSelectable" ejs-for="@Model.IsProjectBasedReadSelectable"></ejs-checkbox></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>@Term.Find(x => x.InternalName.Equals("Incl. subs")).TermString</td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Incl. subs")).TermString</td>
                         <td></td>
                         <td><ejs-checkbox id="IsProjectBasedEditSub" ejs-for="@Model.IsProjectBasedEditSub"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsProjectBasedReadSub" ejs-for="@Model.IsProjectBasedReadSub"></ejs-checkbox></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>@Term.Find(x => x.InternalName.Equals("Incl. parents")).TermString</td>
+                        <td>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Incl. parents")).TermString</td>
                         <td></td>
                         <td><ejs-checkbox id="IsProjectBasedEditParent" ejs-for="@Model.IsProjectBasedEditParent"></ejs-checkbox></td>
                         <td><ejs-checkbox id="IsProjectBasedReadParent" ejs-for="@Model.IsProjectBasedReadParent"></ejs-checkbox></td>
@@ -240,7 +241,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Icon")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Icon")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="@Model.IconId" popupHeight="220px">
@@ -250,7 +251,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Color")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Color")).TermString
             </div>
             <div class="col-9">
                 <ejs-colorpicker id='color-picker' ejs-for="Color" value="Color"></ejs-colorpicker>
@@ -258,8 +259,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

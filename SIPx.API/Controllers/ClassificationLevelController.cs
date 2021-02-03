@@ -20,9 +20,18 @@ namespace SIPx.API.Controllers
         private readonly ICheckProvider _checkProvider;
         private IClaimCheck _claimCheck;
         private readonly IClassificationProvider _classificationProvider;
+        private readonly ICodeTypeProvider _codeTypeProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ClassificationLevelController(IDateLevelProvider dateLevelProvider, IMasterListProvider masterListProvider, IClassificationLevelProvider classificationLevelProvider, IMasterProvider masterProvider, ICheckProvider checkProvider, IClaimCheck claimCheck, IClassificationProvider classificationProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ClassificationLevelController(IDateLevelProvider dateLevelProvider
+            , IMasterListProvider masterListProvider
+            , IClassificationLevelProvider classificationLevelProvider
+            , IMasterProvider masterProvider
+            , ICheckProvider checkProvider
+            , IClaimCheck claimCheck
+            , IClassificationProvider classificationProvider
+            , ICodeTypeProvider codeTypeProvider
+            , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _dateLevelProvider = dateLevelProvider;
             _masterListProvider = masterListProvider;
@@ -31,6 +40,7 @@ namespace SIPx.API.Controllers
             _checkProvider = checkProvider;
             _claimCheck = claimCheck;
             _classificationProvider = classificationProvider;
+            _codeTypeProvider = codeTypeProvider;
             _userManager = userManager;
         }
 
@@ -44,6 +54,7 @@ namespace SIPx.API.Controllers
             ClassificationLevel.LanguageName = UserLanguage.Name;
             ClassificationLevel.DateLevels = DateLevels;
             ClassificationLevel.Sequences = ClassificationLevelCreateGetSequences;
+            ClassificationLevel.CodeTypes = await _codeTypeProvider.List(UserId);
             ClassificationLevel.ClassificationId = ClassificationId;
             return ClassificationLevel;
         }
@@ -52,6 +63,7 @@ namespace SIPx.API.Controllers
         {
             ClassificationLevel.DateLevels = await _dateLevelProvider.List(UserId);
             ClassificationLevel.Sequences = await _classificationLevelProvider.CreateGetSequence(UserId, ClassificationLevel.ClassificationId);
+            ClassificationLevel.CodeTypes = await _codeTypeProvider.List(UserId);
             return ClassificationLevel;
         }
 

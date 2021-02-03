@@ -1,11 +1,13 @@
-CREATE PROCEDURE [dbo].[usp_ProjectTypeCreatePost] (
+CREATE PROCEDURE usp_ContentTypeCreatePost (
 	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @CodePrefix nvarchar(25)
-	, @CodeSuffix nvarchar(25)
+	, @CodePrefix nvarchar(25)=''
+	, @CodeSuffix nvarchar(25)=''
 	, @CodeTypeId int
+	, @HasAnyChildContentType bit
+	, @HasAnyMatrixContentType bit
 	, @Color char(9)
 	, @IconID int
 	, @UserId nvarchar(450)) 
@@ -15,12 +17,17 @@ BEGIN TRANSACTION
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
 FROM UserPreferences
-WHERE USerId = @CreatorId
+WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
-INSERT INTO ProjectTypes (
+INSERT INTO ContentTypes (
 	Color 
 	, IconID 
+	, CodePrefix
+	, CodeSuffix
+	, CodeTypeId
+	, HasAnyChildContentType
+	, HasAnyMatrixContentType
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -28,16 +35,21 @@ INSERT INTO ProjectTypes (
 VALUES (
 	@Color 
 	, @IconID 
-	, @CreatorId
+	, @CodePrefix
+	, @CodeSuffix
+	, @CodeTypeId
+	, @HasAnyChildContentType
+	, @HasAnyMatrixContentType
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
 
 
-DECLARE @NewProjectTypeId int	= scope_identity();
+DECLARE @NewContentTypeId int	= scope_identity();
 
-INSERT INTO ProjectTypeLanguages (
-	ProjectTypeID
+INSERT INTO ContentTypeLanguages (
+	ContentTypeID
 	, LanguageID
 	, Name
 	, Description
@@ -48,15 +60,19 @@ INSERT INTO ProjectTypeLanguages (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@NewProjectTypeID
+	@NewContentTypeID
 	, @LanguageID
 	, @Name
 	, @Description
 	, @MenuName
 	, @MouseOver
-	, @CreatorId
+	, @UserId
 	, getdate()
-	, @CreatorId
+	, @UserId
 	, getdate())
+
+	INSERT INTO ContentTypeClassifications (ContentTypeId, ClassificationID, ObjectTypeClassificationStatusID, ModifierID, ModifiedDate)
+SELECT @NewContentTypeID, ClassificationID, 2, @UserId, getDate() FROM Classifications
+	
 
 	COMMIT TRANSACTION

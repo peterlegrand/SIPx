@@ -1,11 +1,13 @@
-CREATE PROCEDURE usp_ProjectTypeCreatePostCheck (
+CREATE PROCEDURE usp_ContentTypeCreatePostCheck (
 	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
-	, @CodePrefix nvarchar(25)
-	, @CodeSuffix nvarchar(25)
+	, @CodePrefix nvarchar(25)=''
+	, @CodeSuffix nvarchar(25)=''
 	, @CodeTypeId int
+	, @HasAnyChildContentType bit
+	, @HasAnyMatrixContentType bit
 	, @Color char(9)
 	, @IconID int
 	, @UserId nvarchar(450)) 
@@ -28,7 +30,7 @@ END
 
 
 IF  (SELECT COUNT(*) 
-	FROM ProjectTypeLanguages 
+	FROM ContentTypeLanguages 
 	WHERE LanguageId = @LanguageID
 		AND Name = @Name ) > 0
 BEGIN

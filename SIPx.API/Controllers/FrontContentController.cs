@@ -151,6 +151,7 @@ namespace SIPx.API.Controllers
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var ContentNew = new FrontContentContentNew();
+                ContentNew = await _frontContentProvider.ContentNewGetContentType(Id);
                 ContentNew.ContentTypeId = Id;
                 ContentNew.Organizations = await _organizationProvider.ListofUser(CurrentUser.Id);
                 ContentNew.Projects = await _projectProvider.ListofUser(CurrentUser.Id);
@@ -158,7 +159,8 @@ namespace SIPx.API.Controllers
                 ContentNew.SecurityLevels = await _securityLevelProvider.ListofUser(CurrentUser.Id);
                 ContentNew.ContentStatuses = await _contentStatusProvider.List(CurrentUser.Id);
                 ContentNew.Classifications = await _frontContentProvider.NewClassifications(CurrentUser.Id, Id);
-                ContentNew.OrganizationId = ContentNew.Organizations.First().OrganizationId;
+                ContentNew.ContentTypeName = await _contentTypeProvider.ReturnName(CurrentUser.Id, Id);
+                    ContentNew.OrganizationId = ContentNew.Organizations.First().OrganizationId;
                 foreach (var Classification in ContentNew.Classifications)
                 {
 

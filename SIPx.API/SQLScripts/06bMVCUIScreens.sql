@@ -899,4 +899,5 @@ INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogReco
 INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (482, N'ProjectMatrixType', N'Create', 1, 0, 3923, 3923, 3923, 3923);
 INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (483, N'ProjectMatrixType', N'Edit', 1, 0, 3925, 3925, 3925, 3925);
 INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (484, N'ProjectMatrixType', N'Delete', 1, 0, 3924, 3924, 3924, 3924);
+INSERT [dbo].[MVCUIScreens] ([MVCUIScreenID], [Controller], [Action], [IsLogRecordGrid], [IsObsolete], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (485, N'Project', N'ProjectType', 0, 0, 4071, 4071, 4071, 4071);
 SET IDENTITY_INSERT [dbo].[MVCUIScreens] OFF

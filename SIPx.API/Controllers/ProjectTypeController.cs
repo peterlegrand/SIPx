@@ -19,6 +19,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class ProjectTypeController : ControllerBase
     {
+        private readonly ICodeTypeProvider _codeTypeProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IMasterListProvider _masterListProvider;
         private readonly IProjectTypeProvider _projectTypeProvider;
@@ -27,8 +28,9 @@ namespace SIPx.API.Controllers
         private readonly IProjectProvider _projectProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public ProjectTypeController(ICheckProvider checkProvider, IMasterListProvider masterListProvider, IProjectTypeProvider projectTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ProjectTypeController(ICodeTypeProvider codeTypeProvider, ICheckProvider checkProvider, IMasterListProvider masterListProvider, IProjectTypeProvider projectTypeProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, IProjectProvider ProjectProvider, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _codeTypeProvider = codeTypeProvider;
             _checkProvider = checkProvider;
             _masterListProvider = masterListProvider;
             _projectTypeProvider = projectTypeProvider;
@@ -40,6 +42,7 @@ namespace SIPx.API.Controllers
         private async Task<ProjectTypeCreateGet> CreateAddDropDownBoxes(ProjectTypeCreateGet ProjectType, string UserId)
         {
             var icons = await _masterListProvider.IconList(UserId);
+            ProjectType.CodeTypes = await _codeTypeProvider.List(UserId);
             ProjectType.Icons = icons;
             return ProjectType;
         }
@@ -47,6 +50,7 @@ namespace SIPx.API.Controllers
         private async Task<ProjectTypeUpdateGet> UpdateAddDropDownBoxes(ProjectTypeUpdateGet ProjectType, string UserId)
         {
             var icons = await _masterListProvider.IconList(UserId);
+            ProjectType.CodeTypes = await _codeTypeProvider.List(UserId);
             ProjectType.Icons = icons;
 
             return ProjectType;

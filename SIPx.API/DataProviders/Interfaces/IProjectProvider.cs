@@ -24,5 +24,7 @@ namespace SIPx.DataAccess
         Task<ProjectUpdateGet> UpdateGet(string UserId, int ProjectId);
         bool UpdatePost(ProjectUpdateGet Project);
         Task<List<ErrorMessage>> UpdatePostCheck(ProjectUpdateGet Project);
+        Task<List<ProjectProjectType>> ProjectTypes(string UserId, int? ParentProjectId);
+        Task<string> ReturnName(string UserId, int ProjectId);
     }
 }

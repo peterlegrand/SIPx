@@ -83,6 +83,27 @@ namespace SIPx.DataAccess
                 }
             }
             var p = new DynamicParameters();
+
+            p.Add("@IsRelationBasedEdit", Content.IsRelationBasedEdit);
+            p.Add("@IsRelationBasedRead", Content.IsRelationBasedRead);
+            p.Add("@IsFreeEdit", Content.IsFreeEdit);
+            p.Add("@IsFreeRead", Content.IsFreeRead);
+            p.Add("@IsOrganizationBasedEdit", Content.IsOrganizationBasedEdit);
+            p.Add("@IsOrganizationBasedEditParent", Content.IsOrganizationBasedEditParent);
+            p.Add("@IsOrganizationBasedEditSub", Content.IsOrganizationBasedEditSub);
+            p.Add("@IsOrganizationBasedRead", Content.IsOrganizationBasedRead);
+            p.Add("@IsOrganizationBasedReadParent", Content.IsOrganizationBasedReadParent);
+            p.Add("@IsOrganizationBasedReadSub", Content.IsOrganizationBasedReadSub);
+
+            p.Add("@IsProjectBasedEdit", Content.IsProjectBasedEdit);
+            p.Add("@IsProjectBasedEditParent", Content.IsProjectBasedEditParent);
+            p.Add("@IsProjectBasedEditSub", Content.IsProjectBasedEditSub);
+            p.Add("@IsProjectBasedRead", Content.IsProjectBasedRead);
+            p.Add("@IsProjectBasedReadParent", Content.IsProjectBasedReadParent);
+            p.Add("@IsProjectBasedReadSub", Content.IsProjectBasedReadSub);
+
+
+
             p.Add("@ContentTypeId", Content.ContentTypeId);
             p.Add("@ContentStatusId", Content.ContentStatusId);
             p.Add("@LanguageId", Content.LanguageId);
@@ -127,6 +148,17 @@ namespace SIPx.DataAccess
 
 
         }
+
+
+        public Task<FrontContentContentNew> ContentNewGetContentType(int ContentTypeId)
+        {
+            string usp = "usp_FrontContentContentNewGetContentType  @ContentTypeID";
+            return _sqlDataAccess.LoadSingleRecord<FrontContentContentNew, dynamic>(usp, new { ContentTypeId = ContentTypeId });
+
+        }
+
+
+
         public async Task<FrontContentRightsUpdateGet> RightsUpdateGet(int ContentId)
         {
             string usp = "usp_FrontContentRightsUpdateGet @ContentId";

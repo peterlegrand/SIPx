@@ -1,10 +1,11 @@
 ﻿@model FrontIndexGetDashboard
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    //var Term = AllStuff.UITerms;
     //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classifications")).TermString;
     ViewData["Title"] = "Dashboard";
     ViewData["Image"] = "SU.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 @if (Model.ShowTitleName)
@@ -12,7 +13,7 @@
 //PETER TODO, this goes wrong. Will get  double title
     <h1><img src="~/images/icons/SU.png" width="50" height="50" />@Model.TitleName</h1>
     <a data-toggle="modal" data-target="#favoriteModal" style="cursor: pointer">
-        <img src="~/images/icons/Favorites.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
+        <img src="~/images/icons/Favorites.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add favorite")).TermString" />
     </a>
 }
 @if (Model.ShowTitleDescription)

@@ -4067,4 +4067,9 @@ INSERT INTO UITerms (UITermId, InternalName) VALUES(4065, 'Change log meta conte
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4066, 'Read log meta content: Create, Update, Delete');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4067, 'Read log meta content list');
 INSERT INTO UITerms (UITermId, InternalName) VALUES(4068, 'Change log meta contents');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4069, 'Has any child project');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4070, 'Has any matrix project');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4071, 'Project - Project type');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4072, 'Optional (multiple allowed)');
+INSERT INTO UITerms (UITermId, InternalName) VALUES(4073, 'Required (multiple allowed)');
 SET IDENTITY_INSERT UITerms OFF;

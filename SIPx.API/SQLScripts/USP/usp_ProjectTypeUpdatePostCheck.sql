@@ -1,5 +1,5 @@
-CREATE PROCEDURE usp_ProjectTypeUpdatePostCheck (
-	@ProjectTypeId int
+CREATE PROCEDURE usp_ContentTypeUpdatePostCheck (
+	@ContentTypeId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -7,6 +7,8 @@ CREATE PROCEDURE usp_ProjectTypeUpdatePostCheck (
 	, @CodePrefix nvarchar(25)
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
+	, @HasAnyChildContentType bit
+	, @HasAnyMatrixContentType bit
 	, @Color char(9) 
 	, @IconId int 
 	, @UserId nvarchar(450)) 
@@ -22,7 +24,7 @@ BEGIN
 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF (SELECT COUNT(*) FROM ProjectTypes WHERE ProjectTypeId = @ProjectTypeId) = 0 
+IF (SELECT COUNT(*) FROM ContentTypes WHERE ContentTypeId = @ContentTypeId) = 0 
 BEGIN
 insert into @ErrorIdsTable values(96)
 END
@@ -33,9 +35,9 @@ END
 
 
 IF  (SELECT COUNT(*) 
-	FROM ProjectTypeLanguages 
+	FROM ContentTypeLanguages 
 	WHERE LanguageId = @LanguageID
-		AND Name = @Name AND ProjectTypeId <> @ProjectTypeId) > 0
+		AND Name = @Name AND ContentTypeId <> @ContentTypeId) > 0
 BEGIN
 	insert into @ErrorIdsTable values(95)
 END

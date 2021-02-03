@@ -19,6 +19,9 @@ namespace SIPx.Shared
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
         public string Color { get; set; }
+        public bool HasAnyChildProject { get; set; }
+        public bool HasAnyMatrixProject { get; set; }
+
         public string IconName { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }
