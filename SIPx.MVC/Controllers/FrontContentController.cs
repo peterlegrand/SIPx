@@ -106,7 +106,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token"); if (token == null) { return RedirectToAction("Login", "FrontAuth"); }
             var result = await _client.PostProtectedAsync<List<ContentAdvancedSearchResult>>($"{_configuration["APIUrl"]}api/FrontContent/AdvancedSearch", SearchData, token);
-            var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/FrontContent/SearchResult", token);
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //var UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/FrontContent/SearchResult", token);
             
             return View("SearchResult", result);
         }
@@ -141,7 +142,7 @@ namespace SIPx.MVC.Controllers
             if (FrontContentRightsUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
                 var AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
-                AllStuff.Env = _hostingEnv.EnvironmentName;
+                AllStuff.ErrorMessages = FrontContentRightsUpdateGetWithErrorMessage.ErrorMessages;
                 ViewBag.AllStuff = AllStuff;
 
 
@@ -183,7 +184,7 @@ namespace SIPx.MVC.Controllers
             if (FrontContentRightsEditUserCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
                 var AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
-                AllStuff.Env = _hostingEnv.EnvironmentName;
+                AllStuff.ErrorMessages = FrontContentRightsEditUserCreateGetWithErrorMessage.ErrorMessages;
                 ViewBag.AllStuff = AllStuff;
                 //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
                 //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);

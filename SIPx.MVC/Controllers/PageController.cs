@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SIPx.CallAPI;
+using SIPx.MVC.Classes;
 using SIPx.Shared;
 
 namespace SIPx.MVC.Controllers
@@ -17,6 +18,7 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient _client = new ServiceClient();
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _hostingEnv;
+        readonly LoadViewBagModel _loadViewBagModel = new LoadViewBagModel();
         public PageController(IWebHostEnvironment env, IConfiguration configuration)
         {
             _configuration = configuration;
@@ -27,13 +29,14 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<PageCreateGet>($"{_configuration["APIUrl"]}api/Page/Create/", token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Create", token);
-            ViewBag.Env = _hostingEnv.EnvironmentName;
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Create", token);
+            //ViewBag.Env = _hostingEnv.EnvironmentName;
 
-            var ErrorMessages = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = ErrorMessages;
+            //var ErrorMessages = new List<ErrorMessage>();
+            //ViewBag.ErrorMessages = ErrorMessages;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -50,12 +53,15 @@ namespace SIPx.MVC.Controllers
             var PageCreateGetWithErrorMessage = await _client.PostProtectedAsync<PageCreateGetWithErrorMessages>($"{_configuration["APIUrl"]}api/Page/Create", Page, token);
             if (PageCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Create", token);
-                ViewBag.Env = _hostingEnv.EnvironmentName;
+                var AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+                AllStuff.ErrorMessages = PageCreateGetWithErrorMessage.ErrorMessages;
+                ViewBag.AllStuff = AllStuff;
+                //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+                //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+                //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Create", token);
+                //ViewBag.Env = _hostingEnv.EnvironmentName;
 
-                ViewBag.ErrorMessages = PageCreateGetWithErrorMessage.ErrorMessages;
+                //ViewBag.ErrorMessages = PageCreateGetWithErrorMessage.ErrorMessages;
                 return View(PageCreateGetWithErrorMessage.Page);
             }
 
@@ -66,13 +72,14 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<List<PageIndexGet>>($"{_configuration["APIUrl"]}api/Page/Index",token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Index", token);
-            ViewBag.Env = _hostingEnv.EnvironmentName;
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Index", token);
+            //ViewBag.Env = _hostingEnv.EnvironmentName;
 
-            var ErrorMessage = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = ErrorMessage;
+            //var ErrorMessage = new List<ErrorMessage>();
+            //ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -88,13 +95,14 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<PageUpdateGet>($"{_configuration["APIUrl"]}api/Page/Update/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Edit", token);
-            ViewBag.Env = _hostingEnv.EnvironmentName;
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Edit", token);
+            //ViewBag.Env = _hostingEnv.EnvironmentName;
 
-            var ErrorMessage = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = ErrorMessage;
+            //var ErrorMessage = new List<ErrorMessage>();
+            //ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -111,12 +119,15 @@ namespace SIPx.MVC.Controllers
             var PageUpdateGetWithErrorMessage = await _client.PostProtectedAsync<PageUpdateGetWithErrorMessages>($"{_configuration["APIUrl"]}api/Page/Update", Page, token);
             if (PageUpdateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
-                ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-                ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-                ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Edit", token);
-                ViewBag.Env = _hostingEnv.EnvironmentName;
+                var AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+                AllStuff.ErrorMessages = PageUpdateGetWithErrorMessage.ErrorMessages;
+                ViewBag.AllStuff = AllStuff;
+                //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+                //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+                //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Edit", token);
+                //ViewBag.Env = _hostingEnv.EnvironmentName;
 
-                ViewBag.ErrorMessages = PageUpdateGetWithErrorMessage.ErrorMessages;
+                //ViewBag.ErrorMessages = PageUpdateGetWithErrorMessage.ErrorMessages;
                 return View(PageUpdateGetWithErrorMessage.Page);
             }
 
@@ -128,13 +139,14 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync2<PageDeleteGet>($"{_configuration["APIUrl"]}api/Page/Delete/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Delete", token);
-            ViewBag.Env = _hostingEnv.EnvironmentName;
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/Delete", token);
+            //ViewBag.Env = _hostingEnv.EnvironmentName;
 
-            var ErrorMessage = new List<ErrorMessage>();
-            ViewBag.ErrorMessages = ErrorMessage;
+            //var ErrorMessage = new List<ErrorMessage>();
+            //ViewBag.ErrorMessages = ErrorMessage;
             if (response.Item2 == true)
             {
                 return View(response.Item1);
@@ -159,9 +171,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<PageLanguageIndexGet>>($"{_configuration["APIUrl"]}api/Page/LanguageIndex/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/LanguageIndex", token);
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/LanguageIndex", token);
             
             return View(response);
             //return View();
@@ -171,9 +184,10 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<PageLanguageIndexGet>($"{_configuration["APIUrl"]}api/Page/LanguageUpdate/" + id, token);
-            ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
-            ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
-            ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/LanguageEdit", token);
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
+            //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);
+            //ViewBag.UITerms = await _client.GetProtectedAsync<List<UITermLanguageCustomizationList>>($"{_configuration["APIUrl"]}api/MVC/Page/LanguageEdit", token);
             
             return View(response);
         }

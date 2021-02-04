@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SIPx.CallAPI;
+using SIPx.MVC.Classes;
 using SIPx.Shared;
 
 namespace SIPx.MVC.Controllers
@@ -18,6 +19,7 @@ namespace SIPx.MVC.Controllers
         readonly ServiceClient _client = new ServiceClient();
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _hostingEnv;
+        readonly LoadViewBagModel _loadViewBagModel = new LoadViewBagModel();
         public PartialController(IWebHostEnvironment env, IConfiguration configuration)
         {
             _configuration = configuration;
@@ -28,7 +30,8 @@ namespace SIPx.MVC.Controllers
         {
             var token = HttpContext.Session.GetString("Token");if(token == null){ return RedirectToAction("Login","FrontAuth");}
             var response = await _client.GetProtectedAsync<List<PartialLeftUserMenu>>($"{_configuration["APIUrl"]}api/Partial/LeftMenu/", token);
-            ViewBag.Env = _hostingEnv.EnvironmentName;
+            ViewBag.AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
+            //ViewBag.Env = _hostingEnv.EnvironmentName;
             return PartialView(response);
             
         }
