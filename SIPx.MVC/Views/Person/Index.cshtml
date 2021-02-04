@@ -1,26 +1,26 @@
 ﻿@model List<PersonIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Persons")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Persons")).TermString;
     ViewData["Image"] = "Person.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="PersonId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="FirstName" headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="LastName" headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="OrganizationName" headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Addresses")).TermString" template="#Address" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Telecom")).TermString" template="#Telecom" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Position")).TermString" template="#Position" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column field="PersonId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="FirstName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("First name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="LastName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Last name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="OrganizationName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Addresses")).TermString" template="#Address" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Telecom")).TermString" template="#Telecom" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Position")).TermString" template="#Position" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Person/Create">@Term.Find(x => x.InternalName.Equals("Add new person")).TermString</a>
+<a href="~/Person/Create">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new person")).TermString</a>
 <script id="Address" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/PersonAddress/Index/${PersonId}"><span style="color:red">A</span>ddresses</a>
@@ -41,13 +41,13 @@
 </script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Person/Edit/${PersonId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/Person/Edit/${PersonId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Person/Delete/${PersonId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="Person/Delete/${PersonId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

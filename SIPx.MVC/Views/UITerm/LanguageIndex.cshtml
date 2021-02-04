@@ -1,36 +1,36 @@
 ﻿@model List<UITermLanguageIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Term customizations")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Term customizations")).TermString;
     ViewData["Image"] = "UITerm.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings RelationTypeSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="UITermLanguageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="Language" headerText="@Term.Find(x => x.InternalName.Equals("Language")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="MenuName" headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="MouseOver" headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="Customization" headerText="@Term.Find(x => x.InternalName.Equals("Customization")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="UITermLanguageId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Language" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Language")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="Name" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="MenuName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="MouseOver" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="Customization" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Customization")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="/Organization/Index">@Term.Find(x => x.InternalName.Equals("Back to terms")).TermString</a>
-<a href="/Organization/LanguageCreate">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
+<a href="/Organization/Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to terms")).TermString</a>
+<a href="/Organization/LanguageCreate">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/UITerm/LanguageEdit/${UITermLanguageId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/UITerm/LanguageEdit/${UITermLanguageId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="UITerm/LanguageDelete/${UITermLanguageId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="UITerm/LanguageDelete/${UITermLanguageId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

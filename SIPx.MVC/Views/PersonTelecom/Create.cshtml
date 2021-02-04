@@ -3,10 +3,10 @@
 @model PersonTelecomCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add person telecom")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Add person telecom")).TermString;
     ViewData["Image"] = "Telecom.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
@@ -46,14 +46,14 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Value")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Value")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="TelecomValue" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="TelecomTypeId" dataSource="@Model.TelecomTypes" ejs-for="@Model.ConcatTelecomTypeId" value="@Model.ConcatTelecomTypeId" popupHeight="220px">
@@ -66,7 +66,7 @@
         <div id="PhoneProperties">
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Country code")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Country code")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-textbox id="CountryCode" ejs-for="CountryCode" cssClass="e-outline" placeholder="Country code" floatLabelType="Auto"></ejs-textbox>
@@ -75,7 +75,7 @@
 
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Area code")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Area code")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-textbox id="AreaCode" ejs-for="AreaCode" cssClass="e-outline" placeholder="Area code" floatLabelType="Auto"></ejs-textbox>
@@ -83,7 +83,7 @@
             </div>
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Extension code")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Extension code")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-textbox id="ExtensionCode" ejs-for="ExtensionCode" cssClass="e-outline" placeholder="Extension code" floatLabelType="Auto"></ejs-textbox>
@@ -91,7 +91,7 @@
             </div>
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Ask for")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Ask for")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-textbox id="AskForName" ejs-for="AskForName" cssClass="e-outline" placeholder="Ask for" floatLabelType="Auto"></ejs-textbox>
@@ -100,8 +100,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.PersonId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.PersonId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

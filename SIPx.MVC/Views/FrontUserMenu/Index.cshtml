@@ -1,26 +1,26 @@
 ﻿@model List<UserMenuIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User menu")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("User menu")).TermString;
     ViewData["Image"] = "UserMenu.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" Template="#Id" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" Template="#Name" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Icon")).TermString" Template="#IconName" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Left menu type")).TermString" Template="#LeftMenuType" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Left menu")).TermString" Template="#LeftMenu" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Right menu type")).TermString" Template="#RightMenuType" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Right menu")).TermString" Template="#RightMenu" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" Template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" Template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Icon")).TermString" Template="#IconName" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Left menu type")).TermString" Template="#LeftMenuType" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Left menu")).TermString" Template="#LeftMenu" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Right menu type")).TermString" Template="#RightMenuType" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Right menu")).TermString" Template="#RightMenu" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/UserMenu/Create">@Term.Find(x => x.InternalName.Equals("Add user menu")).TermString</a>
+<a href="~/UserMenu/Create">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add user menu")).TermString</a>
 <script id="Id" type="text/x-">
     <div>
         ${UserMenuId}
@@ -58,13 +58,13 @@
 </script>
 <script id="Edit" type="text/x-">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/UserMenu/Edit/${UserMenuId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/UserMenu/Edit/${UserMenuId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="UserMenu/Delete/${UserMenuId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="UserMenu/Delete/${UserMenuId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

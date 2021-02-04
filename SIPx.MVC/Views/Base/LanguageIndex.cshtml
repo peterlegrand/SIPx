@@ -1,9 +1,9 @@
 ﻿@model BaseLanguageIndexGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals(Model.UITermTitle)).TermString;
+    ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals(Model.UITermTitle)).TermString;
     ViewData["Image"] = $"{Model.BaseType}.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     var AllRouteData = Model.AllRouteData;
     Layout = "_LayoutAdmin";
 }
@@ -12,28 +12,28 @@
 <ejs-grid id="Grid" dataSource="@Model.BaseLanguageIndexGetGrids" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="BaseLanguageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="MenuName" headerText="@Term.Find(x => x.InternalName.Equals("Menu name")).TermString" textAlign="Right" type="boolean"></e-grid-column>
-        <e-grid-column field="MouseOver" headerText="@Term.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" type="boolean"></e-grid-column>
-        <e-grid-column field="LanguageName" headerText="@Term.Find(x => x.InternalName.Equals("Language")).TermString" textAlign="Right" type="boolean"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column field="BaseLanguageId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Name" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="MenuName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+        <e-grid-column field="MouseOver" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+        <e-grid-column field="LanguageName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Language")).TermString" textAlign="Right" type="boolean"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 
-<a asp-controller="@Model.BaseType" asp-action="Index">@Term.Find(x => x.InternalName.Equals(Model.UITermBack)).TermString</a>
-<a asp-action="LanguageCreate" asp-route-id="@Model.BaseId" asp-all-route-data="@AllRouteData">@Term.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
+<a asp-controller="@Model.BaseType" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals(Model.UITermBack)).TermString</a>
+<a asp-action="LanguageCreate" asp-route-id="@Model.BaseId" asp-all-route-data="@AllRouteData">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new language")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Base/LanguageEdit/${BaseLanguageId}?BaseType=@Model.BaseType"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/Base/LanguageEdit/${BaseLanguageId}?BaseType=@Model.BaseType"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Base/DeleteLanguage/${BaseLanguageId}?BaseType=@Model.BaseType"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="Base/DeleteLanguage/${BaseLanguageId}?BaseType=@Model.BaseType"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

@@ -3,10 +3,10 @@
 @model OrganizationPositionCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add organization position")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Add organization position")).TermString;
     ViewData["Image"] = "Position.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -34,14 +34,14 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Organization")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString
             </div>    <div class="col-9">
                 @Model.OrganizationName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Position")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Position")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="PositionId" dataSource="@Model.Positions" ejs-for="@Model.PositionId" value="@Model.PositionId" index="2" popupHeight="220px">
@@ -51,7 +51,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Person")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Person")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="PersonId" dataSource="@Model.Persons" ejs-for="@Model.PersonId" value="@Model.PersonId" index="2" popupHeight="220px">
@@ -61,8 +61,8 @@
             </div>
         </div>        <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

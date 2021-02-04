@@ -1,27 +1,27 @@
 ﻿@model List<PageIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Pages")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Pages")).TermString;
     ViewData["Image"] = "Page.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="PageId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Sections")).TermString" template="#Sections" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column field="PageId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Name" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Sections")).TermString" template="#Sections" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/Page/Create">@Term.Find(x => x.InternalName.Equals("Add new page")).TermString</a>
+<a href="~/Page/Create">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new page")).TermString</a>
 
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Page/Edit/${PageId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/Page/Edit/${PageId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
     </div>
 </script>
 
@@ -33,13 +33,13 @@
 </script>
 <script id="Languages" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Page/LanguageIndex/${PageId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/Page/LanguageIndex/${PageId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Page/Delete/${PageId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/Page/Delete/${PageId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

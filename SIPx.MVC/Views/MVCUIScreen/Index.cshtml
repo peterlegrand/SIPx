@@ -2,21 +2,21 @@
 @model List<MVCUIScreenIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Screens")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Screens")).TermString;
 
     ViewData["Image"] = "screen.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Screen name")).TermString" template="#TableName" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Action")).TermString" template="#Action" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Controller")).TermString" template="#Controller" textAlign="Center" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Meta content")).TermString" template="#MetaContent" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Screen name")).TermString" template="#TableName" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Action")).TermString" template="#Action" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Controller")).TermString" template="#Controller" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Meta content")).TermString" template="#MetaContent" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <script id="Id" type="text/x-template">

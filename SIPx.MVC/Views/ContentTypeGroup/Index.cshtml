@@ -1,22 +1,22 @@
 ﻿@model List<ContentTypeGroupIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Content type groups")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type groups")).TermString;
     ViewData["Image"] = "Type.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a href="~/ContentTypeGroup/Create">@Term.Find(x => x.InternalName.Equals("Add new content type group")).TermString</a>
+<a href="~/ContentTypeGroup/Create">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new content type group")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
         ${ContentTypeGroupId}
@@ -29,19 +29,19 @@
 </script>
 <script id="Edit" type="text/x-template">
     <div >
-        <a class="nav-link text-dark font-weight-bold" href="/ContentTypeGroup/Edit/${ContentTypeGroupId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ContentTypeGroup/Edit/${ContentTypeGroupId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Languages" type="text/x-template">
     <div >
-        <a class="nav-link text-dark font-weight-bold" href="/ContentTypeGroup/LanguageIndex/${ContentTypeGroupId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ContentTypeGroup/LanguageIndex/${ContentTypeGroupId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div >
-        <a class="nav-link text-dark font-weight-bold" href="ContentTypeGroup/Delete/${ContentTypeGroupId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="ContentTypeGroup/Delete/${ContentTypeGroupId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

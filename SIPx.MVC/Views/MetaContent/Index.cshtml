@@ -1,9 +1,9 @@
 ﻿@model MetaContentIndexGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Meta content")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Meta content")).TermString;
     ViewData["Image"] = "meta.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }
@@ -11,10 +11,10 @@
 <ejs-grid id="Grid" dataSource="@Model.MetaContentList" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="MetaContentId" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="Title" headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="LanguageName" headerText="@Term.Find(x => x.InternalName.Equals("Language")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="MetaContentTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Meta content type")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="MetaContentId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Title" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Title")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="LanguageName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Language")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="MetaContentTypeName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Meta content type")).TermString" textAlign="Right" type="string"></e-grid-column>
         @if (Model.HasDeleteRights)
         {
             <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
@@ -23,13 +23,13 @@
 </ejs-grid>
 @if (Model.MetaTypeId == 1)
 {
-    <a asp-controller="MVCUIScreen" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Back to screens")).TermString</a>
+    <a asp-controller="MVCUIScreen" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to screens")).TermString</a>
 }
 @if (Model.HasCreateRights)
 {
-    <a asp-controller="MetaContent" asp-action="Create" asp-all-route-data="@Model.AllRouteData">@Term.Find(x => x.InternalName.Equals("Add meta content")).TermString</a>
+    <a asp-controller="MetaContent" asp-action="Create" asp-all-route-data="@Model.AllRouteData">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add meta content")).TermString</a>
 }<script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/MetaContent/Delete/${MetaContentId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/MetaContent/Delete/${MetaContentId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
     </div>
     </script>

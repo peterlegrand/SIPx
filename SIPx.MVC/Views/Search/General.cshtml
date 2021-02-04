@@ -2,32 +2,32 @@
 @model SearchGlobalPost
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Search result")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Search result")).TermString;
 
     Layout = "_Layout";
 }
-<h1>@Term.Find(x => x.InternalName.Equals("Search result")).TermString</h1>
+<h1>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Search result")).TermString</h1>
 @*<ejs-grid id="ContentGrid" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ContentId" textAlign="Right" type="number"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" template="#ContentTitle" textAlign="Right" type="string"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#ContentDescription" textAlign="Right" type="boolean"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" template="#ContentOrganizationName" textAlign="Center" type="string"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ContentCreatorName" textAlign="Center" type="string"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ContentCreatedDate" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#ContentId" textAlign="Right" type="number"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Title")).TermString" template="#ContentTitle" textAlign="Right" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString" template="#ContentDescription" textAlign="Right" type="boolean"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString" template="#ContentOrganizationName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ContentCreatorName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ContentCreatedDate" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>
-    <h2>@Term.Find(x => x.InternalName.Equals("Processes")).TermString</h2>
+    <h2>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Processes")).TermString</h2>
     <ejs-grid id="ProcessGrid" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProcessId" textAlign="Right" type="number"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" template="#ProcessSubject" textAlign="Right" type="string"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessTemplate" textAlign="Right" type="boolean"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" template="#ProcessStage" textAlign="Center" type="string"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProcessCreatorName" textAlign="Center" type="string"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProcessCreatedDate" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProcessId" textAlign="Right" type="number"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Subject")).TermString" template="#ProcessSubject" textAlign="Right" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessTemplate" textAlign="Right" type="boolean"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage")).TermString" template="#ProcessStage" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProcessCreatorName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProcessCreatedDate" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>*@
 <ejs-dashboardlayout id="defaultLayout" columns="10" showGridLines="true" allowResizing="false">
@@ -51,12 +51,12 @@
                                 <ejs-grid id="@x.SubPanelId" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ContentId" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" template="#ContentTitle" textAlign="Right" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#ContentDescription" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" template="#ContentOrganizationName" textAlign="Center" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ContentCreatorName" textAlign="Center" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ContentCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#ContentId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Title")).TermString" template="#ContentTitle" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString" template="#ContentDescription" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString" template="#ContentOrganizationName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ContentCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ContentCreatedDate" textAlign="Center" type="string"></e-grid-column>
                                     </e-grid-columns>
                                 </ejs-grid>
 
@@ -83,12 +83,12 @@
                                 <ejs-grid id="@x.SubPanelId" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProcessId" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" template="#ProcessSubject" textAlign="Right" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessTemplate" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" template="#ProcessStage" textAlign="Center" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProcessCreatorName" textAlign="Center" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProcessCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProcessId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Subject")).TermString" template="#ProcessSubject" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessTemplate" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage")).TermString" template="#ProcessStage" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProcessCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProcessCreatedDate" textAlign="Center" type="string"></e-grid-column>
                                     </e-grid-columns>
                                 </ejs-grid>
 
@@ -115,11 +115,11 @@
                                 <ejs-grid id="@x.SubPanelId" dataSource="@Model.Organizations" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#OrganizationId" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#OrganizationName" textAlign="Right" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#OrganizationDescription" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#OrganizationCreatorName" textAlign="Center" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#OrganizationCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#OrganizationId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" template="#OrganizationName" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString" template="#OrganizationDescription" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#OrganizationCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#OrganizationCreatedDate" textAlign="Center" type="string"></e-grid-column>
                                     </e-grid-columns>
                                 </ejs-grid>
 
@@ -146,14 +146,14 @@
                                 <ejs-grid id="@x.SubPanelId" dataSource="@Model.Persons" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#PersonId" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" template="#PersonFirstName" textAlign="Right" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Middle name")).TermString" template="#PersonMiddleName" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" template="#PersonLastName" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Nick name")).TermString" template="#PersonNickName" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Person")).TermString" template="#PersonOrganizationName" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#PersonCreatorName" textAlign="Center" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#PersonCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#PersonId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("First name")).TermString" template="#PersonFirstName" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Middle name")).TermString" template="#PersonMiddleName" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Last name")).TermString" template="#PersonLastName" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Nick name")).TermString" template="#PersonNickName" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Person")).TermString" template="#PersonOrganizationName" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#PersonCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#PersonCreatedDate" textAlign="Center" type="string"></e-grid-column>
                                     </e-grid-columns>
                                 </ejs-grid>
 
@@ -180,11 +180,11 @@
                                 <ejs-grid id="@x.SubPanelId" dataSource="@Model.Projects" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProjectId" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#ProjectName" textAlign="Right" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#ProjectDescription" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProjectCreatorName" textAlign="Center" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProjectCreatedDate" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProjectId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" template="#ProjectName" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString" template="#ProjectDescription" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProjectCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProjectCreatedDate" textAlign="Center" type="string"></e-grid-column>
                                     </e-grid-columns>
                                 </ejs-grid>
 
@@ -212,11 +212,11 @@
                                 <ejs-grid id="@x.SubPanelId" dataSource="@Model.ClassificationValues" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                                     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                                     <e-grid-columns>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#ClassificationValueId" textAlign="Right" type="number"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#ClassificationValueName" textAlign="Right" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Description")).TermString" template="#ClassificationValueDescription" textAlign="Right" type="boolean"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Classification")).TermString" template="#ClassificationName" textAlign="Center" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProjectCreatorName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#ClassificationValueId" textAlign="Right" type="number"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" template="#ClassificationValueName" textAlign="Right" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString" template="#ClassificationValueDescription" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification")).TermString" template="#ClassificationName" textAlign="Center" type="string"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProjectCreatorName" textAlign="Center" type="string"></e-grid-column>
                                     </e-grid-columns>
                                 </ejs-grid>
 

@@ -1,9 +1,9 @@
 ﻿@model List<ClassificationValueAdvancedSearchResult>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value search result")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification value search result")).TermString;
     ViewData["Image"] = "Value.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <div class="container">
@@ -11,8 +11,8 @@
     <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
         <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
         <e-grid-columns>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Classification value")).TermString" template="#ClassificationValueName" textAlign="Center" type="string"></e-grid-column>
-            <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Classification")).TermString" template="#ClassificationName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification value")).TermString" template="#ClassificationValueName" textAlign="Center" type="string"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification")).TermString" template="#ClassificationName" textAlign="Center" type="string"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>
 </div>

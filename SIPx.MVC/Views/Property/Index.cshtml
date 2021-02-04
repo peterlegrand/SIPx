@@ -1,16 +1,16 @@
 ﻿@model List<PropertyIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Properties")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Properties")).TermString;
     ViewData["Image"] = "Property.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column template="#Values" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
@@ -18,7 +18,7 @@
     </e-grid-columns>
 </ejs-grid>
 <a href="#" onclick="AddFriend()">Favorite</a>
-<a href="~/Property/Create">@Term.Find(x => x.InternalName.Equals("Add new property")).TermString</a>
+<a href="~/Property/Create">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new property")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
         ${PropertyId}
@@ -45,7 +45,7 @@
 <script id="Values" type="text/x-template">
     <div>
         ${if(PropertyTypeId === 6 || PropertyTypeId === 7 || PropertyTypeId === 8 || PropertyTypeId === 9 || PropertyTypeId === 10 || PropertyTypeId === 11 )}
-            <a class="nav-link text-dark font-weight-bold" href="/PropertyValue/Index/${PropertyId}"><img src="/images/icons/Value.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Values")).TermString" /></a>
+            <a class="nav-link text-dark font-weight-bold" href="/PropertyValue/Index/${PropertyId}"><img src="/images/icons/Value.png" height="18" width="18" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Values")).TermString" /></a>
         ${else}
             No values
         ${/if}
@@ -53,19 +53,19 @@
 </script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Property/Edit/${PropertyId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/Property/Edit/${PropertyId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Languages" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/Property/LanguageIndex/${PropertyId}"><img src="/images/icons/LanguageS.png" height="18" width="50" title="@Term.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/Property/LanguageIndex/${PropertyId}"><img src="/images/icons/LanguageS.png" height="18" width="50" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="Property/Delete/${PropertyId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="Property/Delete/${PropertyId}"><img src="/images/icons/DeleteS.png" height="18" width="18" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
 
     </div>
 </script>

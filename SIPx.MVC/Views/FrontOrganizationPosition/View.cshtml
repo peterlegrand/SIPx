@@ -3,16 +3,16 @@
 @model OrganizationPositionDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization position")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization position")).TermString;
     ViewData["Image"] = "Position.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 @if (!Model.InternalOrganizationNormalUserCannotDelete)
 {
-    <a asp-route-id="@Model.OrganizationPersonId" asp-action="Edit"><img src="~/images/icons/Edit.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
-    <a asp-route-id="@Model.OrganizationPersonId" asp-action="Delete"><img src="~/images/icons/Delete.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
-    <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId"><img src="~/images/icons/Back.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Back to organization")).TermString" /></a>
+    <a asp-route-id="@Model.OrganizationPersonId" asp-action="Edit"><img src="~/images/icons/Edit.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+    <a asp-route-id="@Model.OrganizationPersonId" asp-action="Delete"><img src="~/images/icons/Delete.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+    <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId"><img src="~/images/icons/Back.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to organization")).TermString" /></a>
 }
 <div class="container">
     <form method="post">
@@ -20,7 +20,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     @Model.OrganizationPersonId
@@ -34,7 +34,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     @Model.OrganizationPersonId
@@ -47,35 +47,35 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Organization")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString
             </div>    <div class="col-9">
                 @Model.OrganizationName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Position")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Position")).TermString
             </div>    <div class="col-9">
                 @Model.PositionName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("First name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("First name")).TermString
             </div>    <div class="col-9">
                 @Model.FirstName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Last name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Last name")).TermString
             </div>    <div class="col-9">
                 @Model.LastName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.CreatorId">@Model.CreatorName</a>
@@ -83,7 +83,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -91,7 +91,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.ModifierId">@Model.ModifierName</a>
@@ -99,7 +99,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

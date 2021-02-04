@@ -3,9 +3,9 @@
 @model UserMenuDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete user menu")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete user menu")).TermString;
     ViewData["Image"] = "UserMenu.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <div class="container">
@@ -14,7 +14,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>    <div class="col-9">
                     <ejs-numerictextbox id="Id" ejs-for="UserMenuId" enabled="false" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
@@ -24,7 +24,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>    <div class="col-9">
                     <ejs-numerictextbox id="Id" ejs-for="UserMenuId" enabled="false" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
@@ -33,14 +33,14 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
     @Model.Name
 </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
                 @Model.MouseOver
@@ -48,7 +48,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Left menu type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Left menu type")).TermString
             </div>
             <div class="col-9">
                 @Model.UserMenuTypeNameLeft
@@ -56,7 +56,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Right menu type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Right menu type")).TermString
             </div>
             <div class="col-9">
                 @Model.UserMenuTypeNameRight
@@ -64,7 +64,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Left menu page")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Left menu page")).TermString
             </div>
             <div class="col-9">
                 @Model.UserPageNameLeft
@@ -72,7 +72,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Right menu page")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Right menu page")).TermString
             </div>
             <div class="col-9">
                 @Model.UserPageNameRight
@@ -81,7 +81,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Icon")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Icon")).TermString
 
             </div>
             <div class="col-9">
@@ -94,7 +94,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
 
             </div>
             <div class="col-9">
@@ -105,7 +105,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
 
             </div>
             <div class="col-9">
@@ -116,7 +116,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
 
             </div>
             <div class="col-9">
@@ -127,7 +127,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
 
             </div>
             <div class="col-9">
@@ -138,8 +138,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

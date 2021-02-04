@@ -3,10 +3,10 @@
 @model FrontContentRightsUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Edit content rights")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit content rights")).TermString;
     ViewData["Image"] = "Content.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 
     Layout = "_Layout";
 }
@@ -18,7 +18,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Content id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ContentId" ejs-for="@Model.ContentId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
@@ -29,7 +29,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Content id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ContentId" ejs-for="@Model.ContentId" cssClass="e-outline" placeholder="ContentTypeID" floatLabelType="Auto"></ejs-numerictextbox>
@@ -39,7 +39,7 @@
         @if (Model.IsFreeOwnership || Model.IsProjectBasedOwnership || Model.IsOrganizationBasedOwnership || Model.IsRelationBasedOwnership) { }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Owner")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Owner")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Ownership" dataSource="@Model.Owners" ejs-for="@Model.OwnerId" value="@Model.OwnerId" index="2" popupHeight="220px">
@@ -50,8 +50,8 @@
 
         <div class="row">
             <div class="col-3">
-                @*                @Term.Find(x => x.InternalName.Equals("Name")).TermString*@
-                @Term.Find(x => x.InternalName.Equals("Free edit")).TermString
+                @*                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString*@
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Free edit")).TermString
             </div>
             @if (Model.IsFreeEditSelectable)
             {
@@ -67,8 +67,8 @@
 
             }
             <div class="col-3">
-                @*                @Term.Find(x => x.InternalName.Equals("Name")).TermString*@
-                @Term.Find(x => x.InternalName.Equals("Free edit")).TermString
+                @*                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString*@
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Free edit")).TermString
             </div>
             @if (Model.IsFreeReadSelectable)
             {
@@ -89,7 +89,7 @@
         <div class="row">
             @if (Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project edit")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project edit")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedEdit" ejs-for="@Model.IsProjectBasedEdit" value="@Model.IsProjectBasedEdit"></ejs-checkbox>
@@ -97,8 +97,8 @@
             }
             @if (!Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @*                @Term.Find(x => x.InternalName.Equals("Name")).TermString*@
-                    @Term.Find(x => x.InternalName.Equals("Project edit")).TermString
+                    @*                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString*@
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project edit")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedEdit" ejs-for="@Model.IsProjectBasedEdit" value="@Model.IsProjectBasedEdit"></ejs-checkbox>
@@ -106,8 +106,8 @@
             }
             @if (Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @*                @Term.Find(x => x.InternalName.Equals("Name")).TermString*@
-                    @Term.Find(x => x.InternalName.Equals("Project read")).TermString
+                    @*                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString*@
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project read")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedRead" ejs-for="@Model.IsProjectBasedRead" value="@Model.IsProjectBasedRead"></ejs-checkbox>
@@ -115,7 +115,7 @@
             }
             @if (!Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project read")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project read")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedRead" ejs-for="@Model.IsProjectBasedRead" value="@Model.IsProjectBasedRead"></ejs-checkbox>
@@ -125,7 +125,7 @@
         <div class="row">
             @if (Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project edit sub")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project edit sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedEditSub" ejs-for="@Model.IsProjectBasedEditSub" value="@Model.IsProjectBasedEditSub"></ejs-checkbox>
@@ -133,7 +133,7 @@
             }
             @if (!Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project edit sub")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project edit sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedEditSub" ejs-for="@Model.IsProjectBasedEditSub" value="@Model.IsProjectBasedEditSub"></ejs-checkbox>
@@ -141,7 +141,7 @@
             }
             @if (Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project read sub")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project read sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedReadSub" ejs-for="@Model.IsProjectBasedReadSub" value="@Model.IsProjectBasedReadSub"></ejs-checkbox>
@@ -149,7 +149,7 @@
             }
             @if (!Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project read sub")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project read sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedReadSub" ejs-for="@Model.IsProjectBasedReadSub" value="@Model.IsProjectBasedReadSub"></ejs-checkbox>
@@ -159,7 +159,7 @@
         <div class="row">
             @if (Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project edit parent")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project edit parent")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedEditParent" ejs-for="@Model.IsProjectBasedEditParent" value="@Model.IsProjectBasedEditParent"></ejs-checkbox>
@@ -167,7 +167,7 @@
             }
             @if (!Model.IsProjectBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project edit parent")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project edit parent")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedEditParent" ejs-for="@Model.IsProjectBasedEditParent" value="@Model.IsProjectBasedEditParent"></ejs-checkbox>
@@ -175,7 +175,7 @@
             }
             @if (Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project read parent")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project read parent")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsProjectBasedReadParent" ejs-for="@Model.IsProjectBasedReadParent" value="@Model.IsProjectBasedReadParent"></ejs-checkbox>
@@ -183,7 +183,7 @@
             }
             @if (!Model.IsProjectBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project read parent")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project read parent")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsProjectBasedReadParent" ejs-for="@Model.IsProjectBasedReadParent" value="@Model.IsProjectBasedReadParent"></ejs-checkbox>
@@ -193,7 +193,7 @@
         <div class="row">
             @if (Model.IsOrganizationBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization edit")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization edit")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsOrganizationBasedEdit" ejs-for="@Model.IsOrganizationBasedEdit" value="@Model.IsOrganizationBasedEdit"></ejs-checkbox>
@@ -201,7 +201,7 @@
             }
             @if (!Model.IsOrganizationBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization edit")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization edit")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsOrganizationBasedEdit" ejs-for="@Model.IsOrganizationBasedEdit" value="@Model.IsOrganizationBasedEdit"></ejs-checkbox>
@@ -209,7 +209,7 @@
             }
             @if (Model.IsOrganizationBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization read")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization read")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsOrganizationBasedRead" ejs-for="@Model.IsOrganizationBasedRead" value="@Model.IsOrganizationBasedRead"></ejs-checkbox>
@@ -217,7 +217,7 @@
             }
             @if (!Model.IsOrganizationBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization read")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization read")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsOrganizationBasedRead" ejs-for="@Model.IsOrganizationBasedRead" value="@Model.IsOrganizationBasedRead"></ejs-checkbox>
@@ -227,7 +227,7 @@
         <div class="row">
             @if (Model.IsOrganizationBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization edit sub")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization edit sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsOrganizationBasedEditSub" ejs-for="@Model.IsOrganizationBasedEditSub" value="@Model.IsOrganizationBasedEditSub"></ejs-checkbox>
@@ -235,7 +235,7 @@
             }
             @if (!Model.IsOrganizationBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization edit sub")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization edit sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsOrganizationBasedEditSub" ejs-for="@Model.IsOrganizationBasedEditSub" value="@Model.IsOrganizationBasedEditSub"></ejs-checkbox>
@@ -243,7 +243,7 @@
             }
             @if (Model.IsOrganizationBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization read sub")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization read sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsOrganizationBasedReadSub" ejs-for="@Model.IsOrganizationBasedReadSub" value="@Model.IsOrganizationBasedReadSub"></ejs-checkbox>
@@ -251,7 +251,7 @@
             }
             @if (!Model.IsOrganizationBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization read sub")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization read sub")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsOrganizationBasedReadSub" ejs-for="@Model.IsOrganizationBasedReadSub" value="@Model.IsOrganizationBasedReadSub"></ejs-checkbox>
@@ -261,7 +261,7 @@
         <div class="row">
             @if (Model.IsOrganizationBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization edit parent")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization edit parent")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsOrganizationBasedEditParent" ejs-for="@Model.IsOrganizationBasedEditParent" value="@Model.IsOrganizationBasedEditParent"></ejs-checkbox>
@@ -269,7 +269,7 @@
             }
             @if (!Model.IsOrganizationBasedEditSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization edit parent")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization edit parent")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsOrganizationBasedEditParent" ejs-for="@Model.IsOrganizationBasedEditParent" value="@Model.IsOrganizationBasedEditParent"></ejs-checkbox>
@@ -277,7 +277,7 @@
             }
             @if (Model.IsOrganizationBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization read parent")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization read parent")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsOrganizationBasedReadParent" ejs-for="@Model.IsOrganizationBasedReadParent" value="@Model.IsOrganizationBasedReadParent"></ejs-checkbox>
@@ -285,7 +285,7 @@
             }
             @if (!Model.IsOrganizationBasedReadSelectable)
             {<div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization read parent")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization read parent")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox disabled="true" id="IsOrganizationBasedReadParent" ejs-for="@Model.IsOrganizationBasedReadParent" value="@Model.IsOrganizationBasedReadParent"></ejs-checkbox>
@@ -298,7 +298,7 @@
             @if (Model.DefaultIsRelationBasedEdit)
             {
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Relation edit")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Relation edit")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsRelationBasedEdit" ejs-for="@Model.IsRelationBasedEdit" value="@Model.IsRelationBasedEdit"></ejs-checkbox>
@@ -307,7 +307,7 @@
             @if (Model.DefaultIsRelationBasedRead)
             {
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Relation read")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Relation read")).TermString
                 </div>
                 <div class="col-3">
                     <ejs-checkbox id="IsRelationBasedRead" ejs-for="@Model.IsRelationBasedRead" value="@Model.IsRelationBasedRead"></ejs-checkbox>
@@ -320,7 +320,7 @@
                 @if (Model.IsProjectBasedEditSelectable || Model.IsProjectBasedEditSelectable || Model.IsRelationBasedEditSelectable)
                 {
                     <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Select edit users")).TermString
+                        @AllStuff.UITerms.Find(x => x.InternalName.Equals("Select edit users")).TermString
                     </div>
                     <div class="col-3">
                         <a asp-controller="FrontContent" asp-action="RightsEditUserIndex" asp-route-id="@Model.ContentId"><img src="~/images/icons/Group.png" width="20" height="20" /></a>
@@ -334,7 +334,7 @@
                 }
                 @if (Model.IsProjectBasedReadSelectable || Model.IsProjectBasedReadSelectable || Model.IsRelationBasedReadSelectable)
                 {<div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Select read users")).TermString
+                        @AllStuff.UITerms.Find(x => x.InternalName.Equals("Select read users")).TermString
                     </div>
                     <div class="col-3">
                         <a asp-controller="FrontContent" asp-action="RightsReadUsers" asp-route-id="@Model.ContentId"><img src="~/images/icons/Group.png" width="20" height="20" /></a>
@@ -352,8 +352,8 @@
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <ejs-button id="cancelbtn" content="@Term.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <ejs-button id="cancelbtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString" isPrimary="false"></ejs-button>
 
             </div>
         </div>

@@ -3,10 +3,10 @@
 @model PersonRelationUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person relation")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Person relation")).TermString;
     ViewData["Image"] = "Relation.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -15,7 +15,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PersonId" ejs-for="@Model.OriginPersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -27,7 +27,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PersonId" ejs-for="@Model.OriginPersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -39,7 +39,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Relation type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Relation type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="PersonRelationTypeId" dataSource="@Model.PersonRelationTypes" ejs-for="@Model.PersonRelationTypeId" value="@Model.PersonRelationTypeId" index="2" filtering="PersonRelationTypes" popupHeight="220px">
@@ -50,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Person")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Person")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ToPersonId" dataSource="@Model.Persons" ejs-for="@Model.ToPersonId" value="@Model.ToPersonId" index="2" filtering="Persons" popupHeight="220px">
@@ -61,27 +61,27 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Valid from")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Valid from")).TermString
             </div>    <div class="col-9">
                 <ejs-datepicker id="ValidFrom" ejs-for="ValidFrom" cssClass="e-outline" placeholder="Valid from" floatLabelType="Auto"></ejs-datepicker>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Valid till")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Valid till")).TermString
             </div>    <div class="col-9">
                 <ejs-datepicker id="ValidTill" ejs-for="ValidTill" cssClass="e-outline" placeholder="Valid till" floatLabelType="Auto"></ejs-datepicker>
             </div>
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.OriginPersonId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.OriginPersonId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -89,7 +89,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -97,7 +97,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -105,7 +105,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

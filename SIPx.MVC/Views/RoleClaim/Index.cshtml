@@ -1,26 +1,26 @@
 ﻿@model List<RoleClaimIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Role rights")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Role rights")).TermString;
     ViewData["Image"] = "Claim.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="Id" headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column field="Name" headerText="@Term.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="GroupName" headerText="@Term.Find(x => x.InternalName.Equals("Group name")).TermString" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column field="Id" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="Name" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="GroupName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Group name")).TermString" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a asp-controller="Role" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Back to roles")).TermString</a>
-<a asp-controller="RoleClaim" asp-action="Create" asp-route-id="@ViewBag.Id">@Term.Find(x => x.InternalName.Equals("Add right")).TermString</a>
+<a asp-controller="Role" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to roles")).TermString</a>
+<a asp-controller="RoleClaim" asp-action="Create" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add right")).TermString</a>
 
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/RoleClaim/Delete/${RoleClaimId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/RoleClaim/Delete/${RoleClaimId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

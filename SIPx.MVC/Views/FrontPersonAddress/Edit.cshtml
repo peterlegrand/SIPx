@@ -3,10 +3,10 @@
 @model PersonAddressUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person address")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Person address")).TermString;
     ViewData["Image"] = "Address.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -15,7 +15,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -27,7 +27,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="PersonId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -38,7 +38,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="AddressTypeId" dataSource="@Model.AddressTypes" ejs-for="@Model.AddressTypeId" value="@Model.AddressTypeId" index="2" popupHeight="220px">
@@ -49,63 +49,63 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Attn name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Attn name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="AttnName" ejs-for="AttnName" cssClass="e-outline" placeholder="Attn name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Address 1")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Address 1")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Address1" ejs-for="Address1" cssClass="e-outline" placeholder="Address 1" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Address 2")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Address 2")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Address2" ejs-for="Address2" cssClass="e-outline" placeholder="Address 2" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("House number")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("House number")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="HouseNumber" ejs-for="HouseNumber" cssClass="e-outline" placeholder="House number" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("House number ext")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("House number ext")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="HouseNumberExt" ejs-for="HouseNumberExt" cssClass="e-outline" placeholder="House number ext" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("City")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("City")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="City" ejs-for="City" cssClass="e-outline" placeholder="City" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Postal code")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Postal code")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="PostalCode" ejs-for="PostalCode" cssClass="e-outline" placeholder="Postal code" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Postal code ext")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Postal code ext")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="PostalCodeExt" ejs-for="PostalCodeExt" cssClass="e-outline" placeholder="Postal code ext" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Country")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Country")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Country" dataSource="@Model.Countries" ejs-for="@Model.CountryId" value="@Model.CountryId" index="2" popupHeight="220px">
@@ -116,27 +116,27 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Province / state")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Province / state")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="ProvinceState" ejs-for="ProvinceState" cssClass="e-outline" placeholder="Province / state" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("County")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("County")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="County" ejs-for="County" cssClass="e-outline" placeholder="County" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.PersonId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.PersonId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -144,7 +144,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -152,7 +152,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -160,7 +160,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

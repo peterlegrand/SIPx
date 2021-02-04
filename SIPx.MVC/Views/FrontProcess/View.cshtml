@@ -3,15 +3,15 @@
 @model FrontProcessView
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process")).TermString;
     ViewData["Image"] = "Process.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <div class="container">
     <div class="row">
         <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Process template")).TermString:
+            @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template")).TermString:
         </div>
         <div class="col-9">
             @Model.ProcessTemplateName
@@ -19,7 +19,7 @@
     </div>
     <div class="row">
         <div class="col-3">
-            @Term.Find(x => x.InternalName.Equals("Stage")).TermString:
+            @AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage")).TermString:
         </div>
         <div class="col-9">
             @Model.ProcessTemplateStageName -

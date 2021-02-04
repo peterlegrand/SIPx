@@ -3,10 +3,10 @@
 @model LanguageUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Language")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Language")).TermString;
     ViewData["Image"] = "Language.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -15,7 +15,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="LanguageId" ejs-for="@Model.LanguageId" cssClass="e-outline" placeholder="LanguageId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -26,7 +26,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="LanguageId" ejs-for="@Model.LanguageId" cssClass="e-outline" placeholder="LanguageId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -36,7 +36,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>
             <div class="col-9">
                 @Model.Name
@@ -44,7 +44,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Foreign name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Foreign name")).TermString
             </div>
             <div class="col-9">
                 @Model.ForeignName
@@ -52,7 +52,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Status")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="StatusId" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="@Model.StatusId" index="2" popupHeight="220px">
@@ -63,13 +63,13 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -77,7 +77,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

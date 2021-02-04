@@ -3,7 +3,7 @@
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = "Home Page";
     ViewData["Image"] = "Process.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <div class=" control-section">

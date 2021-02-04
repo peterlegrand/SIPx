@@ -3,14 +3,14 @@
 @model ClassificationCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("New classification")).TermString;
 
     Layout = "_LayoutAdmin";
 }
 
 <h1>
-    <img src="~/images/icons/Classification.png" width="50" height="50" />&nbsp;@Term.Find(x => x.InternalName.Equals("New classification")).TermString
+    <img src="~/images/icons/Classification.png" width="50" height="50" />&nbsp;@AllStuff.UITerms.Find(x => x.InternalName.Equals("New classification")).TermString
 </h1>
 <div class="container">
 
@@ -25,29 +25,29 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 5))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 5))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
                 </div>
             </div>
         }
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 104))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 104))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
                 </div>
             </div>
         }
         <div class="row">
-            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-3">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
                 @*<ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
                         <e-content-template>
@@ -59,65 +59,65 @@
                 <textarea asp-for="@Model.Description" class="form-control ckeditor" id="descriptionx" name="Description"></textarea>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 9))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 9))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 9).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 9).Name
                 </div>
             </div>
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 10))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 10))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 10).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 10).Name
                 </div>
             </div>
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 11))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 11))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 11).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 11).Name
                 </div>
             </div>
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Has dropdown")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Has dropdown")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox id="HasDropDown" label="Dropdown" ejs-for="HasDropDown" checked="@Model.HasDropDown"></ejs-checkbox>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 2))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 2))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 2).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 2).Name
                 </div>
             </div>
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Dropdown sequence")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Dropdown sequence")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Sequence" dataSource="@Model.Sequences" ejs-for="@Model.DropDownSequence" value="@Model.DropDownSequence" popupHeight="220px">
@@ -125,25 +125,25 @@
                 </ejs-dropdownlist>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 3))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 3))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 3).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 3).Name
                 </div>
             </div>
         }
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 4))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 4))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 4).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 4).Name
                 </div>
             </div>
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Status")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Status")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Status" dataSource="@Model.Statuses" ejs-for="@Model.StatusId" value="1" popupHeight="220px">
@@ -151,17 +151,17 @@
                 </ejs-dropdownlist>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 1))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 1))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 1).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 1).Name
                 </div>
             </div>
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Icon")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Icon")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="IconId" dataSource="@Model.Icons" ejs-for="@Model.IconId" value="1" popupHeight="220px">
@@ -169,17 +169,17 @@
                 </ejs-dropdownlist>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 8))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 8))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 8).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 8).Name
                 </div>
             </div>
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Color")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Color")).TermString
             </div>
             <div class="col-9">
                 <ejs-colorpicker id='color-picker' ejs-for="Color" value="Color"></ejs-colorpicker>
@@ -187,8 +187,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

@@ -3,9 +3,9 @@
 @model PersonRelationTypeDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete person relation type")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete person relation type")).TermString;
     ViewData["Image"] = "Type.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -14,7 +14,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PersonRelationTypeId" ejs-for="@Model.PersonRelationTypeId" cssClass="e-outline" placeholder="PersonRelationTypeId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -25,7 +25,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PersonRelationTypeId" ejs-for="@Model.PersonRelationTypeId" cssClass="e-outline" placeholder="PersonRelationTypeId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -36,13 +36,13 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
       @Model.Name
             </div>
         </div>
         <div class="row">
-            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-3">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
 @Html.Raw(Model.Description)
             </div>
@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
        @Model.MenuName
@@ -59,7 +59,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
 @Model.MouseOver
@@ -69,7 +69,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("From is an x of to")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("From is an x of to")).TermString
             </div>
             <div class="col-9">
        @Model.FromIsAnXOfTo
@@ -78,7 +78,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("To is an x of from")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("To is an x of from")).TermString
             </div>
             <div class="col-9">
 @Model.ToIsAnXOfFrom
@@ -88,7 +88,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("See personal")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("See personal")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox disabled="true" id="SeePersonal" ejs-for="SeePersonal" cssClass="e-outline" placeholder="SeePersonal" floatLabelType="Auto"></ejs-checkbox>
@@ -97,8 +97,8 @@
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

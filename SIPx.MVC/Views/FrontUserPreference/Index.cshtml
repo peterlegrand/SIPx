@@ -1,23 +1,23 @@
 ﻿@model List<UserPreferenceIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User preferences")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("User preferences")).TermString;
     ViewData["Image"] = "UserPreference.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("User preference type")).TermString" template="#UserPreferenceTypeName" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Value")).TermString" template="#UserPreferenceName" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("User preference type")).TermString" template="#UserPreferenceTypeName" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Value")).TermString" template="#UserPreferenceName" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 
-<a asp-controller="FrontUserMenu" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User menu")).TermString</a>
-<a asp-controller="FrontUserPage" asp-action="Index">@Term.Find(x => x.InternalName.Equals("User pages")).TermString</a>
-<a asp-controller="FrontUserFavorite" asp-action="Index">@Term.Find(x => x.InternalName.Equals("Favorites")).TermString</a>
+<a asp-controller="FrontUserMenu" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("User menu")).TermString</a>
+<a asp-controller="FrontUserPage" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("User pages")).TermString</a>
+<a asp-controller="FrontUserFavorite" asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Favorites")).TermString</a>
 <script id="Id" type="text/x-template">
     <div>
         ${UserPreferenceId}
@@ -35,7 +35,7 @@
 </script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/UserPreference/Edit/${UserPreferenceId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/UserPreference/Edit/${UserPreferenceId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>

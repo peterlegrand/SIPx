@@ -8,7 +8,7 @@
     var ErrorMessages = @AllStuff.ErrorMessages;
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new project")).TermString;
     ViewData["Image"] = "Project.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">

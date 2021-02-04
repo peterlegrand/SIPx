@@ -3,9 +3,9 @@
 @model MetaContentDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete meta content")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete meta content")).TermString;
     ViewData["Image"] = "Level.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }
@@ -18,7 +18,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="MetaContentId" ejs-for="@Model.MetaContentId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
@@ -31,7 +31,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString MetaContentId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString MetaContentId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="MetaContentId" ejs-for="@Model.MetaContentId" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-numerictextbox>
@@ -43,7 +43,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Title")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Title")).TermString
             </div>
             <div class="col-9">
                 @Model.Title
@@ -51,7 +51,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Meta content type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Meta content type")).TermString
             </div>
             <div class="col-9">
                 @Model.MetaContentTypeName
@@ -60,7 +60,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Meta type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Meta type")).TermString
             </div>
             <div class="col-9">
                 @Model.MetaTypeName
@@ -68,7 +68,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Language")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Language")).TermString
             </div>
             <div class="col-9">
                 @Model.LanguageName
@@ -77,7 +77,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -85,7 +85,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -94,8 +94,8 @@
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.MetaContentId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.MetaContentId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
     </form>

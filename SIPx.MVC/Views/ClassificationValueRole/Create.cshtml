@@ -3,7 +3,7 @@
 @model ClassificationValueRoleCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
+    
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("New classification value role")).TermString;
     ViewData["Image"] = "Role.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;

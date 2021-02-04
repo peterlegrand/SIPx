@@ -3,7 +3,7 @@
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification level properties")).TermString;
     ViewData["Image"] = "Property.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }

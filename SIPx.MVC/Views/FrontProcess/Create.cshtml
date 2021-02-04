@@ -3,10 +3,10 @@
 @model FrontProcessNewProcessWithMaster
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create new process")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Create new process")).TermString;
     ViewData["Image"] = "Process.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout"; 
     }
 <div class=" control-section">
@@ -47,7 +47,7 @@
                                 <ejs-textbox onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" id="@Model.ProcessFields[i].ControlId" ejs-for="ProcessFields[i].StringValue"></ejs-textbox>
                                 @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
                                 {
-                                    <div class="text-danger">@Term.Find(x => x.InternalName.Equals("Required")).TermString</div>
+                                    <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
@@ -58,7 +58,7 @@
                                 <ejs-numerictextbox onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" id="@Model.ProcessFields[i].ControlId" ejs-for="@Model.ProcessFields[i].IntValue" value="@Model.ProcessFields[i].IntValue"></ejs-numerictextbox>
                                 @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
                                 {
-                                    <div class="text-danger">@Term.Find(x => x.InternalName.Equals("Required")).TermString</div>
+                                    <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
@@ -70,7 +70,7 @@
                                     <ejs-datepicker onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" allowEdit="true" id="@Model.ProcessFields[i].ControlId" calendarMode="Gregorian" dayHeaderFormat="Narrow" placeholder="Choose a Date" ejs-for="@Model.ProcessFields[i].DateTimeValue"></ejs-datepicker>
                                     @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
                                     {
-                                        <div class="text-danger">@Term.Find(x => x.InternalName.Equals("Required")).TermString</div>
+                                        <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                         <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                     }
                                 </div>
@@ -96,7 +96,7 @@
                                 </ejs-dropdownlist>
                                 @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
                                 {
-                                    <div class="text-danger">@Term.Find(x => x.InternalName.Equals("Required")).TermString</div>
+                                    <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
@@ -109,7 +109,7 @@
                                 </ejs-dropdownlist>
                                 @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
                                 {
-                                    <div class="text-danger">@Term.Find(x => x.InternalName.Equals("Required")).TermString</div>
+                                    <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
@@ -125,7 +125,7 @@
                                 </ejs-richtexteditor>
                                 @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
                                 {
-                                    <div>@Term.Find(x => x.InternalName.Equals("Required")).TermString</div>
+                                    <div>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>

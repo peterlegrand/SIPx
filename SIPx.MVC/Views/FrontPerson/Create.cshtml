@@ -3,17 +3,17 @@
 @model FrontPersonCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add person")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Add person")).TermString;
     ViewData["Image"] = "Person.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <div class="container">
     <form method="post">
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Salutation")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Salutation")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Salutation" ejs-for="Salutation" cssClass="e-outline" placeholder="Salutation" floatLabelType="Auto"></ejs-textbox>
             </div>
@@ -21,70 +21,70 @@
         <div class="row">
             <div class="col-3">
                 @*@Html.ValidationMessage("StudentName", "", new { @class = "text-danger" })*@
-                @Term.Find(x => x.InternalName.Equals("First name")).TermString<span asp-validation-m asp-validation-for="FirstName" class="text-danger"></span>
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("First name")).TermString<span asp-validation-m asp-validation-for="FirstName" class="text-danger"></span>
             </div>    <div class="col-9">
                 <ejs-textbox id="FirstName" ejs-for="FirstName" cssClass="e-outline" placeholder="First name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Middle name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Middle name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="MiddleName" ejs-for="MiddleName" cssClass="e-outline" placeholder="Middle name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Last name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Last name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="LastName" ejs-for="LastName" cssClass="e-outline" placeholder="Last name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Personal title")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Personal title")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="PersonalTitle" ejs-for="PersonalTitle" cssClass="e-outline" placeholder="Personal title" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Suffix")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Suffix")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Suffix" ejs-for="Suffix" cssClass="e-outline" placeholder="Suffix" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Nick name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Nick name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="NickName" ejs-for="NickName" cssClass="e-outline" placeholder="Nick name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Local first name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Local first name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="FirstNameLocal" ejs-for="FirstNameLocal" cssClass="e-outline" placeholder="Local first name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Local middle name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Local middle name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="MiddleNameLocal" ejs-for="MiddleNameLocal" cssClass="e-outline" placeholder="Local middle name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Local last name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Local last name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="LastNameLocal" ejs-for="LastNameLocal" cssClass="e-outline" placeholder="Local last name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Gender")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Gender")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="Gender" dataSource="@Model.Genders" ejs-for="@Model.GenderId" value="@Model.GenderId" index="2" popupHeight="220px">
@@ -95,21 +95,21 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Birth date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Birth date")).TermString
             </div>    <div class="col-9">
                 <ejs-datepicker id="BirthDate" ejs-for="BirthDate" cssClass="e-outline" placeholder="Birth date" floatLabelType="Auto"></ejs-datepicker>
             </div>
         </div>
         @*<div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Deceased date")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Deceased date")).TermString
                 </div>    <div class="col-9">
                     <ejs-datepicker id="DeceasedDate" ejs-for="DeceasedDate" cssClass="e-outline" placeholder="Deceased date" floatLabelType="Auto"></ejs-datepicker>
                 </div>
             </div>*@
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Default organization")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Default organization")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="DefaultOrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.DefaultOrganizationId" value="@Model.DefaultOrganizationId" index="2" popupHeight="220px">
@@ -120,8 +120,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-controller="Front">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-controller="Front">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

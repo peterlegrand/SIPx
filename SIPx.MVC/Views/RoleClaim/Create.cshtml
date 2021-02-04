@@ -3,10 +3,10 @@
 @model RoleClaimCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add right")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Add right")).TermString;
     ViewData["Image"] = "Claim.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -15,7 +15,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Role")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Role")).TermString
                 </div>    <div class="col-9">
                     <ejs-textbox id="RoleId" ejs-for="RoleId" cssClass="e-outline" placeholder="RoleId" floatLabelType="Auto"></ejs-textbox>
                 </div>
@@ -25,7 +25,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Role")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Role")).TermString
                 </div>    <div class="col-9">
                     <ejs-textbox id="RoleId" ejs-for="RoleId" cssClass="e-outline" placeholder="RoleId" floatLabelType="Auto"></ejs-textbox>
                 </div>
@@ -33,14 +33,14 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Role")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Role")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="RoleName" ejs-for="RoleName" cssClass="e-outline" placeholder="RoleName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Right")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Right")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ClaimId" dataSource="@Model.Claims" ejs-for="@Model.ClaimId" value="@Model.ClaimId" index="2" filtering="ClaimId" popupHeight="220px">
@@ -52,8 +52,8 @@
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.RoleId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.RoleId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

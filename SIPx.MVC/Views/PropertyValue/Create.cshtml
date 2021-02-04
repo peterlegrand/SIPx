@@ -3,10 +3,10 @@
 @model PropertyValueCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New property value")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("New property value")).TermString;
     ViewData["Image"] = "Value.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -35,13 +35,13 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
                 </div>    <div class="col-9">
                     <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+                <div class="col-3">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString</div>
                 <div class="col-9">
                     <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
                         <e-content-template>
@@ -54,7 +54,7 @@
 
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
@@ -62,7 +62,7 @@
             </div>
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
@@ -73,7 +73,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Sequence")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Sequence")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="Sequence" dataSource="@Model.PropertyValues" ejs-for="@Model.Sequence" value="@Model.Sequence" popupHeight="220px">
@@ -86,7 +86,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Text")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Text")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-textbox id="PropertyValueString" ejs-for="@Model.PropertyValueString" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
@@ -98,7 +98,7 @@
 
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Number")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Number")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox ejs-for="@Model.PropertyValueInt" value="@Model.PropertyValueInt" id="PropertyValueInt"></ejs-numerictextbox>
@@ -109,7 +109,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Date")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Date")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-datepicker ejs-for="@Model.PropertyValueDate" value="@Model.PropertyValueDate" id="PropertyValueDate"></ejs-datepicker>
@@ -118,8 +118,8 @@
         }
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.PropertyId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.PropertyId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

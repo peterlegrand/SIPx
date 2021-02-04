@@ -3,10 +3,10 @@
 @model FrontContentRightsEditUserCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add edit user")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Add edit user")).TermString;
     ViewData["Image"] = "User.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -15,7 +15,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ContentId" ejs-for="@Model.ContentId" cssClass="e-outline" placeholder="ContentId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -26,7 +26,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ContentId" ejs-for="@Model.ContentId" cssClass="e-outline" placeholder="ContentId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -35,7 +35,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Edit user")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit user")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="SelectedUser" dataSource="@Model.SelectedUsers" ejs-for="@Model.SelectedUserId" popupHeight="220px">
@@ -45,8 +45,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="RightsEditUserIndex">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="RightsEditUserIndex">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
     </form>

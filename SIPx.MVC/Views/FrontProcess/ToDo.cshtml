@@ -2,7 +2,7 @@
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Image"] = "Todo.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">

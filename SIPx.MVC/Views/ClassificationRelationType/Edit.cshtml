@@ -3,7 +3,7 @@
 @model ClassificationRelationTypeUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
+    
     ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification relation type")).TermString;
     ViewData["Image"] = "Relation.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
@@ -45,19 +45,19 @@
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 5))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 5))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 5).Name
                 </div>
             </div>
         }
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 104))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 104))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 104).Name
                 </div>
             </div>
         }
@@ -72,11 +72,11 @@
                 </ejs-richtexteditor>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 9))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 9))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 9).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 9).Name
                 </div>
             </div>
         }
@@ -88,11 +88,11 @@
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 10))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 10))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 10).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 10).Name
                 </div>
             </div>
         }
@@ -104,11 +104,11 @@
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
-        @if (ErrorMessages.Exists(x => x.ErrorMessageId == 11))
+        @if (AllStuff.ErrorMessages.Exists(x => x.ErrorMessageId == 11))
         {
             <div class="row">
                 <div class="offset-3 col-9 alert-danger">
-                    @ErrorMessages.Find(x => x.ErrorMessageId == 11).Name
+                    @AllStuff.ErrorMessages.Find(x => x.ErrorMessageId == 11).Name
                 </div>
             </div>
         }

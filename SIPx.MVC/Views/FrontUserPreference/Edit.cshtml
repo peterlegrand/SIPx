@@ -3,10 +3,10 @@
 @model UserPreferenceUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User preference")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("User preference")).TermString;
     ViewData["Image"] = "UserPreference.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 }
 <div class="container">
     <form method="post">
@@ -14,7 +14,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9"><ejs-numerictextbox id="UserPreferenceId" value="@Model.UserPreferenceId" ejs-for="@Model.UserPreferenceId"></ejs-numerictextbox></div>
             </div>
@@ -23,7 +23,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9"><ejs-numerictextbox id="UserPreferenceId" value="@Model.UserPreferenceId" ejs-for="@Model.UserPreferenceId"></ejs-numerictextbox></div>
             </div>
@@ -35,7 +35,7 @@
             {
                 case 1:
                     <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Default language")).TermString
+                        @AllStuff.UITerms.Find(x => x.InternalName.Equals("Default language")).TermString
                     </div>
                     <div class="col-9">
                         <ejs-dropdownlist id="LanguageId" dataSource="@Model.Languages" ejs-for="@Model.IntPreference" value="@Model.IntPreference" popupHeight="220px">
@@ -45,7 +45,7 @@
                     break;
                 case 2:
                     <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Homepage")).TermString
+                        @AllStuff.UITerms.Find(x => x.InternalName.Equals("Homepage")).TermString
                     </div>
                     <div class="col-9">
                         <ejs-dropdownlist id="PageId" dataSource="@Model.Pages" ejs-for="@Model.IntPreference" value="@Model.IntPreference" popupHeight="220px">
@@ -58,8 +58,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

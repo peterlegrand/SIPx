@@ -3,16 +3,16 @@
 @model OrganizationAddressDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization address")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization address")).TermString;
     ViewData["Image"] = "Address.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 @if (!Model.InternalOrganizationNormalUserCannotDelete)
 {
-    <a asp-route-id="@Model.OrganizationAddressId" asp-action="Edit"><img src="~/images/icons/Edit.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
-    <a asp-route-id="@Model.OrganizationAddressId" asp-action="Delete"><img src="~/images/icons/Delete.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
-    <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId"><img src="~/images/icons/Back.png" width="20" height="20" title="@Term.Find(x => x.InternalName.Equals("Back to organization")).TermString" /></a>
+    <a asp-route-id="@Model.OrganizationAddressId" asp-action="Edit"><img src="~/images/icons/Edit.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+    <a asp-route-id="@Model.OrganizationAddressId" asp-action="Delete"><img src="~/images/icons/Delete.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" /></a>
+    <a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-id="@Model.OrganizationId"><img src="~/images/icons/Back.png" width="20" height="20" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to organization")).TermString" /></a>
 }
 <div class="container">
     <form method="post">
@@ -20,7 +20,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     @Model.OrganizationId
@@ -32,7 +32,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     @Model.OrganizationId
@@ -42,63 +42,63 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Attn name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Attn name")).TermString
             </div>    <div class="col-9">
                 @Model.AttnName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Address 1")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Address 1")).TermString
             </div>    <div class="col-9">
                 @Model.Address1
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Address 2")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Address 2")).TermString
             </div>    <div class="col-9">
                 @Model.Address2
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("House number")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("House number")).TermString
             </div>    <div class="col-9">
                 @Model.HouseNumber
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("House number ext")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("House number ext")).TermString
             </div>    <div class="col-9">
                 @Model.HouseNumberExt
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("City")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("City")).TermString
             </div>    <div class="col-9">
                 @Model.City
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Postal code")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Postal code")).TermString
             </div>    <div class="col-9">
                 @Model.PostalCode
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Postal code ext")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Postal code ext")).TermString
             </div>    <div class="col-9">
                 @Model.PostalCodeExt
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Country")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Country")).TermString
             </div>
             <div class="col-9">
                 @Model.CountryName
@@ -106,21 +106,21 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Province / state")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Province / state")).TermString
             </div>    <div class="col-9">
                 @Model.ProvinceState
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("County")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("County")).TermString
             </div>    <div class="col-9">
                 @Model.County
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.CreatorId">@Model.CreatorName</a>
@@ -128,7 +128,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -136,7 +136,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 <a asp-controller="FrontPerson" asp-action="Dashboard" asp-route-id="@Model.ModifierId">@Model.ModifierName</a>
@@ -144,7 +144,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

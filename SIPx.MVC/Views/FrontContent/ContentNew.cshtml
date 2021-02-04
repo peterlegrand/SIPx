@@ -4,7 +4,7 @@
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     //var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
+    
     ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("New content")).TermString;
     ViewData["Image"] = "Content.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;

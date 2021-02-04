@@ -3,10 +3,10 @@
 @model PageSectionProcessConditionUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section process condition")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Page section process condition")).TermString;
     ViewData["Image"] = "Condition.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -15,7 +15,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PageSectionProcessConditionTypeId" ejs-for="@Model.PageSectionProcessConditionTypeId" cssClass="e-outline" placeholder="PageSectionProcessConditionId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -29,7 +29,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PageSectionProcessConditionTypeId" ejs-for="@Model.PageSectionProcessConditionTypeId" cssClass="e-outline" placeholder="PageSectionProcessConditionId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -42,13 +42,13 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="Name" ejs-for="Name" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
-            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-3">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
                 <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
                     <e-content-template>
@@ -61,7 +61,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MenuName" ejs-for="MenuName" cssClass="e-outline" placeholder="Menu name" floatLabelType="Auto"></ejs-textbox>
@@ -70,7 +70,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="MouseOver" ejs-for="MouseOver" cssClass="e-outline" placeholder="Mouse over" floatLabelType="Auto"></ejs-textbox>
@@ -78,7 +78,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Condition type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Condition type")).TermString
             </div>
             <div class="col-9">
                 @*<ejs-dropdownlist id="PageSectionProcessConditionTypeIdExtended" dataSource="@Model.PageSectionProcessConditionTypes" ejs-for="@Model.PageSectionProcessConditionTypeIdExtended" value="@Model.PageSectionProcessConditionTypeIdExtended" index="2" popupHeight="220px">
@@ -110,7 +110,7 @@
         {
             <div class="row" id="ContainsCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Contains")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Contains")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-textbox id="PageSectionProcessConditionString" ejs-for="@Model.PageSectionProcessConditionString" cssClass="e-outline" placeholder="Contains" floatLabelType="Auto"></ejs-textbox>
@@ -121,7 +121,7 @@
         {
             <div class="row" id="ProcessTemplateCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Process template")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="ProcessTemplateId" dataSource="@Model.ProcessTemplates" ejs-for="@Model.ProcessTemplateId" value="@Model.ProcessTemplateId" index="2" popupHeight="220px">
@@ -135,7 +135,7 @@
         {
             <div class="row" id="ProcessTemplateGroupCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Process template group")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template group")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="ProcessTemplateGroupId" dataSource="@Model.ProcessTemplateGroups" ejs-for="@Model.ProcessTemplateGroupId" value="@Model.ProcessTemplateGroupId" index="2" popupHeight="220px">
@@ -150,7 +150,7 @@
         {
             <div class="row" id="OrganizationCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="OrganizationId" dataSource="@Model.Organizations" ejs-for="@Model.OrganizationId" value="@Model.OrganizationId" index="2" popupHeight="220px">
@@ -164,7 +164,7 @@
         {
             <div class="row" id="ProjectCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="ProjectId" dataSource="@Model.Projects" ejs-for="@Model.ProjectId" value="@Model.ProjectId" index="2" popupHeight="220px">
@@ -178,7 +178,7 @@
         {
             <div class="row" id="RoleCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Role")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Role")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="RoleId" dataSource="@Model.Roles" ejs-for="@Model.RoleId" value="@Model.RoleId" index="2" popupHeight="220px">
@@ -192,7 +192,7 @@
         {
             <div class="row" id="SecurityLevelCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Security level")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Security level")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="SecurityLevelId" dataSource="@Model.SecurityLevels" ejs-for="@Model.SecurityLevelId" value="@Model.SecurityLevelId" index="2" popupHeight="220px">
@@ -206,7 +206,7 @@
         {
             <div class="row" id="OrganizationRoleCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Organization role")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization role")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="OrganizationRoleId" dataSource="@Model.Roles" ejs-for="@Model.SpecificOrganizationRoleOfUserId" value="@Model.SpecificOrganizationRoleOfUserId" index="2" popupHeight="220px">
@@ -220,7 +220,7 @@
         {
             <div class="row" id="ProjectRoleCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Project role")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project role")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="ProjectRoleId" dataSource="@Model.Roles" ejs-for="@Model.SpecificProjectRoleOfUserId" value="@Model.SpecificProjectRoleOfUserId" index="2" popupHeight="220px">
@@ -234,7 +234,7 @@
         {
             <div class="row" id="ContentCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Content")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="ContentId" dataSource="@Model.Contents" ejs-for="@Model.ContentId" value="@Model.ContentId" index="2" popupHeight="220px">
@@ -248,7 +248,7 @@
         {
             <div class="row" id="ContentTypeCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Content type")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="ContentTypeId" dataSource="@Model.ContentTypes" ejs-for="@Model.ContentTypeId" value="@Model.ContentTypeId" index="2" popupHeight="220px">
@@ -262,7 +262,7 @@
         {
             <div class="row" id="ContentTypeGroupCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Content type group")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type group")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="ContentTypeGroupId" dataSource="@Model.ContentTypeGroups" ejs-for="@Model.ContentTypeGroupId" value="@Model.ContentTypeGroupId" index="2" popupHeight="220px">
@@ -276,7 +276,7 @@
         {
             <div class="row" id="UserCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("User")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("User")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="UserId" dataSource="@Model.Users" ejs-for="@Model.SelectedUserId" value="@Model.SelectedUserId" index="2" popupHeight="220px">
@@ -290,7 +290,7 @@
         {
             <div class="row" id="PersonCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Person")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Person")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-dropdownlist id="PersonId" dataSource="@Model.Persons" ejs-for="@Model.PersonId" value="@Model.PersonId" index="2" popupHeight="220px">
@@ -304,7 +304,7 @@
         {
             <div class="row" id="FromDateCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("From date")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("From date")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-datepicker id="CreatedDateFrom" ejs-for="@Model.FromDate" value="@Model.FromDate"></ejs-datepicker>
@@ -315,7 +315,7 @@
         {
             <div class="row" id="ToDateCondition">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("To date")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("To date")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-datepicker id="CreatedDateTo" ejs-for="@Model.ToDate" value="@Model.ToDate"></ejs-datepicker>
@@ -324,13 +324,13 @@
         }
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.PageSectionId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.PageSectionId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -338,7 +338,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -346,7 +346,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -354,7 +354,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

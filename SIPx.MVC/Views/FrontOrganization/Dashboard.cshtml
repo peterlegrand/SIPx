@@ -1,9 +1,9 @@
 ﻿@model FrontOrganizationDashboard
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization dashboard")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization dashboard")).TermString;
     ViewData["Image"] = "Organization.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <div class="row">
@@ -11,13 +11,13 @@
         @if (Model.CanEdit)
         {
             <a asp-action="Edit" asp-route-id="@Model.OrganizationId">
-                <img src="~/images/icons/Edit.png" title="@Term.Find(x => x.InternalName.Equals("Edit")).TermString" width="20" height="20" />&nbsp;
+                <img src="~/images/icons/Edit.png" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" width="20" height="20" />&nbsp;
             </a>}
         @if (Model.CanCreate)
         {
 
             <a asp-action="Create" asp-route-id="@Model.OrganizationId">
-                <img src="~/images/icons/New.png" title="@Term.Find(x => x.InternalName.Equals("New")).TermString" width="20" height="20" />&nbsp;
+                <img src="~/images/icons/New.png" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("New")).TermString" width="20" height="20" />&nbsp;
             </a>}
     </div>
 </div>
@@ -28,18 +28,18 @@
     </div>
 
     <div class="col-2">
-        <div> @Term.Find(x => x.InternalName.Equals("Parent")).TermString: </div>
-        <div> @Term.Find(x => x.InternalName.Equals("Status")).TermString:</div>
-        <div> @Term.Find(x => x.InternalName.Equals("Type")).TermString:</div>
-        <div> @Term.Find(x => x.InternalName.Equals("Creator")).TermString:</div>
-        <div> @Term.Find(x => x.InternalName.Equals("Created date")).TermString:</div>
-        <div> @Term.Find(x => x.InternalName.Equals("Modifier")).TermString:</div>
-        <div> @Term.Find(x => x.InternalName.Equals("Modified date")).TermString:</div>
+        <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Parent")).TermString: </div>
+        <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Status")).TermString:</div>
+        <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Type")).TermString:</div>
+        <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString:</div>
+        <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString:</div>
+        <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString:</div>
+        <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString:</div>
     </div>
     <div class="col-3">
         @if (Model.ParentOrganizationId == null)
         {
-            <div> @Term.Find(x => x.InternalName.Equals("No parent")).TermString</div>
+            <div> @AllStuff.UITerms.Find(x => x.InternalName.Equals("No parent")).TermString</div>
 
         }
         else
@@ -59,46 +59,46 @@
     <div class="col-6">
         <div>
             <h2>
-                <img src="~/images/icons/Address.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Addresses")).TermString
+                <img src="~/images/icons/Address.png" height="30" width="30" />&nbsp;@AllStuff.UITerms.Find(x => x.InternalName.Equals("Addresses")).TermString
             </h2>
         </div>
         @if (Model.CanEdit)
         {
             <div class="col-12">
                 <a asp-controller="FrontOrganizationAddress" asp-action="Create" asp-route-id="@Model.OrganizationId">
-                    <img src="~/images/icons/Add.png" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
+                    <img src="~/images/icons/Add.png" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
                 </a>
             </div>
         }
         <ejs-grid id="Address" dataSource="@Model.Addresses" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column field="AddressTypeName" headerText="@Term.Find(x => x.InternalName.Equals("Address type")).TermString" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column template="#Address1Column" field="Address1" headerText="@Term.Find(x => x.InternalName.Equals("Address 1")).TermString" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column field="CountryName" headerText="@Term.Find(x => x.InternalName.Equals("Country")).TermString" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column field="City" headerText="@Term.Find(x => x.InternalName.Equals("City")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="AddressTypeName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Address type")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column template="#Address1Column" field="Address1" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Address 1")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="CountryName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Country")).TermString" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column field="City" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("City")).TermString" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
     <div class="col-6">
         <div>
             <h2>
-                <img src="~/images/icons/Telecom.png" height="30" width="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Telecom")).TermString
+                <img src="~/images/icons/Telecom.png" height="30" width="30" />&nbsp;@AllStuff.UITerms.Find(x => x.InternalName.Equals("Telecom")).TermString
             </h2>
         </div>
         @if (Model.CanEdit)
         {
             <div class="col-12">
                 <a asp-controller="FrontOrganizationTelecom" asp-action="Create" asp-route-id="@Model.OrganizationId">
-                    <img src="~/images/icons/Add.png" title="@Term.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
+                    <img src="~/images/icons/Add.png" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add")).TermString" width="15" height="15" />&nbsp;
                 </a>
             </div>
         }
         <ejs-grid id="Telecom" dataSource="@Model.Telecoms" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Type")).TermString" field="TelecomTypeName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column template="#TelecomValueColumn" headerText="@Term.Find(x => x.InternalName.Equals("Telecom value")).TermString" field="TelecomValue" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Type")).TermString" field="TelecomTypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column template="#TelecomValueColumn" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Telecom value")).TermString" field="TelecomValue" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
@@ -107,14 +107,14 @@
     <div class="col-6">
         <div>
             <h2>
-                <img src="~/images/icons/Organization.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Sub organizations")).TermString
+                <img src="~/images/icons/Organization.png" width="30" height="30" />&nbsp;@AllStuff.UITerms.Find(x => x.InternalName.Equals("Sub organizations")).TermString
             </h2>
         </div>
         @if (Model.CanEdit)
         {
             <div class="col-12">
                 <a asp-controller="FrontOrganization" asp-action="Create" asp-route-id="@Model.OrganizationId">
-                    <img src="~/images/icons/Organization.png" title="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" width="15" height="15" />&nbsp;
+                    <img src="~/images/icons/Organization.png" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString" width="15" height="15" />&nbsp;
                 </a>
             </div>
         }
@@ -129,23 +129,23 @@
     <div class="col-6">
         <div>
             <h2>
-                <img src="~/images/icons/Position.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Position")).TermString
+                <img src="~/images/icons/Position.png" width="30" height="30" />&nbsp;@AllStuff.UITerms.Find(x => x.InternalName.Equals("Position")).TermString
             </h2>
         </div>
         @if (Model.CanEdit)
         {
             <div class="col-12">
                 <a asp-controller="FrontOrganizationPosition" asp-action="Create" asp-route-id="@Model.OrganizationId">
-                    <img src="~/images/icons/Position.png" title="@Term.Find(x => x.InternalName.Equals("Position")).TermString" width="15" height="15" />&nbsp;
+                    <img src="~/images/icons/Position.png" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Position")).TermString" width="15" height="15" />&nbsp;
                 </a>
             </div>
         }
         <ejs-grid id="PersonPositions" dataSource="@Model.PersonRoles" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Position")).TermString" field="PositionName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" field="FirstName" textAlign="Right" type="text" template="#PersonPositionColumn"></e-grid-column>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" field="LastName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Position")).TermString" field="PositionName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("First name")).TermString" field="FirstName" textAlign="Right" type="text" template="#PersonPositionColumn"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Last name")).TermString" field="LastName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
         <ejs-treeview id="listdata">
@@ -157,30 +157,30 @@
     <div class="col-6">
         <div>
             <h2>
-                <img src="~/images/icons/Content.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Content")).TermString
+                <img src="~/images/icons/Content.png" width="30" height="30" />&nbsp;@AllStuff.UITerms.Find(x => x.InternalName.Equals("Content")).TermString
             </h2>
         </div>
         <ejs-grid id="Contents" dataSource="@Model.Contents" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Title")).TermString" field="Title" textAlign="Right" type="text" template="#Content"></e-grid-column>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Type")).TermString" field="TypeName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Status")).TermString" field="StatusName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Title")).TermString" field="Title" textAlign="Right" type="text" template="#Content"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Type")).TermString" field="TypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Status")).TermString" field="StatusName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
     <div class="col-6">
         <div>
             <h2>
-                <img src="~/images/icons/Process.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Processes")).TermString
+                <img src="~/images/icons/Process.png" width="30" height="30" />&nbsp;@AllStuff.UITerms.Find(x => x.InternalName.Equals("Processes")).TermString
             </h2>
         </div>
         <ejs-grid id="Processes" dataSource="@Model.Processes" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Subject")).TermString" field="Subject" textAlign="Right" type="text" template="#Process"></e-grid-column>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Process template")).TermString" field="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
-                <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Stage")).TermString" field="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Subject")).TermString" field="Subject" textAlign="Right" type="text" template="#Process"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template")).TermString" field="ProcessTemplateName" textAlign="Right" type="text"></e-grid-column>
+                <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage")).TermString" field="ProcessTemplateStageTypeName" textAlign="Right" type="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
@@ -191,16 +191,16 @@
         <div class="col-6">
             <div>
                 <h2>
-                    <img src="~/images/icons/Role.png" width="30" height="30" />&nbsp;@Term.Find(x => x.InternalName.Equals("Roles")).TermString
+                    <img src="~/images/icons/Role.png" width="30" height="30" />&nbsp;@AllStuff.UITerms.Find(x => x.InternalName.Equals("Roles")).TermString
                 </h2>
             </div>
             <ejs-grid id="PersonRoles" dataSource="@Model.PersonRoles" allowPaging="true" allowSorting="true" allowResizing="true" rowHeight="30">
                 <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
                 <e-grid-columns>
-                    <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Role")).TermString" field="RoleName" textAlign="Right" type="text"></e-grid-column>
-                    <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("First name")).TermString" field="FirstName" textAlign="Right" type="text" template="#PersonRoleColumn"></e-grid-column>
-                    <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Last name")).TermString" field="LastName" textAlign="Right" type="text"></e-grid-column>
-                    <e-grid-column headerText="@Term.Find(x => x.InternalName.Equals("Organization")).TermString" field="OrganizationName" textAlign="Right" type="text"></e-grid-column>
+                    <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Role")).TermString" field="RoleName" textAlign="Right" type="text"></e-grid-column>
+                    <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("First name")).TermString" field="FirstName" textAlign="Right" type="text" template="#PersonRoleColumn"></e-grid-column>
+                    <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Last name")).TermString" field="LastName" textAlign="Right" type="text"></e-grid-column>
+                    <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Organization")).TermString" field="OrganizationName" textAlign="Right" type="text"></e-grid-column>
                 </e-grid-columns>
             </ejs-grid>
             <ejs-treeview id="listdata">

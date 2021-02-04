@@ -3,7 +3,7 @@
 @model ClassificationUserUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
+    
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification user")).TermString;
     ViewData["Image"] = "User.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;

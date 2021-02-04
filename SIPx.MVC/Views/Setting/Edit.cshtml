@@ -3,10 +3,10 @@
 @model SettingUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Setting")).TermString;
+    
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Setting")).TermString;
     ViewData["Image"] = "Setting.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -15,7 +15,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="SettingId" ejs-for="@Model.SettingId" cssClass="e-outline" placeholder="SettingId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -26,7 +26,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="SettingId" ejs-for="@Model.SettingId" cssClass="e-outline" placeholder="SettingId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -35,14 +35,14 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>
             <div class="col-9">@Model.SettingsName</div>
 
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Description")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString
             </div>
             <div class="col-9">@Html.Raw(Model.Description)</div>
 
@@ -52,7 +52,7 @@
             case 1:
                 <div class="row">
                     <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("String value")).TermString
+                        @AllStuff.UITerms.Find(x => x.InternalName.Equals("String value")).TermString
                     </div>
                     <div class="col-9">
                         <div class="col-9">
@@ -67,7 +67,7 @@
             case 2:
                 <div class="row">
                     <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Int value")).TermString
+                        @AllStuff.UITerms.Find(x => x.InternalName.Equals("Int value")).TermString
                     </div>
                     <div class="col-9">
                         <ejs-textbox id="IntValue" ejs-for="StringValue" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-textbox>
@@ -77,7 +77,7 @@
             case 3:
                 <div class="row">
                     <div class="col-3">
-                        @Term.Find(x => x.InternalName.Equals("Date time value")).TermString
+                        @AllStuff.UITerms.Find(x => x.InternalName.Equals("Date time value")).TermString
                     </div>
                     <div class="col-9">
                         <ejs-datepicker id="DateTimeValue" ejs-for="DateTimeValue" cssClass="e-outline" placeholder="Date time value" floatLabelType="Auto"></ejs-datepicker>
@@ -88,13 +88,13 @@
         }
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -102,7 +102,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

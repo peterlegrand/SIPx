@@ -3,9 +3,9 @@
 @model UserDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete user")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete user")).TermString;
     ViewData["Image"] = "User.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
@@ -14,7 +14,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="UserId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -25,7 +25,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PersonId" ejs-for="@Model.PersonId" cssClass="e-outline" placeholder="UserId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -35,77 +35,77 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Salutation")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Salutation")).TermString
             </div>    <div class="col-9">
       @Model.Salutation
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("First name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("First name")).TermString
             </div>    <div class="col-9">
 @Model.FirstName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Middle name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Middle name")).TermString
             </div>    <div class="col-9">
    @Model.MiddleName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Last name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Last name")).TermString
             </div>    <div class="col-9">
 @Model.LastName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Personal title")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Personal title")).TermString
             </div>    <div class="col-9">
 @Model.PersonalTitle
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Suffix")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Suffix")).TermString
             </div>    <div class="col-9">
  @Model.Suffix
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Nick name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Nick name")).TermString
             </div>    <div class="col-9">
 @Model.NickName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Local first name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Local first name")).TermString
             </div>    <div class="col-9">
 @Model.FirstNameLocal
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Local middle name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Local middle name")).TermString
             </div>    <div class="col-9">
  @Model.MiddleNameLocal
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Local last name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Local last name")).TermString
             </div>    <div class="col-9">
 @Model.LastNameLocal
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Gender")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Gender")).TermString
             </div>
             <div class="col-9">
 @Model.GenderName
@@ -113,14 +113,14 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Birth date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Birth date")).TermString
             </div>    <div class="col-9">
 @Model.BirthDate
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Default organization")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Default organization")).TermString
             </div>
             <div class="col-9">
 @Model.OrganizationName       
@@ -128,7 +128,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("User name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("User name")).TermString
             </div>
             <div class="col-9">
 @Model.UserName
@@ -136,7 +136,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Email")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Email")).TermString
             </div>
             <div class="col-9">
   @Model.Email
@@ -144,7 +144,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Security level")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Security level")).TermString
             </div>
             <div class="col-9">
 @Model.SecurityLevelName        
@@ -152,7 +152,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -160,7 +160,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -168,7 +168,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -176,7 +176,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>
@@ -185,8 +185,8 @@
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

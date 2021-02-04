@@ -4,7 +4,7 @@
   //  var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type")).TermString;
     ViewData["Image"] = "Content.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 
     Layout = "_Layout";
 }

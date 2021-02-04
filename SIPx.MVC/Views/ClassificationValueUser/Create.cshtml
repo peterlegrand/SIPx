@@ -3,7 +3,7 @@
 @model ClassificationValueUserCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
+    
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("New classification value user")).TermString;
     ViewData["Image"] = "User.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;

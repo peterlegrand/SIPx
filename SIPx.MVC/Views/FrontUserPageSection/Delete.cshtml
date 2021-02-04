@@ -3,9 +3,9 @@
 @model PageSectionDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User page section")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("User page section")).TermString;
     ViewData["Image"] = "Panel.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_Layout";
 }
 <div class="container">
@@ -16,7 +16,7 @@
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -28,7 +28,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="PageId" ejs-for="@Model.PageId" cssClass="e-outline" placeholder="PageId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -40,13 +40,13 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>    <div class="col-9">
     @Model.Name
 </div>
         </div>
         <div class="row">
-            <div class="col-3">@Term.Find(x => x.InternalName.Equals("Description")).TermString</div>
+            <div class="col-3">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString</div>
             <div class="col-9">
                 @Html.Raw(Model.Description)
             </div>
@@ -54,7 +54,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
                 @Model.MenuName
@@ -63,7 +63,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
                 @Model.MouseOver
@@ -71,7 +71,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Title name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Title name")).TermString
             </div>
             <div class="col-9">
                 @Model.TitleName
@@ -79,7 +79,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Title description")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Title description")).TermString
             </div>
             <div class="col-9">
                 @Html.Raw(Model.TitleDescription)
@@ -87,7 +87,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Page section type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Page section type")).TermString
             </div>
             <div class="col-9">
                 @Model.PageSectionTypeName
@@ -95,7 +95,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Page section data type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Page section data type")).TermString
             </div>
             <div class="col-9">
                 @Model.PageSectionDataTypeName
@@ -103,7 +103,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show title name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Show title name")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox disabled="true" id="ShowTitleName" label="OnTheFly" ejs-for="ShowTitleName" checked="@Model.ShowTitleName"></ejs-checkbox>
@@ -111,7 +111,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show title description")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Show title description")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox disabled="true" id="ShowTitleDescription" label="ShowTitleDescription" ejs-for="ShowTitleDescription" checked="@Model.ShowTitleDescription"></ejs-checkbox>
@@ -119,7 +119,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show content type title name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Show content type title name")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox disabled="true" id="ShowContentTypeTitleName" label="OnTheFly" ejs-for="ShowContentTypeTitleName" checked="@Model.ShowContentTypeTitleName"></ejs-checkbox>
@@ -127,7 +127,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Show content type title description")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Show content type title description")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox disabled="true" id="ShowContentTypeTitleDescription" label="ShowContentTypeTitleDescription" ejs-for="ShowContentTypeTitleDescription" checked="@Model.ShowContentTypeTitleDescription"></ejs-checkbox>
@@ -135,7 +135,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Content type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type")).TermString
             </div>
             <div class="col-9">
                 @Model.ContentTypeName
@@ -143,7 +143,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Sort by")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Sort by")).TermString
             </div>
             <div class="col-9">
                 @Model.SortByName
@@ -151,7 +151,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Max content")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Max content")).TermString
             </div>
             <div class="col-9">
                 @Model.MaxContent
@@ -159,7 +159,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Has paging")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Has paging")).TermString
             </div>
             <div class="col-9">
                 <ejs-checkbox disabled="true" id="HasPaging" label="HasPaging" ejs-for="HasPaging" checked="@Model.HasPaging"></ejs-checkbox>
@@ -167,13 +167,13 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.PageId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.PageId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -181,7 +181,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -189,7 +189,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -197,7 +197,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

@@ -3,7 +3,7 @@
 @model ClassificationRoleUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
+    
     ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification role")).TermString;
     ViewData["Image"] = "Role.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
@@ -15,8 +15,8 @@
 <div class="container">
 
     <form method="post">
-        @if (ViewAllStuffBag.Env == "Production")
-            AllStuff
+        @if (AllStuff.Env == "Production")
+        {
             <div hidden class="row">
                 <div class="col-3">
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId

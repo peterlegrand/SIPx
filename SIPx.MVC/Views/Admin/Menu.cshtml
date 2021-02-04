@@ -3,7 +3,7 @@
 
 }
 @{
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("Admin menu")).TermString;
     ViewData["ScreenId"] = ViewBag.MVCUIScreenId;
     ViewData["Image"] = "Setting.png";
