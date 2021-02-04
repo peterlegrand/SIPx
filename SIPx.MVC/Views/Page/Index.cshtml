@@ -1,6 +1,6 @@
 ﻿@model List<PageIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Pages")).TermString;
     ViewData["Image"] = "Page.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

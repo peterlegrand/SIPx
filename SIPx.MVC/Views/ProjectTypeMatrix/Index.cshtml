@@ -1,6 +1,6 @@
 ﻿@model ProjectTypeMatrixIndexGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project type relations (matrix)")).TermString;
     ViewData["Image"] = "matrix.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

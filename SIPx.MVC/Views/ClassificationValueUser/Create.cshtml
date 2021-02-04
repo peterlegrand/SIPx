@@ -2,16 +2,16 @@
 @using Newtonsoft.Json
 @model ClassificationValueUserCreateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification value user")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("New classification value user")).TermString;
     ViewData["Image"] = "User.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
     <form method="post">
-        @if (ViewBag.Env == "Production")
+        @if (AllStuff.Env == "Production")
         {
             <div hidden class="row">
                 <div class="col-3">
@@ -19,7 +19,7 @@
                     <ejs-numerictextbox id="ClassificationValueId" ejs-for="ClassificationValueId" cssClass="e-outline" placeholder="ClassificationValueId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
                 </div>
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Classification value id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification value id")).TermString
                 </div>    <div class="col-9">
                     <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
@@ -33,7 +33,7 @@
                     <ejs-numerictextbox id="ClassificationValueId" ejs-for="ClassificationValueId" cssClass="e-outline" placeholder="ClassificationValueId" floatLabelType="Auto" enabled="false"></ejs-numerictextbox>
                 </div>
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Classification value id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification value id")).TermString
                 </div>    <div class="col-9">
                     <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
@@ -42,14 +42,14 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification value")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification value")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="ClassificationValueName" ejs-for="ClassificationValueName" cssClass="e-outline" placeholder="ClassificationValueName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("User")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="UserOfClassificationValueId" dataSource="@Model.Users" ejs-for="@Model.UserOfClassificationValueId" value="@Model.UserOfClassificationValueId" popupHeight="220px">
@@ -59,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Relation type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Relation type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ClassificationRelationTypeId" dataSource="@Model.ClassificationRelationTypes" ejs-for="@Model.ClassificationRelationTypeId" value="@Model.ClassificationRelationTypeId" popupHeight="220px">
@@ -69,8 +69,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ClassificationValueId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.ClassificationValueId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

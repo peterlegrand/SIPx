@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PageSectionContentConditionDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete page section condition")).TermString;
     ViewData["Image"] = "Condition.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

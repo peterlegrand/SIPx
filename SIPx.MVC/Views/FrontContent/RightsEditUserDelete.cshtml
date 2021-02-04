@@ -2,19 +2,19 @@
 @using Newtonsoft.Json
 @model FrontContentRightsEditUserDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete edit user")).TermString;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete edit user")).TermString;
     ViewData["Image"] = "User.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 }
 <div class="container">
     <form method="post">
-        @if (ViewBag.Env == "Production")
+        @if (AllStuff.Env == "Production")
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ContentUserEditId" ejs-for="ContentUserEditId" cssClass="e-outline" floatLabelType="Auto"></ejs-numerictextbox>
@@ -25,7 +25,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ContentUserEditId" ejs-for="ContentUserEditId" cssClass="e-outline" floatLabelType="Auto"></ejs-numerictextbox>
@@ -36,7 +36,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("User")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="SelectedUserName" ejs-for="SelectedUserName" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-3">
                 @* PETER TODO Change user to Default organization *@
-                @Term.Find(x => x.InternalName.Equals("User")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("User")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox id="DefaultOrganizationName" ejs-for="DefaultOrganizationName" cssClass="e-outline" floatLabelType="Auto"></ejs-textbox>
@@ -53,8 +53,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="RightsEditUserIndex">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="RightsEditUserIndex">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

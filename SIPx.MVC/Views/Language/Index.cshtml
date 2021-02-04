@@ -1,6 +1,6 @@
 ﻿@model List<LanguageIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Languages")).TermString;
     ViewData["Image"] = "Language.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

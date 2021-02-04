@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProjectAdvancedSearchPost
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project advanced search")).TermString;
     ViewData["Image"] = "Project.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

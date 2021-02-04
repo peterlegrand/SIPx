@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProjectTypeMatrixDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete project type relation (matrix)")).TermString;
     ViewData["Image"] = "matrix.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

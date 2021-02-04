@@ -1,6 +1,6 @@
 ﻿@model List<FrontContentRightsEditUserIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Edit users")).TermString;
     ViewData["Image"] = "User.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

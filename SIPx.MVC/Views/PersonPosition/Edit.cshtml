@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PersonPositionUpdateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Position for organization")).TermString;
     Layout = "_LayoutAdmin";

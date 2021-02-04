@@ -1,6 +1,6 @@
 ﻿@model List<OrganizationAdvancedSearchResult>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization search result")).TermString;
     ViewData["Image"] = "Organization.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

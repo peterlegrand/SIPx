@@ -3,7 +3,7 @@
 @model ClassificationLevelDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-//    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+//    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete classification level")).TermString;
     ViewData["Image"] = "Level.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;

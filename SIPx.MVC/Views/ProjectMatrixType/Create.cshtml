@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProjectMatrixTypeCreateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New project matrix type")).TermString;
     ViewData["Image"] = "matrix.png";

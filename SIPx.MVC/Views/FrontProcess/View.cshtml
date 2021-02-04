@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model FrontProcessView
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process")).TermString;
     ViewData["Image"] = "Process.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

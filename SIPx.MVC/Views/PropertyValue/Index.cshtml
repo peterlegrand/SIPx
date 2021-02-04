@@ -1,6 +1,6 @@
 ﻿@model List<PropertyValueIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Property values")).TermString;
     ViewData["Image"] = "Value.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

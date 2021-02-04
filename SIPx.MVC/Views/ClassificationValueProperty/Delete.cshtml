@@ -2,11 +2,11 @@
 @using Newtonsoft.Json
 @model ClassificationValuePropertyDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete classification value property")).TermString;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete classification value property")).TermString;
 
     ViewData["Image"] = "ValueProperty.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
 
 }
@@ -15,11 +15,11 @@
 <div class="container">
 
     <form method="post">
-        @if (ViewBag.Env == "Production")
+        @if (AllStuff.Env == "Production")
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ClassificationValuePropertyId" ejs-for="@Model.ClassificationValuePropertyId" cssClass="e-outline" placeholder="ClassificationValuePropertyId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -32,7 +32,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ClassificationValuePropertyId" ejs-for="@Model.ClassificationValuePropertyId" cssClass="e-outline" placeholder="ClassificationValuePropertyId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -44,7 +44,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification")).TermString ClassificationId
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification")).TermString ClassificationId
             </div>
             <div class="col-9">
                 @Model.ClassificationName
@@ -52,7 +52,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification value")).TermString ClassificationId
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification value")).TermString ClassificationId
             </div>
             <div class="col-9">
                 @Model.ClassificationValueName
@@ -60,7 +60,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Property")).TermString ClassificationId
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Property")).TermString ClassificationId
             </div>
             <div class="col-9">
                 @Model.PropertyName
@@ -70,7 +70,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Date")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Date")).TermString
                 </div>    <div class="col-9">
                     @Model.PropertyDate
                 </div>
@@ -80,7 +80,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Number")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Number")).TermString
                 </div>    <div class="col-9">
                     @Model.PropertyInt
                 </div>
@@ -90,7 +90,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Text")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Text")).TermString
                 </div>    <div class="col-9">
                     @Model.PropertyString
                 </div>
@@ -100,7 +100,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Yes/ no")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Yes/ no")).TermString
                 </div>    <div class="col-9">
                     @Model.PropertyBool
                 </div>
@@ -120,7 +120,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -128,7 +128,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -136,7 +136,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -144,7 +144,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>
@@ -153,8 +153,8 @@
 
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ClassificationValueId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.ClassificationValueId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
     </form>

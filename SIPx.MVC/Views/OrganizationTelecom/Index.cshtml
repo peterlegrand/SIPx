@@ -1,6 +1,6 @@
 ﻿@model List<OrganizationTelecomIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization telecoms")).TermString;
     ViewData["Image"] = "Telecom.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

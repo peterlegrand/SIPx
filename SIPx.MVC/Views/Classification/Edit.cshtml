@@ -5,7 +5,7 @@
 
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
 
-//    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+//    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
 //    var ErrorMessages = (List<ErrorMessage>)AllStuff.ErrorMessages;
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification")).TermString;
 

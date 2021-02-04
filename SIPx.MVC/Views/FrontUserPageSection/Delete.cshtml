@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PageSectionDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User page section")).TermString;
     ViewData["Image"] = "Panel.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

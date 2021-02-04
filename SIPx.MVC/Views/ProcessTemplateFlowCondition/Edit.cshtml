@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProcessTemplateFlowConditionUpdateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template flow condition")).TermString;
     ViewData["Image"] = "Condition.png";

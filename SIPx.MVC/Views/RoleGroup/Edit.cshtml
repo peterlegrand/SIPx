@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model RoleGroupUpdateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Role group")).TermString;
     ViewData["Image"] = "Group.png";

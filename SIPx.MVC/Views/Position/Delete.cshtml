@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PositionDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete position")).TermString;
     ViewData["Image"] = "Relation.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

@@ -1,6 +1,6 @@
 ﻿@model List<OrganizationAddressIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Organization addresses")).TermString;
     ViewData["Image"] = "Address.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

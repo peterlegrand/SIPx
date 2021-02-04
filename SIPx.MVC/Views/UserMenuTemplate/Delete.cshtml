@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model UserMenuTemplateDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete user menu template")).TermString;
     ViewData["Image"] = "UserTemplate.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

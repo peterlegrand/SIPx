@@ -1,7 +1,7 @@
 ﻿@using Syncfusion.EJ2
 @model List<ProjectMatrixTypeIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Project matrix types")).TermString;
 
     ViewData["Image"] = "matrix.png";

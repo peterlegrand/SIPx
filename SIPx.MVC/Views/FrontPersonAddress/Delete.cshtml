@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PersonAddressDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete person address")).TermString;
     ViewData["Image"] = "Address.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

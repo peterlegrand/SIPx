@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProcessTemplateFlowPassCreateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Add process template flow pass")).TermString;
     ViewData["Image"] = "Pass.png";

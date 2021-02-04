@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PersonRelationDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete person relation")).TermString;
     ViewData["Image"] = "Relation.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

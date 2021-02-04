@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProcessTemplateGroupDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete process template group")).TermString;
     ViewData["Image"] = "Group.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

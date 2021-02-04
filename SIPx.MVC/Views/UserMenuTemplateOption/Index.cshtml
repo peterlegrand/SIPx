@@ -1,6 +1,6 @@
 ﻿@model List<UserMenuTemplateOptionIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("User menu template options")).TermString;
     ViewData["Image"] = "Option.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

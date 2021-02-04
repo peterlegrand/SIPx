@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProcessAdvancedSearchPost
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process advanced search")).TermString;
     ViewData["Image"] = "Process.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

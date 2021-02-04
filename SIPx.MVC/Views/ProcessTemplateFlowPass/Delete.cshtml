@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProcessTemplateFlowPassDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete process template flow pass")).TermString;
     ViewData["Image"] = "Pass.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PropertyValueCreateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New property value")).TermString;
     ViewData["Image"] = "Value.png";

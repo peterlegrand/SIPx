@@ -1,7 +1,7 @@
 ﻿@model List<ProjectTypeIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    //   var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    //   var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Project types")).TermString;
     ViewData["Image"] = "Type.png";
     ViewData["FavoriteGroup"] = @AllStuff.FavoriteGroupList;

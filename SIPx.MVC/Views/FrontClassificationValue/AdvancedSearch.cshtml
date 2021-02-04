@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ClassificationValueAdvancedSearchPost
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value advanced search")).TermString;
     ViewData["Image"] = "Value.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

@@ -2,23 +2,23 @@
 @using Newtonsoft.Json
 @model ClassificationValueUpdateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Classification value")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification value")).TermString;
     Layout = "_Layout";
     ViewData["Image"] = "Value.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }
 <div class="container">
 
     <form method="post">
-        @if (ViewBag.Env == "Production")
+        @if (AllStuff.Env == "Production")
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -30,7 +30,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
                     <ejs-numerictextbox id="ClassificationId" ejs-for="@Model.ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
@@ -41,7 +41,7 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Parent value")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Parent value")).TermString
             </div>
             <div class="col-3">
                 @Model.ParentName
@@ -49,7 +49,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox value="@Model.Name" ejs-for="Name" id="Name"></ejs-textbox>
@@ -73,7 +73,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Description")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Description")).TermString
             </div>
             <div class="col-9">
                 <ejs-richtexteditor ejs-for="Description" id="defaultRTE" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
@@ -94,7 +94,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Menu name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Menu name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox value="@Model.MenuName" ejs-for="MenuName" id="MenuName"></ejs-textbox>
@@ -110,7 +110,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Mouse over")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Mouse over")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox value="@Model.MouseOver" ejs-for="MouseOver" id="MouseOver"></ejs-textbox>
@@ -127,7 +127,7 @@
         <div class="row">
             <div class="col-3">
                 @* PETERR TODO *@Down name
-                @*@Term.Find(x => x.InternalName.Equals("Dropdown name")).TermString*@
+                @*@AllStuff.UITerms.Find(x => x.InternalName.Equals("Dropdown name")).TermString*@
             </div>
             <div class="col-9">
                 <ejs-textbox id="DropDownName" ejs-for="DropDownName" cssClass="e-outline" placeholder="DropDownName" floatLabelType="Auto"></ejs-textbox>
@@ -143,7 +143,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Page name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Page name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox value="@Model.PageName" ejs-for="PageName" id="PageName"></ejs-textbox>
@@ -159,7 +159,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Page description")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Page description")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox value="@Model.PageDescription" ejs-for="PageDescription" id="PageDescription"></ejs-textbox>
@@ -175,7 +175,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Header name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Header name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox value="@Model.HeaderName" ejs-for="HeaderName" id="HeaderName"></ejs-textbox>
@@ -191,7 +191,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Header description")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Header description")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox value="@Model.HeaderDescription" ejs-for="HeaderDescription" id="HeaderDescription"></ejs-textbox>
@@ -207,7 +207,7 @@
         }
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Topic name")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Topic name")).TermString
             </div>
             <div class="col-9">
                 <ejs-textbox value="@Model.TopicName" ejs-for="TopicName" id="TopicName"></ejs-textbox>
@@ -225,7 +225,7 @@
         @* PETER TODO Check if date is empty etc.. *@
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("From date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("From date")).TermString
             </div>
             <div class="col-9">
                 <ejs-datepicker value="@Model.DateFrom" ejs-for="DateFrom" id="DateFrom"></ejs-datepicker>
@@ -233,7 +233,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("To date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("To date")).TermString
             </div>
             <div class="col-9">
                 <ejs-datepicker value="@Model.DateTo" ejs-for="DateTo" id="DateTo"></ejs-datepicker>
@@ -241,13 +241,13 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ClassificationId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.ClassificationId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Creator")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatorName
@@ -255,7 +255,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Created date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString
             </div>
             <div class="col-9">
                 @Model.CreatedDate
@@ -263,7 +263,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modifier")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modifier")).TermString
             </div>
             <div class="col-9">
                 @Model.ModifierName
@@ -271,7 +271,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Modified date")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Modified date")).TermString
             </div>
             <div class="col-9">
                 <div>@Model.ModifiedDate</div>

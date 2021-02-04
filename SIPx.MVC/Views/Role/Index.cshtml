@@ -1,6 +1,6 @@
 ﻿@model List<RoleIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Roles")).TermString;
     ViewData["Image"] = "Role.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

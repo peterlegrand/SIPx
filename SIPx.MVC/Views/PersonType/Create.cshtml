@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PersonTypeCreateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Create person type")).TermString;
     ViewData["Image"] = "Type.png";

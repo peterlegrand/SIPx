@@ -1,6 +1,6 @@
 ﻿@model List<PersonRelationIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person relations")).TermString;
     ViewData["Image"] = "Relation.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

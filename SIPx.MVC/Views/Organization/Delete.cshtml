@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model OrganizationDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete organization")).TermString;
     ViewData["Image"] = "Organization.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

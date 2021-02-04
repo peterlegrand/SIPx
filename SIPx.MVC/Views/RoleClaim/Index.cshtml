@@ -1,6 +1,6 @@
 ﻿@model List<RoleClaimIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Role rights")).TermString;
     ViewData["Image"] = "Claim.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

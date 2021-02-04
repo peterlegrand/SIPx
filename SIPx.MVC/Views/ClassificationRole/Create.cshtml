@@ -2,11 +2,11 @@
 @using Newtonsoft.Json
 @model ClassificationRoleCreateGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = (List<ErrorMessage>)ViewBag.ErrorMessages;
-    ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("New classification role")).TermString;
+    ViewData["Title"] = AllStuff.UITerms.Find(x => x.InternalName.Equals("New classification role")).TermString;
     ViewData["Image"] = "Role.png";
-    ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;
+    ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
 
     Layout = "_LayoutAdmin";
 }
@@ -15,11 +15,11 @@
 
 
     <form method="post">
-        @if (ViewBag.Env == "Production")
+        @if (AllStuff.Env == "Production")
         {
             <div hidden class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Classification id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification id")).TermString
                 </div>    <div class="col-9">
                     <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
@@ -29,7 +29,7 @@
         {
             <div class="row">
                 <div class="col-3">
-                    @Term.Find(x => x.InternalName.Equals("Classification id")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification id")).TermString
                 </div>    <div class="col-9">
                     <ejs-numerictextbox id="ClassificationId" ejs-for="ClassificationId" cssClass="e-outline" placeholder="ClassificationId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
@@ -39,14 +39,14 @@
 
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Classification")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Classification")).TermString
             </div>    <div class="col-9">
                 <ejs-textbox id="ClassificationName" ejs-for="ClassificationName" cssClass="e-outline" placeholder="ClassificationName" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Role")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Role")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="RoleId" dataSource="@Model.Roles" ejs-for="@Model.RoleId" value="@Model.RoleId" popupHeight="220px">
@@ -56,7 +56,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @Term.Find(x => x.InternalName.Equals("Relation type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Relation type")).TermString
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ClassificationRelationTypeId" dataSource="@Model.ClassificationRelationTypes" ejs-for="@Model.ClassificationRelationTypeId" value="@Model.ClassificationRelationTypeId" popupHeight="220px">
@@ -66,8 +66,8 @@
         </div>
         <div class="row">
             <div class="col-3 offset-3">
-                <ejs-button id="primarybtn" content="@Term.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ClassificationId">@Term.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" action="Submit" isPrimary="true"></ejs-button>
+                <a asp-action="Index" asp-route-id="@Model.ClassificationId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

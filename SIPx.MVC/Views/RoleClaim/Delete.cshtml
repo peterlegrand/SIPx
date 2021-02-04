@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model RoleClaimDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete right")).TermString;
     ViewData["Image"] = "Claim.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

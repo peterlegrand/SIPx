@@ -1,6 +1,6 @@
 ﻿@model List<ProcessTemplateIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process templates")).TermString;
     ViewData["Image"] = "Template.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PropertyDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete property")).TermString;
     ViewData["Image"] = "Property.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

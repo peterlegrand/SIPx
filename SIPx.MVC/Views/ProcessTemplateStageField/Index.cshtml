@@ -1,6 +1,6 @@
 ﻿@model ProcessTemplateStageFieldIndexGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Process template stage fields")).TermString;
     ViewData["Image"] = "StageField.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

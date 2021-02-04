@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model ProcessTemplateFlowConditionDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete process template flow condition")).TermString;
     ViewData["Image"] = "Condition.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

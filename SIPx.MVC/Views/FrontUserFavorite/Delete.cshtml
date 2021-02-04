@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model MVCFavoriteDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete favorite")).TermString;
     ViewData["Image"] = "Favorite.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

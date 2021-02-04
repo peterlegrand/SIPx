@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model UserDeleteGet
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Delete user")).TermString;
     ViewData["Image"] = "User.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

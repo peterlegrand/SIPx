@@ -1,6 +1,6 @@
 ﻿@model List<PageSectionContentConditionIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Page section conditions")).TermString;
     ViewData["Image"] = "Condition.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

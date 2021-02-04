@@ -2,7 +2,7 @@
 @using Newtonsoft.Json
 @model PersonAdvancedSearchPost
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     //ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Person")).TermString;
     ViewData["Image"] = "Person.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

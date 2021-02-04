@@ -3,7 +3,7 @@
 @model OrganizationTypeCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-//    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+//    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     var ErrorMessages = AllStuff.ErrorMessages;
     ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Create organization type")).TermString;
     ViewData["Image"] = "Type.png";

@@ -1,6 +1,6 @@
 ﻿@model List<UserIndexGet>
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Users")).TermString;
     ViewData["Image"] = "User.png";
     ViewData["FavoriteGroup"] = @ViewBag.FavoriteGroupList;

@@ -1,7 +1,7 @@
 ﻿
 @model SearchGlobalPost
 @{
-    var Term = (List<UITermLanguageCustomizationList>)ViewBag.UITerms;
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     ViewData["Title"] = @Term.Find(x => x.InternalName.Equals("Search result")).TermString;
 
     Layout = "_Layout";
