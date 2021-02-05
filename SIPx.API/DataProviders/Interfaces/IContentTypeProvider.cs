@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IContentTypeProvider
     {
-        Task<List<ProcessTemplateList>> CreateGetProcessTemplates(string UserId);
+        Task<List<ProcessTypeList>> CreateGetProcessTypes(string UserId);
         Task<bool> CreatePost(ContentTypeCreateGet ContentType);
         Task<List<ErrorMessage>> CreatePostCheck(ContentTypeCreateGet ContentType);
         Task<ContentTypeDeleteGet> DeleteGet(string UserId, int ContentTypeId);

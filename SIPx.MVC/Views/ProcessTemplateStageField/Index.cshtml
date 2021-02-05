@@ -1,7 +1,7 @@
-﻿@model ProcessTemplateStageFieldIndexGet
+﻿@model ProcessTypeStageFieldIndexGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template stage fields")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type stage fields")).TermString;
     ViewData["Image"] = "StageField.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -11,7 +11,7 @@
         @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
     </div>
     <div class="col-9">
-        <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-numerictextbox>
+        <ejs-numerictextbox id="ProcessTypeStageId" ejs-for="@Model.ProcessTypeStageId" cssClass="e-outline" placeholder="ProcessTypeStageId" floatLabelType="Auto"></ejs-numerictextbox>
     </div>
 </div>
 
@@ -19,22 +19,22 @@
     <div class="col-3">
         @AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString
     </div>    <div class="col-9">
-        <ejs-textbox id="ProcessTemplateStageName" ejs-for="@Model.ProcessTemplateStageName" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
+        <ejs-textbox id="ProcessTypeStageName" ejs-for="@Model.ProcessTypeStageName" cssClass="e-outline" placeholder="Name" floatLabelType="Auto"></ejs-textbox>
     </div>
 </div>
 <ejs-grid id="Grid" dataSource="@Model.Fields" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ProcessTemplateStageFieldId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProcessTypeStageFieldId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="FieldName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
-        <e-grid-column field="ProcessTemplateStageFieldStatusName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Status name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="ProcessTypeStageFieldStatusName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Status name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column field="ValueUpdateTypeName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Value update type name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateStageField/Edit/${ProcessTemplateStageFieldId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeStageField/Edit/${ProcessTypeStageFieldId}"><img src="/images/icons/EditS.png" height="18" width="18" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>

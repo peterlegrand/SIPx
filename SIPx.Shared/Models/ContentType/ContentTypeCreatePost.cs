@@ -9,7 +9,7 @@ namespace SIPx.Shared
     //{
     //    [Key]
     //    public int ContentTypeGroupId { get; set; }
-    //    public int ProcessTemplateId { get; set; }
+    //    public int ProcessTypeId { get; set; }
     //    public int SecurityLevelId { get; set; }
     //    public string Name { get; set; }
     //    public string Description { get; set; }

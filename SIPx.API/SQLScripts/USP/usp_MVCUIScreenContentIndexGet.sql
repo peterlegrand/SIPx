@@ -41,7 +41,7 @@ JOIN Persons Creator
 WHERE UIName.LanguageId = @LanguageID
 	AND MetaContents.MetaRecordId = @MVCUIScreenId
 	AND MetaContents.MetaTypeId = 1
-ORDER BY  	, ISNULL(UINameCustom.Customization ,UIName.Name) 
+ORDER BY  	 ISNULL(UINameCustom.Customization ,UIName.Name) 
 	, ISNULL(UIContentLanguageNameCustom.Customization ,UIContentLanguageName.Name) 
 
 COMMIT TRANSACTION

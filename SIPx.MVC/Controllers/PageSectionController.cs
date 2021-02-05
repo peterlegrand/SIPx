@@ -105,7 +105,7 @@ namespace SIPx.MVC.Controllers
 
             //var ErrorMessage = new List<ErrorMessage>();
             //ViewBag.ErrorMessages = ErrorMessage;
-            //if (response.Item2 == true)
+            if (response.Item2 == true)
             {
                 return View(response.Item1);
             }

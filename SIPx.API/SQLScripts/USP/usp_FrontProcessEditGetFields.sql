@@ -6,16 +6,16 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 DECLARE @StageId int
-SELECT @StageId = Processes.ProcessTemplateStageID FROM Processes WHERE Processes.ProcessID = @ProcessId;
+SELECT @StageId = Processes.ProcessTypeStageID FROM Processes WHERE Processes.ProcessID = @ProcessId;
 
 SELECT ProcessFields.ProcessID
 	, ProcessFields.ProcessFieldID
 	, ISNULL(ProcessFields.IntValue,0) IntValue
 	, ISNULL(ProcessFields.StringValue,'') StringValue
 	, ISNULL(ProcessFields.DateTimeValue,'1-1-1') DateTimeValue 
-	, ProcessTemplateFieldLanguages.Name FieldName
-	, ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID 
-	, ProcessTemplateStageFields.Sequence
+	, ProcessTypeFieldLanguages.Name FieldName
+	, ProcessTypeStageFields.ProcessTypeStageFieldStatusID 
+	, ProcessTypeStageFields.Sequence
 	, 'ProcessField' + cast(ProcessFieldID as varchar(10)) ControlProcessFieldId
 	, 'ProcessId' + cast(ProcessFieldID as varchar(10)) ControlProcessId
 	, 'Control' + cast(ProcessFieldID as varchar(10)) ControlId
@@ -28,17 +28,17 @@ SELECT ProcessFields.ProcessID
 	, 'Controlg' + cast(ProcessFieldID as varchar(10)) ControlId7
 	, 'Controlh' + cast(ProcessFieldID as varchar(10)) ControlId8
 	, 'Controli' + cast(ProcessFieldID as varchar(10)) ControlId9
-	, ProcessTemplateFields.ProcessTemplateFieldTypeID
+	, ProcessTypeFields.ProcessTypeFieldTypeID
 FROM ProcessFields
-JOIN ProcessTemplateFields
-	ON ProcessFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
-JOIN ProcessTemplateFieldLanguages
-	ON ProcessTemplateFieldLanguages.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID  
-JOIN ProcessTemplateStageFields
-	ON ProcessTemplateStageFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
-WHERE ProcessTemplateStageFields.ProcessTemplateStageID = @StageId
-	AND ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID <> 1
-	AND ProcessTemplateFieldLanguages.LanguageID = @LanguageId
+JOIN ProcessTypeFields
+	ON ProcessFields.ProcessTypeFieldID = ProcessTypeFields.ProcessTypeFieldID
+JOIN ProcessTypeFieldLanguages
+	ON ProcessTypeFieldLanguages.ProcessTypeFieldID = ProcessTypeFields.ProcessTypeFieldID  
+JOIN ProcessTypeStageFields
+	ON ProcessTypeStageFields.ProcessTypeFieldID = ProcessTypeFields.ProcessTypeFieldID
+WHERE ProcessTypeStageFields.ProcessTypeStageID = @StageId
+	AND ProcessTypeStageFields.ProcessTypeStageFieldStatusID <> 1
+	AND ProcessTypeFieldLanguages.LanguageID = @LanguageId
 	AND ProcessFields.ProcessID = @ProcessId
-ORDER BY ProcessTemplateStageFields.Sequence
+ORDER BY ProcessTypeStageFields.Sequence
 

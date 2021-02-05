@@ -11,10 +11,10 @@
 <div class="container">
     <div class="row">
         <div class="col-3">
-            @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template")).TermString:
+            @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type")).TermString:
         </div>
         <div class="col-9">
-            @Model.ProcessTemplateName
+            @Model.ProcessTypeName
         </div>
     </div>
     <div class="row">
@@ -22,160 +22,160 @@
             @AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage")).TermString:
         </div>
         <div class="col-9">
-            @Model.ProcessTemplateStageName -
-            @Model.ProcessTemplateStageTypeName
+            @Model.ProcessTypeStageName -
+            @Model.ProcessTypeStageTypeName
         </div>
     </div>
     @foreach (var x in Model.ProcessFields)
     {
-        if (new[] { 1, 2, 32 }.Contains(x.ProcessTemplateFieldTypeId))//Text
+        if (new[] { 1, 2, 32 }.Contains(x.ProcessTypeFieldTypeId))//Text
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @Html.Raw(x.StringValue)
                 </div>
             </div>
         }
-        if (new[] { 3 }.Contains(x.ProcessTemplateFieldTypeId)) //Number
+        if (new[] { 3 }.Contains(x.ProcessTypeFieldTypeId)) //Number
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.IntValue
                 </div>
             </div>
         }
-        if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(x.ProcessTemplateFieldTypeId))//Date
+        if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(x.ProcessTypeFieldTypeId))//Date
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.DateTimeValue
                 </div>
             </div>
         }
-        if (new[] { 12, 13 }.Contains(x.ProcessTemplateFieldTypeId))//User
+        if (new[] { 12, 13 }.Contains(x.ProcessTypeFieldTypeId))//User
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryUserName
                 </div>
             </div>
         }
-        if (new[] { 14, 15 }.Contains(x.ProcessTemplateFieldTypeId))//Organization
+        if (new[] { 14, 15 }.Contains(x.ProcessTypeFieldTypeId))//Organization
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryOrganizationName
                 </div>
             </div>
         }
-        if (new[] { 16, 17 }.Contains(x.ProcessTemplateFieldTypeId))//Project
+        if (new[] { 16, 17 }.Contains(x.ProcessTypeFieldTypeId))//Project
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryProjectName
                 </div>
             </div>
         }
-        if (new[] { 18, 19 }.Contains(x.ProcessTemplateFieldTypeId))//Language
+        if (new[] { 18, 19 }.Contains(x.ProcessTypeFieldTypeId))//Language
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryLanguageName
                 </div>
             </div>
         }
-        if (new[] { 20, 21 }.Contains(x.ProcessTemplateFieldTypeId))//Classification
+        if (new[] { 20, 21 }.Contains(x.ProcessTypeFieldTypeId))//Classification
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryClassificationName
                 </div>
             </div>
         }
-        if (new[] { 22, 23 }.Contains(x.ProcessTemplateFieldTypeId))//ClassificationValue
+        if (new[] { 22, 23 }.Contains(x.ProcessTypeFieldTypeId))//ClassificationValue
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryClassificationValueName
                 </div>
             </div>
         }
-        if (new[] { 24, 25 }.Contains(x.ProcessTemplateFieldTypeId))//Content
+        if (new[] { 24, 25 }.Contains(x.ProcessTypeFieldTypeId))//Content
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryContentTitle
                 </div>
             </div>
         }
-        if (new[] { 26, 27 }.Contains(x.ProcessTemplateFieldTypeId))//Country
+        if (new[] { 26, 27 }.Contains(x.ProcessTypeFieldTypeId))//Country
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryCountryName
                 </div>
             </div>
         }
-        if (new[] { 28, 29 }.Contains(x.ProcessTemplateFieldTypeId))//SecurityLevel
+        if (new[] { 28, 29 }.Contains(x.ProcessTypeFieldTypeId))//SecurityLevel
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondarySecurityLevelName
                 </div>
             </div>
         }
-        if (new[] { 30, 31 }.Contains(x.ProcessTemplateFieldTypeId))//Role
+        if (new[] { 30, 31 }.Contains(x.ProcessTypeFieldTypeId))//Role
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName
+                    @x.ProcessTypeFieldName
                 </div>
                 <div class="col-9">
                     @x.PrimarySecondaryRoleName:
                 </div>
             </div>
         }
-        if (new[] { 36, 37 }.Contains(x.ProcessTemplateFieldTypeId))//Person
+        if (new[] { 36, 37 }.Contains(x.ProcessTypeFieldTypeId))//Person
         {
             <div class="row">
                 <div class="col-3">
-                    @x.ProcessTemplateFieldName:
+                    @x.ProcessTypeFieldName:
                     @* PETER TODO Still not all scenarios are done *@
                 </div>
                 <div class="col-9">

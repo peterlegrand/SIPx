@@ -2,6 +2,7 @@ CREATE PROCEDURE usp_PersonTypeCreatePost (
 	 @CodePrefix nvarchar(25)
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
+	, @ObjectTypeStatusId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -21,9 +22,10 @@ SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
 INSERT INTO PersonTypes (
-	, CodePrefix 
+	 CodePrefix 
 	, CodeSuffix 
 	, CodeTypeId 
+	, ObjectTypeStatusId
 	, Color
 	, IconId
 	, CreatorID
@@ -31,9 +33,10 @@ INSERT INTO PersonTypes (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	, @CodePrefix 
+	 @CodePrefix 
 	, @CodeSuffix 
 	, @CodeTypeId 
+	, @ObjectTypeStatusId
 	, @Color
 	, @IconId
 	, @UserID

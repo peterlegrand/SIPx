@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateStageTypeCreateGet
+@model ProcessTypeStageTypeCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("New process template stage type")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("New process type stage type")).TermString;
     ViewData["Image"] = "Type.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";

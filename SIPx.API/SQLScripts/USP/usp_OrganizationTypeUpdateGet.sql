@@ -6,6 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT OrganizationTypes.OrganizationTypeID
+	, ObjectTypeStatusId
 	, OrganizationTypes.CodePrefix
 	, OrganizationTypes.CodeSuffix
 	, OrganizationTypes.CodeTypeId

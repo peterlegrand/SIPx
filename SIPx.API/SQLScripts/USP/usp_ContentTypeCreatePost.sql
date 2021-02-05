@@ -3,8 +3,9 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeCreatePost] (
 	, @CodePrefix nvarchar(25)
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
-	, @ProcessTemplateId int
+	, @ProcessTypeId int
 	, @SecurityLevelId int
+	, @ObjectTypeStatusId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -55,8 +56,9 @@ INSERT INTO ContentTypes (
 	, CodePrefix 
 	, CodeSuffix 
 	, CodeTypeId 
-	, ProcessTemplateID
+	, ProcessTypeID
 	, SecurityLevelID
+	, ObjectTypeStatusId
 	, IsRelationBasedOwnership
     , IsProjectBasedOwnership 
 	, IsOrganizationBasedOwnership 
@@ -96,8 +98,9 @@ VALUES (
 	, @CodePrefix 
 	, @CodeSuffix 
 	, @CodeTypeId 
-	, @ProcessTemplateID
+	, @ProcessTypeID
 	, @SecurityLevelID
+	, @ObjectTypeStatusId
 	, @IsRelationBasedOwnership
     , @IsProjectBasedOwnership 
 	, @IsOrganizationBasedOwnership 

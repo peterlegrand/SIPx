@@ -9,8 +9,8 @@ namespace SIPx.Shared
     public class NewProcessFromAPI : INewProcessFromAPI
     {
         [Key]
-        public int ProcessTemplateId { get; set; }
-        public int ProcessTemplateStageId { get; set; }
+        public int ProcessTypeId { get; set; }
+        public int ProcessTypeStageId { get; set; }
         public List<NewProcessFieldFromAPI> ProcessFields { get; set; }
     }
 }

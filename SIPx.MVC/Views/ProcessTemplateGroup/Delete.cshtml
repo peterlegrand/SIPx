@@ -1,9 +1,9 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateGroupDeleteGet
+@model ProcessTypeGroupDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete process template group")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete process type group")).TermString;
     ViewData["Image"] = "Group.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -16,7 +16,7 @@
                 <div class="col-3">
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>    <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateGroupId" ejs-for="ProcessTemplateGroupId" cssClass="e-outline" placeholder="ProcessTemplateGroupId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeGroupId" ejs-for="ProcessTypeGroupId" cssClass="e-outline" placeholder="ProcessTypeGroupId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -26,7 +26,7 @@
                 <div class="col-3">
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString
                 </div>    <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateGroupId" ejs-for="ProcessTemplateGroupId" cssClass="e-outline" placeholder="ProcessTemplateGroupId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeGroupId" ejs-for="ProcessTypeGroupId" cssClass="e-outline" placeholder="ProcessTypeGroupId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }

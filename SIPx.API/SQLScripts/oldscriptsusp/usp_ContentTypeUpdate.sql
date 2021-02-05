@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeUpdate] (
 	@ContentTypeLanguageId int
 	, @ContentTypeId int
 	, @ContentTypeGroupId int
-	, @ProcessTemplateId int
+	, @ProcessTypeId int
 	, @SecurityLevelId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
@@ -15,7 +15,7 @@ AS
 BEGIN TRANSACTION
 UPDATE ContentTypes SET 
 	ContentTypeGroupID= @ContentTypeGroupID
-	, ProcessTemplateId = @ProcessTemplateID
+	, ProcessTypeId = @ProcessTypeID
 	, SecurityLevelId = @SecurityLevelID
 	, ModifierId = @UserID
 	, ModifiedDate = GETDATE()

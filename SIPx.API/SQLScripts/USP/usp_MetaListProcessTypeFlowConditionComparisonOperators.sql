@@ -1,0 +1,8 @@
+CREATE PROCEDURE [dbo].[usp_MetaListProcessTypeFlowConditionComparisonOperators]
+AS
+SELECT ProcessTypeFlowConditionComparisonOperators.ProcessTypeFlowConditionComparisonOperatorId, Name
+FROM ProcessTypeFlowConditionComparisonOperators 
+JOIN UITermLanguages
+	ON ProcessTypeFlowConditionComparisonOperators.NameTermId = UITermLanguages.UITermID
+WHERE LanguageId =41 
+ORDER BY Name

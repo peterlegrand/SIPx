@@ -34,33 +34,33 @@ namespace SIPx.DataAccess
         //    var x = await _sqlDataAccess.LoadData<ProcessViewGet, dynamic>(usp, new { LanguageId = LanguageId });
         //    return x;
         //}
-        public async Task<List<FrontProcessTemplateIdFlowId>> CreateGetInitialTemplateFlowList()
+        public async Task<List<FrontProcessTypeIdFlowId>> CreateGetInitialTemplateFlowList()
         {
             string usp = "usp_NewProcessGetInitialTemplateFlowList";
-            var x = await _sqlDataAccess.LoadData<FrontProcessTemplateIdFlowId>(usp);
+            var x = await _sqlDataAccess.LoadData<FrontProcessTypeIdFlowId>(usp);
             return x;
         }
 
 
-        public async Task<List<FrontProcessProcessTemplateFlowConditions>> CreateGetInitialTemplateFlowConditionList(int ProcessTemplateFlowId)
+        public async Task<List<FrontProcessProcessTypeFlowConditions>> CreateGetInitialTemplateFlowConditionList(int ProcessTypeFlowId)
         {
-            string usp = "usp_NewProcessGetFlowConditionList @ProcessTemplateFlowId";
-            var x = await _sqlDataAccess.LoadData<FrontProcessProcessTemplateFlowConditions, dynamic>(usp, new { ProcessTemplateFlowId = ProcessTemplateFlowId });
+            string usp = "usp_NewProcessGetFlowConditionList @ProcessTypeFlowId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessProcessTypeFlowConditions, dynamic>(usp, new { ProcessTypeFlowId = ProcessTypeFlowId });
             return x;
         }
 
-        public async Task<List<FrontProcessNewProcessField>> CreateGet(string UserId, int ProcessTemplateId)
+        public async Task<List<FrontProcessNewProcessField>> CreateGet(string UserId, int ProcessTypeId)
         {
 
-            string usp = "usp_NewProcessGet @ProcessTemplateID, @UserId";
-            var x = await _sqlDataAccess.LoadData<FrontProcessNewProcessField, dynamic>(usp, new { UserId = UserId, ProcessTemplateId = ProcessTemplateId });
+            string usp = "usp_NewProcessGet @ProcessTypeID, @UserId";
+            var x = await _sqlDataAccess.LoadData<FrontProcessNewProcessField, dynamic>(usp, new { UserId = UserId, ProcessTypeId = ProcessTypeId });
             return x;
         }
         //PETER TODO PostCheck added
 
         public async Task<bool> CreatePost(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields)
         {
-            await _sqlDataAccess.SaveData2<dynamic>(SQLString, new { User = UserId, ProcessTemplateId = TemplateId, ProcessTemplateStageId = StageId, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
+            await _sqlDataAccess.SaveData2<dynamic>(SQLString, new { User = UserId, ProcessTypeId = TemplateId, ProcessTypeStageId = StageId, FieldsTable = Fields.AsTableValuedParameter("udt_ProcessFieldsNew") });
             return true;
         }
 
@@ -98,7 +98,7 @@ namespace SIPx.DataAccess
         //}
         public Task<List<ProcessAdvancedSearchResult>> AdvancedSearch(string UserId, ProcessAdvancedSearchPost AdvancedSearch)
         {
-            string usp = "usp_ProcessAdvancedSearch @UserId, @Contains, @Number, @DateFrom, @DateTo, @SelectedUserId, @OrganizationId, @ProjectId, @LanguageId, @ClassificationId, @ClassificationValueId, @ContentId, @CountryId, @SecurityLevelId, @RoleId, @PersonId, @ProcessTemplateStageTypeId ";
+            string usp = "usp_ProcessAdvancedSearch @UserId, @Contains, @Number, @DateFrom, @DateTo, @SelectedUserId, @OrganizationId, @ProjectId, @LanguageId, @ClassificationId, @ClassificationValueId, @ContentId, @CountryId, @SecurityLevelId, @RoleId, @PersonId, @ProcessTypeStageTypeId ";
             return _sqlDataAccess.LoadData<ProcessAdvancedSearchResult, dynamic>(usp, AdvancedSearch);
         }
 

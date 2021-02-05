@@ -12,17 +12,17 @@
         if (x.templates.Count > 0)
         {@if (ViewBag.Env == "Production")
             {
-                <div class="font-weight-bold" hidden>@x.ProcessTemplateGroupId</div>
+                <div class="font-weight-bold" hidden>@x.ProcessTypeGroupId</div>
             }
             else
             {
-                <div class="font-weight-bold" >@x.ProcessTemplateGroupId</div>
+                <div class="font-weight-bold" >@x.ProcessTypeGroupId</div>
             }
 
         <div class="font-weight-bold"><h2>@x.Name</h2></div>
         @foreach (var y in x.templates)
         {
-            <a class="nav-link text-dark font-weight-bold" asp-controller="FrontProcess" asp-action="Create" asp-route-id="@y.ProcessTemplateId"><img src="@y.FileName" width="15" height="15" />&nbsp @y.Name</a>
+            <a class="nav-link text-dark font-weight-bold" asp-controller="FrontProcess" asp-action="Create" asp-route-id="@y.ProcessTypeId"><img src="@y.FileName" width="15" height="15" />&nbsp @y.Name</a>
         }
     }
 }

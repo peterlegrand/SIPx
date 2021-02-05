@@ -1,7 +1,7 @@
-﻿@model List<ProcessTemplateStageIndexGet>
+﻿@model List<ProcessTypeStageIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template stages")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type stages")).TermString;
     ViewData["Image"] = "Spotlight.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -9,7 +9,7 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ProcessTemplateStageId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProcessTypeStageId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage fields")).TermString" template="#StageField" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
@@ -17,31 +17,31 @@
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a asp-action="Index" asp-controller="ProcessTemplate">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to process templates")).TermString</a>
+<a asp-action="Index" asp-controller="ProcessType">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to process types")).TermString</a>
 
-<a asp-action="Create" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new process template stage")).TermString</a>
+<a asp-action="Create" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new process type stage")).TermString</a>
 
 <script id="StageField" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateStageField/Index/${ProcessTemplateStageId}"><span style="color:red">S</span>tage field</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeStageField/Index/${ProcessTypeStageId}"><span style="color:red">S</span>tage field</a>
 
     </div>
 </script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateStage/Edit/${ProcessTemplateStageId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeStage/Edit/${ProcessTypeStageId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Language" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateStage/LanguageIndex/${ProcessTemplateStageId}"><span style="color:red">L</span>angauge</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeStage/LanguageIndex/${ProcessTypeStageId}"><span style="color:red">L</span>angauge</a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateStage/Delete/${ProcessTemplateStageId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeStage/Delete/${ProcessTypeStageId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

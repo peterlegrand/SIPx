@@ -13,6 +13,7 @@ SELECT OrganizationTypes.OrganizationTypeID
 	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Name,'No description for this organization type')) Description
 	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.Name,'No menu name for this organization type')) MenuName
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this organization type')) MouseOver
+	, ISNULL(CustomObjectTypeStatus.Customization,DefaultObjectTypeStatus.Name) ObjectTypeStatusName
 	, OrganizationTypes.Internal
 	, OrganizationTypes.LegalEntity
 	, Color
@@ -28,6 +29,12 @@ LEFT JOIN (SELECT OrganizationTypeId, Name, Description, MenuName, MouseOver FRO
 	ON UserLanguage.OrganizationTypeID= OrganizationTypes.OrganizationTypeID
 LEFT JOIN (SELECT OrganizationTypeId, Name, Description, MenuName, MouseOver FROM OrganizationTypeLanguages JOIN Settings ON OrganizationTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
 	ON DefaultLanguage.OrganizationTypeId = OrganizationTypes.OrganizationTypeID
+JOIN ObjectTypeStatuses
+	ON ObjectTypeStatuses.ObjectTypeStatusID = OrganizationTypes.ObjectTypeStatusID
+JOIN UITermLanguages DefaultObjectTypeStatus
+	ON DefaultObjectTypeStatus.UITermId = ObjectTypeStatuses.NameTermID
+LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) CustomObjectTypeStatus
+	ON CustomObjectTypeStatus.UITermId = ObjectTypeStatuses.NameTermID
 JOIN Persons Creator
 	ON Creator.UserId = OrganizationTypes.CreatorID
 JOIN Persons Modifier
@@ -40,3 +47,4 @@ LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHE
 	ON UINameCustom.UITermId = Icons.NameTermID
 WHERE UIName.LanguageId = @LanguageID 
 	AND OrganizationTypes.OrganizationTypeID = @OrganizationTypeID
+	AND DefaultObjectTypeStatus.LanguageId = @LanguageID

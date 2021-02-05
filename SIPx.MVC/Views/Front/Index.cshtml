@@ -88,7 +88,7 @@
                                                     <e-grid-columns>
                                                         <e-grid-column headerText="Id" width="300" field="ProcessId" textAlign="Left"></e-grid-column>
                                                         <e-grid-column headerText="Subject" width="300" field="Subject" textAlign="Left"></e-grid-column>
-                                                        <e-grid-column headerText="Template" width="300" field="ProcessTemplateName" textAlign="Left"></e-grid-column>
+                                                        <e-grid-column headerText="Template" width="300" field="ProcessTypeName" textAlign="Left"></e-grid-column>
                                                     </e-grid-columns>
                                                 </ejs-grid>
                                             </div>
@@ -724,13 +724,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="/FrontProcess/Edit/${ProcessId}">  ${ProcessTemplateName} </a>
+                            <a href="/FrontProcess/Edit/${ProcessId}">  ${ProcessTypeName} </a>
                         </td>
                         <td class="font-italic">
                             ${Subject}
                         </td>
                         <td class="font-italic">
-                            ${ProcessTemplateName}
+                            ${ProcessTypeName}
                         </td>
 
                     </tr>

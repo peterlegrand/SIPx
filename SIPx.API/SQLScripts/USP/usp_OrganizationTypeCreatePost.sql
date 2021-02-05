@@ -4,6 +4,7 @@ CREATE PROCEDURE usp_OrganizationTypeCreatePost (
 	, @CodePrefix nvarchar(25)
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
+	, @ObjectTypeStatusId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -28,6 +29,7 @@ INSERT INTO OrganizationTypes (
 	, CodePrefix 
 	, CodeSuffix 
 	, CodeTypeId 
+	, ObjectTypeStatusId
 	, Color
 	, IconId
 	, CreatorID
@@ -40,6 +42,7 @@ VALUES (
 	, @CodePrefix 
 	, @CodeSuffix 
 	, @CodeTypeId 
+	, @ObjectTypeStatusId
 	, @Color
 	, @IconId
 	, @UserID

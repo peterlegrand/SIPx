@@ -16,8 +16,8 @@ namespace SIPx.Shared
         string Modifier { get; set; }
         string MouseOver { get; set; }
         string Name { get; set; }
-        int ProcessTemplateId { get; set; }
-        List<ProcessTemplateList> ProcessTemplates { get; set; }
+        int ProcessTypeId { get; set; }
+        List<ProcessTypeList> ProcessTypes { get; set; }
         int SecurityLevelId { get; set; }
         List<SecurityLevelList> SecurityLevels { get; set; }
     }

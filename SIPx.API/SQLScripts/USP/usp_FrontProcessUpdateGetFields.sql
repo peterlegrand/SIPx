@@ -8,17 +8,17 @@ WHERE USerId = @UserID
 SELECT
 	ProcessFields.ProcessID
 	, ProcessFields.ProcessFieldID
-	, ProcessFields.ProcessTemplateID
-	, ProcessFields.ProcessTemplateFieldID
+	, ProcessFields.ProcessTypeID
+	, ProcessFields.ProcessTypeFieldID
 	, ProcessFields.StringValue
 	, ProcessFields.IntValue
 	, ProcessFields.DateTimeValue
-	, ProcessTemplateFields.ProcessTemplateFieldTypeID
-	, ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
-	, ProcessTemplateStageFields.ValueUpdateTypeID
-	, ProcessTemplateStageFields.StringValue DefaultStringValue
-	, ProcessTemplateStageFields.IntValue DefaultIntValue
-	, ProcessTemplateStageFields.DateTimeValue DefaultDateTimeValue
+	, ProcessTypeFields.ProcessTypeFieldTypeID
+	, ProcessTypeStageFields.ProcessTypeStageFieldStatusID
+	, ProcessTypeStageFields.ValueUpdateTypeID
+	, ProcessTypeStageFields.StringValue DefaultStringValue
+	, ProcessTypeStageFields.IntValue DefaultIntValue
+	, ProcessTypeStageFields.DateTimeValue DefaultDateTimeValue
 	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this field')) FieldName
 	, 'Control1ID' + TRIM(CAST(Processfields.ProcessFieldId as nvarchar(10))) Control1 
 	, 'Control2ID' + TRIM(CAST(Processfields.ProcessFieldId as nvarchar(10))) Control2 
@@ -39,15 +39,15 @@ SELECT
 FROM ProcessFields
 JOIN Processes	
 	ON Processes.ProcessID = ProcessFields.ProcessID
-JOIN ProcessTemplateFields
-	ON ProcessFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
-JOIN ProcessTemplateStageFields
-	ON Processes.ProcessTemplateStageID = ProcessTemplateStageFields.ProcessTemplateStageID
-		AND ProcessFields.ProcessTemplateFieldID = ProcessTemplateStageFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver, ProcessTemplateFieldLanguageID FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserLanguage
-	ON UserLanguage.ProcessTemplateFieldID= ProcessFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver, ProcessTemplateFieldLanguageID FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
-	ON DefaultLanguage.ProcessTemplateFieldId = ProcessFields.ProcessTemplateFieldID
+JOIN ProcessTypeFields
+	ON ProcessFields.ProcessTypeFieldID = ProcessTypeFields.ProcessTypeFieldID
+JOIN ProcessTypeStageFields
+	ON Processes.ProcessTypeStageID = ProcessTypeStageFields.ProcessTypeStageID
+		AND ProcessFields.ProcessTypeFieldID = ProcessTypeStageFields.ProcessTypeFieldID
+LEFT JOIN (SELECT ProcessTypeFieldId, Name, Description, MenuName, MouseOver, ProcessTypeFieldLanguageID FROM ProcessTypeFieldLanguages WHERE LanguageId = @LanguageID) UserLanguage
+	ON UserLanguage.ProcessTypeFieldID= ProcessFields.ProcessTypeFieldID
+LEFT JOIN (SELECT ProcessTypeFieldId, Name, Description, MenuName, MouseOver, ProcessTypeFieldLanguageID FROM ProcessTypeFieldLanguages JOIN Settings ON ProcessTypeFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ProcessTypeFieldId = ProcessFields.ProcessTypeFieldID
 LEFT JOIN (SELECT UserId, FirstName + ' ' + LastName UserName FROM Persons) UserField
 	ON UserField.UserID = ProcessFields.StringValue
 LEFT JOIN (SELECT PersonId, FirstName + ' ' + LastName PersonName FROM Persons) PersonField
@@ -110,4 +110,4 @@ LEFT JOIN Contents
 	ON Contents.ContentID = ProcessFields.IntValue
 
 WHERE ProcessFields.ProcessID = @ProcessId
-ORDER BY ProcessTemplateStageFields.Sequence
+ORDER BY ProcessTypeStageFields.Sequence

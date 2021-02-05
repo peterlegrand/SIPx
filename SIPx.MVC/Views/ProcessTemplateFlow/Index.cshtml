@@ -1,7 +1,7 @@
-﻿@model List<ProcessTemplateFlowIndexGet>
+﻿@model List<ProcessTypeFlowIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template flows")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type flows")).TermString;
     ViewData["Image"] = "Flow.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -10,7 +10,7 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ProcessTemplateFlowId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProcessTypeFlowId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Conditions")).TermString" template="#Condition" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Passes")).TermString" template="#Pass" textAlign="Center" type="string"></e-grid-column>
@@ -19,36 +19,36 @@
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a asp-action="Index" asp-controller="ProcessTemplate">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to process templates")).TermString</a>
+<a asp-action="Index" asp-controller="ProcessType">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to process types")).TermString</a>
 
-<a asp-action="Create" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new process template flow")).TermString</a>
+<a asp-action="Create" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new process type flow")).TermString</a>
 <script id="Condition" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlowCondition/Index/${ProcessTemplateFlowId}"><span style="color:red">C</span>onditions</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeFlowCondition/Index/${ProcessTypeFlowId}"><span style="color:red">C</span>onditions</a>
 
     </div>
 </script>
 <script id="Pass" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlowPass/Index/${ProcessTemplateFlowId}"><span style="color:red">P</span>ass</a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeFlowPass/Index/${ProcessTypeFlowId}"><span style="color:red">P</span>ass</a>
 
     </div>
 </script>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlow/Edit/${ProcessTemplateFlowId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeFlow/Edit/${ProcessTypeFlowId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Language" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlow/LanguageIndex/${ProcessTemplateFlowId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeFlow/LanguageIndex/${ProcessTypeFlowId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlow/Delete/${ProcessTemplateFlowId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeFlow/Delete/${ProcessTypeFlowId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>

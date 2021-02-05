@@ -54,7 +54,7 @@ namespace SIPx.MVC.Controllers
             if (PageSectionContentConditionCreateGetWithErrorMessage.ErrorMessages.Count > 0)
             {
                 var AllStuff = await _loadViewBagModel.ViewBagLoad(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), token, _hostingEnv.EnvironmentName, _configuration, false, 0, "");
-                AllStuff.ErrorMessages = v.ErrorMessages;
+                AllStuff.ErrorMessages = PageSectionContentConditionCreateGetWithErrorMessage.ErrorMessages;
                 ViewBag.AllStuff = AllStuff;
                 //ViewBag.Favorites = await _client.GetProtectedAsync<List<MVCFavoriteMenu>>($"{_configuration["APIUrl"]}api/MVCFavorite/Menu", token);
                 //ViewBag.FavoriteGroupList = await _client.GetProtectedAsync<List<MVCFavoriteGroupList>>($"{_configuration["APIUrl"]}api/MVCFavorite/GroupList", token);

@@ -6,15 +6,15 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 DECLARE @StageId int
-SELECT @StageId = Processes.ProcessTemplateStageID FROM Processes WHERE Processes.ProcessID = @ProcessId;
+SELECT @StageId = Processes.ProcessTypeStageID FROM Processes WHERE Processes.ProcessID = @ProcessId;
 
 SELECT ProcessFields.ProcessID
 	, ProcessFields.ProcessFieldID
-	, ProcessFields.ProcessTemplateID
-	, ProcessFields.ProcessTemplateFieldID
-	, Processes.ProcessTemplateStageID
-	, ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID 
-	, ISNULL(TemplateFieldUserLanguage.ProcessTemplateFieldName,ISNULL(TemplateFieldDefaultLanguage.ProcessTemplateFieldName,'No name for this template')) ProcessTemplateFieldName
+	, ProcessFields.ProcessTypeID
+	, ProcessFields.ProcessTypeFieldID
+	, Processes.ProcessTypeStageID
+	, ProcessTypeStageFields.ProcessTypeStageFieldStatusID 
+	, ISNULL(TemplateFieldUserLanguage.ProcessTypeFieldName,ISNULL(TemplateFieldDefaultLanguage.ProcessTypeFieldName,'No name for this template')) ProcessTypeFieldName
 
 	, ISNULL(ProcessFields.IntValue,0) IntValue
 	, ISNULL(ProcessFields.StringValue,'') StringValue
@@ -22,7 +22,7 @@ SELECT ProcessFields.ProcessID
 	, ISNULL(PrimarySecondaryProjectName,'') PrimarySecondaryProjectName
 	, ISNULL(PrimarySecondaryProject,0) PrimarySecondaryProject
 
-	, ProcessTemplateStageFields.Sequence
+	, ProcessTypeStageFields.Sequence
 	, 'ProcessField' + cast(ProcessFields.ProcessFieldID as varchar(10)) ControlProcessFieldId
 	, 'ProcessId' + cast(ProcessFields.ProcessFieldID as varchar(10)) ControlProcessId
 	, 'Control' + cast(ProcessFields.ProcessFieldID as varchar(10)) ControlId
@@ -39,47 +39,47 @@ SELECT ProcessFields.ProcessID
 	, ISNULL(PrimarySecondaryPerson.PrimarySecondaryPersonName,'') PrimarySecondaryPersonName
 	, ISNULL(PrimarySecondaryProject.PrimarySecondaryProject,0) PrimarySecondaryProjectType
 	, ISNULL(PrimarySecondaryProject.PrimarySecondaryProjectName,'') PrimarySecondaryProjectName
-	, ProcessTemplateFields.ProcessTemplateFieldTypeID
+	, ProcessTypeFields.ProcessTypeFieldTypeID
 FROM ProcessFields
 JOIN Processes
 	ON Processes.ProcessID = ProcessFields.ProcessID
-JOIN ProcessTemplateFields
-	ON ProcessFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
+JOIN ProcessTypeFields
+	ON ProcessFields.ProcessTypeFieldID = ProcessTypeFields.ProcessTypeFieldID
 
---ProcessTemplateFieldName
+--ProcessTypeFieldName
 LEFT JOIN (
-		SELECT ProcessTemplateFieldId, Name ProcessTemplateFieldName
-		FROM ProcessTemplateFieldLanguages 
+		SELECT ProcessTypeFieldId, Name ProcessTypeFieldName
+		FROM ProcessTypeFieldLanguages 
 		WHERE LanguageId = @LanguageID) TemplateFieldUserLanguage
-	ON TemplateFieldUserLanguage.ProcessTemplateFieldID= ProcessTemplateFields.ProcessTemplateFieldID
+	ON TemplateFieldUserLanguage.ProcessTypeFieldID= ProcessTypeFields.ProcessTypeFieldID
 LEFT JOIN (
-		SELECT ProcessTemplateFieldId, Name ProcessTemplateFieldName
-		FROM ProcessTemplateFieldLanguages 
-		JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue 
+		SELECT ProcessTypeFieldId, Name ProcessTypeFieldName
+		FROM ProcessTypeFieldLanguages 
+		JOIN Settings ON ProcessTypeFieldLanguages.LanguageId = Settings.IntValue 
 		WHERE Settings.SettingId = 1) TemplateFieldDefaultLanguage
-	ON TemplateFieldDefaultLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
+	ON TemplateFieldDefaultLanguage.ProcessTypeFieldId = ProcessTypeFields.ProcessTypeFieldID
 
 --primary and secondary User
 LEFT JOIN (
 		SELECT Processfields.ProcessFieldID
 			, CONCAT(FirstName, ' ' ,LastName) PrimarySecondaryPersonName  
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryPersonType
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryPersonType
 		FROM AspNetUsers 
 		JOIN Persons ON Persons.UserID = AspNetUsers.Id 
 		JOIN ProcessFields ON ProcessFields.StringValue = AspNetUsers.id 
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (12,13)) PrimarySecondaryUser 
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (12,13)) PrimarySecondaryUser 
 	ON PrimarySecondaryUser.ProcessFieldID = ProcessFields.ProcessFieldID
 
 --primary and secondary person
 LEFT JOIN (
 		SELECT Processfields.ProcessFieldID
 			, CONCAT(FirstName, ' ' ,LastName) PrimarySecondaryPersonName  
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryPersonType
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryPersonType
 		FROM Persons  
 		JOIN ProcessFields ON ProcessFields.IntValue = Persons.PersonID
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (36,37)) PrimarySecondaryPerson 
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (36,37)) PrimarySecondaryPerson 
 	ON PrimarySecondaryPerson.ProcessFieldID = ProcessFields.ProcessFieldID
 
 ----Primary and secondary organization
@@ -88,8 +88,8 @@ LEFT JOIN (
 --			, Name 
 --		FROM OrganizationLanguages 
 --		JOIN ProcessFields ON ProcessFields.IntValue = OrganizationLanguages.OrganizationID 
---		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
---		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (14,15)		
+--		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+--		WHERE Processtypefields.ProcessTypeFieldTypeID IN (14,15)		
 --		AND LanguageId = @LanguageID ) PrimarySecondaryOrganizationUserLanguage
 --	ON PrimarySecondaryOrganizationUserLanguage.ProcessFieldID= ProcessFields.IntValue
 
@@ -99,8 +99,8 @@ LEFT JOIN (
 --		FROM OrganizationLanguages 
 --		JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue  
 --		JOIN ProcessFields ON ProcessFields.IntValue = OrganizationLanguages.OrganizationID 
---		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
---		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (14,15)		
+--		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+--		WHERE Processtypefields.ProcessTypeFieldTypeID IN (14,15)		
 --		AND Settings.SettingId = 1) PrimarySecondaryOrganizationDefaultLanguage
 --	ON PrimarySecondaryOrganizationDefaultLanguage.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -110,8 +110,8 @@ LEFT JOIN (
 --			, Name 
 --		FROM ProjectLanguages 
 --		JOIN ProcessFields ON ProcessFields.IntValue = ProjectLanguages.ProjectID 
---		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
---		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (14,15)		
+--		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+--		WHERE Processtypefields.ProcessTypeFieldTypeID IN (14,15)		
 --		AND LanguageId = @LanguageID ) PrimarySecondaryProjectUserLanguage
 --	ON PrimarySecondaryProjectUserLanguage.ProcessFieldID= ProcessFields.IntValue
 
@@ -121,8 +121,8 @@ LEFT JOIN (
 --		FROM ProjectLanguages 
 --		JOIN Settings ON ProjectLanguages.LanguageId = Settings.IntValue  
 --		JOIN ProcessFields ON ProcessFields.IntValue = ProjectLanguages.ProjectID 
---		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
---		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (14,15)		
+--		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+--		WHERE Processtypefields.ProcessTypeFieldTypeID IN (14,15)		
 --		AND Settings.SettingId = 1) PrimarySecondaryProjectDefaultLanguage
 --	ON PrimarySecondaryProjectDefaultLanguage.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -130,7 +130,7 @@ LEFT JOIN (
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(ProjectUser.Name,ISNULL(ProjectDefault.Name,'No name for this project')) PrimarySecondaryProjectName
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryProject
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryProject
 		FROM Projects
 		LEFT JOIN (
 				SELECT ProjectId, Name 
@@ -144,8 +144,8 @@ LEFT JOIN (
 				WHERE ProjectLanguages.LanguageID = @LanguageId) ProjectUser
 			ON ProjectUser.ProjectID = projects.ProjectID
 		JOIN ProcessFields ON ProcessFields.IntValue = Projects.ProjectID 
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (16,17)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (16,17)		
 		) PrimarySecondaryProject
 	ON PrimarySecondaryProject.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -153,7 +153,7 @@ LEFT JOIN (
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(OrganizationUser.Name,ISNULL(OrganizationDefault.Name,'No name for this Organization')) PrimarySecondaryOrganizationName
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryOrganization
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryOrganization
 		FROM Organizations
 		LEFT JOIN (
 				SELECT OrganizationId, Name 
@@ -167,8 +167,8 @@ LEFT JOIN (
 				WHERE OrganizationLanguages.LanguageID = @LanguageId) OrganizationUser
 			ON OrganizationUser.OrganizationID = Organizations.OrganizationID
 		JOIN ProcessFields ON ProcessFields.IntValue = Organizations.OrganizationID 
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (14,15)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (14,15)		
 		) PrimarySecondaryOrganization
 	ON PrimarySecondaryOrganization.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -178,7 +178,7 @@ LEFT JOIN (
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(ClassificationUser.Name,ISNULL(ClassificationDefault.Name,'No name for this Classification')) PrimarySecondaryClassificationName
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryClassification
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryClassification
 		FROM Classifications
 		LEFT JOIN (
 				SELECT ClassificationId, Name 
@@ -192,8 +192,8 @@ LEFT JOIN (
 				WHERE ClassificationLanguages.LanguageID = @LanguageId) ClassificationUser
 			ON ClassificationUser.ClassificationID = Classifications.ClassificationID
 		JOIN ProcessFields ON ProcessFields.IntValue = Classifications.ClassificationID 
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (20,21)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (20,21)		
 		) PrimarySecondaryClassification
 	ON PrimarySecondaryClassification.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -204,7 +204,7 @@ LEFT JOIN (
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(ClassificationValueUser.Name,ISNULL(ClassificationValueDefault.Name,'No name for this ClassificationValue')) PrimarySecondaryClassificationValueName
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryClassificationValue
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryClassificationValue
 		FROM ClassificationValues
 		LEFT JOIN (
 				SELECT ClassificationValueId, Name 
@@ -218,8 +218,8 @@ LEFT JOIN (
 				WHERE ClassificationValueLanguages.LanguageID = @LanguageId) ClassificationValueUser
 			ON ClassificationValueUser.ClassificationValueID = ClassificationValues.ClassificationValueID
 		JOIN ProcessFields ON ProcessFields.IntValue = ClassificationValues.ClassificationValueID 
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (22,23)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (22,23)		
 		) PrimarySecondaryClassificationValue
 	ON PrimarySecondaryClassificationValue.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -229,7 +229,7 @@ LEFT JOIN (
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(RoleUser.Name,ISNULL(RoleDefault.Name,'No name for this role')) PrimarySecondaryRoleName
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryClassificationValue
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryClassificationValue
 		FROM AspNetRoles
 		LEFT JOIN (
 				SELECT RoleLanguages.RoleID, Name 
@@ -243,8 +243,8 @@ LEFT JOIN (
 				WHERE RoleLanguages.LanguageID = @LanguageId) RoleUser
 			ON RoleUser.RoleID = AspNetRoles.Id
 		JOIN ProcessFields ON ProcessFields.StringValue= AspNetRoles.Id
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (30,31)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (30,31)		
 		) PrimarySecondaryRole
 	ON PrimarySecondaryRole.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -254,11 +254,11 @@ LEFT JOIN (
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(Contents.Title,'No title for this content') PrimarySecondaryContentTitle
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryContent
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryContent
 		FROM Contents 
 		JOIN ProcessFields ON ProcessFields.IntValue = Contents.ContentID
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (24,25)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (24,25)		
 		) PrimarySecondaryContent
 	ON PrimarySecondaryContent.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -268,15 +268,15 @@ LEFT JOIN (
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(LanguageCustom.Name,ISNULL(LanguageDefault.Name,'No name for this langauge')) PrimarySecondaryLanguageName
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryLanguage
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryLanguage
 		FROM Languages
 JOIN UITermLanguages LanguageDefault
 	ON LanguageDefault.UITermId = Languages.NameTermID
 LEFT JOIN (SELECT UITermId, Customization Name FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) LanguageCustom
 	ON LanguageCustom.UITermId = Languages.NameTermID
 		JOIN ProcessFields ON ProcessFields.IntValue = Languages.LanguageID 
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (18,19)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (18,19)		
 		) PrimarySecondaryLanguage
 	ON PrimarySecondaryLanguage.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -286,15 +286,15 @@ LEFT JOIN (SELECT UITermId, Customization Name FROM UITermLanguageCustomizations
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(CountryCustom.Name,ISNULL(CountryDefault.Name,'No name for this langauge')) PrimarySecondaryCountryName
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondaryCountry
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondaryCountry
 		FROM Countries
 JOIN UITermLanguages CountryDefault
 	ON CountryDefault.UITermId = Countries.NameTermID
 LEFT JOIN (SELECT UITermId, Customization Name FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageId) CountryCustom
 	ON CountryCustom.UITermId = Countries.NameTermID
 		JOIN ProcessFields ON ProcessFields.IntValue = Countries.CountryID 
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (26,27)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (26,27)		
 		) PrimarySecondaryCountry
 	ON PrimarySecondaryCountry.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -304,15 +304,15 @@ LEFT JOIN (SELECT UITermId, Customization Name FROM UITermLanguageCustomizations
 LEFT JOIN (
 		SELECT ProcessFields.ProcessFieldID
 			, ISNULL(SecurityLevelCustom.Name,ISNULL(SecurityLevelDefault.Name,'No name for this langauge')) PrimarySecondarySecurityLevelName
-			, Processtemplatefields.ProcessTemplateFieldTypeID PrimarySecondarySecurityLevel
+			, Processtypefields.ProcessTypeFieldTypeID PrimarySecondarySecurityLevel
 		FROM SecurityLevels
 JOIN UITermLanguages SecurityLevelDefault
 	ON SecurityLevelDefault.UITermId = SecurityLevels.NameTermID
 LEFT JOIN (SELECT UITermId, Customization Name FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageId) SecurityLevelCustom
 	ON SecurityLevelCustom.UITermId = SecurityLevels.NameTermID
 		JOIN ProcessFields ON ProcessFields.IntValue = SecurityLevels.SecurityLevelID 
-		JOIN Processtemplatefields ON processfields.ProcessTemplateFieldID = Processtemplatefields.ProcessTemplateFieldID 
-		WHERE Processtemplatefields.ProcessTemplateFieldTypeID IN (26,27)		
+		JOIN Processtypefields ON processfields.ProcessTypeFieldID = Processtypefields.ProcessTypeFieldID 
+		WHERE Processtypefields.ProcessTypeFieldTypeID IN (26,27)		
 		) PrimarySecondarySecurityLevel
 	ON PrimarySecondarySecurityLevel.ProcessFieldID = ProcessFields.ProcessFieldID
 
@@ -320,11 +320,11 @@ LEFT JOIN (SELECT UITermId, Customization Name FROM UITermLanguageCustomizations
 
 
 
-JOIN ProcessTemplateStageFields
-	ON ProcessTemplateStageFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
-	AND Processes.ProcessTemplateStageID = ProcessTemplateStageFields.ProcessTemplateStageID
-WHERE ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID <> 1
+JOIN ProcessTypeStageFields
+	ON ProcessTypeStageFields.ProcessTypeFieldID = ProcessTypeFields.ProcessTypeFieldID
+	AND Processes.ProcessTypeStageID = ProcessTypeStageFields.ProcessTypeStageID
+WHERE ProcessTypeStageFields.ProcessTypeStageFieldStatusID <> 1
 	AND ProcessFields.ProcessID = @ProcessId
-	AND ProcessTemplateFields.ProcessTemplateFieldTypeID NOT IN (10, 11)
-ORDER BY ProcessTemplateStageFields.Sequence
+	AND ProcessTypeFields.ProcessTypeFieldTypeID NOT IN (10, 11)
+ORDER BY ProcessTypeStageFields.Sequence
 

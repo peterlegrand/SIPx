@@ -141,8 +141,8 @@
             <div class="col-3">
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage type")).TermString
             </div>    <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateStageTypeId" dataSource="@Model.ProcessTemplateStageTypes" ejs-for="@Model.ProcessTemplateStageTypeId" value="@Model.ProcessTemplateStageTypeId" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateStageTypeId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeStageTypeId" dataSource="@Model.ProcessTypeStageTypes" ejs-for="@Model.ProcessTypeStageTypeId" value="@Model.ProcessTypeStageTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeStageTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
@@ -338,9 +338,9 @@
             }
 </script>
 <script type="text/javascript">
-    function ProcessTemplateStageTypeId(e) {
+    function ProcessTypeStageTypeId(e) {
                 var query = new ej.data.Query();
                 query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateStageTypes)), query);
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeStageTypes)), query);
             }
 </script>

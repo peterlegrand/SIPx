@@ -10,7 +10,7 @@ namespace SIPx.Shared
         string MenuName { get; set; }
         string MouseOver { get; set; }
         string Name { get; set; }
-        int ProcessTemplateId { get; set; }
+        int ProcessTypeId { get; set; }
         int SecurityLevelId { get; set; }
         string UserId { get; set; }
     }

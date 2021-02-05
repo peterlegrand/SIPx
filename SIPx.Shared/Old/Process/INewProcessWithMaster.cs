@@ -7,7 +7,7 @@ namespace SIPx.Shared
         List<FrontProcessNewProcessField> ProcessFields { get; set; }
         List<ProjectList> Projects { get; set; }
         List<UserList> Users { get; set; }
-        int ProcessTemplateId { get; set; }
+        int ProcessTypeId { get; set; }
         string UserId { get; set; }
     }
 }

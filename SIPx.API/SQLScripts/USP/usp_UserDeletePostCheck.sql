@@ -14,25 +14,25 @@ BEGIN
 DECLARE @ErrorIdsTable TABLE (id int)
 
 IF  (SELECT COUNT(*) FROM Menu1Languages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(131) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFlowPassLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(184) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFlowPassLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(184) END
 IF  (SELECT COUNT(*) FROM Menu2 WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(132) END
 IF  (SELECT COUNT(*) FROM Menu2Languages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(132) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFlows WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(182) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFlows WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(182) END
 IF  (SELECT COUNT(*) FROM Menu3 WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(133) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateGroupLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(134) END
+IF  (SELECT COUNT(*) FROM ProcessTypeGroupLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(134) END
 IF  (SELECT COUNT(*) FROM Menu3Languages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(133) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateGroups WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(134) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(135) END
-IF  (SELECT COUNT(*) FROM ProcessTemplates WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(135) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateStageFields WHERE ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(131) END
+IF  (SELECT COUNT(*) FROM ProcessTypeGroups WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(134) END
+IF  (SELECT COUNT(*) FROM ProcessTypeLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(135) END
+IF  (SELECT COUNT(*) FROM ProcessTypes WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(135) END
+IF  (SELECT COUNT(*) FROM ProcessTypeStageFields WHERE ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(131) END
 IF  (SELECT COUNT(*) FROM OrganizationAddresses WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(136) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateStageLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(137) END
+IF  (SELECT COUNT(*) FROM ProcessTypeStageLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(137) END
 IF  (SELECT COUNT(*) FROM OrganizationLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(138) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateStages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(137) END
+IF  (SELECT COUNT(*) FROM ProcessTypeStages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(137) END
 IF  (SELECT COUNT(*) FROM Organizations WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(138) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateStageTypeLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(139) END
+IF  (SELECT COUNT(*) FROM ProcessTypeStageTypeLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(139) END
 IF  (SELECT COUNT(*) FROM OrganizationSettings WHERE ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(133) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateStageTypes WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(139) END
+IF  (SELECT COUNT(*) FROM ProcessTypeStageTypes WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(139) END
 IF  (SELECT COUNT(*) FROM ProjectLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(140) END
 IF  (SELECT COUNT(*) FROM Projects WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(140) END
 IF  (SELECT COUNT(*) FROM ProjectTypeLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(142) END
@@ -105,19 +105,19 @@ IF  (SELECT COUNT(*) FROM ProcessFields WHERE CreatorId = @SelectedUserId OR Mod
 IF  (SELECT COUNT(*) FROM ProcessMultis WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
 IF  (SELECT COUNT(*) FROM ContentTypeGroupLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
 IF  (SELECT COUNT(*) FROM ContentTypeGroups WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFieldConditionLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFieldConditionLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
 IF  (SELECT COUNT(*) FROM ContentTypeLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFieldConditions WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFieldConditions WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
 IF  (SELECT COUNT(*) FROM ContentTypes WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFieldLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFields WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFlowConditionLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFieldLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFields WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFlowConditionLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
 IF  (SELECT COUNT(*) FROM Genders WHERE ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(175) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFlowConditions WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFlowLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFlowConditions WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFlowLanguages WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
 IF  (SELECT COUNT(*) FROM Languages WHERE ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(177) END
 IF  (SELECT COUNT(*) FROM Menu1 WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
-IF  (SELECT COUNT(*) FROM ProcessTemplateFlowPasses WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
+IF  (SELECT COUNT(*) FROM ProcessTypeFlowPasses WHERE CreatorId = @SelectedUserId OR ModifierId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(130) END
 IF  (SELECT COUNT(*) FROM ContentUserEdit WHERE CreatorId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(197) END
 
 IF  (SELECT COUNT(*) FROM ContentUserRead WHERE CreatorId = @SelectedUserId ) >0 BEGIN insert into @ErrorIdsTable values(198) END

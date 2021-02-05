@@ -1,7 +1,7 @@
 CREATE PROCEDURE usp_ProcessUpdatePostCheck (
 	@UserId nvarchar(450)
 	, @ProcessId int
-	, @ProcessTemplateFlowId int
+	, @ProcessTypeFlowId int
 	, @ProcessFieldTable AS udt_ProcessFieldUpdate READONLY
 	) 
 	AS 
@@ -22,7 +22,7 @@ BEGIN
 insert into @ErrorIdsTable values(116)
 END
 
-IF (SELECT COUNT(*) FROM ProcessTemplateFlows WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId) = 0 
+IF (SELECT COUNT(*) FROM ProcessTypeFlows WHERE ProcessTypeFlowId = @ProcessTypeFlowId) = 0 
 BEGIN
 insert into @ErrorIdsTable values(83)
 END

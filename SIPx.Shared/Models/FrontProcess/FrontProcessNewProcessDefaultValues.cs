@@ -9,7 +9,7 @@ namespace SIPx.Shared
     public class FrontProcessNewProcessDefaultValues 
     {
         [Key]
-        public int ProcessTemplateFieldID { get; set; }
+        public int ProcessTypeFieldID { get; set; }
         public int ValueUpdateTypeID { get; set; }
         public string StringValue { get; set; }
         public int? IntValue { get; set; }

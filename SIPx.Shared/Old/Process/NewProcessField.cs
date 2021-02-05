@@ -10,8 +10,8 @@ namespace SIPx.Shared
         public static DataTable CreateTable()
         {
             DataTable ProcessFields = new DataTable();
-            ProcessFields.Columns.Add("ProcessTemplateID", typeof(Int32));
-            ProcessFields.Columns.Add("ProcessTemplateFieldID", typeof(Int32));
+            ProcessFields.Columns.Add("ProcessTypeID", typeof(Int32));
+            ProcessFields.Columns.Add("ProcessTypeFieldID", typeof(Int32));
             ProcessFields.Columns.Add("StringValue", typeof(string));
             ProcessFields.Columns.Add("IntValue", typeof(Int32));
             ProcessFields.Columns.Add("DateTimeValue", typeof(DateTime));

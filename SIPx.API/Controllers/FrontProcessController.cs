@@ -19,7 +19,7 @@ namespace SIPx.API.Controllers
     {
 
         private readonly IUserRoleProvider _userRoleProvider;
-        private readonly IProcessTemplateStageTypeProvider _processTemplateStageTypeProvider;
+        private readonly IProcessTypeStageTypeProvider _processTypeStageTypeProvider;
         private readonly IPersonProvider _personProvider;
         private readonly IRoleProvider _roleProvider;
         private readonly ISecurityLevelProvider _securityLevelProvider;
@@ -37,7 +37,7 @@ namespace SIPx.API.Controllers
         private readonly UserManager<SipUser> _userManager;
 
         public FrontProcessController(IUserRoleProvider userRoleProvider
-            , IProcessTemplateStageTypeProvider processTemplateStageTypeProvider
+            , IProcessTypeStageTypeProvider processTypeStageTypeProvider
             , IPersonProvider personProvider
             , IRoleProvider roleProvider
             , ISecurityLevelProvider securityLevelProvider
@@ -55,7 +55,7 @@ namespace SIPx.API.Controllers
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _userRoleProvider = userRoleProvider;
-            _processTemplateStageTypeProvider = processTemplateStageTypeProvider;
+            _processTypeStageTypeProvider = processTypeStageTypeProvider;
             _personProvider = personProvider;
             _roleProvider = roleProvider;
             _securityLevelProvider = securityLevelProvider;
@@ -79,18 +79,18 @@ namespace SIPx.API.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                var ListOfProcessTemplateGroups = await _frontProcessProvider.NewProcessShowTemplateGroup(CurrentUser.Id);
+                var ListOfProcessTypeGroups = await _frontProcessProvider.NewProcessShowTemplateGroup(CurrentUser.Id);
                 var TemplateLogic = new FrontProcessNewProcessLogic(_userProvider, _processProvider, _frontProcessProvider);
-                var ListOfProcessTemplates = await TemplateLogic.ReturnProcessTemplateList(CurrentUser);
+                var ListOfProcessTypes = await TemplateLogic.ReturnProcessTypeList(CurrentUser);
 
 
                 // var  = await _frontProcessProvider.NewProcessShowTemplate(CurrentUser.Id);
-                foreach (var group in ListOfProcessTemplateGroups)
+                foreach (var group in ListOfProcessTypeGroups)
                 {
-                    var ProcessTemplates = ListOfProcessTemplates.FindAll(x => x.ProcessTemplateGroupId == group.ProcessTemplateGroupId);
-                    group.templates = ProcessTemplates;
+                    var ProcessTypes = ListOfProcessTypes.FindAll(x => x.ProcessTypeGroupId == group.ProcessTypeGroupId);
+                    group.templates = ProcessTypes;
                 }
-                return Ok(ListOfProcessTemplateGroups);
+                return Ok(ListOfProcessTypeGroups);
             }
             return BadRequest(new
             {
@@ -108,19 +108,19 @@ namespace SIPx.API.Controllers
 
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
-                List<NewProcessTemplateList> x = await testifallowed.ReturnProcessTemplateList(CurrentUser);
+                List<NewProcessTypeList> x = await testifallowed.ReturnProcessTypeList(CurrentUser);
 
-                if (x.Exists(x => x.ProcessTemplateId == Id))
+                if (x.Exists(x => x.ProcessTypeId == Id))
                 {
                     //TOFIX PETER
                     var newprocess = await _processProvider.CreateGet(CurrentUser.Id, Id);
                     var newProcessWithMaster = new FrontProcessNewProcessWithMaster();
 
-                    newProcessWithMaster.ProcessTemplateId = Id;
+                    newProcessWithMaster.ProcessTypeId = Id;
                     newProcessWithMaster.ProcessFields = newprocess;
                     foreach(var y in newprocess)
                     {
-                        if(y.ProcessTemplateStageFieldStatusId == 4)
+                        if(y.ProcessTypeStageFieldStatusId == 4)
                         {
                             var xd = @$"function {y.ControlIdOnFocusOutFunction.Trim()} {{var x = document.getElementById('{y.ControlId.Trim()}');console.log(x);if (x.value==='') {{ document.getElementById('{y.ControlIdWarning.Trim()}').style.display = 'block';}}else{{ document.getElementById('{y.ControlIdWarning.Trim()}').style.display = 'none';}}}}";
                               //var xd = @$"function {y.ControlIdOnFocusOutFunction.Trim()} {{var x = document.getElementById('{y.ControlId.Trim()}');if (x.value==='') {{alert('{y.MissingValueText.Trim()}a');}}else{{alert('{y.MissingValueText.Trim()}b');}}}}";
@@ -134,63 +134,63 @@ namespace SIPx.API.Controllers
                     }
                     //for(int i = 0; i < newprocess.Count; i++)
                     //{ 
-                    //if(newprocess[i].ValueUpdateTypeId==2 && new[] { 1, 2 }.Contains(newprocess[i].ProcessTemplateFieldTypeId))
+                    //if(newprocess[i].ValueUpdateTypeId==2 && new[] { 1, 2 }.Contains(newprocess[i].ProcessTypeFieldTypeId))
                     //    {
                     //        newprocess[i].StringValue
                     //    }
 
                     //}
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 12) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 13))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 12) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 13))
                     {
                         var Users = await _userProvider.List();
                         newProcessWithMaster.Users = Users;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 14) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 15))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 14) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 15))
                     {
                         var organizations = await _organizationProvider.List(CurrentUser.Id);
                         newProcessWithMaster.Organizations = organizations;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 16) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 17))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 16) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 17))
                     {
                         var projects = await _projectProvider.List(CurrentUser.Id);
                         newProcessWithMaster.Projects = projects;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 18) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 19))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 18) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 19))
                     {
                         var Languages = await _languageProvider.List(CurrentUser.Id);
                         newProcessWithMaster.Languages = Languages;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 20) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 21))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 20) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 21))
                     {
                         var Classifications = await _classificationProvider.List(CurrentUser.Id);
                         newProcessWithMaster.Classifications = Classifications;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 22) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 23))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 22) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 23))
                     {
                         var ClassificationValues = await _classificationValueProvider.List(CurrentUser.Id);
                         newProcessWithMaster.ClassificationValues = ClassificationValues;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 24) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 25))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 24) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 25))
                     {
                         var Contents = await _contentProvider.List();
                         newProcessWithMaster.Contents = Contents;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 26) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 27))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 26) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 27))
                     {
                         var Countries = await _masterListProvider.CountryList(CurrentUser.Id);
                         newProcessWithMaster.Countries = Countries;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 28) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 29))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 28) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 29))
                     {
                         var SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                         newProcessWithMaster.SecurityLevels = SecurityLevels;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 30) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 31))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 30) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 31))
                     {
                         var Roles = await _roleProvider.List(CurrentUser.Id);
                         newProcessWithMaster.Roles = Roles;
                     }
-                    if (newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 36) || newprocess.Exists(x => x.ProcessTemplateFieldTypeId == 37))
+                    if (newprocess.Exists(x => x.ProcessTypeFieldTypeId == 36) || newprocess.Exists(x => x.ProcessTypeFieldTypeId == 37))
                     {
                         var Persons = await _personProvider.List();
                         newProcessWithMaster.Persons = Persons;
@@ -218,11 +218,11 @@ namespace SIPx.API.Controllers
             {
 
                 //Check if the template is allowed to be created
-                var Condition = await testifallowed.ReturnProcessTemplateList(CurrentUser);
-                var Pass = await testifallowed.ReturnProcessTemplateFlowPass(CurrentUser, Fields);
-                if (Condition.Any(x => x.ProcessTemplateId == Fields.ProcessTemplateId) && Pass != 0)
+                var Condition = await testifallowed.ReturnProcessTypeList(CurrentUser);
+                var Pass = await testifallowed.ReturnProcessTypeFlowPass(CurrentUser, Fields);
+                if (Condition.Any(x => x.ProcessTypeId == Fields.ProcessTypeId) && Pass != 0)
                 {
-                    Fields.ProcessTemplateFlowId = Pass;
+                    Fields.ProcessTypeFlowId = Pass;
                     _frontProcessProvider.FrontProcessCreatePost(Fields);
                     return Ok(Fields);// CurrentUser.LanguageId));
                 }
@@ -300,47 +300,47 @@ namespace SIPx.API.Controllers
                         }
                     }
                     //User
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 12 || x.ProcessTemplateFieldTypeId == 13))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 12 || x.ProcessTypeFieldTypeId == 13))
                     {
                     }
                     //Organization
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 14 || x.ProcessTemplateFieldTypeId == 15))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 14 || x.ProcessTypeFieldTypeId == 15))
                     {
                     }
                     //Project
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 16 || x.ProcessTemplateFieldTypeId == 17))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 16 || x.ProcessTypeFieldTypeId == 17))
                     {
                     }
                     //Language
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 18 || x.ProcessTemplateFieldTypeId == 19))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 18 || x.ProcessTypeFieldTypeId == 19))
                     {
                     }
                     //Classification
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 20 || x.ProcessTemplateFieldTypeId == 21))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 20 || x.ProcessTypeFieldTypeId == 21))
                     {
                     }
                     //Classification value
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 22 || x.ProcessTemplateFieldTypeId == 23))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 22 || x.ProcessTypeFieldTypeId == 23))
                     {
                     }
                     //Content
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 24 || x.ProcessTemplateFieldTypeId == 25))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 24 || x.ProcessTypeFieldTypeId == 25))
                     {
                     }
                     //Country
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 26 || x.ProcessTemplateFieldTypeId == 27))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 26 || x.ProcessTypeFieldTypeId == 27))
                     {
                     }
                     //Security level
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 28 || x.ProcessTemplateFieldTypeId == 29))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 28 || x.ProcessTypeFieldTypeId == 29))
                     {
                     }
                     //Role
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 30 || x.ProcessTemplateFieldTypeId == 31))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 30 || x.ProcessTypeFieldTypeId == 31))
                     {
                     }
                     //Person
-                    if (Process.Fields.Any(x => x.ProcessTemplateFieldTypeId == 36 || x.ProcessTemplateFieldTypeId == 37))
+                    if (Process.Fields.Any(x => x.ProcessTypeFieldTypeId == 36 || x.ProcessTypeFieldTypeId == 37))
                     {
                     }
                 }
@@ -361,10 +361,10 @@ namespace SIPx.API.Controllers
             {
 
                 var testifallowed = new FrontProcessToDoLogic(_projectProvider, _organizationProvider, _userRoleProvider, _roleProvider, _userProvider, _processProvider, _frontProcessProvider);
-                var Pass = await testifallowed.ReturnProcessTemplateFlowPass(CurrentUser, Process);
+                var Pass = await testifallowed.ReturnProcessTypeFlowPass(CurrentUser, Process);
                 if (Pass != 0)
                 {
-                    Process.ProcessTemplateFlowId = Pass;
+                    Process.ProcessTypeFlowId = Pass;
 
                 }
                 _frontProcessProvider.FrontProcessEditPost(Process, CurrentUser.Id);
@@ -420,7 +420,7 @@ namespace SIPx.API.Controllers
                 ProcessSearch.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 ProcessSearch.Roles = await _roleProvider.List(CurrentUser.Id);
                 ProcessSearch.Persons = await _personProvider.List();
-                ProcessSearch.ProcessTemplateStageTypes = await _processTemplateStageTypeProvider.List(CurrentUser.Id);
+                ProcessSearch.ProcessTypeStageTypes = await _processTypeStageTypeProvider.List(CurrentUser.Id);
                 return Ok(ProcessSearch);
             }
             return BadRequest(new

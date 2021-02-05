@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateCreateGet
+@model ProcessTypeCreateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Create process template")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Create process type")).TermString;
     ViewData["Image"] = "Template.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -106,18 +106,18 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="Sequence" dataSource="@Model.ProcessTemplates" ejs-for="@Model.Sequence" popupHeight="220px">
+                <ejs-dropdownlist id="Sequence" dataSource="@Model.ProcessTypes" ejs-for="@Model.Sequence" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template group")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type group")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateGroupId" dataSource="@Model.ProcessTemplateGroups" ejs-for="@Model.ProcessTemplateGroupId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateGroupId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeGroupId" dataSource="@Model.ProcessTypeGroups" ejs-for="@Model.ProcessTypeGroupId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeGroupId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
@@ -296,6 +296,6 @@
         function Sequence(e) {
                 var query = new ej.data.Query();
                 query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplates)), query);
+                e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypes)), query);
             }
 </script>

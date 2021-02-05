@@ -119,13 +119,13 @@
         }
         @if (Model.PageSectionProcessConditionTypeIdExtended == "T1")
         {
-            <div class="row" id="ProcessTemplateCondition">
+            <div class="row" id="ProcessTypeCondition">
                 <div class="col-3">
-                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type")).TermString
                 </div>
                 <div class="col-9">
-                    <ejs-dropdownlist id="ProcessTemplateId" dataSource="@Model.ProcessTemplates" ejs-for="@Model.ProcessTemplateId" value="@Model.ProcessTemplateId" index="2" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ProcessTemplateId"></e-dropdownlist-fields>
+                    <ejs-dropdownlist id="ProcessTypeId" dataSource="@Model.ProcessTypes" ejs-for="@Model.ProcessTypeId" value="@Model.ProcessTypeId" index="2" popupHeight="220px">
+                        <e-dropdownlist-fields text="Name" value="ProcessTypeId"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
 
                 </div>
@@ -133,13 +133,13 @@
         }
         @if (Model.PageSectionProcessConditionTypeIdExtended == "T2")
         {
-            <div class="row" id="ProcessTemplateGroupCondition">
+            <div class="row" id="ProcessTypeGroupCondition">
                 <div class="col-3">
-                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template group")).TermString
+                    @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type group")).TermString
                 </div>
                 <div class="col-9">
-                    <ejs-dropdownlist id="ProcessTemplateGroupId" dataSource="@Model.ProcessTemplateGroups" ejs-for="@Model.ProcessTemplateGroupId" value="@Model.ProcessTemplateGroupId" index="2" popupHeight="220px">
-                        <e-dropdownlist-fields text="Name" value="ProcessTemplateGroupId"></e-dropdownlist-fields>
+                    <ejs-dropdownlist id="ProcessTypeGroupId" dataSource="@Model.ProcessTypeGroups" ejs-for="@Model.ProcessTypeGroupId" value="@Model.ProcessTypeGroupId" index="2" popupHeight="220px">
+                        <e-dropdownlist-fields text="Name" value="ProcessTypeGroupId"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
 
                 </div>

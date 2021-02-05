@@ -6,12 +6,12 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT Processes.ProcessID
-	, ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this process template')) ProcessTemplateName
+	, ISNULL(UserProcessTypeLanguage.Name,ISNULL(DefaultProcessTypeLanguage.Name,'No name for this process type')) ProcessTypeName
 	, ProcessFields.StringValue Subject
-	, ISNULL(UserProcessTemplateStageLanguage.Name,ISNULL(DefaultProcessTemplateStageLanguage.Name,'No description for this process template stage')) ProcesstemplateStage
+	, ISNULL(UserProcessTypeStageLanguage.Name,ISNULL(DefaultProcessTypeStageLanguage.Name,'No description for this process type stage')) ProcesstypeStage
 	, ISNULL(Processes.ProcessMultiID,0) ProcessMultiID
-	, Processes.ProcessTemplateID
-	, Processes.ProcessTemplateStageID
+	, Processes.ProcessTypeID
+	, Processes.ProcessTypeStageID
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, Processes.CreatedDate
@@ -21,22 +21,22 @@ SELECT Processes.ProcessID
 FROM Processes 
 JOIN ProcessFields
 	ON ProcessFields.ProcessId = Processes.ProcessID
-JOIN ProcessTemplateFields 
-	ON ProcessTemplateFields.ProcessTemplateFieldId = ProcessFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateLanguage
-	ON UserProcessTemplateLanguage.ProcessTemplateId = Processes.ProcessTemplateID
-LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateLanguage
-	ON DefaultProcessTemplateLanguage.ProcessTemplateId = Processes.ProcessTemplateID
-LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageLanguage
-	ON UserProcessTemplateStageLanguage.ProcessTemplateStageId = Processes.ProcessTemplateStageID
-LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages JOIN Settings ON ProcessTemplateStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateStageLanguage
-	ON DefaultProcessTemplateStageLanguage.ProcessTemplateStageId = Processes.ProcessTemplateStageID
+JOIN ProcessTypeFields 
+	ON ProcessTypeFields.ProcessTypeFieldId = ProcessFields.ProcessTypeFieldID
+LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTypeLanguage
+	ON UserProcessTypeLanguage.ProcessTypeId = Processes.ProcessTypeID
+LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages JOIN Settings ON ProcessTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeLanguage
+	ON DefaultProcessTypeLanguage.ProcessTypeId = Processes.ProcessTypeID
+LEFT JOIN (SELECT ProcessTypeStageId, Name FROM ProcessTypeStageLanguages WHERE LanguageId = @LanguageID) UserProcessTypeStageLanguage
+	ON UserProcessTypeStageLanguage.ProcessTypeStageId = Processes.ProcessTypeStageID
+LEFT JOIN (SELECT ProcessTypeStageId, Name FROM ProcessTypeStageLanguages JOIN Settings ON ProcessTypeStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeStageLanguage
+	ON DefaultProcessTypeStageLanguage.ProcessTypeStageId = Processes.ProcessTypeStageID
 JOIN Persons Creator
 	ON Creator.UserId = Processes.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = Processes.ModifierID
-WHERE ProcessTemplateFields.ProcessTemplateFieldTypeId = 1
-ORDER BY ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this process template')) 
+WHERE ProcessTypeFields.ProcessTypeFieldTypeId = 1
+ORDER BY ISNULL(UserProcessTypeLanguage.Name,ISNULL(DefaultProcessTypeLanguage.Name,'No name for this process type')) 
 	, ProcessFields.StringValue
 
 

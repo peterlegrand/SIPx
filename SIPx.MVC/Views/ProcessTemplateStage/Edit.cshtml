@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateStageUpdateGet
+@model ProcessTypeStageUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template stage")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type stage")).TermString;
     ViewData["Image"] = "Spotlight.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -18,8 +18,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId" cssClass="e-outline" placeholder="ProcessTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageId" ejs-for="@Model.ProcessTypeStageId" cssClass="e-outline" placeholder="ProcessTypeStageId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -30,8 +30,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId" cssClass="e-outline" placeholder="ProcessTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageId" ejs-for="@Model.ProcessTypeStageId" cssClass="e-outline" placeholder="ProcessTypeStageId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -76,8 +76,8 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateStageTypeId" dataSource="@Model.ProcessTemplateStageTypes" ejs-for="@Model.ProcessTemplateStageTypeId" value="@Model.ProcessTemplateStageTypeId" index="2" filtering="ProcessTemplateStageTypeId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateStageTypeId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeStageTypeId" dataSource="@Model.ProcessTypeStageTypes" ejs-for="@Model.ProcessTypeStageTypeId" value="@Model.ProcessTypeStageTypeId" index="2" filtering="ProcessTypeStageTypeId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeStageTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -94,7 +94,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ProcessTemplateId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <a asp-action="Index" asp-route-id="@Model.ProcessTypeId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">

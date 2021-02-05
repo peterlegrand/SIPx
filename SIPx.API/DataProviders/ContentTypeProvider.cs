@@ -21,10 +21,10 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public Task<List<ProcessTemplateList>> CreateGetProcessTemplates(string UserId)
+        public Task<List<ProcessTypeList>> CreateGetProcessTypes(string UserId)
         {
-            string usp = "usp_ContentTypeCreateGetProcessTemplates @UserId";
-            return _sqlDataAccess.LoadData<ProcessTemplateList, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_ContentTypeCreateGetProcessTypes @UserId";
+            return _sqlDataAccess.LoadData<ProcessTypeList, dynamic>(usp, new { UserId = UserId });
         }
 
         public async Task<List<ErrorMessage>> CreatePostCheck(ContentTypeCreateGet ContentType)
@@ -39,7 +39,7 @@ namespace SIPx.DataAccess
                 , ContentTypeClassification.ObjectTypeClassificationStatusId);
 
             }
-            string usp = "usp_ContentTypeCreatePostCheck @ContentTypeGroupId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
+            string usp = "usp_ContentTypeCreatePostCheck @ContentTypeGroupId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ProcessTypeId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
  " , @IsRelationBasedOwnership " +
            " , @IsProjectBasedOwnership " +
            " , @IsOrganizationBasedOwnership " +
@@ -72,7 +72,7 @@ namespace SIPx.DataAccess
             {
                 ContentTypeGroupId = ContentType.ContentTypeGroupId
                 ,
-                ProcessTemplateId = ContentType.@ProcessTemplateId
+                ProcessTypeId = ContentType.@ProcessTypeId
                 ,
                 SecurityLevelId = ContentType.SecurityLevelId
                 ,
@@ -154,7 +154,7 @@ namespace SIPx.DataAccess
         //see sp name of update or create without post
         //public async Task<string> CreatePost(ContentTypeCreatePost ContentType)
         //{
-        //    string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @Color, @IconId,  ";
+        //    string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId  , @ProcessTypeId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @Color, @IconId,  ";
         //    var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, ContentType);
         //    return String;
         //}
@@ -171,7 +171,7 @@ namespace SIPx.DataAccess
                 , ContentTypeClassification.ObjectTypeClassificationStatusId);
 
             }
-            string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
+            string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ProcessTypeId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @UserId " +
    " , @IsRelationBasedOwnership " +
              " , @IsProjectBasedOwnership " +
              " , @IsOrganizationBasedOwnership " +
@@ -206,7 +206,7 @@ namespace SIPx.DataAccess
             {
                 ContentTypeGroupId = ContentType.ContentTypeGroupId
                 ,
-                ProcessTemplateId = ContentType.@ProcessTemplateId
+                ProcessTypeId = ContentType.@ProcessTypeId
                 ,
                 SecurityLevelId = ContentType.SecurityLevelId
                 ,
@@ -300,7 +300,7 @@ namespace SIPx.DataAccess
         }
         public async Task<List<ErrorMessage>> UpdatePostCheck(ContentTypeUpdateGet ContentType)
         {
-            string usp = "usp_ContentTypeUpdatePostCheck @ContentTypeId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId " +
+            string usp = "usp_ContentTypeUpdatePostCheck @ContentTypeId,@CodePrefix , @CodeSuffix , @CodeTypeId ,   @ContentTypeGroupId  , @ProcessTypeId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId " +
              " , @IsRelationBasedOwnership " +
              " , @IsProjectBasedOwnership " +
              " , @IsOrganizationBasedOwnership " +
@@ -347,14 +347,14 @@ namespace SIPx.DataAccess
                         , x.ObjectTypeClassificationStatusId);
                 //}
             }
-            //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
+            //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTypeId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, new
             {
                 ContentTypeId = ContentType.ContentTypeId
                 ,
                 ContentTypeGroupId = ContentType.ContentTypeGroupId
                 ,
-                ProcessTemplateId = ContentType.@ProcessTemplateId
+                ProcessTypeId = ContentType.@ProcessTypeId
                 ,
                 SecurityLevelId = ContentType.SecurityLevelId
                 ,
@@ -435,7 +435,7 @@ namespace SIPx.DataAccess
 
         public bool UpdatePost(ContentTypeUpdateGet ContentType)
         {
-            string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @CodePrefix , @CodeSuffix , @CodeTypeId ,  @ContentTypeGroupId  , @ProcessTemplateId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @IsRelationBasedOwnership " +
+            string usp = "usp_ContentTypeUpdatePost @ContentTypeId, @CodePrefix , @CodeSuffix , @CodeTypeId ,  @ContentTypeGroupId  , @ProcessTypeId  ,@SecurityLevelId,  @Name, @Description, @MenuName, @MouseOver, @UserId, @IsRelationBasedOwnership " +
    " , @IsProjectBasedOwnership " +
    " , @IsOrganizationBasedOwnership " +
    " , @IsFreeOwnership " +
@@ -481,14 +481,14 @@ namespace SIPx.DataAccess
                         , x.ObjectTypeClassificationStatusId);
                 //}
             }
-            //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTemplateId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
+            //   string usp = "usp_ContentTypeCreatePost @ContentTypeGroupId, @ProcessTypeId , @SecurityLevelId, @Name , @Description, @MenuName , @MouseOver, @CreatorID, @MouseOver, @IconID, @ContentTypeClassificationTable ";
             _sqlDataAccess.SaveData<dynamic>(usp, new
             {
                 ContentTypeId = ContentType.ContentTypeId
                 ,
                 ContentTypeGroupId = ContentType.ContentTypeGroupId
                 ,
-                ProcessTemplateId = ContentType.@ProcessTemplateId
+                ProcessTypeId = ContentType.@ProcessTypeId
                 ,
                 SecurityLevelId = ContentType.SecurityLevelId
                 ,

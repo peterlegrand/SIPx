@@ -1,19 +1,19 @@
 CREATE PROCEDURE usp_ProcessUpdatePost (
 	@UserId nvarchar(450)
 	, @ProcessId int
-	, @ProcessTemplateFlowId int
+	, @ProcessTypeFlowId int
 	, @ProcessFieldTable AS udt_ProcessFieldUpdate READONLY
 )
 AS 
-DECLARE @ProcessTemplateStageID int;
-SELECT @ProcessTemplateStageID = ProcessTemplateFlows.ProcessTemplateToStageID 
-FROM ProcessTemplateFlows
-WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId
+DECLARE @ProcessTypeStageID int;
+SELECT @ProcessTypeStageID = ProcessTypeFlows.ProcessTypeToStageID 
+FROM ProcessTypeFlows
+WHERE ProcessTypeFlowId = @ProcessTypeFlowId
 
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
 UPDATE Processes 
-SET ProcessTemplateStageID = @ProcessTemplateStageID
+SET ProcessTypeStageID = @ProcessTypeStageID
 	, ModifierId = @UserID
 	, ModifiedDate = getdate()
 WHERE ProcessId = @ProcessId

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[usp_ContentTypeIndexGet] (@UserId nvarchar(450)) 
+CREATE PROCEDURE [dbo].[usp_ClassificationIndexGet] (@UserId nvarchar(450)) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -7,57 +7,57 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 DECLARE @ScreenId int;
-SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'ContentType' AND Action = 'Index';
+SELECT @ScreenId = MVCUIScreenID FROM MVCUIScreens WHERE Controller = 'Classification' AND Action = 'Index';
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
 
-INSERT INTO ReadLogContentTypeList (UserId, ReadLogDate, MVCUIScreenID)  VALUES( @UserId, Getdate(), @ScreenId)
+INSERT INTO ReadLogClassificationList (UserId, ReadLogDate, MVCUIScreenID)  VALUES( @UserId, Getdate(), @ScreenId)
 
-SELECT ContentTypes.ContentTypeID
-	, ISNULL(UserLanguage.ContentTypeLanguageID,ISNULL(DefaultLanguage.ContentTypeLanguageID,0)) ContentTypeLanguageID
+SELECT Classifications.ClassificationID
+	, ISNULL(UserLanguage.ClassificationLanguageID,ISNULL(DefaultLanguage.ClassificationLanguageID,0)) ClassificationLanguageID
 	, @LanguageId LanguageId
 	, LanguageTerm.Name LanguageName
-	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this ContentType')) Name
-	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this ContentType')) Description
-	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this ContentType')) MenuName
-	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this ContentType')) MouseOver
+	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name
+	, ISNULL(UserLanguage.Description,ISNULL(DefaultLanguage.Description,'No description for this classification')) Description
+	, ISNULL(UserLanguage.MenuName,ISNULL(DefaultLanguage.MenuName,'No menu name for this classification')) MenuName
+	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this classification')) MouseOver
 	, ISNULL(UINameCustom.Customization ,UIName.Name) StatusName
-	, CASE WHEN ContentTypes.DefaultPageId IS NULL THEN ISNULL(UserContentTypePageLanguage.Name,ISNULL(DefaultContentTypePageLanguage.Name,'No name for the default page')) ELSE 'There is no default page' END DefaultPageName
-	, ContentTypes.DefaultPageID
-	, ContentTypes.HasDropDown 
-	, ContentTypes.DropDownSequence
+	, CASE WHEN Classifications.DefaultPageId IS NULL THEN ISNULL(UserClassificationPageLanguage.Name,ISNULL(DefaultClassificationPageLanguage.Name,'No name for the default page')) ELSE 'There is no default page' END DefaultPageName
+	, Classifications.DefaultPageID
+	, Classifications.HasDropDown 
+	, Classifications.DropDownSequence
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
-	, ContentTypes.CreatedDate
+	, Classifications.CreatedDate
 	, Modifier.FirstName + ' ' + Modifier.LastName ModifierName
 	, Modifier.PersonID ModifierID
-	, ContentTypes.ModifiedDate
-FROM ContentTypes 
+	, Classifications.ModifiedDate
+FROM Classifications 
 JOIN Statuses 
-	ON Statuses.StatusId = ContentTypes.StatusID
+	ON Statuses.StatusId = Classifications.StatusID
 JOIN UITermLanguages UIName
 	ON UIName.UITermId = Statuses.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UINameCustom
 	ON UINameCustom.UITermId = Statuses.NameTermID
-LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages WHERE LanguageId = @LanguageID) UserLanguage
-	ON UserLanguage.ContentTypeID= ContentTypes.ContentTypeID
-LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages JOIN Settings ON ContentTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
-	ON DefaultLanguage.ContentTypeId = ContentTypes.ContentTypeID
-LEFT JOIN (SELECT ContentTypePageId, Name FROM ContentTypePageLanguages WHERE LanguageId = @LanguageID) UserContentTypePageLanguage
-	ON UserContentTypePageLanguage.ContentTypePageId = ContentTypes.DefaultPageID
-LEFT JOIN (SELECT ContentTypePageId, Name FROM ContentTypePageLanguages  JOIN Settings ON ContentTypePageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultContentTypePageLanguage
-	ON DefaultContentTypePageLanguage.ContentTypePageId = ContentTypes.DefaultPageID
+LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver, ClassificationLanguageID FROM ClassificationLanguages WHERE LanguageId = @LanguageID) UserLanguage
+	ON UserLanguage.ClassificationID= Classifications.ClassificationID
+LEFT JOIN (SELECT ClassificationId, Name, Description, MenuName, MouseOver, ClassificationLanguageID FROM ClassificationLanguages JOIN Settings ON ClassificationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ClassificationId = Classifications.ClassificationID
+LEFT JOIN (SELECT ClassificationPageId, Name FROM ClassificationPageLanguages WHERE LanguageId = @LanguageID) UserClassificationPageLanguage
+	ON UserClassificationPageLanguage.ClassificationPageId = Classifications.DefaultPageID
+LEFT JOIN (SELECT ClassificationPageId, Name FROM ClassificationPageLanguages  JOIN Settings ON ClassificationPageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultClassificationPageLanguage
+	ON DefaultClassificationPageLanguage.ClassificationPageId = Classifications.DefaultPageID
 JOIN Persons Creator
-	ON Creator.UserId = ContentTypes.CreatorID
+	ON Creator.UserId = Classifications.CreatorID
 JOIN Persons Modifier
-	ON Modifier.UserId = ContentTypes.ModifierID
+	ON Modifier.UserId = Classifications.ModifierID
 JOIN Languages
 	ON Languages.LanguageID = @LanguageId
 JOIN UITermLanguages LanguageTerm
 	ON Languages.NameTermID = LanguageTerm.UITermID
 WHERE UIName.LanguageId = @LanguageID
 	AND LanguageTerm.LanguageID = @LanguageId
-ORDER BY  ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this ContentType')) 
+ORDER BY  ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) 
 
 
 

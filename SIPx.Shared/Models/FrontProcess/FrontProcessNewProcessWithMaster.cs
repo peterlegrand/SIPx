@@ -22,9 +22,9 @@ namespace SIPx.Shared
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<RoleList> Roles { get; set; }
         public List<PersonList> Persons { get; set; }
-        public int ProcessTemplateId { get; set; }
+        public int ProcessTypeId { get; set; }
         public string UserId { get; set; }
-        public int ProcessTemplateFlowId { get; set; }
+        public int ProcessTypeFlowId { get; set; }
         public string ErrorHandlingScript { get; set; }
     }
 }

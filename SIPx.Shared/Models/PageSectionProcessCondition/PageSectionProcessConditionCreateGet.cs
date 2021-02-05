@@ -21,8 +21,8 @@ namespace SIPx.Shared
         public string MouseOver { get; set; }
 
 
-        public int ProcessTemplateId { get; set; }
-        public int ProcessTemplateGroupId { get; set; }
+        public int ProcessTypeId { get; set; }
+        public int ProcessTypeGroupId { get; set; }
         public bool MyCalendar { get; set; }
         public bool PersonalCalendar { get; set; }
         public bool OrganizationCalendar { get; set; }
@@ -63,14 +63,14 @@ namespace SIPx.Shared
         public List<PageSectionProcessConditionTypeListExtended> PageSectionProcessConditionTypes { get; set; }
 
 
-        public List<ProcessTemplateList> ProcessTemplates { get; set; }
-        public List<ProcessTemplateGroupList> ProcessTemplateGroups { get; set; }
+        public List<ProcessTypeList> ProcessTypes { get; set; }
+        public List<ProcessTypeGroupList> ProcessTypeGroups { get; set; }
         public List<OrganizationList> Organizations { get; set; }
         public List<ProjectList> Projects { get; set; }
         public List<RoleList> Roles { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<UserList> Users { get; set; }
-        public List<ProcessTemplateStageTypeList> ProcessTemplateStageTypes { get; set; }
+        public List<ProcessTypeStageTypeList> ProcessTypeStageTypes { get; set; }
         public List<LanguageList> Languages { get; set; }
         public List<PersonList> Persons { get; set; }
         public List<ContentList> Contents { get; set; }

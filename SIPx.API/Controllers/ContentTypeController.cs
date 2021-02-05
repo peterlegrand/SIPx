@@ -22,7 +22,7 @@ namespace SIPx.API.Controllers
         private readonly IClassificationValueProvider _classificationValueProvider;
         private readonly IContentTypeClassificationProvider _contentTypeClassificationProvider;
         private readonly IContentTypeClassificationStatusProvider _contentTypeClassificationStatusProvider;
-        private readonly IProcessTemplateProvider _processTemplateProvider;
+        private readonly IProcessTypeProvider _processTypeProvider;
         private readonly IContentTypeGroupProvider _contentTypeGroupProvider;
         private readonly ICheckProvider _checkProvider;
         private readonly IContentTypeProvider _contentTypeProvider;
@@ -32,12 +32,12 @@ namespace SIPx.API.Controllers
         private readonly IClaimCheck _claimCheck;
         private readonly UserManager<SipUser> _userManager;
 
-        public ContentTypeController(IClassificationValueProvider classificationValueProvider, IContentTypeClassificationProvider contentTypeClassificationProvider, IContentTypeClassificationStatusProvider contentTypeClassificationStatusProvider, IProcessTemplateProvider processTemplateProvider, IContentTypeGroupProvider contentTypeGroupProvider, ICheckProvider checkProvider, IContentTypeProvider contentTypeProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
+        public ContentTypeController(IClassificationValueProvider classificationValueProvider, IContentTypeClassificationProvider contentTypeClassificationProvider, IContentTypeClassificationStatusProvider contentTypeClassificationStatusProvider, IProcessTypeProvider processTypeProvider, IContentTypeGroupProvider contentTypeGroupProvider, ICheckProvider checkProvider, IContentTypeProvider contentTypeProvider, IMasterListProvider masterListProvider, ISecurityLevelProvider securityLevelProvider, IMasterProvider masterProvider, IClaimCheck claimCheck, Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
             _classificationValueProvider = classificationValueProvider;
             _contentTypeClassificationProvider = contentTypeClassificationProvider;
             _contentTypeClassificationStatusProvider = contentTypeClassificationStatusProvider;
-            _processTemplateProvider = processTemplateProvider;
+            _processTypeProvider = processTypeProvider;
             _contentTypeGroupProvider = contentTypeGroupProvider;
             _checkProvider = checkProvider;
             _contentTypeProvider = contentTypeProvider;
@@ -51,7 +51,7 @@ namespace SIPx.API.Controllers
         private async Task<ContentTypeCreateGet> CreateAddDropDownBoxes(ContentTypeCreateGet ContentType, string UserId)
         {
             var ContentTypeGroups = await _contentTypeGroupProvider.List(UserId);
-            var ProcessTemplates = await _contentTypeProvider.CreateGetProcessTemplates(UserId);
+            var ProcessTypes = await _contentTypeProvider.CreateGetProcessTypes(UserId);
             var SecurityLevels = await _securityLevelProvider.List(UserId);
             var UserLanguage = await _masterProvider.UserLanguageUpdateGet(UserId);
             var Icons = await _masterListProvider.IconList(UserId);
@@ -61,7 +61,7 @@ namespace SIPx.API.Controllers
             ContentType.ContentTypeGroups = ContentTypeGroups;
             ContentType.Icons = Icons;
             ContentType.SecurityLevels = SecurityLevels;
-            ContentType.ProcessTemplates = ProcessTemplates;
+            ContentType.ProcessTypes = ProcessTypes;
             ContentType.ContentTypeClassificationStatuses = ContentTypeClassificationStatuses;
             ContentType.ContentTypeClassifications = ContentTypeClassifications;
             return ContentType;
@@ -71,7 +71,7 @@ namespace SIPx.API.Controllers
             var icons = await _masterListProvider.IconList(UserId);
             var ContentTypeGroups = await _contentTypeGroupProvider.List(UserId);
             var SecurityLevels = await _securityLevelProvider.List(UserId);
-            var ProcessTemplates = await _processTemplateProvider.List(UserId);
+            var ProcessTypes = await _processTypeProvider.List(UserId);
 
             var ContentTypeClassifications = await _contentTypeClassificationProvider.UpdateGetClassifications(UserId, ContentType.ContentTypeId);
 
@@ -82,7 +82,7 @@ namespace SIPx.API.Controllers
             ContentType.ContentTypeClassifications = ContentTypeClassifications;
 
             ContentType.SecurityLevels = SecurityLevels;
-            ContentType.ProcessTemplates = ProcessTemplates;
+            ContentType.ProcessTypes = ProcessTypes;
             ContentType.Icons = icons;
 
             return ContentType;

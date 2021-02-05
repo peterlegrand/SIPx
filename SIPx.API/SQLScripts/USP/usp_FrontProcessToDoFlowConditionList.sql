@@ -1,15 +1,15 @@
-CREATE PROCEDURE [dbo].[usp_FrontProcessToDoFlowConditionList] (@ProcessTemplateFlowId int)
+CREATE PROCEDURE [dbo].[usp_FrontProcessToDoFlowConditionList] (@ProcessTypeFlowId int)
 AS
 
-SELECT ProcessTemplateFlowConditionID
-	, ProcessTemplateFlowConditionTypeID
-	, ProcessTemplateFieldID
-	, ProcessTemplateFieldIDRole
+SELECT ProcessTypeFlowConditionID
+	, ProcessTypeFlowConditionTypeID
+	, ProcessTypeFieldID
+	, ProcessTypeFieldIDRole
 	, ComparisonOperatorID
-	, ProcessTemplateFlowConditionString
-	, ProcessTemplateFlowConditionInt
-	, ProcessTemplateFlowConditionDate
+	, ProcessTypeFlowConditionString
+	, ProcessTypeFlowConditionInt
+	, ProcessTypeFlowConditionDate
 
-FROM ProcessTemplateFlowConditions 
-WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId
+FROM ProcessTypeFlowConditions 
+WHERE ProcessTypeFlowId = @ProcessTypeFlowId
 ORDER BY Sequence

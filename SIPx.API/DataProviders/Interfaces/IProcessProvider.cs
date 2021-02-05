@@ -8,9 +8,9 @@ namespace SIPx.DataAccess
     public interface IProcessProvider
     {
         Task<List<ProcessAdvancedSearchResult>> AdvancedSearch(string UserId, ProcessAdvancedSearchPost AdvancedSearch);
-        Task<List<FrontProcessNewProcessField>> CreateGet(string UserId, int ProcessTemplateId);
-        Task<List<FrontProcessProcessTemplateFlowConditions>> CreateGetInitialTemplateFlowConditionList(int ProcessTemplateFlowId);
-        Task<List<FrontProcessTemplateIdFlowId>> CreateGetInitialTemplateFlowList();
+        Task<List<FrontProcessNewProcessField>> CreateGet(string UserId, int ProcessTypeId);
+        Task<List<FrontProcessProcessTypeFlowConditions>> CreateGetInitialTemplateFlowConditionList(int ProcessTypeFlowId);
+        Task<List<FrontProcessTypeIdFlowId>> CreateGetInitialTemplateFlowList();
         Task<bool> CreatePost(string SQLString, string UserId, int TemplateId, int StageId, DataTable Fields);
         Task<ProcessDeleteGet> DeleteGet(string UserId, int ProcessId);
         bool DeletePost(string UserId, int ProcessId);

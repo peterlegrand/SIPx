@@ -20,26 +20,26 @@ namespace SIPx.DataAccess
             _sqlDataAccess = sqlDataAccess;
         }
 
-        //public Task<List<ProcessTemplateStageFieldStatus>> IndexGet(string UserId)
+        //public Task<List<ProcessTypeStageFieldStatus>> IndexGet(string UserId)
         //{
-        //    string usp = "usp_ProcessTemplateStageFieldStatusIndexGet @UserID";
-        //    return _sqlDataAccess.LoadData<ProcessTemplateStageFieldStatus, dynamic>(usp, new { UserId = UserId });
+        //    string usp = "usp_ProcessTypeStageFieldStatusIndexGet @UserID";
+        //    return _sqlDataAccess.LoadData<ProcessTypeStageFieldStatus, dynamic>(usp, new { UserId = UserId });
 
         //}
-        //public Task<ProcessTemplateStageFieldStatus> ProcessTemplateStageFieldStatuIndexGet(string UserId, int ProcessTemplateStageFieldStatusId)
+        //public Task<ProcessTypeStageFieldStatus> ProcessTypeStageFieldStatuIndexGet(string UserId, int ProcessTypeStageFieldStatusId)
         //{
-        //    string usp = "usp_ProcessTemplateStageFieldStatus @UserId, @ProcessTemplateStageFieldStatusID";
-        //    return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageFieldStatus, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldStatusId = ProcessTemplateStageFieldStatusId });
+        //    string usp = "usp_ProcessTypeStageFieldStatus @UserId, @ProcessTypeStageFieldStatusID";
+        //    return _sqlDataAccess.LoadSingleRecord<ProcessTypeStageFieldStatus, dynamic>(usp, new { UserId = UserId, ProcessTypeStageFieldStatusId = ProcessTypeStageFieldStatusId });
 
         //}
-        //public Task<ProcessTemplateStageFieldStatusUpdateGet> UpdateGet(string UserId, int ProcessTemplateStageFieldDStatusId)
+        //public Task<ProcessTypeStageFieldStatusUpdateGet> UpdateGet(string UserId, int ProcessTypeStageFieldDStatusId)
         //{
-        //    string usp = "usp_ProcessTemplateStageTypeLanguageUpdateGet @UserId, @ProcessTemplateStageFieldDStatusId";
-        //    return _sqlDataAccess.LoadSingleRecord<ProcessTemplateStageFieldStatusUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTemplateStageFieldDStatusId = ProcessTemplateStageFieldDStatusId });
+        //    string usp = "usp_ProcessTypeStageTypeLanguageUpdateGet @UserId, @ProcessTypeStageFieldDStatusId";
+        //    return _sqlDataAccess.LoadSingleRecord<ProcessTypeStageFieldStatusUpdateGet, dynamic>(usp, new { UserId = UserId, ProcessTypeStageFieldDStatusId = ProcessTypeStageFieldDStatusId });
         //}
         public Task<List<ValueUpdateTypeList>> List(string UserId)
         {
-            string usp = "usp_ProcessTemplateStageFieldStatusList @UserID";
+            string usp = "usp_ProcessTypeStageFieldStatusList @UserID";
             return _sqlDataAccess.LoadData<ValueUpdateTypeList, dynamic>(usp, new { UserId = UserId });
 
         }

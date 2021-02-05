@@ -6,14 +6,14 @@ namespace SIPx.Shared
 {
     public class NewProcessShowTemplateGroup
     {
-        public int ProcessTemplateGroupId { get; set; }
+        public int ProcessTypeGroupId { get; set; }
         public string Name { get; set; }
-        public List<NewProcessTemplateList> templates { get; set; }
+        public List<NewProcessTypeList> templates { get; set; }
     }
     //public class NewProcessShowTemplate
     //{
-    //    public int ProcessTemplateGroupId { get; set; }
-    //    public int ProcessTemplateId { get; set; }
+    //    public int ProcessTypeGroupId { get; set; }
+    //    public int ProcessTypeId { get; set; }
     //    public string Name { get; set; }
     //}
 }

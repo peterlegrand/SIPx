@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ContentTypeCreatePostCheck (
+CREATE PROCEDURE [dbo].[usp_ProjectTypeCreatePostCheck] (
 	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -6,8 +6,9 @@ CREATE PROCEDURE usp_ContentTypeCreatePostCheck (
 	, @CodePrefix nvarchar(25)=''
 	, @CodeSuffix nvarchar(25)=''
 	, @CodeTypeId int
-	, @HasAnyChildContentType bit
-	, @HasAnyMatrixContentType bit
+	, @ObjectTypeStatusId int
+	, @HasAnyChildProject bit
+	, @HasAnyMatrixProject bit
 	, @Color char(9)
 	, @IconID int
 	, @UserId nvarchar(450)) 
@@ -30,7 +31,7 @@ END
 
 
 IF  (SELECT COUNT(*) 
-	FROM ContentTypeLanguages 
+	FROM ProjectTypeLanguages 
 	WHERE LanguageId = @LanguageID
 		AND Name = @Name ) > 0
 BEGIN

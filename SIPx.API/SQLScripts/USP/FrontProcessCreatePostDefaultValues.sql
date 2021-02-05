@@ -1,11 +1,11 @@
-CREATE PROCEDURE FrontProcessCreatePostDefaultValues (@ProcessTemplateFlowId int)
+CREATE PROCEDURE FrontProcessCreatePostDefaultValues (@ProcessTypeFlowId int)
 AS
-SELECT ProcessTemplateStageFields.ProcessTemplateFieldID
-	, ProcessTemplateStageFields.ValueUpdateTypeID
+SELECT ProcessTypeStageFields.ProcessTypeFieldID
+	, ProcessTypeStageFields.ValueUpdateTypeID
 	, StringValue
 	, IntValue
 	, DateTimeValue
-FROM ProcessTemplateStageFields
-JOIN ProcessTemplateFlows
-	ON ProcessTemplateStageFields.ProcessTemplateStageID = ProcessTemplateFlows.ProcessTemplateFromStageID
-WHERE ProcessTemplateFlows.ProcessTemplateFlowID = @ProcessTemplateFlowId 
+FROM ProcessTypeStageFields
+JOIN ProcessTypeFlows
+	ON ProcessTypeStageFields.ProcessTypeStageID = ProcessTypeFlows.ProcessTypeFromStageID
+WHERE ProcessTypeFlows.ProcessTypeFlowID = @ProcessTypeFlowId 

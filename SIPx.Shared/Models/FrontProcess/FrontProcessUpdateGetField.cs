@@ -11,13 +11,13 @@ namespace SIPx.Shared
         [Key]
         public int ProcessId { get; set; }
         public int ProcessFieldId { get; set; }
-        public int ProcessTemplateId { get; set; }
-        public int ProcessTemplateFieldId { get; set; }
+        public int ProcessTypeId { get; set; }
+        public int ProcessTypeFieldId { get; set; }
         public string StringValue { get; set; }
         public int? IntValue { get; set; }
         public DateTime DateTimeValue { get; set; }
-        public int ProcessTemplateFieldTypeId { get; set; }
-        public int ProcessTemplateStageFieldStatusId { get; set; }
+        public int ProcessTypeFieldTypeId { get; set; }
+        public int ProcessTypeStageFieldStatusId { get; set; }
         public int ValueUpdateTypeId { get; set; }
         public string DefaultStringValue { get; set; }
         public int? DefaultIntValue { get; set; }

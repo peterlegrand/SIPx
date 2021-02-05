@@ -3,6 +3,7 @@ CREATE PROCEDURE usp_OrganizationTypeUpdatePost (
 	, @CodePrefix nvarchar(25)
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
+	, @ObjectTypeStatusId int
 	, @Internal bit
 	, @LegalEntity bit
 	, @Name nvarchar(50)
@@ -24,6 +25,7 @@ UPDATE OrganizationTypes SET
 	, CodePrefix =@CodePrefix 
 	, CodeSuffix =@CodeSuffix 
 	, CodeTypeId =@CodeTypeId 
+	, ObjectTypeStatusId = @ObjectTypeStatusId
 	, ModifierId = @ModifierId
 	, ModifiedDate = GETDATE()
 WHERE OrganizationTypeId = @OrganizationTypeID

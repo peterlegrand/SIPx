@@ -120,10 +120,10 @@ namespace SIPx.API.Classes
 
         public async Task<List<ProcessForPanel>> ProcessList(SipUser CurrentUser, int PageSectionId)
         {
-            string ProcessConditionSQLFrom = " SELECT Processes.ProcessId, ISNULL(ProcessFieldSubject.StringValue,'') As Subject, ProcessTemplateLanguages.Name ProcessTemplateName FROM Processes JOIN ProcessFields ProcessFieldSubject ON ProcessFieldSubject.ProcessId = Processes.ProcessId " +
-                                     " JOIN ProcessTemplatefields ProcessTemplateFieldSubject ON  ProcessTemplateFieldSubject.ProcessTemplatefieldId = ProcessFieldSubject.ProcessTemplatefieldId  " +
-                                     " JOIN ProcessTemplates ON Processes.ProcessTemplateId =  ProcessTemplates.ProcessTemplateId JOIN ProcessTemplateStages ON Processes.ProcessTemplateStageId = ProcessTemplateStages.ProcessTemplateStageID ";
-            string ProcessConditionSQLWhere = " WHERE ProcessTemplateFieldSubject.ProcessTemplateFieldTypeId = 1 AND ProcessTemplateStages.InToDo = 1 ";
+            string ProcessConditionSQLFrom = " SELECT Processes.ProcessId, ISNULL(ProcessFieldSubject.StringValue,'') As Subject, ProcessTypeLanguages.Name ProcessTypeName FROM Processes JOIN ProcessFields ProcessFieldSubject ON ProcessFieldSubject.ProcessId = Processes.ProcessId " +
+                                     " JOIN ProcessTypefields ProcessTypeFieldSubject ON  ProcessTypeFieldSubject.ProcessTypefieldId = ProcessFieldSubject.ProcessTypefieldId  " +
+                                     " JOIN ProcessTypes ON Processes.ProcessTypeId =  ProcessTypes.ProcessTypeId JOIN ProcessTypeStages ON Processes.ProcessTypeStageId = ProcessTypeStages.ProcessTypeStageID ";
+            string ProcessConditionSQLWhere = " WHERE ProcessTypeFieldSubject.ProcessTypeFieldTypeId = 1 AND ProcessTypeStages.InToDo = 1 ";
             string ProcessConditionSQLContains = "";
             var ProcessConditions = await _processProvider.PanelCondition(PageSectionId);
             foreach (var ProcessCondition in ProcessConditions)
@@ -134,108 +134,108 @@ namespace SIPx.API.Classes
                         ProcessConditionSQLWhere += " AND TemplateId = " + ProcessCondition.PageSectionProcessConditionInt;
                         break;
                     case 2: // Template group
-                        ProcessConditionSQLFrom += " JOIN ProcessTemplateGroups ON ProcessTemplates.ProcessTemplateGroupId = ProcessTemplateGroups.ProcessTemplateGroupId ";
-                        ProcessConditionSQLWhere += " AND ProcessTemplateGroups.TemplateGroupId = " + ProcessCondition.PageSectionProcessConditionInt;
+                        ProcessConditionSQLFrom += " JOIN ProcessTypeGroups ON ProcessTypes.ProcessTypeGroupId = ProcessTypeGroups.ProcessTypeGroupId ";
+                        ProcessConditionSQLWhere += " AND ProcessTypeGroups.TemplateGroupId = " + ProcessCondition.PageSectionProcessConditionInt;
                         break;
 
                     case 3: // My calendar
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldMyCalendar ON Processes.ProcessId = ProcessFieldMyCalendar.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldMyCalendar ON ProcessTemplateFieldMyCalendar.ProcessTemplateFieldId = ProcessFieldMyCalendar.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInPersonalCalendar = 1 AND ProcessFieldMyCalendar.StringValue = '" + CurrentUser.Id + "' AND ProcessTemplateFieldMyCalendar.ProcessTemplatefieldTypeId = 12 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldMyCalendar ON Processes.ProcessId = ProcessFieldMyCalendar.ProcessId JOIN ProcessTypeFields ProcessTypeFieldMyCalendar ON ProcessTypeFieldMyCalendar.ProcessTypeFieldId = ProcessFieldMyCalendar.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.ShowInPersonalCalendar = 1 AND ProcessFieldMyCalendar.StringValue = '" + CurrentUser.Id + "' AND ProcessTypeFieldMyCalendar.ProcessTypefieldTypeId = 12 ";
                         break;
                     case 4: // Personal calendar
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInPersonalCalendar = 1 ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.ShowInPersonalCalendar = 1 ";
                         break;
                     case 5: // Organization calendar
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInOrganizationCalendar = 1 ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.ShowInOrganizationCalendar = 1 ";
                         break;
                     case 6: // Project calendar
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInProjectCalendar = 1 ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.ShowInProjectCalendar = 1 ";
                         break;
                     case 7: // Event calendar
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInEventCalendar = 1 ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.ShowInEventCalendar = 1 ";
                         break;
                     case 8: // Is personal
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.IsPersonal = 1 ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.IsPersonal = 1 ";
                         break;
                     case 9: // Show new
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInNew = 1 ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.ShowInNew = 1 ";
                         break;
                     case 10: // Show search
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInSearch = 1 ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.ShowInSearch = 1 ";
                         break;
                     case 11: // show report
-                        ProcessConditionSQLWhere += " AND ProcessTemplates.ShowInReport = 1 ";
+                        ProcessConditionSQLWhere += " AND ProcessTypes.ShowInReport = 1 ";
                         break;
                     case 12: // Organization
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldOrganization ON Processes.ProcessId = ProcessFieldOrganization.ProcessId  JOIN ProcessTemplateFields ProcessTemplateFieldOrganization ON ProcessTemplateFieldOrganization.ProcessTemplateFieldId = ProcessFieldOrganization.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldOrganization.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + " AND (ProcessTemplateFieldOrganization.ProcessTemplatefieldTypeId = 14 OR ProcessTemplateFieldOrganization.ProcessTemplatefieldTypeId = 15 ) ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldOrganization ON Processes.ProcessId = ProcessFieldOrganization.ProcessId  JOIN ProcessTypeFields ProcessTypeFieldOrganization ON ProcessTypeFieldOrganization.ProcessTypeFieldId = ProcessFieldOrganization.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldOrganization.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + " AND (ProcessTypeFieldOrganization.ProcessTypefieldTypeId = 14 OR ProcessTypeFieldOrganization.ProcessTypefieldTypeId = 15 ) ";
                         break;
                     case 13: // Project
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldProject ON Processes.ProcessId = ProcessFieldProject.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldProject ON ProcessTemplateFieldProject.ProcessTemplateFieldId = ProcessFieldProject.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldProject.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + "' AND (ProcessTemplateFieldProject.ProcessTemplatefieldTypeId = 16 OR ProcessTemplateFieldProject.ProcessTemplatefieldTypeId = 17) ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldProject ON Processes.ProcessId = ProcessFieldProject.ProcessId JOIN ProcessTypeFields ProcessTypeFieldProject ON ProcessTypeFieldProject.ProcessTypeFieldId = ProcessFieldProject.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldProject.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + "' AND (ProcessTypeFieldProject.ProcessTypefieldTypeId = 16 OR ProcessTypeFieldProject.ProcessTypefieldTypeId = 17) ";
                         break;
                     case 14: // creator is user
                         ProcessConditionSQLWhere += " AND Processes.CreatorId = '" + CurrentUser.Id + "' ";
                         break;
                     case 15: // role
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldRole ON Processes.ProcessId = ProcessFieldRole.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldRole ON ProcessTemplateFieldRole.ProcessTemplateFieldId = ProcessFieldRole.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldRole.stringValue = '" + ProcessCondition.PageSectionProcessConditionString + "' AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 30 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldRole ON Processes.ProcessId = ProcessFieldRole.ProcessId JOIN ProcessTypeFields ProcessTypeFieldRole ON ProcessTypeFieldRole.ProcessTypeFieldId = ProcessFieldRole.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldRole.stringValue = '" + ProcessCondition.PageSectionProcessConditionString + "' AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 30 ";
                         break;
                     case 16: // securitylevel
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldSecurityLevel ON Processes.ProcessId = ProcessFieldSecurityLevel.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldSecurityLevel ON ProcessTemplateFieldSecurityLevel.ProcessTemplateFieldId = ProcessFieldSecurityLevel.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldSecurityLevel.IntValue <= '" + ProcessCondition.PageSectionProcessConditionInt + "' AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 28 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldSecurityLevel ON Processes.ProcessId = ProcessFieldSecurityLevel.ProcessId JOIN ProcessTypeFields ProcessTypeFieldSecurityLevel ON ProcessTypeFieldSecurityLevel.ProcessTypeFieldId = ProcessFieldSecurityLevel.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldSecurityLevel.IntValue <= '" + ProcessCondition.PageSectionProcessConditionInt + "' AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 28 ";
                         break;
                     case 18: // Default Organization
-                        ProcessConditionSQLWhere += " AND ProcessFieldOrganization.IntValue = @DefaultOrganization AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 14 ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldOrganization.IntValue = @DefaultOrganization AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 14 ";
                         break;
                     case 19: // UserOrganization
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldUserOrganization ON Processes.ProcessId = ProcessFieldUserOrganization.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldUserOrganization ON ProcessTemplateFieldUserOrganization.ProcessTemplateFieldId = ProcessFieldUserOrganization.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldUserOrganization.IntValue IN (SELECT OrganizationId FROM AspNetRoles JOIN AspNetUserRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId WHERE UserId = '" + CurrentUser.Id + "') AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 14 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldUserOrganization ON Processes.ProcessId = ProcessFieldUserOrganization.ProcessId JOIN ProcessTypeFields ProcessTypeFieldUserOrganization ON ProcessTypeFieldUserOrganization.ProcessTypeFieldId = ProcessFieldUserOrganization.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldUserOrganization.IntValue IN (SELECT OrganizationId FROM AspNetRoles JOIN AspNetUserRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId WHERE UserId = '" + CurrentUser.Id + "') AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 14 ";
                         break;
 
                     case 20: // Specific Organization
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldOrganizationRole ON Processes.ProcessId = ProcessFieldOrganizationRole.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldOrganizationRole ON ProcessTemplateFieldOrganizationRole.ProcessTemplateFieldId = ProcessFieldOrganizationRole.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldOrganizationRole.StringValue = '" + ProcessCondition.PageSectionProcessConditionString + "' AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 30 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldOrganizationRole ON Processes.ProcessId = ProcessFieldOrganizationRole.ProcessId JOIN ProcessTypeFields ProcessTypeFieldOrganizationRole ON ProcessTypeFieldOrganizationRole.ProcessTypeFieldId = ProcessFieldOrganizationRole.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldOrganizationRole.StringValue = '" + ProcessCondition.PageSectionProcessConditionString + "' AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 30 ";
                         break;
                     case 21: // UserProject
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldUserProject ON Processes.ProcessId = ProcessFieldUserProject.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldUserProject ON ProcessTemplateFieldUserProject.ProcessTemplateFieldId = ProcessFieldUserProject.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldUserProject.IntValue IN (SELECT ProjectId FROM AspNetRoles JOIN AspNetUserRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId WHERE UserId = '" + CurrentUser.Id + "') AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 16 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldUserProject ON Processes.ProcessId = ProcessFieldUserProject.ProcessId JOIN ProcessTypeFields ProcessTypeFieldUserProject ON ProcessTypeFieldUserProject.ProcessTypeFieldId = ProcessFieldUserProject.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldUserProject.IntValue IN (SELECT ProjectId FROM AspNetRoles JOIN AspNetUserRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId WHERE UserId = '" + CurrentUser.Id + "') AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 16 ";
                         break;
 
                     case 22: // Specific project
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldProjectRole ON Processes.ProcessId = ProcessFieldProjectRole.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldProjectRole ON ProcessFieldProjectRole.ProcessTemplateFieldId = ProcessTemplateFieldProjectRole.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldProjectRole.StringValue = '" + ProcessCondition.PageSectionProcessConditionString + "' AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 30 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldProjectRole ON Processes.ProcessId = ProcessFieldProjectRole.ProcessId JOIN ProcessTypeFields ProcessTypeFieldProjectRole ON ProcessFieldProjectRole.ProcessTypeFieldId = ProcessTypeFieldProjectRole.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldProjectRole.StringValue = '" + ProcessCondition.PageSectionProcessConditionString + "' AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 30 ";
                         break;
 
                     case 25: // Content
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldContent ON Processes.ProcessId = ProcessFieldContent.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldContent ON ProcessFieldContent.ProcessTemplateFieldId = ProcessTemplateFieldContent.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldContent.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + " AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 24  ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldContent ON Processes.ProcessId = ProcessFieldContent.ProcessId JOIN ProcessTypeFields ProcessTypeFieldContent ON ProcessFieldContent.ProcessTypeFieldId = ProcessTypeFieldContent.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldContent.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + " AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 24  ";
                         break;
 
                     case 26: // Content type
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldContentType ON Processes.ProcessId = ProcessFieldContentType.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldContentType ON ProcessFieldContentType.ProcessTemplateFieldId = ProcessTemplateFieldContentType.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldContentType.IntValue IN (SELECT ContentId FROM Contents WHERE ContentTypeID = " + ProcessCondition.PageSectionProcessConditionInt + ") AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 24  ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldContentType ON Processes.ProcessId = ProcessFieldContentType.ProcessId JOIN ProcessTypeFields ProcessTypeFieldContentType ON ProcessFieldContentType.ProcessTypeFieldId = ProcessTypeFieldContentType.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldContentType.IntValue IN (SELECT ContentId FROM Contents WHERE ContentTypeID = " + ProcessCondition.PageSectionProcessConditionInt + ") AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 24  ";
                         break;
                     case 27: // User is user
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldUserIsUser ON Processes.ProcessId = ProcessFieldUserIsUser.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldUserIsUser ON ProcessFieldUserIsUser.ProcessTemplateFieldId = ProcessTemplateFieldUserIsUser.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldUserIsUser.StringValue = '" + ProcessCondition.PageSectionProcessConditionString + "' AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 12  ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldUserIsUser ON Processes.ProcessId = ProcessFieldUserIsUser.ProcessId JOIN ProcessTypeFields ProcessTypeFieldUserIsUser ON ProcessFieldUserIsUser.ProcessTypeFieldId = ProcessTypeFieldUserIsUser.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldUserIsUser.StringValue = '" + ProcessCondition.PageSectionProcessConditionString + "' AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 12  ";
                         break;
                     case 32: // From date
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldFromDate ON Processes.ProcessId = ProcessFieldFromDate.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldFromDate ON ProcessFieldFromDate.ProcessTemplateFieldId = ProcessTemplateFieldFromDate.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldFromDate.DateTimeValue >= '" + ProcessCondition.PageSectionProcessConditionDate + "' AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 4  ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldFromDate ON Processes.ProcessId = ProcessFieldFromDate.ProcessId JOIN ProcessTypeFields ProcessTypeFieldFromDate ON ProcessFieldFromDate.ProcessTypeFieldId = ProcessTypeFieldFromDate.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldFromDate.DateTimeValue >= '" + ProcessCondition.PageSectionProcessConditionDate + "' AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 4  ";
                         //PETER TO DO the date time and date time range and date range
                         break;
                     case 33: // To date
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldToDate ON Processes.ProcessId = ProcessFieldToDate.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldToDate ON ProcessFieldToDate.ProcessTemplateFieldId = ProcessTemplateFieldToDate.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldToDate.DateTimeValue <= '" + ProcessCondition.PageSectionProcessConditionDate + "' AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 4  ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldToDate ON Processes.ProcessId = ProcessFieldToDate.ProcessId JOIN ProcessTypeFields ProcessTypeFieldToDate ON ProcessFieldToDate.ProcessTypeFieldId = ProcessTypeFieldToDate.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldToDate.DateTimeValue <= '" + ProcessCondition.PageSectionProcessConditionDate + "' AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 4  ";
                         break;
                     case 37: // Person
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldPerson ON Processes.ProcessId = ProcessFieldPerson.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldPerson ON ProcessFieldPerson.ProcessTemplateFieldId = ProcessTemplateFieldPerson.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldPerson.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + " AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 36 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldPerson ON Processes.ProcessId = ProcessFieldPerson.ProcessId JOIN ProcessTypeFields ProcessTypeFieldPerson ON ProcessFieldPerson.ProcessTypeFieldId = ProcessTypeFieldPerson.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldPerson.IntValue = " + ProcessCondition.PageSectionProcessConditionInt + " AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 36 ";
                         break;
                     case 38: // Content type group
-                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldContentTypeGroup ON Processes.ProcessId = ProcessFieldContentTypeGroup.ProcessId JOIN ProcessTemplateFields ProcessTemplateFieldContentTypeGroup ON ProcessFieldContentTypeGroup.ProcessTemplateFieldId = ProcessTemplateFieldContentTypeGroup.ProcessTemplateFieldId ";
-                        ProcessConditionSQLWhere += " AND ProcessFieldContentTypeGroup.IntValue IN (SELECT ContentId FROM Contents JOIN ContentTypes ON Contents.ContentTypeId = ContentTypes.ContentTypeId WHERE ContentTypeGroupID = " + ProcessCondition.PageSectionProcessConditionInt + ") AND ProcessTemplateFieldUser.ProcessTemplatefieldTypeId = 24 ";
+                        ProcessConditionSQLFrom += " JOIN ProcessFields ProcessFieldContentTypeGroup ON Processes.ProcessId = ProcessFieldContentTypeGroup.ProcessId JOIN ProcessTypeFields ProcessTypeFieldContentTypeGroup ON ProcessFieldContentTypeGroup.ProcessTypeFieldId = ProcessTypeFieldContentTypeGroup.ProcessTypeFieldId ";
+                        ProcessConditionSQLWhere += " AND ProcessFieldContentTypeGroup.IntValue IN (SELECT ContentId FROM Contents JOIN ContentTypes ON Contents.ContentTypeId = ContentTypes.ContentTypeId WHERE ContentTypeGroupID = " + ProcessCondition.PageSectionProcessConditionInt + ") AND ProcessTypeFieldUser.ProcessTypefieldTypeId = 24 ";
                         break;
 
                 }

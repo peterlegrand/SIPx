@@ -1,7 +1,7 @@
 CREATE PROCEDURE usp_ProcessCreatePostCheck (
 	@UserId nvarchar(450)
-	, @ProcessTemplateId int
-	, @ProcessTemplateFlowId int
+	, @ProcessTypeId int
+	, @ProcessTypeFlowId int
 	, @ProcessFieldValueTable AS udt_ProcessFieldsNew READONLY)
 	AS 
 
@@ -16,23 +16,23 @@ BEGIN
 
 DECLARE @ErrorIdsTable TABLE (id int)
 
-IF (SELECT COUNT(*) FROM ProcessTemplates WHERE ProcessTemplateId = @ProcessTemplateId) = 0 
+IF (SELECT COUNT(*) FROM ProcessTypes WHERE ProcessTypeId = @ProcessTypeId) = 0 
 BEGIN
 insert into @ErrorIdsTable values(82)
 END
 
-IF (SELECT COUNT(*) FROM ProcessTemplateFlows WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId) = 0 
+IF (SELECT COUNT(*) FROM ProcessTypeFlows WHERE ProcessTypeFlowId = @ProcessTypeFlowId) = 0 
 BEGIN
 insert into @ErrorIdsTable values(83)
 END
 
-IF (SELECT COUNT(*) FROM @ProcessFieldValueTable TempTable WHERE TempTable.ProcessTemplateId NOT IN (SELECT ProcessTemplateId FROM ProcessTemplates )) > 0 
+IF (SELECT COUNT(*) FROM @ProcessFieldValueTable TempTable WHERE TempTable.ProcessTypeId NOT IN (SELECT ProcessTypeId FROM ProcessTypes )) > 0 
 BEGIN
 insert into @ErrorIdsTable values(82)
 END
 
 --PETER TODO, check the values based  on the field type
-IF (SELECT COUNT(*) FROM @ProcessFieldValueTable TempTable WHERE TempTable.ProcessTemplateFieldId NOT IN (SELECT ProcessTemplateFieldId FROM ProcessTemplateFields )) > 0 
+IF (SELECT COUNT(*) FROM @ProcessFieldValueTable TempTable WHERE TempTable.ProcessTypeFieldId NOT IN (SELECT ProcessTypeFieldId FROM ProcessTypeFields )) > 0 
 BEGIN
 insert into @ErrorIdsTable values(84)
 END

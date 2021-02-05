@@ -17,7 +17,7 @@ WHERE USerId = @ModifierId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
 UPDATE PersonTypes SET 
-	, CodePrefix =@CodePrefix 
+	 CodePrefix =@CodePrefix 
 	, CodeSuffix =@CodeSuffix 
 	, CodeTypeId =@CodeTypeId 
 	, ModifierId = @ModifierId

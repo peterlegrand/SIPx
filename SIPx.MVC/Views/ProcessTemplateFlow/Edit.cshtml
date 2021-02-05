@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateFlowUpdateGet
+@model ProcessTypeFlowUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template flow")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type flow")).TermString;
     ViewData["Image"] = "Flow.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -18,8 +18,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId" cssClass="e-outline" placeholder="ProcessTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowId" ejs-for="@Model.ProcessTypeFlowId" cssClass="e-outline" placeholder="ProcessTypeFlowId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -30,8 +30,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId" cssClass="e-outline" placeholder="ProcessTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowId" ejs-for="@Model.ProcessTypeFlowId" cssClass="e-outline" placeholder="ProcessTypeFlowId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -78,8 +78,8 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("From stage")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateFromStageId" dataSource="@Model.ProcessTemplateStages" ejs-for="@Model.ProcessTemplateFromStageId" value="@Model.ProcessTemplateFromStageId" index="2" filtering="ProcessTemplateFromStageId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateStageId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeFromStageId" dataSource="@Model.ProcessTypeStages" ejs-for="@Model.ProcessTypeFromStageId" value="@Model.ProcessTypeFromStageId" index="2" filtering="ProcessTypeFromStageId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeStageId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -89,8 +89,8 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("To stage")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateToStageId" dataSource="@Model.ProcessTemplateStages" ejs-for="@Model.ProcessTemplateToStageId" value="@Model.ProcessTemplateToStageId" index="2" filtering="ProcessTemplateToStageId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateStageId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeToStageId" dataSource="@Model.ProcessTypeStages" ejs-for="@Model.ProcessTypeToStageId" value="@Model.ProcessTypeToStageId" index="2" filtering="ProcessTypeToStageId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeStageId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -99,7 +99,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ProcessTemplateId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <a asp-action="Index" asp-route-id="@Model.ProcessTypeId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
@@ -243,16 +243,16 @@
 </script>
 
 <script type="text/javascript">
-            function ProcessTemplateFromStageId(e) {
+            function ProcessTypeFromStageId(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateStages)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeStages)), query);
                 }
 </script>
 <script type="text/javascript">
-        function ProcessTemplateToStageId(e) {
+        function ProcessTypeToStageId(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateStages)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeStages)), query);
                 }
 </script>

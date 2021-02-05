@@ -86,18 +86,18 @@ namespace SIPx.API
             services.AddTransient<IBaseProvider, BaseProvider>();
             services.AddTransient<IFrontUserFavoriteProvider, FrontUserFavoriteProvider>();
             services.AddTransient<IFrontUserFavoriteGroupProvider, FrontUserFavoriteGroupProvider>();
-            services.AddTransient<IProcessTemplateFlowConditionProvider, ProcessTemplateFlowConditionProvider>();
-            services.AddTransient<IProcessTemplateFlowConditionTypeProvider, ProcessTemplateFlowConditionTypeProvider>();
+            services.AddTransient<IProcessTypeFlowConditionProvider, ProcessTypeFlowConditionProvider>();
+            services.AddTransient<IProcessTypeFlowConditionTypeProvider, ProcessTypeFlowConditionTypeProvider>();
 
-            services.AddTransient<IProcessTemplateFlowPassComparisonOperatorProvider, ProcessTemplateFlowPassComparisonOperatorProvider>();
+            services.AddTransient<IProcessTypeFlowPassComparisonOperatorProvider, ProcessTypeFlowPassComparisonOperatorProvider>();
 
             services.AddTransient<ICodeTypeProvider, CodeTypeProvider>();
             services.AddTransient<IProjectMatrixTypeProvider, ProjectMatrixTypeProvider>();
             services.AddTransient<IProjectTypeMatrixProvider, ProjectTypeMatrixProvider>();
 
 
-            services.AddTransient<IProcessTemplateFlowPassTypeProvider, ProcessTemplateFlowPassTypeProvider>();
-            services.AddTransient<IProcessTemplateFlowPassProvider, ProcessTemplateFlowPassProvider>();
+            services.AddTransient<IProcessTypeFlowPassTypeProvider, ProcessTypeFlowPassTypeProvider>();
+            services.AddTransient<IProcessTypeFlowPassProvider, ProcessTypeFlowPassProvider>();
 
             services.AddTransient<IOrganizationPositionProvider, OrganizationPositionProvider>();
             services.AddTransient<IMVCFavoriteProvider, MVCFavoriteProvider>();
@@ -118,7 +118,7 @@ namespace SIPx.API
             services.AddTransient<IFrontProjectProvider, FrontProjectProvider>();
             services.AddTransient<IFrontOrganizationProvider, FrontOrganizationProvider>();
             services.AddTransient<IFrontContentProvider, FrontContentProvider>();
-            services.AddTransient<IProcessTemplateFlowProvider, ProcessTemplateFlowProvider>();
+            services.AddTransient<IProcessTypeFlowProvider, ProcessTypeFlowProvider>();
             services.AddTransient<ICheckProvider, CheckProvider>();
             services.AddTransient<ISettingProvider, SettingProvider>();
             services.AddTransient<IClassificationLevelProvider, ClassificationLevelProvider>();
@@ -127,23 +127,23 @@ namespace SIPx.API
             services.AddTransient<IPersonAddressProvider, PersonAddressProvider>();
             services.AddTransient<IPersonRelationProvider, PersonRelationProvider>();
             services.AddTransient<IPersonTelecomProvider, PersonTelecomProvider>();
-            services.AddTransient<IProcessTemplateStageFieldStatusProvider, ProcessTemplateStageFieldStatusProvider>();
-            services.AddTransient<IProcessTemplateGroupProvider, ProcessTemplateGroupProvider>();
-            services.AddTransient<IProcessTemplateStageFieldProvider, ProcessTemplateStageFieldProvider>();
-            services.AddTransient<IProcessTemplateFieldStageProvider, ProcessTemplateFieldStageProvider>();
-            services.AddTransient<IProcessTemplateFieldTypeProvider, ProcessTemplateFieldTypeProvider>();
+            services.AddTransient<IProcessTypeStageFieldStatusProvider, ProcessTypeStageFieldStatusProvider>();
+            services.AddTransient<IProcessTypeGroupProvider, ProcessTypeGroupProvider>();
+            services.AddTransient<IProcessTypeStageFieldProvider, ProcessTypeStageFieldProvider>();
+            services.AddTransient<IProcessTypeFieldStageProvider, ProcessTypeFieldStageProvider>();
+            services.AddTransient<IProcessTypeFieldTypeProvider, ProcessTypeFieldTypeProvider>();
             services.AddTransient<IPersonProvider, PersonProvider>();
             services.AddTransient<IPageSectionDataTypeProvider, PageSectionDataTypeProvider>();
             services.AddTransient<ISecurityLevelProvider, SecurityLevelProvider>();
-            services.AddTransient<IProcessTemplateStageProvider, ProcessTemplateStageProvider>();
-            services.AddTransient<IProcessTemplateGroupProvider, ProcessTemplateGroupProvider>();
-            //services.AddTransient<IProcessTemplateFieldProvider, ProcessTemplateFieldProvider>();
-            services.AddTransient<IProcessTemplateStageProvider, ProcessTemplateStageProvider>();
+            services.AddTransient<IProcessTypeStageProvider, ProcessTypeStageProvider>();
+            services.AddTransient<IProcessTypeGroupProvider, ProcessTypeGroupProvider>();
+            //services.AddTransient<IProcessTypeFieldProvider, ProcessTypeFieldProvider>();
+            services.AddTransient<IProcessTypeStageProvider, ProcessTypeStageProvider>();
             services.AddTransient<IPageSectionTypeProvider, PageSectionTypeProvider>();
             services.AddTransient<IUserMenuTypeProvider, UserMenuTypeProvider>();
             services.AddTransient<ITelecomTypeProvider, TelecomTypeProvider>();
-            services.AddTransient<IProcessTemplateFieldProvider, ProcessTemplateFieldProvider>();
-            services.AddTransient<IProcessTemplateFlowConditionComparisonOperatorProvider, ProcessTemplateFlowConditionComparisonOperatorProvider>();
+            services.AddTransient<IProcessTypeFieldProvider, ProcessTypeFieldProvider>();
+            services.AddTransient<IProcessTypeFlowConditionComparisonOperatorProvider, ProcessTypeFlowConditionComparisonOperatorProvider>();
             services.AddTransient<IClassificationUserProvider, ClassificationUserProvider>();
             services.AddTransient<IClassificationRoleProvider, ClassificationRoleProvider>();
             //services.AddTransient<IClassificationPageProvider, ClassificationPageProvider>();
@@ -193,8 +193,8 @@ namespace SIPx.API
 
             services.AddTransient<IProcessProvider, ProcessProvider>();
 
-            services.AddTransient<IProcessTemplateProvider, ProcessTemplateProvider>();
-            services.AddTransient<IProcessTemplateStageTypeProvider, ProcessTemplateStageTypeProvider>();
+            services.AddTransient<IProcessTypeProvider, ProcessTypeProvider>();
+            services.AddTransient<IProcessTypeStageTypeProvider, ProcessTypeStageTypeProvider>();
 
             services.AddTransient<IOrganizationProvider, OrganizationProvider>();
             services.AddTransient<IOrganizationAddressProvider, OrganizationAddressProvider>();

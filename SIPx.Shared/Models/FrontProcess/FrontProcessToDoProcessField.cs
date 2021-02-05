@@ -14,7 +14,7 @@ namespace SIPx.Shared
         public string StringValue { get; set; }
         public int IntValue { get; set; }
         public DateTime DateTimeValue { get; set; }
-        public int ProcessTemplateFieldID { get; set; }
-        public int ProcessTemplateFieldTypeID { get; set; }
+        public int ProcessTypeFieldID { get; set; }
+        public int ProcessTypeFieldTypeID { get; set; }
     }
 }

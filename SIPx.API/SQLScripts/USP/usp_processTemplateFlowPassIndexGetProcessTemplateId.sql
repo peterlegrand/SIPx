@@ -1,3 +1,0 @@
-CREATE PROCEDURE usp_processTemplateFlowPassIndexGetProcessTemplateId (@ProcessTemplateFlowId int)
-AS
-SELECT ProcessTemplateId FROM ProcessTemplateFlows WHERE ProcessTemplateFlowId = @ProcessTemplateFlowId

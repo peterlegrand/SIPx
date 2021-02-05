@@ -43,8 +43,8 @@ namespace SIPx.API.Controllers
         }
         
 
-        [HttpGet("NewProcessGet{ProcessTemplateId}")]
-        public async Task<IActionResult> NewProcessGet(int ProcessTemplateId)
+        [HttpGet("NewProcessGet{ProcessTypeId}")]
+        public async Task<IActionResult> NewProcessGet(int ProcessTypeId)
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -52,11 +52,11 @@ namespace SIPx.API.Controllers
 
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
-                List<NewProcessTemplateList> x = await testifallowed.ReturnProcessTemplateList(CurrentUser);
+                List<NewProcessTypeList> x = await testifallowed.ReturnProcessTypeList(CurrentUser);
 
-                if (x.Exists(x => x.ProcessTemplateId == ProcessTemplateId))
+                if (x.Exists(x => x.ProcessTypeId == ProcessTypeId))
                     //TOFIX PETER
-                    return Ok(await _processProvider.CreateGet(CurrentUser.Id, ProcessTemplateId));// CurrentUser.LanguageId));
+                    return Ok(await _processProvider.CreateGet(CurrentUser.Id, ProcessTypeId));// CurrentUser.LanguageId));
             }
             return BadRequest(new
             {
@@ -75,24 +75,24 @@ namespace SIPx.API.Controllers
 
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))  //11
             {
-                List<NewProcessTemplateList> x = await testifallowed.ReturnProcessTemplateList(CurrentUser);
-                if (x.Exists(x => x.ProcessTemplateId == ProcessesFromAPI.ProcessTemplateId))
+                List<NewProcessTypeList> x = await testifallowed.ReturnProcessTypeList(CurrentUser);
+                if (x.Exists(x => x.ProcessTypeId == ProcessesFromAPI.ProcessTypeId))
                 {
 
-                    List<FrontProcessNewProcessField> ProcessesFromDB = await _processProvider.CreateGet(CurrentUser.Id, ProcessesFromAPI.ProcessTemplateId);
+                    List<FrontProcessNewProcessField> ProcessesFromDB = await _processProvider.CreateGet(CurrentUser.Id, ProcessesFromAPI.ProcessTypeId);
                     int NoOfFields = ProcessesFromDB.Count();
                     int EqualSequenceCount = 0;
-                    if (ProcessesFromDB.Exists(z => z.ProcessTemplateStageId == ProcessesFromAPI.ProcessTemplateStageId) & ProcessesFromDB.Count() == ProcessesFromAPI.ProcessFields.Count())
+                    if (ProcessesFromDB.Exists(z => z.ProcessTypeStageId == ProcessesFromAPI.ProcessTypeStageId) & ProcessesFromDB.Count() == ProcessesFromAPI.ProcessFields.Count())
                     {
                         foreach (var ProcessFromDB in ProcessesFromDB)
                         {
                             foreach (var ProcessFieldFromAPI in ProcessesFromAPI.ProcessFields)
                             {
 
-                                if (ProcessFieldFromAPI.Sequence == ProcessFromDB.Sequence & ProcessFieldFromAPI.ProcessTemplateFieldId == ProcessFromDB.ProcessTemplateFieldId)
+                                if (ProcessFieldFromAPI.Sequence == ProcessFromDB.Sequence & ProcessFieldFromAPI.ProcessTypeFieldId == ProcessFromDB.ProcessTypeFieldId)
                                 {
                                     EqualSequenceCount++;
-                                    switch (ProcessFromDB.ProcessTemplateFieldTypeId)
+                                    switch (ProcessFromDB.ProcessTypeFieldTypeId)
                                     {
 
                                         case 12: //User
@@ -251,7 +251,7 @@ namespace SIPx.API.Controllers
                                             //case 11:
 
                                     }
-                                    switch (ProcessFromDB.ProcessTemplateFieldTypeId)
+                                    switch (ProcessFromDB.ProcessTypeFieldTypeId)
                                     {
                                         case 1: //Text - Subject
                                         case 2: //text
@@ -262,7 +262,7 @@ namespace SIPx.API.Controllers
                                         case 32: // html
                                         case 34: // organization role
                                         case 35: // project role
-                                            if (ProcessFromDB.ProcessTemplateStageFieldStatusId == 4 & ProcessFieldFromAPI.StringValue == null)
+                                            if (ProcessFromDB.ProcessTypeStageFieldStatusId == 4 & ProcessFieldFromAPI.StringValue == null)
                                             {
                                                 return BadRequest(new
                                                 {
@@ -291,7 +291,7 @@ namespace SIPx.API.Controllers
                                         case 28://security level
                                         case 29: //sec security level
                                         case 33: //user has specific relation to user field
-                                            if (ProcessFromDB.ProcessTemplateStageFieldStatusId == 4 & ProcessFieldFromAPI.IntValue == null)
+                                            if (ProcessFromDB.ProcessTypeStageFieldStatusId == 4 & ProcessFieldFromAPI.IntValue == null)
                                             {
                                                 return BadRequest(new
                                                 {
@@ -309,7 +309,7 @@ namespace SIPx.API.Controllers
                                         case 7:
                                         case 8:
                                         case 9:
-                                            if (ProcessFromDB.ProcessTemplateStageFieldStatusId == 4 & ProcessFieldFromAPI.DateTimeValue == null)
+                                            if (ProcessFromDB.ProcessTypeStageFieldStatusId == 4 & ProcessFieldFromAPI.DateTimeValue == null)
                                             {
                                                 return BadRequest(new
                                                 {
@@ -331,17 +331,17 @@ namespace SIPx.API.Controllers
 
                         foreach (var ProcessFieldFromAPI in ProcessesFromAPI.ProcessFields)
                         {
-                            ProcessFields.Rows.Add(ProcessFieldFromAPI.ProcessTemplateId, ProcessFieldFromAPI.ProcessTemplateFieldId, ProcessFieldFromAPI.StringValue, ProcessFieldFromAPI.IntValue, ProcessFieldFromAPI.DateTimeValue);
+                            ProcessFields.Rows.Add(ProcessFieldFromAPI.ProcessTypeId, ProcessFieldFromAPI.ProcessTypeFieldId, ProcessFieldFromAPI.StringValue, ProcessFieldFromAPI.IntValue, ProcessFieldFromAPI.DateTimeValue);
                         }
 
                         //   SqlParameter Parameters = cmd.Parameters.AddWithValue("@FieldsTable", ProcessFields);
                     //    System.Data.SqlClient.SqlParameter[] Parameters =  {
                     //    new System.Data.SqlClient.SqlParameter("@User", CurrentUser.Id)
-                    //    , new System.Data.SqlClient.SqlParameter("@ProcessTemplateID", ProcessesFromAPI.ProcessTemplateId)
-                    //    , new System.Data.SqlClient.SqlParameter("@ProcessTemplateStageID", ProcessesFromAPI.ProcessTemplateStageId)
+                    //    , new System.Data.SqlClient.SqlParameter("@ProcessTypeID", ProcessesFromAPI.ProcessTypeId)
+                    //    , new System.Data.SqlClient.SqlParameter("@ProcessTypeStageID", ProcessesFromAPI.ProcessTypeStageId)
                     //    , new System.Data.SqlClient.SqlParameter("@FieldsTable", ProcessFields)
                     //};
-                        await _processProvider.CreatePost("usp_CreateProcess @User, @ProcessTemplateId, @ProcessTemplateStageId, @FieldsTable", CurrentUser.Id,  ProcessesFromAPI.ProcessTemplateId, ProcessesFromAPI.ProcessTemplateStageId, ProcessFields );
+                        await _processProvider.CreatePost("usp_CreateProcess @User, @ProcessTypeId, @ProcessTypeStageId, @FieldsTable", CurrentUser.Id,  ProcessesFromAPI.ProcessTypeId, ProcessesFromAPI.ProcessTypeStageId, ProcessFields );
                         return Ok();
                     }
 

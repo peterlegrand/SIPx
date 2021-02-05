@@ -10,13 +10,13 @@ namespace SIPx.Shared
     public class FrontProcessToDoFlowCondition
     {
         [Key]
-        public int ProcessTemplateFlowConditionID { get; set; }
-        public int ProcessTemplateFlowConditionTypeID { get; set; }
-        public int ProcessTemplateFieldID { get; set; }
-        public int ProcessTemplateFieldIDRole { get; set; }
+        public int ProcessTypeFlowConditionID { get; set; }
+        public int ProcessTypeFlowConditionTypeID { get; set; }
+        public int ProcessTypeFieldID { get; set; }
+        public int ProcessTypeFieldIDRole { get; set; }
         public int ComparisonOperatorID { get; set; }
-        public string ProcessTemplateFlowConditionString { get; set; }
-        public int ProcessTemplateFlowConditionInt { get; set; }
-        public DateTime ProcessTemplateFlowConditionDate { get; set; }
+        public string ProcessTypeFlowConditionString { get; set; }
+        public int ProcessTypeFlowConditionInt { get; set; }
+        public DateTime ProcessTypeFlowConditionDate { get; set; }
     }
 }

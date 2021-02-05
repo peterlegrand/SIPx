@@ -24,7 +24,7 @@
         <e-grid-columns>
             <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProcessId" textAlign="Right" type="number"></e-grid-column>
             <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Subject")).TermString" template="#ProcessSubject" textAlign="Right" type="string"></e-grid-column>
-            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessTemplate" textAlign="Right" type="boolean"></e-grid-column>
+            <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessType" textAlign="Right" type="boolean"></e-grid-column>
             <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage")).TermString" template="#ProcessStage" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProcessCreatorName" textAlign="Center" type="string"></e-grid-column>
             <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProcessCreatedDate" textAlign="Center" type="string"></e-grid-column>
@@ -85,7 +85,7 @@
                                     <e-grid-columns>
                                         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#ProcessId" textAlign="Right" type="number"></e-grid-column>
                                         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Subject")).TermString" template="#ProcessSubject" textAlign="Right" type="string"></e-grid-column>
-                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessTemplate" textAlign="Right" type="boolean"></e-grid-column>
+                                        <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Template")).TermString" template="#ProcessType" textAlign="Right" type="boolean"></e-grid-column>
                                         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage")).TermString" template="#ProcessStage" textAlign="Center" type="string"></e-grid-column>
                                         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Creator")).TermString" template="#ProcessCreatorName" textAlign="Center" type="string"></e-grid-column>
                                         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Created date")).TermString" template="#ProcessCreatedDate" textAlign="Center" type="string"></e-grid-column>
@@ -267,19 +267,19 @@
 </script>
 <script id="ProcessSubject" type="text/x-template">
     <div>
-        <img src="${ProcessTemplateIcon}" width="18" height="18" />
+        <img src="${ProcessTypeIcon}" width="18" height="18" />
         <a href="/FrontProcess/View/${ProcessId}">${Subject}</a>
     </div>
 </script>
-<script id="ProcessTemplate" type="text/x-template">
+<script id="ProcessType" type="text/x-template">
     <div>
-        ${ProcessTemplateName}
+        ${ProcessTypeName}
     </div>
 </script>
 <script id="ProcessStage" type="text/x-template">
-    <div ${ProcessTemplateStageTypeColor} class='box'></div>
+    <div ${ProcessTypeStageTypeColor} class='box'></div>
     <div class="Stage">
-        ${ProcessTemplateStageName}
+        ${ProcessTypeStageName}
     </div>
 </script>
 <script id="ProcessCreatorName" type="text/x-template">

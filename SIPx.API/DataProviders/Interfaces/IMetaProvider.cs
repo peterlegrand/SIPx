@@ -17,10 +17,10 @@ namespace SIPx.DataAccess
         Task<List<MetaListPageSectionDataType>> PageSectionDataTypes();
         Task<List<MetaListPageSectionType>> PageSectionTypes();
         Task<List<MetaListPreferenceType>> PreferenceTypes();
-        Task<List<MetaListProcessTemplateFieldType>> ProcessTemplateFieldTypes();
-        Task<List<MetaListProcessTemplateFlowConditionComparisonOperator>> ProcessTemplateFlowConditionComparisonOperators();
-        Task<List<MetaListProcessTemplateFlowConditionType>> ProcessTemplateFlowConditionTypes();
-        Task<List<MetaListProcessTemplateStageFieldStatus>> ProcessTemplateStageFieldStatuses();
+        Task<List<MetaListProcessTypeFieldType>> ProcessTypeFieldTypes();
+        Task<List<MetaListProcessTypeFlowConditionComparisonOperator>> ProcessTypeFlowConditionComparisonOperators();
+        Task<List<MetaListProcessTypeFlowConditionType>> ProcessTypeFlowConditionTypes();
+        Task<List<MetaListProcessTypeStageFieldStatus>> ProcessTypeStageFieldStatuses();
         Task<List<MetaListRegion>> Regions();
         Task<List<MetaListSecurityLevel>> SecurityLevels();
         Task<List<MetaListSettings>> Settings();

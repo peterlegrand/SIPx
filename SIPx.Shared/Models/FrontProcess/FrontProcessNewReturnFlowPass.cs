@@ -9,14 +9,14 @@ namespace SIPx.Shared
     public class FrontProcessNewReturnFlowPass
     {
         [Key]
-        public int ProcessTemplateFlowConditionTypeId { get; set; }
-        public int ProcessTemplateFieldId { get; set; }
-        public int ProcessTemplateFieldIDRole { get; set; }
+        public int ProcessTypeFlowConditionTypeId { get; set; }
+        public int ProcessTypeFieldId { get; set; }
+        public int ProcessTypeFieldIDRole { get; set; }
         public int ComparisonOperatorID { get; set; }
-        public string ProcessTemplateFlowConditionString { get; set; }
-        public int ProcessTemplateFlowConditionInt { get; set; }
-        public DateTime ProcessTemplateFlowConditionDate { get; set; }
-        public int ProcessTemplateFieldTypeId { get; set; }
+        public string ProcessTypeFlowConditionString { get; set; }
+        public int ProcessTypeFlowConditionInt { get; set; }
+        public DateTime ProcessTypeFlowConditionDate { get; set; }
+        public int ProcessTypeFieldTypeId { get; set; }
         public string StageFieldStringValue { get; set; }
         public int StageFieldIntValue { get; set; }
         public DateTime StageFieldDateTimeValue { get; set; }

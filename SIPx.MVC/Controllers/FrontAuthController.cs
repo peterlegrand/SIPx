@@ -22,7 +22,7 @@ namespace SIPx.MVC.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            var model = new LoginViewModel() { Email = "eplegrand@gmail.com", Password = "Pipo!9165" };
+            var model = new LoginViewModel() { Email = "eplegrand@gmail.com", Password = "Sip!2021" };
             return View(model);
         }
         [HttpPost]

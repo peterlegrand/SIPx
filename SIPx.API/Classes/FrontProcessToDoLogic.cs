@@ -30,162 +30,162 @@ namespace SIPx.API.Classes
             _processProvider = ProcessProvider;
             _frontProcessProvider = frontProcessProvider;
         }
-        public async Task<int> ReturnProcessTemplateFlowPass(SipUser CurrentUser, FrontProcessUpdateGet Process)
+        public async Task<int> ReturnProcessTypeFlowPass(SipUser CurrentUser, FrontProcessUpdateGet Process)
         {
-            var Flows = await _frontProcessProvider.FrontProcessUpdateReturnFlows(Process.ProcessTemplateStageId);
+            var Flows = await _frontProcessProvider.FrontProcessUpdateReturnFlows(Process.ProcessTypeStageId);
             foreach (var FlowId in Flows)
             {
-                string From = "SELECT ProcessTemplateFlowId FROM ProcessTemplateFlowPasses";
-                string Where = " WHERE ProcessTemplateFlowId = " + FlowId + " AND ";
+                string From = "SELECT ProcessTypeFlowId FROM ProcessTypeFlowPasses";
+                string Where = " WHERE ProcessTypeFlowId = " + FlowId + " AND ";
                 var Passes = await _frontProcessProvider.FrontProcessNewReturnFlowPasses(FlowId);
                 foreach (var Pass in Passes)
                 {
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 1) //Creator is user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 1) //Creator is user
                     {
                         //                    From = From + NewProcess. '  '
                         //Have to check if this can be used in general or only new processes
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 2) //  Field
+                    if (Pass.ProcessTypeFlowConditionTypeId == 2) //  Field
                     {
-                        if (!new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Pass.ProcessTemplateFieldTypeId))
+                        if (!new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Pass.ProcessTypeFieldTypeId))
                         {
                             Where = Where + " 1=2 ";
                         }
 
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 3) //  Security level user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 3) //  Security level user
                     {
                         var UserSecurityLevel = await _userProvider.UserSecurityLevel(CurrentUser.Id);
                         if (Pass.ComparisonOperatorID == 1)  //Comparison blank
                         {
                             Where = Where + " 1=2 ";
                         }
-                        if (Pass.ComparisonOperatorID == 2 && UserSecurityLevel != Pass.ProcessTemplateFlowConditionInt) //Equal
+                        if (Pass.ComparisonOperatorID == 2 && UserSecurityLevel != Pass.ProcessTypeFlowConditionInt) //Equal
                         {
                             Where = Where + " 1=2 ";
                         }
-                        if (Pass.ComparisonOperatorID == 3 && UserSecurityLevel <= Pass.ProcessTemplateFlowConditionInt) //
+                        if (Pass.ComparisonOperatorID == 3 && UserSecurityLevel <= Pass.ProcessTypeFlowConditionInt) //
                         {
                             Where = Where + " 1=2 ";
                         }
-                        if (Pass.ComparisonOperatorID == 4 && UserSecurityLevel >= Pass.ProcessTemplateFlowConditionInt)
+                        if (Pass.ComparisonOperatorID == 4 && UserSecurityLevel >= Pass.ProcessTypeFlowConditionInt)
                         {
                             Where = Where + " 1=2 ";
                         }
-                        if (Pass.ComparisonOperatorID == 5 && UserSecurityLevel < Pass.ProcessTemplateFlowConditionInt)
+                        if (Pass.ComparisonOperatorID == 5 && UserSecurityLevel < Pass.ProcessTypeFlowConditionInt)
                         {
                             Where = Where + " 1=2 ";
                         }
-                        if (Pass.ComparisonOperatorID == 6 && UserSecurityLevel > Pass.ProcessTemplateFlowConditionInt)
+                        if (Pass.ComparisonOperatorID == 6 && UserSecurityLevel > Pass.ProcessTypeFlowConditionInt)
                         {
                             Where = Where + " 1=2 ";
                         }
-                        if (Pass.ComparisonOperatorID == 7 && UserSecurityLevel == Pass.ProcessTemplateFlowConditionInt)
+                        if (Pass.ComparisonOperatorID == 7 && UserSecurityLevel == Pass.ProcessTypeFlowConditionInt)
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 4) // Role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 4) // Role user
                     {
                         var Roles = await _userProvider.UserRoles(CurrentUser.Id);
-                        if (!Roles.Contains(Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).StringValue ?? ""))
+                        if (!Roles.Contains(Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).StringValue ?? ""))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
                     //PETER not sure yet
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 5) //  Manager user field
+                    if (Pass.ProcessTypeFlowConditionTypeId == 5) //  Manager user field
                     {
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 6) //  Organization user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 6) //  Organization user
                     {
                         var Organizations = await _userProvider.UserOrganizations(CurrentUser.Id);
-                        if (!Organizations.Contains(Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        if (!Organizations.Contains(Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 7) //  Organization role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 7) //  Organization role user
                     {
-                        var RoleId = Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldIDRole).StringValue ?? "";
+                        var RoleId = Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldIDRole).StringValue ?? "";
                         var Organizations = await _userProvider.UserRoleOrganizations(CurrentUser.Id, RoleId);
-                        if (!Organizations.Contains(Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        if (!Organizations.Contains(Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
                     //PETER TODO
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 8) //  Organization parent user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 8) //  Organization parent user
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 9) //  Organization parent role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 9) //  Organization parent role user
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 10) // Project user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 10) // Project user
                     {
                         var Projects = await _userProvider.UserProjects(CurrentUser.Id);
-                        if (!Projects.Contains(Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        if (!Projects.Contains(Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 11) //Project role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 11) //Project role user
                     {
-                        var RoleId = Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldIDRole).StringValue ?? "";
+                        var RoleId = Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldIDRole).StringValue ?? "";
                         var Projects = await _userProvider.UserRoleProjects(CurrentUser.Id, RoleId);
-                        if (!Projects.Contains(Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        if (!Projects.Contains(Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 12) //Project parent user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 12) //Project parent user
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 13) //Project parent role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 13) //Project parent role user
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 14) //Default organization user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 14) //Default organization user
                     {
                         var Organization = await _userProvider.UserDefaultOrganization(CurrentUser.Id);
-                        var OrganizationInField = Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0;
+                        var OrganizationInField = Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0;
                         if (Organization != OrganizationInField)
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 15) //Open bracket
+                    if (Pass.ProcessTypeFlowConditionTypeId == 15) //Open bracket
                     {
                         Where = Where + " ( ";
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 16) //and
+                    if (Pass.ProcessTypeFlowConditionTypeId == 16) //and
                     {
                         Where = Where + " AND ";
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 17) //or
+                    if (Pass.ProcessTypeFlowConditionTypeId == 17) //or
                     {
                         Where = Where + " OR ";
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 18) //Close bracket
+                    if (Pass.ProcessTypeFlowConditionTypeId == 18) //Close bracket
                     {
                         Where = Where + " ) ";
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 19) //User
+                    if (Pass.ProcessTypeFlowConditionTypeId == 19) //User
                     {
-                        var UserInField = Process.Fields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).StringValue ?? "";
+                        var UserInField = Process.Fields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).StringValue ?? "";
                         if (CurrentUser.Id != UserInField)
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 20) //Relation to creator
+                    if (Pass.ProcessTypeFlowConditionTypeId == 20) //Relation to creator
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 21) //Relation to user field
+                    if (Pass.ProcessTypeFlowConditionTypeId == 21) //Relation to user field
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 22) //Classification relation
+                    if (Pass.ProcessTypeFlowConditionTypeId == 22) //Classification relation
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 23) //Classification relation type
+                    if (Pass.ProcessTypeFlowConditionTypeId == 23) //Classification relation type
                     { }
                 }
-                if (Where == " WHERE ProcessTemplateFlowId = " + FlowId + " AND ")
-                { Where = " WHERE ProcessTemplateFlowId = " + FlowId; }
+                if (Where == " WHERE ProcessTypeFlowId = " + FlowId + " AND ")
+                { Where = " WHERE ProcessTypeFlowId = " + FlowId; }
                 var SQLStatement = From + Where;
-                var x = await _frontProcessProvider.ReturnProcessTemplateFlowPass(CurrentUser.Id, SQLStatement);
+                var x = await _frontProcessProvider.ReturnProcessTypeFlowPass(CurrentUser.Id, SQLStatement);
                 if (x.Count() > 0)
                 {
                     return x.First();
@@ -208,38 +208,38 @@ namespace SIPx.API.Classes
                 {
                     string From = "DECLARE @LanguageId int; SELECT @LanguageId = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeId = 1 ;" +
                         " SELECT Processes.ProcessID " +
-                        " , ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this process template')) ProcessTemplateName " +
-                        " , ISNULL(UserProcessTemplateFieldLanguage.Name,ISNULL(DefaultProcessTemplateFieldLanguage.Name,'No name for this process template field')) ProcessTemplateFieldName " +
-                        " , ISNULL(UserProcessTemplateStageTypeLanguage.Name,ISNULL(DefaultProcessTemplateStageTypeLanguage.Name,'No description for this process template stage type')) ProcesstemplateStageTypeName" +
-                        " , ISNULL(UserProcessTemplateStageLanguage.Name,ISNULL(DefaultProcessTemplateStageLanguage.Name,'No description for this process template stage')) ProcesstemplateStageName" +
+                        " , ISNULL(UserProcessTypeLanguage.Name,ISNULL(DefaultProcessTypeLanguage.Name,'No name for this process type')) ProcessTypeName " +
+                        " , ISNULL(UserProcessTypeFieldLanguage.Name,ISNULL(DefaultProcessTypeFieldLanguage.Name,'No name for this process type field')) ProcessTypeFieldName " +
+                        " , ISNULL(UserProcessTypeStageTypeLanguage.Name,ISNULL(DefaultProcessTypeStageTypeLanguage.Name,'No description for this process type stage type')) ProcesstypeStageTypeName" +
+                        " , ISNULL(UserProcessTypeStageLanguage.Name,ISNULL(DefaultProcessTypeStageLanguage.Name,'No description for this process type stage')) ProcesstypeStageName" +
                         " , ProcessFields.StringValue Subject " +
                         " , Creator.FirstName + ' ' + Creator.LastName CreatorName, Creator.PersonID CreatorID, Processes.CreatedDate, Modifier.FirstName + ' ' + Modifier.LastName ModifierName, Modifier.PersonID ModifierId, Processes.ModifiedDate " +
                         " FROM Processes JOIN ProcessFields ON ProcessFields.ProcessId = Processes.ProcessID " +
-                        " JOIN ProcessTemplateFields ON ProcessTemplateFields.ProcessTemplateFieldId = ProcessFields.ProcessTemplateFieldID " +
-                        " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateLanguage ON UserProcessTemplateLanguage.ProcessTemplateId = Processes.ProcessTemplateID " +
-                        " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateLanguage ON DefaultProcessTemplateLanguage.ProcessTemplateId = Processes.ProcessTemplateID " +
+                        " JOIN ProcessTypeFields ON ProcessTypeFields.ProcessTypeFieldId = ProcessFields.ProcessTypeFieldID " +
+                        " LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTypeLanguage ON UserProcessTypeLanguage.ProcessTypeId = Processes.ProcessTypeID " +
+                        " LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages JOIN Settings ON ProcessTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeLanguage ON DefaultProcessTypeLanguage.ProcessTypeId = Processes.ProcessTypeID " +
 
-                        " LEFT JOIN (SELECT ProcessTemplateFieldId, Name FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage ON UserProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID " +
-                        " LEFT JOIN (SELECT ProcessTemplateFieldId, Name FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID " +
+                        " LEFT JOIN (SELECT ProcessTypeFieldId, Name FROM ProcessTypeFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTypeFieldLanguage ON UserProcessTypeFieldLanguage.ProcessTypeFieldId = ProcessTypeFields.ProcessTypeFieldID " +
+                        " LEFT JOIN (SELECT ProcessTypeFieldId, Name FROM ProcessTypeFieldLanguages JOIN Settings ON ProcessTypeFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeFieldLanguage ON DefaultProcessTypeFieldLanguage.ProcessTypeFieldId = ProcessTypeFields.ProcessTypeFieldID " +
 
-                        " LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageLanguage ON UserProcessTemplateStageLanguage.ProcessTemplateStageId = Processes.ProcessTemplateStageID " +
-                        " LEFT JOIN (SELECT ProcessTemplateStageId, Name FROM ProcessTemplateStageLanguages JOIN Settings ON ProcessTemplateStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateStageLanguage ON DefaultProcessTemplateStageLanguage.ProcessTemplateStageId = Processes.ProcessTemplateStageID " +
+                        " LEFT JOIN (SELECT ProcessTypeStageId, Name FROM ProcessTypeStageLanguages WHERE LanguageId = @LanguageID) UserProcessTypeStageLanguage ON UserProcessTypeStageLanguage.ProcessTypeStageId = Processes.ProcessTypeStageID " +
+                        " LEFT JOIN (SELECT ProcessTypeStageId, Name FROM ProcessTypeStageLanguages JOIN Settings ON ProcessTypeStageLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeStageLanguage ON DefaultProcessTypeStageLanguage.ProcessTypeStageId = Processes.ProcessTypeStageID " +
 
-                        " JOIN ProcessTemplateStages ON Processes.ProcessTemplateStageId = ProcessTemplateStages.ProcessTemplateStageId " +
+                        " JOIN ProcessTypeStages ON Processes.ProcessTypeStageId = ProcessTypeStages.ProcessTypeStageId " +
 
-                        " LEFT JOIN (SELECT ProcessTemplateStageTypeId, Name FROM ProcessTemplateStageTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageTypeLanguage ON UserProcessTemplateStageTypeLanguage.ProcessTemplateStageTypeId = ProcessTemplateStages.ProcessTemplateStageTypeID " +
-                        " LEFT JOIN (SELECT ProcessTemplateStageTypeId, Name FROM ProcessTemplateStageTypeLanguages JOIN Settings ON ProcessTemplateStageTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateStageTypeLanguage ON DefaultProcessTemplateStageTypeLanguage.ProcessTemplateStageTypeId = ProcessTemplateStages.ProcessTemplateStageTypeID " +
+                        " LEFT JOIN (SELECT ProcessTypeStageTypeId, Name FROM ProcessTypeStageTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTypeStageTypeLanguage ON UserProcessTypeStageTypeLanguage.ProcessTypeStageTypeId = ProcessTypeStages.ProcessTypeStageTypeID " +
+                        " LEFT JOIN (SELECT ProcessTypeStageTypeId, Name FROM ProcessTypeStageTypeLanguages JOIN Settings ON ProcessTypeStageTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeStageTypeLanguage ON DefaultProcessTypeStageTypeLanguage.ProcessTypeStageTypeId = ProcessTypeStages.ProcessTypeStageTypeID " +
 
                         " JOIN Persons Creator ON Creator.UserId = Processes.CreatorID " +
                         " JOIN Persons Modifier ON Modifier.UserId = Processes.ModifierID ";
-                    string Where = " WHERE ProcessTemplateFields.ProcessTemplateFieldTypeId = 1 AND Processes.ProcessId = " + Process.ProcessId + " AND ";
-                    string OrderBy = " ORDER BY ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this process template')) , ProcessFields.StringValue ";
+                    string Where = " WHERE ProcessTypeFields.ProcessTypeFieldTypeId = 1 AND Processes.ProcessId = " + Process.ProcessId + " AND ";
+                    string OrderBy = " ORDER BY ISNULL(UserProcessTypeLanguage.Name,ISNULL(DefaultProcessTypeLanguage.Name,'No name for this process type')) , ProcessFields.StringValue ";
                     var Conditions = await _frontProcessProvider.FrontProcessToDoConditions(Flow);
                     foreach (var Condition in Conditions)
                     {
                         var Fields = await _frontProcessProvider.FrontProcessToDoProcessFields(Process.ProcessId);
 
-                        switch (Condition.ProcessTemplateFlowConditionTypeID)
+                        switch (Condition.ProcessTypeFlowConditionTypeID)
                         {
 
                             case 1: //Creator is user
@@ -252,21 +252,21 @@ namespace SIPx.API.Classes
                                 if (
                                     //PETER TODO maybe still adjust for condition <>=
                                     (
-                                        Fields.Find(x => x.ProcessTemplateFieldID == Condition.ProcessTemplateFieldID).StringValue != Condition.ProcessTemplateFlowConditionString
+                                        Fields.Find(x => x.ProcessTypeFieldID == Condition.ProcessTypeFieldID).StringValue != Condition.ProcessTypeFlowConditionString
                                     &&
-                                    !new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Fields.Find(x => x.ProcessTemplateFieldID == Condition.ProcessTemplateFieldID).ProcessTemplateFieldTypeID)
+                                    !new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Fields.Find(x => x.ProcessTypeFieldID == Condition.ProcessTypeFieldID).ProcessTypeFieldTypeID)
                                      )
                                      ||
                                     (
-                                        Fields.Find(x => x.ProcessTemplateFieldID == Condition.ProcessTemplateFieldID).IntValue != Condition.ProcessTemplateFlowConditionInt
+                                        Fields.Find(x => x.ProcessTypeFieldID == Condition.ProcessTypeFieldID).IntValue != Condition.ProcessTypeFlowConditionInt
                                     &&
-                                    !new[] { 3, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 36, 37 }.Contains(Fields.Find(x => x.ProcessTemplateFieldID == Condition.ProcessTemplateFieldID).ProcessTemplateFieldTypeID)
+                                    !new[] { 3, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 36, 37 }.Contains(Fields.Find(x => x.ProcessTypeFieldID == Condition.ProcessTypeFieldID).ProcessTypeFieldTypeID)
                                      )
                                        ||
                                     (
-                                        Fields.Find(x => x.ProcessTemplateFieldID == Condition.ProcessTemplateFieldID).DateTimeValue != Condition.ProcessTemplateFlowConditionDate
+                                        Fields.Find(x => x.ProcessTypeFieldID == Condition.ProcessTypeFieldID).DateTimeValue != Condition.ProcessTypeFlowConditionDate
                                     &&
-                                    !new[] { 4, 5, 6, 7, 8, 9 }.Contains(Fields.Find(x => x.ProcessTemplateFieldID == Condition.ProcessTemplateFieldID).ProcessTemplateFieldTypeID)
+                                    !new[] { 4, 5, 6, 7, 8, 9 }.Contains(Fields.Find(x => x.ProcessTypeFieldID == Condition.ProcessTypeFieldID).ProcessTypeFieldTypeID)
                                      )
                                     )
                                 { }
@@ -284,37 +284,37 @@ namespace SIPx.API.Classes
 
                                         break;
                                     case 2: //=
-                                        if (Fields.Find(x => x.ProcessTemplateFieldTypeID == 12).IntValue != CurrentUser.SecurityLevelId)
+                                        if (Fields.Find(x => x.ProcessTypeFieldTypeID == 12).IntValue != CurrentUser.SecurityLevelId)
                                         {
                                             Where = Where + " 3 = 2 ";
                                         }
                                         break;
                                     case 3://large
-                                        if (Fields.Find(x => x.ProcessTemplateFieldTypeID == 12).IntValue >= CurrentUser.SecurityLevelId)
+                                        if (Fields.Find(x => x.ProcessTypeFieldTypeID == 12).IntValue >= CurrentUser.SecurityLevelId)
                                         {
                                             Where = Where + " 3 = 4 ";
                                         }
                                         break;
                                     case 4://Smaller
-                                        if (Fields.Find(x => x.ProcessTemplateFieldTypeID == 12).IntValue <= CurrentUser.SecurityLevelId)
+                                        if (Fields.Find(x => x.ProcessTypeFieldTypeID == 12).IntValue <= CurrentUser.SecurityLevelId)
                                         {
                                             Where = Where + " 3 = 5 ";
                                         }
                                         break;
                                     case 5://Larger or equal
-                                        if (Fields.Find(x => x.ProcessTemplateFieldTypeID == 12).IntValue > CurrentUser.SecurityLevelId)
+                                        if (Fields.Find(x => x.ProcessTypeFieldTypeID == 12).IntValue > CurrentUser.SecurityLevelId)
                                         {
                                             Where = Where + " 3 = 6 ";
                                         }
                                         break;
                                     case 6://Smaller or equal
-                                        if (Fields.Find(x => x.ProcessTemplateFieldTypeID == 12).IntValue < CurrentUser.SecurityLevelId)
+                                        if (Fields.Find(x => x.ProcessTypeFieldTypeID == 12).IntValue < CurrentUser.SecurityLevelId)
                                         {
                                             Where = Where + " 3 = 7 ";
                                         }
                                         break;
                                     case 7://Not qual
-                                        if (Fields.Find(x => x.ProcessTemplateFieldTypeID == 12).IntValue == CurrentUser.SecurityLevelId)
+                                        if (Fields.Find(x => x.ProcessTypeFieldTypeID == 12).IntValue == CurrentUser.SecurityLevelId)
                                         {
                                             Where = Where + " 3 = 8 ";
                                         }
@@ -323,7 +323,7 @@ namespace SIPx.API.Classes
                                 break;
                             case 4: //Role user
                                 var RoleIds = await _userRoleProvider.UserRoleIDsPerUser(CurrentUser.Id);
-                                if (!RoleIds.Contains(Fields.Find(x => x.ProcessTemplateFieldTypeID == 30).StringValue))
+                                if (!RoleIds.Contains(Fields.Find(x => x.ProcessTypeFieldTypeID == 30).StringValue))
                                 {
                                     Where = Where + " 3 = 8 ";
                                 }
@@ -334,7 +334,7 @@ namespace SIPx.API.Classes
                             case 6: //Organization user
                                 //PETER TODO do we need to split Main organization, any organization or for specific role
                                 var OrganizationIds = await _organizationProvider.OrganizationIDsPerUser(CurrentUser.Id);
-                                if (!OrganizationIds.Contains(Fields.Find(x => x.ProcessTemplateFieldTypeID == 30).IntValue))
+                                if (!OrganizationIds.Contains(Fields.Find(x => x.ProcessTypeFieldTypeID == 30).IntValue))
                                 {
                                     Where = Where + " 3 = 8 ";
                                 }
@@ -352,7 +352,7 @@ namespace SIPx.API.Classes
                                 break;
                             case 11: //Project role user
                                 var ProjectIds = await _projectProvider.ProjectIDsPerUser(CurrentUser.Id);
-                                if (!ProjectIds.Contains(Fields.Find(x => x.ProcessTemplateFieldTypeID == 30).IntValue))
+                                if (!ProjectIds.Contains(Fields.Find(x => x.ProcessTypeFieldTypeID == 30).IntValue))
                                 {
                                     Where = Where + " 3 = 8 ";
                                 }
@@ -366,7 +366,7 @@ namespace SIPx.API.Classes
                                 break;
                             case 14: //Default organization user
                                 var OrganizationId = await _organizationProvider.MainOrganizationIDPerUser(CurrentUser.Id);
-                                if (OrganizationId != Fields.Find(x => x.ProcessTemplateFieldTypeID == 30).IntValue)
+                                if (OrganizationId != Fields.Find(x => x.ProcessTypeFieldTypeID == 30).IntValue)
                                 {
                                     Where = Where + " 3 = 8 ";
                                 }
@@ -389,7 +389,7 @@ namespace SIPx.API.Classes
 
                                 break;
                             case 19: //User
-                                if (Fields.Find(x => x.ProcessTemplateFieldTypeID == 12).StringValue != CurrentUser.Id)
+                                if (Fields.Find(x => x.ProcessTypeFieldTypeID == 12).StringValue != CurrentUser.Id)
                                 {
                                     Where = Where + " 1 = 2 ";
                                 }
@@ -410,10 +410,10 @@ namespace SIPx.API.Classes
 
                     }
 
-                    var CompareWhere = " WHERE ProcessTemplateFields.ProcessTemplateFieldTypeId = 1 AND Processes.ProcessId = " + Process.ProcessId + " AND ";
+                    var CompareWhere = " WHERE ProcessTypeFields.ProcessTypeFieldTypeId = 1 AND Processes.ProcessId = " + Process.ProcessId + " AND ";
                     if (Where == CompareWhere)
                     {
-                        Where = " WHERE ProcessTemplateFields.ProcessTemplateFieldTypeId = 1 AND Processes.ProcessId = " + Process.ProcessId + " ";
+                        Where = " WHERE ProcessTypeFields.ProcessTypeFieldTypeId = 1 AND Processes.ProcessId = " + Process.ProcessId + " ";
                     }
                     var ToDos = await _frontProcessProvider.FrontProcessToDo(From + Where + OrderBy);
                     if(ToDos.Count==1)

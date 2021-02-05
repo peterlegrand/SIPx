@@ -5,9 +5,9 @@ SELECT ProcessFields.ProcessFieldID
 	, ProcessFields.StringValue
 	, ProcessFields.IntValue
 	, ProcessFields.DateTimeValue
-	, ProcessFields.ProcessTemplateFieldID
-	, ProcessTemplateFields.ProcessTemplateFieldTypeID
+	, ProcessFields.ProcessTypeFieldID
+	, ProcessTypeFields.ProcessTypeFieldTypeID
 FROM ProcessFields 
-JOIN ProcessTemplateFields
-	ON ProcessFields.ProcessTemplateFieldID = ProcessTemplateFields.ProcessTemplateFieldID
+JOIN ProcessTypeFields
+	ON ProcessFields.ProcessTypeFieldID = ProcessTypeFields.ProcessTypeFieldID
 WHERE ProcessId = @ProcessId

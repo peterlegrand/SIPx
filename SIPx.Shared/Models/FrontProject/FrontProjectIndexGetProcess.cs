@@ -10,8 +10,8 @@ namespace SIPx.Shared
         [Key]
         public int ProcessId { get; set; }
         public string Subject { get; set; }
-        public string ProcessTemplateStageTypeName { get; set; }
-        public string ProcessTemplateName { get; set; }
+        public string ProcessTypeStageTypeName { get; set; }
+        public string ProcessTypeName { get; set; }
         public string TemplateColor { get; set; }
         public string StageTypeColor { get; set; }
         public string TemplateIconFileName { get; set; }

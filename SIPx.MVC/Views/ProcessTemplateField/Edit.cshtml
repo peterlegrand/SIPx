@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateFieldUpdateGet
+@model ProcessTypeFieldUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template field")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type field")).TermString;
     ViewData["Image"] = "Field.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -18,8 +18,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateFieldId" ejs-for="@Model.ProcessTemplateFieldId" cssClass="e-outline" placeholder="ProcessTemplateFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId" cssClass="e-outline" placeholder="ProcessTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFieldId" ejs-for="@Model.ProcessTypeFieldId" cssClass="e-outline" placeholder="ProcessTypeFieldId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -30,8 +30,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateFieldId" ejs-for="@Model.ProcessTemplateFieldId" cssClass="e-outline" placeholder="ProcessTemplateFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId" cssClass="e-outline" placeholder="ProcessTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFieldId" ejs-for="@Model.ProcessTypeFieldId" cssClass="e-outline" placeholder="ProcessTypeFieldId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -85,8 +85,8 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Field type")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateFieldTypeId" dataSource="@Model.ProcessTemplateFieldTypes" ejs-for="@Model.ProcessTemplateFieldTypeId" value="@Model.ProcessTemplateFieldTypeId" index="2" filtering="ProcessTemplateFieldTypes" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFieldTypeId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeFieldTypeId" dataSource="@Model.ProcessTypeFieldTypes" ejs-for="@Model.ProcessTypeFieldTypeId" value="@Model.ProcessTypeFieldTypeId" index="2" filtering="ProcessTypeFieldTypes" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeFieldTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -95,7 +95,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ProcessTemplateId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <a asp-action="Index" asp-route-id="@Model.ProcessTypeId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
@@ -239,9 +239,9 @@
 </script>
 
 <script type="text/javascript">
-        function ProcessTemplateFieldTypes(e) {
+        function ProcessTypeFieldTypes(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFieldTypes)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeFieldTypes)), query);
                 }
 </script>

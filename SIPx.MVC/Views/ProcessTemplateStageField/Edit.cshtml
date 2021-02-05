@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateStageFieldUpdateGet
+@model ProcessTypeStageFieldUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template field stage")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type field stage")).TermString;
     ViewData["Image"] = "StageField.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -18,8 +18,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateStageFieldId" ejs-for="@Model.ProcessTemplateStageFieldId" cssClass="e-outline" placeholder="ProcessTemplateStageFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageId" ejs-for="@Model.ProcessTypeStageId" cssClass="e-outline" placeholder="ProcessTypeStageId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageFieldId" ejs-for="@Model.ProcessTypeStageFieldId" cssClass="e-outline" placeholder="ProcessTypeStageFieldId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -30,8 +30,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId" cssClass="e-outline" placeholder="ProcessTemplateStageId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateStageFieldId" ejs-for="@Model.ProcessTemplateStageFieldId" cssClass="e-outline" placeholder="ProcessTemplateStageFieldId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageId" ejs-for="@Model.ProcessTypeStageId" cssClass="e-outline" placeholder="ProcessTypeStageId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageFieldId" ejs-for="@Model.ProcessTypeStageFieldId" cssClass="e-outline" placeholder="ProcessTypeStageFieldId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -41,7 +41,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Field")).TermString
             </div>
             <div class="col-9">
-                @Model.ProcessTemplateFieldName
+                @Model.ProcessTypeFieldName
             </div>
         </div>
 
@@ -50,7 +50,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Stage")).TermString
             </div>
             <div class="col-9">
-                @Model.ProcessTemplateStageName
+                @Model.ProcessTypeStageName
             </div>
         </div>
         <div class="row">
@@ -58,8 +58,8 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Status")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateStageFieldStatusName" dataSource="@Model.ProcessTemplateStageFieldStatuses" ejs-for="@Model.ProcessTemplateStageFieldStatusId" value="@Model.ProcessTemplateStageFieldStatusId" index="2" filtering="ProcessTemplateStageFieldStatuses" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateStageFieldStatusId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeStageFieldStatusName" dataSource="@Model.ProcessTypeStageFieldStatuses" ejs-for="@Model.ProcessTypeStageFieldStatusId" value="@Model.ProcessTypeStageFieldStatusId" index="2" filtering="ProcessTypeStageFieldStatuses" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeStageFieldStatusId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -69,7 +69,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateFields" dataSource="@Model.ProcessTemplateFields" ejs-for="@Model.Sequence" value="@Model.Sequence" filtering="ProcessTemplateFields" index="2" popupHeight="220px">
+                <ejs-dropdownlist id="ProcessTypeFields" dataSource="@Model.ProcessTypeFields" ejs-for="@Model.Sequence" value="@Model.Sequence" filtering="ProcessTypeFields" index="2" popupHeight="220px">
                     <e-dropdownlist-fields text="Name" value="Sequence"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
@@ -91,7 +91,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("String value")).TermString
             </div>
             <div class="col-9">
-                @if (new[] { 1, 2 }.Contains(Model.ProcessTemplateFieldTypeId))
+                @if (new[] { 1, 2 }.Contains(Model.ProcessTypeFieldTypeId))
                 {
                     <ejs-textbox id="StringValue" ejs-for="StringValue" cssClass="e-outline" placeholder="String value" floatLabelType="Auto"></ejs-textbox>
                 }
@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ProcessTemplateStageId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <a asp-action="Index" asp-route-id="@Model.ProcessTypeStageId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
@@ -254,17 +254,17 @@
 </script>
 
 <script type="text/javascript">
-    function ProcessTemplateStageFieldStatuses(e) {
+    function ProcessTypeStageFieldStatuses(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateStageFieldStatuses)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeStageFieldStatuses)), query);
                 }
 </script>
 <script type="text/javascript">
-    function ProcessTemplateFields(e) {
+    function ProcessTypeFields(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFields)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeFields)), query);
                 }
 </script>
 <script type="text/javascript">

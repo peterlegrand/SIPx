@@ -1,23 +1,23 @@
-CREATE PROCEDURE usp_NewProcessGetFlowConditionList (@ProcessTemplateFlowId int) 
+CREATE PROCEDURE usp_NewProcessGetFlowConditionList (@ProcessTypeFlowId int) 
 AS
-SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowId
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionId
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionTypeID
-	, ProcessTemplateFlowConditions.ProcessTemplateFieldID
-	, ProcessTemplateFlowConditions.ProcessTemplateFieldIDRole
-	, ProcessTemplateFlowConditions.ComparisonOperatorID
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionString
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionInt
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionDate
+SELECT ProcessTypeFlowConditions.ProcessTypeFlowId
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionId
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionTypeID
+	, ProcessTypeFlowConditions.ProcessTypeFieldID
+	, ProcessTypeFlowConditions.ProcessTypeFieldIDRole
+	, ProcessTypeFlowConditions.ComparisonOperatorID
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionString
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionInt
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionDate
 	, ISNULL(stagefields.IntValue, 0) StageFieldIntValue
 	, ISNULL(stagefields.StringValue, '') StageFieldStringValue
 	, ISNULL(stagefields.DateTimeValue, getdate()) StageFieldDateTimeValue
-FROM ProcessTemplateFlowConditions 
-JOIN ProcessTemplateFlows 
-	ON ProcessTemplateFlowConditions.ProcessTemplateFlowID = ProcessTemplateFlows.ProcessTemplateFlowID 
-LEFT JOIN (SELECT ProcessTemplateStageFields.ProcessTemplateFieldID, ProcessTemplateStageFields.ProcessTemplateStageID, IntValue, StringValue, DateTimeValue FROM ProcessTemplateStageFields) StageFields
-	ON StageFields.ProcessTemplateFieldID = ProcessTemplateFlowConditions.ProcessTemplateFieldID 
-		AND StageFields.ProcessTemplateStageID = ProcessTemplateFlows.ProcessTemplateFromStageID 
-WHERE ProcessTemplateFlowConditions.ProcessTemplateFlowId = @ProcessTemplateFlowId
+FROM ProcessTypeFlowConditions 
+JOIN ProcessTypeFlows 
+	ON ProcessTypeFlowConditions.ProcessTypeFlowID = ProcessTypeFlows.ProcessTypeFlowID 
+LEFT JOIN (SELECT ProcessTypeStageFields.ProcessTypeFieldID, ProcessTypeStageFields.ProcessTypeStageID, IntValue, StringValue, DateTimeValue FROM ProcessTypeStageFields) StageFields
+	ON StageFields.ProcessTypeFieldID = ProcessTypeFlowConditions.ProcessTypeFieldID 
+		AND StageFields.ProcessTypeStageID = ProcessTypeFlows.ProcessTypeFromStageID 
+WHERE ProcessTypeFlowConditions.ProcessTypeFlowId = @ProcessTypeFlowId
 ORDER BY Sequence
 

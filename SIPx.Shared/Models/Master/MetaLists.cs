@@ -163,28 +163,28 @@ namespace SIPx.Shared
         public int PreferenceTypeId { get; set; }
         public string Name { get; set; }
     }
-    public class MetaListProcessTemplateFieldType
+    public class MetaListProcessTypeFieldType
     {
         [Key]
-        public int ProcessTemplateFieldTypeId { get; set; }
+        public int ProcessTypeFieldTypeId { get; set; }
         public string Name { get; set; }
     }
-    public class MetaListProcessTemplateFlowConditionComparisonOperator
+    public class MetaListProcessTypeFlowConditionComparisonOperator
     {
         [Key]
-        public int ProcessTemplateFlowConditionComparisonOperatorId { get; set; }
+        public int ProcessTypeFlowConditionComparisonOperatorId { get; set; }
         public string Name { get; set; }
     }
-    public class MetaListProcessTemplateFlowConditionType
+    public class MetaListProcessTypeFlowConditionType
     {
         [Key]
-        public int ProcessTemplateFlowConditionTypeId { get; set; }
+        public int ProcessTypeFlowConditionTypeId { get; set; }
         public string Name { get; set; }
     }
-    public class MetaListProcessTemplateStageFieldStatus
+    public class MetaListProcessTypeStageFieldStatus
     {
         [Key]
-        public int ProcessTemplateStageFieldStatuseId { get; set; }
+        public int ProcessTypeStageFieldStatuseId { get; set; }
         public string Name { get; set; }
     }
     public class MetaListClassification

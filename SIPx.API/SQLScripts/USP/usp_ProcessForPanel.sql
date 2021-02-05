@@ -13,8 +13,8 @@ WHERE USerId = @UserID
 DECLARE @statement NVARCHAR(2200);
 
 SET @statement = TRIM(@ProcessConditionSQLFrom) +  
-' JOIN ProcessTemplateLanguages ON ProcessTemplates.ProcessTemplateID = ProcessTemplateLanguages.ProcessTemplateID ' + TRIM(@ProcessConditionSQLWhere) +
-' AND ProcessTemplateLanguages.LanguageId = ' + cast (@LanguageId as varchar(2))
+' JOIN ProcessTypeLanguages ON ProcessTypes.ProcessTypeID = ProcessTypeLanguages.ProcessTypeID ' + TRIM(@ProcessConditionSQLWhere) +
+' AND ProcessTypeLanguages.LanguageId = ' + cast (@LanguageId as varchar(2))
 
 EXECUTE sp_executesql @statement
 

@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateStageTypeUpdateGet
+@model ProcessTypeStageTypeUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template stage type")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type stage type")).TermString;
     ViewData["Image"] = "Type.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -18,7 +18,7 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateStageTypeId" ejs-for="@Model.ProcessTemplateStageTypeId" cssClass="e-outline" placeholder="ProcessTemplateStageTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageTypeId" ejs-for="@Model.ProcessTypeStageTypeId" cssClass="e-outline" placeholder="ProcessTypeStageTypeId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -29,7 +29,7 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateStageTypeId" ejs-for="@Model.ProcessTemplateStageTypeId" cssClass="e-outline" placeholder="ProcessTemplateStageTypeId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageTypeId" ejs-for="@Model.ProcessTypeStageTypeId" cssClass="e-outline" placeholder="ProcessTypeStageTypeId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }

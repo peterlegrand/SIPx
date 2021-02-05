@@ -21,33 +21,33 @@ namespace SIPx.API.Classes
             _processProvider = ProcessProvider;
             _frontProcessProvider = frontProcessProvider;
         }
-        public async Task<int> ReturnProcessTemplateFlowPass(SipUser CurrentUser, FrontProcessNewProcessWithMaster NewProcess)
+        public async Task<int> ReturnProcessTypeFlowPass(SipUser CurrentUser, FrontProcessNewProcessWithMaster NewProcess)
         {
-            var Flows = await _frontProcessProvider.FrontProcessNewReturnFlows(NewProcess.ProcessTemplateId);
+            var Flows = await _frontProcessProvider.FrontProcessNewReturnFlows(NewProcess.ProcessTypeId);
             foreach (var FlowId in Flows)
             {
-                string From = "SELECT ProcessTemplateFlowId FROM ProcessTemplateFlowPasses";
-                string Where = " WHERE ProcessTemplateFlowId = " + FlowId + " AND ";
+                string From = "SELECT ProcessTypeFlowId FROM ProcessTypeFlowPasses";
+                string Where = " WHERE ProcessTypeFlowId = " + FlowId + " AND ";
                 var Passes = await _frontProcessProvider.FrontProcessNewReturnFlowPasses(FlowId);
                 foreach (var Pass in Passes)
                 {
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 1) //Creator is user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 1) //Creator is user
                     {
                         //                    From = From + NewProcess. '  '
                         //Have to check if this can be used in general or only new processes
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 2) //  Field
+                    if (Pass.ProcessTypeFlowConditionTypeId == 2) //  Field
                     {
-                        if (!new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Pass.ProcessTemplateFieldTypeId))
+                        if (!new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Pass.ProcessTypeFieldTypeId))
                         {
                             Where = Where + " 1=2 ";
                         }
 
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 3) //  Security level user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 3) //  Security level user
                     {
                         var UserSecurityLevel = await _userProvider.UserSecurityLevel(CurrentUser.Id);
-                        var ProcessSecurityLevel = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue;
+                        var ProcessSecurityLevel = NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue;
                         if (ProcessSecurityLevel == null || ProcessSecurityLevel == 0)
                         { ProcessSecurityLevel = Pass.StageFieldIntValue; }
                         if (Pass.ComparisonOperatorID == 1)  //Comparison blank
@@ -79,107 +79,107 @@ namespace SIPx.API.Classes
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 4) // Role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 4) // Role user
                     {
                         var Roles = await _userProvider.UserRoles(CurrentUser.Id);
-                        if (!Roles.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).StringValue ?? ""))
+                        if (!Roles.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).StringValue ?? ""))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
                     //PETER not sure yet
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 5) //  Manager user field
+                    if (Pass.ProcessTypeFlowConditionTypeId == 5) //  Manager user field
                     {
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 6) //  Organization user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 6) //  Organization user
                     {
                         var Organizations = await _userProvider.UserOrganizations(CurrentUser.Id);
-                        if (!Organizations.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        if (!Organizations.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 7) //  Organization role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 7) //  Organization role user
                     {
-                        var RoleId = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldIDRole).StringValue ?? "";
+                        var RoleId = NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldIDRole).StringValue ?? "";
                         var Organizations = await _userProvider.UserRoleOrganizations(CurrentUser.Id, RoleId);
-                        if (!Organizations.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        if (!Organizations.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
                     //PETER TODO
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 8) //  Organization parent user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 8) //  Organization parent user
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 9) //  Organization parent role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 9) //  Organization parent role user
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 10) // Project user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 10) // Project user
                     {
                         var Projects = await _userProvider.UserProjects(CurrentUser.Id);
-                        if (!Projects.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        if (!Projects.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 11) //Project role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 11) //Project role user
                     {
-                        var RoleId = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldIDRole).StringValue ?? "";
+                        var RoleId = NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldIDRole).StringValue ?? "";
                         var Projects = await _userProvider.UserRoleProjects(CurrentUser.Id, RoleId);
-                        if (!Projects.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0))
+                        if (!Projects.Contains(NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0))
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 12) //Project parent user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 12) //Project parent user
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 13) //Project parent role user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 13) //Project parent role user
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 14) //Default organization user
+                    if (Pass.ProcessTypeFlowConditionTypeId == 14) //Default organization user
                     {
                         var Organization = await _userProvider.UserDefaultOrganization(CurrentUser.Id);
-                        var OrganizationInField = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).IntValue ?? 0;
+                        var OrganizationInField = NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).IntValue ?? 0;
                         if (Organization != OrganizationInField)
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 15) //Open bracket
+                    if (Pass.ProcessTypeFlowConditionTypeId == 15) //Open bracket
                     {
                         Where = Where + " ( ";
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 16) //and
+                    if (Pass.ProcessTypeFlowConditionTypeId == 16) //and
                     {
                         Where = Where + " AND ";
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 17) //or
+                    if (Pass.ProcessTypeFlowConditionTypeId == 17) //or
                     {
                         Where = Where + " OR ";
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 18) //Close bracket
+                    if (Pass.ProcessTypeFlowConditionTypeId == 18) //Close bracket
                     {
                         Where = Where + " ) ";
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 19) //User
+                    if (Pass.ProcessTypeFlowConditionTypeId == 19) //User
                     {
-                        var UserInField = NewProcess.ProcessFields.Find(x => x.ProcessTemplateFieldId == Pass.ProcessTemplateFieldId).StringValue ?? "";
+                        var UserInField = NewProcess.ProcessFields.Find(x => x.ProcessTypeFieldId == Pass.ProcessTypeFieldId).StringValue ?? "";
                         if (CurrentUser.Id != UserInField)
                         {
                             Where = Where + " 1=2 ";
                         }
                     }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 20) //Relation to creator
+                    if (Pass.ProcessTypeFlowConditionTypeId == 20) //Relation to creator
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 21) //Relation to user field
+                    if (Pass.ProcessTypeFlowConditionTypeId == 21) //Relation to user field
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 22) //Classification relation
+                    if (Pass.ProcessTypeFlowConditionTypeId == 22) //Classification relation
                     { }
-                    if (Pass.ProcessTemplateFlowConditionTypeId == 23) //Classification relation type
+                    if (Pass.ProcessTypeFlowConditionTypeId == 23) //Classification relation type
                     { }
                 }
-                if (Where == " WHERE ProcessTemplateFlowId = " + FlowId + " AND ")
-                { Where = " WHERE ProcessTemplateFlowId = " + FlowId; }
+                if (Where == " WHERE ProcessTypeFlowId = " + FlowId + " AND ")
+                { Where = " WHERE ProcessTypeFlowId = " + FlowId; }
                 var SQLStatement = From + Where;
-                var x = await _frontProcessProvider.ReturnProcessTemplateFlowPass(CurrentUser.Id, SQLStatement);
+                var x = await _frontProcessProvider.ReturnProcessTypeFlowPass(CurrentUser.Id, SQLStatement);
                 if (x.Count() > 0)
                 {
                     return x.First();
@@ -191,39 +191,39 @@ namespace SIPx.API.Classes
             return 0;
         }
 
-        public async Task<List<NewProcessTemplateList>> ReturnProcessTemplateList(SipUser CurrentUser)
+        public async Task<List<NewProcessTypeList>> ReturnProcessTypeList(SipUser CurrentUser)
         {
-            List<NewProcessTemplateList> ProcesstemplateList = new List<NewProcessTemplateList>();
+            List<NewProcessTypeList> ProcesstypeList = new List<NewProcessTypeList>();
             var TemplateIdFlowIds = await _processProvider.CreateGetInitialTemplateFlowList();
             foreach (var TemplateIdFlowId in TemplateIdFlowIds)
             {
                 string From = "DECLARE @LanguageId int; SELECT @LanguageId = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeId = 1 ;" +
-                    " SELECT  ProcessTemplateFlowConditions.ProcessTemplateID , ProcessTemplateGroupID, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name, TRIM(Icons.FileName) FileName FROM ProcessTemplateFlowConditions" +
-                    " JOIN ProcessTemplates ON ProcessTemplateFlowConditions.ProcessTemplateId = ProcessTemplates.ProcessTemplateId " +
-                    " JOIN Icons ON ICons.IconId = ProcessTemplates.IconId " +
-                    " LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserLanguage " +
-                    "  ON UserLanguage.ProcessTemplateID = ProcessTemplateFlowConditions.ProcessTemplateID " +
-                    "LEFT JOIN(SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
-                    "  ON DefaultLanguage.ProcessTemplateID = ProcessTemplateFlowConditions.ProcessTemplateID ";
-                string Where = " WHERE ProcessTemplateFlowId = " + TemplateIdFlowId.ProcessTemplateFlowId + " AND ";
-                var Conditions = await _processProvider.CreateGetInitialTemplateFlowConditionList(TemplateIdFlowId.ProcessTemplateFlowId);
+                    " SELECT  ProcessTypeFlowConditions.ProcessTypeID , ProcessTypeGroupID, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name, TRIM(Icons.FileName) FileName FROM ProcessTypeFlowConditions" +
+                    " JOIN ProcessTypes ON ProcessTypeFlowConditions.ProcessTypeId = ProcessTypes.ProcessTypeId " +
+                    " JOIN Icons ON ICons.IconId = ProcessTypes.IconId " +
+                    " LEFT JOIN(SELECT ProcessTypeId, Name FROM ProcessTypeLanguages WHERE LanguageId = @LanguageID) UserLanguage " +
+                    "  ON UserLanguage.ProcessTypeID = ProcessTypeFlowConditions.ProcessTypeID " +
+                    "LEFT JOIN(SELECT ProcessTypeId, Name FROM ProcessTypeLanguages JOIN Settings ON ProcessTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
+                    "  ON DefaultLanguage.ProcessTypeID = ProcessTypeFlowConditions.ProcessTypeID ";
+                string Where = " WHERE ProcessTypeFlowId = " + TemplateIdFlowId.ProcessTypeFlowId + " AND ";
+                var Conditions = await _processProvider.CreateGetInitialTemplateFlowConditionList(TemplateIdFlowId.ProcessTypeFlowId);
                 foreach (var Condition in Conditions)
                 {
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 1) //Creator is user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 1) //Creator is user
                     {
                         //                    From = From + NewProcess. '  '
                         //Have to check if this can be used in general or only new processes
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 2) //  Field
+                    if (Condition.ProcessTypeFlowConditionTypeId == 2) //  Field
                     {
                         //NOT RELEVANT FOR NEW PROCESS
-                        //if (!new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Condition.Fie.ProcessTemplateFieldTypeId))
+                        //if (!new[] { 1, 2, 12, 13, 30, 31, 32 }.Contains(Condition.Fie.ProcessTypeFieldTypeId))
                         //{
                         //    Where = Where + " 1=2 ";
                         //}
 
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 3) //  Security level user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 3) //  Security level user
                     {
                         var UserSecurityLevel = await _userProvider.UserSecurityLevel(CurrentUser.Id);
                         if (Condition.ComparisonOperatorId == 1)  //Comparison blank
@@ -232,140 +232,140 @@ namespace SIPx.API.Classes
                         }
                         if (Condition.ComparisonOperatorId == 2 && UserSecurityLevel != Condition.StageFieldIntValue) //Equal
                         {
-                            Where = Where + UserSecurityLevel.ToString() + " =  " + Condition.ProcessTemplateFlowConditionInt.ToString();
+                            Where = Where + UserSecurityLevel.ToString() + " =  " + Condition.ProcessTypeFlowConditionInt.ToString();
                         }
                         if (Condition.ComparisonOperatorId == 3 && UserSecurityLevel <= Condition.StageFieldIntValue) // >
                         {
-                            Where = Where + UserSecurityLevel.ToString() + " > " + Condition.ProcessTemplateFlowConditionInt.ToString();
+                            Where = Where + UserSecurityLevel.ToString() + " > " + Condition.ProcessTypeFlowConditionInt.ToString();
                         }
                         if (Condition.ComparisonOperatorId == 4 && UserSecurityLevel >= Condition.StageFieldIntValue) //<
                         {
-                            Where = Where + UserSecurityLevel.ToString() + " <  " + Condition.ProcessTemplateFlowConditionInt.ToString();
+                            Where = Where + UserSecurityLevel.ToString() + " <  " + Condition.ProcessTypeFlowConditionInt.ToString();
                         }
                         if (Condition.ComparisonOperatorId == 5 && UserSecurityLevel < Condition.StageFieldIntValue) //>=
                         {
-                            Where = Where + UserSecurityLevel.ToString() + " >=  " + Condition.ProcessTemplateFlowConditionInt.ToString();
+                            Where = Where + UserSecurityLevel.ToString() + " >=  " + Condition.ProcessTypeFlowConditionInt.ToString();
                         }
                         if (Condition.ComparisonOperatorId == 6 && UserSecurityLevel > Condition.StageFieldIntValue) //<=
                         {
-                            Where = Where + UserSecurityLevel.ToString() + " <=  " + Condition.ProcessTemplateFlowConditionInt.ToString();
+                            Where = Where + UserSecurityLevel.ToString() + " <=  " + Condition.ProcessTypeFlowConditionInt.ToString();
                         }
                         if (Condition.ComparisonOperatorId == 7 && UserSecurityLevel == Condition.StageFieldIntValue) //<>
                         {
-                            Where = Where + UserSecurityLevel.ToString() + " <> " + Condition.ProcessTemplateFlowConditionInt.ToString();
+                            Where = Where + UserSecurityLevel.ToString() + " <> " + Condition.ProcessTypeFlowConditionInt.ToString();
                         }
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 4) // Role user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 4) // Role user
                     {
                         var Roles = await _userProvider.RoleIdForSpecificUser(CurrentUser.Id);
                         for (int i = 0; i < Roles.Count; i++)
                         {
                             Roles[i] = Roles[i].Replace("\t", "");
                         }
-                        if (!Roles.Contains(Condition.ProcessTemplateFlowConditionString.Replace("\t", "")))
+                        if (!Roles.Contains(Condition.ProcessTypeFlowConditionString.Replace("\t", "")))
                         {
                             Where = Where + " 14=2 ";
                         }
                     }
                     //PETER not sure yet
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 5) //  Manager user field
+                    if (Condition.ProcessTypeFlowConditionTypeId == 5) //  Manager user field
                     {
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 6) //  Organization user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 6) //  Organization user
                     {
                         var Organizations = await _userProvider.UserOrganizations(CurrentUser.Id);
-                        if (!Organizations.Contains(Condition.ProcessTemplateFlowConditionInt))
+                        if (!Organizations.Contains(Condition.ProcessTypeFlowConditionInt))
                         {
                             Where = Where + " 1=42 ";
                         }
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 7) //  Organization role user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 7) //  Organization role user
                     {
-                        var RoleId = Condition.ProcessTemplateFlowConditionString;
+                        var RoleId = Condition.ProcessTypeFlowConditionString;
                         var Organizations = await _userProvider.UserRoleOrganizations(CurrentUser.Id, RoleId);
-                        if (!Organizations.Contains(Condition.ProcessTemplateFlowConditionInt))
+                        if (!Organizations.Contains(Condition.ProcessTypeFlowConditionInt))
                         {
                             Where = Where + " 1=25 ";
                         }
                     }
                     //PETER TODO
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 8) //  Organization parent user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 8) //  Organization parent user
                     { }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 9) //  Organization parent role user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 9) //  Organization parent role user
                     { }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 10) // Project user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 10) // Project user
                     {
                         var Projects = await _userProvider.UserProjects(CurrentUser.Id);
-                        if (!Projects.Contains(Condition.ProcessTemplateFlowConditionInt))
+                        if (!Projects.Contains(Condition.ProcessTypeFlowConditionInt))
                         {
                             Where = Where + " 1=26 ";
                         }
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 11) //Project role user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 11) //Project role user
                     {
-                        var RoleId = Condition.ProcessTemplateFlowConditionString;
+                        var RoleId = Condition.ProcessTypeFlowConditionString;
                         var Projects = await _userProvider.UserRoleProjects(CurrentUser.Id, RoleId);
-                        if (!Projects.Contains(Condition.ProcessTemplateFlowConditionInt))
+                        if (!Projects.Contains(Condition.ProcessTypeFlowConditionInt))
                         {
                             Where = Where + " 1=27 ";
                         }
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 12) //Project parent user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 12) //Project parent user
                     { }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 13) //Project parent role user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 13) //Project parent role user
                     { }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 14) //Default organization user
+                    if (Condition.ProcessTypeFlowConditionTypeId == 14) //Default organization user
                     {
                         var Organization = await _userProvider.UserDefaultOrganization(CurrentUser.Id);
-                        if (Organization != Condition.ProcessTemplateFlowConditionInt)
+                        if (Organization != Condition.ProcessTypeFlowConditionInt)
                         {
                             Where = Where + " 1=28 ";
                         }
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 15) //Open bracket
+                    if (Condition.ProcessTypeFlowConditionTypeId == 15) //Open bracket
                     {
                         Where = Where + " ( ";
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 16) //and
+                    if (Condition.ProcessTypeFlowConditionTypeId == 16) //and
                     {
                         Where = Where + " AND ";
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 17) //or
+                    if (Condition.ProcessTypeFlowConditionTypeId == 17) //or
                     {
                         Where = Where + " OR ";
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 18) //Close bracket
+                    if (Condition.ProcessTypeFlowConditionTypeId == 18) //Close bracket
                     {
                         Where = Where + " ) ";
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 19) //User
+                    if (Condition.ProcessTypeFlowConditionTypeId == 19) //User
                     {
-                        if (CurrentUser.Id != Condition.ProcessTemplateFlowConditionString)
+                        if (CurrentUser.Id != Condition.ProcessTypeFlowConditionString)
                         {
                             Where = Where + " 1=29 ";
                         }
                     }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 20) //Relation to creator
+                    if (Condition.ProcessTypeFlowConditionTypeId == 20) //Relation to creator
                     { }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 21) //Relation to user field
+                    if (Condition.ProcessTypeFlowConditionTypeId == 21) //Relation to user field
                     { }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 22) //Classification relation
+                    if (Condition.ProcessTypeFlowConditionTypeId == 22) //Classification relation
                     { }
-                    if (Condition.ProcessTemplateFlowConditionTypeId == 23) //Classification relation type
+                    if (Condition.ProcessTypeFlowConditionTypeId == 23) //Classification relation type
                     { }
                 }
-                if (Where == " WHERE ProcessTemplateFlowId = " + TemplateIdFlowId.ProcessTemplateFlowId + " AND ")
+                if (Where == " WHERE ProcessTypeFlowId = " + TemplateIdFlowId.ProcessTypeFlowId + " AND ")
                 {
-                    Where = " WHERE ProcessTemplateFlowId = " + TemplateIdFlowId.ProcessTemplateFlowId;
+                    Where = " WHERE ProcessTypeFlowId = " + TemplateIdFlowId.ProcessTypeFlowId;
                 }
-                if (!ProcesstemplateList.Any(t => t.ProcessTemplateId == TemplateIdFlowId.ProcessTemplateId))
+                if (!ProcesstypeList.Any(t => t.ProcessTypeId == TemplateIdFlowId.ProcessTypeId))
                 {
                     var y = await _frontProcessProvider.CreateGetTemplateList(From + Where);
                     if (y.Count != 0)
                     {
                         var z = y.First();
                         z.FileName = "/images/icons/" + z.FileName;
-                        ProcesstemplateList.Add(z);
+                        ProcesstypeList.Add(z);
                     }
 
                 }
@@ -373,21 +373,21 @@ namespace SIPx.API.Classes
 
 
             }
-            return ProcesstemplateList;
+            return ProcesstypeList;
         }
 
-        //public async Task<List<NewProcessTemplateList>> CheckProcessTemplateID(SipUser CurrentUser, int TemplateToCheckId)
+        //public async Task<List<NewProcessTypeList>> CheckProcessTypeID(SipUser CurrentUser, int TemplateToCheckId)
         //{
         //    //string SQLWhere = " WHERE 1=1 ";
         //    //string SQLJOIN = " DECLARE @LanguageId int;" +
         //    //    "SELECT @LanguageId = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeId = 1 ;" +
-        //    //    "SELECT ProcessTemplates.ProcessTemplateId ,ProcessTemplates.ProcessTemplateGroupId   " +
+        //    //    "SELECT ProcessTypes.ProcessTypeId ,ProcessTypes.ProcessTypeGroupId   " +
         //    //    ", ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name " +
-        //    //    "FROM processtemplates JOIN ProcessTemplateFlows ON ProcessTemplates.ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //    //    " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageId) UserLanguage " +
-        //    //    "  ON UserLanguage.ProcessTemplateID= ProcessTemplates.ProcessTemplateId " +
-        //    //    " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
-        //    //    " ON DefaultLanguage.ProcessTemplateId = ProcessTemplates.ProcessTemplateId ";
+        //    //    "FROM processtypes JOIN ProcessTypeFlows ON ProcessTypes.ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //    //    " LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages WHERE LanguageId = @LanguageId) UserLanguage " +
+        //    //    "  ON UserLanguage.ProcessTypeID= ProcessTypes.ProcessTypeId " +
+        //    //    " LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages JOIN Settings ON ProcessTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
+        //    //    " ON DefaultLanguage.ProcessTypeId = ProcessTypes.ProcessTypeId ";
 
         //    List<int> TemplateIDs = await _processProvider.CreateGetInitialTemplateList();
         //    foreach (var TemplateId in TemplateIDs)
@@ -395,32 +395,32 @@ namespace SIPx.API.Classes
         //        string SQLWhere = " WHERE 1=1 ";
         //        string SQLJOIN = " DECLARE @LanguageId int;" +
         //            "SELECT @LanguageId = IntPreference FROM UserPreferences WHERE USerId = '" + CurrentUser.Id + "' AND UserPreferences.PreferenceTypeId = 1 ;" +
-        //            "SELECT ProcessTemplates.ProcessTemplateId ,ProcessTemplates.ProcessTemplateGroupId   " +
+        //            "SELECT ProcessTypes.ProcessTypeId ,ProcessTypes.ProcessTypeGroupId   " +
         //            ", ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this classification')) Name " +
-        //            "FROM processtemplates JOIN ProcessTemplateFlows ON ProcessTemplates.ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //            " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageId) UserLanguage " +
-        //            "  ON UserLanguage.ProcessTemplateID= ProcessTemplates.ProcessTemplateId " +
-        //            " LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
-        //            " ON DefaultLanguage.ProcessTemplateId = ProcessTemplates.ProcessTemplateId ";
-        //        List<ProcessTemplateFlowConditionOld> TemplateFlowConditions = await _processProvider.CreateGetFlowConditionList(TemplateId);
+        //            "FROM processtypes JOIN ProcessTypeFlows ON ProcessTypes.ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //            " LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages WHERE LanguageId = @LanguageId) UserLanguage " +
+        //            "  ON UserLanguage.ProcessTypeID= ProcessTypes.ProcessTypeId " +
+        //            " LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages JOIN Settings ON ProcessTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage " +
+        //            " ON DefaultLanguage.ProcessTypeId = ProcessTypes.ProcessTypeId ";
+        //        List<ProcessTypeFlowConditionOld> TemplateFlowConditions = await _processProvider.CreateGetFlowConditionList(TemplateId);
 
         //        if (TemplateFlowConditions.Count() > 0)
         //        { SQLWhere += " AND "; }
         //        foreach (var Condition in TemplateFlowConditions)
         //        {
         //            //Condition types
-        //            //SELECT ProcessTemplateFlowConditionTypes.ProcessTemplateFlowConditionTypeId, Name FROM ProcessTemplateFlowConditionTypes JOIN UITermLanguages ON ProcessTemplateFlowConditionTypes.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY ProcessTemplateFlowConditionTypes.ProcessTemplateFlowConditionTypeID
+        //            //SELECT ProcessTypeFlowConditionTypes.ProcessTypeFlowConditionTypeId, Name FROM ProcessTypeFlowConditionTypes JOIN UITermLanguages ON ProcessTypeFlowConditionTypes.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY ProcessTypeFlowConditionTypes.ProcessTypeFlowConditionTypeID
         //            //Field types
-        //            //SELECT 'case ' + cast(ProcessTemplateFieldTypes.ProcessTemplateFieldTypeId as char(2))+ ': //', Name FROM ProcessTemplateFieldTypes JOIN UITermLanguages ON ProcessTemplateFieldTypes.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY ProcessTemplateFieldTypes.ProcessTemplateFieldTypeID
+        //            //SELECT 'case ' + cast(ProcessTypeFieldTypes.ProcessTypeFieldTypeId as char(2))+ ': //', Name FROM ProcessTypeFieldTypes JOIN UITermLanguages ON ProcessTypeFieldTypes.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY ProcessTypeFieldTypes.ProcessTypeFieldTypeID
 
-        //            switch (Condition.ProcessTemplateFlowConditionTypeId)
+        //            switch (Condition.ProcessTypeFlowConditionTypeId)
         //            {
         //                //Case 1 is Creator User which doesn't happen for a new process 
         //                //Case 2 is Field which doesn't happen as it would check against default value which doesn't make sense.
         //                case 3: //Security level user
 
-        //                    //SELECT 'case ' + cast(ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorId as char(2))+ ': //', Name FROM ProcessTemplateFlowConditionComparisonOperators JOIN UITermLanguages ON ProcessTemplateFlowConditionComparisonOperators.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY ProcessTemplateFlowConditionComparisonOperators.ProcessTemplateFlowConditionComparisonOperatorID
-        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeId = 28 AND Table" + Condition.ProcessTemplateFlowId + "a.IntValue ";
+        //                    //SELECT 'case ' + cast(ProcessTypeFlowConditionComparisonOperators.ProcessTypeFlowConditionComparisonOperatorId as char(2))+ ': //', Name FROM ProcessTypeFlowConditionComparisonOperators JOIN UITermLanguages ON ProcessTypeFlowConditionComparisonOperators.NameTermId = UITermLanguages.UITermId WHERE LanguageId =41 ORDER BY ProcessTypeFlowConditionComparisonOperators.ProcessTypeFlowConditionComparisonOperatorID
+        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTypeFlowId + ".ProcessTypeFieldTypeId = 28 AND Table" + Condition.ProcessTypeFlowId + "a.IntValue ";
         //                    switch (Condition.ComparisonOperatorId)
         //                    {
         //                        case 2:
@@ -444,105 +444,105 @@ namespace SIPx.API.Classes
 
         //                    }
         //                    SQLWhere += CurrentUser.SecurityLevelId.ToString();
-        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "a " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldId " +
-        //                            " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageId ";
+        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            " ON Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "a " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "a.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeFieldId " +
+        //                            " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "a.ProcessTypeStageId ";
         //                    break;
         //                case 4: //User role
-        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeId = 30 AND Table" + Condition.ProcessTemplateFlowId + "a.StringValue IN (SELECT RoleId FROM AspNetUserRoles WHERE UserId = '" + CurrentUser.Id + "') ";
+        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTypeFlowId + ".ProcessTypeFieldTypeId = 30 AND Table" + Condition.ProcessTypeFlowId + "a.StringValue IN (SELECT RoleId FROM AspNetUserRoles WHERE UserId = '" + CurrentUser.Id + "') ";
 
-        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "a " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldId " +
-        //                            " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageId ";
+        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            " ON Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "a " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "a.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeFieldId " +
+        //                            " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "a.ProcessTypeStageId ";
 
         //                    break;
         //                //  Manager user field there is no user yet stored in the process
         //                case 6: //   Organization user
-        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeId = 14 AND Table" + Condition.ProcessTemplateFlowId + "a.IntValue IN ((SELECT CAST(AspNetRoleClaims.ClaimValue as int) FROM AspNetUserRoles JOIN AspNetRoleClaims ON AspNetUserRoles.RoleId = AspNetRoleClaims.RoleId WHERE UserId = '" + CurrentUser.Id + "' AND AspNetRoleClaims.ClaimValue = 'OrganizationRight') ";
+        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTypeFlowId + ".ProcessTypeFieldTypeId = 14 AND Table" + Condition.ProcessTypeFlowId + "a.IntValue IN ((SELECT CAST(AspNetRoleClaims.ClaimValue as int) FROM AspNetUserRoles JOIN AspNetRoleClaims ON AspNetUserRoles.RoleId = AspNetRoleClaims.RoleId WHERE UserId = '" + CurrentUser.Id + "' AND AspNetRoleClaims.ClaimValue = 'OrganizationRight') ";
 
-        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "a " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldId " +
-        //                            " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageId ";
+        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            " ON Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "a " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "a.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeFieldId " +
+        //                            " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "a.ProcessTypeStageId ";
         //                    break;
         //                case 7: //	Organization role user
-        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + "Field.ProcessTemplateFieldTypeId = 14 " +
+        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTypeFlowId + "Field.ProcessTypeFieldTypeId = 14 " +
 
-        //                        " Table" + Condition.ProcessTemplateFlowId + "FieldRole.ProcessTemplateFieldTypeId = 30 " +
-        //                        " AND Table" + Condition.ProcessTemplateFlowId + "UserRole.UserId = '" + CurrentUser.Id + "'  ";
+        //                        " Table" + Condition.ProcessTypeFlowId + "FieldRole.ProcessTypeFieldTypeId = 30 " +
+        //                        " AND Table" + Condition.ProcessTypeFlowId + "UserRole.UserId = '" + CurrentUser.Id + "'  ";
 
         //                    //Link to field of project
-        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            "Field ON Table" + Condition.ProcessTemplateFlowId.ToString() + "Field.ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "StageField " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "StageField.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + "Field.ProcessTemplateFieldId " +
-        //                            " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "StageField.ProcessTemplateStageId "
+        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            "Field ON Table" + Condition.ProcessTypeFlowId.ToString() + "Field.ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "StageField " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "StageField.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + "Field.ProcessTypeFieldId " +
+        //                            " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "StageField.ProcessTypeStageId "
 
         //                            //Link to field of role
-        //                            + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            "FieldRole ON Table" + Condition.ProcessTemplateFlowId.ToString() + "FieldRole.ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "StageFieldRole " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "StageFieldRole.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + "FieldRole.ProcessTemplateFieldId " +
-        //                                " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "StageFieldRole.ProcessTemplateStageId " +
-        //                        " JOIN aspnetuserroles Table" + Condition.ProcessTemplateFlowId + "UserRole " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "UserROle.RoleId = Table" + Condition.ProcessTemplateFlowId.ToString() + "StageFieldRole.StringValue " +
-        //                        " JOIN aspnetroleclaims Table" + Condition.ProcessTemplateFlowId + "RoleClaim " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "RoleClaim.RoleId = Table" + Condition.ProcessTemplateFlowId + "UserRole.RoleId " +
-        //                            " AND CAST(Table" + Condition.ProcessTemplateFlowId + "RoleClaim.ClaimValue AS int) = Table" + Condition.ProcessTemplateFlowId + "StageField.IntValue "
+        //                            + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            "FieldRole ON Table" + Condition.ProcessTypeFlowId.ToString() + "FieldRole.ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "StageFieldRole " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "StageFieldRole.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + "FieldRole.ProcessTypeFieldId " +
+        //                                " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "StageFieldRole.ProcessTypeStageId " +
+        //                        " JOIN aspnetuserroles Table" + Condition.ProcessTypeFlowId + "UserRole " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "UserROle.RoleId = Table" + Condition.ProcessTypeFlowId.ToString() + "StageFieldRole.StringValue " +
+        //                        " JOIN aspnetroleclaims Table" + Condition.ProcessTypeFlowId + "RoleClaim " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "RoleClaim.RoleId = Table" + Condition.ProcessTypeFlowId + "UserRole.RoleId " +
+        //                            " AND CAST(Table" + Condition.ProcessTypeFlowId + "RoleClaim.ClaimValue AS int) = Table" + Condition.ProcessTypeFlowId + "StageField.IntValue "
         //                            ;
         //                    break;
         //                //	Organization parent user no parent
         //                //	Organization parent role user
         //                case 10: //	Project user
-        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeId = 16 AND Table" + Condition.ProcessTemplateFlowId + "a.IntValue IN ((SELECT CAST(AspNetRoleClaims.ClaimValue as int) FROM AspNetUserRoles JOIN AspNetRoleClaims ON AspNetUserRoles.RoleId = AspNetRoleClaims.RoleId WHERE UserId = '" + CurrentUser.Id + "' AND AspNetRoleClaims.ClaimValue = 'ProjectRight') ";
+        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTypeFlowId + ".ProcessTypeFieldTypeId = 16 AND Table" + Condition.ProcessTypeFlowId + "a.IntValue IN ((SELECT CAST(AspNetRoleClaims.ClaimValue as int) FROM AspNetUserRoles JOIN AspNetRoleClaims ON AspNetUserRoles.RoleId = AspNetRoleClaims.RoleId WHERE UserId = '" + CurrentUser.Id + "' AND AspNetRoleClaims.ClaimValue = 'ProjectRight') ";
 
-        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "a " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldId " +
-        //                            " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageId ";
+        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            " ON Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "a " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "a.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeFieldId " +
+        //                            " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "a.ProcessTypeStageId ";
         //                    break;
         //                case 11: //	Project role user
-        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + "Field.ProcessTemplateFieldTypeId = 16 " +
+        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTypeFlowId + "Field.ProcessTypeFieldTypeId = 16 " +
 
-        //                        " Table" + Condition.ProcessTemplateFlowId + "FieldRole.ProcessTemplateFieldTypeId = 30 " +
-        //                        " AND Table" + Condition.ProcessTemplateFlowId + "UserRole.UserId = '" + CurrentUser.Id + "'  ";
+        //                        " Table" + Condition.ProcessTypeFlowId + "FieldRole.ProcessTypeFieldTypeId = 30 " +
+        //                        " AND Table" + Condition.ProcessTypeFlowId + "UserRole.UserId = '" + CurrentUser.Id + "'  ";
 
         //                    //Link to field of project
-        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            "Field ON Table" + Condition.ProcessTemplateFlowId.ToString() + "Field.ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "StageField " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "StageField.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + "Field.ProcessTemplateFieldId " +
-        //                            " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "StageField.ProcessTemplateStageId "
+        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            "Field ON Table" + Condition.ProcessTypeFlowId.ToString() + "Field.ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "StageField " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "StageField.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + "Field.ProcessTypeFieldId " +
+        //                            " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "StageField.ProcessTypeStageId "
 
         //                            //Link to field of role
-        //                            + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            "FieldRole ON Table" + Condition.ProcessTemplateFlowId.ToString() + "FieldRole.ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "StageFieldRole " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "StageFieldRole.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + "FieldRole.ProcessTemplateFieldId " +
-        //                                " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "StageFieldRole.ProcessTemplateStageId " +
-        //                        " JOIN aspnetuserroles Table" + Condition.ProcessTemplateFlowId + "UserRole " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "UserROle.RoleId = Table" + Condition.ProcessTemplateFlowId.ToString() + "StageFieldRole.StringValue " +
-        //                        " JOIN aspnetroleclaims Table" + Condition.ProcessTemplateFlowId + "RoleClaim " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "RoleClaim.RoleId = Table" + Condition.ProcessTemplateFlowId + "UserRole.RoleId " +
-        //                            " AND CAST(Table" + Condition.ProcessTemplateFlowId + "RoleClaim.ClaimValue AS int) = Table" + Condition.ProcessTemplateFlowId + "StageField.IntValue "
+        //                            + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            "FieldRole ON Table" + Condition.ProcessTypeFlowId.ToString() + "FieldRole.ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "StageFieldRole " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "StageFieldRole.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + "FieldRole.ProcessTypeFieldId " +
+        //                                " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "StageFieldRole.ProcessTypeStageId " +
+        //                        " JOIN aspnetuserroles Table" + Condition.ProcessTypeFlowId + "UserRole " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "UserROle.RoleId = Table" + Condition.ProcessTypeFlowId.ToString() + "StageFieldRole.StringValue " +
+        //                        " JOIN aspnetroleclaims Table" + Condition.ProcessTypeFlowId + "RoleClaim " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "RoleClaim.RoleId = Table" + Condition.ProcessTypeFlowId + "UserRole.RoleId " +
+        //                            " AND CAST(Table" + Condition.ProcessTypeFlowId + "RoleClaim.ClaimValue AS int) = Table" + Condition.ProcessTypeFlowId + "StageField.IntValue "
         //                            ;
         //                    break;
         //                //	Project parent user
         //                //	Project parent role user
         //                case 14: //	Default organization user
-        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTemplateFlowId + ".ProcessTemplateFieldTypeId = 14 AND Table" + Condition.ProcessTemplateFlowId + "a.IntValue IN ((SELECT persons.DefaultOrganizationId FROM persons WHERE persons.UserID'" + CurrentUser.Id + "' ) ";
+        //                    SQLWhere = SQLWhere + " Table" + Condition.ProcessTypeFlowId + ".ProcessTypeFieldTypeId = 14 AND Table" + Condition.ProcessTypeFlowId + "a.IntValue IN ((SELECT persons.DefaultOrganizationId FROM persons WHERE persons.UserID'" + CurrentUser.Id + "' ) ";
 
-        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTemplateFields AS Table" + Condition.ProcessTemplateFlowId.ToString() +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateId = ProcessTemplateFlows.ProcessTemplateId " +
-        //                        " JOIN ProcessTemplateStageFields AS Table" + Condition.ProcessTemplateFlowId.ToString() + "a " +
-        //                            " ON Table" + Condition.ProcessTemplateFlowId + "a.ProcessTemplateFieldId = Table" + Condition.ProcessTemplateFlowId.ToString() + ".ProcessTemplateFieldId " +
-        //                            " AND ProcessTemplateFlows.ProcessTemplateFromStageId = Table" + Condition.ProcessTemplateFlowId.ToString() + "a.ProcessTemplateStageId ";
+        //                    SQLJOIN = SQLJOIN + " JOIN ProcessTypeFields AS Table" + Condition.ProcessTypeFlowId.ToString() +
+        //                            " ON Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeId = ProcessTypeFlows.ProcessTypeId " +
+        //                        " JOIN ProcessTypeStageFields AS Table" + Condition.ProcessTypeFlowId.ToString() + "a " +
+        //                            " ON Table" + Condition.ProcessTypeFlowId + "a.ProcessTypeFieldId = Table" + Condition.ProcessTypeFlowId.ToString() + ".ProcessTypeFieldId " +
+        //                            " AND ProcessTypeFlows.ProcessTypeFromStageId = Table" + Condition.ProcessTypeFlowId.ToString() + "a.ProcessTypeStageId ";
         //                    break;
         //                case 15: //	Open bracket
         //                    SQLWhere += " ( ";
@@ -566,7 +566,7 @@ namespace SIPx.API.Classes
         //            }
         //        }
         //    }
-        //    List<NewProcessTemplateList> NewTemplateList = await _processProvider.CreateGetTemplateList(SQLJOIN + SQLWhere);
+        //    List<NewProcessTypeList> NewTemplateList = await _processProvider.CreateGetTemplateList(SQLJOIN + SQLWhere);
         //    return NewTemplateList;
 
         //}
@@ -578,8 +578,8 @@ namespace SIPx.API.Classes
 
         //    foreach (var NewProcessField in NewProcessFields)
         //    {
-        //        if (NewProcessField.ProcessTemplateStageFieldStatusId == 4)
-        //            switch (NewProcessField.ProcessTemplateFieldTypeId)
+        //        if (NewProcessField.ProcessTypeStageFieldStatusId == 4)
+        //            switch (NewProcessField.ProcessTypeFieldTypeId)
         //            {
         //                case 1:
         //                    if (NewProcessField.StringValue == "" || NewProcessField.StringValue == null)

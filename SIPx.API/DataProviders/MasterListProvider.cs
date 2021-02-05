@@ -59,10 +59,10 @@ namespace SIPx.DataAccess
             return _sqlDataAccess.LoadData<ValueUpdateTypeList, dynamic>(usp, new { UserId = UserId });
 
         }
-        public Task<List<ProcessTemplateStageFieldStatusList>> ProcessTemplateStageFieldStatusList(string UserId)
+        public Task<List<ProcessTypeStageFieldStatusList>> ProcessTypeStageFieldStatusList(string UserId)
         {
-            string usp = "usp_ProcessTemplateStageFieldStatusList @UserId";
-            return _sqlDataAccess.LoadData<ProcessTemplateStageFieldStatusList, dynamic>(usp, new { UserId = UserId });
+            string usp = "usp_ProcessTypeStageFieldStatusList @UserId";
+            return _sqlDataAccess.LoadData<ProcessTypeStageFieldStatusList, dynamic>(usp, new { UserId = UserId });
 
         }
 

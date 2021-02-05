@@ -13,6 +13,6 @@ namespace SIPx.DataAccess
         Task<List<StatusList>> StatusList(string UserId);
         Task<List<ClaimList>> ClaimList(string UserId);
         Task<List<ValueUpdateTypeList>> ValueUpdateTypeList(string UserId);
-        Task<List<ProcessTemplateStageFieldStatusList>> ProcessTemplateStageFieldStatusList(string UserId);
+        Task<List<ProcessTypeStageFieldStatusList>> ProcessTypeStageFieldStatusList(string UserId);
     }
 }

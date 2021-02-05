@@ -9,7 +9,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int ContentTypeGroupId { get; set; }
-        public int ProcessTemplateId { get; set; }
+        public int ProcessTypeId { get; set; }
         public int SecurityLevelId { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
@@ -54,7 +54,7 @@ namespace SIPx.Shared
         public List<ContentTypeCreateGetClassification> ContentTypeClassifications { get; set; }
         public List<ContentTypeClassificationStatusList> ContentTypeClassificationStatuses { get; set; }
         public List<ContentTypeGroupList> ContentTypeGroups { get; set; }
-        public List<ProcessTemplateList> ProcessTemplates { get; set; }
+        public List<ProcessTypeList> ProcessTypes { get; set; }
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<IconList> Icons { get; set; }
         public List<CodeTypeList> CodeTypes { get; set; }

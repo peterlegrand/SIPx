@@ -1,13 +1,13 @@
-CREATE PROCEDURE usp_NewProcessGetInitialTemplateFlowConditionList (@ProcessTemplateFlowId int)
+CREATE PROCEDURE usp_NewProcessGetInitialTemplateFlowConditionList (@ProcessTypeFlowId int)
 AS
-SELECT ProcessTemplateFlowConditions.ProcessTemplateFlowConditionID
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionTypeID
-	, ProcessTemplateFlowConditions.ProcessTemplateFieldID
-	, ProcessTemplateFlowConditions.ProcessTemplateFieldIDRole
-	, ProcessTemplateFlowConditions.ComparisonOperatorID
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionString
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionInt
-	, ProcessTemplateFlowConditions.ProcessTemplateFlowConditionDate
-FROM ProcessTemplateFlowConditions 
-WHERE ProcessTemplateFlowConditions.ProcessTemplateFlowID = @ProcessTemplateFlowId
+SELECT ProcessTypeFlowConditions.ProcessTypeFlowConditionID
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionTypeID
+	, ProcessTypeFlowConditions.ProcessTypeFieldID
+	, ProcessTypeFlowConditions.ProcessTypeFieldIDRole
+	, ProcessTypeFlowConditions.ComparisonOperatorID
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionString
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionInt
+	, ProcessTypeFlowConditions.ProcessTypeFlowConditionDate
+FROM ProcessTypeFlowConditions 
+WHERE ProcessTypeFlowConditions.ProcessTypeFlowID = @ProcessTypeFlowId
 ORDER BY Sequence

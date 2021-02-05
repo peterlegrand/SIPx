@@ -1,0 +1,21 @@
+﻿
+@model List<SIPx.Shared.MetaListProcessTypeFieldType>
+@{
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead>
+            <tr><th>Process type field type ID</th><th>Name</th></tr>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+            <tr>
+                <td><div>@x.ProcessTypeFieldTypeId</div></td>
+                <td><div>@x.Name</div></td>
+            </tr>
+
+        }
+    </table>
+</div>

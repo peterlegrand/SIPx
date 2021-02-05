@@ -130,24 +130,24 @@ namespace SIPx.API.Controllers
             List<MetaListPreferenceType> MasterList = await _metaProvider.PreferenceTypes();
             return View(MasterList);
         }
-        public async Task<IActionResult> ProcessTemplateFieldTypes()
+        public async Task<IActionResult> ProcessTypeFieldTypes()
         {
-            List<MetaListProcessTemplateFieldType> MasterList = await _metaProvider.ProcessTemplateFieldTypes();
+            List<MetaListProcessTypeFieldType> MasterList = await _metaProvider.ProcessTypeFieldTypes();
             return View(MasterList);
         }
-        public async Task<IActionResult> ProcessTemplateStageFieldStatuses()
+        public async Task<IActionResult> ProcessTypeStageFieldStatuses()
         {
-            List<MetaListProcessTemplateStageFieldStatus> MasterList = await _metaProvider.ProcessTemplateStageFieldStatuses();
+            List<MetaListProcessTypeStageFieldStatus> MasterList = await _metaProvider.ProcessTypeStageFieldStatuses();
             return View(MasterList);
         }
-        public async Task<IActionResult> ProcessTemplateFlowConditionComparisonOperators()
+        public async Task<IActionResult> ProcessTypeFlowConditionComparisonOperators()
         {
-            List<MetaListProcessTemplateFlowConditionComparisonOperator> MasterList = await _metaProvider.ProcessTemplateFlowConditionComparisonOperators();
+            List<MetaListProcessTypeFlowConditionComparisonOperator> MasterList = await _metaProvider.ProcessTypeFlowConditionComparisonOperators();
             return View(MasterList);
         }
-        public async Task<IActionResult> ProcessTemplateFlowConditionTypes()
+        public async Task<IActionResult> ProcessTypeFlowConditionTypes()
         {
-            List<MetaListProcessTemplateFlowConditionType> MasterList = await _metaProvider.ProcessTemplateFlowConditionTypes();
+            List<MetaListProcessTypeFlowConditionType> MasterList = await _metaProvider.ProcessTypeFlowConditionTypes();
             return View(MasterList);
         }
         public async Task<IActionResult> Classifications()

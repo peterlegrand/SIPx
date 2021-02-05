@@ -876,105 +876,105 @@ INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, D
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
 (157, 8, 'ApplicationRight', 'PersonTelecom\Index',1943,1943,1943,1943);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(158, 7, 'ApplicationRight', 'ProcessTemplate\Create',1944,1944,1944,1944);
+(158, 7, 'ApplicationRight', 'ProcessType\Create',1944,1944,1944,1944);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(159, 7, 'ApplicationRight', 'ProcessTemplate\Delete',1945,1945,1945,1945);
+(159, 7, 'ApplicationRight', 'ProcessType\Delete',1945,1945,1945,1945);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(160, 7, 'ApplicationRight', 'ProcessTemplate\Update',1946,1946,1946,1946);
+(160, 7, 'ApplicationRight', 'ProcessType\Update',1946,1946,1946,1946);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(161, 7, 'ApplicationRight', 'ProcessTemplate\Index',1947,1947,1947,1947);
+(161, 7, 'ApplicationRight', 'ProcessType\Index',1947,1947,1947,1947);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(162, 7, 'ApplicationRight', 'ProcessTemplate\LanguageEdit',1948,1948,1948,1948);
+(162, 7, 'ApplicationRight', 'ProcessType\LanguageEdit',1948,1948,1948,1948);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(163, 7, 'ApplicationRight', 'ProcessTemplate\LanguageIndex',1949,1949,1949,1949);
+(163, 7, 'ApplicationRight', 'ProcessType\LanguageIndex',1949,1949,1949,1949);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(164, 7, 'ApplicationRight', 'ProcessTemplateField\Create',1950,1950,1950,1950);
+(164, 7, 'ApplicationRight', 'ProcessTypeField\Create',1950,1950,1950,1950);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(165, 7, 'ApplicationRight', 'ProcessTemplateField\Delete',1951,1951,1951,1951);
+(165, 7, 'ApplicationRight', 'ProcessTypeField\Delete',1951,1951,1951,1951);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(166, 7, 'ApplicationRight', 'ProcessTemplateField\Update',1952,1952,1952,1952);
+(166, 7, 'ApplicationRight', 'ProcessTypeField\Update',1952,1952,1952,1952);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(167, 7, 'ApplicationRight', 'ProcessTemplateField\Index',1953,1953,1953,1953);
+(167, 7, 'ApplicationRight', 'ProcessTypeField\Index',1953,1953,1953,1953);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(168, 7, 'ApplicationRight', 'ProcessTemplateField\LanguageEdit',1954,1954,1954,1954);
+(168, 7, 'ApplicationRight', 'ProcessTypeField\LanguageEdit',1954,1954,1954,1954);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(169, 7, 'ApplicationRight', 'ProcessTemplateField\LanguageIndex',1955,1955,1955,1955);
+(169, 7, 'ApplicationRight', 'ProcessTypeField\LanguageIndex',1955,1955,1955,1955);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(170, 7, 'ApplicationRight', 'ProcessTemplateFieldStage\Update',1956,1956,1956,1956);
+(170, 7, 'ApplicationRight', 'ProcessTypeFieldStage\Update',1956,1956,1956,1956);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(171, 7, 'ApplicationRight', 'ProcessTemplateFieldStage\Index',1957,1957,1957,1957);
+(171, 7, 'ApplicationRight', 'ProcessTypeFieldStage\Index',1957,1957,1957,1957);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(172, 7, 'ApplicationRight', 'ProcessTemplateFlow\Create',1958,1958,1958,1958);
+(172, 7, 'ApplicationRight', 'ProcessTypeFlow\Create',1958,1958,1958,1958);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(173, 7, 'ApplicationRight', 'ProcessTemplateFlow\Delete',1959,1959,1959,1959);
+(173, 7, 'ApplicationRight', 'ProcessTypeFlow\Delete',1959,1959,1959,1959);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(174, 7, 'ApplicationRight', 'ProcessTemplateFlow\Update',1960,1960,1960,1960);
+(174, 7, 'ApplicationRight', 'ProcessTypeFlow\Update',1960,1960,1960,1960);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(175, 7, 'ApplicationRight', 'ProcessTemplateFlow\Index',1961,1961,1961,1961);
+(175, 7, 'ApplicationRight', 'ProcessTypeFlow\Index',1961,1961,1961,1961);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(176, 7, 'ApplicationRight', 'ProcessTemplateFlow\LanguageEdit',1962,1962,1962,1962);
+(176, 7, 'ApplicationRight', 'ProcessTypeFlow\LanguageEdit',1962,1962,1962,1962);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(177, 7, 'ApplicationRight', 'ProcessTemplateFlow\LanguageIndex',1963,1963,1963,1963);
+(177, 7, 'ApplicationRight', 'ProcessTypeFlow\LanguageIndex',1963,1963,1963,1963);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(178, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\Create',1964,1964,1964,1964);
+(178, 7, 'ApplicationRight', 'ProcessTypeFlowCondition\Create',1964,1964,1964,1964);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(179, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\Delete',1965,1965,1965,1965);
+(179, 7, 'ApplicationRight', 'ProcessTypeFlowCondition\Delete',1965,1965,1965,1965);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(180, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\Update',1966,1966,1966,1966);
+(180, 7, 'ApplicationRight', 'ProcessTypeFlowCondition\Update',1966,1966,1966,1966);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(181, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\Index',1967,1967,1967,1967);
+(181, 7, 'ApplicationRight', 'ProcessTypeFlowCondition\Index',1967,1967,1967,1967);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(182, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\LanguageEdit',1968,1968,1968,1968);
+(182, 7, 'ApplicationRight', 'ProcessTypeFlowCondition\LanguageEdit',1968,1968,1968,1968);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(183, 7, 'ApplicationRight', 'ProcessTemplateFlowCondition\LanguageIndex',1969,1969,1969,1969);
+(183, 7, 'ApplicationRight', 'ProcessTypeFlowCondition\LanguageIndex',1969,1969,1969,1969);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(184, 7, 'ApplicationRight', 'ProcessTemplateFlowPass\Create',1970,1970,1970,1970);
+(184, 7, 'ApplicationRight', 'ProcessTypeFlowPass\Create',1970,1970,1970,1970);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(185, 7, 'ApplicationRight', 'ProcessTemplateFlowPass\Delete',1971,1971,1971,1971);
+(185, 7, 'ApplicationRight', 'ProcessTypeFlowPass\Delete',1971,1971,1971,1971);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(186, 7, 'ApplicationRight', 'ProcessTemplateFlowPass\Update',1972,1972,1972,1972);
+(186, 7, 'ApplicationRight', 'ProcessTypeFlowPass\Update',1972,1972,1972,1972);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(187, 7, 'ApplicationRight', 'ProcessTemplateFlowPass\Index',1973,1973,1973,1973);
+(187, 7, 'ApplicationRight', 'ProcessTypeFlowPass\Index',1973,1973,1973,1973);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(188, 7, 'ApplicationRight', 'ProcessTemplateGroup\Create',1974,1974,1974,1974);
+(188, 7, 'ApplicationRight', 'ProcessTypeGroup\Create',1974,1974,1974,1974);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(189, 7, 'ApplicationRight', 'ProcessTemplateGroup\Delete',1975,1975,1975,1975);
+(189, 7, 'ApplicationRight', 'ProcessTypeGroup\Delete',1975,1975,1975,1975);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(190, 7, 'ApplicationRight', 'ProcessTemplateGroup\Update',1976,1976,1976,1976);
+(190, 7, 'ApplicationRight', 'ProcessTypeGroup\Update',1976,1976,1976,1976);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(191, 7, 'ApplicationRight', 'ProcessTemplateGroup\Index',1977,1977,1977,1977);
+(191, 7, 'ApplicationRight', 'ProcessTypeGroup\Index',1977,1977,1977,1977);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(192, 7, 'ApplicationRight', 'ProcessTemplateGroup\LanguageEdit',1978,1978,1978,1978);
+(192, 7, 'ApplicationRight', 'ProcessTypeGroup\LanguageEdit',1978,1978,1978,1978);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(193, 7, 'ApplicationRight', 'ProcessTemplateGroup\LanguageIndex',1979,1979,1979,1979);
+(193, 7, 'ApplicationRight', 'ProcessTypeGroup\LanguageIndex',1979,1979,1979,1979);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(194, 7, 'ApplicationRight', 'ProcessTemplateStage\Create',1980,1980,1980,1980);
+(194, 7, 'ApplicationRight', 'ProcessTypeStage\Create',1980,1980,1980,1980);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(195, 7, 'ApplicationRight', 'ProcessTemplateStage\Delete',1981,1981,1981,1981);
+(195, 7, 'ApplicationRight', 'ProcessTypeStage\Delete',1981,1981,1981,1981);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(196, 7, 'ApplicationRight', 'ProcessTemplateStage\Update',1982,1982,1982,1982);
+(196, 7, 'ApplicationRight', 'ProcessTypeStage\Update',1982,1982,1982,1982);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(197, 7, 'ApplicationRight', 'ProcessTemplateStage\Index',1983,1983,1983,1983);
+(197, 7, 'ApplicationRight', 'ProcessTypeStage\Index',1983,1983,1983,1983);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(198, 7, 'ApplicationRight', 'ProcessTemplateStage\LanguageEdit',1984,1984,1984,1984);
+(198, 7, 'ApplicationRight', 'ProcessTypeStage\LanguageEdit',1984,1984,1984,1984);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(199, 7, 'ApplicationRight', 'ProcessTemplateStage\LanguageIndex',1985,1985,1985,1985);
+(199, 7, 'ApplicationRight', 'ProcessTypeStage\LanguageIndex',1985,1985,1985,1985);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(200, 7, 'ApplicationRight', 'ProcessTemplateStageField\Update',1986,1986,1986,1986);
+(200, 7, 'ApplicationRight', 'ProcessTypeStageField\Update',1986,1986,1986,1986);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(201, 7, 'ApplicationRight', 'ProcessTemplateStageField\Index',1987,1987,1987,1987);
+(201, 7, 'ApplicationRight', 'ProcessTypeStageField\Index',1987,1987,1987,1987);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(202, 7, 'ApplicationRight', 'ProcessTemplateStageType\Create',1988,1988,1988,1988);
+(202, 7, 'ApplicationRight', 'ProcessTypeStageType\Create',1988,1988,1988,1988);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(203, 7, 'ApplicationRight', 'ProcessTemplateStageType\Delete',1989,1989,1989,1989);
+(203, 7, 'ApplicationRight', 'ProcessTypeStageType\Delete',1989,1989,1989,1989);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(204, 7, 'ApplicationRight', 'ProcessTemplateStageType\Update',1990,1990,1990,1990);
+(204, 7, 'ApplicationRight', 'ProcessTypeStageType\Update',1990,1990,1990,1990);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(205, 7, 'ApplicationRight', 'ProcessTemplateStageType\Index',1991,1991,1991,1991);
+(205, 7, 'ApplicationRight', 'ProcessTypeStageType\Index',1991,1991,1991,1991);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(206, 7, 'ApplicationRight', 'ProcessTemplateStageType\LanguageEdit',1992,1992,1992,1992);
+(206, 7, 'ApplicationRight', 'ProcessTypeStageType\LanguageEdit',1992,1992,1992,1992);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
-(207, 7, 'ApplicationRight', 'ProcessTemplateStageType\LanguageIndex',1993,1993,1993,1993);
+(207, 7, 'ApplicationRight', 'ProcessTypeStageType\LanguageIndex',1993,1993,1993,1993);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
 (208, 5, 'ApplicationRight', 'Project\Create',1994,1994,1994,1994);
 INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
@@ -1132,15 +1132,15 @@ INSERT INTO Claims ( ClaimId, ClaimGroupId, ClaimType, ClaimValue, NameTermId, D
 
 SET IDENTITY_INSERT Claims OFF;
 
-SET IDENTITY_INSERT ProcessTemplateFieldTypes ON
-INSERT INTO ProcessTemplateFieldTypes (ProcessTemplateFieldTypeId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID, active) VALUES 
+SET IDENTITY_INSERT ProcessTypeFieldTypes ON
+INSERT INTO ProcessTypeFieldTypes (ProcessTypeFieldTypeId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID, active) VALUES 
 (1, 645, 645, 645, 645,1),(2, 646, 646, 646, 646,1),(3, 647, 647, 647, 647,1),(4, 195, 195, 195, 195,1),(5, 648, 648, 648, 648,1),(6, 649, 649, 649, 649,1)
 ,(7, 650, 650, 650, 650,1),(8, 651, 651, 651, 651,1),(9, 652, 652, 652, 652,1),(10, 653, 653, 653, 653,1),(11, 654, 654, 654, 654,1),(12, 655, 655, 655, 655,1)
 ,(13, 656, 656, 656, 656,1),(14, 657, 657, 657, 657,1),(15, 658, 658, 658, 658,1),(16, 659, 659, 659, 659,1),(17, 660, 660, 660, 660,1),(18, 661, 661, 661, 661,1)
 ,(19, 662, 662, 662, 662,1),(20, 663, 663, 663, 663,1),(21, 664, 664, 664, 664,1),(22, 665, 665, 665, 665,1),(23, 666, 666, 666, 666,1),(24, 667, 667, 667, 667,1)
 ,(25, 668, 668, 668, 668,1),(26, 669, 669, 669, 669,1),(27, 670, 670, 670, 670,1),(28, 671, 671, 671, 671,1),(29, 672, 672, 672, 672,1),(30, 673, 673, 673, 673,1)
 ,(31, 674, 674, 674, 674,1),(32, 675, 675, 675, 675,1),(33, 918, 918, 918, 918,1),(34, 919, 919, 919, 919,1),(35, 920, 920, 920, 920,1),(36, 1346, 1346, 1346, 1346,1),(37, 1347, 1347, 1347, 1347,1);
-SET IDENTITY_INSERT ProcessTemplateFieldTypes OFF
+SET IDENTITY_INSERT ProcessTypeFieldTypes OFF
 
 SET IDENTITY_INSERT AddressTypes ON
 INSERT INTO AddressTypes (AddressTypeId, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID, active) VALUES 
@@ -1190,8 +1190,8 @@ INSERT INTO PageSectionDataTypes (PageSectionDataTypeId, NameTermId, Description
 SET IDENTITY_INSERT PageSectionDataTypes OFF;
 
 
-SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes ON;
-INSERT INTO ProcessTemplateFlowConditionTypes (ProcessTemplateFlowConditionTypeId, NameTermId,DescriptionTermId,MenuNameTermId,MouseOverTermID,active) VALUES
+SET IDENTITY_INSERT ProcessTypeFlowConditionTypes ON;
+INSERT INTO ProcessTypeFlowConditionTypes (ProcessTypeFlowConditionTypeId, NameTermId,DescriptionTermId,MenuNameTermId,MouseOverTermID,active) VALUES
 (1, 880, 881, 880,880,1)
 , (2, 882, 883, 882,882,1)
 , (3, 884, 885, 884,884,1)
@@ -1215,10 +1215,10 @@ INSERT INTO ProcessTemplateFlowConditionTypes (ProcessTemplateFlowConditionTypeI
 , (21, 917, 918, 917,917,1)
 , (22, 928, 930, 928,928,1)
 , (23, 929, 931, 929,929,1)
-SET IDENTITY_INSERT ProcessTemplateFlowConditionTypes OFF;
+SET IDENTITY_INSERT ProcessTypeFlowConditionTypes OFF;
 
-SET IDENTITY_INSERT ProcessTemplateFlowPassTypes ON;
-INSERT INTO ProcessTemplateFlowPassTypes (ProcessTemplateFlowPassTypeId, NameTermId,DescriptionTermId,MenuNameTermId,MouseOverTermID,active) VALUES
+SET IDENTITY_INSERT ProcessTypeFlowPassTypes ON;
+INSERT INTO ProcessTypeFlowPassTypes (ProcessTypeFlowPassTypeId, NameTermId,DescriptionTermId,MenuNameTermId,MouseOverTermID,active) VALUES
 (1, 880, 881, 880,880,1)
 , (2, 882, 883, 882,882,1)
 , (3, 884, 885, 884,884,1)
@@ -1242,12 +1242,12 @@ INSERT INTO ProcessTemplateFlowPassTypes (ProcessTemplateFlowPassTypeId, NameTer
 , (21, 917, 918, 917,917,1)
 , (22, 928, 930, 928,928,1)
 , (23, 929, 931, 929,929,1)
-SET IDENTITY_INSERT ProcessTemplateFlowPassTypes OFF;
+SET IDENTITY_INSERT ProcessTypeFlowPassTypes OFF;
 
 
-SET IDENTITY_INSERT ProcessTemplateFlowConditionComparisonOperators ON;
-INSERT INTO ProcessTemplateFlowConditionComparisonOperators (
-	ProcessTemplateFlowConditionComparisonOperatorId, Symbol, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+SET IDENTITY_INSERT ProcessTypeFlowConditionComparisonOperators ON;
+INSERT INTO ProcessTypeFlowConditionComparisonOperators (
+	ProcessTypeFlowConditionComparisonOperatorId, Symbol, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
 (1, '', 921, 921, 921, 921)
 , (2, '=', 922, 922, 922, 922)
 , (3, '>', 923, 923, 923, 923)
@@ -1255,11 +1255,11 @@ INSERT INTO ProcessTemplateFlowConditionComparisonOperators (
 , (5, '>=', 925, 925, 925, 925)
 , (6, '<=', 926, 926, 926, 926)
 , (7, '<>', 927, 927, 927, 927);
-SET IDENTITY_INSERT ProcessTemplateFlowConditionComparisonOperators OFF;
+SET IDENTITY_INSERT ProcessTypeFlowConditionComparisonOperators OFF;
 
-SET IDENTITY_INSERT ProcessTemplateFlowPassComparisonOperators ON;
-INSERT INTO ProcessTemplateFlowPassComparisonOperators (
-	ProcessTemplateFlowPassComparisonOperatorId, Symbol, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
+SET IDENTITY_INSERT ProcessTypeFlowPassComparisonOperators ON;
+INSERT INTO ProcessTypeFlowPassComparisonOperators (
+	ProcessTypeFlowPassComparisonOperatorId, Symbol, NameTermId, DescriptionTermId, MenuNameTermId, MouseOverTermID) VALUES 
 (1, '', 921, 921, 921, 921)
 , (2, '=', 922, 922, 922, 922)
 , (3, '>', 923, 923, 923, 923)
@@ -1267,7 +1267,7 @@ INSERT INTO ProcessTemplateFlowPassComparisonOperators (
 , (5, '>=', 925, 925, 925, 925)
 , (6, '<=', 926, 926, 926, 926)
 , (7, '<>', 927, 927, 927, 927);
-SET IDENTITY_INSERT ProcessTemplateFlowPassComparisonOperators OFF;
+SET IDENTITY_INSERT ProcessTypeFlowPassComparisonOperators OFF;
 
 
 SET IDENTITY_INSERT ValueUpdateTypes ON;
@@ -1680,23 +1680,23 @@ INSERT [dbo].[ObjectTypeClassificationStatuses] ([ObjectTypeClassificationStatus
 
 SET IDENTITY_INSERT [dbo].[ObjectTypeClassificationStatuses] OFF
 
-SET IDENTITY_INSERT [dbo].[ProcessTemplateStageFieldStatuses] ON 
+SET IDENTITY_INSERT [dbo].[ProcessTypeStageFieldStatuses] ON 
 
-INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 679, 679, 679, 679)
+INSERT [dbo].[ProcessTypeStageFieldStatuses] ([ProcessTypeStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 679, 679, 679, 679)
 
-INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 680, 680, 680, 680)
+INSERT [dbo].[ProcessTypeStageFieldStatuses] ([ProcessTypeStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 680, 680, 680, 680)
 
-INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 681, 681, 681, 681)
+INSERT [dbo].[ProcessTypeStageFieldStatuses] ([ProcessTypeStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 681, 681, 681, 681)
 
-INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 682, 682, 682, 682)
+INSERT [dbo].[ProcessTypeStageFieldStatuses] ([ProcessTypeStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (4, 682, 682, 682, 682)
 
-INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 3879, 3879, 3879, 3879)
+INSERT [dbo].[ProcessTypeStageFieldStatuses] ([ProcessTypeStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (5, 3879, 3879, 3879, 3879)
 
-INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (6, 3880, 3880, 3880, 3880)
+INSERT [dbo].[ProcessTypeStageFieldStatuses] ([ProcessTypeStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (6, 3880, 3880, 3880, 3880)
 
-INSERT [dbo].[ProcessTemplateStageFieldStatuses] ([ProcessTemplateStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (7, 3881, 3881, 3881, 3881)
+INSERT [dbo].[ProcessTypeStageFieldStatuses] ([ProcessTypeStageFieldStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (7, 3881, 3881, 3881, 3881)
 
-SET IDENTITY_INSERT [dbo].[ProcessTemplateStageFieldStatuses] OFF
+SET IDENTITY_INSERT [dbo].[ProcessTypeStageFieldStatuses] OFF
 
 SET IDENTITY_INSERT [dbo].[CodeTypes] ON 
 
@@ -1707,4 +1707,13 @@ INSERT [dbo].[CodeTypes] ([CodeTypeID], [NameTermID], [DescriptionTermID], [Menu
 INSERT [dbo].[CodeTypes] ([CodeTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 3899, 3899, 3899, 3899)
 
 SET IDENTITY_INSERT [dbo].[CodeTypes] OFF
+
+
+
+
+INSERT [dbo].[ObjectTypeStatuses] ([ObjectTypeStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 336, 336, 336, 336)
+
+INSERT [dbo].[ObjectTypeStatuses] ([ObjectTypeStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 192, 192, 192, 192)
+
+INSERT [dbo].[ObjectTypeStatuses] ([ObjectTypeStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 327, 327, 327, 327)
 

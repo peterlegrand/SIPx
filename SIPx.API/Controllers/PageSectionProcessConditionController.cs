@@ -24,10 +24,10 @@ namespace SIPx.API.Controllers
         private readonly IContentTypeProvider _contentTypeProvider;
         private readonly IContentTypeGroupProvider _contentTypeGroupProvider;
         private readonly IPersonProvider _personProvider;
-        private readonly IProcessTemplateStageTypeProvider _processTemplateStageTypeProvider;
+        private readonly IProcessTypeStageTypeProvider _processTypeStageTypeProvider;
         private readonly IRoleProvider _roleProvider;
-        private readonly IProcessTemplateGroupProvider _processTemplateGroupProvider;
-        private readonly IProcessTemplateProvider _processTemplateProvider;
+        private readonly IProcessTypeGroupProvider _processTypeGroupProvider;
+        private readonly IProcessTypeProvider _processTypeProvider;
         private readonly IPageSectionProcessConditionProvider _pageSectionProcessConditionProvider;
         private readonly IPageSectionProcessConditionTypeProvider _pageSectionProcessConditionTypeProvider;
         private readonly IUserProvider _userProvider;
@@ -49,10 +49,10 @@ namespace SIPx.API.Controllers
                 , IContentTypeProvider contentTypeProvider
                 , IContentTypeGroupProvider contentTypeGroupProvider
                 , IPersonProvider personProvider
-                , IProcessTemplateStageTypeProvider processTemplateStageTypeProvider
+                , IProcessTypeStageTypeProvider processTypeStageTypeProvider
                 , IRoleProvider roleProvider
-                , IProcessTemplateGroupProvider processTemplateGroupProvider
-                , IProcessTemplateProvider processTemplateProvider
+                , IProcessTypeGroupProvider processTypeGroupProvider
+                , IProcessTypeProvider processTypeProvider
                 , IPageSectionProcessConditionProvider pageSectionProcessConditionProvider
                 , IPageSectionProcessConditionTypeProvider pageSectionProcessConditionTypeProvider
                 , IUserProvider userProvider
@@ -73,10 +73,10 @@ namespace SIPx.API.Controllers
             _contentTypeProvider = contentTypeProvider;
             _contentTypeGroupProvider = contentTypeGroupProvider;
             _personProvider = personProvider;
-            _processTemplateStageTypeProvider = processTemplateStageTypeProvider;
+            _processTypeStageTypeProvider = processTypeStageTypeProvider;
             _roleProvider = roleProvider;
-            _processTemplateGroupProvider = processTemplateGroupProvider;
-            _processTemplateProvider = processTemplateProvider;
+            _processTypeGroupProvider = processTypeGroupProvider;
+            _processTypeProvider = processTypeProvider;
             _pageSectionProcessConditionProvider = pageSectionProcessConditionProvider;
             _pageSectionProcessConditionTypeProvider = pageSectionProcessConditionTypeProvider;
             _userProvider = userProvider;
@@ -100,14 +100,14 @@ namespace SIPx.API.Controllers
                 //PETER TODO add security with message like missing in contentcondition
                 var PageSectionProcessConditionCreateGet = new PageSectionProcessConditionCreateGet();
                 PageSectionProcessConditionCreateGet.PageSectionProcessConditionTypes = await _pageSectionProcessConditionTypeProvider.ListExtended(CurrentUser.Id);
-                PageSectionProcessConditionCreateGet.ProcessTemplates = await _processTemplateProvider.List(CurrentUser.Id);
-                PageSectionProcessConditionCreateGet.ProcessTemplateGroups = await _processTemplateGroupProvider.List(CurrentUser.Id);
+                PageSectionProcessConditionCreateGet.ProcessTypes = await _processTypeProvider.List(CurrentUser.Id);
+                PageSectionProcessConditionCreateGet.ProcessTypeGroups = await _processTypeGroupProvider.List(CurrentUser.Id);
                 PageSectionProcessConditionCreateGet.Organizations = await _organizationProvider.List(CurrentUser.Id);
                 PageSectionProcessConditionCreateGet.Projects = await _projectProvider.List(CurrentUser.Id);
                 PageSectionProcessConditionCreateGet.Roles = await _roleProvider.List(CurrentUser.Id);
                 PageSectionProcessConditionCreateGet.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 PageSectionProcessConditionCreateGet.Users = await _userProvider.List();
-                PageSectionProcessConditionCreateGet.ProcessTemplateStageTypes = await _processTemplateStageTypeProvider.List(CurrentUser.Id);
+                PageSectionProcessConditionCreateGet.ProcessTypeStageTypes = await _processTypeStageTypeProvider.List(CurrentUser.Id);
                 PageSectionProcessConditionCreateGet.Languages = await _languageProvider.List(CurrentUser.Id);
                 PageSectionProcessConditionCreateGet.Persons = await _personProvider.List();
                 PageSectionProcessConditionCreateGet.Contents = await _contentProvider.List();
@@ -157,10 +157,10 @@ namespace SIPx.API.Controllers
                     switch (PageSectionProcessCondition.PageSectionProcessConditionTypeIdExtended)
                     {
                         case "T1":
-                            PageSectionProcessCondition.PageSectionProcessConditionInt= PageSectionProcessCondition.ProcessTemplateId;
+                            PageSectionProcessCondition.PageSectionProcessConditionInt= PageSectionProcessCondition.ProcessTypeId;
                             break;
                         case "T2":
-                            PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.ProcessTemplateGroupId;
+                            PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.ProcessTypeGroupId;
                             break;
                         case "T12":
                             PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.OrganizationId;
@@ -252,14 +252,14 @@ namespace SIPx.API.Controllers
                 var PageSectionProcessCondition = await _pageSectionProcessConditionProvider.UpdateGet(CurrentUser.Id, Id);
 
                 PageSectionProcessCondition.PageSectionProcessConditionTypes = await _pageSectionProcessConditionTypeProvider.ListExtended(CurrentUser.Id);
-                PageSectionProcessCondition.ProcessTemplates = await _processTemplateProvider.List(CurrentUser.Id);
-                PageSectionProcessCondition.ProcessTemplateGroups = await _processTemplateGroupProvider.List(CurrentUser.Id);
+                PageSectionProcessCondition.ProcessTypes = await _processTypeProvider.List(CurrentUser.Id);
+                PageSectionProcessCondition.ProcessTypeGroups = await _processTypeGroupProvider.List(CurrentUser.Id);
                 PageSectionProcessCondition.Organizations = await _organizationProvider.List(CurrentUser.Id);
                 PageSectionProcessCondition.Projects = await _projectProvider.List(CurrentUser.Id);
                 PageSectionProcessCondition.Roles = await _roleProvider.List(CurrentUser.Id);
                 PageSectionProcessCondition.SecurityLevels = await _securityLevelProvider.List(CurrentUser.Id);
                 PageSectionProcessCondition.Users = await _userProvider.List();
-                PageSectionProcessCondition.ProcessTemplateStageTypes = await _processTemplateStageTypeProvider.List(CurrentUser.Id);
+                PageSectionProcessCondition.ProcessTypeStageTypes = await _processTypeStageTypeProvider.List(CurrentUser.Id);
                 PageSectionProcessCondition.Languages = await _languageProvider.List(CurrentUser.Id);
                 PageSectionProcessCondition.Persons = await _personProvider.List();
                 PageSectionProcessCondition.Contents = await _contentProvider.List();
@@ -291,10 +291,10 @@ namespace SIPx.API.Controllers
 
 
                         case "T1":
-                            PageSectionProcessCondition.ProcessTemplateId = PageSectionProcessCondition.PageSectionProcessConditionInt;
+                            PageSectionProcessCondition.ProcessTypeId = PageSectionProcessCondition.PageSectionProcessConditionInt;
                             break;
                         case "T2":
-                            PageSectionProcessCondition.ProcessTemplateGroupId = PageSectionProcessCondition.PageSectionProcessConditionInt;
+                            PageSectionProcessCondition.ProcessTypeGroupId = PageSectionProcessCondition.PageSectionProcessConditionInt;
                             break;
                         case "T12":
                             PageSectionProcessCondition.OrganizationId = PageSectionProcessCondition.PageSectionProcessConditionInt;
@@ -407,10 +407,10 @@ namespace SIPx.API.Controllers
 
 
                         case "T1":
-                            PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.ProcessTemplateId;
+                            PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.ProcessTypeId;
                             break;
                         case "T2":
-                            PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.ProcessTemplateGroupId;
+                            PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.ProcessTypeGroupId;
                             break;
                         case "T12":
                             PageSectionProcessCondition.PageSectionProcessConditionInt = PageSectionProcessCondition.OrganizationId;

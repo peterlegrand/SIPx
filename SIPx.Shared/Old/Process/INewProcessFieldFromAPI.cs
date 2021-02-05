@@ -6,8 +6,8 @@ namespace SIPx.Shared
     {
         DateTime? DateTimeValue { get; set; }
         int? IntValue { get; set; }
-        int ProcessTemplateFieldId { get; set; }
-        int ProcessTemplateId { get; set; }
+        int ProcessTypeFieldId { get; set; }
+        int ProcessTypeId { get; set; }
         int Sequence { get; set; }
         string StringValue { get; set; }
     }

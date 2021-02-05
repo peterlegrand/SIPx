@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateUpdateGet
+@model ProcessTypeUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type")).TermString;
     ViewData["Image"] = "Template.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -18,7 +18,7 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId" cssClass="e-outline" placeholder="ProcessTypeId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -29,7 +29,7 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId" cssClass="e-outline" placeholder="ProcessTemplateId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId" cssClass="e-outline" placeholder="ProcessTypeId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -144,8 +144,8 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Sequence")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateGroupId" dataSource="@Model.ProcessTemplateGroups" ejs-for="@Model.ProcessTemplateGroupId" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateGroupId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeGroupId" dataSource="@Model.ProcessTypeGroups" ejs-for="@Model.ProcessTypeGroupId" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeGroupId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>

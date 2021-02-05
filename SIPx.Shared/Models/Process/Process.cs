@@ -14,12 +14,12 @@ namespace SIPx.Shared
         public int CodeInt { get; set; }
         public string CodeSuffix { get; set; }
         public string Code { get; set; }
-        public string ProcessTemplateName { get; set; }
+        public string ProcessTypeName { get; set; }
         public string Subject { get; set; }
-        public string ProcessTemplateStage { get; set; }
+        public string ProcessTypeStage { get; set; }
         public int? ProcessMultiId { get; set; }
-        public int ProcessTemplateId { get; set; }
-        public int ProcessTemplateStageId { get; set; }
+        public int ProcessTypeId { get; set; }
+        public int ProcessTypeStageId { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

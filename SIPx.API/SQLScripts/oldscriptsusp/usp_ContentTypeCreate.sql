@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ContentTypeCreate] (
 	@ContentTypeGroupId int 
-	, @ProcessTemplateId int
+	, @ProcessTypeId int
 	, @SecurityLevelId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
@@ -18,7 +18,7 @@ BEGIN TRANSACTION
 
 INSERT INTO ContentTypes (
 	ContentTypeGroupID
-	, ProcessTemplateID
+	, ProcessTypeID
 	, SecurityLevelID
 	, CreatorID
 	, CreatedDate
@@ -26,7 +26,7 @@ INSERT INTO ContentTypes (
 	, ModifiedDate)
 VALUES (
 	@ContentTypeGroupID
-	, @ProcessTemplateID
+	, @ProcessTypeID
 	, @SecurityLevelID
 	, @UserID
 	, getdate()

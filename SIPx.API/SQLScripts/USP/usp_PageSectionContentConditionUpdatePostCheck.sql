@@ -99,7 +99,7 @@ BEGIN
 END
 
 
---PETER TODO Add a check for process template which includes if primary content is a field for that.
+--PETER TODO Add a check for process type which includes if primary content is a field for that.
 SELECT ErrorMessages.ErrorMessageID
 	, ISNULL(UINameCustom.Customization,UIName.Name) Name
 FROM @ErrorIdsTable Errors 

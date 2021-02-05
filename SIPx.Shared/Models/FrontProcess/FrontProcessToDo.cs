@@ -11,9 +11,9 @@ namespace SIPx.Shared
     {
         [Key]
         public int ProcessId { get; set; }
-        public string ProcessTemplateName { get; set; }
+        public string ProcessTypeName { get; set; }
         public string Subject { get; set; } 
-        public string ProcesstemplateStage { get; set; }
+        public string ProcesstypeStage { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }
         public DateTime  CreatedDate { get; set; }

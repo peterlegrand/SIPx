@@ -13,7 +13,7 @@ namespace SIPx.Shared
         public string CodeSuffix { get; set; }
         public int CodeTypeId { get; set; }
         public string ContentTypeGroupName { get; set; }
-        public string ProcessTemplateName { get; set; }
+        public string ProcessTypeName { get; set; }
         public string SecurityLevelName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

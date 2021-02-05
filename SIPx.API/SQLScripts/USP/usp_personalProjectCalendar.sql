@@ -4,39 +4,39 @@ SELECT Processes.ProcessID Id
 	, FromField.DateTimeValue StartTime
 	, ToField.DateTimeValue EndTime
 	, SubjectField.StringValue Subject
-	, ProcessTemplates.Color
-FROM processTemplates 
+	, ProcessTypes.Color
+FROM processTypes 
 JOIN Processes 
-	ON ProcessTemplates.ProcessTemplateID = Processes.ProcessTemplateID
-JOIN ProcessTemplateFields
-	ON ProcessTemplates.ProcessTemplateID = ProcessTemplatefields.ProcessTemplateID
+	ON ProcessTypes.ProcessTypeID = Processes.ProcessTypeID
+JOIN ProcessTypeFields
+	ON ProcessTypes.ProcessTypeID = ProcessTypefields.ProcessTypeID
 JOIN ProcessFields
-	ON ProcessTemplateFields.ProcessTemplateFieldID = ProcessFields.ProcessTemplateFieldID
+	ON ProcessTypeFields.ProcessTypeFieldID = ProcessFields.ProcessTypeFieldID
 		AND Processes.ProcessID = ProcessFields.ProcessID
-JOIN ProcessTemplateFields FromTemplateField
-	ON Processes.ProcessTemplateID = FromTemplateField.ProcessTemplateID
+JOIN ProcessTypeFields FromTemplateField
+	ON Processes.ProcessTypeID = FromTemplateField.ProcessTypeID
 JOIN ProcessFields FromField
 	ON Processes.ProcessID = FromField.ProcessID
-		AND FromField.ProcessTemplateFieldID = FromTemplateField.ProcessTemplateFieldID
-JOIN ProcessTemplateFields ToTemplateField
-	ON Processes.ProcessTemplateID = ToTemplateField.ProcessTemplateID
+		AND FromField.ProcessTypeFieldID = FromTemplateField.ProcessTypeFieldID
+JOIN ProcessTypeFields ToTemplateField
+	ON Processes.ProcessTypeID = ToTemplateField.ProcessTypeID
 JOIN ProcessFields ToField
 	ON Processes.ProcessID = ToField.ProcessID
-		AND ToField.ProcessTemplateFieldID = ToTemplateField.ProcessTemplateFieldID
-JOIN ProcessTemplateFields SubjectTemplateField
-	ON Processes.ProcessTemplateID = SubjectTemplateField.ProcessTemplateID
+		AND ToField.ProcessTypeFieldID = ToTemplateField.ProcessTypeFieldID
+JOIN ProcessTypeFields SubjectTemplateField
+	ON Processes.ProcessTypeID = SubjectTemplateField.ProcessTypeID
 JOIN ProcessFields SubjectField
 	ON Processes.ProcessID = SubJectField.ProcessID
-		AND SubjectField.ProcessTemplateFieldID = SubjectTemplateField.ProcessTemplateFieldID
+		AND SubjectField.ProcessTypeFieldID = SubjectTemplateField.ProcessTypeFieldID
 JOIN AspNetRoleClaims
 	ON cast(AspNetRoleClaims.ClaimValue as int)= ProcessFields.IntValue
 JOIN AspNetUserRoles
 	ON AspNetRoleClaims.RoleId = AspNetUserRoles.RoleId
-WHERE processtemplates.ShowInProjectCalendar = 1
-AND ProcessTemplateFields.ProcessTemplateFieldTypeId = 16
+WHERE processtypes.ShowInProjectCalendar = 1
+AND ProcessTypeFields.ProcessTypeFieldTypeId = 16
 AND AspNetRoleClaims.ClaimType = 'ProjectRight'
 AND AspNetUserRoles.UserId = @UserId
-AND FromTemplateField.ProcessTemplateFieldTypeID =8
-AND ToTemplateField.ProcessTemplateFieldTypeID =9
-AND SubjectTemplateField.ProcessTemplateFieldTypeID =1
+AND FromTemplateField.ProcessTypeFieldTypeID =8
+AND ToTemplateField.ProcessTypeFieldTypeID =9
+AND SubjectTemplateField.ProcessTypeFieldTypeID =1
 ORDER BY FromField.DateTimeValue 

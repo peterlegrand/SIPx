@@ -15,13 +15,13 @@
             @if (ViewBag.Env == "Production")
             {
                 <p hidden>
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId"></ejs-numerictextbox>
                 </p>
             }
             else
             {
                 <p>
-                    <ejs-numerictextbox id="ProcessTemplateId" ejs-for="@Model.ProcessTemplateId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeId" ejs-for="@Model.ProcessTypeId"></ejs-numerictextbox>
                 </p>
             }
 
@@ -31,44 +31,44 @@
 
                 <div hidden>FieldId</div>
                 <p hidden>
-                    <ejs-numerictextbox id="@Model.ProcessFields[i].ControlIdProcessTemplateFieldId" ejs-for="@Model.ProcessFields[i].ProcessTemplateFieldId"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="@Model.ProcessFields[i].ControlIdProcessTemplateFieldTypeId" ejs-for="@Model.ProcessFields[i].ProcessTemplateFieldTypeId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="@Model.ProcessFields[i].ControlIdProcessTypeFieldId" ejs-for="@Model.ProcessFields[i].ProcessTypeFieldId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="@Model.ProcessFields[i].ControlIdProcessTypeFieldTypeId" ejs-for="@Model.ProcessFields[i].ProcessTypeFieldTypeId"></ejs-numerictextbox>
                 </p>
-                if (new[] { 3, 4 }.Contains(Model.ProcessFields[i].ProcessTemplateStageFieldStatusId))
+                if (new[] { 3, 4 }.Contains(Model.ProcessFields[i].ProcessTypeStageFieldStatusId))
                 {
                     <div class="row">
-                        @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="font-weight-bold col-4">@Model.ProcessFields[i].Name</div>
                         }
-                        @if (new[] { 1, 2 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 1, 2 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="col-8">
                                 <ejs-textbox onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" id="@Model.ProcessFields[i].ControlId" ejs-for="ProcessFields[i].StringValue"></ejs-textbox>
-                                @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
+                                @if (Model.ProcessFields[i].ProcessTypeStageFieldStatusId == 4)
                                 {
                                     <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
                         }
-                        @if (new[] { 3 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 3 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="col-8">
                                 <ejs-numerictextbox onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" id="@Model.ProcessFields[i].ControlId" ejs-for="@Model.ProcessFields[i].IntValue" value="@Model.ProcessFields[i].IntValue"></ejs-numerictextbox>
-                                @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
+                                @if (Model.ProcessFields[i].ProcessTypeStageFieldStatusId == 4)
                                 {
                                     <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
                         }
-                        @if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="col-8">
                                 <div id="wrapper" class="datepicker-section">
                                     <ejs-datepicker onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" allowEdit="true" id="@Model.ProcessFields[i].ControlId" calendarMode="Gregorian" dayHeaderFormat="Narrow" placeholder="Choose a Date" ejs-for="@Model.ProcessFields[i].DateTimeValue"></ejs-datepicker>
-                                    @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
+                                    @if (Model.ProcessFields[i].ProcessTypeStageFieldStatusId == 4)
                                     {
                                         <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                         <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
@@ -76,45 +76,45 @@
                                 </div>
                             </div>
                         }
-                        @if (new[] { 10 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 10 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="offset-4 col-8">
                                 <ejs-button isPrimary="true" name="submit" action="submit" value="@Model.ProcessFields[i].ControlId" id="submit">@Model.ProcessFields[i].Name</ejs-button>
                             </div>
                         }
-                        @if (new[] { 11 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 11 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="offset-4 col-8">
                                 <ejs-button isPrimary="false" name="submit" action="submit" value="@Model.ProcessFields[i].ControlId" id="submit">@Model.ProcessFields[i].Name</ejs-button>
                             </div>
                         }
-                        @if (new[] { 12 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 12 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="col-8">
                                 <ejs-dropdownlist onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" dataSource="@Model.Users" ejs-for="@Model.ProcessFields[i].StringValue" id="@Model.ProcessFields[i].ControlId">
                                     <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
+                                @if (Model.ProcessFields[i].ProcessTypeStageFieldStatusId == 4)
                                 {
                                     <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
                         }
-                        @if (new[] { 16 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 16 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="col-8">
                                 <ejs-dropdownlist onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" dataSource="@Model.Projects" ejs-for="@Model.ProcessFields[i].IntValue" id="@Model.ProcessFields[i].ControlId">
                                     <e-dropdownlist-fields text="Name" value="ProjectId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
+                                @if (Model.ProcessFields[i].ProcessTypeStageFieldStatusId == 4)
                                 {
                                     <div class="text-danger">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
                                 }
                             </div>
                         }
-                        @if (new[] { 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 32 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="col-8">
                                 <ejs-richtexteditor onfocusout="@Model.ProcessFields[i].ControlIdOnFocusOutFunction" ejs-for="@Model.ProcessFields[i].HTMLStringValue" value="@Model.ProcessFields[i].HTMLStringValue" id="@Model.ProcessFields[i].ControlId" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" maxLength="2000" created="created">
@@ -123,7 +123,7 @@
                                     <e-richtexteditor-toolbarsettings items="@ViewBag.tools">
                                     </e-richtexteditor-toolbarsettings>
                                 </ejs-richtexteditor>
-                                @if (Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 4)
+                                @if (Model.ProcessFields[i].ProcessTypeStageFieldStatusId == 4)
                                 {
                                     <div>@AllStuff.UITerms.Find(x => x.InternalName.Equals("Required")).TermString</div>
                                     <div class="bg-danger" style="display:none" id="@Model.ProcessFields[i].ControlIdWarning">@Model.ProcessFields[i].MissingValueText</div>
@@ -133,19 +133,19 @@
                     </div>
 
                 }
-                if (new[] { 2 }.Contains(Model.ProcessFields[i].ProcessTemplateStageFieldStatusId))
+                if (new[] { 2 }.Contains(Model.ProcessFields[i].ProcessTypeStageFieldStatusId))
                 {
                     <div class="row">
-                        @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div class="font-weight-bold col-4">@Model.ProcessFields[i].Name</div>
                         }
-                        @if (new[] { 1, 2 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId) && Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 2)
+                        @if (new[] { 1, 2 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId) && Model.ProcessFields[i].ProcessTypeStageFieldStatusId == 2)
                         {
                             <div class="col-8"> @Model.ProcessFields[i].StringValue</div>
                         }
 
-                        @if (new[] { 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId) && Model.ProcessFields[i].ProcessTemplateStageFieldStatusId == 2)
+                        @if (new[] { 32 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId) && Model.ProcessFields[i].ProcessTypeStageFieldStatusId == 2)
                         {
                             <div class="col-8">
                                 <div class="col-9">
@@ -153,7 +153,7 @@
                                 </div>
                             </div>
                         }
-                        @if (new[] { 1, 2, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 1, 2, 32 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div hidden>
                                 <ejs-textbox ejs-for="@Model.ProcessFields[i].StringValue" value="@Model.ProcessFields[i].StringValue" id="@Model.ProcessFields[i].ControlId"></ejs-textbox>
@@ -161,10 +161,10 @@
                         }
                     </div>
                 }
-                if (new[] { 1 }.Contains(Model.ProcessFields[i].ProcessTemplateStageFieldStatusId))
+                if (new[] { 1 }.Contains(Model.ProcessFields[i].ProcessTypeStageFieldStatusId))
                 {
                     <div class="row">
-                        @if (new[] { 1, 2, 32 }.Contains(Model.ProcessFields[i].ProcessTemplateFieldTypeId))
+                        @if (new[] { 1, 2, 32 }.Contains(Model.ProcessFields[i].ProcessTypeFieldTypeId))
                         {
                             <div hidden>
                                 <ejs-textbox ejs-for="@Model.ProcessFields[i].StringValue" value="@Model.ProcessFields[i].StringValue" id="@Model.ProcessFields[i].ControlId"></ejs-textbox>
@@ -174,7 +174,7 @@
                 }
             }
             @*<ejs-textbox id="TestText" onfocusout="myFunction()"></ejs-textbox>
-        <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@Model.ProcessTemplateFlowId" id="frutje">
+        <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@Model.ProcessTypeFlowId" id="frutje">
             <e-dropdownlist-fields text="Name" value="UserId"></e-dropdownlist-fields>
         </ejs-dropdownlist>*@
 

@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ContentTypeCreatePost (
+CREATE PROCEDURE [dbo].[usp_ProjectTypeCreatePost] (
 	 @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
@@ -6,8 +6,9 @@ CREATE PROCEDURE usp_ContentTypeCreatePost (
 	, @CodePrefix nvarchar(25)=''
 	, @CodeSuffix nvarchar(25)=''
 	, @CodeTypeId int
-	, @HasAnyChildContentType bit
-	, @HasAnyMatrixContentType bit
+	, @ObjectTypeStatusId int
+	, @HasAnyChildProject bit
+	, @HasAnyMatrixProject bit
 	, @Color char(9)
 	, @IconID int
 	, @UserId nvarchar(450)) 
@@ -20,14 +21,15 @@ FROM UserPreferences
 WHERE USerId = @UserId
 	AND UserPreferences.PreferenceTypeId = 1 ;
 
-INSERT INTO ContentTypes (
+INSERT INTO ProjectTypes (
 	Color 
 	, IconID 
 	, CodePrefix
 	, CodeSuffix
 	, CodeTypeId
-	, HasAnyChildContentType
-	, HasAnyMatrixContentType
+	, ObjectTypeStatusId 
+	, HasAnyChildProject
+	, HasAnyMatrixProject
 	, CreatorID
 	, CreatedDate
 	, ModifierID
@@ -38,18 +40,19 @@ VALUES (
 	, @CodePrefix
 	, @CodeSuffix
 	, @CodeTypeId
-	, @HasAnyChildContentType
-	, @HasAnyMatrixContentType
+	, @ObjectTypeStatusId 
+	, @HasAnyChildProject
+	, @HasAnyMatrixProject
 	, @UserId
 	, getdate()
 	, @UserId
 	, getdate())
 
 
-DECLARE @NewContentTypeId int	= scope_identity();
+DECLARE @NewProjectTypeId int	= scope_identity();
 
-INSERT INTO ContentTypeLanguages (
-	ContentTypeID
+INSERT INTO ProjectTypeLanguages (
+	ProjectTypeID
 	, LanguageID
 	, Name
 	, Description
@@ -60,7 +63,7 @@ INSERT INTO ContentTypeLanguages (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@NewContentTypeID
+	@NewProjectTypeID
 	, @LanguageID
 	, @Name
 	, @Description
@@ -71,8 +74,8 @@ VALUES (
 	, @UserId
 	, getdate())
 
-	INSERT INTO ContentTypeClassifications (ContentTypeId, ClassificationID, ObjectTypeClassificationStatusID, ModifierID, ModifiedDate)
-SELECT @NewContentTypeID, ClassificationID, 2, @UserId, getDate() FROM Classifications
+	INSERT INTO ProjectTypeClassifications (ProjectTypeId, ClassificationID, ObjectTypeClassificationStatusID, ModifierID, ModifiedDate)
+SELECT @NewProjectTypeID, ClassificationID, 2, @UserId, getDate() FROM Classifications
 	
 
 	COMMIT TRANSACTION

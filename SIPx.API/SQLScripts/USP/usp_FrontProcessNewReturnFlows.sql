@@ -1,13 +1,13 @@
 CREATE PROCEDURE usp_FrontProcessNewReturnFlows (
-	@ProcessTemplateId int
+	@ProcessTypeId int
 	)
 AS
-SELECT ProcessTemplateFlowID 
-FROM ProcessTemplateFlows 
-WHERE ProcessTemplateFlows.ProcessTemplateID = @ProcessTemplateId 
-	AND ProcessTemplateFlows.ProcessTemplateFromStageID NOT IN (
-		SELECT ProcessTemplateToStageID 
-		FROM ProcessTemplateFlows 
-		WHERE ProcessTemplateFlows.ProcessTemplateID = @ProcessTemplateId
+SELECT ProcessTypeFlowID 
+FROM ProcessTypeFlows 
+WHERE ProcessTypeFlows.ProcessTypeID = @ProcessTypeId 
+	AND ProcessTypeFlows.ProcessTypeFromStageID NOT IN (
+		SELECT ProcessTypeToStageID 
+		FROM ProcessTypeFlows 
+		WHERE ProcessTypeFlows.ProcessTypeID = @ProcessTypeId
 	);
 

@@ -58,13 +58,13 @@ LEFT JOIN (SELECT ProjectId, Name FROM ProjectLanguages JOIN Settings ON Project
 	ON ProjectDefaultLanguage.ProjectId = Contents.ProjectID
 JOIN ProcessFields 
 	ON ProcessFields.ProcessId = Contents.ProcessID
-JOIN ProcessTemplateFields 
-	ON ProcessFields.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldId 
+JOIN ProcessTypeFields 
+	ON ProcessFields.ProcessTypeFieldId = ProcessTypeFields.ProcessTypeFieldId 
 JOIN Persons Creator
 	ON Creator.UserId = Contents.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = Contents.ModifierID
-WHERE ProcessTemplateFields.ProcessTemplateFieldTypeId = 1
+WHERE ProcessTypeFields.ProcessTypeFieldTypeId = 1
 	AND UISecurityLevelName.LanguageId = @LanguageID
 	AND UIStatusName.LanguageId = @LanguageID
 	AND UILanguageName.LanguageId = @LanguageID

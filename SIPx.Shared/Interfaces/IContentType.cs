@@ -10,8 +10,8 @@
         string MenuName { get; set; }
         string MouseOver { get; set; }
         string Name { get; set; }
-        int ProcessTemplateId { get; set; }
-        string ProcessTemplateName { get; set; }
+        int ProcessTypeId { get; set; }
+        string ProcessTypeName { get; set; }
         string SecurityLevelName { get; set; }
     }
 }

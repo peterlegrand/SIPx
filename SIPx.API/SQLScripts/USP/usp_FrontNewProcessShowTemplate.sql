@@ -5,14 +5,14 @@ SELECT @LanguageId = IntPreference
 FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
-SELECT ProcessTemplates.ProcessTemplateGroupID
-	, ProcessTemplates.ProcessTemplateID
-	, ISNULL(UserProcessTemplateLanguage.Name,ISNULL(DefaultProcessTemplateLanguage.Name,'No name for this ')) Name
-FROM ProcessTemplates
-LEFT JOIN (SELECT ProcessTemplateId, Name, Description, MenuName, MouseOver FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateLanguage
-	ON UserProcessTemplateLanguage.ProcessTemplateId = ProcessTemplates.ProcessTemplateID
-LEFT JOIN (SELECT ProcessTemplateId, Name, Description, MenuName, MouseOver FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateLanguage
-	ON DefaultProcessTemplateLanguage.ProcessTemplateId = ProcessTemplates.ProcessTemplateID
-JOIN ProcessTemplateGroups
-	ON ProcessTemplates.ProcessTemplateGroupID = ProcessTemplateGroups.ProcessTemplateGroupID
-ORDER BY ProcessTemplateGroups.Sequence , ProcessTemplates.Sequence 
+SELECT ProcessTypes.ProcessTypeGroupID
+	, ProcessTypes.ProcessTypeID
+	, ISNULL(UserProcessTypeLanguage.Name,ISNULL(DefaultProcessTypeLanguage.Name,'No name for this ')) Name
+FROM ProcessTypes
+LEFT JOIN (SELECT ProcessTypeId, Name, Description, MenuName, MouseOver FROM ProcessTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTypeLanguage
+	ON UserProcessTypeLanguage.ProcessTypeId = ProcessTypes.ProcessTypeID
+LEFT JOIN (SELECT ProcessTypeId, Name, Description, MenuName, MouseOver FROM ProcessTypeLanguages JOIN Settings ON ProcessTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeLanguage
+	ON DefaultProcessTypeLanguage.ProcessTypeId = ProcessTypes.ProcessTypeID
+JOIN ProcessTypeGroups
+	ON ProcessTypes.ProcessTypeGroupID = ProcessTypeGroups.ProcessTypeGroupID
+ORDER BY ProcessTypeGroups.Sequence , ProcessTypes.Sequence 

@@ -9,8 +9,8 @@ namespace SIPx.Shared
     public class ProcessCreateGetFieldList
     {
         [Key]
-        public int ProcessTemplateFieldId { get; set; }
-        public int ProcessTemplateId { get; set; }
+        public int ProcessTypeFieldId { get; set; }
+        public int ProcessTypeId { get; set; }
         public int? IntValue { get; set; }
         public string StringValue { get; set; }
         public DateTime? DateTimeValue { get; set; }

@@ -25,7 +25,7 @@ namespace SIPx.Shared
         public int SecurityLevelId { get; set; }
         public string RoleId { get; set; }
         public int PersonId { get; set; }
-        public int ProcessTemplateStageTypeId { get; set; }
+        public int ProcessTypeStageTypeId { get; set; }
 
         public List<UserList> SelectedUsers { get; set; }
         public List<OrganizationList> Organizations { get; set; }
@@ -38,7 +38,7 @@ namespace SIPx.Shared
         public List<SecurityLevelList> SecurityLevels { get; set; }
         public List<RoleList> Roles { get; set; }
         public List<PersonList> Persons { get; set; }
-        public List<ProcessTemplateStageTypeList> ProcessTemplateStageTypes { get; set; }
+        public List<ProcessTypeStageTypeList> ProcessTypeStageTypes { get; set; }
 
 
     }

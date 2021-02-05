@@ -11,10 +11,10 @@ namespace SIPx.Shared
         [Key]
         public int ProcessId { get; set; }
         public string Subject { get; set; }
-        public string ProcessTemplateName { get; set; }
-        public string ProcessTemplateStageName { get; set; }
-        public string ProcessTemplateIcon { get; set; }
-        public string ProcessTemplateStageTypeColor { get; set; }
+        public string ProcessTypeName { get; set; }
+        public string ProcessTypeStageName { get; set; }
+        public string ProcessTypeIcon { get; set; }
+        public string ProcessTypeStageTypeColor { get; set; }
         public string CreatorName { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreatedDate { get; set; }

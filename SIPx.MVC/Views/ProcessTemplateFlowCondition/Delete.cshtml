@@ -1,9 +1,9 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateFlowConditionDeleteGet
+@model ProcessTypeFlowConditionDeleteGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete process template flow condition")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete process type flow condition")).TermString;
     ViewData["Image"] = "Condition.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -17,8 +17,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateFlowConditionId" ejs-for="@Model.ProcessTemplateFlowConditionId" cssClass="e-outline" placeholder="ProcessTemplateFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowId" ejs-for="@Model.ProcessTypeFlowId" cssClass="e-outline" placeholder="ProcessTypeFlowId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowConditionId" ejs-for="@Model.ProcessTypeFlowConditionId" cssClass="e-outline" placeholder="ProcessTypeFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -29,8 +29,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateFlowConditionId" ejs-for="@Model.ProcessTemplateFlowConditionId" cssClass="e-outline" placeholder="ProcessTemplateFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowId" ejs-for="@Model.ProcessTypeFlowId" cssClass="e-outline" placeholder="ProcessTypeFlowId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowConditionId" ejs-for="@Model.ProcessTypeFlowConditionId" cssClass="e-outline" placeholder="ProcessTypeFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -68,26 +68,26 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template flow condition type")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type flow condition type")).TermString
             </div>
             <div class="col-9">
-@Model.ProcessTemplateFlowConditionTypeName
+@Model.ProcessTypeFlowConditionTypeName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template field")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type field")).TermString
             </div>
             <div class="col-9">
-@Model.ProcessTemplateFieldName
+@Model.ProcessTypeFieldName
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template field role")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type field role")).TermString
             </div>
             <div class="col-9">
-@Model.ProcessTemplateFieldNameRole
+@Model.ProcessTypeFieldNameRole
             </div>
         </div>
         <div class="row">
@@ -103,7 +103,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("String value")).TermString
             </div>
             <div class="col-9">
-                @Model.ProcessTemplateFlowConditionString
+                @Model.ProcessTypeFlowConditionString
             </div>
         </div>
         <div class="row">
@@ -111,7 +111,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Int value")).TermString
             </div>
             <div class="col-9">
-@Model.ProcessTemplateFlowConditionInt
+@Model.ProcessTypeFlowConditionInt
             </div>
         </div>
         <div class="row">
@@ -119,7 +119,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Date time value")).TermString
             </div>
             <div class="col-9">
-@Model.ProcessTemplateFlowConditionDate
+@Model.ProcessTypeFlowConditionDate
             </div>
         </div>
         <div class="row">
@@ -157,7 +157,7 @@
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ProcessTemplateFlowId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <a asp-action="Index" asp-route-id="@Model.ProcessTypeFlowId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
 

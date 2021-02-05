@@ -8,7 +8,7 @@ namespace SIPx.Shared
     public class MVCFavoriteGroupUpdateGet
     {
         [Key]
-        public int ProcessTemplateGroupId { get; set; }
+        public int ProcessTypeGroupId { get; set; }
         public int Sequence { get; set; }
         public string Name { get; set; }
         public string CreatorName { get; set; }

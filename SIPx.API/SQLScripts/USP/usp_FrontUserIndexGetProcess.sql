@@ -17,14 +17,14 @@ SELECT @SelectedUserId = UserId from Persons where PersonID = @SelectedPersonId;
 ;
 SELECT Processes.ProcessID
 	, SubjectField.StringValue Subject
-	, ISNULL(UserProcessTemplateStageTypeLanguage.Name
-		,ISNULL(DefaultProcessTemplateStageTypeLanguage.Name
-			,'No name for this stage type')) ProcessTemplateStageTypeName
-	, ISNULL(UserProcessTemplateLanguage.Name
-		,ISNULL(DefaultProcessTemplateLanguage.Name
-			,'No name for this process template')) ProcessTemplateName
-	, ProcessTemplates.Color TemplateColor
-	, ProcessTemplateStageTypes.Color StageTypeColor
+	, ISNULL(UserProcessTypeStageTypeLanguage.Name
+		,ISNULL(DefaultProcessTypeStageTypeLanguage.Name
+			,'No name for this stage type')) ProcessTypeStageTypeName
+	, ISNULL(UserProcessTypeLanguage.Name
+		,ISNULL(DefaultProcessTypeLanguage.Name
+			,'No name for this process type')) ProcessTypeName
+	, ProcessTypes.Color TemplateColor
+	, ProcessTypeStageTypes.Color StageTypeColor
 	, StageTypeIcon.FileName StageTypeIconFileName
 	, TemplateIcon.FileName TemplateIconFileName
 
@@ -32,45 +32,45 @@ FROM Processes
 JOIN ProcessFields PersonField
 	ON Processes.ProcessID = PersonField.ProcessID
 
-JOIN ProcessTemplateFields	PersonTemplateField
-	ON PersonTemplateField.ProcessTemplateFieldID = PersonField.ProcessTemplateFieldID
+JOIN ProcessTypeFields	PersonTemplateField
+	ON PersonTemplateField.ProcessTypeFieldID = PersonField.ProcessTypeFieldID
 
 JOIN ProcessFields SubjectField
 	ON Processes.ProcessID = SubjectField.ProcessID
 
-JOIN ProcessTemplateFields	SubjectTemplateField
-	ON SubjectTemplateField.ProcessTemplateFieldID = SubjectField.ProcessTemplateFieldID
+JOIN ProcessTypeFields	SubjectTemplateField
+	ON SubjectTemplateField.ProcessTypeFieldID = SubjectField.ProcessTypeFieldID
 
 JOIN ProcessFields SecurityField
 	ON Processes.ProcessID = SecurityField.ProcessID
 
-JOIN ProcessTemplateFields	SecurityTemplateField
-	ON SecurityTemplateField.ProcessTemplateFieldID = SecurityField.ProcessTemplateFieldID
+JOIN ProcessTypeFields	SecurityTemplateField
+	ON SecurityTemplateField.ProcessTypeFieldID = SecurityField.ProcessTypeFieldID
 
-JOIN ProcessTemplateStages
-	ON Processes.ProcessTemplateStageID = ProcessTemplateStages.ProcessTemplateStageID
+JOIN ProcessTypeStages
+	ON Processes.ProcessTypeStageID = ProcessTypeStages.ProcessTypeStageID
 
-JOIN ProcessTemplateStageTypes
-	ON ProcessTemplateStageTypes.ProcessTemplateStageTypeID = ProcessTemplateStages.ProcessTemplateStageTypeID
-LEFT JOIN (SELECT ProcessTemplateStageTypeId, Name FROM ProcessTemplateStageTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateStageTypeLanguage
-	ON UserProcessTemplateStageTypeLanguage.ProcessTemplateStageTypeID= ProcessTemplateStageTypes.ProcessTemplateStageTypeID
-LEFT JOIN (SELECT ProcessTemplateStageTypeId, Name FROM ProcessTemplateStageTypeLanguages JOIN Settings ON ProcessTemplateStageTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateStageTypeLanguage
-	ON DefaultProcessTemplateStageTypeLanguage.ProcessTemplateStageTypeId = ProcessTemplateStageTypes.ProcessTemplateStageTypeID
+JOIN ProcessTypeStageTypes
+	ON ProcessTypeStageTypes.ProcessTypeStageTypeID = ProcessTypeStages.ProcessTypeStageTypeID
+LEFT JOIN (SELECT ProcessTypeStageTypeId, Name FROM ProcessTypeStageTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTypeStageTypeLanguage
+	ON UserProcessTypeStageTypeLanguage.ProcessTypeStageTypeID= ProcessTypeStageTypes.ProcessTypeStageTypeID
+LEFT JOIN (SELECT ProcessTypeStageTypeId, Name FROM ProcessTypeStageTypeLanguages JOIN Settings ON ProcessTypeStageTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeStageTypeLanguage
+	ON DefaultProcessTypeStageTypeLanguage.ProcessTypeStageTypeId = ProcessTypeStageTypes.ProcessTypeStageTypeID
 JOIN Icons StageTypeIcon
-	ON ProcessTemplateStageTypes.IconID = StageTypeIcon.IconId
-JOIN ProcessTemplates 
-	ON ProcessTemplates.ProcessTemplateID = Processes.ProcessTemplateID
+	ON ProcessTypeStageTypes.IconID = StageTypeIcon.IconId
+JOIN ProcessTypes 
+	ON ProcessTypes.ProcessTypeID = Processes.ProcessTypeID
 JOIN Icons TemplateIcon
-	ON ProcessTemplates.IconID = TemplateIcon.IconId
-LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateLanguage
-	ON UserProcessTemplateLanguage.ProcessTemplateID= ProcessTemplates.ProcessTemplateID
-LEFT JOIN (SELECT ProcessTemplateId, Name FROM ProcessTemplateLanguages JOIN Settings ON ProcessTemplateLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateLanguage
-	ON DefaultProcessTemplateLanguage.ProcessTemplateId = ProcessTemplates.ProcessTemplateID
+	ON ProcessTypes.IconID = TemplateIcon.IconId
+LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTypeLanguage
+	ON UserProcessTypeLanguage.ProcessTypeID= ProcessTypes.ProcessTypeID
+LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages JOIN Settings ON ProcessTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeLanguage
+	ON DefaultProcessTypeLanguage.ProcessTypeId = ProcessTypes.ProcessTypeID
 
 WHERE 
 	PersonField.StringValue = @SelectedUserId
 	AND SecurityField.IntValue <= @SecurityLevelId
-	AND PersonTemplateField.ProcessTemplateFieldTypeID = 12
-	AND SubjectTemplateField.ProcessTemplateFieldTypeID = 1
-	AND SecurityTemplateField.ProcessTemplateFieldTypeID = 28
+	AND PersonTemplateField.ProcessTypeFieldTypeID = 12
+	AND SubjectTemplateField.ProcessTypeFieldTypeID = 1
+	AND SecurityTemplateField.ProcessTypeFieldTypeID = 28
 	END

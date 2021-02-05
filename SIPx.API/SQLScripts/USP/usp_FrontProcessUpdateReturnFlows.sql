@@ -1,9 +1,9 @@
 CREATE PROCEDURE usp_FrontProcessUpdateReturnFlows (
-	@ProcessTemplateStageId int
+	@ProcessTypeStageId int
 	)
 AS
-SELECT ProcessTemplateFlowID 
-FROM ProcessTemplateFlows 
-WHERE ProcessTemplateFlows.ProcessTemplateFromStageID = @ProcessTemplateStageId 
+SELECT ProcessTypeFlowID 
+FROM ProcessTypeFlows 
+WHERE ProcessTypeFlows.ProcessTypeFromStageID = @ProcessTypeStageId 
 ;
 

@@ -10,7 +10,7 @@ namespace SIPx.Shared
     {
         [Key]
         public int Sequence { get; set; }
-        public int ProcessTemplateStageFieldStatusId { get; set; }
+        public int ProcessTypeStageFieldStatusId { get; set; }
         public int? IntValue { get; set; }
         public DateTime DateTimeValue { get; set; }
         public string StringValue { get; set; }
@@ -19,14 +19,14 @@ namespace SIPx.Shared
         public string HTMLStringValue { get; set; }
         public string MissingValueText { get; set; }
         public int ValueUpdateTypeId { get; set; }
-        public int ProcessTemplateFieldId { get; set; }
-        public int ProcessTemplateFieldTypeId { get; set; }
-        public int ProcessTemplateId { get; set; }
-        public int ProcessTemplateStageId { get; set; }
+        public int ProcessTypeFieldId { get; set; }
+        public int ProcessTypeFieldTypeId { get; set; }
+        public int ProcessTypeId { get; set; }
+        public int ProcessTypeStageId { get; set; }
         public string Name { get; set; }
         public string ControlId { get; set; }
-        public string ControlIdProcessTemplateFieldId { get; set; }
-        public string ControlIdProcessTemplateFieldTypeId { get; set; }
+        public string ControlIdProcessTypeFieldId { get; set; }
+        public string ControlIdProcessTypeFieldTypeId { get; set; }
         public string ControlIdOnFocusOutFunction { get; set; }
         public string ControlIdWarning { get; set; }
     }

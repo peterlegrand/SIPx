@@ -1,10 +1,10 @@
 ﻿@using Syncfusion.EJ2
 @using Newtonsoft.Json
-@model ProcessTemplateFlowConditionUpdateGet
+@model ProcessTypeFlowConditionUpdateGet
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
     
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template flow condition")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type flow condition")).TermString;
     ViewData["Image"] = "Condition.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -18,8 +18,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateFlowConditionId" ejs-for="@Model.ProcessTemplateFlowConditionId" cssClass="e-outline" placeholder="ProcessTemplateFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowId" ejs-for="@Model.ProcessTypeFlowId" cssClass="e-outline" placeholder="ProcessTypeFlowId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowConditionId" ejs-for="@Model.ProcessTypeFlowConditionId" cssClass="e-outline" placeholder="ProcessTypeFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -30,8 +30,8 @@
                     @AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString ClassificationId
                 </div>
                 <div class="col-9">
-                    <ejs-numerictextbox id="ProcessTemplateFlowId" ejs-for="@Model.ProcessTemplateFlowId" cssClass="e-outline" placeholder="ProcessTemplateFlowId" floatLabelType="Auto"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateFlowConditionId" ejs-for="@Model.ProcessTemplateFlowConditionId" cssClass="e-outline" placeholder="ProcessTemplateFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowId" ejs-for="@Model.ProcessTypeFlowId" cssClass="e-outline" placeholder="ProcessTypeFlowId" floatLabelType="Auto"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeFlowConditionId" ejs-for="@Model.ProcessTypeFlowConditionId" cssClass="e-outline" placeholder="ProcessTypeFlowConditionId" floatLabelType="Auto"></ejs-numerictextbox>
                 </div>
             </div>
         }
@@ -84,33 +84,33 @@
         </div>
         <div class="row">
             <div class="col-3">
-                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template flow conditiontype")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type flow conditiontype")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateFlowConditionTypeId" dataSource="@Model.ProcessTemplateFlowConditionTypes" ejs-for="@Model.ProcessTemplateFlowConditionTypeId" value="@Model.ProcessTemplateFlowConditionTypeId" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFlowConditionTypeId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeFlowConditionTypeId" dataSource="@Model.ProcessTypeFlowConditionTypes" ejs-for="@Model.ProcessTypeFlowConditionTypeId" value="@Model.ProcessTypeFlowConditionTypeId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeFlowConditionTypeId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template field")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type field")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateFieldId" dataSource="@Model.ProcessTemplateFields" ejs-for="@Model.ProcessTemplateFieldId" value="@Model.ProcessTemplateFieldId" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFieldId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeFieldId" dataSource="@Model.ProcessTypeFields" ejs-for="@Model.ProcessTypeFieldId" value="@Model.ProcessTypeFieldId" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeFieldId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template field role")).TermString
+                @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type field role")).TermString
             </div>
             <div class="col-9">
-                <ejs-dropdownlist id="ProcessTemplateFieldIdRole" dataSource="@Model.ProcessTemplateFieldRoles" ejs-for="@Model.ProcessTemplateFieldIdRole" value="@Model.ProcessTemplateFieldIdRole" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFieldId"></e-dropdownlist-fields>
+                <ejs-dropdownlist id="ProcessTypeFieldIdRole" dataSource="@Model.ProcessTypeFieldRoles" ejs-for="@Model.ProcessTypeFieldIdRole" value="@Model.ProcessTypeFieldIdRole" index="2" popupHeight="220px">
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeFieldId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -121,7 +121,7 @@
             </div>
             <div class="col-9">
                 <ejs-dropdownlist id="ComparisonOperatorId" dataSource="@Model.ComparisonOperators" ejs-for="@Model.ComparisonOperatorId" value="@Model.ComparisonOperatorId" index="2" popupHeight="220px">
-                    <e-dropdownlist-fields text="Name" value="ProcessTemplateFlowConditionComparisonOperatorId"></e-dropdownlist-fields>
+                    <e-dropdownlist-fields text="Name" value="ProcessTypeFlowConditionComparisonOperatorId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
 
             </div>
@@ -132,7 +132,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("String value")).TermString
             </div>
             <div class="col-9">
-                <ejs-textbox id="ProcessTemplateFlowConditionString" ejs-for="ProcessTemplateFlowConditionString" cssClass="e-outline" placeholder="String value" floatLabelType="Auto"></ejs-textbox>
+                <ejs-textbox id="ProcessTypeFlowConditionString" ejs-for="ProcessTypeFlowConditionString" cssClass="e-outline" placeholder="String value" floatLabelType="Auto"></ejs-textbox>
             </div>
         </div>
         <div class="row">
@@ -140,7 +140,7 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Int value")).TermString
             </div>
             <div class="col-9">
-                <ejs-numerictextbox id="ProcessTemplateFlowConditionInt" ejs-for="ProcessTemplateFlowConditionInt" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-numerictextbox>
+                <ejs-numerictextbox id="ProcessTypeFlowConditionInt" ejs-for="ProcessTypeFlowConditionInt" cssClass="e-outline" placeholder="Int value" floatLabelType="Auto"></ejs-numerictextbox>
             </div>
         </div>
         <div class="row">
@@ -148,14 +148,14 @@
                 @AllStuff.UITerms.Find(x => x.InternalName.Equals("Date time value")).TermString
             </div>
             <div class="col-9">
-                <ejs-datepicker id="ProcessTemplateFlowConditionDate" ejs-for="ProcessTemplateFlowConditionDate" cssClass="e-outline" placeholder="Date time value" floatLabelType="Auto"></ejs-datepicker>
+                <ejs-datepicker id="ProcessTypeFlowConditionDate" ejs-for="ProcessTypeFlowConditionDate" cssClass="e-outline" placeholder="Date time value" floatLabelType="Auto"></ejs-datepicker>
             </div>
         </div>
 
         <div class="row">
             <div class="col-3 offset-3">
                 <ejs-button id="primarybtn" content="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Save")).TermString" isPrimary="true"></ejs-button>
-                <a asp-action="Index" asp-route-id="@Model.ProcessTemplateFlowId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
+                <a asp-action="Index" asp-route-id="@Model.ProcessTypeFlowId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Cancel")).TermString</a>
             </div>
         </div>
         <div class="row">
@@ -299,10 +299,10 @@
 </script>
 
 <script type="text/javascript">
-        function ProcessTemplateFlowConditionTypes(e) {
+        function ProcessTypeFlowConditionTypes(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFlowConditionTypes)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeFlowConditionTypes)), query);
                 }
 </script>
 <script type="text/javascript">
@@ -313,10 +313,10 @@
                 }
 </script>
 <script type="text/javascript">
-    function ProcessTemplateFields(e) {
+    function ProcessTypeFields(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFields)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeFields)), query);
                 }
 </script>
 <script type="text/javascript">
@@ -327,9 +327,9 @@
                 }
 </script>
 <script type="text/javascript">
-    function ProcessTemplateFlowConditionTypes(e) {
+    function ProcessTypeFlowConditionTypes(e) {
                     var query = new ej.data.Query();
                     query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
-                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTemplateFlowConditionTypes)), query);
+                    e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.ProcessTypeFlowConditionTypes)), query);
                 }
 </script>

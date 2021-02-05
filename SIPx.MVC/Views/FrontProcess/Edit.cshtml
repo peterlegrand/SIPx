@@ -16,14 +16,14 @@
             {
                 <p>
                     <ejs-numerictextbox id="ProcessId" ejs-for="@Model.ProcessId"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageId" ejs-for="@Model.ProcessTypeStageId"></ejs-numerictextbox>
                 </p>
             }
             else
             {
                 <p hidden>
                     <ejs-numerictextbox id="ProcessId" ejs-for="@Model.ProcessId"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="ProcessTemplateStageId" ejs-for="@Model.ProcessTemplateStageId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="ProcessTypeStageId" ejs-for="@Model.ProcessTypeStageId"></ejs-numerictextbox>
                 </p>
             }
             @Model.CreatorName
@@ -35,21 +35,21 @@
                 <div hidden>FieldId</div>
                 <p hidden>
                     <ejs-numerictextbox id="@Model.Fields[i].Control1" ejs-for="@Model.Fields[i].ProcessFieldId"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="@Model.Fields[i].Control2" ejs-for="@Model.Fields[i].ProcessTemplateFieldId"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="@Model.Fields[i].Control3" ejs-for="@Model.Fields[i].ProcessTemplateFieldTypeId"></ejs-numerictextbox>
-                    <ejs-numerictextbox id="@Model.Fields[i].Control4" ejs-for="@Model.Fields[i].ProcessTemplateStageFieldStatusId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="@Model.Fields[i].Control2" ejs-for="@Model.Fields[i].ProcessTypeFieldId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="@Model.Fields[i].Control3" ejs-for="@Model.Fields[i].ProcessTypeFieldTypeId"></ejs-numerictextbox>
+                    <ejs-numerictextbox id="@Model.Fields[i].Control4" ejs-for="@Model.Fields[i].ProcessTypeStageFieldStatusId"></ejs-numerictextbox>
                     <ejs-numerictextbox id="@Model.Fields[i].Control5" ejs-for="@Model.Fields[i].ValueUpdateTypeId"></ejs-numerictextbox>
                 </p>
                 <div class="row">
-                    @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId) && Model.Fields[i].ProcessTemplateStageFieldStatusId != 1) //Everything except buttons
+                    @if (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId) && Model.Fields[i].ProcessTypeStageFieldStatusId != 1) //Everything except buttons
                     {
                         <div class="font-weight-bold col-4">@Model.Fields[i].FieldName</div>
                     }
 
-                    @if (new[] { 1, 2 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 1, 2 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -69,10 +69,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 3 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 3 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -92,10 +92,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 4, 5, 6, 7, 8, 9 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden id="wrapper" class="datepicker-section">
@@ -117,10 +117,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 10 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 10 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden id="wrapper" class="datepicker-section">
@@ -137,10 +137,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 11 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 11 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden id="wrapper" class="datepicker-section">
@@ -157,10 +157,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 12, 13 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 12, 13 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -188,10 +188,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 14, 15 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 14, 15 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -219,10 +219,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 16, 17 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 16, 17 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -250,10 +250,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 16, 17 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 16, 17 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -281,10 +281,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 18, 19 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 18, 19 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -312,10 +312,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 20, 21 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 20, 21 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -343,10 +343,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 22, 23 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 22, 23 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -374,10 +374,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 24, 25 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 24, 25 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -405,10 +405,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 26, 27 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 26, 27 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -436,10 +436,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 28, 29 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 28, 29 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -467,10 +467,10 @@
                             }
                         </div>
                     }
-                    @if (new[] { 36, 37 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 36, 37 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="offset-4 col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden>
@@ -498,7 +498,7 @@
                             }
                         </div>
                     }
-                    @*@if (new[] { 12 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @*@if (new[] { 12 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                 {
                     <div class="col-8">
                         <ejs-dropdownlist dataSource="@Model.Users" ejs-for="@Model.Fields[i].StringValue" id="@Model.Fields[i].Control6">
@@ -506,7 +506,7 @@
                         </ejs-dropdownlist>
                     </div>
                 }
-                @if (new[] { 16 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                @if (new[] { 16 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                 {
                     <div class="col-8">
                         <ejs-dropdownlist dataSource="@Model.Projects" ejs-for="@Model.Fields[i].IntValue" id="@Model.Fields[i].Control6">
@@ -514,10 +514,10 @@
                         </ejs-dropdownlist>
                     </div>
                 }*@
-                    @if (new[] { 32 }.Contains(Model.Fields[i].ProcessTemplateFieldTypeId))
+                    @if (new[] { 32 }.Contains(Model.Fields[i].ProcessTypeFieldTypeId))
                     {
                         <div class="col-8">
-                            @switch (Model.Fields[i].ProcessTemplateStageFieldStatusId)
+                            @switch (Model.Fields[i].ProcessTypeStageFieldStatusId)
                             {
                                 case 1:
                                     <div hidden id="wrapper" class="datepicker-section">

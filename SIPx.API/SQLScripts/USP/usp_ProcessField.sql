@@ -17,23 +17,23 @@ SELECT
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, ProcessFields.ModifiedDate
 FROM Processes
-JOIN ProcessTemplateStageFields
-	ON Processes.ProcessTemplateStageId = ProcessTemplateStageFields.ProcessTemplateStageID
+JOIN ProcessTypeStageFields
+	ON Processes.ProcessTypeStageId = ProcessTypeStageFields.ProcessTypeStageID
 JOIN ProcessFields
 	ON Processes.ProcessId = ProcessFields.ProcessID
-JOIN ProcessTemplateFields
-	ON ProcessFields.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
-		AND ProcessTemplateStageFields.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTemplateFieldLanguage
-	ON UserProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
-LEFT JOIN (SELECT ProcessTemplateFieldId, Name, Description, MenuName, MouseOver FROM ProcessTemplateFieldLanguages JOIN Settings ON ProcessTemplateFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTemplateFieldLanguage
-	ON DefaultProcessTemplateFieldLanguage.ProcessTemplateFieldId = ProcessTemplateFields.ProcessTemplateFieldID
-JOIN ProcessTemplateStageFieldStatuses 
-	ON ProcessTemplateStageFieldStatuses.ProcessTemplateStageFieldStatusId = ProcessTemplateStageFields.ProcessTemplateStageFieldStatusID
+JOIN ProcessTypeFields
+	ON ProcessFields.ProcessTypeFieldId = ProcessTypeFields.ProcessTypeFieldID
+		AND ProcessTypeStageFields.ProcessTypeFieldId = ProcessTypeFields.ProcessTypeFieldID
+LEFT JOIN (SELECT ProcessTypeFieldId, Name, Description, MenuName, MouseOver FROM ProcessTypeFieldLanguages WHERE LanguageId = @LanguageID) UserProcessTypeFieldLanguage
+	ON UserProcessTypeFieldLanguage.ProcessTypeFieldId = ProcessTypeFields.ProcessTypeFieldID
+LEFT JOIN (SELECT ProcessTypeFieldId, Name, Description, MenuName, MouseOver FROM ProcessTypeFieldLanguages JOIN Settings ON ProcessTypeFieldLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeFieldLanguage
+	ON DefaultProcessTypeFieldLanguage.ProcessTypeFieldId = ProcessTypeFields.ProcessTypeFieldID
+JOIN ProcessTypeStageFieldStatuses 
+	ON ProcessTypeStageFieldStatuses.ProcessTypeStageFieldStatusId = ProcessTypeStageFields.ProcessTypeStageFieldStatusID
 JOIN UITermLanguages UIStatusName
-	ON UIStatusName.UITermId = ProcessTemplateStageFieldStatuses.NameTermID
+	ON UIStatusName.UITermId = ProcessTypeStageFieldStatuses.NameTermID
 LEFT JOIN (SELECT UITermId, Customization FROM UITermLanguageCustomizations  WHERE LanguageId = @LanguageID) UIStatusNameCustom
-	ON UIStatusNameCustom.UITermId = ProcessTemplateStageFieldStatuses.NameTermID
+	ON UIStatusNameCustom.UITermId = ProcessTypeStageFieldStatuses.NameTermID
 JOIN Persons Creator
 	ON Creator.UserId = ProcessFields.CreatorID
 JOIN Persons Modifier

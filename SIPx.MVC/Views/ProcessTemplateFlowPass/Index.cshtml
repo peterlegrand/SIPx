@@ -1,7 +1,7 @@
-﻿@model List<ProcessTemplateFlowPassIndexGet>
+﻿@model List<ProcessTypeFlowPassIndexGet>
 @{
     var AllStuff = (ViewBagModel)ViewBag.AllStuff;
-    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process template flow passes")).TermString;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Process type flow passes")).TermString;
     ViewData["Image"] = "Pass.png";
     ViewData["FavoriteGroup"] = AllStuff.FavoriteGroupList;
     Layout = "_LayoutAdmin";
@@ -9,30 +9,30 @@
 <ejs-grid id="Grid" dataSource="@Model" allowPaging="true" allowSorting="true" allowResizing="true">
     <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
     <e-grid-columns>
-        <e-grid-column field="ProcessTemplateFlowPassId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="ProcessTypeFlowPassId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column field="Name" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Language" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
-<a asp-action="Index" asp-controller="ProcessTemplateFlow" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to process template flows")).TermString</a>
-<a asp-action="Create" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new process template flow pass")).TermString</a>
+<a asp-action="Index" asp-controller="ProcessTypeFlow" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to process type flows")).TermString</a>
+<a asp-action="Create" asp-route-id="@ViewBag.Id">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new process type flow pass")).TermString</a>
 <script id="Edit" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlowPass/Edit/${ProcessTemplateFlowPassId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeFlowPass/Edit/${ProcessTypeFlowPassId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
 
     </div>
 </script>
 <script id="Language" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlowPass/LanguageIndex/${ProcessTemplateFlowPassId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeFlowPass/LanguageIndex/${ProcessTypeFlowPassId}"><img src="/images/icons/LanguageS.png"  height="18" width="50" title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Languages")).TermString" /></a>
 
     </div>
 </script>
 <script id="Delete" type="text/x-template">
     <div>
-        <a class="nav-link text-dark font-weight-bold" href="/ProcessTemplateFlowPass/Delete/${ProcessTemplateFlowPassId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+        <a class="nav-link text-dark font-weight-bold" href="/ProcessTypeFlowPass/Delete/${ProcessTypeFlowPassId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
 
     </div>
 </script>
