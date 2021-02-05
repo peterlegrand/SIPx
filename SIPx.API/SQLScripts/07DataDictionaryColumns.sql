@@ -752,16 +752,6 @@ INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [Co
 
 INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [ColumnName], [ColumnLength], [ColumnPrecision], [ColumnScale], [IsNullable], [IsIdentity], [IsComputed], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (376, 35, 12, N'ModifierID', 900, 0, 0, 0, 0, 0, 3175, 3175, 3175, 3175)
 
-INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [ColumnName], [ColumnLength], [ColumnPrecision], [ColumnScale], [IsNullable], [IsIdentity], [IsComputed], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (377, 36, 10, N'ObjectTypeClassificationStatusId', 4, 10, 0, 0, 1, 0, 3023, 3023, 3023, 3023)
-
-INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [ColumnName], [ColumnLength], [ColumnPrecision], [ColumnScale], [IsNullable], [IsIdentity], [IsComputed], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (378, 36, 10, N'DescriptionTermID', 4, 10, 0, 1, 0, 0, 3052, 3052, 3052, 3052)
-
-INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [ColumnName], [ColumnLength], [ColumnPrecision], [ColumnScale], [IsNullable], [IsIdentity], [IsComputed], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (379, 36, 10, N'MenuNameTermID', 4, 10, 0, 1, 0, 0, 3169, 3169, 3169, 3169)
-
-INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [ColumnName], [ColumnLength], [ColumnPrecision], [ColumnScale], [IsNullable], [IsIdentity], [IsComputed], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (380, 36, 10, N'MouseOverTermID', 4, 10, 0, 1, 0, 0, 3177, 3177, 3177, 3177)
-
-INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [ColumnName], [ColumnLength], [ColumnPrecision], [ColumnScale], [IsNullable], [IsIdentity], [IsComputed], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (381, 36, 10, N'NameTermID', 4, 10, 0, 1, 0, 0, 3184, 3184, 3184, 3184)
-
 INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [ColumnName], [ColumnLength], [ColumnPrecision], [ColumnScale], [IsNullable], [IsIdentity], [IsComputed], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (382, 37, 10, N'ContentTypeGroupID', 4, 10, 0, 0, 0, 0, 3024, 3024, 3024, 3024)
 
 INSERT [dbo].[DataDictionaryColumns] ([ColumnId], [TableId], [ColumnTypeId], [ColumnName], [ColumnLength], [ColumnPrecision], [ColumnScale], [IsNullable], [IsIdentity], [IsComputed], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (383, 37, 10, N'ContentTypeGroupLanguageID', 4, 10, 0, 0, 1, 0, 3025, 3025, 3025, 3025)
