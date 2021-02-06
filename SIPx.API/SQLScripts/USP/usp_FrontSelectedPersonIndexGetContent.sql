@@ -21,7 +21,7 @@ SELECT
 	, ISNULL(Contents.ParentContentID, 0) ParentContentID
 	, Contents.SecurityLevelID
 	, Contents.Title
-	, Contents.Description
+	, ContentVersions.Description
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this SelectedPerson type')) TypeName
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
 	, ISNULL( UserSecurityLevelName.Customization, SecurityLevelName.Name) SecurityLevelName
@@ -33,6 +33,8 @@ SELECT
 	, Modifier.PersonID ModifierID
 	, Contents.ModifiedDate
 FROM Contents
+JOIN ContentVersions
+	ON ContentVersions.ContentVersionId = contents.ActiveVersionId
 LEFT JOIN (SELECT ContentID, Title FROM Contents WHERE Contents.SecurityLevelID <= @SecurityLevelId) ParentContent
 	ON ParentContent.ContentID = Contents.ParentContentID
 JOIN ContentStatuses

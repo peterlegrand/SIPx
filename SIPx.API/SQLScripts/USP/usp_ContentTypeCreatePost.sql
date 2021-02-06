@@ -3,7 +3,8 @@ CREATE PROCEDURE [dbo].[usp_ContentTypeCreatePost] (
 	, @CodePrefix nvarchar(25)
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
-	, @ProcessTypeId int
+	, @ContentProcessTypeId int
+	, @ContentVersionProcessTypeId int
 	, @SecurityLevelId int
 	, @ObjectTypeStatusId int
 	, @Name nvarchar(50)
@@ -56,7 +57,8 @@ INSERT INTO ContentTypes (
 	, CodePrefix 
 	, CodeSuffix 
 	, CodeTypeId 
-	, ProcessTypeID
+	, ContentProcessTypeID
+	, ContentVersionProcessTypeId
 	, SecurityLevelID
 	, ObjectTypeStatusId
 	, IsRelationBasedOwnership
@@ -98,7 +100,8 @@ VALUES (
 	, @CodePrefix 
 	, @CodeSuffix 
 	, @CodeTypeId 
-	, @ProcessTypeID
+	, @ContentProcessTypeID
+	, @ContentVersionProcessTypeId
 	, @SecurityLevelID
 	, @ObjectTypeStatusId
 	, @IsRelationBasedOwnership

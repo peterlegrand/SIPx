@@ -4,7 +4,8 @@ CREATE PROCEDURE usp_ContentTypeUpdatePost (
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
 	, @ContentTypeGroupId int
-	, @ProcessTypeId int
+	, @ContentProcessTypeId int
+	, @ContentVersionProcessTypeId int
 	, @SecurityLevelId int
 	, @ObjectTypeStatusId int
 	, @Name nvarchar(50)
@@ -58,7 +59,8 @@ UPDATE ContentTypes SET
 	, CodePrefix =@CodePrefix 
 	, CodeSuffix =@CodeSuffix 
 	, CodeTypeId =@CodeTypeId 
-	, ProcessTypeId = @ProcessTypeID
+	, ContentProcessTypeId = @ContentProcessTypeID
+	, ContentVersionProcessTypeId = @ContentVersionProcessTypeID
 	, SecurityLevelId = @SecurityLevelID
 	, ObjectTypeStatusId = @ObjectTypeStatusId
 	, IsRelationBasedOwnership = @IsRelationBasedOwnership 

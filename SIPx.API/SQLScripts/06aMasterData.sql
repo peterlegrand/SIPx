@@ -1717,3 +1717,14 @@ INSERT [dbo].[ObjectTypeStatuses] ([ObjectTypeStatusID], [NameTermID], [Descript
 
 INSERT [dbo].[ObjectTypeStatuses] ([ObjectTypeStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 327, 327, 327, 327)
 
+
+INSERT [dbo].[AttachmentTypes] ([AttachmentTypeId], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 4782, 4782, 4782, 4782)
+
+INSERT [dbo].[AttachmentTypes] ([AttachmentTypeId], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 4783, 4783, 4783, 4783)
+
+INSERT [dbo].[AttachmentTypes] ([AttachmentTypeId], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (3, 4784, 4784, 4784, 4784)
+
+INSERT [dbo].[VersionTypes] ([VersionTypeId], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 4780, 4780, 4780, 4780)
+
+INSERT [dbo].[VersionTypes] ([VersionTypeId], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 4781, 4781, 4781, 4781)
+

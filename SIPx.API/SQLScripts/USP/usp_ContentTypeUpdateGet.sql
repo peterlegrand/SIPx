@@ -16,7 +16,7 @@ SELECT ContentTypes.ContentTypeID
 	, ISNULL(UserLanguage.MouseOver,ISNULL(DefaultLanguage.MouseOver,'No mouse over for this content type')) MouseOver
 	, Contenttypes.ContentTypeGroupID
 	, contenttypes.SecurityLevelID
-	, ISNULL(ContentTypes.ProcessTypeId,0) ProcessTypeId
+	, ISNULL(ContentTypes.ContentProcessTypeID,0) ProcessTypeId
 	, ObjectTypeStatusId
 	, IsRelationBasedOwnership
     , IsProjectBasedOwnership 

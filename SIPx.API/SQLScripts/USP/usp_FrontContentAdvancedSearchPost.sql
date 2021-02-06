@@ -25,16 +25,18 @@ WHERE USerId = @UserID
 
 SELECT Contents.ContentID
 	, Contents.Title
-	, Contents.Description
+	, ContentVersions.Description
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this content type')) ContentTypeName
 FROM Contents
+JOIN ContentVersions
+	ON Contents.ActiveVersionId = ContentVersions.ContentVersionId
 LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages WHERE LanguageId = @LanguageID) UserContentTypeLanguage
 	ON UserContentTypeLanguage.ContentTypeID= Contents.ContentTypeID
 LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages JOIN Settings ON ContentTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultContentTypeLanguage
 	ON DefaultContentTypeLanguage.ContentTypeId = Contents.ContentTypeID
 WHERE (Contents.Title LIKE '%' + @Title + '%' OR @Title = '' OR @Title IS NULL )
-	AND (Contents.Description LIKE '%' + @Description + '%' OR @Description = '' OR @Description IS NULL )
-	AND (Contents.Description LIKE '%' + @Text + '%' OR Contents.Title LIKE '%' + @Text + '%' OR @Text = '' OR @Text IS NULL )
+	AND (ContentVersions.Description LIKE '%' + @Description + '%' OR @Description = '' OR @Description IS NULL )
+	AND (ContentVersions.Description LIKE '%' + @Text + '%' OR Contents.Title LIKE '%' + @Text + '%' OR @Text = '' OR @Text IS NULL )
 	AND(Contents.OrganizationId = @OrganizationId OR @OrganizationId  = 0 )
 	AND (Contents.ProjectId = @ProjectId OR @ProjectId = 0 )
 	AND(Contents.ParentContentId= @ParentContentId OR @ParentContentId = 0 )

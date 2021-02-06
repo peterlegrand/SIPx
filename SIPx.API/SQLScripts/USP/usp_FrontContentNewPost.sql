@@ -63,7 +63,6 @@ AS
 --	, @IsProjectBasedReadParent  = IsProjectBasedReadParent
 --from contenttypes
 --WHERE ContentTypeId = @contentTypeId
-
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
 INSERT INTO Contents (
@@ -71,7 +70,6 @@ INSERT INTO Contents (
 	, ContentStatusID
 	, LanguageID
 	, Title
-	, Description
 	, SecurityLevelID
 	, ProjectID
 	, OrganizationID
@@ -103,7 +101,6 @@ INSERT INTO Contents (
 	, @ContentStatusID
 	, @LanguageID
 	, @Title
-	, @Description
 	, @SecurityLevelID
 	, @ProjectID
 	, @OrganizationID
@@ -135,5 +132,6 @@ SET @NewId 	= scope_identity();
 INSERT ContentClassificationValues (ContentId, ClassificationID, ClassificationValueID, CreatorID, CreatedDate, ModifierID, ModifiedDate)
 SELECT @NewId, ClassificationId, ClassificationValueId, @UserID, getdate(), @UserID, Getdate() FROM @ClassificationValueTable
 
-
+INSERT INTO ContentVersions (ContentId, Sequence, VersionStatusId, Description, CreatorID, ModifierID, CreatedDate, ModifiedDate)
+VALUES(@NewId, 1, 2, @Description, @UserID, @UserID, getdate(), getdate())
 COMMIT TRANSACTION

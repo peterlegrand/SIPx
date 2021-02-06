@@ -253,18 +253,12 @@ INSERT INTO ContentTypeGroupLanguages(ContentTypeGroupLanguageId, ContentTypeGro
 , (2, 2, 41, 'Assignments', 'Assignments', 'Assignments', 'Assignments', @User, @User, GETDATE(), GETDATE())
 SET IDENTITY_INSERT ContentTypeGroupLanguages OFF;
 
-SET IDENTITY_INSERT ContentTypes ON;
-INSERT INTO ContentTypes (ContentTypeId, ContentTypeGroupId, SecurityLevelId, objectTypeStatusId, IsClaimOwnership
- , IsRelationBasedOwnership  ,IsProjectBasedOwnership  ,IsOrganizationBasedOwnership  ,IsFreeOwnership  ,IsRelationBasedEdit  ,IsRelationBasedEditSelectable  ,IsOrganizationBasedEdit  
- , IsOrganizationBasedEditSelectable  ,IsOrganizationBasedEditSub  ,IsProjectBasedEdit  ,IsProjectBasedEditSelectable  ,IsProjectBasedEditSub  ,IsFreeEdit  ,IsFreeEditSelectable  
- , IsRelationBasedRead  ,IsRelationBasedReadSelectable  ,IsOrganizationBasedRead  ,IsOrganizationBasedReadSelectable  ,IsOrganizationBasedReadSub  ,IsProjectBasedRead  
- , IsProjectBasedReadSelectable  ,IsProjectBasedReadSub  ,IsFreeRead  ,IsFreeReadSelectable  
- , IsOrganizationBasedEditParent, IsProjectBasedEditParent, IsOrganizationBasedReadParent, IsProjectBasedReadParent
-, CanRate, Color, IconID, CodeTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) VALUES 
-  (1, 1, 1,1,1,     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1, '#008000ff',1,2, @User, @User, GETDATE(), GETDATE())
- , (2, 1, 1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,2,@User, @User, GETDATE(), GETDATE())
- , (3, 2, 1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, '#008000ff',1,2,@User, @User, GETDATE(), GETDATE())
-SET IDENTITY_INSERT ContentTypes OFF;
+SET IDENTITY_INSERT [dbo].[ContentTypes] ON 
+INSERT [dbo].[ContentTypes] ([ContentTypeID], [ContentTypeGroupID], [SecurityLevelID], [CodePrefix], [CodeSuffix], [CodeTypeId], [VersionTypeId], [AttachmentVersionTypeId], [AttachmentTypeId], [ObjectTypeStatusId], [IsClaimOwnership], [IsRelationBasedOwnership], [IsProjectBasedOwnership], [IsOrganizationBasedOwnership], [IsFreeOwnership], [IsRelationBasedEdit], [IsRelationBasedEditSelectable], [IsOrganizationBasedEdit], [IsOrganizationBasedEditSelectable], [IsOrganizationBasedEditSub], [IsOrganizationBasedEditParent], [IsOrganizationRoleBasedAllRoles], [IsOrganizationRoleBasedOwner], [IsOrganizationRoleBasedRead], [IsOrganizationRoleBasedEdit], [IsOrganizationRoleBasedReadSelectable], [IsOrganizationRoleBasedEditSelectable], [IsProjectBasedEdit], [IsProjectBasedEditSelectable], [IsProjectBasedEditSub], [IsProjectBasedEditParent], [IsFreeEdit], [IsProjectRoleBasedAllRoles], [IsProjectRoleBasedOwner], [IsProjectRoleBasedRead], [IsProjectRoleBasedEdit], [IsProjectRoleBasedReadSelectable], [IsProjectRoleBasedEditSelectable], [IsFreeEditSelectable], [IsRelationBasedRead], [IsRelationBasedReadSelectable], [IsOrganizationBasedRead], [IsOrganizationBasedReadSelectable], [IsOrganizationBasedReadSub], [IsOrganizationBasedReadParent], [IsProjectBasedRead], [IsProjectBasedReadSelectable], [IsProjectBasedReadSub], [IsProjectBasedReadParent], [IsFreeRead], [IsFreeReadSelectable], [CanRate], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1,  1, N'a', N'A', 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+INSERT [dbo].[ContentTypes] ([ContentTypeID], [ContentTypeGroupID], [SecurityLevelID], [CodePrefix], [CodeSuffix], [CodeTypeId], [VersionTypeId], [AttachmentVersionTypeId], [AttachmentTypeId], [ObjectTypeStatusId], [IsClaimOwnership], [IsRelationBasedOwnership], [IsProjectBasedOwnership], [IsOrganizationBasedOwnership], [IsFreeOwnership], [IsRelationBasedEdit], [IsRelationBasedEditSelectable], [IsOrganizationBasedEdit], [IsOrganizationBasedEditSelectable], [IsOrganizationBasedEditSub], [IsOrganizationBasedEditParent], [IsOrganizationRoleBasedAllRoles], [IsOrganizationRoleBasedOwner], [IsOrganizationRoleBasedRead], [IsOrganizationRoleBasedEdit], [IsOrganizationRoleBasedReadSelectable], [IsOrganizationRoleBasedEditSelectable], [IsProjectBasedEdit], [IsProjectBasedEditSelectable], [IsProjectBasedEditSub], [IsProjectBasedEditParent], [IsFreeEdit], [IsProjectRoleBasedAllRoles], [IsProjectRoleBasedOwner], [IsProjectRoleBasedRead], [IsProjectRoleBasedEdit], [IsProjectRoleBasedReadSelectable], [IsProjectRoleBasedEditSelectable], [IsFreeEditSelectable], [IsRelationBasedRead], [IsRelationBasedReadSelectable], [IsOrganizationBasedRead], [IsOrganizationBasedReadSelectable], [IsOrganizationBasedReadSub], [IsOrganizationBasedReadParent], [IsProjectBasedRead], [IsProjectBasedReadSelectable], [IsProjectBasedReadSub], [IsProjectBasedReadParent], [IsFreeRead], [IsFreeReadSelectable], [CanRate], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 1, 1, N'b', N'B', 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+INSERT [dbo].[ContentTypes] ([ContentTypeID], [ContentTypeGroupID], [SecurityLevelID], [CodePrefix], [CodeSuffix], [CodeTypeId], [VersionTypeId], [AttachmentVersionTypeId], [AttachmentTypeId], [ObjectTypeStatusId], [IsClaimOwnership], [IsRelationBasedOwnership], [IsProjectBasedOwnership], [IsOrganizationBasedOwnership], [IsFreeOwnership], [IsRelationBasedEdit], [IsRelationBasedEditSelectable], [IsOrganizationBasedEdit], [IsOrganizationBasedEditSelectable], [IsOrganizationBasedEditSub], [IsOrganizationBasedEditParent], [IsOrganizationRoleBasedAllRoles], [IsOrganizationRoleBasedOwner], [IsOrganizationRoleBasedRead], [IsOrganizationRoleBasedEdit], [IsOrganizationRoleBasedReadSelectable], [IsOrganizationRoleBasedEditSelectable], [IsProjectBasedEdit], [IsProjectBasedEditSelectable], [IsProjectBasedEditSub], [IsProjectBasedEditParent], [IsFreeEdit], [IsProjectRoleBasedAllRoles], [IsProjectRoleBasedOwner], [IsProjectRoleBasedRead], [IsProjectRoleBasedEdit], [IsProjectRoleBasedReadSelectable], [IsProjectRoleBasedEditSelectable], [IsFreeEditSelectable], [IsRelationBasedRead], [IsRelationBasedReadSelectable], [IsOrganizationBasedRead], [IsOrganizationBasedReadSelectable], [IsOrganizationBasedReadSub], [IsOrganizationBasedReadParent], [IsProjectBasedRead], [IsProjectBasedReadSelectable], [IsProjectBasedReadSub], [IsProjectBasedReadParent], [IsFreeRead], [IsFreeReadSelectable], [CanRate], [Color], [IconID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 2, 1, N'c', N'C', 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, N'#008000ff', 1, @User, @User, getdate(), getdate())
+SET IDENTITY_INSERT [dbo].[ContentTypes] OFF
+
 
 SET IDENTITY_INSERT ContentTypeLanguages ON;
 INSERT INTO ContentTypeLanguages(ContentTypeLanguageId, ContentTypeId, LanguageId, Name, Description, MenuName, MouseOver, RatingLabel, CreatorId, ModifierId, CreatedDate, ModifiedDate) VALUES 
@@ -1299,31 +1293,72 @@ ProcessFieldId, ProcessTypeId, ProcessId, ProcessTypeFieldID
 , (145,2,11,30, @User, @User, GETDATE(), GETDATE())
 , (146,2,11,31, @User, @User, GETDATE(), GETDATE())
 ;
-
 SET IDENTITY_INSERT ProcessFields OFF;
-SET IDENTITY_INSERT Contents ON;
-INSERT INTO Contents (
-ContentId, ContentTypeId, ContentStatusId, LanguageId, Title, Description, SecurityLevelId, OrganizationId
-, IsRelationBasedRead, IsRelationBasedEdit, IsOrganizationBasedEdit, IsOrganizationBasedEditSub, IsOrganizationBasedEditParent, 
-IsOrganizationBasedRead, IsOrganizationBasedReadSub, IsOrganizationBasedReadParent
-, IsProjectBasedEdit, IsProjectBasedEditSub, IsProjectBasedEditParent, IsProjectBasedRead, IsProjectBasedReadSub, IsProjectBasedReadParent, IsFreeEdit, IsFreeRead
-, CreatorId, ModifierId, ModifiedDate, CreatedDate, ProcessID, OwnerId) 
-VALUES 
-  (1,1,2,41,'Research of Tropics on butterflies','This is a story about butterflies in my backgarden', 1,1, 
-  1,1, 1,1, 1,
-  1, 1,1, 
-  1,1,1,1,1,1,1,1,  @User, @User, GETDATE(), GETDATE(),9, @User)
-, (2,2,4,41,'Growing passion fruits in Silt soil','They are the most delicious passion fruits'       , 1,1,
-1,1, 1,1, 1,
-1, 1,1,
-1,1, 1,1, 1,1,1,1, 
-@User, @User, GETDATE(), GETDATE(),10, @User)
-, (3,1,3,41,'Arctic and strawberries','They really grow well especially if you keep the lights on'   , 1,1, 
-1,1, 1,1, 1,
-1, 1,1,
-1,1, 1,1, 1,1, 1,1, @User, @User, GETDATE(), GETDATE(),11, @User)
 
-SET IDENTITY_INSERT Contents OFF;
+USE [sip]
+USE [sip]
+
+SET IDENTITY_INSERT [dbo].[Contents] ON 
+
+INSERT [dbo].[Contents] ([ContentID], [ParentContentID], [ContentTypeID], [ContentStatusID], [LanguageID], activeversionid, [CodePrefix], [CodeInt], [CodeSuffix], [Code], [Title], [SecurityLevelID], [OrganizationID], [ProjectID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate], [ProcessID], [ProcessTypeId], [IsFreeEdit], [IsFreeRead], [IsRelationBasedEdit], [IsRelationBasedRead], [IsOrganizationBasedEdit], [IsOrganizationBasedEditSub], [IsOrganizationBasedEditParent], [IsOrganizationBasedRead], [IsOrganizationBasedReadSub], [IsOrganizationBasedReadParent], [IsProjectBasedEdit], [IsProjectBasedEditSub], [IsProjectBasedEditParent], [IsProjectBasedRead], [IsProjectBasedReadSub], [IsProjectBasedReadParent], [OwnerId]) VALUES (1, NULL, 1, 2, 41,1, N'a', 1, N'A', N'a1A',N'Research of Tropics on butterflies', 1, 1, NULL, @User, @User, getdate(), getdate(), 9, NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, @User)
+
+INSERT [dbo].[Contents] ([ContentID], [ParentContentID], [ContentTypeID], [ContentStatusID], [LanguageID], activeversionid,[CodePrefix], [CodeInt], [CodeSuffix], [Code], [Title],[SecurityLevelID], [OrganizationID], [ProjectID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate], [ProcessID], [ProcessTypeId], [IsFreeEdit], [IsFreeRead], [IsRelationBasedEdit], [IsRelationBasedRead], [IsOrganizationBasedEdit], [IsOrganizationBasedEditSub], [IsOrganizationBasedEditParent], [IsOrganizationBasedRead], [IsOrganizationBasedReadSub], [IsOrganizationBasedReadParent], [IsProjectBasedEdit], [IsProjectBasedEditSub], [IsProjectBasedEditParent], [IsProjectBasedRead], [IsProjectBasedReadSub], [IsProjectBasedReadParent], [OwnerId]) VALUES (2, NULL, 2, 4, 41,2, N'b', 1, N'B', N'b1B',N'Growing passion fruits in Silt soil', 1, 1, NULL, @User, @User, getdate(), getdate(), 10, NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, @User)
+
+INSERT [dbo].[Contents] ([ContentID], [ParentContentID], [ContentTypeID], [ContentStatusID], [LanguageID], activeversionid,[CodePrefix], [CodeInt], [CodeSuffix], [Code], [Title],[SecurityLevelID], [OrganizationID], [ProjectID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate], [ProcessID], [ProcessTypeId], [IsFreeEdit], [IsFreeRead], [IsRelationBasedEdit], [IsRelationBasedRead], [IsOrganizationBasedEdit], [IsOrganizationBasedEditSub], [IsOrganizationBasedEditParent], [IsOrganizationBasedRead], [IsOrganizationBasedReadSub], [IsOrganizationBasedReadParent], [IsProjectBasedEdit], [IsProjectBasedEditSub], [IsProjectBasedEditParent], [IsProjectBasedRead], [IsProjectBasedReadSub], [IsProjectBasedReadParent], [OwnerId]) VALUES (3, NULL, 1, 3, 41,3, N'a', 2, N'A', N'a2A', N'Arctic and strawberries',1, 1, NULL, @User, @User, getdate(), getdate(), 11, NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, @User)
+
+INSERT [dbo].[Contents] ([ContentID], [ParentContentID], [ContentTypeID], [ContentStatusID], [LanguageID], activeversionid,[CodePrefix], [CodeInt], [CodeSuffix], [Code], [Title],[SecurityLevelID], [OrganizationID], [ProjectID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate], [ProcessID], [ProcessTypeId], [IsFreeEdit], [IsFreeRead], [IsRelationBasedEdit], [IsRelationBasedRead], [IsOrganizationBasedEdit], [IsOrganizationBasedEditSub], [IsOrganizationBasedEditParent], [IsOrganizationBasedRead], [IsOrganizationBasedReadSub], [IsOrganizationBasedReadParent], [IsProjectBasedEdit], [IsProjectBasedEditSub], [IsProjectBasedEditParent], [IsProjectBasedRead], [IsProjectBasedReadSub], [IsProjectBasedReadParent], [OwnerId]) VALUES (4, NULL, 3, 2, 41,4, N'c', 1, N'C', N'c1C',N'Habits of a Systems Thinker', 1, 1, NULL, @User, @User, getdate(), getdate(), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, @User)
+
+INSERT [dbo].[Contents] ([ContentID], [ParentContentID], [ContentTypeID], [ContentStatusID], [LanguageID], activeversionid,[CodePrefix], [CodeInt], [CodeSuffix], [Code], [Title],[SecurityLevelID], [OrganizationID], [ProjectID], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate], [ProcessID], [ProcessTypeId], [IsFreeEdit], [IsFreeRead], [IsRelationBasedEdit], [IsRelationBasedRead], [IsOrganizationBasedEdit], [IsOrganizationBasedEditSub], [IsOrganizationBasedEditParent], [IsOrganizationBasedRead], [IsOrganizationBasedReadSub], [IsOrganizationBasedReadParent], [IsProjectBasedEdit], [IsProjectBasedEditSub], [IsProjectBasedEditParent], [IsProjectBasedRead], [IsProjectBasedReadSub], [IsProjectBasedReadParent], [OwnerId]) VALUES (5, NULL, 3, 4, 41,5, N'c', 2, N'C', N'c2C',N'Habits of a Systems Thinker', 1, 1, NULL, @User, @User, getdate(), getdate(), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, @User)
+
+SET IDENTITY_INSERT [dbo].[Contents] OFF
+
+SET IDENTITY_INSERT [dbo].[VersionStatuses] ON 
+INSERT [dbo].[VersionStatuses] ([VersionStatusId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, @User, @User, getdate(), getdate())
+INSERT [dbo].[VersionStatuses] ([VersionStatusId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, @User, @User, getdate(), getdate())
+INSERT [dbo].[VersionStatuses] ([VersionStatusId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, @User, @User, getdate(), getdate())
+SET IDENTITY_INSERT [dbo].[VersionStatuses] OFF
+
+SET IDENTITY_INSERT [dbo].[VersionStatusLanguages] ON 
+INSERT [dbo].[VersionStatusLanguages] ([VersionStatusLanguageId], [VersionStatusId], [LanguageID], [Name], [Description], [MenuName], [MouseOver], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 41, N'Pending', N'Pending', N'Pending', N'Pending', @User, @User, getdate(), getdate())
+INSERT [dbo].[VersionStatusLanguages] ([VersionStatusLanguageId], [VersionStatusId], [LanguageID], [Name], [Description], [MenuName], [MouseOver], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 2, 41, N'Active', N'Active', N'Active', N'Active', @User, @User, getdate(), getdate())
+INSERT [dbo].[VersionStatusLanguages] ([VersionStatusLanguageId], [VersionStatusId], [LanguageID], [Name], [Description], [MenuName], [MouseOver], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 3, 41, N'Obsolete', N'Obsolete', N'Obsolete', N'Obsolete', @User, @User, getdate(), getdate())
+SET IDENTITY_INSERT [dbo].[VersionStatusLanguages] OFF
+
+
+SET IDENTITY_INSERT [dbo].[ContentVersions] ON 
+
+INSERT [dbo].[ContentVersions] ([ContentVersionId], [ContentId], [Sequence], [VersionStatusId],  [Description], [ProcessID], [ProcessTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 1, 2,  N'This is a story about butterflies in my backgarden', 1, 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[ContentVersions] ([ContentVersionId], [ContentId], [Sequence], [VersionStatusId], [Description], [ProcessID], [ProcessTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (2, 2, 1, 2,  N'They are the most delicious passion fruits', 1, 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[ContentVersions] ([ContentVersionId], [ContentId], [Sequence], [VersionStatusId], [Description], [ProcessID], [ProcessTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (3, 3, 1, 2,  N'They really grow well especially if you keep the lights on', 1, 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[ContentVersions] ([ContentVersionId], [ContentId], [Sequence], [VersionStatusId], [Description], [ProcessID], [ProcessTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (4, 4, 1, 2,  N'<p><span class="TextRun SCXW66835828 BCX9" lang="EN-US" style="animation: 0s ease 0s 1 normal none running none; background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: scroll; background-origin: padding-box; background-clip: border-box; background-blend-mode: normal; border: 0px none #000000; border-radius: 0px; border-collapse: separate; inset: auto; box-shadow: none; box-sizing: content-box; break-after: auto; break-before: auto; break-inside: auto; caption-side: top; clear: none; clip: auto; content: normal; cursor: text; direction: ltr; display: inline; empty-cells: show; float: none; font-family: Helvetica, Helvetica_EmbeddedFont, sans-serif; font-kerning: auto; font-optical-sizing: auto; font-size: 21.3333px; font-stretch: 100%; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures no-historical-ligatures no-contextual; font-variant-numeric: normal; font-variant-east-asian: normal; height: auto; image-rendering: auto; isolation: auto; place-items: normal; place-self: auto; line-height: 26.9792px; list-style: outside none disc; margin: 0px; max-height: none; max-width: none; min-height: 0px; min-width: 0px; mix-blend-mode: normal; object-fit: fill; object-position: 50% 50%; 
+offset: none 0px auto 0deg; opacity: 1; outline: #000000 none 0px; outline-offset: 0px; overflow-anchor: auto; overflow-wrap: break-word; overflow: visible; padding: 0px; pointer-events: auto; position: static; resize: 
+none; scroll-behavior: auto; speak: normal; table-layout: auto; tab-size: 8; text-align-last: auto; text-decoration-style: solid; text-decoration-color: #000000; text-decoration-skip-ink: auto; text-underline-position: 
+auto; text-rendering: auto; text-shadow: none; text-size-adjust: auto; text-overflow: clip; touch-action: auto; transition: all 0s ease 0s; unicode-bidi: normal; vertical-align: baseline; visibility: visible; width: auto; 
+will-change: auto; word-break: normal; z-index: auto; zoom: 1; appearance: none; backface-visibility: visible; border-spacing: 0px; -webkit-border-image: none; -webkit-box-align: stretch; -webkit-box-decoration-break: 
+slice; -webkit-box-direction: normal; -webkit-box-flex: 0; -webkit-box-ordinal-group: 1; -webkit-box-orient: horizontal; -webkit-box-pack: start; columns: auto auto; gap: normal; column-rule: 0px none #000000; column-span: 
+none; backdrop-filter: none; place-content: normal; flex: 0 1 auto; flex-flow: row nowrap; -webkit-font-smoothing: auto; grid-auto-columns: auto; grid-auto-flow: row; grid-auto-rows: auto; grid-area: auto / auto / auto / 
+auto; grid-template-areas: none; grid-template-columns: none; grid-template-rows: none; -webkit-highlight: none; hyphens: manual; -webkit-hyphenate-character: auto; -webkit-line-break: after-white-space; -webkit-locale: 
+''en-US''; -webkit-mask-box-image-outset: 0px; -webkit-mask-box-image-repeat: stretch; -webkit-mask-box-image-slice: 0 fill; -webkit-mask-box-image-source: none; -webkit-mask-box-image-width: auto; -webkit-mask: none 0% 0% 
+/ auto repeat border-box border-box; -webkit-mask-composite: source-over; order: 0; perspective: none; perspective-origin: 0px 0px; -webkit-print-color-adjust: economy; -webkit-rtl-ordering: logical; shape-outside: none; shape-image-threshold: 0; shape-margin: 0px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-combine: none; -webkit-text-emphasis: none #000000; -webkit-text-emphasis-position: over right; -webkit-text-fill-color: #000000; -webkit-text-orientation: vertical-right; -webkit-text-security: none; -webkit-text-stroke-color: #000000; transform: none; transform-origin: 0px 0px; transform-style: flat; -webkit-user-drag: none; -webkit-user-modify: read-write; user-select: text; -webkit-writing-mode: horizontal-tb; -webkit-app-region: none; buffered-rendering: auto; clip-path: none; clip-rule: nonzero; mask: none; filter: none; flood-color: #000000; flood-opacity: 1; lighting-color: #ffffff; stop-color: #000000; stop-opacity: 1; color-interpolation: srgb; color-interpolation-filters: linearrgb; color-rendering: auto; fill: #000000; fill-opacity: 1; fill-rule: nonzero; marker: none; mask-type: luminance; shape-rendering: auto; stroke: none; stroke-dasharray: none; stroke-dashoffset: 0px; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 1px; alignment-baseline: auto; baseline-shift: 0px; dominant-baseline: auto; text-anchor: start; writing-mode: horizontal-tb; vector-effect: none; paint-order: normal; d: none; cx: 0px; cy: 0px; x: 0px; y: 0px; r: 0px; rx: auto; ry: auto; caret-color: #000000;" xml:lang="EN-US" data-contrast="auto"><span class="NormalTextRun SCXW66835828 BCX9">Habits of a Systems Thinker</span></span></p>', 1, 1, @User, @User, getdate(), getdate())
+
+INSERT [dbo].[ContentVersions] ([ContentVersionId], [ContentId], [Sequence], [VersionStatusId], [Description], [ProcessID], [ProcessTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (5, 5, 1, 2,  N'<p><img src="../../images/20210203153931567.png" alt="" width="756" height="1082" /></p>', 1, 1, @User, @User, getdate(), getdate())
+SET IDENTITY_INSERT [dbo].[ContentVersions] OFF
+
+SET IDENTITY_INSERT [dbo].[ContentVersionAttachments] ON 
+INSERT [dbo].[ContentVersionAttachments] ([ContentVersionAttachmentId], [ContentVersionId], [ContentId],activeversionid, [Name], [FileTypeId], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 5, 5,1, N'Planning sheet', 35, @User, @User, getdate(), getdate())
+
+SET IDENTITY_INSERT [dbo].[ContentVersionAttachments] OFF
+
+SET IDENTITY_INSERT [dbo].[ContentVersionAttachmentVersions] ON 
+
+INSERT [dbo].[ContentVersionAttachmentVersions] ([ContentVersionAttachmentVersionId], [ContentVersionAttachmentId], [ContentVersionId], [ContentId], [Sequence], [VersionStatusId], [FileName], [CreatorID], [ModifierID], [ModifiedDate], [CreatedDate]) VALUES (1, 1, 5, 5, 1, 2, N'Planning.xlsx', @User, @User, getdate(), getdate())
+
+SET IDENTITY_INSERT [dbo].[ContentVersionAttachmentVersions] OFF
+
+
 
 SET IDENTITY_INSERT ContentClassificationValues ON;
 INSERT INTO ContentClassificationValues (
@@ -1335,7 +1370,7 @@ VALUES
 
 SET IDENTITY_INSERT ContentClassificationValues OFF;
 
-UPDATE ContentTypes SET ProcessTypeId = 2 WHERE ContentTypeId IN (1,2);
+UPDATE ContentTypes SET ContentProcessTypeId = 2, ContentVersionProcessTypeId = 2  --WHERE ContentTypeId IN (1,2);
 
 SET IDENTITY_INSERT [dbo].[OrganizationSettings] ON 
 INSERT [dbo].[OrganizationSettings] ([OrganizationSettingID], [OrganizationSettingTypeID], [OrganizationID], [IntValue], [StringValue], [DateTimeValue], [GuidValue], [LocationValue], [ModifierID], [ModifiedDate]) VALUES (1, 1, 1, 1, NULL, NULL, NULL, NULL, @User, getdate())

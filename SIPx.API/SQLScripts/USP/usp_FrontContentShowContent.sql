@@ -10,7 +10,7 @@ SELECT @SecurityLevelId = SecurityLevelID FROM AspNetUsers WHERE id = @UserId;
 SELECT 
 	Contents.ContentID
 	, Contents.Title
-	, Contents.Description
+	, ContentVersions.Description
 	, ISNULL(Contents.ProjectId,0) ProjectID
 	, Contents.ProjectID 
 	, Contents.ContentTypeId 
@@ -29,6 +29,8 @@ SELECT
 	, Contents.ModifiedDate
 	, CASE WHEN Contents.OwnerId = @UserId THEN 1 ELSE 0 END AS IsOwner
 FROM Contents
+JOIN ContentVersions 
+	ON Contents.ActiveVersionId = ContentVersionId
 LEFT JOIN Contents ParentContent
 	ON ParentContent.ContentID = Contents.ParentContentID
 LEFT JOIN (SELECT ProjectId, Name, Description, MenuName, MouseOver, ProjectLanguageID FROM ProjectLanguages WHERE LanguageId = @LanguageID) UserProjectLanguage

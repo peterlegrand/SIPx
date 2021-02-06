@@ -8,7 +8,7 @@ WHERE USerId = @UserID
 
 SELECT Contents.ContentID 
 	, Contents.Title
-	, Contents.Description
+	, ContentVersions.Description
 	, ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,'No name for this organization')) OrganizationName
 	, Contents.OrganizationID
 	, Persons.FirstName + ' ' + Persons.LastName CreatorName
@@ -17,6 +17,8 @@ SELECT Contents.ContentID
 FROM --CONTAINSTABLE(contents, Fulltext,@Contains) AS ContentKey 
 --JOIN 
 	Contents 
+JOIN ContentVersions	
+	ON Contents.ActiveVersionId = Contentversions.ContentVersionId
 --	ON ContentKey.Key = Contents.ContentID
 JOIN Persons 
 	ON Persons.UserID = Contents.CreatorID
@@ -24,4 +26,4 @@ LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, Organi
 	ON OrganizationUserLanguage.OrganizationID= Persons.DefaultOrganizationID
 LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID FROM OrganizationLanguages JOIN Settings ON OrganizationLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) OrganizationDefaultLanguage
 	ON OrganizationDefaultLanguage.OrganizationId = Persons.DefaultOrganizationID
-WHERE Contains(Contents.Fulltext, @Contains)
+WHERE Contains(Contents.Title, @Contains) OR Contains(ContentVersions.Description, @Contains) 

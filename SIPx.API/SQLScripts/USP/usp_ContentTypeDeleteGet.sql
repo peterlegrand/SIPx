@@ -22,8 +22,8 @@ SELECT ContentTypes.ContentTypeID
 	, ISNULL(UserGroupLanguage.MenuName,ISNULL(DefaultGroupLanguage.MenuName,'No menu name for this content type group')) GroupMenuName
 	, ISNULL(UserGroupLanguage.MouseOver,ISNULL(DefaultGroupLanguage.MouseOver,'No mouse over for this content type group')) GroupMouseOver
 	, ISNULL(UISecurityLevelNameCustom.Customization ,UISecurityLevelName.Name) SecurityLevelName
-	, CASE WHEN ContentTypes.ProcessTypeId IS NOT NULL THEN ISNULL(UserProcessTypeLanguage.Name,ISNULL(DefaultProcessTypeLanguageLanguage.Name,'No name for the process type')) ELSE 'There is process no template' END ProcessTypeName
-	, ISNULL(ContentTypes.ProcessTypeId,0) ProcessTypeId
+	, CASE WHEN ContentTypes.ContentProcessTypeID IS NOT NULL THEN ISNULL(UserProcessTypeLanguage.Name,ISNULL(DefaultProcessTypeLanguageLanguage.Name,'No name for the process type')) ELSE 'There is process no template' END ProcessTypeName
+	, ISNULL(ContentTypes.ContentProcessTypeID,0) ProcessTypeId
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, ContentTypes.CreatedDate
@@ -48,9 +48,9 @@ LEFT JOIN (SELECT ContentTypeGroupId, Name, Description, MenuName, MouseOver FRO
 LEFT JOIN (SELECT ContentTypeGroupId, Name, Description, MenuName, MouseOver FROM ContentTypeGroupLanguages JOIN Settings ON ContentTypeGroupLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultGroupLanguage
 	ON DefaultGroupLanguage.ContentTypeGroupId = ContentTypes.ContentTypeGroupID
 LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages WHERE LanguageId = @LanguageID) UserProcessTypeLanguage
-	ON UserProcessTypeLanguage.ProcessTypeId = ContentTypes.ProcessTypeID
+	ON UserProcessTypeLanguage.ProcessTypeId = ContentTypes.ContentProcessTypeID
 LEFT JOIN (SELECT ProcessTypeId, Name FROM ProcessTypeLanguages JOIN Settings ON ProcessTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultProcessTypeLanguageLanguage
-	ON DefaultProcessTypeLanguageLanguage.ProcessTypeId = ContentTypes.ProcessTypeID
+	ON DefaultProcessTypeLanguageLanguage.ProcessTypeId = ContentTypes.ContentProcessTypeID
 JOIN Languages 
 	ON Languages.LanguageId = @LanguageID
 JOIN UITermLanguages UILanguageName

@@ -12,7 +12,7 @@ FROM AspNetUsers
 WHERE Id = @UserID;
 SELECT Contents.ContentID
 , Contents.Title
-, Contents.Description
+, ContentVersions.Description
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this content type')) ContentTypeName
 	, ISNULL(UIStatusNameCustom.Customization,UIStatusName.Name) StatusName
 	, ISNULL(UILanguageNameCustom.Customization,UILanguageName.Name) LanguageName
@@ -25,6 +25,8 @@ SELECT Contents.ContentID
 	, Modifier.FirstName + ' ' + Modifier.LastName Modifier
 	, Contents.ModifiedDate
 FROM Contents 
+JOIN ContentVersions
+	ON Contents.ActiveVersionId = ContentVersions.ContentVersionId
 LEFT JOIN Contents ParentContents
 	ON Contents.ParentContentId = ParentContents.ContentID
 LEFT JOIN (SELECT ContentTypeId, Name FROM ContentTypeLanguages WHERE LanguageId = @LanguageID) UserContentTypeLanguage

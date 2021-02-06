@@ -22,7 +22,7 @@ SELECT
 	, ISNULL(Contents.ParentContentID, 0) ParentContentID
 	, Contents.SecurityLevelID
 	, Contents.Title
-	, Contents.Description
+	, ContentVersions.Description
  	, ISNULL(UserOrganizationLanguage.Name,ISNULL(DefaultOrganizationLanguage.Name,'No organization')) OrganizationName
 	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultTypeLanguage.Name,'No name for this project type')) TypeName
 	, ISNULL( UserStatusName.Customization, StatusName.Name) StatusName
@@ -35,6 +35,8 @@ SELECT
 	, Contents.ModifierID
 	, Contents.ModifiedDate
 FROM Contents
+JOIN ContentVersions 
+	ON ContentVersions.ContentVersionId = Contents.ActiveVersionId
 LEFT JOIN (SELECT ContentID, Title FROM Contents WHERE Contents.SecurityLevelID <= @SecurityLevelId) ParentContent
 	ON ParentContent.ContentID = Contents.ParentContentID
 JOIN ContentStatuses

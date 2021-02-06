@@ -3,7 +3,8 @@ CREATE PROCEDURE usp_ContentTypeCreatePostCheck (
 	, @CodePrefix nvarchar(25)
 	, @CodeSuffix nvarchar(25)
 	, @CodeTypeId int
-	, @ProcessTypeId int
+	, @ContentProcessTypeId int
+	, @ContentVersionProcessTypeId int
 	, @SecurityLevelId int
 	, @ObjectTypeStatusId int
 	, @Name nvarchar(50)

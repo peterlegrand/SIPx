@@ -20,7 +20,6 @@ INSERT INTO Contents (
 	, ContentStatusID
 	, LanguageID
 	, Title
-	, Description
 	, SecurityLevelID
 	, OrganizationID
 	, ProjectID
@@ -35,7 +34,6 @@ VALUES (
 	, @ContentStatusID
 	, @LanguageID
 	, @Title
-	, @Description
 	, @SecurityLevelID
 	, @OrganizationID
 	, @ProjectID
@@ -49,4 +47,8 @@ DECLARE @NewContentId int	= scope_identity();
 
 INSERT INTO ContentClassificationValues(ContentId, ClassificationValueId, ClassificationId, CreatorId, ModifierId, CreatedDate, ModifiedDate)
 SELECT @NewContentId, ClassificationValueId, ClassificationId, @UserId,@UserId, getdate(), getdate() FROM @ClassificationValueTable
+
+INSERT INTO ContentVersions (ContentId, Sequence, VersionStatusId, Description, CreatorID,ModifierID,CreatedDate, ModifiedDate)
+VALUES(@NewContentId,1,2,@Description,@UserId,@UserId,getdate(),getdate())
 COMMIT TRANSACTION
+

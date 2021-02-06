@@ -28,14 +28,14 @@ FROM @ClassificationValueTable
 
 SET @FROM = 'SELECT Contents.ContentID ' +
 	' , Contents.Title ' +
-	' , Contents.Description ' +
+	' , ContentVersions.Description ' +
 	' , ISNULL(OrganizationUserLanguage.Name,ISNULL(OrganizationDefaultLanguage.Name,''No name for this organization'')) OrganizationName ' +
 	' , Contents.OrganizationID ' +
 	' , Persons.FirstName + '' '' + Persons.LastName CreatorName ' +
 	' , Persons.PersonID CreatorId ' +
 	' , Contents.CreatedDate ' +
 ' FROM  ' +
-	' Contents  ' +
+	' Contents JOIN ContentVersions ON Contents.ActiveVersionId = ContentVersionId ' +
 ' JOIN Persons  ' +
 	' ON Persons.UserID = Contents.CreatorID ' +
 ' LEFT JOIN (SELECT OrganizationId, Name, Description, MenuName, MouseOver, OrganizationLanguageID FROM OrganizationLanguages WHERE LanguageId = ' + trim(cast(@UserLanguageID as varchar(10))) + ') OrganizationUserLanguage ' +

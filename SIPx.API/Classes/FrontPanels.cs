@@ -38,7 +38,7 @@ namespace SIPx.API.Classes
                 " AND UserPreferences.PreferenceTypeId = 1; " +
                 " SELECT Contents.ContentID " +
                 ", Contents.Title " +
-                ", Contents.Description " +
+                ", ContentVersions.Description " +
                 ", ISNULL(UserLanguage.Name, ISNULL(DefaultLanguage.Name, 'No name for this ContentType')) ContentTypeName " +
                 ", Creator.FirstName + ' ' + Creator.LastName CreatorName " +
                 ", Creator.PersonID CreatorID " +
@@ -47,7 +47,7 @@ namespace SIPx.API.Classes
                 ", Modifier.PersonId ModifierID " +
                 ", Contents.ModifiedDate " +
                 ", CONCAT('controlID', Contents.ContentId) ControlId " +
-                " FROM Contents " +
+                " FROM Contents JOIN ContentVersions ON Contents.ActiveVersionId = ContentVersions.ContentversionID  " +
                 " JOIN ContentTypes " +
                 " ON Contents.ContentTypeID = ContentTypes.ContentTypeID " +
                 " LEFT JOIN(SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages WHERE LanguageId = @LanguageID) UserLanguage " +

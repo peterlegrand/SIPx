@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_FrontContentNewPostCheck (
-	@ContentTypeId int
+@ContentTypeId int
 	, @ContentStatusID int
 	, @LanguageID int
 	, @Title nvarchar(50)
@@ -7,7 +7,25 @@ CREATE PROCEDURE usp_FrontContentNewPostCheck (
 	, @SecurityLevelID int
 	, @ProjectID int
 	, @OrganizationID int
+	, @IsRelationBasedEdit bit
+	, @IsRelationBasedRead bit
+	, @IsFreeEdit bit
+	, @IsFreeRead bit
+	, @IsOrganizationBasedEdit bit
+	, @IsOrganizationBasedEditParent bit
+	, @IsOrganizationBasedEditSub bit
+	, @IsOrganizationBasedRead bit
+	, @IsOrganizationBasedReadParent bit
+	, @IsOrganizationBasedReadSub bit
+	
+	, @IsProjectBasedEdit bit
+	, @IsProjectBasedEditParent bit
+	, @IsProjectBasedEditSub bit
+	, @IsProjectBasedRead bit
+	, @IsProjectBasedReadParent bit
+	, @IsProjectBasedReadSub bit
 	, @UserID nvarchar(450)
+	, @NewId int OUTPUT
 	, @ClassificationValueTable AS udt_ContentClassificationValueInsert READONLY
 ) 
 	
