@@ -268,16 +268,16 @@ INSERT INTO ContentTypeLanguages(ContentTypeLanguageId, ContentTypeId, LanguageI
 SET IDENTITY_INSERT ContentTypeLanguages OFF;
 
 SET IDENTITY_INSERT ContentTypeClassifications ON;
-INSERT INTO ContentTypeClassifications ( ContentTypeClassificationId, ContentTypeId, ClassificationId, ObjectTypeClassificationStatusId, ModifierId, ModifiedDate) VALUES 
- (1, 1, 1, 3, @User, GETDATE())
-, (2, 1, 2, 2, @User, GETDATE())
-, (3, 1, 3, 2, @User, GETDATE())
-, (4, 2, 1, 2, @User, GETDATE())
-, (5, 2, 2, 3, @User, GETDATE())
-, (6, 2, 3, 2, @User, GETDATE())
-, (7, 3, 1, 2, @User, GETDATE())
-, (8, 3, 2, 2, @User, GETDATE())
-, (9, 3, 3, 2, @User, GETDATE())
+INSERT INTO ContentTypeClassifications ( ContentTypeClassificationId, ContentTypeId, ClassificationId, ObjectTypeClassificationStatusId,CreatorID,  ModifierId, CreatedDate, ModifiedDate) VALUES 
+ (1, 1, 1, 3, @User, @User, GETDATE(), GETDATE())
+, (2, 1, 2, 2, @User,@User, GETDATE(),  GETDATE())
+, (3, 1, 3, 2, @User,@User, GETDATE(),  GETDATE())
+, (4, 2, 1, 2, @User,@User, GETDATE(),  GETDATE())
+, (5, 2, 2, 3, @User,@User, GETDATE(),  GETDATE())
+, (6, 2, 3, 2, @User,@User, GETDATE(),  GETDATE())
+, (7, 3, 1, 2, @User,@User, GETDATE(),  GETDATE())
+, (8, 3, 2, 2, @User,@User, GETDATE(),  GETDATE())
+, (9, 3, 3, 2, @User,@User, GETDATE(),  GETDATE())
 SET IDENTITY_INSERT ContentTypeClassifications OFF;
 
 

@@ -1621,10 +1621,10 @@ INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID
 INSERT [dbo].[PropertyTypes] ([PropertyTypeID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID], active) VALUES (11, 1614, 1614, 1614, 1614,1)
 SET IDENTITY_INSERT [dbo].[PropertyTypes] OFF
 
-SET IDENTITY_INSERT [dbo].[PropertyStatuses] ON 
-INSERT [dbo].[PropertyStatuses] ([PropertyStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 682, 682, 682, 682)
-INSERT [dbo].[PropertyStatuses] ([PropertyStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 340, 340, 340, 340)
-SET IDENTITY_INSERT [dbo].[PropertyStatuses] OFF
+SET IDENTITY_INSERT [dbo].[ObjectTypePropertyStatuses] ON 
+INSERT [dbo].[ObjectTypePropertyStatuses] ([ObjectTypePropertyStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (1, 682, 682, 682, 682)
+INSERT [dbo].[ObjectTypePropertyStatuses] ([ObjectTypePropertyStatusID], [NameTermID], [DescriptionTermID], [MenuNameTermID], [MouseOverTermID]) VALUES (2, 340, 340, 340, 340)
+SET IDENTITY_INSERT [dbo].[ObjectTypePropertyStatuses] OFF
 
 USE [sip]
 
