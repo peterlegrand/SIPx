@@ -86,22 +86,37 @@ namespace SIPx.DataAccess
 
         public async Task<List<FrontContentContentNewClassification>> NewClassifications(string UserId, int ContentTypeId)
         {
-            string usp = "usp_FrontContentNewClassifications @UserId, @ContentTypeId";
-            var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassification, dynamic>(usp, new { UserId = UserId, ContentTypeId = ContentTypeId });
-            return x;
+            List<FrontContentContentNewClassification> classifications = new List<FrontContentContentNewClassification>();
+            List<FrontContentContentNewClassificationLevel> ClassificationLevels1 = new List<FrontContentContentNewClassificationLevel>();
+            List<FrontContentContentNewClassificationLevel> ClassificationLevels2 = new List<FrontContentContentNewClassificationLevel>();
+            ClassificationLevels1.Add(new FrontContentContentNewClassificationLevel { Alphabetically = true, CanLink = false, Sequence = 1, ControlChange = "1Level1", ControlDropDownListId = "1Level1ControlDropDown", SelectedClassificationValueId = 1 });
+            ClassificationLevels2.Add(new FrontContentContentNewClassificationLevel { Alphabetically = true, CanLink = false, Sequence = 1, ControlChange = "2Level1", ControlDropDownListId = "2Level1ControlDropDown", SelectedClassificationValueId = 4 });
+            List<FrontContentContentNewClassificationValue> ClassificationValues1 = new List<FrontContentContentNewClassificationValue>();
+            List<FrontContentContentNewClassificationValue> ClassificationValues2 = new List<FrontContentContentNewClassificationValue>();
+            ClassificationValues1.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 1, Name = "Wind energy", ParentValueID = 0 });
+            ClassificationValues1.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 2, Name = "Solar energy", ParentValueID = 0 });
+            ClassificationValues1.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 3, Name = "Hydro energy", ParentValueID = 0 });
+            ClassificationValues2.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 4, Name = "Permaculture", ParentValueID = 0 });
+            ClassificationValues2.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 5, Name = "Steady state", ParentValueID = 0 });
+            ClassificationValues2.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 6, Name = "Transition town", ParentValueID = 0 });
+            classifications.Add(new FrontContentContentNewClassification { ClassificationId = 1, ClassificationName = "Energy", ControlA = "EnergyA", ControlB = "EnergyB", ControlButton = "EnergyButton", ControlDialog = "EnergyControlDialog", ControlOverlayClick = "EnergyOverlayClick", ClassificationValueId = 1, ControlTarget = "EnergyControlTarget", ClassificationLevels = ClassificationLevels1, ClassificationValues = ClassificationValues1 });
+            classifications.Add(new FrontContentContentNewClassification { ClassificationId = 2, ClassificationName = "Community", ControlA = "CommunityA", ControlB = "CommunityB", ControlButton = "CommunityButton", ControlDialog = "CommunityControlDialog", ControlOverlayClick = "CommunityOverlayClick", ClassificationValueId = 4, ControlTarget = "CommunityControlTarget", ClassificationLevels = ClassificationLevels2, ClassificationValues = ClassificationValues2 });
+            return classifications;
         }
         public async Task<List<FrontContentContentNewClassificationLevel>> NewClassificationLevels(int ClassificationId)
         {
-            string usp = "usp_FrontContentNewClassificationLevels @ClassificationId";
-            var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassificationLevel, dynamic>(usp, new { ClassificationId });
-            return x;
+            List<FrontContentContentNewClassificationLevel> ClassificationLevels = new List<FrontContentContentNewClassificationLevel>();
+            ClassificationLevels.Add(new FrontContentContentNewClassificationLevel { Alphabetically = true, CanLink = false, Sequence = 1, ControlChange = "1Level1", ControlDropDownListId = "1Level1ControlDropDown", SelectedClassificationValueId = 1 });
+            return ClassificationLevels;
         }
 
         public async Task<List<FrontContentContentNewClassificationValue>> NewClassificationValues(string UserId, int ClassificationId, int Sequence, bool Alphabetical)
         {
-            string usp = "usp_FrontContentNewClassificationValues @UserId, @ClassificationId, @Sequence, @Alphabetical ";
-            var x = await _sqlDataAccess.LoadData<FrontContentContentNewClassificationValue, dynamic>(usp, new { UserId, ClassificationId, Sequence, Alphabetical});
-            return x;
+            List<FrontContentContentNewClassificationValue> ClassificationValues1 = new List<FrontContentContentNewClassificationValue>();
+            ClassificationValues1.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 1, Name = "Wind energy", ParentValueID = 0 });
+            ClassificationValues1.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 2, Name = "Solar energy", ParentValueID = 0 });
+            ClassificationValues1.Add(new FrontContentContentNewClassificationValue { ClassificationValueId = 3, Name = "Hydro energy", ParentValueID = 0 });
+            return ClassificationValues1;
         }
 
         public async Task<int> FrontContentCreatePost(string UserId, FrontContentContentNew Content)
@@ -192,6 +207,28 @@ namespace SIPx.DataAccess
 
         public Task<FrontContentContentNew> ContentNewGetContentType(int ContentTypeId)
         {
+            FrontContentContentNew ContentType = new FrontContentContentNew();
+            ContentType.CodePrefix = "Pre";
+            ContentType.CodeSuffix= "Suf";
+            ContentType.CodeTypeId = 1;
+            //ContentStatusList Status1 = new ContentStatusList { ContentStatusId = 1, Name = "Active" };
+            //ContentStatusList Status2 = new ContentStatusList { ContentStatusId = 2, Name = "Inactive" };
+//            ContentType.ContentStatuses = new List<ContentStatusList> { Status1, Status2 };
+            ContentType.ContentStatuses = new List<ContentStatusList> { new ContentStatusList { ContentStatusId = 1, Name = "Active" }, new ContentStatusList { ContentStatusId = 1, Name = "Inactive" } };
+            ContentType.ContentStatusId = 1;
+            ContentType.ContentTypeName = "Knowledge";
+            ContentType.CreatedDate = DateTime.Now;
+            ContentType.CreatorId = 1;
+            ContentType.Description = "Any content that can help others";
+            ContentType.IsFreeEdit = false;
+            ContentType.IsFreeEditSelectable = false;
+            ContentType.IsFreeRead = false;
+            ContentType.IsFreeReadSelectable = false;
+            ContentType.IsOrganizationBasedEdit = false;
+
+
+
+
             string usp = "usp_FrontContentContentNewGetContentType  @ContentTypeID";
             return _sqlDataAccess.LoadSingleRecord<FrontContentContentNew, dynamic>(usp, new { ContentTypeId = ContentTypeId });
 

@@ -41,7 +41,6 @@ namespace SIPx.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IClaimCheck, ClaimCheck > ();
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -82,12 +81,14 @@ namespace SIPx.API
                 services.AddTransient<IClassificationProvider, DevClassificationProvider>();
                 services.AddTransient<IFrontContentProvider, DevFrontContentProvider>();
                 services.AddScoped<IUserService, DevUserService>();
+                services.AddScoped<IClaimCheck, DevClaimCheck>();
             }
             else
             {
                 services.AddTransient<IClassificationProvider, ClassificationProvider>();
                 services.AddTransient<IFrontContentProvider, FrontContentProvider>();
                 services.AddScoped<IUserService, UserService>();
+                services.AddScoped<IClaimCheck, ClaimCheck>();
             }
             services.AddControllers();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();

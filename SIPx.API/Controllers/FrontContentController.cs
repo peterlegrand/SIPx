@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Classes;
@@ -16,6 +17,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontContentController : Controller
     {
+        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ICheckProvider _checkProvider;
         private readonly IClassificationProvider _classificationProvider;
         private readonly IClassificationValueProvider _classificationValueProvider;
@@ -31,7 +33,7 @@ namespace SIPx.API.Controllers
         private readonly IFrontProvider _frontProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontContentController(ICheckProvider checkProvider, IClassificationProvider classificationProvider
+        public FrontContentController(IHostingEnvironment hostingEnvironment,  ICheckProvider checkProvider, IClassificationProvider classificationProvider
             , IClassificationValueProvider classificationValueProvider
             , IContentTypeProvider contentTypeProvider
             , ILanguageProvider languageProvider
@@ -45,6 +47,7 @@ namespace SIPx.API.Controllers
             , IFrontProvider frontProvider
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _hostingEnvironment = hostingEnvironment;
             _checkProvider = checkProvider;
             _classificationProvider = classificationProvider;
             _classificationValueProvider = classificationValueProvider;
@@ -98,8 +101,9 @@ namespace SIPx.API.Controllers
         [HttpGet("ShowContent/{Id:int}")]
         public async Task<IActionResult> ShowContent(int Id)
         {
-
-            var CurrentUser = await _userManager.GetUserAsync(User);
+            SIPUserManager SIPUser = new SIPUserManager(_hostingEnvironment, _userManager);
+            var CurrentUser = await SIPUser.GetUser(User);
+//            var CurrentUser = await _userManager.GetUserAsync(User);
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 

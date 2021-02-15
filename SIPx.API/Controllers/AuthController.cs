@@ -53,35 +53,35 @@ namespace SIPx.API.Controllers
         [HttpPost("Login")]
         public async Task<UserManagerResponse> LoginAsync([FromBody] LoginViewModel model)
         {
-        //    //PETER TODO this has a second stuff for dev environment
-        //    if (_hostingEnvironment.IsEnvironment("Development"))
-        //    {
+            //PETER TODO this has a second stuff for dev environment
+            if (_hostingEnvironment.IsEnvironment("Development"))
+            {
 
-        //        var claims = new[]
-        //{
-        //        new System.Security.Claims.Claim("Email", "eplegrand@gmail.com"),
-        //        new System.Security.Claims.Claim(ClaimTypes.NameIdentifier, "a")
-        //    };
-        //        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
+                var claims = new[]
+        {
+                new System.Security.Claims.Claim("Email", "eplegrand@gmail.com"),
+                new System.Security.Claims.Claim(ClaimTypes.NameIdentifier, "a")
+            };
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
 
-        //        var token = new JwtSecurityToken(
-        //    issuer: _configuration["AuthSettings:Issuer"],
-        //    audience: _configuration["AuthSettings:Audience"],
-        //    claims: claims,
-        //    expires: DateTime.Now.AddDays(30),
-        //    signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
-        //        string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+                var token = new JwtSecurityToken(
+            issuer: _configuration["AuthSettings:Issuer"],
+            audience: _configuration["AuthSettings:Audience"],
+            claims: claims,
+            expires: DateTime.Now.AddDays(30),
+            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
+                string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
 
-        //        return new UserManagerResponse
-        //        {
-        //            UserInfo = claims.ToDictionary(c => c.Type, c => c.Value),
-        //            Message = tokenAsString,
-        //            IsSuccess = true,
-        //            ExpireDate = token.ValidTo
-        //        };
-        //    }
-        //    else
-        //    {
+                return new UserManagerResponse
+                {
+                    UserInfo = claims.ToDictionary(c => c.Type, c => c.Value),
+                    Message = tokenAsString,
+                    IsSuccess = true,
+                    ExpireDate = token.ValidTo
+                };
+            }
+            else
+            {
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (ModelState.IsValid)
                 {
@@ -127,7 +127,7 @@ namespace SIPx.API.Controllers
                     Message = "There is no user with that Email address",
                     IsSuccess = false,
                 };
-            //}
+            }
         }
     }
 }
