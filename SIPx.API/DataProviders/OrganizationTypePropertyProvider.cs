@@ -22,22 +22,22 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(ObjectTypePropertyCreateGet OrganizationTypeProperty)
         {
-            string usp = "usp_OrganizationTypePropertyCreatePostCheck @OrganizationTypeId, @PropertyId , @ObjectTypePropertyStatusId, @UserId  ";
+            string usp = "usp_OrganizationTypePropertyCreatePostCheck @ObjectTypeId, @PropertyId , @ObjectTypePropertyStatusId, @UserId  ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationTypeProperty);
             return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ObjectTypePropertyCreateGet OrganizationTypeProperty)
         {
-            string usp = "usp_OrganizationTypePropertyCreatePost @OrganizationTypeId, @PropertyId , @ObjectTypePropertyStatusId, @UserId  ";
+            string usp = "usp_OrganizationTypePropertyCreatePost @ObjectTypeId, @PropertyId , @ObjectTypePropertyStatusId, @UserId  ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, OrganizationTypeProperty);
             return String;
         }
 
-        public Task<List<ObjectTypePropertyIndexGet>> IndexGet(string UserId, int OrganizationTypeId)
+        public Task<List<ObjectTypePropertyIndexGetGrid>> IndexGet(string UserId, int OrganizationTypeId)
         {
             string usp = "usp_OrganizationTypePropertyIndexGet @UserID, @OrganizationTypeId";
-            return _sqlDataAccess.LoadData<ObjectTypePropertyIndexGet, dynamic>(usp, new { UserId = UserId, OrganizationTypeId = OrganizationTypeId });
+            return _sqlDataAccess.LoadData<ObjectTypePropertyIndexGetGrid, dynamic>(usp, new { UserId = UserId, OrganizationTypeId = OrganizationTypeId });
 
         }
 

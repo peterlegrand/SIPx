@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ContentTypePropertyDeletePost (@UserId nvarchar(450), 
-	@ContentTypePropertyId int) 
+	@ObjectTypePropertyId int) 
 AS 
 
 DECLARE  @ColumnId int
@@ -8,8 +8,8 @@ SELECT @ColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables
 
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
-INSERT INTO ChangeLogContentTypeProperties (ColumnId, ChangeTypeId, RecordId, UserId, ChangeLogDate) VALUES(@ColumnId,3,@ContentTypePropertyId, @UserId, getdate())
-DELETE FROM ContentTypeProperties WHERE @ContentTypePropertyId = ContentTypePropertyId
+INSERT INTO ChangeLogContentTypeProperties (ColumnId, ChangeTypeId, RecordId, UserId, ChangeLogDate) VALUES(@ColumnId,3,@ObjectTypePropertyId, @UserId, getdate())
+DELETE FROM ContentTypeProperties WHERE @ObjectTypePropertyId = ContentTypePropertyId
 COMMIT TRANSACTION
 
 

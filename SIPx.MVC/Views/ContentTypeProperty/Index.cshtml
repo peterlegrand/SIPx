@@ -1,0 +1,35 @@
+﻿@model ObjectTypePropertyIndexGet
+@{
+    var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    //   var AllStuff = (ViewBagModel)ViewBag.AllStuff;
+    ViewData["Title"] = @AllStuff.UITerms.Find(x => x.InternalName.Equals("Content type properties")).TermString;
+    ViewData["Image"] = "Type.png";
+    ViewData["FavoriteGroup"] = @AllStuff.FavoriteGroupList;
+    Layout = "_LayoutAdmin";
+}
+@* PETER TO DO CHange the Model to include content type id and name. *@
+<ejs-grid id="Grid" dataSource="@Model.ObjectTypePropertyIndexGetGrid" allowPaging="true" allowSorting="true" allowResizing="true">
+    <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="ObjectTypePropertyId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column field="PropertyName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Property")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column field="ObjectTypePropertyStatusName" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Status")).TermString" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Edit" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" textAlign="Center" type="string"></e-grid-column>
+        <e-grid-column template="#Delete" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" textAlign="Center" type="string"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<a asp-controller="ContentType" asp-action="Create" >@AllStuff.UITerms.Find(x => x.InternalName.Equals("Back to content type")).TermString</a>
+<a asp-controller="ContentTypeProperty" asp-action="Create" asp-route-id="@Model.ObjectTypeId">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new content type property")).TermString</a>
+
+<script id="Edit" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ContentTypeProperty/Edit/${ObjectTypePropertyId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>
+
+    </div>
+</script>
+<script id="Delete" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ContentTypeProperty/Delete/${ObjectTypePropertyId}"><img src="/images/icons/DeleteS.png" height="18" width="18"   title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString"  /></a>
+
+    </div>
+</script>

@@ -11,7 +11,7 @@ namespace SIPx.DataAccess
         Task<ObjectTypePropertyDeleteGet> DeleteGet(string UserId, int PersonTypePropertyId);
         bool DeletePost(string UserId, int PersonTypePropertyId);
         Task<List<ErrorMessage>> DeletePostCheck(string UserId, int PersonTypePropertyId);
-        Task<List<ObjectTypePropertyIndexGet>> IndexGet(string UserId, int PersonTypeId);
+        Task<List<ObjectTypePropertyIndexGetGrid>> IndexGet(string UserId, int PersonTypeId);
         Task<List<ObjectTypePropertyList>> List(string UserId);
         Task<ObjectTypePropertyUpdateGet> UpdateGet(string UserId, int PersonTypePropertyId);
         bool UpdatePost(ObjectTypePropertyUpdateGet PersonTypeProperty);

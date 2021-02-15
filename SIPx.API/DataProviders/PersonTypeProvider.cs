@@ -33,6 +33,12 @@ namespace SIPx.DataAccess
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonType);
             return String;
         }
+        public Task<string> ReturnName(string UserId, int PersonTypeId)
+        {
+            string usp = "usp_PersonTypeReturnName @UserId, @PersonTypeID";
+            return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { UserId = UserId, PersonTypeId = PersonTypeId });
+
+        }
 
         public Task<List<PersonTypeIndexGet>> IndexGet(string UserId)
         {

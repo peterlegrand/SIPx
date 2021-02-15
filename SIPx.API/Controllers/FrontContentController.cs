@@ -77,7 +77,7 @@ namespace SIPx.API.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
                 var ContentTypeGroups = await _frontContentProvider.ContentTypeContentTypeGroup(CurrentUser.Id);
@@ -100,7 +100,7 @@ namespace SIPx.API.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
                 var FrontContentShowContent = await _frontContentProvider.FrontContentShowContent(CurrentUser.Id, Id);
@@ -122,8 +122,8 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
-                var FrontContentShowContentRights = await _frontContentProvider.ShowContentRightsGet( Id);
-                if(FrontContentShowContentRights.OwnerId ==CurrentUser.Id)
+                var FrontContentShowContentRights = await _frontContentProvider.ShowContentRightsGet(Id);
+                if (FrontContentShowContentRights.OwnerId == CurrentUser.Id)
                 {
                     return BadRequest(new
                     {
@@ -148,7 +148,7 @@ namespace SIPx.API.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var ContentNew = new FrontContentContentNew();
                 ContentNew = await _frontContentProvider.ContentNewGetContentType(Id);
@@ -160,13 +160,13 @@ namespace SIPx.API.Controllers
                 ContentNew.ContentStatuses = await _contentStatusProvider.List(CurrentUser.Id);
                 ContentNew.Classifications = await _frontContentProvider.NewClassifications(CurrentUser.Id, Id);
                 ContentNew.ContentTypeName = await _contentTypeProvider.ReturnName(CurrentUser.Id, Id);
-                    ContentNew.OrganizationId = ContentNew.Organizations.First().OrganizationId;
+                ContentNew.OrganizationId = ContentNew.Organizations.First().OrganizationId;
                 foreach (var Classification in ContentNew.Classifications)
                 {
 
 
                     Classification.ClassificationLevels = await _frontContentProvider.NewClassificationLevels(Classification.ClassificationId);
-                    foreach(var Classificationlevel in Classification.ClassificationLevels )
+                    foreach (var Classificationlevel in Classification.ClassificationLevels)
                     {
                         Classificationlevel.ClassificationValues = await _frontContentProvider.NewClassificationValues(CurrentUser.Id, Classification.ClassificationId, Classificationlevel.Sequence, Classificationlevel.Alphabetically);
                     }
@@ -185,13 +185,13 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> ContentNew(FrontContentContentNew Content)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
-                Content.UserId= CurrentUser.Id;
-               var NewId = await _frontContentProvider.FrontContentCreatePost(CurrentUser.Id, Content);
+                Content.UserId = CurrentUser.Id;
+                var NewId = await _frontContentProvider.FrontContentCreatePost(CurrentUser.Id, Content);
                 Content.NewId = NewId;
                 return Ok(Content);
-            } 
+            }
             return BadRequest(new
             {
                 IsSuccess = false,
@@ -203,7 +203,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> AdvancedSearch()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-                       if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var ContentSearch = new ContentAdvancedSearchPost();
                 ContentSearch.Classifications = await _classificationProvider.ClassificationsWithValues(CurrentUser.Id);
@@ -234,7 +234,7 @@ namespace SIPx.API.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             AdvancedSearch.UserId = CurrentUser.Id;
-                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
+            if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 //var CheckString = await _ContentProvider.CreatePostCheck(Content);
                 //if (CheckString.Length == 0)
@@ -285,7 +285,7 @@ namespace SIPx.API.Controllers
             if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
 
-                var FrontContentShowContentRights = await _frontContentProvider.RightsUpdateGet( Id);
+                var FrontContentShowContentRights = await _frontContentProvider.RightsUpdateGet(Id);
                 if (FrontContentShowContentRights.OwnerId != CurrentUser.Id)
                 {
                     return BadRequest(new
@@ -335,7 +335,7 @@ namespace SIPx.API.Controllers
             {
                 var FrontContentRightsEditUser = new FrontContentRightsEditUserCreateGet();
                 FrontContentRightsEditUser.UserId = CurrentUser.Id;
-                FrontContentRightsEditUser.ContentId= Id;
+                FrontContentRightsEditUser.ContentId = Id;
 
                 FrontContentRightsEditUser = await FrontContentRightsEditUserCreateAddDropDownBoxes(FrontContentRightsEditUser);
                 return Ok(FrontContentRightsEditUser);

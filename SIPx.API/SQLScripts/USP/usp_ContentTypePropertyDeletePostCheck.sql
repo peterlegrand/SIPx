@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ContentTypePropertyDeletePostCheck (@UserId nvarchar(450), 
-	@ContentTypePropertyId int) 
+	@ObjectTypePropertyId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference

@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_PersonTypePropertyDeleteGet (@UserId nvarchar(450),@PersonTypePropertyId int)
+CREATE PROCEDURE usp_PersonTypePropertyDeleteGet (@UserId nvarchar(450),@ObjectTypePropertyId int)
 AS
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -7,15 +7,15 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 	SET XACT_ABORT ON;
 BEGIN TRANSACTION
-exec usp_readlogWrite 'PersonTypeProperty', 'Delete',1,'',@PersonTypePropertyId,@UserId
+exec usp_readlogWrite 'PersonTypeProperty', 'Delete',1,'',@ObjectTypePropertyId,@UserId
 
-SELECT PersonTypeProperties.PersonTypePropertyID
-	, PersonTypeProperties.PersonTypeID 
-	, ISNULL(UserPersonTypeLanguage.Name,ISNULL(DefaultPersonTypeLanguage.Name,'No name for this Person type')) PersonTypeName
+SELECT PersonTypeProperties.PersonTypePropertyID ObjectTypePropertyID
+	, PersonTypeProperties.PersonTypeID  ObjectTypeID
+	, ISNULL(UserPersonTypeLanguage.Name,ISNULL(DefaultPersonTypeLanguage.Name,'No name for this Person type')) ObjectTypeName 
 	, PersonTypeProperties.PropertyID
 	, ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) PropertyName
 	, PersonTypeProperties.ObjectTypePropertyStatusId
-	, ISNULL(CustomStatus.Customization,DefaultStatus.Name) StatusName
+	, ISNULL(CustomStatus.Customization,DefaultStatus.Name) ObjectTypePropertyStatusName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, PersonTypeProperties.CreatedDate
@@ -50,7 +50,7 @@ JOIN Persons Creator
 	ON Creator.UserId = PersonTypeProperties.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = PersonTypeProperties.ModifierID
-WHERE PersonTypeProperties.PersonTypePropertyId = @PersonTypePropertyID
+WHERE PersonTypeProperties.PersonTypePropertyId = @ObjectTypePropertyID
 AND DefaultStatus.LanguageId = @LanguageID
 COMMIT TRANSACTION
 

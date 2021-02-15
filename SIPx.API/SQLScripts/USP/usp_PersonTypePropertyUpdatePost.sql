@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_PersonTypePropertyUpdatePost (
-	@PersonTypePropertyId int
+	@ObjectTypePropertyId int
 	, @PropertyId int
 	, @ObjectTypePropertyStatusId int
 	, @UserId nvarchar(450)) 
@@ -16,7 +16,7 @@ DECLARE  @OldModifierId nvarchar(450)
 DECLARE  @OldModifiedDate datetime
 
 SELECT @OldPropertyId = PropertyId, @OldObjectTypePropertyStatusId = ObjectTypePropertyStatusId, @OldModifierId = ModifierId, @OldModifiedDate = ModifiedDate 
-FROM PersonTypeProperties WHERE PersonTypePropertyId = @PersonTypePropertyId 
+FROM PersonTypeProperties WHERE PersonTypePropertyId = @ObjectTypePropertyId 
 
 SELECT @PropertyIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'Classifications' AND ColumnName = 'PropertyId';
 SELECT @ObjectTypePropertyStatusIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'Classifications' AND ColumnName = 'ObjectTypePropertyStatusId';
@@ -33,29 +33,29 @@ UPDATE PersonTypeProperties SET
 	, ObjectTypePropertyStatusId = @ObjectTypePropertyStatusId 
 	, ModifierID = @UserId
 	, ModifiedDate = getdate()
-WHERE PersonTypePropertyId = @PersonTypePropertyId
+WHERE PersonTypePropertyId = @ObjectTypePropertyId
 END
 
 IF @OldPropertyId <> @PropertyId
 BEGIN
 INSERT INTO ChangeLogPersonTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, OldValue, NewValue, ChangeLogDate) 
-VALUES(@PropertyIdColumnId, 1,@PersonTypePropertyId , @UserId, cast(@OldPropertyId as nvarchar(10)), cast(@PropertyId as nvarchar(10)), getdate())
+VALUES(@PropertyIdColumnId, 1,@ObjectTypePropertyId , @UserId, cast(@OldPropertyId as nvarchar(10)), cast(@PropertyId as nvarchar(10)), getdate())
 END
 IF @OldObjectTypePropertyStatusId <> @ObjectTypePropertyStatusId
 BEGIN
 INSERT INTO ChangeLogPersonTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, OldValue, NewValue, ChangeLogDate) 
-	VALUES(@ObjectTypePropertyStatusIdColumnId, 1,@PersonTypePropertyId , @UserId, cast(@OldObjectTypePropertyStatusId as nvarchar(10)),cast(@ObjectTypePropertyStatusId as nvarchar(10)), getdate())
+	VALUES(@ObjectTypePropertyStatusIdColumnId, 1,@ObjectTypePropertyId , @UserId, cast(@OldObjectTypePropertyStatusId as nvarchar(10)),cast(@ObjectTypePropertyStatusId as nvarchar(10)), getdate())
 END
 IF (@OldPropertyId <> @PropertyId OR @OldObjectTypePropertyStatusId <> @ObjectTypePropertyStatusId) AND @OldModifierId <> @UserId
 BEGIN
 INSERT INTO ChangeLogPersonTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, OldValue, NewValue, ChangeLogDate) 
-	VALUES(@ModifierIdColumnId, 1,@PersonTypePropertyId , @OldModifierId, @UserId, @UserId , getdate())
+	VALUES(@ModifierIdColumnId, 1,@ObjectTypePropertyId , @OldModifierId, @UserId, @UserId , getdate())
 END
 
 IF @OldPropertyId <> @PropertyId OR @OldObjectTypePropertyStatusId <> @ObjectTypePropertyStatusId
 BEGIN
 INSERT INTO ChangeLogPersonTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, OldValue, NewValue, ChangeLogDate) 
-	VALUES(@ModifiedDateColumnId, 1,@PersonTypePropertyId , @UserId, cast(@OldModifiedDate as nvarchar(26)), cast(getdate() as nvarchar(26)), getdate())
+	VALUES(@ModifiedDateColumnId, 1,@ObjectTypePropertyId , @UserId, cast(@OldModifiedDate as nvarchar(26)), cast(getdate() as nvarchar(26)), getdate())
 END
 	COMMIT TRANSACTION
 

@@ -22,22 +22,22 @@ namespace SIPx.DataAccess
 
         public async Task<List<ErrorMessage>> CreatePostCheck(ObjectTypePropertyCreateGet PersonTypeProperty)
         {
-            string usp = "usp_PersonTypePropertyCreatePostCheck @PersonTypeId, @PropertyId , @ObjectTypePropertyStatusId, @UserId  ";
+            string usp = "usp_PersonTypePropertyCreatePostCheck @ObjectTypeId, @PropertyId , @ObjectTypePropertyStatusId, @UserId  ";
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, PersonTypeProperty);
             return ErrorMessages;
         }
 
         public async Task<string> CreatePost(ObjectTypePropertyCreateGet PersonTypeProperty)
         {
-            string usp = "usp_PersonTypePropertyCreatePost @PersonTypeId, @PropertyId , @ObjectTypePropertyStatusId, @UserId  ";
+            string usp = "usp_PersonTypePropertyCreatePost @ObjectTypeId, @PropertyId , @ObjectTypePropertyStatusId, @UserId  ";
             var String = await _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, PersonTypeProperty);
             return String;
         }
 
-        public Task<List<ObjectTypePropertyIndexGet>> IndexGet(string UserId, int PersonTypeId)
+        public Task<List<ObjectTypePropertyIndexGetGrid>> IndexGet(string UserId, int PersonTypeId)
         {
             string usp = "usp_PersonTypePropertyIndexGet @UserID, @PersonTypeId";
-            return _sqlDataAccess.LoadData<ObjectTypePropertyIndexGet, dynamic>(usp, new { UserId = UserId, PersonTypeId = PersonTypeId });
+            return _sqlDataAccess.LoadData<ObjectTypePropertyIndexGetGrid, dynamic>(usp, new { UserId = UserId, PersonTypeId = PersonTypeId });
 
         }
 

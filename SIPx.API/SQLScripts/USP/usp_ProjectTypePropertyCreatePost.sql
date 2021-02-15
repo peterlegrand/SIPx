@@ -1,12 +1,12 @@
 CREATE PROCEDURE usp_ProjectTypePropertyCreatePost (
-	@ProjectTypeId int
+	@ObjectTypeId int
 	, @PropertyId int
 	, @ObjectTypePropertyStatusId int
 	, @UserId nvarchar(450)) 
 AS 
 
 DECLARE @ProjectTypePropertyIdColumnId int;
-DECLARE  @ProjectTypeIdColumnId int
+DECLARE  @ObjectTypeIdColumnId int
 DECLARE  @PropertyIdColumnId int
 DECLARE  @ObjectTypePropertyStatusIdColumnId int
 DECLARE  @CreatorIdColumnId int
@@ -15,13 +15,13 @@ DECLARE  @CreatedDateColumnId int
 DECLARE  @ModifiedDateColumnId int
 
 SELECT @ProjectTypePropertyIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ProjectTypeProperties' AND ColumnName = 'ProjectTypePropertyId';
-SELECT @ProjectTypeIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'Classifications' AND ColumnName = 'ProjectTypeId';
-SELECT @PropertyIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'Classifications' AND ColumnName = 'PropertyId';
-SELECT @ObjectTypePropertyStatusIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'Classifications' AND ColumnName = 'ObjectTypePropertyStatusId';
-SELECT @CreatorIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ClassificationLanguages' AND ColumnName = 'CreatorId';
-SELECT @ModifierIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ClassificationLanguages' AND ColumnName = 'ModifierId';
-SELECT @CreatedDateColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ClassificationLanguages' AND ColumnName = 'CreatedDate';
-SELECT @ModifiedDateColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ClassificationLanguages' AND ColumnName = 'ModifiedDate';
+SELECT @ObjectTypeIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ProjectTypeProperties' AND ColumnName = 'ProjectTypeId';
+SELECT @PropertyIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ProjectTypeProperties' AND ColumnName = 'PropertyId';
+SELECT @ObjectTypePropertyStatusIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ProjectTypeProperties' AND ColumnName = 'ObjectTypePropertyStatusId';
+SELECT @CreatorIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ProjectTypeProperties' AND ColumnName = 'CreatorId';
+SELECT @ModifierIdColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ProjectTypeProperties' AND ColumnName = 'ModifierId';
+SELECT @CreatedDateColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ProjectTypeProperties' AND ColumnName = 'CreatedDate';
+SELECT @ModifiedDateColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables ON DataDictionaryColumns.TableId = DataDictionaryTables.TableId WHERE TableName = 'ProjectTypeProperties' AND ColumnName = 'ModifiedDate';
 
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
@@ -36,7 +36,7 @@ INSERT INTO ProjectTypeProperties (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@ProjectTypeId
+	@ObjectTypeId
 	, @PropertyId
 	, @ObjectTypePropertyStatusId 
 	, @UserID
@@ -51,7 +51,7 @@ DECLARE @NewProjectTypePropertyId int	= scope_identity();
 	VALUES(@ProjectTypePropertyIdColumnId, 1,@NewProjectTypePropertyId , @UserId, cast(@NewProjectTypePropertyId as nvarchar(10)), getdate())
 
 	INSERT INTO ChangeLogProjectTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, NewValue, ChangeLogDate) 
-	VALUES(@ProjectTypeIdColumnId, 1,@NewProjectTypePropertyId , @UserId, cast(@ProjectTypeId as nvarchar(10)), getdate())
+	VALUES(@ObjectTypeIdColumnId, 1,@NewProjectTypePropertyId , @UserId, cast(@ObjectTypeId as nvarchar(10)), getdate())
 
 	INSERT INTO ChangeLogProjectTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, NewValue, ChangeLogDate) 
 	VALUES(@PropertyIdColumnId, 1,@NewProjectTypePropertyId , @UserId, cast(@PropertyId as nvarchar(10)), getdate())

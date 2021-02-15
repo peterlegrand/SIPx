@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_OrganizationTypePropertyDeleteGet (@UserId nvarchar(450),@OrganizationTypePropertyId int)
+CREATE PROCEDURE usp_OrganizationTypePropertyDeleteGet (@UserId nvarchar(450),@ObjectTypePropertyId int)
 AS
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -7,7 +7,7 @@ WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 	SET XACT_ABORT ON;
 BEGIN TRANSACTION
-exec usp_readlogWrite 'OrganizationTypeProperty', 'Delete',1,'',@OrganizationTypePropertyId,@UserId
+exec usp_readlogWrite 'OrganizationTypeProperty', 'Delete',1,'',@ObjectTypePropertyId,@UserId
 
 SELECT OrganizationTypeProperties.OrganizationTypePropertyID
 	, OrganizationTypeProperties.OrganizationTypeID 
@@ -50,7 +50,7 @@ JOIN Persons Creator
 	ON Creator.UserId = OrganizationTypeProperties.CreatorID
 JOIN Persons Modifier
 	ON Modifier.UserId = OrganizationTypeProperties.ModifierID
-WHERE OrganizationTypeProperties.OrganizationTypePropertyId = @OrganizationTypePropertyID
+WHERE OrganizationTypeProperties.OrganizationTypePropertyId = @ObjectTypePropertyID
 AND DefaultStatus.LanguageId = @LanguageID
 COMMIT TRANSACTION
 

@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ProjectTypePropertyCreatePostCheck (
-	@ProjectTypeId int
+	@ObjectTypeId int
 	, @PropertyId int
 	, @ObjectTypePropertyStatusId int
 	, @UserId nvarchar(450)) 

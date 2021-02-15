@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_PersonTypePropertyUpdatePostCheck (
-	@PersonTypePropertyId int
+	@ObjectTypePropertyId int
 	, @PropertyId int
 	, @ObjectTypePropertyStatusId int
 	, @UserId nvarchar(450)) 

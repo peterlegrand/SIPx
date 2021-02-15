@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_OrganizationTypePropertyIndexGet (@UserId nvarchar(450), @OrganizationTypeId int) 
+CREATE PROCEDURE usp_OrganizationTypePropertyIndexGet (@UserId nvarchar(450), @ObjectTypeId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -44,7 +44,7 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserId = OrganizationTypeProperties.ModifierID
 WHERE UIName.LanguageId = @LanguageID
-	AND OrganizationTypeProperties.OrganizationTypeID= @OrganizationTypeId
+	AND OrganizationTypeProperties.OrganizationTypeID= @ObjectTypeId
 ORDER BY  ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) 
 
 COMMIT TRANSACTION

@@ -10,12 +10,12 @@ BEGIN TRANSACTION
 exec usp_readlogWrite 'ContentTypeProperty', 'Delete',1,'',@ContentTypePropertyId,@UserId
 
 SELECT ContentTypeProperties.ContentTypePropertyID
-	, ContentTypeProperties.ContentTypeID 
-	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this Content type')) ContentTypeName
+	, ContentTypeProperties.ContentTypeID ObjectTypeId
+	, ISNULL(UserContentTypeLanguage.Name,ISNULL(DefaultContentTypeLanguage.Name,'No name for this Content type')) ObjectTypeName
 	, ContentTypeProperties.PropertyID
-	, ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) PropertyName
+	, ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) ObjectName
 	, ContentTypeProperties.ObjectTypePropertyStatusId
-	, ISNULL(CustomStatus.Customization,DefaultStatus.Name) StatusName
+	, ISNULL(CustomStatus.Customization,DefaultStatus.Name) ObjectTypePropertyStatusName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, ContentTypeProperties.CreatedDate

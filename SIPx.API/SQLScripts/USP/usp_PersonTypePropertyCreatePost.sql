@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_PersonTypePropertyCreatePost (
-	@PersonTypeId int
+	@ObjectTypeId int
 	, @PropertyId int
 	, @ObjectTypePropertyStatusId int
 	, @UserId nvarchar(450)) 
@@ -36,7 +36,7 @@ INSERT INTO PersonTypeProperties (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@PersonTypeId
+	@ObjectTypeId
 	, @PropertyId
 	, @ObjectTypePropertyStatusId 
 	, @UserID
@@ -51,7 +51,7 @@ DECLARE @NewPersonTypePropertyId int	= scope_identity();
 	VALUES(@PersonTypePropertyIdColumnId, 1,@NewPersonTypePropertyId , @UserId, cast(@NewPersonTypePropertyId as nvarchar(10)), getdate())
 
 	INSERT INTO ChangeLogPersonTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, NewValue, ChangeLogDate) 
-	VALUES(@PersonTypeIdColumnId, 1,@NewPersonTypePropertyId , @UserId, cast(@PersonTypeId as nvarchar(10)), getdate())
+	VALUES(@PersonTypeIdColumnId, 1,@NewPersonTypePropertyId , @UserId, cast(@ObjectTypeId as nvarchar(10)), getdate())
 
 	INSERT INTO ChangeLogPersonTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, NewValue, ChangeLogDate) 
 	VALUES(@PropertyIdColumnId, 1,@NewPersonTypePropertyId , @UserId, cast(@PropertyId as nvarchar(10)), getdate())

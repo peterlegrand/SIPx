@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_OrganizationTypePropertyCreatePost (
-	@OrganizationTypeId int
+	@ObjectTypeId int
 	, @PropertyId int
 	, @ObjectTypePropertyStatusId int
 	, @UserId nvarchar(450)) 
@@ -36,7 +36,7 @@ INSERT INTO OrganizationTypeProperties (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@OrganizationTypeId
+	@ObjectTypeId
 	, @PropertyId
 	, @ObjectTypePropertyStatusId 
 	, @UserID
@@ -51,7 +51,7 @@ DECLARE @NewOrganizationTypePropertyId int	= scope_identity();
 	VALUES(@OrganizationTypePropertyIdColumnId, 1,@NewOrganizationTypePropertyId , @UserId, cast(@NewOrganizationTypePropertyId as nvarchar(10)), getdate())
 
 	INSERT INTO ChangeLogOrganizationTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, NewValue, ChangeLogDate) 
-	VALUES(@OrganizationTypeIdColumnId, 1,@NewOrganizationTypePropertyId , @UserId, cast(@OrganizationTypeId as nvarchar(10)), getdate())
+	VALUES(@OrganizationTypeIdColumnId, 1,@NewOrganizationTypePropertyId , @UserId, cast(@ObjectTypeId as nvarchar(10)), getdate())
 
 	INSERT INTO ChangeLogOrganizationTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, NewValue, ChangeLogDate) 
 	VALUES(@PropertyIdColumnId, 1,@NewOrganizationTypePropertyId , @UserId, cast(@PropertyId as nvarchar(10)), getdate())

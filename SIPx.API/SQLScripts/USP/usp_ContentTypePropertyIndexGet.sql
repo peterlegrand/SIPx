@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ContentTypePropertyIndexGet (@UserId nvarchar(450), @ContentTypeId int) 
+CREATE PROCEDURE usp_ContentTypePropertyIndexGet (@UserId nvarchar(450), @ObjectTypeId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -14,9 +14,9 @@ BEGIN TRANSACTION
 
 INSERT INTO ReadLogContentTypePropertyList (UserId, ReadLogDate, MVCUIScreenID)  VALUES( @UserId, Getdate(), @ScreenId)
 
-SELECT ContentTypeProperties.ContentTypePropertyID
-	, ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) PropertyName
-	, ISNULL(UINameCustom.Customization ,UIName.Name) StatusName
+SELECT ContentTypeProperties.ContentTypePropertyID ObjectTypePropertyID
+	, ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) ObjectName
+	, ISNULL(UINameCustom.Customization ,UIName.Name) ObjectTypePropertyStatusName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, ContentTypeProperties.CreatedDate
@@ -44,7 +44,7 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserId = ContentTypeProperties.ModifierID
 WHERE UIName.LanguageId = @LanguageID
-	AND ContentTypeProperties.ContentTypeID= @ContentTypeId
+	AND ContentTypeProperties.ContentTypeID= @ObjectTypeId
 ORDER BY  ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) 
 
 COMMIT TRANSACTION

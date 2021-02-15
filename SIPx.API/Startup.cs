@@ -28,9 +28,12 @@ namespace SIPx.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnvironment;
+
+        public Startup(IConfiguration configuration , Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment)
         {
             Configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IConfiguration Configuration { get; }
@@ -74,7 +77,14 @@ namespace SIPx.API
             {
                 options.InputFormatters.Insert(0, new BinaryInputFormatter());
             });
-
+            if (_hostingEnvironment.IsEnvironment("Development"))
+            {
+                services.AddTransient<IClassificationProvider, DevClassificationProvider>();
+            }
+            else
+            {
+                services.AddTransient<IClassificationProvider, ClassificationProvider>();
+            }
             services.AddControllers();
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
@@ -153,7 +163,6 @@ namespace SIPx.API
             //services.AddTransient<IClassificationPageProvider, ClassificationPageProvider>();
             //services.AddTransient<IClassificationPageSectionProvider, ClassificationPageSectionProvider>();
             services.AddTransient<IClassificationRelationTypeProvider, ClassificationRelationTypeProvider>();
-            services.AddTransient<IClassificationProvider, ClassificationProvider>();
             services.AddTransient<IClassificationValueProvider, ClassificationValueProvider>();
             services.AddTransient<IClassificationValueRoleProvider, ClassificationValueRoleProvider>();
             services.AddTransient<IClassificationValueUserProvider, ClassificationValueUserProvider>();

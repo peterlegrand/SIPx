@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ContentTypePropertyCreatePost (
-	@ContentTypeId int
+	@ObjectTypeId int
 	, @PropertyId int
 	, @ObjectTypePropertyStatusId int
 	, @UserId nvarchar(450)) 
@@ -36,7 +36,7 @@ INSERT INTO ContentTypeProperties (
 	, ModifierID
 	, ModifiedDate)
 VALUES (
-	@ContentTypeId
+	@ObjectTypeId
 	, @PropertyId
 	, @ObjectTypePropertyStatusId 
 	, @UserID
@@ -51,7 +51,7 @@ DECLARE @NewContentTypePropertyId int	= scope_identity();
 	VALUES(@ContentTypePropertyIdColumnId, 1,@NewContentTypePropertyId , @UserId, cast(@NewContentTypePropertyId as nvarchar(10)), getdate())
 
 	INSERT INTO ChangeLogContentTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, NewValue, ChangeLogDate) 
-	VALUES(@ContentTypeIdColumnId, 1,@NewContentTypePropertyId , @UserId, cast(@ContentTypeId as nvarchar(10)), getdate())
+	VALUES(@ContentTypeIdColumnId, 1,@NewContentTypePropertyId , @UserId, cast(@ObjectTypeId as nvarchar(10)), getdate())
 
 	INSERT INTO ChangeLogContentTypeProperties (ColumnId, ChangeTypeId,RecordId ,UserId, NewValue, ChangeLogDate) 
 	VALUES(@PropertyIdColumnId, 1,@NewContentTypePropertyId , @UserId, cast(@PropertyId as nvarchar(10)), getdate())

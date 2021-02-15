@@ -6,7 +6,7 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT ObjectTypePropertyStatuses.ObjectTypePropertyStatusID
-	, ISNULL(UINameCustom.Customization ,UIName.Name) StatusName
+	, ISNULL(UINameCustom.Customization ,UIName.Name) Name
 
 FROM ObjectTypePropertyStatuses 
 JOIN UITermLanguages UIName

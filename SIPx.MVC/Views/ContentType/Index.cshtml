@@ -13,6 +13,7 @@
         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" template="#Id" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" template="#Name" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Group name")).TermString" template="#GroupName" textAlign="Right" type="number"></e-grid-column>
+        <e-grid-column template="#Property" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Property")).TermString" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column template="#Delete" textAlign="Center" type="string"></e-grid-column>
@@ -32,6 +33,12 @@
 <script id="GroupName" type="text/x-template">
     <div>
         ${ContentTypeGroupName}
+    </div>
+</script>
+<script id="Property" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/ContentTypeProperty/Index/${ProjectTypeId}"><img src="/images/icons/Property.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Property")).TermString" /></a>
+
     </div>
 </script>
 <script id="Edit" type="text/x-template">

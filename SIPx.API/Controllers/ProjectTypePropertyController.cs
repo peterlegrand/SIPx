@@ -60,7 +60,7 @@ namespace SIPx.API.Controllers
             return ProjectTypeProperty;
         }
 
-        [HttpGet("Create")]
+        [HttpGet("Create/{Id:int}")]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);

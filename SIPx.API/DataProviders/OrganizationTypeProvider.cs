@@ -26,6 +26,12 @@ namespace SIPx.DataAccess
             var ErrorMessages = await _sqlDataAccess.LoadData<ErrorMessage, dynamic>(usp, OrganizationType);
             return ErrorMessages;
         }
+        public Task<string> ReturnName(string UserId, int OrganizationTypeId)
+        {
+            string usp = "usp_OrganizationTypeReturnName @UserId, @OrganizationTypeID";
+            return _sqlDataAccess.LoadSingleRecord<string, dynamic>(usp, new { UserId = UserId, OrganizationTypeId = OrganizationTypeId });
+
+        }
 
         public async Task<string> CreatePost(OrganizationTypeCreateGet OrganizationType)
         {

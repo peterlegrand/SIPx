@@ -11,12 +11,19 @@
     <e-grid-columns>
         <e-grid-column id="OrgnizationTypeId" field="OrgnizationTypeId" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Id")).TermString" textAlign="Right" type="number"></e-grid-column>
         <e-grid-column id="Name" field="Name" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Name")).TermString" textAlign="Right" type="string"></e-grid-column>
+        <e-grid-column template="#Property" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Property")).TermString" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column id="Edit" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" template="#Edit" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column id="Languages" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Languages")).TermString" template="#Languages" textAlign="Center" type="string"></e-grid-column>
         <e-grid-column id="Delete" headerText="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Delete")).TermString" template="#Delete" textAlign="Center" type="string"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 <a href="~/PersonType/Create">@AllStuff.UITerms.Find(x => x.InternalName.Equals("Add new person type")).TermString</a>
+<script id="Property" type="text/x-template">
+    <div>
+        <a class="nav-link text-dark font-weight-bold" href="/PersonTypeProperty/Index/${ProjectTypeId}"><img src="/images/icons/Property.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Property")).TermString" /></a>
+
+    </div>
+</script>
 <script id="Edit" type="text/x-template">
     <div>
         <a class="nav-link text-dark font-weight-bold" href="/PersonType/Edit/${PersonTypeId}"><img src="/images/icons/EditS.png" height="18" width="18"  title="@AllStuff.UITerms.Find(x => x.InternalName.Equals("Edit")).TermString" /></a>

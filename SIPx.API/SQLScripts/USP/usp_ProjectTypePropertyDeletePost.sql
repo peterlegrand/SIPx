@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_ProjectTypePropertyDeletePost (@UserId nvarchar(450), 
-	@ProjectTypePropertyId int) 
+	@ObjectTypePropertyId int) 
 AS 
 
 DECLARE  @ColumnId int
@@ -8,8 +8,8 @@ SELECT @ColumnId = ColumnId FROM DataDictionaryColumns JOIN DataDictionaryTables
 
 SET XACT_ABORT ON;
 BEGIN TRANSACTION
-INSERT INTO ChangeLogProjectTypeProperties (ColumnId, ChangeTypeId, RecordId, UserId, ChangeLogDate) VALUES(@ColumnId,3,@ProjectTypePropertyId, @UserId, getdate())
-DELETE FROM ProjectTypeProperties WHERE @ProjectTypePropertyId = ProjectTypePropertyId
+INSERT INTO ChangeLogProjectTypeProperties (ColumnId, ChangeTypeId, RecordId, UserId, ChangeLogDate) VALUES(@ColumnId,3,@ObjectTypePropertyId, @UserId, getdate())
+DELETE FROM ProjectTypeProperties WHERE @ObjectTypePropertyId = ProjectTypePropertyId
 COMMIT TRANSACTION
 
 

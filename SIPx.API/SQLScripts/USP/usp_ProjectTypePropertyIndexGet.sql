@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_ProjectTypePropertyIndexGet (@UserId nvarchar(450), @ProjectTypeId int) 
+CREATE PROCEDURE usp_ProjectTypePropertyIndexGet (@UserId nvarchar(450), @ObjectTypeId int) 
 AS 
 DECLARE @LanguageId int;
 SELECT @LanguageId = IntPreference
@@ -14,9 +14,9 @@ BEGIN TRANSACTION
 
 INSERT INTO ReadLogProjectTypePropertyList (UserId, ReadLogDate, MVCUIScreenID)  VALUES( @UserId, Getdate(), @ScreenId)
 
-SELECT ProjectTypeProperties.ProjectTypePropertyID
+SELECT ProjectTypeProperties.ProjectTypePropertyID ObjectTypePropertyID
 	, ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) PropertyName
-	, ISNULL(UINameCustom.Customization ,UIName.Name) StatusName
+	, ISNULL(UINameCustom.Customization ,UIName.Name) ObjectTypePropertyStatusName
 	, Creator.FirstName + ' ' + Creator.LastName CreatorName
 	, Creator.PersonID CreatorID
 	, ProjectTypeProperties.CreatedDate
@@ -44,7 +44,7 @@ JOIN Persons Creator
 JOIN Persons Modifier
 	ON Modifier.UserId = ProjectTypeProperties.ModifierID
 WHERE UIName.LanguageId = @LanguageID
-	AND ProjectTypeProperties.ProjectTypeID= @ProjectTypeId
+	AND ProjectTypeProperties.ProjectTypeID= @ObjectTypeId
 ORDER BY  ISNULL(UserPropertyLanguage.Name,ISNULL(DefaultPropertyLanguage.Name,'No name for this property')) 
 
 COMMIT TRANSACTION
