@@ -11,41 +11,77 @@ using System.Threading.Tasks;
 
 namespace SIPx.DataAccess
 {
-    public class FrontContentProvider : IFrontContentProvider
+    public class DevFrontContentProvider : IFrontContentProvider
     {
         private readonly ISqlDataAccess _sqlDataAccess;
 
-        public FrontContentProvider(ISqlDataAccess sqlDataAccess)
+        public DevFrontContentProvider(ISqlDataAccess sqlDataAccess)
         {
             _sqlDataAccess = sqlDataAccess;
         }
 
         public async Task<List<FrontContentContentTypeGroup>> ContentTypeContentTypeGroup(string UserId)
         {
-            string usp = "usp_FrontContentTypeIndexGetContentGroup @UserId";
-            var x = await _sqlDataAccess.LoadData<FrontContentContentTypeGroup, dynamic>(usp, new { UserId = UserId });
-            return x;
+            List<FrontContentContentTypeGroup> contentTypeGroups = new List<FrontContentContentTypeGroup>();
+            List<FrontContentContentType> contentTypes1 = new List<FrontContentContentType>();
+            contentTypes1.Add(new FrontContentContentType { ContentTypeGroupID = 1, ContentTypeID = 1, ContentTypeName = "Energy assignments" });
+            contentTypes1.Add(new FrontContentContentType { ContentTypeGroupID = 1, ContentTypeID = 2, ContentTypeName = "Bio diversity assignments" });
+            contentTypes1.Add(new FrontContentContentType { ContentTypeGroupID = 1, ContentTypeID = 3, ContentTypeName = "Polution assignments" });
+
+            List<FrontContentContentType> contentTypes2 = new List<FrontContentContentType>();
+            contentTypes1.Add(new FrontContentContentType { ContentTypeGroupID = 2, ContentTypeID = 4, ContentTypeName = "Energy knowledge" });
+            contentTypes1.Add(new FrontContentContentType { ContentTypeGroupID = 2, ContentTypeID = 5, ContentTypeName = "Steady state economy knowledge" });
+
+
+            contentTypeGroups.Add(new FrontContentContentTypeGroup { ContentTypeGroupID = 1, ContentTypeGroupName = "Assignments", ContentTypes = contentTypes1 });
+            contentTypeGroups.Add(new FrontContentContentTypeGroup { ContentTypeGroupID = 2, ContentTypeGroupName = "Knowledge", ContentTypes = contentTypes2 });
+            return contentTypeGroups;
         }
 
         public async Task<FrontContentShowContent> FrontContentShowContent(string UserId, int ContentId)
         {
-            string usp = "usp_FrontContentShowContent @UserId, @ContentId";
-            var x = await _sqlDataAccess.LoadSingleRecord<FrontContentShowContent, dynamic>(usp, new { UserId = UserId, ContentId = ContentId });
-            return x;
+            FrontContentShowContent content = new FrontContentShowContent();
+            content.ContentId = 1;
+            content.ContentStatusName = "Active";
+            content.ContentTypeId = 1;
+            content.ContentTypeName = "Energy assignment";
+            content.CreatedDate = DateTime.Now;
+            content.CreatorId = 1;
+            content.CreatorName = "John Cleese";
+            content.Description = "<html><head><meta http-equiv=\"content - type\" content=\"text / html; charset = UTF - 8\"><title></title></head><body><h1>What is Sustainable Energy?</h1><p>Sustainable energy is a form of energy that meets our today’s demand of energy without putting them in danger of getting expired or depleted and can be used over and over again. Sustainable energy should be widely encouraged as it does not cause any harm to the environment and is available widely free of cost. All renewable energy sources like solar, wind, geothermal, hydropower and ocean energy are sustainable as they are stable and available in plenty.<br><br> Sun will continue to provide sunlight till we all are here on earth, heat caused by the sun will continue to produce winds, the earth will continue to produce heat from inside and will not cool down anytime soon, movement of earth, sun and moon will not stop, and this will keep on producing tides. <br> </p> <p>The process of evaporation will cause water to evaporate that will fall down in the form of rain or ice which will go through rivers or streams and merge in the oceans and can be used to produce energy through hydropower. This clearly states that all these renewable energy sources are sustainable and will continue to provide energy to the coming generations.<br> </p> <p>There are many forms of sustainable energy sources that can be incorporated by countries to stop the use of fossil fuels. Sustainable energy does not include any sources that are derived from fossil fuels or waste products. This energy is replenishable and helps us to reduce greenhouse gas emissions and causes no damage to the environment. If we are going to use fossil fuels at a steady rate, they will expire soon and cause adverse effects on our planet.<br> <br> Fossil fuels are not considered as sustainable energy sources because they are limited, cause immense pollution by releasing harmful gases and are not available everywhere on earth. Fossil fuels normally include coal, oil and natural gas. Steps must be taken to reduce our dependency on fossil fuels as pose dangerous to the environment. Most of the counties have already started taking steps to make use of alternative energy sources.<br> </p> </body> </html>";
+            content.IsOwner = true;
+            content.LanguageName = "English";
+            content.ModifiedDate = DateTime.Now;
+            content.ModifierId = 1;
+            content.ModifierName = "John Cleese";
+            content.OrganizationId = 1;
+            content.OrganizationName = "Absegami High School";
+            content.ParentContentTitle = "";
+            content.ProjectId = 0;
+            content.ProjectName = "No project";
+            content.SecurityLevelName = "Level 1";
+            content.Title = "What is Sustainable Energy?";
+            
+            return content;
         }
         public async Task<List<FrontContentShowContentClassificationValue>> FrontContentShowContentClassificationValue(string UserId, int ContentId)
         {
-            string usp = "usp_FrontContentShowContentClassificationValues @UserId, @ContentId";
-            var ClassificationValues = await _sqlDataAccess.LoadData<FrontContentShowContentClassificationValue, dynamic>(usp, new { UserId = UserId, ContentId = ContentId });
+            List<FrontContentShowContentClassificationValue> ClassificationValues = new List<FrontContentShowContentClassificationValue>();
+            ClassificationValues.Add(new FrontContentShowContentClassificationValue { ClassificationName = "Energy", ClassificationValueId = 1, ClassificationValueName = "Renewable energy" });
+            ClassificationValues.Add(new FrontContentShowContentClassificationValue { ClassificationName = "Location", ClassificationValueId = 2, ClassificationValueName = "North America" });
             return ClassificationValues;
         }
 
-
         public async Task<List<FrontContentContentType>> ContentType(string UserId, int ContentTypeGroupId)
         {
-            string usp = "usp_FrontContentTypeIndexGetContent @UserId, @ContentTypeGroupId";
-            var x = await _sqlDataAccess.LoadData<FrontContentContentType, dynamic>(usp, new { UserId = UserId, ContentTypeGroupId = ContentTypeGroupId });
-            return x;
+            List<FrontContentContentType> contentTypes = new List<FrontContentContentType>();
+            contentTypes.Add(new FrontContentContentType { ContentTypeGroupID = 1, ContentTypeID = 1, ContentTypeName = "Energy assignments" });
+            contentTypes.Add(new FrontContentContentType { ContentTypeGroupID = 1, ContentTypeID = 2, ContentTypeName = "Bio diversity assignments" });
+            contentTypes.Add(new FrontContentContentType { ContentTypeGroupID = 1, ContentTypeID = 3, ContentTypeName = "Polution assignments" });
+            contentTypes.Add(new FrontContentContentType { ContentTypeGroupID = 2, ContentTypeID = 4, ContentTypeName = "Energy knowledge" });
+            contentTypes.Add(new FrontContentContentType { ContentTypeGroupID = 2, ContentTypeID = 5, ContentTypeName = "Steady state economy knowledge" });
+
+            return contentTypes;
         }
 
         public async Task<List<FrontContentContentNewClassification>> NewClassifications(string UserId, int ContentTypeId)

@@ -104,7 +104,7 @@ namespace SIPx.API.Controllers
             {
 
                 var FrontContentShowContent = await _frontContentProvider.FrontContentShowContent(CurrentUser.Id, Id);
-
+                FrontContentShowContent.ClassificationValues = await _frontContentProvider.FrontContentShowContentClassificationValue(CurrentUser.Id, Id);
                 return Ok(FrontContentShowContent);
             }
             return BadRequest(new

@@ -80,13 +80,16 @@ namespace SIPx.API
             if (_hostingEnvironment.IsEnvironment("Development"))
             {
                 services.AddTransient<IClassificationProvider, DevClassificationProvider>();
+                services.AddTransient<IFrontContentProvider, DevFrontContentProvider>();
+                services.AddScoped<IUserService, DevUserService>();
             }
             else
             {
                 services.AddTransient<IClassificationProvider, ClassificationProvider>();
+                services.AddTransient<IFrontContentProvider, FrontContentProvider>();
+                services.AddScoped<IUserService, UserService>();
             }
             services.AddControllers();
-            services.AddScoped<IUserService, UserService>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
             services.AddTransient<ISearchProvider, SearchProvider>();
@@ -131,7 +134,6 @@ namespace SIPx.API
 //            services.AddTransient<IFrontUserProvider, FrontUserProvider>();
             services.AddTransient<IFrontProjectProvider, FrontProjectProvider>();
             services.AddTransient<IFrontOrganizationProvider, FrontOrganizationProvider>();
-            services.AddTransient<IFrontContentProvider, FrontContentProvider>();
             services.AddTransient<IProcessTypeFlowProvider, ProcessTypeFlowProvider>();
             services.AddTransient<ICheckProvider, CheckProvider>();
             services.AddTransient<ISettingProvider, SettingProvider>();

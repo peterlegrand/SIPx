@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,16 +24,18 @@ namespace SIPx.API.Controllers
         private readonly IUserService _userService;
         private readonly UserManager<SipUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public AuthController(IUserService userService, UserManager<SipUser> userManager, IConfiguration configuration )
+        public AuthController(IUserService userService, UserManager<SipUser> userManager, IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             _userService = userService;
             _userManager = userManager;
             _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> RegisterAsync([FromBody]RegisterViewModel model)
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -48,39 +51,74 @@ namespace SIPx.API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<UserManagerResponse> LoginAsync([FromBody]LoginViewModel model)
+        public async Task<UserManagerResponse> LoginAsync([FromBody] LoginViewModel model)
         {
-           
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (ModelState.IsValid)
-            {
-                var result = await _userService.LoginUserAsync(model);
+        //    //PETER TODO this has a second stuff for dev environment
+        //    if (_hostingEnvironment.IsEnvironment("Development"))
+        //    {
 
-                if (result.IsSuccess)
+        //        var claims = new[]
+        //{
+        //        new System.Security.Claims.Claim("Email", "eplegrand@gmail.com"),
+        //        new System.Security.Claims.Claim(ClaimTypes.NameIdentifier, "a")
+        //    };
+        //        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
+
+        //        var token = new JwtSecurityToken(
+        //    issuer: _configuration["AuthSettings:Issuer"],
+        //    audience: _configuration["AuthSettings:Audience"],
+        //    claims: claims,
+        //    expires: DateTime.Now.AddDays(30),
+        //    signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
+        //        string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+
+        //        return new UserManagerResponse
+        //        {
+        //            UserInfo = claims.ToDictionary(c => c.Type, c => c.Value),
+        //            Message = tokenAsString,
+        //            IsSuccess = true,
+        //            ExpireDate = token.ValidTo
+        //        };
+        //    }
+        //    else
+        //    {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (ModelState.IsValid)
                 {
-                    var claims = new[]
-            {
+                    var result = await _userService.LoginUserAsync(model);
+
+                    if (result.IsSuccess)
+                    {
+                        var claims = new[]
+                {
                 new System.Security.Claims.Claim("Email", model.Email),
                // new Claim("FirstName", user.FirstName),
                 //new Claim("LastName", user.LastName),
                 new System.Security.Claims.Claim(ClaimTypes.NameIdentifier, user.Id)
             };
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
-                  
-                    var token = new JwtSecurityToken(
-                issuer: _configuration["AuthSettings:Issuer"],
-                audience: _configuration["AuthSettings:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddDays(30),
-                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
-                    string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
+
+                        var token = new JwtSecurityToken(
+                    issuer: _configuration["AuthSettings:Issuer"],
+                    audience: _configuration["AuthSettings:Audience"],
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(30),
+                    signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
+                        string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+
+                        return new UserManagerResponse
+                        {
+                            UserInfo = claims.ToDictionary(c => c.Type, c => c.Value),
+                            Message = tokenAsString,
+                            IsSuccess = true,
+                            ExpireDate = token.ValidTo
+                        };
+                    }
 
                     return new UserManagerResponse
                     {
-                        UserInfo = claims.ToDictionary(c => c.Type, c => c.Value),
-                        Message = tokenAsString,
-                        IsSuccess = true,
-                        ExpireDate = token.ValidTo
+                        Message = "There is no user with that Email address",
+                        IsSuccess = false,
                     };
                 }
 
@@ -89,13 +127,7 @@ namespace SIPx.API.Controllers
                     Message = "There is no user with that Email address",
                     IsSuccess = false,
                 };
-            }
-
-            return new UserManagerResponse
-            {
-                Message = "There is no user with that Email address",
-                IsSuccess = false,
-            };
+            //}
         }
     }
 }
