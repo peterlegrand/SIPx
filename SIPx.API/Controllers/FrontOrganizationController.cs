@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using SIPx.API.Classes;
 using SIPx.API.Models;
 using SIPx.DataAccess;
 using SIPx.Shared;
@@ -13,6 +15,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontOrganizationController : ControllerBase
     {
+        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IOrganizationAddressProvider _organizationAddressProvider;
         private readonly IOrganizationTelecomProvider _organizationTelecomProvider;
         private readonly IPersonProvider _personProvider;
@@ -26,7 +29,7 @@ namespace SIPx.API.Controllers
         private readonly IClassificationProvider _classificationProvider;
         private readonly UserManager<SipUser> _userManager;
 
-        public FrontOrganizationController (IOrganizationAddressProvider organizationAddressProvider
+        public FrontOrganizationController (IHostingEnvironment hostingEnvironment, IOrganizationAddressProvider organizationAddressProvider
             , IOrganizationTelecomProvider organizationTelecomProvider
             , IPersonProvider personProvider
             , IOrganizationTypeProvider organizationTypeProvider
@@ -39,6 +42,7 @@ namespace SIPx.API.Controllers
             , IClassificationProvider classificationProvider
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _hostingEnvironment = hostingEnvironment;
             _organizationAddressProvider = organizationAddressProvider;
             _organizationTelecomProvider = organizationTelecomProvider;
             _personProvider = personProvider;
@@ -56,7 +60,9 @@ namespace SIPx.API.Controllers
         [HttpGet("Dashboard/{Id:int}")]
         public async Task<IActionResult> Dashboard(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
+            SIPUserManager SIPUser = new SIPUserManager(_hostingEnvironment, _userManager);
+            var CurrentUser = await SIPUser.GetUser(User);
+//            var CurrentUser = await _userManager.GetUserAsync(User);
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 var Organization = new FrontOrganizationDashboard();

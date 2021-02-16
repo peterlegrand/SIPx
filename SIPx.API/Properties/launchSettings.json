@@ -18,7 +18,7 @@
       "launchBrowser": true,
       "launchUrl": "https://localhost:44393/swagger/index.html",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "production"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "SIPx.API": {

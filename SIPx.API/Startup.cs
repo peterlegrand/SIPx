@@ -82,6 +82,7 @@ namespace SIPx.API
                 services.AddTransient<IFrontContentProvider, DevFrontContentProvider>();
                 services.AddScoped<IUserService, DevUserService>();
                 services.AddScoped<IClaimCheck, DevClaimCheck>();
+                services.AddTransient<IFrontOrganizationProvider, DevFrontOrganizationProvider>();
             }
             else
             {
@@ -89,6 +90,7 @@ namespace SIPx.API
                 services.AddTransient<IFrontContentProvider, FrontContentProvider>();
                 services.AddScoped<IUserService, UserService>();
                 services.AddScoped<IClaimCheck, ClaimCheck>();
+                services.AddTransient<IFrontOrganizationProvider, FrontOrganizationProvider>();
             }
             services.AddControllers();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
@@ -134,7 +136,6 @@ namespace SIPx.API
             services.AddTransient<IFrontClassificationValueProvider, FrontClassificationValueProvider>();
 //            services.AddTransient<IFrontUserProvider, FrontUserProvider>();
             services.AddTransient<IFrontProjectProvider, FrontProjectProvider>();
-            services.AddTransient<IFrontOrganizationProvider, FrontOrganizationProvider>();
             services.AddTransient<IProcessTypeFlowProvider, ProcessTypeFlowProvider>();
             services.AddTransient<ICheckProvider, CheckProvider>();
             services.AddTransient<ISettingProvider, SettingProvider>();
