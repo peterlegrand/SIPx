@@ -72,7 +72,7 @@ namespace SIPx.DataAccess
             return ClassificationValues;
         }
 
-        public async Task<List<FrontContentContentType>> ContentType(string UserId, int ContentTypeGroupId)
+        public async Task<List<FrontContentContentType>> ContentType(string UserId)
         {
             List<FrontContentContentType> contentTypes = new List<FrontContentContentType>();
             contentTypes.Add(new FrontContentContentType { ContentTypeGroupID = 1, ContentTypeID = 1, ContentTypeName = "Energy assignments" });

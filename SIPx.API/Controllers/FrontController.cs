@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIPx.API.Classes;
@@ -17,6 +18,7 @@ namespace SIPx.API.Controllers
     //[Authorize]
     public class FrontController : Controller
     {
+        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserRoleProvider _userRoleProvider;
         private readonly IRoleProvider _roleProvider;
         private readonly IUserProvider _userProvider;
@@ -33,7 +35,7 @@ namespace SIPx.API.Controllers
         private readonly UserManager<SipUser> _userManager;
       //  private readonly FrontPanels _frontPanels;
 
-        public FrontController(IUserRoleProvider userRoleProvider
+        public FrontController(IHostingEnvironment hostingEnvironment, IUserRoleProvider userRoleProvider
             , IRoleProvider roleProvider 
             , IUserProvider userProvider
             , IClassificationValueProvider classificationValueProvider
@@ -48,6 +50,7 @@ namespace SIPx.API.Controllers
             , IFrontProvider frontProvider
             , Microsoft.AspNetCore.Identity.UserManager<SIPx.API.Models.SipUser> userManager)
         {
+            _hostingEnvironment = hostingEnvironment;
             _userRoleProvider = userRoleProvider;
             _roleProvider = roleProvider;
             _userProvider = userProvider;
@@ -67,8 +70,10 @@ namespace SIPx.API.Controllers
         [HttpGet("Index/{Id}")]
         public async Task<IActionResult> Index(int Id)
         {
-            
-            var CurrentUser = await _userManager.GetUserAsync(User);
+            SIPUserManager SIPUser = new SIPUserManager(_hostingEnvironment, _userManager);
+            var CurrentUser = await SIPUser.GetUser(User);
+
+//            var CurrentUser = await _userManager.GetUserAsync(User);
                        if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
                 if (Id == 0)

@@ -83,6 +83,8 @@ namespace SIPx.API
                 services.AddScoped<IUserService, DevUserService>();
                 services.AddScoped<IClaimCheck, DevClaimCheck>();
                 services.AddTransient<IFrontOrganizationProvider, DevFrontOrganizationProvider>();
+                services.AddTransient<IFrontProvider, DevFrontProvider>();
+                services.AddTransient<IContentProvider, DevContentProvider>();
             }
             else
             {
@@ -91,6 +93,8 @@ namespace SIPx.API
                 services.AddScoped<IUserService, UserService>();
                 services.AddScoped<IClaimCheck, ClaimCheck>();
                 services.AddTransient<IFrontOrganizationProvider, FrontOrganizationProvider>();
+                services.AddTransient<IFrontProvider, FrontProvider>();
+                services.AddTransient<IContentProvider, ContentProvider>();
             }
             services.AddControllers();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
@@ -176,7 +180,6 @@ namespace SIPx.API
             services.AddTransient<IFrontUserPageProvider, FrontUserPageProvider>();
             services.AddTransient<IFrontUserPageSectionProvider, FrontUserPageSectionProvider>();
             services.AddTransient<IPartialProvider, PartialProvider>();
-            services.AddTransient<IContentProvider, ContentProvider>();
             services.AddTransient<IContentStatusProvider, ContentStatusProvider>();
             services.AddTransient<IContentTypeClassificationProvider, ContentTypeClassificationProvider>();
             services.AddTransient<IContentTypeClassificationStatusProvider, ContentTypeClassificationStatusProvider>();
@@ -184,7 +187,6 @@ namespace SIPx.API
             services.AddTransient<IContentTypeProvider, ContentTypeProvider>();
 
             services.AddTransient<IFrontProcessProvider, FrontProcessProvider>();
-            services.AddTransient<IFrontProvider, FrontProvider>();
             services.AddTransient<IGenderProvider, GenderProvider>();
 
             services.AddTransient<ILanguageProvider, LanguageProvider>();

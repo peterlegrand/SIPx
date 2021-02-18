@@ -121,12 +121,12 @@ namespace SIPx.API.Controllers
             {
                 Name = "Admin",
                 RoleGroupId = 1,
-                CanAssignContentOwnership = true,
-                CanReceiveContentOwnership = true,
-                CanAssignContentRead = true,
-                CanReceiveContentRead = true,
-                CanAssignContentEdit = true,
-                CanReceiveContentEdit =true
+                //CanAssignContentOwnership = true,
+                //CanReceiveContentOwnership = true,
+                //CanAssignContentRead = true,
+                //CanReceiveContentRead = true,
+                //CanAssignContentEdit = true,
+                //CanReceiveContentEdit =true
             };
             await _roleManager.CreateAsync(Role);
             using (StreamReader sr = new StreamReader($"SQLScripts\\ApplicationRights.txt", System.Text.Encoding.UTF8))

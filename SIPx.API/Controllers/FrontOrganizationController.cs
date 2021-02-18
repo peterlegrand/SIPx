@@ -61,7 +61,7 @@ namespace SIPx.API.Controllers
         public async Task<IActionResult> Dashboard(int Id)
         {
             SIPUserManager SIPUser = new SIPUserManager(_hostingEnvironment, _userManager);
-            var CurrentUser = await SIPUser.GetUser(User);
+            var CurrentUser = await SIPUser.GetUser(User); 
 //            var CurrentUser = await _userManager.GetUserAsync(User);
                         if (await _claimCheck.CheckClaim(CurrentUser, "ApplicationRight", this.ControllerContext.RouteData.Values["controller"].ToString() + "\\" + this.ControllerContext.RouteData.Values["action"].ToString()))
             {
