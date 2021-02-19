@@ -5,31 +5,11 @@ SELECT
 	, CodePrefix
 	, CodeSuffix
 	, CodeTypeId
-	, IsRelationBasedEdit
-	, IsRelationBasedEditSelectable
-	, IsRelationBasedRead
-	, IsRelationBasedReadSelectable
-	, IsFreeEdit
-	, IsFreeEditSelectable 
-	, IsFreeRead
-	, IsFreeReadSelectable
-	, IsOrganizationBasedEdit
-	, IsOrganizationBasedEditParent
-	, IsOrganizationBasedEditSub
-	, IsOrganizationBasedEditSelectable
-	, IsOrganizationBasedRead
-	, IsOrganizationBasedReadParent
-	, IsOrganizationBasedReadSub
-	, IsOrganizationBasedReadSelectable
-	
-	, IsProjectBasedEdit
-	, IsProjectBasedEditParent
-	, IsProjectBasedEditSub
-	, IsProjectBasedEditSelectable
-	, IsProjectBasedRead
-	, IsProjectBasedReadParent
-	, IsProjectBasedReadSub
-	, IsProjectBasedReadSelectable
+	, ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this content type')) ContentTypeName
 	
 FROM contenttypes
-WHERE ContentTypeID = @ContentTypeId
+LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages WHERE LanguageId = 41) UserLanguage
+	ON UserLanguage.ContentTypeID= ContentTypes.ContentTypeID
+LEFT JOIN (SELECT ContentTypeId, Name, Description, MenuName, MouseOver, ContentTypeLanguageID FROM ContentTypeLanguages JOIN Settings ON ContentTypeLanguages.LanguageId = Settings.IntValue WHERE Settings.SettingId = 1) DefaultLanguage
+	ON DefaultLanguage.ContentTypeId = ContentTypes.ContentTypeID
+WHERE contenttypes.ContentTypeID = @ContentTypeId

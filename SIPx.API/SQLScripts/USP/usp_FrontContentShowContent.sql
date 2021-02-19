@@ -7,6 +7,21 @@ FROM UserPreferences
 WHERE USerId = @UserID
 	AND UserPreferences.PreferenceTypeId = 1 ;
 SELECT @SecurityLevelId = SecurityLevelID FROM AspNetUsers WHERE id = @UserId;
+
+DECLARE @IsOwner bit;
+
+IF  (SELECT COUNT(*) 
+	FROM Contents 
+	WHERE OwnerId  = @UserId
+		) >0
+BEGIN
+	SET @IsOwner = 1
+END
+ELSE
+BEGIN
+SET @IsOwner = 0
+
+
 SELECT 
 	Contents.ContentID
 	, Contents.Title
@@ -14,6 +29,7 @@ SELECT
 	, ISNULL(Contents.ProjectId,0) ProjectID
 	, Contents.ProjectID 
 	, Contents.ContentTypeId 
+	, @IsOwner IsOwner
 	, ISNULL(ParentContent.Title, 'No parent content') AS ParentContentTitle
 	, ISNULL(UIContentStatusNameCustom.Customization ,UIContentStatusName.Name) ContentStatusName
 	, ISNULL(UILanguageNameCustom.Customization ,UILanguageName.Name) LanguageName

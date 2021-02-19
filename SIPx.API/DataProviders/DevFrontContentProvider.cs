@@ -33,8 +33,8 @@ namespace SIPx.DataAccess
             contentTypes1.Add(new FrontContentContentType { ContentTypeGroupID = 2, ContentTypeID = 5, ContentTypeName = "Steady state economy knowledge" });
 
 
-            contentTypeGroups.Add(new FrontContentContentTypeGroup { ContentTypeGroupID = 1, ContentTypeGroupName = "Assignments", ContentTypes = contentTypes1 });
-            contentTypeGroups.Add(new FrontContentContentTypeGroup { ContentTypeGroupID = 2, ContentTypeGroupName = "Knowledge", ContentTypes = contentTypes2 });
+            contentTypeGroups.Add(new FrontContentContentTypeGroup { ContentTypeGroupId = 1, ContentTypeGroupName = "Assignments", ContentTypes = contentTypes1 });
+            contentTypeGroups.Add(new FrontContentContentTypeGroup { ContentTypeGroupId = 2, ContentTypeGroupName = "Knowledge", ContentTypes = contentTypes2 });
             return contentTypeGroups;
         }
 
@@ -50,6 +50,10 @@ namespace SIPx.DataAccess
             content.CreatorName = "John Cleese";
             content.Description = "<html><head><meta http-equiv=\"content - type\" content=\"text / html; charset = UTF - 8\"><title></title></head><body><h1>What is Sustainable Energy?</h1><p>Sustainable energy is a form of energy that meets our today’s demand of energy without putting them in danger of getting expired or depleted and can be used over and over again. Sustainable energy should be widely encouraged as it does not cause any harm to the environment and is available widely free of cost. All renewable energy sources like solar, wind, geothermal, hydropower and ocean energy are sustainable as they are stable and available in plenty.<br><br> Sun will continue to provide sunlight till we all are here on earth, heat caused by the sun will continue to produce winds, the earth will continue to produce heat from inside and will not cool down anytime soon, movement of earth, sun and moon will not stop, and this will keep on producing tides. <br> </p> <p>The process of evaporation will cause water to evaporate that will fall down in the form of rain or ice which will go through rivers or streams and merge in the oceans and can be used to produce energy through hydropower. This clearly states that all these renewable energy sources are sustainable and will continue to provide energy to the coming generations.<br> </p> <p>There are many forms of sustainable energy sources that can be incorporated by countries to stop the use of fossil fuels. Sustainable energy does not include any sources that are derived from fossil fuels or waste products. This energy is replenishable and helps us to reduce greenhouse gas emissions and causes no damage to the environment. If we are going to use fossil fuels at a steady rate, they will expire soon and cause adverse effects on our planet.<br> <br> Fossil fuels are not considered as sustainable energy sources because they are limited, cause immense pollution by releasing harmful gases and are not available everywhere on earth. Fossil fuels normally include coal, oil and natural gas. Steps must be taken to reduce our dependency on fossil fuels as pose dangerous to the environment. Most of the counties have already started taking steps to make use of alternative energy sources.<br> </p> </body> </html>";
             content.IsOwner = true;
+            content.CanEdit = true;
+            content.CanClaimOwnership = true;
+            content.CanRate= true;
+            content.CanComment = true;
             content.LanguageName = "English";
             content.ModifiedDate = DateTime.Now;
             content.ModifierId = 1;
@@ -72,7 +76,7 @@ namespace SIPx.DataAccess
             return ClassificationValues;
         }
 
-        public async Task<List<FrontContentContentType>> ContentType(string UserId)
+        public async Task<List<FrontContentContentType>> ContentType(string UserId, int ContentTypeGroupId)
         {
             List<FrontContentContentType> contentTypes = new List<FrontContentContentType>();
             contentTypes.Add(new FrontContentContentType { ContentTypeGroupID = 1, ContentTypeID = 1, ContentTypeName = "Energy assignments" });

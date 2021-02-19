@@ -6,7 +6,7 @@ namespace SIPx.DataAccess
 {
     public interface IFrontContentProvider
     {
-        Task<List<FrontContentContentType>> ContentType(string UserId);
+        Task<List<FrontContentContentType>> ContentType(string UserId, int ContentTypeGroupId);
         Task<List<FrontContentContentTypeGroup>> ContentTypeContentTypeGroup(string UserId);
         Task<List<FrontContentContentNewClassification>> NewClassifications(string UserId, int ContentTypeId);
 

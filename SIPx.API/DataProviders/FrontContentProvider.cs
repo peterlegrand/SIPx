@@ -41,10 +41,10 @@ namespace SIPx.DataAccess
         }
 
 
-        public async Task<List<FrontContentContentType>> ContentType(string UserId)
+        public async Task<List<FrontContentContentType>> ContentType(string UserId, int ContentTypeGroupId)
         {
-            string usp = "usp_FrontContentContentTypeIndexGet @UserId";
-            var x = await _sqlDataAccess.LoadData<FrontContentContentType, dynamic>(usp, new { UserId = UserId});
+            string usp = "usp_FrontContentContentTypeIndexGet @UserId, @ContentTypeGroupId";
+            var x = await _sqlDataAccess.LoadData<FrontContentContentType, dynamic>(usp, new { UserId = UserId , ContentTypeGroupId  = ContentTypeGroupId });
             return x;
         }
 

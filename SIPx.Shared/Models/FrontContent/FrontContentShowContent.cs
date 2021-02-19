@@ -10,8 +10,10 @@ namespace SIPx.Shared
     {
         [Key]
         public int ContentId { get; set; }
+        public string ContentCode { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public int? ParentContentId { get; set; }
         public string ParentContentTitle { get; set; }
         public string ContentStatusName { get; set; }
         public string LanguageName { get; set; }
@@ -20,7 +22,11 @@ namespace SIPx.Shared
         public string ProjectName { get; set; }
         public int ProjectId { get; set; }
         public int OrganizationId { get; set; }
+        public bool CanEdit { get; set; }
         public bool IsOwner { get; set; }
+        public bool CanClaimOwnership { get; set; }
+        public bool CanComment { get; set; }
+        public bool CanRate { get; set; }
         public int ContentTypeId { get; set; }
         public string ContentTypeName { get; set; }
         public string CreatorName { get; set; }

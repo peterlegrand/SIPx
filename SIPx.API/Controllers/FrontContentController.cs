@@ -86,7 +86,7 @@ namespace SIPx.API.Controllers
                 var ContentTypeGroups = await _frontContentProvider.ContentTypeContentTypeGroup(CurrentUser.Id);
                 foreach (var ContentTypeGroup in ContentTypeGroups)
                 {
-                    ContentTypeGroup.ContentTypes = await _frontContentProvider.ContentType(CurrentUser.Id);
+                    ContentTypeGroup.ContentTypes = await _frontContentProvider.ContentType(CurrentUser.Id, ContentTypeGroup.ContentTypeGroupId);
 
                 }
                 return Ok(ContentTypeGroups);

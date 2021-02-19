@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_FrontContentContentTypeIndexGet (@UserId nvarchar(450))
+CREATE PROCEDURE usp_FrontContentContentTypeIndexGet (@UserId nvarchar(450), @ContentTypeGroupId int)
 AS
 DECLARE @LanguageId int;
 DECLARE @SecurityLevelId int;
@@ -27,4 +27,5 @@ WHERE ContentTypes.SecurityLevelID <= @SecurityLevelId
 	AND AspNetRoles.ProjectId IS NULL 
 	AND AspNetRoles.OrganizationId IS NULL
 	AND ContentTypeRoles.CanCreate = 1
+	AND Contenttypes.ContentTypeGroupID = @ContentTypeGroupId
 ORDER BY 	 ISNULL(UserLanguage.Name,ISNULL(DefaultLanguage.Name,'No name for this content type'))
