@@ -43,6 +43,7 @@ namespace SIPx.DataAccess
             FrontContentShowContent content = new FrontContentShowContent();
             content.ContentId = 1;
             content.ContentStatusName = "Active";
+            content.ContentCode = "EA-01";
             content.ContentTypeId = 1;
             content.ContentTypeName = "Energy assignment";
             content.CreatedDate = DateTime.Now;
