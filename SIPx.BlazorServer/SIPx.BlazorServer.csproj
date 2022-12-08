@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="2.1.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Radzen.Blazor" Version="2.10.7" />
     <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.59" />
   </ItemGroup>
